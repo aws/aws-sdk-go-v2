@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -56,12 +56,14 @@
                 "Used": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount currently used toward the quota maximum.</p>"
                     }
                 },
                 "Max": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum allowed value for the quota.</p>"
                     }
                 }
@@ -127,24 +129,6 @@
         },
         "com.amazonaws.databasemigrationservice#AmazonDMSv20160101": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Database Migration Service",
-                    "arnNamespace": "dms",
-                    "cloudFormationName": "DMS",
-                    "cloudTrailEventSource": "databasemigrationservice.amazonaws.com",
-                    "endpointPrefix": "dms"
-                },
-                "aws.auth#sigv4": {
-                    "name": "dms"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>Database Migration Service</fullname>\n         <p>Database Migration Service (DMS) can migrate your data to and from the most\n         widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL\n         Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise\n         (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as\n         heterogeneous migrations between different database platforms, such as Oracle to MySQL or\n         SQL Server to PostgreSQL.</p>\n         <p>For more information about DMS, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html\">What Is Database Migration Service?</a>\n         in the <i>Database Migration Service User Guide.</i>\n         </p>",
-                "smithy.api#title": "AWS Database Migration Service",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://dms.amazonaws.com/doc/2016-01-01/"
-                }
-            },
             "version": "2016-01-01",
             "operations": [
                 {
@@ -342,7 +326,2218 @@
                 {
                     "target": "com.amazonaws.databasemigrationservice#UpdateSubscriptionsToEventBridge"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Database Migration Service",
+                    "arnNamespace": "dms",
+                    "cloudFormationName": "DMS",
+                    "cloudTrailEventSource": "databasemigrationservice.amazonaws.com",
+                    "endpointPrefix": "dms"
+                },
+                "aws.auth#sigv4": {
+                    "name": "dms"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<fullname>Database Migration Service</fullname>\n         <p>Database Migration Service (DMS) can migrate your data to and from the most\n         widely used commercial and open-source databases such as Oracle, PostgreSQL, Microsoft SQL\n         Server, Amazon Redshift, MariaDB, Amazon Aurora, MySQL, and SAP Adaptive Server Enterprise\n         (ASE). The service supports homogeneous migrations such as Oracle to Oracle, as well as\n         heterogeneous migrations between different database platforms, such as Oracle to MySQL or\n         SQL Server to PostgreSQL.</p>\n         <p>For more information about DMS, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html\">What Is Database Migration Service?</a>\n         in the <i>Database Migration Service User Guide.</i>\n         </p>",
+                "smithy.api#title": "AWS Database Migration Service",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://dms.amazonaws.com/doc/2016-01-01/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://dms-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "dms"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://dms-fips.us-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "dms"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://dms.us-gov-west-1.amazonaws.com",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://dms.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "dms"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://dms.us-iso-east-1.c2s.ic.gov",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-iso",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://dms.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "Region"
+                                                                        },
+                                                                        "dms"
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://dms.us-isob-east-1.sc2s.sgov.gov",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-iso-b",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://dms.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://dms-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://dms.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://dms.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-south-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-south-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-south-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-south-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-south-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-south-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-south-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-south-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-iso-west-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-iso-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-central-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-central-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-central-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-central-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-central-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-central-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-4"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.ap-southeast-4.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-4"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-4"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.ap-southeast-4.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-4"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://dms.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.databasemigrationservice#ApplyPendingMaintenanceAction": {
             "type": "operation",
@@ -411,37 +2606,43 @@
             }
         },
         "com.amazonaws.databasemigrationservice#AuthMechanismValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "default",
-                        "name": "DEFAULT"
-                    },
-                    {
-                        "value": "mongodb_cr",
-                        "name": "MONGODB_CR"
-                    },
-                    {
-                        "value": "scram_sha_1",
-                        "name": "SCRAM_SHA_1"
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
                     }
-                ]
+                },
+                "MONGODB_CR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mongodb_cr"
+                    }
+                },
+                "SCRAM_SHA_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scram_sha_1"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#AuthTypeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "no",
-                        "name": "NO"
-                    },
-                    {
-                        "value": "password",
-                        "name": "PASSWORD"
+            "type": "enum",
+            "members": {
+                "NO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "no"
                     }
-                ]
+                },
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "password"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#AvailabilityZone": {
@@ -465,13 +2666,13 @@
             }
         },
         "com.amazonaws.databasemigrationservice#Boolean": {
-            "type": "boolean"
-        },
-        "com.amazonaws.databasemigrationservice#BooleanOptional": {
             "type": "boolean",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": false
             }
+        },
+        "com.amazonaws.databasemigrationservice#BooleanOptional": {
+            "type": "boolean"
         },
         "com.amazonaws.databasemigrationservice#CancelReplicationTaskAssessmentRun": {
             "type": "operation",
@@ -526,42 +2727,56 @@
             }
         },
         "com.amazonaws.databasemigrationservice#CannedAclForObjectsValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "none",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "private",
-                        "name": "PRIVATE"
-                    },
-                    {
-                        "value": "public-read",
-                        "name": "PUBLIC_READ"
-                    },
-                    {
-                        "value": "public-read-write",
-                        "name": "PUBLIC_READ_WRITE"
-                    },
-                    {
-                        "value": "authenticated-read",
-                        "name": "AUTHENTICATED_READ"
-                    },
-                    {
-                        "value": "aws-exec-read",
-                        "name": "AWS_EXEC_READ"
-                    },
-                    {
-                        "value": "bucket-owner-read",
-                        "name": "BUCKET_OWNER_READ"
-                    },
-                    {
-                        "value": "bucket-owner-full-control",
-                        "name": "BUCKET_OWNER_FULL_CONTROL"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
                     }
-                ]
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "private"
+                    }
+                },
+                "PUBLIC_READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "public-read"
+                    }
+                },
+                "PUBLIC_READ_WRITE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "public-read-write"
+                    }
+                },
+                "AUTHENTICATED_READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "authenticated-read"
+                    }
+                },
+                "AWS_EXEC_READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "aws-exec-read"
+                    }
+                },
+                "BUCKET_OWNER_READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bucket-owner-read"
+                    }
+                },
+                "BUCKET_OWNER_FULL_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "bucket-owner-full-control"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#Certificate": {
@@ -645,22 +2860,26 @@
             "type": "blob"
         },
         "com.amazonaws.databasemigrationservice#CharLengthSemantics": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "default",
-                        "name": "DEFAULT"
-                    },
-                    {
-                        "value": "char",
-                        "name": "CHAR"
-                    },
-                    {
-                        "value": "byte",
-                        "name": "BYTE"
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
                     }
-                ]
+                },
+                "CHAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "char"
+                    }
+                },
+                "BYTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "byte"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#CollectorHealthCheck": {
@@ -815,18 +3034,20 @@
             }
         },
         "com.amazonaws.databasemigrationservice#CollectorStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UNREGISTERED",
-                        "name": "UNREGISTERED"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
+            "type": "enum",
+            "members": {
+                "UNREGISTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNREGISTERED"
                     }
-                ]
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#CollectorsList": {
@@ -836,18 +3057,20 @@
             }
         },
         "com.amazonaws.databasemigrationservice#CompressionTypeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "none",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "gzip",
-                        "name": "GZIP"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
                     }
-                ]
+                },
+                "GZIP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gzip"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#Connection": {
@@ -958,7 +3181,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of engine for the endpoint. Valid values, depending on the\n         <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>,\n          <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, \n          <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>,\n         <code>\"db2\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"docdb\"</code>,\n         <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of engine for the endpoint. Valid values, depending on the\n         <code>EndpointType</code> value, include <code>\"mysql\"</code>, <code>\"oracle\"</code>,\n          <code>\"postgres\"</code>, <code>\"mariadb\"</code>, <code>\"aurora\"</code>, \n          <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>, <code>\"redshift\"</code>, <code>\"s3\"</code>,\n         <code>\"db2\"</code>, <code>\"db2-zos\"</code>, <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>, <code>\"docdb\"</code>,\n         <code>\"sqlserver\"</code>, <code>\"neptune\"</code>, and <code>\"babelfish\"</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1505,6 +3728,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A friendly name for the resource identifier at the end of the <code>EndpointArn</code>\n         response parameter that is returned in the created <code>Endpoint</code> object. The value\n         for this parameter can have up to 31 characters. It can contain only ASCII letters, digits,\n         and hyphen ('-'). Also, it can't end with a hyphen or contain two consecutive hyphens,\n         and can only begin with a letter, such as <code>Example-App-ARN1</code>. For example, this\n         value might result in the <code>EndpointArn</code> value\n         <code>arn:aws:dms:eu-west-1:012345678901:rep:Example-App-ARN1</code>. If you don't\n         specify a <code>ResourceIdentifier</code> value, DMS generates a default identifier\n         value for the end of <code>EndpointArn</code>.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of IP address protocol used by a replication instance, \n         such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. \n         IPv6 only is not yet supported.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1745,18 +3974,20 @@
             }
         },
         "com.amazonaws.databasemigrationservice#DataFormatValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "csv",
-                        "name": "CSV"
-                    },
-                    {
-                        "value": "parquet",
-                        "name": "PARQUET"
+            "type": "enum",
+            "members": {
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "csv"
                     }
-                ]
+                },
+                "PARQUET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "parquet"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#DatabaseInstanceSoftwareDetailsResponse": {
@@ -1898,53 +4129,67 @@
             }
         },
         "com.amazonaws.databasemigrationservice#DatePartitionDelimiterValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SLASH",
-                        "name": "SLASH"
-                    },
-                    {
-                        "value": "UNDERSCORE",
-                        "name": "UNDERSCORE"
-                    },
-                    {
-                        "value": "DASH",
-                        "name": "DASH"
-                    },
-                    {
-                        "value": "NONE",
-                        "name": "NONE"
+            "type": "enum",
+            "members": {
+                "SLASH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SLASH"
                     }
-                ]
+                },
+                "UNDERSCORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNDERSCORE"
+                    }
+                },
+                "DASH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DASH"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#DatePartitionSequenceValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "YYYYMMDD",
-                        "name": "YYYYMMDD"
-                    },
-                    {
-                        "value": "YYYYMMDDHH",
-                        "name": "YYYYMMDDHH"
-                    },
-                    {
-                        "value": "YYYYMM",
-                        "name": "YYYYMM"
-                    },
-                    {
-                        "value": "MMYYYYDD",
-                        "name": "MMYYYYDD"
-                    },
-                    {
-                        "value": "DDMMYYYY",
-                        "name": "DDMMYYYY"
+            "type": "enum",
+            "members": {
+                "YYYYMMDD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YYYYMMDD"
                     }
-                ]
+                },
+                "YYYYMMDDHH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YYYYMMDDHH"
+                    }
+                },
+                "YYYYMM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "YYYYMM"
+                    }
+                },
+                "MMYYYYDD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MMYYYYDD"
+                    }
+                },
+                "DDMMYYYY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DDMMYYYY"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#DeleteCertificate": {
@@ -4706,26 +6951,32 @@
             }
         },
         "com.amazonaws.databasemigrationservice#DmsSslModeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "none",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "require",
-                        "name": "REQUIRE"
-                    },
-                    {
-                        "value": "verify-ca",
-                        "name": "VERIFY_CA"
-                    },
-                    {
-                        "value": "verify-full",
-                        "name": "VERIFY_FULL"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
                     }
-                ]
+                },
+                "REQUIRE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "require"
+                    }
+                },
+                "VERIFY_CA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "verify-ca"
+                    }
+                },
+                "VERIFY_FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "verify-full"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#DmsTransferSettings": {
@@ -4823,10 +7074,7 @@
             }
         },
         "com.amazonaws.databasemigrationservice#DoubleOptional": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.databasemigrationservice#DynamoDbSettings": {
             "type": "structure",
@@ -4884,37 +7132,43 @@
             }
         },
         "com.amazonaws.databasemigrationservice#EncodingTypeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "plain",
-                        "name": "PLAIN"
-                    },
-                    {
-                        "value": "plain-dictionary",
-                        "name": "PLAIN_DICTIONARY"
-                    },
-                    {
-                        "value": "rle-dictionary",
-                        "name": "RLE_DICTIONARY"
+            "type": "enum",
+            "members": {
+                "PLAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "plain"
                     }
-                ]
+                },
+                "PLAIN_DICTIONARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "plain-dictionary"
+                    }
+                },
+                "RLE_DICTIONARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rle-dictionary"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#EncryptionModeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "sse-s3",
-                        "name": "SSE_S3"
-                    },
-                    {
-                        "value": "sse-kms",
-                        "name": "SSE_KMS"
+            "type": "enum",
+            "members": {
+                "SSE_S3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sse-s3"
                     }
-                ]
+                },
+                "SSE_KMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sse-kms"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#Endpoint": {
@@ -4935,13 +7189,13 @@
                 "EngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include\n            <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n            <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>,\n            <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>,\n            <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n            <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>,\n            <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include\n         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>,\n         <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"db2-zos\"</code>, \n         <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, \n         <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, \n         <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, \n         <code>\"neptune\"</code>, and <code>\"babelfish\"</code>.</p>"
                     }
                 },
                 "EngineDisplayName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expanded name for the engine name. For example, if the <code>EngineName</code>\n         parameter is \"aurora,\" this value would be \"Amazon Aurora MySQL.\"</p>"
+                        "smithy.api#documentation": "<p>The expanded name for the engine name. For example, if the <code>EngineName</code>\n         parameter is \"aurora\", this value would be \"Amazon Aurora MySQL\".</p>"
                     }
                 },
                 "Username": {
@@ -5210,26 +7464,32 @@
             }
         },
         "com.amazonaws.databasemigrationservice#EndpointSettingTypeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "string",
-                        "name": "STRING"
-                    },
-                    {
-                        "value": "boolean",
-                        "name": "BOOLEAN"
-                    },
-                    {
-                        "value": "integer",
-                        "name": "INTEGER"
-                    },
-                    {
-                        "value": "enum",
-                        "name": "ENUM"
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "string"
                     }
-                ]
+                },
+                "BOOLEAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "boolean"
+                    }
+                },
+                "INTEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "integer"
+                    }
+                },
+                "ENUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "enum"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#EndpointSettingsList": {
@@ -5377,6 +7637,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.databasemigrationservice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value that indicates if the event subscription is enabled.</p>"
                     }
                 }
@@ -5771,7 +8032,10 @@
             }
         },
         "com.amazonaws.databasemigrationservice#Integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.databasemigrationservice#IntegerList": {
             "type": "list",
@@ -5780,10 +8044,7 @@
             }
         },
         "com.amazonaws.databasemigrationservice#IntegerOptional": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.databasemigrationservice#InvalidCertificateFault": {
             "type": "structure",
@@ -5947,26 +8208,32 @@
             }
         },
         "com.amazonaws.databasemigrationservice#KafkaSecurityProtocol": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "plaintext",
-                        "name": "PLAINTEXT"
-                    },
-                    {
-                        "value": "ssl-authentication",
-                        "name": "SSL_AUTHENTICATION"
-                    },
-                    {
-                        "value": "ssl-encryption",
-                        "name": "SSL_ENCRYPTION"
-                    },
-                    {
-                        "value": "sasl-ssl",
-                        "name": "SASL_SSL"
+            "type": "enum",
+            "members": {
+                "PLAINTEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "plaintext"
                     }
-                ]
+                },
+                "SSL_AUTHENTICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ssl-authentication"
+                    }
+                },
+                "SSL_ENCRYPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ssl-encryption"
+                    }
+                },
+                "SASL_SSL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sasl-ssl"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#KafkaSettings": {
@@ -6211,27 +8478,29 @@
             }
         },
         "com.amazonaws.databasemigrationservice#Long": {
-            "type": "long"
-        },
-        "com.amazonaws.databasemigrationservice#LongOptional": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#default": 0
             }
         },
+        "com.amazonaws.databasemigrationservice#LongOptional": {
+            "type": "long"
+        },
         "com.amazonaws.databasemigrationservice#MessageFormatValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "json",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "json-unformatted",
-                        "name": "JSON_UNFORMATTED"
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "json"
                     }
-                ]
+                },
+                "JSON_UNFORMATTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "json-unformatted"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#MicrosoftSQLServerSettings": {
@@ -6333,22 +8602,26 @@
             }
         },
         "com.amazonaws.databasemigrationservice#MigrationTypeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "full-load",
-                        "name": "FULL_LOAD"
-                    },
-                    {
-                        "value": "cdc",
-                        "name": "CDC"
-                    },
-                    {
-                        "value": "full-load-and-cdc",
-                        "name": "FULL_LOAD_AND_CDC"
+            "type": "enum",
+            "members": {
+                "FULL_LOAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "full-load"
                     }
-                ]
+                },
+                "CDC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cdc"
+                    }
+                },
+                "FULL_LOAD_AND_CDC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "full-load-and-cdc"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#ModifyEndpoint": {
@@ -6405,7 +8678,7 @@
                 "EngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of engine for the endpoint. Valid values, depending on the EndpointType,\n         include\n         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>, <code>\"opensearch\"</code>,\n         <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>,\n         <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>,\n         <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include\n         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>,\n         <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"db2-zos\"</code>, \n         <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, \n         <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, \n         <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, \n         <code>\"neptune\"</code>, and <code>\"babelfish\"</code>.</p>"
                     }
                 },
                 "Username": {
@@ -6746,6 +9019,7 @@
                 "ApplyImmediately": {
                     "target": "com.amazonaws.databasemigrationservice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the changes should be applied immediately or during the next\n         maintenance window.</p>"
                     }
                 },
@@ -6782,6 +9056,7 @@
                 "AllowMajorVersionUpgrade": {
                     "target": "com.amazonaws.databasemigrationservice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates that major version upgrades are allowed. Changing this parameter does not\n         result in an outage, and the change is asynchronously applied as soon as possible.</p>\n         <p>This parameter must be set to <code>true</code> when specifying a value for the\n            <code>EngineVersion</code> parameter that is a different major version than the\n         replication instance's current version.</p>"
                     }
                 },
@@ -6795,6 +9070,12 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The replication instance identifier. This parameter is stored as a lowercase\n         string.</p>"
+                    }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of IP address protocol used by a replication instance, \n         such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. \n         IPv6 only is not yet supported.</p>"
                     }
                 }
             },
@@ -7295,18 +9576,20 @@
             }
         },
         "com.amazonaws.databasemigrationservice#NestingLevelValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "none",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "one",
-                        "name": "ONE"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
                     }
-                ]
+                },
+                "ONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "one"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#OracleSettings": {
@@ -7399,7 +9682,7 @@
                 "ArchivedLogsOnly": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>When this field is set to <code>Y</code>, DMS only accesses the\n         archived redo logs. If the archived redo logs are stored on\n         Oracle ASM only, the DMS user account needs to be\n         granted ASM privileges.</p>"
+                        "smithy.api#documentation": "<p>When this field is set to <code>Y</code>, DMS only accesses the\n         archived redo logs. If the archived redo logs are stored on\n         Automatic Storage Management (ASM) only, the DMS user account needs to be\n         granted ASM privileges.</p>"
                     }
                 },
                 "AsmPassword": {
@@ -7543,13 +9826,13 @@
                 "SecretsManagerOracleAsmAccessRoleArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN\n         of the IAM role that specifies DMS as the trusted entity and grants the required\n         permissions to access the <code>SecretsManagerOracleAsmSecret</code>. This\n            <code>SecretsManagerOracleAsmSecret</code> has the secret value that allows access to\n         the Oracle ASM of the endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerOracleAsmSecretId</code>. Or you can\n            specify clear-text values for <code>AsmUserName</code>, <code>AsmPassword</code>, and\n               <code>AsmServerName</code>. You can't specify both. For more information on\n            creating this <code>SecretsManagerOracleAsmSecret</code> and the\n               <code>SecretsManagerOracleAsmAccessRoleArn</code> and\n               <code>SecretsManagerOracleAsmSecretId</code> required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service\n               resources</a> in the <i>Database Migration Service User\n               Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN\n         of the IAM role that specifies DMS as the trusted entity and grants the required\n         permissions to access the <code>SecretsManagerOracleAsmSecret</code>. This\n            <code>SecretsManagerOracleAsmSecret</code> has the secret value that allows access to\n         the Oracle ASM of the endpoint.</p>\n         <note>\n            <p>You can specify one of two sets of values for these permissions. You can specify the\n            values for this setting and <code>SecretsManagerOracleAsmSecretId</code>. Or you can\n            specify clear-text values for <code>AsmUserName</code>, <code>AsmPassword</code>, and\n               <code>AsmServerName</code>. You can't specify both. For more information on\n            creating this <code>SecretsManagerOracleAsmSecret</code> and the\n               <code>SecretsManagerOracleAsmAccessRoleArn</code> and\n               <code>SecretsManagerOracleAsmSecretId</code> required to access it, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#security-iam-secretsmanager\">Using secrets to access Database Migration Service\n               resources</a> in the <i>Database Migration Service User\n               Guide</i>.</p>\n         </note>"
                     }
                 },
                 "SecretsManagerOracleAsmSecretId": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Required only if your Oracle endpoint uses Advanced Storage Manager (ASM). The full ARN, partial ARN, or friendly name of the <code>SecretsManagerOracleAsmSecret</code> \n         that contains the Oracle ASM connection details for the Oracle endpoint.</p>"
+                        "smithy.api#documentation": "<p>Required only if your Oracle endpoint uses Automatic Storage Management (ASM). The full ARN, partial ARN, or friendly name of the <code>SecretsManagerOracleAsmSecret</code> \n         that contains the Oracle ASM connection details for the Oracle endpoint.</p>"
                     }
                 },
                 "TrimSpaceInChar": {
@@ -7587,24 +9870,28 @@
                 "MinAllocatedStorage": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum amount of storage (in gigabytes) that can be allocated for the replication\n         instance.</p>"
                     }
                 },
                 "MaxAllocatedStorage": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum amount of storage (in gigabytes) that can be allocated for the replication\n         instance.</p>"
                     }
                 },
                 "DefaultAllocatedStorage": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The default amount of storage (in gigabytes) that is allocated for the replication\n         instance.</p>"
                     }
                 },
                 "IncludedAllocatedStorage": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of storage (in gigabytes) that is allocated for the replication\n         instance.</p>"
                     }
                 },
@@ -7635,18 +9922,20 @@
             }
         },
         "com.amazonaws.databasemigrationservice#ParquetVersionValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "parquet-1-0",
-                        "name": "PARQUET_1_0"
-                    },
-                    {
-                        "value": "parquet-2-0",
-                        "name": "PARQUET_2_0"
+            "type": "enum",
+            "members": {
+                "PARQUET_1_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "parquet-1-0"
                     }
-                ]
+                },
+                "PARQUET_2_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "parquet-2-0"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#PendingMaintenanceAction": {
@@ -7712,22 +10001,26 @@
             }
         },
         "com.amazonaws.databasemigrationservice#PluginNameValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "no-preference",
-                        "name": "NO_PREFERENCE"
-                    },
-                    {
-                        "value": "test-decoding",
-                        "name": "TEST_DECODING"
-                    },
-                    {
-                        "value": "pglogical",
-                        "name": "PGLOGICAL"
+            "type": "enum",
+            "members": {
+                "NO_PREFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "no-preference"
                     }
-                ]
+                },
+                "TEST_DECODING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "test-decoding"
+                    }
+                },
+                "PGLOGICAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pglogical"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#PostgreSQLSettings": {
@@ -7908,22 +10201,26 @@
             }
         },
         "com.amazonaws.databasemigrationservice#RedisAuthTypeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "none",
-                        "name": "NONE"
-                    },
-                    {
-                        "value": "auth-role",
-                        "name": "AUTH_ROLE"
-                    },
-                    {
-                        "value": "auth-token",
-                        "name": "AUTH_TOKEN"
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
                     }
-                ]
+                },
+                "AUTH_ROLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "auth-role"
+                    }
+                },
+                "AUTH_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "auth-token"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#RedisSettings": {
@@ -7939,6 +10236,7 @@
                 "Port": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Transmission Control Protocol (TCP) port for the endpoint.</p>",
                         "smithy.api#required": {}
                     }
@@ -8267,48 +10565,54 @@
             }
         },
         "com.amazonaws.databasemigrationservice#RefreshSchemasStatusTypeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "successful",
-                        "name": "SUCCESSFUL"
-                    },
-                    {
-                        "value": "failed",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "refreshing",
-                        "name": "REFRESHING"
+            "type": "enum",
+            "members": {
+                "SUCCESSFUL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "successful"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "failed"
+                    }
+                },
+                "REFRESHING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "refreshing"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#ReleaseStatusValues": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "beta",
-                        "name": "BETA"
+            "type": "enum",
+            "members": {
+                "BETA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "beta"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#ReloadOptionValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "data-reload",
-                        "name": "DATA_RELOAD"
-                    },
-                    {
-                        "value": "validate-only",
-                        "name": "VALIDATE_ONLY"
+            "type": "enum",
+            "members": {
+                "DATA_RELOAD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "data-reload"
                     }
-                ]
+                },
+                "VALIDATE_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "validate-only"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#ReloadTables": {
@@ -8414,18 +10718,20 @@
             }
         },
         "com.amazonaws.databasemigrationservice#ReplicationEndpointTypeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "source",
-                        "name": "SOURCE"
-                    },
-                    {
-                        "value": "target",
-                        "name": "TARGET"
+            "type": "enum",
+            "members": {
+                "SOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "source"
                     }
-                ]
+                },
+                "TARGET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "target"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#ReplicationInstance": {
@@ -8452,6 +10758,7 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of storage (in gigabytes) that is allocated for the replication\n         instance.</p>"
                     }
                 },
@@ -8494,6 +10801,7 @@
                 "MultiAZ": {
                     "target": "com.amazonaws.databasemigrationservice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies whether the replication instance is a Multi-AZ deployment. You can't set the\n            <code>AvailabilityZone</code> parameter if the Multi-AZ parameter is set to\n            <code>true</code>. </p>"
                     }
                 },
@@ -8506,6 +10814,7 @@
                 "AutoMinorVersionUpgrade": {
                     "target": "com.amazonaws.databasemigrationservice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Boolean value indicating if minor version upgrades will be automatically applied to the\n         instance.</p>"
                     }
                 },
@@ -8547,9 +10856,16 @@
                         "smithy.api#documentation": "<p>One or more private IP addresses for the replication instance.</p>"
                     }
                 },
+                "ReplicationInstanceIpv6Addresses": {
+                    "target": "com.amazonaws.databasemigrationservice#ReplicationInstanceIpv6AddressList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more IPv6 addresses for the replication instance.</p>"
+                    }
+                },
                 "PubliclyAccessible": {
                     "target": "com.amazonaws.databasemigrationservice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Specifies the accessibility options for the replication instance. A value of\n            <code>true</code> represents an instance with a public IP address. A value of\n            <code>false</code> represents an instance with a private IP address. The default value\n         is <code>true</code>. </p>"
                     }
                 },
@@ -8570,10 +10886,22 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The DNS name servers supported for the replication instance to access your on-premise source or target database.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of IP address protocol used by a replication instance, \n         such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. \n         IPv6 only is not yet supported.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information that defines a replication instance.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#ReplicationInstanceIpv6AddressList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#String"
             }
         },
         "com.amazonaws.databasemigrationservice#ReplicationInstanceList": {
@@ -8615,6 +10943,7 @@
                 "ReplicationInstanceTaskLogSize": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size, in bytes, of the replication task log.</p>"
                     }
                 }
@@ -8655,6 +10984,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The engine version number of the replication instance.</p>"
                     }
+                },
+                "NetworkType": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of IP address protocol used by a replication instance, \n         such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing. \n         IPv6 only is not yet supported.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8692,6 +11027,12 @@
                     "target": "com.amazonaws.databasemigrationservice#SubnetList",
                     "traits": {
                         "smithy.api#documentation": "<p>The subnets that are in the subnet group.</p>"
+                    }
+                },
+                "SupportedNetworkTypes": {
+                    "target": "com.amazonaws.databasemigrationservice#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP addressing protocol supported by the subnet group. This is used by a \n      replication instance with values such as IPv4 only or Dual-stack that supports \n      both IPv4 and IPv6 addressing. IPv6 only is not yet supported.</p>"
                     }
                 }
             },
@@ -8996,12 +11337,14 @@
                 "IndividualAssessmentCount": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of individual assessments that are specified to run.</p>"
                     }
                 },
                 "IndividualAssessmentCompletedCount": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of individual assessments that have completed, successfully or not.</p>"
                     }
                 }
@@ -9069,36 +11412,42 @@
                 "FullLoadProgressPercent": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percent complete for the full load migration task.</p>"
                     }
                 },
                 "ElapsedTimeMillis": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The elapsed time of the task, in milliseconds.</p>"
                     }
                 },
                 "TablesLoaded": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tables loaded for this task.</p>"
                     }
                 },
                 "TablesLoading": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tables currently loading for this task.</p>"
                     }
                 },
                 "TablesQueued": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of tables queued for this task.</p>"
                     }
                 },
                 "TablesErrored": {
                     "target": "com.amazonaws.databasemigrationservice#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of errors that have occurred during this task.</p>"
                     }
                 },
@@ -9467,7 +11816,7 @@
                 "CdcMinFileSize": {
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Minimum file size, defined in megabytes, to reach for a file output to Amazon S3.</p>\n         <p>When <code>CdcMinFileSize</code> and <code>CdcMaxBatchInterval</code> are both specified, the file \n         write is triggered by whichever parameter condition is met first within an DMS \n         CloudFormation template.</p>\n         <p>The default value is 32 MB.</p>"
+                        "smithy.api#documentation": "<p>Minimum file size, defined in kilobytes, to reach for a file output to Amazon S3.</p>\n         <p>When <code>CdcMinFileSize</code> and <code>CdcMaxBatchInterval</code> are both specified, the file \n         write is triggered by whichever parameter condition is met first within an DMS \n         CloudFormation template.</p>\n         <p>The default value is 32 MB.</p>"
                     }
                 },
                 "CsvNullValue": {
@@ -9548,22 +11897,26 @@
             }
         },
         "com.amazonaws.databasemigrationservice#SafeguardPolicy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "rely-on-sql-server-replication-agent",
-                        "name": "RELY_ON_SQL_SERVER_REPLICATION_AGENT"
-                    },
-                    {
-                        "value": "exclusive-automatic-truncation",
-                        "name": "EXCLUSIVE_AUTOMATIC_TRUNCATION"
-                    },
-                    {
-                        "value": "shared-automatic-truncation",
-                        "name": "SHARED_AUTOMATIC_TRUNCATION"
+            "type": "enum",
+            "members": {
+                "RELY_ON_SQL_SERVER_REPLICATION_AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "rely-on-sql-server-replication-agent"
                     }
-                ]
+                },
+                "EXCLUSIVE_AUTOMATIC_TRUNCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "exclusive-automatic-truncation"
+                    }
+                },
+                "SHARED_AUTOMATIC_TRUNCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "shared-automatic-truncation"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#SchemaList": {
@@ -9711,29 +12064,31 @@
             }
         },
         "com.amazonaws.databasemigrationservice#SourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "replication-instance",
-                        "name": "replication_instance"
+            "type": "enum",
+            "members": {
+                "replication_instance": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "replication-instance"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#SslSecurityProtocolValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "plaintext",
-                        "name": "PLAINTEXT"
-                    },
-                    {
-                        "value": "ssl-encryption",
-                        "name": "SSL_ENCRYPTION"
+            "type": "enum",
+            "members": {
+                "PLAINTEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "plaintext"
                     }
-                ]
+                },
+                "SSL_ENCRYPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ssl-encryption"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#StartReplicationTask": {
@@ -9993,22 +12348,26 @@
             }
         },
         "com.amazonaws.databasemigrationservice#StartReplicationTaskTypeValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "start-replication",
-                        "name": "START_REPLICATION"
-                    },
-                    {
-                        "value": "resume-processing",
-                        "name": "RESUME_PROCESSING"
-                    },
-                    {
-                        "value": "reload-target",
-                        "name": "RELOAD_TARGET"
+            "type": "enum",
+            "members": {
+                "START_REPLICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "start-replication"
                     }
-                ]
+                },
+                "RESUME_PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "resume-processing"
+                    }
+                },
+                "RELOAD_TARGET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "reload-target"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#StopReplicationTask": {
@@ -10149,12 +12508,13 @@
                 "EngineName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database engine name. Valid values, depending on the EndpointType,  include\n         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>,\n         <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"azuredb\"</code>,\n         <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, <code>\"mongodb\"</code>,\n         <code>\"kinesis\"</code>, <code>\"kafka\"</code>, <code>\"elasticsearch\"</code>,\n         <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, and <code>\"neptune\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The database engine name. Valid values, depending on the EndpointType, include\n         <code>\"mysql\"</code>, <code>\"oracle\"</code>, <code>\"postgres\"</code>,\n         <code>\"mariadb\"</code>, <code>\"aurora\"</code>, <code>\"aurora-postgresql\"</code>,\n         <code>\"redshift\"</code>, <code>\"s3\"</code>, <code>\"db2\"</code>, <code>\"db2-zos\"</code>, \n         <code>\"azuredb\"</code>, <code>\"sybase\"</code>, <code>\"dynamodb\"</code>, \n         <code>\"mongodb\"</code>, <code>\"kinesis\"</code>, <code>\"kafka\"</code>, \n         <code>\"elasticsearch\"</code>, <code>\"documentdb\"</code>, <code>\"sqlserver\"</code>, \n         <code>\"neptune\"</code>, and <code>\"babelfish\"</code>.</p>"
                     }
                 },
                 "SupportsCDC": {
                     "target": "com.amazonaws.databasemigrationservice#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates if change data capture (CDC) is supported.</p>"
                     }
                 },
@@ -10173,7 +12533,7 @@
                 "EngineDisplayName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The expanded name for the engine name. For example, if the <code>EngineName</code>\n         parameter is \"aurora,\" this value would be \"Amazon Aurora MySQL.\"</p>"
+                        "smithy.api#documentation": "<p>The expanded name for the engine name. For example, if the <code>EngineName</code>\n         parameter is \"aurora\", this value would be \"Amazon Aurora MySQL\".</p>"
                     }
                 }
             },
@@ -10267,42 +12627,73 @@
                 "Inserts": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of insert actions performed on a table.</p>"
                     }
                 },
                 "Deletes": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of delete actions performed on a table.</p>"
                     }
                 },
                 "Updates": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of update actions performed on a table.</p>"
                     }
                 },
                 "Ddls": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The data definition language (DDL) used to build and modify the structure of your tables.</p>"
+                    }
+                },
+                "AppliedInserts": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of insert actions applied on a target table.</p>"
+                    }
+                },
+                "AppliedDeletes": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of delete actions applied on a target table.</p>"
+                    }
+                },
+                "AppliedUpdates": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of update actions applied on a target table.</p>"
+                    }
+                },
+                "AppliedDdls": {
+                    "target": "com.amazonaws.databasemigrationservice#LongOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of data definition language (DDL) statements used to build and modify the structure\n         of your tables applied on the target.</p>"
                     }
                 },
                 "FullLoadRows": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of rows added during the full load operation.</p>"
                     }
                 },
                 "FullLoadCondtnlChkFailedRows": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of rows that failed conditional checks during the full load operation (valid\n         only for migrations where DynamoDB is the target).</p>"
                     }
                 },
                 "FullLoadErrorRows": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of rows that failed to load during the full load operation (valid only for\n         migrations where DynamoDB is the target).</p>"
                     }
                 },
@@ -10339,18 +12730,21 @@
                 "ValidationPendingRecords": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of records that have yet to be validated.</p>"
                     }
                 },
                 "ValidationFailedRecords": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of records that failed validation.</p>"
                     }
                 },
                 "ValidationSuspendedRecords": {
                     "target": "com.amazonaws.databasemigrationservice#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of records that couldn't be validated.</p>"
                     }
                 },
@@ -10435,18 +12829,20 @@
             }
         },
         "com.amazonaws.databasemigrationservice#TargetDbType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "specific-database",
-                        "name": "SPECIFIC_DATABASE"
-                    },
-                    {
-                        "value": "multiple-databases",
-                        "name": "MULTIPLE_DATABASES"
+            "type": "enum",
+            "members": {
+                "SPECIFIC_DATABASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "specific-database"
                     }
-                ]
+                },
+                "MULTIPLE_DATABASES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "multiple-databases"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#TestConnection": {
@@ -10578,22 +12974,26 @@
             }
         },
         "com.amazonaws.databasemigrationservice#VersionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UP_TO_DATE",
-                        "name": "UP_TO_DATE"
-                    },
-                    {
-                        "value": "OUTDATED",
-                        "name": "OUTDATED"
-                    },
-                    {
-                        "value": "UNSUPPORTED",
-                        "name": "UNSUPPORTED"
+            "type": "enum",
+            "members": {
+                "UP_TO_DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UP_TO_DATE"
                     }
-                ]
+                },
+                "OUTDATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUTDATED"
+                    }
+                },
+                "UNSUPPORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSUPPORTED"
+                    }
+                }
             }
         },
         "com.amazonaws.databasemigrationservice#VpcSecurityGroupIdList": {

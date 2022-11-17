@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -129,21 +129,6 @@
         },
         "com.amazonaws.personalize#AmazonPersonalize": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Personalize",
-                    "arnNamespace": "personalize",
-                    "cloudFormationName": "Personalize",
-                    "cloudTrailEventSource": "personalize.amazonaws.com",
-                    "endpointPrefix": "personalize"
-                },
-                "aws.auth#sigv4": {
-                    "name": "personalize"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Personalize is a machine learning service that makes it easy to add individualized\n      recommendations to customers.</p>",
-                "smithy.api#title": "Amazon Personalize"
-            },
             "version": "2018-05-22",
             "operations": [
                 {
@@ -174,6 +159,9 @@
                     "target": "com.amazonaws.personalize#CreateFilter"
                 },
                 {
+                    "target": "com.amazonaws.personalize#CreateMetricAttribution"
+                },
+                {
                     "target": "com.amazonaws.personalize#CreateRecommender"
                 },
                 {
@@ -199,6 +187,9 @@
                 },
                 {
                     "target": "com.amazonaws.personalize#DeleteFilter"
+                },
+                {
+                    "target": "com.amazonaws.personalize#DeleteMetricAttribution"
                 },
                 {
                     "target": "com.amazonaws.personalize#DeleteRecommender"
@@ -241,6 +232,9 @@
                 },
                 {
                     "target": "com.amazonaws.personalize#DescribeFilter"
+                },
+                {
+                    "target": "com.amazonaws.personalize#DescribeMetricAttribution"
                 },
                 {
                     "target": "com.amazonaws.personalize#DescribeRecipe"
@@ -288,6 +282,12 @@
                     "target": "com.amazonaws.personalize#ListFilters"
                 },
                 {
+                    "target": "com.amazonaws.personalize#ListMetricAttributionMetrics"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ListMetricAttributions"
+                },
+                {
                     "target": "com.amazonaws.personalize#ListRecipes"
                 },
                 {
@@ -324,9 +324,1009 @@
                     "target": "com.amazonaws.personalize#UpdateCampaign"
                 },
                 {
+                    "target": "com.amazonaws.personalize#UpdateMetricAttribution"
+                },
+                {
                     "target": "com.amazonaws.personalize#UpdateRecommender"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Personalize",
+                    "arnNamespace": "personalize",
+                    "cloudFormationName": "Personalize",
+                    "cloudTrailEventSource": "personalize.amazonaws.com",
+                    "endpointPrefix": "personalize"
+                },
+                "aws.auth#sigv4": {
+                    "name": "personalize"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon Personalize is a machine learning service that makes it easy to add individualized\n      recommendations to customers.</p>",
+                "smithy.api#title": "Amazon Personalize",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://personalize-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://personalize-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://personalize.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://personalize.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://personalize.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.personalize#Arn": {
             "type": "string",
@@ -756,10 +1756,7 @@
             }
         },
         "com.amazonaws.personalize#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.personalize#Campaign": {
             "type": "structure",
@@ -1008,12 +2005,14 @@
                 "minValue": {
                     "target": "com.amazonaws.personalize#ContinuousMinValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum allowable value for the hyperparameter.</p>"
                     }
                 },
                 "maxValue": {
                     "target": "com.amazonaws.personalize#ContinuousMaxValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum allowable value for the hyperparameter.</p>"
                     }
                 }
@@ -1037,6 +2036,7 @@
         "com.amazonaws.personalize#ContinuousMaxValue": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": -1000000
                 }
@@ -1045,6 +2045,7 @@
         "com.amazonaws.personalize#ContinuousMinValue": {
             "type": "double",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": -1000000
                 }
@@ -1614,6 +2615,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specify how to add the new records to an existing dataset. The default\n      import mode is <code>FULL</code>. If you haven't imported bulk records into the dataset previously, you\n      can only specify <code>FULL</code>.</p>\n         <ul>\n            <li>\n               <p>Specify <code>FULL</code> to overwrite all existing bulk data in\n          your dataset. Data you imported individually is not replaced.</p>\n            </li>\n            <li>\n               <p>Specify <code>INCREMENTAL</code> to append the new records to the\n          existing data in your dataset. Amazon Personalize replaces any record with the\n          same ID with the new one.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "publishAttributionMetricsToS3": {
+                    "target": "com.amazonaws.personalize#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you created a metric attribution, specify whether to publish metrics for this import job to Amazon S3</p>"
+                    }
                 }
             }
         },
@@ -1825,6 +2832,79 @@
                 }
             }
         },
+        "com.amazonaws.personalize#CreateMetricAttribution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#CreateMetricAttributionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#CreateMetricAttributionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a metric attribution. \n      A metric attribution creates reports on the data that you import into Amazon Personalize. Depending on how you imported the data, you can view reports in Amazon CloudWatch or Amazon S3.\n      For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html\">Measuring impact of recommendations</a>.</p>"
+            }
+        },
+        "com.amazonaws.personalize#CreateMetricAttributionRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the metric attribution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the destination dataset group for the metric attribution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metrics": {
+                    "target": "com.amazonaws.personalize#MetricAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of metric attributes for the metric attribution. Each metric attribute specifies an event type to track and a function.\n      Available functions are <code>SUM()</code> or <code>SAMPLECOUNT()</code>. For SUM() functions, provide the \n      dataset type (either Interactions or Items) and column to sum as a parameter. For example SUM(Items.PRICE).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metricsOutputConfig": {
+                    "target": "com.amazonaws.personalize#MetricAttributionOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output configuration details for the metric attribution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#CreateMetricAttributionResponse": {
+            "type": "structure",
+            "members": {
+                "metricAttributionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the new metric attribution.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.personalize#CreateRecommender": {
             "type": "operation",
             "input": {
@@ -2018,6 +3098,7 @@
                 "performAutoML": {
                     "target": "com.amazonaws.personalize#PerformAutoML",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether to perform automated machine learning (AutoML). The default is <code>false</code>.\n      For this case, you must specify <code>recipeArn</code>.</p>\n         <p>When set to <code>true</code>, Amazon Personalize analyzes your training data and selects\n      the optimal USER_PERSONALIZATION recipe and hyperparameters. In this case, you must omit\n      <code>recipeArn</code>. Amazon Personalize determines the optimal recipe by running tests with\n      different values for the hyperparameters.\n      AutoML lengthens the training process as compared to selecting a specific recipe.</p>"
                     }
                 },
@@ -2081,6 +3162,9 @@
                     "target": "com.amazonaws.personalize#LimitExceededException"
                 },
                 {
+                    "target": "com.amazonaws.personalize#ResourceAlreadyExistsException"
+                },
+                {
                     "target": "com.amazonaws.personalize#ResourceInUseException"
                 },
                 {
@@ -2097,6 +3181,12 @@
         "com.amazonaws.personalize#CreateSolutionVersionRequest": {
             "type": "structure",
             "members": {
+                "name": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the solution version.</p>"
+                    }
+                },
                 "solutionArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
@@ -2523,6 +3613,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The import mode used by the dataset import job to import new\n      records.</p>"
                     }
+                },
+                "publishAttributionMetricsToS3": {
+                    "target": "com.amazonaws.personalize#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the job publishes metrics to Amazon S3 for a metric attribution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2759,6 +3855,7 @@
                 "isTunable": {
                     "target": "com.amazonaws.personalize#Tunable",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the hyperparameter is tunable.</p>"
                     }
                 }
@@ -2791,18 +3888,21 @@
                 "minValue": {
                     "target": "com.amazonaws.personalize#ContinuousMinValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum allowable value for the hyperparameter.</p>"
                     }
                 },
                 "maxValue": {
                     "target": "com.amazonaws.personalize#ContinuousMaxValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum allowable value for the hyperparameter.</p>"
                     }
                 },
                 "isTunable": {
                     "target": "com.amazonaws.personalize#Tunable",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the hyperparameter is tunable.</p>"
                     }
                 }
@@ -2861,18 +3961,21 @@
                 "minValue": {
                     "target": "com.amazonaws.personalize#IntegerMinValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum allowable value for the hyperparameter.</p>"
                     }
                 },
                 "maxValue": {
                     "target": "com.amazonaws.personalize#IntegerMaxValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum allowable value for the hyperparameter.</p>"
                     }
                 },
                 "isTunable": {
                     "target": "com.amazonaws.personalize#Tunable",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether the hyperparameter is tunable.</p>"
                     }
                 }
@@ -3067,6 +4170,42 @@
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the filter to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#DeleteMetricAttribution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#DeleteMetricAttributionRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a metric attribution.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#DeleteMetricAttributionRequest": {
+            "type": "structure",
+            "members": {
+                "metricAttributionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3664,6 +4803,49 @@
                 }
             }
         },
+        "com.amazonaws.personalize#DescribeMetricAttribution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#DescribeMetricAttributionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#DescribeMetricAttributionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a metric attribution.</p>"
+            }
+        },
+        "com.amazonaws.personalize#DescribeMetricAttributionRequest": {
+            "type": "structure",
+            "members": {
+                "metricAttributionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's Amazon Resource Name (ARN).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#DescribeMetricAttributionResponse": {
+            "type": "structure",
+            "members": {
+                "metricAttribution": {
+                    "target": "com.amazonaws.personalize#MetricAttribution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the metric attribution.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.personalize#DescribeRecipe": {
             "type": "operation",
             "input": {
@@ -3897,18 +5079,20 @@
             }
         },
         "com.amazonaws.personalize#Domain": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ECOMMERCE",
-                        "name": "ECOMMERCE"
-                    },
-                    {
-                        "value": "VIDEO_ON_DEMAND",
-                        "name": "VIDEO_ON_DEMAND"
+            "type": "enum",
+            "members": {
+                "ECOMMERCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ECOMMERCE"
                     }
-                ]
+                },
+                "VIDEO_ON_DEMAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_ON_DEMAND"
+                    }
+                }
             }
         },
         "com.amazonaws.personalize#ErrorMessage": {
@@ -4427,37 +5611,43 @@
             }
         },
         "com.amazonaws.personalize#ImportMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FULL",
-                        "name": "FULL"
-                    },
-                    {
-                        "value": "INCREMENTAL",
-                        "name": "INCREMENTAL"
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
                     }
-                ]
+                },
+                "INCREMENTAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREMENTAL"
+                    }
+                }
             }
         },
         "com.amazonaws.personalize#IngestionMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BULK",
-                        "name": "BULK"
-                    },
-                    {
-                        "value": "PUT",
-                        "name": "PUT"
-                    },
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
+            "type": "enum",
+            "members": {
+                "BULK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BULK"
                     }
-                ]
+                },
+                "PUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUT"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                }
             }
         },
         "com.amazonaws.personalize#IntegerHyperParameterRange": {
@@ -4472,12 +5662,14 @@
                 "minValue": {
                     "target": "com.amazonaws.personalize#IntegerMinValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The minimum allowable value for the hyperparameter.</p>"
                     }
                 },
                 "maxValue": {
                     "target": "com.amazonaws.personalize#IntegerMaxValue",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum allowable value for the hyperparameter.</p>"
                     }
                 }
@@ -4501,6 +5693,7 @@
         "com.amazonaws.personalize#IntegerMaxValue": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "max": 1000000
                 }
@@ -4509,6 +5702,7 @@
         "com.amazonaws.personalize#IntegerMinValue": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": -1000000
                 }
@@ -5166,6 +6360,140 @@
                 }
             }
         },
+        "com.amazonaws.personalize#ListMetricAttributionMetrics": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#ListMetricAttributionMetricsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#ListMetricAttributionMetricsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the metrics for the metric attribution.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "metrics",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListMetricAttributionMetricsRequest": {
+            "type": "structure",
+            "members": {
+                "metricAttributionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the metric attribution to retrieve attributes for.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.personalize#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of metrics to return in one page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListMetricAttributionMetricsResponse": {
+            "type": "structure",
+            "members": {
+                "metrics": {
+                    "target": "com.amazonaws.personalize#MetricAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metrics for the specified metric attribution.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the pagination token from a previous <code>ListMetricAttributionMetricsResponse</code> request to retrieve the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListMetricAttributions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#ListMetricAttributionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#ListMetricAttributionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists metric attributions.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "metricAttributions",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListMetricAttributionsRequest": {
+            "type": "structure",
+            "members": {
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attributions' dataset group Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.personalize#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of metric attributions to return in one page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#ListMetricAttributionsResponse": {
+            "type": "structure",
+            "members": {
+                "metricAttributions": {
+                    "target": "com.amazonaws.personalize#MetricAttributions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of metric attributions.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify the pagination token from a previous request to retrieve the next page of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.personalize#ListRecipes": {
             "type": "operation",
             "input": {
@@ -5550,10 +6878,201 @@
         "com.amazonaws.personalize#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
+                }
+            }
+        },
+        "com.amazonaws.personalize#MetricAttribute": {
+            "type": "structure",
+            "members": {
+                "eventType": {
+                    "target": "com.amazonaws.personalize#EventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric's event type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "metricName": {
+                    "target": "com.amazonaws.personalize#MetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric's name. The name helps you identify the metric in Amazon CloudWatch or Amazon S3.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expression": {
+                    "target": "com.amazonaws.personalize#MetricExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute's expression. Available functions are <code>SUM()</code> or <code>SAMPLECOUNT()</code>. For SUM() functions, provide the \n      dataset type (either Interactions or Items) and column to sum as a parameter. For example SUM(Items.PRICE).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on a metric that a metric attribution reports on. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html\">Measuring impact of recommendations</a>.</p>"
+            }
+        },
+        "com.amazonaws.personalize#MetricAttributes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalize#MetricAttribute"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.personalize#MetricAttributesNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalize#MetricName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.personalize#MetricAttribution": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's name.</p>"
+                    }
+                },
+                "metricAttributionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's dataset group Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "metricsOutputConfig": {
+                    "target": "com.amazonaws.personalize#MetricAttributionOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's output configuration.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's status.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's creation date time.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's last updated date time.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's failure reason.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information on a metric attribution. A metric attribution creates reports on the data that you import into Amazon Personalize. \n      Depending on how you import the data, you can view reports in Amazon CloudWatch or Amazon S3.\n      For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html\">Measuring impact of recommendations</a>.</p>"
+            }
+        },
+        "com.amazonaws.personalize#MetricAttributionOutput": {
+            "type": "structure",
+            "members": {
+                "s3DataDestination": {
+                    "target": "com.amazonaws.personalize#S3DataConfig"
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.personalize#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your output Amazon S3 bucket and add metrics to Amazon CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/measuring-recommendation-impact.html\">Measuring impact of recommendations</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The output configuration details for a metric attribution.</p>"
+            }
+        },
+        "com.amazonaws.personalize#MetricAttributionSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the metric attribution.</p>"
+                    }
+                },
+                "metricAttributionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's status.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's creation date time.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's last updated date time.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric attribution's failure reason.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the properties of a metric attribution. For a complete listing, call the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeMetricAttribution.html\">DescribeMetricAttribution</a>.</p>"
+            }
+        },
+        "com.amazonaws.personalize#MetricAttributions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalize#MetricAttributionSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.personalize#MetricExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
                 }
             }
         },
@@ -5576,7 +7095,10 @@
             }
         },
         "com.amazonaws.personalize#MetricValue": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.personalize#Metrics": {
             "type": "map",
@@ -5613,32 +7135,35 @@
             }
         },
         "com.amazonaws.personalize#NumBatchResults": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.personalize#ObjectiveSensitivity": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LOW",
-                        "name": "LOW"
-                    },
-                    {
-                        "value": "MEDIUM",
-                        "name": "MEDIUM"
-                    },
-                    {
-                        "value": "HIGH",
-                        "name": "HIGH"
-                    },
-                    {
-                        "value": "OFF",
-                        "name": "OFF"
+            "type": "enum",
+            "members": {
+                "LOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOW"
                     }
-                ]
+                },
+                "MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM"
+                    }
+                },
+                "HIGH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HIGH"
+                    }
+                },
+                "OFF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OFF"
+                    }
+                }
             }
         },
         "com.amazonaws.personalize#OptimizationObjective": {
@@ -5680,10 +7205,16 @@
             }
         },
         "com.amazonaws.personalize#PerformAutoML": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.personalize#PerformHPO": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.personalize#Recipe": {
             "type": "structure",
@@ -5748,14 +7279,14 @@
             }
         },
         "com.amazonaws.personalize#RecipeProvider": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SERVICE",
-                        "name": "SERVICE"
+            "type": "enum",
+            "members": {
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.personalize#RecipeSummary": {
@@ -6148,12 +7679,14 @@
                 "performHPO": {
                     "target": "com.amazonaws.personalize#PerformHPO",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The\n      default is <code>false</code>.</p>"
                     }
                 },
                 "performAutoML": {
                     "target": "com.amazonaws.personalize#PerformAutoML",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When true, Amazon Personalize performs a search for the best USER_PERSONALIZATION recipe from\n      the list specified in the solution configuration (<code>recipeArn</code> must not be specified).\n      When false (the default), Amazon Personalize uses <code>recipeArn</code> for training.</p>"
                     }
                 },
@@ -6292,6 +7825,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time (in Unix time) that the solution was last updated.</p>"
                     }
+                },
+                "recipeArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recipe used by the solution.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6301,6 +7840,12 @@
         "com.amazonaws.personalize#SolutionVersion": {
             "type": "structure",
             "members": {
+                "name": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the solution version.</p>"
+                    }
+                },
                 "solutionVersionArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
@@ -6316,12 +7861,14 @@
                 "performHPO": {
                     "target": "com.amazonaws.personalize#PerformHPO",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether to perform hyperparameter optimization (HPO) on the chosen recipe. The default is\n        <code>false</code>.</p>"
                     }
                 },
                 "performAutoML": {
                     "target": "com.amazonaws.personalize#PerformAutoML",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When true, Amazon Personalize searches for the most optimal recipe according to the solution\n      configuration. When false (the default), Amazon Personalize uses <code>recipeArn</code>.</p>"
                     }
                 },
@@ -6753,7 +8300,6 @@
         "com.amazonaws.personalize#TrainingHours": {
             "type": "double",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -6769,31 +8315,35 @@
             }
         },
         "com.amazonaws.personalize#TrainingMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FULL",
-                        "name": "FULL"
-                    },
-                    {
-                        "value": "UPDATE",
-                        "name": "UPDATE"
+            "type": "enum",
+            "members": {
+                "FULL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FULL"
                     }
-                ]
+                },
+                "UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE"
+                    }
+                }
             }
         },
         "com.amazonaws.personalize#TransactionsPerSecond": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
             }
         },
         "com.amazonaws.personalize#Tunable": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.personalize#TunedHPOParams": {
             "type": "structure",
@@ -6919,6 +8469,72 @@
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The same campaign ARN as given in the request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#UpdateMetricAttribution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#UpdateMetricAttributionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#UpdateMetricAttributionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a metric attribution.</p>"
+            }
+        },
+        "com.amazonaws.personalize#UpdateMetricAttributionRequest": {
+            "type": "structure",
+            "members": {
+                "addMetrics": {
+                    "target": "com.amazonaws.personalize#MetricAttributes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Add new metric attributes to the metric attribution.</p>"
+                    }
+                },
+                "removeMetrics": {
+                    "target": "com.amazonaws.personalize#MetricAttributesNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Remove metric attributes from the metric attribution.</p>"
+                    }
+                },
+                "metricsOutputConfig": {
+                    "target": "com.amazonaws.personalize#MetricAttributionOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An output config for the metric attribution.</p>"
+                    }
+                },
+                "metricAttributionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the metric attribution to update.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#UpdateMetricAttributionResponse": {
+            "type": "structure",
+            "members": {
+                "metricAttributionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the metric attribution that you updated.</p>"
                     }
                 }
             }

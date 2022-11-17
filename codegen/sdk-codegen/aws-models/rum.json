@@ -73,6 +73,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that contains information about whether this app monitor stores a copy of\n         the telemetry data that RUM collects using CloudWatch Logs.</p>"
                     }
+                },
+                "CustomEvents": {
+                    "target": "com.amazonaws.rum#CustomEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n      custom events.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -97,7 +103,7 @@
                 "IncludedPages": {
                     "target": "com.amazonaws.rum#Pages",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this app monitor is to collect data from only certain pages in your application, this structure lists those pages. </p>\n      \n         <p>You can't include both <code>ExcludedPages</code> and <code>IncludedPages</code> in the same operation.</p>"
+                        "smithy.api#documentation": "<p>If this app monitor is to collect data from only certain pages in your application, this structure lists those pages. </p>\n         <p>You can't include both <code>ExcludedPages</code> and <code>IncludedPages</code> in the same operation.</p>"
                     }
                 },
                 "FavoritePages": {
@@ -334,7 +340,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the extended metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid\n         destinations include CloudWatch and Evidently.</p> \n         <p>By default, RUM app monitors send some metrics to CloudWatch. These default metrics\n         are listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html\">CloudWatch metrics that you can collect \n            with CloudWatch RUM</a>.</p>\n         <p>If you also send extended metrics, you can send metrics to Evidently as well as CloudWatch, and you can also \n         optionally\n         send the metrics with additional dimensions. The valid dimension names for the additional dimensions are\n         <code>BrowserName</code>, <code>CountryCode</code>, <code>DeviceType</code>,\n         <code>FileType</code>, <code>OSName</code>, and <code>PageId</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n            Extended metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>\n         <p>The maximum number of metric definitions that you can specify in one \n         <code>BatchCreateRumMetricDefinitions</code> operation is 200.</p>\n      \n         <p>The maximum number of metric definitions that one destination can contain is 2000.</p>\n         <p>Extended metrics sent are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension\n         value counts as a custom metric. For more information, see \n         <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>\n         <p>You must have\n         already created a destination for the metrics before you send them. For more information, see \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>\n         <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid,\n      those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>",
+                "smithy.api#documentation": "<p>Specifies the extended metrics that you want a CloudWatch RUM app monitor to send to a destination. Valid\n         destinations include CloudWatch and Evidently.</p>\n         <p>By default, RUM app monitors send some metrics to CloudWatch. These default metrics\n         are listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-metrics.html\">CloudWatch metrics that you can collect \n            with CloudWatch RUM</a>.</p>\n         <p>If you also send extended metrics, you can send metrics to Evidently as well as CloudWatch, and you can also \n         optionally\n         send the metrics with additional dimensions. The valid dimension names for the additional dimensions are\n         <code>BrowserName</code>, <code>CountryCode</code>, <code>DeviceType</code>,\n         <code>FileType</code>, <code>OSName</code>, and <code>PageId</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-vended-metrics.html\">\n            Extended metrics that you can send to CloudWatch and CloudWatch Evidently</a>.</p>\n         <p>The maximum number of metric definitions that you can specify in one \n         <code>BatchCreateRumMetricDefinitions</code> operation is 200.</p>\n         <p>The maximum number of metric definitions that one destination can contain is 2000.</p>\n         <p>Extended metrics sent are charged as CloudWatch custom metrics. Each combination of additional dimension name and dimension\n         value counts as a custom metric. For more information, see \n         <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p>\n         <p>You must have\n         already created a destination for the metrics before you send them. For more information, see \n         <a href=\"https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html\">PutRumMetricsDestination</a>.</p>\n         <p>If some metric definitions specified in a <code>BatchCreateRumMetricDefinitions</code> operations are not valid,\n      those metric definitions fail and return errors, but all valid metric definitions in the same operation still succeed.</p>",
                 "smithy.api#externalDocumentation": {
                     "API Reference": "https://docs.aws.amazon.com/rum/latest/developerguide/BatchCreateRumMetricDefinitions.html"
                 },
@@ -758,7 +764,7 @@
                 "Tags": {
                     "target": "com.amazonaws.rum#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the app monitor.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n         permissions by granting a user\n         permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n    \n         <p>You can associate as many as 50 tags with an app monitor.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the app monitor.</p>\n         <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n         permissions by granting a user\n         permission to access or change only resources with certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can associate as many as 50 tags with an app monitor.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>.</p>"
                     }
                 },
                 "AppMonitorConfiguration": {
@@ -772,6 +778,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM \n         sends a copy of this telemetry data to Amazon CloudWatch Logs\n         in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur\n         Amazon CloudWatch Logs charges.</p>\n         <p>If you omit this parameter, the default is <code>false</code>.</p>"
                     }
+                },
+                "CustomEvents": {
+                    "target": "com.amazonaws.rum#CustomEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n         custom events. If you omit this parameter, custom events are <code>DISABLED</code>.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
+                    }
                 }
             }
         },
@@ -784,6 +796,35 @@
                         "smithy.api#documentation": "<p>The unique ID of the new app monitor.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.rum#CustomEvents": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.rum#CustomEventsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n         custom events. The default is for custom events to be <code>DISABLED</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about custom events for this app monitor.</p>"
+            }
+        },
+        "com.amazonaws.rum#CustomEventsStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLED",
+                        "value": "ENABLED"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "DISABLED"
+                    }
+                ]
             }
         },
         "com.amazonaws.rum#CwLog": {
@@ -1547,7 +1588,7 @@
                 "DimensionKeys": {
                     "target": "com.amazonaws.rum#DimensionKeysMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this field only if you are sending the metric to CloudWatch.</p>\n         <p>This field is a map of field paths to dimension names. It defines the dimensions to associate with this\n         metric in CloudWatch. Valid values for the entries in this field are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"metadata.pageId\": \"PageId\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.browserName\": \"BrowserName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.deviceType\": \"DeviceType\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.osName\": \"OSName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.countryCode\": \"CountryCode\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"event_details.fileType\": \"FileType\"</code>\n               </p>\n            </li>\n         </ul>\n      \n         <p> All dimensions listed in this field\n         must also be included in <code>EventPattern</code>.</p>"
+                        "smithy.api#documentation": "<p>Use this field only if you are sending the metric to CloudWatch.</p>\n         <p>This field is a map of field paths to dimension names. It defines the dimensions to associate with this\n         metric in CloudWatch. Valid values for the entries in this field are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>\"metadata.pageId\": \"PageId\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.browserName\": \"BrowserName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.deviceType\": \"DeviceType\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.osName\": \"OSName\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"metadata.countryCode\": \"CountryCode\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>\"event_details.fileType\": \"FileType\"</code>\n               </p>\n            </li>\n         </ul>\n         <p> All dimensions listed in this field\n         must also be included in <code>EventPattern</code>.</p>"
                     }
                 },
                 "EventPattern": {
@@ -1900,7 +1941,7 @@
                         "date"
                     ]
                 },
-                "smithy.api#documentation": "<p>With Amazon CloudWatch RUM, you can perform real-user monitoring to collect client-side data about \n       your web application performance from actual user sessions in real time. The data collected includes page load \n       times, client-side errors, and user behavior. When you view this data, you can see it all aggregated together and \n       also see breakdowns by the browsers and devices that your customers use.</p>\n       \n         <p>You can use the collected data to quickly identify and debug client-side performance issues. CloudWatch \n       RUM helps you visualize anomalies in your application performance and find relevant debugging data such as error \n       messages, stack traces, and user sessions. You can also use RUM to \n       understand the range of end-user impact including the number of users, geolocations, and browsers used.</p>",
+                "smithy.api#documentation": "<p>With Amazon CloudWatch RUM, you can perform real-user monitoring to collect client-side data about \n       your web application performance from actual user sessions in real time. The data collected includes page load \n       times, client-side errors, and user behavior. When you view this data, you can see it all aggregated together and \n       also see breakdowns by the browsers and devices that your customers use.</p>\n         <p>You can use the collected data to quickly identify and debug client-side performance issues. CloudWatch \n       RUM helps you visualize anomalies in your application performance and find relevant debugging data such as error \n       messages, stack traces, and user sessions. You can also use RUM to \n       understand the range of end-user impact including the number of users, geolocations, and browsers used.</p>",
                 "smithy.api#title": "CloudWatch RUM",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2227,9 +2268,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -2240,9 +2281,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -2253,9 +2294,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -2266,9 +2307,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -2279,9 +2320,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -2292,9 +2333,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -2305,9 +2346,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -2318,9 +2359,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -2331,9 +2372,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -2344,9 +2385,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -2357,9 +2398,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -2370,9 +2411,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -2383,9 +2424,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -2396,9 +2437,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -2409,9 +2450,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -2422,9 +2463,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -2435,9 +2476,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -2448,9 +2489,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -2461,9 +2502,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -2474,9 +2515,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -2487,9 +2528,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -2500,9 +2541,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -2513,9 +2554,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -2526,9 +2567,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -2539,9 +2580,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2552,9 +2593,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2565,9 +2606,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2578,9 +2619,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2591,9 +2632,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2604,9 +2645,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2617,9 +2658,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2630,9 +2671,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2643,9 +2684,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2656,9 +2697,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2669,9 +2710,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2682,9 +2723,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2695,9 +2736,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2708,9 +2749,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2721,9 +2762,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2734,9 +2775,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2747,9 +2788,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2759,9 +2800,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2771,9 +2812,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -3215,6 +3256,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM \n         sends a copy of this telemetry data to Amazon CloudWatch Logs\n         in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur\n         Amazon CloudWatch Logs charges.</p>"
+                    }
+                },
+                "CustomEvents": {
+                    "target": "com.amazonaws.rum#CustomEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether this app monitor allows the web client to define and send\n         custom events. The default is for custom events to be <code>DISABLED</code>.</p>\n         <p>For more information about custom events, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-RUM-custom-events.html\">Send custom events</a>.</p>"
                     }
                 }
             }

@@ -641,6 +641,12 @@
                     "traits": {
                         "smithy.api#enumValue": "yue-CN"
                     }
+                },
+                "ar_AE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ar-AE"
+                    }
                 }
             }
         },
@@ -3712,6 +3718,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Suvi"
+                    }
+                },
+                "Ola": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Ola"
+                    }
+                },
+                "Hala": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Hala"
                     }
                 }
             }

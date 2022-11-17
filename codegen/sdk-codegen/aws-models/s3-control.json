@@ -6076,7 +6076,7 @@
                 "ActivityMetrics": {
                     "target": "com.amazonaws.s3control#ActivityMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for the S3 Storage Lens activity metrics.</p>"
+                        "smithy.api#documentation": "<p>A container for S3 Storage Lens activity metrics.</p>"
                     }
                 },
                 "BucketLevel": {
@@ -6085,10 +6085,28 @@
                         "smithy.api#documentation": "<p>A container for the S3 Storage Lens bucket-level configuration.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AdvancedCostOptimizationMetrics": {
+                    "target": "com.amazonaws.s3control#AdvancedCostOptimizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for S3 Storage Lens advanced cost-optimization metrics.</p>"
+                    }
+                },
+                "AdvancedDataProtectionMetrics": {
+                    "target": "com.amazonaws.s3control#AdvancedDataProtectionMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for S3 Storage Lens advanced data-protection metrics.</p>"
+                    }
+                },
+                "DetailedStatusCodesMetrics": {
+                    "target": "com.amazonaws.s3control#DetailedStatusCodesMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for detailed status code metrics. </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A container for the account level Amazon S3 Storage Lens configuration.</p>"
+                "smithy.api#documentation": "<p>A container for the account-level Amazon S3 Storage Lens configuration.</p>\n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.s3control#ActivityMetrics": {
@@ -6098,12 +6116,42 @@
                     "target": "com.amazonaws.s3control#IsEnabled",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>A container for whether the activity metrics are enabled.</p>"
+                        "smithy.api#documentation": "<p>A container that indicates whether activity metrics are enabled.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A container for the activity metrics.</p>"
+                "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens activity metrics. Activity metrics show details about \n         how your storage is requested, such as requests (for example, All requests, Get requests, \n         Put requests), bytes uploaded or downloaded, and errors.</p>\n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.s3control#AdvancedCostOptimizationMetrics": {
+            "type": "structure",
+            "members": {
+                "IsEnabled": {
+                    "target": "com.amazonaws.s3control#IsEnabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A container that indicates whether advanced cost-optimization metrics are\n         enabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens advanced cost-optimization metrics. Advanced\n         cost-optimization metrics provide insights that you can use to manage and optimize your\n         storage costs, for example, lifecycle rule counts for transitions, expirations, and\n         incomplete multipart uploads.</p> \n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.s3control#AdvancedDataProtectionMetrics": {
+            "type": "structure",
+            "members": {
+                "IsEnabled": {
+                    "target": "com.amazonaws.s3control#IsEnabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A container that indicates whether advanced data-protection metrics are enabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens advanced data-protection metrics. Advanced\n         data-protection metrics provide insights that you can use to perform audits and protect\n         your data, for example replication rule counts within and across Regions.</p> \n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.s3control#Alias": {
@@ -6380,18 +6428,36 @@
                 "ActivityMetrics": {
                     "target": "com.amazonaws.s3control#ActivityMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for the bucket-level activity metrics for Amazon S3 Storage Lens</p>"
+                        "smithy.api#documentation": "<p>A container for the bucket-level activity metrics for S3 Storage Lens.</p>"
                     }
                 },
                 "PrefixLevel": {
                     "target": "com.amazonaws.s3control#PrefixLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for the bucket-level prefix-level metrics for S3 Storage Lens</p>"
+                        "smithy.api#documentation": "<p>A container for the prefix-level metrics for S3 Storage Lens. </p>"
+                    }
+                },
+                "AdvancedCostOptimizationMetrics": {
+                    "target": "com.amazonaws.s3control#AdvancedCostOptimizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for bucket-level advanced cost-optimization metrics for S3 Storage Lens.</p>"
+                    }
+                },
+                "AdvancedDataProtectionMetrics": {
+                    "target": "com.amazonaws.s3control#AdvancedDataProtectionMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for bucket-level advanced data-protection metrics for S3 Storage Lens.</p>"
+                    }
+                },
+                "DetailedStatusCodesMetrics": {
+                    "target": "com.amazonaws.s3control#DetailedStatusCodesMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container for bucket-level detailed status code metrics for S3 Storage Lens.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A container for the bucket-level configuration.</p>"
+                "smithy.api#documentation": "<p>A container for the bucket-level configuration for Amazon S3 Storage Lens.</p> \n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.s3control#BucketLocationConstraint": {
@@ -7940,6 +8006,21 @@
                 }
             }
         },
+        "com.amazonaws.s3control#DetailedStatusCodesMetrics": {
+            "type": "structure",
+            "members": {
+                "IsEnabled": {
+                    "target": "com.amazonaws.s3control#IsEnabled",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A container that indicates whether detailed status code metrics are enabled.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The container element for Amazon S3 Storage Lens detailed status code metrics. Detailed status\n         code metrics generate metrics for HTTP status codes, such as <code>200 OK</code>, <code>403\n            Forbidden</code>, <code>503 Service Unavailable</code> and others. </p> \n         <p>For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html\">Assessing your storage activity and usage with S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>"
+            }
+        },
         "com.amazonaws.s3control#Endpoints": {
             "type": "map",
             "key": {
@@ -9218,7 +9299,7 @@
                 "target": "com.amazonaws.s3control#GetStorageLensConfigurationResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets the Amazon S3 Storage Lens configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Assessing your storage\n            activity and usage with Amazon S3 Storage Lens </a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>To use this action, you must have permission to perform the\n               <code>s3:GetStorageLensConfiguration</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the\n               <i>Amazon S3 User Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Gets the Amazon S3 Storage Lens configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Assessing your storage\n            activity and usage with Amazon S3 Storage Lens </a> in the\n         <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>To use this action, you must have permission to perform the\n               <code>s3:GetStorageLensConfiguration</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the\n               <i>Amazon S3 User Guide</i>.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -9900,7 +9981,7 @@
                 "S3PutObjectAcl": {
                     "target": "com.amazonaws.s3control#S3SetObjectAclOperation",
                     "traits": {
-                        "smithy.api#documentation": "<p>Directs the specified job to run a PUT Object acl call on every object in the\n         manifest.</p>"
+                        "smithy.api#documentation": "<p>Directs the specified job to run a <code>PutObjectAcl</code> call on every object in the\n         manifest.</p>"
                     }
                 },
                 "S3PutObjectTagging": {
@@ -11728,7 +11809,7 @@
                     "target": "com.amazonaws.s3control#Setting",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets\n         in this account. Setting this element to <code>TRUE</code> causes the following\n         behavior:</p>\n         <ul>\n            <li>\n               <p>PUT Bucket acl and PUT Object acl calls fail if the specified ACL is\n               public.</p>\n            </li>\n            <li>\n               <p>PUT Object calls fail if the request includes a public ACL.</p>\n            </li>\n            <li>\n               <p>PUT Bucket calls fail if the request includes a public ACL.</p>\n            </li>\n         </ul>\n         <p>Enabling this setting doesn't affect existing policies or ACLs.</p>\n         <p>This is not supported for Amazon S3 on Outposts.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in\n         this account. Setting this element to <code>TRUE</code> causes the following\n         behavior:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PutBucketAcl</code> and <code>PutObjectAcl</code> calls fail if the\n               specified ACL is public.</p>\n            </li>\n            <li>\n               <p>PUT Object calls fail if the request includes a public ACL.</p>\n            </li>\n            <li>\n               <p>PUT Bucket calls fail if the request includes a public ACL.</p>\n            </li>\n         </ul>\n         <p>Enabling this setting doesn't affect existing policies or ACLs.</p>\n         <p>This property is not supported for Amazon S3 on Outposts.</p>",
                         "smithy.api#xmlName": "BlockPublicAcls"
                     }
                 },
@@ -11736,7 +11817,7 @@
                     "target": "com.amazonaws.s3control#Setting",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting\n         this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in\n         this account and any objects that they contain. </p>\n         <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't\n         prevent new public ACLs from being set.</p>\n         <p>This is not supported for Amazon S3 on Outposts.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should ignore public ACLs for buckets in this account. Setting\n         this element to <code>TRUE</code> causes Amazon S3 to ignore all public ACLs on buckets in this\n         account and any objects that they contain. </p>\n         <p>Enabling this setting doesn't affect the persistence of any existing ACLs and doesn't\n         prevent new public ACLs from being set.</p>\n         <p>This property is not supported for Amazon S3 on Outposts.</p>",
                         "smithy.api#xmlName": "IgnorePublicAcls"
                     }
                 },
@@ -11744,7 +11825,7 @@
                     "target": "com.amazonaws.s3control#Setting",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account.\n         Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket\n         policy if the specified bucket policy allows public access. </p>\n         <p>Enabling this setting doesn't affect existing bucket policies.</p>\n         <p>This is not supported for Amazon S3 on Outposts.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should block public bucket policies for buckets in this account.\n         Setting this element to <code>TRUE</code> causes Amazon S3 to reject calls to PUT Bucket policy\n         if the specified bucket policy allows public access. </p>\n         <p>Enabling this setting doesn't affect existing bucket policies.</p>\n         <p>This property is not supported for Amazon S3 on Outposts.</p>",
                         "smithy.api#xmlName": "BlockPublicPolicy"
                     }
                 },
@@ -11752,13 +11833,13 @@
                     "target": "com.amazonaws.s3control#Setting",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this\n         account. Setting this element to <code>TRUE</code> restricts access to buckets with public\n         policies to only Amazon Web Service principals and authorized users within this\n         account.</p>\n         <p>Enabling this setting doesn't affect previously stored bucket policies, except that\n         public and cross-account access within any public bucket policy, including non-public\n         delegation to specific accounts, is blocked.</p>\n         <p>This is not supported for Amazon S3 on Outposts.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether Amazon S3 should restrict public bucket policies for buckets in this\n         account. Setting this element to <code>TRUE</code> restricts access to buckets with public\n         policies to only Amazon Web Service principals and authorized users within this\n         account.</p>\n         <p>Enabling this setting doesn't affect previously stored bucket policies, except that\n         public and cross-account access within any public bucket policy, including non-public\n         delegation to specific accounts, is blocked.</p>\n         <p>This property is not supported for Amazon S3 on Outposts.</p>",
                         "smithy.api#xmlName": "RestrictPublicBuckets"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3\n         account. You can enable the configuration options in any combination. For more information\n         about when Amazon S3 considers a bucket or object public, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status\">The Meaning of \"Public\"</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>This is not supported for Amazon S3 on Outposts.</p>"
+                "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3\n         account. You can enable the configuration options in any combination. For more information\n         about when Amazon S3 considers a bucket or object public, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status\">The Meaning of \"Public\"</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>This data type is not supported for Amazon S3 on Outposts.</p>"
             }
         },
         "com.amazonaws.s3control#PublicAccessBlockEnabled": {
@@ -12420,7 +12501,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Working with\n            Amazon S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>To use this action, you must have permission to perform the\n               <code>s3:PutStorageLensConfiguration</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the\n               <i>Amazon S3 User Guide</i>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Puts an Amazon S3 Storage Lens configuration. For more information about S3 Storage Lens, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html\">Working with\n         Amazon S3 Storage Lens</a> in the <i>Amazon S3 User Guide</i>. For a complete list of S3 Storage Lens metrics, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html\">S3 Storage Lens metrics glossary</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <note>\n            <p>To use this action, you must have permission to perform the\n               <code>s3:PutStorageLensConfiguration</code> action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html\">Setting permissions to use Amazon S3 Storage Lens</a> in the\n               <i>Amazon S3 User Guide</i>.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -12927,7 +13008,7 @@
                 "TargetResource": {
                     "target": "com.amazonaws.s3control#S3BucketArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the destination bucket ARN for the batch copy operation. For example, to copy\n         objects to a bucket named \"destinationBucket\", set the TargetResource to\n         \"arn:aws:s3:::destinationBucket\".</p>"
+                        "smithy.api#documentation": "<p>Specifies the destination bucket ARN for the batch copy operation. For example, to copy\n         objects to a bucket named <code>destinationBucket</code>, set the\n            <code>TargetResource</code> property to\n         <code>arn:aws:s3:::destinationBucket</code>.</p>"
                     }
                 },
                 "CannedAccessControlList": {
@@ -13563,7 +13644,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the configuration parameters for a Set Object ACL operation. S3 Batch Operations\n         passes every object to the underlying PUT Object acl API. For more information about the\n         parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html\">PUT Object acl</a>.</p>"
+                "smithy.api#documentation": "<p>Contains the configuration parameters for a Set Object ACL operation. S3 Batch Operations\n         passes every object to the underlying <code>PutObjectAcl</code> API. For more information\n         about the parameters for this operation, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html\">\n               <code>PutObjectAcl</code>\n            </a>.</p>"
             }
         },
         "com.amazonaws.s3control#S3SetObjectLegalHoldOperation": {
@@ -13670,20 +13751,20 @@
                 "Key": {
                     "target": "com.amazonaws.s3control#TagKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Key of the tag</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Value": {
                     "target": "com.amazonaws.s3control#TagValueString",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>Value of the tag</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>A container for a key-value name pair.</p>"
             }
         },
         "com.amazonaws.s3control#S3TagSet": {

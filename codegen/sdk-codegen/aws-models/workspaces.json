@@ -416,6 +416,23 @@
         "com.amazonaws.workspaces#BundleOwner": {
             "type": "string"
         },
+        "com.amazonaws.workspaces#BundleType": {
+            "type": "enum",
+            "members": {
+                "REGULAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGULAR"
+                    }
+                },
+                "STANDBY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDBY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workspaces#CertificateAuthorityArn": {
             "type": "string",
             "traits": {
@@ -1209,6 +1226,71 @@
                     "target": "com.amazonaws.workspaces#IpGroupId",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier of the group.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#CreateStandbyWorkspaces": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workspaces#CreateStandbyWorkspacesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workspaces#CreateStandbyWorkspacesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Standby WorkSpace in a secondary region.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#CreateStandbyWorkspacesRequest": {
+            "type": "structure",
+            "members": {
+                "PrimaryRegion": {
+                    "target": "com.amazonaws.workspaces#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region of the primary WorkSpace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StandbyWorkspaces": {
+                    "target": "com.amazonaws.workspaces#StandbyWorkspacesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Standby WorkSpace to be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#CreateStandbyWorkspacesResult": {
+            "type": "structure",
+            "members": {
+                "FailedStandbyRequests": {
+                    "target": "com.amazonaws.workspaces#FailedCreateStandbyWorkspacesRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Standby WorkSpace that could not be created. </p>"
+                    }
+                },
+                "PendingStandbyRequests": {
+                    "target": "com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Standby WorkSpace that was created.</p>"
                     }
                 }
             }
@@ -3282,6 +3364,38 @@
         "com.amazonaws.workspaces#ExceptionMessage": {
             "type": "string"
         },
+        "com.amazonaws.workspaces#FailedCreateStandbyWorkspacesRequest": {
+            "type": "structure",
+            "members": {
+                "StandbyWorkspaceRequest": {
+                    "target": "com.amazonaws.workspaces#StandbyWorkspace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the Standby WorkSpace that could not be created.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.workspaces#WorkspaceErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code that is returned if the Standby WorkSpace could not be created.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.workspaces#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the error message that is returned if the Standby WorkSpace could not be created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Standby WorkSpace that could not be created.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#FailedCreateStandbyWorkspacesRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#FailedCreateStandbyWorkspacesRequest"
+            }
+        },
         "com.amazonaws.workspaces#FailedCreateWorkspaceRequest": {
             "type": "structure",
             "members": {
@@ -4484,6 +4598,9 @@
                     "target": "com.amazonaws.workspaces#InvalidResourceStateException"
                 },
                 {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
                     "target": "com.amazonaws.workspaces#ResourceNotFoundException"
                 }
             ],
@@ -4595,6 +4712,44 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequest": {
+            "type": "structure",
+            "members": {
+                "UserName": {
+                    "target": "com.amazonaws.workspaces#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the Standby WorkSpace that was created.</p>\n         <p>Because this operation is asynchronous, the identifier returned is not immediately \n         available for use with other operations. For example, if you call \n         <a href=\"https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeWorkspaces.html\">\n            DescribeWorkspaces</a> \n         before the WorkSpace is created, the information returned can be incomplete. </p>"
+                    }
+                },
+                "DirectoryId": {
+                    "target": "com.amazonaws.workspaces#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory for the Standby WorkSpace.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#WorkspaceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operational state of the Standby WorkSpace.</p>"
+                    }
+                },
+                "WorkspaceId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Standby WorkSpace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the Standby WorkSpace.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#PendingCreateStandbyWorkspacesRequest"
+            }
+        },
         "com.amazonaws.workspaces#Protocol": {
             "type": "enum",
             "members": {
@@ -4653,6 +4808,11 @@
             "output": {
                 "target": "com.amazonaws.workspaces#RebootWorkspacesResult"
             },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                }
+            ],
             "traits": {
                 "smithy.api#documentation": "<p>Reboots the specified WorkSpaces.</p>\n         <p>You cannot reboot a WorkSpace unless its state is <code>AVAILABLE</code> or\n            <code>UNHEALTHY</code>.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces have rebooted.</p>"
             }
@@ -4715,6 +4875,11 @@
             "output": {
                 "target": "com.amazonaws.workspaces#RebuildWorkspacesResult"
             },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                }
+            ],
             "traits": {
                 "smithy.api#documentation": "<p>Rebuilds the specified WorkSpace.</p>\n         <p>You cannot rebuild a WorkSpace unless its state is <code>AVAILABLE</code>,\n            <code>ERROR</code>, <code>UNHEALTHY</code>, <code>STOPPED</code>, or\n            <code>REBOOTING</code>.</p>\n         <p>Rebuilding a WorkSpace is a potentially destructive action that can result in the loss\n         of data. For more information, see <a href=\"https://docs.aws.amazon.com/workspaces/latest/adminguide/reset-workspace.html\">Rebuild a\n         WorkSpace</a>.</p>\n         <p>This operation is asynchronous and returns before the WorkSpaces have been completely\n         rebuilt.</p>"
             }
@@ -4863,6 +5028,44 @@
                 }
             }
         },
+        "com.amazonaws.workspaces#RelatedWorkspaceProperties": {
+            "type": "structure",
+            "members": {
+                "WorkspaceId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the related WorkSpace.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.workspaces#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region of the related WorkSpace.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#WorkspaceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the state of the WorkSpace.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.workspaces#StandbyWorkspaceRelationshipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of WorkSpace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the related WorkSpace. The related WorkSpace could be a Standby WorkSpace or \n         Primary WorkSpace related to the specified WorkSpace.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#RelatedWorkspaces": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#RelatedWorkspaceProperties"
+            }
+        },
         "com.amazonaws.workspaces#ResourceAlreadyExistsException": {
             "type": "structure",
             "members": {
@@ -4982,6 +5185,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
                 },
                 {
                     "target": "com.amazonaws.workspaces#ResourceNotFoundException"
@@ -5224,6 +5430,63 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.workspaces#Snapshot"
+            }
+        },
+        "com.amazonaws.workspaces#StandbyWorkspace": {
+            "type": "structure",
+            "members": {
+                "PrimaryWorkspaceId": {
+                    "target": "com.amazonaws.workspaces#WorkspaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Standby WorkSpace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VolumeEncryptionKey": {
+                    "target": "com.amazonaws.workspaces#VolumeEncryptionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume encryption key of the Standby WorkSpace.</p>"
+                    }
+                },
+                "DirectoryId": {
+                    "target": "com.amazonaws.workspaces#DirectoryId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory for the Standby WorkSpace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.workspaces#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the Standby WorkSpace.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a Standby WorkSpace.</p>"
+            }
+        },
+        "com.amazonaws.workspaces#StandbyWorkspaceRelationshipType": {
+            "type": "enum",
+            "members": {
+                "PRIMARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIMARY"
+                    }
+                },
+                "STANDBY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STANDBY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workspaces#StandbyWorkspacesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workspaces#StandbyWorkspace"
             }
         },
         "com.amazonaws.workspaces#StartRequest": {
@@ -5758,6 +6021,9 @@
                     "target": "com.amazonaws.workspaces#InvalidParameterValuesException"
                 },
                 {
+                    "target": "com.amazonaws.workspaces#OperationNotSupportedException"
+                },
+                {
                     "target": "com.amazonaws.workspaces#ResourceNotFoundException"
                 },
                 {
@@ -5969,6 +6235,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The modification states of the WorkSpace.</p>"
                     }
+                },
+                "RelatedWorkspaces": {
+                    "target": "com.amazonaws.workspaces#RelatedWorkspaces",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Standby WorkSpace or Primary WorkSpace related to the specified WorkSpace.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6093,6 +6365,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the bundle was created.</p>"
                     }
+                },
+                "State": {
+                    "target": "com.amazonaws.workspaces#WorkspaceBundleState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the WorkSpace bundle.</p>"
+                    }
+                },
+                "BundleType": {
+                    "target": "com.amazonaws.workspaces#BundleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of WorkSpace bundle.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6117,6 +6401,29 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_./()\\\\-]+$"
+            }
+        },
+        "com.amazonaws.workspaces#WorkspaceBundleState": {
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.workspaces#WorkspaceConnectionStatus": {
@@ -6900,6 +7207,9 @@
                 },
                 {
                     "target": "com.amazonaws.workspaces#CreateIpGroup"
+                },
+                {
+                    "target": "com.amazonaws.workspaces#CreateStandbyWorkspaces"
                 },
                 {
                     "target": "com.amazonaws.workspaces#CreateTags"
