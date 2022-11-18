@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Adds permissions to the target database.
 func (c *Client) PutResourcePermission(ctx context.Context, params *PutResourcePermissionInput, optFns ...func(*Options)) (*PutResourcePermissionOutput, error) {
 	if params == nil {
 		params = &PutResourcePermissionInput{}

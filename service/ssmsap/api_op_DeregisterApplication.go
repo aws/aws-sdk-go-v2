@@ -10,6 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Deregister an SAP application with AWS Systems Manager for SAP. This action does
+// not aﬀect the existing setup of your SAP workloads on Amazon EC2.
 func (c *Client) DeregisterApplication(ctx context.Context, params *DeregisterApplicationInput, optFns ...func(*Options)) (*DeregisterApplicationOutput, error) {
 	if params == nil {
 		params = &DeregisterApplicationInput{}

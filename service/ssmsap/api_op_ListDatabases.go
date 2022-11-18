@@ -12,6 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists the SAP HANA databases of an application registered with AWS Systems
+// Manager for SAP.
 func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, optFns ...func(*Options)) (*ListDatabasesOutput, error) {
 	if params == nil {
 		params = &ListDatabasesInput{}
