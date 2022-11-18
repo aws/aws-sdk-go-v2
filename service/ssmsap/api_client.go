@@ -21,7 +21,7 @@ import (
 	"time"
 )
 
-const ServiceID = "SsmSap"
+const ServiceID = "Ssm Sap"
 const ServiceAPIVersion = "2018-05-10"
 
 // Client provides the API client to make operations call for AWS Systems Manager

@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Removes permissions associated with the target database.
 func (c *Client) DeleteResourcePermission(ctx context.Context, params *DeleteResourcePermissionInput, optFns ...func(*Options)) (*DeleteResourcePermissionOutput, error) {
 	if params == nil {
 		params = &DeleteResourcePermissionInput{}

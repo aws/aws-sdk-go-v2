@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists all the components registered with AWS Systems Manager for SAP.
 func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput, optFns ...func(*Options)) (*ListComponentsOutput, error) {
 	if params == nil {
 		params = &ListComponentsInput{}

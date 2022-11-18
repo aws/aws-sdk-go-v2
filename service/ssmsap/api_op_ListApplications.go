@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Lists all the applications registered with AWS Systems Manager for SAP.
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}

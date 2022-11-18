@@ -62,7 +62,7 @@ func transformToSharedOptions(options Options) endpoints.Options {
 	}
 }
 
-// Resolver SsmSap endpoint resolver
+// Resolver Ssm Sap endpoint resolver
 type Resolver struct {
 	partitions endpoints.Partitions
 }

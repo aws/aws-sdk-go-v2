@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Gets permissions associated with the target database.
 func (c *Client) GetResourcePermission(ctx context.Context, params *GetResourcePermissionInput, optFns ...func(*Options)) (*GetResourcePermissionOutput, error) {
 	if params == nil {
 		params = &GetResourcePermissionInput{}

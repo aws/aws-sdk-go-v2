@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Delete the tags for a resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -32,7 +33,8 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	//
+	// Adds/updates or removes credentials for applications registered with AWS Systems
+	// Manager for SAP.
 	//
 	// This member is required.
 	TagKeys []string
