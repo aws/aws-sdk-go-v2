@@ -1,3 +1,7 @@
+# v1.15.0 (2022-11-18)
+
+* **Feature**: This release adds support for using Step Functions service integrations to invoke any cross-account AWS resource, even if that service doesn't support resource-based policies or cross-account calls. See https://docs.aws.amazon.com/step-functions/latest/dg/concepts-access-cross-acct-resources.html
+
 # v1.14.5 (2022-11-16)
 
 * No change notes available for this release.

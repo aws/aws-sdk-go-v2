@@ -1,3 +1,7 @@
+# v1.55.0 (2022-11-18)
+
+* **Feature**: Added DisableProfiler flag as a new field in ProfilerConfig
+
 # v1.54.0 (2022-11-03)
 
 * **Feature**: Amazon SageMaker now supports running training jobs on ml.trn1 instance types.

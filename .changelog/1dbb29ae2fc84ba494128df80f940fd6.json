@@ -1,8 +1,0 @@
-{
-    "id": "1dbb29ae-2fc8-4ba4-9412-8df80f940fd6",
-    "type": "feature",
-    "description": "AppFlow provides a new API called UpdateConnectorRegistration to update a custom connector that customers have previously registered. With this API, customers no longer need to unregister and then register a connector to make an update.",
-    "modules": [
-        "service/appflow"
-    ]
-}

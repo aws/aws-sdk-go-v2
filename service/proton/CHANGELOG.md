@@ -1,3 +1,7 @@
+# v1.17.1 (2022-11-18)
+
+* No change notes available for this release.
+
 # v1.17.0 (2022-11-16)
 
 * **Feature**: Add support for sorting and filtering in ListServiceInstances

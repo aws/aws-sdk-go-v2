@@ -1,3 +1,42 @@
+# Release (2022-11-18)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.20.0](service/appflow/CHANGELOG.md#v1200-2022-11-18)
+  * **Feature**: AppFlow provides a new API called UpdateConnectorRegistration to update a custom connector that customers have previously registered. With this API, customers no longer need to unregister and then register a connector to make an update.
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.21.0](service/auditmanager/CHANGELOG.md#v1210-2022-11-18)
+  * **Feature**: This release introduces a new feature for Audit Manager: Evidence finder. You can now use evidence finder to quickly query your evidence, and add the matching evidence results to an assessment report.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.0.0](service/chimesdkvoice/CHANGELOG.md#v100-2022-11-18)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Chime Voice Connector, Voice Connector Group and PSTN Audio Service APIs are now available in the Amazon Chime SDK Voice namespace. See https://docs.aws.amazon.com/chime-sdk/latest/dg/sdk-available-regions.html for more details.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.21.0](service/cloudfront/CHANGELOG.md#v1210-2022-11-18)
+  * **Feature**: CloudFront API support for staging distributions and associated traffic management policies.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.38.0](service/connect/CHANGELOG.md#v1380-2022-11-18)
+  * **Feature**: Added AllowedAccessControlTags and TagRestrictedResource for Tag Based Access Control on Amazon Connect Webpage
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.17.6](service/dynamodb/CHANGELOG.md#v1176-2022-11-18)
+  * **Documentation**: Updated minor fixes for DynamoDB documentation.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.13.25](service/dynamodbstreams/CHANGELOG.md#v11325-2022-11-18)
+  * **Documentation**: Updated minor fixes for DynamoDB documentation.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.72.0](service/ec2/CHANGELOG.md#v1720-2022-11-18)
+  * **Feature**: This release adds support for copying an Amazon Machine Image's tags when copying an AMI.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.35.0](service/glue/CHANGELOG.md#v1350-2022-11-18)
+  * **Feature**: AWSGlue Crawler - Adding support for Table and Column level Comments with database level datatypes for JDBC based crawler.
+* `github.com/aws/aws-sdk-go-v2/service/iotroborunner`: [v1.0.0](service/iotroborunner/CHANGELOG.md#v100-2022-11-18)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS IoT RoboRunner is a new service that makes it easy to build applications that help multi-vendor robots work together seamlessly. See the IoT RoboRunner developer guide for more details on getting started. https://docs.aws.amazon.com/iotroborunner/latest/dev/iotroborunner-welcome.html
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.27.0](service/quicksight/CHANGELOG.md#v1270-2022-11-18)
+  * **Feature**: This release adds the following: 1) Asset management for centralized assets governance 2) QuickSight Q now supports public embedding 3) New Termination protection flag to mitigate accidental deletes 4) Athena data sources now accept a custom IAM role 5) QuickSight supports connectivity to Databricks
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.55.0](service/sagemaker/CHANGELOG.md#v1550-2022-11-18)
+  * **Feature**: Added DisableProfiler flag as a new field in ProfilerConfig
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.15.0](service/servicecatalog/CHANGELOG.md#v1150-2022-11-18)
+  * **Feature**: This release 1. adds support for Principal Name Sharing with Service Catalog portfolio sharing. 2. Introduces repo sourced products which are created and managed with existing SC APIs. These products are synced to external repos and auto create new product versions based on changes in the repo.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.15.0](service/sfn/CHANGELOG.md#v1150-2022-11-18)
+  * **Feature**: This release adds support for using Step Functions service integrations to invoke any cross-account AWS resource, even if that service doesn't support resource-based policies or cross-account calls. See https://docs.aws.amazon.com/step-functions/latest/dg/concepts-access-cross-acct-resources.html
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.25.0](service/transfer/CHANGELOG.md#v1250-2022-11-18)
+  * **Feature**: Adds a NONE encryption algorithm type to AS2 connectors, providing support for skipping encryption of the AS2 message body when a HTTPS URL is also specified.
+
 # Release (2022-11-17)
 
 ## General Highlights

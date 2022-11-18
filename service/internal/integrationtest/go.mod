@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.24.2
 	github.com/aws/aws-sdk-go-v2/service/batch v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.24.0
-	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.20.7
+	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.21
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.20.2
@@ -30,8 +30,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directconnect v1.17.22
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.15
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.5
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.71.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.6
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.72.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.22
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.19.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.17.19
@@ -46,7 +46,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.22
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.19
-	github.com/aws/aws-sdk-go-v2/service/glue v1.34.1
+	github.com/aws/aws-sdk-go-v2/service/glue v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.22
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.23
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.19
@@ -69,9 +69,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.29.3
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.16.7
-	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.14.19
+	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.21
-	github.com/aws/aws-sdk-go-v2/service/sfn v1.14.5
+	github.com/aws/aws-sdk-go-v2/service/sfn v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/shield v1.17.11
 	github.com/aws/aws-sdk-go-v2/service/sms v1.12.20
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.16.2

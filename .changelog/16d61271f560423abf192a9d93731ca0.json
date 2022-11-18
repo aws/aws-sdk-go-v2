@@ -1,8 +1,0 @@
-{
-    "id": "16d61271-f560-423a-bf19-2a9d93731ca0",
-    "type": "feature",
-    "description": "This release introduces a new feature for Audit Manager: Evidence finder. You can now use evidence finder to quickly query your evidence, and add the matching evidence results to an assessment report.",
-    "modules": [
-        "service/auditmanager"
-    ]
-}

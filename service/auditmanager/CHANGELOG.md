@@ -1,3 +1,7 @@
+# v1.21.0 (2022-11-18)
+
+* **Feature**: This release introduces a new feature for Audit Manager: Evidence finder. You can now use evidence finder to quickly query your evidence, and add the matching evidence results to an assessment report.
+
 # v1.20.11 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

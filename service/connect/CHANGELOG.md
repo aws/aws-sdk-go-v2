@@ -1,3 +1,7 @@
+# v1.38.0 (2022-11-18)
+
+* **Feature**: Added AllowedAccessControlTags and TagRestrictedResource for Tag Based Access Control on Amazon Connect Webpage
+
 # v1.37.0 (2022-11-16)
 
 * **Feature**: This release adds a new MonitorContact API for initiating monitoring of ongoing Voice and Chat contacts.

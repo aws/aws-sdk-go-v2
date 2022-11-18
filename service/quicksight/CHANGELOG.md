@@ -1,3 +1,7 @@
+# v1.27.0 (2022-11-18)
+
+* **Feature**: This release adds the following: 1) Asset management for centralized assets governance 2) QuickSight Q now supports public embedding 3) New Termination protection flag to mitigate accidental deletes 4) Athena data sources now accept a custom IAM role 5) QuickSight supports connectivity to Databricks
+
 # v1.26.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

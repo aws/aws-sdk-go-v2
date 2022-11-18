@@ -1,8 +1,0 @@
-{
-    "id": "6b464c86-18f7-417e-8c5c-bf4da8db1d8c",
-    "type": "feature",
-    "description": "Added AllowedAccessControlTags and TagRestrictedResource for Tag Based Access Control on Amazon Connect Webpage",
-    "modules": [
-        "service/connect"
-    ]
-}

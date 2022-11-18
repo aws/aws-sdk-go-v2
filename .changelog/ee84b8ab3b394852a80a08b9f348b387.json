@@ -1,8 +1,0 @@
-{
-    "id": "ee84b8ab-3b39-4852-a80a-08b9f348b387",
-    "type": "feature",
-    "description": "AWSGlue Crawler - Adding support for Table and Column level Comments with database level datatypes for JDBC based crawler.",
-    "modules": [
-        "service/glue"
-    ]
-}

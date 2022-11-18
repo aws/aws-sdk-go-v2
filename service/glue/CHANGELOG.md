@@ -1,3 +1,7 @@
+# v1.35.0 (2022-11-18)
+
+* **Feature**: AWSGlue Crawler - Adding support for Table and Column level Comments with database level datatypes for JDBC based crawler.
+
 # v1.34.1 (2022-11-11)
 
 * **Documentation**: Added links related to enabling job bookmarks.
