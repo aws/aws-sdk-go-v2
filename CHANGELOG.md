@@ -1,3 +1,9 @@
+# Release (2022-11-18.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.0.1](service/ssmsap/CHANGELOG.md#v101-2022-11-182)
+  * **Bug Fix**: Removes old model file for ssm sap and uses the new model file to regenerate client
+
 # Release (2022-11-18)
 
 ## General Highlights
