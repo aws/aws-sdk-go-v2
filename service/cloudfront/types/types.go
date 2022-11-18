@@ -925,6 +925,126 @@ type ContentTypeProfiles struct {
 	noSmithyDocumentSerde
 }
 
+// A continuous deployment policy.
+type ContinuousDeploymentPolicy struct {
+
+	// Contains the configuration for a continuous deployment policy.
+	//
+	// This member is required.
+	ContinuousDeploymentPolicyConfig *ContinuousDeploymentPolicyConfig
+
+	// The identifier of the continuous deployment policy.
+	//
+	// This member is required.
+	Id *string
+
+	// The date and time the continuous deployment policy was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains the configuration for a continuous deployment policy.
+type ContinuousDeploymentPolicyConfig struct {
+
+	// A Boolean that indicates whether this continuous deployment policy is enabled
+	// (in effect). When this value is true, this policy is enabled and in effect. When
+	// this value is false, this policy is not enabled and has no effect.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The CloudFront domain name of the staging distribution. For example:
+	// d111111abcdef8.cloudfront.net.
+	//
+	// This member is required.
+	StagingDistributionDnsNames *StagingDistributionDnsNames
+
+	// Contains the parameters for routing production traffic from your primary to
+	// staging distributions.
+	TrafficConfig *TrafficConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains a list of continuous deployment policies.
+type ContinuousDeploymentPolicyList struct {
+
+	// The maximum number of continuous deployment policies that were specified in your
+	// request.
+	//
+	// This member is required.
+	MaxItems *int32
+
+	// The total number of continuous deployment policies in your Amazon Web Services
+	// account, regardless of the MaxItems value.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// A list of continuous deployment policy items.
+	Items []ContinuousDeploymentPolicySummary
+
+	// Indicates the next page of continuous deployment policies. To get the next page
+	// of the list, use this value in the Marker field of your request.
+	NextMarker *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the information about your continuous deployment policies.
+type ContinuousDeploymentPolicySummary struct {
+
+	// The continuous deployment policy.
+	//
+	// This member is required.
+	ContinuousDeploymentPolicy *ContinuousDeploymentPolicy
+
+	noSmithyDocumentSerde
+}
+
+// This configuration determines which HTTP requests are sent to the staging
+// distribution. If the HTTP request contains a header and value that matches what
+// you specify here, the request is sent to the staging distribution. Otherwise the
+// request is sent to the primary distribution.
+type ContinuousDeploymentSingleHeaderConfig struct {
+
+	// The request header name that you want CloudFront to send to your staging
+	// distribution.
+	//
+	// This member is required.
+	Header *string
+
+	// The request header value.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the percentage of traffic to send to a staging distribution, expressed
+// as a decimal number between 0 and 1.
+type ContinuousDeploymentSingleWeightConfig struct {
+
+	// The percentage of traffic to send to the staging distribution, expressed as a
+	// decimal number between 0 and 1.
+	//
+	// This member is required.
+	Weight *float32
+
+	// Session stickiness provides the ability to define multiple requests from a
+	// single viewer as a single session. This prevents the potentially inconsistent
+	// experience of sending some of a given user's requests to your staging
+	// distribution, while others are sent to your primary distribution. Define the
+	// session duration using TTL values.
+	SessionStickinessConfig *SessionStickinessConfig
+
+	noSmithyDocumentSerde
+}
+
 // Contains a list of cookie names.
 type CookieNames struct {
 
@@ -1401,26 +1521,23 @@ type DefaultCacheBehavior struct {
 // the details about how to track and manage content delivery.
 type Distribution struct {
 
-	// The ARN (Amazon Resource Name) for the distribution. For example:
-	// arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5, where
-	// 123456789012 is your Amazon Web Services account ID.
+	// The distribution’s Amazon Resource Name (ARN).
 	//
 	// This member is required.
 	ARN *string
 
-	// The current configuration information for the distribution. Send a GET request
-	// to the /CloudFront API version/distribution ID/config resource.
+	// The distribution’s configuration.
 	//
 	// This member is required.
 	DistributionConfig *DistributionConfig
 
-	// The domain name corresponding to the distribution, for example,
+	// The distribution’s CloudFront domain name. For example:
 	// d111111abcdef8.cloudfront.net.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The identifier for the distribution. For example: EDFDVBD632BHDS5.
+	// The distribution’s identifier. For example: E1U5RQF7T870K0.
 	//
 	// This member is required.
 	Id *string
@@ -1430,14 +1547,13 @@ type Distribution struct {
 	// This member is required.
 	InProgressInvalidationBatches *int32
 
-	// The date and time the distribution was last modified.
+	// The date and time when the distribution was last modified.
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// This response element indicates the current status of the distribution. When the
-	// status is Deployed, the distribution's information is fully propagated to all
-	// CloudFront edge locations.
+	// The distribution’s status. When the status is Deployed, the distribution’s
+	// information is fully propagated to all CloudFront edge locations.
 	//
 	// This member is required.
 	Status *string
@@ -1530,8 +1646,8 @@ type DistributionConfig struct {
 
 	// The object that you want CloudFront to request from your origin (for example,
 	// index.html) when a viewer requests the root URL for your distribution
-	// (http://www.example.com) instead of an object in your distribution
-	// (http://www.example.com/product-description.html). Specifying a default root
+	// (https://www.example.com) instead of an object in your distribution
+	// (https://www.example.com/product-description.html). Specifying a default root
 	// object avoids exposing the contents of your distribution. Specify only the
 	// object name, for example, index.html. Don't add a / before the object name. If
 	// you don't want to specify a default root object when you create a distribution,
@@ -2914,11 +3030,6 @@ type OriginAccessControl struct {
 // A CloudFront origin access control configuration.
 type OriginAccessControlConfig struct {
 
-	// A description of the origin access control.
-	//
-	// This member is required.
-	Description *string
-
 	// A name to identify the origin access control.
 	//
 	// This member is required.
@@ -2963,6 +3074,9 @@ type OriginAccessControlConfig struct {
 	//
 	// This member is required.
 	SigningProtocol OriginAccessControlSigningProtocols
+
+	// A description of the origin access control.
+	Description *string
 
 	noSmithyDocumentSerde
 }
@@ -4498,6 +4612,30 @@ type S3OriginConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Session stickiness provides the ability to define multiple requests from a
+// single viewer as a single session. This prevents the potentially inconsistent
+// experience of sending some of a given user's requests to your staging
+// distribution, while others are sent to your primary distribution. Define the
+// session duration using TTL values.
+type SessionStickinessConfig struct {
+
+	// The amount of time after which you want sessions to cease if no requests are
+	// received. Allowed values are 300–3600 seconds (5–60 minutes). The value must be
+	// less than or equal to MaximumTTL.
+	//
+	// This member is required.
+	IdleTTL *int32
+
+	// The maximum amount of time to consider requests from the viewer as being part of
+	// the same session. Allowed values are 300–3600 seconds (5–60 minutes). The value
+	// must be less than or equal to IdleTTL.
+	//
+	// This member is required.
+	MaximumTTL *int32
+
+	noSmithyDocumentSerde
+}
+
 // A list of Amazon Web Services accounts and the active CloudFront key pairs in
 // each account that CloudFront can use to verify the signatures of signed URLs and
 // signed cookies.
@@ -4511,6 +4649,20 @@ type Signer struct {
 
 	// A list of CloudFront key pair identifiers.
 	KeyPairIds *KeyPairIds
+
+	noSmithyDocumentSerde
+}
+
+// The CloudFront domain name of the staging distribution.
+type StagingDistributionDnsNames struct {
+
+	// The number of CloudFront domain names in your staging distribution.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// The CloudFront domain name of the staging distribution.
+	Items []string
 
 	noSmithyDocumentSerde
 }
@@ -4870,6 +5022,23 @@ type TestResult struct {
 	// Contains configuration information and metadata about the CloudFront function
 	// that was tested.
 	FunctionSummary *FunctionSummary
+
+	noSmithyDocumentSerde
+}
+
+// The traffic configuration of your continuous deployment.
+type TrafficConfig struct {
+
+	// The type of traffic configuration.
+	//
+	// This member is required.
+	Type ContinuousDeploymentPolicyType
+
+	// Determines which HTTP requests are sent to the staging distribution.
+	SingleHeaderConfig *ContinuousDeploymentSingleHeaderConfig
+
+	// Contains the percentage of traffic to send to the staging distribution.
+	SingleWeightConfig *ContinuousDeploymentSingleWeightConfig
 
 	noSmithyDocumentSerde
 }

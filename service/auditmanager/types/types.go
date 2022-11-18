@@ -382,14 +382,14 @@ type AssessmentReport struct {
 	noSmithyDocumentSerde
 }
 
-// An error entity for the AssessmentReportEvidence API. This is used to provide
+// An error entity for assessment report evidence errors. This is used to provide
 // more meaningful errors than a simple string message.
 type AssessmentReportEvidenceError struct {
 
-	// The error code that the AssessmentReportEvidence API returned.
+	// The error code that was returned.
 	ErrorCode *string
 
-	// The error message that the AssessmentReportEvidence API returned.
+	// The error message that was returned.
 	ErrorMessage *string
 
 	// The identifier for the evidence.
@@ -552,8 +552,8 @@ type Control struct {
 	// The data mapping sources for the control.
 	ControlMappingSources []ControlMappingSource
 
-	// The data source that determines where Audit Manager collects evidence from for
-	// the control.
+	// The data source types that determine where Audit Manager collects evidence from
+	// for the control.
 	ControlSources *string
 
 	// Specifies when the control was created.
@@ -955,10 +955,22 @@ type Evidence struct {
 	// organization path.
 	AwsOrganization *string
 
-	// The evaluation status for evidence that falls under the compliance check
-	// category. For evidence collected from Security Hub, a Pass or Fail result is
-	// shown. For evidence collected from Config, a Compliant or Noncompliant result is
-	// shown.
+	// The evaluation status for automated evidence that falls under the compliance
+	// check category.
+	//
+	// * Audit Manager classes evidence as non-compliant if Security
+	// Hub reports a Fail result, or if Config reports a Non-compliant result.
+	//
+	// * Audit
+	// Manager classes evidence as compliant if Security Hub reports a Pass result, or
+	// if Config reports a Compliant result.
+	//
+	// * If a compliance check isn't available
+	// or applicable, then no compliance evaluation can be made for that evidence. This
+	// is the case if the evidence uses Config or Security Hub as the underlying data
+	// source type, but those services aren't enabled. This is also the case if the
+	// evidence uses an underlying data source type that doesn't support compliance
+	// checks (such as manual evidence, Amazon Web Services API calls, or CloudTrail).
 	ComplianceCheck *string
 
 	// The data source where the evidence was collected from.
@@ -991,6 +1003,59 @@ type Evidence struct {
 
 	// The timestamp that represents when the evidence was collected.
 	Time *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The settings object that specifies whether evidence finder is enabled. This
+// object also describes the related event data store, and the backfill status for
+// populating the event data store with evidence data.
+type EvidenceFinderEnablement struct {
+
+	// The current status of the evidence data backfill process. The backfill starts
+	// after you enable evidence finder. During this task, Audit Manager populates an
+	// event data store with your past evidence data so that your evidence can be
+	// queried.
+	//
+	// * NOT_STARTED means that the backfill hasn’t started yet.
+	//
+	// *
+	// IN_PROGRESS means that the backfill is in progress. This can take up to 24 hours
+	// to complete, depending on the amount of evidence data.
+	//
+	// * COMPLETED means that
+	// the backfill is complete. All of your past evidence is now queryable.
+	BackfillStatus EvidenceFinderBackfillStatus
+
+	// The current status of the evidence finder feature and the related event data
+	// store.
+	//
+	// * ENABLE_IN_PROGRESS means that you requested to enable evidence finder.
+	// An event data store is currently being created to support evidence finder
+	// queries.
+	//
+	// * ENABLED means that an event data store was successfully created and
+	// evidence finder is enabled. We recommend that you wait 24 hours until the event
+	// data store is backfilled with your past evidence data. You can use evidence
+	// finder in the meantime, but not all data might be available until the backfill
+	// is complete.
+	//
+	// * DISABLE_IN_PROGRESS means that you requested to disable evidence
+	// finder, and your request is pending the deletion of the event data store.
+	//
+	// *
+	// DISABLED means that you have permanently disabled evidence finder and the event
+	// data store has been deleted. You can't re-enable evidence finder after this
+	// point.
+	EnablementStatus EvidenceFinderEnablementStatus
+
+	// Represents any errors that occurred when enabling or disabling evidence finder.
+	Error *string
+
+	// The Amazon Resource Name (ARN) of the CloudTrail Lake event data store that’s
+	// used by evidence finder. The event data store is the lake of evidence data that
+	// evidence finder runs queries against.
+	EventDataStoreArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1245,6 +1310,25 @@ type Resource struct {
 	// The Amazon Resource Name (ARN) for the resource.
 	Arn *string
 
+	// The evaluation status for a resource that was assessed when collecting
+	// compliance check evidence.
+	//
+	// * Audit Manager classes the resource as
+	// non-compliant if Security Hub reports a Fail result, or if Config reports a
+	// Non-compliant result.
+	//
+	// * Audit Manager classes the resource as compliant if
+	// Security Hub reports a Pass result, or if Config reports a Compliant result.
+	//
+	// *
+	// If a compliance check isn't available or applicable, then no compliance
+	// evaluation can be made for that resource. This is the case if a resource
+	// assessment uses Config or Security Hub as the underlying data source type, but
+	// those services aren't enabled. This is also the case if the resource assessment
+	// uses an underlying data source type that doesn't support compliance checks (such
+	// as manual evidence, Amazon Web Services API calls, or CloudTrail).
+	ComplianceCheck *string
+
 	// The value of the resource.
 	Value *string
 
@@ -1312,6 +1396,9 @@ type Settings struct {
 
 	// The designated default audit owners.
 	DefaultProcessOwners []Role
+
+	// The current evidence finder status and event data store details.
+	EvidenceFinderEnablement *EvidenceFinderEnablement
 
 	// Specifies whether Organizations is enabled.
 	IsAwsOrgEnabled *bool
@@ -1385,11 +1472,7 @@ type SourceKeyword struct {
 	// keywordValue: Custom_CustomRuleForAccount-conformance-pack
 	//
 	// * Service-linked
-	// rule name: securityhub-api-gw-cache-encrypted-101104e1 keywordValue:
-	// Custom_securityhub-api-gw-cache-encrypted
-	//
-	// * Service-linked rule name:
-	// OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba keywordValue:
+	// rule name: OrgConfigRule-s3-bucket-versioning-enabled-dbgzf8ba keywordValue:
 	// Custom_OrgConfigRule-s3-bucket-versioning-enabled
 	KeywordValue *string
 

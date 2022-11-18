@@ -11113,10 +11113,8 @@ type ProductionVariantSummary struct {
 // and storage paths.
 type ProfilerConfig struct {
 
-	// Path to Amazon S3 storage location for system and framework metrics.
-	//
-	// This member is required.
-	S3OutputPath *string
+	// To disable system monitoring and profiling, set to True.
+	DisableProfiler bool
 
 	// A time interval for capturing system metrics in milliseconds. Available values
 	// are 100, 200, 500, 1000 (1 second), 5000 (5 seconds), and 60000 (1 minute)
@@ -11132,6 +11130,9 @@ type ProfilerConfig struct {
 	// Training Job
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
 	ProfilingParameters map[string]string
+
+	// Path to Amazon S3 storage location for system and framework metrics.
+	S3OutputPath *string
 
 	noSmithyDocumentSerde
 }

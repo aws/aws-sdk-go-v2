@@ -53,8 +53,9 @@ type CreateCrawlerInput struct {
 	Classifiers []string
 
 	// Crawler configuration information. This versioned JSON string allows users to
-	// specify aspects of a crawler's behavior. For more information, see Configuring a
-	// Crawler (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
+	// specify aspects of a crawler's behavior. For more information, see Setting
+	// crawler configuration options
+	// (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html).
 	Configuration *string
 
 	// The name of the SecurityConfiguration structure to be used by this crawler.

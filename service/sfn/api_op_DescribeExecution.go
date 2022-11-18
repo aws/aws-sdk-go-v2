@@ -99,7 +99,7 @@ type DescribeExecutionOutput struct {
 	// If the execution has already ended, the date the execution stopped.
 	StopDate *time.Time
 
-	// The AWS X-Ray trace header that was passed to the execution.
+	// The X-Ray trace header that was passed to the execution.
 	TraceHeader *string
 
 	// Metadata pertaining to the operation's result.

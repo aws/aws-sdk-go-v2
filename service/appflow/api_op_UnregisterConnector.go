@@ -11,7 +11,7 @@ import (
 )
 
 // Unregisters the custom connector registered in your account that matches the
-// connectorLabel provided in the request.
+// connector label provided in the request.
 func (c *Client) UnregisterConnector(ctx context.Context, params *UnregisterConnectorInput, optFns ...func(*Options)) (*UnregisterConnectorOutput, error) {
 	if params == nil {
 		params = &UnregisterConnectorInput{}

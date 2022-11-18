@@ -13,7 +13,13 @@ import (
 	"time"
 )
 
-// Starts a Synchronous Express state machine execution.
+// Starts a Synchronous Express state machine execution. StartSyncExecution is not
+// available for STANDARD workflows. StartSyncExecution will return a 200 OK
+// response, even if your execution fails, because the status code in the API
+// response doesn't reflect function errors. Error codes are reserved for errors
+// that prevent your execution from running, such as permissions errors, limit
+// errors, or issues with your state machine code and configuration. This API
+// action isn't logged in CloudTrail.
 func (c *Client) StartSyncExecution(ctx context.Context, params *StartSyncExecutionInput, optFns ...func(*Options)) (*StartSyncExecutionOutput, error) {
 	if params == nil {
 		params = &StartSyncExecutionInput{}
@@ -46,7 +52,7 @@ type StartSyncExecutionInput struct {
 	// The name of the execution.
 	Name *string
 
-	// Passes the AWS X-Ray trace header. The trace header can also be passed in the
+	// Passes the X-Ray trace header. The trace header can also be passed in the
 	// request payload.
 	TraceHeader *string
 
@@ -107,7 +113,7 @@ type StartSyncExecutionOutput struct {
 	// The Amazon Resource Name (ARN) that identifies the state machine.
 	StateMachineArn *string
 
-	// The AWS X-Ray trace header that was passed to the execution.
+	// The X-Ray trace header that was passed to the execution.
 	TraceHeader *string
 
 	// Metadata pertaining to the operation's result.

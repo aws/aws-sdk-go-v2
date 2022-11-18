@@ -560,7 +560,12 @@ type BatchStatementResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details for the read/write capacity mode.
+// Contains the details for the read/write capacity mode. This page talks about
+// PROVISIONED and PAY_PER_REQUEST billing modes. For more information about these
+// modes, see Read/write capacity mode
+// (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html).
+// You may need to switch to on-demand mode at least once in order to return a
+// BillingModeSummary response.
 type BillingModeSummary struct {
 
 	// Controls how you are charged for read and write throughput and how you manage
@@ -1427,7 +1432,7 @@ type GlobalSecondaryIndexDescription struct {
 	// The total size of the specified index, in bytes. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	IndexSizeBytes int64
+	IndexSizeBytes *int64
 
 	// The current state of the global secondary index:
 	//
@@ -1445,7 +1450,7 @@ type GlobalSecondaryIndexDescription struct {
 	// The number of items in the specified index. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	ItemCount int64
+	ItemCount *int64
 
 	// The complete key schema for a global secondary index, which consists of one or
 	// more pairs of attribute names and key types:
@@ -1699,7 +1704,7 @@ type ImportTableDescription struct {
 	ProcessedItemCount int64
 
 	// The total size of data processed from the source file, in Bytes.
-	ProcessedSizeBytes int64
+	ProcessedSizeBytes *int64
 
 	// Values for the S3 bucket the source file is imported from. Includes bucket name
 	// (required), key prefix (optional) and bucket account owner ID (optional).
@@ -1939,12 +1944,12 @@ type LocalSecondaryIndexDescription struct {
 	// The total size of the specified index, in bytes. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	IndexSizeBytes int64
+	IndexSizeBytes *int64
 
 	// The number of items in the specified index. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	ItemCount int64
+	ItemCount *int64
 
 	// The complete key schema for the local secondary index, consisting of one or more
 	// pairs of attribute names and key types:
@@ -2342,10 +2347,11 @@ type ReplicaGlobalSecondaryIndexAutoScalingDescription struct {
 	// * CREATING - The index
 	// is being created.
 	//
-	// * UPDATING - The index is being updated.
+	// * UPDATING - The table/index configuration is being updated.
+	// The table/index remains available for data operations when UPDATING
 	//
-	// * DELETING - The
-	// index is being deleted.
+	// * DELETING
+	// - The index is being deleted.
 	//
 	// * ACTIVE - The index is ready for use.
 	IndexStatus IndexStatus
@@ -2669,7 +2675,7 @@ type SourceTableDetails struct {
 	TableArn *string
 
 	// Size of the table in bytes. Note that this is an approximate value.
-	TableSizeBytes int64
+	TableSizeBytes *int64
 
 	noSmithyDocumentSerde
 }
@@ -2974,7 +2980,7 @@ type TableDescription struct {
 	// The number of items in the specified table. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	ItemCount int64
+	ItemCount *int64
 
 	// The primary key structure for the table. Each KeySchemaElement consists of:
 	//
@@ -3100,17 +3106,18 @@ type TableDescription struct {
 	// The total size of the specified table, in bytes. DynamoDB updates this value
 	// approximately every six hours. Recent changes might not be reflected in this
 	// value.
-	TableSizeBytes int64
+	TableSizeBytes *int64
 
 	// The current state of the table:
 	//
 	// * CREATING - The table is being created.
 	//
 	// *
-	// UPDATING - The table is being updated.
+	// UPDATING - The table/index configuration is being updated. The table/index
+	// remains available for data operations when UPDATING.
 	//
-	// * DELETING - The table is being
-	// deleted.
+	// * DELETING - The table is
+	// being deleted.
 	//
 	// * ACTIVE - The table is ready for use.
 	//

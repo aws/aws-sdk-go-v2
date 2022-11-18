@@ -242,8 +242,7 @@ type ExecutionStartedEventDetails struct {
 	// Contains details about the input for an execution history event.
 	InputDetails *HistoryEventExecutionDataDetails
 
-	// The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda
-	// tasks.
+	// The Amazon Resource Name (ARN) of the IAM role used for executing Lambda tasks.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -327,25 +326,25 @@ type HistoryEvent struct {
 	// Contains details about the execution timeout that occurred during the execution.
 	ExecutionTimedOutEventDetails *ExecutionTimedOutEventDetails
 
-	// Contains details about a lambda function that failed during an execution.
+	// Contains details about a Lambda function that failed during an execution.
 	LambdaFunctionFailedEventDetails *LambdaFunctionFailedEventDetails
 
-	// Contains details about a failed lambda function schedule event that occurred
+	// Contains details about a failed Lambda function schedule event that occurred
 	// during an execution.
 	LambdaFunctionScheduleFailedEventDetails *LambdaFunctionScheduleFailedEventDetails
 
-	// Contains details about a lambda function scheduled during an execution.
+	// Contains details about a Lambda function scheduled during an execution.
 	LambdaFunctionScheduledEventDetails *LambdaFunctionScheduledEventDetails
 
 	// Contains details about a lambda function that failed to start during an
 	// execution.
 	LambdaFunctionStartFailedEventDetails *LambdaFunctionStartFailedEventDetails
 
-	// Contains details about a lambda function that terminated successfully during an
+	// Contains details about a Lambda function that terminated successfully during an
 	// execution.
 	LambdaFunctionSucceededEventDetails *LambdaFunctionSucceededEventDetails
 
-	// Contains details about a lambda function timeout that occurred during an
+	// Contains details about a Lambda function timeout that occurred during an
 	// execution.
 	LambdaFunctionTimedOutEventDetails *LambdaFunctionTimedOutEventDetails
 
@@ -410,7 +409,7 @@ type HistoryEventExecutionDataDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about a lambda function that failed during an execution.
+// Contains details about a Lambda function that failed during an execution.
 type LambdaFunctionFailedEventDetails struct {
 
 	// A more detailed explanation of the cause of the failure.
@@ -422,28 +421,31 @@ type LambdaFunctionFailedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about a lambda function scheduled during an execution.
+// Contains details about a Lambda function scheduled during an execution.
 type LambdaFunctionScheduledEventDetails struct {
 
-	// The Amazon Resource Name (ARN) of the scheduled lambda function.
+	// The Amazon Resource Name (ARN) of the scheduled Lambda function.
 	//
 	// This member is required.
 	Resource *string
 
-	// The JSON data input to the lambda function. Length constraints apply to the
+	// The JSON data input to the Lambda function. Length constraints apply to the
 	// payload size, and are expressed as bytes in UTF-8 encoding.
 	Input *string
 
 	// Contains details about input for an execution history event.
 	InputDetails *HistoryEventExecutionDataDetails
 
-	// The maximum allowed duration of the lambda function.
+	// The credentials that Step Functions uses for the task.
+	TaskCredentials *TaskCredentials
+
+	// The maximum allowed duration of the Lambda function.
 	TimeoutInSeconds *int64
 
 	noSmithyDocumentSerde
 }
 
-// Contains details about a failed lambda function schedule event that occurred
+// Contains details about a failed Lambda function schedule event that occurred
 // during an execution.
 type LambdaFunctionScheduleFailedEventDetails struct {
 
@@ -469,11 +471,11 @@ type LambdaFunctionStartFailedEventDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about a lambda function that successfully terminated during an
+// Contains details about a Lambda function that successfully terminated during an
 // execution.
 type LambdaFunctionSucceededEventDetails struct {
 
-	// The JSON data output by the lambda function. Length constraints apply to the
+	// The JSON data output by the Lambda function. Length constraints apply to the
 	// payload size, and are expressed as bytes in UTF-8 encoding.
 	Output *string
 
@@ -483,7 +485,7 @@ type LambdaFunctionSucceededEventDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about a lambda function timeout that occurred during an
+// Contains details about a Lambda function timeout that occurred during an
 // execution.
 type LambdaFunctionTimedOutEventDetails struct {
 
@@ -501,7 +503,7 @@ type LogDestination struct {
 	// An object describing a CloudWatch log group. For more information, see
 	// AWS::Logs::LogGroup
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-logs-loggroup.html)
-	// in the AWS CloudFormation User Guide.
+	// in the CloudFormation User Guide.
 	CloudWatchLogsLogGroup *CloudWatchLogsLogGroup
 
 	noSmithyDocumentSerde
@@ -642,8 +644,8 @@ type StateMachineListItem struct {
 // machines and activities. An array of key-value pairs. For more information, see
 // Using Cost Allocation Tags
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-// in the AWS Billing and Cost Management User Guide, and Controlling Access Using
-// IAM Tags
+// in the Amazon Web Services Billing and Cost Management User Guide, and
+// Controlling Access Using IAM Tags
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html). Tags
 // may only contain Unicode letters, digits, white space, or these symbols: _ . : /
 // = + - @.
@@ -658,15 +660,25 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// Contains details about the credentials that Step Functions uses for a task.
+type TaskCredentials struct {
+
+	// The ARN of an IAM role that Step Functions assumes for the task. The role can
+	// allow cross-account access to resources.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a task failure event.
 type TaskFailedEventDetails struct {
 
-	// The service name of the resource in a task state.
+	// The action of the resource called by a task state.
 	//
 	// This member is required.
 	Resource *string
 
-	// The action of the resource called by a task state.
+	// The service name of the resource in a task state.
 	//
 	// This member is required.
 	ResourceType *string
@@ -695,18 +707,21 @@ type TaskScheduledEventDetails struct {
 	// This member is required.
 	Region *string
 
-	// The service name of the resource in a task state.
+	// The action of the resource called by a task state.
 	//
 	// This member is required.
 	Resource *string
 
-	// The action of the resource called by a task state.
+	// The service name of the resource in a task state.
 	//
 	// This member is required.
 	ResourceType *string
 
 	// The maximum allowed duration between two heartbeats for the task.
 	HeartbeatInSeconds *int64
+
+	// The credentials that Step Functions uses for the task.
+	TaskCredentials *TaskCredentials
 
 	// The maximum allowed duration of the task.
 	TimeoutInSeconds *int64
@@ -717,12 +732,12 @@ type TaskScheduledEventDetails struct {
 // Contains details about the start of a task during an execution.
 type TaskStartedEventDetails struct {
 
-	// The service name of the resource in a task state.
+	// The action of the resource called by a task state.
 	//
 	// This member is required.
 	Resource *string
 
-	// The action of the resource called by a task state.
+	// The service name of the resource in a task state.
 	//
 	// This member is required.
 	ResourceType *string
@@ -733,12 +748,12 @@ type TaskStartedEventDetails struct {
 // Contains details about a task that failed to start during an execution.
 type TaskStartFailedEventDetails struct {
 
-	// The service name of the resource in a task state.
+	// The action of the resource called by a task state.
 	//
 	// This member is required.
 	Resource *string
 
-	// The action of the resource called by a task state.
+	// The service name of the resource in a task state.
 	//
 	// This member is required.
 	ResourceType *string
@@ -755,12 +770,12 @@ type TaskStartFailedEventDetails struct {
 // Contains details about a task that failed to submit during an execution.
 type TaskSubmitFailedEventDetails struct {
 
-	// The service name of the resource in a task state.
+	// The action of the resource called by a task state.
 	//
 	// This member is required.
 	Resource *string
 
-	// The action of the resource called by a task state.
+	// The service name of the resource in a task state.
 	//
 	// This member is required.
 	ResourceType *string
@@ -777,12 +792,12 @@ type TaskSubmitFailedEventDetails struct {
 // Contains details about a task submitted to a resource .
 type TaskSubmittedEventDetails struct {
 
-	// The service name of the resource in a task state.
+	// The action of the resource called by a task state.
 	//
 	// This member is required.
 	Resource *string
 
-	// The action of the resource called by a task state.
+	// The service name of the resource in a task state.
 	//
 	// This member is required.
 	ResourceType *string
@@ -800,12 +815,12 @@ type TaskSubmittedEventDetails struct {
 // Contains details about the successful completion of a task state.
 type TaskSucceededEventDetails struct {
 
-	// The service name of the resource in a task state.
+	// The action of the resource called by a task state.
 	//
 	// This member is required.
 	Resource *string
 
-	// The action of the resource called by a task state.
+	// The service name of the resource in a task state.
 	//
 	// This member is required.
 	ResourceType *string
@@ -824,12 +839,12 @@ type TaskSucceededEventDetails struct {
 // Contains details about a resource timeout that occurred during an execution.
 type TaskTimedOutEventDetails struct {
 
-	// The service name of the resource in a task state.
+	// The action of the resource called by a task state.
 	//
 	// This member is required.
 	Resource *string
 
-	// The action of the resource called by a task state.
+	// The service name of the resource in a task state.
 	//
 	// This member is required.
 	ResourceType *string
@@ -843,11 +858,11 @@ type TaskTimedOutEventDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Selects whether or not the state machine's AWS X-Ray tracing is enabled. Default
-// is false
+// Selects whether or not the state machine's X-Ray tracing is enabled. Default is
+// false
 type TracingConfiguration struct {
 
-	// When set to true, AWS X-Ray tracing is enabled.
+	// When set to true, X-Ray tracing is enabled.
 	Enabled bool
 
 	noSmithyDocumentSerde

@@ -10527,6 +10527,73 @@ func awsAwsjson11_deserializeDocumentCloudWatchDashboards(v *[]types.CloudWatchD
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCodeStarParameters(v **types.CodeStarParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CodeStarParameters
+	if *v == nil {
+		sv = &types.CodeStarParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ArtifactPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RepositoryArtifactPath to be of type string, got %T instead", value)
+				}
+				sv.ArtifactPath = ptr.String(jtv)
+			}
+
+		case "Branch":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RepositoryBranch to be of type string, got %T instead", value)
+				}
+				sv.Branch = ptr.String(jtv)
+			}
+
+		case "ConnectionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CodeStarConnectionArn to be of type string, got %T instead", value)
+				}
+				sv.ConnectionArn = ptr.String(jtv)
+			}
+
+		case "Repository":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Repository to be of type string, got %T instead", value)
+				}
+				sv.Repository = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentConstraintDetail(v **types.ConstraintDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11072,6 +11139,96 @@ func awsAwsjson11_deserializeDocumentInvalidStateException(v **types.InvalidStat
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLastSync(v **types.LastSync, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LastSync
+	if *v == nil {
+		sv = &types.LastSync{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LastSuccessfulSyncProvisioningArtifactId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.LastSuccessfulSyncProvisioningArtifactId = ptr.String(jtv)
+			}
+
+		case "LastSuccessfulSyncTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastSuccessfulSyncTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastSuccessfulSyncTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "LastSyncStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastSyncStatus to be of type string, got %T instead", value)
+				}
+				sv.LastSyncStatus = types.LastSyncStatus(jtv)
+			}
+
+		case "LastSyncStatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LastSyncStatusMessage to be of type string, got %T instead", value)
+				}
+				sv.LastSyncStatusMessage = ptr.String(jtv)
+			}
+
+		case "LastSyncTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastSyncTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected LastSyncTime to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		default:
@@ -11750,6 +11907,15 @@ func awsAwsjson11_deserializeDocumentPortfolioShareDetail(v **types.PortfolioSha
 				sv.PrincipalId = ptr.String(jtv)
 			}
 
+		case "SharePrincipals":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SharePrincipals = jtv
+			}
+
 		case "ShareTagOptions":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -12064,6 +12230,11 @@ func awsAwsjson11_deserializeDocumentProductViewDetail(v **types.ProductViewDeta
 
 		case "ProductViewSummary":
 			if err := awsAwsjson11_deserializeDocumentProductViewSummary(&sv.ProductViewSummary, value); err != nil {
+				return err
+			}
+
+		case "SourceConnection":
+			if err := awsAwsjson11_deserializeDocumentSourceConnectionDetail(&sv.SourceConnection, value); err != nil {
 				return err
 			}
 
@@ -13207,6 +13378,15 @@ func awsAwsjson11_deserializeDocumentProvisioningArtifactDetail(v **types.Provis
 					return fmt.Errorf("expected ProvisioningArtifactName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "SourceRevision":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceRevision to be of type string, got %T instead", value)
+				}
+				sv.SourceRevision = ptr.String(jtv)
 			}
 
 		case "Type":
@@ -15016,6 +15196,92 @@ func awsAwsjson11_deserializeDocumentShareErrors(v *[]types.ShareError, value in
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSourceConnectionDetail(v **types.SourceConnectionDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourceConnectionDetail
+	if *v == nil {
+		sv = &types.SourceConnectionDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConnectionParameters":
+			if err := awsAwsjson11_deserializeDocumentSourceConnectionParameters(&sv.ConnectionParameters, value); err != nil {
+				return err
+			}
+
+		case "LastSync":
+			if err := awsAwsjson11_deserializeDocumentLastSync(&sv.LastSync, value); err != nil {
+				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.SourceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSourceConnectionParameters(v **types.SourceConnectionParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SourceConnectionParameters
+	if *v == nil {
+		sv = &types.SourceConnectionParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CodeStar":
+			if err := awsAwsjson11_deserializeDocumentCodeStarParameters(&sv.CodeStar, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

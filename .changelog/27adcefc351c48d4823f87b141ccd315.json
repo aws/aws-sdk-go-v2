@@ -1,0 +1,8 @@
+{
+    "id": "27adcefc-351c-48d4-823f-87b141ccd315",
+    "type": "feature",
+    "description": "Adds a NONE encryption algorithm type to AS2 connectors, providing support for skipping encryption of the AS2 message body when a HTTPS URL is also specified.",
+    "modules": [
+        "service/transfer"
+    ]
+}

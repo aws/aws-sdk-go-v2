@@ -46,6 +46,12 @@ type UpdateAccountSettingsInput struct {
 	// regarding your Amazon Web Services account or Amazon QuickSight subscription.
 	NotificationEmail *string
 
+	// A boolean value that determines whether or not an Amazon QuickSight account can
+	// be deleted. A True value doesn't allow the account to be deleted and results in
+	// an error message if a user tries to make a DeleteAccountSubscription request. A
+	// False value will allow the account to be deleted.
+	TerminationProtectionEnabled bool
+
 	noSmithyDocumentSerde
 }
 

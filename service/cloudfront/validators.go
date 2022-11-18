@@ -30,6 +30,26 @@ func (m *validateOpAssociateAlias) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCopyDistribution struct {
+}
+
+func (*validateOpCopyDistribution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCopyDistribution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CopyDistributionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCopyDistributionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCachePolicy struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpCreateCloudFrontOriginAccessIdentity) HandleInitialize(ctx co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateCloudFrontOriginAccessIdentityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateContinuousDeploymentPolicy struct {
+}
+
+func (*validateOpCreateContinuousDeploymentPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateContinuousDeploymentPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateContinuousDeploymentPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateContinuousDeploymentPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +450,26 @@ func (m *validateOpDeleteCloudFrontOriginAccessIdentity) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteContinuousDeploymentPolicy struct {
+}
+
+func (*validateOpDeleteContinuousDeploymentPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteContinuousDeploymentPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteContinuousDeploymentPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteContinuousDeploymentPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDistribution struct {
 }
 
@@ -725,6 +785,46 @@ func (m *validateOpGetCloudFrontOriginAccessIdentity) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetCloudFrontOriginAccessIdentityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContinuousDeploymentPolicyConfig struct {
+}
+
+func (*validateOpGetContinuousDeploymentPolicyConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContinuousDeploymentPolicyConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContinuousDeploymentPolicyConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContinuousDeploymentPolicyConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetContinuousDeploymentPolicy struct {
+}
+
+func (*validateOpGetContinuousDeploymentPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetContinuousDeploymentPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetContinuousDeploymentPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetContinuousDeploymentPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1430,6 +1530,26 @@ func (m *validateOpUpdateCloudFrontOriginAccessIdentity) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateContinuousDeploymentPolicy struct {
+}
+
+func (*validateOpUpdateContinuousDeploymentPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContinuousDeploymentPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContinuousDeploymentPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContinuousDeploymentPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDistribution struct {
 }
 
@@ -1654,12 +1774,20 @@ func addOpAssociateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateAlias{}, middleware.After)
 }
 
+func addOpCopyDistributionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCopyDistribution{}, middleware.After)
+}
+
 func addOpCreateCachePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCachePolicy{}, middleware.After)
 }
 
 func addOpCreateCloudFrontOriginAccessIdentityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCloudFrontOriginAccessIdentity{}, middleware.After)
+}
+
+func addOpCreateContinuousDeploymentPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateContinuousDeploymentPolicy{}, middleware.After)
 }
 
 func addOpCreateDistributionValidationMiddleware(stack *middleware.Stack) error {
@@ -1730,6 +1858,10 @@ func addOpDeleteCloudFrontOriginAccessIdentityValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpDeleteCloudFrontOriginAccessIdentity{}, middleware.After)
 }
 
+func addOpDeleteContinuousDeploymentPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteContinuousDeploymentPolicy{}, middleware.After)
+}
+
 func addOpDeleteDistributionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDistribution{}, middleware.After)
 }
@@ -1792,6 +1924,14 @@ func addOpGetCloudFrontOriginAccessIdentityConfigValidationMiddleware(stack *mid
 
 func addOpGetCloudFrontOriginAccessIdentityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCloudFrontOriginAccessIdentity{}, middleware.After)
+}
+
+func addOpGetContinuousDeploymentPolicyConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContinuousDeploymentPolicyConfig{}, middleware.After)
+}
+
+func addOpGetContinuousDeploymentPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetContinuousDeploymentPolicy{}, middleware.After)
 }
 
 func addOpGetDistributionConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1932,6 +2072,10 @@ func addOpUpdateCachePolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateCloudFrontOriginAccessIdentityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCloudFrontOriginAccessIdentity{}, middleware.After)
+}
+
+func addOpUpdateContinuousDeploymentPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContinuousDeploymentPolicy{}, middleware.After)
 }
 
 func addOpUpdateDistributionValidationMiddleware(stack *middleware.Stack) error {
@@ -2289,6 +2433,71 @@ func validateContentTypeProfiles(v *types.ContentTypeProfiles) error {
 	if v.Items != nil {
 		if err := validateContentTypeProfileList(v.Items); err != nil {
 			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContinuousDeploymentPolicyConfig(v *types.ContinuousDeploymentPolicyConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContinuousDeploymentPolicyConfig"}
+	if v.StagingDistributionDnsNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StagingDistributionDnsNames"))
+	} else if v.StagingDistributionDnsNames != nil {
+		if err := validateStagingDistributionDnsNames(v.StagingDistributionDnsNames); err != nil {
+			invalidParams.AddNested("StagingDistributionDnsNames", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if v.TrafficConfig != nil {
+		if err := validateTrafficConfig(v.TrafficConfig); err != nil {
+			invalidParams.AddNested("TrafficConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContinuousDeploymentSingleHeaderConfig(v *types.ContinuousDeploymentSingleHeaderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContinuousDeploymentSingleHeaderConfig"}
+	if v.Header == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Header"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContinuousDeploymentSingleWeightConfig(v *types.ContinuousDeploymentSingleWeightConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContinuousDeploymentSingleWeightConfig"}
+	if v.Weight == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Weight"))
+	}
+	if v.SessionStickinessConfig != nil {
+		if err := validateSessionStickinessConfig(v.SessionStickinessConfig); err != nil {
+			invalidParams.AddNested("SessionStickinessConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -3071,9 +3280,6 @@ func validateOriginAccessControlConfig(v *types.OriginAccessControlConfig) error
 	invalidParams := smithy.InvalidParamsError{Context: "OriginAccessControlConfig"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.Description == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Description"))
 	}
 	if len(v.SigningProtocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SigningProtocol"))
@@ -4045,6 +4251,39 @@ func validateS3OriginConfig(v *types.S3OriginConfig) error {
 	}
 }
 
+func validateSessionStickinessConfig(v *types.SessionStickinessConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SessionStickinessConfig"}
+	if v.IdleTTL == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdleTTL"))
+	}
+	if v.MaximumTTL == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaximumTTL"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateStagingDistributionDnsNames(v *types.StagingDistributionDnsNames) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StagingDistributionDnsNames"}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateStatusCodes(v *types.StatusCodes) error {
 	if v == nil {
 		return nil
@@ -4204,6 +4443,31 @@ func validateTags(v *types.Tags) error {
 	}
 }
 
+func validateTrafficConfig(v *types.TrafficConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrafficConfig"}
+	if v.SingleWeightConfig != nil {
+		if err := validateContinuousDeploymentSingleWeightConfig(v.SingleWeightConfig); err != nil {
+			invalidParams.AddNested("SingleWeightConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SingleHeaderConfig != nil {
+		if err := validateContinuousDeploymentSingleHeaderConfig(v.SingleHeaderConfig); err != nil {
+			invalidParams.AddNested("SingleHeaderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTrustedKeyGroups(v *types.TrustedKeyGroups) error {
 	if v == nil {
 		return nil
@@ -4258,6 +4522,24 @@ func validateOpAssociateAliasInput(v *AssociateAliasInput) error {
 	}
 }
 
+func validateOpCopyDistributionInput(v *CopyDistributionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CopyDistributionInput"}
+	if v.PrimaryDistributionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryDistributionId"))
+	}
+	if v.CallerReference == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallerReference"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCachePolicyInput(v *CreateCachePolicyInput) error {
 	if v == nil {
 		return nil
@@ -4287,6 +4569,25 @@ func validateOpCreateCloudFrontOriginAccessIdentityInput(v *CreateCloudFrontOrig
 	} else if v.CloudFrontOriginAccessIdentityConfig != nil {
 		if err := validateCloudFrontOriginAccessIdentityConfig(v.CloudFrontOriginAccessIdentityConfig); err != nil {
 			invalidParams.AddNested("CloudFrontOriginAccessIdentityConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateContinuousDeploymentPolicyInput(v *CreateContinuousDeploymentPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateContinuousDeploymentPolicyInput"}
+	if v.ContinuousDeploymentPolicyConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContinuousDeploymentPolicyConfig"))
+	} else if v.ContinuousDeploymentPolicyConfig != nil {
+		if err := validateContinuousDeploymentPolicyConfig(v.ContinuousDeploymentPolicyConfig); err != nil {
+			invalidParams.AddNested("ContinuousDeploymentPolicyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4632,6 +4933,21 @@ func validateOpDeleteCloudFrontOriginAccessIdentityInput(v *DeleteCloudFrontOrig
 	}
 }
 
+func validateOpDeleteContinuousDeploymentPolicyInput(v *DeleteContinuousDeploymentPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteContinuousDeploymentPolicyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDistributionInput(v *DeleteDistributionInput) error {
 	if v == nil {
 		return nil
@@ -4865,6 +5181,36 @@ func validateOpGetCloudFrontOriginAccessIdentityInput(v *GetCloudFrontOriginAcce
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetCloudFrontOriginAccessIdentityInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContinuousDeploymentPolicyConfigInput(v *GetContinuousDeploymentPolicyConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContinuousDeploymentPolicyConfigInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetContinuousDeploymentPolicyInput(v *GetContinuousDeploymentPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetContinuousDeploymentPolicyInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
@@ -5427,6 +5773,28 @@ func validateOpUpdateCloudFrontOriginAccessIdentityInput(v *UpdateCloudFrontOrig
 	} else if v.CloudFrontOriginAccessIdentityConfig != nil {
 		if err := validateCloudFrontOriginAccessIdentityConfig(v.CloudFrontOriginAccessIdentityConfig); err != nil {
 			invalidParams.AddNested("CloudFrontOriginAccessIdentityConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateContinuousDeploymentPolicyInput(v *UpdateContinuousDeploymentPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContinuousDeploymentPolicyInput"}
+	if v.ContinuousDeploymentPolicyConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContinuousDeploymentPolicyConfig"))
+	} else if v.ContinuousDeploymentPolicyConfig != nil {
+		if err := validateContinuousDeploymentPolicyConfig(v.ContinuousDeploymentPolicyConfig); err != nil {
+			invalidParams.AddNested("ContinuousDeploymentPolicyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Id == nil {

@@ -390,6 +390,26 @@ func (m *validateOpDeleteAccountCustomization) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAccountSubscription struct {
+}
+
+func (*validateOpDeleteAccountSubscription) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccountSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccountSubscriptionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccountSubscriptionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAnalysis struct {
 }
 
@@ -1850,6 +1870,46 @@ func (m *validateOpSearchDashboards) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchDataSets struct {
+}
+
+func (*validateOpSearchDataSets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchDataSets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchDataSetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchDataSetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchDataSources struct {
+}
+
+func (*validateOpSearchDataSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchDataSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchDataSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchDataSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchFolders struct {
 }
 
@@ -2486,6 +2546,10 @@ func addOpDeleteAccountCustomizationValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDeleteAccountCustomization{}, middleware.After)
 }
 
+func addOpDeleteAccountSubscriptionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccountSubscription{}, middleware.After)
+}
+
 func addOpDeleteAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAnalysis{}, middleware.After)
 }
@@ -2778,6 +2842,14 @@ func addOpSearchDashboardsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchDashboards{}, middleware.After)
 }
 
+func addOpSearchDataSetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchDataSets{}, middleware.After)
+}
+
+func addOpSearchDataSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchDataSources{}, middleware.After)
+}
+
 func addOpSearchFoldersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchFolders{}, middleware.After)
 }
@@ -3007,6 +3079,26 @@ func validateAnonymousUserEmbeddingExperienceConfiguration(v *types.AnonymousUse
 		if err := validateAnonymousUserDashboardVisualEmbeddingConfiguration(v.DashboardVisual); err != nil {
 			invalidParams.AddNested("DashboardVisual", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.QSearchBar != nil {
+		if err := validateAnonymousUserQSearchBarEmbeddingConfiguration(v.QSearchBar); err != nil {
+			invalidParams.AddNested("QSearchBar", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAnonymousUserQSearchBarEmbeddingConfiguration(v *types.AnonymousUserQSearchBarEmbeddingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnonymousUserQSearchBarEmbeddingConfiguration"}
+	if v.InitialTopicId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InitialTopicId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3316,6 +3408,24 @@ func validateDashboardVisualId(v *types.DashboardVisualId) error {
 	}
 }
 
+func validateDatabricksParameters(v *types.DatabricksParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatabricksParameters"}
+	if v.Host == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Host"))
+	}
+	if v.SqlEndpointPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SqlEndpointPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataSetReference(v *types.DataSetReference) error {
 	if v == nil {
 		return nil
@@ -3341,6 +3451,44 @@ func validateDataSetReferenceList(v []types.DataSetReference) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DataSetReferenceList"}
 	for i := range v {
 		if err := validateDataSetReference(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetSearchFilter(v *types.DataSetSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetSearchFilter"}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSetSearchFilterList(v []types.DataSetSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSetSearchFilterList"}
+	for i := range v {
+		if err := validateDataSetSearchFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3397,6 +3545,11 @@ func validateDataSourceParameters(v types.DataSourceParameters) error {
 	case *types.DataSourceParametersMemberAwsIotAnalyticsParameters:
 		if err := validateAwsIotAnalyticsParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[AwsIotAnalyticsParameters]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DataSourceParametersMemberDatabricksParameters:
+		if err := validateDatabricksParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[DatabricksParameters]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.DataSourceParametersMemberExasolParameters:
@@ -3494,6 +3647,44 @@ func validateDataSourceParametersList(v []types.DataSourceParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DataSourceParametersList"}
 	for i := range v {
 		if err := validateDataSourceParameters(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSourceSearchFilter(v *types.DataSourceSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceSearchFilter"}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSourceSearchFilterList(v []types.DataSourceSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceSearchFilterList"}
+	for i := range v {
+		if err := validateDataSourceSearchFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -5299,6 +5490,21 @@ func validateOpDeleteAccountCustomizationInput(v *DeleteAccountCustomizationInpu
 	}
 }
 
+func validateOpDeleteAccountSubscriptionInput(v *DeleteAccountSubscriptionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccountSubscriptionInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAnalysisInput(v *DeleteAnalysisInput) error {
 	if v == nil {
 		return nil
@@ -6662,6 +6868,50 @@ func validateOpSearchDashboardsInput(v *SearchDashboardsInput) error {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
 	} else if v.Filters != nil {
 		if err := validateDashboardSearchFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchDataSetsInput(v *SearchDataSetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchDataSetsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateDataSetSearchFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchDataSourcesInput(v *SearchDataSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchDataSourcesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateDataSourceSearchFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}

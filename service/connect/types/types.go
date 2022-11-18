@@ -1883,6 +1883,10 @@ type SecurityKey struct {
 // Contains information about a security profile.
 type SecurityProfile struct {
 
+	// The list of tags that a security profile uses to restrict access to resources in
+	// Amazon Connect.
+	AllowedAccessControlTags map[string]string
+
 	// The Amazon Resource Name (ARN) for the secruity profile.
 	Arn *string
 
@@ -1897,6 +1901,10 @@ type SecurityProfile struct {
 
 	// The name for the security profile.
 	SecurityProfileName *string
+
+	// The list of resources that a security profile applies tag restrictions to in
+	// Amazon Connect.
+	TagRestrictedResources []string
 
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "tags": {"key1":"value1", "key2":"value2"} }.

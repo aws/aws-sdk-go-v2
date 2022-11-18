@@ -330,6 +330,26 @@ func (m *validateOpUpdateConnectorProfile) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnectorRegistration struct {
+}
+
+func (*validateOpUpdateConnectorRegistration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnectorRegistration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectorRegistrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectorRegistrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFlow struct {
 }
 
@@ -412,6 +432,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateConnectorProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConnectorProfile{}, middleware.After)
+}
+
+func addOpUpdateConnectorRegistrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnectorRegistration{}, middleware.After)
 }
 
 func addOpUpdateFlowValidationMiddleware(stack *middleware.Stack) error {
@@ -2327,6 +2351,26 @@ func validateOpUpdateConnectorProfileInput(v *UpdateConnectorProfileInput) error
 	} else if v.ConnectorProfileConfig != nil {
 		if err := validateConnectorProfileConfig(v.ConnectorProfileConfig); err != nil {
 			invalidParams.AddNested("ConnectorProfileConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectorRegistrationInput(v *UpdateConnectorRegistrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectorRegistrationInput"}
+	if v.ConnectorLabel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorLabel"))
+	}
+	if v.ConnectorProvisioningConfig != nil {
+		if err := validateConnectorProvisioningConfig(v.ConnectorProvisioningConfig); err != nil {
+			invalidParams.AddNested("ConnectorProvisioningConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

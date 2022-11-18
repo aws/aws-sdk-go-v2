@@ -56,11 +56,6 @@ type CreateProductInput struct {
 	// This member is required.
 	ProductType types.ProductType
 
-	// The configuration of the provisioning artifact.
-	//
-	// This member is required.
-	ProvisioningArtifactParameters *types.ProvisioningArtifactProperties
-
 	// The language code.
 	//
 	// * en - English (default)
@@ -75,6 +70,19 @@ type CreateProductInput struct {
 
 	// The distributor of the product.
 	Distributor *string
+
+	// The configuration of the provisioning artifact.
+	ProvisioningArtifactParameters *types.ProvisioningArtifactProperties
+
+	// Specifies connection details for the created product and syncs the product to
+	// the connection source artifact. This automatically manages the product's
+	// artifacts based on changes to the source. The SourceConnection parameter
+	// consists of the following sub-fields.
+	//
+	// * Type
+	//
+	// * ConnectionParamters
+	SourceConnection *types.SourceConnection
 
 	// The support information about the product.
 	SupportDescription *string

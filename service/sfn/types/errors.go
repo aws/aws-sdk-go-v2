@@ -452,8 +452,8 @@ func (e *TaskTimedOut) ErrorCode() string             { return "TaskTimedOut" }
 func (e *TaskTimedOut) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've exceeded the number of tags allowed for a resource. See the  Limits Topic
-// (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html) in the AWS
-// Step Functions Developer Guide.
+// (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html) in the Step
+// Functions Developer Guide.
 type TooManyTags struct {
 	Message *string
 

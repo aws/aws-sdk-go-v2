@@ -1,0 +1,8 @@
+{
+    "id": "182c88f1-92ee-45d1-93d2-ccaec425c934",
+    "type": "feature",
+    "description": "CloudFront API support for staging distributions and associated traffic management policies.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

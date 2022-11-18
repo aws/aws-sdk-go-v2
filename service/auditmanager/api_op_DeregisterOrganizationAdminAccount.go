@@ -16,13 +16,27 @@ import (
 // previously collected under that account. This is also the case when you
 // deregister a delegated administrator from Organizations. However, Audit Manager
 // will stop collecting and attaching evidence to that delegated administrator
-// account moving forward. When you deregister a delegated administrator account
-// for Audit Manager, the data for that account isn’t deleted. If you want to
-// delete resource data for a delegated administrator account, you must perform
-// that task separately before you deregister the account. Either, you can do this
-// in the Audit Manager console. Or, you can use one of the delete API operations
-// that are provided by Audit Manager. To delete your Audit Manager resource data,
-// see the following instructions:
+// account moving forward. Keep in mind the following cleanup task if you use
+// evidence finder: Before you use your management account to remove a delegated
+// administrator, make sure that the current delegated administrator account signs
+// in to Audit Manager and disables evidence finder first. Disabling evidence
+// finder automatically deletes the event data store that was created in their
+// account when they enabled evidence finder. If this task isn’t completed, the
+// event data store remains in their account. In this case, we recommend that the
+// original delegated administrator goes to CloudTrail Lake and manually deletes
+// the event data store
+// (https://docs.aws.amazon.com/userguide/awscloudtrail/latest/userguide/query-eds-disable-termination.html).
+// This cleanup task is necessary to ensure that you don't end up with multiple
+// event data stores. Audit Manager will ignore an unused event data store after
+// you remove or change a delegated administrator account. However, the unused
+// event data store continues to incur storage costs from CloudTrail Lake if you
+// don't delete it. When you deregister a delegated administrator account for Audit
+// Manager, the data for that account isn’t deleted. If you want to delete resource
+// data for a delegated administrator account, you must perform that task
+// separately before you deregister the account. Either, you can do this in the
+// Audit Manager console. Or, you can use one of the delete API operations that are
+// provided by Audit Manager. To delete your Audit Manager resource data, see the
+// following instructions:
 //
 // * DeleteAssessment
 // (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeleteAssessment.html)

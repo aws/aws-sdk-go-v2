@@ -133,7 +133,7 @@ type DescribeImagesInput struct {
 	// ID of the owner. We recommend that you use the Owner request parameter instead
 	// of this filter.
 	//
-	// * platform - The platform. To only list Windows-based AMIs, use
+	// * platform - The platform. The only supported value is
 	// windows.
 	//
 	// * product-code - The product code.

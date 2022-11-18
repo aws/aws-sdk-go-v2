@@ -6,11 +6,20 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociates a previously associated principal ARN from a specified portfolio.
+// The PrincipalType and PrincipalARN must match the
+// AssociatePrincipalWithPortfolio call request details. For example, to
+// disassociate an association created with a PrincipalARN of PrincipalType IAM you
+// must use the PrincipalType IAM when calling DisassociatePrincipalFromPortfolio.
+// For portfolios that have been shared with principal name sharing enabled: after
+// disassociating a principal, share recipient accounts will no longer be able to
+// provision products in this portfolio using a role matching the name of the
+// associated principal.
 func (c *Client) DisassociatePrincipalFromPortfolio(ctx context.Context, params *DisassociatePrincipalFromPortfolioInput, optFns ...func(*Options)) (*DisassociatePrincipalFromPortfolioOutput, error) {
 	if params == nil {
 		params = &DisassociatePrincipalFromPortfolioInput{}
@@ -33,7 +42,8 @@ type DisassociatePrincipalFromPortfolioInput struct {
 	// This member is required.
 	PortfolioId *string
 
-	// The ARN of the principal (IAM user, role, or group).
+	// The ARN of the principal (IAM user, role, or group). This field allows an ARN
+	// with no accountID if PrincipalType is IAM_PATTERN.
 	//
 	// This member is required.
 	PrincipalARN *string
@@ -46,6 +56,10 @@ type DisassociatePrincipalFromPortfolioInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	// The supported value is IAM if you use a fully defined ARN, or IAM_PATTERN if you
+	// use no accountID.
+	PrincipalType types.PrincipalType
 
 	noSmithyDocumentSerde
 }

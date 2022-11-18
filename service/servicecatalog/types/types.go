@@ -45,6 +45,35 @@ type CloudWatchDashboard struct {
 	noSmithyDocumentSerde
 }
 
+// The subtype containing details about the Codestar connection Type.
+type CodeStarParameters struct {
+
+	// The absolute path wehre the artifact resides within the repo and branch,
+	// formatted as "folder/file.json."
+	//
+	// This member is required.
+	ArtifactPath *string
+
+	// The specific branch where the artifact resides.
+	//
+	// This member is required.
+	Branch *string
+
+	// The CodeStar ARN, which is the connection between Service Catalog and the
+	// external repository.
+	//
+	// This member is required.
+	ConnectionArn *string
+
+	// The specific repository where the product’s artifact-to-be-synced resides,
+	// formatted as "Account/Repo."
+	//
+	// This member is required.
+	Repository *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a constraint.
 type ConstraintDetail struct {
 
@@ -133,6 +162,42 @@ type FailedServiceActionAssociation struct {
 
 	// The self-service action identifier. For example, act-fs7abcd89wxyz.
 	ServiceActionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the product's connection sync and contains the following
+// sub-fields.
+//
+// * LastSyncTime
+//
+// * LastSyncStatus
+//
+// * LastSyncStatusMessage
+//
+// *
+// LastSuccessfulSyncTime
+//
+// * LastSuccessfulSyncProvisioningArtifactID
+type LastSync struct {
+
+	// The ProvisioningArtifactID of the ProvisioningArtifact created from the latest
+	// successful sync.
+	LastSuccessfulSyncProvisioningArtifactId *string
+
+	// The time of the latest successful sync from the source repo artifact to the
+	// Service Catalog product.
+	LastSuccessfulSyncTime *time.Time
+
+	// The current status of the sync. Responses include SUCCEEDED or FAILED.
+	LastSyncStatus LastSyncStatus
+
+	// The sync's status message.
+	LastSyncStatusMessage *string
+
+	// The time of the last attempted sync from the repository to the Service Catalog
+	// product.
+	LastSyncTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -284,10 +349,13 @@ type PortfolioShareDetail struct {
 	Accepted bool
 
 	// The identifier of the recipient entity that received the portfolio share. The
-	// recipient entities can be one of the following: 1. An external account. 2. An
+	// recipient entity can be one of the following: 1. An external account. 2. An
 	// organziation member account. 3. An organzational unit (OU). 4. The organization
 	// itself. (This shares with every account in the organization).
 	PrincipalId *string
+
+	// Indicates if Principal sharing is enabled or disabled for the portfolio share.
+	SharePrincipals bool
 
 	// Indicates whether TagOptions sharing is enabled or disabled for the portfolio
 	// share.
@@ -302,10 +370,12 @@ type PortfolioShareDetail struct {
 // Information about a principal.
 type Principal struct {
 
-	// The ARN of the principal (IAM user, role, or group).
+	// The ARN of the principal (IAM user, role, or group). This field allows for an
+	// ARN with no accountID if the PrincipalType is an IAM_PATTERN.
 	PrincipalARN *string
 
-	// The principal type. The supported value is IAM.
+	// The principal type. The supported value is IAM if you use a fully defined ARN,
+	// or IAM_PATTERN if you use an ARN with no accountID.
 	PrincipalType PrincipalType
 
 	noSmithyDocumentSerde
@@ -335,6 +405,13 @@ type ProductViewDetail struct {
 
 	// Summary information about the product view.
 	ProductViewSummary *ProductViewSummary
+
+	// A top level ProductViewDetail response containing details about the product’s
+	// connection. Service Catalog returns this field for the CreateProduct,
+	// UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This
+	// response contains the same fields as the ConnectionParameters request, with the
+	// addition of the LastSync response.
+	SourceConnection *SourceConnectionDetail
 
 	// The status of the product.
 	//
@@ -651,7 +728,7 @@ type ProvisionedProductPlanDetails struct {
 	// One or more tags.
 	Tags []Tag
 
-	// The time when the plan was last updated.
+	// The UTC time stamp when the plan was last updated.
 	UpdatedTime *time.Time
 
 	noSmithyDocumentSerde
@@ -726,6 +803,15 @@ type ProvisioningArtifactDetail struct {
 
 	// The name of the provisioning artifact.
 	Name *string
+
+	// Specifies the revision of the external artifact that was used to automatically
+	// sync the Service Catalog product and create the provisioning artifact. Service
+	// Catalog includes this response parameter as a high level field to the existing
+	// ProvisioningArtifactDetail type, which is returned as part of the response for
+	// CreateProduct, UpdateProduct, DescribeProductAsAdmin,
+	// DescribeProvisioningArtifact, ListProvisioningArtifact, and
+	// UpdateProvisioningArticat APIs. This field only exists for Repo-Synced products.
+	SourceRevision *string
 
 	// The type of provisioning artifact.
 	//
@@ -809,27 +895,24 @@ type ProvisioningArtifactPreferences struct {
 // product.
 type ProvisioningArtifactProperties struct {
 
+	// The description of the provisioning artifact, including how it differs from the
+	// previous provisioning artifact.
+	Description *string
+
+	// If set to true, Service Catalog stops validating the specified provisioning
+	// artifact even if it is invalid.
+	DisableTemplateValidation bool
+
 	// Specify the template source with one of the following options, but not both.
 	// Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the
-	// CloudFormation template in Amazon S3, Amazon Web Services CodeCommit, or GitHub
-	// in JSON format. Specify the URL in JSON format as follows:
-	// "LoadTemplateFromURL":
+	// CloudFormation template in Amazon S3 or GitHub in JSON format. Specify the URL
+	// in JSON format as follows: "LoadTemplateFromURL":
 	// "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."ImportFromPhysicalId:
 	// The physical id of the resource that contains the template. Currently only
 	// supports CloudFormation stack arn. Specify the physical id in JSON format as
 	// follows: ImportFromPhysicalId:
 	// “arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId]
-	//
-	// This member is required.
 	Info map[string]string
-
-	// The description of the provisioning artifact, including how it differs from the
-	// previous provisioning artifact.
-	Description *string
-
-	// If set to true, Amazon Web Services Service Catalog stops validating the
-	// specified provisioning artifact even if it is invalid.
-	DisableTemplateValidation bool
 
 	// The name of the provisioning artifact (for example, v1 v2beta). No spaces are
 	// allowed.
@@ -1241,6 +1324,60 @@ type ShareError struct {
 
 	// Information about the error.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A top level ProductViewDetail response containing details about the product’s
+// connection. Service Catalog returns this field for the CreateProduct,
+// UpdateProduct, DescribeProductAsAdmin, and SearchProductAsAdmin APIs. This
+// response contains the same fields as the ConnectionParameters request, with the
+// addition of the LastSync response.
+type SourceConnection struct {
+
+	// The connection details based on the connection Type.
+	//
+	// This member is required.
+	ConnectionParameters *SourceConnectionParameters
+
+	// The only supported SourceConnection type is Codestar.
+	Type SourceType
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the configured SourceConnection.
+type SourceConnectionDetail struct {
+
+	// The connection details based on the connection Type.
+	ConnectionParameters *SourceConnectionParameters
+
+	// Provides details about the product's connection sync and contains the following
+	// sub-fields.
+	//
+	// * LastSyncTime
+	//
+	// * LastSyncStatus
+	//
+	// * LastSyncStatusMessage
+	//
+	// *
+	// LastSuccessfulSyncTime
+	//
+	// * LastSuccessfulSyncProvisioningArtifactID
+	LastSync *LastSync
+
+	// The only supported SourceConnection type is Codestar.
+	Type SourceType
+
+	noSmithyDocumentSerde
+}
+
+// Provides connection details.
+type SourceConnectionParameters struct {
+
+	// Provides ConnectionType details.
+	CodeStar *CodeStarParameters
 
 	noSmithyDocumentSerde
 }

@@ -1987,6 +1987,13 @@ func awsRestjson1_serializeOpDocumentCreateSecurityProfileInput(v *CreateSecurit
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowedAccessControlTags != nil {
+		ok := object.Key("AllowedAccessControlTags")
+		if err := awsRestjson1_serializeDocumentAllowedAccessControlTags(v.AllowedAccessControlTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -2002,6 +2009,13 @@ func awsRestjson1_serializeOpDocumentCreateSecurityProfileInput(v *CreateSecurit
 	if v.SecurityProfileName != nil {
 		ok := object.Key("SecurityProfileName")
 		ok.String(*v.SecurityProfileName)
+	}
+
+	if v.TagRestrictedResources != nil {
+		ok := object.Key("TagRestrictedResources")
+		if err := awsRestjson1_serializeDocumentTagRestrictedResourceList(v.TagRestrictedResources, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -12555,6 +12569,13 @@ func awsRestjson1_serializeOpDocumentUpdateSecurityProfileInput(v *UpdateSecurit
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowedAccessControlTags != nil {
+		ok := object.Key("AllowedAccessControlTags")
+		if err := awsRestjson1_serializeDocumentAllowedAccessControlTags(v.AllowedAccessControlTags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -12563,6 +12584,13 @@ func awsRestjson1_serializeOpDocumentUpdateSecurityProfileInput(v *UpdateSecurit
 	if v.Permissions != nil {
 		ok := object.Key("Permissions")
 		if err := awsRestjson1_serializeDocumentPermissionsList(v.Permissions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TagRestrictedResources != nil {
+		ok := object.Key("TagRestrictedResources")
+		if err := awsRestjson1_serializeDocumentTagRestrictedResourceList(v.TagRestrictedResources, ok); err != nil {
 			return err
 		}
 	}
@@ -13405,6 +13433,17 @@ func awsRestjson1_serializeOpDocumentUpdateUserSecurityProfilesInput(v *UpdateUs
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAllowedAccessControlTags(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 
@@ -14602,6 +14641,17 @@ func awsRestjson1_serializeDocumentTagOrConditionList(v [][]types.TagCondition, 
 		if err := awsRestjson1_serializeDocumentTagAndConditionList(v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagRestrictedResourceList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

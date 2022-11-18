@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all principal ARNs associated with the specified portfolio.
+// Lists all PrincipalARNs and corresponding PrincipalTypes associated with the
+// specified portfolio.
 func (c *Client) ListPrincipalsForPortfolio(ctx context.Context, params *ListPrincipalsForPortfolioInput, optFns ...func(*Options)) (*ListPrincipalsForPortfolioOutput, error) {
 	if params == nil {
 		params = &ListPrincipalsForPortfolioInput{}
@@ -60,7 +61,8 @@ type ListPrincipalsForPortfolioOutput struct {
 	// additional results, this value is null.
 	NextPageToken *string
 
-	// The IAM principals (users or roles) associated with the portfolio.
+	// The PrincipalARNs and corresponding PrincipalTypes associated with the
+	// portfolio.
 	Principals []types.Principal
 
 	// Metadata pertaining to the operation's result.

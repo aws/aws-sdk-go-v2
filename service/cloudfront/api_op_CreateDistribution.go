@@ -11,19 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new web distribution. You create a CloudFront distribution to tell
-// CloudFront where you want content to be delivered from, and the details about
-// how to track and manage content delivery. Send a POST request to the /CloudFront
-// API version/distribution/distribution ID resource. When you update a
-// distribution, there are more required fields than when you create a
-// distribution. When you update your distribution by using UpdateDistribution
-// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html),
-// follow the steps included in the documentation to get the current configuration
-// and then make your updates. This helps to make sure that you include all of the
-// required fields. To view a summary, see Required Fields for Create Distribution
-// and Update Distribution
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html)
-// in the Amazon CloudFront Developer Guide.
+// Creates a CloudFront distribution.
 func (c *Client) CreateDistribution(ctx context.Context, params *CreateDistributionInput, optFns ...func(*Options)) (*CreateDistributionOutput, error) {
 	if params == nil {
 		params = &CreateDistributionInput{}

@@ -12561,6 +12561,17 @@ func awsAwsjson11_serializeDocumentDynamoDBTargetList(v []types.DynamoDBTarget, 
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEnableAdditionalMetadata(v []types.JdbcMetadataEntry, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentEnclosedInStringProperties(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -13243,6 +13254,13 @@ func awsAwsjson11_serializeDocumentJdbcTarget(v *types.JdbcTarget, value smithyj
 	if v.ConnectionName != nil {
 		ok := object.Key("ConnectionName")
 		ok.String(*v.ConnectionName)
+	}
+
+	if v.EnableAdditionalMetadata != nil {
+		ok := object.Key("EnableAdditionalMetadata")
+		if err := awsAwsjson11_serializeDocumentEnableAdditionalMetadata(v.EnableAdditionalMetadata, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Exclusions != nil {

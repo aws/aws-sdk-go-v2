@@ -1,0 +1,8 @@
+{
+    "id": "91661ba0-90e1-485a-a949-78d060f74982",
+    "type": "feature",
+    "description": "This release adds support for copying an Amazon Machine Image's tags when copying an AMI.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -5462,6 +5462,11 @@ func awsAwsjson10_deserializeDocumentLambdaFunctionScheduledEventDetails(v **typ
 				sv.Resource = ptr.String(jtv)
 			}
 
+		case "taskCredentials":
+			if err := awsAwsjson10_deserializeDocumentTaskCredentials(&sv.TaskCredentials, value); err != nil {
+				return err
+			}
+
 		case "timeoutInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6485,6 +6490,46 @@ func awsAwsjson10_deserializeDocumentTagList(v *[]types.Tag, value interface{}) 
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentTaskCredentials(v **types.TaskCredentials, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TaskCredentials
+	if *v == nil {
+		sv = &types.TaskCredentials{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentTaskDoesNotExist(v **types.TaskDoesNotExist, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6661,6 +6706,11 @@ func awsAwsjson10_deserializeDocumentTaskScheduledEventDetails(v **types.TaskSch
 					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = ptr.String(jtv)
+			}
+
+		case "taskCredentials":
+			if err := awsAwsjson10_deserializeDocumentTaskCredentials(&sv.TaskCredentials, value); err != nil {
+				return err
 			}
 
 		case "timeoutInSeconds":

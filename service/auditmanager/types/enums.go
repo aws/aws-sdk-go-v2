@@ -207,6 +207,49 @@ func (DelegationStatus) Values() []DelegationStatus {
 	}
 }
 
+type EvidenceFinderBackfillStatus string
+
+// Enum values for EvidenceFinderBackfillStatus
+const (
+	EvidenceFinderBackfillStatusNotStarted EvidenceFinderBackfillStatus = "NOT_STARTED"
+	EvidenceFinderBackfillStatusInProgress EvidenceFinderBackfillStatus = "IN_PROGRESS"
+	EvidenceFinderBackfillStatusCompleted  EvidenceFinderBackfillStatus = "COMPLETED"
+)
+
+// Values returns all known values for EvidenceFinderBackfillStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EvidenceFinderBackfillStatus) Values() []EvidenceFinderBackfillStatus {
+	return []EvidenceFinderBackfillStatus{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+	}
+}
+
+type EvidenceFinderEnablementStatus string
+
+// Enum values for EvidenceFinderEnablementStatus
+const (
+	EvidenceFinderEnablementStatusEnabled           EvidenceFinderEnablementStatus = "ENABLED"
+	EvidenceFinderEnablementStatusDisabled          EvidenceFinderEnablementStatus = "DISABLED"
+	EvidenceFinderEnablementStatusEnableInProgress  EvidenceFinderEnablementStatus = "ENABLE_IN_PROGRESS"
+	EvidenceFinderEnablementStatusDisableInProgress EvidenceFinderEnablementStatus = "DISABLE_IN_PROGRESS"
+)
+
+// Values returns all known values for EvidenceFinderEnablementStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (EvidenceFinderEnablementStatus) Values() []EvidenceFinderEnablementStatus {
+	return []EvidenceFinderEnablementStatus{
+		"ENABLED",
+		"DISABLED",
+		"ENABLE_IN_PROGRESS",
+		"DISABLE_IN_PROGRESS",
+	}
+}
+
 type FrameworkType string
 
 // Enum values for FrameworkType
@@ -292,6 +335,7 @@ const (
 	SettingAttributeSnsTopic                            SettingAttribute = "SNS_TOPIC"
 	SettingAttributeDefaultAssessmentReportsDestination SettingAttribute = "DEFAULT_ASSESSMENT_REPORTS_DESTINATION"
 	SettingAttributeDefaultProcessOwners                SettingAttribute = "DEFAULT_PROCESS_OWNERS"
+	SettingAttributeEvidenceFinderEnablement            SettingAttribute = "EVIDENCE_FINDER_ENABLEMENT"
 )
 
 // Values returns all known values for SettingAttribute. Note that this can be
@@ -304,6 +348,7 @@ func (SettingAttribute) Values() []SettingAttribute {
 		"SNS_TOPIC",
 		"DEFAULT_ASSESSMENT_REPORTS_DESTINATION",
 		"DEFAULT_PROCESS_OWNERS",
+		"EVIDENCE_FINDER_ENABLEMENT",
 	}
 }
 

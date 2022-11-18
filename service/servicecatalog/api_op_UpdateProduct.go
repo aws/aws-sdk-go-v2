@@ -61,6 +61,16 @@ type UpdateProductInput struct {
 	// The tags to remove from the product.
 	RemoveTags []string
 
+	// Specifies connection details for the updated product and syncs the product to
+	// the connection source artifact. This automatically manages the product's
+	// artifacts based on changes to the source. The SourceConnection parameter
+	// consists of the following sub-fields.
+	//
+	// * Type
+	//
+	// * ConnectionParamters
+	SourceConnection *types.SourceConnection
+
 	// The updated support description for the product.
 	SupportDescription *string
 

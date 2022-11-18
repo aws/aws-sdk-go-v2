@@ -40,7 +40,13 @@ type AnalysisFilterAttribute string
 
 // Enum values for AnalysisFilterAttribute
 const (
-	AnalysisFilterAttributeQuicksightUser AnalysisFilterAttribute = "QUICKSIGHT_USER"
+	AnalysisFilterAttributeQuicksightUser                AnalysisFilterAttribute = "QUICKSIGHT_USER"
+	AnalysisFilterAttributeQuicksightViewerOrOwner       AnalysisFilterAttribute = "QUICKSIGHT_VIEWER_OR_OWNER"
+	AnalysisFilterAttributeDirectQuicksightViewerOrOwner AnalysisFilterAttribute = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	AnalysisFilterAttributeQuicksightOwner               AnalysisFilterAttribute = "QUICKSIGHT_OWNER"
+	AnalysisFilterAttributeDirectQuicksightOwner         AnalysisFilterAttribute = "DIRECT_QUICKSIGHT_OWNER"
+	AnalysisFilterAttributeDirectQuicksightSoleOwner     AnalysisFilterAttribute = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	AnalysisFilterAttributeAnalysisName                  AnalysisFilterAttribute = "ANALYSIS_NAME"
 )
 
 // Values returns all known values for AnalysisFilterAttribute. Note that this can
@@ -49,6 +55,12 @@ const (
 func (AnalysisFilterAttribute) Values() []AnalysisFilterAttribute {
 	return []AnalysisFilterAttribute{
 		"QUICKSIGHT_USER",
+		"QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"ANALYSIS_NAME",
 	}
 }
 
@@ -188,7 +200,13 @@ type DashboardFilterAttribute string
 
 // Enum values for DashboardFilterAttribute
 const (
-	DashboardFilterAttributeQuicksightUser DashboardFilterAttribute = "QUICKSIGHT_USER"
+	DashboardFilterAttributeQuicksightUser                DashboardFilterAttribute = "QUICKSIGHT_USER"
+	DashboardFilterAttributeQuicksightViewerOrOwner       DashboardFilterAttribute = "QUICKSIGHT_VIEWER_OR_OWNER"
+	DashboardFilterAttributeDirectQuicksightViewerOrOwner DashboardFilterAttribute = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	DashboardFilterAttributeQuicksightOwner               DashboardFilterAttribute = "QUICKSIGHT_OWNER"
+	DashboardFilterAttributeDirectQuicksightOwner         DashboardFilterAttribute = "DIRECT_QUICKSIGHT_OWNER"
+	DashboardFilterAttributeDirectQuicksightSoleOwner     DashboardFilterAttribute = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	DashboardFilterAttributeDashboardName                 DashboardFilterAttribute = "DASHBOARD_NAME"
 )
 
 // Values returns all known values for DashboardFilterAttribute. Note that this can
@@ -197,6 +215,12 @@ const (
 func (DashboardFilterAttribute) Values() []DashboardFilterAttribute {
 	return []DashboardFilterAttribute{
 		"QUICKSIGHT_USER",
+		"QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"DASHBOARD_NAME",
 	}
 }
 
@@ -215,6 +239,32 @@ func (DashboardUIState) Values() []DashboardUIState {
 	return []DashboardUIState{
 		"EXPANDED",
 		"COLLAPSED",
+	}
+}
+
+type DataSetFilterAttribute string
+
+// Enum values for DataSetFilterAttribute
+const (
+	DataSetFilterAttributeQuicksightViewerOrOwner       DataSetFilterAttribute = "QUICKSIGHT_VIEWER_OR_OWNER"
+	DataSetFilterAttributeQuicksightOwner               DataSetFilterAttribute = "QUICKSIGHT_OWNER"
+	DataSetFilterAttributeDirectQuicksightViewerOrOwner DataSetFilterAttribute = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	DataSetFilterAttributeDirectQuicksightOwner         DataSetFilterAttribute = "DIRECT_QUICKSIGHT_OWNER"
+	DataSetFilterAttributeDirectQuicksightSoleOwner     DataSetFilterAttribute = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	DataSetFilterAttributeDatasetName                   DataSetFilterAttribute = "DATASET_NAME"
+)
+
+// Values returns all known values for DataSetFilterAttribute. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataSetFilterAttribute) Values() []DataSetFilterAttribute {
+	return []DataSetFilterAttribute{
+		"QUICKSIGHT_VIEWER_OR_OWNER",
+		"QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"DATASET_NAME",
 	}
 }
 
@@ -266,6 +316,28 @@ func (DataSourceErrorInfoType) Values() []DataSourceErrorInfoType {
 	}
 }
 
+type DataSourceFilterAttribute string
+
+// Enum values for DataSourceFilterAttribute
+const (
+	DataSourceFilterAttributeDirectQuicksightViewerOrOwner DataSourceFilterAttribute = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	DataSourceFilterAttributeDirectQuicksightOwner         DataSourceFilterAttribute = "DIRECT_QUICKSIGHT_OWNER"
+	DataSourceFilterAttributeDirectQuicksightSoleOwner     DataSourceFilterAttribute = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	DataSourceFilterAttributeDatasourceName                DataSourceFilterAttribute = "DATASOURCE_NAME"
+)
+
+// Values returns all known values for DataSourceFilterAttribute. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataSourceFilterAttribute) Values() []DataSourceFilterAttribute {
+	return []DataSourceFilterAttribute{
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"DATASOURCE_NAME",
+	}
+}
+
 type DataSourceType string
 
 // Enum values for DataSourceType
@@ -295,6 +367,7 @@ const (
 	DataSourceTypeTimestream          DataSourceType = "TIMESTREAM"
 	DataSourceTypeAmazonOpensearch    DataSourceType = "AMAZON_OPENSEARCH"
 	DataSourceTypeExasol              DataSourceType = "EXASOL"
+	DataSourceTypeDatabricks          DataSourceType = "DATABRICKS"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -327,6 +400,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"TIMESTREAM",
 		"AMAZON_OPENSEARCH",
 		"EXASOL",
+		"DATABRICKS",
 	}
 }
 
@@ -433,6 +507,7 @@ type FilterOperator string
 // Enum values for FilterOperator
 const (
 	FilterOperatorStringEquals FilterOperator = "StringEquals"
+	FilterOperatorStringLike   FilterOperator = "StringLike"
 )
 
 // Values returns all known values for FilterOperator. Note that this can be
@@ -441,6 +516,7 @@ const (
 func (FilterOperator) Values() []FilterOperator {
 	return []FilterOperator{
 		"StringEquals",
+		"StringLike",
 	}
 }
 
@@ -448,7 +524,13 @@ type FolderFilterAttribute string
 
 // Enum values for FolderFilterAttribute
 const (
-	FolderFilterAttributeParentFolderArn FolderFilterAttribute = "PARENT_FOLDER_ARN"
+	FolderFilterAttributeParentFolderArn               FolderFilterAttribute = "PARENT_FOLDER_ARN"
+	FolderFilterAttributeDirectQuicksightOwner         FolderFilterAttribute = "DIRECT_QUICKSIGHT_OWNER"
+	FolderFilterAttributeDirectQuicksightSoleOwner     FolderFilterAttribute = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	FolderFilterAttributeDirectQuicksightViewerOrOwner FolderFilterAttribute = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	FolderFilterAttributeQuicksightOwner               FolderFilterAttribute = "QUICKSIGHT_OWNER"
+	FolderFilterAttributeQuicksightViewerOrOwner       FolderFilterAttribute = "QUICKSIGHT_VIEWER_OR_OWNER"
+	FolderFilterAttributeFolderName                    FolderFilterAttribute = "FOLDER_NAME"
 )
 
 // Values returns all known values for FolderFilterAttribute. Note that this can be
@@ -457,6 +539,12 @@ const (
 func (FolderFilterAttribute) Values() []FolderFilterAttribute {
 	return []FolderFilterAttribute{
 		"PARENT_FOLDER_ARN",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"QUICKSIGHT_OWNER",
+		"QUICKSIGHT_VIEWER_OR_OWNER",
+		"FOLDER_NAME",
 	}
 }
 

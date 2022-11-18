@@ -13172,6 +13172,73 @@ func awsRestjson1_deserializeDocumentEvidenceAttributes(v *map[string]string, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEvidenceFinderEnablement(v **types.EvidenceFinderEnablement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EvidenceFinderEnablement
+	if *v == nil {
+		sv = &types.EvidenceFinderEnablement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "backfillStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvidenceFinderBackfillStatus to be of type string, got %T instead", value)
+				}
+				sv.BackfillStatus = types.EvidenceFinderBackfillStatus(jtv)
+			}
+
+		case "enablementStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EvidenceFinderEnablementStatus to be of type string, got %T instead", value)
+				}
+				sv.EnablementStatus = types.EvidenceFinderEnablementStatus(jtv)
+			}
+
+		case "error":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Error = ptr.String(jtv)
+			}
+
+		case "eventDataStoreArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CloudTrailArn to be of type string, got %T instead", value)
+				}
+				sv.EventDataStoreArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEvidenceIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14174,6 +14241,15 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "complianceCheck":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ComplianceCheck = ptr.String(jtv)
+			}
+
 		case "value":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14578,6 +14654,11 @@ func awsRestjson1_deserializeDocumentSettings(v **types.Settings, value interfac
 
 		case "defaultProcessOwners":
 			if err := awsRestjson1_deserializeDocumentRoles(&sv.DefaultProcessOwners, value); err != nil {
+				return err
+			}
+
+		case "evidenceFinderEnablement":
+			if err := awsRestjson1_deserializeDocumentEvidenceFinderEnablement(&sv.EvidenceFinderEnablement, value); err != nil {
 				return err
 			}
 

@@ -21,7 +21,17 @@ import (
 // that contain a shared product. If the portfolio share with the specified account
 // or organization node already exists, this action will have no effect and will
 // not return an error. To update an existing share, you must use the
-// UpdatePortfolioShare API instead.
+// UpdatePortfolioShare API instead. When you associate a principal with portfolio,
+// a potential privilege escalation path may occur when that portfolio is then
+// shared with other accounts. For a user in a recipient account who is not an
+// Service Catalog Admin, but still has the ability to create Principals
+// (Users/Groups/Roles), that user could create a role that matches a principal
+// name association for the portfolio. Although this user may not know which
+// principal names are associated through Service Catalog, they may be able to
+// guess the user. If this potential escalation path is a concern, then Service
+// Catalog recommends using PrincipalType as IAM. With this configuration, the
+// PrincipalARN must already exist in the recipient account before it can be
+// associated.
 func (c *Client) CreatePortfolioShare(ctx context.Context, params *CreatePortfolioShareInput, optFns ...func(*Options)) (*CreatePortfolioShareOutput, error) {
 	if params == nil {
 		params = &CreatePortfolioShareInput{}
@@ -62,6 +72,15 @@ type CreatePortfolioShareInput struct {
 	// PortfolioShareToken, which enables the administrator to monitor the status of
 	// the PortfolioShare creation process.
 	OrganizationNode *types.OrganizationNode
+
+	// Enables or disables Principal sharing when creating the portfolio share. If this
+	// flag is not provided, principal sharing is disabled. When you enable Principal
+	// Name Sharing for a portfolio share, the share recipient account end users with a
+	// principal that matches any of the associated IAM patterns can provision products
+	// from the portfolio. Once shared, the share recipient can view associations of
+	// PrincipalType: IAM_PATTERN on their portfolio. You can create the principals in
+	// the recipient account before or after creating the share.
+	SharePrincipals bool
 
 	// Enables or disables TagOptions  sharing when creating the portfolio share. If
 	// this flag is not provided, TagOptions sharing is disabled.

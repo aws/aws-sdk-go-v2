@@ -10331,7 +10331,7 @@ func awsAwsjson10_deserializeDocumentGlobalSecondaryIndexDescription(v **types.G
 				if err != nil {
 					return err
 				}
-				sv.IndexSizeBytes = i64
+				sv.IndexSizeBytes = ptr.Int64(i64)
 			}
 
 		case "IndexStatus":
@@ -10353,7 +10353,7 @@ func awsAwsjson10_deserializeDocumentGlobalSecondaryIndexDescription(v **types.G
 				if err != nil {
 					return err
 				}
-				sv.ItemCount = i64
+				sv.ItemCount = ptr.Int64(i64)
 			}
 
 		case "KeySchema":
@@ -11206,7 +11206,7 @@ func awsAwsjson10_deserializeDocumentImportTableDescription(v **types.ImportTabl
 				if err != nil {
 					return err
 				}
-				sv.ProcessedSizeBytes = i64
+				sv.ProcessedSizeBytes = ptr.Int64(i64)
 			}
 
 		case "S3BucketSource":
@@ -12271,7 +12271,7 @@ func awsAwsjson10_deserializeDocumentLocalSecondaryIndexDescription(v **types.Lo
 				if err != nil {
 					return err
 				}
-				sv.IndexSizeBytes = i64
+				sv.IndexSizeBytes = ptr.Int64(i64)
 			}
 
 		case "ItemCount":
@@ -12284,7 +12284,7 @@ func awsAwsjson10_deserializeDocumentLocalSecondaryIndexDescription(v **types.Lo
 				if err != nil {
 					return err
 				}
-				sv.ItemCount = i64
+				sv.ItemCount = ptr.Int64(i64)
 			}
 
 		case "KeySchema":
@@ -14246,7 +14246,7 @@ func awsAwsjson10_deserializeDocumentSourceTableDetails(v **types.SourceTableDet
 				if err != nil {
 					return err
 				}
-				sv.TableSizeBytes = i64
+				sv.TableSizeBytes = ptr.Int64(i64)
 			}
 
 		default:
@@ -14832,7 +14832,7 @@ func awsAwsjson10_deserializeDocumentTableDescription(v **types.TableDescription
 				if err != nil {
 					return err
 				}
-				sv.ItemCount = i64
+				sv.ItemCount = ptr.Int64(i64)
 			}
 
 		case "KeySchema":
@@ -14930,7 +14930,7 @@ func awsAwsjson10_deserializeDocumentTableDescription(v **types.TableDescription
 				if err != nil {
 					return err
 				}
-				sv.TableSizeBytes = i64
+				sv.TableSizeBytes = ptr.Int64(i64)
 			}
 
 		case "TableStatus":

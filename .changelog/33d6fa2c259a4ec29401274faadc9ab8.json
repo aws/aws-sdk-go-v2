@@ -1,0 +1,8 @@
+{
+    "id": "33d6fa2c-259a-4ec2-9401-274faadc9ab8",
+    "type": "feature",
+    "description": "This release 1. adds support for Principal Name Sharing with Service Catalog portfolio sharing. 2. Introduces repo sourced products which are created and managed with existing SC APIs. These products are synced to external repos and auto create new product versions based on changes in the repo.",
+    "modules": [
+        "service/servicecatalog"
+    ]
+}

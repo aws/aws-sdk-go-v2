@@ -29,6 +29,7 @@
         "api_op_UnregisterConnector.go",
         "api_op_UntagResource.go",
         "api_op_UpdateConnectorProfile.go",
+        "api_op_UpdateConnectorRegistration.go",
         "api_op_UpdateFlow.go",
         "deserializers.go",
         "doc.go",

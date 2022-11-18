@@ -40,6 +40,10 @@ type UpdateSecurityProfileInput struct {
 	// This member is required.
 	SecurityProfileId *string
 
+	// The list of tags that a security profile uses to restrict access to resources in
+	// Amazon Connect.
+	AllowedAccessControlTags map[string]string
+
 	// The description of the security profile.
 	Description *string
 
@@ -47,6 +51,10 @@ type UpdateSecurityProfileInput struct {
 	// see List of security profile permissions
 	// (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html).
 	Permissions []string
+
+	// The list of resources that a security profile applies tag restrictions to in
+	// Amazon Connect.
+	TagRestrictedResources []string
 
 	noSmithyDocumentSerde
 }

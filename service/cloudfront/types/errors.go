@@ -1664,6 +1664,25 @@ func (e *ResponseHeadersPolicyInUse) ErrorMessage() string {
 func (e *ResponseHeadersPolicyInUse) ErrorCode() string             { return "ResponseHeadersPolicyInUse" }
 func (e *ResponseHeadersPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A continuous deployment policy for this staging distribution already exists.
+type StagingDistributionInUse struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *StagingDistributionInUse) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *StagingDistributionInUse) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *StagingDistributionInUse) ErrorCode() string             { return "StagingDistributionInUse" }
+func (e *StagingDistributionInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The caller reference you attempted to create the streaming distribution with is
 // associated with another distribution
 type StreamingDistributionAlreadyExists struct {

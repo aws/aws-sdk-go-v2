@@ -1,0 +1,8 @@
+{
+    "id": "2150e257-be15-421a-9596-1da8226c833b",
+    "type": "feature",
+    "description": "Added DisableProfiler flag as a new field in ProfilerConfig",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

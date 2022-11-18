@@ -103,6 +103,25 @@ func (CertificateSource) Values() []CertificateSource {
 	}
 }
 
+type ContinuousDeploymentPolicyType string
+
+// Enum values for ContinuousDeploymentPolicyType
+const (
+	ContinuousDeploymentPolicyTypeSingleWeight ContinuousDeploymentPolicyType = "SingleWeight"
+	ContinuousDeploymentPolicyTypeSingleHeader ContinuousDeploymentPolicyType = "SingleHeader"
+)
+
+// Values returns all known values for ContinuousDeploymentPolicyType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ContinuousDeploymentPolicyType) Values() []ContinuousDeploymentPolicyType {
+	return []ContinuousDeploymentPolicyType{
+		"SingleWeight",
+		"SingleHeader",
+	}
+}
+
 type EventType string
 
 // Enum values for EventType

@@ -184,6 +184,28 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You don't have this feature activated for your account. To fix this issue,
+// contact Amazon Web Services support.
+type InvalidRequestException struct {
+	Message *string
+
+	RequestId *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidRequestException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidRequestException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // A limit is exceeded.
 type LimitExceededException struct {
 	Message *string

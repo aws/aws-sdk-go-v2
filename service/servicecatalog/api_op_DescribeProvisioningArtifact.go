@@ -59,8 +59,7 @@ type DescribeProvisioningArtifactInput struct {
 
 type DescribeProvisioningArtifactOutput struct {
 
-	// The URL of the CloudFormation template in Amazon S3, Amazon Web Services
-	// CodeCommit, or GitHub in JSON format.
+	// The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.
 	Info map[string]string
 
 	// Information about the provisioning artifact.

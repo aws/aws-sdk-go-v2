@@ -54637,6 +54637,15 @@ func awsAwsjson11_deserializeDocumentProfilerConfig(v **types.ProfilerConfig, va
 
 	for key, value := range shape {
 		switch key {
+		case "DisableProfiler":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected DisableProfiler to be of type *bool, got %T instead", value)
+				}
+				sv.DisableProfiler = jtv
+			}
+
 		case "ProfilingIntervalInMilliseconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)

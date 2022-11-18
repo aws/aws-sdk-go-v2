@@ -4793,7 +4793,7 @@ type Image struct {
 	Platform PlatformValues
 
 	// The platform details associated with the billing code of the AMI. For more
-	// information, see Understanding AMI billing
+	// information, see Understand AMI billing information
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html) in
 	// the Amazon Elastic Compute Cloud User Guide.
 	PlatformDetails *string
@@ -11970,8 +11970,8 @@ type S3ObjectTag struct {
 type S3Storage struct {
 
 	// The access key ID of the owner of the bucket. Before you specify a value for
-	// your access key ID, review and follow the guidance in Best Practices for
-	// Managing Amazon Web Services Access Keys
+	// your access key ID, review and follow the guidance in Best practices for
+	// managing Amazon Web Services access keys
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html).
 	AWSAccessKeyId *string
 

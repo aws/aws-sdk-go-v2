@@ -11,84 +11,30 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration for a web distribution. When you update a
-// distribution, there are more required fields than when you create a
-// distribution. When you update your distribution by using this API action, follow
-// the steps here to get the current configuration and then make your updates, to
-// make sure that you include all of the required fields. To view a summary, see
-// Required Fields for Create Distribution and Update Distribution
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-overview-required-fields.html)
-// in the Amazon CloudFront Developer Guide. The update process includes getting
-// the current distribution configuration, updating the XML document that is
-// returned to make your changes, and then submitting an UpdateDistribution request
-// to make the updates. For information about updating a distribution using the
-// CloudFront console instead, see Creating a Distribution
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-creating-console.html)
-// in the Amazon CloudFront Developer Guide. To update a web distribution using the
-// CloudFront API
+// Updates the configuration for a CloudFront distribution. The update process
+// includes getting the current distribution configuration, updating it to make
+// your changes, and then submitting an UpdateDistribution request to make the
+// updates. To update a web distribution using the CloudFront API
 //
-// * Submit a GetDistributionConfig
-// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistributionConfig.html)
-// request to get the current configuration and an Etag header
+// * Use
+// GetDistributionConfig to get the current configuration, including the version
+// identifier (ETag).
 //
-// for the
-// distribution. If you update the distribution again, you must get a new Etag
-// header.
+// * Update the distribution configuration that was returned in
+// the response. Note the following important requirements and restrictions:
 //
-// * Update the XML document that was returned in the response to your
-// GetDistributionConfig request to include your changes. When you edit the XML
-// file, be aware of the following:
+// * You
+// must rename the ETag field to IfMatch, leaving the value unchanged. (Set the
+// value of IfMatch to the value of ETag, then remove the ETag field.)
 //
-// * You must strip out the ETag parameter that
-// is returned.
+// * You can’t
+// change the value of CallerReference.
 //
-// * Additional fields are required when you update a distribution.
-// There may be fields included in the XML file for features that you haven't
-// configured for your distribution. This is expected and required to successfully
-// update the distribution.
-//
-// * You can't change the value of CallerReference. If
-// you try to change this value, CloudFront returns an
-//
-// IllegalUpdate error.
-//
-// * The
-// new configuration replaces the existing configuration; the values that you
-// specify in an UpdateDistribution request are not merged into your existing
-// configuration. When you add, delete, or replace values in an element that allows
-// multiple values (for example, CNAME), you must specify all of the values that
-// you want to appear in the updated distribution. In addition,
-//
-// you must update
-// the corresponding Quantity element.
-//
-// * Submit an UpdateDistribution request to
-// update the configuration for your distribution:
-//
-// * In the request body, include
-// the XML document that you updated in Step 2. The request body must include
-// an
-//
-// XML document with a DistributionConfig element.
-//
-// * Set the value of the HTTP
-// If-Match header to the value of the ETag header that CloudFront returned
-//
-// when
-// you submitted the GetDistributionConfig request in Step 1.
-//
-// * Review the
-// response to the UpdateDistribution request to confirm that the configuration
-// was
-//
-// successfully updated.
-//
-// * Optional: Submit a GetDistribution
-// (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html)
-// request to confirm that your changes have propagated.
-//
-// When propagation is
-// complete, the value of Status is Deployed.
+// * Submit an UpdateDistribution request,
+// providing the distribution configuration. The new configuration replaces the
+// existing configuration. The values that you specify in an UpdateDistribution
+// request are not merged into your existing configuration. Make sure to include
+// all fields: the ones that you modified and also the ones that you didn’t.
 func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistributionInput, optFns ...func(*Options)) (*UpdateDistributionOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionInput{}

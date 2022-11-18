@@ -77,7 +77,7 @@ type DescribeStateMachineForExecutionOutput struct {
 	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration
 
-	// Selects whether AWS X-Ray tracing is enabled.
+	// Selects whether X-Ray tracing is enabled.
 	TracingConfiguration *types.TracingConfiguration
 
 	// Metadata pertaining to the operation's result.

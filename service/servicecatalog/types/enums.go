@@ -138,6 +138,24 @@ func (EvaluationType) Values() []EvaluationType {
 	}
 }
 
+type LastSyncStatus string
+
+// Enum values for LastSyncStatus
+const (
+	LastSyncStatusSucceeded LastSyncStatus = "SUCCEEDED"
+	LastSyncStatusFailed    LastSyncStatus = "FAILED"
+)
+
+// Values returns all known values for LastSyncStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LastSyncStatus) Values() []LastSyncStatus {
+	return []LastSyncStatus{
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
 type OrganizationNodeType string
 
 // Enum values for OrganizationNodeType
@@ -182,7 +200,8 @@ type PrincipalType string
 
 // Enum values for PrincipalType
 const (
-	PrincipalTypeIam PrincipalType = "IAM"
+	PrincipalTypeIam        PrincipalType = "IAM"
+	PrincipalTypeIamPattern PrincipalType = "IAM_PATTERN"
 )
 
 // Values returns all known values for PrincipalType. Note that this can be
@@ -191,6 +210,7 @@ const (
 func (PrincipalType) Values() []PrincipalType {
 	return []PrincipalType{
 		"IAM",
+		"IAM_PATTERN",
 	}
 }
 
@@ -618,6 +638,22 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type SourceType string
+
+// Enum values for SourceType
+const (
+	SourceTypeCodestar SourceType = "CODESTAR"
+)
+
+// Values returns all known values for SourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SourceType) Values() []SourceType {
+	return []SourceType{
+		"CODESTAR",
 	}
 }
 

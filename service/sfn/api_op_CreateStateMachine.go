@@ -18,8 +18,8 @@ import (
 // machines are specified using a JSON-based, structured language. For more
 // information, see Amazon States Language
 // (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)
-// in the AWS Step Functions User Guide. This operation is eventually consistent.
-// The results are best effort and may not reflect very recent updates and changes.
+// in the Step Functions User Guide. This operation is eventually consistent. The
+// results are best effort and may not reflect very recent updates and changes.
 // CreateStateMachine is an idempotent API. Subsequent requests won’t create a
 // duplicate resource if it was already created. CreateStateMachine's idempotency
 // check is based on the state machine name, definition, type, LoggingConfiguration
@@ -80,20 +80,20 @@ type CreateStateMachineInput struct {
 	// Defines what execution history events are logged and where they are logged. By
 	// default, the level is set to OFF. For more information see Log Levels
 	// (https://docs.aws.amazon.com/step-functions/latest/dg/cloudwatch-log-level.html)
-	// in the AWS Step Functions User Guide.
+	// in the Step Functions User Guide.
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// Tags to be added when creating a state machine. An array of key-value pairs. For
 	// more information, see Using Cost Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-	// in the AWS Billing and Cost Management User Guide, and Controlling Access Using
-	// IAM Tags
+	// in the Amazon Web Services Billing and Cost Management User Guide, and
+	// Controlling Access Using IAM Tags
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html). Tags
 	// may only contain Unicode letters, digits, white space, or these symbols: _ . : /
 	// = + - @.
 	Tags []types.Tag
 
-	// Selects whether AWS X-Ray tracing is enabled.
+	// Selects whether X-Ray tracing is enabled.
 	TracingConfiguration *types.TracingConfiguration
 
 	// Determines whether a Standard or Express state machine is created. The default

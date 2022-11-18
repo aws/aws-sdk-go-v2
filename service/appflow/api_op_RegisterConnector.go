@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a new connector with your Amazon Web Services account. Before you can
-// register the connector, you must deploy lambda in your account.
+// Registers a new custom connector with your Amazon Web Services account. Before
+// you can register the connector, you must deploy the associated AWS lambda
+// function in your account.
 func (c *Client) RegisterConnector(ctx context.Context, params *RegisterConnectorInput, optFns ...func(*Options)) (*RegisterConnectorOutput, error) {
 	if params == nil {
 		params = &RegisterConnectorInput{}

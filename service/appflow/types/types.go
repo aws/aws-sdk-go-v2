@@ -2053,8 +2053,8 @@ type SalesforceSourceProperties struct {
 	// REST_SYNC Amazon AppFlow uses only Salesforce REST API. By choosing this option,
 	// you ensure that your flow writes consistent output, but you decrease performance
 	// for large data transfers that are better suited for Bulk API 2.0. In some cases,
-	// if your flow attempts to transfer a vary large set of data, it might fail with a
-	// timed out error.
+	// if your flow attempts to transfer a vary large set of data, it might fail wituh
+	// a timed out error.
 	DataTransferApi SalesforceDataTransferApi
 
 	// The flag that enables dynamic fetching of new (recently added) fields in the

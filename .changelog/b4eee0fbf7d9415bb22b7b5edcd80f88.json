@@ -1,0 +1,8 @@
+{
+    "id": "b4eee0fb-f7d9-415b-b22b-7b5edcd80f88",
+    "type": "feature",
+    "description": "This release adds support for using Step Functions service integrations to invoke any cross-account AWS resource, even if that service doesn't support resource-based policies or cross-account calls. See https://docs.aws.amazon.com/step-functions/latest/dg/concepts-access-cross-acct-resources.html",
+    "modules": [
+        "service/sfn"
+    ]
+}

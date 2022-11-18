@@ -11,11 +11,12 @@ import (
 	"time"
 )
 
-// Starts a state machine execution. StartExecution is idempotent. If
-// StartExecution is called with the same name and input as a running execution,
-// the call will succeed and return the same response as the original request. If
-// the execution is closed or if the input is different, it will return a 400
-// ExecutionAlreadyExists error. Names can be reused after 90 days.
+// Starts a state machine execution. StartExecution is idempotent for STANDARD
+// workflows. For a STANDARD workflow, if StartExecution is called with the same
+// name and input as a running execution, the call will succeed and return the same
+// response as the original request. If the execution is closed or if the input is
+// different, it will return a 400 ExecutionAlreadyExists error. Names can be
+// reused after 90 days. StartExecution is not idempotent for EXPRESS workflows.
 func (c *Client) StartExecution(ctx context.Context, params *StartExecutionInput, optFns ...func(*Options)) (*StartExecutionOutput, error) {
 	if params == nil {
 		params = &StartExecutionInput{}
@@ -45,11 +46,11 @@ type StartExecutionInput struct {
 	// encoding.
 	Input *string
 
-	// The name of the execution. This name must be unique for your AWS account,
-	// region, and state machine for 90 days. For more information, see  Limits Related
-	// to State Machine Executions
+	// The name of the execution. This name must be unique for your Amazon Web Services
+	// account, region, and state machine for 90 days. For more information, see
+	// Limits Related to State Machine Executions
 	// (https://docs.aws.amazon.com/step-functions/latest/dg/limits.html#service-limits-state-machine-executions)
-	// in the AWS Step Functions Developer Guide. A name must not contain:
+	// in the Step Functions Developer Guide. A name must not contain:
 	//
 	// * white
 	// space
@@ -68,7 +69,7 @@ type StartExecutionInput struct {
 	// - and _.
 	Name *string
 
-	// Passes the AWS X-Ray trace header. The trace header can also be passed in the
+	// Passes the X-Ray trace header. The trace header can also be passed in the
 	// request payload.
 	TraceHeader *string
 

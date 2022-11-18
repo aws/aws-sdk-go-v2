@@ -52,7 +52,7 @@ type UpdateStateMachineInput struct {
 	// The Amazon Resource Name (ARN) of the IAM role of the state machine.
 	RoleArn *string
 
-	// Selects whether AWS X-Ray tracing is enabled.
+	// Selects whether X-Ray tracing is enabled.
 	TracingConfiguration *types.TracingConfiguration
 
 	noSmithyDocumentSerde

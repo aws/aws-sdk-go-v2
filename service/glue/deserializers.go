@@ -31005,6 +31005,42 @@ func awsAwsjson11_deserializeDocumentEdgeList(v *[]types.Edge, value interface{}
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEnableAdditionalMetadata(v *[]types.JdbcMetadataEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.JdbcMetadataEntry
+	if *v == nil {
+		cv = []types.JdbcMetadataEntry{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.JdbcMetadataEntry
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected JdbcMetadataEntry to be of type string, got %T instead", value)
+			}
+			col = types.JdbcMetadataEntry(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEnclosedInStringProperties(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -33627,6 +33663,11 @@ func awsAwsjson11_deserializeDocumentJdbcTarget(v **types.JdbcTarget, value inte
 					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
 				}
 				sv.ConnectionName = ptr.String(jtv)
+			}
+
+		case "EnableAdditionalMetadata":
+			if err := awsAwsjson11_deserializeDocumentEnableAdditionalMetadata(&sv.EnableAdditionalMetadata, value); err != nil {
+				return err
 			}
 
 		case "Exclusions":

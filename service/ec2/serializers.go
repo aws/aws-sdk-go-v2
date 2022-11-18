@@ -45382,6 +45382,11 @@ func awsEc2query_serializeOpDocumentCopyImageInput(v *CopyImageInput, value quer
 		objectKey.String(*v.ClientToken)
 	}
 
+	if v.CopyImageTags != nil {
+		objectKey := object.Key("CopyImageTags")
+		objectKey.Boolean(*v.CopyImageTags)
+	}
+
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)

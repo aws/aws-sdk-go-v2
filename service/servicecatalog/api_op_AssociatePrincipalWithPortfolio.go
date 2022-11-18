@@ -11,7 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the specified principal ARN with the specified portfolio.
+// Associates the specified principal ARN with the specified portfolio. If you
+// share the portfolio with principal name sharing enabled, the PrincipalARN
+// association is included in the share. The PortfolioID, PrincipalARN, and
+// PrincipalType parameters are required. You can associate a maximum of 10
+// Principals with a portfolio using PrincipalType as IAM_PATTERN When you
+// associate a principal with portfolio, a potential privilege escalation path may
+// occur when that portfolio is then shared with other accounts. For a user in a
+// recipient account who is not an Service Catalog Admin, but still has the ability
+// to create Principals (Users/Groups/Roles), that user could create a role that
+// matches a principal name association for the portfolio. Although this user may
+// not know which principal names are associated through Service Catalog, they may
+// be able to guess the user. If this potential escalation path is a concern, then
+// Service Catalog recommends using PrincipalType as IAM. With this configuration,
+// the PrincipalARN must already exist in the recipient account before it can be
+// associated.
 func (c *Client) AssociatePrincipalWithPortfolio(ctx context.Context, params *AssociatePrincipalWithPortfolioInput, optFns ...func(*Options)) (*AssociatePrincipalWithPortfolioOutput, error) {
 	if params == nil {
 		params = &AssociatePrincipalWithPortfolioInput{}
@@ -34,12 +48,17 @@ type AssociatePrincipalWithPortfolioInput struct {
 	// This member is required.
 	PortfolioId *string
 
-	// The ARN of the principal (IAM user, role, or group).
+	// The ARN of the principal (IAM user, role, or group). This field allows an ARN
+	// with no accountID if PrincipalType is IAM_PATTERN. You can associate multiple
+	// IAM patterns even if the account has no principal with that name. This is useful
+	// in Principal Name Sharing if you want to share a principal without creating it
+	// in the account that owns the portfolio.
 	//
 	// This member is required.
 	PrincipalARN *string
 
-	// The principal type. The supported value is IAM.
+	// The principal type. The supported value is IAM if you use a fully defined ARN,
+	// or IAM_PATTERN if you use an ARN with no accountID.
 	//
 	// This member is required.
 	PrincipalType types.PrincipalType

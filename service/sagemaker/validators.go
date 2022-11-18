@@ -8942,21 +8942,6 @@ func validateProductionVariantServerlessConfig(v *types.ProductionVariantServerl
 	}
 }
 
-func validateProfilerConfig(v *types.ProfilerConfig) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ProfilerConfig"}
-	if v.S3OutputPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateProfilerRuleConfiguration(v *types.ProfilerRuleConfiguration) error {
 	if v == nil {
 		return nil
@@ -11407,11 +11392,6 @@ func validateOpCreateTrainingJobInput(v *CreateTrainingJobInput) error {
 	if v.TensorBoardOutputConfig != nil {
 		if err := validateTensorBoardOutputConfig(v.TensorBoardOutputConfig); err != nil {
 			invalidParams.AddNested("TensorBoardOutputConfig", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ProfilerConfig != nil {
-		if err := validateProfilerConfig(v.ProfilerConfig); err != nil {
-			invalidParams.AddNested("ProfilerConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ProfilerRuleConfigurations != nil {

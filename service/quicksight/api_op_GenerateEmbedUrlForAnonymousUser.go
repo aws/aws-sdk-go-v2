@@ -108,6 +108,11 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 
 type GenerateEmbedUrlForAnonymousUserOutput struct {
 
+	// The Amazon Resource Name (ARN) to use for the anonymous Amazon QuickSight user.
+	//
+	// This member is required.
+	AnonymousUserArn *string
+
 	// The embed URL for the dashboard.
 	//
 	// This member is required.

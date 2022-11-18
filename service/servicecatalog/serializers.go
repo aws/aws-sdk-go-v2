@@ -4829,6 +4829,33 @@ func awsAwsjson11_serializeDocumentAddTags(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCodeStarParameters(v *types.CodeStarParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ArtifactPath != nil {
+		ok := object.Key("ArtifactPath")
+		ok.String(*v.ArtifactPath)
+	}
+
+	if v.Branch != nil {
+		ok := object.Key("Branch")
+		ok.String(*v.Branch)
+	}
+
+	if v.ConnectionArn != nil {
+		ok := object.Key("ConnectionArn")
+		ok.String(*v.ConnectionArn)
+	}
+
+	if v.Repository != nil {
+		ok := object.Key("Repository")
+		ok.String(*v.Repository)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCopyOptions(v []types.CopyOption, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5169,6 +5196,39 @@ func awsAwsjson11_serializeDocumentServiceActionDefinitionMap(v map[string]strin
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSourceConnection(v *types.SourceConnection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectionParameters != nil {
+		ok := object.Key("ConnectionParameters")
+		if err := awsAwsjson11_serializeDocumentSourceConnectionParameters(v.ConnectionParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSourceConnectionParameters(v *types.SourceConnectionParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CodeStar != nil {
+		ok := object.Key("CodeStar")
+		if err := awsAwsjson11_serializeDocumentCodeStarParameters(v.CodeStar, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5671,6 +5731,11 @@ func awsAwsjson11_serializeOpDocumentCreatePortfolioShareInput(v *CreatePortfoli
 		ok.String(*v.PortfolioId)
 	}
 
+	if v.SharePrincipals {
+		ok := object.Key("SharePrincipals")
+		ok.Boolean(v.SharePrincipals)
+	}
+
 	if v.ShareTagOptions {
 		ok := object.Key("ShareTagOptions")
 		ok.Boolean(v.ShareTagOptions)
@@ -5721,6 +5786,13 @@ func awsAwsjson11_serializeOpDocumentCreateProductInput(v *CreateProductInput, v
 	if v.ProvisioningArtifactParameters != nil {
 		ok := object.Key("ProvisioningArtifactParameters")
 		if err := awsAwsjson11_serializeDocumentProvisioningArtifactProperties(v.ProvisioningArtifactParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceConnection != nil {
+		ok := object.Key("SourceConnection")
+		if err := awsAwsjson11_serializeDocumentSourceConnection(v.SourceConnection, ok); err != nil {
 			return err
 		}
 	}
@@ -6459,6 +6531,11 @@ func awsAwsjson11_serializeOpDocumentDisassociatePrincipalFromPortfolioInput(v *
 	if v.PrincipalARN != nil {
 		ok := object.Key("PrincipalARN")
 		ok.String(*v.PrincipalARN)
+	}
+
+	if len(v.PrincipalType) > 0 {
+		ok := object.Key("PrincipalType")
+		ok.String(string(v.PrincipalType))
 	}
 
 	return nil
@@ -7576,6 +7653,11 @@ func awsAwsjson11_serializeOpDocumentUpdatePortfolioShareInput(v *UpdatePortfoli
 		ok.String(*v.PortfolioId)
 	}
 
+	if v.SharePrincipals != nil {
+		ok := object.Key("SharePrincipals")
+		ok.Boolean(*v.SharePrincipals)
+	}
+
 	if v.ShareTagOptions != nil {
 		ok := object.Key("ShareTagOptions")
 		ok.Boolean(*v.ShareTagOptions)
@@ -7628,6 +7710,13 @@ func awsAwsjson11_serializeOpDocumentUpdateProductInput(v *UpdateProductInput, v
 	if v.RemoveTags != nil {
 		ok := object.Key("RemoveTags")
 		if err := awsAwsjson11_serializeDocumentTagKeys(v.RemoveTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceConnection != nil {
+		ok := object.Key("SourceConnection")
+		if err := awsAwsjson11_serializeDocumentSourceConnection(v.SourceConnection, ok); err != nil {
 			return err
 		}
 	}

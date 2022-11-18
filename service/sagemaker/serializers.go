@@ -20689,6 +20689,11 @@ func awsAwsjson11_serializeDocumentProfilerConfig(v *types.ProfilerConfig, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.DisableProfiler {
+		ok := object.Key("DisableProfiler")
+		ok.Boolean(v.DisableProfiler)
+	}
+
 	if v.ProfilingIntervalInMilliseconds != nil {
 		ok := object.Key("ProfilingIntervalInMilliseconds")
 		ok.Long(*v.ProfilingIntervalInMilliseconds)

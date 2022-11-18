@@ -67,12 +67,11 @@ type CreateProvisioningArtifactInput struct {
 type CreateProvisioningArtifactOutput struct {
 
 	// Specify the template source with one of the following options, but not both.
-	// Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ]. The URL of the
-	// CloudFormation template in Amazon S3, Amazon Web Services CodeCommit, or GitHub
-	// in JSON format. LoadTemplateFromURL Use the URL of the CloudFormation template
-	// in Amazon S3, Amazon Web Services CodeCommit, or GitHub in JSON format.
-	// ImportFromPhysicalId Use the physical id of the resource that contains the
-	// template; currently supports CloudFormation stack ARN.
+	// Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ]. Use the URL of the
+	// CloudFormation template in Amazon S3 or GitHub in JSON format.
+	// LoadTemplateFromURL Use the URL of the CloudFormation template in Amazon S3 or
+	// GitHub in JSON format. ImportFromPhysicalId Use the physical id of the resource
+	// that contains the template; currently supports CloudFormation stack ARN.
 	Info map[string]string
 
 	// Information about the provisioning artifact.

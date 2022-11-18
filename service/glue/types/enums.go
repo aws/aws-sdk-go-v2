@@ -794,6 +794,24 @@ func (JDBCDataType) Values() []JDBCDataType {
 	}
 }
 
+type JdbcMetadataEntry string
+
+// Enum values for JdbcMetadataEntry
+const (
+	JdbcMetadataEntryComments JdbcMetadataEntry = "COMMENTS"
+	JdbcMetadataEntryRawtypes JdbcMetadataEntry = "RAWTYPES"
+)
+
+// Values returns all known values for JdbcMetadataEntry. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JdbcMetadataEntry) Values() []JdbcMetadataEntry {
+	return []JdbcMetadataEntry{
+		"COMMENTS",
+		"RAWTYPES",
+	}
+}
+
 type JobBookmarksEncryptionMode string
 
 // Enum values for JobBookmarksEncryptionMode

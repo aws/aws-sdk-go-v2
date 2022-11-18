@@ -76,7 +76,7 @@ type DescribeStateMachineOutput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role used when creating this state
 	// machine. (The IAM role maintains security by granting Step Functions access to
-	// AWS resources.)
+	// Amazon Web Services resources.)
 	//
 	// This member is required.
 	RoleArn *string
@@ -97,7 +97,7 @@ type DescribeStateMachineOutput struct {
 	// The current status of the state machine.
 	Status types.StateMachineStatus
 
-	// Selects whether AWS X-Ray tracing is enabled.
+	// Selects whether X-Ray tracing is enabled.
 	TracingConfiguration *types.TracingConfiguration
 
 	// Metadata pertaining to the operation's result.

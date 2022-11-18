@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use the DescribeAccountSubscription operation to receive a description of a
+// Use the DescribeAccountSubscription operation to receive a description of an
 // Amazon QuickSight account's subscription. A successful API call returns an
 // AccountInfo object that includes an account's name, subscription status,
 // authentication type, edition, and notification email address.

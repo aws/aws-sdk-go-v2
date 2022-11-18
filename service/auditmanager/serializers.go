@@ -819,6 +819,11 @@ func awsRestjson1_serializeOpDocumentCreateAssessmentReportInput(v *CreateAssess
 		ok.String(*v.Name)
 	}
 
+	if v.QueryStatement != nil {
+		ok := object.Key("queryStatement")
+		ok.String(*v.QueryStatement)
+	}
+
 	return nil
 }
 
@@ -4335,6 +4340,11 @@ func awsRestjson1_serializeOpDocumentUpdateSettingsInput(v *UpdateSettingsInput,
 		if err := awsRestjson1_serializeDocumentRoles(v.DefaultProcessOwners, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.EvidenceFinderEnabled != nil {
+		ok := object.Key("evidenceFinderEnabled")
+		ok.Boolean(*v.EvidenceFinderEnabled)
 	}
 
 	if v.KmsKey != nil {

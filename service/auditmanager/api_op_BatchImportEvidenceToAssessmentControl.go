@@ -12,7 +12,28 @@ import (
 )
 
 // Uploads one or more pieces of evidence to a control in an Audit Manager
-// assessment.
+// assessment. You can upload manual evidence from any Amazon Simple Storage
+// Service (Amazon S3) bucket by specifying the S3 URI of the evidence. You must
+// upload manual evidence to your S3 bucket before you can upload it to your
+// assessment. For instructions, see CreateBucket
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html) and
+// PutObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html)
+// in the Amazon Simple Storage Service API Reference. The following restrictions
+// apply to this action:
+//
+// * Maximum size of an individual evidence file: 100 MB
+//
+// *
+// Number of daily manual evidence uploads per control: 100
+//
+// * Supported file
+// formats: See Supported file types for manual evidence
+// (https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files)
+// in the Audit Manager User Guide
+//
+// For more information about Audit Manager
+// service restrictions, see Quotas and restrictions for Audit Manager
+// (https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html).
 func (c *Client) BatchImportEvidenceToAssessmentControl(ctx context.Context, params *BatchImportEvidenceToAssessmentControlInput, optFns ...func(*Options)) (*BatchImportEvidenceToAssessmentControlOutput, error) {
 	if params == nil {
 		params = &BatchImportEvidenceToAssessmentControlInput{}

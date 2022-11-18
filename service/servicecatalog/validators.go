@@ -1659,13 +1659,22 @@ func validateAddTags(v []types.Tag) error {
 	}
 }
 
-func validateProvisioningArtifactProperties(v *types.ProvisioningArtifactProperties) error {
+func validateCodeStarParameters(v *types.CodeStarParameters) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ProvisioningArtifactProperties"}
-	if v.Info == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Info"))
+	invalidParams := smithy.InvalidParamsError{Context: "CodeStarParameters"}
+	if v.ConnectionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionArn"))
+	}
+	if v.Repository == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Repository"))
+	}
+	if v.Branch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Branch"))
+	}
+	if v.ArtifactPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArtifactPath"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1703,6 +1712,42 @@ func validateServiceActionAssociations(v []types.ServiceActionAssociation) error
 	for i := range v {
 		if err := validateServiceActionAssociation(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceConnection(v *types.SourceConnection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceConnection"}
+	if v.ConnectionParameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionParameters"))
+	} else if v.ConnectionParameters != nil {
+		if err := validateSourceConnectionParameters(v.ConnectionParameters); err != nil {
+			invalidParams.AddNested("ConnectionParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceConnectionParameters(v *types.SourceConnectionParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceConnectionParameters"}
+	if v.CodeStar != nil {
+		if err := validateCodeStarParameters(v.CodeStar); err != nil {
+			invalidParams.AddNested("CodeStar", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2001,15 +2046,13 @@ func validateOpCreateProductInput(v *CreateProductInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ProvisioningArtifactParameters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProvisioningArtifactParameters"))
-	} else if v.ProvisioningArtifactParameters != nil {
-		if err := validateProvisioningArtifactProperties(v.ProvisioningArtifactParameters); err != nil {
-			invalidParams.AddNested("ProvisioningArtifactParameters", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.IdempotencyToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
+	}
+	if v.SourceConnection != nil {
+		if err := validateSourceConnection(v.SourceConnection); err != nil {
+			invalidParams.AddNested("SourceConnection", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2063,10 +2106,6 @@ func validateOpCreateProvisioningArtifactInput(v *CreateProvisioningArtifactInpu
 	}
 	if v.Parameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
-	} else if v.Parameters != nil {
-		if err := validateProvisioningArtifactProperties(v.Parameters); err != nil {
-			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
-		}
 	}
 	if v.IdempotencyToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
@@ -2873,6 +2912,11 @@ func validateOpUpdateProductInput(v *UpdateProductInput) error {
 	if v.AddTags != nil {
 		if err := validateAddTags(v.AddTags); err != nil {
 			invalidParams.AddNested("AddTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceConnection != nil {
+		if err := validateSourceConnection(v.SourceConnection); err != nil {
+			invalidParams.AddNested("SourceConnection", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

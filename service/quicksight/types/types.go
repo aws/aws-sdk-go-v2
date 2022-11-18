@@ -84,6 +84,12 @@ type AccountSettings struct {
 	// (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html).
 	PublicSharingEnabled bool
 
+	// A boolean value that determines whether or not an Amazon QuickSight account can
+	// be deleted. A True value doesn't allow the account to be deleted and results in
+	// an error message if a user tries to make a DeleteAccountSubsctiption request. A
+	// False value will allow the ccount to be deleted.
+	TerminationProtectionEnabled bool
+
 	noSmithyDocumentSerde
 }
 
@@ -183,11 +189,47 @@ type AnalysisError struct {
 type AnalysisSearchFilter struct {
 
 	// The name of the value that you want to use as a filter, for example "Name":
-	// "QUICKSIGHT_USER".
+	// "QUICKSIGHT_OWNER". Valid values are defined as follows:
+	//
+	// *
+	// QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any analyses
+	// with that ARN listed as one of the analysis' owners or viewers are returned.
+	// Implicit permissions from folders or groups are considered.
+	//
+	// * QUICKSIGHT_OWNER:
+	// Provide an ARN of a user or group, and any analyses with that ARN listed as one
+	// of the owners of the analyses are returned. Implicit permissions from folders or
+	// groups are considered.
+	//
+	// * DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user
+	// or group, and any analyses with that ARN listed as the only owner of the
+	// analysis are returned. Implicit permissions from folders or groups are not
+	// considered.
+	//
+	// * DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and
+	// any analyses with that ARN listed as one of the owners of the analyses are
+	// returned. Implicit permissions from folders or groups are not considered.
+	//
+	// *
+	// DIRECT_QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
+	// analyses with that ARN listed as one of the owners or viewers of the analyses
+	// are returned. Implicit permissions from folders or groups are not considered.
+	//
+	// *
+	// ANALYSIS_NAME: Any analyses whose names have a substring match to this value
+	// will be returned.
 	Name AnalysisFilterAttribute
 
 	// The comparison operator that you want to use as a filter, for example
-	// "Operator": "StringEquals".
+	// "Operator": "StringEquals". Valid values are "StringEquals" and "StringLike". If
+	// you set the operator value to "StringEquals", you need to provide an ownership
+	// related filter in the "NAME" field and the arn of the user or group whose
+	// folders you want to search in the "Value" field. For example,
+	// "Name":"DIRECT_QUICKSIGHT_OWNER", "Operator": "StringEquals", "Value":
+	// "arn:aws:quicksight:us-east-1:1:user/default/UserName1". If you set the value to
+	// "StringLike", you need to provide the name of the folders you are searching for.
+	// For example, "Name":"ANALYSIS_NAME", "Operator": "StringLike", "Value": "Test".
+	// The "StringLike" operator only supports the NAME value ANALYSIS_NAME.
 	Operator FilterOperator
 
 	// The value of the named item, in this case QUICKSIGHT_USER, that you want to use
@@ -289,11 +331,38 @@ type AnonymousUserEmbeddingExperienceConfiguration struct {
 	// The type of embedding experience. In this case, Amazon QuickSight visuals.
 	DashboardVisual *AnonymousUserDashboardVisualEmbeddingConfiguration
 
+	// The Q search bar that you want to use for anonymous user embedding.
+	QSearchBar *AnonymousUserQSearchBarEmbeddingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The settings that you want to use with the Q search bar.
+type AnonymousUserQSearchBarEmbeddingConfiguration struct {
+
+	// The QuickSight Q topic ID of the topic that you want the anonymous user to see
+	// first. This ID is included in the output URL. When the URL in response is
+	// accessed, Amazon QuickSight renders the Q search bar with this topic
+	// pre-selected. The Amazon Resource Name (ARN) of this Q topic must be included in
+	// the AuthorizedResourceArns parameter. Otherwise, the request will fail with
+	// InvalidParameterValueException.
+	//
+	// This member is required.
+	InitialTopicId *string
+
 	noSmithyDocumentSerde
 }
 
 // Parameters for Amazon Athena.
 type AthenaParameters struct {
+
+	// Use the RoleArn structure to override an account-wide role for a specific Athena
+	// data source. For example, say an account administrator has turned off all Athena
+	// access with an account-wide role. The administrator can then use RoleArn to
+	// bypass the account-wide role and allow Athena access for the single Athena data
+	// source that is specified in the structure, even if the account-wide role
+	// forbidding Athena access is still active.
+	RoleArn *string
 
 	// The workgroup that Amazon Athena uses.
 	WorkGroup *string
@@ -613,14 +682,51 @@ type DashboardPublishOptions struct {
 // A filter that you apply when searching for dashboards.
 type DashboardSearchFilter struct {
 
-	// The comparison operator that you want to use as a filter, for example,
-	// "Operator": "StringEquals".
+	// The comparison operator that you want to use as a filter, for example
+	// "Operator": "StringEquals". Valid values are "StringEquals" and "StringLike". If
+	// you set the operator value to "StringEquals", you need to provide an ownership
+	// related filter in the "NAME" field and the arn of the user or group whose
+	// folders you want to search in the "Value" field. For example,
+	// "Name":"DIRECT_QUICKSIGHT_OWNER", "Operator": "StringEquals", "Value":
+	// "arn:aws:quicksight:us-east-1:1:user/default/UserName1". If you set the value to
+	// "StringLike", you need to provide the name of the folders you are searching for.
+	// For example, "Name":"DASHBOARD_NAME", "Operator": "StringLike", "Value": "Test".
+	// The "StringLike" operator only supports the NAME value DASHBOARD_NAME.
 	//
 	// This member is required.
 	Operator FilterOperator
 
 	// The name of the value that you want to use as a filter, for example, "Name":
-	// "QUICKSIGHT_USER".
+	// "QUICKSIGHT_OWNER". Valid values are defined as follows:
+	//
+	// *
+	// QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
+	// dashboards with that ARN listed as one of the dashboards's owners or viewers are
+	// returned. Implicit permissions from folders or groups are considered.
+	//
+	// *
+	// QUICKSIGHT_OWNER: Provide an ARN of a user or group, and any dashboards with
+	// that ARN listed as one of the owners of the dashboards are returned. Implicit
+	// permissions from folders or groups are considered.
+	//
+	// *
+	// DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user or group, and any
+	// dashboards with that ARN listed as the only owner of the dashboard are returned.
+	// Implicit permissions from folders or groups are not considered.
+	//
+	// *
+	// DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and any dashboards
+	// with that ARN listed as one of the owners of the dashboards are returned.
+	// Implicit permissions from folders or groups are not considered.
+	//
+	// *
+	// DIRECT_QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
+	// dashboards with that ARN listed as one of the owners or viewers of the
+	// dashboards are returned. Implicit permissions from folders or groups are not
+	// considered.
+	//
+	// * DASHBOARD_NAME: Any dashboards whose names have a substring match
+	// to this value will be returned.
 	Name DashboardFilterAttribute
 
 	// The value of the named item, in this case QUICKSIGHT_USER, that you want to use
@@ -787,6 +893,27 @@ type DashboardVisualId struct {
 	noSmithyDocumentSerde
 }
 
+// The required parameters that are needed to connect to a Databricks data source.
+type DatabricksParameters struct {
+
+	// The host name of the Databricks data source.
+	//
+	// This member is required.
+	Host *string
+
+	// The port for the Databricks data source.
+	//
+	// This member is required.
+	Port int32
+
+	// The HTTP path of the Databricks data source.
+	//
+	// This member is required.
+	SqlEndpointPath *string
+
+	noSmithyDocumentSerde
+}
+
 // The theme colors that are used for data colors in charts. The colors description
 // is a hexadecimal color code that consists of six alphanumerical characters,
 // prefixed with #, for example #37BFF5.
@@ -901,6 +1028,67 @@ type DataSetSchema struct {
 
 	// A structure containing the list of column schemas.
 	ColumnSchemaList []ColumnSchema
+
+	noSmithyDocumentSerde
+}
+
+// A filter that you apply when searching for datasets.
+type DataSetSearchFilter struct {
+
+	// The name of the value that you want to use as a filter, for example, "Name":
+	// "QUICKSIGHT_OWNER". Valid values are defined as follows:
+	//
+	// *
+	// QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any datasets
+	// with that ARN listed as one of the dataset owners or viewers are returned.
+	// Implicit permissions from folders or groups are considered.
+	//
+	// * QUICKSIGHT_OWNER:
+	// Provide an ARN of a user or group, and any datasets with that ARN listed as one
+	// of the owners of the dataset are returned. Implicit permissions from folders or
+	// groups are considered.
+	//
+	// * DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user
+	// or group, and any datasets with that ARN listed as the only owner of the dataset
+	// are returned. Implicit permissions from folders or groups are not considered.
+	//
+	// *
+	// DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and any datasets
+	// with that ARN listed as one of the owners if the dataset are returned. Implicit
+	// permissions from folders or groups are not considered.
+	//
+	// *
+	// DIRECT_QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
+	// datasets with that ARN listed as one of the owners or viewers of the dataset are
+	// returned. Implicit permissions from folders or groups are not considered.
+	//
+	// *
+	// DATASET_NAME: Any datasets whose names have a substring match to this value will
+	// be returned.
+	//
+	// This member is required.
+	Name DataSetFilterAttribute
+
+	// The comparison operator that you want to use as a filter, for example
+	// "Operator": "StringEquals". Valid values are "StringEquals" and "StringLike". If
+	// you set the operator value to "StringEquals", you need to provide an ownership
+	// related filter in the "NAME" field and the arn of the user or group whose
+	// datasets you want to search in the "Value" field. For example,
+	// "Name":"QUICKSIGHT_OWNER", "Operator": "StringEquals", "Value":
+	// "arn:aws:quicksight:us-east- 1:1:user/default/UserName1". If you set the value
+	// to "StringLike", you need to provide the name of the datasets you are searching
+	// for. For example, "Name":"DATASET_NAME", "Operator": "StringLike", "Value":
+	// "Test". The "StringLike" operator only supports the NAME value DATASET_NAME.
+	//
+	// This member is required.
+	Operator FilterOperator
+
+	// The value of the named item, in this case QUICKSIGHT_OWNER, that you want to use
+	// as a filter, for example, "Value":
+	// "arn:aws:quicksight:us-east-1:1:user/default/UserName1".
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -1059,6 +1247,7 @@ type DataSourceErrorInfo struct {
 //	DataSourceParametersMemberAuroraParameters
 //	DataSourceParametersMemberAuroraPostgreSqlParameters
 //	DataSourceParametersMemberAwsIotAnalyticsParameters
+//	DataSourceParametersMemberDatabricksParameters
 //	DataSourceParametersMemberExasolParameters
 //	DataSourceParametersMemberJiraParameters
 //	DataSourceParametersMemberMariaDbParameters
@@ -1132,6 +1321,15 @@ type DataSourceParametersMemberAwsIotAnalyticsParameters struct {
 }
 
 func (*DataSourceParametersMemberAwsIotAnalyticsParameters) isDataSourceParameters() {}
+
+// The required parameters that are needed to connect to a Databricks data source.
+type DataSourceParametersMemberDatabricksParameters struct {
+	Value DatabricksParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberDatabricksParameters) isDataSourceParameters() {}
 
 // The parameters for Exasol.
 type DataSourceParametersMemberExasolParameters struct {
@@ -1277,6 +1475,84 @@ type DataSourceParametersMemberTwitterParameters struct {
 
 func (*DataSourceParametersMemberTwitterParameters) isDataSourceParameters() {}
 
+// A filter that you apply when searching for data sources.
+type DataSourceSearchFilter struct {
+
+	// The name of the value that you want to use as a filter, for example, "Name":
+	// "DIRECT_QUICKSIGHT_OWNER". Valid values are defined as follows:
+	//
+	// *
+	// DIRECT_QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
+	// data sources with that ARN listed as one of the owners or viewers of the data
+	// sources are returned. Implicit permissions from folders or groups are not
+	// considered.
+	//
+	// * DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and
+	// any data sources with that ARN listed as one of the owners if the data source
+	// are returned. Implicit permissions from folders or groups are not considered.
+	//
+	// *
+	// DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user or group, and any data
+	// sources with that ARN listed as the only owner of the data source are returned.
+	// Implicit permissions from folders or groups are not considered.
+	//
+	// *
+	// DATASOURCE_NAME: Any data sources whose names have a substring match to the
+	// provided value are returned.
+	//
+	// This member is required.
+	Name DataSourceFilterAttribute
+
+	// The comparison operator that you want to use as a filter, for example
+	// "Operator": "StringEquals". Valid values are "StringEquals" and "StringLike". If
+	// you set the operator value to "StringEquals", you need to provide an ownership
+	// related filter in the "NAME" field and the arn of the user or group whose data
+	// sources you want to search in the "Value" field. For example,
+	// "Name":"DIRECT_QUICKSIGHT_OWNER", "Operator": "StringEquals", "Value":
+	// "arn:aws:quicksight:us-east-1:1:user/default/UserName1". If you set the value to
+	// "StringLike", you need to provide the name of the data sources you are searching
+	// for. For example, "Name":"DATASOURCE_NAME", "Operator": "StringLike", "Value":
+	// "Test". The "StringLike" operator only supports the NAME value DATASOURCE_NAME.
+	//
+	// This member is required.
+	Operator FilterOperator
+
+	// The value of the named item, for example DIRECT_QUICKSIGHT_OWNER, that you want
+	// to use as a filter, for example, "Value":
+	// "arn:aws:quicksight:us-east-1:1:user/default/UserName1".
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A DataSourceSummary object that returns a summary of a data source.
+type DataSourceSummary struct {
+
+	// The arn of the datasource.
+	Arn *string
+
+	// The date and time that the data source was created. This value is expressed in
+	// MM-DD-YYYY HH:MM:SS format.
+	CreatedTime *time.Time
+
+	// The unique ID of the data source.
+	DataSourceId *string
+
+	// The date and time the data source was last updated. This value is expressed in
+	// MM-DD-YYYY HH:MM:SS format.
+	LastUpdatedTime *time.Time
+
+	// The name of the data source.
+	Name *string
+
+	// The type of the data source.
+	Type DataSourceType
+
+	noSmithyDocumentSerde
+}
+
 // A date-time parameter.
 type DateTimeParameter struct {
 
@@ -1410,15 +1686,56 @@ type FolderMember struct {
 	noSmithyDocumentSerde
 }
 
-// A filter to use to search a Amazon QuickSight folder.
+// A filter to use to search an Amazon QuickSight folder.
 type FolderSearchFilter struct {
 
 	// The name of a value that you want to use in the filter. For example, "Name":
-	// "PARENT_FOLDER_ARN".
+	// "QUICKSIGHT_OWNER". Valid values are defined as follows:
+	//
+	// *
+	// QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any folders
+	// with that ARN listed as one of the folder's owners or viewers are returned.
+	// Implicit permissions from folders or groups are considered.
+	//
+	// * QUICKSIGHT_OWNER:
+	// Provide an ARN of a user or group, and any folders with that ARN listed as one
+	// of the owners of the folders are returned. Implicit permissions from folders or
+	// groups are considered.
+	//
+	// * DIRECT_QUICKSIGHT_SOLE_OWNER: Provide an ARN of a user
+	// or group, and any folders with that ARN listed as the only owner of the folder
+	// are returned. Implicit permissions from folders or groups are not considered.
+	//
+	// *
+	// DIRECT_QUICKSIGHT_OWNER: Provide an ARN of a user or group, and any folders with
+	// that ARN listed as one of the owners of the folders are returned. Implicit
+	// permissions from folders or groups are not considered.
+	//
+	// *
+	// DIRECT_QUICKSIGHT_VIEWER_OR_OWNER: Provide an ARN of a user or group, and any
+	// folders with that ARN listed as one of the owners or viewers of the folders are
+	// returned. Implicit permissions from folders or groups are not considered.
+	//
+	// *
+	// FOLDER_NAME: Any folders whose names have a substring match to this value will
+	// be returned.
+	//
+	// * PARENT_FOLDER_ARN: Provide an ARN of a folder, and any folders
+	// that are directly under that parent folder are returned. If you choose to use
+	// this option and leave the value blank, all root-level folders in the account are
+	// returned.
 	Name FolderFilterAttribute
 
-	// The comparison operator that you want to use in the filter. For example,
-	// "Operator": "StringEquals".
+	// The comparison operator that you want to use as a filter, for example
+	// "Operator": "StringEquals". Valid values are "StringEquals" and "StringLike". If
+	// you set the operator value to "StringEquals", you need to provide an ownership
+	// related filter in the "NAME" field and the arn of the user or group whose
+	// folders you want to search in the "Value" field. For example,
+	// "Name":"DIRECT_QUICKSIGHT_OWNER", "Operator": "StringEquals", "Value":
+	// "arn:aws:quicksight:us-east-1:1:user/default/UserName1". If you set the value to
+	// "StringLike", you need to provide the name of the folders you are searching for.
+	// For example, "Name":"FOLDER_NAME", "Operator": "StringLike", "Value": "Test".
+	// The "StringLike" operator only supports the NAME value FOLDER_NAME.
 	Operator FilterOperator
 
 	// The value of the named item (in this example, PARENT_FOLDER_ARN), that you want
