@@ -139,6 +139,13 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean value that indicates whether public sharing is turned on for an Amazon QuickSight account. For more information about turning on public sharing, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/APIReference/API_UpdatePublicSharingSettings.html\">UpdatePublicSharingSettings</a>.</p>"
                     }
+                },
+                "TerminationProtectionEnabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean value that determines whether or not an Amazon QuickSight account can be deleted. A <code>True</code> value doesn't allow the account to be deleted and results in an error message if a user tries to make a <code>DeleteAccountSubsctiption</code> request. A <code>False</code> value will allow the ccount to be deleted. </p>"
+                    }
                 }
             },
             "traits": {
@@ -421,6 +428,42 @@
                     "traits": {
                         "smithy.api#enumValue": "QUICKSIGHT_USER"
                     }
+                },
+                "QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_SOLE_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_SOLE_OWNER"
+                    }
+                },
+                "ANALYSIS_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANALYSIS_NAME"
+                    }
                 }
             }
         },
@@ -439,13 +482,13 @@
                 "Operator": {
                     "target": "com.amazonaws.quicksight#FilterOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator that you want to use as a filter, for example\n                <code>\"Operator\": \"StringEquals\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator that you want to use as a filter, for example  <code>\"Operator\": \"StringEquals\"</code>. Valid values are  <code>\"StringEquals\"</code>  and  <code>\"StringLike\"</code>.</p>\n         <p>If you set the operator value to <code>\"StringEquals\"</code>, you need to provide an ownership related filter in the <code>\"NAME\"</code> field and the arn of the user or group whose folders you want to search in the <code>\"Value\"</code> field. For example,  <code>\"Name\":\"DIRECT_QUICKSIGHT_OWNER\", \"Operator\": \"StringEquals\", \"Value\": \"arn:aws:quicksight:us-east-1:1:user/default/UserName1\"</code>.</p>\n         <p>If you set the value to <code>\"StringLike\"</code>, you need to provide the name of the folders you are searching for. For example, <code>\"Name\":\"ANALYSIS_NAME\", \"Operator\": \"StringLike\", \"Value\": \"Test\"</code>. The <code>\"StringLike\"</code> operator only supports the <code>NAME</code> value <code>ANALYSIS_NAME</code>.</p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.quicksight#AnalysisFilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the value that you want to use as a filter, for example <code>\"Name\":\n                \"QUICKSIGHT_USER\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the value that you want to use as a filter, for example <code>\"Name\":\n                \"QUICKSIGHT_OWNER\"</code>.</p>\n        <p>Valid values are defined as follows:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as one of the analysis' owners or viewers are returned. Implicit permissions from folders or groups are considered. </p>\n            </li>\n            <li>\n                <p>\n                  <code>QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as one of the owners of the analyses are returned. Implicit permissions from folders or groups are considered.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as the only owner of the analysis are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DIRECT_QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as one of the owners of the analyses are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DIRECT_QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any analyses with that ARN listed as one of the owners or viewers of the analyses are returned. Implicit permissions from folders or groups are not considered. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ANALYSIS_NAME</code>: Any analyses whose names have a substring match to this value will be returned.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Value": {
@@ -607,10 +650,31 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of embedding experience. In this case, Amazon QuickSight visuals.</p>"
                     }
+                },
+                "QSearchBar": {
+                    "target": "com.amazonaws.quicksight#AnonymousUserQSearchBarEmbeddingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Q search bar that you want to use for anonymous user embedding.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of experience you want to embed. For anonymous users, you can embed Amazon QuickSight dashboards.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AnonymousUserQSearchBarEmbeddingConfiguration": {
+            "type": "structure",
+            "members": {
+                "InitialTopicId": {
+                    "target": "com.amazonaws.quicksight#RestrictiveResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The QuickSight Q topic ID of the topic that you want the anonymous user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders the Q search bar with this topic pre-selected.</p>\n        <p>The Amazon Resource Name (ARN) of this Q topic must be included in the <code>AuthorizedResourceArns</code> parameter. Otherwise, the request will fail with <code>InvalidParameterValueException</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The settings that you want to use with the Q search bar.</p>"
             }
         },
         "com.amazonaws.quicksight#Arn": {
@@ -652,6 +716,12 @@
                     "target": "com.amazonaws.quicksight#WorkGroup",
                     "traits": {
                         "smithy.api#documentation": "<p>The workgroup that Amazon Athena uses.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.quicksight#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>"
                     }
                 }
             },
@@ -3833,6 +3903,42 @@
                     "traits": {
                         "smithy.api#enumValue": "QUICKSIGHT_USER"
                     }
+                },
+                "QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_SOLE_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_SOLE_OWNER"
+                    }
+                },
+                "DASHBOARD_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DASHBOARD_NAME"
+                    }
                 }
             }
         },
@@ -3877,14 +3983,14 @@
                 "Operator": {
                     "target": "com.amazonaws.quicksight#FilterOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator that you want to use as a filter, for example,\n            <code>\"Operator\": \"StringEquals\"</code>.</p>",
+                        "smithy.api#documentation": "<p>The comparison operator that you want to use as a filter, for example  <code>\"Operator\": \"StringEquals\"</code>. Valid values are <code>\"StringEquals\"</code> and  <code>\"StringLike\"</code>.</p>\n        <p>If you set the operator value to <code>\"StringEquals\"</code>, you need to provide an ownership related filter in the <code>\"NAME\"</code> field and the arn of the user or group whose folders you want to search in the <code>\"Value\"</code> field. For example,  <code>\"Name\":\"DIRECT_QUICKSIGHT_OWNER\", \"Operator\": \"StringEquals\", \"Value\": \"arn:aws:quicksight:us-east-1:1:user/default/UserName1\"</code>.</p>\n        <p>If you set the value to <code>\"StringLike\"</code>, you need to provide the name of the folders you are searching for. For example, <code>\"Name\":\"DASHBOARD_NAME\", \"Operator\": \"StringLike\", \"Value\": \"Test\"</code>. The <code>\"StringLike\"</code> operator only supports the <code>NAME</code> value <code>DASHBOARD_NAME</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.quicksight#DashboardFilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the value that you want to use as a filter, for example, <code>\"Name\":\n            \"QUICKSIGHT_USER\"</code>. </p>"
+                        "smithy.api#documentation": "<p>The name of the value that you want to use as a filter, for example, <code>\"Name\":\n            \"QUICKSIGHT_OWNER\"</code>.</p>\n        <p>Valid values are defined as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any dashboards with that ARN listed as one of the dashboards's owners or viewers are returned. Implicit permissions from folders or groups are considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any dashboards with that ARN listed as one of the owners of the dashboards are returned. Implicit permissions from folders or groups are considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code>: Provide an ARN of a user or group, and any dashboards with that ARN listed as the only owner of the dashboard are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any dashboards with that ARN listed as one of the owners of the dashboards are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any dashboards with that ARN listed as one of the owners or viewers of the dashboards are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DASHBOARD_NAME</code>: Any dashboards whose names have a substring match to this value will be returned.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Value": {
@@ -4359,6 +4465,47 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#DataSetFilterAttribute": {
+            "type": "enum",
+            "members": {
+                "QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_SOLE_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_SOLE_OWNER"
+                    }
+                },
+                "DATASET_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATASET_NAME"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#DataSetImportMode": {
             "type": "enum",
             "members": {
@@ -4430,6 +4577,47 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Dataset schema.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetSearchFilter": {
+            "type": "structure",
+            "members": {
+                "Operator": {
+                    "target": "com.amazonaws.quicksight#FilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator that you want to use as a filter, for example <code>\"Operator\": \"StringEquals\"</code>. Valid values are <code>\"StringEquals\"</code> and <code>\"StringLike\"</code>.</p>\n         <p>If you set the operator value to <code>\"StringEquals\"</code>, you need to provide an ownership related filter in the <code>\"NAME\"</code> field and the arn of the user or group whose datasets you want to search in the <code>\"Value\"</code> field. For example, <code>\"Name\":\"QUICKSIGHT_OWNER\", \"Operator\": \"StringEquals\", \"Value\": \"arn:aws:quicksight:us-east- 1:1:user/default/UserName1\"</code>.</p>\n         <p>If you set the value to <code>\"StringLike\"</code>, you need to provide the name of the datasets you are searching for. For example, <code>\"Name\":\"DATASET_NAME\", \"Operator\": \"StringLike\", \"Value\": \"Test\"</code>. The <code>\"StringLike\"</code> operator only supports the <code>NAME</code> value <code>DATASET_NAME</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#DataSetFilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the value that you want to use as a filter, for example, <code>\"Name\":\n            \"QUICKSIGHT_OWNER\"</code>.</p>\n         <p>Valid values are defined as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any datasets with that ARN listed as one of the dataset owners or viewers are returned. Implicit permissions from folders or groups are considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any datasets with that ARN listed as one of the owners of the dataset are returned. Implicit permissions from folders or groups are considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code>: Provide an ARN of a user or group, and any datasets with that ARN listed as the only owner of the dataset are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any datasets with that ARN listed as one of the owners if the dataset are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any datasets with that ARN listed as one of the owners or viewers of the dataset are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DATASET_NAME</code>: Any datasets whose names have a substring match to this value will be returned.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the named item, in this case <code>QUICKSIGHT_OWNER</code>, that you want\n            to use as a filter, for example, <code>\"Value\":\n            \"arn:aws:quicksight:us-east-1:1:user/default/UserName1\"</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that you apply when searching for datasets.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSetSearchFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#DataSetSearchFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.quicksight#DataSetSummary": {
@@ -4710,6 +4898,35 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#DataSourceFilterAttribute": {
+            "type": "enum",
+            "members": {
+                "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_SOLE_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_SOLE_OWNER"
+                    }
+                },
+                "DATASOURCE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATASOURCE_NAME"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#DataSourceList": {
             "type": "list",
             "member": {
@@ -4850,6 +5067,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters for Exasol.</p>"
                     }
+                },
+                "DatabricksParameters": {
+                    "target": "com.amazonaws.quicksight#DatabricksParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The required parameters that are needed to connect to a Databricks data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4866,6 +5089,97 @@
                     "min": 1,
                     "max": 50
                 }
+            }
+        },
+        "com.amazonaws.quicksight#DataSourceSearchFilter": {
+            "type": "structure",
+            "members": {
+                "Operator": {
+                    "target": "com.amazonaws.quicksight#FilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator that you want to use as a filter, for example <code>\"Operator\": \"StringEquals\"</code>. Valid values are <code>\"StringEquals\"</code> and <code>\"StringLike\"</code>.</p>\n         <p>If you set the operator value to <code>\"StringEquals\"</code>, you need to provide an ownership related filter in the <code>\"NAME\"</code> field and the arn of the user or group whose data sources you want to search in the <code>\"Value\"</code> field. For example, <code>\"Name\":\"DIRECT_QUICKSIGHT_OWNER\", \"Operator\": \"StringEquals\", \"Value\": \"arn:aws:quicksight:us-east-1:1:user/default/UserName1\"</code>.</p>\n         <p>If you set the value to <code>\"StringLike\"</code>, you need to provide the name of the data sources you are searching for. For example, <code>\"Name\":\"DATASOURCE_NAME\", \"Operator\": \"StringLike\", \"Value\": \"Test\"</code>. The <code>\"StringLike\"</code> operator only supports the <code>NAME</code> value <code>DATASOURCE_NAME</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#DataSourceFilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the value that you want to use as a filter, for example, <code>\"Name\":\n            \"DIRECT_QUICKSIGHT_OWNER\"</code>.</p>\n        <p>Valid values are defined as follows:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>DIRECT_QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any data sources with that ARN listed as one of the owners or viewers of the data sources are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DIRECT_QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any data sources with that ARN listed as one of the owners if the data source are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code>: Provide an ARN of a user or group, and any data sources with that ARN listed as the only owner of the data source are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DATASOURCE_NAME</code>: Any data sources whose names have a substring match to the provided value are returned.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the named item, for example <code>DIRECT_QUICKSIGHT_OWNER</code>, that you want\n            to use as a filter, for example, <code>\"Value\":\n            \"arn:aws:quicksight:us-east-1:1:user/default/UserName1\"</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter that you apply when searching for data sources.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSourceSearchFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#DataSourceSearchFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DataSourceSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the datasource.</p>"
+                    }
+                },
+                "DataSourceId": {
+                    "target": "com.amazonaws.quicksight#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the data source.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data source.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.quicksight#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the data source.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the data source was created. This value is expressed in MM-DD-YYYY HH:MM:SS format.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the data source was last updated. This value is expressed in MM-DD-YYYY HH:MM:SS format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>DataSourceSummary</code> object that returns a summary of a data source.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#DataSourceSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#DataSourceSummary"
             }
         },
         "com.amazonaws.quicksight#DataSourceType": {
@@ -5020,6 +5334,12 @@
                     "traits": {
                         "smithy.api#enumValue": "EXASOL"
                     }
+                },
+                "DATABRICKS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATABRICKS"
+                    }
                 }
             }
         },
@@ -5030,6 +5350,36 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.quicksight#DatabricksParameters": {
+            "type": "structure",
+            "members": {
+                "Host": {
+                    "target": "com.amazonaws.quicksight#Host",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host name of the Databricks data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.quicksight#Port",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The port for the Databricks data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SqlEndpointPath": {
+                    "target": "com.amazonaws.quicksight#SqlEndpointPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP path of the Databricks data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The required parameters that are needed to connect to a Databricks data source.</p>"
             }
         },
         "com.amazonaws.quicksight#DateTimeParameter": {
@@ -5161,6 +5511,78 @@
             }
         },
         "com.amazonaws.quicksight#DeleteAccountCustomizationResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteAccountSubscription": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteAccountSubscriptionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteAccountSubscriptionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use the <code>DeleteAccountSubscription</code> operation to delete an Amazon QuickSight account. This operation will result in an error message if you have configured your account termination protection settings to <code>True</code>. To change this setting and delete your account, call the <code>UpdateAccountSettings</code> API and set the value of the <code>TerminationProtectionEnabled</code> parameter to <code>False</code>, then make another call to the <code>DeleteAccountSubscription</code> API.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/account/{AwsAccountId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteAccountSubscriptionRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the account that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteAccountSubscriptionResponse": {
             "type": "structure",
             "members": {
                 "RequestId": {
@@ -6903,7 +7325,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Use the DescribeAccountSubscription operation to receive a description of a Amazon QuickSight account's subscription. A successful API call returns an <code>AccountInfo</code> object that includes an account's name, subscription status, authentication type, edition, and notification email address.</p>",
+                "smithy.api#documentation": "<p>Use the DescribeAccountSubscription operation to receive a description of an Amazon QuickSight account's subscription. A successful API call returns an <code>AccountInfo</code> object that includes an account's name, subscription status, authentication type, edition, and notification email address.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/account/{AwsAccountId}",
@@ -9487,6 +9909,12 @@
                     "traits": {
                         "smithy.api#enumValue": "StringEquals"
                     }
+                },
+                "StringLike": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringLike"
+                    }
                 }
             }
         },
@@ -9560,6 +9988,42 @@
                     "traits": {
                         "smithy.api#enumValue": "PARENT_FOLDER_ARN"
                     }
+                },
+                "DIRECT_QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_SOLE_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_SOLE_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_OWNER"
+                    }
+                },
+                "QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "FOLDER_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FOLDER_NAME"
+                    }
                 }
             }
         },
@@ -9610,13 +10074,13 @@
                 "Operator": {
                     "target": "com.amazonaws.quicksight#FilterOperator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The comparison operator that you want to use in the filter. For example, <code>\"Operator\": \"StringEquals\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The comparison operator that you want to use as a filter, for example  <code>\"Operator\": \"StringEquals\"</code>. Valid values are  <code>\"StringEquals\"</code>  and  <code>\"StringLike\"</code>.</p>\n         <p>If you set the operator value to <code>\"StringEquals\"</code>, you need to provide an ownership related filter in the <code>\"NAME\"</code> field and the arn of the user or group whose folders you want to search in the <code>\"Value\"</code> field. For example,  <code>\"Name\":\"DIRECT_QUICKSIGHT_OWNER\", \"Operator\": \"StringEquals\", \"Value\": \"arn:aws:quicksight:us-east-1:1:user/default/UserName1\"</code>.</p>\n         <p>If you set the value to <code>\"StringLike\"</code>, you need to provide the name of the folders you are searching for. For example, <code>\"Name\":\"FOLDER_NAME\", \"Operator\": \"StringLike\", \"Value\": \"Test\"</code>. The <code>\"StringLike\"</code> operator only supports the <code>NAME</code> value <code>FOLDER_NAME</code>.</p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.quicksight#FolderFilterAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a value that you want to use in the filter. For example, <code>\"Name\": \"PARENT_FOLDER_ARN\"</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of a value that you want to use in the filter. For example, <code>\"Name\": \"QUICKSIGHT_OWNER\"</code>.</p>\n         <p>Valid values are defined as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any folders with that ARN listed as one of the folder's owners or viewers are returned. Implicit permissions from folders or groups are considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any folders with that ARN listed as one of the owners of the folders are returned. Implicit permissions from folders or groups are considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_SOLE_OWNER</code>: Provide an ARN of a user or group, and any folders with that ARN listed as the only owner of the folder are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_OWNER</code>: Provide an ARN of a user or group, and any folders with that ARN listed as one of the owners of the folders are returned. Implicit permissions from folders or groups are not considered.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DIRECT_QUICKSIGHT_VIEWER_OR_OWNER</code>: Provide an ARN of a user or group, and any folders with that ARN listed as one of the owners or viewers of the folders are returned. Implicit permissions from folders or groups are not considered. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FOLDER_NAME</code>: Any folders whose names have a substring match to this value will be returned.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PARENT_FOLDER_ARN</code>: Provide an ARN of a folder, and any folders that are directly under that parent folder are returned. If you choose to use this option and leave the value blank, all root-level folders in the account are returned. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Value": {
@@ -9627,7 +10091,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter to use to search a Amazon QuickSight folder.</p>"
+                "smithy.api#documentation": "<p>A filter to use to search an Amazon QuickSight folder.</p>"
             }
         },
         "com.amazonaws.quicksight#FolderSearchFilterList": {
@@ -9827,6 +10291,13 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AnonymousUserArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) to use for the anonymous Amazon QuickSight user.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11296,6 +11767,25 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>One or more parameters has a value that isn't valid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.quicksight#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.quicksight#String"
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have this feature activated for your account. To fix this issue, contact Amazon Web Services support.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -14626,6 +15116,9 @@
                     "target": "com.amazonaws.quicksight#DeleteAccountCustomization"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DeleteAccountSubscription"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DeleteAnalysis"
                 },
                 {
@@ -14845,6 +15338,12 @@
                     "target": "com.amazonaws.quicksight#SearchDashboards"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#SearchDataSets"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#SearchDataSources"
+                },
+                {
                     "target": "com.amazonaws.quicksight#SearchFolders"
                 },
                 {
@@ -14942,7 +15441,1353 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<fullname>Amazon QuickSight API Reference</fullname>\n        <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the\n            Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your\n            organization. This API reference contains documentation for a programming interface that\n            you can use to manage Amazon QuickSight. </p>",
-                "smithy.api#title": "Amazon QuickSight"
+                "smithy.api#title": "Amazon QuickSight",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://quicksight-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://quicksight-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://quicksight.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://quicksight.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ap-south-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ap-south-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ap-south-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ap-south-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ca-central-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ca-central-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ca-central-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ca-central-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "eu-central-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-central-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "eu-central-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-central-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-west-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-west-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-west-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-west-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "eu-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "eu-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "eu-west-3",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-west-3",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "eu-west-3",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-west-3",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "eu-west-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-west-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "eu-west-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-west-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "eu-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "eu-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "eu-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "sa-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "sa-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "sa-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "sa-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-2",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-2",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://quicksight.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
             }
         },
         "com.amazonaws.quicksight#RdsParameters": {
@@ -15618,6 +17463,15 @@
                 "smithy.api#pattern": "^[\\w\\-]+$"
             }
         },
+        "com.amazonaws.quicksight#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.quicksight#RoleName": {
             "type": "string",
             "traits": {
@@ -16092,6 +17946,220 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#SearchDataSets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#SearchDataSetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#SearchDataSetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use the <code>SearchDataSets</code> operation to search for datasets that belong to an account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/search/data-sets",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "DataSetSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SearchDataSetsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.quicksight#DataSetSearchFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply to the search.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SearchDataSetsResponse": {
+            "type": "structure",
+            "members": {
+                "DataSetSummaries": {
+                    "target": "com.amazonaws.quicksight#DataSetSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>DataSetSummaries</code> object that returns a summary of a dataset.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SearchDataSources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#SearchDataSourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#SearchDataSourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use the <code>SearchDataSources</code> operation to search for data sources that belong to an account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/search/data-sources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "DataSourceSummaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SearchDataSourcesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.quicksight#DataSourceSearchFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply to the search.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SearchDataSourcesResponse": {
+            "type": "structure",
+            "members": {
+                "DataSourceSummaries": {
+                    "target": "com.amazonaws.quicksight#DataSourceSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>DataSourceSummaries</code> object that returns a summary of a data source.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#SearchFolders": {
             "type": "operation",
             "input": {
@@ -16112,6 +18180,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidRequestException"
                 },
                 {
                     "target": "com.amazonaws.quicksight#ResourceNotFoundException"
@@ -16577,6 +18648,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The parameters for Spark.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SqlEndpointPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
             }
         },
         "com.amazonaws.quicksight#SqlQuery": {
@@ -18191,6 +20271,13 @@
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The email address that you want Amazon QuickSight to send notifications to regarding your\n            Amazon Web Services account or Amazon QuickSight subscription.</p>"
+                    }
+                },
+                "TerminationProtectionEnabled": {
+                    "target": "com.amazonaws.quicksight#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>A boolean value that determines whether or not an Amazon QuickSight account can be deleted. A <code>True</code> value doesn't allow the account to be deleted and results in an error message if a user tries to make a <code>DeleteAccountSubscription</code> request. A <code>False</code> value will allow the account to be deleted.</p>"
                     }
                 }
             }

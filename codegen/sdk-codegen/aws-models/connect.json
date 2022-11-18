@@ -372,6 +372,21 @@
                 }
             }
         },
+        "com.amazonaws.connect#AllowedAccessControlTags": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#SecurityProfilePolicyKey"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#SecurityProfilePolicyValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.connect#AllowedMonitorCapabilities": {
             "type": "list",
             "member": {
@@ -4674,11 +4689,21 @@
                 }
             }
         },
+        "com.amazonaws.connect#CreateSecurityProfileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                },
+                "smithy.api#pattern": "^[ a-zA-Z0-9_@-]+$"
+            }
+        },
         "com.amazonaws.connect#CreateSecurityProfileRequest": {
             "type": "structure",
             "members": {
                 "SecurityProfileName": {
-                    "target": "com.amazonaws.connect#SecurityProfileName",
+                    "target": "com.amazonaws.connect#CreateSecurityProfileName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the security profile.</p>",
                         "smithy.api#required": {}
@@ -4708,6 +4733,18 @@
                     "target": "com.amazonaws.connect#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                },
+                "AllowedAccessControlTags": {
+                    "target": "com.amazonaws.connect#AllowedAccessControlTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags that a security profile uses to restrict access to resources in Amazon Connect.</p>"
+                    }
+                },
+                "TagRestrictedResources": {
+                    "target": "com.amazonaws.connect#TagRestrictedResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect.</p>"
                     }
                 }
             }
@@ -17798,6 +17835,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
                     }
+                },
+                "AllowedAccessControlTags": {
+                    "target": "com.amazonaws.connect#AllowedAccessControlTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags that a security profile uses to restrict access to resources in Amazon Connect.</p>"
+                    }
+                },
+                "TagRestrictedResources": {
+                    "target": "com.amazonaws.connect#TagRestrictedResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17837,6 +17886,24 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#SecurityProfilePolicyKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.connect#SecurityProfilePolicyValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
                 }
             }
         },
@@ -19023,6 +19090,27 @@
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>",
                         "smithy.api#required": {}
                     }
+                }
+            }
+        },
+        "com.amazonaws.connect#TagRestrictedResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#TagRestrictedResourceName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.connect#TagRestrictedResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
                 }
             }
         },
@@ -21552,6 +21640,18 @@
                         "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "AllowedAccessControlTags": {
+                    "target": "com.amazonaws.connect#AllowedAccessControlTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags that a security profile uses to restrict access to resources in Amazon Connect.</p>"
+                    }
+                },
+                "TagRestrictedResources": {
+                    "target": "com.amazonaws.connect#TagRestrictedResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect.</p>"
                     }
                 }
             }

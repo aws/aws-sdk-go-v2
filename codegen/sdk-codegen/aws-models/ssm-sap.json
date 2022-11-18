@@ -1,0 +1,2584 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.ssmsap#AppRegistryArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws:servicecatalog:[a-z0-9:\\/-]+$"
+            }
+        },
+        "com.amazonaws.ssmsap#Application": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmsap#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "AppRegistryArn": {
+                    "target": "com.amazonaws.ssmsap#AppRegistryArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssmsap#ApplicationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Components": {
+                    "target": "com.amazonaws.ssmsap#ComponentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "LastUpdated": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.ssmsap#ApplicationCredential": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.ssmsap#DatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CredentialType": {
+                    "target": "com.amazonaws.ssmsap#CredentialType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecretId": {
+                    "target": "com.amazonaws.ssmsap#SecretId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.ssmsap#ApplicationCredentialList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#ApplicationCredential"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ApplicationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[\\w\\d]{1,50}$"
+            }
+        },
+        "com.amazonaws.ssmsap#ApplicationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVATED",
+                        "name": "ACTIVATED"
+                    },
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "REGISTERING",
+                        "name": "REGISTERING"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmsap#ApplicationSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmsap#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmsap#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.ssmsap#ApplicationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#ApplicationSummary"
+            }
+        },
+        "com.amazonaws.ssmsap#ApplicationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HANA",
+                        "name": "HANA"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmsap#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$"
+            }
+        },
+        "com.amazonaws.ssmsap#Component": {
+            "type": "structure",
+            "members": {
+                "ComponentId": {
+                    "target": "com.amazonaws.ssmsap#ComponentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ComponentType": {
+                    "target": "com.amazonaws.ssmsap#ComponentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssmsap#ComponentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Databases": {
+                    "target": "com.amazonaws.ssmsap#DatabaseIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Hosts": {
+                    "target": "com.amazonaws.ssmsap#HostList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "PrimaryHost": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "LastUpdated": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.ssmsap#ComponentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[\\w\\d-]+$"
+            }
+        },
+        "com.amazonaws.ssmsap#ComponentIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#ComponentId"
+            }
+        },
+        "com.amazonaws.ssmsap#ComponentStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVATED",
+                        "name": "ACTIVATED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmsap#ComponentSummary": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ComponentId": {
+                    "target": "com.amazonaws.ssmsap#ComponentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ComponentType": {
+                    "target": "com.amazonaws.ssmsap#ComponentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmsap#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.ssmsap#ComponentSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#ComponentSummary"
+            }
+        },
+        "com.amazonaws.ssmsap#ComponentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HANA",
+                        "name": "HANA"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmsap#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.ssmsap#CredentialType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ADMIN",
+                        "name": "ADMIN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmsap#Database": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ComponentId": {
+                    "target": "com.amazonaws.ssmsap#ComponentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Credentials": {
+                    "target": "com.amazonaws.ssmsap#ApplicationCredentialList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "DatabaseId": {
+                    "target": "com.amazonaws.ssmsap#DatabaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "DatabaseName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "DatabaseType": {
+                    "target": "com.amazonaws.ssmsap#DatabaseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssmsap#DatabaseStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "PrimaryHost": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "SQLPort": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "LastUpdated": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.ssmsap#DatabaseId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "[\\w\\d]+$"
+            }
+        },
+        "com.amazonaws.ssmsap#DatabaseIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#DatabaseId"
+            }
+        },
+        "com.amazonaws.ssmsap#DatabaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#DatabaseStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "WARNING",
+                        "name": "WARNING"
+                    },
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmsap#DatabaseSummary": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ComponentId": {
+                    "target": "com.amazonaws.ssmsap#ComponentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "DatabaseId": {
+                    "target": "com.amazonaws.ssmsap#DatabaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "DatabaseType": {
+                    "target": "com.amazonaws.ssmsap#DatabaseType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmsap#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.ssmsap#DatabaseSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#DatabaseSummary"
+            }
+        },
+        "com.amazonaws.ssmsap#DatabaseType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SYSTEM",
+                        "name": "SYSTEM"
+                    },
+                    {
+                        "value": "TENANT",
+                        "name": "TENANT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmsap#DeleteResourcePermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#DeleteResourcePermissionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#DeleteResourcePermissionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes permissions associated with the target database.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/delete-resource-permission"
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#DeleteResourcePermissionInput": {
+            "type": "structure",
+            "members": {
+                "ActionType": {
+                    "target": "com.amazonaws.ssmsap#PermissionActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "SourceResourceArn": {
+                    "target": "com.amazonaws.ssmsap#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.ssmsap#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#DeleteResourcePermissionOutput": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#DeregisterApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#DeregisterApplicationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#DeregisterApplicationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deregister an SAP application with AWS Systems Manager for SAP. This action does not\n         aﬀect the existing setup of your SAP workloads on Amazon EC2.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/deregister-application"
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#DeregisterApplicationInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#DeregisterApplicationOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmsap#GetApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#GetApplicationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#GetApplicationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets an application registered with AWS Systems Manager for SAP. It also returns the\n         components of the application.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-application"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#GetApplicationInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ApplicationArn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#GetApplicationOutput": {
+            "type": "structure",
+            "members": {
+                "Application": {
+                    "target": "com.amazonaws.ssmsap#Application",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmsap#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#GetComponent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#GetComponentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#GetComponentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the component of an application registered with AWS Systems Manager for\n         SAP.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-component"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#GetComponentInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ComponentId": {
+                    "target": "com.amazonaws.ssmsap#ComponentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#GetComponentOutput": {
+            "type": "structure",
+            "members": {
+                "Component": {
+                    "target": "com.amazonaws.ssmsap#Component",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#GetDatabase": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#GetDatabaseInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#GetDatabaseOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the SAP HANA database of an application registered with AWS Systems Manager for\n         SAP.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-database"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#GetDatabaseInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ComponentId": {
+                    "target": "com.amazonaws.ssmsap#ComponentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "DatabaseId": {
+                    "target": "com.amazonaws.ssmsap#DatabaseId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "DatabaseArn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#GetDatabaseOutput": {
+            "type": "structure",
+            "members": {
+                "Database": {
+                    "target": "com.amazonaws.ssmsap#Database",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmsap#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#GetOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#GetOperationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#GetOperationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the details of an operation by specifying the operation ID.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-operation"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#GetOperationInput": {
+            "type": "structure",
+            "members": {
+                "OperationId": {
+                    "target": "com.amazonaws.ssmsap#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#GetOperationOutput": {
+            "type": "structure",
+            "members": {
+                "Operation": {
+                    "target": "com.amazonaws.ssmsap#Operation",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#GetResourcePermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#GetResourcePermissionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#GetResourcePermissionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets permissions associated with the target database.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/get-resource-permission"
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#GetResourcePermissionInput": {
+            "type": "structure",
+            "members": {
+                "ActionType": {
+                    "target": "com.amazonaws.ssmsap#PermissionActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.ssmsap#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#GetResourcePermissionOutput": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#Host": {
+            "type": "structure",
+            "members": {
+                "HostName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "HostRole": {
+                    "target": "com.amazonaws.ssmsap#HostRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "HostIp": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "InstanceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.ssmsap#HostList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#Host"
+            }
+        },
+        "com.amazonaws.ssmsap#HostRole": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LEADER",
+                        "name": "LEADER"
+                    },
+                    {
+                        "value": "WORKER",
+                        "name": "WORKER"
+                    },
+                    {
+                        "value": "STANDBY",
+                        "name": "STANDBY"
+                    },
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmsap#InstanceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^i-[\\w\\d]{8}$|^i-[\\w\\d]{17}$"
+            }
+        },
+        "com.amazonaws.ssmsap#InstanceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#InstanceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.ssmsap#ListApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#ListApplicationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#ListApplicationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the applications registered with AWS Systems Manager for SAP.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-applications"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Applications"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListApplicationsInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmsap#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ListApplicationsOutput": {
+            "type": "structure",
+            "members": {
+                "Applications": {
+                    "target": "com.amazonaws.ssmsap#ApplicationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ListComponents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#ListComponentsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#ListComponentsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the components registered with AWS Systems Manager for SAP.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-components"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Components"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListComponentsInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmsap#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ListComponentsOutput": {
+            "type": "structure",
+            "members": {
+                "Components": {
+                    "target": "com.amazonaws.ssmsap#ComponentSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ListDatabases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#ListDatabasesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#ListDatabasesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the SAP HANA databases of an application registered with AWS Systems Manager for\n         SAP.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/list-databases"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Databases"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListDatabasesInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ComponentId": {
+                    "target": "com.amazonaws.ssmsap#ComponentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmsap#MaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ListDatabasesOutput": {
+            "type": "structure",
+            "members": {
+                "Databases": {
+                    "target": "com.amazonaws.ssmsap#DatabaseSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmsap#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all tags on an SAP HANA application and/or database registered with AWS Systems\n         Manager for SAP.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmsap#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.ssmsap#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^.{16,1024}$"
+            }
+        },
+        "com.amazonaws.ssmsap#Operation": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.ssmsap#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmsap#OperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ssmsap#OperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Properties": {
+                    "target": "com.amazonaws.ssmsap#OperationProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.ssmsap#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.ssmsap#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.ssmsap#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "StartTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "EndTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>"
+            }
+        },
+        "com.amazonaws.ssmsap#OperationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[{]?[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}[}]?$"
+            }
+        },
+        "com.amazonaws.ssmsap#OperationIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#OperationId"
+            }
+        },
+        "com.amazonaws.ssmsap#OperationProperties": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#sparse": {}
+            }
+        },
+        "com.amazonaws.ssmsap#OperationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INPROGRESS",
+                        "name": "INPROGRESS"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmsap#OperationType": {
+            "type": "string"
+        },
+        "com.amazonaws.ssmsap#PermissionActionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RESTORE",
+                        "name": "RESTORE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmsap#PutResourcePermission": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#PutResourcePermissionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#PutResourcePermissionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds permissions to the target database.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/put-resource-permission"
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#PutResourcePermissionInput": {
+            "type": "structure",
+            "members": {
+                "ActionType": {
+                    "target": "com.amazonaws.ssmsap#PermissionActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceResourceArn": {
+                    "target": "com.amazonaws.ssmsap#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.ssmsap#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#PutResourcePermissionOutput": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#RegisterApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#RegisterApplicationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#RegisterApplicationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Register an SAP application with AWS Systems Manager for SAP. You must meet the\n         following requirements before registering. </p>\n         <p>The SAP application you want to register with AWS Systems Manager for SAP is running\n         on Amazon EC2.</p>\n         <p>AWS Systems Manager Agent must be setup on an Amazon EC2 instance along with the required\n         IAM permissions.</p>\n         <p>Amazon EC2 instance(s) must have access to the secrets created in AWS Secrets\n         Manager to manage SAP applications and components.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/register-application"
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#RegisterApplicationInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationType": {
+                    "target": "com.amazonaws.ssmsap#ApplicationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Instances": {
+                    "target": "com.amazonaws.ssmsap#InstanceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SapInstanceNumber": {
+                    "target": "com.amazonaws.ssmsap#SAPInstanceNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Sid": {
+                    "target": "com.amazonaws.ssmsap#SID",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmsap#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "Credentials": {
+                    "target": "com.amazonaws.ssmsap#ApplicationCredentialList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#RegisterApplicationOutput": {
+            "type": "structure",
+            "members": {
+                "Application": {
+                    "target": "com.amazonaws.ssmsap#Application",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.ssmsap#OperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.ssmsap#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#SAPInstanceNumber": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[0-9]{2}$"
+            }
+        },
+        "com.amazonaws.ssmsap#SID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[A-Z][A-Z0-9]{2}$"
+            }
+        },
+        "com.amazonaws.ssmsap#SecretId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.ssmsap#SsmSap": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ssmsap#DeleteResourcePermission"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#DeregisterApplication"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#GetApplication"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#GetComponent"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#GetDatabase"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#GetOperation"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#GetResourcePermission"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ListApplications"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ListComponents"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ListDatabases"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#PutResourcePermission"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#RegisterApplication"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#UpdateApplicationSettings"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Ssm Sap",
+                    "arnNamespace": "ssm-sap",
+                    "cloudTrailEventSource": "ssm-sap.amazonaws.com",
+                    "endpointPrefix": "ssm-sap"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ssm-sap"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "content-type",
+                        "x-amz-date",
+                        "authorization",
+                        "x-api-key",
+                        "x-amz-security-token",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent"
+                    ],
+                    "origin": "*"
+                },
+                "smithy.api#documentation": "<p>This API reference provides descriptions, syntax, and other details about each of the\n         actions and data types for AWS Systems Manager for SAP. The topic for each action shows\n         the API request parameters and responses. </p>",
+                "smithy.api#title": "AWS Systems Manager for SAP",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://ssm-sap-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://ssm-sap-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://ssm-sap.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://ssm-sap.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://ssm-sap.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#SsmSapArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(.+:){2,4}.+$|^arn:(.+:){1,3}.+\\/.+$"
+            }
+        },
+        "com.amazonaws.ssmsap#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.ssmsap#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmsap#TagKey"
+            }
+        },
+        "com.amazonaws.ssmsap#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ssmsap#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.ssmsap#TagValue"
+            }
+        },
+        "com.amazonaws.ssmsap#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates tag for a resource by specifying the ARN.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}"
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ssmsap#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmsap#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete the tags for a resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmsap#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ssmsap#SsmSapArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.ssmsap#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds/updates or removes credentials for applications registered with AWS Systems Manager for SAP.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmsap#UpdateApplicationSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmsap#UpdateApplicationSettingsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmsap#UpdateApplicationSettingsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmsap#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmsap#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/update-application-settings"
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#UpdateApplicationSettingsInput": {
+            "type": "structure",
+            "members": {
+                "ApplicationId": {
+                    "target": "com.amazonaws.ssmsap#ApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CredentialsToAddOrUpdate": {
+                    "target": "com.amazonaws.ssmsap#ApplicationCredentialList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "CredentialsToRemove": {
+                    "target": "com.amazonaws.ssmsap#ApplicationCredentialList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#UpdateApplicationSettingsOutput": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "OperationIds": {
+                    "target": "com.amazonaws.ssmsap#OperationIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p/>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmsap#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

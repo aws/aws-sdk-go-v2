@@ -6367,7 +6367,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers a new connector with your Amazon Web Services account. Before you can register\n      the connector, you must deploy lambda in your account.</p>",
+                "smithy.api#documentation": "<p>Registers a new custom connector with your Amazon Web Services account. Before you can register\n      the connector, you must deploy the associated AWS lambda function in your account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/register-connector",
@@ -7270,7 +7270,7 @@
                 "dataTransferApi": {
                     "target": "com.amazonaws.appflow#SalesforceDataTransferApi",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers\n      data from Salesforce.</p>\n         <dl>\n            <dt>AUTOMATIC</dt>\n            <dd>\n               <p>The default. Amazon AppFlow selects which API to use based on the number of\n            records that your flow transfers from Salesforce. If your flow transfers fewer than\n            1,000,000 records, Amazon AppFlow uses Salesforce REST API. If your flow transfers\n            1,000,000 records or more, Amazon AppFlow uses Salesforce Bulk API 2.0.</p>\n               <p>Each of these Salesforce APIs structures data differently. If Amazon AppFlow\n            selects the API automatically, be aware that, for recurring flows, the data output might\n            vary from one flow run to the next. For example, if a flow runs daily, it might use REST\n            API on one day to transfer 900,000 records, and it might use Bulk API 2.0 on the next\n            day to transfer 1,100,000 records. For each of these flow runs, the respective\n            Salesforce API formats the data differently. Some of the differences include how dates\n            are formatted and null values are represented. Also, Bulk API 2.0 doesn't transfer\n            Salesforce compound fields.</p>\n               <p>By choosing this option, you optimize flow performance for both small and large data\n            transfers, but the tradeoff is inconsistent formatting in the output.</p>\n            </dd>\n            <dt>BULKV2</dt>\n            <dd>\n               <p>Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs asynchronous\n            data transfers, and it's optimal for large sets of data. By choosing this option, you\n            ensure that your flow writes consistent output, but you optimize performance only for\n            large data transfers.</p>\n               <p>Note that Bulk API 2.0 does not transfer Salesforce compound fields.</p>\n            </dd>\n            <dt>REST_SYNC</dt>\n            <dd>\n               <p>Amazon AppFlow uses only Salesforce REST API. By choosing this option, you\n            ensure that your flow writes consistent output, but you decrease performance for large\n            data transfers that are better suited for Bulk API 2.0. In some cases, if your flow\n            attempts to transfer a vary large set of data, it might fail with a timed out\n            error.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>Specifies which Salesforce API is used by Amazon AppFlow when your flow transfers\n      data from Salesforce.</p>\n         <dl>\n            <dt>AUTOMATIC</dt>\n            <dd>\n               <p>The default. Amazon AppFlow selects which API to use based on the number of\n            records that your flow transfers from Salesforce. If your flow transfers fewer than\n            1,000,000 records, Amazon AppFlow uses Salesforce REST API. If your flow transfers\n            1,000,000 records or more, Amazon AppFlow uses Salesforce Bulk API 2.0.</p>\n               <p>Each of these Salesforce APIs structures data differently. If Amazon AppFlow\n            selects the API automatically, be aware that, for recurring flows, the data output might\n            vary from one flow run to the next. For example, if a flow runs daily, it might use REST\n            API on one day to transfer 900,000 records, and it might use Bulk API 2.0 on the next\n            day to transfer 1,100,000 records. For each of these flow runs, the respective\n            Salesforce API formats the data differently. Some of the differences include how dates\n            are formatted and null values are represented. Also, Bulk API 2.0 doesn't transfer\n            Salesforce compound fields.</p>\n               <p>By choosing this option, you optimize flow performance for both small and large data\n            transfers, but the tradeoff is inconsistent formatting in the output.</p>\n            </dd>\n            <dt>BULKV2</dt>\n            <dd>\n               <p>Amazon AppFlow uses only Salesforce Bulk API 2.0. This API runs asynchronous\n            data transfers, and it's optimal for large sets of data. By choosing this option, you\n            ensure that your flow writes consistent output, but you optimize performance only for\n            large data transfers.</p>\n               <p>Note that Bulk API 2.0 does not transfer Salesforce compound fields.</p>\n            </dd>\n            <dt>REST_SYNC</dt>\n            <dd>\n               <p>Amazon AppFlow uses only Salesforce REST API. By choosing this option, you\n            ensure that your flow writes consistent output, but you decrease performance for large\n            data transfers that are better suited for Bulk API 2.0. In some cases, if your flow\n            attempts to transfer a vary large set of data, it might fail wituh a timed out\n            error.</p>\n            </dd>\n         </dl>"
                     }
                 }
             },
@@ -7344,6 +7344,9 @@
                 },
                 {
                     "target": "com.amazonaws.appflow#UpdateConnectorProfile"
+                },
+                {
+                    "target": "com.amazonaws.appflow#UpdateConnectorRegistration"
                 },
                 {
                     "target": "com.amazonaws.appflow#UpdateFlow"
@@ -10226,7 +10229,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Unregisters the custom connector registered in your account that matches the\n      connectorLabel provided in the request.</p>",
+                "smithy.api#documentation": "<p>Unregisters the custom connector registered in your account that matches the\n      connector label provided in the request.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/unregister-connector",
@@ -10390,6 +10393,84 @@
                     "target": "com.amazonaws.appflow#ConnectorProfileArn",
                     "traits": {
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the connector profile. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appflow#UpdateConnectorRegistration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appflow#UpdateConnectorRegistrationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appflow#UpdateConnectorRegistrationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appflow#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ConnectorAuthenticationException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ConnectorServerException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.appflow#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a custom connector that you've previously registered. This operation updates the connector with one of the following:</p>\n         <ul>\n            <li>\n               <p>The latest version of the AWS Lambda function that's assigned to the connector</p>\n            </li>\n            <li>\n               <p>A new AWS Lambda function that you specify</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/update-connector-registration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.appflow#UpdateConnectorRegistrationRequest": {
+            "type": "structure",
+            "members": {
+                "connectorLabel": {
+                    "target": "com.amazonaws.appflow#ConnectorLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connector. The name is unique for each connector registration in your AWS\n      account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.appflow#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description about the update that you're applying to the connector.</p>"
+                    }
+                },
+                "connectorProvisioningConfig": {
+                    "target": "com.amazonaws.appflow#ConnectorProvisioningConfig"
+                }
+            }
+        },
+        "com.amazonaws.appflow#UpdateConnectorRegistrationResponse": {
+            "type": "structure",
+            "members": {
+                "connectorArn": {
+                    "target": "com.amazonaws.appflow#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the connector being updated.</p>"
                     }
                 }
             }
