@@ -7,7 +7,7 @@
  *
  *  http://aws.amazon.com/apache2.0
  *
- * or in the "license" file accompanying this file. This file is distributed
+ * or in the "license" file accompanying this file. This file is distributedwriteErrorCodeParser
  * on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
@@ -221,6 +221,20 @@ final class AwsProtocolUtils {
                         .settings(context.getSettings())
                         .addClientConfigValues(configValues)
         ).generateProtocolTests();
+    }
+
+    public static void writeAwsQueryErrorCodeDeserializer(GenerationContext context) {
+        GoWriter writer = context.getWriter().get();
+        writer.write("queryCodeHeader := response.Header.Get(\"x-amzn-query-error\")");
+        writer.write("if queryCodeHeader != \"\" {");
+        writer.write("\tqueryCodeParts := strings.Split(queryCodeHeader, \";\")");
+        writer.write("\tif queryCodeParts != nil && len(queryCodeParts) == 2 {");
+        writer.write("\t\treturn &smithy.GenericAPIError{");
+        writer.write("\t\tCode:    errorCode,");
+        writer.write("\t\tMessage: errorMessage,");
+        writer.write("\t\t}");
+        writer.write("\t}");
+        writer.write("}");
     }
 
     public static void writeJsonErrorMessageCodeDeserializer(GenerationContext context) {

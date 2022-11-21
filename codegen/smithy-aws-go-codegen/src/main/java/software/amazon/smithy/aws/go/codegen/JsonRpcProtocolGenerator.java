@@ -18,6 +18,7 @@ package software.amazon.smithy.aws.go.codegen;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecodeError;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.initializeJsonDecoder;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeJsonErrorMessageCodeDeserializer;
+import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeAwsQueryErrorCodeDeserializer;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -42,6 +43,7 @@ import software.amazon.smithy.model.shapes.UnionShape;
 import software.amazon.smithy.model.traits.ErrorTrait;
 import software.amazon.smithy.model.traits.EventHeaderTrait;
 import software.amazon.smithy.model.traits.EventPayloadTrait;
+import software.amazon.smithy.aws.traits.protocols.AwsQueryCompatibleTrait;
 
 /**
  * Handles generating the aws.rest-json protocol for services.
@@ -174,6 +176,9 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
         writeJsonErrorMessageCodeDeserializer(context);
+        if (context.getService().hasTrait(AwsQueryCompatibleTrait.class)) {
+            writeAwsQueryErrorCodeDeserializer(context);
+        }
     }
 
     @Override
