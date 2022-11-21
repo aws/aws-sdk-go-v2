@@ -100,6 +100,7 @@ const (
 	CloudWatchRegionMeSouth1     CloudWatchRegion = "me-south-1"
 	CloudWatchRegionMeCentral1   CloudWatchRegion = "me-central-1"
 	CloudWatchRegionApSouth1     CloudWatchRegion = "ap-south-1"
+	CloudWatchRegionApSouth2     CloudWatchRegion = "ap-south-2"
 	CloudWatchRegionApSoutheast1 CloudWatchRegion = "ap-southeast-1"
 	CloudWatchRegionApSoutheast2 CloudWatchRegion = "ap-southeast-2"
 	CloudWatchRegionApSoutheast3 CloudWatchRegion = "ap-southeast-3"
@@ -139,6 +140,7 @@ func (CloudWatchRegion) Values() []CloudWatchRegion {
 		"me-south-1",
 		"me-central-1",
 		"ap-south-1",
+		"ap-south-2",
 		"ap-southeast-1",
 		"ap-southeast-2",
 		"ap-southeast-3",
@@ -348,6 +350,7 @@ const (
 	ResourceRecordSetRegionMeSouth1     ResourceRecordSetRegion = "me-south-1"
 	ResourceRecordSetRegionMeCentral1   ResourceRecordSetRegion = "me-central-1"
 	ResourceRecordSetRegionApSouth1     ResourceRecordSetRegion = "ap-south-1"
+	ResourceRecordSetRegionApSouth2     ResourceRecordSetRegion = "ap-south-2"
 	ResourceRecordSetRegionAfSouth1     ResourceRecordSetRegion = "af-south-1"
 	ResourceRecordSetRegionEuSouth1     ResourceRecordSetRegion = "eu-south-1"
 	ResourceRecordSetRegionEuSouth2     ResourceRecordSetRegion = "eu-south-2"
@@ -382,6 +385,7 @@ func (ResourceRecordSetRegion) Values() []ResourceRecordSetRegion {
 		"me-south-1",
 		"me-central-1",
 		"ap-south-1",
+		"ap-south-2",
 		"af-south-1",
 		"eu-south-1",
 		"eu-south-2",
@@ -512,6 +516,7 @@ const (
 	VPCRegionApSoutheast2 VPCRegion = "ap-southeast-2"
 	VPCRegionApSoutheast3 VPCRegion = "ap-southeast-3"
 	VPCRegionApSouth1     VPCRegion = "ap-south-1"
+	VPCRegionApSouth2     VPCRegion = "ap-south-2"
 	VPCRegionApNortheast1 VPCRegion = "ap-northeast-1"
 	VPCRegionApNortheast2 VPCRegion = "ap-northeast-2"
 	VPCRegionApNortheast3 VPCRegion = "ap-northeast-3"
@@ -550,6 +555,7 @@ func (VPCRegion) Values() []VPCRegion {
 		"ap-southeast-2",
 		"ap-southeast-3",
 		"ap-south-1",
+		"ap-south-2",
 		"ap-northeast-1",
 		"ap-northeast-2",
 		"ap-northeast-3",
