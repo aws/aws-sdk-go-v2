@@ -1,3 +1,9 @@
+# Release (2022-11-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.25.0](service/route53/CHANGELOG.md#v1250-2022-11-21)
+  * **Feature**: Amazon Route 53 now supports the Asia Pacific (Hyderabad) Region (ap-south-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 # Release (2022-11-18.2)
 
 ## Module Highlights
