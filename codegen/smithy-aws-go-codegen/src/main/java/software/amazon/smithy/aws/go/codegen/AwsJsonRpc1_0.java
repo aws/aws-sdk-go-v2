@@ -15,7 +15,10 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
+import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeAwsQueryErrorCodeDeserializer;
+
 import software.amazon.smithy.aws.traits.protocols.AwsJson1_0Trait;
+import software.amazon.smithy.aws.traits.protocols.AwsQueryCompatibleTrait;
 import software.amazon.smithy.model.shapes.ShapeId;
 
 /**
@@ -35,5 +38,13 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
     @Override
     public ShapeId getProtocol() {
         return AwsJson1_0Trait.ID;
+    }
+
+    @Override
+    protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
+        super.writeErrorMessageCodeDeserializer(context);
+        if (context.getService().hasTrait(AwsQueryCompatibleTrait.class)) {
+            writeAwsQueryErrorCodeDeserializer(context);
+        }
     }
 }
