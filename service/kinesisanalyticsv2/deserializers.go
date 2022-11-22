@@ -1860,6 +1860,9 @@ func awsAwsjson11_deserializeOpErrorDeleteApplicationSnapshot(response *smithyht
 	}
 
 	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 

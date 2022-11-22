@@ -166,6 +166,11 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "resource-explorer-2.ap-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "ap-south-2",
+			}: endpoints.Endpoint{
+				Hostname: "resource-explorer-2.ap-south-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
 			}: endpoints.Endpoint{
 				Hostname: "resource-explorer-2.ap-southeast-1.api.aws",

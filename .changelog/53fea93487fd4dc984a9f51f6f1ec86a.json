@@ -1,0 +1,8 @@
+{
+    "id": "53fea934-87fd-4dc9-84a9-f51f6f1ec86a",
+    "type": "feature",
+    "description": "Support for Apache Flink 1.15 in Kinesis Data Analytics.",
+    "modules": [
+        "service/kinesisanalyticsv2"
+    ]
+}

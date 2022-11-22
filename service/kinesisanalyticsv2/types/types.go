@@ -174,8 +174,7 @@ type ApplicationDetail struct {
 	// This member is required.
 	ApplicationVersionId *int64
 
-	// The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or
-	// FLINK-1_11).
+	// The runtime environment for the application.
 	//
 	// This member is required.
 	RuntimeEnvironment RuntimeEnvironment

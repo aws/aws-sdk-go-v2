@@ -253,6 +253,15 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "ap-south-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-south-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "kms-fips.ap-south-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-south-2-fips",
 			}: endpoints.Endpoint{
 				Hostname: "kms-fips.ap-south-2.amazonaws.com",
