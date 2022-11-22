@@ -1,3 +1,7 @@
+# v1.25.1 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.25.0 (2022-11-17)
 
 * **Feature**: Add Node 18 (nodejs18.x) support to AWS Lambda.

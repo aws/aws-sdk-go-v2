@@ -1,3 +1,7 @@
+# v1.72.1 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.72.0 (2022-11-18)
 
 * **Feature**: This release adds support for copying an Amazon Machine Image's tags when copying an AMI.

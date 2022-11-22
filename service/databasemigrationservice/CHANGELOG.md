@@ -1,3 +1,7 @@
+# v1.22.1 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.22.0 (2022-11-17)
 
 * **Feature**: Adds support for Internet Protocol Version 6 (IPv6) on DMS Replication Instances

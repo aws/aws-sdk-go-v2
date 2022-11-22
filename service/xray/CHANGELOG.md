@@ -1,3 +1,7 @@
+# v1.15.1 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.15.0 (2022-11-16)
 
 * **Feature**: This release adds new APIs - PutResourcePolicy, DeleteResourcePolicy, ListResourcePolicies for supporting resource based policies for AWS X-Ray.

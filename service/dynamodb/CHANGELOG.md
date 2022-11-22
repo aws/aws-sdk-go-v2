@@ -1,3 +1,7 @@
+# v1.17.7 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.17.6 (2022-11-18)
 
 * **Documentation**: Updated minor fixes for DynamoDB documentation.

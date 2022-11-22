@@ -1,3 +1,7 @@
+# v1.24.1 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.24.0 (2022-11-16)
 
 * **Feature**: Added UnsupportedTarget HandlerErrorCode for use with CFN Resource Hooks

@@ -1,3 +1,14 @@
+# Release (2022-11-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.21.0](service/appflow/CHANGELOG.md#v1210-2022-11-22)
+  * **Feature**: Adding support for Amazon AppFlow to transfer the data to Amazon Redshift databases through Amazon Redshift Data API service. This feature will support the Redshift destination connector on both public and private accessible Amazon Redshift Clusters and Amazon Redshift Serverless.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.15.0](service/kinesisanalyticsv2/CHANGELOG.md#v1150-2022-11-22)
+  * **Feature**: Support for Apache Flink 1.15 in Kinesis Data Analytics.
+
 # Release (2022-11-21)
 
 ## Module Highlights

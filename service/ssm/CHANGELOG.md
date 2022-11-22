@@ -1,3 +1,7 @@
+# v1.33.1 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.33.0 (2022-11-16)
 
 * **Feature**: This release adds support for cross account access in CreateOpsItem, UpdateOpsItem and GetOpsItem. It introduces new APIs to setup resource policies for SSM resources: PutResourcePolicy, GetResourcePolicies and DeleteResourcePolicy.

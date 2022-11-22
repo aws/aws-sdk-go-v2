@@ -1,3 +1,7 @@
+# v1.0.2 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.0.1 (2022-11-10)
 
 * **Documentation**: Text only updates to some Resource Explorer descriptions.
