@@ -230,7 +230,7 @@ final class AwsProtocolUtils {
                 writer.write("queryCodeParts := strings.Split(queryCodeHeader, \";\")");
                 writer.openBlock("\tif queryCodeParts != nil && len(queryCodeParts) == 2 {", "}", () -> {
                         writer.openBlock("return &smithy.GenericAPIError{", "}", () -> {
-                                writer.write("Code:    errorCode,");
+                                writer.write("Code:    queryCodeParts[0],");
                                 writer.write("Message: errorMessage,");
                         });
                 });
