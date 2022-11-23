@@ -1,3 +1,7 @@
+# v1.7.0 (2022-11-23)
+
+* **Feature**: This release adds support for Rule Lock for Recycle Bin, which allows you to lock retention rules so that they can no longer be modified or deleted.
+
 # v1.6.23 (2022-11-16)
 
 * No change notes available for this release.

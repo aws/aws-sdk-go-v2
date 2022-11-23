@@ -1,3 +1,11 @@
+# Release (2022-11-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.10.0](service/grafana/CHANGELOG.md#v1100-2022-11-23)
+  * **Feature**: This release includes support for configuring a Grafana workspace to connect to a datasource within a VPC as well as new APIs for configuring Grafana settings.
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.7.0](service/rbin/CHANGELOG.md#v170-2022-11-23)
+  * **Feature**: This release adds support for Rule Lock for Recycle Bin, which allows you to lock retention rules so that they can no longer be modified or deleted.
+
 # Release (2022-11-22)
 
 ## General Highlights
