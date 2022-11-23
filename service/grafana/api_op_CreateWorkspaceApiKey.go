@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an API key for the workspace. This key can be used to authenticate
-// requests sent to the workspace's HTTP API. See
+// Creates a Grafana API key for the workspace. This key can be used to
+// authenticate requests sent to the workspace's HTTP API. See
 // https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html
 // (https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html)
 // for available APIs and example requests.
@@ -32,13 +32,12 @@ func (c *Client) CreateWorkspaceApiKey(ctx context.Context, params *CreateWorksp
 
 type CreateWorkspaceApiKeyInput struct {
 
-	// Specifies the name of the key to create. Key names must be unique to the
-	// workspace.
+	// Specifies the name of the key. Keynames must be unique to the workspace.
 	//
 	// This member is required.
 	KeyName *string
 
-	// Specifies the permission level of the key. Valid Values: VIEWER | EDITOR | ADMIN
+	// Specifies the permission level of the key. Valid values: VIEWER|EDITOR|ADMIN
 	//
 	// This member is required.
 	KeyRole *string
@@ -49,7 +48,7 @@ type CreateWorkspaceApiKeyInput struct {
 	// This member is required.
 	SecondsToLive *int32
 
-	// The ID of the workspace in which to create an API key.
+	// The ID of the workspace to create an API key.
 	//
 	// This member is required.
 	WorkspaceId *string
@@ -59,8 +58,8 @@ type CreateWorkspaceApiKeyInput struct {
 
 type CreateWorkspaceApiKeyOutput struct {
 
-	// The key token that was created. Use this value as a bearer token to authenticate
-	// HTTP requests to the workspace.
+	// The key token. Use this value as a bearer token to authenticate HTTP requests to
+	// the workspace.
 	//
 	// This member is required.
 	Key *string

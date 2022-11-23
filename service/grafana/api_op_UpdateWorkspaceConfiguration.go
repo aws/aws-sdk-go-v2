@@ -10,30 +10,35 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Grafana API key for the workspace.
-func (c *Client) DeleteWorkspaceApiKey(ctx context.Context, params *DeleteWorkspaceApiKeyInput, optFns ...func(*Options)) (*DeleteWorkspaceApiKeyOutput, error) {
+// Updates the configuration string for the given workspace
+func (c *Client) UpdateWorkspaceConfiguration(ctx context.Context, params *UpdateWorkspaceConfigurationInput, optFns ...func(*Options)) (*UpdateWorkspaceConfigurationOutput, error) {
 	if params == nil {
-		params = &DeleteWorkspaceApiKeyInput{}
+		params = &UpdateWorkspaceConfigurationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DeleteWorkspaceApiKey", params, optFns, c.addOperationDeleteWorkspaceApiKeyMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "UpdateWorkspaceConfiguration", params, optFns, c.addOperationUpdateWorkspaceConfigurationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DeleteWorkspaceApiKeyOutput)
+	out := result.(*UpdateWorkspaceConfigurationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DeleteWorkspaceApiKeyInput struct {
+type UpdateWorkspaceConfigurationInput struct {
 
-	// The name of the API key to delete.
+	// The new configuration string for the workspace. For more information about the
+	// format and configuration options available, see Working in your Grafana
+	// workspace
+	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html).
+	//
+	// This value conforms to the media type: application/json
 	//
 	// This member is required.
-	KeyName *string
+	Configuration *string
 
-	// The ID of the workspace to delete.
+	// The ID of the workspace to update.
 	//
 	// This member is required.
 	WorkspaceId *string
@@ -41,30 +46,19 @@ type DeleteWorkspaceApiKeyInput struct {
 	noSmithyDocumentSerde
 }
 
-type DeleteWorkspaceApiKeyOutput struct {
-
-	// The name of the key that was deleted.
-	//
-	// This member is required.
-	KeyName *string
-
-	// The ID of the workspace where the key was deleted.
-	//
-	// This member is required.
-	WorkspaceId *string
-
+type UpdateWorkspaceConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDeleteWorkspaceApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWorkspaceApiKey{}, middleware.After)
+func (c *Client) addOperationUpdateWorkspaceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateWorkspaceConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWorkspaceApiKey{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateWorkspaceConfiguration{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -104,10 +98,10 @@ func (c *Client) addOperationDeleteWorkspaceApiKeyMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDeleteWorkspaceApiKeyValidationMiddleware(stack); err != nil {
+	if err = addOpUpdateWorkspaceConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkspaceApiKey(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkspaceConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -122,11 +116,11 @@ func (c *Client) addOperationDeleteWorkspaceApiKeyMiddlewares(stack *middleware.
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDeleteWorkspaceApiKey(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opUpdateWorkspaceConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "grafana",
-		OperationName: "DeleteWorkspaceApiKey",
+		OperationName: "UpdateWorkspaceConfiguration",
 	}
 }

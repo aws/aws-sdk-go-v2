@@ -65,6 +65,8 @@ const (
 	DataSourceTypeAthena DataSourceType = "ATHENA"
 	// Redshift
 	DataSourceTypeRedshift DataSourceType = "REDSHIFT"
+	// IoT TwinMaker
+	DataSourceTypeTwinmaker DataSourceType = "TWINMAKER"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -80,6 +82,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"SITEWISE",
 		"ATHENA",
 		"REDSHIFT",
+		"TWINMAKER",
 	}
 }
 

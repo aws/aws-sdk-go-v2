@@ -42,15 +42,15 @@ type AssertionAttributes struct {
 // the workspace.
 type AuthenticationDescription struct {
 
-	// Specifies whether this workspace uses Amazon Web Services SSO, SAML, or both
-	// methods to authenticate users to use the Grafana console in the Amazon Managed
-	// Grafana workspace.
+	// Specifies whether this workspace uses IAM Identity Center, SAML, or both methods
+	// to authenticate users to use the Grafana console in the Amazon Managed Grafana
+	// workspace.
 	//
 	// This member is required.
 	Providers []AuthenticationProviderTypes
 
-	// A structure containing information about how this workspace works with Amazon
-	// Web Services SSO.
+	// A structure containing information about how this workspace works with IAM
+	// Identity Center.
 	AwsSso *AwsSsoAuthentication
 
 	// A structure containing information about how this workspace works with SAML,
@@ -61,13 +61,13 @@ type AuthenticationDescription struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that describes whether the workspace uses SAML, Amazon Web Services
-// SSO, or both methods for user authentication, and whether that authentication is
+// A structure that describes whether the workspace uses SAML, IAM Identity Center,
+// or both methods for user authentication, and whether that authentication is
 // fully configured.
 type AuthenticationSummary struct {
 
-	// Specifies whether the workspace uses SAML, Amazon Web Services SSO, or both
-	// methods for user authentication.
+	// Specifies whether the workspace uses SAML, IAM Identity Center, or both methods
+	// for user authentication.
 	//
 	// This member is required.
 	Providers []AuthenticationProviderTypes
@@ -79,12 +79,12 @@ type AuthenticationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// A structure containing information about how this workspace works with Amazon
-// Web Services SSO.
+// A structure containing information about how this workspace works with IAM
+// Identity Center.
 type AwsSsoAuthentication struct {
 
-	// The ID of the Amazon Web Services SSO-managed application that is created by
-	// Amazon Managed Grafana.
+	// The ID of the IAM Identity Center-managed application that is created by Amazon
+	// Managed Grafana.
 	SsoClientId *string
 
 	noSmithyDocumentSerde
@@ -93,7 +93,8 @@ type AwsSsoAuthentication struct {
 // A structure containing the identity provider (IdP) metadata used to integrate
 // the identity provider with this workspace. You can specify the metadata either
 // by providing a URL to its location in the url parameter, or by specifying the
-// full metadata in XML format in the xml parameter.
+// full metadata in XML format in the xml parameter. Specifying both will cause an
+// error.
 //
 // The following types satisfy this interface:
 //
@@ -103,7 +104,7 @@ type IdpMetadata interface {
 	isIdpMetadata()
 }
 
-// The URL of the location containing the metadata.
+// The URL of the location containing the IdP metadata.
 type IdpMetadataMemberUrl struct {
 	Value string
 
@@ -112,7 +113,7 @@ type IdpMetadataMemberUrl struct {
 
 func (*IdpMetadataMemberUrl) isIdpMetadata() {}
 
-// The actual full metadata file, in XML format.
+// The full IdP metadata, in XML format.
 type IdpMetadataMemberXml struct {
 	Value string
 
@@ -121,11 +122,11 @@ type IdpMetadataMemberXml struct {
 
 func (*IdpMetadataMemberXml) isIdpMetadata() {}
 
-// A structure containing the identity of one user or group and the Admin or Editor
-// role that they have.
+// A structure containing the identity of one user or group and the Admin, Editor,
+// or Viewer role that they have.
 type PermissionEntry struct {
 
-	// Specifies whether the user or group has the Admin or Editor role.
+	// Specifies whether the user or group has the Admin, Editor, or Viewer role.
 	//
 	// This member is required.
 	Role Role
@@ -139,7 +140,9 @@ type PermissionEntry struct {
 }
 
 // This structure defines which groups defined in the SAML assertion attribute are
-// to be mapped to the Grafana Admin and Editor roles in the workspace.
+// to be mapped to the Grafana Admin and Editor roles in the workspace. SAML
+// authenticated users not part of Admin or Editor role groups have Viewer
+// permission over the workspace.
 type RoleValues struct {
 
 	// A list of groups from the SAML assertion attribute to grant the Grafana Admin
@@ -279,12 +282,31 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration settings for an Amazon VPC that contains data sources for your
+// Grafana workspace to connect to.
+type VpcConfiguration struct {
+
+	// The list of Amazon EC2 security group IDs attached to the Amazon VPC for your
+	// Grafana workspace to connect.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana
+	// workspace to connect.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
 // A structure containing information about an Amazon Managed Grafana workspace in
 // your account.
 type WorkspaceDescription struct {
 
-	// A structure that describes whether the workspace uses SAML, Amazon Web Services
-	// SSO, or both methods for user authentication.
+	// A structure that describes whether the workspace uses SAML, IAM Identity Center,
+	// or both methods for user authentication.
 	//
 	// This member is required.
 	Authentication *AuthenticationSummary
@@ -387,6 +409,10 @@ type WorkspaceDescription struct {
 
 	// The list of tags associated with the workspace.
 	Tags map[string]string
+
+	// The configuration for connecting to data sources in a private VPC (Amazon
+	// Virtual Private Cloud).
+	VpcConfiguration *VpcConfiguration
 
 	// The IAM role that grants permissions to the Amazon Web Services resources that
 	// the workspace will view data from. This role must already exist.

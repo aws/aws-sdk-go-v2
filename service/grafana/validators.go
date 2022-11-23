@@ -130,6 +130,26 @@ func (m *validateOpDescribeWorkspaceAuthentication) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeWorkspaceConfiguration struct {
+}
+
+func (*validateOpDescribeWorkspaceConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWorkspaceConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWorkspaceConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWorkspaceConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeWorkspace struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpUpdateWorkspaceAuthentication) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateWorkspaceConfiguration struct {
+}
+
+func (*validateOpUpdateWorkspaceConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateWorkspaceConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateWorkspaceConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateWorkspaceConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateWorkspace struct {
 }
 
@@ -334,6 +374,10 @@ func addOpDescribeWorkspaceAuthenticationValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpDescribeWorkspaceAuthentication{}, middleware.After)
 }
 
+func addOpDescribeWorkspaceConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWorkspaceConfiguration{}, middleware.After)
+}
+
 func addOpDescribeWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeWorkspace{}, middleware.After)
 }
@@ -364,6 +408,10 @@ func addOpUpdatePermissionsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateWorkspaceAuthenticationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkspaceAuthentication{}, middleware.After)
+}
+
+func addOpUpdateWorkspaceConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateWorkspaceConfiguration{}, middleware.After)
 }
 
 func addOpUpdateWorkspaceValidationMiddleware(stack *middleware.Stack) error {
@@ -462,6 +510,24 @@ func validateUserList(v []types.User) error {
 	}
 }
 
+func validateVpcConfiguration(v *types.VpcConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcConfiguration"}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateLicenseInput(v *AssociateLicenseInput) error {
 	if v == nil {
 		return nil
@@ -518,6 +584,11 @@ func validateOpCreateWorkspaceInput(v *CreateWorkspaceInput) error {
 	if v.AuthenticationProviders == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthenticationProviders"))
 	}
+	if v.VpcConfiguration != nil {
+		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -563,6 +634,21 @@ func validateOpDescribeWorkspaceAuthenticationInput(v *DescribeWorkspaceAuthenti
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkspaceAuthenticationInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeWorkspaceConfigurationInput(v *DescribeWorkspaceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkspaceConfigurationInput"}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
 	}
@@ -717,6 +803,24 @@ func validateOpUpdateWorkspaceAuthenticationInput(v *UpdateWorkspaceAuthenticati
 	}
 }
 
+func validateOpUpdateWorkspaceConfigurationInput(v *UpdateWorkspaceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorkspaceConfigurationInput"}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateWorkspaceInput(v *UpdateWorkspaceInput) error {
 	if v == nil {
 		return nil
@@ -724,6 +828,11 @@ func validateOpUpdateWorkspaceInput(v *UpdateWorkspaceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateWorkspaceInput"}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.VpcConfiguration != nil {
+		if err := validateVpcConfiguration(v.VpcConfiguration); err != nil {
+			invalidParams.AddNested("VpcConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "7409f174-a242-4870-8725-0b0a71cc5d1c",
+    "type": "feature",
+    "description": "This release adds support for Rule Lock for Recycle Bin, which allows you to lock retention rules so that they can no longer be modified or deleted.",
+    "modules": [
+        "service/rbin"
+    ]
+}

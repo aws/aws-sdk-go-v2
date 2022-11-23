@@ -2,6 +2,42 @@
 
 package types
 
+type ConflictExceptionReason string
+
+// Enum values for ConflictExceptionReason
+const (
+	ConflictExceptionReasonInvalidRuleState ConflictExceptionReason = "INVALID_RULE_STATE"
+)
+
+// Values returns all known values for ConflictExceptionReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConflictExceptionReason) Values() []ConflictExceptionReason {
+	return []ConflictExceptionReason{
+		"INVALID_RULE_STATE",
+	}
+}
+
+type LockState string
+
+// Enum values for LockState
+const (
+	LockStateLocked        LockState = "locked"
+	LockStatePendingUnlock LockState = "pending_unlock"
+	LockStateUnlocked      LockState = "unlocked"
+)
+
+// Values returns all known values for LockState. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LockState) Values() []LockState {
+	return []LockState{
+		"locked",
+		"pending_unlock",
+		"unlocked",
+	}
+}
+
 type ResourceNotFoundExceptionReason string
 
 // Enum values for ResourceNotFoundExceptionReason
@@ -85,6 +121,22 @@ const (
 func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExceptionReason {
 	return []ServiceQuotaExceededExceptionReason{
 		"SERVICE_QUOTA_EXCEEDED",
+	}
+}
+
+type UnlockDelayUnit string
+
+// Enum values for UnlockDelayUnit
+const (
+	UnlockDelayUnitDays UnlockDelayUnit = "DAYS"
+)
+
+// Values returns all known values for UnlockDelayUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UnlockDelayUnit) Values() []UnlockDelayUnit {
+	return []UnlockDelayUnit{
+		"DAYS",
 	}
 }
 

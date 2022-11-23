@@ -43,10 +43,10 @@ type CreateWorkspaceInput struct {
 	// This member is required.
 	AccountAccessType types.AccountAccessType
 
-	// Specifies whether this workspace uses SAML 2.0, Amazon Web Services Single Sign
-	// On, or both to authenticate users for using the Grafana console within a
-	// workspace. For more information, see User authentication in Amazon Managed
-	// Grafana
+	// Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor
+	// to Single Sign-On), or both to authenticate users for using the Grafana console
+	// within a workspace. For more information, see User authentication in Amazon
+	// Managed Grafana
 	// (https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html).
 	//
 	// This member is required.
@@ -55,14 +55,17 @@ type CreateWorkspaceInput struct {
 	// If you specify SERVICE_MANAGED on AWS Grafana console, Amazon Managed Grafana
 	// automatically creates the IAM roles and provisions the permissions that the
 	// workspace needs to use Amazon Web Services data sources and notification
-	// channels. In CLI mode, the permissionType SERVICE_MANAGED will not create the
-	// IAM role for you. If you specify CUSTOMER_MANAGED, you will manage those roles
-	// and permissions yourself. If you are creating this workspace in a member account
-	// of an organization that is not a delegated administrator account, and you want
-	// the workspace to access data sources in other Amazon Web Services accounts in
-	// the organization, you must choose CUSTOMER_MANAGED. For more information, see
-	// Amazon Managed Grafana permissions and policies for Amazon Web Services data
-	// sources and notification channels
+	// channels. In the CLI mode, the permissionType SERVICE_MANAGED will not create
+	// the IAM role for you. The ability for the Amazon Managed Grafana to create the
+	// IAM role on behalf of the user is supported only in the Amazon Managed Grafana
+	// AWS console. Use only the CUSTOMER_MANAGED permission type when creating a
+	// workspace in the CLI. If you specify CUSTOMER_MANAGED, you will manage those
+	// roles and permissions yourself. If you are creating this workspace in a member
+	// account of an organization that is not a delegated administrator account, and
+	// you want the workspace to access data sources in other Amazon Web Services
+	// accounts in the organization, you must choose CUSTOMER_MANAGED. For more
+	// information, see Amazon Managed Grafana permissions and policies for Amazon Web
+	// Services data sources and notification channels
 	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html).
 	//
 	// This member is required.
@@ -71,6 +74,14 @@ type CreateWorkspaceInput struct {
 	// A unique, case-sensitive, user-provided identifier to ensure the idempotency of
 	// the request.
 	ClientToken *string
+
+	// The configuration string for the workspace that you create. For more information
+	// about the format and configuration options available, see Working in your
+	// Grafana workspace
+	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html).
+	//
+	// This value conforms to the media type: application/json
+	Configuration *string
 
 	// The name of an IAM role that already exists to use with Organizations to access
 	// Amazon Web Services data sources and notification channels in other accounts in
@@ -83,6 +94,10 @@ type CreateWorkspaceInput struct {
 
 	// The list of tags associated with the workspace.
 	Tags map[string]string
+
+	// The configuration settings for an Amazon VPC that contains data sources for your
+	// Grafana workspace to connect to.
+	VpcConfiguration *types.VpcConfiguration
 
 	// Specify the Amazon Web Services data sources that you want to be queried in this
 	// workspace. Specifying these data sources here enables Amazon Managed Grafana to

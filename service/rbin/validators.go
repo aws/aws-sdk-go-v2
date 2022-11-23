@@ -110,6 +110,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpLockRule struct {
+}
+
+func (*validateOpLockRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpLockRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*LockRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpLockRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUnlockRule struct {
+}
+
+func (*validateOpUnlockRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUnlockRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UnlockRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUnlockRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,8 +230,16 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpLockRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpLockRule{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUnlockRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUnlockRule{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -200,6 +248,25 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRule{}, middleware.After)
+}
+
+func validateLockConfiguration(v *types.LockConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LockConfiguration"}
+	if v.UnlockDelay == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnlockDelay"))
+	} else if v.UnlockDelay != nil {
+		if err := validateUnlockDelay(v.UnlockDelay); err != nil {
+			invalidParams.AddNested("UnlockDelay", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateResourceTag(v *types.ResourceTag) error {
@@ -287,6 +354,24 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateUnlockDelay(v *types.UnlockDelay) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UnlockDelay"}
+	if v.UnlockDelayValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnlockDelayValue"))
+	}
+	if len(v.UnlockDelayUnit) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UnlockDelayUnit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRuleInput(v *CreateRuleInput) error {
 	if v == nil {
 		return nil
@@ -310,6 +395,11 @@ func validateOpCreateRuleInput(v *CreateRuleInput) error {
 	if v.ResourceTags != nil {
 		if err := validateResourceTags(v.ResourceTags); err != nil {
 			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LockConfiguration != nil {
+		if err := validateLockConfiguration(v.LockConfiguration); err != nil {
+			invalidParams.AddNested("LockConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -384,6 +474,28 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpLockRuleInput(v *LockRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LockRuleInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.LockConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LockConfiguration"))
+	} else if v.LockConfiguration != nil {
+		if err := validateLockConfiguration(v.LockConfiguration); err != nil {
+			invalidParams.AddNested("LockConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -398,6 +510,21 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUnlockRuleInput(v *UnlockRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UnlockRuleInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

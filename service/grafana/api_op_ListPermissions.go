@@ -52,9 +52,9 @@ type ListPermissionsInput struct {
 	// (Optional) Limits the results to only the user that matches this ID.
 	UserId *string
 
-	// (Optional) If you specify SSO_USER, then only the permissions of Amazon Web
-	// Services SSO users are returned. If you specify SSO_GROUP, only the permissions
-	// of Amazon Web Services SSO groups are returned.
+	// (Optional) If you specify SSO_USER, then only the permissions of IAM Identity
+	// Center users are returned. If you specify SSO_GROUP, only the permissions of IAM
+	// Identity Center groups are returned.
 	UserType types.UserType
 
 	noSmithyDocumentSerde

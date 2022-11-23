@@ -7,6 +7,27 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The specified retention rule lock request can't be completed.
+type ConflictException struct {
+	Message *string
+
+	Reason ConflictExceptionReason
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The service could not respond to the request due to an internal problem.
 type InternalServerException struct {
 	Message *string

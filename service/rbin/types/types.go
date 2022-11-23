@@ -6,6 +6,17 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Information about a retention rule lock configuration.
+type LockConfiguration struct {
+
+	// Information about the retention rule unlock delay.
+	//
+	// This member is required.
+	UnlockDelay *UnlockDelay
+
+	noSmithyDocumentSerde
+}
+
 // Information about the resource tags used to identify resources that are retained
 // by the retention rule.
 type ResourceTag struct {
@@ -49,6 +60,24 @@ type RuleSummary struct {
 	// The unique ID of the retention rule.
 	Identifier *string
 
+	// The lock state for the retention rule.
+	//
+	// * locked - The retention rule is locked
+	// and can't be modified or deleted.
+	//
+	// * pending_unlock - The retention rule has
+	// been unlocked but it is still within the unlock delay period. The retention rule
+	// can be modified or deleted only after the unlock delay period has expired.
+	//
+	// *
+	// unlocked - The retention rule is unlocked and it can be modified or deleted by
+	// any user with the required permissions.
+	//
+	// * null - The retention rule has never
+	// been locked. Once a retention rule has been locked, it can transition between
+	// the locked and unlocked states only; it can never transition back to null.
+	LockState LockState
+
 	// Information about the retention period for which the retention rule is to retain
 	// resources.
 	RetentionPeriod *RetentionPeriod
@@ -68,6 +97,26 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the retention rule unlock delay. The unlock delay is the
+// period after which a retention rule can be modified or edited after it has been
+// unlocked by a user with the required permissions. The retention rule can't be
+// modified or deleted during the unlock delay.
+type UnlockDelay struct {
+
+	// The unit of time in which to measure the unlock delay. Currently, the unlock
+	// delay can be measure only in days.
+	//
+	// This member is required.
+	UnlockDelayUnit UnlockDelayUnit
+
+	// The unlock delay period, measured in the unit specified for UnlockDelayUnit.
+	//
+	// This member is required.
+	UnlockDelayValue *int32
 
 	noSmithyDocumentSerde
 }
