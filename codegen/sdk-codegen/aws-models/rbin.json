@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,21 +31,6 @@
     "shapes": {
         "com.amazonaws.rbin#AmazonRecycleBin": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "rbin",
-                    "arnNamespace": "rbin",
-                    "cloudFormationName": "Rbin",
-                    "cloudTrailEventSource": "rbin.amazonaws.com",
-                    "endpointPrefix": "rbin"
-                },
-                "aws.auth#sigv4": {
-                    "name": "rbin"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This is the <i>Recycle Bin API Reference</i>. This documentation provides \n      descriptions and syntax for each of the actions and data types in Recycle Bin.</p>\n    \n         <p>Recycle Bin is a resource recovery feature that enables you to restore accidentally \n      deleted snapshots and EBS-backed AMIs. When using Recycle Bin, if your resources are \n      deleted, they are retained in the Recycle Bin for a time period that you specify.</p> \n    \n         <p>You can restore a resource from the Recycle Bin at any time before its retention period \n      expires. After you restore a resource from the Recycle Bin, the resource is removed from the \n      Recycle Bin, and you can then use it in the same way you use any other resource of that type \n      in your account. If the retention period expires and the resource is not restored, the resource \n      is permanently deleted from the Recycle Bin and is no longer available for recovery. For more \n      information about Recycle Bin, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-recycle-bin.html\">\n        Recycle Bin</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
-                "smithy.api#title": "Amazon Recycle Bin"
-            },
             "version": "2021-06-15",
             "operations": [
                 {
@@ -64,7 +49,13 @@
                     "target": "com.amazonaws.rbin#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.rbin#LockRule"
+                },
+                {
                     "target": "com.amazonaws.rbin#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.rbin#UnlockRule"
                 },
                 {
                     "target": "com.amazonaws.rbin#UntagResource"
@@ -72,7 +63,1970 @@
                 {
                     "target": "com.amazonaws.rbin#UpdateRule"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "rbin",
+                    "arnNamespace": "rbin",
+                    "cloudFormationName": "Rbin",
+                    "cloudTrailEventSource": "rbin.amazonaws.com",
+                    "endpointPrefix": "rbin"
+                },
+                "aws.auth#sigv4": {
+                    "name": "rbin"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>This is the <i>Recycle Bin API Reference</i>. This documentation provides \n      descriptions and syntax for each of the actions and data types in Recycle Bin.</p>\n    \n         <p>Recycle Bin is a resource recovery feature that enables you to restore accidentally \n      deleted snapshots and EBS-backed AMIs. When using Recycle Bin, if your resources are \n      deleted, they are retained in the Recycle Bin for a time period that you specify.</p> \n    \n         <p>You can restore a resource from the Recycle Bin at any time before its retention period \n      expires. After you restore a resource from the Recycle Bin, the resource is removed from the \n      Recycle Bin, and you can then use it in the same way you use any other resource of that type \n      in your account. If the retention period expires and the resource is not restored, the resource \n      is permanently deleted from the Recycle Bin and is no longer available for recovery. For more \n      information about Recycle Bin, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-recycle-bin.html\">\n        Recycle Bin</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                "smithy.api#title": "Amazon Recycle Bin",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://rbin-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://rbin-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://rbin.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://rbin.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-south-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-central-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-central-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-central-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-central-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-3",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-3",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "me-south-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "sa-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-3",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-3",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-3",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-3",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-2",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://rbin.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.rbin#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.rbin#ErrorMessage"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.rbin#ConflictExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified retention rule lock request can't be completed.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.rbin#ConflictExceptionReason": {
+            "type": "enum",
+            "members": {
+                "INVALID_RULE_STATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_RULE_STATE"
+                    }
+                }
+            }
         },
         "com.amazonaws.rbin#CreateRule": {
             "type": "operation",
@@ -136,6 +2090,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the resource tags to use to identify resources that are to be retained by a \n  tag-level retention rule. For tag-level retention rules, only deleted resources, of the specified resource type, that \n  have one or more of the specified tag key and value pairs are retained. If a resource is deleted, but it does not have \n  any of the specified tag key and value pairs, it is immediately deleted without being retained by the retention rule.</p>\n         <p>You can add the same tag key and value pair to a maximum or five retention rules.</p>\n         <p>To create a Region-level retention rule, omit this parameter. A Region-level retention rule \n      does not have any resource tags specified. It retains all deleted resources of the specified \n      resource type in the Region in which the rule is created, even if the resources are not tagged.</p>"
                     }
+                },
+                "LockConfiguration": {
+                    "target": "com.amazonaws.rbin#LockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the retention rule lock configuration.</p>"
+                    }
                 }
             }
         },
@@ -180,6 +2140,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> \n      state retain resources.</p>"
                     }
+                },
+                "LockConfiguration": {
+                    "target": "com.amazonaws.rbin#LockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the retention rule lock configuration.</p>"
+                    }
+                },
+                "LockState": {
+                    "target": "com.amazonaws.rbin#LockState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -192,6 +2164,9 @@
                 "target": "com.amazonaws.rbin#DeleteRuleResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.rbin#ConflictException"
+                },
                 {
                     "target": "com.amazonaws.rbin#InternalServerException"
                 },
@@ -316,6 +2291,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> \n      state retain resources.</p>"
                     }
+                },
+                "LockConfiguration": {
+                    "target": "com.amazonaws.rbin#LockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the retention rule lock configuration.</p>"
+                    }
+                },
+                "LockState": {
+                    "target": "com.amazonaws.rbin#LockState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "LockEndTime": {
+                    "target": "com.amazonaws.rbin#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the unlock delay is set to expire. Only returned \n      for retention rules that have been unlocked and that are still within the unlock \n      delay period.</p>"
+                    }
                 }
             }
         },
@@ -358,6 +2351,7 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
+                    "items": "Rules",
                     "pageSize": "MaxResults"
                 }
             }
@@ -388,6 +2382,12 @@
                     "target": "com.amazonaws.rbin#ResourceTags",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
+                    }
+                },
+                "LockState": {
+                    "target": "com.amazonaws.rbin#LockState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lock state of the retention rules to list. Only retention rules with the specified \n      lock state are returned.</p>"
                     }
                 }
             }
@@ -461,10 +2461,148 @@
                 }
             }
         },
+        "com.amazonaws.rbin#LockConfiguration": {
+            "type": "structure",
+            "members": {
+                "UnlockDelay": {
+                    "target": "com.amazonaws.rbin#UnlockDelay",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the retention rule unlock delay.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a retention rule lock configuration.</p>"
+            }
+        },
+        "com.amazonaws.rbin#LockRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rbin#LockRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rbin#LockRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rbin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rbin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rbin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rbin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Locks a retention rule. A locked retention rule can't be modified or deleted.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/rules/{Identifier}/lock",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.rbin#LockRuleRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.rbin#RuleIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the retention rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "LockConfiguration": {
+                    "target": "com.amazonaws.rbin#LockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the retention rule lock configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rbin#LockRuleResponse": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.rbin#RuleIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the retention rule.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.rbin#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention rule description.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.rbin#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type retained by the retention rule.</p>"
+                    }
+                },
+                "RetentionPeriod": {
+                    "target": "com.amazonaws.rbin#RetentionPeriod"
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.rbin#ResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rbin#RuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> \n      state retain resources.</p>"
+                    }
+                },
+                "LockConfiguration": {
+                    "target": "com.amazonaws.rbin#LockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the retention rule lock configuration.</p>"
+                    }
+                },
+                "LockState": {
+                    "target": "com.amazonaws.rbin#LockState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rbin#LockState": {
+            "type": "enum",
+            "members": {
+                "LOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "locked"
+                    }
+                },
+                "PENDING_UNLOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending_unlock"
+                    }
+                },
+                "UNLOCKED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "unlocked"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rbin#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 1000
@@ -497,14 +2635,14 @@
             }
         },
         "com.amazonaws.rbin#ResourceNotFoundExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RULE_NOT_FOUND",
-                        "name": "RULE_NOT_FOUND"
+            "type": "enum",
+            "members": {
+                "RULE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RULE_NOT_FOUND"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.rbin#ResourceTag": {
@@ -553,18 +2691,20 @@
             }
         },
         "com.amazonaws.rbin#ResourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "EBS_SNAPSHOT",
-                        "name": "EBS_SNAPSHOT"
-                    },
-                    {
-                        "value": "EC2_IMAGE",
-                        "name": "EC2_IMAGE"
+            "type": "enum",
+            "members": {
+                "EBS_SNAPSHOT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EBS_SNAPSHOT"
                     }
-                ]
+                },
+                "EC2_IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EC2_IMAGE"
+                    }
+                }
             }
         },
         "com.amazonaws.rbin#RetentionPeriod": {
@@ -590,20 +2730,19 @@
             }
         },
         "com.amazonaws.rbin#RetentionPeriodUnit": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DAYS",
-                        "name": "DAYS"
+            "type": "enum",
+            "members": {
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.rbin#RetentionPeriodValue": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 3650
@@ -627,18 +2766,20 @@
             }
         },
         "com.amazonaws.rbin#RuleStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "pending",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "available",
-                        "name": "AVAILABLE"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pending"
                     }
-                ]
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "available"
+                    }
+                }
             }
         },
         "com.amazonaws.rbin#RuleSummary": {
@@ -660,6 +2801,12 @@
                     "target": "com.amazonaws.rbin#RetentionPeriod",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the retention period for which the retention rule is to retain resources.</p>"
+                    }
+                },
+                "LockState": {
+                    "target": "com.amazonaws.rbin#LockState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -693,14 +2840,14 @@
             }
         },
         "com.amazonaws.rbin#ServiceQuotaExceededExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SERVICE_QUOTA_EXCEEDED",
-                        "name": "SERVICE_QUOTA_EXCEEDED"
+            "type": "enum",
+            "members": {
+                "SERVICE_QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_QUOTA_EXCEEDED"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.rbin#Tag": {
@@ -824,6 +2971,151 @@
                 "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
             }
         },
+        "com.amazonaws.rbin#TimeStamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.rbin#UnlockDelay": {
+            "type": "structure",
+            "members": {
+                "UnlockDelayValue": {
+                    "target": "com.amazonaws.rbin#UnlockDelayValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unlock delay period, measured in the unit specified for <b>\n      UnlockDelayUnit</b>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UnlockDelayUnit": {
+                    "target": "com.amazonaws.rbin#UnlockDelayUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of time in which to measure the unlock delay. Currently, the unlock delay can \n      be measure only in days.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the retention rule unlock delay. The unlock delay is the period after which \n      a retention rule can be modified or edited after it has been unlocked by a user with the required \n      permissions. The retention rule can't be modified or deleted during the unlock delay.</p>"
+            }
+        },
+        "com.amazonaws.rbin#UnlockDelayUnit": {
+            "type": "enum",
+            "members": {
+                "DAYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAYS"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rbin#UnlockDelayValue": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 7,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.rbin#UnlockRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rbin#UnlockRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rbin#UnlockRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rbin#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.rbin#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.rbin#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rbin#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Unlocks a retention rule. After a retention rule is unlocked, it can be modified or deleted \n      only after the unlock delay period expires.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/rules/{Identifier}/unlock",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.rbin#UnlockRuleRequest": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.rbin#RuleIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the retention rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rbin#UnlockRuleResponse": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.rbin#RuleIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the retention rule.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.rbin#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention rule description.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.rbin#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type retained by the retention rule.</p>"
+                    }
+                },
+                "RetentionPeriod": {
+                    "target": "com.amazonaws.rbin#RetentionPeriod"
+                },
+                "ResourceTags": {
+                    "target": "com.amazonaws.rbin#ResourceTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the resource tags used to identify resources that are retained by the retention \n      rule.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.rbin#RuleStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> \n      state retain resources.</p>"
+                    }
+                },
+                "LockConfiguration": {
+                    "target": "com.amazonaws.rbin#LockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the retention rule lock configuration.</p>"
+                    }
+                },
+                "LockState": {
+                    "target": "com.amazonaws.rbin#LockState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "LockEndTime": {
+                    "target": "com.amazonaws.rbin#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the unlock delay is set to expire. Only returned \n      for retention rules that have been unlocked and that are still within the unlock \n      delay period.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rbin#UntagResource": {
             "type": "operation",
             "input": {
@@ -887,6 +3179,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.rbin#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.rbin#InternalServerException"
                 },
                 {
@@ -897,7 +3192,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing Recycle Bin retention rule. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule\">\n      Update Recycle Bin retention rules</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Updates an existing Recycle Bin retention rule. You can update a retention rule's description, \n      resource tags, and retention period at any time after creation. You can't update a retention rule's \n      resource type after creation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin-working-with-rules.html#recycle-bin-update-rule\">\n      Update Recycle Bin retention rules</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/rules/{Identifier}",
@@ -931,7 +3226,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.rbin#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type to be retained by the retention rule. Currently, only Amazon EBS snapshots \n      and EBS-backed AMIs are supported. To retain snapshots, specify <code>EBS_SNAPSHOT</code>. To \n      retain EBS-backed AMIs, specify <code>EC2_IMAGE</code>.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>This parameter is currently not supported. You can't update a retention rule's resource type \n      after creation.</p>\n         </note>"
                     }
                 },
                 "ResourceTags": {
@@ -977,6 +3272,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the retention rule. Only retention rules that are in the <code>available</code> \n      state retain resources.</p>"
                     }
+                },
+                "LockState": {
+                    "target": "com.amazonaws.rbin#LockState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lock state for the retention rule.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>locked</code> - The retention rule is locked and can't be modified or deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>pending_unlock</code> - The retention rule has been unlocked but it is still within \n          the unlock delay period. The retention rule can be modified or deleted only after the unlock \n          delay period has expired.</p>\n            </li>\n            <li>\n               <p>\n                  <code>unlocked</code> - The retention rule is unlocked and it can be modified or deleted by \n          any user with the required permissions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>null</code> - The retention rule has never been locked. Once a retention rule has \n        been locked, it can transition between the <code>locked</code> and <code>unlocked</code> states \n        only; it can never transition back to <code>null</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "LockEndTime": {
+                    "target": "com.amazonaws.rbin#TimeStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which the unlock delay is set to expire. Only returned \n      for retention rules that have been unlocked and that are still within the unlock \n      delay period.</p>"
+                    }
                 }
             }
         },
@@ -1000,18 +3307,20 @@
             }
         },
         "com.amazonaws.rbin#ValidationExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INVALID_PAGE_TOKEN",
-                        "name": "INVALID_PAGE_TOKEN"
-                    },
-                    {
-                        "value": "INVALID_PARAMETER_VALUE",
-                        "name": "INVALID_PARAMETER_VALUE"
+            "type": "enum",
+            "members": {
+                "INVALID_PAGE_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PAGE_TOKEN"
                     }
-                ]
+                },
+                "INVALID_PARAMETER_VALUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_PARAMETER_VALUE"
+                    }
+                }
             }
         }
     }
