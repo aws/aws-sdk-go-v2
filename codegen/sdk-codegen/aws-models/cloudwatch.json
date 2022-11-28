@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -48,28 +48,29 @@
             }
         },
         "com.amazonaws.cloudwatch#ActionsEnabled": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.cloudwatch#ActionsSuppressedBy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "WaitPeriod",
-                        "name": "WaitPeriod"
-                    },
-                    {
-                        "value": "ExtensionPeriod",
-                        "name": "ExtensionPeriod"
-                    },
-                    {
-                        "value": "Alarm",
-                        "name": "Alarm"
+            "type": "enum",
+            "members": {
+                "WaitPeriod": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WaitPeriod"
                     }
-                ]
+                },
+                "ExtensionPeriod": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ExtensionPeriod"
+                    }
+                },
+                "Alarm": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Alarm"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#ActionsSuppressedReason": {
@@ -189,18 +190,20 @@
             }
         },
         "com.amazonaws.cloudwatch#AlarmType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CompositeAlarm",
-                        "name": "CompositeAlarm"
-                    },
-                    {
-                        "value": "MetricAlarm",
-                        "name": "MetricAlarm"
+            "type": "enum",
+            "members": {
+                "CompositeAlarm": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CompositeAlarm"
                     }
-                ]
+                },
+                "MetricAlarm": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MetricAlarm"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#AlarmTypes": {
@@ -333,37 +336,43 @@
             }
         },
         "com.amazonaws.cloudwatch#AnomalyDetectorStateValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING_TRAINING",
-                        "name": "PENDING_TRAINING"
-                    },
-                    {
-                        "value": "TRAINED_INSUFFICIENT_DATA",
-                        "name": "TRAINED_INSUFFICIENT_DATA"
-                    },
-                    {
-                        "value": "TRAINED",
-                        "name": "TRAINED"
+            "type": "enum",
+            "members": {
+                "PENDING_TRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_TRAINING"
                     }
-                ]
+                },
+                "TRAINED_INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRAINED_INSUFFICIENT_DATA"
+                    }
+                },
+                "TRAINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRAINED"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#AnomalyDetectorType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SINGLE_METRIC",
-                        "name": "SINGLE_METRIC"
-                    },
-                    {
-                        "value": "METRIC_MATH",
-                        "name": "METRIC_MATH"
+            "type": "enum",
+            "members": {
+                "SINGLE_METRIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE_METRIC"
                     }
-                ]
+                },
+                "METRIC_MATH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METRIC_MATH"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#AnomalyDetectorTypes": {
@@ -394,38 +403,50 @@
             }
         },
         "com.amazonaws.cloudwatch#ComparisonOperator": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GreaterThanOrEqualToThreshold",
-                        "name": "GreaterThanOrEqualToThreshold"
-                    },
-                    {
-                        "value": "GreaterThanThreshold",
-                        "name": "GreaterThanThreshold"
-                    },
-                    {
-                        "value": "LessThanThreshold",
-                        "name": "LessThanThreshold"
-                    },
-                    {
-                        "value": "LessThanOrEqualToThreshold",
-                        "name": "LessThanOrEqualToThreshold"
-                    },
-                    {
-                        "value": "LessThanLowerOrGreaterThanUpperThreshold",
-                        "name": "LessThanLowerOrGreaterThanUpperThreshold"
-                    },
-                    {
-                        "value": "LessThanLowerThreshold",
-                        "name": "LessThanLowerThreshold"
-                    },
-                    {
-                        "value": "GreaterThanUpperThreshold",
-                        "name": "GreaterThanUpperThreshold"
+            "type": "enum",
+            "members": {
+                "GreaterThanOrEqualToThreshold": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThanOrEqualToThreshold"
                     }
-                ]
+                },
+                "GreaterThanThreshold": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThanThreshold"
+                    }
+                },
+                "LessThanThreshold": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThanThreshold"
+                    }
+                },
+                "LessThanOrEqualToThreshold": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThanOrEqualToThreshold"
+                    }
+                },
+                "LessThanLowerOrGreaterThanUpperThreshold": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThanLowerOrGreaterThanUpperThreshold"
+                    }
+                },
+                "LessThanLowerThreshold": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LessThanLowerThreshold"
+                    }
+                },
+                "GreaterThanUpperThreshold": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GreaterThanUpperThreshold"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#CompositeAlarm": {
@@ -615,6 +636,7 @@
                 "Size": {
                     "target": "com.amazonaws.cloudwatch#Size",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the dashboard, in bytes.</p>"
                     }
                 }
@@ -761,10 +783,7 @@
             }
         },
         "com.amazonaws.cloudwatch#DatapointValue": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.cloudwatch#DatapointValueMap": {
             "type": "map",
@@ -790,7 +809,6 @@
         "com.amazonaws.cloudwatch#DatapointsToAlarm": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -810,7 +828,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified alarms. You can delete up to 100 alarms in one operation. However, this total can include no more\n\t\t\tthan one composite alarm. For example, you could delete 99 metric alarms and one composite alarms with one operation, but you can't\n\t\t\tdelete two composite alarms with one operation.</p>\n\t\t       <p>\n\t\t\tIn the event of an error, no alarms are\n\t\t\tdeleted.</p>\n\t\t       <note>\n            <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and \n\t\t\tcomposite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle \n\t\t\tbecause there is always still a composite alarm that depends on that alarm that you want to delete.</p>\n\t\t\t         <p>To get out of such a situation, you must\n\t\t\t\tbreak the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest\n\t\t\t\tchange to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>False</code>. </p>\n\t\t\t         <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path.\n\t\t\t</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes the specified alarms. You can delete up to 100 alarms in one operation. However, this total can include no more\n\t\t\tthan one composite alarm. For example, you could delete 99 metric alarms and one composite alarms with one operation, but you can't\n\t\t\tdelete two composite alarms with one operation.</p>\n\t\t       <p>\n\t\t\tIn the event of an error, no alarms are\n\t\t\tdeleted.</p>\n\t\t       <note>\n            <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and \n\t\t\tcomposite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle \n\t\t\tbecause there is always still a composite alarm that depends on that alarm that you want to delete.</p>\n\t\t\t         <p>To get out of such a situation, you must\n\t\t\t\tbreak the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest\n\t\t\t\tchange to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>false</code>. </p>\n\t\t\t         <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path.\n\t\t\t</p>\n         </note>"
             }
         },
         "com.amazonaws.cloudwatch#DeleteAlarmsInput": {
@@ -1722,7 +1740,6 @@
         "com.amazonaws.cloudwatch#EvaluationPeriods": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -2007,10 +2024,7 @@
             "type": "string"
         },
         "com.amazonaws.cloudwatch#GetMetricDataMaxDatapoints": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.cloudwatch#GetMetricDataOutput": {
             "type": "structure",
@@ -2213,7 +2227,7 @@
                 "FirehoseArn": {
                     "target": "com.amazonaws.cloudwatch#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Kinesis Firehose delivery stream that is used by\n\t\tthis metric stream.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Kinesis Data Firehose delivery stream that is used by this metric\n\t\t\tstream.</p>"
                     }
                 },
                 "RoleArn": {
@@ -2297,24 +2311,6 @@
         },
         "com.amazonaws.cloudwatch#GraniteServiceVersion20100801": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "CloudWatch",
-                    "arnNamespace": "monitoring",
-                    "cloudFormationName": "CloudWatch",
-                    "cloudTrailEventSource": "cloudwatch.amazonaws.com",
-                    "endpointPrefix": "monitoring"
-                },
-                "aws.auth#sigv4": {
-                    "name": "monitoring"
-                },
-                "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<p>Amazon CloudWatch monitors your Amazon Web Services (Amazon Web Services) resources and the\n\t\t\tapplications you run on Amazon Web Services in real time. You can use CloudWatch to collect and track\n\t\t\tmetrics, which are the variables you want to measure for your resources and\n\t\t\tapplications.</p>\n\n\t\t       <p>CloudWatch alarms send notifications or automatically change the resources you are monitoring based on rules\n\t\t\tthat you define. For example, you can monitor the CPU usage and disk reads and writes of your Amazon EC2\n\t\t\tinstances. Then, use this data to determine whether you should launch\n\t\t\tadditional instances to handle increased load. You can also use this data to stop\n\t\t\tunder-used instances to save\n\t\t\tmoney.</p>\n\n\t\t       <p>In addition to monitoring the built-in metrics that come with Amazon Web Services, you can monitor\n\t\t\tyour own custom metrics. With CloudWatch, you gain system-wide visibility into resource\n\t\t\tutilization, application performance, and operational health.</p>",
-                "smithy.api#title": "Amazon CloudWatch",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://monitoring.amazonaws.com/doc/2010-08-01/"
-                }
-            },
             "version": "2010-08-01",
             "operations": [
                 {
@@ -2431,7 +2427,2216 @@
                 {
                     "target": "com.amazonaws.cloudwatch#UntagResource"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "CloudWatch",
+                    "arnNamespace": "monitoring",
+                    "cloudFormationName": "CloudWatch",
+                    "cloudTrailEventSource": "cloudwatch.amazonaws.com",
+                    "endpointPrefix": "monitoring"
+                },
+                "aws.auth#sigv4": {
+                    "name": "monitoring"
+                },
+                "aws.protocols#awsQuery": {},
+                "smithy.api#documentation": "<p>Amazon CloudWatch monitors your Amazon Web Services (Amazon Web Services) resources and the\n\t\t\tapplications you run on Amazon Web Services in real time. You can use CloudWatch to collect and track\n\t\t\tmetrics, which are the variables you want to measure for your resources and\n\t\t\tapplications.</p>\n\n\t\t       <p>CloudWatch alarms send notifications or automatically change the resources you are monitoring based on rules\n\t\t\tthat you define. For example, you can monitor the CPU usage and disk reads and writes of your Amazon EC2\n\t\t\tinstances. Then, use this data to determine whether you should launch\n\t\t\tadditional instances to handle increased load. You can also use this data to stop\n\t\t\tunder-used instances to save\n\t\t\tmoney.</p>\n\n\t\t       <p>In addition to monitoring the built-in metrics that come with Amazon Web Services, you can monitor\n\t\t\tyour own custom metrics. With CloudWatch, you gain system-wide visibility into resource\n\t\t\tutilization, application performance, and operational health.</p>",
+                "smithy.api#title": "Amazon CloudWatch",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://monitoring.amazonaws.com/doc/2010-08-01/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://monitoring-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "stringEquals",
+                                                                    "argv": [
+                                                                        "aws-us-gov",
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "name"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "endpoint": {
+                                                                "url": "https://monitoring.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://monitoring-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://monitoring.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://monitoring.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-iso-west-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-iso-west-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-central-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-central-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ca-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ca-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ca-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ca-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.ap-southeast-4.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.ap-southeast-4.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://monitoring.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.cloudwatch#HistoryData": {
             "type": "string",
@@ -2443,22 +4648,26 @@
             }
         },
         "com.amazonaws.cloudwatch#HistoryItemType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ConfigurationUpdate",
-                        "name": "ConfigurationUpdate"
-                    },
-                    {
-                        "value": "StateUpdate",
-                        "name": "StateUpdate"
-                    },
-                    {
-                        "value": "Action",
-                        "name": "Action"
+            "type": "enum",
+            "members": {
+                "ConfigurationUpdate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ConfigurationUpdate"
                     }
-                ]
+                },
+                "StateUpdate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StateUpdate"
+                    }
+                },
+                "Action": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Action"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#HistorySummary": {
@@ -2468,6 +4677,12 @@
                     "min": 1,
                     "max": 255
                 }
+            }
+        },
+        "com.amazonaws.cloudwatch#IncludeLinkedAccounts": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
             }
         },
         "com.amazonaws.cloudwatch#InsightRule": {
@@ -2504,6 +4719,7 @@
                 "ManagedRule": {
                     "target": "com.amazonaws.cloudwatch#InsightRuleIsManaged",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>\n\t\t\tAn optional built-in rule that Amazon Web Services manages.\n\t\t</p>"
                     }
                 }
@@ -2607,12 +4823,14 @@
             }
         },
         "com.amazonaws.cloudwatch#InsightRuleIsManaged": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.cloudwatch#InsightRuleMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -2738,22 +4956,13 @@
             }
         },
         "com.amazonaws.cloudwatch#InsightRuleUnboundDouble": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.cloudwatch#InsightRuleUnboundInteger": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.cloudwatch#InsightRuleUnboundLong": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.cloudwatch#InsightRules": {
             "type": "list",
@@ -3094,7 +5303,6 @@
         "com.amazonaws.cloudwatch#ListMetricStreamsMaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -3135,11 +5343,10 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the specified metrics. You can use the returned metrics with\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a> to obtain statistical data.</p>\n\t\t       <p>Up to 500 results are returned for any one call. To retrieve additional results,\n\t\t\tuse the returned token with subsequent calls.</p>\n\t\t       <p>After you create a metric, allow up to 15 minutes before the metric appears.\n\t\t\tYou can see statistics about the metric sooner by using <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p>\n\n\t        <p>\n            <code>ListMetrics</code> doesn't return information about metrics if those metrics haven't \n\treported data in the past two weeks. To retrieve those metrics, use \n\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or \n\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p>",
+                "smithy.api#documentation": "<p>List the specified metrics. You can use the returned metrics with <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a> to get statistical data.</p>\n\t\t       <p>Up to 500 results are returned for any one call. To retrieve additional results,\n\t\t\tuse the returned token with subsequent calls.</p>\n\t\t       <p>After you create a metric, allow up to 15 minutes for the metric to appear. To see metric\n\t\t\tstatistics sooner, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p>\n\t\t\n\t\t       <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n\t\t\tview metrics from the linked source accounts. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>\n\n\t        <p>\n            <code>ListMetrics</code> doesn't return information about metrics if those metrics haven't \n\treported data in the past two weeks. To retrieve those metrics, use \n\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html\">GetMetricData</a> or \n\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html\">GetMetricStatistics</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
-                    "outputToken": "NextToken",
-                    "items": "Metrics"
+                    "outputToken": "NextToken"
                 }
             }
         },
@@ -3155,7 +5362,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.cloudwatch#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the metric to filter against.  Only the metrics with names that match exactly \n\t\t\twill be returned.</p>"
+                        "smithy.api#documentation": "<p>The name of the metric to filter against. Only the metrics with names that match exactly\n\t\t\twill be returned.</p>"
                     }
                 },
                 "Dimensions": {
@@ -3175,6 +5382,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>To filter the results to show only metrics that have had data points published\n\t\t\tin the past three hours, specify this parameter\n\t\t\twith a value of <code>PT3H</code>. This is the only valid value\n\t\t\tfor this parameter.</p>\n\t\t       <p>The results that are returned are an approximation of the value you specify. There\n\t\tis a low probability that the returned results include metrics with last published\n\t\tdata as much as 40 minutes more than the specified time interval.</p>"
                     }
+                },
+                "IncludeLinkedAccounts": {
+                    "target": "com.amazonaws.cloudwatch#IncludeLinkedAccounts",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>If you are using this operation in a monitoring account, \n\t\t\tspecify <code>true</code> to include metrics from source accounts in the returned data.</p>\n\t\t       <p>The default is <code>false</code>.</p>"
+                    }
+                },
+                "OwningAccount": {
+                    "target": "com.amazonaws.cloudwatch#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you use this operation in a monitoring account, use this field to return metrics only from one source account.\n\t\t\tTo do so, specify that source account ID in this field, and also\n\t\tspecify <code>true</code> for <code>IncludeLinkedAccounts</code>.</p>"
+                    }
                 }
             }
         },
@@ -3191,6 +5411,12 @@
                     "target": "com.amazonaws.cloudwatch#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token that marks the start of the next batch of returned results. </p>"
+                    }
+                },
+                "OwningAccounts": {
+                    "target": "com.amazonaws.cloudwatch#OwningAccounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you are using this operation in a monitoring account, this array contains the account IDs of the source \n\t\t\taccounts where the metrics in the returned data\n\t\tare from.</p>\n\t\t       <p>This field is a 1:1 mapping between each metric that is returned and the ID of the owning account.</p>"
                     }
                 }
             }
@@ -3332,7 +5558,6 @@
         "com.amazonaws.cloudwatch#MaxRecords": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3342,7 +5567,6 @@
         "com.amazonaws.cloudwatch#MaxReturnedResultsCount": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -3622,7 +5846,7 @@
                 "ReturnData": {
                     "target": "com.amazonaws.cloudwatch#ReturnData",
                     "traits": {
-                        "smithy.api#documentation": "<p>When used in <code>GetMetricData</code>, this option indicates whether to return the\n\t\t\ttimestamps and raw data values of this metric. If you are performing this call just to\n\t\t\tdo math expressions and do not also need the raw data returned, you can specify\n\t\t\t\t<code>False</code>. If you omit this, the default of <code>True</code> is\n\t\t\tused.</p>\n\t\t       <p>When used in <code>PutMetricAlarm</code>, specify <code>True</code> for the one expression result to use as the alarm. For all \n\t\tother metrics and expressions in the same <code>PutMetricAlarm</code> operation, specify <code>ReturnData</code> as False.</p>"
+                        "smithy.api#documentation": "<p>When used in <code>GetMetricData</code>, this option indicates whether to return the\n\t\t\ttimestamps and raw data values of this metric. If you are performing this call just to\n\t\t\tdo math expressions and do not also need the raw data returned, you can specify\n\t\t\t\t<code>false</code>. If you omit this, the default of <code>true</code> is\n\t\t\tused.</p>\n\t\t       <p>When used in <code>PutMetricAlarm</code>, specify <code>true</code> for the one expression result to use as the alarm. For all \n\t\tother metrics and expressions in the same <code>PutMetricAlarm</code> operation, specify <code>ReturnData</code> as False.</p>"
                     }
                 },
                 "Period": {
@@ -3634,12 +5858,12 @@
                 "AccountId": {
                     "target": "com.amazonaws.cloudwatch#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the account where the metrics are located, if this is a cross-account alarm.</p>\n\t\t       <p>Use this field only for <code>PutMetricAlarm</code> operations. It is not used in \n\t\t<code>GetMetricData</code> operations.</p>"
+                        "smithy.api#documentation": "<p>The ID of the account where the metrics are located.</p>\n\t\t       <p>If you are performing a <code>GetMetricData</code> operation in a monitoring account, use this to specify \n\t\t\twhich account to retrieve this metric from.</p>\n\t\t       <p>If you are performing a <code>PutMetricAlarm</code> operation, use this to specify \n\t\t\twhich account contains the metric that the alarm is watching.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported\n\t\t\tuse of this structure is different for those two operations.</p>\n\t\t       <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving\n\t\t\ta batch set of data for one metric, or is performing a Metrics Insights query or a math expression. A\n\t\t\tsingle <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code>\n\t\t\tstructures.</p>\n\t\t       <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a\n\t\t\tmetric math expression. Each <code>MetricDataQuery</code> in the array specifies either\n\t\t\ta metric to retrieve, or a math expression to be performed on retrieved metrics. A\n\t\t\tsingle <code>PutMetricAlarm</code> call can include up to 20\n\t\t\t\t<code>MetricDataQuery</code> structures in the array. The 20 structures can include\n\t\t\tas many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a\n\t\t\tmetric, and as many as 10 structures that contain the <code>Expression</code> parameter\n\t\t\tto perform a math expression. Of those <code>Expression</code> structures, one must have <code>True</code>\n\t\tas the value for <code>ReturnData</code>. The result of this expression is the value the alarm watches.</p>\n\n\t\t       <p>Any expression used in a <code>PutMetricAlarm</code>\n\t\t\toperation must return a single time series. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User\n\t\t\t\tGuide</i>.</p>\n\n\t\t       <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code>\n\t\t\toperation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>"
+                "smithy.api#documentation": "<p>This structure is used in both <code>GetMetricData</code> and <code>PutMetricAlarm</code>. The supported\n\t\t\tuse of this structure is different for those two operations.</p>\n\t\t       <p>When used in <code>GetMetricData</code>, it indicates the metric data to return, and whether this call is just retrieving\n\t\t\ta batch set of data for one metric, or is performing a Metrics Insights query or a math expression. A\n\t\t\tsingle <code>GetMetricData</code> call can include up to 500 <code>MetricDataQuery</code>\n\t\t\tstructures.</p>\n\t\t       <p>When used in <code>PutMetricAlarm</code>, it enables you to create an alarm based on a\n\t\t\tmetric math expression. Each <code>MetricDataQuery</code> in the array specifies either\n\t\t\ta metric to retrieve, or a math expression to be performed on retrieved metrics. A\n\t\t\tsingle <code>PutMetricAlarm</code> call can include up to 20\n\t\t\t\t<code>MetricDataQuery</code> structures in the array. The 20 structures can include\n\t\t\tas many as 10 structures that contain a <code>MetricStat</code> parameter to retrieve a\n\t\t\tmetric, and as many as 10 structures that contain the <code>Expression</code> parameter\n\t\t\tto perform a math expression. Of those <code>Expression</code> structures, one must have <code>true</code>\n\t\tas the value for <code>ReturnData</code>. The result of this expression is the value the alarm watches.</p>\n\n\t\t       <p>Any expression used in a <code>PutMetricAlarm</code>\n\t\t\toperation must return a single time series. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/using-metric-math.html#metric-math-syntax\">Metric Math Syntax and Functions</a> in the <i>Amazon CloudWatch User\n\t\t\t\tGuide</i>.</p>\n\n\t\t       <p>Some of the parameters of this structure also have different uses whether you are using this structure in a <code>GetMetricData</code>\n\t\t\toperation or a <code>PutMetricAlarm</code> operation. These differences are explained in the following parameter list.</p>"
             }
         },
         "com.amazonaws.cloudwatch#MetricDataResult": {
@@ -3788,7 +6012,7 @@
                 "MetricDataQueries": {
                     "target": "com.amazonaws.cloudwatch#MetricDataQueries",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of metric data query structures \n\t\t\tthat enables you to create an anomaly detector \n\t\t\tbased on the result of a metric math expression.\n\t\t\tEach item in <code>MetricDataQueries</code> gets a metric or performs a math expression.\n\t\t\tOne item in <code>MetricDataQueries</code> is the expression \n\t\t\tthat provides the time series \n\t\t\tthat the anomaly detector uses as input. \n\t\t\tDesignate the expression by setting <code>ReturnData</code> to <code>True</code> \n\t\t\tfor this object in the array.\n\t\t\tFor all other expressions and metrics, set <code>ReturnData</code> to <code>False</code>.\n\t\t\tThe designated expression must return \n\t\t\ta single time series.</p>"
+                        "smithy.api#documentation": "<p>An array of metric data query structures \n\t\t\tthat enables you to create an anomaly detector \n\t\t\tbased on the result of a metric math expression.\n\t\t\tEach item in <code>MetricDataQueries</code> gets a metric or performs a math expression.\n\t\t\tOne item in <code>MetricDataQueries</code> is the expression \n\t\t\tthat provides the time series \n\t\t\tthat the anomaly detector uses as input. \n\t\t\tDesignate the expression by setting <code>ReturnData</code> to <code>true</code> \n\t\t\tfor this object in the array.\n\t\t\tFor all other expressions and metrics, set <code>ReturnData</code> to <code>false</code>.\n\t\t\tThe designated expression must return \n\t\t\ta single time series.</p>"
                     }
                 }
             },
@@ -3932,18 +6156,22 @@
             }
         },
         "com.amazonaws.cloudwatch#MetricStreamOutputFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "json",
-                        "name": "JSON"
-                    },
-                    {
-                        "value": "opentelemetry0.7",
-                        "name": "OPEN_TELEMETRY_0_7"
+            "type": "enum",
+            "members": {
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "json"
                     }
-                ],
+                },
+                "OPEN_TELEMETRY_0_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "opentelemetry0.7"
+                    }
+                }
+            },
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
@@ -4066,6 +6294,12 @@
         "com.amazonaws.cloudwatch#OutputFormat": {
             "type": "string"
         },
+        "com.amazonaws.cloudwatch#OwningAccounts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatch#AccountId"
+            }
+        },
         "com.amazonaws.cloudwatch#PartialFailure": {
             "type": "structure",
             "members": {
@@ -4101,7 +6335,6 @@
         "com.amazonaws.cloudwatch#Period": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -4213,7 +6446,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a <i>composite alarm</i>. When you create a composite\n\t\t\talarm, you specify a rule expression for the alarm that takes into account the alarm\n\t\t\tstates of other alarms that you have created. The composite alarm goes into ALARM state\n\t\t\tonly if all conditions of the rule are met.</p>\n\t\t       <p>The alarms specified in a composite alarm's rule expression can include metric alarms\n\t\t\tand other composite alarms. The rule expression of a composite alarm can include as many as 100 underlying alarms. \n\t\t\tAny single alarm can be included in the rule expressions of as many as 150 composite alarms.</p>\n\t\t       <p>Using composite alarms can reduce\n\t\t\talarm noise. You can create multiple metric alarms,\n\t\t\tand also create a composite alarm and\n\t\t\tset up alerts only\n\t\t\tfor the composite alarm. For example, you could create a composite\n\t\t\talarm that goes into ALARM state only when more than one of the underlying metric alarms\n\t\t\tare in ALARM state.</p>\n\t\t       <p>Currently, the only alarm actions that can be taken by composite alarms are notifying\n\t\t\tSNS topics.</p>\n\t\t       <note>\n            <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and \n\t\t\tcomposite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle \n\t\t\tbecause there is always still a composite alarm that depends on that alarm that you want to delete.</p>\n\t\t\t         <p>To get out of such a situation, you must\n\t\t\tbreak the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest\n\t\t\tchange to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>False</code>. </p>\n\t\t\t         <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path.\n\t\t</p>\n         </note>\n\t\t       <p>When this operation creates an alarm, the alarm state is immediately set to\n\t\t\t\t<code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n\t\t\tappropriately. Any actions associated with the new state are then executed. For a\n\t\t\tcomposite alarm, this initial time after creation is the only time that\n\t\t\tthe\n\t\t\talarm can be in <code>INSUFFICIENT_DATA</code> state.</p>\n\t\t       <p>When you update an existing alarm, its state is left unchanged, but the update\n\t\t\tcompletely overwrites the previous configuration of the alarm.</p>\n\t\t\n\t\t       <p>To use this operation, you must be signed on with \n\t\t\tthe <code>cloudwatch:PutCompositeAlarm</code> permission that is scoped to <code>*</code>. You can't create a\n\t\t\tcomposite alarms if your <code>cloudwatch:PutCompositeAlarm</code> permission has a narrower scope.</p>\n\t\t\n\t\t       <p>If you are an IAM user, you must have <code>iam:CreateServiceLinkedRole</code> to create\n\t\t\ta composite alarm that has Systems Manager OpsItem actions.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a <i>composite alarm</i>. When you create a composite\n\t\t\talarm, you specify a rule expression for the alarm that takes into account the alarm\n\t\t\tstates of other alarms that you have created. The composite alarm goes into ALARM state\n\t\t\tonly if all conditions of the rule are met.</p>\n\t\t       <p>The alarms specified in a composite alarm's rule expression can include metric alarms\n\t\t\tand other composite alarms. The rule expression of a composite alarm can include as many as 100 underlying alarms. \n\t\t\tAny single alarm can be included in the rule expressions of as many as 150 composite alarms.</p>\n\t\t       <p>Using composite alarms can reduce\n\t\t\talarm noise. You can create multiple metric alarms,\n\t\t\tand also create a composite alarm and\n\t\t\tset up alerts only\n\t\t\tfor the composite alarm. For example, you could create a composite\n\t\t\talarm that goes into ALARM state only when more than one of the underlying metric alarms\n\t\t\tare in ALARM state.</p>\n\t\t       <p>Currently, the only alarm actions that can be taken by composite alarms are notifying\n\t\t\tSNS topics.</p>\n\t\t       <note>\n            <p>It is possible to create a loop or cycle of composite alarms, where composite alarm A depends on composite alarm B, and \n\t\t\tcomposite alarm B also depends on composite alarm A. In this scenario, you can't delete any composite alarm that is part of the cycle \n\t\t\tbecause there is always still a composite alarm that depends on that alarm that you want to delete.</p>\n\t\t\t         <p>To get out of such a situation, you must\n\t\t\tbreak the cycle by changing the rule of one of the composite alarms in the cycle to remove a dependency that creates the cycle. The simplest\n\t\t\tchange to make to break a cycle is to change the <code>AlarmRule</code> of one of the alarms to <code>false</code>. </p>\n\t\t\t         <p>Additionally, the evaluation of composite alarms stops if CloudWatch detects a cycle in the evaluation path.\n\t\t</p>\n         </note>\n\t\t       <p>When this operation creates an alarm, the alarm state is immediately set to\n\t\t\t\t<code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n\t\t\tappropriately. Any actions associated with the new state are then executed. For a\n\t\t\tcomposite alarm, this initial time after creation is the only time that\n\t\t\tthe\n\t\t\talarm can be in <code>INSUFFICIENT_DATA</code> state.</p>\n\t\t       <p>When you update an existing alarm, its state is left unchanged, but the update\n\t\t\tcompletely overwrites the previous configuration of the alarm.</p>\n\t\t\n\t\t       <p>To use this operation, you must be signed on with \n\t\t\tthe <code>cloudwatch:PutCompositeAlarm</code> permission that is scoped to <code>*</code>. You can't create a\n\t\t\tcomposite alarms if your <code>cloudwatch:PutCompositeAlarm</code> permission has a narrower scope.</p>\n\t\t\n\t\t       <p>If you are an IAM user, you must have <code>iam:CreateServiceLinkedRole</code> to create\n\t\t\ta composite alarm that has Systems Manager OpsItem actions.</p>"
             }
         },
         "com.amazonaws.cloudwatch#PutCompositeAlarmInput": {
@@ -4668,7 +6901,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics \n\t\t\tto Amazon Web Services destinations including\n\t\t\tAmazon S3 and to many third-party solutions.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html\">\n\t\tUsing Metric Streams</a>.</p>\n\t\t       <p>To create a metric stream, \n\t\t\tyou must be logged on to an account that has the <code>iam:PassRole</code> permission\n\t\t\tand either the <code>CloudWatchFullAccess</code>\n\t\tpolicy or the <code>cloudwatch:PutMetricStream</code> \n\t\tpermission.</p>\n\t\t       <p>When you create or update a metric stream, you choose one of the following:</p>\n\t\t       <ul>\n            <li>\n               <p>Stream metrics from all metric namespaces in the account.</p>\n            </li>\n            <li>\n               <p>Stream metrics from all metric namespaces in the account, except\n\t\t\t\tfor the namespaces that you list in <code>ExcludeFilters</code>.</p>\n            </li>\n            <li>\n               <p>Stream metrics from only the metric namespaces that you list in \n\t\t\t\t<code>IncludeFilters</code>.</p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>, <code>SUM</code>, \n\t\t\tand <code>SAMPLECOUNT</code> statistics for each metric that is streamed. You can use the\n\t\t\t<code>StatisticsConfigurations</code> parameter to have \n\t\t\tthe metric stream also send additional statistics in the stream. Streaming additional statistics incurs\n\t\t\tadditional costs. For more information, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>. </p>\n\t\t\n\t\t       <p>When you use <code>PutMetricStream</code> to create a new metric stream, the stream \n\t\tis created in the <code>running</code> state. If you use it to update an existing stream, \n\t\tthe state of the stream is not changed.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a metric stream. Metric streams can automatically stream CloudWatch\n\t\t\tmetrics to Amazon Web Services destinations, including Amazon S3, and to many third-party\n\t\t\tsolutions.</p>\n\t\t       <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html\">\n\t\tUsing Metric Streams</a>.</p>\n\t\t       <p>To create a metric stream, you must be signed in to an account that has the\n\t\t\t\t<code>iam:PassRole</code> permission and either the\n\t\t\t\t<code>CloudWatchFullAccess</code> policy or the\n\t\t\t\t<code>cloudwatch:PutMetricStream</code> permission.</p>\n\t\t       <p>When you create or update a metric stream, you choose one of the following:</p>\n\t\t       <ul>\n            <li>\n               <p>Stream metrics from all metric namespaces in the account.</p>\n            </li>\n            <li>\n               <p>Stream metrics from all metric namespaces in the account, except\n\t\t\t\tfor the namespaces that you list in <code>ExcludeFilters</code>.</p>\n            </li>\n            <li>\n               <p>Stream metrics from only the metric namespaces that you list in \n\t\t\t\t<code>IncludeFilters</code>.</p>\n            </li>\n         </ul>\n\t\t\n\t\t       <p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>,\n\t\t\t\t<code>SUM</code>, and <code>SAMPLECOUNT</code> statistics for each metric that is\n\t\t\tstreamed. You can use the <code>StatisticsConfigurations</code> parameter to have the\n\t\t\tmetric stream send additional statistics in the stream. Streaming additional statistics\n\t\t\tincurs additional costs. For more information, see <a href=\"https://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>. </p>\n\t\t\n\t\t       <p>When you use <code>PutMetricStream</code> to create a new metric stream, the stream \n\t\tis created in the <code>running</code> state. If you use it to update an existing stream, \n\t\tthe state of the stream is not changed.</p>"
             }
         },
         "com.amazonaws.cloudwatch#PutMetricStreamInput": {
@@ -4696,14 +6929,14 @@
                 "FirehoseArn": {
                     "target": "com.amazonaws.cloudwatch#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream.\n\t\tThis Amazon Kinesis Firehose delivery stream must already exist and must be in the same\n\t\taccount as the metric stream.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Kinesis Data Firehose delivery stream to use for this metric stream.\n\t\t\tThis Amazon Kinesis Data Firehose delivery stream must already exist and must be in the\n\t\t\tsame account as the metric stream.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.cloudwatch#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an IAM role that this metric stream will use to access\n\t\t\tAmazon Kinesis Firehose resources. This IAM role must already \n\t\texist and must be in the same account as the metric stream. This IAM role must include the following permissions:</p>\n\t\t       <ul>\n            <li>\n               <p>firehose:PutRecord</p>\n            </li>\n            <li>\n               <p>firehose:PutRecordBatch</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that this metric stream will use to access Amazon Kinesis Data\n\t\t\tFirehose resources. This IAM role must already exist and must be in the same account as\n\t\t\tthe metric stream. This IAM role must include the following permissions:</p>\n\t\t       <ul>\n            <li>\n               <p>firehose:PutRecord</p>\n            </li>\n            <li>\n               <p>firehose:PutRecordBatch</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4723,7 +6956,7 @@
                 "StatisticsConfigurations": {
                     "target": "com.amazonaws.cloudwatch#MetricStreamStatisticsConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>, <code>SUM</code>, \n\t\t\tand <code>SAMPLECOUNT</code> statistics for each metric that is streamed. You can use this parameter to have \n\t\t\tthe metric stream also send additional statistics in the stream. This \n\t\t\tarray can have up to 100 members.</p>\n\t\t       <p>For each entry in this array, you specify one or more metrics and the list of additional statistics to stream\n\t\t\tfor those metrics. The additional statistics that you can stream depend on the stream's <code>OutputFormat</code>.\n\t\t\tIf the <code>OutputFormat</code> is <code>json</code>, you can stream any additional statistic that is supported \n\t\t\tby CloudWatch, listed in \n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\">\n\t\t\t\tCloudWatch statistics definitions</a>. If the <code>OutputFormat</code> is \n\t\t\t<code>opentelemetry0.7</code>, you can stream percentile statistics such as p95, p99.9 and so on.</p>"
+                        "smithy.api#documentation": "<p>By default, a metric stream always sends the <code>MAX</code>, <code>MIN</code>, <code>SUM</code>, \n\t\t\tand <code>SAMPLECOUNT</code> statistics for each metric that is streamed. You can use this parameter to have \n\t\t\tthe metric stream also send additional statistics in the stream. This \n\t\t\tarray can have up to 100 members.</p>\n\t\t       <p>For each entry in this array, you specify one or more metrics and the list of additional\n\t\t\tstatistics to stream for those metrics. The additional statistics that you can stream\n\t\t\tdepend on the stream's <code>OutputFormat</code>. If the <code>OutputFormat</code> is\n\t\t\t\t<code>json</code>, you can stream any additional statistic that is supported by\n\t\t\t\tCloudWatch, listed in <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html\">\n\t\t\t\tCloudWatch statistics definitions</a>. If the <code>OutputFormat</code>\n\t\t\tis <code>opentelemetry0.7</code>, you can stream percentile statistics such as p95,\n\t\t\tp99.9, and so on.</p>"
                     }
                 }
             }
@@ -4762,14 +6995,14 @@
             }
         },
         "com.amazonaws.cloudwatch#RecentlyActive": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PT3H",
-                        "name": "PT3H"
+            "type": "enum",
+            "members": {
+                "PT3H": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT3H"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.cloudwatch#ResourceId": {
@@ -4843,24 +7076,23 @@
             "type": "string"
         },
         "com.amazonaws.cloudwatch#ReturnData": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.cloudwatch#ScanBy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TimestampDescending",
-                        "name": "TIMESTAMP_DESCENDING"
-                    },
-                    {
-                        "value": "TimestampAscending",
-                        "name": "TIMESTAMP_ASCENDING"
+            "type": "enum",
+            "members": {
+                "TIMESTAMP_DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimestampDescending"
                     }
-                ]
+                },
+                "TIMESTAMP_ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TimestampAscending"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#SetAlarmState": {
@@ -4948,121 +7180,176 @@
             }
         },
         "com.amazonaws.cloudwatch#Size": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.cloudwatch#StandardUnit": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Seconds",
-                        "name": "Seconds"
-                    },
-                    {
-                        "value": "Microseconds",
-                        "name": "Microseconds"
-                    },
-                    {
-                        "value": "Milliseconds",
-                        "name": "Milliseconds"
-                    },
-                    {
-                        "value": "Bytes",
-                        "name": "Bytes"
-                    },
-                    {
-                        "value": "Kilobytes",
-                        "name": "Kilobytes"
-                    },
-                    {
-                        "value": "Megabytes",
-                        "name": "Megabytes"
-                    },
-                    {
-                        "value": "Gigabytes",
-                        "name": "Gigabytes"
-                    },
-                    {
-                        "value": "Terabytes",
-                        "name": "Terabytes"
-                    },
-                    {
-                        "value": "Bits",
-                        "name": "Bits"
-                    },
-                    {
-                        "value": "Kilobits",
-                        "name": "Kilobits"
-                    },
-                    {
-                        "value": "Megabits",
-                        "name": "Megabits"
-                    },
-                    {
-                        "value": "Gigabits",
-                        "name": "Gigabits"
-                    },
-                    {
-                        "value": "Terabits",
-                        "name": "Terabits"
-                    },
-                    {
-                        "value": "Percent",
-                        "name": "Percent"
-                    },
-                    {
-                        "value": "Count",
-                        "name": "Count"
-                    },
-                    {
-                        "value": "Bytes/Second",
-                        "name": "Bytes_Second"
-                    },
-                    {
-                        "value": "Kilobytes/Second",
-                        "name": "Kilobytes_Second"
-                    },
-                    {
-                        "value": "Megabytes/Second",
-                        "name": "Megabytes_Second"
-                    },
-                    {
-                        "value": "Gigabytes/Second",
-                        "name": "Gigabytes_Second"
-                    },
-                    {
-                        "value": "Terabytes/Second",
-                        "name": "Terabytes_Second"
-                    },
-                    {
-                        "value": "Bits/Second",
-                        "name": "Bits_Second"
-                    },
-                    {
-                        "value": "Kilobits/Second",
-                        "name": "Kilobits_Second"
-                    },
-                    {
-                        "value": "Megabits/Second",
-                        "name": "Megabits_Second"
-                    },
-                    {
-                        "value": "Gigabits/Second",
-                        "name": "Gigabits_Second"
-                    },
-                    {
-                        "value": "Terabits/Second",
-                        "name": "Terabits_Second"
-                    },
-                    {
-                        "value": "Count/Second",
-                        "name": "Count_Second"
-                    },
-                    {
-                        "value": "None",
-                        "name": "None"
+            "type": "enum",
+            "members": {
+                "Seconds": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Seconds"
                     }
-                ]
+                },
+                "Microseconds": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Microseconds"
+                    }
+                },
+                "Milliseconds": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Milliseconds"
+                    }
+                },
+                "Bytes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bytes"
+                    }
+                },
+                "Kilobytes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kilobytes"
+                    }
+                },
+                "Megabytes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Megabytes"
+                    }
+                },
+                "Gigabytes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Gigabytes"
+                    }
+                },
+                "Terabytes": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Terabytes"
+                    }
+                },
+                "Bits": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bits"
+                    }
+                },
+                "Kilobits": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kilobits"
+                    }
+                },
+                "Megabits": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Megabits"
+                    }
+                },
+                "Gigabits": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Gigabits"
+                    }
+                },
+                "Terabits": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Terabits"
+                    }
+                },
+                "Percent": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Percent"
+                    }
+                },
+                "Count": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Count"
+                    }
+                },
+                "Bytes_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bytes/Second"
+                    }
+                },
+                "Kilobytes_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kilobytes/Second"
+                    }
+                },
+                "Megabytes_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Megabytes/Second"
+                    }
+                },
+                "Gigabytes_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Gigabytes/Second"
+                    }
+                },
+                "Terabytes_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Terabytes/Second"
+                    }
+                },
+                "Bits_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Bits/Second"
+                    }
+                },
+                "Kilobits_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Kilobits/Second"
+                    }
+                },
+                "Megabits_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Megabits/Second"
+                    }
+                },
+                "Gigabits_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Gigabits/Second"
+                    }
+                },
+                "Terabits_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Terabits/Second"
+                    }
+                },
+                "Count_Second": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Count/Second"
+                    }
+                },
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "None"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#StartMetricStreams": {
@@ -5126,49 +7413,61 @@
             }
         },
         "com.amazonaws.cloudwatch#StateValue": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "OK",
-                        "name": "OK"
-                    },
-                    {
-                        "value": "ALARM",
-                        "name": "ALARM"
-                    },
-                    {
-                        "value": "INSUFFICIENT_DATA",
-                        "name": "INSUFFICIENT_DATA"
+            "type": "enum",
+            "members": {
+                "OK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OK"
                     }
-                ]
+                },
+                "ALARM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALARM"
+                    }
+                },
+                "INSUFFICIENT_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_DATA"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#Statistic": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SampleCount",
-                        "name": "SampleCount"
-                    },
-                    {
-                        "value": "Average",
-                        "name": "Average"
-                    },
-                    {
-                        "value": "Sum",
-                        "name": "Sum"
-                    },
-                    {
-                        "value": "Minimum",
-                        "name": "Minimum"
-                    },
-                    {
-                        "value": "Maximum",
-                        "name": "Maximum"
+            "type": "enum",
+            "members": {
+                "SampleCount": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SampleCount"
                     }
-                ]
+                },
+                "Average": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Average"
+                    }
+                },
+                "Sum": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Sum"
+                    }
+                },
+                "Minimum": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Minimum"
+                    }
+                },
+                "Maximum": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Maximum"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#StatisticSet": {
@@ -5220,22 +7519,32 @@
             }
         },
         "com.amazonaws.cloudwatch#StatusCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "Complete",
-                        "name": "COMPLETE"
-                    },
-                    {
-                        "value": "InternalError",
-                        "name": "INTERNAL_ERROR"
-                    },
-                    {
-                        "value": "PartialData",
-                        "name": "PARTIAL_DATA"
+            "type": "enum",
+            "members": {
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Complete"
                     }
-                ]
+                },
+                "INTERNAL_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InternalError"
+                    }
+                },
+                "PARTIAL_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PartialData"
+                    }
+                },
+                "FORBIDDEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Forbidden"
+                    }
+                }
             }
         },
         "com.amazonaws.cloudwatch#StopMetricStreams": {
@@ -5280,17 +7589,13 @@
         "com.amazonaws.cloudwatch#StorageResolution": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
             }
         },
         "com.amazonaws.cloudwatch#SuppressorPeriod": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.cloudwatch#Tag": {
             "type": "structure",
@@ -5404,10 +7709,7 @@
             }
         },
         "com.amazonaws.cloudwatch#Threshold": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.cloudwatch#Timestamp": {
             "type": "timestamp"

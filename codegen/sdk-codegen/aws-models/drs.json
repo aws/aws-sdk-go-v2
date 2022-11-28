@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.drs#ARN": {
             "type": "string",
@@ -86,6 +86,26 @@
                 }
             }
         },
+        "com.amazonaws.drs#AwsAvailabilityZone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|sa|af|me)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9][a-z]$"
+            }
+        },
+        "com.amazonaws.drs#AwsRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|sa|af|me)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$"
+            }
+        },
         "com.amazonaws.drs#BoundedString": {
             "type": "string",
             "traits": {
@@ -101,6 +121,7 @@
                 "cores": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of CPU cores.</p>"
                     }
                 },
@@ -369,6 +390,7 @@
                 "bandwidthThrottling": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.</p>",
                         "smithy.api#required": {}
                     }
@@ -548,24 +570,28 @@
                 "totalStorageBytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total amount of data to be replicated in bytes.</p>"
                     }
                 },
                 "replicatedStorageBytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of data replicated so far in bytes.</p>"
                     }
                 },
                 "rescannedStorageBytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of data to be rescanned in bytes.</p>"
                     }
                 },
                 "backloggedStorageBytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the replication backlog in bytes.</p>"
                     }
                 }
@@ -1013,6 +1039,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.drs#StrictlyPositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of Job log items to retrieve.</p>"
                     }
                 },
@@ -1091,6 +1118,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.drs#StrictlyPositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of Jobs to retrieve.</p>"
                     }
                 },
@@ -1181,7 +1209,8 @@
             ],
             "traits": {
                 "aws.iam#requiredActions": [
-                    "ec2:DescribeInstances"
+                    "ec2:DescribeInstances",
+                    "drs:DescribeSourceServers"
                 ],
                 "smithy.api#documentation": "<p>Lists all Recovery Instances or multiple Recovery Instances by ID.</p>",
                 "smithy.api#http": {
@@ -1216,6 +1245,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.drs#StrictlyPositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of Recovery Instances to retrieve.</p>"
                     }
                 },
@@ -1330,6 +1360,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.drs#StrictlyPositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of Recovery Snapshots to retrieve.</p>"
                     }
                 },
@@ -1431,6 +1462,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.drs#StrictlyPositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of Replication Configuration Templates to retrieve.</p>"
                     }
                 },
@@ -1509,6 +1541,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.drs#StrictlyPositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Maximum number of Source Servers to retrieve.</p>"
                     }
                 },
@@ -1682,6 +1715,7 @@
                 "bytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of storage on the disk in bytes.</p>"
                     }
                 }
@@ -1774,40 +1808,6 @@
         },
         "com.amazonaws.drs#ElasticDisasterRecoveryService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "drs",
-                    "arnNamespace": "drs",
-                    "awsProductName": "drs",
-                    "cloudTrailEventSource": "drs.amazonaws.com"
-                },
-                "aws.auth#sigv4": {
-                    "name": "drs"
-                },
-                "aws.iam#defineConditionKeys": {
-                    "drs:EC2InstanceARN": {
-                        "type": "String",
-                        "documentation": "Filters access by the EC2 instance the request originated from"
-                    }
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {
-                    "additionalAllowedHeaders": [
-                        "Content-Type",
-                        "X-Amz-Content-Sha256",
-                        "X-Amz-User-Agent",
-                        "X-Amzn-Trace-Id"
-                    ],
-                    "additionalExposedHeaders": [
-                        "X-Amzn-Errortype",
-                        "X-Amzn-Requestid",
-                        "X-Amzn-Trace-Id",
-                        "X-Amz-Apigw-Id"
-                    ]
-                },
-                "smithy.api#documentation": "<p>AWS Elastic Disaster Recovery Service.</p>",
-                "smithy.api#title": "Elastic Disaster Recovery Service"
-            },
             "version": "2020-02-26",
             "operations": [
                 {
@@ -1848,7 +1848,1543 @@
                 {
                     "target": "com.amazonaws.drs#SourceServerResource"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "drs",
+                    "arnNamespace": "drs",
+                    "awsProductName": "drs",
+                    "cloudTrailEventSource": "drs.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "drs"
+                },
+                "aws.iam#defineConditionKeys": {
+                    "drs:EC2InstanceARN": {
+                        "type": "String",
+                        "documentation": "Filters access by the EC2 instance the request originated from"
+                    }
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Content-Type",
+                        "X-Amz-Content-Sha256",
+                        "X-Amz-User-Agent",
+                        "X-Amzn-Trace-Id"
+                    ],
+                    "additionalExposedHeaders": [
+                        "X-Amzn-Errortype",
+                        "X-Amzn-Requestid",
+                        "X-Amzn-Trace-Id",
+                        "X-Amz-Apigw-Id"
+                    ]
+                },
+                "smithy.api#documentation": "<p>AWS Elastic Disaster Recovery Service.</p>",
+                "smithy.api#title": "Elastic Disaster Recovery Service",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://drs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://drs-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://drs.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://drs.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://drs.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.drs#ExtensionStatus": {
             "type": "string",
@@ -1865,6 +3401,21 @@
                     {
                         "name": "NOT_EXTENDED",
                         "value": "NOT_EXTENDED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.drs#FailbackLaunchType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "RECOVERY",
+                        "value": "RECOVERY"
+                    },
+                    {
+                        "name": "DRILL",
+                        "value": "DRILL"
                     }
                 ]
             }
@@ -1908,6 +3459,54 @@
                     {
                         "name": "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION",
                         "value": "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"
+                    },
+                    {
+                        "name": "FAILED_GETTING_REPLICATION_STATE",
+                        "value": "FAILED_GETTING_REPLICATION_STATE"
+                    },
+                    {
+                        "name": "SNAPSHOTS_FAILURE",
+                        "value": "SNAPSHOTS_FAILURE"
+                    },
+                    {
+                        "name": "FAILED_TO_CREATE_SECURITY_GROUP",
+                        "value": "FAILED_TO_CREATE_SECURITY_GROUP"
+                    },
+                    {
+                        "name": "FAILED_TO_LAUNCH_REPLICATION_SERVER",
+                        "value": "FAILED_TO_LAUNCH_REPLICATION_SERVER"
+                    },
+                    {
+                        "name": "FAILED_TO_BOOT_REPLICATION_SERVER",
+                        "value": "FAILED_TO_BOOT_REPLICATION_SERVER"
+                    },
+                    {
+                        "name": "FAILED_TO_AUTHENTICATE_WITH_SERVICE",
+                        "value": "FAILED_TO_AUTHENTICATE_WITH_SERVICE"
+                    },
+                    {
+                        "name": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE",
+                        "value": "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"
+                    },
+                    {
+                        "name": "FAILED_TO_CREATE_STAGING_DISKS",
+                        "value": "FAILED_TO_CREATE_STAGING_DISKS"
+                    },
+                    {
+                        "name": "FAILED_TO_ATTACH_STAGING_DISKS",
+                        "value": "FAILED_TO_ATTACH_STAGING_DISKS"
+                    },
+                    {
+                        "name": "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT",
+                        "value": "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"
+                    },
+                    {
+                        "name": "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER",
+                        "value": "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"
+                    },
+                    {
+                        "name": "FAILED_TO_START_DATA_TRANSFER",
+                        "value": "FAILED_TO_START_DATA_TRANSFER"
                     }
                 ]
             }
@@ -1935,6 +3534,14 @@
                     {
                         "name": "FAILBACK_ERROR",
                         "value": "FAILBACK_ERROR"
+                    },
+                    {
+                        "name": "FAILBACK_NOT_READY_FOR_LAUNCH",
+                        "value": "FAILBACK_NOT_READY_FOR_LAUNCH"
+                    },
+                    {
+                        "name": "FAILBACK_LAUNCH_STATE_NOT_AVAILABLE",
+                        "value": "FAILBACK_LAUNCH_STATE_NOT_AVAILABLE"
                     }
                 ]
             }
@@ -2002,6 +3609,7 @@
                 "bandwidthThrottling": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Configure bandwidth throttling for the outbound data transfer rate of the Recovery Instance in Mbps.</p>"
                     }
                 },
@@ -2249,6 +3857,7 @@
                 "retryAfterSeconds": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of seconds after which the request should be safe to retry.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
@@ -2838,6 +4447,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.drs#MaxResultsReplicatingSourceServers",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of extensible source servers to retrieve.</p>"
                     }
                 },
@@ -3008,6 +4618,7 @@
         "com.amazonaws.drs#MaxResultsReplicatingSourceServers": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1,
                     "max": 300
@@ -3066,6 +4677,21 @@
                 "smithy.api#documentation": "<p>Operating System.</p>"
             }
         },
+        "com.amazonaws.drs#OriginEnvironment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ON_PREMISES",
+                        "value": "ON_PREMISES"
+                    },
+                    {
+                        "name": "AWS",
+                        "value": "AWS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.drs#PITPolicy": {
             "type": "list",
             "member": {
@@ -3084,6 +4710,7 @@
                 "ruleID": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The ID of the rule.</p>"
                     }
                 },
@@ -3097,6 +4724,7 @@
                 "interval": {
                     "target": "com.amazonaws.drs#StrictlyPositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>How often, in the chosen units, a snapshot should be taken.</p>",
                         "smithy.api#required": {}
                     }
@@ -3104,6 +4732,7 @@
                 "retentionDuration": {
                     "target": "com.amazonaws.drs#StrictlyPositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The duration to retain a snapshot for, in the chosen units.</p>",
                         "smithy.api#required": {}
                     }
@@ -3182,6 +4811,7 @@
         "com.amazonaws.drs#PositiveInteger": {
             "type": "long",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -3260,6 +4890,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether this Recovery Instance was created for a drill or for an actual Recovery event.</p>"
+                    }
+                },
+                "originEnvironment": {
+                    "target": "com.amazonaws.drs#OriginEnvironment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Environment (On Premises / AWS) of the instance that the recovery instance originated from. </p>"
                     }
                 }
             },
@@ -3343,24 +4979,28 @@
                 "totalStorageBytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total amount of data to be replicated in bytes.</p>"
                     }
                 },
                 "replicatedStorageBytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of data replicated so far in bytes.</p>"
                     }
                 },
                 "rescannedStorageBytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of data to be rescanned in bytes.</p>"
                     }
                 },
                 "backloggedStorageBytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size of the replication backlog in bytes.</p>"
                     }
                 }
@@ -3452,6 +5092,50 @@
                     {
                         "name": "ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION",
                         "value": "ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"
+                    },
+                    {
+                        "value": "WAIT",
+                        "name": "WAIT"
+                    },
+                    {
+                        "value": "CREATE_SECURITY_GROUP",
+                        "name": "CREATE_SECURITY_GROUP"
+                    },
+                    {
+                        "value": "LAUNCH_REPLICATION_SERVER",
+                        "name": "LAUNCH_REPLICATION_SERVER"
+                    },
+                    {
+                        "value": "BOOT_REPLICATION_SERVER",
+                        "name": "BOOT_REPLICATION_SERVER"
+                    },
+                    {
+                        "value": "AUTHENTICATE_WITH_SERVICE",
+                        "name": "AUTHENTICATE_WITH_SERVICE"
+                    },
+                    {
+                        "value": "DOWNLOAD_REPLICATION_SOFTWARE",
+                        "name": "DOWNLOAD_REPLICATION_SOFTWARE"
+                    },
+                    {
+                        "value": "CREATE_STAGING_DISKS",
+                        "name": "CREATE_STAGING_DISKS"
+                    },
+                    {
+                        "value": "ATTACH_STAGING_DISKS",
+                        "name": "ATTACH_STAGING_DISKS"
+                    },
+                    {
+                        "value": "PAIR_REPLICATION_SERVER_WITH_AGENT",
+                        "name": "PAIR_REPLICATION_SERVER_WITH_AGENT"
+                    },
+                    {
+                        "value": "CONNECT_AGENT_TO_REPLICATION_SERVER",
+                        "name": "CONNECT_AGENT_TO_REPLICATION_SERVER"
+                    },
+                    {
+                        "value": "START_DATA_TRANSFER",
+                        "name": "START_DATA_TRANSFER"
                     }
                 ]
             }
@@ -3532,6 +5216,14 @@
                     {
                         "name": "DISCONNECTED",
                         "value": "DISCONNECTED"
+                    },
+                    {
+                        "name": "REPLICATION_STATE_NOT_AVAILABLE",
+                        "value": "REPLICATION_STATE_NOT_AVAILABLE"
+                    },
+                    {
+                        "name": "NOT_STARTED",
+                        "value": "NOT_STARTED"
                     }
                 ]
             }
@@ -3548,6 +5240,7 @@
                 "bytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of storage on the disk in bytes.</p>"
                     }
                 },
@@ -3630,6 +5323,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time that the Recovery Instance has been replicating for.</p>"
                     }
+                },
+                "failbackLaunchType": {
+                    "target": "com.amazonaws.drs#FailbackLaunchType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch type (Recovery / Drill) of the last launch for the failback replication of this recovery instance.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3694,6 +5393,7 @@
                 "ramBytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of RAM in bytes.</p>"
                     }
                 },
@@ -3727,6 +5427,9 @@
                 },
                 {
                     "target": "com.amazonaws.drs#GetFailbackReplicationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.drs#ReverseReplication"
                 },
                 {
                     "target": "com.amazonaws.drs#StopFailback"
@@ -3910,6 +5613,7 @@
                 "bandwidthThrottling": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.</p>"
                     }
                 },
@@ -4016,19 +5720,21 @@
                 "iops": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The requested number of I/O operations per second (IOPS).</p>"
                     }
                 },
                 "throughput": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The throughput to use for the EBS volume in MiB/s. This parameter is valid only for gp3 volumes.</p>"
                     }
                 },
                 "optimizedStagingDiskType": {
                     "target": "com.amazonaws.drs#ReplicationConfigurationReplicatedDiskStagingDiskType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Staging Disk EBS volume type to be used during replication when <code>stagingDiskType</code> is set to Auto. This is a read-only field.</p>"
+                        "smithy.api#documentation": "<p>When <code>stagingDiskType</code> is set to Auto, this field shows the current staging disk EBS volume type as it is constantly updated by the service. This is a read-only field.</p>"
                     }
                 }
             },
@@ -4150,6 +5856,7 @@
                 "bandwidthThrottling": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.</p>"
                     }
                 },
@@ -4242,6 +5949,22 @@
                 "target": "com.amazonaws.drs#ReplicationConfigurationTemplate"
             }
         },
+        "com.amazonaws.drs#ReplicationDirection": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Replication direction designates if this is a failover replication, or a failback replication. When a DRS agent is installed on an instance, the replication direction is failover. In cases where a recovery launch was made in the recovery location and a new recovery instance was created, and then a failback replication was initiated from that recovery instance back to the origin location, then the replication direction will be failback.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "FAILOVER",
+                        "value": "FAILOVER"
+                    },
+                    {
+                        "name": "FAILBACK",
+                        "value": "FAILBACK"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.drs#ReplicationServersSecurityGroupsIDs": {
             "type": "list",
             "member": {
@@ -4328,6 +6051,74 @@
                 }
             }
         },
+        "com.amazonaws.drs#ReverseReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#ReverseReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#ReverseReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#requiredActions": [
+                    "ec2:DescribeInstances",
+                    "drs:DescribeReplicationConfigurationTemplates",
+                    "drs:DescribeSourceServers"
+                ],
+                "smithy.api#documentation": "<p>Start replication to origin / target region - applies only to protected instances that originated in EC2.\n            For recovery instances on target region - starts replication back to origin region.\n            For failback instances on origin region - starts replication to target region to re-protect them.\n        </p>",
+                "smithy.api#http": {
+                    "uri": "/ReverseReplication",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#ReverseReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "recoveryInstanceID": {
+                    "target": "com.amazonaws.drs#RecoveryInstanceID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Recovery Instance that we want to reverse the replication for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.drs#ReverseReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "reversedDirectionSourceServerArn": {
+                    "target": "com.amazonaws.drs#SourceServerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of created SourceServer.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.drs#SecurityGroupID": {
             "type": "string",
             "traits": {
@@ -4387,6 +6178,32 @@
                 }
             }
         },
+        "com.amazonaws.drs#SourceCloudProperties": {
+            "type": "structure",
+            "members": {
+                "originAccountID": {
+                    "target": "com.amazonaws.drs#AccountID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS Account ID for an EC2-originated Source Server.</p>"
+                    }
+                },
+                "originRegion": {
+                    "target": "com.amazonaws.drs#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS Region for an EC2-originated Source Server.</p>"
+                    }
+                },
+                "originAvailabilityZone": {
+                    "target": "com.amazonaws.drs#AwsAvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>AWS Availability Zone for an EC2-originated Source Server.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Properties of the cloud environment where this Source Server originated from.</p>"
+            }
+        },
         "com.amazonaws.drs#SourceProperties": {
             "type": "structure",
             "members": {
@@ -4429,6 +6246,7 @@
                 "ramBytes": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of RAM in bytes.</p>"
                     }
                 },
@@ -4499,6 +6317,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The staging area of the source server.</p>"
                     }
+                },
+                "sourceCloudProperties": {
+                    "target": "com.amazonaws.drs#SourceCloudProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source cloud properties of the Source Server.</p>"
+                    }
+                },
+                "replicationDirection": {
+                    "target": "com.amazonaws.drs#ReplicationDirection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Replication direction of the Source Server.</p>"
+                    }
+                },
+                "reversedDirectionSourceServerArn": {
+                    "target": "com.amazonaws.drs#SourceServerARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For EC2-originated Source Servers which have been failed over and then failed back, this value will mean the ARN of the Source Server on the opposite replication direction.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4563,6 +6399,12 @@
                 },
                 {
                     "target": "com.amazonaws.drs#RetryDataReplication"
+                },
+                {
+                    "target": "com.amazonaws.drs#StartReplication"
+                },
+                {
+                    "target": "com.amazonaws.drs#StopReplication"
                 },
                 {
                     "target": "com.amazonaws.drs#UpdateLaunchConfiguration"
@@ -4873,6 +6715,63 @@
                 }
             }
         },
+        "com.amazonaws.drs#StartReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#StartReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#StartReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts replication for a stopped Source Server. This action would make the Source Server protected again and restart billing for it.</p>",
+                "smithy.api#http": {
+                    "uri": "/StartReplication",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#StartReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.drs#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Source Server to start replication for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.drs#StartReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "sourceServer": {
+                    "target": "com.amazonaws.drs#SourceServer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Source Server that this action was targeted on.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.drs#StopFailback": {
             "type": "operation",
             "input": {
@@ -4916,9 +6815,67 @@
                 }
             }
         },
+        "com.amazonaws.drs#StopReplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.drs#StopReplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.drs#StopReplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.drs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.drs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.drs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.drs#UninitializedAccountException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops replication for a Source Server. This action would make the Source Server unprotected, delete its existing snapshots and stop billing for it.</p>",
+                "smithy.api#http": {
+                    "uri": "/StopReplication",
+                    "method": "POST",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.drs#StopReplicationRequest": {
+            "type": "structure",
+            "members": {
+                "sourceServerID": {
+                    "target": "com.amazonaws.drs#SourceServerID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Source Server to stop replication for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.drs#StopReplicationResponse": {
+            "type": "structure",
+            "members": {
+                "sourceServer": {
+                    "target": "com.amazonaws.drs#SourceServer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Source Server that this action was targeted on.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.drs#StrictlyPositiveInteger": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -5072,7 +7029,8 @@
                     "ec2:DescribeVolumes",
                     "ec2:DescribeInstances",
                     "ec2:TerminateInstances",
-                    "ec2:DeleteVolume"
+                    "ec2:DeleteVolume",
+                    "drs:DescribeSourceServers"
                 ],
                 "smithy.api#documentation": "<p>Initiates a Job for terminating the EC2 resources associated with the specified Recovery Instances, and then will delete the Recovery Instances from the Elastic Disaster Recovery service.</p>",
                 "smithy.api#http": {
@@ -5264,6 +7222,7 @@
                 "bandwidthThrottling": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Configure bandwidth throttling for the outbound data transfer rate of the Recovery Instance in Mbps.</p>"
                     }
                 },
@@ -5475,6 +7434,7 @@
                 "bandwidthThrottling": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.</p>"
                     }
                 },
@@ -5608,6 +7568,7 @@
                 "bandwidthThrottling": {
                     "target": "com.amazonaws.drs#PositiveInteger",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Configure bandwidth throttling for the outbound data transfer rate of the Source Server in Mbps.</p>"
                     }
                 },

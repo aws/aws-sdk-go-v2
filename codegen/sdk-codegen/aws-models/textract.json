@@ -661,6 +661,26 @@
                 }
             }
         },
+        "com.amazonaws.textract#DetectedSignature": {
+            "type": "structure",
+            "members": {
+                "Page": {
+                    "target": "com.amazonaws.textract#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The page a detected signature was found on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that holds information regarding a detected signature on a page.</p>"
+            }
+        },
+        "com.amazonaws.textract#DetectedSignatureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#DetectedSignature"
+            }
+        },
         "com.amazonaws.textract#Document": {
             "type": "structure",
             "members": {
@@ -681,6 +701,44 @@
                 "smithy.api#documentation": "<p>The input document, either as bytes or as an S3 object.</p>\n         <p>You pass image bytes to an Amazon Textract API operation by using the <code>Bytes</code>\n         property. For example, you would use the <code>Bytes</code> property to pass a document\n         loaded from a local file system. Image bytes passed by using the <code>Bytes</code>\n         property must be base64 encoded. Your code might not need to encode document file bytes if\n         you're using an AWS SDK to call Amazon Textract API operations. </p>\n         <p>You pass images stored in an S3 bucket to an Amazon Textract API operation by using the\n            <code>S3Object</code> property. Documents stored in an S3 bucket don't need to be base64\n         encoded.</p>\n         <p>The AWS Region for the S3 bucket that contains the S3 object must match the AWS\n         Region that you use for Amazon Textract operations.</p>\n         <p>If you use the AWS CLI to call Amazon Textract operations, passing image bytes using\n         the Bytes property isn't supported. You must first upload the document to an Amazon S3\n         bucket, and then call the operation using the S3Object property.</p>\n      \n         <p>For Amazon Textract to process an S3 object, the user must have permission\n         to access the S3 object. </p>"
             }
         },
+        "com.amazonaws.textract#DocumentGroup": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.textract#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of document that Amazon Textract has detected. See LINK for a list of all types returned by Textract.</p>"
+                    }
+                },
+                "SplitDocuments": {
+                    "target": "com.amazonaws.textract#SplitDocumentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains information about the pages of a document, defined by logical boundary.</p>"
+                    }
+                },
+                "DetectedSignatures": {
+                    "target": "com.amazonaws.textract#DetectedSignatureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the detected signatures found in a document group.</p>"
+                    }
+                },
+                "UndetectedSignatures": {
+                    "target": "com.amazonaws.textract#UndetectedSignatureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of any expected signatures not found in a document group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about documents grouped by the same document type.</p>"
+            }
+        },
+        "com.amazonaws.textract#DocumentGroupList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#DocumentGroup"
+            }
+        },
         "com.amazonaws.textract#DocumentLocation": {
             "type": "structure",
             "members": {
@@ -692,7 +750,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon S3 bucket that contains the document to be processed. It's used by asynchronous\n         operations such as <a>StartDocumentTextDetection</a>.</p>\n         <p>The input document can be an image file in JPEG or PNG format. It can also be a file in\n         PDF format.</p>"
+                "smithy.api#documentation": "<p>The Amazon S3 bucket that contains the document to be processed. It's used by asynchronous\n         operations.</p>\n         <p>The input document can be an image file in JPEG or PNG format. It can also be a file in\n         PDF format.</p>"
             }
         },
         "com.amazonaws.textract#DocumentMetadata": {
@@ -943,6 +1001,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object used to store information about the Type detected by Amazon Textract.</p>"
+            }
+        },
+        "com.amazonaws.textract#Extraction": {
+            "type": "structure",
+            "members": {
+                "LendingDocument": {
+                    "target": "com.amazonaws.textract#LendingDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Holds the structured data returned by AnalyzeDocument for lending documents.</p>"
+                    }
+                },
+                "ExpenseDocument": {
+                    "target": "com.amazonaws.textract#ExpenseDocument"
+                },
+                "IdentityDocument": {
+                    "target": "com.amazonaws.textract#IdentityDocument"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information extracted by an analysis operation after using StartLendingAnalysis.</p>"
+            }
+        },
+        "com.amazonaws.textract#ExtractionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#Extraction"
             }
         },
         "com.amazonaws.textract#FeatureType": {
@@ -1342,6 +1426,200 @@
                 }
             }
         },
+        "com.amazonaws.textract#GetLendingAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#GetLendingAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#GetLendingAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidJobIdException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidKMSKeyException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidS3ObjectException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the results for an Amazon Textract asynchronous operation that analyzes text in a\n            lending document. </p>\n        <p>You start asynchronous text analysis by calling <code>StartLendingAnalysis</code>,\n            which returns a job identifier (<code>JobId</code>). When the text analysis operation\n            finishes, Amazon Textract publishes a completion status to the Amazon Simple\n            Notification Service (Amazon SNS) topic that's registered in the initial call to\n                <code>StartLendingAnalysis</code>. </p>\n        <p>To get the results of the text analysis operation, first check that the status value\n            published to the Amazon SNS topic is SUCCEEDED. If so, call GetLendingAnalysis, and pass\n            the job identifier (<code>JobId</code>) from the initial call to\n                <code>StartLendingAnalysis</code>.</p>"
+            }
+        },
+        "com.amazonaws.textract#GetLendingAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.textract#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the lending or text-detection job. The <code>JobId</code> is\n            returned from <code>StartLendingAnalysis</code>. A <code>JobId</code> value is only\n            valid for 7 days.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.textract#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per paginated call. The largest value that you\n            can specify is 30. If you specify a value greater than 30, a maximum of 30 results is\n            returned. The default value is 30.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.textract#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous response was incomplete, Amazon Textract returns a pagination token in\n            the response. You can use this pagination token to retrieve the next set of lending\n            results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#GetLendingAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "DocumentMetadata": {
+                    "target": "com.amazonaws.textract#DocumentMetadata"
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.textract#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the lending analysis job.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.textract#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Textract returns this token. \n            You can use this token in the subsequent request to retrieve the next set of lending results.</p>"
+                    }
+                },
+                "Results": {
+                    "target": "com.amazonaws.textract#LendingResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Holds the information returned by one of AmazonTextract's document analysis\n            operations for the pinstripe.</p>"
+                    }
+                },
+                "Warnings": {
+                    "target": "com.amazonaws.textract#Warnings",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A list of warnings that occurred during the lending analysis operation. </p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.textract#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>  Returns if the lending analysis job could not be completed. Contains explanation for\n            what error occurred. </p>"
+                    }
+                },
+                "AnalyzeLendingModelVersion": {
+                    "target": "com.amazonaws.textract#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current model version of the Analyze Lending API.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#GetLendingAnalysisSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#GetLendingAnalysisSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#GetLendingAnalysisSummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidJobIdException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidKMSKeyException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidS3ObjectException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets summarized results for the <code>StartLendingAnalysis</code> operation, which analyzes\n   text in a lending document. The returned summary consists of information about documents grouped\n   together by a common document type. Information like detected signatures, page numbers, and split\n   documents is returned with respect to the type of grouped document. </p>\n         <p>You start asynchronous text analysis by calling <code>StartLendingAnalysis</code>, which\n   returns a job identifier (<code>JobId</code>). When the text analysis operation finishes, Amazon\n   Textract publishes a completion status to the Amazon Simple Notification Service (Amazon SNS)\n   topic that's registered in the initial call to <code>StartLendingAnalysis</code>. </p>\n         <p>To get the results of the text analysis operation, first check that the status value\n   published to the Amazon SNS topic is SUCCEEDED. If so, call\n    <code>GetLendingAnalysisSummary</code>, and pass the job identifier (<code>JobId</code>) from\n   the initial call to <code>StartLendingAnalysis</code>.</p>"
+            }
+        },
+        "com.amazonaws.textract#GetLendingAnalysisSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.textract#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier for the lending or text-detection job. The <code>JobId</code> is\n   returned from StartLendingAnalysis. A <code>JobId</code> value is only valid for 7 days.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#GetLendingAnalysisSummaryResponse": {
+            "type": "structure",
+            "members": {
+                "DocumentMetadata": {
+                    "target": "com.amazonaws.textract#DocumentMetadata"
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.textract#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the lending analysis job. </p>"
+                    }
+                },
+                "Summary": {
+                    "target": "com.amazonaws.textract#LendingSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Contains summary information for documents grouped by type.</p>"
+                    }
+                },
+                "Warnings": {
+                    "target": "com.amazonaws.textract#Warnings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of warnings that occurred during the lending analysis operation.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.textract#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns if the lending analysis could not be completed. Contains explanation for what error\n   occurred.</p>"
+                    }
+                },
+                "AnalyzeLendingModelVersion": {
+                    "target": "com.amazonaws.textract#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current model version of the Analyze Lending API.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.textract#HumanLoopActivationOutput": {
             "type": "structure",
             "members": {
@@ -1585,7 +1863,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An invalid job identifier was passed to <a>GetDocumentAnalysis</a> or to\n      <a>GetDocumentAnalysis</a>.</p>",
+                "smithy.api#documentation": "<p>An invalid job identifier was passed to an asynchronous analysis operation.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -1691,6 +1969,142 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$"
+            }
+        },
+        "com.amazonaws.textract#LendingDetection": {
+            "type": "structure",
+            "members": {
+                "Text": {
+                    "target": "com.amazonaws.textract#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text extracted for a detected value in a lending document.</p>"
+                    }
+                },
+                "SelectionStatus": {
+                    "target": "com.amazonaws.textract#SelectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The selection status of a selection element, such as an option button or check box.</p>"
+                    }
+                },
+                "Geometry": {
+                    "target": "com.amazonaws.textract#Geometry"
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.textract#Percent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence level for the text of a detected value in a lending document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The results extracted for a lending document.</p>"
+            }
+        },
+        "com.amazonaws.textract#LendingDetectionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#LendingDetection"
+            }
+        },
+        "com.amazonaws.textract#LendingDocument": {
+            "type": "structure",
+            "members": {
+                "LendingFields": {
+                    "target": "com.amazonaws.textract#LendingFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of LendingField objects.</p>"
+                    }
+                },
+                "SignatureDetections": {
+                    "target": "com.amazonaws.textract#SignatureDetectionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of signatures detected in a lending document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Holds the structured data returned by AnalyzeDocument for lending documents.</p>"
+            }
+        },
+        "com.amazonaws.textract#LendingField": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.textract#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the lending document.</p>"
+                    }
+                },
+                "KeyDetection": {
+                    "target": "com.amazonaws.textract#LendingDetection"
+                },
+                "ValueDetections": {
+                    "target": "com.amazonaws.textract#LendingDetectionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of LendingDetection objects.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Holds the normalized key-value pairs returned by AnalyzeDocument, including the document type, detected text, and geometry.</p>"
+            }
+        },
+        "com.amazonaws.textract#LendingFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#LendingField"
+            }
+        },
+        "com.amazonaws.textract#LendingResult": {
+            "type": "structure",
+            "members": {
+                "Page": {
+                    "target": "com.amazonaws.textract#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The page number for a page, with regard to whole submission.</p>"
+                    }
+                },
+                "PageClassification": {
+                    "target": "com.amazonaws.textract#PageClassification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The classifier result for a given page.</p>"
+                    }
+                },
+                "Extractions": {
+                    "target": "com.amazonaws.textract#ExtractionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of Extraction to hold structured data. e.g. normalized key value pairs instead of raw OCR detections .</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the detections for each page analyzed through the Analyze Lending API.</p>"
+            }
+        },
+        "com.amazonaws.textract#LendingResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#LendingResult"
+            }
+        },
+        "com.amazonaws.textract#LendingSummary": {
+            "type": "structure",
+            "members": {
+                "DocumentGroups": {
+                    "target": "com.amazonaws.textract#DocumentGroupList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains an array of all DocumentGroup objects.</p>"
+                    }
+                },
+                "UndetectedDocumentTypes": {
+                    "target": "com.amazonaws.textract#UndetectedDocumentTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>UndetectedDocumentTypes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information regarding DocumentGroups and UndetectedDocumentTypes.</p>"
             }
         },
         "com.amazonaws.textract#LimitExceededException": {
@@ -1807,7 +2221,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Textract publishes the completion status of\n         an asynchronous document operation, such as <a>StartDocumentTextDetection</a>. </p>"
+                "smithy.api#documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon Textract publishes the completion status of\n         an asynchronous document operation. </p>"
             }
         },
         "com.amazonaws.textract#OutputConfig": {
@@ -1828,7 +2242,35 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sets whether or not your output will go to a user created bucket. Used to set the name\n         of the bucket, and the prefix on the output file.</p>\n         <p>\n            <code>OutputConfig</code> is an optional parameter which lets you adjust where your output will be placed. \n         By default, Amazon Textract will store the results internally and can only be accessed by the Get \n         API operations. With OutputConfig enabled, you can set the name of the bucket the output will be \n         sent to and the file prefix of the results where you can download your results. Additionally, you \n         can set the <code>KMSKeyID</code> parameter to a customer master key (CMK) to encrypt your output. Without this\n         parameter set Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>\n         <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account \n         is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after \n         the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\"> Managing AI services opt-out policy. </a>\n         </p>\n         <p>For more information on data privacy,\n         see the <a href=\"https://aws.amazon.com/compliance/data-privacy-faq/\">Data Privacy\n            FAQ</a>.</p>"
+                "smithy.api#documentation": "<p>Sets whether or not your output will go to a user created bucket. Used to set the name\n         of the bucket, and the prefix on the output file.</p>\n         <p>\n            <code>OutputConfig</code> is an optional parameter which lets you adjust where your\n         output will be placed. By default, Amazon Textract will store the results internally and can\n         only be accessed by the Get API operations. With <code>OutputConfig</code> enabled, you can\n         set the name of the bucket the output will be sent to the file prefix of the results where\n         you can download your results. Additionally, you can set the <code>KMSKeyID</code>\n         parameter to a customer master key (CMK) to encrypt your output. Without this parameter set\n         Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>\n         <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account \n         is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after \n         the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\"> Managing AI services opt-out policy. </a>\n         </p>\n         <p>For more information on data privacy,\n         see the <a href=\"https://aws.amazon.com/compliance/data-privacy-faq/\">Data Privacy\n            FAQ</a>.</p>"
+            }
+        },
+        "com.amazonaws.textract#PageClassification": {
+            "type": "structure",
+            "members": {
+                "PageType": {
+                    "target": "com.amazonaws.textract#PredictionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The class, or document type, assigned to a detected Page object. The class, or document type, \n         assigned to a detected Page object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PageNumber": {
+                    "target": "com.amazonaws.textract#PredictionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The page number the value was detected on, relative to Amazon Textract's starting position.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The class assigned to a Page object detected in an input document. \n         Contains information regarding the predicted type/class of a document's page and the \n         page number that the Page object was detected on.</p>"
+            }
+        },
+        "com.amazonaws.textract#PageList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#UInteger"
             }
         },
         "com.amazonaws.textract#Pages": {
@@ -1882,6 +2324,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.textract#Point"
+            }
+        },
+        "com.amazonaws.textract#Prediction": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.textract#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The predicted value of a detected object.</p>"
+                    }
+                },
+                "Confidence": {
+                    "target": "com.amazonaws.textract#Percent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Textract's confidence in its predicted value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information regarding predicted values returned by Amazon Textract operations, including the \n         predicted value and the confidence in the predicted value.</p>"
+            }
+        },
+        "com.amazonaws.textract#PredictionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#Prediction"
             }
         },
         "com.amazonaws.textract#ProvisionedThroughputExceededException": {
@@ -2141,6 +2609,55 @@
                         "smithy.api#enumValue": "NOT_SELECTED"
                     }
                 }
+            }
+        },
+        "com.amazonaws.textract#SignatureDetection": {
+            "type": "structure",
+            "members": {
+                "Confidence": {
+                    "target": "com.amazonaws.textract#Percent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence, from 0 to 100, in the predicted values for a detected signature.</p>"
+                    }
+                },
+                "Geometry": {
+                    "target": "com.amazonaws.textract#Geometry"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information regarding a detected signature on a page.</p>"
+            }
+        },
+        "com.amazonaws.textract#SignatureDetectionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#SignatureDetection"
+            }
+        },
+        "com.amazonaws.textract#SplitDocument": {
+            "type": "structure",
+            "members": {
+                "Index": {
+                    "target": "com.amazonaws.textract#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The index for a given document in a DocumentGroup of a specific Type.</p>"
+                    }
+                },
+                "Pages": {
+                    "target": "com.amazonaws.textract#PageList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of page numbers for a for a given document, ordered by logical boundary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the pages of a document, defined by logical boundary.</p>"
+            }
+        },
+        "com.amazonaws.textract#SplitDocumentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#SplitDocument"
             }
         },
         "com.amazonaws.textract#StartDocumentAnalysis": {
@@ -2462,6 +2979,102 @@
                 }
             }
         },
+        "com.amazonaws.textract#StartLendingAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.textract#StartLendingAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.textract#StartLendingAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.textract#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.textract#BadDocumentException"
+                },
+                {
+                    "target": "com.amazonaws.textract#DocumentTooLargeException"
+                },
+                {
+                    "target": "com.amazonaws.textract#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidKMSKeyException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.textract#InvalidS3ObjectException"
+                },
+                {
+                    "target": "com.amazonaws.textract#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.textract#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.textract#UnsupportedDocumentException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts the classification and analysis of an input document.\n    <code>StartLendingAnalysis</code> initiates the classification and analysis of a packet of\n   lending documents. <code>StartLendingAnalysis</code> operates on a document file located in an\n   Amazon S3 bucket.</p>\n         <p>\n            <code>StartLendingAnalysis</code> can analyze text in documents that are in one of the\n   following formats: JPEG, PNG, TIFF, PDF. Use <code>DocumentLocation</code> to specify the bucket\n   name and the file name of the document. </p>\n         <p>\n            <code>StartLendingAnalysis</code> returns a job identifier (<code>JobId</code>) that you use\n   to get the results of the operation. When the text analysis is finished, Amazon Textract\n   publishes a completion status to the Amazon Simple Notification Service (Amazon SNS) topic that\n   you specify in <code>NotificationChannel</code>. To get the results of the text analysis\n   operation, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If\n   the status is SUCCEEDED you can call either <code>GetLendingAnalysis</code> or\n    <code>GetLendingAnalysisSummary</code> and provide the <code>JobId</code> to obtain the results\n   of the analysis.</p>\n         <p>If using <code>OutputConfig</code> to specify an Amazon S3 bucket, the output will be contained\n   within the specified prefix in a directory labeled with the job-id. In the directory there are 3\n   sub-directories: </p>\n         <ul>\n            <li>\n               <p>detailedResponse (contains the GetLendingAnalysis response)</p>\n            </li>\n            <li>\n               <p>summaryResponse (for the GetLendingAnalysisSummary response)</p>\n            </li>\n            <li>\n               <p>splitDocuments (documents split across logical boundaries)</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.textract#StartLendingAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "DocumentLocation": {
+                    "target": "com.amazonaws.textract#DocumentLocation",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.textract#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotent token that you use to identify the start request. If you use the same token\n   with multiple <code>StartLendingAnalysis</code> requests, the same <code>JobId</code> is\n   returned. Use <code>ClientRequestToken</code> to prevent the same job from being accidentally\n   started more than once. For more information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/api-sync.html\">Calling Amazon Textract Asynchronous Operations</a>.</p>"
+                    }
+                },
+                "JobTag": {
+                    "target": "com.amazonaws.textract#JobTag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that you specify to be included in the completion notification published to\n   the Amazon SNS topic. For example, you can use <code>JobTag</code> to identify the type of\n   document that the completion notification corresponds to (such as a tax form or a\n   receipt).</p>"
+                    }
+                },
+                "NotificationChannel": {
+                    "target": "com.amazonaws.textract#NotificationChannel"
+                },
+                "OutputConfig": {
+                    "target": "com.amazonaws.textract#OutputConfig"
+                },
+                "KMSKeyId": {
+                    "target": "com.amazonaws.textract#KMSKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key used to encrypt the inference results. This can be in either Key ID or Key\n   Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of\n   the objects in the customer bucket. When this parameter is not enabled, the result will be\n   encrypted server side, using SSE-S3. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.textract#StartLendingAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.textract#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the lending or text-detection job. The <code>JobId</code> is\n   returned from <code>StartLendingAnalysis</code>. A <code>JobId</code> value is only valid for 7\n   days.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.textract#StatusMessage": {
             "type": "string"
         },
@@ -2527,6 +3140,12 @@
                     "target": "com.amazonaws.textract#GetExpenseAnalysis"
                 },
                 {
+                    "target": "com.amazonaws.textract#GetLendingAnalysis"
+                },
+                {
+                    "target": "com.amazonaws.textract#GetLendingAnalysisSummary"
+                },
+                {
                     "target": "com.amazonaws.textract#StartDocumentAnalysis"
                 },
                 {
@@ -2534,6 +3153,9 @@
                 },
                 {
                     "target": "com.amazonaws.textract#StartExpenseAnalysis"
+                },
+                {
+                    "target": "com.amazonaws.textract#StartLendingAnalysis"
                 }
             ],
             "traits": {
@@ -2555,7 +3177,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -2875,9 +3497,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "ap-south-1",
                                 "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2888,9 +3510,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2901,9 +3523,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2914,9 +3536,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-south-1",
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2927,9 +3549,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2940,9 +3562,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2953,9 +3575,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2966,9 +3588,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2979,9 +3601,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "ca-central-1",
                                 "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2992,9 +3614,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3005,9 +3627,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3018,9 +3640,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ca-central-1",
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3031,9 +3653,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "eu-central-1",
                                 "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3044,9 +3666,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3057,9 +3679,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3070,9 +3692,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3083,9 +3705,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3096,9 +3718,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3109,9 +3731,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3122,9 +3744,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3135,9 +3757,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3148,9 +3770,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3161,9 +3783,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3174,9 +3796,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-west-2",
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3187,9 +3809,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "eu-west-3",
                                 "UseFIPS": true,
-                                "Region": "eu-west-3"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3200,9 +3822,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": true,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3213,9 +3835,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3226,9 +3848,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-3",
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3239,9 +3861,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "eu-west-2",
                                 "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3252,9 +3874,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3265,9 +3887,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3278,9 +3900,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-2",
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3291,9 +3913,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "eu-west-1",
                                 "UseFIPS": true,
-                                "Region": "eu-west-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3304,9 +3926,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": true,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3317,9 +3939,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3330,9 +3952,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "eu-west-1",
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3343,9 +3965,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3356,9 +3978,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3369,9 +3991,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3382,9 +4004,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-northeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3395,9 +4017,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3408,9 +4030,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3421,9 +4043,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3434,9 +4056,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-gov-west-1",
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3447,9 +4069,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3460,9 +4082,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3473,9 +4095,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3486,9 +4108,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-1",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3499,9 +4121,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3512,9 +4134,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3525,9 +4147,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3538,9 +4160,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "ap-southeast-2",
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3549,9 +4171,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3562,9 +4184,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3573,9 +4195,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3586,9 +4208,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3599,9 +4221,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3612,9 +4234,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3625,9 +4247,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3638,9 +4260,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3651,9 +4273,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3664,9 +4286,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3677,9 +4299,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3690,9 +4312,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
+                                "Region": "us-east-2",
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3703,9 +4325,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3715,9 +4337,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3727,9 +4349,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -3759,6 +4381,32 @@
                 "smithy.api#range": {
                     "min": 0
                 }
+            }
+        },
+        "com.amazonaws.textract#UndetectedDocumentTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#NonEmptyString"
+            }
+        },
+        "com.amazonaws.textract#UndetectedSignature": {
+            "type": "structure",
+            "members": {
+                "Page": {
+                    "target": "com.amazonaws.textract#UInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The page where a signature was expected but not found.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure containing information about an undetected signature on a page where it was expected but not found.</p>"
+            }
+        },
+        "com.amazonaws.textract#UndetectedSignatureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.textract#UndetectedSignature"
             }
         },
         "com.amazonaws.textract#UnsupportedDocumentException": {

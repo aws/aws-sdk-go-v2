@@ -168,6 +168,9 @@
                     "target": "com.amazonaws.ecs#ListServices"
                 },
                 {
+                    "target": "com.amazonaws.ecs#ListServicesByNamespace"
+                },
+                {
                     "target": "com.amazonaws.ecs#ListTagsForResource"
                 },
                 {
@@ -2382,6 +2385,29 @@
                 }
             }
         },
+        "com.amazonaws.ecs#ApplicationProtocol": {
+            "type": "enum",
+            "members": {
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "http"
+                    }
+                },
+                "HTTP2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "http2"
+                    }
+                },
+                "GRPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "grpc"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ecs#AssignPublicIp": {
             "type": "enum",
             "members": {
@@ -2484,7 +2510,7 @@
                 "value": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the attribute. The <code>value</code> must contain between 1 and 128\n\t\t\tcharacters. It can contain letters (uppercase and lowercase), numbers, hyphens (-),\n\t\t\tunderscores (_), periods (.), at signs (@), forward slashes (/), back slashes (\\),\n\t\t\tcolons (:), or spaces. The value can't can't start or end with a space.</p>"
+                        "smithy.api#documentation": "<p>The value of the attribute. The <code>value</code> must contain between 1 and 128\n\t\t\tcharacters. It can contain letters (uppercase and lowercase), numbers, hyphens (-),\n\t\t\tunderscores (_), periods (.), at signs (@), forward slashes (/), back slashes (\\),\n\t\t\tcolons (:), or spaces. The value can't start or end with a space.</p>"
                     }
                 },
                 "targetType": {
@@ -2931,6 +2957,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the capacity providers associated with the cluster. The following are\n\t\t\tthe states that are returned.</p>\n\t\t       <dl>\n            <dt>UPDATE_IN_PROGRESS</dt>\n            <dd>\n\t\t\t\t\t          <p>The available capacity providers for the cluster are updating.</p>\n\t\t\t\t        </dd>\n            <dt>UPDATE_COMPLETE</dt>\n            <dd>\n\t\t\t\t\t          <p>The capacity providers have successfully updated.</p>\n\t\t\t\t        </dd>\n            <dt>UPDATE_FAILED</dt>\n            <dd>\n\t\t\t\t\t          <p>The capacity provider updates failed.</p>\n\t\t\t\t        </dd>\n         </dl>"
                     }
+                },
+                "serviceConnectDefaults": {
+                    "target": "com.amazonaws.ecs#ClusterServiceConnectDefaults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to set a default Service Connect namespace. After you set a default \n\tService Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as\n\tclient services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to\n\t<code>true</code> in the <code>ServiceConnectConfiguration</code>.\n\tYou can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default\n\tparameter.</p>\n\t        <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3038,6 +3070,35 @@
             "traits": {
                 "smithy.api#documentation": "<p>The specified cluster wasn't found. You can view your available clusters with <a>ListClusters</a>. Amazon ECS clusters are Region specific.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecs#ClusterServiceConnectDefaults": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace. When you create a service\n\t\t\tand don't specify a Service Connect configuration, this namespace is used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use this parameter to set a default Service Connect namespace. After you set a default \n\tService Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as\n\tclient services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to\n\t<code>true</code> in the <code>ServiceConnectConfiguration</code>.\n\tYou can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default\n\tparameter.</p>\n\t        <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ClusterServiceConnectDefaultsRequest": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace that's used when you create a service\n\t\t\tand don't specify a Service Connect configuration. Up to 1024 characters are allowed. The\n\t\t\tname is case-sensitive. The characters can't include hyphens (-), tilde (~), greater than\n\t\t\t(>), less than (<), or slash (/).</p>\n\t\t       <p>If you enter an existing namespace name or ARN, then that namespace will be used. Any\n\t\t\tnamespace type is supported. The namespace must be in this account and this Amazon Web Services Region.</p>\n\t\t       <p>If you enter a new name, a Cloud Map namespace will be created. Amazon ECS creates a\n\t\t\tCloud Map namespace with the \"API calls\" method of instance discovery only. This instance\n\t\t\tdiscovery method is the \"HTTP\" namespace type in the Command Line Interface. Other types of\n\t\t\tinstance discovery aren't used by Service Connect.</p>\n\t\t       <p>If you update the service with an empty string <code>\"\"</code> for the namespace name,\n\t\t\tthe cluster configuration for Service Connect is removed. Note that the namespace will \n\t\t\tremain in Cloud Map and must be deleted separately.</p>\n\t\t       <p>For more information about Cloud Map, see <a href=\"https://docs.aws.amazon.com/\">Working with Services</a> in the <i>Cloud Map Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use this parameter to set a default Service Connect namespace. After you set a default \n\tService Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as\n\tclient services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to\n\t<code>true</code> in the <code>ServiceConnectConfiguration</code>.\n\tYou can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default\n\tparameter.</p>\n\t        <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#ClusterSetting": {
@@ -3473,7 +3534,7 @@
                 "ulimits": {
                     "target": "com.amazonaws.ecs#UlimitList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>ulimits</code> to set in the container. If a ulimit value is specified\n\t\t\tin a task definition, it overrides the default values set by Docker. This parameter maps\n\t\t\tto <code>Ulimits</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>. Valid naming values are displayed\n\t\t\tin the <a>Ulimit</a> data type.</p>\n\t\t       <p>Amazon ECS tasks hosted on Fargate use the default\n\t\t\t\t\t\t\tresource limit values set by the operating system with the exception of\n\t\t\t\t\t\t\tthe <code>nofile</code> resource limit parameter which Fargate\n\t\t\t\t\t\t\toverrides. The <code>nofile</code> resource limit sets a restriction on\n\t\t\t\t\t\t\tthe number of open files that a container can use. The default\n\t\t\t\t\t\t\t\t<code>nofile</code> soft limit is <code>1024</code> and hard limit\n\t\t\t\t\t\t\tis <code>4096</code>.</p>\n\t\t       <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code>\n         </p>\n\t\t       <note>\n                        <p>This parameter is not supported for Windows containers.</p>\n                     </note>"
+                        "smithy.api#documentation": "<p>A list of <code>ulimits</code> to set in the container. If a <code>ulimit</code> value is specified\n\t\t\tin a task definition, it overrides the default values set by Docker. This parameter maps\n\t\t\tto <code>Ulimits</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>. Valid naming values are displayed\n\t\t\tin the <a>Ulimit</a> data type.</p>\n\t\t       <p>Amazon ECS tasks hosted on Fargate use the default\n\t\t\t\t\t\t\tresource limit values set by the operating system with the exception of\n\t\t\t\t\t\t\tthe <code>nofile</code> resource limit parameter which Fargate\n\t\t\t\t\t\t\toverrides. The <code>nofile</code> resource limit sets a restriction on\n\t\t\t\t\t\t\tthe number of open files that a container can use. The default\n\t\t\t\t\t\t\t\t<code>nofile</code> soft limit is <code>1024</code> and hard limit\n\t\t\t\t\t\t\tis <code>4096</code>.</p>\n\t\t       <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code>\n         </p>\n\t\t       <note>\n                        <p>This parameter is not supported for Windows containers.</p>\n                     </note>"
                     }
                 },
                 "logConfiguration": {
@@ -3999,6 +4060,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The capacity provider strategy to set as the default for the cluster. After a default\n\t\t\tcapacity provider strategy is set for a cluster, when you call the <a>RunTask</a> or <a>CreateService</a> APIs with no capacity\n\t\t\tprovider strategy or launch type specified, the default capacity provider strategy for\n\t\t\tthe cluster is used.</p>\n\t\t       <p>If a default capacity provider strategy isn't defined for a cluster when it was\n\t\t\tcreated, it can be defined later with the <a>PutClusterCapacityProviders</a>\n\t\t\tAPI operation.</p>"
                     }
+                },
+                "serviceConnectDefaults": {
+                    "target": "com.amazonaws.ecs#ClusterServiceConnectDefaultsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to set a default Service Connect namespace. After you set a default \n\tService Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as\n\tclient services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to\n\t<code>true</code> in the <code>ServiceConnectConfiguration</code>.\n\tYou can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default\n\tparameter.</p>\n\t        <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -4035,6 +4102,9 @@
                     "target": "com.amazonaws.ecs#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.ecs#NamespaceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.ecs#PlatformTaskDefinitionIncompatibilityException"
                 },
                 {
@@ -4048,7 +4118,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, see the <a>UpdateService</a> action.</p>\n\t\t       <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n\t\t       <p>There are two service scheduler strategies available:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the\n\t\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the\n\t\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. This is done with an <a>UpdateService</a> operation. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n\t\t       <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n\t\t       <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n\t\t       <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n\t\t       <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a>CreateTaskSet</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>When the service scheduler launches new tasks, it determines task placement. For\n\t\t\tinformation about task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS\n\t\t\t\ttask placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Runs and maintains your desired number of tasks from a specified task definition. If\n\t\t\tthe number of tasks running in a service drops below the <code>desiredCount</code>,\n\t\t\tAmazon ECS runs another copy of the task in the specified cluster. To update an existing\n\t\t\tservice, see the <a>UpdateService</a> action.</p>\n\t\t       <p>In addition to maintaining the desired count of tasks in your service, you can\n\t\t\toptionally run your service behind one or more load balancers. The load balancers\n\t\t\tdistribute traffic across the tasks that are associated with the service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-load-balancing.html\">Service load balancing</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>Tasks for services that don't use a load balancer are considered healthy if they're in\n\t\t\tthe <code>RUNNING</code> state. Tasks for services that use a load balancer are\n\t\t\tconsidered healthy if they're in the <code>RUNNING</code> state and are reported as\n\t\t\thealthy by the load balancer.</p>\n\t\t       <p>There are two service scheduler strategies available:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>REPLICA</code> - The replica scheduling strategy places and\n\t\t\t\t\tmaintains your desired number of tasks across your cluster. By default, the\n\t\t\t\t\tservice scheduler spreads tasks across Availability Zones. You can use task\n\t\t\t\t\tplacement strategies and constraints to customize task placement decisions. For\n\t\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the\n\t\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>DAEMON</code> - The daemon scheduling strategy deploys exactly one\n\t\t\t\t\ttask on each active container instance that meets all of the task placement\n\t\t\t\t\tconstraints that you specify in your cluster. The service scheduler also\n\t\t\t\t\tevaluates the task placement constraints for running tasks. It also stops tasks\n\t\t\t\t\tthat don't meet the placement constraints. When using this strategy, you don't\n\t\t\t\t\tneed to specify a desired number of tasks, a task placement strategy, or use\n\t\t\t\t\tService Auto Scaling policies. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs_services.html\">Service scheduler concepts</a> in the\n\t\t\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>You can optionally specify a deployment configuration for your service. The deployment\n\t\t\tis initiated by changing properties. For example, the deployment might be initiated by\n\t\t\tthe task definition or by your desired count of a service. This is done with an <a>UpdateService</a> operation. The default value for a replica service for\n\t\t\t\t<code>minimumHealthyPercent</code> is 100%. The default value for a daemon service\n\t\t\tfor <code>minimumHealthyPercent</code> is 0%.</p>\n\t\t       <p>If a service uses the <code>ECS</code> deployment controller, the minimum healthy\n\t\t\tpercent represents a lower limit on the number of tasks in a service that must remain in\n\t\t\tthe <code>RUNNING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of your desired number of tasks (rounded up to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can deploy without using additional cluster capacity. For example, if you\n\t\t\tset your service to have desired number of four tasks and a minimum healthy percent of\n\t\t\t50%, the scheduler might stop two existing tasks to free up cluster capacity before\n\t\t\tstarting two new tasks. If they're in the <code>RUNNING</code> state, tasks for services\n\t\t\tthat don't use a load balancer are considered healthy . If they're in the\n\t\t\t\t<code>RUNNING</code> state and reported as healthy by the load balancer, tasks for\n\t\t\tservices that <i>do</i> use a load balancer are considered healthy . The\n\t\t\tdefault value for minimum healthy percent is 100%.</p>\n\t\t       <p>If a service uses the <code>ECS</code> deployment controller, the <b>maximum percent</b> parameter represents an upper limit on the\n\t\t\tnumber of tasks in a service that are allowed in the <code>RUNNING</code> or\n\t\t\t\t<code>PENDING</code> state during a deployment. Specifically, it represents it as a\n\t\t\tpercentage of the desired number of tasks (rounded down to the nearest integer). This\n\t\t\thappens when any of your container instances are in the <code>DRAINING</code> state if\n\t\t\tthe service contains tasks using the EC2 launch type. Using this\n\t\t\tparameter, you can define the deployment batch size. For example, if your service has a\n\t\t\tdesired number of four tasks and a maximum percent value of 200%, the scheduler may\n\t\t\tstart four new tasks before stopping the four older tasks (provided that the cluster\n\t\t\tresources required to do this are available). The default value for maximum percent is\n\t\t\t200%.</p>\n\t\t       <p>If a service uses either the <code>CODE_DEPLOY</code> or <code>EXTERNAL</code>\n\t\t\tdeployment controller types and tasks that use the EC2 launch type, the\n\t\t\t\t<b>minimum healthy percent</b> and <b>maximum percent</b> values are used only to define the lower and upper limit\n\t\t\ton the number of the tasks in the service that remain in the <code>RUNNING</code> state.\n\t\t\tThis is while the container instances are in the <code>DRAINING</code> state. If the\n\t\t\ttasks in the service use the Fargate launch type, the minimum healthy\n\t\t\tpercent and maximum percent values aren't used. This is the case even if they're\n\t\t\tcurrently visible when describing your service.</p>\n\t\t       <p>When creating a service that uses the <code>EXTERNAL</code> deployment controller, you\n\t\t\tcan specify only parameters that aren't controlled at the task set level. The only\n\t\t\trequired parameter is the service name. You control your services using the <a>CreateTaskSet</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">Amazon ECS deployment types</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <p>When the service scheduler launches new tasks, it determines task placement. For information\n\t\t\tabout task placement and task placement strategies, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement.html\">Amazon ECS task placement</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#CreateServiceRequest": {
@@ -4148,7 +4218,7 @@
                 "healthCheckGracePeriodSeconds": {
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy\n\t\t\tElastic Load Balancing target health checks after a task has first started. This is only used when your\n\t\t\tservice is configured to use a load balancer. If your service has a load balancer\n\t\t\tdefined and you don't specify a health check grace period value, the default value of\n\t\t\t\t<code>0</code> is used.</p>\n\t\t       <p>If you do not use an Elastic Load Balancing, we recomend that you use the <code>startPeriod</code> in\n\t\t\tthe task definition healtch check parameters. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html\">Health\n\t\t\t\tcheck</a>.</p>\n\t\t       <p>If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you\n\t\t\tcan specify a health check grace period of up to\n\t\t\t2,147,483,647\n\t\t\tseconds (about 69 years). During that time, the Amazon ECS service\n\t\t\tscheduler ignores health check status. This grace period can prevent the service\n\t\t\tscheduler from marking tasks as unhealthy and stopping them before they have time to\n\t\t\tcome up.</p>"
+                        "smithy.api#documentation": "<p>The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy\n\t\t\tElastic Load Balancing target health checks after a task has first started. This is only used when your\n\t\t\tservice is configured to use a load balancer. If your service has a load balancer\n\t\t\tdefined and you don't specify a health check grace period value, the default value of\n\t\t\t\t<code>0</code> is used.</p>\n\t\t       <p>If you do not use an Elastic Load Balancing, we recommend that you use the <code>startPeriod</code> in the\n\t\t\ttask definition health check parameters. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html\">Health\n\t\t\t\tcheck</a>.</p>\n\t\t       <p>If your service's tasks take a while to start and respond to Elastic Load Balancing health checks, you\n\t\t\tcan specify a health check grace period of up to\n\t\t\t2,147,483,647\n\t\t\tseconds (about 69 years). During that time, the Amazon ECS service\n\t\t\tscheduler ignores health check status. This grace period can prevent the service\n\t\t\tscheduler from marking tasks as unhealthy and stopping them before they have time to\n\t\t\tcome up.</p>"
                     }
                 },
                 "schedulingStrategy": {
@@ -4188,6 +4258,12 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Determines whether the execute command functionality is enabled for the service. If\n\t\t\t\t<code>true</code>, this enables execute command functionality on all containers in\n\t\t\tthe service tasks.</p>"
                     }
+                },
+                "serviceConnectConfiguration": {
+                    "target": "com.amazonaws.ecs#ServiceConnectConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for this service to discover and connect to\n\tservices, and be discovered by, and connected from, other services within a namespace.</p> \n         <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -4222,6 +4298,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#NamespaceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.ecs#PlatformTaskDefinitionIncompatibilityException"
@@ -4804,6 +4883,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the rollout state of a deployment.</p>"
                     }
+                },
+                "serviceConnectConfiguration": {
+                    "target": "com.amazonaws.ecs#ServiceConnectConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the Service Connect configuration that's used by this deployment. Compare the\n\t\t\tconfiguration between multiple deployments when troubleshooting issues with new\n\t\t\tdeployments.</p>\n\t\t       <p>The configuration for this service to discover and connect to\n\tservices, and be discovered by, and connected from, other services within a namespace.</p> \n         <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
+                },
+                "serviceConnectResources": {
+                    "target": "com.amazonaws.ecs#ServiceConnectServiceResourceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Service Connect resources that are associated with this deployment.\n\t\t\tEach list entry maps a discovery name to a Cloud Map service name.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5144,7 +5235,7 @@
                 "include": {
                     "target": "com.amazonaws.ecs#ClusterFieldList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether to include additional information about the clusters in the\n\t\t\tresponse. If this field is omitted, this information isn't included.</p>\n\t\t       <p>If <code>ATTACHMENTS</code> is specified, the attachments for the container instances\n\t\t\tor tasks within the cluster are included.</p>\n\t\t       <p>If <code>SETTINGS</code> is specified, the settings for the cluster are\n\t\t\tincluded.</p>\n\t\t       <p>If <code>CONFIGURATIONS</code> is specified, the configuration for the cluster is\n\t\t\tincluded.</p>\n\t\t       <p>If <code>STATISTICS</code> is specified, the task and service count is included,\n\t\t\tseparated by launch type.</p>\n\t\t       <p>If <code>TAGS</code> is specified, the metadata tags associated with the cluster are\n\t\t\tincluded.</p>"
+                        "smithy.api#documentation": "<p>Determines whether to include additional information about the clusters in the\n\t\t\tresponse. If this field is omitted, this information isn't included.</p>\n\t\t       <p>If <code>ATTACHMENTS</code> is specified, the attachments for the container instances\n\t\t\tor tasks within the cluster are included, for example the capacity providers.</p>\n\t\t       <p>If <code>SETTINGS</code> is specified, the settings for the cluster are\n\t\t\tincluded.</p>\n\t\t       <p>If <code>CONFIGURATIONS</code> is specified, the configuration for the cluster is\n\t\t\tincluded.</p>\n\t\t       <p>If <code>STATISTICS</code> is specified, the task and service count is included,\n\t\t\tseparated by launch type.</p>\n\t\t       <p>If <code>TAGS</code> is specified, the metadata tags associated with the cluster are\n\t\t\tincluded.</p>"
                     }
                 }
             }
@@ -5771,6 +5862,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The telemetry endpoint for the Amazon ECS agent.</p>"
                     }
+                },
+                "serviceConnectEndpoint": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint for the Amazon ECS agent to poll for Service Connect configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -6010,7 +6107,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs a command remotely on a container within a task.</p>\n\t\t       <p>If you use a condition key in your IAM policy to refine the conditions for the policy\n\t\t\tstatement, for example limit the actions to a specific cluster, you recevie an\n\t\t\t\t<code>AccessDeniedException</code> when there is a mismatch between the condition\n\t\t\tkey value and the corresponding parameter value.</p>"
+                "smithy.api#documentation": "<p>Runs a command remotely on a container within a task.</p>\n\t\t       <p>If you use a condition key in your IAM policy to refine the conditions for the policy\n\t\t\tstatement, for example limit the actions to a specific cluster, you receive an\n\t\t\t\t<code>AccessDeniedException</code> when there is a mismatch between the condition\n\t\t\tkey value and the corresponding parameter value.</p>"
             }
         },
         "com.amazonaws.ecs#ExecuteCommandConfiguration": {
@@ -6425,7 +6522,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing a container health check. Health check parameters that are\n\t\t\tspecified in a container definition override any Docker health checks that exist in the\n\t\t\tcontainer image (such as those specified in a parent image or from the image's\n\t\t\tDockerfile).</p>\n\t\t       <note>\n\t\t\t         <p>The Amazon ECS container agent only monitors and reports on the health checks specified\n\t\t\t\tin the task definition. Amazon ECS does not monitor Docker health checks that are\n\t\t\t\tembedded in a container image and not specified in the container definition. Health\n\t\t\t\tcheck parameters that are specified in a container definition override any Docker\n\t\t\t\thealth checks that exist in the container image.</p>\n\t\t       </note>\n\t\t       <p>You can view the health status of both individual containers and a task with the\n\t\t\tDescribeTasks API operation or when viewing the task details in the console.</p>\n\t\t       <p>The following describes the possible <code>healthStatus</code> values for a\n\t\t\tcontainer:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>HEALTHY</code>-The container health check has passed\n\t\t\t\t\tsuccessfully.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>UNHEALTHY</code>-The container health check has failed.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>UNKNOWN</code>-The container health check is being evaluated or\n\t\t\t\t\tthere's no container health check defined.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>The following describes the possible <code>healthStatus</code> values for a task. The\n\t\t\tcontainer health check status of nonessential containers do not have an effect on the\n\t\t\thealth status of a task.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>HEALTHY</code>-All essential containers within the task have\n\t\t\t\t\tpassed their health checks.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>UNHEALTHY</code>-One or more essential containers have failed\n\t\t\t\t\ttheir health check.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>UNKNOWN</code>-The essential containers within the task are still\n\t\t\t\t\thaving their health checks evaluated or there are no container health checks\n\t\t\t\t\tdefined.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>If a task is run manually, and not as part of a service, the task will continue its\n\t\t\tlifecycle regardless of its health status. For tasks that are part of a service, if the\n\t\t\ttask reports as unhealthy then the task will be stopped and the service scheduler will\n\t\t\treplace it.</p>\n\t\t       <p>The following are notes about container health check support:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Container health checks require version 1.17.0 or greater of the Amazon ECS\n\t\t\t\t\tcontainer agent. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the\n\t\t\t\t\t\tAmazon ECS container agent</a>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Container health checks are supported for Fargate tasks if\n\t\t\t\t\tyou're using platform version <code>1.1.0</code> or greater. For more\n\t\t\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate\n\t\t\t\t\t\tplatform versions</a>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Container health checks aren't supported for tasks that are part of a service\n\t\t\t\t\tthat's configured to use a Classic Load Balancer.</p>\n\t\t\t         </li>\n         </ul>"
+                "smithy.api#documentation": "<p>An object representing a container health check. Health check parameters that are\n\t\t\tspecified in a container definition override any Docker health checks that exist in the\n\t\t\tcontainer image (such as those specified in a parent image or from the image's\n\t\t\tDockerfile).</p>\n\t\t       <note>\n\t\t\t         <p>The Amazon ECS container agent only monitors and reports on the health checks specified\n\t\t\t\tin the task definition. Amazon ECS does not monitor Docker health checks that are\n\t\t\t\tembedded in a container image and not specified in the container definition. Health\n\t\t\t\tcheck parameters that are specified in a container definition override any Docker\n\t\t\t\thealth checks that exist in the container image.</p>\n\t\t       </note>\n\t\t       <p>You can view the health status of both individual containers and a task with the\n\t\t\tDescribeTasks API operation or when viewing the task details in the console.</p>\n\t\t       <p>The following describes the possible <code>healthStatus</code> values for a\n\t\t\tcontainer:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>HEALTHY</code>-The container health check has passed\n\t\t\t\t\tsuccessfully.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>UNHEALTHY</code>-The container health check has failed.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>UNKNOWN</code>-The container health check is being evaluated or\n\t\t\t\t\tthere's no container health check defined.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>The following describes the possible <code>healthStatus</code> values for a task. The\n\t\t\tcontainer health check status of nonessential containers only affects the health status\n\t\t\tof a task if no essential containers have health checks defined.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>HEALTHY</code>-All essential containers within the task have\n\t\t\t\t\tpassed their health checks.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>UNHEALTHY</code>-One or more essential containers have failed\n\t\t\t\t\ttheir health check.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>UNKNOWN</code>-The essential containers within the task are still\n\t\t\t\t\thaving their health checks evaluated or there are only nonessential containers\n\t\t\t\t\twith health checks defined.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>If a task is run manually, and not as part of a service, the task will continue its\n\t\t\tlifecycle regardless of its health status. For tasks that are part of a service, if the\n\t\t\ttask reports as unhealthy then the task will be stopped and the service scheduler will\n\t\t\treplace it.</p>\n\t\t       <important>\n\t\t\t         <p>For tasks that are a part of a service and the service uses the <code>ECS</code>\n\t\t\t\trolling deployment type, the deployment is paused while the new tasks have the\n\t\t\t\t\t<code>UNKNOWN</code> task health check status. For example, tasks that define\n\t\t\t\thealth checks for nonessential containers when no essential containers have health\n\t\t\t\tchecks will have the <code>UNKNOWN</code> health check status indefinitely which\n\t\t\t\tprevents the deployment from completing.</p>\n\t\t       </important>\n\t\t       <p>The following are notes about container health check support:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>Container health checks require version 1.17.0 or greater of the Amazon ECS\n\t\t\t\t\tcontainer agent. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html\">Updating the\n\t\t\t\t\t\tAmazon ECS container agent</a>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Container health checks are supported for Fargate tasks if\n\t\t\t\t\tyou're using platform version <code>1.1.0</code> or greater. For more\n\t\t\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">Fargate\n\t\t\t\t\t\tplatform versions</a>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>Container health checks aren't supported for tasks that are part of a service\n\t\t\t\t\tthat's configured to use a Classic Load Balancer.</p>\n\t\t\t         </li>\n         </ul>"
             }
         },
         "com.amazonaws.ecs#HealthStatus": {
@@ -7144,6 +7241,79 @@
                 }
             }
         },
+        "com.amazonaws.ecs#ListServicesByNamespace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecs#ListServicesByNamespaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecs#ListServicesByNamespaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecs#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#NamespaceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecs#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This operation lists all of the services that are associated with a Cloud Map namespace. This list\n\t\t\tmight include services in different clusters. In contrast, <code>ListServices</code> can\n\t\t\tonly list services in one cluster at a time. If you need to filter the list of\n\t\t\tservices in a single cluster by various parameters, use <code>ListServices</code>.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "serviceArns",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.ecs#ListServicesByNamespaceRequest": {
+            "type": "structure",
+            "members": {
+                "namespace": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace to list the services in.</p>\n\t\t       <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value that's returned from a <code>ListServicesByNamespace</code> request.\n\t\t\tIt indicates that more results are available to fulfill the request and further calls\n\t\t\tare needed. If <code>maxResults</code> is returned, it is possible the number of results\n\t\t\tis less than <code>maxResults</code>.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ecs#BoxedInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of service results that <code>ListServicesByNamespace</code> returns in\n\t\t\tpaginated output. When this parameter is used, <code>ListServicesByNamespace</code> only returns\n\t\t\t<code>maxResults</code> results in a single page along with a <code>nextToken</code>\n\t\t\tresponse element. The remaining results of the initial request can be seen by sending\n\t\t\tanother <code>ListServicesByNamespace</code> request with the returned <code>nextToken</code>\n\t\t\tvalue. This value can be between 1 and 100. If\n\t\t\tthis parameter isn't used, then <code>ListServicesByNamespace</code> returns up to\n\t\t\t10 results and a <code>nextToken</code> value if\n\t\t\tapplicable.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecs#ListServicesByNamespaceResponse": {
+            "type": "structure",
+            "members": {
+                "serviceArns": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of full ARN entries for each service that's associated with the specified\n\t\t\tnamespace.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListServicesByNamespace</code>\n\t\t\trequest. When the results of a <code>ListServicesByNamespace</code> request exceed\n\t\t\t<code>maxResults</code>, this value can be used to retrieve the next page of\n\t\t\tresults. When there are no more results to\n\t\t\treturn, this value is <code>null</code>.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ecs#ListServicesRequest": {
             "type": "structure",
             "members": {
@@ -7472,7 +7642,7 @@
                 "startedBy": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>startedBy</code> value to filter the task results with. Specifying a\n\t\t\t\t<code>startedBy</code> value limits the results to tasks that were started with that\n\t\t\tvalue.</p>"
+                        "smithy.api#documentation": "<p>The <code>startedBy</code> value to filter the task results with. Specifying a\n\t\t\t\t<code>startedBy</code> value limits the results to tasks that were started with that\n\t\t\tvalue.</p>\n\t\t       <p>When you specify <code>startedBy</code> as the filter, it must be the only filter that\n\t\t\tyou use.</p>"
                     }
                 },
                 "serviceName": {
@@ -7759,7 +7929,7 @@
                 "maximumScalingStepSize": {
                     "target": "com.amazonaws.ecs#ManagedScalingStepSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale\n\t\t\tin process is not affected by this parameter. If this parameter is omitted, the default\n\t\t\tvalue of <code>10000</code> is used.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one time. The scale\n\t\t\tin process is not affected by this parameter. If this parameter is omitted, the default\n\t\t\tvalue of <code>1</code> is used.</p>"
                     }
                 },
                 "instanceWarmupPeriod": {
@@ -7876,6 +8046,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#MountPoint"
+            }
+        },
+        "com.amazonaws.ecs#NamespaceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecs#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified namespace wasn't found.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.ecs#NetworkBinding": {
@@ -8248,6 +8430,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The protocol used for the port mapping. Valid values are <code>tcp</code> and\n\t\t\t\t<code>udp</code>. The default is <code>tcp</code>.</p>"
                     }
+                },
+                "name": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that's used for the port mapping. This parameter only applies to Service Connect. \n\t\t\tThis parameter is the name that you use in the <code>serviceConnectConfiguration</code>\n\t\t\tof a service. Up to 64 characters are allowed. The characters can include lowercase letters,\n\t\t\tnumbers, underscores (_), and hyphens (-). A hyphen can't be the first character.</p>\n\t\t\t      <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
+                },
+                "appProtocol": {
+                    "target": "com.amazonaws.ecs#ApplicationProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application protocol that's used for the port mapping. This parameter only applies\n\t\t\tto Service Connect. We recommend that you set this parameter to be consistent with\n\t\t\tthe protocol that your application uses.\n\t\t\tIf you set this parameter, Amazon ECS adds protocol-specific connection\n\t\t\thandling to the Service Connect proxy.\n\t\t\tIf you set this parameter, Amazon ECS adds protocol-specific telemetry in the Amazon ECS console and CloudWatch.</p>\n\t\t       <p>If you don't set a value for this parameter, then TCP is used. However, Amazon ECS doesn't add protocol-specific telemetry for TCP.</p>\n\t\t       <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8258,6 +8452,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ecs#PortMapping"
+            }
+        },
+        "com.amazonaws.ecs#PortNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65535
+                }
             }
         },
         "com.amazonaws.ecs#PropagateTags": {
@@ -9155,7 +9358,7 @@
                 "cpuArchitecture": {
                     "target": "com.amazonaws.ecs#CPUArchitecture",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CPU architecture.</p>\n\t\t       <p>You can run your Linux tasks on an ARM-based platform by setting the value to\n\t\t\t\t<code>ARM64</code>. This option is avaiable for tasks that run on Linux Amazon EC2\n\t\t\tinstance or Linux containers on Fargate.</p>"
+                        "smithy.api#documentation": "<p>The CPU architecture.</p>\n\t\t       <p>You can run your Linux tasks on an ARM-based platform by setting the value to\n\t\t\t\t<code>ARM64</code>. This option is available for tasks that run on Linux Amazon EC2\n\t\t\tinstance or Linux containers on Fargate.</p>"
                     }
                 },
                 "operatingSystemFamily": {
@@ -9480,6 +9683,129 @@
                 "smithy.api#documentation": "<p>Details on a service within a cluster</p>"
             }
         },
+        "com.amazonaws.ecs#ServiceConnectClientAlias": {
+            "type": "structure",
+            "members": {
+                "port": {
+                    "target": "com.amazonaws.ecs#PortNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The listening port number for the Service Connect proxy. This port is\n\t\t\tavailable inside of all of the tasks within the same namespace.</p>\n\t\t       <p>To avoid changing your applications in client Amazon ECS services, set this\n\t\t\tto the same port that the client application uses by default.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dnsName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>dnsName</code> is the name that you use in the applications\n\t\t\tof client tasks to connect to this service.\n\t\t\tThe name must be a valid DNS name but doesn't need to be fully-qualified.\n\t\t\tUp to 127 characters are allowed. The characters can include lowercase letters,\n\t\t\tnumbers, underscores (_), hyphens (-), and periods (.). A hyphen can't be \n\t\t\tthe first character.</p>\n\t\t       <p>If this parameter isn't specified,\n\t\t\tthe default value of <code>discoveryName.namespace</code> is used.\n\t\t\tIf the <code>discoveryName</code> isn't specified, the <code>portName.namespace</code>\n\t\t\tfrom the task definition is used.</p>\n\t\t       <p>To avoid changing your applications in client Amazon ECS services, set this\n\t\t\tto the same name that the client application uses by default. For example, a few common names\n\t\t\tare <code>database</code>, <code>db</code>, or the lowercase name of a database,\n\t\t\tsuch as <code>mysql</code> or <code>redis</code>.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Each alias (\"endpoint\") is a fully-qualified name and port number that other\n\t\t\ttasks (\"clients\") can use to connect to this service.</p>\n\t\t       <p>Each name and port mapping must be unique within the namespace.</p>\n\t\t       <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectClientAliasList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ServiceConnectClientAlias"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectConfiguration": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether to use Service Connect with this service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace for use with Service Connect. The \n\t\t\tnamespace must be in the same Amazon Web Services Region as the Amazon ECS service and \n\t\t\tcluster. The type of namespace doesn't affect Service Connect. \n\t\t\tFor more information about Cloud Map, see <a href=\"https://docs.aws.amazon.com/\">Working with Services</a> in the <i>Cloud Map Developer Guide</i>.</p>"
+                    }
+                },
+                "services": {
+                    "target": "com.amazonaws.ecs#ServiceConnectServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Service Connect service objects. These are names and aliases (also known as endpoints)\n\t\t\tthat are used by other Amazon ECS services to connect to this service. You can specify up to\n\t\t\tX (30?) objects per Amazon ECS service.</p>\n\t\t       <p>This field is not required for a \"client\" Amazon ECS service that's a member of a\n\t\t\tnamespace only to connect to other services within the namespace. An example of this\n\t\t\twould be a frontend application that accepts incoming requests\n\t\t\tfrom either a load balancer that's attached to the service or by other means.</p>\n\t\t       <p>An object selects a port from the task definition, assigns a name for the \n\t\t\tCloud Map service, and a list of aliases (endpoints) and ports for\n\t\t\tclient applications to refer to this service.</p>"
+                    }
+                },
+                "logConfiguration": {
+                    "target": "com.amazonaws.ecs#LogConfiguration"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Service Connect configuration of your Amazon ECS service. The configuration for\n\t\tthis service to discover and connect to services, and be discovered by, and\n\t\tconnected from, other services within a namespace.</p>\n\t\t       <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectService": {
+            "type": "structure",
+            "members": {
+                "portName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>portName</code> must match the name of one of the \n\t\t\t<code>portMappings</code> from all the containers in the task \n\t\t\tdefinition of this Amazon ECS service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "discoveryName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>discoveryName</code> is the name of the new Cloud Map service that Amazon ECS creates\n\t\t\tfor this Amazon ECS service. This must be unique within the Cloud Map namespace. Up to 64 characters are allowed. The characters can include lowercase letters,\n\t\t\tnumbers, underscores (_), and hyphens (-). A hyphen can't be the first character.</p>\n\t\t       <p>If this field isn't specified, <code>portName</code> is used.</p>"
+                    }
+                },
+                "clientAliases": {
+                    "target": "com.amazonaws.ecs#ServiceConnectClientAliasList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of client aliases for this Service Connect service. You use these to assign\n\t\t\tnames that can be used by client applications. The maximum number of client aliases\n\t\t\tthat you can have in this list is 1.</p>\n\t\t       <p>Each alias (\"endpoint\") is a fully-qualified name and port number that other Amazon ECS\n\t\t\ttasks (\"clients\") can use to connect to this service.</p>\n\t\t       <p>Each name and port mapping must be unique within the namespace.</p>\n\t\t       <p>For each <code>ServiceConnectService</code>, you must provide at least one <code>clientAlias</code> with one <code>port</code>.</p>"
+                    }
+                },
+                "ingressPortOverride": {
+                    "target": "com.amazonaws.ecs#PortNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number for the Service Connect proxy to listen on.</p>\n\t\t       <p>Use the value of this field to bypass the proxy for traffic on the port number\n\t\t\tspecified in the named <code>portMapping</code> in the task definition of this application, and\n\t\t\tthen use it in your VPC security groups to allow traffic into the proxy for\n\t\t\tthis Amazon ECS service.</p>\n\t\t       <p>In <code>awsvpc</code> mode and Fargate, the default value is the container port number. The container port number is in the\n\t\t\t<code>portMapping</code> in the task definition. In bridge mode,\n\t\t\tthe default value is the ephemeral port of the Service Connect proxy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Service Connect service object configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectServiceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ServiceConnectService"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectServiceResource": {
+            "type": "structure",
+            "members": {
+                "discoveryName": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The discovery name of this Service Connect resource.</p>\n\t\t       <p>The <code>discoveryName</code> is the name of the new Cloud Map service that Amazon ECS creates\n\t\t\tfor this Amazon ECS service. This must be unique within the Cloud Map namespace. Up to 64 characters are allowed. The characters can include lowercase letters,\n\t\t\tnumbers, underscores (_), and hyphens (-). A hyphen can't be the first character.</p>\n\t\t       <p>If this field isn't specified, <code>portName</code> is used.</p>"
+                    }
+                },
+                "discoveryArn": {
+                    "target": "com.amazonaws.ecs#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the namespace in Cloud Map that matches the discovery name\n\t\t\tfor this Service Connect resource. You can use this ARN in other integrations\n\t\t\twith Cloud Map. However, Service Connect can't ensure connectivity outside of Amazon ECS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Service Connect resource. Each configuration maps a discovery name to a Cloud Map service name.\n\t\t\tThe data is stored in Cloud Map as part of the Service Connect configuration\n\t\t\tfor each discovery name of this Amazon ECS service.</p>\n\t\t       <p>A task can resolve the <code>dnsName</code> for each of the\n\t\t\t<code>clientAliases</code> of a service. However a task can't resolve the discovery names.\n\t\t\tIf you want to connect to a service, refer to the\n\t\t\t<code>ServiceConnectConfiguration</code> of\n\t\t\tthat service for the list of <code>clientAliases</code> that you can use.</p>"
+            }
+        },
+        "com.amazonaws.ecs#ServiceConnectServiceResourceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecs#ServiceConnectServiceResource"
+            }
+        },
         "com.amazonaws.ecs#ServiceEvent": {
             "type": "structure",
             "members": {
@@ -9770,7 +10096,7 @@
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Specifies whether to use Amazon ECS managed tags for the task. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging Your Amazon ECS\n\t\t\t\tResources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to use Amazon ECS managed tags for the task. For more information, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html\">Tagging Your Amazon ECS\n\t\t\t\tResources</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
                     }
                 },
                 "enableExecuteCommand": {
@@ -10850,7 +11176,7 @@
                 "cpu": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cpu override for the task.</p>"
+                        "smithy.api#documentation": "<p>The CPU override for the task.</p>"
                     }
                 },
                 "inferenceAcceleratorOverrides": {
@@ -10918,7 +11244,7 @@
                 "startedBy": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tag specified when a task set is started. If an CodeDeploy deployment created the task\n\t\t\tset, the <code>startedBy</code> parameter is <code>CODE_DEPLOY</code>. If an external\n\t\t\tdeployment created the task set, the startedBy field isn't used.</p>"
+                        "smithy.api#documentation": "<p>The tag specified when a task set is started. If an CodeDeploy deployment created the task\n\t\t\tset, the <code>startedBy</code> parameter is <code>CODE_DEPLOY</code>. If an external\n\t\t\tdeployment created the task set, the <code>startedBy</code> field isn't used.</p>"
                     }
                 },
                 "externalId": {
@@ -11023,7 +11349,7 @@
                 "stabilityStatus": {
                     "target": "com.amazonaws.ecs#StabilityStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The stability status. This indicates whether the task set has reached a steady state.\n\t\t\tIf the following conditions are met, the task set sre in\n\t\t\t<code>STEADY_STATE</code>:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>The task <code>runningCount</code> is equal to the\n\t\t\t\t\t\t<code>computedDesiredCount</code>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The <code>pendingCount</code> is <code>0</code>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>There are no tasks that are running on container instances in the\n\t\t\t\t\t\t<code>DRAINING</code> status.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>All tasks are reporting a healthy status from the load balancers, service\n\t\t\t\t\tdiscovery, and container health checks.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>If any of those conditions aren't met, the stability status returns\n\t\t\t\t<code>STABILIZING</code>.</p>"
+                        "smithy.api#documentation": "<p>The stability status. This indicates whether the task set has reached a steady state.\n\t\t\tIf the following conditions are met, the task set are in\n\t\t\t<code>STEADY_STATE</code>:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>The task <code>runningCount</code> is equal to the\n\t\t\t\t\t\t<code>computedDesiredCount</code>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The <code>pendingCount</code> is <code>0</code>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>There are no tasks that are running on container instances in the\n\t\t\t\t\t\t<code>DRAINING</code> status.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>All tasks are reporting a healthy status from the load balancers, service\n\t\t\t\t\tdiscovery, and container health checks.</p>\n\t\t\t         </li>\n         </ul>\n\t\t       <p>If any of those conditions aren't met, the stability status returns\n\t\t\t\t<code>STABILIZING</code>.</p>"
                     }
                 },
                 "stabilityStatusAt": {
@@ -11097,6 +11423,24 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UserInitiated"
+                    }
+                },
+                "SERVICE_SCHEDULER_INITIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ServiceSchedulerInitiated"
+                    }
+                },
+                "SPOT_INTERRUPTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SpotInterruption"
+                    }
+                },
+                "TERMINATION_NOTICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TerminationNotice"
                     }
                 }
             }
@@ -11176,7 +11520,7 @@
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The soft limit for the ulimit type.</p>",
+                        "smithy.api#documentation": "<p>The soft limit for the <code>ulimit</code> type.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11184,7 +11528,7 @@
                     "target": "com.amazonaws.ecs#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The hard limit for the ulimit type.</p>",
+                        "smithy.api#documentation": "<p>The hard limit for the <code>ulimit</code> type.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11458,6 +11802,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The execute command configuration for the cluster.</p>"
                     }
+                },
+                "serviceConnectDefaults": {
+                    "target": "com.amazonaws.ecs#ClusterServiceConnectDefaultsRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this parameter to set a default Service Connect namespace. After you set a default \n\tService Connect namespace, any new services with Service Connect turned on that are created in the cluster are added as\n\tclient services in the namespace. This setting only applies to new services that set the <code>enabled</code> parameter to\n\t<code>true</code> in the <code>ServiceConnectConfiguration</code>.\n\tYou can set the namespace of each service individually in the <code>ServiceConnectConfiguration</code> to override this default\n\tparameter.</p>\n\t        <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -11511,7 +11861,7 @@
                 "settings": {
                     "target": "com.amazonaws.ecs#ClusterSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting to use by default for a cluster. This parameter is used to turn on CloudWatch\n\t\t\tContainer Insights for a cluster. If this value is specified, it overrides the\n\t\t\t\t<code>containerInsights</code> value set with <a>PutAccountSetting</a> or\n\t\t\t\t<a>PutAccountSettingDefault</a>.</p>",
+                        "smithy.api#documentation": "<p>The setting to use by default for a cluster. This parameter is used to turn on CloudWatch\n\t\t\tContainer Insights for a cluster. If this value is specified, it overrides the\n\t\t\t\t<code>containerInsights</code> value set with <a>PutAccountSetting</a> or\n\t\t\t\t<a>PutAccountSettingDefault</a>.</p>\n\t\t       <important>\n\t\t\t         <p>Currently, if you delete an existing cluster that does not have Container Insights\n\t\t\t\tturned on, and then create a new cluster with the same name with Container Insights\n\t\t\t\ttuned on, Container Insights will not actually be turned on. If you want to preserve\n\t\t\t\tthe same name for your existing cluster and turn on Container Insights, you must\n\t\t\t\twait 7 days before you can re-create it.</p>\n\t\t       </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11560,7 +11910,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the Amazon ECS container agent on a specified container instance. Updating the\n\t\t\tAmazon ECS container agent doesn't interrupt running tasks or services on the container\n\t\t\tinstance. The process for updating the agent differs depending on whether your container\n\t\t\tinstance was launched with the Amazon ECS-optimized AMI or another operating system.</p>\n\t\t       <note>\n\t\t\t         <p>The <code>UpdateContainerAgent</code> API isn't supported for container instances\n\t\t\t\tusing the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent,\n\t\t\t\tyou can update the <code>ecs-init</code> package. This updates the agent. For more\n\t\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/agent-update-ecs-ami.html\">Updating the\n\t\t\t\t\tAmazon ECS container agent</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       </note>\n\t\t       <p>The <code>UpdateContainerAgent</code> API requires an Amazon ECS-optimized AMI or Amazon\n\t\t\tLinux AMI with the <code>ecs-init</code> service installed and running. For help\n\t\t\tupdating the Amazon ECS container agent on other operating systems, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent\">Manually updating the Amazon ECS container agent</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Updates the Amazon ECS container agent on a specified container instance. Updating the\n\t\t\tAmazon ECS container agent doesn't interrupt running tasks or services on the container\n\t\t\tinstance. The process for updating the agent differs depending on whether your container\n\t\t\tinstance was launched with the Amazon ECS-optimized AMI or another operating system.</p>\n\t\t       <note>\n\t\t\t         <p>The <code>UpdateContainerAgent</code> API isn't supported for container instances\n\t\t\t\tusing the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent,\n\t\t\t\tyou can update the <code>ecs-init</code> package. This updates the agent. For more\n\t\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/agent-update-ecs-ami.html\">Updating the\n\t\t\t\t\tAmazon ECS container agent</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       </note>\n\t\t       <note>\n\t\t\t         <p>Agent updates with the <code>UpdateContainerAgent</code> API operation do not\n\t\t\t\tapply to Windows container instances. We recommend that you launch new container\n\t\t\t\tinstances to update the agent version in your Windows clusters.</p>\n\t\t       </note>\n\t\t       <p>The <code>UpdateContainerAgent</code> API requires an Amazon ECS-optimized AMI or Amazon\n\t\t\tLinux AMI with the <code>ecs-init</code> service installed and running. For help\n\t\t\tupdating the Amazon ECS container agent on other operating systems, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent\">Manually updating the Amazon ECS container agent</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#UpdateContainerAgentRequest": {
@@ -11694,6 +12044,9 @@
                     "target": "com.amazonaws.ecs#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.ecs#NamespaceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.ecs#PlatformTaskDefinitionIncompatibilityException"
                 },
                 {
@@ -11786,7 +12139,7 @@
                 "taskSet": {
                     "target": "com.amazonaws.ecs#TaskSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>etails about the task set.</p>"
+                        "smithy.api#documentation": "<p>The details about the task set.</p>"
                     }
                 }
             }
@@ -11897,6 +12250,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The details for the service discovery registries to assign to this service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service\n\t\t\t\tDiscovery</a>.</p>\n\t\t       <p>When you add, update, or remove the service registries configuration, Amazon ECS starts new\n\t\t\ttasks with the updated service registries configuration, and then stops the old tasks\n\t\t\twhen the new tasks are running.</p>\n\t\t       <p>You can remove existing <code>serviceRegistries</code> by passing an empty\n\t\t\tlist.</p>"
                     }
+                },
+                "serviceConnectConfiguration": {
+                    "target": "com.amazonaws.ecs#ServiceConnectConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for this service to discover and connect to\n\tservices, and be discovered by, and connected from, other services within a namespace.</p> \n         <p>Tasks that run in a namespace can use short names to connect\n\tto services in the namespace. Tasks can connect to services across all of the clusters in the namespace.\n\tTasks connect through a managed proxy container\n\tthat collects logs and metrics for increased visibility.\n\tOnly the tasks that Amazon ECS services create are supported with Service Connect.\n\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html\">Service Connect</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -11943,7 +12302,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the protection status of a task. You can set <code>protectionEnabled</code> to\n\t\t\t\t<code>true</code> to protect your task from termination during scale-in events from\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html\">Service\n\t\t\t\tAutoscaling</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">deployments</a>.</p>\n\t\t       <p>Task-protection, by default, expires after 2 hours at which point Amazon ECS unsets the\n\t\t\t\t<code>protectionEnabled</code> property making the task eligible for termination by\n\t\t\ta subsequent scale-in event.</p>\n\t\t       <p>You can specify a custom expiration period for task protection from 1 minute to up to\n\t\t\t2,880 minutes (48 hours). To specify the custom expiration period, set the\n\t\t\t\t<code>expiresInMinutes</code> property. The <code>expiresInMinutes</code> property\n\t\t\tis always reset when you invoke this operation for a task that already has\n\t\t\t\t<code>protectionEnabled</code> set to <code>true</code>. You can keep extending the\n\t\t\tprotection expiration period of a task by invoking this operation repeatedly.</p>\n\t\t       <p>To learn more about Amazon ECS task protection, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html\">Task scale-in\n\t\t\t\tprotection</a> in the <i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       <note>\n\t\t\t         <p>This operation is only supported for tasks belonging to an Amazon ECS service. Invoking\n\t\t\t\tthis operation for a standalone task will result in an <code>TASK_NOT_VALID</code>\n\t\t\t\tfailure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html.html\">API\n\t\t\t\t\tfailure reasons</a>.</p>\n\t\t       </note>\n\t\t       <important>\n\t\t\t         <p>If you prefer to set task protection from within the container, we recommend using\n\t\t\t\tthe <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-endpoint.html\">Amazon ECS container\n\t\t\t\t\tagent endpoint</a>.</p>\n\t\t       </important>"
+                "smithy.api#documentation": "<p>Updates the protection status of a task. You can set <code>protectionEnabled</code> to\n\t\t\t\t<code>true</code> to protect your task from termination during scale-in events from\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-auto-scaling.html\">Service\n\t\t\t\tAutoscaling</a> or <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html\">deployments</a>.</p>\n\t\t       <p>Task-protection, by default, expires after 2 hours at which point Amazon ECS unsets the\n\t\t\t\t<code>protectionEnabled</code> property making the task eligible for termination by\n\t\t\ta subsequent scale-in event.</p>\n\t\t       <p>You can specify a custom expiration period for task protection from 1 minute to up to\n\t\t\t2,880 minutes (48 hours). To specify the custom expiration period, set the\n\t\t\t\t<code>expiresInMinutes</code> property. The <code>expiresInMinutes</code> property\n\t\t\tis always reset when you invoke this operation for a task that already has\n\t\t\t\t<code>protectionEnabled</code> set to <code>true</code>. You can keep extending the\n\t\t\tprotection expiration period of a task by invoking this operation repeatedly.</p>\n\t\t       <p>To learn more about Amazon ECS task protection, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html\">Task scale-in\n\t\t\t\tprotection</a> in the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>.</p>\n\t\t       <note>\n\t\t\t         <p>This operation is only supported for tasks belonging to an Amazon ECS service. Invoking\n\t\t\t\tthis operation for a standalone task will result in an <code>TASK_NOT_VALID</code>\n\t\t\t\tfailure. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html\">API failure\n\t\t\t\t\treasons</a>.</p>\n\t\t       </note>\n\t\t       <important>\n\t\t\t         <p>If you prefer to set task protection from within the container, we recommend using\n\t\t\t\tthe <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html\">Task scale-in protection endpoint</a>.</p>\n\t\t       </important>"
             }
         },
         "com.amazonaws.ecs#UpdateTaskProtectionRequest": {
@@ -12142,7 +12501,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A data volume that's used in a task definition. For tasks that use the Amazon Elastic\n\t\t\tFile System (Amazon EFS), specify an <code>efsVolumeConfiguration</code>. For Windows\n\t\t\ttasks that use Amazon FSx for Windows File Server file system, specify a\n\t\t\t\t<code>fsxWindowsFileServerVolumeConfiguration</code>. For tasks that use a Docker\n\t\t\tvolume, specify a <code>DockerVolumeConfiguration</code>. For tasks that use a bind\n\t\t\tmount host volume, specify a <code>host</code> and optional <code>sourcePath</code>. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html\">Using Data Volumes in\n\t\t\t\tTasks</a>.</p>"
+                "smithy.api#documentation": "<p>A data volume that's used in a task definition. For tasks that use the Amazon Elastic File System (Amazon EFS), specify an <code>efsVolumeConfiguration</code>. For Windows\n\t\t\ttasks that use Amazon FSx for Windows File Server file system, specify a\n\t\t\t\t<code>fsxWindowsFileServerVolumeConfiguration</code>. For tasks that use a Docker\n\t\t\tvolume, specify a <code>DockerVolumeConfiguration</code>. For tasks that use a bind\n\t\t\tmount host volume, specify a <code>host</code> and optional <code>sourcePath</code>. For\n\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using_data_volumes.html\">Using Data Volumes in\n\t\t\t\tTasks</a>.</p>"
             }
         },
         "com.amazonaws.ecs#VolumeFrom": {
