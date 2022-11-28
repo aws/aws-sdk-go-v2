@@ -1,3 +1,7 @@
+# v1.22.0 (2022-11-28)
+
+* **Feature**: Adds cross-account support to the GetMetricData API. Adds cross-account support to the ListMetrics API through the usage of the IncludeLinkedAccounts flag and the new OwningAccounts field.
+
 # v1.21.11 (2022-11-22)
 
 * No change notes available for this release.

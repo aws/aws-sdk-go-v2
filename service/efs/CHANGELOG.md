@@ -1,3 +1,7 @@
+# v1.18.0 (2022-11-28)
+
+* **Feature**: This release adds elastic as a new ThroughputMode value for EFS file systems and adds AFTER_1_DAY as a value for TransitionToIARules.
+
 # v1.17.19 (2022-11-10)
 
 * No change notes available for this release.

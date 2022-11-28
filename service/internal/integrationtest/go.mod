@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.21
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.20.3
-	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.21.11
+	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.19.19
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.15.5
@@ -33,8 +33,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.7
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.72.1
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.23
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.19.2
-	github.com/aws/aws-sdk-go-v2/service/efs v1.17.19
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.20.0
+	github.com/aws/aws-sdk-go-v2/service/efs v1.18.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.14.20
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.14.23
@@ -43,14 +43,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/emr v1.20.16
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.16.20
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.22
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.23
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/glue v1.35.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.22
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.23
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.19
-	github.com/aws/aws-sdk-go-v2/service/iot v1.31.0
+	github.com/aws/aws-sdk-go-v2/service/iot v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.24
 	github.com/aws/aws-sdk-go-v2/service/kms v1.18.18
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.25.1
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.21
 	github.com/aws/aws-sdk-go-v2/service/polly v1.20.0
-	github.com/aws/aws-sdk-go-v2/service/rds v1.30.1
+	github.com/aws/aws-sdk-go-v2/service/rds v1.31.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.16
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.21.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.25.0
@@ -81,7 +81,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/sts v1.17.5
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.14.6
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.7.0
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.8.0
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.19
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.20
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.23.1

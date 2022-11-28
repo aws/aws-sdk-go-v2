@@ -1,8 +1,0 @@
-{
-    "id": "9cb1fcd9-c4be-4520-923a-92c0d6d83cdb",
-    "type": "feature",
-    "description": "Amazon CloudWatch Observability Access Manager is a new service that allows configuration of the CloudWatch cross-account observability feature.",
-    "modules": [
-        "service/oam"
-    ]
-}

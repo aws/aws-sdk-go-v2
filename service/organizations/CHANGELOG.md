@@ -1,3 +1,7 @@
+# v1.17.0 (2022-11-28)
+
+* **Feature**: This release introduces delegated administrator for AWS Organizations, a new feature to help you delegate the management of your Organizations policies, enabling you to govern your AWS organization in a decentralized way. You can now allow member accounts to manage Organizations policies.
+
 # v1.16.15 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

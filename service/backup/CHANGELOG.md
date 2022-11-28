@@ -1,3 +1,7 @@
+# v1.18.0 (2022-11-28)
+
+* **Feature**: AWS Backup introduces support for legal hold and application stack backups. AWS Backup Audit Manager introduces support for cross-Region, cross-account reports.
+
 # v1.17.11 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

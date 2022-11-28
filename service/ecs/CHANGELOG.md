@@ -1,3 +1,7 @@
+# v1.20.0 (2022-11-28)
+
+* **Feature**: This release adds support for ECS Service Connect, a new capability that simplifies writing and operating resilient distributed applications. This release updates the TaskDefinition, Cluster, Service mutation APIs with Service connect constructs and also adds a new ListServicesByNamespace API.
+
 # v1.19.2 (2022-11-22)
 
 * No change notes available for this release.

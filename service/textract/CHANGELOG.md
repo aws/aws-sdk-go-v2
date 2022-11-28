@@ -1,3 +1,7 @@
+# v1.19.0 (2022-11-28)
+
+* **Feature**: This release adds support for classifying and splitting lending documents by type, and extracting information by using the Analyze Lending APIs. This release also includes support for summarized information of the processed lending document package, in addition to per document results.
+
 # v1.18.0 (2022-11-17)
 
 * **Feature**: This release adds support for specifying and extracting information from documents using the Signatures feature within Analyze Document API

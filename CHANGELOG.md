@@ -1,3 +1,42 @@
+# Release (2022-11-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.18.0](service/backup/CHANGELOG.md#v1180-2022-11-28)
+  * **Feature**: AWS Backup introduces support for legal hold and application stack backups. AWS Backup Audit Manager introduces support for cross-Region, cross-account reports.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.22.0](service/cloudwatch/CHANGELOG.md#v1220-2022-11-28)
+  * **Feature**: Adds cross-account support to the GetMetricData API. Adds cross-account support to the ListMetrics API through the usage of the IncludeLinkedAccounts flag and the new OwningAccounts field.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.17.0](service/cloudwatchlogs/CHANGELOG.md#v1170-2022-11-28)
+  * **Feature**: Updates to support CloudWatch Logs data protection and CloudWatch cross-account observability
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.9.0](service/drs/CHANGELOG.md#v190-2022-11-28)
+  * **Feature**: Non breaking changes to existing APIs, and additional APIs added to support in-AWS failing back using AWS Elastic Disaster Recovery.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.20.0](service/ecs/CHANGELOG.md#v1200-2022-11-28)
+  * **Feature**: This release adds support for ECS Service Connect, a new capability that simplifies writing and operating resilient distributed applications. This release updates the TaskDefinition, Cluster, Service mutation APIs with Service connect constructs and also adds a new ListServicesByNamespace API.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.18.0](service/efs/CHANGELOG.md#v1180-2022-11-28)
+  * **Feature**: This release adds elastic as a new ThroughputMode value for EFS file systems and adds AFTER_1_DAY as a value for TransitionToIARules.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.32.0](service/iot/CHANGELOG.md#v1320-2022-11-28)
+  * **Feature**: Job scheduling enables the scheduled rollout of a Job with start and end times and a customizable end behavior when end time is reached. This is available for continuous and snapshot jobs. Added support for MQTT5 properties to AWS IoT TopicRule Republish Action.
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.13.0](service/iotdataplane/CHANGELOG.md#v1130-2022-11-28)
+  * **Feature**: This release adds support for MQTT5 properties to AWS IoT HTTP Publish API.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.23.0](service/iotwireless/CHANGELOG.md#v1230-2022-11-28)
+  * **Feature**: This release includes a new feature for customers to calculate the position of their devices by adding three new APIs: UpdateResourcePosition, GetResourcePosition, and GetPositionEstimate.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.36.0](service/kendra/CHANGELOG.md#v1360-2022-11-28)
+  * **Feature**: Amazon Kendra now supports preview of table information from HTML tables in the search results. The most relevant cells with their corresponding rows, columns are displayed as a preview in the search result. The most relevant table cell or cells are also highlighted in table preview.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.16.0](service/mgn/CHANGELOG.md#v1160-2022-11-28)
+  * **Feature**: This release adds support for Application and Wave management. We also now support custom post-launch actions.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.0.0](service/oam/CHANGELOG.md#v100-2022-11-28)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon CloudWatch Observability Access Manager is a new service that allows configuration of the CloudWatch cross-account observability feature.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.17.0](service/organizations/CHANGELOG.md#v1170-2022-11-28)
+  * **Feature**: This release introduces delegated administrator for AWS Organizations, a new feature to help you delegate the management of your Organizations policies, enabling you to govern your AWS organization in a decentralized way. You can now allow member accounts to manage Organizations policies.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.31.0](service/rds/CHANGELOG.md#v1310-2022-11-28)
+  * **Feature**: This release enables new Aurora and RDS feature called Blue/Green Deployments that makes updates to databases safer, simpler and faster.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.19.0](service/textract/CHANGELOG.md#v1190-2022-11-28)
+  * **Feature**: This release adds support for classifying and splitting lending documents by type, and extracting information by using the Analyze Lending APIs. This release also includes support for summarized information of the processed lending document package, in addition to per document results.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.22.0](service/transcribe/CHANGELOG.md#v1220-2022-11-28)
+  * **Feature**: This release adds support for 'inputType' for post-call and real-time (streaming) Call Analytics within Amazon Transcribe.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.8.0](service/transcribestreaming/CHANGELOG.md#v180-2022-11-28)
+  * **Feature**: This release adds support for real-time (streaming) and post-call Call Analytics within Amazon Transcribe.
+
 # Release (2022-11-23)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "75e61a3f-5e36-478f-a8e0-7000d5e11ed5",
-    "type": "feature",
-    "description": "This release includes a new feature for customers to calculate the position of their devices by adding three new APIs: UpdateResourcePosition, GetResourcePosition, and GetPositionEstimate.",
-    "modules": [
-        "service/iotwireless"
-    ]
-}

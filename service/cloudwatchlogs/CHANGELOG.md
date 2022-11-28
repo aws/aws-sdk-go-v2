@@ -1,3 +1,7 @@
+# v1.17.0 (2022-11-28)
+
+* **Feature**: Updates to support CloudWatch Logs data protection and CloudWatch cross-account observability
+
 # v1.16.4 (2022-11-22)
 
 * No change notes available for this release.

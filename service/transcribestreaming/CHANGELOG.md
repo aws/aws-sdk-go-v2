@@ -1,3 +1,7 @@
+# v1.8.0 (2022-11-28)
+
+* **Feature**: This release adds support for real-time (streaming) and post-call Call Analytics within Amazon Transcribe.
+
 # v1.7.0 (2022-11-09)
 
 * **Feature**: This will release hi-IN and th-TH

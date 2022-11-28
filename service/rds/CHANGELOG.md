@@ -1,3 +1,7 @@
+# v1.31.0 (2022-11-28)
+
+* **Feature**: This release enables new Aurora and RDS feature called Blue/Green Deployments that makes updates to databases safer, simpler and faster.
+
 # v1.30.1 (2022-11-22)
 
 * No change notes available for this release.

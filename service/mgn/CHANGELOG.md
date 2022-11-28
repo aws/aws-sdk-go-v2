@@ -1,3 +1,7 @@
+# v1.16.0 (2022-11-28)
+
+* **Feature**: This release adds support for Application and Wave management. We also now support custom post-launch actions.
+
 # v1.15.14 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

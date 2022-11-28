@@ -1,3 +1,7 @@
+# v1.23.0 (2022-11-28)
+
+* **Feature**: This release includes a new feature for customers to calculate the position of their devices by adding three new APIs: UpdateResourcePosition, GetResourcePosition, and GetPositionEstimate.
+
 # v1.22.8 (2022-10-28)
 
 * No change notes available for this release.

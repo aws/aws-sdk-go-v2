@@ -1,8 +1,0 @@
-{
-    "id": "c68b30fa-a038-4b94-a0cb-2dcfc427d95b",
-    "type": "feature",
-    "description": "This release adds support for real-time (streaming) and post-call Call Analytics within Amazon Transcribe.",
-    "modules": [
-        "service/transcribestreaming"
-    ]
-}
