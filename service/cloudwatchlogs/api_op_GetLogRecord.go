@@ -39,6 +39,11 @@ type GetLogRecordInput struct {
 	// This member is required.
 	LogRecordPointer *string
 
+	// Specify true to display the log event fields with all sensitive data unmasked
+	// and visible. The default is false. To use this operation with this parameter,
+	// you must be signed into an account with the logs:Unmask permission.
+	Unmask bool
+
 	noSmithyDocumentSerde
 }
 

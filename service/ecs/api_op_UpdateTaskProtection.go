@@ -27,14 +27,14 @@ import (
 // protection expiration period of a task by invoking this operation repeatedly. To
 // learn more about Amazon ECS task protection, see Task scale-in protection
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection.html)
-// in the Amazon Elastic Container Service Developer Guide. This operation is only
+// in the Amazon Elastic Container Service Developer Guide . This operation is only
 // supported for tasks belonging to an Amazon ECS service. Invoking this operation
 // for a standalone task will result in an TASK_NOT_VALID failure. For more
 // information, see API failure reasons
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html.html).
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/api_failures_messages.html).
 // If you prefer to set task protection from within the container, we recommend
-// using the Amazon ECS container agent endpoint
-// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-endpoint.html).
+// using the Task scale-in protection endpoint
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-scale-in-protection-endpoint.html).
 func (c *Client) UpdateTaskProtection(ctx context.Context, params *UpdateTaskProtectionInput, optFns ...func(*Options)) (*UpdateTaskProtectionOutput, error) {
 	if params == nil {
 		params = &UpdateTaskProtectionInput{}

@@ -57,6 +57,17 @@ type RetryDataReplicationOutput struct {
 	// The ID of the Recovery Instance associated with this Source Server.
 	RecoveryInstanceId *string
 
+	// Replication direction of the Source Server.
+	ReplicationDirection types.ReplicationDirection
+
+	// For EC2-originated Source Servers which have been failed over and then failed
+	// back, this value will mean the ARN of the Source Server on the opposite
+	// replication direction.
+	ReversedDirectionSourceServerArn *string
+
+	// Source cloud properties of the Source Server.
+	SourceCloudProperties *types.SourceCloudProperties
+
 	// The source properties of the Source Server.
 	SourceProperties *types.SourceProperties
 

@@ -19,7 +19,7 @@ import (
 // a few minutes before you can successfully access the account. To check the
 // status of the request, do one of the following:
 //
-// * Use the Id member of the
+// * Use the Id value of the
 // CreateAccountStatus response element from this operation to provide as a
 // parameter to the DescribeCreateAccountStatus operation.
 //
@@ -152,16 +152,16 @@ type CreateAccountInput struct {
 	// account.
 	IamUserAccessToBilling types.IAMUserAccessToBilling
 
-	// (Optional) The name of an IAM role that Organizations automatically
-	// preconfigures in the new member account. This role trusts the management
-	// account, allowing users in the management account to assume the role, as
-	// permitted by the management account administrator. The role has administrator
-	// permissions in the new member account. If you don't specify this parameter, the
-	// role name defaults to OrganizationAccountAccessRole. For more information about
-	// how to use this role to access the member account, see the following links:
+	// The name of an IAM role that Organizations automatically preconfigures in the
+	// new member account. This role trusts the management account, allowing users in
+	// the management account to assume the role, as permitted by the management
+	// account administrator. The role has administrator permissions in the new member
+	// account. If you don't specify this parameter, the role name defaults to
+	// OrganizationAccountAccessRole. For more information about how to use this role
+	// to access the member account, see the following links:
 	//
-	// *
-	// Accessing and Administering the Member Accounts in Your Organization
+	// * Accessing and
+	// Administering the Member Accounts in Your Organization
 	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_access.html#orgs_manage_accounts_create-cross-account-role)
 	// in the Organizations User Guide
 	//

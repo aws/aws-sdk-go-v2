@@ -1,0 +1,8 @@
+{
+    "id": "2989edcb-c101-476a-8844-9617e9c6c6d3",
+    "type": "feature",
+    "description": "Updates to support CloudWatch Logs data protection and CloudWatch cross-account observability",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

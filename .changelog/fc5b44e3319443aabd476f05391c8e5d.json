@@ -1,0 +1,8 @@
+{
+    "id": "fc5b44e3-3194-43aa-bd47-6f05391c8e5d",
+    "type": "feature",
+    "description": "This release adds elastic as a new ThroughputMode value for EFS file systems and adds AFTER_1_DAY as a value for TransitionToIARules.",
+    "modules": [
+        "service/efs"
+    ]
+}

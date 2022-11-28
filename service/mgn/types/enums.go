@@ -2,6 +2,46 @@
 
 package types
 
+type ApplicationHealthStatus string
+
+// Enum values for ApplicationHealthStatus
+const (
+	ApplicationHealthStatusHealthy ApplicationHealthStatus = "HEALTHY"
+	ApplicationHealthStatusLagging ApplicationHealthStatus = "LAGGING"
+	ApplicationHealthStatusError   ApplicationHealthStatus = "ERROR"
+)
+
+// Values returns all known values for ApplicationHealthStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationHealthStatus) Values() []ApplicationHealthStatus {
+	return []ApplicationHealthStatus{
+		"HEALTHY",
+		"LAGGING",
+		"ERROR",
+	}
+}
+
+type ApplicationProgressStatus string
+
+// Enum values for ApplicationProgressStatus
+const (
+	ApplicationProgressStatusNotStarted ApplicationProgressStatus = "NOT_STARTED"
+	ApplicationProgressStatusInProgress ApplicationProgressStatus = "IN_PROGRESS"
+	ApplicationProgressStatusCompleted  ApplicationProgressStatus = "COMPLETED"
+)
+
+// Values returns all known values for ApplicationProgressStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationProgressStatus) Values() []ApplicationProgressStatus {
+	return []ApplicationProgressStatus{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"COMPLETED",
+	}
+}
+
 type BootMode string
 
 // Enum values for BootMode
@@ -416,6 +456,7 @@ type PostLaunchActionsDeploymentType string
 const (
 	PostLaunchActionsDeploymentTypeTestAndCutover PostLaunchActionsDeploymentType = "TEST_AND_CUTOVER"
 	PostLaunchActionsDeploymentTypeCutoverOnly    PostLaunchActionsDeploymentType = "CUTOVER_ONLY"
+	PostLaunchActionsDeploymentTypeTestOnly       PostLaunchActionsDeploymentType = "TEST_ONLY"
 )
 
 // Values returns all known values for PostLaunchActionsDeploymentType. Note that
@@ -426,6 +467,7 @@ func (PostLaunchActionsDeploymentType) Values() []PostLaunchActionsDeploymentTyp
 	return []PostLaunchActionsDeploymentType{
 		"TEST_AND_CUTOVER",
 		"CUTOVER_ONLY",
+		"TEST_ONLY",
 	}
 }
 
@@ -610,5 +652,73 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"cannotParse",
 		"fieldValidationFailed",
 		"other",
+	}
+}
+
+type VolumeType string
+
+// Enum values for VolumeType
+const (
+	VolumeTypeIo1      VolumeType = "io1"
+	VolumeTypeIo2      VolumeType = "io2"
+	VolumeTypeGp3      VolumeType = "gp3"
+	VolumeTypeGp2      VolumeType = "gp2"
+	VolumeTypeSt1      VolumeType = "st1"
+	VolumeTypeSc1      VolumeType = "sc1"
+	VolumeTypeStandard VolumeType = "standard"
+)
+
+// Values returns all known values for VolumeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VolumeType) Values() []VolumeType {
+	return []VolumeType{
+		"io1",
+		"io2",
+		"gp3",
+		"gp2",
+		"st1",
+		"sc1",
+		"standard",
+	}
+}
+
+type WaveHealthStatus string
+
+// Enum values for WaveHealthStatus
+const (
+	WaveHealthStatusHealthy WaveHealthStatus = "HEALTHY"
+	WaveHealthStatusLagging WaveHealthStatus = "LAGGING"
+	WaveHealthStatusError   WaveHealthStatus = "ERROR"
+)
+
+// Values returns all known values for WaveHealthStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WaveHealthStatus) Values() []WaveHealthStatus {
+	return []WaveHealthStatus{
+		"HEALTHY",
+		"LAGGING",
+		"ERROR",
+	}
+}
+
+type WaveProgressStatus string
+
+// Enum values for WaveProgressStatus
+const (
+	WaveProgressStatusNotStarted WaveProgressStatus = "NOT_STARTED"
+	WaveProgressStatusInProgress WaveProgressStatus = "IN_PROGRESS"
+	WaveProgressStatusCompleted  WaveProgressStatus = "COMPLETED"
+)
+
+// Values returns all known values for WaveProgressStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WaveProgressStatus) Values() []WaveProgressStatus {
+	return []WaveProgressStatus{
+		"NOT_STARTED",
+		"IN_PROGRESS",
+		"COMPLETED",
 	}
 }

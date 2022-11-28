@@ -17,19 +17,17 @@ import (
 
 // Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
 // Amazon Transcribe and the transcription results are streamed to your
-// application. The following are encoded as headers:
+// application. The following parameters are required:
 //
-// * language-code
+// * language-code or
+// identify-language
 //
-// *
-// media-encoding
+// * media-encoding
 //
 // * sample-rate
 //
-// * session-id
-//
-// For more information on streaming
-// with Amazon Transcribe, see Transcribing streaming audio
+// For more information on
+// streaming with Amazon Transcribe, see Transcribing streaming audio
 // (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
 func (c *Client) StartStreamTranscription(ctx context.Context, params *StartStreamTranscriptionInput, optFns ...func(*Options)) (*StartStreamTranscriptionOutput, error) {
 	if params == nil {
@@ -48,7 +46,7 @@ func (c *Client) StartStreamTranscription(ctx context.Context, params *StartStre
 
 type StartStreamTranscriptionInput struct {
 
-	// Specify the encoding used for the input audio. Supported formats are:
+	// Specify the encoding of your input audio. Supported formats are:
 	//
 	// * FLAC
 	//
@@ -134,8 +132,9 @@ type StartStreamTranscriptionInput struct {
 	// processing your transcription. Note that language model names are case
 	// sensitive. The language of the specified language model must match the language
 	// code you specify in your transcription request. If the languages don't match,
-	// the language model isn't applied. There are no errors or warnings associated
-	// with a language mismatch. For more information, see Custom language models
+	// the custom language model isn't applied. There are no errors or warnings
+	// associated with a language mismatch. For more information, see Custom language
+	// models
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html).
 	LanguageModelName *string
 
@@ -195,11 +194,12 @@ type StartStreamTranscriptionInput struct {
 	// Specify the name of the custom vocabulary filter that you want to use when
 	// processing your transcription. Note that vocabulary filter names are case
 	// sensitive. If the language of the specified custom vocabulary filter doesn't
-	// match the language identified in your media, your job fails. This parameter is
-	// not intended for use with the IdentifyLanguage parameter. If you're including
-	// IdentifyLanguage in your request and want to use one or more vocabulary filters
-	// with your transcription, use the VocabularyFilterNames parameter instead. For
-	// more information, see Using vocabulary filtering with unwanted words
+	// match the language identified in your media, the vocabulary filter is not
+	// applied to your transcription. This parameter is not intended for use with the
+	// IdentifyLanguage parameter. If you're including IdentifyLanguage in your request
+	// and want to use one or more vocabulary filters with your transcription, use the
+	// VocabularyFilterNames parameter instead. For more information, see Using
+	// vocabulary filtering with unwanted words
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/vocabulary-filtering.html).
 	VocabularyFilterName *string
 
@@ -217,11 +217,11 @@ type StartStreamTranscriptionInput struct {
 	// Specify the name of the custom vocabulary that you want to use when processing
 	// your transcription. Note that vocabulary names are case sensitive. If the
 	// language of the specified custom vocabulary doesn't match the language
-	// identified in your media, your job fails. This parameter is not intended for use
-	// with the IdentifyLanguage parameter. If you're including IdentifyLanguage in
-	// your request and want to use one or more custom vocabularies with your
-	// transcription, use the VocabularyNames parameter instead. For more information,
-	// see Custom vocabularies
+	// identified in your media, the custom vocabulary is not applied to your
+	// transcription. This parameter is not intended for use with the IdentifyLanguage
+	// parameter. If you're including IdentifyLanguage in your request and want to use
+	// one or more custom vocabularies with your transcription, use the VocabularyNames
+	// parameter instead. For more information, see Custom vocabularies
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-vocabulary.html).
 	VocabularyName *string
 

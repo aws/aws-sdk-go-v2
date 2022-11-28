@@ -1,0 +1,8 @@
+{
+    "id": "649470f7-0cb6-4600-aa66-21b266ab6455",
+    "type": "feature",
+    "description": "This release adds support for classifying and splitting lending documents by type, and extracting information by using the Analyze Lending APIs. This release also includes support for summarized information of the processed lending document package, in addition to per document results.",
+    "modules": [
+        "service/textract"
+    ]
+}

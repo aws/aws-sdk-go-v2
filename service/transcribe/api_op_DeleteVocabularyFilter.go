@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a vocabulary filter. To use this operation, specify the name of the
-// vocabulary filter you want to delete using VocabularyFilterName. Vocabulary
-// filter names are case sensitive.
+// Deletes a custom vocabulary filter. To use this operation, specify the name of
+// the custom vocabulary filter you want to delete using VocabularyFilterName.
+// Custom vocabulary filter names are case sensitive.
 func (c *Client) DeleteVocabularyFilter(ctx context.Context, params *DeleteVocabularyFilterInput, optFns ...func(*Options)) (*DeleteVocabularyFilterOutput, error) {
 	if params == nil {
 		params = &DeleteVocabularyFilterInput{}
@@ -30,8 +30,8 @@ func (c *Client) DeleteVocabularyFilter(ctx context.Context, params *DeleteVocab
 
 type DeleteVocabularyFilterInput struct {
 
-	// The name of the custom vocabulary filter you want to delete. Vocabulary filter
-	// names are case sensitive.
+	// The name of the custom vocabulary filter you want to delete. Custom vocabulary
+	// filter names are case sensitive.
 	//
 	// This member is required.
 	VocabularyFilterName *string

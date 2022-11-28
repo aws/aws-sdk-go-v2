@@ -1196,6 +1196,27 @@ func (e *PolicyTypeNotEnabledException) ErrorMessage() string {
 func (e *PolicyTypeNotEnabledException) ErrorCode() string             { return "PolicyTypeNotEnabledException" }
 func (e *PolicyTypeNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// We can't find a resource policy request with the parameter that you specified.
+type ResourcePolicyNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourcePolicyNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourcePolicyNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourcePolicyNotFoundException) ErrorCode() string {
+	return "ResourcePolicyNotFoundException"
+}
+func (e *ResourcePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // We can't find a root with the RootId that you specified.
 type RootNotFoundException struct {
 	Message *string

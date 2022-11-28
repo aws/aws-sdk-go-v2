@@ -650,7 +650,7 @@ type MetricAlarm struct {
 // 20 MetricDataQuery structures in the array. The 20 structures can include as
 // many as 10 structures that contain a MetricStat parameter to retrieve a metric,
 // and as many as 10 structures that contain the Expression parameter to perform a
-// math expression. Of those Expression structures, one must have True as the value
+// math expression. Of those Expression structures, one must have true as the value
 // for ReturnData. The result of this expression is the value the alarm watches.
 // Any expression used in a PutMetricAlarm operation must return a single time
 // series. For more information, see Metric Math Syntax and Functions
@@ -670,9 +670,11 @@ type MetricDataQuery struct {
 	// This member is required.
 	Id *string
 
-	// The ID of the account where the metrics are located, if this is a cross-account
-	// alarm. Use this field only for PutMetricAlarm operations. It is not used in
-	// GetMetricData operations.
+	// The ID of the account where the metrics are located. If you are performing a
+	// GetMetricData operation in a monitoring account, use this to specify which
+	// account to retrieve this metric from. If you are performing a PutMetricAlarm
+	// operation, use this to specify which account contains the metric that the alarm
+	// is watching.
 	AccountId *string
 
 	// This field can contain either a Metrics Insights query, or a metric math
@@ -714,8 +716,8 @@ type MetricDataQuery struct {
 	// When used in GetMetricData, this option indicates whether to return the
 	// timestamps and raw data values of this metric. If you are performing this call
 	// just to do math expressions and do not also need the raw data returned, you can
-	// specify False. If you omit this, the default of True is used. When used in
-	// PutMetricAlarm, specify True for the one expression result to use as the alarm.
+	// specify false. If you omit this, the default of true is used. When used in
+	// PutMetricAlarm, specify true for the one expression result to use as the alarm.
 	// For all other metrics and expressions in the same PutMetricAlarm operation,
 	// specify ReturnData as False.
 	ReturnData *bool
@@ -829,8 +831,8 @@ type MetricMathAnomalyDetector struct {
 	// MetricDataQueries gets a metric or performs a math expression. One item in
 	// MetricDataQueries is the expression that provides the time series that the
 	// anomaly detector uses as input. Designate the expression by setting ReturnData
-	// to True for this object in the array. For all other expressions and metrics, set
-	// ReturnData to False. The designated expression must return a single time series.
+	// to true for this object in the array. For all other expressions and metrics, set
+	// ReturnData to false. The designated expression must return a single time series.
 	MetricDataQueries []MetricDataQuery
 
 	noSmithyDocumentSerde

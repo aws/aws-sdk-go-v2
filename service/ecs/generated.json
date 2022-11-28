@@ -36,6 +36,7 @@
         "api_op_ListClusters.go",
         "api_op_ListContainerInstances.go",
         "api_op_ListServices.go",
+        "api_op_ListServicesByNamespace.go",
         "api_op_ListTagsForResource.go",
         "api_op_ListTaskDefinitionFamilies.go",
         "api_op_ListTaskDefinitions.go",

@@ -42,8 +42,8 @@ type DescribeExportTasksInput struct {
 	// to zero or more export tasks.
 	StatusCode types.ExportTaskStatusCode
 
-	// The ID of the export task. Specifying a task ID filters the results to zero or
-	// one export tasks.
+	// The ID of the export task. Specifying a task ID filters the results to one or
+	// zero export tasks.
 	TaskId *string
 
 	noSmithyDocumentSerde

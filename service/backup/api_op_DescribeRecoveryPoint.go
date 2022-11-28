@@ -74,6 +74,13 @@ type DescribeRecoveryPointOutput struct {
 	// Friday, January 26, 2018 12:11:30.087 AM.
 	CompletionDate *time.Time
 
+	// This is the identifier of a resource within a composite group, such as nested
+	// (child) recovery point belonging to a composite (parent) stack. The ID is
+	// transferred from the  logical ID
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax)
+	// within a stack.
+	CompositeMemberIdentifier *string
+
 	// Contains identifying information about the creation of a recovery point,
 	// including the BackupPlanArn, BackupPlanId, BackupPlanVersion, and BackupRuleId
 	// of the backup plan used to create it.
@@ -97,6 +104,10 @@ type DescribeRecoveryPointOutput struct {
 	// encrypted, or FALSE if the recovery point is not encrypted.
 	IsEncrypted bool
 
+	// This returns the boolean value that a recovery point is a parent (composite)
+	// job.
+	IsParent bool
+
 	// The date and time that a recovery point was last restored, in Unix format and
 	// Coordinated Universal Time (UTC). The value of LastRestoreTime is accurate to
 	// milliseconds. For example, the value 1516925490.087 represents Friday, January
@@ -115,6 +126,11 @@ type DescribeRecoveryPointOutput struct {
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
 	// table. Backup ignores this expression for other resource types.
 	Lifecycle *types.Lifecycle
+
+	// This is an ARN that uniquely identifies a parent (composite) recovery point; for
+	// example,
+	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
+	ParentRecoveryPointArn *string
 
 	// An ARN that uniquely identifies a recovery point; for example,
 	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
@@ -146,7 +162,15 @@ type DescribeRecoveryPointOutput struct {
 	// unable to delete it. To manually delete these recovery points, see  Step 3:
 	// Delete the recovery points
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups)
-	// in the Clean up resources section of Getting started.
+	// in the Clean up resources section of Getting started. STOPPED status occurs on a
+	// continuous backup where a user has taken some action that causes the continuous
+	// backup to be disabled. This can be caused by the removal of permissions, turning
+	// off versioning, turning off events being sent to EventBridge, or disabling the
+	// EventBridge rules that are put in place by Backup. To resolve STOPPED status,
+	// ensure that all requested permissions are in place and that versioning is
+	// enabled on the S3 bucket. Once these conditions are met, the next instance of a
+	// backup rule running will result in a new continuous recovery point being
+	// created. The recovery points with STOPPED status do not need to be deleted.
 	Status types.RecoveryPointStatus
 
 	// A status message explaining the reason for the recovery point deletion failure.

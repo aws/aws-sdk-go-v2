@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new ReplicationConfigurationTemplate.
+// Deletes a single Launch Configuration Template by ID.
 func (c *Client) DeleteLaunchConfigurationTemplate(ctx context.Context, params *DeleteLaunchConfigurationTemplateInput, optFns ...func(*Options)) (*DeleteLaunchConfigurationTemplateOutput, error) {
 	if params == nil {
 		params = &DeleteLaunchConfigurationTemplateInput{}

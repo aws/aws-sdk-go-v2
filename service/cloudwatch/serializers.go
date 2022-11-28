@@ -3870,6 +3870,11 @@ func awsAwsquery_serializeOpDocumentListMetricsInput(v *ListMetricsInput, value 
 		}
 	}
 
+	if v.IncludeLinkedAccounts {
+		objectKey := object.Key("IncludeLinkedAccounts")
+		objectKey.Boolean(v.IncludeLinkedAccounts)
+	}
+
 	if v.MetricName != nil {
 		objectKey := object.Key("MetricName")
 		objectKey.String(*v.MetricName)
@@ -3883,6 +3888,11 @@ func awsAwsquery_serializeOpDocumentListMetricsInput(v *ListMetricsInput, value 
 	if v.NextToken != nil {
 		objectKey := object.Key("NextToken")
 		objectKey.String(*v.NextToken)
+	}
+
+	if v.OwningAccount != nil {
+		objectKey := object.Key("OwningAccount")
+		objectKey.String(*v.OwningAccount)
 	}
 
 	if len(v.RecentlyActive) > 0 {

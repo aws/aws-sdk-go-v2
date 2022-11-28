@@ -15,12 +15,16 @@ import (
 // query are returned, along with a @ptr field, which is the identifier for the log
 // record. You can use the value of @ptr in a GetLogRecord
 // (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_GetLogRecord.html)
-// operation to get the full log record. GetQueryResults does not start a query
-// execution. To run a query, use StartQuery
+// operation to get the full log record. GetQueryResults does not start running a
+// query. To run a query, use StartQuery
 // (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_StartQuery.html).
 // If the value of the Status field in the output is Running, this operation
 // returns only partial results. If you see a value of Scheduled or Running for the
-// status, you can retry the operation later to see the final results.
+// status, you can retry the operation later to see the final results. If you are
+// using CloudWatch cross-account observability, you can use this operation in a
+// monitoring account to start queries in linked source accounts. For more
+// information, see CloudWatch cross-account observability
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
 func (c *Client) GetQueryResults(ctx context.Context, params *GetQueryResultsInput, optFns ...func(*Options)) (*GetQueryResultsOutput, error) {
 	if params == nil {
 		params = &GetQueryResultsInput{}
@@ -61,7 +65,7 @@ type GetQueryResultsOutput struct {
 
 	// The status of the most recent running of the query. Possible values are
 	// Cancelled, Complete, Failed, Running, Scheduled, Timeout, and Unknown. Queries
-	// time out after 15 minutes of execution. To avoid having your queries time out,
+	// time out after 15 minutes of runtime. To avoid having your queries time out,
 	// reduce the time range being searched or partition your query into a number of
 	// queries.
 	Status types.QueryStatus

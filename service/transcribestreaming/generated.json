@@ -9,6 +9,7 @@
     "files": [
         "api_client.go",
         "api_client_test.go",
+        "api_op_StartCallAnalyticsStreamTranscription.go",
         "api_op_StartMedicalStreamTranscription.go",
         "api_op_StartStreamTranscription.go",
         "deserializers.go",

@@ -239,6 +239,25 @@ func (e *MissingVersionException) ErrorMessage() string {
 func (e *MissingVersionException) ErrorCode() string             { return "MissingVersionException" }
 func (e *MissingVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified namespace wasn't found.
+type NamespaceNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NamespaceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NamespaceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NamespaceNotFoundException) ErrorCode() string             { return "NamespaceNotFoundException" }
+func (e *NamespaceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // There's no update available for this Amazon ECS container agent. This might be
 // because the agent is already running the latest version or because it's so old
 // that there's no update path to the current version.

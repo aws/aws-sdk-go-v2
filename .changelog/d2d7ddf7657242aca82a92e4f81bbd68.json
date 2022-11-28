@@ -1,0 +1,8 @@
+{
+    "id": "d2d7ddf7-6572-42ac-a82a-92e4f81bbd68",
+    "type": "feature",
+    "description": "Non breaking changes to existing APIs, and additional APIs added to support in-AWS failing back using AWS Elastic Disaster Recovery.",
+    "modules": [
+        "service/drs"
+    ]
+}

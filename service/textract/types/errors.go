@@ -149,8 +149,7 @@ func (e *InternalServerError) ErrorMessage() string {
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// An invalid job identifier was passed to GetDocumentAnalysis or to
-// GetDocumentAnalysis.
+// An invalid job identifier was passed to an asynchronous analysis operation.
 type InvalidJobIdException struct {
 	Message *string
 

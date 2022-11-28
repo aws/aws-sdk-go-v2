@@ -182,20 +182,21 @@ type CreateAccountFailureReason string
 
 // Enum values for CreateAccountFailureReason
 const (
-	CreateAccountFailureReasonAccountLimitExceeded                 CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"
-	CreateAccountFailureReasonEmailAlreadyExists                   CreateAccountFailureReason = "EMAIL_ALREADY_EXISTS"
-	CreateAccountFailureReasonInvalidAddress                       CreateAccountFailureReason = "INVALID_ADDRESS"
-	CreateAccountFailureReasonInvalidEmail                         CreateAccountFailureReason = "INVALID_EMAIL"
-	CreateAccountFailureReasonConcurrentAccountModification        CreateAccountFailureReason = "CONCURRENT_ACCOUNT_MODIFICATION"
-	CreateAccountFailureReasonInternalFailure                      CreateAccountFailureReason = "INTERNAL_FAILURE"
-	CreateAccountFailureReasonGovcloudAccountAlreadyExists         CreateAccountFailureReason = "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
-	CreateAccountFailureReasonMissingBusinessValidation            CreateAccountFailureReason = "MISSING_BUSINESS_VALIDATION"
-	CreateAccountFailureReasonFailedBusinessValidation             CreateAccountFailureReason = "FAILED_BUSINESS_VALIDATION"
-	CreateAccountFailureReasonPendingBusinessVALIDATIONv           CreateAccountFailureReason = "PENDING_BUSINESS_VALIDATION"
-	CreateAccountFailureReasonInvalidIdentityForBusinessValidation CreateAccountFailureReason = "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION"
-	CreateAccountFailureReasonUnknownBusinessValidation            CreateAccountFailureReason = "UNKNOWN_BUSINESS_VALIDATION"
-	CreateAccountFailureReasonMissingPaymentInstrument             CreateAccountFailureReason = "MISSING_PAYMENT_INSTRUMENT"
-	CreateAccountFailureReasonInvalidPaymentInstrument             CreateAccountFailureReason = "INVALID_PAYMENT_INSTRUMENT"
+	CreateAccountFailureReasonAccountLimitExceeded                             CreateAccountFailureReason = "ACCOUNT_LIMIT_EXCEEDED"
+	CreateAccountFailureReasonEmailAlreadyExists                               CreateAccountFailureReason = "EMAIL_ALREADY_EXISTS"
+	CreateAccountFailureReasonInvalidAddress                                   CreateAccountFailureReason = "INVALID_ADDRESS"
+	CreateAccountFailureReasonInvalidEmail                                     CreateAccountFailureReason = "INVALID_EMAIL"
+	CreateAccountFailureReasonConcurrentAccountModification                    CreateAccountFailureReason = "CONCURRENT_ACCOUNT_MODIFICATION"
+	CreateAccountFailureReasonInternalFailure                                  CreateAccountFailureReason = "INTERNAL_FAILURE"
+	CreateAccountFailureReasonGovcloudAccountAlreadyExists                     CreateAccountFailureReason = "GOVCLOUD_ACCOUNT_ALREADY_EXISTS"
+	CreateAccountFailureReasonMissingBusinessValidation                        CreateAccountFailureReason = "MISSING_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonFailedBusinessValidation                         CreateAccountFailureReason = "FAILED_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonPendingBusinessVALIDATIONv                       CreateAccountFailureReason = "PENDING_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonInvalidIdentityForBusinessValidation             CreateAccountFailureReason = "INVALID_IDENTITY_FOR_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonUnknownBusinessValidation                        CreateAccountFailureReason = "UNKNOWN_BUSINESS_VALIDATION"
+	CreateAccountFailureReasonMissingPaymentInstrument                         CreateAccountFailureReason = "MISSING_PAYMENT_INSTRUMENT"
+	CreateAccountFailureReasonInvalidPaymentInstrument                         CreateAccountFailureReason = "INVALID_PAYMENT_INSTRUMENT"
+	CreateAccountFailureReasonUpdateExistingResourcePolicyWithTagsNotSupported CreateAccountFailureReason = "UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED"
 )
 
 // Values returns all known values for CreateAccountFailureReason. Note that this
@@ -217,6 +218,7 @@ func (CreateAccountFailureReason) Values() []CreateAccountFailureReason {
 		"UNKNOWN_BUSINESS_VALIDATION",
 		"MISSING_PAYMENT_INSTRUMENT",
 		"INVALID_PAYMENT_INSTRUMENT",
+		"UPDATE_EXISTING_RESOURCE_POLICY_WITH_TAGS_NOT_SUPPORTED",
 	}
 }
 
@@ -393,30 +395,34 @@ type InvalidInputExceptionReason string
 
 // Enum values for InvalidInputExceptionReason
 const (
-	InvalidInputExceptionReasonInvalidPartyTypeTarget             InvalidInputExceptionReason = "INVALID_PARTY_TYPE_TARGET"
-	InvalidInputExceptionReasonInvalidSyntaxOrganization          InvalidInputExceptionReason = "INVALID_SYNTAX_ORGANIZATION_ARN"
-	InvalidInputExceptionReasonInvalidSyntaxPolicy                InvalidInputExceptionReason = "INVALID_SYNTAX_POLICY_ID"
-	InvalidInputExceptionReasonInvalidEnum                        InvalidInputExceptionReason = "INVALID_ENUM"
-	InvalidInputExceptionReasonInvalidEnumPolicyType              InvalidInputExceptionReason = "INVALID_ENUM_POLICY_TYPE"
-	InvalidInputExceptionReasonInvalidListMember                  InvalidInputExceptionReason = "INVALID_LIST_MEMBER"
-	InvalidInputExceptionReasonMaxLengthExceeded                  InvalidInputExceptionReason = "MAX_LENGTH_EXCEEDED"
-	InvalidInputExceptionReasonMaxValueExceeded                   InvalidInputExceptionReason = "MAX_VALUE_EXCEEDED"
-	InvalidInputExceptionReasonMinLengthExceeded                  InvalidInputExceptionReason = "MIN_LENGTH_EXCEEDED"
-	InvalidInputExceptionReasonMinValueExceeded                   InvalidInputExceptionReason = "MIN_VALUE_EXCEEDED"
-	InvalidInputExceptionReasonImmutablePolicy                    InvalidInputExceptionReason = "IMMUTABLE_POLICY"
-	InvalidInputExceptionReasonInvalidPattern                     InvalidInputExceptionReason = "INVALID_PATTERN"
-	InvalidInputExceptionReasonInvalidPatternTargetId             InvalidInputExceptionReason = "INVALID_PATTERN_TARGET_ID"
-	InvalidInputExceptionReasonInputRequired                      InvalidInputExceptionReason = "INPUT_REQUIRED"
-	InvalidInputExceptionReasonInvalidPaginationToken             InvalidInputExceptionReason = "INVALID_NEXT_TOKEN"
-	InvalidInputExceptionReasonMaxFilterLimitExceeded             InvalidInputExceptionReason = "MAX_LIMIT_EXCEEDED_FILTER"
-	InvalidInputExceptionReasonMovingAccountBetweenDifferentRoots InvalidInputExceptionReason = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
-	InvalidInputExceptionReasonInvalidFullNameTarget              InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
-	InvalidInputExceptionReasonUnrecognizedServicePrincipal       InvalidInputExceptionReason = "UNRECOGNIZED_SERVICE_PRINCIPAL"
-	InvalidInputExceptionReasonInvalidRoleName                    InvalidInputExceptionReason = "INVALID_ROLE_NAME"
-	InvalidInputExceptionReasonInvalidSystemTagsParameter         InvalidInputExceptionReason = "INVALID_SYSTEM_TAGS_PARAMETER"
-	InvalidInputExceptionReasonDuplicateTagKey                    InvalidInputExceptionReason = "DUPLICATE_TAG_KEY"
-	InvalidInputExceptionReasonTargetNotSupported                 InvalidInputExceptionReason = "TARGET_NOT_SUPPORTED"
-	InvalidInputExceptionReasonInvalidEmailAddressTarget          InvalidInputExceptionReason = "INVALID_EMAIL_ADDRESS_TARGET"
+	InvalidInputExceptionReasonInvalidPartyTypeTarget                InvalidInputExceptionReason = "INVALID_PARTY_TYPE_TARGET"
+	InvalidInputExceptionReasonInvalidSyntaxOrganization             InvalidInputExceptionReason = "INVALID_SYNTAX_ORGANIZATION_ARN"
+	InvalidInputExceptionReasonInvalidSyntaxPolicy                   InvalidInputExceptionReason = "INVALID_SYNTAX_POLICY_ID"
+	InvalidInputExceptionReasonInvalidEnum                           InvalidInputExceptionReason = "INVALID_ENUM"
+	InvalidInputExceptionReasonInvalidEnumPolicyType                 InvalidInputExceptionReason = "INVALID_ENUM_POLICY_TYPE"
+	InvalidInputExceptionReasonInvalidListMember                     InvalidInputExceptionReason = "INVALID_LIST_MEMBER"
+	InvalidInputExceptionReasonMaxLengthExceeded                     InvalidInputExceptionReason = "MAX_LENGTH_EXCEEDED"
+	InvalidInputExceptionReasonMaxValueExceeded                      InvalidInputExceptionReason = "MAX_VALUE_EXCEEDED"
+	InvalidInputExceptionReasonMinLengthExceeded                     InvalidInputExceptionReason = "MIN_LENGTH_EXCEEDED"
+	InvalidInputExceptionReasonMinValueExceeded                      InvalidInputExceptionReason = "MIN_VALUE_EXCEEDED"
+	InvalidInputExceptionReasonImmutablePolicy                       InvalidInputExceptionReason = "IMMUTABLE_POLICY"
+	InvalidInputExceptionReasonInvalidPattern                        InvalidInputExceptionReason = "INVALID_PATTERN"
+	InvalidInputExceptionReasonInvalidPatternTargetId                InvalidInputExceptionReason = "INVALID_PATTERN_TARGET_ID"
+	InvalidInputExceptionReasonInputRequired                         InvalidInputExceptionReason = "INPUT_REQUIRED"
+	InvalidInputExceptionReasonInvalidPaginationToken                InvalidInputExceptionReason = "INVALID_NEXT_TOKEN"
+	InvalidInputExceptionReasonMaxFilterLimitExceeded                InvalidInputExceptionReason = "MAX_LIMIT_EXCEEDED_FILTER"
+	InvalidInputExceptionReasonMovingAccountBetweenDifferentRoots    InvalidInputExceptionReason = "MOVING_ACCOUNT_BETWEEN_DIFFERENT_ROOTS"
+	InvalidInputExceptionReasonInvalidFullNameTarget                 InvalidInputExceptionReason = "INVALID_FULL_NAME_TARGET"
+	InvalidInputExceptionReasonUnrecognizedServicePrincipal          InvalidInputExceptionReason = "UNRECOGNIZED_SERVICE_PRINCIPAL"
+	InvalidInputExceptionReasonInvalidRoleName                       InvalidInputExceptionReason = "INVALID_ROLE_NAME"
+	InvalidInputExceptionReasonInvalidSystemTagsParameter            InvalidInputExceptionReason = "INVALID_SYSTEM_TAGS_PARAMETER"
+	InvalidInputExceptionReasonDuplicateTagKey                       InvalidInputExceptionReason = "DUPLICATE_TAG_KEY"
+	InvalidInputExceptionReasonTargetNotSupported                    InvalidInputExceptionReason = "TARGET_NOT_SUPPORTED"
+	InvalidInputExceptionReasonInvalidEmailAddressTarget             InvalidInputExceptionReason = "INVALID_EMAIL_ADDRESS_TARGET"
+	InvalidInputExceptionReasonInvalidResourcePolicyJson             InvalidInputExceptionReason = "INVALID_RESOURCE_POLICY_JSON"
+	InvalidInputExceptionReasonUnsupportedActionInResourcePolicy     InvalidInputExceptionReason = "UNSUPPORTED_ACTION_IN_RESOURCE_POLICY"
+	InvalidInputExceptionReasonUnsupportedPolicyTypeInResourcePolicy InvalidInputExceptionReason = "UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY"
+	InvalidInputExceptionReasonUnsupportedResourceInResourcePolicy   InvalidInputExceptionReason = "UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY"
 )
 
 // Values returns all known values for InvalidInputExceptionReason. Note that this
@@ -448,6 +454,10 @@ func (InvalidInputExceptionReason) Values() []InvalidInputExceptionReason {
 		"DUPLICATE_TAG_KEY",
 		"TARGET_NOT_SUPPORTED",
 		"INVALID_EMAIL_ADDRESS_TARGET",
+		"INVALID_RESOURCE_POLICY_JSON",
+		"UNSUPPORTED_ACTION_IN_RESOURCE_POLICY",
+		"UNSUPPORTED_POLICY_TYPE_IN_RESOURCE_POLICY",
+		"UNSUPPORTED_RESOURCE_IN_RESOURCE_POLICY",
 	}
 }
 

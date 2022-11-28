@@ -48,6 +48,12 @@ type DiscoverPollEndpointOutput struct {
 	// The endpoint for the Amazon ECS agent to poll.
 	Endpoint *string
 
+	// The endpoint for the Amazon ECS agent to poll for Service Connect configuration.
+	// For more information, see Service Connect
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	ServiceConnectEndpoint *string
+
 	// The telemetry endpoint for the Amazon ECS agent.
 	TelemetryEndpoint *string
 

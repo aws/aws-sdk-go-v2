@@ -33,8 +33,9 @@ func (c *Client) ListCallAnalyticsCategories(ctx context.Context, params *ListCa
 type ListCallAnalyticsCategoriesInput struct {
 
 	// The maximum number of Call Analytics categories to return in each page of
-	// results. If there are fewer results than the value you specify, only the actual
-	// results are returned. If you don't specify a value, a default of 5 is used.
+	// results. If there are fewer results than the value that you specify, only the
+	// actual results are returned. If you don't specify a value, a default of 5 is
+	// used.
 	MaxResults *int32
 
 	// If your ListCallAnalyticsCategories request returns more results than can be
@@ -138,8 +139,9 @@ var _ ListCallAnalyticsCategoriesAPIClient = (*Client)(nil)
 // ListCallAnalyticsCategories
 type ListCallAnalyticsCategoriesPaginatorOptions struct {
 	// The maximum number of Call Analytics categories to return in each page of
-	// results. If there are fewer results than the value you specify, only the actual
-	// results are returned. If you don't specify a value, a default of 5 is used.
+	// results. If there are fewer results than the value that you specify, only the
+	// actual results are returned. If you don't specify a value, a default of 5 is
+	// used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

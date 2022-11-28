@@ -66,6 +66,24 @@ func (CLMLanguageCode) Values() []CLMLanguageCode {
 	}
 }
 
+type InputType string
+
+// Enum values for InputType
+const (
+	InputTypeRealTime InputType = "REAL_TIME"
+	InputTypePostCall InputType = "POST_CALL"
+)
+
+// Values returns all known values for InputType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (InputType) Values() []InputType {
+	return []InputType{
+		"REAL_TIME",
+		"POST_CALL",
+	}
+}
+
 type LanguageCode string
 
 // Enum values for LanguageCode

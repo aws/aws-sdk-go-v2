@@ -10,9 +10,126 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
+	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
+
+type awsRestjson1_serializeOpStartCallAnalyticsStreamTranscription struct {
+}
+
+func (*awsRestjson1_serializeOpStartCallAnalyticsStreamTranscription) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartCallAnalyticsStreamTranscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartCallAnalyticsStreamTranscriptionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/call-analytics-stream-transcription")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStartCallAnalyticsStreamTranscriptionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/vnd.amazon.eventstream")
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartCallAnalyticsStreamTranscriptionInput(v *StartCallAnalyticsStreamTranscriptionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.ContentIdentificationType) > 0 {
+		locationName := "X-Amzn-Transcribe-Content-Identification-Type"
+		encoder.SetHeader(locationName).String(string(v.ContentIdentificationType))
+	}
+
+	if len(v.ContentRedactionType) > 0 {
+		locationName := "X-Amzn-Transcribe-Content-Redaction-Type"
+		encoder.SetHeader(locationName).String(string(v.ContentRedactionType))
+	}
+
+	if v.EnablePartialResultsStabilization {
+		locationName := "X-Amzn-Transcribe-Enable-Partial-Results-Stabilization"
+		encoder.SetHeader(locationName).Boolean(v.EnablePartialResultsStabilization)
+	}
+
+	if len(v.LanguageCode) > 0 {
+		locationName := "X-Amzn-Transcribe-Language-Code"
+		encoder.SetHeader(locationName).String(string(v.LanguageCode))
+	}
+
+	if v.LanguageModelName != nil && len(*v.LanguageModelName) > 0 {
+		locationName := "X-Amzn-Transcribe-Language-Model-Name"
+		encoder.SetHeader(locationName).String(*v.LanguageModelName)
+	}
+
+	if len(v.MediaEncoding) > 0 {
+		locationName := "X-Amzn-Transcribe-Media-Encoding"
+		encoder.SetHeader(locationName).String(string(v.MediaEncoding))
+	}
+
+	if v.MediaSampleRateHertz != nil {
+		locationName := "X-Amzn-Transcribe-Sample-Rate"
+		encoder.SetHeader(locationName).Integer(*v.MediaSampleRateHertz)
+	}
+
+	if len(v.PartialResultsStability) > 0 {
+		locationName := "X-Amzn-Transcribe-Partial-Results-Stability"
+		encoder.SetHeader(locationName).String(string(v.PartialResultsStability))
+	}
+
+	if v.PiiEntityTypes != nil && len(*v.PiiEntityTypes) > 0 {
+		locationName := "X-Amzn-Transcribe-Pii-Entity-Types"
+		encoder.SetHeader(locationName).String(*v.PiiEntityTypes)
+	}
+
+	if v.SessionId != nil && len(*v.SessionId) > 0 {
+		locationName := "X-Amzn-Transcribe-Session-Id"
+		encoder.SetHeader(locationName).String(*v.SessionId)
+	}
+
+	if len(v.VocabularyFilterMethod) > 0 {
+		locationName := "X-Amzn-Transcribe-Vocabulary-Filter-Method"
+		encoder.SetHeader(locationName).String(string(v.VocabularyFilterMethod))
+	}
+
+	if v.VocabularyFilterName != nil && len(*v.VocabularyFilterName) > 0 {
+		locationName := "X-Amzn-Transcribe-Vocabulary-Filter-Name"
+		encoder.SetHeader(locationName).String(*v.VocabularyFilterName)
+	}
+
+	if v.VocabularyName != nil && len(*v.VocabularyName) > 0 {
+		locationName := "X-Amzn-Transcribe-Vocabulary-Name"
+		encoder.SetHeader(locationName).String(*v.VocabularyName)
+	}
+
+	return nil
+}
 
 type awsRestjson1_serializeOpStartMedicalStreamTranscription struct {
 }
@@ -286,6 +403,10 @@ func awsRestjson1_serializeEventStreamAudioStream(v types.AudioStream, msg *even
 		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("AudioEvent"))
 		return awsRestjson1_serializeEventMessageAudioEvent(&vv.Value, msg)
 
+	case *types.AudioStreamMemberConfigurationEvent:
+		msg.Headers.Set(eventstreamapi.EventTypeHeader, eventstream.StringValue("ConfigurationEvent"))
+		return awsRestjson1_serializeEventMessageConfigurationEvent(&vv.Value, msg)
+
 	default:
 		return fmt.Errorf("unexpected event message type: %v", v)
 
@@ -301,5 +422,98 @@ func awsRestjson1_serializeEventMessageAudioEvent(v *types.AudioEvent, msg *even
 		msg.Headers.Set(eventstreamapi.ContentTypeHeader, eventstream.StringValue("application/octet-stream"))
 		msg.Payload = v.AudioChunk
 	}
+	return nil
+}
+
+func awsRestjson1_serializeEventMessageConfigurationEvent(v *types.ConfigurationEvent, msg *eventstream.Message) error {
+	if v == nil {
+		return fmt.Errorf("unexpected serialization of nil %T", v)
+	}
+
+	msg.Headers.Set(eventstreamapi.MessageTypeHeader, eventstream.StringValue(eventstreamapi.EventMessageType))
+	msg.Headers.Set(eventstreamapi.ContentTypeHeader, eventstream.StringValue("application/json"))
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeDocumentConfigurationEvent(v, jsonEncoder.Value); err != nil {
+		return err
+	}
+	msg.Payload = jsonEncoder.Bytes()
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChannelDefinition(v *types.ChannelDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("ChannelId")
+		ok.Integer(v.ChannelId)
+	}
+
+	if len(v.ParticipantRole) > 0 {
+		ok := object.Key("ParticipantRole")
+		ok.String(string(v.ParticipantRole))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentChannelDefinitions(v []types.ChannelDefinition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentChannelDefinition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentConfigurationEvent(v *types.ConfigurationEvent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelDefinitions != nil {
+		ok := object.Key("ChannelDefinitions")
+		if err := awsRestjson1_serializeDocumentChannelDefinitions(v.ChannelDefinitions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PostCallAnalyticsSettings != nil {
+		ok := object.Key("PostCallAnalyticsSettings")
+		if err := awsRestjson1_serializeDocumentPostCallAnalyticsSettings(v.PostCallAnalyticsSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPostCallAnalyticsSettings(v *types.PostCallAnalyticsSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ContentRedactionOutput) > 0 {
+		ok := object.Key("ContentRedactionOutput")
+		ok.String(string(v.ContentRedactionOutput))
+	}
+
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
+	}
+
+	if v.OutputEncryptionKMSKeyId != nil {
+		ok := object.Key("OutputEncryptionKMSKeyId")
+		ok.String(*v.OutputEncryptionKMSKeyId)
+	}
+
+	if v.OutputLocation != nil {
+		ok := object.Key("OutputLocation")
+		ok.String(*v.OutputLocation)
+	}
+
 	return nil
 }

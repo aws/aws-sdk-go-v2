@@ -5535,6 +5535,23 @@ func validateMitigationActionParams(v *types.MitigationActionParams) error {
 	}
 }
 
+func validateMqttHeaders(v *types.MqttHeaders) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MqttHeaders"}
+	if v.UserProperties != nil {
+		if err := validateUserProperties(v.UserProperties); err != nil {
+			invalidParams.AddNested("UserProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpenSearchAction(v *types.OpenSearchAction) error {
 	if v == nil {
 		return nil
@@ -5668,6 +5685,11 @@ func validateRepublishAction(v *types.RepublishAction) error {
 	}
 	if v.Topic == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Topic"))
+	}
+	if v.Headers != nil {
+		if err := validateMqttHeaders(v.Headers); err != nil {
+			invalidParams.AddNested("Headers", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6044,6 +6066,41 @@ func validateUpdateDeviceCertificateParams(v *types.UpdateDeviceCertificateParam
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDeviceCertificateParams"}
 	if len(v.Action) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUserProperties(v []types.UserProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UserProperties"}
+	for i := range v {
+		if err := validateUserProperty(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUserProperty(v *types.UserProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UserProperty"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

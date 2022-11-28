@@ -52,7 +52,7 @@ type GetQuerySuggestionsInput struct {
 
 type GetQuerySuggestionsOutput struct {
 
-	// The unique identifier for a list of query suggestions for an index.
+	// The identifier for a list of query suggestions for an index.
 	QuerySuggestionsId *string
 
 	// A list of query suggestions for an index.

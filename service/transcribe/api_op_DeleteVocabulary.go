@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes a custom vocabulary. To use this operation, specify the name of the
-// vocabulary you want to delete using VocabularyName. Vocabulary names are case
-// sensitive.
+// custom vocabulary you want to delete using VocabularyName. Custom vocabulary
+// names are case sensitive.
 func (c *Client) DeleteVocabulary(ctx context.Context, params *DeleteVocabularyInput, optFns ...func(*Options)) (*DeleteVocabularyOutput, error) {
 	if params == nil {
 		params = &DeleteVocabularyInput{}
@@ -30,8 +30,8 @@ func (c *Client) DeleteVocabulary(ctx context.Context, params *DeleteVocabularyI
 
 type DeleteVocabularyInput struct {
 
-	// The name of the custom vocabulary you want to delete. Vocabulary names are case
-	// sensitive.
+	// The name of the custom vocabulary you want to delete. Custom vocabulary names
+	// are case sensitive.
 	//
 	// This member is required.
 	VocabularyName *string

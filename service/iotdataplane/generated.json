@@ -23,6 +23,7 @@
         "internal/endpoints/endpoints_test.go",
         "protocol_test.go",
         "serializers.go",
+        "types/enums.go",
         "types/errors.go",
         "types/types.go",
         "validators.go"

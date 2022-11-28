@@ -19,7 +19,11 @@ import (
 // Logs actions do support the use of the aws:ResourceTag/key-name  condition key
 // to control access. For more information about using tags to control access, see
 // Controlling access to Amazon Web Services resources using tags
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html).
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html). If you are
+// using CloudWatch cross-account observability, you can use this operation in a
+// monitoring account and view data from the linked source accounts. For more
+// information, see CloudWatch cross-account observability
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
 func (c *Client) DescribeLogGroups(ctx context.Context, params *DescribeLogGroupsInput, optFns ...func(*Options)) (*DescribeLogGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeLogGroupsInput{}
@@ -37,11 +41,34 @@ func (c *Client) DescribeLogGroups(ctx context.Context, params *DescribeLogGroup
 
 type DescribeLogGroupsInput struct {
 
+	// When includeLinkedAccounts is set to True, use this parameter to specify the
+	// list of accounts to search. You can specify as many as 20 account IDs in the
+	// array.
+	AccountIdentifiers []string
+
+	// If you are using a monitoring account, set this to True to have the operation
+	// return log groups in the accounts listed in accountIdentifiers. If this
+	// parameter is set to true and accountIdentifiers contains a null value, the
+	// operation returns all log groups in the monitoring account and all log groups in
+	// all source accounts that are linked to the monitoring account. If you specify
+	// includeLinkedAccounts in your request, then metricFilterCount, retentionInDays,
+	// and storedBytes are not included in the response.
+	IncludeLinkedAccounts *bool
+
 	// The maximum number of items returned. If you don't specify a value, the default
 	// is up to 50 items.
 	Limit *int32
 
-	// The prefix to match.
+	// If you specify a string for this parameter, the operation returns only log
+	// groups that have names that match the string based on a case-sensitive substring
+	// search. For example, if you specify Foo, log groups named FooBar, aws/Foo, and
+	// GroupFoo would match, but foo, F/o/o and Froo would not match.
+	// logGroupNamePattern and logGroupNamePrefix are mutually exclusive. Only one of
+	// these parameters can be passed.
+	LogGroupNamePattern *string
+
+	// The prefix to match. logGroupNamePrefix and logGroupNamePattern are mutually
+	// exclusive. Only one of these parameters can be passed.
 	LogGroupNamePrefix *string
 
 	// The token for the next set of items to return. (You received this token from a
@@ -54,7 +81,7 @@ type DescribeLogGroupsInput struct {
 type DescribeLogGroupsOutput struct {
 
 	// The log groups. If the retentionInDays value is not included for a log group,
-	// then that log group is set to have its events never expire.
+	// then that log group's events do not expire.
 	LogGroups []types.LogGroup
 
 	// The token for the next set of items to return. The token expires after 24 hours.

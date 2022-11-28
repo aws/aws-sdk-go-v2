@@ -48,6 +48,9 @@ type ChangeServerLifeCycleStateInput struct {
 
 type ChangeServerLifeCycleStateOutput struct {
 
+	// Source server application ID.
+	ApplicationID *string
+
 	// Source server ARN.
 	Arn *string
 

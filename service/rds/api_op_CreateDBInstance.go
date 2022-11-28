@@ -470,8 +470,8 @@ type CreateDBInstanceInput struct {
 	// number of the database engine to be used by the DB instance is managed by the DB
 	// cluster. Amazon RDS Custom for Oracle A custom engine version (CEV) that you
 	// have previously created. This setting is required for RDS Custom for Oracle. The
-	// CEV name has the following format: 19.customized_string . An example identifier
-	// is 19.my_cev1. For more information, see  Creating an RDS Custom for Oracle DB
+	// CEV name has the following format: 19.customized_string. A valid CEV name is
+	// 19.my_cev1. For more information, see  Creating an RDS Custom for Oracle DB
 	// instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create)
 	// in the Amazon RDS User Guide. Amazon RDS Custom for SQL Server See RDS Custom

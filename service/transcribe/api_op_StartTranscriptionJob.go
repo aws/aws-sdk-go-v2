@@ -61,49 +61,55 @@ type StartTranscriptionJobInput struct {
 	// This member is required.
 	Media *types.Media
 
-	// A unique name, chosen by you, for your transcription job. The name you specify
-	// is also used as the default name of your transcription output file. If you want
-	// to specify a different name for your transcription output, use the OutputKey
-	// parameter. This name is case sensitive, cannot contain spaces, and must be
-	// unique within an Amazon Web Services account. If you try to create a new job
-	// with the same name as an existing job, you get a ConflictException error.
+	// A unique name, chosen by you, for your transcription job. The name that you
+	// specify is also used as the default name of your transcription output file. If
+	// you want to specify a different name for your transcription output, use the
+	// OutputKey parameter. This name is case sensitive, cannot contain spaces, and
+	// must be unique within an Amazon Web Services account. If you try to create a new
+	// job with the same name as an existing job, you get a ConflictException error.
 	//
 	// This member is required.
 	TranscriptionJobName *string
 
-	// Allows you to redact or flag specified personally identifiable information (PII)
-	// in your transcript. If you use ContentRedaction, you must also include the
-	// sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
+	// Makes it possible to redact or flag specified personally identifiable
+	// information (PII) in your transcript. If you use ContentRedaction, you must also
+	// include the sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
 	ContentRedaction *types.ContentRedaction
 
-	// Enables automatic language identification in your transcription job request. If
-	// you include IdentifyLanguage, you can optionally include a list of language
-	// codes, using LanguageOptions, that you think may be present in your media file.
-	// Including language options can improve transcription accuracy. If you want to
-	// apply a custom language model, a custom vocabulary, or a custom vocabulary
+	// Enables automatic language identification in your transcription job request. Use
+	// this parameter if your media file contains only one language. If your media
+	// contains multiple languages, use IdentifyMultipleLanguages instead. If you
+	// include IdentifyLanguage, you can optionally include a list of language codes,
+	// using LanguageOptions, that you think may be present in your media file.
+	// Including LanguageOptions restricts IdentifyLanguage to only the language
+	// options that you specify, which can improve transcription accuracy. If you want
+	// to apply a custom language model, a custom vocabulary, or a custom vocabulary
 	// filter to your automatic language identification request, include
 	// LanguageIdSettings with the relevant sub-parameters (VocabularyName,
-	// LanguageModelName, and VocabularyFilterName). Note that you must include one of
-	// LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages in your request. If
-	// you include more than one of these parameters, your transcription job fails.
+	// LanguageModelName, and VocabularyFilterName). If you include LanguageIdSettings,
+	// also include LanguageOptions. Note that you must include one of LanguageCode,
+	// IdentifyLanguage, or IdentifyMultipleLanguages in your request. If you include
+	// more than one of these parameters, your transcription job fails.
 	IdentifyLanguage *bool
 
 	// Enables automatic multi-language identification in your transcription job
 	// request. Use this parameter if your media file contains more than one language.
-	// If you include IdentifyMultipleLanguages, you can optionally include a list of
-	// language codes, using LanguageOptions, that you think may be present in your
-	// media file. Including language options can improve transcription accuracy. If
-	// you want to apply a custom vocabulary or a custom vocabulary filter to your
-	// automatic language identification request, include LanguageIdSettings with the
-	// relevant sub-parameters (VocabularyName and VocabularyFilterName). Note that you
-	// must include one of LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages
-	// in your request. If you include more than one of these parameters, your
-	// transcription job fails.
+	// If your media contains only one language, use IdentifyLanguage instead. If you
+	// include IdentifyMultipleLanguages, you can optionally include a list of language
+	// codes, using LanguageOptions, that you think may be present in your media file.
+	// Including LanguageOptions restricts IdentifyLanguage to only the language
+	// options that you specify, which can improve transcription accuracy. If you want
+	// to apply a custom vocabulary or a custom vocabulary filter to your automatic
+	// language identification request, include LanguageIdSettings with the relevant
+	// sub-parameters (VocabularyName and VocabularyFilterName). If you include
+	// LanguageIdSettings, also include LanguageOptions. Note that you must include one
+	// of LanguageCode, IdentifyLanguage, or IdentifyMultipleLanguages in your request.
+	// If you include more than one of these parameters, your transcription job fails.
 	IdentifyMultipleLanguages *bool
 
-	// Allows you to control how your transcription job is processed. Currently, the
-	// only JobExecutionSettings modification you can choose is enabling job queueing
-	// using the AllowDeferredExecution sub-parameter. If you include
+	// Makes it possible to control how your transcription job is processed. Currently,
+	// the only JobExecutionSettings modification you can choose is enabling job
+	// queueing using the AllowDeferredExecution sub-parameter. If you include
 	// JobExecutionSettings in your request, you must also include the sub-parameters:
 	// AllowDeferredExecution and DataAccessRoleArn.
 	JobExecutionSettings *types.JobExecutionSettings
@@ -129,29 +135,32 @@ type StartTranscriptionJobInput struct {
 	// must be encoded at a sample rate of 16,000 Hz or higher.
 	LanguageCode types.LanguageCode
 
-	// If using automatic language identification (IdentifyLanguage) in your request
-	// and you want to apply a custom language model, a custom vocabulary, or a custom
-	// vocabulary filter, include LanguageIdSettings with the relevant sub-parameters
-	// (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify
-	// two or more language codes that represent the languages you think may be present
-	// in your media; including more than five is not recommended. Each language code
-	// you include can have an associated custom language model, custom vocabulary, and
-	// custom vocabulary filter. The languages you specify must match the languages of
-	// the specified custom language models, custom vocabularies, and custom vocabulary
-	// filters. To include language options using IdentifyLanguage without including a
-	// custom language model, a custom vocabulary, or a custom vocabulary filter, use
-	// LanguageOptions instead of LanguageIdSettings. Including language options can
-	// improve the accuracy of automatic language identification. If you want to
-	// include a custom language model with your request but do not want to use
-	// automatic language identification, use instead the  parameter with the
-	// LanguageModelName sub-parameter. If you want to include a custom vocabulary or a
-	// custom vocabulary filter (or both) with your request but do not want to use
-	// automatic language identification, use instead the  parameter with the
-	// VocabularyName or VocabularyFilterName (or both) sub-parameter.
+	// If using automatic language identification in your request and you want to apply
+	// a custom language model, a custom vocabulary, or a custom vocabulary filter,
+	// include LanguageIdSettings with the relevant sub-parameters (VocabularyName,
+	// LanguageModelName, and VocabularyFilterName). Note that multi-language
+	// identification (IdentifyMultipleLanguages) doesn't support custom language
+	// models. LanguageIdSettings supports two to five language codes. Each language
+	// code you include can have an associated custom language model, custom
+	// vocabulary, and custom vocabulary filter. The language codes that you specify
+	// must match the languages of the associated custom language models, custom
+	// vocabularies, and custom vocabulary filters. It's recommended that you include
+	// LanguageOptions when using LanguageIdSettings to ensure that the correct
+	// language dialect is identified. For example, if you specify a custom vocabulary
+	// that is in en-US but Amazon Transcribe determines that the language spoken in
+	// your media is en-AU, your custom vocabulary is not applied to your
+	// transcription. If you include LanguageOptions and include en-US as the only
+	// English language dialect, your custom vocabulary is applied to your
+	// transcription. If you want to include a custom language model with your request
+	// but do not want to use automatic language identification, use instead the
+	// parameter with the LanguageModelName sub-parameter. If you want to include a
+	// custom vocabulary or a custom vocabulary filter (or both) with your request but
+	// do not want to use automatic language identification, use instead the  parameter
+	// with the VocabularyName or VocabularyFilterName (or both) sub-parameter.
 	LanguageIdSettings map[string]types.LanguageIdSettings
 
 	// You can specify two or more language codes that represent the languages you
-	// think may be present in your media; including more than five is not recommended.
+	// think may be present in your media. Including more than five is not recommended.
 	// If you're unsure what languages are present, do not include this parameter. If
 	// you include LanguageOptions in your request, you must also include
 	// IdentifyLanguage. For more information, refer to Supported languages
@@ -163,12 +172,12 @@ type StartTranscriptionJobInput struct {
 	// Specify the format of your input media file.
 	MediaFormat types.MediaFormat
 
-	// The sample rate, in Hertz, of the audio track in your input media file. If you
+	// The sample rate, in hertz, of the audio track in your input media file. If you
 	// don't specify the media sample rate, Amazon Transcribe determines it for you. If
 	// you specify the sample rate, it must match the rate detected by Amazon
-	// Transcribe; if there's a mismatch between the value you specify and the value
-	// detected, your job fails. Therefore, in most cases, it's advised to omit
-	// MediaSampleRateHertz and let Amazon Transcribe determine the sample rate.
+	// Transcribe. If there's a mismatch between the value that you specify and the
+	// value detected, your job fails. In most cases, you can omit MediaSampleRateHertz
+	// and let Amazon Transcribe determine the sample rate.
 	MediaSampleRateHertz *int32
 
 	// Specify the custom language model you want to include with your transcription
@@ -265,10 +274,10 @@ type StartTranscriptionJobInput struct {
 	OutputKey *string
 
 	// Specify additional optional settings in your request, including channel
-	// identification, alternative transcriptions, speaker labeling; allows you to
-	// apply custom vocabularies and vocabulary filters. If you want to include a
-	// custom vocabulary or a custom vocabulary filter (or both) with your request but
-	// do not want to use automatic language identification, use Settings with the
+	// identification, alternative transcriptions, speaker partitioning. You can use
+	// that to apply custom vocabularies and vocabulary filters. If you want to include
+	// a custom vocabulary or a custom vocabulary filter (or both) with your request
+	// but do not want to use automatic language identification, use Settings with the
 	// VocabularyName or VocabularyFilterName (or both) sub-parameter. If you're using
 	// automatic language identification with your request and want to include a custom
 	// language model, a custom vocabulary, or a custom vocabulary filter, use instead

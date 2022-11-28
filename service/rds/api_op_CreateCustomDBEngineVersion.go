@@ -73,10 +73,10 @@ type CreateCustomDBEngineVersionInput struct {
 	// This member is required.
 	Engine *string
 
-	// The name of your CEV. The name format is 19.customized_string . For example, a
-	// valid name is 19.my_cev1. This setting is required for RDS Custom for Oracle,
-	// but optional for Amazon RDS. The combination of Engine and EngineVersion is
-	// unique per customer per Region.
+	// The name of your CEV. The name format is 19.customized_string. For example, a
+	// valid CEV name is 19.my_cev1. This setting is required for RDS Custom for
+	// Oracle, but optional for Amazon RDS. The combination of Engine and EngineVersion
+	// is unique per customer per Region.
 	//
 	// This member is required.
 	EngineVersion *string

@@ -110,6 +110,26 @@ func (m *validateOpCreateLogStream) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteDataProtectionPolicy struct {
+}
+
+func (*validateOpDeleteDataProtectionPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataProtectionPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataProtectionPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataProtectionPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDestination struct {
 }
 
@@ -330,6 +350,26 @@ func (m *validateOpFilterLogEvents) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataProtectionPolicy struct {
+}
+
+func (*validateOpGetDataProtectionPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataProtectionPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataProtectionPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataProtectionPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetLogEvents struct {
 }
 
@@ -445,6 +485,26 @@ func (m *validateOpListTagsLogGroup) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsLogGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutDataProtectionPolicy struct {
+}
+
+func (*validateOpPutDataProtectionPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutDataProtectionPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutDataProtectionPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutDataProtectionPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -750,6 +810,10 @@ func addOpCreateLogStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLogStream{}, middleware.After)
 }
 
+func addOpDeleteDataProtectionPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataProtectionPolicy{}, middleware.After)
+}
+
 func addOpDeleteDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDestination{}, middleware.After)
 }
@@ -794,6 +858,10 @@ func addOpFilterLogEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpFilterLogEvents{}, middleware.After)
 }
 
+func addOpGetDataProtectionPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataProtectionPolicy{}, middleware.After)
+}
+
 func addOpGetLogEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLogEvents{}, middleware.After)
 }
@@ -816,6 +884,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListTagsLogGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsLogGroup{}, middleware.After)
+}
+
+func addOpPutDataProtectionPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutDataProtectionPolicy{}, middleware.After)
 }
 
 func addOpPutDestinationValidationMiddleware(stack *middleware.Stack) error {
@@ -1037,6 +1109,21 @@ func validateOpCreateLogStreamInput(v *CreateLogStreamInput) error {
 	}
 }
 
+func validateOpDeleteDataProtectionPolicyInput(v *DeleteDataProtectionPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataProtectionPolicyInput"}
+	if v.LogGroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDestinationInput(v *DeleteDestinationInput) error {
 	if v == nil {
 		return nil
@@ -1211,6 +1298,21 @@ func validateOpFilterLogEventsInput(v *FilterLogEventsInput) error {
 	}
 }
 
+func validateOpGetDataProtectionPolicyInput(v *GetDataProtectionPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataProtectionPolicyInput"}
+	if v.LogGroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetLogEventsInput(v *GetLogEventsInput) error {
 	if v == nil {
 		return nil
@@ -1296,6 +1398,24 @@ func validateOpListTagsLogGroupInput(v *ListTagsLogGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsLogGroupInput"}
 	if v.LogGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutDataProtectionPolicyInput(v *PutDataProtectionPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutDataProtectionPolicyInput"}
+	if v.LogGroupIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LogGroupIdentifier"))
+	}
+	if v.PolicyDocument == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

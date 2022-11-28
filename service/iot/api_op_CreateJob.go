@@ -85,6 +85,10 @@ type CreateJobInput struct {
 	// Configuration information for pre-signed S3 URLs.
 	PresignedUrlConfig *types.PresignedUrlConfig
 
+	// The configuration that allows you to schedule a job for a future date and time
+	// in addition to specifying the end behavior for each job execution.
+	SchedulingConfig *types.SchedulingConfig
+
 	// Metadata which can be used to manage the job.
 	Tags []types.Tag
 

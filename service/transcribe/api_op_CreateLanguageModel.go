@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new custom language model. When creating a new language model, you
-// must specify:
+// Creates a new custom language model. When creating a new custom language model,
+// you must specify:
 //
-// * If you want a Wideband (audio sample rates over 16,000 Hz) or
-// Narrowband (audio sample rates under 16,000 Hz) base model
+// * If you want a Wideband (audio sample rates over 16,000 Hz)
+// or Narrowband (audio sample rates under 16,000 Hz) base model
 //
 // * The location of
 // your training and tuning files (this must be an Amazon S3 URI)
@@ -24,10 +24,6 @@ import (
 // of your model
 //
 // * A unique name for your model
-//
-// For more information, see Custom
-// language models
-// (https://docs.aws.amazon.com/transcribe/latest/dg/custom-language-models.html).
 func (c *Client) CreateLanguageModel(ctx context.Context, params *CreateLanguageModelInput, optFns ...func(*Options)) (*CreateLanguageModelOutput, error) {
 	if params == nil {
 		params = &CreateLanguageModelInput{}
@@ -67,25 +63,25 @@ type CreateLanguageModelInput struct {
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The language code that represents the language of your model. Each language
-	// model must contain terms in only one language, and the language you select for
-	// your model must match the language of your training and tuning data. For a list
-	// of supported languages and their associated language codes, refer to the
-	// Supported languages
+	// The language code that represents the language of your model. Each custom
+	// language model must contain terms in only one language, and the language you
+	// select for your custom language model must match the language of your training
+	// and tuning data. For a list of supported languages and their associated language
+	// codes, refer to the Supported languages
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-	// table. Note that U.S. English (en-US) is the only language supported with Amazon
+	// table. Note that US English (en-US) is the only language supported with Amazon
 	// Transcribe Medical. A custom language model can only be used to transcribe files
-	// in the same language as the model. For example, if you create a language model
-	// using US English (en-US), you can only apply this model to files that contain
-	// English audio.
+	// in the same language as the model. For example, if you create a custom language
+	// model using US English (en-US), you can only apply this model to files that
+	// contain English audio.
 	//
 	// This member is required.
 	LanguageCode types.CLMLanguageCode
 
 	// A unique name, chosen by you, for your custom language model. This name is case
 	// sensitive, cannot contain spaces, and must be unique within an Amazon Web
-	// Services account. If you try to create a new language model with the same name
-	// as an existing language model, you get a ConflictException error.
+	// Services account. If you try to create a new custom language model with the same
+	// name as an existing custom language model, you get a ConflictException error.
 	//
 	// This member is required.
 	ModelName *string

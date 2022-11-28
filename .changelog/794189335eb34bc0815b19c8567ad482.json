@@ -1,0 +1,8 @@
+{
+    "id": "79418933-5eb3-4bc0-815b-19c8567ad482",
+    "type": "feature",
+    "description": "This release introduces delegated administrator for AWS Organizations, a new feature to help you delegate the management of your Organizations policies, enabling you to govern your AWS organization in a decentralized way. You can now allow member accounts to manage Organizations policies.",
+    "modules": [
+        "service/organizations"
+    ]
+}

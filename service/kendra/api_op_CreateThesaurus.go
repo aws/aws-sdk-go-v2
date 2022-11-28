@@ -71,7 +71,7 @@ type CreateThesaurusInput struct {
 
 type CreateThesaurusOutput struct {
 
-	// The unique identifier of the thesaurus.
+	// The identifier of the thesaurus.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

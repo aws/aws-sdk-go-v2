@@ -1,0 +1,8 @@
+{
+    "id": "24dca586-8e6a-49d0-a773-f3ca3f412855",
+    "type": "feature",
+    "description": "Adds cross-account support to the GetMetricData API. Adds cross-account support to the ListMetrics API through the usage of the IncludeLinkedAccounts flag and the new OwningAccounts field.",
+    "modules": [
+        "service/cloudwatch"
+    ]
+}

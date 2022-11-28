@@ -49,6 +49,9 @@ type FinalizeCutoverInput struct {
 
 type FinalizeCutoverOutput struct {
 
+	// Source server application ID.
+	ApplicationID *string
+
 	// Source server ARN.
 	Arn *string
 

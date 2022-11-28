@@ -297,6 +297,7 @@ const (
 	StatusCodeComplete      StatusCode = "Complete"
 	StatusCodeInternalError StatusCode = "InternalError"
 	StatusCodePartialData   StatusCode = "PartialData"
+	StatusCodeForbidden     StatusCode = "Forbidden"
 )
 
 // Values returns all known values for StatusCode. Note that this can be expanded
@@ -307,5 +308,6 @@ func (StatusCode) Values() []StatusCode {
 		"Complete",
 		"InternalError",
 		"PartialData",
+		"Forbidden",
 	}
 }

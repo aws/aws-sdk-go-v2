@@ -569,7 +569,8 @@ func (e *SubnetNotFound) ErrorCode() string             { return "SubnetNotFound
 func (e *SubnetNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned when the CreateAccessPoint API action is called too quickly and the
-// number of Access Points in the account is nearing the limit of 120.
+// number of Access Points on the file system is nearing the limit of 120
+// (https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region).
 type ThrottlingException struct {
 	Message *string
 

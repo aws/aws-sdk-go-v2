@@ -27,29 +27,30 @@ import (
 // * None of the log events in the batch can be more than 2 hours in
 // the future.
 //
-// * None of the log events in the batch can be older than 14 days or
-// older than the retention period of the log group.
+// * None of the log events in the batch can be more than 14 days in
+// the past. Also, none of the log events can be from earlier than the retention
+// period of the log group.
 //
-// * The log events in the batch
-// must be in chronological order by their timestamp. The timestamp is the time the
-// event occurred, expressed as the number of milliseconds after Jan 1, 1970
-// 00:00:00 UTC. (In Amazon Web Services Tools for PowerShell and the Amazon Web
-// Services SDK for .NET, the timestamp is specified in .NET format:
-// yyyy-mm-ddThh:mm:ss. For example, 2017-09-15T13:45:30.)
+// * The log events in the batch must be in chronological
+// order by their timestamp. The timestamp is the time that the event occurred,
+// expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. (In
+// Amazon Web Services Tools for PowerShell and the Amazon Web Services SDK for
+// .NET, the timestamp is specified in .NET format: yyyy-mm-ddThh:mm:ss. For
+// example, 2017-09-15T13:45:30.)
 //
-// * A batch of log events
-// in a single request cannot span more than 24 hours. Otherwise, the operation
-// fails.
+// * A batch of log events in a single request
+// cannot span more than 24 hours. Otherwise, the operation fails.
 //
-// * The maximum number of log events in a batch is 10,000.
+// * The maximum
+// number of log events in a batch is 10,000.
 //
-// * There is a
-// quota of 5 requests per second per log stream. Additional requests are
-// throttled. This quota can't be changed.
+// * There is a quota of five requests
+// per second per log stream. Additional requests are throttled. This quota can't
+// be changed.
 //
-// If a call to PutLogEvents returns
-// "UnrecognizedClientException" the most likely cause is an invalid Amazon Web
-// Services access key ID or secret key.
+// If a call to PutLogEvents returns "UnrecognizedClientException" the
+// most likely cause is a non-valid Amazon Web Services access key ID or secret
+// key.
 func (c *Client) PutLogEvents(ctx context.Context, params *PutLogEventsInput, optFns ...func(*Options)) (*PutLogEventsOutput, error) {
 	if params == nil {
 		params = &PutLogEventsInput{}

@@ -1,0 +1,8 @@
+{
+    "id": "750da849-11e3-4705-bf84-eaf5e14f1780",
+    "type": "feature",
+    "description": "This release enables new Aurora and RDS feature called Blue/Green Deployments that makes updates to databases safer, simpler and faster.",
+    "modules": [
+        "service/rds"
+    ]
+}

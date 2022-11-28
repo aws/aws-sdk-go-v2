@@ -839,6 +839,24 @@ func (QueryIdentifiersEnclosingOption) Values() []QueryIdentifiersEnclosingOptio
 	}
 }
 
+type QueryResultFormat string
+
+// Enum values for QueryResultFormat
+const (
+	QueryResultFormatTable QueryResultFormat = "TABLE"
+	QueryResultFormatText  QueryResultFormat = "TEXT"
+)
+
+// Values returns all known values for QueryResultFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (QueryResultFormat) Values() []QueryResultFormat {
+	return []QueryResultFormat{
+		"TABLE",
+		"TEXT",
+	}
+}
+
 type QueryResultType string
 
 // Enum values for QueryResultType

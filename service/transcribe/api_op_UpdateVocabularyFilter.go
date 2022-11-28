@@ -14,7 +14,7 @@ import (
 
 // Updates an existing custom vocabulary filter with a new list of words. The new
 // list you provide overwrites all previous entries; you cannot append new terms
-// onto an existing vocabulary filter.
+// onto an existing custom vocabulary filter.
 func (c *Client) UpdateVocabularyFilter(ctx context.Context, params *UpdateVocabularyFilterInput, optFns ...func(*Options)) (*UpdateVocabularyFilterOutput, error) {
 	if params == nil {
 		params = &UpdateVocabularyFilterInput{}
@@ -32,8 +32,8 @@ func (c *Client) UpdateVocabularyFilter(ctx context.Context, params *UpdateVocab
 
 type UpdateVocabularyFilterInput struct {
 
-	// The name of the custom vocabulary filter you want to update. Vocabulary filter
-	// names are case sensitive.
+	// The name of the custom vocabulary filter you want to update. Custom vocabulary
+	// filter names are case sensitive.
 	//
 	// This member is required.
 	VocabularyFilterName *string
@@ -46,17 +46,17 @@ type UpdateVocabularyFilterInput struct {
 	// one or the other.
 	VocabularyFilterFileUri *string
 
-	// Use this parameter if you want to update your vocabulary filter by including all
-	// desired terms, as comma-separated values, within your request. The other option
-	// for updating your vocabulary filter is to save your entries in a text file and
-	// upload them to an Amazon S3 bucket, then specify the location of your file using
-	// the VocabularyFilterFileUri parameter. Note that if you include Words in your
-	// request, you cannot use VocabularyFilterFileUri; you must choose one or the
-	// other. Each language has a character set that contains all allowed characters
-	// for that specific language. If you use unsupported characters, your vocabulary
-	// filter request fails. Refer to Character Sets for Custom Vocabularies
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) to get the
-	// character set for your language.
+	// Use this parameter if you want to update your custom vocabulary filter by
+	// including all desired terms, as comma-separated values, within your request. The
+	// other option for updating your vocabulary filter is to save your entries in a
+	// text file and upload them to an Amazon S3 bucket, then specify the location of
+	// your file using the VocabularyFilterFileUri parameter. Note that if you include
+	// Words in your request, you cannot use VocabularyFilterFileUri; you must choose
+	// one or the other. Each language has a character set that contains all allowed
+	// characters for that specific language. If you use unsupported characters, your
+	// custom vocabulary filter request fails. Refer to Character Sets for Custom
+	// Vocabularies (https://docs.aws.amazon.com/transcribe/latest/dg/charsets.html) to
+	// get the character set for your language.
 	Words []string
 
 	noSmithyDocumentSerde
@@ -64,11 +64,11 @@ type UpdateVocabularyFilterInput struct {
 
 type UpdateVocabularyFilterOutput struct {
 
-	// The language code you selected for your vocabulary filter.
+	// The language code you selected for your custom vocabulary filter.
 	LanguageCode types.LanguageCode
 
-	// The date and time the specified vocabulary filter was last updated. Timestamps
-	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// The date and time the specified custom vocabulary filter was last updated.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 

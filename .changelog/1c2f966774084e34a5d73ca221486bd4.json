@@ -1,0 +1,8 @@
+{
+    "id": "1c2f9667-7408-4e34-a5d7-3ca221486bd4",
+    "type": "feature",
+    "description": "AWS Backup introduces support for legal hold and application stack backups. AWS Backup Audit Manager introduces support for cross-Region, cross-account reports.",
+    "modules": [
+        "service/backup"
+    ]
+}

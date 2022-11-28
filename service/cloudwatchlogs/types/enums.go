@@ -2,6 +2,28 @@
 
 package types
 
+type DataProtectionStatus string
+
+// Enum values for DataProtectionStatus
+const (
+	DataProtectionStatusActivated DataProtectionStatus = "ACTIVATED"
+	DataProtectionStatusDeleted   DataProtectionStatus = "DELETED"
+	DataProtectionStatusArchived  DataProtectionStatus = "ARCHIVED"
+	DataProtectionStatusDisabled  DataProtectionStatus = "DISABLED"
+)
+
+// Values returns all known values for DataProtectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataProtectionStatus) Values() []DataProtectionStatus {
+	return []DataProtectionStatus{
+		"ACTIVATED",
+		"DELETED",
+		"ARCHIVED",
+		"DISABLED",
+	}
+}
+
 type Distribution string
 
 // Enum values for Distribution

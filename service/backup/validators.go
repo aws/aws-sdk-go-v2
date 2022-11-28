@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCancelLegalHold struct {
+}
+
+func (*validateOpCancelLegalHold) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelLegalHold) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelLegalHoldInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelLegalHoldInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateBackupPlan struct {
 }
 
@@ -85,6 +105,26 @@ func (m *validateOpCreateFramework) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateFrameworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLegalHold struct {
+}
+
+func (*validateOpCreateLegalHold) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLegalHold) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLegalHoldInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLegalHoldInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +510,26 @@ func (m *validateOpDescribeRestoreJob) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateRecoveryPointFromParent struct {
+}
+
+func (*validateOpDisassociateRecoveryPointFromParent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateRecoveryPointFromParent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateRecoveryPointFromParentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateRecoveryPointFromParentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateRecoveryPoint struct {
 }
 
@@ -630,6 +690,26 @@ func (m *validateOpGetBackupVaultNotifications) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetLegalHold struct {
+}
+
+func (*validateOpGetLegalHold) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLegalHold) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLegalHoldInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLegalHoldInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetRecoveryPointRestoreMetadata struct {
 }
 
@@ -705,6 +785,26 @@ func (m *validateOpListRecoveryPointsByBackupVault) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRecoveryPointsByBackupVaultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRecoveryPointsByLegalHold struct {
+}
+
+func (*validateOpListRecoveryPointsByLegalHold) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRecoveryPointsByLegalHold) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRecoveryPointsByLegalHoldInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRecoveryPointsByLegalHoldInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1030,6 +1130,10 @@ func (m *validateOpUpdateReportPlan) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCancelLegalHoldValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelLegalHold{}, middleware.After)
+}
+
 func addOpCreateBackupPlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBackupPlan{}, middleware.After)
 }
@@ -1044,6 +1148,10 @@ func addOpCreateBackupVaultValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateFrameworkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFramework{}, middleware.After)
+}
+
+func addOpCreateLegalHoldValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLegalHold{}, middleware.After)
 }
 
 func addOpCreateReportPlanValidationMiddleware(stack *middleware.Stack) error {
@@ -1122,6 +1230,10 @@ func addOpDescribeRestoreJobValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDescribeRestoreJob{}, middleware.After)
 }
 
+func addOpDisassociateRecoveryPointFromParentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateRecoveryPointFromParent{}, middleware.After)
+}
+
 func addOpDisassociateRecoveryPointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateRecoveryPoint{}, middleware.After)
 }
@@ -1154,6 +1266,10 @@ func addOpGetBackupVaultNotificationsValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpGetBackupVaultNotifications{}, middleware.After)
 }
 
+func addOpGetLegalHoldValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLegalHold{}, middleware.After)
+}
+
 func addOpGetRecoveryPointRestoreMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRecoveryPointRestoreMetadata{}, middleware.After)
 }
@@ -1168,6 +1284,10 @@ func addOpListBackupSelectionsValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpListRecoveryPointsByBackupVaultValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRecoveryPointsByBackupVault{}, middleware.After)
+}
+
+func addOpListRecoveryPointsByLegalHoldValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRecoveryPointsByLegalHold{}, middleware.After)
 }
 
 func addOpListRecoveryPointsByResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1372,6 +1492,24 @@ func validateCopyActions(v []types.CopyAction) error {
 	}
 }
 
+func validateDateRange(v *types.DateRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DateRange"}
+	if v.FromDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FromDate"))
+	}
+	if v.ToDate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ToDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFrameworkControl(v *types.FrameworkControl) error {
 	if v == nil {
 		return nil
@@ -1421,6 +1559,23 @@ func validateListOfTags(v []types.Condition) error {
 	}
 }
 
+func validateRecoveryPointSelection(v *types.RecoveryPointSelection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecoveryPointSelection"}
+	if v.DateRange != nil {
+		if err := validateDateRange(v.DateRange); err != nil {
+			invalidParams.AddNested("DateRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateReportDeliveryChannel(v *types.ReportDeliveryChannel) error {
 	if v == nil {
 		return nil
@@ -1443,6 +1598,24 @@ func validateReportSetting(v *types.ReportSetting) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ReportSetting"}
 	if v.ReportTemplate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReportTemplate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelLegalHoldInput(v *CancelLegalHoldInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelLegalHoldInput"}
+	if v.LegalHoldId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LegalHoldId"))
+	}
+	if v.CancelDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CancelDescription"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1520,6 +1693,29 @@ func validateOpCreateFrameworkInput(v *CreateFrameworkInput) error {
 	} else if v.FrameworkControls != nil {
 		if err := validateFrameworkControls(v.FrameworkControls); err != nil {
 			invalidParams.AddNested("FrameworkControls", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLegalHoldInput(v *CreateLegalHoldInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLegalHoldInput"}
+	if v.Title == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Title"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.RecoveryPointSelection != nil {
+		if err := validateRecoveryPointSelection(v.RecoveryPointSelection); err != nil {
+			invalidParams.AddNested("RecoveryPointSelection", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1837,6 +2033,24 @@ func validateOpDescribeRestoreJobInput(v *DescribeRestoreJobInput) error {
 	}
 }
 
+func validateOpDisassociateRecoveryPointFromParentInput(v *DisassociateRecoveryPointFromParentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateRecoveryPointFromParentInput"}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisassociateRecoveryPointInput(v *DisassociateRecoveryPointInput) error {
 	if v == nil {
 		return nil
@@ -1963,6 +2177,21 @@ func validateOpGetBackupVaultNotificationsInput(v *GetBackupVaultNotificationsIn
 	}
 }
 
+func validateOpGetLegalHoldInput(v *GetLegalHoldInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLegalHoldInput"}
+	if v.LegalHoldId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LegalHoldId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetRecoveryPointRestoreMetadataInput(v *GetRecoveryPointRestoreMetadataInput) error {
 	if v == nil {
 		return nil
@@ -2018,6 +2247,21 @@ func validateOpListRecoveryPointsByBackupVaultInput(v *ListRecoveryPointsByBacku
 	invalidParams := smithy.InvalidParamsError{Context: "ListRecoveryPointsByBackupVaultInput"}
 	if v.BackupVaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRecoveryPointsByLegalHoldInput(v *ListRecoveryPointsByLegalHoldInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRecoveryPointsByLegalHoldInput"}
+	if v.LegalHoldId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LegalHoldId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

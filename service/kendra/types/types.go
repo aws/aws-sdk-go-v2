@@ -281,7 +281,7 @@ type BatchDeleteDocumentResponseFailedDocument struct {
 // Provides a response when the status of a document could not be retrieved.
 type BatchGetDocumentStatusResponseError struct {
 
-	// The unique identifier of the document whose status could not be retrieved.
+	// The identifier of the document whose status could not be retrieved.
 	DocumentId *string
 
 	// Indicates the source of the error.
@@ -303,7 +303,7 @@ type BatchPutDocumentResponseFailedDocument struct {
 	// A description of the reason why the document could not be indexed.
 	ErrorMessage *string
 
-	// The unique identifier of the document.
+	// The identifier of the document.
 	Id *string
 
 	noSmithyDocumentSerde
@@ -340,9 +340,8 @@ type BoxConfiguration struct {
 	// password.
 	//
 	// You create an application in Box to generate the keys or credentials
-	// required for the secret. For more information, see Authentication for a Box data
-	// source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html#box-authentication).
+	// required for the secret. For more information, see Using a Box data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-box.html).
 	//
 	// This member is required.
 	SecretArn *string
@@ -455,7 +454,7 @@ type ClickFeedback struct {
 	// This member is required.
 	ClickTime *time.Time
 
-	// The unique identifier of the search result that was clicked.
+	// The identifier of the search result that was clicked.
 	//
 	// This member is required.
 	ResultId *string
@@ -477,7 +476,7 @@ type ColumnConfiguration struct {
 	// This member is required.
 	DocumentDataColumnName *string
 
-	// The column that provides the document's unique identifier.
+	// The column that provides the document's identifier.
 	//
 	// This member is required.
 	DocumentIdColumnName *string
@@ -582,12 +581,10 @@ type ConfluenceConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of an Secrets Manager secret that contains the
 	// user name and password required to connect to the Confluence instance. If you
-	// use Confluence Cloud, you use a generated API token as the password. For more
-	// information, see Using a Confluence data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html). You
-	// can also provide authentication credentials in the form of a personal access
-	// token. For more information, see Authentication for a Confluence data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html#confluence-authentication).
+	// use Confluence Cloud, you use a generated API token as the password. You can
+	// also provide authentication credentials in the form of a personal access token.
+	// For more information, see Using a Confluence data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-confluence.html).
 	//
 	// This member is required.
 	SecretArn *string
@@ -994,14 +991,13 @@ type DataSourceGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information for an Amazon Kendra data source. Returned in a call to the
-// DescribeDataSource API.
+// Summary information for a Amazon Kendra data source.
 type DataSourceSummary struct {
 
 	// The UNIX datetime that the data source was created.
 	CreatedAt *time.Time
 
-	// The unique identifier for the data source.
+	// The identifier for the data source.
 	Id *string
 
 	// The code for a language. This shows a supported language for all documents in
@@ -1045,7 +1041,7 @@ type DataSourceSyncJob struct {
 	// description of the error that caused the synchronization to fail.
 	ErrorMessage *string
 
-	// A unique identifier for the synchronization job.
+	// A identifier for the synchronization job.
 	ExecutionId *string
 
 	// Maps a batch delete document request to a specific data source sync job. This is
@@ -1153,11 +1149,11 @@ type DataSourceVpcConfiguration struct {
 // A document in an index.
 type Document struct {
 
-	// A unique identifier of the document in the index. Note, each document ID must be
-	// unique per index. You cannot create a data source to index your documents with
-	// their unique IDs and then use the BatchPutDocument API to index the same
-	// documents, or vice versa. You can delete a data source and then use the
-	// BatchPutDocument API to index the same documents, or vice versa.
+	// A identifier of the document in the index. Note, each document ID must be unique
+	// per index. You cannot create a data source to index your documents with their
+	// unique IDs and then use the BatchPutDocument API to index the same documents, or
+	// vice versa. You can delete a data source and then use the BatchPutDocument API
+	// to index the same documents, or vice versa.
 	//
 	// This member is required.
 	Id *string
@@ -1303,7 +1299,7 @@ type DocumentAttributeValue struct {
 	// A long integer value.
 	LongValue *int64
 
-	// A list of strings.
+	// A list of strings. The default maximum length or number of strings is 10.
 	StringListValue []string
 
 	// A string, such as "department".
@@ -1340,7 +1336,7 @@ type DocumentAttributeValueCountPair struct {
 // Identifies a document for which to retrieve status information
 type DocumentInfo struct {
 
-	// The unique identifier of the document.
+	// The identifier of the document.
 	//
 	// This member is required.
 	DocumentId *string
@@ -1651,7 +1647,7 @@ type FaqSummary struct {
 	// The file type used to create the FAQ.
 	FileFormat FaqFileFormat
 
-	// The unique identifier of the FAQ.
+	// The identifier of the FAQ.
 	Id *string
 
 	// The code for a language. This shows a supported language for the FAQ document as
@@ -1745,10 +1741,10 @@ type GitHubConfiguration struct {
 	// key-value pairs required to connect to your GitHub. The secret must contain a
 	// JSON structure with the following keys:
 	//
-	// * githubToken—The access token created
-	// in GitHub. For more information on creating a token in GitHub, see
-	// Authentication for a GitHub data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html#github-authentication).
+	// * personalToken—The access token
+	// created in GitHub. For more information on creating a token in GitHub, see Using
+	// a GitHub data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-github.html).
 	//
 	// This member is required.
 	SecretArn *string
@@ -2138,15 +2134,15 @@ type IndexConfigurationSummary struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Indicates whether the index is a enterprise edition index or a developer edition
+	// Indicates whether the index is a Enterprise Edition index or a Developer Edition
 	// index.
 	Edition IndexEdition
 
-	// A unique identifier for the index. Use this to identify the index when you are
-	// using APIs such as Query, DescribeIndex, UpdateIndex, and DeleteIndex.
+	// A identifier for the index. Use this to identify the index when you are using
+	// APIs such as Query, DescribeIndex, UpdateIndex, and DeleteIndex.
 	Id *string
 
-	// The identifier of the index.
+	// The name of the index.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -2210,8 +2206,8 @@ type JiraConfiguration struct {
 	// username.
 	//
 	// * jiraCredentials—The Jira API token. For more information on
-	// creating an API token in Jira, see  Authentication for a Jira data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html#jira-authentication).
+	// creating an API token in Jira, see  Using a Jira data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html).
 	//
 	// This member is required.
 	SecretArn *string
@@ -2566,7 +2562,7 @@ type QueryResultItem struct {
 	// the relevant terms in the excerpt.
 	DocumentExcerpt *TextWithHighlights
 
-	// The unique identifier for the document.
+	// The identifier for the document.
 	DocumentId *string
 
 	// The title of the document. Contains the text of the title and information for
@@ -2578,11 +2574,17 @@ type QueryResultItem struct {
 
 	// A token that identifies a particular result from a particular query. Use this
 	// token to provide click-through feedback for the result. For more information,
-	// see  Submitting feedback
+	// see Submitting feedback
 	// (https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html).
 	FeedbackToken *string
 
-	// The unique identifier for the query result.
+	// If the Type of document within the response is ANSWER, then it is either a TABLE
+	// answer or TEXT answer. If it's a table answer, a table excerpt is returned in
+	// TableExcerpt. If it's a text answer, a text excerpt is returned in
+	// DocumentExcerpt.
+	Format QueryResultFormat
+
+	// The identifier for the query result.
 	Id *string
 
 	// Indicates the confidence that Amazon Kendra has that a result matches the query
@@ -2593,7 +2595,11 @@ type QueryResultItem struct {
 	// confident that the result matches the query.
 	ScoreAttributes *ScoreAttributes
 
-	// The type of document.
+	// An excerpt from a table within a document.
+	TableExcerpt *TableExcerpt
+
+	// The type of document within the response. For example, a response could include
+	// a question-answer that's relevant to the query.
 	Type QueryResultType
 
 	noSmithyDocumentSerde
@@ -2642,8 +2648,8 @@ type QuipConfiguration struct {
 	// contain a JSON structure with the following keys:
 	//
 	// * accessToken—The token
-	// created in Quip. For more information, see Authentication for a Quip data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html#quip-authentication).
+	// created in Quip. For more information, see Using a Quip data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-slack.html).
 	//
 	// This member is required.
 	SecretArn *string
@@ -2763,8 +2769,8 @@ type RelevanceFeedback struct {
 	// This member is required.
 	RelevanceValue RelevanceType
 
-	// The unique identifier of the search result that the user provided relevance
-	// feedback for.
+	// The identifier of the search result that the user provided relevance feedback
+	// for.
 	//
 	// This member is required.
 	ResultId *string
@@ -3170,9 +3176,8 @@ type ServiceNowConfiguration struct {
 	// The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the
 	// user name and password required to connect to the ServiceNow instance. You can
 	// also provide OAuth authentication credentials of user name, password, client ID,
-	// and client secret. For more information, see Authentication for a ServiceNow
-	// data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html#servicenow-authentication).
+	// and client secret. For more information, see Using a ServiceNow data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html).
 	//
 	// This member is required.
 	SecretArn *string
@@ -3309,9 +3314,8 @@ type SharePointConfiguration struct {
 	// Source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html). You
 	// can also provide OAuth authentication credentials of user name, password, client
-	// ID, and client secret. For more information, see Authentication for a SharePoint
-	// data source
-	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html#sharepoint-authentication).
+	// ID, and client secret. For more information, see Using a SharePoint data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html).
 	//
 	// This member is required.
 	SecretArn *string
@@ -3607,7 +3611,7 @@ type SqlConfiguration struct {
 // Provides information about the status of documents submitted for indexing.
 type Status struct {
 
-	// The unique identifier of the document.
+	// The identifier of the document.
 	DocumentId *string
 
 	// The current status of a document. If the document was submitted for deletion,
@@ -3628,10 +3632,10 @@ type Status struct {
 // A single query suggestion.
 type Suggestion struct {
 
-	// The unique UUID (universally unique identifier) of a single query suggestion.
+	// The UUID (universally unique identifier) of a single query suggestion.
 	Id *string
 
-	// The value for the unique UUID (universally unique identifier) of a single query
+	// The value for the UUID (universally unique identifier) of a single query
 	// suggestion. The value is the text string of a suggestion.
 	Value *SuggestionValue
 
@@ -3669,6 +3673,53 @@ type SuggestionValue struct {
 	// The SuggestionTextWithHighlights structure that contains the query suggestion
 	// text and highlights.
 	Text *SuggestionTextWithHighlights
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a table cell in a table excerpt.
+type TableCell struct {
+
+	// TRUE means that the table cell should be treated as a header.
+	Header bool
+
+	// TRUE means that the table cell has a high enough confidence and is relevant to
+	// the query, so the value or content should be highlighted.
+	Highlighted bool
+
+	// TRUE if the response of the table cell is the top answer. This is the cell value
+	// or content with the highest confidence score or is the most relevant to the
+	// query.
+	TopAnswer bool
+
+	// The actual value or content within a table cell. A table cell could contain a
+	// date value of a year, or a string value of text, for example.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// An excerpt from a table within a document. The table excerpt displays up to five
+// columns and three rows, depending on how many table cells are relevant to the
+// query and how many columns are available in the original table. The top most
+// relevant cell is displayed in the table excerpt, along with the next most
+// relevant cells.
+type TableExcerpt struct {
+
+	// A list of rows in the table excerpt.
+	Rows []TableRow
+
+	// A count of the number of rows in the original table within the document.
+	TotalNumberOfRows *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about a row in a table excerpt.
+type TableRow struct {
+
+	// A list of table cells in a row.
+	Cells []TableCell
 
 	noSmithyDocumentSerde
 }

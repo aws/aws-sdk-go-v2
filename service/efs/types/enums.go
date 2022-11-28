@@ -132,6 +132,7 @@ type ThroughputMode string
 const (
 	ThroughputModeBursting    ThroughputMode = "bursting"
 	ThroughputModeProvisioned ThroughputMode = "provisioned"
+	ThroughputModeElastic     ThroughputMode = "elastic"
 )
 
 // Values returns all known values for ThroughputMode. Note that this can be
@@ -141,6 +142,7 @@ func (ThroughputMode) Values() []ThroughputMode {
 	return []ThroughputMode{
 		"bursting",
 		"provisioned",
+		"elastic",
 	}
 }
 
@@ -153,6 +155,7 @@ const (
 	TransitionToIARulesAfter30Days TransitionToIARules = "AFTER_30_DAYS"
 	TransitionToIARulesAfter60Days TransitionToIARules = "AFTER_60_DAYS"
 	TransitionToIARulesAfter90Days TransitionToIARules = "AFTER_90_DAYS"
+	TransitionToIARulesAfter1Day   TransitionToIARules = "AFTER_1_DAY"
 )
 
 // Values returns all known values for TransitionToIARules. Note that this can be
@@ -165,6 +168,7 @@ func (TransitionToIARules) Values() []TransitionToIARules {
 		"AFTER_30_DAYS",
 		"AFTER_60_DAYS",
 		"AFTER_90_DAYS",
+		"AFTER_1_DAY",
 	}
 }
 

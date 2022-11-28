@@ -230,8 +230,8 @@ func (e *TooManyTagsException) ErrorMessage() string {
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The most likely cause is an invalid Amazon Web Services access key ID or secret
-// key.
+// The most likely cause is an Amazon Web Services access key ID or secret key
+// that's not valid.
 type UnrecognizedClientException struct {
 	Message *string
 

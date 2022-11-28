@@ -52,7 +52,7 @@ type GetMetricStreamOutput struct {
 	// stream.
 	ExcludeFilters []types.MetricStreamFilter
 
-	// The ARN of the Amazon Kinesis Firehose delivery stream that is used by this
+	// The ARN of the Amazon Kinesis Data Firehose delivery stream that is used by this
 	// metric stream.
 	FirehoseArn *string
 

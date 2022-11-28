@@ -1,0 +1,8 @@
+{
+    "id": "27d9af42-79c3-4555-96c8-ecf4358c6192",
+    "type": "feature",
+    "description": "This release adds support for Application and Wave management. We also now support custom post-launch actions.",
+    "modules": [
+        "service/mgn"
+    ]
+}

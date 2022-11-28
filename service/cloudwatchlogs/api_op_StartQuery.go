@@ -14,10 +14,15 @@ import (
 // log group and time range to query and the query string to use. For more
 // information, see CloudWatch Logs Insights Query Syntax
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
-// Queries time out after 15 minutes of execution. If your queries are timing out,
+// Queries time out after 15 minutes of runtime. If your queries are timing out,
 // reduce the time range being searched or partition your query into a number of
-// queries. You are limited to 20 concurrent CloudWatch Logs insights queries,
-// including queries that have been added to dashboards.
+// queries. If you are using CloudWatch cross-account observability, you can use
+// this operation in a monitoring account to start a query in a linked source
+// account. For more information, see CloudWatch cross-account observability
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
+// For a cross-account StartQuery operation, the query definition must be defined
+// in the monitoring account. You can have up to 20 concurrent CloudWatch Logs
+// insights queries, including queries that have been added to dashboards.
 func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns ...func(*Options)) (*StartQueryOutput, error) {
 	if params == nil {
 		params = &StartQueryInput{}
@@ -61,13 +66,23 @@ type StartQueryInput struct {
 	// returned. The default is 1000.
 	Limit *int32
 
+	// The list of log groups to query. You can include up to 50 log groups. You can
+	// specify them by the log group name or ARN. If a log group that you're querying
+	// is in a source account and you're using a monitoring account, you must specify
+	// the ARN of the log group here. The query definition must also be defined in the
+	// monitoring account. If you specify an ARN, the ARN can't end with an asterisk
+	// (*). A StartQuery operation must include exactly one of the following
+	// parameters: logGroupName, logGroupNames or logGroupIdentifiers.
+	LogGroupIdentifiers []string
+
 	// The log group on which to perform the query. A StartQuery operation must include
-	// a logGroupNames or a logGroupName parameter, but not both.
+	// exactly one of the following parameters: logGroupName, logGroupNames or
+	// logGroupIdentifiers.
 	LogGroupName *string
 
-	// The list of log groups to be queried. You can include up to 20 log groups. A
-	// StartQuery operation must include a logGroupNames or a logGroupName parameter,
-	// but not both.
+	// The list of log groups to be queried. You can include up to 50 log groups. A
+	// StartQuery operation must include exactly one of the following parameters:
+	// logGroupName, logGroupNames or logGroupIdentifiers.
 	LogGroupNames []string
 
 	noSmithyDocumentSerde

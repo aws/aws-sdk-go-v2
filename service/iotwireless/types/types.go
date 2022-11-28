@@ -43,11 +43,30 @@ type AbpV1_1 struct {
 // specified instead of the position computed by solver.
 type Accuracy struct {
 
-	// The horizontal accuracy of the estimated position in meters.
+	// The horizontal accuracy of the estimated position, which is the difference
+	// between the estimated location and the actual device location.
 	HorizontalAccuracy *float32
 
-	// The vertical accuracy of the estimated position in meters.
+	// The vertical accuracy of the estimated position, which is the difference between
+	// the estimated altitude and actual device latitude in meters.
 	VerticalAccuracy *float32
+
+	noSmithyDocumentSerde
+}
+
+// LoRaWAN application configuration, which can be used to perform geolocation.
+type ApplicationConfig struct {
+
+	// The name of the position data destination that describes the AWS IoT rule that
+	// processes the device's position data for use by AWS IoT Core for LoRaWAN.
+	DestinationName *string
+
+	// The Fport value.
+	FPort *int32
+
+	// Application type, which can be specified to obtain real-time position
+	// information of your LoRaWAN device.
+	Type ApplicationConfigType
 
 	noSmithyDocumentSerde
 }
@@ -60,6 +79,107 @@ type Beaconing struct {
 
 	// The frequency list for the gateways to send the beacons.
 	Frequencies []int32
+
+	noSmithyDocumentSerde
+}
+
+// CDMA local ID information, which corresponds to the local identification
+// parameters of a CDMA cell.
+type CdmaLocalId struct {
+
+	// CDMA channel information.
+	//
+	// This member is required.
+	CdmaChannel *int32
+
+	// Pseudo-noise offset, which is a characteristic of the signal from a cell on a
+	// radio tower.
+	//
+	// This member is required.
+	PnOffset *int32
+
+	noSmithyDocumentSerde
+}
+
+// CDMA object for network measurement reports.
+type CdmaNmrObj struct {
+
+	// CDMA channel information.
+	//
+	// This member is required.
+	CdmaChannel *int32
+
+	// Pseudo-noise offset, which is a characteristic of the signal from a cell on a
+	// radio tower.
+	//
+	// This member is required.
+	PnOffset *int32
+
+	// CDMA base station ID (BSID).
+	BaseStationId *int32
+
+	// Transmit power level of the pilot signal, measured in dBm (decibel-milliwatts).
+	PilotPower *int32
+
+	noSmithyDocumentSerde
+}
+
+// CDMA (Code-division multiple access) object.
+type CdmaObj struct {
+
+	// CDMA base station ID (BSID).
+	//
+	// This member is required.
+	BaseStationId *int32
+
+	// CDMA network ID (NID).
+	//
+	// This member is required.
+	NetworkId *int32
+
+	// CDMA system ID (SID).
+	//
+	// This member is required.
+	SystemId *int32
+
+	// CDMA base station latitude in degrees.
+	BaseLat *float32
+
+	// CDMA base station longtitude in degrees.
+	BaseLng *float32
+
+	// CDMA local identification (local ID) parameters.
+	CdmaLocalId *CdmaLocalId
+
+	// CDMA network measurement reports.
+	CdmaNmr []CdmaNmrObj
+
+	// Transmit power level of the pilot signal, measured in dBm (decibel-milliwatts).
+	PilotPower *int32
+
+	// CDMA registration zone (RZ).
+	RegistrationZone *int32
+
+	noSmithyDocumentSerde
+}
+
+// The cell towers that were used to perform the measurements.
+type CellTowers struct {
+
+	// CDMA object information.
+	Cdma []CdmaObj
+
+	// GSM object information.
+	Gsm []GsmObj
+
+	// LTE object information.
+	Lte []LteObj
+
+	// TD-SCDMA object information.
+	Tdscdma []TdscdmaObj
+
+	// WCDMA object information.
+	Wcdma []WcdmaObj
 
 	noSmithyDocumentSerde
 }
@@ -232,6 +352,9 @@ type EventNotificationItemConfigurations struct {
 // List of FPort assigned for different LoRaWAN application packages to use
 type FPorts struct {
 
+	// Optional LoRaWAN application information, which can be used for geolocation.
+	Applications []ApplicationConfig
+
 	// The Fport value.
 	ClockSync *int32
 
@@ -278,6 +401,147 @@ type GatewayListItem struct {
 	//
 	// This member is required.
 	GatewayId *string
+
+	noSmithyDocumentSerde
+}
+
+// Global identity information.
+type GlobalIdentity struct {
+
+	// GERAN (GSM EDGE Radio Access Network) cell global identifier.
+	//
+	// This member is required.
+	GeranCid *int32
+
+	// Location area code of the global identity.
+	//
+	// This member is required.
+	Lac *int32
+
+	noSmithyDocumentSerde
+}
+
+// Global navigation satellite system (GNSS) object used for positioning.
+type Gnss struct {
+
+	// Payload that contains the GNSS scan result, or NAV message, in hexadecimal
+	// notation.
+	//
+	// This member is required.
+	Payload *string
+
+	// Optional assistance altitude, which is the altitude of the device at capture
+	// time, specified in meters above the WGS84 reference ellipsoid.
+	AssistAltitude *float32
+
+	// Optional assistance position information, specified using latitude and longitude
+	// values in degrees. The co-ordinates are inside the WGS84 reference frame.
+	AssistPosition []float32
+
+	// Optional parameter that gives an estimate of the time when the GNSS scan
+	// information is taken, in seconds GPS time (GPST). If capture time is not
+	// specified, the local server time is used.
+	CaptureTime *float32
+
+	// Optional value that gives the capture time estimate accuracy, in seconds. If
+	// capture time accuracy is not specified, default value of 300 is used.
+	CaptureTimeAccuracy *float32
+
+	// Optional parameter that forces 2D solve, which modifies the positioning
+	// algorithm to a 2D solution problem. When this parameter is specified, the
+	// assistance altitude should have an accuracy of at least 10 meters.
+	Use2DSolver bool
+
+	noSmithyDocumentSerde
+}
+
+// GSM local ID information, which corresponds to the local identification
+// parameters of a GSM cell.
+type GsmLocalId struct {
+
+	// GSM broadcast control channel.
+	//
+	// This member is required.
+	Bcch *int32
+
+	// GSM base station identity code (BSIC).
+	//
+	// This member is required.
+	Bsic *int32
+
+	noSmithyDocumentSerde
+}
+
+// GSM object for network measurement reports.
+type GsmNmrObj struct {
+
+	// GSM broadcast control channel.
+	//
+	// This member is required.
+	Bcch *int32
+
+	// GSM base station identity code (BSIC).
+	//
+	// This member is required.
+	Bsic *int32
+
+	// Global identity information of the GSM object.
+	GlobalIdentity *GlobalIdentity
+
+	// Rx level, which is the received signal power, measured in dBm
+	// (decibel-milliwatts).
+	RxLevel *int32
+
+	noSmithyDocumentSerde
+}
+
+// GSM object.
+type GsmObj struct {
+
+	// GERAN (GSM EDGE Radio Access Network) Cell Global Identifier.
+	//
+	// This member is required.
+	GeranCid *int32
+
+	// Location area code.
+	//
+	// This member is required.
+	Lac *int32
+
+	// Mobile Country Code.
+	//
+	// This member is required.
+	Mcc *int32
+
+	// Mobile Network Code.
+	//
+	// This member is required.
+	Mnc *int32
+
+	// GSM local identification (local ID) information.
+	GsmLocalId *GsmLocalId
+
+	// GSM object for network measurement reports.
+	GsmNmr []GsmNmrObj
+
+	// Timing advance value, which corresponds to the length of time a signal takes to
+	// reach the base station from a mobile phone.
+	GsmTimingAdvance *int32
+
+	// Rx level, which is the received signal power, measured in dBm
+	// (decibel-milliwatts).
+	RxLevel *int32
+
+	noSmithyDocumentSerde
+}
+
+// IP address used for resolving device location.
+type Ip struct {
+
+	// IP address information.
+	//
+	// This member is required.
+	IpAddress *string
 
 	noSmithyDocumentSerde
 }
@@ -765,6 +1029,98 @@ type LoRaWANUpdateGatewayTaskEntry struct {
 	noSmithyDocumentSerde
 }
 
+// LTE local identification (local ID) information.
+type LteLocalId struct {
+
+	// Evolved universal terrestrial radio access (E-UTRA) absolute radio frequency
+	// channel number (FCN).
+	//
+	// This member is required.
+	Earfcn *int32
+
+	// Physical cell ID.
+	//
+	// This member is required.
+	Pci *int32
+
+	noSmithyDocumentSerde
+}
+
+// LTE object for network measurement reports.
+type LteNmrObj struct {
+
+	// E-UTRA (Evolved universal terrestrial Radio Access) absolute radio frequency
+	// channel Number (EARFCN).
+	//
+	// This member is required.
+	Earfcn *int32
+
+	// E-UTRAN (Evolved Universal Terrestrial Radio Access Network) cell global
+	// identifier (EUTRANCID).
+	//
+	// This member is required.
+	EutranCid *int32
+
+	// Physical cell ID.
+	//
+	// This member is required.
+	Pci *int32
+
+	// Signal power of the reference signal received, measured in dBm
+	// (decibel-milliwatts).
+	Rsrp *int32
+
+	// Signal quality of the reference Signal received, measured in decibels (dB).
+	Rsrq *float32
+
+	noSmithyDocumentSerde
+}
+
+// LTE object.
+type LteObj struct {
+
+	// E-UTRAN (Evolved Universal Terrestrial Radio Access Network) Cell Global
+	// Identifier.
+	//
+	// This member is required.
+	EutranCid *int32
+
+	// Mobile Country Code.
+	//
+	// This member is required.
+	Mcc *int32
+
+	// Mobile Network Code.
+	//
+	// This member is required.
+	Mnc *int32
+
+	// LTE local identification (local ID) information.
+	LteLocalId *LteLocalId
+
+	// LTE object for network measurement reports.
+	LteNmr []LteNmrObj
+
+	// LTE timing advance.
+	LteTimingAdvance *int32
+
+	// Parameter that determines whether the LTE object is capable of supporting NR
+	// (new radio).
+	NrCapable bool
+
+	// Signal power of the reference signal received, measured in dBm
+	// (decibel-milliwatts).
+	Rsrp *int32
+
+	// Signal quality of the reference Signal received, measured in decibels (dB).
+	Rsrq *float32
+
+	// LTE tracking area code.
+	Tac *int32
+
+	noSmithyDocumentSerde
+}
+
 // Message delivery status event configuration object for enabling and disabling
 // relevant topics.
 type MessageDeliveryStatusEventConfiguration struct {
@@ -773,7 +1129,7 @@ type MessageDeliveryStatusEventConfiguration struct {
 	// object for Sidewalk-related event topics.
 	Sidewalk *SidewalkEventNotificationConfigurations
 
-	// Denotes whether the wireless device ID device registration state event topic is
+	// Denotes whether the wireless device ID message delivery status event topic is
 	// enabled or disabled.
 	WirelessDeviceIdEventTopic EventNotificationTopicStatus
 
@@ -1151,7 +1507,7 @@ type SidewalkResourceTypeEventConfiguration struct {
 // Information about a Sidewalk router.
 type SidewalkSendDataToDevice struct {
 
-	// The duration of time in seconds for which you want to retry sending the ACK.
+	// The duration of time in seconds to retry sending the ACK.
 	AckModeRetryDurationSecs *int32
 
 	// Sidewalk device message type. Default value is CUSTOM_COMMAND_ID_NOTIFY.
@@ -1184,6 +1540,91 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// TD-SCDMA local identification (local Id) information.
+type TdscdmaLocalId struct {
+
+	// Cell parameters for TD-SCDMA.
+	//
+	// This member is required.
+	CellParams *int32
+
+	// TD-SCDMA UTRA (Universal Terrestrial Radio Access Network) absolute RF channel
+	// number (UARFCN).
+	//
+	// This member is required.
+	Uarfcn *int32
+
+	noSmithyDocumentSerde
+}
+
+// TD-SCDMA object for network measurement reports.
+type TdscdmaNmrObj struct {
+
+	// Cell parameters for TD-SCDMA network measurement reports object.
+	//
+	// This member is required.
+	CellParams *int32
+
+	// TD-SCDMA UTRA (Universal Terrestrial Radio Access Network) absolute RF channel
+	// number.
+	//
+	// This member is required.
+	Uarfcn *int32
+
+	// Path loss, or path attenuation, is the reduction in power density of an
+	// electromagnetic wave as it propagates through space.
+	PathLoss *int32
+
+	// Code power of the received signal, measured in decibel-milliwatts (dBm).
+	Rscp *int32
+
+	// UTRAN (UMTS Terrestrial Radio Access Network) cell global identifier.
+	UtranCid *int32
+
+	noSmithyDocumentSerde
+}
+
+// TD-SCDMA object.
+type TdscdmaObj struct {
+
+	// Mobile Country Code.
+	//
+	// This member is required.
+	Mcc *int32
+
+	// Mobile Network Code.
+	//
+	// This member is required.
+	Mnc *int32
+
+	// UTRAN (UMTS Terrestrial Radio Access Network) Cell Global Identifier.
+	//
+	// This member is required.
+	UtranCid *int32
+
+	// Location Area Code.
+	Lac *int32
+
+	// Path loss, or path attenuation, is the reduction in power density of an
+	// electromagnetic wave as it propagates through space.
+	PathLoss *int32
+
+	// Signal power of the received signal (Received Signal Code Power), measured in
+	// decibel-milliwatts (dBm).
+	Rscp *int32
+
+	// TD-SCDMA local identification (local ID) information.
+	TdscdmaLocalId *TdscdmaLocalId
+
+	// TD-SCDMA object for network measurement reports.
+	TdscdmaNmr []TdscdmaNmrObj
+
+	// TD-SCDMA Timing advance.
+	TdscdmaTimingAdvance *int32
 
 	noSmithyDocumentSerde
 }
@@ -1225,6 +1666,10 @@ type UpdateAbpV1_1 struct {
 // Object for updating the FPorts information.
 type UpdateFPorts struct {
 
+	// LoRaWAN application, which can be used for geolocation by activating
+	// positioning.
+	Applications []ApplicationConfig
+
 	// Positioning FPorts for the ClockSync, Stream, and GNSS functions.
 	Positioning *Positioning
 
@@ -1257,6 +1702,103 @@ type UpdateWirelessGatewayTaskEntry struct {
 
 	// The properties that relate to the LoRaWAN wireless gateway.
 	LoRaWAN *LoRaWANUpdateGatewayTaskEntry
+
+	noSmithyDocumentSerde
+}
+
+// WCDMA local identification (local ID) information.
+type WcdmaLocalId struct {
+
+	// Primary Scrambling Code.
+	//
+	// This member is required.
+	Psc *int32
+
+	// WCDMA UTRA Absolute RF Channel Number downlink.
+	//
+	// This member is required.
+	Uarfcndl *int32
+
+	noSmithyDocumentSerde
+}
+
+// Network Measurement Reports.
+type WcdmaNmrObj struct {
+
+	// Primary Scrambling Code.
+	//
+	// This member is required.
+	Psc *int32
+
+	// WCDMA UTRA Absolute RF Channel Number downlink.
+	//
+	// This member is required.
+	Uarfcndl *int32
+
+	// UTRAN (UMTS Terrestrial Radio Access Network) Cell Global Identifier.
+	//
+	// This member is required.
+	UtranCid *int32
+
+	// Path loss, or path attenuation, is the reduction in power density of an
+	// electromagnetic wave as it propagates through space.
+	PathLoss *int32
+
+	// Received Signal Code Power (signal power) (dBm)
+	Rscp *int32
+
+	noSmithyDocumentSerde
+}
+
+// WCDMA.
+type WcdmaObj struct {
+
+	// Mobile Country Code.
+	//
+	// This member is required.
+	Mcc *int32
+
+	// Mobile Network Code.
+	//
+	// This member is required.
+	Mnc *int32
+
+	// UTRAN (UMTS Terrestrial Radio Access Network) Cell Global Identifier.
+	//
+	// This member is required.
+	UtranCid *int32
+
+	// Location Area Code.
+	Lac *int32
+
+	// Path loss, or path attenuation, is the reduction in power density of an
+	// electromagnetic wave as it propagates through space.
+	PathLoss *int32
+
+	// Received Signal Code Power (signal power) (dBm).
+	Rscp *int32
+
+	// WCDMA local ID information.
+	WcdmaLocalId *WcdmaLocalId
+
+	// WCDMA object for network measurement reports.
+	WcdmaNmr []WcdmaNmrObj
+
+	noSmithyDocumentSerde
+}
+
+// Wi-Fi access point.
+type WiFiAccessPoint struct {
+
+	// Wi-Fi MAC Address.
+	//
+	// This member is required.
+	MacAddress *string
+
+	// Recived signal strength of the WLAN measurement data.
+	//
+	// This member is required.
+	Rss *int32
 
 	noSmithyDocumentSerde
 }

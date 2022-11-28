@@ -85,7 +85,7 @@ type CreateFaqInput struct {
 
 type CreateFaqOutput struct {
 
-	// The unique identifier of the FAQ.
+	// The identifier of the FAQ.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

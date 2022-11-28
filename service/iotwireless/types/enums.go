@@ -2,6 +2,22 @@
 
 package types
 
+type ApplicationConfigType string
+
+// Enum values for ApplicationConfigType
+const (
+	ApplicationConfigTypeSemtechGeoLocation ApplicationConfigType = "SemtechGeolocation"
+)
+
+// Values returns all known values for ApplicationConfigType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationConfigType) Values() []ApplicationConfigType {
+	return []ApplicationConfigType{
+		"SemtechGeolocation",
+	}
+}
+
 type BatteryLevel string
 
 // Enum values for BatteryLevel
@@ -370,6 +386,24 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PositionConfigurationStatus) Values() []PositionConfigurationStatus {
 	return []PositionConfigurationStatus{
+		"Enabled",
+		"Disabled",
+	}
+}
+
+type PositioningConfigStatus string
+
+// Enum values for PositioningConfigStatus
+const (
+	PositioningConfigStatusEnabled  PositioningConfigStatus = "Enabled"
+	PositioningConfigStatusDisabled PositioningConfigStatus = "Disabled"
+)
+
+// Values returns all known values for PositioningConfigStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PositioningConfigStatus) Values() []PositioningConfigStatus {
+	return []PositioningConfigStatus{
 		"Enabled",
 		"Disabled",
 	}

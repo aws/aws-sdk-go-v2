@@ -85,6 +85,51 @@ func (e *BackupPolicyNotFoundFault) ErrorMessage() string {
 func (e *BackupPolicyNotFoundFault) ErrorCode() string             { return "BackupPolicyNotFoundFault" }
 func (e *BackupPolicyNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A blue/green deployment with the specified name already exists.
+type BlueGreenDeploymentAlreadyExistsFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *BlueGreenDeploymentAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BlueGreenDeploymentAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BlueGreenDeploymentAlreadyExistsFault) ErrorCode() string {
+	return "BlueGreenDeploymentAlreadyExistsFault"
+}
+func (e *BlueGreenDeploymentAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// BlueGreenDeploymentIdentifier doesn't refer to an existing blue/green
+// deployment.
+type BlueGreenDeploymentNotFoundFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *BlueGreenDeploymentNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BlueGreenDeploymentNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BlueGreenDeploymentNotFoundFault) ErrorCode() string {
+	return "BlueGreenDeploymentNotFoundFault"
+}
+func (e *BlueGreenDeploymentNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // CertificateIdentifier doesn't refer to an existing certificate.
 type CertificateNotFoundFault struct {
 	Message *string
@@ -1446,6 +1491,30 @@ func (e *InsufficientStorageClusterCapacityFault) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
+// The blue/green deployment can't be switched over or deleted because there is an
+// invalid configuration in the green environment.
+type InvalidBlueGreenDeploymentStateFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidBlueGreenDeploymentStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidBlueGreenDeploymentStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidBlueGreenDeploymentStateFault) ErrorCode() string {
+	return "InvalidBlueGreenDeploymentStateFault"
+}
+func (e *InvalidBlueGreenDeploymentStateFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // You can't delete the CEV.
 type InvalidCustomDBEngineVersionStateFault struct {
 	Message *string
@@ -2299,6 +2368,46 @@ func (e *SNSTopicArnNotFoundFault) ErrorMessage() string {
 }
 func (e *SNSTopicArnNotFoundFault) ErrorCode() string             { return "SNSTopicArnNotFound" }
 func (e *SNSTopicArnNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The source DB cluster isn't supported for a blue/green deployment.
+type SourceClusterNotSupportedFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SourceClusterNotSupportedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SourceClusterNotSupportedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SourceClusterNotSupportedFault) ErrorCode() string             { return "SourceClusterNotSupportedFault" }
+func (e *SourceClusterNotSupportedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The source DB instance isn't supported for a blue/green deployment.
+type SourceDatabaseNotSupportedFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SourceDatabaseNotSupportedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SourceDatabaseNotSupportedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SourceDatabaseNotSupportedFault) ErrorCode() string {
+	return "SourceDatabaseNotSupportedFault"
+}
+func (e *SourceDatabaseNotSupportedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested source could not be found.
 type SourceNotFoundFault struct {

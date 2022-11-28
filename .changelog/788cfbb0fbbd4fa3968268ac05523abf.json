@@ -1,0 +1,8 @@
+{
+    "id": "788cfbb0-fbbd-4fa3-9682-68ac05523abf",
+    "type": "feature",
+    "description": "This release adds support for ECS Service Connect, a new capability that simplifies writing and operating resilient distributed applications. This release updates the TaskDefinition, Cluster, Service mutation APIs with Service connect constructs and also adds a new ListServicesByNamespace API.",
+    "modules": [
+        "service/ecs"
+    ]
+}

@@ -2,6 +2,38 @@
 
 package types
 
+type CallAnalyticsLanguageCode string
+
+// Enum values for CallAnalyticsLanguageCode
+const (
+	CallAnalyticsLanguageCodeEnUs CallAnalyticsLanguageCode = "en-US"
+	CallAnalyticsLanguageCodeEnGb CallAnalyticsLanguageCode = "en-GB"
+	CallAnalyticsLanguageCodeEsUs CallAnalyticsLanguageCode = "es-US"
+	CallAnalyticsLanguageCodeFrCa CallAnalyticsLanguageCode = "fr-CA"
+	CallAnalyticsLanguageCodeFrFr CallAnalyticsLanguageCode = "fr-FR"
+	CallAnalyticsLanguageCodeEnAu CallAnalyticsLanguageCode = "en-AU"
+	CallAnalyticsLanguageCodeItIt CallAnalyticsLanguageCode = "it-IT"
+	CallAnalyticsLanguageCodeDeDe CallAnalyticsLanguageCode = "de-DE"
+	CallAnalyticsLanguageCodePtBr CallAnalyticsLanguageCode = "pt-BR"
+)
+
+// Values returns all known values for CallAnalyticsLanguageCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CallAnalyticsLanguageCode) Values() []CallAnalyticsLanguageCode {
+	return []CallAnalyticsLanguageCode{
+		"en-US",
+		"en-GB",
+		"es-US",
+		"fr-CA",
+		"fr-FR",
+		"en-AU",
+		"it-IT",
+		"de-DE",
+		"pt-BR",
+	}
+}
+
 type ContentIdentificationType string
 
 // Enum values for ContentIdentificationType
@@ -15,6 +47,24 @@ const (
 func (ContentIdentificationType) Values() []ContentIdentificationType {
 	return []ContentIdentificationType{
 		"PII",
+	}
+}
+
+type ContentRedactionOutput string
+
+// Enum values for ContentRedactionOutput
+const (
+	ContentRedactionOutputRedacted              ContentRedactionOutput = "redacted"
+	ContentRedactionOutputRedactedAndUnredacted ContentRedactionOutput = "redacted_and_unredacted"
+)
+
+// Values returns all known values for ContentRedactionOutput. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ContentRedactionOutput) Values() []ContentRedactionOutput {
+	return []ContentRedactionOutput{
+		"redacted",
+		"redacted_and_unredacted",
 	}
 }
 
@@ -148,6 +198,46 @@ func (PartialResultsStability) Values() []PartialResultsStability {
 		"high",
 		"medium",
 		"low",
+	}
+}
+
+type ParticipantRole string
+
+// Enum values for ParticipantRole
+const (
+	ParticipantRoleAgent    ParticipantRole = "AGENT"
+	ParticipantRoleCustomer ParticipantRole = "CUSTOMER"
+)
+
+// Values returns all known values for ParticipantRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantRole) Values() []ParticipantRole {
+	return []ParticipantRole{
+		"AGENT",
+		"CUSTOMER",
+	}
+}
+
+type Sentiment string
+
+// Enum values for Sentiment
+const (
+	SentimentPositive Sentiment = "POSITIVE"
+	SentimentNegative Sentiment = "NEGATIVE"
+	SentimentMixed    Sentiment = "MIXED"
+	SentimentNeutral  Sentiment = "NEUTRAL"
+)
+
+// Values returns all known values for Sentiment. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Sentiment) Values() []Sentiment {
+	return []Sentiment{
+		"POSITIVE",
+		"NEGATIVE",
+		"MIXED",
+		"NEUTRAL",
 	}
 }
 

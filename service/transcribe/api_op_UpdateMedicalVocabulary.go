@@ -14,7 +14,7 @@ import (
 
 // Updates an existing custom medical vocabulary with new values. This operation
 // overwrites all existing information with your new values; you cannot append new
-// terms onto an existing vocabulary.
+// terms onto an existing custom vocabulary.
 func (c *Client) UpdateMedicalVocabulary(ctx context.Context, params *UpdateMedicalVocabularyInput, optFns ...func(*Options)) (*UpdateMedicalVocabularyOutput, error) {
 	if params == nil {
 		params = &UpdateMedicalVocabularyInput{}
@@ -47,8 +47,8 @@ type UpdateMedicalVocabularyInput struct {
 	// This member is required.
 	VocabularyFileUri *string
 
-	// The name of the custom medical vocabulary you want to update. Vocabulary names
-	// are case sensitive.
+	// The name of the custom medical vocabulary you want to update. Custom medical
+	// vocabulary names are case sensitive.
 	//
 	// This member is required.
 	VocabularyName *string
@@ -58,8 +58,8 @@ type UpdateMedicalVocabularyInput struct {
 
 type UpdateMedicalVocabularyOutput struct {
 
-	// The language code you selected for your medical vocabulary. US English (en-US)
-	// is the only language supported with Amazon Transcribe Medical.
+	// The language code you selected for your custom medical vocabulary. US English
+	// (en-US) is the only language supported with Amazon Transcribe Medical.
 	LanguageCode types.LanguageCode
 
 	// The date and time the specified custom medical vocabulary was last updated.
@@ -71,7 +71,7 @@ type UpdateMedicalVocabularyOutput struct {
 	VocabularyName *string
 
 	// The processing state of your custom medical vocabulary. If the state is READY,
-	// you can use the vocabulary in a StartMedicalTranscriptionJob request.
+	// you can use the custom vocabulary in a StartMedicalTranscriptionJob request.
 	VocabularyState types.VocabularyState
 
 	// Metadata pertaining to the operation's result.

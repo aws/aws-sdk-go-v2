@@ -75,7 +75,7 @@ type StartRestoreJobInput struct {
 	RecoveryPointArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the
-	// target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
+	// target resource; for example: arn:aws:iam::123456789012:role/S3Access.
 	IamRoleArn *string
 
 	// A customer-chosen string that you can use to distinguish between otherwise

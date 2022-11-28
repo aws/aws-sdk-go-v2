@@ -34,8 +34,9 @@ func (c *Client) ListMedicalVocabularies(ctx context.Context, params *ListMedica
 type ListMedicalVocabulariesInput struct {
 
 	// The maximum number of custom medical vocabularies to return in each page of
-	// results. If there are fewer results than the value you specify, only the actual
-	// results are returned. If you don't specify a value, a default of 5 is used.
+	// results. If there are fewer results than the value that you specify, only the
+	// actual results are returned. If you don't specify a value, a default of 5 is
+	// used.
 	MaxResults *int32
 
 	// Returns only the custom medical vocabularies that contain the specified string.
@@ -49,9 +50,9 @@ type ListMedicalVocabulariesInput struct {
 	// view all your results.
 	NextToken *string
 
-	// Returns only custom medical vocabularies with the specified state. Vocabularies
-	// are ordered by creation date, with the newest vocabulary first. If you don't
-	// include StateEquals, all custom medical vocabularies are returned.
+	// Returns only custom medical vocabularies with the specified state. Custom
+	// vocabularies are ordered by creation date, with the newest vocabulary first. If
+	// you don't include StateEquals, all custom medical vocabularies are returned.
 	StateEquals types.VocabularyState
 
 	noSmithyDocumentSerde
@@ -67,8 +68,8 @@ type ListMedicalVocabulariesOutput struct {
 	NextToken *string
 
 	// Lists all custom medical vocabularies that have the status specified in your
-	// request. Vocabularies are ordered by creation date, with the newest vocabulary
-	// first.
+	// request. Custom vocabularies are ordered by creation date, with the newest
+	// vocabulary first.
 	Status types.VocabularyState
 
 	// Provides information about the custom medical vocabularies that match the
@@ -153,8 +154,9 @@ var _ ListMedicalVocabulariesAPIClient = (*Client)(nil)
 // ListMedicalVocabularies
 type ListMedicalVocabulariesPaginatorOptions struct {
 	// The maximum number of custom medical vocabularies to return in each page of
-	// results. If there are fewer results than the value you specify, only the actual
-	// results are returned. If you don't specify a value, a default of 5 is used.
+	// results. If there are fewer results than the value that you specify, only the
+	// actual results are returned. If you don't specify a value, a default of 5 is
+	// used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

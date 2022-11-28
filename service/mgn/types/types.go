@@ -6,6 +6,59 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+type Application struct {
+
+	// Application aggregated status.
+	ApplicationAggregatedStatus *ApplicationAggregatedStatus
+
+	// Application ID.
+	ApplicationID *string
+
+	// Application ARN.
+	Arn *string
+
+	// Application creation dateTime.
+	CreationDateTime *string
+
+	// Application description.
+	Description *string
+
+	// Application archival status.
+	IsArchived *bool
+
+	// Application last modified dateTime.
+	LastModifiedDateTime *string
+
+	// Application name.
+	Name *string
+
+	// Application tags.
+	Tags map[string]string
+
+	// Application wave ID.
+	WaveID *string
+
+	noSmithyDocumentSerde
+}
+
+// Application aggregated status.
+type ApplicationAggregatedStatus struct {
+
+	// Application aggregated status health status.
+	HealthStatus ApplicationHealthStatus
+
+	// Application aggregated status last update dateTime.
+	LastUpdateDateTime *string
+
+	// Application aggregated status progress status.
+	ProgressStatus ApplicationProgressStatus
+
+	// Application aggregated status total source servers amount.
+	TotalSourceServers int64
+
+	noSmithyDocumentSerde
+}
+
 // The request to change the source server migration lifecycle state.
 type ChangeServerLifeCycleStateSourceServerLifecycle struct {
 
@@ -133,6 +186,9 @@ type DescribeJobsRequestFilters struct {
 
 // Request to filter Source Servers list.
 type DescribeSourceServersRequestFilters struct {
+
+	// Request to filter Source Servers list by application IDs.
+	ApplicationIDs []string
 
 	// Request to filter Source Servers list by archived.
 	IsArchived *bool
@@ -268,22 +324,23 @@ type JobLogEventData struct {
 	noSmithyDocumentSerde
 }
 
-// Job type.
+// Launch Status of the Job Post Launch Actions.
 type JobPostLaunchActionsLaunchStatus struct {
 
-	// Job type.
+	// AWS Systems Manager Document's execution ID of the of the Job Post Launch
+	// Actions.
 	ExecutionID *string
 
-	// Job type.
+	// AWS Systems Manager Document's execution status.
 	ExecutionStatus PostLaunchActionExecutionStatus
 
-	// Job type.
+	// AWS Systems Manager Document's failure reason.
 	FailureReason *string
 
-	// Job type.
+	// AWS Systems Manager's Document of the of the Job Post Launch Actions.
 	SsmDocument *SsmDocument
 
-	// Job type.
+	// AWS Systems Manager Document type.
 	SsmDocumentType SsmDocumentType
 
 	noSmithyDocumentSerde
@@ -291,19 +348,58 @@ type JobPostLaunchActionsLaunchStatus struct {
 
 type LaunchConfigurationTemplate struct {
 
-	// Copy Private IP during Launch Configuration.
+	// ID of the Launch Configuration Template.
 	//
 	// This member is required.
 	LaunchConfigurationTemplateID *string
 
-	// Copy Private IP during Launch Configuration.
+	// ARN of the Launch Configuration Template.
 	Arn *string
 
-	// Copy Private IP during Launch Configuration.
+	// Associate public Ip address.
+	AssociatePublicIpAddress *bool
+
+	// Launch configuration template boot mode.
+	BootMode BootMode
+
+	// Copy private Ip.
+	CopyPrivateIp *bool
+
+	// Copy tags.
+	CopyTags *bool
+
+	// EC2 launch template ID.
+	Ec2LaunchTemplateID *string
+
+	// Enable map auto tagging.
+	EnableMapAutoTagging *bool
+
+	// Large volume config.
+	LargeVolumeConf *LaunchTemplateDiskConf
+
+	// Launch disposition.
+	LaunchDisposition LaunchDisposition
+
+	// Configure Licensing.
+	Licensing *Licensing
+
+	// Launch configuration template map auto tagging MPE ID.
+	MapAutoTaggingMpeID *string
+
+	// Post Launch Actions of the Launch Configuration Template.
 	PostLaunchActions *PostLaunchActions
 
-	// Copy Private IP during Launch Configuration.
+	// Small volume config.
+	SmallVolumeConf *LaunchTemplateDiskConf
+
+	// Small volume maximum size.
+	SmallVolumeMaxSize int64
+
+	// Tags of the Launch Configuration Template.
 	Tags map[string]string
+
+	// Target instance type right-sizing method.
+	TargetInstanceTypeRightSizingMethod TargetInstanceTypeRightSizingMethod
 
 	noSmithyDocumentSerde
 }
@@ -319,6 +415,21 @@ type LaunchedInstance struct {
 
 	// Launched instance Job ID.
 	JobID *string
+
+	noSmithyDocumentSerde
+}
+
+// Launch template disk configuration.
+type LaunchTemplateDiskConf struct {
+
+	// Launch template disk iops configuration.
+	Iops int64
+
+	// Launch template disk throughput configuration.
+	Throughput int64
+
+	// Launch template disk volume type configuration.
+	VolumeType VolumeType
 
 	noSmithyDocumentSerde
 }
@@ -449,6 +560,33 @@ type LifeCycleLastTestReverted struct {
 	noSmithyDocumentSerde
 }
 
+// Applications list filters.
+type ListApplicationsRequestFilters struct {
+
+	// Filter applications list by application ID.
+	ApplicationIDs []string
+
+	// Filter applications list by archival status.
+	IsArchived *bool
+
+	// Filter applications list by wave ID.
+	WaveIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// Waves list filters.
+type ListWavesRequestFilters struct {
+
+	// Filter waves list by archival status.
+	IsArchived *bool
+
+	// Filter waves list by wave ID.
+	WaveIDs []string
+
+	noSmithyDocumentSerde
+}
+
 // Network interface.
 type NetworkInterface struct {
 
@@ -484,43 +622,44 @@ type ParticipatingServer struct {
 	// Participating server launch status.
 	LaunchStatus LaunchStatus
 
-	// Participating server Source Server ID.
+	// Participating server's launched ec2 instance ID.
 	LaunchedEc2InstanceID *string
 
-	// Participating server Source Server ID.
+	// Participating server's Post Launch Actions Status.
 	PostLaunchActionsStatus *PostLaunchActionsStatus
 
 	noSmithyDocumentSerde
 }
 
-// Server participating in Job.
+// Post Launch Actions to executed on the Test or Cutover instance.
 type PostLaunchActions struct {
 
-	// Server participating in Job.
+	// AWS Systems Manager Command's CloudWatch log group name.
 	CloudWatchLogGroupName *string
 
-	// Server participating in Job.
+	// Deployment type in which AWS Systems Manager Documents will be executed.
 	Deployment PostLaunchActionsDeploymentType
 
-	// Server participating in Job.
+	// AWS Systems Manager Command's logs S3 log bucket.
 	S3LogBucket *string
 
-	// Server participating in Job.
+	// AWS Systems Manager Command's logs S3 output key prefix.
 	S3OutputKeyPrefix *string
 
-	// Server participating in Job.
+	// AWS Systems Manager Documents.
 	SsmDocuments []SsmDocument
 
 	noSmithyDocumentSerde
 }
 
-// Server participating in Job.
+// Status of the Post Launch Actions running on the Test or Cutover instance.
 type PostLaunchActionsStatus struct {
 
-	// Server participating in Job.
+	// List of Post Launch Action status.
 	PostLaunchActionsLaunchStatusList []JobPostLaunchActionsLaunchStatus
 
-	// Server participating in Job.
+	// Time where the AWS Systems Manager was detected as running on the Test or
+	// Cutover instance.
 	SsmAgentDiscoveryDatetime *string
 
 	noSmithyDocumentSerde
@@ -632,6 +771,9 @@ type SourceProperties struct {
 
 type SourceServer struct {
 
+	// Source server application ID.
+	ApplicationID *string
+
 	// Source server ARN.
 	Arn *string
 
@@ -665,43 +807,128 @@ type SourceServer struct {
 	noSmithyDocumentSerde
 }
 
-// Source server replication type.
-type SsmDocument struct {
+type SourceServerActionDocument struct {
 
-	// Source server replication type.
-	//
-	// This member is required.
+	// Source server post migration custom action ID.
+	ActionID *string
+
+	// Source server post migration custom action name.
 	ActionName *string
 
-	// Source server replication type.
-	//
-	// This member is required.
-	SsmDocumentName *string
+	// Source server post migration custom action active status.
+	Active *bool
 
-	// Source server replication type.
+	// Source server post migration custom action document identifier.
+	DocumentIdentifier *string
+
+	// Source server post migration custom action document version.
+	DocumentVersion *string
+
+	// Source server post migration custom action must succeed for cutover.
 	MustSucceedForCutover *bool
 
-	// Source server replication type.
+	// Source server post migration custom action order.
+	Order int32
+
+	// Source server post migration custom action parameters.
 	Parameters map[string][]SsmParameterStoreParameter
 
-	// Source server replication type.
+	// Source server post migration custom action timeout in seconds.
 	TimeoutSeconds int32
 
 	noSmithyDocumentSerde
 }
 
-// Source server replication type.
+// Source server post migration custom action filters.
+type SourceServerActionsRequestFilters struct {
+
+	// Action IDs to filter source server post migration custom actions by.
+	ActionIDs []string
+
+	noSmithyDocumentSerde
+}
+
+// AWS Systems Manager Document.
+type SsmDocument struct {
+
+	// User-friendly name for the AWS Systems Manager Document.
+	//
+	// This member is required.
+	ActionName *string
+
+	// AWS Systems Manager Document name or full ARN.
+	//
+	// This member is required.
+	SsmDocumentName *string
+
+	// If true, Cutover will not be enabled if the document has failed.
+	MustSucceedForCutover *bool
+
+	// AWS Systems Manager Document parameters.
+	Parameters map[string][]SsmParameterStoreParameter
+
+	// AWS Systems Manager Document timeout seconds.
+	TimeoutSeconds int32
+
+	noSmithyDocumentSerde
+}
+
+// AWS Systems Manager Parameter Store parameter.
 type SsmParameterStoreParameter struct {
 
-	// Source server replication type.
+	// AWS Systems Manager Parameter Store parameter name.
 	//
 	// This member is required.
 	ParameterName *string
 
-	// Source server replication type.
+	// AWS Systems Manager Parameter Store parameter type.
 	//
 	// This member is required.
 	ParameterType SsmParameterStoreParameterType
+
+	noSmithyDocumentSerde
+}
+
+type TemplateActionDocument struct {
+
+	// Template post migration custom action ID.
+	ActionID *string
+
+	// Template post migration custom action name.
+	ActionName *string
+
+	// Template post migration custom action active status.
+	Active *bool
+
+	// Template post migration custom action document identifier.
+	DocumentIdentifier *string
+
+	// Template post migration custom action document version.
+	DocumentVersion *string
+
+	// Template post migration custom action must succeed for cutover.
+	MustSucceedForCutover *bool
+
+	// Operating system eligible for this template post migration custom action.
+	OperatingSystem *string
+
+	// Template post migration custom action order.
+	Order int32
+
+	// Template post migration custom action parameters.
+	Parameters map[string][]SsmParameterStoreParameter
+
+	// Template post migration custom action timeout in seconds.
+	TimeoutSeconds int32
+
+	noSmithyDocumentSerde
+}
+
+// Template post migration custom action filters.
+type TemplateActionsRequestFilters struct {
+
+	// Action IDs to filter template post migration custom actions by.
+	ActionIDs []string
 
 	noSmithyDocumentSerde
 }
@@ -744,6 +971,59 @@ type VcenterClient struct {
 
 	// Vcenter UUID of vCenter client.
 	VcenterUUID *string
+
+	noSmithyDocumentSerde
+}
+
+type Wave struct {
+
+	// Wave ARN.
+	Arn *string
+
+	// Wave creation dateTime.
+	CreationDateTime *string
+
+	// Wave description.
+	Description *string
+
+	// Wave archival status.
+	IsArchived *bool
+
+	// Wave last modified dateTime.
+	LastModifiedDateTime *string
+
+	// Wave name.
+	Name *string
+
+	// Wave tags.
+	Tags map[string]string
+
+	// Wave aggregated status.
+	WaveAggregatedStatus *WaveAggregatedStatus
+
+	// Wave ID.
+	WaveID *string
+
+	noSmithyDocumentSerde
+}
+
+// Wave aggregated status.
+type WaveAggregatedStatus struct {
+
+	// Wave aggregated status health status.
+	HealthStatus WaveHealthStatus
+
+	// Wave aggregated status last update dateTime.
+	LastUpdateDateTime *string
+
+	// Wave aggregated status progress status.
+	ProgressStatus WaveProgressStatus
+
+	// DateTime marking when the first source server in the wave started replication.
+	ReplicationStartedDateTime *string
+
+	// Wave aggregated status total applications amount.
+	TotalApplications int64
 
 	noSmithyDocumentSerde
 }

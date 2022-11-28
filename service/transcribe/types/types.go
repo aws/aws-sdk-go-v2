@@ -13,12 +13,12 @@ import (
 // criteria in the audio contained between the 10,000 millisecond mark and the
 // 50,000 millisecond mark of your media file. You must use StartTime and EndTime
 // as a set; that is, if you include one, you must include both. You can use also
-// First to search from the start of the audio until the time you specify, or Last
-// to search from the time you specify until the end of the audio. For example,
-// setting First to 50000 only searches for your specified criteria in the audio
-// contained between the start of the media file to the 50,000 millisecond mark.
-// You can use First and Last independently of each other. If you prefer to use
-// percentage instead of milliseconds, see .
+// First to search from the start of the audio until the time that you specify, or
+// Last to search from the time that you specify until the end of the audio. For
+// example, setting First to 50000 only searches for your specified criteria in the
+// audio contained between the start of the media file to the 50,000 millisecond
+// mark. You can use First and Last independently of each other. If you prefer to
+// use percentage instead of milliseconds, see .
 type AbsoluteTimeRange struct {
 
 	// The time, in milliseconds, when Amazon Transcribe stops searching for the
@@ -26,12 +26,14 @@ type AbsoluteTimeRange struct {
 	// must also include StartTime.
 	EndTime *int64
 
-	// The time, in milliseconds, from the start of your media file until the value you
-	// specify in which Amazon Transcribe searches for your specified criteria.
+	// The time, in milliseconds, from the start of your media file until the specified
+	// value. Amazon Transcribe searches for your specified criteria in this time
+	// segment.
 	First *int64
 
-	// The time, in milliseconds, from the value you specify until the end of your
-	// media file in which Amazon Transcribe searches for your specified criteria.
+	// The time, in milliseconds, from the specified value until the end of your media
+	// file. Amazon Transcribe searches for your specified criteria in this time
+	// segment.
 	Last *int64
 
 	// The time, in milliseconds, when Amazon Transcribe starts searching for the
@@ -64,10 +66,7 @@ type CallAnalyticsJob struct {
 	// on why your transcription job failed.
 	CallAnalyticsJobStatus CallAnalyticsJobStatus
 
-	// Allows you to specify which speaker is on which channel in your Call Analytics
-	// job request. For example, if your agent is the first participant to speak, you
-	// would set ChannelId to 0 (to indicate the first channel) and ParticipantRole to
-	// AGENT (to indicate that it's the agent speaking).
+	// Indicates which speaker is on which channel.
 	ChannelDefinitions []ChannelDefinition
 
 	// The date and time the specified Call Analytics job finished processing.
@@ -82,13 +81,7 @@ type CallAnalyticsJob struct {
 	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
-	// Amazon S3 bucket that contains your input files. If the role you specify doesn’t
-	// have the appropriate permissions to access the specified Amazon S3 location,
-	// your request fails. IAM role ARNs have the format
-	// arn:partition:iam::account:role/role-name-with-path. For example:
-	// arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
+	// The Amazon Resource Name (ARN) you included in your request.
 	DataAccessRoleArn *string
 
 	// If CallAnalyticsJobStatus is FAILED, FailureReason contains information about
@@ -106,7 +99,7 @@ type CallAnalyticsJob struct {
 	//
 	// * Invalid sample rate for audio file. The sample rate specified in
 	// MediaSampleRateHertz isn't valid. The sample rate must be between 8,000 and
-	// 48,000 Hertz.
+	// 48,000 hertz.
 	//
 	// * The sample rate provided does not match the detected sample
 	// rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample
@@ -142,19 +135,19 @@ type CallAnalyticsJob struct {
 	// transcription.
 	LanguageCode LanguageCode
 
-	// Describes the Amazon S3 location of the media file you want to use in your
-	// request.
+	// Provides the Amazon S3 location of the media file you used in your Call
+	// Analytics request.
 	Media *Media
 
 	// The format of the input media file.
 	MediaFormat MediaFormat
 
-	// The sample rate, in Hertz, of the audio track in your input media file.
+	// The sample rate, in hertz, of the audio track in your input media file.
 	MediaSampleRateHertz *int32
 
-	// Allows additional optional settings in your request, including content
-	// redaction; allows you to apply custom language models, vocabulary filters, and
-	// custom vocabularies to your Call Analytics job.
+	// Provides information on any additional settings that were included in your
+	// request. Additional settings include content redaction and language
+	// identification settings.
 	Settings *CallAnalyticsJobSettings
 
 	// The date and time the specified Call Analytics job began processing. Timestamps
@@ -171,65 +164,69 @@ type CallAnalyticsJob struct {
 
 // Provides additional optional settings for your request, including content
 // redaction, automatic language identification; allows you to apply custom
-// language models, vocabulary filters, and custom vocabularies.
+// language models, custom vocabulary filters, and custom vocabularies.
 type CallAnalyticsJobSettings struct {
 
-	// Allows you to redact or flag specified personally identifiable information (PII)
-	// in your transcript. If you use ContentRedaction, you must also include the
-	// sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
+	// Makes it possible to redact or flag specified personally identifiable
+	// information (PII) in your transcript. If you use ContentRedaction, you must also
+	// include the sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
 	ContentRedaction *ContentRedaction
 
-	// If using automatic language identification (IdentifyLanguage) in your request
-	// and you want to apply a custom language model, a custom vocabulary, or a custom
-	// vocabulary filter, include LanguageIdSettings with the relevant sub-parameters
-	// (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify
-	// two or more language codes that represent the languages you think may be present
-	// in your media; including more than five is not recommended. Each language code
-	// you include can have an associated custom language model, custom vocabulary, and
-	// custom vocabulary filter. The languages you specify must match the languages of
-	// the specified custom language models, custom vocabularies, and custom vocabulary
-	// filters. To include language options using IdentifyLanguage without including a
-	// custom language model, a custom vocabulary, or a custom vocabulary filter, use
-	// LanguageOptions instead of LanguageIdSettings. Including language options can
-	// improve the accuracy of automatic language identification. If you want to
-	// include a custom language model with your request but do not want to use
+	// If using automatic language identification in your request and you want to apply
+	// a custom language model, a custom vocabulary, or a custom vocabulary filter,
+	// include LanguageIdSettings with the relevant sub-parameters (VocabularyName,
+	// LanguageModelName, and VocabularyFilterName). LanguageIdSettings supports two to
+	// five language codes. Each language code you include can have an associated
+	// custom language model, custom vocabulary, and custom vocabulary filter. The
+	// language codes that you specify must match the languages of the associated
+	// custom language models, custom vocabularies, and custom vocabulary filters. It's
+	// recommended that you include LanguageOptions when using LanguageIdSettings to
+	// ensure that the correct language dialect is identified. For example, if you
+	// specify a custom vocabulary that is in en-US but Amazon Transcribe determines
+	// that the language spoken in your media is en-AU, your custom vocabulary is not
+	// applied to your transcription. If you include LanguageOptions and include en-US
+	// as the only English language dialect, your custom vocabulary is applied to your
+	// transcription. If you want to include a custom language model, custom
+	// vocabulary, or custom vocabulary filter with your request but do not want to use
 	// automatic language identification, use instead the  parameter with the
-	// LanguageModelName sub-parameter. If you want to include a custom vocabulary or a
-	// custom vocabulary filter (or both) with your request but do not want to use
-	// automatic language identification, use instead the  parameter with the
-	// VocabularyName or VocabularyFilterName (or both) sub-parameter.
+	// LanguageModelName, VocabularyName, or VocabularyFilterName sub-parameters. For a
+	// list of languages supported with Call Analytics, refer to Supported languages
+	// and language-specific features
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html).
 	LanguageIdSettings map[string]LanguageIdSettings
 
 	// The name of the custom language model you want to use when processing your Call
-	// Analytics job. Note that language model names are case sensitive. The language
-	// of the specified language model must match the language code you specify in your
-	// transcription request. If the languages don't match, the language model isn't
-	// applied. There are no errors or warnings associated with a language mismatch.
+	// Analytics job. Note that custom language model names are case sensitive. The
+	// language of the specified custom language model must match the language code
+	// that you specify in your transcription request. If the languages don't match,
+	// the custom language model isn't applied. There are no errors or warnings
+	// associated with a language mismatch.
 	LanguageModelName *string
 
 	// You can specify two or more language codes that represent the languages you
-	// think may be present in your media; including more than five is not recommended.
+	// think may be present in your media. Including more than five is not recommended.
 	// If you're unsure what languages are present, do not include this parameter.
 	// Including language options can improve the accuracy of language identification.
 	// For a list of languages supported with Call Analytics, refer to the Supported
 	// languages
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-	// table.
+	// table. To transcribe speech in Modern Standard Arabic (ar-SA), your media file
+	// must be encoded at a sample rate of 16,000 Hz or higher.
 	LanguageOptions []LanguageCode
 
-	// Specify how you want your vocabulary filter applied to your transcript. To
-	// replace words with ***, choose mask. To delete words, choose remove. To flag
+	// Specify how you want your custom vocabulary filter applied to your transcript.
+	// To replace words with ***, choose mask. To delete words, choose remove. To flag
 	// words without changing them, choose tag.
 	VocabularyFilterMethod VocabularyFilterMethod
 
 	// The name of the custom vocabulary filter you want to include in your Call
-	// Analytics transcription request. Vocabulary filter names are case sensitive.
-	// Note that if you include VocabularyFilterName in your request, you must also
-	// include VocabularyFilterMethod.
+	// Analytics transcription request. Custom vocabulary filter names are case
+	// sensitive. Note that if you include VocabularyFilterName in your request, you
+	// must also include VocabularyFilterMethod.
 	VocabularyFilterName *string
 
 	// The name of the custom vocabulary you want to include in your Call Analytics
-	// transcription request. Vocabulary names are case sensitive.
+	// transcription request. Custom vocabulary names are case sensitive.
 	VocabularyName *string
 
 	noSmithyDocumentSerde
@@ -292,6 +289,11 @@ type CategoryProperties struct {
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	CreateTime *time.Time
 
+	// The input type associated with the specified category. POST_CALL refers to a
+	// category that is applied to batch transcriptions; REAL_TIME refers to a category
+	// that is applied to streaming transcriptions.
+	InputType InputType
+
 	// The date and time the specified Call Analytics category was last updated.
 	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
 	// 2022-05-05T12:45:32.691000-07:00 represents 12:45 PM UTC-7 on May 5, 2022.
@@ -304,8 +306,8 @@ type CategoryProperties struct {
 	noSmithyDocumentSerde
 }
 
-// Allows you to specify which speaker is on which channel. For example, if your
-// agent is the first participant to speak, you would set ChannelId to 0 (to
+// Makes it possible to specify which speaker is on which channel. For example, if
+// your agent is the first participant to speak, you would set ChannelId to 0 (to
 // indicate the first channel) and ParticipantRole to AGENT (to indicate that it's
 // the agent speaking).
 type ChannelDefinition struct {
@@ -320,9 +322,9 @@ type ChannelDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// Allows you to redact or flag specified personally identifiable information (PII)
-// in your transcript. If you use ContentRedaction, you must also include the
-// sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
+// Makes it possible to redact or flag specified personally identifiable
+// information (PII) in your transcript. If you use ContentRedaction, you must also
+// include the sub-parameters: PiiEntityTypes, RedactionOutput, and RedactionType.
 type ContentRedaction struct {
 
 	// Specify if you want only a redacted transcript, or if you want a redacted and an
@@ -355,9 +357,9 @@ type ContentRedaction struct {
 type InputDataConfig struct {
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
-	// Amazon S3 bucket that contains your input files. If the role you specify doesn’t
-	// have the appropriate permissions to access the specified Amazon S3 location,
-	// your request fails. IAM role ARNs have the format
+	// Amazon S3 bucket that contains your input files. If the role that you specify
+	// doesn’t have the appropriate permissions to access the specified Amazon S3
+	// location, your request fails. IAM role ARNs have the format
 	// arn:partition:iam::account:role/role-name-with-path. For example:
 	// arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
@@ -394,55 +396,55 @@ type InputDataConfig struct {
 // * A lack of
 // interruptions
 //
-// See Rule criteria
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules)
+// See Rule criteria for batch categories
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch)
 // for usage examples.
 type InterruptionFilter struct {
 
-	// Allows you to specify a time range (in milliseconds) in your audio, during which
-	// you want to search for an interruption. See for more detail.
+	// Makes it possible to specify a time range (in milliseconds) in your audio,
+	// during which you want to search for an interruption. See for more detail.
 	AbsoluteTimeRange *AbsoluteTimeRange
 
 	// Set to TRUE to flag speech that does not contain interruptions. Set to FALSE to
 	// flag speech that contains interruptions.
 	Negate *bool
 
-	// Specify the interrupter you want to flag. Omitting this parameter is equivalent
-	// to specifying both participants.
+	// Specify the interrupter that you want to flag. Omitting this parameter is
+	// equivalent to specifying both participants.
 	ParticipantRole ParticipantRole
 
-	// Allows you to specify a time range (in percentage) in your media file, during
-	// which you want to search for an interruption. See for more detail.
+	// Makes it possible to specify a time range (in percentage) in your media file,
+	// during which you want to search for an interruption. See for more detail.
 	RelativeTimeRange *RelativeTimeRange
 
 	// Specify the duration of the interruptions in milliseconds. For example, you can
-	// flag speech that contains more than 10000 milliseconds of interruptions.
+	// flag speech that contains more than 10,000 milliseconds of interruptions.
 	Threshold *int64
 
 	noSmithyDocumentSerde
 }
 
-// Allows you to control how your transcription job is processed. Currently, the
-// only JobExecutionSettings modification you can choose is enabling job queueing
-// using the AllowDeferredExecution sub-parameter. If you include
+// Makes it possible to control how your transcription job is processed. Currently,
+// the only JobExecutionSettings modification you can choose is enabling job
+// queueing using the AllowDeferredExecution sub-parameter. If you include
 // JobExecutionSettings in your request, you must also include the sub-parameters:
 // AllowDeferredExecution and DataAccessRoleArn.
 type JobExecutionSettings struct {
 
-	// Allows you to enable job queuing when your concurrent request limit is exceeded.
-	// When AllowDeferredExecution is set to true, transcription job requests are
-	// placed in a queue until the number of jobs falls below the concurrent request
-	// limit. If AllowDeferredExecution is set to false and the number of transcription
-	// job requests exceed the concurrent request limit, you get a
+	// Makes it possible to enable job queuing when your concurrent request limit is
+	// exceeded. When AllowDeferredExecution is set to true, transcription job requests
+	// are placed in a queue until the number of jobs falls below the concurrent
+	// request limit. If AllowDeferredExecution is set to false and the number of
+	// transcription job requests exceed the concurrent request limit, you get a
 	// LimitExceededException error. Note that job queuing is enabled by default for
 	// Call Analytics jobs. If you include AllowDeferredExecution in your request, you
 	// must also include DataAccessRoleArn.
 	AllowDeferredExecution *bool
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
-	// Amazon S3 bucket that contains your input files. If the role you specify doesn’t
-	// have the appropriate permissions to access the specified Amazon S3 location,
-	// your request fails. IAM role ARNs have the format
+	// Amazon S3 bucket that contains your input files. If the role that you specify
+	// doesn’t have the appropriate permissions to access the specified Amazon S3
+	// location, your request fails. IAM role ARNs have the format
 	// arn:partition:iam::account:role/role-name-with-path. For example:
 	// arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
@@ -469,49 +471,54 @@ type LanguageCodeItem struct {
 	noSmithyDocumentSerde
 }
 
-// If using automatic language identification (IdentifyLanguage) in your request
-// and you want to apply a custom language model, a custom vocabulary, or a custom
-// vocabulary filter, include LanguageIdSettings with the relevant sub-parameters
-// (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify
-// two or more language codes that represent the languages you think may be present
-// in your media; including more than five is not recommended. Each language code
-// you include can have an associated custom language model, custom vocabulary, and
-// custom vocabulary filter. The languages you specify must match the languages of
-// the specified custom language models, custom vocabularies, and custom vocabulary
-// filters. To include language options using IdentifyLanguage without including a
-// custom language model, a custom vocabulary, or a custom vocabulary filter, use
-// LanguageOptions instead of LanguageIdSettings. Including language options can
-// improve the accuracy of automatic language identification. If you want to
-// include a custom language model with your request but do not want to use
-// automatic language identification, use instead the  parameter with the
-// LanguageModelName sub-parameter. If you want to include a custom vocabulary or a
-// custom vocabulary filter (or both) with your request but do not want to use
-// automatic language identification, use instead the  parameter with the
-// VocabularyName or VocabularyFilterName (or both) sub-parameter.
+// If using automatic language identification in your request and you want to apply
+// a custom language model, a custom vocabulary, or a custom vocabulary filter,
+// include LanguageIdSettings with the relevant sub-parameters (VocabularyName,
+// LanguageModelName, and VocabularyFilterName). Note that multi-language
+// identification (IdentifyMultipleLanguages) doesn't support custom language
+// models. LanguageIdSettings supports two to five language codes. Each language
+// code you include can have an associated custom language model, custom
+// vocabulary, and custom vocabulary filter. The language codes that you specify
+// must match the languages of the associated custom language models, custom
+// vocabularies, and custom vocabulary filters. It's recommended that you include
+// LanguageOptions when using LanguageIdSettings to ensure that the correct
+// language dialect is identified. For example, if you specify a custom vocabulary
+// that is in en-US but Amazon Transcribe determines that the language spoken in
+// your media is en-AU, your custom vocabulary is not applied to your
+// transcription. If you include LanguageOptions and include en-US as the only
+// English language dialect, your custom vocabulary is applied to your
+// transcription. If you want to include a custom language model with your request
+// but do not want to use automatic language identification, use instead the
+// parameter with the LanguageModelName sub-parameter. If you want to include a
+// custom vocabulary or a custom vocabulary filter (or both) with your request but
+// do not want to use automatic language identification, use instead the  parameter
+// with the VocabularyName or VocabularyFilterName (or both) sub-parameter.
 type LanguageIdSettings struct {
 
 	// The name of the custom language model you want to use when processing your
-	// transcription job. Note that language model names are case sensitive. The
-	// language of the specified language model must match the language code you
-	// specify in your transcription request. If the languages don't match, the
-	// language model isn't applied. There are no errors or warnings associated with a
-	// language mismatch.
+	// transcription job. Note that custom language model names are case sensitive. The
+	// language of the specified custom language model must match the language code
+	// that you specify in your transcription request. If the languages don't match,
+	// the custom language model isn't applied. There are no errors or warnings
+	// associated with a language mismatch.
 	LanguageModelName *string
 
 	// The name of the custom vocabulary filter you want to use when processing your
-	// transcription job. Vocabulary filter names are case sensitive. The language of
-	// the specified vocabulary filter must match the language code you specify in your
-	// transcription request. If the languages don't match, the vocabulary filter isn't
-	// applied. There are no errors or warnings associated with a language mismatch.
-	// Note that if you include VocabularyFilterName in your request, you must also
-	// include VocabularyFilterMethod.
+	// transcription job. Custom vocabulary filter names are case sensitive. The
+	// language of the specified custom vocabulary filter must match the language code
+	// that you specify in your transcription request. If the languages don't match,
+	// the custom vocabulary filter isn't applied. There are no errors or warnings
+	// associated with a language mismatch. Note that if you include
+	// VocabularyFilterName in your request, you must also include
+	// VocabularyFilterMethod.
 	VocabularyFilterName *string
 
 	// The name of the custom vocabulary you want to use when processing your
-	// transcription job. Vocabulary names are case sensitive. The language of the
-	// specified vocabulary must match the language code you specify in your
-	// transcription request. If the languages don't match, the vocabulary isn't
-	// applied. There are no errors or warnings associated with a language mismatch.
+	// transcription job. Custom vocabulary names are case sensitive. The language of
+	// the specified custom vocabulary must match the language code that you specify in
+	// your transcription request. If the languages don't match, the custom vocabulary
+	// isn't applied. There are no errors or warnings associated with a language
+	// mismatch.
 	VocabularyName *string
 
 	noSmithyDocumentSerde
@@ -543,18 +550,18 @@ type LanguageModel struct {
 	// that has permissions to access these data.
 	InputDataConfig *InputDataConfig
 
-	// The language code used to create your custom language model. Each language model
-	// must contain terms in only one language, and the language you select for your
-	// model must match the language of your training and tuning data. For a list of
-	// supported languages and their associated language codes, refer to the Supported
-	// languages
+	// The language code used to create your custom language model. Each custom
+	// language model must contain terms in only one language, and the language you
+	// select for your custom language model must match the language of your training
+	// and tuning data. For a list of supported languages and their associated language
+	// codes, refer to the Supported languages
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
 	// table. Note that U.S. English (en-US) is the only language supported with Amazon
 	// Transcribe Medical.
 	LanguageCode CLMLanguageCode
 
-	// The date and time the specified language model was last modified. Timestamps are
-	// in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// The date and time the specified custom language model was last modified.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
@@ -568,7 +575,7 @@ type LanguageModel struct {
 	ModelStatus ModelStatus
 
 	// Shows if a more current base model is available for use with the specified
-	// custom language model. If false, your language model is using the most
+	// custom language model. If false, your custom language model is using the most
 	// up-to-date base model. If true, there is a newer base model available than the
 	// one your language model is using. Note that to update a base model, you must
 	// recreate the custom language model using the new base model. Base model upgrades
@@ -579,7 +586,11 @@ type LanguageModel struct {
 }
 
 // Describes the Amazon S3 location of the media file you want to use in your
-// request.
+// request. For information on supported media formats, refer to the MediaFormat
+// (https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat)
+// parameter or the Media formats
+// (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
+// section in the Amazon S3 Developer Guide.
 type Media struct {
 
 	// The Amazon S3 location of the media file you want to transcribe. For example:
@@ -606,8 +617,9 @@ type Media struct {
 	// Note that the Amazon S3
 	// bucket that contains your input media must be located in the same Amazon Web
 	// Services Region where you're making your transcription request.
-	// RedactedMediaFileUri is only supported for Call Analytics
-	// (StartCallAnalyticsJob) transcription requests.
+	// RedactedMediaFileUri produces a redacted audio file in addition to a redacted
+	// transcript. It is only supported for Call Analytics (StartCallAnalyticsJob)
+	// transcription requests.
 	RedactedMediaFileUri *string
 
 	noSmithyDocumentSerde
@@ -617,15 +629,8 @@ type Media struct {
 type MedicalTranscript struct {
 
 	// The Amazon S3 location of your transcript. You can use this URI to access or
-	// download your transcript. If you included OutputBucketName in your transcription
-	// job request, this is the URI of that bucket. If you also included OutputKey in
-	// your request, your output is located in the path you specified in your request.
-	// If you didn't include OutputBucketName in your transcription job request, your
-	// transcript is stored in a service-managed bucket, and TranscriptFileUri provides
-	// you with a temporary URI you can use for secure access to your transcript.
-	// Temporary URIs for service-managed Amazon S3 buckets are only valid for 15
-	// minutes. If you get an AccesDenied error, you can get a new temporary URI by
-	// running a GetTranscriptionJob or ListTranscriptionJob request.
+	// download your transcript. Note that this is the Amazon S3 location you specified
+	// in your request using the OutputBucketName parameter.
 	TranscriptFileUri *string
 
 	noSmithyDocumentSerde
@@ -645,9 +650,8 @@ type MedicalTranscriptionJob struct {
 	// processing at 12:33 PM UTC-7 on May 4, 2022.
 	CompletionTime *time.Time
 
-	// Labels all personal health information (PHI) identified in your transcript. For
-	// more information, see Identifying personal health information (PHI) in a
-	// transcription (https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html).
+	// Indicates whether content identification was enabled for your transcription
+	// request.
 	ContentIdentificationType MedicalContentIdentificationType
 
 	// The date and time the specified medical transcription job request was made.
@@ -671,7 +675,7 @@ type MedicalTranscriptionJob struct {
 	//
 	// * Invalid sample rate for audio file. The sample rate specified in
 	// MediaSampleRateHertz isn't valid. The sample rate must be between 16,000 and
-	// 48,000 Hertz.
+	// 48,000 hertz.
 	//
 	// * The sample rate provided does not match the detected sample
 	// rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample
@@ -695,22 +699,27 @@ type MedicalTranscriptionJob struct {
 	LanguageCode LanguageCode
 
 	// Describes the Amazon S3 location of the media file you want to use in your
-	// request.
+	// request. For information on supported media formats, refer to the MediaFormat
+	// (https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat)
+	// parameter or the Media formats
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
+	// section in the Amazon S3 Developer Guide.
 	Media *Media
 
 	// The format of the input media file.
 	MediaFormat MediaFormat
 
-	// The sample rate, in Hertz, of the audio track in your input media file.
+	// The sample rate, in hertz, of the audio track in your input media file.
 	MediaSampleRateHertz *int32
 
 	// The name of the medical transcription job. Job names are case sensitive and must
 	// be unique within an Amazon Web Services account.
 	MedicalTranscriptionJobName *string
 
-	// Specify additional optional settings in your request, including channel
-	// identification, alternative transcriptions, and speaker labeling; allows you to
-	// apply custom vocabularies to your medical transcription job.
+	// Provides information on any additional settings that were included in your
+	// request. Additional settings include channel identification, alternative
+	// transcriptions, speaker partitioning, custom vocabularies, and custom vocabulary
+	// filters.
 	Settings *MedicalTranscriptionSetting
 
 	// Describes the medical specialty represented in your media.
@@ -807,8 +816,8 @@ type MedicalTranscriptionJobSummary struct {
 }
 
 // Allows additional optional settings in your request, including channel
-// identification, alternative transcriptions, and speaker labeling; allows you to
-// apply custom vocabularies to your medical transcription job.
+// identification, alternative transcriptions, and speaker partitioning. You can
+// use that to apply custom vocabularies to your medical transcription job.
 type MedicalTranscriptionSetting struct {
 
 	// Enables channel identification in multi-channel audio. Channel identification
@@ -832,10 +841,10 @@ type MedicalTranscriptionSetting struct {
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
 	MaxAlternatives *int32
 
-	// Specify the maximum number of speakers you want to identify in your media. Note
+	// Specify the maximum number of speakers you want to partition in your media. Note
 	// that if your media contains more speakers than the specified number, multiple
-	// speakers will be identified as a single speaker. If you specify the
-	// MaxSpeakerLabels field, you must set the ShowSpeakerLabels field to true.
+	// speakers are treated as a single speaker. If you specify the MaxSpeakerLabels
+	// field, you must set the ShowSpeakerLabels field to true.
 	MaxSpeakerLabels *int32
 
 	// To include alternative transcriptions within your transcription output, include
@@ -846,22 +855,22 @@ type MedicalTranscriptionSetting struct {
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
 	ShowAlternatives *bool
 
-	// Enables speaker identification (diarization) in your transcription output.
-	// Speaker identification labels the speech from individual speakers in your media
-	// file. If you enable ShowSpeakerLabels in your request, you must also include
-	// MaxSpeakerLabels. You can't include both ShowSpeakerLabels and
-	// ChannelIdentification in the same request. Including both parameters returns a
-	// BadRequestException. For more information, see Identifying speakers
-	// (diarization)
+	// Enables speaker partitioning (diarization) in your transcription output. Speaker
+	// partitioning labels the speech from individual speakers in your media file. If
+	// you enable ShowSpeakerLabels in your request, you must also include
+	// MaxSpeakerLabels. You can't include ShowSpeakerLabels and ChannelIdentification
+	// in the same request. Including both parameters returns a BadRequestException.
+	// For more information, see Partitioning speakers (diarization)
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
 	ShowSpeakerLabels *bool
 
 	// The name of the custom vocabulary you want to use when processing your medical
-	// transcription job. Vocabulary names are case sensitive. The language of the
-	// specified vocabulary must match the language code you specify in your
-	// transcription request. If the languages don't match, the vocabulary isn't
-	// applied. There are no errors or warnings associated with a language mismatch. US
-	// English (en-US) is the only valid language for Amazon Transcribe Medical.
+	// transcription job. Custom vocabulary names are case sensitive. The language of
+	// the specified custom vocabulary must match the language code that you specify in
+	// your transcription request. If the languages don't match, the custom vocabulary
+	// isn't applied. There are no errors or warnings associated with a language
+	// mismatch. US English (en-US) is the only valid language for Amazon Transcribe
+	// Medical.
 	VocabularyName *string
 
 	noSmithyDocumentSerde
@@ -875,11 +884,11 @@ type MedicalTranscriptionSetting struct {
 type ModelSettings struct {
 
 	// The name of the custom language model you want to use when processing your
-	// transcription job. Note that language model names are case sensitive. The
-	// language of the specified language model must match the language code you
-	// specify in your transcription request. If the languages don't match, the
-	// language model isn't applied. There are no errors or warnings associated with a
-	// language mismatch.
+	// transcription job. Note that custom language model names are case sensitive. The
+	// language of the specified custom language model must match the language code
+	// that you specify in your transcription request. If the languages don't match,
+	// the custom language model isn't applied. There are no errors or warnings
+	// associated with a language mismatch.
 	LanguageModelName *string
 
 	noSmithyDocumentSerde
@@ -894,24 +903,25 @@ type ModelSettings struct {
 // * The presence
 // of speech at specified periods throughout the call
 //
-// See Rule criteria
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules)
+// See Rule criteria for batch
+// categories
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch)
 // for usage examples.
 type NonTalkTimeFilter struct {
 
-	// Allows you to specify a time range (in milliseconds) in your audio, during which
-	// you want to search for a period of silence. See for more detail.
+	// Makes it possible to specify a time range (in milliseconds) in your audio,
+	// during which you want to search for a period of silence. See for more detail.
 	AbsoluteTimeRange *AbsoluteTimeRange
 
 	// Set to TRUE to flag periods of speech. Set to FALSE to flag periods of silence
 	Negate *bool
 
-	// Allows you to specify a time range (in percentage) in your media file, during
-	// which you want to search for a period of silence. See for more detail.
+	// Makes it possible to specify a time range (in percentage) in your media file,
+	// during which you want to search for a period of silence. See for more detail.
 	RelativeTimeRange *RelativeTimeRange
 
-	// Specify the duration, in milliseconds, of the period of silence you want to
-	// flag. For example, you can flag a silent period that lasts 30000 milliseconds.
+	// Specify the duration, in milliseconds, of the period of silence that you want to
+	// flag. For example, you can flag a silent period that lasts 30,000 milliseconds.
 	Threshold *int64
 
 	noSmithyDocumentSerde
@@ -922,11 +932,11 @@ type NonTalkTimeFilter struct {
 // setting StartPercentage to 10 and EndPercentage to 50 only searches for your
 // specified criteria in the audio contained between the 10 percent mark and the 50
 // percent mark of your media file. You can use also First to search from the start
-// of the media file until the time you specify, or Last to search from the time
-// you specify until the end of the media file. For example, setting First to 10
-// only searches for your specified criteria in the audio contained in the first 10
-// percent of the media file. If you prefer to use milliseconds instead of
-// percentage, see .
+// of the media file until the time that you specify. Or use Last to search from
+// the time that you specify until the end of the media file. For example, setting
+// First to 10 only searches for your specified criteria in the audio contained in
+// the first 10 percent of the media file. If you prefer to use milliseconds
+// instead of percentage, see .
 type RelativeTimeRange struct {
 
 	// The time, in percentage, when Amazon Transcribe stops searching for the
@@ -934,12 +944,14 @@ type RelativeTimeRange struct {
 	// request, you must also include StartPercentage.
 	EndPercentage *int32
 
-	// The time, in percentage, from the start of your media file until the value you
-	// specify in which Amazon Transcribe searches for your specified criteria.
+	// The time, in percentage, from the start of your media file until the specified
+	// value. Amazon Transcribe searches for your specified criteria in this time
+	// segment.
 	First *int32
 
-	// The time, in percentage, from the value you specify until the end of your media
-	// file in which Amazon Transcribe searches for your specified criteria.
+	// The time, in percentage, from the specified value until the end of your media
+	// file. Amazon Transcribe searches for your specified criteria in this time
+	// segment.
 	Last *int32
 
 	// The time, in percentage, when Amazon Transcribe starts searching for the
@@ -950,13 +962,13 @@ type RelativeTimeRange struct {
 	noSmithyDocumentSerde
 }
 
-// A rule is a set of criteria you can specify to flag an attribute in your Call
-// Analytics output. Rules define a Call Analytics category. Rules can include
-// these parameters: , , , and . To learn more about these parameters, refer to
-// Rule criteria
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules).
-// To learn more about Call Analytics categories, see Creating categories
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html).
+// A rule is a set of criteria that you can specify to flag an attribute in your
+// Call Analytics output. Rules define a Call Analytics category. Rules can include
+// these parameters: , , , and . To learn more about Call Analytics rules and
+// categories, see Creating categories for batch transcriptions
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html) and
+// Creating categories for streaming transcriptions
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html).
 // To learn more about Call Analytics, see Analyzing call center audio with Call
 // Analytics
 // (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html).
@@ -1029,38 +1041,40 @@ func (*RuleMemberTranscriptFilter) isRule() {}
 // mixed sentiment felt by the customer, the agent, or both at specified points in
 // the call
 //
-// See Rule criteria
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules)
-// for examples.
+// See Rule criteria for batch categories
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch)
+// for usage examples.
 type SentimentFilter struct {
 
-	// Specify the sentiments you want to flag.
+	// Specify the sentiments that you want to flag.
 	//
 	// This member is required.
 	Sentiments []SentimentValue
 
-	// Allows you to specify a time range (in milliseconds) in your audio, during which
-	// you want to search for the specified sentiments. See for more detail.
+	// Makes it possible to specify a time range (in milliseconds) in your audio,
+	// during which you want to search for the specified sentiments. See for more
+	// detail.
 	AbsoluteTimeRange *AbsoluteTimeRange
 
-	// Set to TRUE to flag the sentiments you didn't include in your request. Set to
-	// FALSE to flag the sentiments you specified in your request.
+	// Set to TRUE to flag the sentiments that you didn't include in your request. Set
+	// to FALSE to flag the sentiments that you specified in your request.
 	Negate *bool
 
-	// Specify the participant you want to flag. Omitting this parameter is equivalent
-	// to specifying both participants.
+	// Specify the participant that you want to flag. Omitting this parameter is
+	// equivalent to specifying both participants.
 	ParticipantRole ParticipantRole
 
-	// Allows you to specify a time range (in percentage) in your media file, during
-	// which you want to search for the specified sentiments. See for more detail.
+	// Makes it possible to specify a time range (in percentage) in your media file,
+	// during which you want to search for the specified sentiments. See for more
+	// detail.
 	RelativeTimeRange *RelativeTimeRange
 
 	noSmithyDocumentSerde
 }
 
 // Allows additional optional settings in your request, including channel
-// identification, alternative transcriptions, and speaker labeling; allows you to
-// apply custom vocabularies to your transcription job.
+// identification, alternative transcriptions, and speaker partitioning. You can
+// use that to apply custom vocabularies to your transcription job.
 type Settings struct {
 
 	// Enables channel identification in multi-channel audio. Channel identification
@@ -1080,10 +1094,10 @@ type Settings struct {
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
 	MaxAlternatives *int32
 
-	// Specify the maximum number of speakers you want to identify in your media. Note
+	// Specify the maximum number of speakers you want to partition in your media. Note
 	// that if your media contains more speakers than the specified number, multiple
-	// speakers will be identified as a single speaker. If you specify the
-	// MaxSpeakerLabels field, you must set the ShowSpeakerLabels field to true.
+	// speakers are treated as a single speaker. If you specify the MaxSpeakerLabels
+	// field, you must set the ShowSpeakerLabels field to true.
 	MaxSpeakerLabels *int32
 
 	// To include alternative transcriptions within your transcription output, include
@@ -1096,18 +1110,18 @@ type Settings struct {
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-alternatives.html).
 	ShowAlternatives *bool
 
-	// Enables speaker identification (diarization) in your transcription output.
-	// Speaker identification labels the speech from individual speakers in your media
-	// file. If you enable ShowSpeakerLabels in your request, you must also include
+	// Enables speaker partitioning (diarization) in your transcription output. Speaker
+	// partitioning labels the speech from individual speakers in your media file. If
+	// you enable ShowSpeakerLabels in your request, you must also include
 	// MaxSpeakerLabels. You can't include both ShowSpeakerLabels and
 	// ChannelIdentification in the same request. Including both parameters returns a
-	// BadRequestException. For more information, see Identifying speakers
+	// BadRequestException. For more information, see Partitioning speakers
 	// (diarization)
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html).
 	ShowSpeakerLabels *bool
 
-	// Specify how you want your vocabulary filter applied to your transcript. To
-	// replace words with ***, choose mask. To delete words, choose remove. To flag
+	// Specify how you want your custom vocabulary filter applied to your transcript.
+	// To replace words with ***, choose mask. To delete words, choose remove. To flag
 	// words without changing them, choose tag.
 	VocabularyFilterMethod VocabularyFilterMethod
 
@@ -1243,39 +1257,44 @@ type Transcript struct {
 // Custom words or phrases that occur at a specific time frame
 //
 // See Rule criteria
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules)
-// for examples.
+// for batch categories
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html#tca-rules-batch)
+// and Rule criteria for streaming categories
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html#tca-rules-stream)
+// for usage examples.
 type TranscriptFilter struct {
 
-	// Specify the phrases you want to flag.
+	// Specify the phrases that you want to flag.
 	//
 	// This member is required.
 	Targets []string
 
-	// Flag the presence or absence of an exact match to the phrases you specify. For
-	// example, if you specify the phrase "speak to a manager" as your Targets value,
-	// only that exact phrase is flagged. Note that semantic matching is not supported.
-	// For example, if your customer says "speak to the manager", instead of "speak to
-	// a manager", your content is not flagged.
+	// Flag the presence or absence of an exact match to the phrases that you specify.
+	// For example, if you specify the phrase "speak to a manager" as your Targets
+	// value, only that exact phrase is flagged. Note that semantic matching is not
+	// supported. For example, if your customer says "speak to the manager", instead of
+	// "speak to a manager", your content is not flagged.
 	//
 	// This member is required.
 	TranscriptFilterType TranscriptFilterType
 
-	// Allows you to specify a time range (in milliseconds) in your audio, during which
-	// you want to search for the specified key words or phrases. See for more detail.
+	// Makes it possible to specify a time range (in milliseconds) in your audio,
+	// during which you want to search for the specified key words or phrases. See for
+	// more detail.
 	AbsoluteTimeRange *AbsoluteTimeRange
 
-	// Set to TRUE to flag the absence of the phrase you specified in your request. Set
-	// to FALSE to flag the presence of the phrase you specified in your request.
+	// Set to TRUE to flag the absence of the phrase that you specified in your
+	// request. Set to FALSE to flag the presence of the phrase that you specified in
+	// your request.
 	Negate *bool
 
-	// Specify the participant you want to flag. Omitting this parameter is equivalent
-	// to specifying both participants.
+	// Specify the participant that you want to flag. Omitting this parameter is
+	// equivalent to specifying both participants.
 	ParticipantRole ParticipantRole
 
-	// Allows you to specify a time range (in percentage) in your media file, during
-	// which you want to search for the specified key words or phrases. See for more
-	// detail.
+	// Makes it possible to specify a time range (in percentage) in your media file,
+	// during which you want to search for the specified key words or phrases. See for
+	// more detail.
 	RelativeTimeRange *RelativeTimeRange
 
 	noSmithyDocumentSerde
@@ -1296,8 +1315,7 @@ type TranscriptionJob struct {
 	// processing at 12:33 PM UTC-7 on May 4, 2022.
 	CompletionTime *time.Time
 
-	// Redacts or flags specified personally identifiable information (PII) in your
-	// transcript.
+	// Indicates whether redaction was enabled in your transcript.
 	ContentRedaction *ContentRedaction
 
 	// The date and time the specified transcription job request was made. Timestamps
@@ -1321,7 +1339,7 @@ type TranscriptionJob struct {
 	//
 	// * Invalid sample rate for audio file. The sample rate specified in
 	// MediaSampleRateHertz isn't valid. The sample rate must be between 8,000 and
-	// 48,000 Hertz.
+	// 48,000 hertz.
 	//
 	// * The sample rate provided does not match the detected sample
 	// rate. The sample rate specified in MediaSampleRateHertz doesn't match the sample
@@ -1354,84 +1372,43 @@ type TranscriptionJob struct {
 	// the specified transcription job.
 	IdentifyMultipleLanguages *bool
 
-	// Provides information about how your transcription job is being processed. This
-	// parameter shows if your request is queued and what data access role is being
-	// used.
+	// Provides information about how your transcription job was processed. This
+	// parameter shows if your request was queued and what data access role was used.
 	JobExecutionSettings *JobExecutionSettings
 
-	// The language code used to create your transcription job. For a list of supported
-	// languages and their associated language codes, refer to the Supported languages
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-	// table. Note that you must include one of LanguageCode, IdentifyLanguage, or
-	// IdentifyMultipleLanguages in your request. If you include more than one of these
-	// parameters, your transcription job fails.
+	// The language code used to create your transcription job. This parameter is used
+	// with single-language identification. For multi-language identification requests,
+	// refer to the plural version of this parameter, LanguageCodes.
 	LanguageCode LanguageCode
 
 	// The language codes used to create your transcription job. This parameter is used
 	// with multi-language identification. For single-language identification requests,
-	// refer to the singular version of this parameter, LanguageCode. For a list of
-	// supported languages and their associated language codes, refer to the Supported
-	// languages
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
-	// table.
+	// refer to the singular version of this parameter, LanguageCode.
 	LanguageCodes []LanguageCodeItem
 
-	// If using automatic language identification (IdentifyLanguage) in your request
-	// and you want to apply a custom language model, a custom vocabulary, or a custom
-	// vocabulary filter, include LanguageIdSettings with the relevant sub-parameters
-	// (VocabularyName, LanguageModelName, and VocabularyFilterName). You can specify
-	// two or more language codes that represent the languages you think may be present
-	// in your media; including more than five is not recommended. Each language code
-	// you include can have an associated custom language model, custom vocabulary, and
-	// custom vocabulary filter. The languages you specify must match the languages of
-	// the specified custom language models, custom vocabularies, and custom vocabulary
-	// filters. To include language options using IdentifyLanguage without including a
-	// custom language model, a custom vocabulary, or a custom vocabulary filter, use
-	// LanguageOptions instead of LanguageIdSettings. Including language options can
-	// improve the accuracy of automatic language identification. If you want to
-	// include a custom language model with your request but do not want to use
-	// automatic language identification, use instead the  parameter with the
-	// LanguageModelName sub-parameter. If you want to include a custom vocabulary or a
-	// custom vocabulary filter (or both) with your request but do not want to use
-	// automatic language identification, use instead the  parameter with the
-	// VocabularyName or VocabularyFilterName (or both) sub-parameter.
+	// Provides the name and language of all custom language models, custom
+	// vocabularies, and custom vocabulary filters that you included in your request.
 	LanguageIdSettings map[string]LanguageIdSettings
 
-	// You can specify two or more language codes that represent the languages you
-	// think may be present in your media; including more than five is not recommended.
-	// If you're unsure what languages are present, do not include this parameter. If
-	// you include LanguageOptions in your request, you must also include
-	// IdentifyLanguage. For more information, refer to Supported languages
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html). To
-	// transcribe speech in Modern Standard Arabic (ar-SA), your media file must be
-	// encoded at a sample rate of 16,000 Hz or higher.
+	// Provides the language codes you specified in your request.
 	LanguageOptions []LanguageCode
 
-	// Describes the Amazon S3 location of the media file you want to use in your
-	// request.
+	// Provides the Amazon S3 location of the media file you used in your request.
 	Media *Media
 
 	// The format of the input media file.
 	MediaFormat MediaFormat
 
-	// The sample rate, in Hertz, of the audio track in your input media file.
+	// The sample rate, in hertz, of the audio track in your input media file.
 	MediaSampleRateHertz *int32
 
-	// The custom language model you want to include with your transcription job. If
-	// you include ModelSettings in your request, you must include the
-	// LanguageModelName sub-parameter.
+	// Provides information on the custom language model you included in your request.
 	ModelSettings *ModelSettings
 
-	// Specify additional optional settings in your request, including channel
-	// identification, alternative transcriptions, speaker labeling; allows you to
-	// apply custom vocabularies and vocabulary filters. If you want to include a
-	// custom vocabulary or a custom vocabulary filter (or both) with your request but
-	// do not want to use automatic language identification, use Settings with the
-	// VocabularyName or VocabularyFilterName (or both) sub-parameter. If you're using
-	// automatic language identification with your request and want to include a custom
-	// language model, a custom vocabulary, or a custom vocabulary filter, do not use
-	// the Settings parameter; use instead the  parameter with the LanguageModelName,
-	// VocabularyName or VocabularyFilterName sub-parameters.
+	// Provides information on any additional settings that were included in your
+	// request. Additional settings include channel identification, alternative
+	// transcriptions, speaker partitioning, custom vocabularies, and custom vocabulary
+	// filters.
 	Settings *Settings
 
 	// The date and time the specified transcription job began processing. Timestamps
@@ -1440,13 +1417,11 @@ type TranscriptionJob struct {
 	// processing at 12:32 PM UTC-7 on May 4, 2022.
 	StartTime *time.Time
 
-	// Generate subtitles for your media file with your transcription request.
+	// Indicates whether subtitles were generated with your transcription.
 	Subtitles *SubtitlesOutput
 
-	// Adds one or more custom tags, each in the form of a key:value pair, to a new
-	// transcription job at the time you start this new job. To learn more about using
-	// tags with Amazon Transcribe, refer to Tagging resources
-	// (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html).
+	// The tags, each in the form of a key:value pair, assigned to the specified
+	// transcription job.
 	Tags []Tag
 
 	// Provides you with the Amazon S3 URI you can use to access your transcript.
@@ -1547,23 +1522,23 @@ type TranscriptionJobSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a vocabulary filter, including the language of the
-// filter, when it was last modified, and its name.
+// Provides information about a custom vocabulary filter, including the language of
+// the filter, when it was last modified, and its name.
 type VocabularyFilterInfo struct {
 
 	// The language code that represents the language of the entries in your vocabulary
-	// filter. Each vocabulary filter must contain terms in only one language. A
-	// vocabulary filter can only be used to transcribe files in the same language as
-	// the filter. For example, if you create a vocabulary filter using US English
-	// (en-US), you can only apply this filter to files that contain English audio. For
-	// a list of supported languages and their associated language codes, refer to the
-	// Supported languages
+	// filter. Each custom vocabulary filter must contain terms in only one language. A
+	// custom vocabulary filter can only be used to transcribe files in the same
+	// language as the filter. For example, if you create a custom vocabulary filter
+	// using US English (en-US), you can only apply this filter to files that contain
+	// English audio. For a list of supported languages and their associated language
+	// codes, refer to the Supported languages
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/supported-languages.html)
 	// table.
 	LanguageCode LanguageCode
 
-	// The date and time the specified vocabulary filter was last modified. Timestamps
-	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// The date and time the specified custom vocabulary filter was last modified.
+	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
@@ -1576,18 +1551,19 @@ type VocabularyFilterInfo struct {
 }
 
 // Provides information about a custom vocabulary, including the language of the
-// vocabulary, when it was last modified, its name, and the processing state.
+// custom vocabulary, when it was last modified, its name, and the processing
+// state.
 type VocabularyInfo struct {
 
-	// The language code used to create your custom vocabulary. Each vocabulary must
-	// contain terms in only one language. A custom vocabulary can only be used to
-	// transcribe files in the same language as the vocabulary. For example, if you
-	// create a vocabulary using US English (en-US), you can only apply this vocabulary
-	// to files that contain English audio.
+	// The language code used to create your custom vocabulary. Each custom vocabulary
+	// must contain terms in only one language. A custom vocabulary can only be used to
+	// transcribe files in the same language as the custom vocabulary. For example, if
+	// you create a custom vocabulary using US English (en-US), you can only apply this
+	// custom vocabulary to files that contain English audio.
 	LanguageCode LanguageCode
 
-	// The date and time the specified vocabulary was last modified. Timestamps are in
-	// the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
+	// The date and time the specified custom vocabulary was last modified. Timestamps
+	// are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC. For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
 
@@ -1597,7 +1573,7 @@ type VocabularyInfo struct {
 	VocabularyName *string
 
 	// The processing state of your custom vocabulary. If the state is READY, you can
-	// use the vocabulary in a StartTranscriptionJob request.
+	// use the custom vocabulary in a StartTranscriptionJob request.
 	VocabularyState VocabularyState
 
 	noSmithyDocumentSerde

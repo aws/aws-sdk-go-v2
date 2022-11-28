@@ -72,6 +72,9 @@ type DescribeBackupJobOutput struct {
 	// was queried.
 	BytesTransferred *int64
 
+	// This returns the statistics of the included child (nested) backup jobs.
+	ChildJobsInState map[string]int64
+
 	// The date and time that a job to create a backup job is completed, in Unix format
 	// and Coordinated Universal Time (UTC). The value of CompletionDate is accurate to
 	// milliseconds. For example, the value 1516925490.087 represents Friday, January
@@ -98,6 +101,15 @@ type DescribeBackupJobOutput struct {
 	// Specifies the IAM role ARN used to create the target recovery point; for
 	// example, arn:aws:iam::123456789012:role/S3Access.
 	IamRoleArn *string
+
+	// This returns the boolean value that a backup job is a parent (composite) job.
+	IsParent bool
+
+	// This returns the number of child (nested) backup jobs.
+	NumberOfChildJobs *int64
+
+	// This returns the parent (composite) resource backup job ID.
+	ParentJobId *string
 
 	// Contains an estimated percentage that is complete of a job at the time the job
 	// status was queried.

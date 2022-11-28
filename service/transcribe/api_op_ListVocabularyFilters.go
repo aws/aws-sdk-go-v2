@@ -34,8 +34,9 @@ func (c *Client) ListVocabularyFilters(ctx context.Context, params *ListVocabula
 type ListVocabularyFiltersInput struct {
 
 	// The maximum number of custom vocabulary filters to return in each page of
-	// results. If there are fewer results than the value you specify, only the actual
-	// results are returned. If you don't specify a value, a default of 5 is used.
+	// results. If there are fewer results than the value that you specify, only the
+	// actual results are returned. If you don't specify a value, a default of 5 is
+	// used.
 	MaxResults *int32
 
 	// Returns only the custom vocabulary filters that contain the specified string.
@@ -143,8 +144,9 @@ var _ ListVocabularyFiltersAPIClient = (*Client)(nil)
 // ListVocabularyFilters
 type ListVocabularyFiltersPaginatorOptions struct {
 	// The maximum number of custom vocabulary filters to return in each page of
-	// results. If there are fewer results than the value you specify, only the actual
-	// results are returned. If you don't specify a value, a default of 5 is used.
+	// results. If there are fewer results than the value that you specify, only the
+	// actual results are returned. If you don't specify a value, a default of 5 is
+	// used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

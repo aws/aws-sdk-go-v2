@@ -41,6 +41,9 @@ type MarkAsArchivedInput struct {
 
 type MarkAsArchivedOutput struct {
 
+	// Source server application ID.
+	ApplicationID *string
+
 	// Source server ARN.
 	Arn *string
 

@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new ReplicationConfigurationTemplate.
+// Lists all Launch Configuration Templates, filtered by Launch Configuration
+// Template IDs
 func (c *Client) DescribeLaunchConfigurationTemplates(ctx context.Context, params *DescribeLaunchConfigurationTemplatesInput, optFns ...func(*Options)) (*DescribeLaunchConfigurationTemplatesOutput, error) {
 	if params == nil {
 		params = &DescribeLaunchConfigurationTemplatesInput{}
@@ -30,13 +31,14 @@ func (c *Client) DescribeLaunchConfigurationTemplates(ctx context.Context, param
 
 type DescribeLaunchConfigurationTemplatesInput struct {
 
-	// Request to disconnect Source Server from service by Server ID.
+	// Request to filter Launch Configuration Templates list by Launch Configuration
+	// Template ID.
 	LaunchConfigurationTemplateIDs []string
 
-	// Request to disconnect Source Server from service by Server ID.
+	// Maximum results to be returned in DescribeLaunchConfigurationTemplates.
 	MaxResults int32
 
-	// Request to disconnect Source Server from service by Server ID.
+	// Next pagination token returned from DescribeLaunchConfigurationTemplates.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,10 +46,10 @@ type DescribeLaunchConfigurationTemplatesInput struct {
 
 type DescribeLaunchConfigurationTemplatesOutput struct {
 
-	// Request to disconnect Source Server from service by Server ID.
+	// List of items returned by DescribeLaunchConfigurationTemplates.
 	Items []types.LaunchConfigurationTemplate
 
-	// Request to disconnect Source Server from service by Server ID.
+	// Next pagination token returned from DescribeLaunchConfigurationTemplates.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -127,7 +129,7 @@ var _ DescribeLaunchConfigurationTemplatesAPIClient = (*Client)(nil)
 // DescribeLaunchConfigurationTemplatesPaginatorOptions is the paginator options
 // for DescribeLaunchConfigurationTemplates
 type DescribeLaunchConfigurationTemplatesPaginatorOptions struct {
-	// Request to disconnect Source Server from service by Server ID.
+	// Maximum results to be returned in DescribeLaunchConfigurationTemplates.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

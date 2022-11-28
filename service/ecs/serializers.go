@@ -1502,6 +1502,61 @@ func (m *awsAwsjson11_serializeOpListServices) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListServicesByNamespace struct {
+}
+
+func (*awsAwsjson11_serializeOpListServicesByNamespace) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListServicesByNamespace) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListServicesByNamespaceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonEC2ContainerServiceV20141113.ListServicesByNamespace")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListServicesByNamespaceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListTagsForResource struct {
 }
 
@@ -3196,6 +3251,18 @@ func awsAwsjson11_serializeDocumentClusterFieldList(v []types.ClusterField, valu
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterServiceConnectDefaultsRequest(v *types.ClusterServiceConnectDefaultsRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Namespace != nil {
+		ok := object.Key("namespace")
+		ok.String(*v.Namespace)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterSetting(v *types.ClusterSetting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4599,6 +4666,11 @@ func awsAwsjson11_serializeDocumentPortMapping(v *types.PortMapping, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AppProtocol) > 0 {
+		ok := object.Key("appProtocol")
+		ok.String(string(v.AppProtocol))
+	}
+
 	if v.ContainerPort != nil {
 		ok := object.Key("containerPort")
 		ok.Integer(*v.ContainerPort)
@@ -4607,6 +4679,11 @@ func awsAwsjson11_serializeDocumentPortMapping(v *types.PortMapping, value smith
 	if v.HostPort != nil {
 		ok := object.Key("hostPort")
 		ok.Integer(*v.HostPort)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -4845,6 +4922,109 @@ func awsAwsjson11_serializeDocumentSecretList(v []types.Secret, value smithyjson
 	for i := range v {
 		av := array.Value()
 		if err := awsAwsjson11_serializeDocumentSecret(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectClientAlias(v *types.ServiceConnectClientAlias, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DnsName != nil {
+		ok := object.Key("dnsName")
+		ok.String(*v.DnsName)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectClientAliasList(v []types.ServiceConnectClientAlias, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentServiceConnectClientAlias(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectConfiguration(v *types.ServiceConnectConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.LogConfiguration != nil {
+		ok := object.Key("logConfiguration")
+		if err := awsAwsjson11_serializeDocumentLogConfiguration(v.LogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Namespace != nil {
+		ok := object.Key("namespace")
+		ok.String(*v.Namespace)
+	}
+
+	if v.Services != nil {
+		ok := object.Key("services")
+		if err := awsAwsjson11_serializeDocumentServiceConnectServiceList(v.Services, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectService(v *types.ServiceConnectService, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientAliases != nil {
+		ok := object.Key("clientAliases")
+		if err := awsAwsjson11_serializeDocumentServiceConnectClientAliasList(v.ClientAliases, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DiscoveryName != nil {
+		ok := object.Key("discoveryName")
+		ok.String(*v.DiscoveryName)
+	}
+
+	if v.IngressPortOverride != nil {
+		ok := object.Key("ingressPortOverride")
+		ok.Integer(*v.IngressPortOverride)
+	}
+
+	if v.PortName != nil {
+		ok := object.Key("portName")
+		ok.String(*v.PortName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServiceConnectServiceList(v []types.ServiceConnectService, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentServiceConnectService(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -5339,6 +5519,13 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.ServiceConnectDefaults != nil {
+		ok := object.Key("serviceConnectDefaults")
+		if err := awsAwsjson11_serializeDocumentClusterServiceConnectDefaultsRequest(v.ServiceConnectDefaults, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Settings != nil {
 		ok := object.Key("settings")
 		if err := awsAwsjson11_serializeDocumentClusterSettings(v.Settings, ok); err != nil {
@@ -5462,6 +5649,13 @@ func awsAwsjson11_serializeOpDocumentCreateServiceInput(v *CreateServiceInput, v
 	if len(v.SchedulingStrategy) > 0 {
 		ok := object.Key("schedulingStrategy")
 		ok.String(string(v.SchedulingStrategy))
+	}
+
+	if v.ServiceConnectConfiguration != nil {
+		ok := object.Key("serviceConnectConfiguration")
+		if err := awsAwsjson11_serializeDocumentServiceConnectConfiguration(v.ServiceConnectConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ServiceName != nil {
@@ -6084,6 +6278,28 @@ func awsAwsjson11_serializeOpDocumentListContainerInstancesInput(v *ListContaine
 	if len(v.Status) > 0 {
 		ok := object.Key("status")
 		ok.String(string(v.Status))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListServicesByNamespaceInput(v *ListServicesByNamespaceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.Namespace != nil {
+		ok := object.Key("namespace")
+		ok.String(*v.Namespace)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
 	}
 
 	return nil
@@ -6905,6 +7121,13 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 		}
 	}
 
+	if v.ServiceConnectDefaults != nil {
+		ok := object.Key("serviceConnectDefaults")
+		if err := awsAwsjson11_serializeDocumentClusterServiceConnectDefaultsRequest(v.ServiceConnectDefaults, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Settings != nil {
 		ok := object.Key("settings")
 		if err := awsAwsjson11_serializeDocumentClusterSettings(v.Settings, ok); err != nil {
@@ -7064,6 +7287,13 @@ func awsAwsjson11_serializeOpDocumentUpdateServiceInput(v *UpdateServiceInput, v
 	if v.Service != nil {
 		ok := object.Key("service")
 		ok.String(*v.Service)
+	}
+
+	if v.ServiceConnectConfiguration != nil {
+		ok := object.Key("serviceConnectConfiguration")
+		if err := awsAwsjson11_serializeDocumentServiceConnectConfiguration(v.ServiceConnectConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ServiceRegistries != nil {

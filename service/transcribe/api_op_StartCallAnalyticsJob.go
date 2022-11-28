@@ -12,8 +12,8 @@ import (
 )
 
 // Transcribes the audio from a customer service call and applies any additional
-// Request Parameters you choose to include in your request. In addition to many of
-// the standard transcription features, Call Analytics provides you with call
+// Request Parameters you choose to include in your request. In addition to many
+// standard transcription features, Call Analytics provides you with call
 // characteristics, call summarization, speaker sentiment, and optional redaction
 // of your text transcript and your audio file. You can also apply custom
 // categories to flag specified conditions. To learn more about these features and
@@ -22,8 +22,10 @@ import (
 // want to apply categories to your Call Analytics job, you must create them before
 // submitting your job request. Categories cannot be retroactively applied to a
 // job. To create a new category, use the operation. To learn more about Call
-// Analytics categories, see Creating categories
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html).
+// Analytics categories, see Creating categories for batch transcriptions
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html) and
+// Creating categories for streaming transcriptions
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html).
 // To make a StartCallAnalyticsJob request, you must first upload your media file
 // into an Amazon S3 bucket; you can then specify the Amazon S3 location of the
 // file using the Media parameter. You must include the following parameters in
@@ -35,8 +37,8 @@ import (
 // quotas (https://docs.aws.amazon.com/general/latest/gr/transcribe.html).
 //
 // *
-// CallAnalyticsJobName: A custom name you create for your transcription job that
-// is unique within your Amazon Web Services account.
+// CallAnalyticsJobName: A custom name that you create for your transcription job
+// that's unique within your Amazon Web Services account.
 //
 // * DataAccessRoleArn: The
 // Amazon Resource Name (ARN) of an IAM role that has permissions to access the
@@ -76,22 +78,22 @@ type StartCallAnalyticsJobInput struct {
 	// This member is required.
 	CallAnalyticsJobName *string
 
-	// Describes the Amazon S3 location of the media file you want to use in your
-	// request.
+	// Describes the Amazon S3 location of the media file you want to use in your Call
+	// Analytics request.
 	//
 	// This member is required.
 	Media *types.Media
 
-	// Allows you to specify which speaker is on which channel. For example, if your
-	// agent is the first participant to speak, you would set ChannelId to 0 (to
+	// Makes it possible to specify which speaker is on which channel. For example, if
+	// your agent is the first participant to speak, you would set ChannelId to 0 (to
 	// indicate the first channel) and ParticipantRole to AGENT (to indicate that it's
 	// the agent speaking).
 	ChannelDefinitions []types.ChannelDefinition
 
 	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
-	// Amazon S3 bucket that contains your input files. If the role you specify doesn’t
-	// have the appropriate permissions to access the specified Amazon S3 location,
-	// your request fails. IAM role ARNs have the format
+	// Amazon S3 bucket that contains your input files. If the role that you specify
+	// doesn’t have the appropriate permissions to access the specified Amazon S3
+	// location, your request fails. IAM role ARNs have the format
 	// arn:partition:iam::account:role/role-name-with-path. For example:
 	// arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).

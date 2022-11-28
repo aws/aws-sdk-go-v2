@@ -22,7 +22,7 @@ import (
 // get out of such a situation, you must break the cycle by changing the rule of
 // one of the composite alarms in the cycle to remove a dependency that creates the
 // cycle. The simplest change to make to break a cycle is to change the AlarmRule
-// of one of the alarms to False. Additionally, the evaluation of composite alarms
+// of one of the alarms to false. Additionally, the evaluation of composite alarms
 // stops if CloudWatch detects a cycle in the evaluation path.
 func (c *Client) DeleteAlarms(ctx context.Context, params *DeleteAlarmsInput, optFns ...func(*Options)) (*DeleteAlarmsOutput, error) {
 	if params == nil {

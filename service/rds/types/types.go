@@ -140,6 +140,109 @@ type AvailableProcessorFeature struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the details about a blue/green deployment. For more information, see
+// Using Amazon RDS Blue/Green Deployments for database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
+// database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+// in the Amazon Aurora User Guide.
+type BlueGreenDeployment struct {
+
+	// The system-generated identifier of the blue/green deployment.
+	BlueGreenDeploymentIdentifier *string
+
+	// The user-supplied name of the blue/green deployment.
+	BlueGreenDeploymentName *string
+
+	// Specifies the time when the blue/green deployment was created, in Universal
+	// Coordinated Time (UTC).
+	CreateTime *time.Time
+
+	// Specifies the time when the blue/green deployment was deleted, in Universal
+	// Coordinated Time (UTC).
+	DeleteTime *time.Time
+
+	// The source database for the blue/green deployment. Before switchover, the source
+	// database is the production database in the blue environment.
+	Source *string
+
+	// The status of the blue/green deployment. Values:
+	//
+	// * PROVISIONING - Resources are
+	// being created in the green environment.
+	//
+	// * AVAILABLE - Resources are available
+	// in the green environment.
+	//
+	// * SWITCHOVER_IN_PROGRESS - The deployment is being
+	// switched from the blue environment to the green environment.
+	//
+	// *
+	// SWITCHOVER_COMPLETED - Switchover from the blue environment to the green
+	// environment is complete.
+	//
+	// * INVALID_CONFIGURATION - Resources in the green
+	// environment are invalid, so switchover isn't possible.
+	//
+	// * SWITCHOVER_FAILED -
+	// Switchover was attempted but failed.
+	//
+	// * DELETING - The blue/green deployment is
+	// being deleted.
+	Status *string
+
+	// Additional information about the status of the blue/green deployment.
+	StatusDetails *string
+
+	// The details about each source and target resource in the blue/green deployment.
+	SwitchoverDetails []SwitchoverDetail
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	TagList []Tag
+
+	// The target database for the blue/green deployment. Before switchover, the target
+	// database is the clone database in the green environment.
+	Target *string
+
+	// Either tasks to be performed or tasks that have been completed on the target
+	// database before switchover.
+	Tasks []BlueGreenDeploymentTask
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details about a task for a blue/green deployment. For more
+// information, see Using Amazon RDS Blue/Green Deployments for database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
+// database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+// in the Amazon Aurora User Guide.
+type BlueGreenDeploymentTask struct {
+
+	// The name of the blue/green deployment task.
+	Name *string
+
+	// The status of the blue/green deployment task. Values:
+	//
+	// * PENDING - The resources
+	// are being prepared for deployment.
+	//
+	// * IN_PROGRESS - The resource is being
+	// deployed.
+	//
+	// * COMPLETED - The resource has been deployed.
+	//
+	// * FAILED - Deployment
+	// of the resource failed.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // A CA certificate for an Amazon Web Services account.
 type Certificate struct {
 
@@ -3611,7 +3714,46 @@ type Subnet struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
+// Contains the details about a blue/green deployment. For more information, see
+// Using Amazon RDS Blue/Green Deployments for database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
+// database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+// in the Amazon Aurora User Guide.
+type SwitchoverDetail struct {
+
+	// The Amazon Resource Name (ARN) of a resource in the blue environment.
+	SourceMember *string
+
+	// The switchover status of a resource in a blue/green deployment. Values:
+	//
+	// *
+	// preparing-for-switchover - The resource is being prepared to switch over.
+	//
+	// *
+	// ready-for-switchover - The resource is ready to switch over.
+	//
+	// *
+	// switchover-in-progress - The resource is being switched over.
+	//
+	// *
+	// switchover-completed - The resource has been switched over.
+	//
+	// * switchover-failed
+	// - The resource attempted to switch over but failed.
+	Status *string
+
+	// The Amazon Resource Name (ARN) of a resource in the green environment.
+	TargetMember *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata assigned to an Amazon RDS resource consisting of a key-value pair. For
+// more information, see Tagging Amazon RDS Resources
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+// the Amazon RDS User Guide.
 type Tag struct {
 
 	// A key is the required name of the tag. The string value can be from 1 to 128

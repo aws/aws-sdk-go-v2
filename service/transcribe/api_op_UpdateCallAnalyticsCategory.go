@@ -45,6 +45,13 @@ type UpdateCallAnalyticsCategoryInput struct {
 	// This member is required.
 	Rules []types.Rule
 
+	// Choose whether you want to update a streaming or a batch Call Analytics
+	// category. The input type you specify must match the input type specified when
+	// the category was created. For example, if you created a category with the
+	// POST_CALL input type, you must use POST_CALL as the input type when updating
+	// this category.
+	InputType types.InputType
+
 	noSmithyDocumentSerde
 }
 

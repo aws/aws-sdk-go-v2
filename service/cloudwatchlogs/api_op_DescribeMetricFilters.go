@@ -32,8 +32,8 @@ func (c *Client) DescribeMetricFilters(ctx context.Context, params *DescribeMetr
 
 type DescribeMetricFiltersInput struct {
 
-	// The prefix to match. CloudWatch Logs uses the value you set here only if you
-	// also include the logGroupName parameter in your request.
+	// The prefix to match. CloudWatch Logs uses the value that you set here only if
+	// you also include the logGroupName parameter in your request.
 	FilterNamePrefix *string
 
 	// The maximum number of items returned. If you don't specify a value, the default
