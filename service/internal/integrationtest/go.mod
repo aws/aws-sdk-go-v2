@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.16
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.7
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.73.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.74.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.23
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.18.0
@@ -43,7 +43,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/elastictranscoder v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/emr v1.20.16
 	github.com/aws/aws-sdk-go-v2/service/eventbridge v1.16.20
-	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.23
+	github.com/aws/aws-sdk-go-v2/service/firehose v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/glue v1.36.0
@@ -52,7 +52,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.19
 	github.com/aws/aws-sdk-go-v2/service/iot v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.24
-	github.com/aws/aws-sdk-go-v2/service/kms v1.18.18
+	github.com/aws/aws-sdk-go-v2/service/kms v1.19.0
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.19

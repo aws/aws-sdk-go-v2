@@ -1,3 +1,25 @@
+# Release (2022-11-29.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.74.0](service/ec2/CHANGELOG.md#v1740-2022-11-292)
+  * **Feature**: This release adds support for AWS Verified Access and the Hpc6id Amazon EC2 compute optimized instance type, which features 3rd generation Intel Xeon Scalable processors.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.15.0](service/firehose/CHANGELOG.md#v1150-2022-11-292)
+  * **Feature**: Allow support for the Serverless offering for Amazon OpenSearch Service as a Kinesis Data Firehose delivery destination.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.19.0](service/kms/CHANGELOG.md#v1190-2022-11-292)
+  * **Feature**: AWS KMS introduces the External Key Store (XKS), a new feature for customers who want to protect their data with encryption keys stored in an external key management system under their control.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.0.0](service/omics/CHANGELOG.md#v100-2022-11-292)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Omics is a new, purpose-built service that can be used by healthcare and life science organizations to store, query, and analyze omics data. The insights from that data can be used to accelerate scientific discoveries and improve healthcare.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.0.0](service/opensearchserverless/CHANGELOG.md#v100-2022-11-292)
+  * **Release**: New AWS service client module
+  * **Feature**: Publish SDK for Amazon OpenSearch Serverless
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.0.0](service/securitylake/CHANGELOG.md#v100-2022-11-292)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Security Lake automatically centralizes security data from cloud, on-premises, and custom sources into a purpose-built data lake stored in your account. Security Lake makes it easier to analyze security data, so you can improve the protection of your workloads, applications, and data
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.0.0](service/simspaceweaver/CHANGELOG.md#v100-2022-11-292)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS SimSpace Weaver is a new service that helps customers build spatial simulations at new levels of scale - resulting in virtual worlds with millions of dynamic entities. See the AWS SimSpace Weaver developer guide for more details on how to get started. https://docs.aws.amazon.com/simspaceweaver
+
 # Release (2022-11-29)
 
 ## Module Highlights

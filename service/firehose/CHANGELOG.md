@@ -1,3 +1,7 @@
+# v1.15.0 (2022-11-29.2)
+
+* **Feature**: Allow support for the Serverless offering for Amazon OpenSearch Service as a Kinesis Data Firehose delivery destination.
+
 # v1.14.23 (2022-11-28)
 
 * No change notes available for this release.

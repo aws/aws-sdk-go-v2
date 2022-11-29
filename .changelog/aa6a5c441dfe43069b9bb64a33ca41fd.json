@@ -1,8 +1,0 @@
-{
-    "id": "aa6a5c44-1dfe-4306-9b9b-b64a33ca41fd",
-    "type": "feature",
-    "description": "Allow support for the Serverless offering for Amazon OpenSearch Service as a Kinesis Data Firehose delivery destination.",
-    "modules": [
-        "service/firehose"
-    ]
-}
