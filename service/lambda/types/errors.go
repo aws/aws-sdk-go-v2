@@ -32,8 +32,9 @@ func (e *CodeSigningConfigNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// You have exceeded your maximum total code size per account. Learn more
-// (https://docs.aws.amazon.com/lambda/latest/dg/limits.html)
+// Your Amazon Web Services account has exceeded its maximum total code size. For
+// more information, see Lambda quotas
+// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html).
 type CodeStorageExceededException struct {
 	Message *string
 
@@ -100,8 +101,8 @@ func (e *EC2AccessDeniedException) ErrorMessage() string {
 func (e *EC2AccessDeniedException) ErrorCode() string             { return "EC2AccessDeniedException" }
 func (e *EC2AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Lambda was throttled by Amazon EC2 during Lambda function initialization using
-// the execution role provided for the Lambda function.
+// Amazon EC2 throttled Lambda during Lambda function initialization using the
+// execution role provided for the function.
 type EC2ThrottledException struct {
 	Message *string
 
@@ -122,8 +123,8 @@ func (e *EC2ThrottledException) ErrorMessage() string {
 func (e *EC2ThrottledException) ErrorCode() string             { return "EC2ThrottledException" }
 func (e *EC2ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Lambda received an unexpected EC2 client exception while setting up for the
-// Lambda function.
+// Lambda received an unexpected Amazon EC2 client exception while setting up for
+// the Lambda function.
 type EC2UnexpectedException struct {
 	Message *string
 
@@ -166,7 +167,8 @@ func (e *EFSIOException) ErrorMessage() string {
 func (e *EFSIOException) ErrorCode() string             { return "EFSIOException" }
 func (e *EFSIOException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The function couldn't make a network connection to the configured file system.
+// The Lambda function couldn't make a network connection to the configured file
+// system.
 type EFSMountConnectivityException struct {
 	Message *string
 
@@ -187,8 +189,8 @@ func (e *EFSMountConnectivityException) ErrorMessage() string {
 func (e *EFSMountConnectivityException) ErrorCode() string             { return "EFSMountConnectivityException" }
 func (e *EFSMountConnectivityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The function couldn't mount the configured file system due to a permission or
-// configuration issue.
+// The Lambda function couldn't mount the configured file system due to a
+// permission or configuration issue.
 type EFSMountFailureException struct {
 	Message *string
 
@@ -209,8 +211,8 @@ func (e *EFSMountFailureException) ErrorMessage() string {
 func (e *EFSMountFailureException) ErrorCode() string             { return "EFSMountFailureException" }
 func (e *EFSMountFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The function was able to make a network connection to the configured file
-// system, but the mount operation timed out.
+// The Lambda function made a network connection to the configured file system, but
+// the mount operation timed out.
 type EFSMountTimeoutException struct {
 	Message *string
 
@@ -231,9 +233,10 @@ func (e *EFSMountTimeoutException) ErrorMessage() string {
 func (e *EFSMountTimeoutException) ErrorCode() string             { return "EFSMountTimeoutException" }
 func (e *EFSMountTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Lambda was not able to create an elastic network interface in the VPC, specified
-// as part of Lambda function configuration, because the limit for network
-// interfaces has been reached.
+// Lambda couldn't create an elastic network interface in the VPC, specified as
+// part of Lambda function configuration, because the limit for network interfaces
+// has been reached. For more information, see Lambda quotas
+// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html).
 type ENILimitReachedException struct {
 	Message *string
 
@@ -254,8 +257,8 @@ func (e *ENILimitReachedException) ErrorMessage() string {
 func (e *ENILimitReachedException) ErrorCode() string             { return "ENILimitReachedException" }
 func (e *ENILimitReachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The code signature failed the integrity check. Lambda always blocks deployment
-// if the integrity check fails, even if code signing policy is set to WARN.
+// The code signature failed the integrity check. If the integrity check fails,
+// then Lambda blocks deployment, even if the code signing policy is set to WARN.
 type InvalidCodeSignatureException struct {
 	Message *string
 
@@ -276,7 +279,7 @@ func (e *InvalidCodeSignatureException) ErrorMessage() string {
 func (e *InvalidCodeSignatureException) ErrorCode() string             { return "InvalidCodeSignatureException" }
 func (e *InvalidCodeSignatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One of the parameters in the request is invalid.
+// One of the parameters in the request is not valid.
 type InvalidParameterValueException struct {
 	Message *string
 
@@ -339,8 +342,8 @@ func (e *InvalidRuntimeException) ErrorMessage() string {
 func (e *InvalidRuntimeException) ErrorCode() string             { return "InvalidRuntimeException" }
 func (e *InvalidRuntimeException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The Security Group ID provided in the Lambda function VPC configuration is
-// invalid.
+// The security group ID provided in the Lambda function VPC configuration is not
+// valid.
 type InvalidSecurityGroupIDException struct {
 	Message *string
 
@@ -363,7 +366,7 @@ func (e *InvalidSecurityGroupIDException) ErrorCode() string {
 }
 func (e *InvalidSecurityGroupIDException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The Subnet ID provided in the Lambda function VPC configuration is invalid.
+// The subnet ID provided in the Lambda function VPC configuration is not valid.
 type InvalidSubnetIDException struct {
 	Message *string
 
@@ -405,8 +408,8 @@ func (e *InvalidZipFileException) ErrorMessage() string {
 func (e *InvalidZipFileException) ErrorCode() string             { return "InvalidZipFileException" }
 func (e *InvalidZipFileException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Lambda was unable to decrypt the environment variables because KMS access was
-// denied. Check the Lambda function's KMS permissions.
+// Lambda couldn't decrypt the environment variables because KMS access was denied.
+// Check the Lambda function's KMS permissions.
 type KMSAccessDeniedException struct {
 	Message *string
 
@@ -427,8 +430,8 @@ func (e *KMSAccessDeniedException) ErrorMessage() string {
 func (e *KMSAccessDeniedException) ErrorCode() string             { return "KMSAccessDeniedException" }
 func (e *KMSAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Lambda was unable to decrypt the environment variables because the KMS key used
-// is disabled. Check the Lambda function's KMS key settings.
+// Lambda couldn't decrypt the environment variables because the KMS key used is
+// disabled. Check the Lambda function's KMS key settings.
 type KMSDisabledException struct {
 	Message *string
 
@@ -449,8 +452,8 @@ func (e *KMSDisabledException) ErrorMessage() string {
 func (e *KMSDisabledException) ErrorCode() string             { return "KMSDisabledException" }
 func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Lambda was unable to decrypt the environment variables because the KMS key used
-// is in an invalid state for Decrypt. Check the function's KMS key settings.
+// Lambda couldn't decrypt the environment variables because the state of the KMS
+// key used is not valid for Decrypt. Check the function's KMS key settings.
 type KMSInvalidStateException struct {
 	Message *string
 
@@ -471,8 +474,8 @@ func (e *KMSInvalidStateException) ErrorMessage() string {
 func (e *KMSInvalidStateException) ErrorCode() string             { return "KMSInvalidStateException" }
 func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Lambda was unable to decrypt the environment variables because the KMS key was
-// not found. Check the function's KMS key settings.
+// Lambda couldn't decrypt the environment variables because the KMS key was not
+// found. Check the function's KMS key settings.
 type KMSNotFoundException struct {
 	Message *string
 
@@ -493,8 +496,9 @@ func (e *KMSNotFoundException) ErrorMessage() string {
 func (e *KMSNotFoundException) ErrorCode() string             { return "KMSNotFoundException" }
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The permissions policy for the resource is too large. Learn more
-// (https://docs.aws.amazon.com/lambda/latest/dg/limits.html)
+// The permissions policy for the resource is too large. For more information, see
+// Lambda quotas
+// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html).
 type PolicyLengthExceededException struct {
 	Message *string
 
@@ -516,8 +520,8 @@ func (e *PolicyLengthExceededException) ErrorCode() string             { return 
 func (e *PolicyLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The RevisionId provided does not match the latest RevisionId for the Lambda
-// function or alias. Call the GetFunction or the GetAlias API to retrieve the
-// latest RevisionId for your resource.
+// function or alias. Call the GetFunction or the GetAlias API operation to
+// retrieve the latest RevisionId for your resource.
 type PreconditionFailedException struct {
 	Message *string
 
@@ -563,9 +567,9 @@ func (e *ProvisionedConcurrencyConfigNotFoundException) ErrorFault() smithy.Erro
 	return smithy.FaultClient
 }
 
-// The request payload exceeded the Invoke request body JSON input limit. For more
-// information, see Limits
-// (https://docs.aws.amazon.com/lambda/latest/dg/limits.html).
+// The request payload exceeded the Invoke request body JSON input quota. For more
+// information, see Lambda quotas
+// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html).
 type RequestTooLargeException struct {
 	Message *string
 
@@ -607,9 +611,9 @@ func (e *ResourceConflictException) ErrorMessage() string {
 func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation conflicts with the resource's availability. For example, you
-// attempted to update an EventSource Mapping in CREATING, or tried to delete a
-// EventSource mapping currently in the UPDATING state.
+// The operation conflicts with the resource's availability. For example, you tried
+// to update an event source mapping in the CREATING state, or you tried to delete
+// an event source mapping currently UPDATING.
 type ResourceInUseException struct {
 	Message *string
 
@@ -694,8 +698,76 @@ func (e *ServiceException) ErrorMessage() string {
 func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Lambda was not able to set up VPC access for the Lambda function because one or
-// more configured subnets has no available IP addresses.
+// The runtime restore hook encountered an error. For more information, check the
+// Amazon CloudWatch logs.
+type SnapStartException struct {
+	Message *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SnapStartException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SnapStartException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SnapStartException) ErrorCode() string             { return "SnapStartException" }
+func (e *SnapStartException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Lambda is initializing your function. You can invoke the function when the
+// function state
+// (https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html) becomes
+// Active.
+type SnapStartNotReadyException struct {
+	Message *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SnapStartNotReadyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SnapStartNotReadyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SnapStartNotReadyException) ErrorCode() string             { return "SnapStartNotReadyException" }
+func (e *SnapStartNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The runtime restore hook failed to complete within the timeout limit (2
+// seconds).
+type SnapStartTimeoutException struct {
+	Message *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SnapStartTimeoutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SnapStartTimeoutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SnapStartTimeoutException) ErrorCode() string             { return "SnapStartTimeoutException" }
+func (e *SnapStartTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Lambda couldn't set up VPC access for the Lambda function because one or more
+// configured subnets has no available IP addresses.
 type SubnetIPAddressLimitReachedException struct {
 	Message *string
 
@@ -720,7 +792,9 @@ func (e *SubnetIPAddressLimitReachedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
 
-// The request throughput limit was exceeded.
+// The request throughput limit was exceeded. For more information, see Lambda
+// quotas
+// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests).
 type TooManyRequestsException struct {
 	Message *string
 

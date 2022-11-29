@@ -61,7 +61,8 @@ type GetUsageStatisticsOutput struct {
 	NextToken *string
 
 	// An array of objects that contains the results of the query. Each object contains
-	// the data for an account that meets the filter criteria specified in the request.
+	// the data for an account that matches the filter criteria specified in the
+	// request.
 	Records []types.UsageRecord
 
 	// The inclusive time period that the usage data applies to. Possible values are:

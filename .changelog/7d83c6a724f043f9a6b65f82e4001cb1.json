@@ -1,0 +1,8 @@
+{
+    "id": "7d83c6a7-24f0-43f9-a6b6-5f82e4001cb1",
+    "type": "feature",
+    "description": "Adds support for a new recommendation preference that makes it possible for customers to optimize their EC2 recommendations by utilizing an external metrics ingestion service to provide metrics.",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

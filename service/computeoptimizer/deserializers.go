@@ -3511,6 +3511,11 @@ func awsAwsjson10_deserializeDocumentEffectiveRecommendationPreferences(v **type
 				sv.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(jtv)
 			}
 
+		case "externalMetricsPreference":
+			if err := awsAwsjson10_deserializeDocumentExternalMetricsPreference(&sv.ExternalMetricsPreference, value); err != nil {
+				return err
+			}
+
 		case "inferredWorkloadTypes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3628,6 +3633,46 @@ func awsAwsjson10_deserializeDocumentExportDestination(v **types.ExportDestinati
 		case "s3":
 			if err := awsAwsjson10_deserializeDocumentS3Destination(&sv.S3, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentExternalMetricsPreference(v **types.ExternalMetricsPreference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExternalMetricsPreference
+	if *v == nil {
+		sv = &types.ExternalMetricsPreference{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExternalMetricsSource to be of type string, got %T instead", value)
+				}
+				sv.Source = types.ExternalMetricsSource(jtv)
 			}
 
 		default:
@@ -5411,6 +5456,11 @@ func awsAwsjson10_deserializeDocumentRecommendationPreferencesDetail(v **types.R
 				sv.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(jtv)
 			}
 
+		case "externalMetricsPreference":
+			if err := awsAwsjson10_deserializeDocumentExternalMetricsPreference(&sv.ExternalMetricsPreference, value); err != nil {
+				return err
+			}
+
 		case "inferredWorkloadTypes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7184,6 +7234,11 @@ func awsAwsjson10_deserializeOpDocumentGetEffectiveRecommendationPreferencesOutp
 					return fmt.Errorf("expected EnhancedInfrastructureMetrics to be of type string, got %T instead", value)
 				}
 				sv.EnhancedInfrastructureMetrics = types.EnhancedInfrastructureMetrics(jtv)
+			}
+
+		case "externalMetricsPreference":
+			if err := awsAwsjson10_deserializeDocumentExternalMetricsPreference(&sv.ExternalMetricsPreference, value); err != nil {
+				return err
 			}
 
 		default:

@@ -63,6 +63,12 @@ type IdentityProviderSummary struct {
 	// This member is required.
 	Product *string
 
+	// An object that details the registered identity provider’s product related
+	// configuration settings such as the subnets to provision VPC endpoints.
+	//
+	// This member is required.
+	Settings *Settings
+
 	// The status of an identity provider.
 	//
 	// This member is required.
@@ -173,6 +179,48 @@ type ProductUserSummary struct {
 
 	// The start date of a subscription.
 	SubscriptionStartDate *string
+
+	noSmithyDocumentSerde
+}
+
+// The registered identity provider’s product related configuration settings such
+// as the subnets to provision VPC endpoints, and the security group ID that is
+// associated with the VPC endpoints. The security group should permit inbound TCP
+// port 1688 communication from resources in the VPC.
+type Settings struct {
+
+	// A security group ID that allows inbound TCP port 1688 communication between
+	// resources in your VPC and the VPC endpoint for activation servers.
+	//
+	// This member is required.
+	SecurityGroupId *string
+
+	// The subnets defined for the registered identity provider.
+	//
+	// This member is required.
+	Subnets []string
+
+	noSmithyDocumentSerde
+}
+
+// Updates the registered identity provider’s product related configuration
+// settings such as the subnets to provision VPC endpoints.
+type UpdateSettings struct {
+
+	// The ID of one or more subnets in which License Manager will create a VPC
+	// endpoint for products that require connectivity to activation servers.
+	//
+	// This member is required.
+	AddSubnets []string
+
+	// The ID of one or more subnets to remove.
+	//
+	// This member is required.
+	RemoveSubnets []string
+
+	// A security group ID that allows inbound TCP port 1688 communication between
+	// resources in your VPC and the VPC endpoints for activation servers.
+	SecurityGroupId *string
 
 	noSmithyDocumentSerde
 }

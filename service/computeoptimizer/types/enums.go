@@ -330,6 +330,7 @@ const (
 	ExportableInstanceFieldEffectiveRecommendationPreferencesInferredWorkloadTypes         ExportableInstanceField = "EffectiveRecommendationPreferencesInferredWorkloadTypes"
 	ExportableInstanceFieldInferredWorkloadTypes                                           ExportableInstanceField = "InferredWorkloadTypes"
 	ExportableInstanceFieldRecommendationOptionsMigrationEffort                            ExportableInstanceField = "RecommendationOptionsMigrationEffort"
+	ExportableInstanceFieldEffectiveRecommendationPreferencesExternalMetricsSource         ExportableInstanceField = "EffectiveRecommendationPreferencesExternalMetricsSource"
 )
 
 // Values returns all known values for ExportableInstanceField. Note that this can
@@ -389,6 +390,7 @@ func (ExportableInstanceField) Values() []ExportableInstanceField {
 		"EffectiveRecommendationPreferencesInferredWorkloadTypes",
 		"InferredWorkloadTypes",
 		"RecommendationOptionsMigrationEffort",
+		"EffectiveRecommendationPreferencesExternalMetricsSource",
 	}
 }
 
@@ -526,6 +528,28 @@ func (ExportableVolumeField) Values() []ExportableVolumeField {
 		"RecommendationOptionsSavingsOpportunityPercentage",
 		"RecommendationOptionsEstimatedMonthlySavingsCurrency",
 		"RecommendationOptionsEstimatedMonthlySavingsValue",
+	}
+}
+
+type ExternalMetricsSource string
+
+// Enum values for ExternalMetricsSource
+const (
+	ExternalMetricsSourceDatadog   ExternalMetricsSource = "Datadog"
+	ExternalMetricsSourceDynatrace ExternalMetricsSource = "Dynatrace"
+	ExternalMetricsSourceNewrelic  ExternalMetricsSource = "NewRelic"
+	ExternalMetricsSourceInstana   ExternalMetricsSource = "Instana"
+)
+
+// Values returns all known values for ExternalMetricsSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExternalMetricsSource) Values() []ExternalMetricsSource {
+	return []ExternalMetricsSource{
+		"Datadog",
+		"Dynatrace",
+		"NewRelic",
+		"Instana",
 	}
 }
 
@@ -991,6 +1015,7 @@ type RecommendationPreferenceName string
 const (
 	RecommendationPreferenceNameEnhancedInfrastructureMetrics RecommendationPreferenceName = "EnhancedInfrastructureMetrics"
 	RecommendationPreferenceNameInferredWorkloadTypes         RecommendationPreferenceName = "InferredWorkloadTypes"
+	RecommendationPreferenceNameExternalMetricsPreference     RecommendationPreferenceName = "ExternalMetricsPreference"
 )
 
 // Values returns all known values for RecommendationPreferenceName. Note that this
@@ -1000,6 +1025,7 @@ func (RecommendationPreferenceName) Values() []RecommendationPreferenceName {
 	return []RecommendationPreferenceName{
 		"EnhancedInfrastructureMetrics",
 		"InferredWorkloadTypes",
+		"ExternalMetricsPreference",
 	}
 }
 

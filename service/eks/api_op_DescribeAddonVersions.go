@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the Kubernetes versions that the add-on can be used with.
+// Describes the versions for an add-on. Information such as the Kubernetes
+// versions that you can use the add-on with, the owner, publisher, and the type of
+// the add-on are returned.
 func (c *Client) DescribeAddonVersions(ctx context.Context, params *DescribeAddonVersionsInput, optFns ...func(*Options)) (*DescribeAddonVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeAddonVersionsInput{}
@@ -35,7 +37,7 @@ type DescribeAddonVersionsInput struct {
 	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html).
 	AddonName *string
 
-	// The Kubernetes versions that the add-on can be used with.
+	// The Kubernetes versions that you can use the add-on with.
 	KubernetesVersion *string
 
 	// The maximum number of results to return.
@@ -49,12 +51,25 @@ type DescribeAddonVersionsInput struct {
 	// for other programmatic purposes.
 	NextToken *string
 
+	// The owner of the add-on. For valid owners, don't specify a value for this
+	// property.
+	Owners []string
+
+	// The publisher of the add-on. For valid publishers, don't specify a value for
+	// this property.
+	Publishers []string
+
+	// The type of the add-on. For valid types, don't specify a value for this
+	// property.
+	Types []string
+
 	noSmithyDocumentSerde
 }
 
 type DescribeAddonVersionsOutput struct {
 
-	// The list of available versions with Kubernetes version compatibility.
+	// The list of available versions with Kubernetes version compatibility and other
+	// properties.
 	Addons []types.AddonInfo
 
 	// The nextToken value returned from a previous paginated

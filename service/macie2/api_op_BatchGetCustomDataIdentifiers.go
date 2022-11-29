@@ -38,8 +38,8 @@ type BatchGetCustomDataIdentifiersInput struct {
 
 type BatchGetCustomDataIdentifiersOutput struct {
 
-	// An array of objects, one for each custom data identifier that meets the criteria
-	// specified in the request.
+	// An array of objects, one for each custom data identifier that matches the
+	// criteria specified in the request.
 	CustomDataIdentifiers []types.BatchGetCustomDataIdentifierSummary
 
 	// An array of custom data identifier IDs, one for each custom data identifier that

@@ -13,12 +13,12 @@ import (
 
 // Updates a Lambda function's code. If code signing is enabled for the function,
 // the code package must be signed by a trusted publisher. For more information,
-// see Configuring code signing
-// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-trustedcode.html).
-// If the function's package type is Image, you must specify the code package in
-// ImageUri as the URI of a container image
+// see Configuring code signing for Lambda
+// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html).
+// If the function's package type is Image, then you must specify the code package
+// in ImageUri as the URI of a container image
 // (https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html) in the Amazon
-// ECR registry. If the function's package type is Zip, you must specify the
+// ECR registry. If the function's package type is Zip, then you must specify the
 // deployment package as a .zip file archive
 // (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip).
 // Enter the Amazon S3 bucket and key of the code .zip file location. You can also
@@ -48,13 +48,13 @@ type UpdateFunctionCodeInput struct {
 
 	// The name of the Lambda function. Name formats
 	//
-	// * Function name - my-function.
+	// * Function name – my-function.
 	//
 	// *
-	// Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function.
+	// Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function.
 	//
 	// *
-	// Partial ARN - 123456789012:function:my-function.
+	// Partial ARN – 123456789012:function:my-function.
 	//
 	// The length constraint applies
 	// only to the full ARN. If you specify only the function name, it is limited to 64
@@ -80,7 +80,7 @@ type UpdateFunctionCodeInput struct {
 	// This has the same effect as calling PublishVersion separately.
 	Publish bool
 
-	// Only update the function if the revision ID matches the ID that's specified. Use
+	// Update the function only if the revision ID matches the ID that's specified. Use
 	// this option to avoid modifying a function that has changed since you last read
 	// it.
 	RevisionId *string
@@ -98,8 +98,8 @@ type UpdateFunctionCodeInput struct {
 	S3ObjectVersion *string
 
 	// The base64-encoded contents of the deployment package. Amazon Web Services SDK
-	// and Amazon Web Services CLI clients handle the encoding for you. Use only with a
-	// function defined with a .zip file archive deployment package.
+	// and CLI clients handle the encoding for you. Use only with a function defined
+	// with a .zip file archive deployment package.
 	ZipFile []byte
 
 	noSmithyDocumentSerde
@@ -131,7 +131,7 @@ type UpdateFunctionCodeOutput struct {
 	Environment *types.EnvironmentResponse
 
 	// The size of the function’s /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10240 MB.
+	// it can be any whole number between 512 and 10,240 MB.
 	EphemeralStorage *types.EphemeralStorage
 
 	// Connection settings for an Amazon EFS file system
@@ -144,14 +144,14 @@ type UpdateFunctionCodeOutput struct {
 	// The name of the function.
 	FunctionName *string
 
-	// The function that Lambda calls to begin executing your function.
+	// The function that Lambda calls to begin running your function.
 	Handler *string
 
 	// The function's image configuration values.
 	ImageConfigResponse *types.ImageConfigResponse
 
 	// The KMS key that's used to encrypt the function's environment variables. This
-	// key is only returned if you've configured a customer managed key.
+	// key is returned only if you've configured a customer managed key.
 	KMSKeyArn *string
 
 	// The date and time that the function was last updated, in ISO-8601 format
@@ -168,7 +168,7 @@ type UpdateFunctionCodeOutput struct {
 	// The reason code for the last update that was performed on the function.
 	LastUpdateStatusReasonCode types.LastUpdateStatusReasonCode
 
-	// The function's  layers
+	// The function's layers
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 	Layers []types.Layer
 
@@ -196,6 +196,12 @@ type UpdateFunctionCodeOutput struct {
 
 	// The ARN of the signing profile version.
 	SigningProfileVersionArn *string
+
+	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
+	// execution environment when you publish a function version. For more information,
+	// see Reducing startup time with Lambda SnapStart
+	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
+	SnapStart *types.SnapStartResponse
 
 	// The current state of the function. When the state is Inactive, you can
 	// reactivate the function by invoking it.

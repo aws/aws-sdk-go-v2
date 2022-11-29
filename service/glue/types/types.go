@@ -689,6 +689,9 @@ type CodeGenConfigurationNode struct {
 	// placeholders such as zeros, are not automatically recognized as nulls.
 	DropNullFields *DropNullFields
 
+	// Specifies a custom visual transform created by a user.
+	DynamicTransform *DynamicTransform
+
 	// Specifies a DynamoDB data source in the Glue Data Catalog.
 	DynamoDBCatalogSource *DynamoDBCatalogSource
 
@@ -2281,6 +2284,44 @@ type DropNullFields struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the set of parameters needed to perform the dynamic transform.
+type DynamicTransform struct {
+
+	// Specifies the name of the function of the dynamic transform.
+	//
+	// This member is required.
+	FunctionName *string
+
+	// Specifies the inputs for the dynamic transform that are required.
+	//
+	// This member is required.
+	Inputs []string
+
+	// Specifies the name of the dynamic transform.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies the path of the dynamic transform source and config files.
+	//
+	// This member is required.
+	Path *string
+
+	// Specifies the name of the dynamic transform as it appears in the Glue Studio
+	// visual editor.
+	//
+	// This member is required.
+	TransformName *string
+
+	// Specifies the parameters of the dynamic transform.
+	Parameters []TransformConfigParameter
+
+	// This field is not used and will be deprecated in future release.
+	Version *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a DynamoDB data source in the Glue Data Catalog.
 type DynamoDBCatalogSource struct {
 
@@ -2667,7 +2708,7 @@ type GluePolicy struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a user-defined schema when a schema cannot be determined by AWS Glue.
+// Specifies a user-defined schema when a schema cannot be determined by Glue.
 type GlueSchema struct {
 
 	// Specifies the column definitions that make up a Glue schema.
@@ -6259,6 +6300,40 @@ type TaskRunSortCriteria struct {
 	//
 	// This member is required.
 	SortDirection SortDirectionType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the parameters in the config file of the dynamic transform.
+type TransformConfigParameter struct {
+
+	// Specifies the name of the parameter in the config file of the dynamic transform.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies the parameter type in the config file of the dynamic transform.
+	//
+	// This member is required.
+	Type ParamType
+
+	// Specifies whether the parameter is optional or not in the config file of the
+	// dynamic transform.
+	IsOptional *bool
+
+	// Specifies the list type of the parameter in the config file of the dynamic
+	// transform.
+	ListType ParamType
+
+	// Specifies the validation message in the config file of the dynamic transform.
+	ValidationMessage *string
+
+	// Specifies the validation rule in the config file of the dynamic transform.
+	ValidationRule *string
+
+	// Specifies the value of the parameter in the config file of the dynamic
+	// transform.
+	Value []string
 
 	noSmithyDocumentSerde
 }

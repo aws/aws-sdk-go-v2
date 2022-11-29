@@ -30,8 +30,17 @@ type Addon struct {
 	// An object representing the health of the add-on.
 	Health *AddonHealth
 
+	// Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.
+	MarketplaceInformation *MarketplaceInformation
+
 	// The date and time that the add-on was last modified.
 	ModifiedAt *time.Time
+
+	// The owner of the add-on.
+	Owner *string
+
+	// The publisher of the add-on.
+	Publisher *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that is bound to the Kubernetes
 	// service account used by the add-on.
@@ -67,6 +76,15 @@ type AddonInfo struct {
 	// compatible Kubernetes versions.
 	AddonVersions []AddonVersionInfo
 
+	// Information about the add-on from the Amazon Web Services Marketplace.
+	MarketplaceInformation *MarketplaceInformation
+
+	// The owner of the add-on.
+	Owner *string
+
+	// The publisher of the add-on.
+	Publisher *string
+
 	// The type of the add-on.
 	Type *string
 
@@ -99,6 +117,9 @@ type AddonVersionInfo struct {
 
 	// An object representing the compatibilities of a version.
 	Compatibilities []Compatibility
+
+	// Whether the add-on requires configuration.
+	RequiresConfiguration bool
 
 	noSmithyDocumentSerde
 }
@@ -295,7 +316,7 @@ type ConnectorConfigResponse struct {
 	noSmithyDocumentSerde
 }
 
-// The placement configuration for all the control plane instance of your local
+// The placement configuration for all the control plane instances of your local
 // Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see
 // Capacity considerations
 // (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
@@ -309,7 +330,7 @@ type ControlPlanePlacementRequest struct {
 	noSmithyDocumentSerde
 }
 
-// The placement configuration for all the control plane instance of your local
+// The placement configuration for all the control plane instances of your local
 // Amazon EKS cluster on an Amazon Web Services Outpost. For more information, see
 // Capacity considerations
 // (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
@@ -676,6 +697,18 @@ type LogSetup struct {
 	noSmithyDocumentSerde
 }
 
+// Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.
+type MarketplaceInformation struct {
+
+	// The product ID from the Amazon Web Services Marketplace.
+	ProductId *string
+
+	// The product URL from the Amazon Web Services Marketplace.
+	ProductUrl *string
+
+	noSmithyDocumentSerde
+}
+
 // An object representing an Amazon EKS managed node group.
 type Nodegroup struct {
 
@@ -1005,8 +1038,8 @@ type OutpostConfigRequest struct {
 	OutpostArns []string
 
 	// An object representing the placement configuration for all the control plane
-	// instance of your local Amazon EKS cluster on an Amazon Web Services Outpost. For
-	// more information, see Capacity considerations
+	// instances of your local Amazon EKS cluster on an Amazon Web Services Outpost.
+	// For more information, see Capacity considerations
 	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
 	// in the Amazon EKS User Guide.
 	ControlPlanePlacement *ControlPlanePlacementRequest
@@ -1032,8 +1065,8 @@ type OutpostConfigResponse struct {
 	OutpostArns []string
 
 	// An object representing the placement configuration for all the control plane
-	// instance of your local Amazon EKS cluster on an Amazon Web Services Outpost. For
-	// more information, see Capacity considerations
+	// instances of your local Amazon EKS cluster on an Amazon Web Services Outpost.
+	// For more information, see Capacity considerations
 	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html)
 	// in the Amazon EKS User Guide.
 	ControlPlanePlacement *ControlPlanePlacementResponse
@@ -1150,7 +1183,7 @@ type UpdateTaintsPayload struct {
 	// Kubernetes taints to be added or updated.
 	AddOrUpdateTaints []Taint
 
-	// Kubernetes taints to be removed.
+	// Kubernetes taints to remove.
 	RemoveTaints []Taint
 
 	noSmithyDocumentSerde

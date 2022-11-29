@@ -12161,7 +12161,7 @@ type SortCriterion struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a specific standard.
+// Provides information about a specific security standard.
 type Standard struct {
 
 	// A description of the standard.
@@ -12179,6 +12179,9 @@ type Standard struct {
 
 	// The ARN of a standard.
 	StandardsArn *string
+
+	// Provides details about the management of a standard.
+	StandardsManagedBy *StandardsManagedBy
 
 	noSmithyDocumentSerde
 }
@@ -12222,6 +12225,21 @@ type StandardsControl struct {
 
 	// The title of the security standard control.
 	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the management of a security standard.
+type StandardsManagedBy struct {
+
+	// An identifier for the company that manages a specific security standard. For
+	// existing standards, the value is equal to Amazon Web Services.
+	Company *string
+
+	// An identifier for the product that manages a specific security standard. For
+	// existing standards, the value is equal to the Amazon Web Services service that
+	// manages the standard.
+	Product *string
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,8 @@
+{
+    "id": "959d6d1c-7279-465a-80f8-750552cdee7c",
+    "type": "feature",
+    "description": "Added support for configuring Macie to continually sample objects from S3 buckets and inspect them for sensitive data. Results appear in statistics, findings, and other data that Macie provides.",
+    "modules": [
+        "service/macie2"
+    ]
+}

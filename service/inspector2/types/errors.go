@@ -136,6 +136,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 type ThrottlingException struct {
 	Message *string
 
+	RetryAfterSeconds *int32
+
 	noSmithyDocumentSerde
 }
 

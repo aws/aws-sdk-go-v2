@@ -1,0 +1,8 @@
+{
+    "id": "85706186-05e8-4361-933d-8d51d2f20e19",
+    "type": "feature",
+    "description": "This release adds new Describe APIs and updates Create and Update APIs to support the data model for Dashboards, Analyses, and Templates.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

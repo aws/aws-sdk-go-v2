@@ -5955,6 +5955,11 @@ func awsRestjson1_deserializeDocumentAddon(v **types.Addon, value interface{}) e
 				return err
 			}
 
+		case "marketplaceInformation":
+			if err := awsRestjson1_deserializeDocumentMarketplaceInformation(&sv.MarketplaceInformation, value); err != nil {
+				return err
+			}
+
 		case "modifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5969,6 +5974,24 @@ func awsRestjson1_deserializeDocumentAddon(v **types.Addon, value interface{}) e
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "owner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Owner = ptr.String(jtv)
+			}
+
+		case "publisher":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Publisher = ptr.String(jtv)
 			}
 
 		case "serviceAccountRoleArn":
@@ -6073,6 +6096,29 @@ func awsRestjson1_deserializeDocumentAddonInfo(v **types.AddonInfo, value interf
 		case "addonVersions":
 			if err := awsRestjson1_deserializeDocumentAddonVersionInfoList(&sv.AddonVersions, value); err != nil {
 				return err
+			}
+
+		case "marketplaceInformation":
+			if err := awsRestjson1_deserializeDocumentMarketplaceInformation(&sv.MarketplaceInformation, value); err != nil {
+				return err
+			}
+
+		case "owner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Owner = ptr.String(jtv)
+			}
+
+		case "publisher":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Publisher = ptr.String(jtv)
 			}
 
 		case "type":
@@ -6254,6 +6300,15 @@ func awsRestjson1_deserializeDocumentAddonVersionInfo(v **types.AddonVersionInfo
 		case "compatibilities":
 			if err := awsRestjson1_deserializeDocumentCompatibilities(&sv.Compatibilities, value); err != nil {
 				return err
+			}
+
+		case "requiresConfiguration":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RequiresConfiguration = jtv
 			}
 
 		default:
@@ -8104,6 +8159,55 @@ func awsRestjson1_deserializeDocumentLogTypes(v *[]types.LogType, value interfac
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMarketplaceInformation(v **types.MarketplaceInformation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MarketplaceInformation
+	if *v == nil {
+		sv = &types.MarketplaceInformation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "productId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProductId = ptr.String(jtv)
+			}
+
+		case "productUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ProductUrl = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

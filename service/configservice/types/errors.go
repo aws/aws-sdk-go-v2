@@ -30,6 +30,26 @@ func (e *ConformancePackTemplateValidationException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
+// Using the same client token with one or more different parameters. Specify a new
+// client token with the parameter changes and try again.
+type IdempotentParameterMismatch struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IdempotentParameterMismatch) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IdempotentParameterMismatch) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IdempotentParameterMismatch) ErrorCode() string             { return "IdempotentParameterMismatch" }
+func (e *IdempotentParameterMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Your Amazon S3 bucket policy does not permit Config to write to it.
 type InsufficientDeliveryPolicyException struct {
 	Message *string

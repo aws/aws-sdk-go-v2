@@ -11035,6 +11035,13 @@ func awsAwsjson11_serializeDocumentCodeGenConfigurationNode(v *types.CodeGenConf
 		}
 	}
 
+	if v.DynamicTransform != nil {
+		ok := object.Key("DynamicTransform")
+		if err := awsAwsjson11_serializeDocumentDynamicTransform(v.DynamicTransform, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DynamoDBCatalogSource != nil {
 		ok := object.Key("DynamoDBCatalogSource")
 		if err := awsAwsjson11_serializeDocumentDynamoDBCatalogSource(v.DynamoDBCatalogSource, ok); err != nil {
@@ -12486,6 +12493,52 @@ func awsAwsjson11_serializeDocumentDropNullFields(v *types.DropNullFields, value
 		if err := awsAwsjson11_serializeDocumentNullValueFields(v.NullTextList, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDynamicTransform(v *types.DynamicTransform, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FunctionName != nil {
+		ok := object.Key("FunctionName")
+		ok.String(*v.FunctionName)
+	}
+
+	if v.Inputs != nil {
+		ok := object.Key("Inputs")
+		if err := awsAwsjson11_serializeDocumentOneInput(v.Inputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsAwsjson11_serializeDocumentTransformConfigParameterList(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Path != nil {
+		ok := object.Key("Path")
+		ok.String(*v.Path)
+	}
+
+	if v.TransformName != nil {
+		ok := object.Key("TransformName")
+		ok.String(*v.TransformName)
+	}
+
+	if v.Version != nil {
+		ok := object.Key("Version")
+		ok.String(*v.Version)
 	}
 
 	return nil
@@ -16432,6 +16485,63 @@ func awsAwsjson11_serializeDocumentTaskRunSortCriteria(v *types.TaskRunSortCrite
 		ok.String(string(v.SortDirection))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTransformConfigParameter(v *types.TransformConfigParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsOptional != nil {
+		ok := object.Key("IsOptional")
+		ok.Boolean(*v.IsOptional)
+	}
+
+	if len(v.ListType) > 0 {
+		ok := object.Key("ListType")
+		ok.String(string(v.ListType))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.ValidationMessage != nil {
+		ok := object.Key("ValidationMessage")
+		ok.String(*v.ValidationMessage)
+	}
+
+	if v.ValidationRule != nil {
+		ok := object.Key("ValidationRule")
+		ok.String(*v.ValidationRule)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		if err := awsAwsjson11_serializeDocumentEnclosedInStringProperties(v.Value, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTransformConfigParameterList(v []types.TransformConfigParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentTransformConfigParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

@@ -65,6 +65,11 @@ type RestoreVolumeFromSnapshotInput struct {
 
 type RestoreVolumeFromSnapshotOutput struct {
 
+	// A list of administrative actions for the file system that are in process or
+	// waiting to be processed. Administrative actions describe changes to the Amazon
+	// FSx system.
+	AdministrativeActions []types.AdministrativeAction
+
 	// The lifecycle state of the volume being restored.
 	Lifecycle types.VolumeLifecycle
 

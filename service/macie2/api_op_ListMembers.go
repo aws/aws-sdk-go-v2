@@ -50,7 +50,7 @@ type ListMembersInput struct {
 type ListMembersOutput struct {
 
 	// An array of objects, one for each account that's associated with the
-	// administrator account and meets the criteria specified in the request.
+	// administrator account and matches the criteria specified in the request.
 	Members []types.Member
 
 	// The string to use in a subsequent request to get the next page of results in a

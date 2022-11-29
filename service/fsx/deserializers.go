@@ -4713,6 +4713,9 @@ func awsAwsjson11_deserializeOpErrorUpdateFileSystem(response *smithyhttp.Respon
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
 
+	case strings.EqualFold("InvalidNetworkSettings", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidNetworkSettings(response, errorBody)
+
 	case strings.EqualFold("MissingFileSystemConfiguration", errorCode):
 		return awsAwsjson11_deserializeErrorMissingFileSystemConfiguration(response, errorBody)
 
@@ -10721,6 +10724,15 @@ func awsAwsjson11_deserializeDocumentOntapVolumeConfiguration(v **types.OntapVol
 
 	for key, value := range shape {
 		switch key {
+		case "CopyTagsToBackups":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Flag to be of type *bool, got %T instead", value)
+				}
+				sv.CopyTagsToBackups = ptr.Bool(jtv)
+			}
+
 		case "FlexCacheEndpointType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10768,6 +10780,15 @@ func awsAwsjson11_deserializeDocumentOntapVolumeConfiguration(v **types.OntapVol
 					return err
 				}
 				sv.SizeInMegabytes = ptr.Int32(int32(i64))
+			}
+
+		case "SnapshotPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnapshotPolicy to be of type string, got %T instead", value)
+				}
+				sv.SnapshotPolicy = ptr.String(jtv)
 			}
 
 		case "StorageEfficiencyEnabled":
@@ -11310,6 +11331,24 @@ func awsAwsjson11_deserializeDocumentOpenZFSVolumeConfiguration(v **types.OpenZF
 				sv.DataCompressionType = types.OpenZFSDataCompressionType(jtv)
 			}
 
+		case "DeleteClonedVolumes":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Flag to be of type *bool, got %T instead", value)
+				}
+				sv.DeleteClonedVolumes = ptr.Bool(jtv)
+			}
+
+		case "DeleteIntermediateSnaphots":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Flag to be of type *bool, got %T instead", value)
+				}
+				sv.DeleteIntermediateSnaphots = ptr.Bool(jtv)
+			}
+
 		case "NfsExports":
 			if err := awsAwsjson11_deserializeDocumentOpenZFSNfsExports(&sv.NfsExports, value); err != nil {
 				return err
@@ -11349,6 +11388,15 @@ func awsAwsjson11_deserializeDocumentOpenZFSVolumeConfiguration(v **types.OpenZF
 					return err
 				}
 				sv.RecordSizeKiB = ptr.Int32(int32(i64))
+			}
+
+		case "RestoreToSnapshot":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SnapshotId to be of type string, got %T instead", value)
+				}
+				sv.RestoreToSnapshot = ptr.String(jtv)
 			}
 
 		case "StorageCapacityQuotaGiB":
@@ -12067,15 +12115,6 @@ func awsAwsjson11_deserializeDocumentStorageVirtualMachine(v **types.StorageVirt
 					return fmt.Errorf("expected StorageVirtualMachineId to be of type string, got %T instead", value)
 				}
 				sv.StorageVirtualMachineId = ptr.String(jtv)
-			}
-
-		case "Subtype":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected StorageVirtualMachineSubtype to be of type string, got %T instead", value)
-				}
-				sv.Subtype = types.StorageVirtualMachineSubtype(jtv)
 			}
 
 		case "Tags":
@@ -14368,6 +14407,11 @@ func awsAwsjson11_deserializeOpDocumentRestoreVolumeFromSnapshotOutput(v **Resto
 
 	for key, value := range shape {
 		switch key {
+		case "AdministrativeActions":
+			if err := awsAwsjson11_deserializeDocumentAdministrativeActions(&sv.AdministrativeActions, value); err != nil {
+				return err
+			}
+
 		case "Lifecycle":
 			if value != nil {
 				jtv, ok := value.(string)

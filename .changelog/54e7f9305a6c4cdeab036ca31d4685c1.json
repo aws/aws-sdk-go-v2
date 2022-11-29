@@ -1,0 +1,8 @@
+{
+    "id": "54e7f930-5a6c-4cde-ab03-6ca31d4685c1",
+    "type": "feature",
+    "description": "With this release, you can use AWS Config to evaluate your resources for compliance with Config rules before they are created or updated. Using Config rules in proactive mode enables you to test and build compliant resource templates or check resource configurations at the time they are provisioned.",
+    "modules": [
+        "service/configservice"
+    ]
+}

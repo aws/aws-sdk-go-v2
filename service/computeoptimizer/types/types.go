@@ -294,6 +294,12 @@ type EffectiveRecommendationPreferences struct {
 	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics EnhancedInfrastructureMetrics
 
+	// An object that describes the external metrics recommendation preference. If the
+	// preference is applied in the latest recommendation refresh, an object with a
+	// valid source value appears in the response. If the preference isn't applied to
+	// the recommendations already, then this object doesn't appear in the response.
+	ExternalMetricsPreference *ExternalMetricsPreference
+
 	// Describes the activation status of the inferred workload types preference. A
 	// status of Active confirms that the preference is applied in the latest
 	// recommendation refresh. A status of Inactive confirms that it's not yet applied
@@ -342,6 +348,15 @@ type ExportDestination struct {
 	// S3) bucket name and object keys of a recommendations export file, and its
 	// associated metadata file.
 	S3 *S3Destination
+
+	noSmithyDocumentSerde
+}
+
+// Describes the external metrics preferences for EC2 rightsizing recommendations.
+type ExternalMetricsPreference struct {
+
+	// Contains the source options for external metrics preferences.
+	Source ExternalMetricsSource
 
 	noSmithyDocumentSerde
 }
@@ -1157,19 +1172,25 @@ type RecommendationPreferences struct {
 // Describes a recommendation preference.
 type RecommendationPreferencesDetail struct {
 
-	// The status of the enhanced infrastructure metrics recommendation preference. A
-	// status of Active confirms that the preference is applied in the latest
-	// recommendation refresh, and a status of Inactive confirms that it's not yet
-	// applied to recommendations. For more information, see Enhanced infrastructure
-	// metrics
+	// The status of the enhanced infrastructure metrics recommendation preference.
+	// When the recommendations page is refreshed, a status of Active confirms that the
+	// preference is applied to the recommendations, and a status of Inactive confirms
+	// that the preference isn't yet applied to recommendations. For more information,
+	// see Enhanced infrastructure metrics
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
 	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics EnhancedInfrastructureMetrics
 
-	// The status of the inferred workload types recommendation preference. A status of
-	// Active confirms that the preference is applied in the latest recommendation
-	// refresh. A status of Inactive confirms that it's not yet applied to
-	// recommendations.
+	// An object that describes the external metrics recommendation preference. If the
+	// preference is applied in the latest recommendation refresh, an object with a
+	// valid source value appears in the response. If the preference isn't applied to
+	// the recommendations already, then this object doesn't appear in the response.
+	ExternalMetricsPreference *ExternalMetricsPreference
+
+	// The status of the inferred workload types recommendation preference. When the
+	// recommendations page is refreshed, a status of Active confirms that the
+	// preference is applied to the recommendations, and a status of Inactive confirms
+	// that the preference isn't yet applied to recommendations.
 	InferredWorkloadTypes InferredWorkloadTypesPreference
 
 	// The target resource type of the recommendation preference to create. The

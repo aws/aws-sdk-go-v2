@@ -4,6 +4,7 @@ package macie2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
@@ -110,6 +111,87 @@ func (c *Client) addOperationListManagedDataIdentifiersMiddlewares(stack *middle
 		return err
 	}
 	return nil
+}
+
+// ListManagedDataIdentifiersAPIClient is a client that implements the
+// ListManagedDataIdentifiers operation.
+type ListManagedDataIdentifiersAPIClient interface {
+	ListManagedDataIdentifiers(context.Context, *ListManagedDataIdentifiersInput, ...func(*Options)) (*ListManagedDataIdentifiersOutput, error)
+}
+
+var _ ListManagedDataIdentifiersAPIClient = (*Client)(nil)
+
+// ListManagedDataIdentifiersPaginatorOptions is the paginator options for
+// ListManagedDataIdentifiers
+type ListManagedDataIdentifiersPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListManagedDataIdentifiersPaginator is a paginator for
+// ListManagedDataIdentifiers
+type ListManagedDataIdentifiersPaginator struct {
+	options   ListManagedDataIdentifiersPaginatorOptions
+	client    ListManagedDataIdentifiersAPIClient
+	params    *ListManagedDataIdentifiersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListManagedDataIdentifiersPaginator returns a new
+// ListManagedDataIdentifiersPaginator
+func NewListManagedDataIdentifiersPaginator(client ListManagedDataIdentifiersAPIClient, params *ListManagedDataIdentifiersInput, optFns ...func(*ListManagedDataIdentifiersPaginatorOptions)) *ListManagedDataIdentifiersPaginator {
+	if params == nil {
+		params = &ListManagedDataIdentifiersInput{}
+	}
+
+	options := ListManagedDataIdentifiersPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListManagedDataIdentifiersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListManagedDataIdentifiersPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next ListManagedDataIdentifiers page.
+func (p *ListManagedDataIdentifiersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListManagedDataIdentifiersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListManagedDataIdentifiers(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListManagedDataIdentifiers(region string) *awsmiddleware.RegisterServiceMetadata {

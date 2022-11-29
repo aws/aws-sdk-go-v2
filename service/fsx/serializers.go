@@ -2658,9 +2658,19 @@ func awsAwsjson11_serializeDocumentCreateOntapVolumeConfiguration(v *types.Creat
 	object := value.Object()
 	defer object.Close()
 
+	if v.CopyTagsToBackups != nil {
+		ok := object.Key("CopyTagsToBackups")
+		ok.Boolean(*v.CopyTagsToBackups)
+	}
+
 	if v.JunctionPath != nil {
 		ok := object.Key("JunctionPath")
 		ok.String(*v.JunctionPath)
+	}
+
+	if len(v.OntapVolumeType) > 0 {
+		ok := object.Key("OntapVolumeType")
+		ok.String(string(v.OntapVolumeType))
 	}
 
 	if len(v.SecurityStyle) > 0 {
@@ -2671,6 +2681,11 @@ func awsAwsjson11_serializeDocumentCreateOntapVolumeConfiguration(v *types.Creat
 	if v.SizeInMegabytes != nil {
 		ok := object.Key("SizeInMegabytes")
 		ok.Integer(*v.SizeInMegabytes)
+	}
+
+	if v.SnapshotPolicy != nil {
+		ok := object.Key("SnapshotPolicy")
+		ok.String(*v.SnapshotPolicy)
 	}
 
 	if v.StorageEfficiencyEnabled != nil {
@@ -3724,6 +3739,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemOntapConfiguration(v *types.U
 	object := value.Object()
 	defer object.Close()
 
+	if v.AddRouteTableIds != nil {
+		ok := object.Key("AddRouteTableIds")
+		if err := awsAwsjson11_serializeDocumentRouteTableIds(v.AddRouteTableIds, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AutomaticBackupRetentionDays != nil {
 		ok := object.Key("AutomaticBackupRetentionDays")
 		ok.Integer(*v.AutomaticBackupRetentionDays)
@@ -3744,6 +3766,13 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemOntapConfiguration(v *types.U
 	if v.FsxAdminPassword != nil {
 		ok := object.Key("FsxAdminPassword")
 		ok.String(*v.FsxAdminPassword)
+	}
+
+	if v.RemoveRouteTableIds != nil {
+		ok := object.Key("RemoveRouteTableIds")
+		if err := awsAwsjson11_serializeDocumentRouteTableIds(v.RemoveRouteTableIds, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ThroughputCapacity != nil {
@@ -3848,6 +3877,11 @@ func awsAwsjson11_serializeDocumentUpdateOntapVolumeConfiguration(v *types.Updat
 	object := value.Object()
 	defer object.Close()
 
+	if v.CopyTagsToBackups != nil {
+		ok := object.Key("CopyTagsToBackups")
+		ok.Boolean(*v.CopyTagsToBackups)
+	}
+
 	if v.JunctionPath != nil {
 		ok := object.Key("JunctionPath")
 		ok.String(*v.JunctionPath)
@@ -3861,6 +3895,11 @@ func awsAwsjson11_serializeDocumentUpdateOntapVolumeConfiguration(v *types.Updat
 	if v.SizeInMegabytes != nil {
 		ok := object.Key("SizeInMegabytes")
 		ok.Integer(*v.SizeInMegabytes)
+	}
+
+	if v.SnapshotPolicy != nil {
+		ok := object.Key("SnapshotPolicy")
+		ok.String(*v.SnapshotPolicy)
 	}
 
 	if v.StorageEfficiencyEnabled != nil {

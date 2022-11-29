@@ -668,6 +668,13 @@ func awsRestjson1_serializeOpDocumentRegisterIdentityProviderInput(v *RegisterId
 		ok.String(*v.Product)
 	}
 
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsRestjson1_serializeDocumentSettings(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -841,6 +848,88 @@ func awsRestjson1_serializeOpDocumentStopProductSubscriptionInput(v *StopProduct
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateIdentityProviderSettings struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateIdentityProviderSettings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateIdentityProviderSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateIdentityProviderSettingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/identity-provider/UpdateIdentityProviderSettings")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateIdentityProviderSettingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateIdentityProviderSettingsInput(v *UpdateIdentityProviderSettingsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateIdentityProviderSettingsInput(v *UpdateIdentityProviderSettingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdentityProvider != nil {
+		ok := object.Key("IdentityProvider")
+		if err := awsRestjson1_serializeDocumentIdentityProvider(v.IdentityProvider, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Product != nil {
+		ok := object.Key("Product")
+		ok.String(*v.Product)
+	}
+
+	if v.UpdateSettings != nil {
+		ok := object.Key("UpdateSettings")
+		if err := awsRestjson1_serializeDocumentUpdateSettings(v.UpdateSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentActiveDirectoryIdentityProvider(v *types.ActiveDirectoryIdentityProvider, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -903,5 +992,61 @@ func awsRestjson1_serializeDocumentIdentityProvider(v types.IdentityProvider, va
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSettings(v *types.Settings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupId != nil {
+		ok := object.Key("SecurityGroupId")
+		ok.String(*v.SecurityGroupId)
+	}
+
+	if v.Subnets != nil {
+		ok := object.Key("Subnets")
+		if err := awsRestjson1_serializeDocumentSubnets(v.Subnets, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubnets(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateSettings(v *types.UpdateSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AddSubnets != nil {
+		ok := object.Key("AddSubnets")
+		if err := awsRestjson1_serializeDocumentSubnets(v.AddSubnets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RemoveSubnets != nil {
+		ok := object.Key("RemoveSubnets")
+		if err := awsRestjson1_serializeDocumentSubnets(v.RemoveSubnets, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecurityGroupId != nil {
+		ok := object.Key("SecurityGroupId")
+		ok.String(*v.SecurityGroupId)
+	}
+
 	return nil
 }

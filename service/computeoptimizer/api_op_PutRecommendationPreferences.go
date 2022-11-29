@@ -50,6 +50,15 @@ type PutRecommendationPreferencesInput struct {
 	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics types.EnhancedInfrastructureMetrics
 
+	// The provider of the external metrics recommendation preference to create or
+	// update. Specify a valid provider in the source field to activate the preference.
+	// To delete this preference, see the DeleteRecommendationPreferences action. This
+	// preference can only be set for the Ec2Instance resource type. For more
+	// information, see External metrics ingestion
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html)
+	// in the Compute Optimizer User Guide.
+	ExternalMetricsPreference *types.ExternalMetricsPreference
+
 	// The status of the inferred workload types recommendation preference to create or
 	// update. The inferred workload type feature is active by default. To deactivate
 	// it, create a recommendation preference. Specify the Inactive status to

@@ -630,26 +630,6 @@ func (m *validateOpGetComplianceDetailsByConfigRule) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGetComplianceDetailsByResource struct {
-}
-
-func (*validateOpGetComplianceDetailsByResource) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGetComplianceDetailsByResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GetComplianceDetailsByResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGetComplianceDetailsByResourceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetConformancePackComplianceDetails struct {
 }
 
@@ -765,6 +745,26 @@ func (m *validateOpGetResourceConfigHistory) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResourceConfigHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResourceEvaluationSummary struct {
+}
+
+func (*validateOpGetResourceEvaluationSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceEvaluationSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceEvaluationSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceEvaluationSummaryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1250,6 +1250,26 @@ func (m *validateOpStartRemediationExecution) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartResourceEvaluation struct {
+}
+
+func (*validateOpStartResourceEvaluation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartResourceEvaluation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartResourceEvaluationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartResourceEvaluationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopConfigurationRecorder struct {
 }
 
@@ -1434,10 +1454,6 @@ func addOpGetComplianceDetailsByConfigRuleValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpGetComplianceDetailsByConfigRule{}, middleware.After)
 }
 
-func addOpGetComplianceDetailsByResourceValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGetComplianceDetailsByResource{}, middleware.After)
-}
-
 func addOpGetConformancePackComplianceDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetConformancePackComplianceDetails{}, middleware.After)
 }
@@ -1460,6 +1476,10 @@ func addOpGetOrganizationCustomRulePolicyValidationMiddleware(stack *middleware.
 
 func addOpGetResourceConfigHistoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourceConfigHistory{}, middleware.After)
+}
+
+func addOpGetResourceEvaluationSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceEvaluationSummary{}, middleware.After)
 }
 
 func addOpGetStoredQueryValidationMiddleware(stack *middleware.Stack) error {
@@ -1556,6 +1576,10 @@ func addOpStartConfigurationRecorderValidationMiddleware(stack *middleware.Stack
 
 func addOpStartRemediationExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartRemediationExecution{}, middleware.After)
+}
+
+func addOpStartResourceEvaluationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartResourceEvaluation{}, middleware.After)
 }
 
 func addOpStopConfigurationRecorderValidationMiddleware(stack *middleware.Stack) error {
@@ -1919,6 +1943,27 @@ func validateRemediationParameterValue(v *types.RemediationParameterValue) error
 		if err := validateStaticValue(v.StaticValue); err != nil {
 			invalidParams.AddNested("StaticValue", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceDetails(v *types.ResourceDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceDetails"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.ResourceConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2568,24 +2613,6 @@ func validateOpGetComplianceDetailsByConfigRuleInput(v *GetComplianceDetailsByCo
 	}
 }
 
-func validateOpGetComplianceDetailsByResourceInput(v *GetComplianceDetailsByResourceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GetComplianceDetailsByResourceInput"}
-	if v.ResourceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
-	}
-	if v.ResourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpGetConformancePackComplianceDetailsInput(v *GetConformancePackComplianceDetailsInput) error {
 	if v == nil {
 		return nil
@@ -2671,6 +2698,21 @@ func validateOpGetResourceConfigHistoryInput(v *GetResourceConfigHistoryInput) e
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourceEvaluationSummaryInput(v *GetResourceEvaluationSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceEvaluationSummaryInput"}
+	if v.ResourceEvaluationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceEvaluationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3122,6 +3164,28 @@ func validateOpStartRemediationExecutionInput(v *StartRemediationExecutionInput)
 		if err := validateResourceKeys(v.ResourceKeys); err != nil {
 			invalidParams.AddNested("ResourceKeys", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartResourceEvaluationInput(v *StartResourceEvaluationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartResourceEvaluationInput"}
+	if v.ResourceDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceDetails"))
+	} else if v.ResourceDetails != nil {
+		if err := validateResourceDetails(v.ResourceDetails); err != nil {
+			invalidParams.AddNested("ResourceDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.EvaluationMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

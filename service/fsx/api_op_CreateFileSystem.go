@@ -144,9 +144,7 @@ type CreateFileSystemInput struct {
 	//
 	// Default value = 2.10, except when
 	// DeploymentType is set to PERSISTENT_2, then the default is 2.12. If you set
-	// FileSystemTypeVersion to 2.10 for a
-	//
-	// PERSISTENT_2 Lustre deployment type, the
+	// FileSystemTypeVersion to 2.10 for a PERSISTENT_2 Lustre deployment type, the
 	// CreateFileSystem operation fails.
 	FileSystemTypeVersion *string
 

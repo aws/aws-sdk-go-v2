@@ -15,10 +15,10 @@ import (
 // Returns a list of Lambda functions, with the version-specific configuration of
 // each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to
 // include all published versions of each function in addition to the unpublished
-// version. The ListFunctions action returns a subset of the FunctionConfiguration
-// fields. To get the additional fields (State, StateReasonCode, StateReason,
-// LastUpdateStatus, LastUpdateStatusReason, LastUpdateStatusReasonCode) for a
-// function or version, use GetFunction.
+// version. The ListFunctions operation returns a subset of the
+// FunctionConfiguration fields. To get the additional fields (State,
+// StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason,
+// LastUpdateStatusReasonCode) for a function or version, use GetFunction.
 func (c *Client) ListFunctions(ctx context.Context, params *ListFunctionsInput, optFns ...func(*Options)) (*ListFunctionsOutput, error) {
 	if params == nil {
 		params = &ListFunctionsInput{}
@@ -44,7 +44,7 @@ type ListFunctionsInput struct {
 	Marker *string
 
 	// For Lambda@Edge functions, the Amazon Web Services Region of the master
-	// function. For example, us-east-1 filters the list of functions to only include
+	// function. For example, us-east-1 filters the list of functions to include only
 	// Lambda@Edge functions replicated from a master function in US East (N.
 	// Virginia). If specified, you must set FunctionVersion to ALL.
 	MasterRegion *string

@@ -2430,6 +2430,18 @@ func awsRestjson1_serializeDocumentAggregationRequest(v types.AggregationRequest
 			return err
 		}
 
+	case *types.AggregationRequestMemberLambdaFunctionAggregation:
+		av := object.Key("lambdaFunctionAggregation")
+		if err := awsRestjson1_serializeDocumentLambdaFunctionAggregation(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.AggregationRequestMemberLambdaLayerAggregation:
+		av := object.Key("lambdaLayerAggregation")
+		if err := awsRestjson1_serializeDocumentLambdaLayerAggregation(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.AggregationRequestMemberPackageAggregation:
 		av := object.Key("packageAggregation")
 		if err := awsRestjson1_serializeDocumentPackageAggregation(&uv.Value, av); err != nil {
@@ -2491,6 +2503,11 @@ func awsRestjson1_serializeDocumentAutoEnable(v *types.AutoEnable, value smithyj
 	if v.Ecr != nil {
 		ok := object.Key("ecr")
 		ok.Boolean(*v.Ecr)
+	}
+
+	if v.Lambda != nil {
+		ok := object.Key("lambda")
+		ok.Boolean(*v.Lambda)
 	}
 
 	return nil
@@ -2576,6 +2593,27 @@ func awsRestjson1_serializeDocumentCoverageFilterCriteria(v *types.CoverageFilte
 	if v.EcrRepositoryName != nil {
 		ok := object.Key("ecrRepositoryName")
 		if err := awsRestjson1_serializeDocumentCoverageStringFilterList(v.EcrRepositoryName, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaFunctionName != nil {
+		ok := object.Key("lambdaFunctionName")
+		if err := awsRestjson1_serializeDocumentCoverageStringFilterList(v.LambdaFunctionName, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaFunctionRuntime != nil {
+		ok := object.Key("lambdaFunctionRuntime")
+		if err := awsRestjson1_serializeDocumentCoverageStringFilterList(v.LambdaFunctionRuntime, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaFunctionTags != nil {
+		ok := object.Key("lambdaFunctionTags")
+		if err := awsRestjson1_serializeDocumentCoverageMapFilterList(v.LambdaFunctionTags, ok); err != nil {
 			return err
 		}
 	}
@@ -2913,6 +2951,13 @@ func awsRestjson1_serializeDocumentFilterCriteria(v *types.FilterCriteria, value
 		}
 	}
 
+	if v.ExploitAvailable != nil {
+		ok := object.Key("exploitAvailable")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.ExploitAvailable, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FindingArn != nil {
 		ok := object.Key("findingArn")
 		if err := awsRestjson1_serializeDocumentStringFilterList(v.FindingArn, ok); err != nil {
@@ -2951,6 +2996,41 @@ func awsRestjson1_serializeDocumentFilterCriteria(v *types.FilterCriteria, value
 	if v.InspectorScore != nil {
 		ok := object.Key("inspectorScore")
 		if err := awsRestjson1_serializeDocumentNumberFilterList(v.InspectorScore, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaFunctionExecutionRoleArn != nil {
+		ok := object.Key("lambdaFunctionExecutionRoleArn")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.LambdaFunctionExecutionRoleArn, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaFunctionLastModifiedAt != nil {
+		ok := object.Key("lambdaFunctionLastModifiedAt")
+		if err := awsRestjson1_serializeDocumentDateFilterList(v.LambdaFunctionLastModifiedAt, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaFunctionLayers != nil {
+		ok := object.Key("lambdaFunctionLayers")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.LambdaFunctionLayers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaFunctionName != nil {
+		ok := object.Key("lambdaFunctionName")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.LambdaFunctionName, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LambdaFunctionRuntime != nil {
+		ok := object.Key("lambdaFunctionRuntime")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.LambdaFunctionRuntime, ok); err != nil {
 			return err
 		}
 	}
@@ -3097,6 +3177,89 @@ func awsRestjson1_serializeDocumentImageLayerAggregation(v *types.ImageLayerAggr
 	if v.Repositories != nil {
 		ok := object.Key("repositories")
 		if err := awsRestjson1_serializeDocumentStringFilterList(v.Repositories, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceIds != nil {
+		ok := object.Key("resourceIds")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.ResourceIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SortBy) > 0 {
+		ok := object.Key("sortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("sortOrder")
+		ok.String(string(v.SortOrder))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLambdaFunctionAggregation(v *types.LambdaFunctionAggregation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FunctionNames != nil {
+		ok := object.Key("functionNames")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.FunctionNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FunctionTags != nil {
+		ok := object.Key("functionTags")
+		if err := awsRestjson1_serializeDocumentMapFilterList(v.FunctionTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceIds != nil {
+		ok := object.Key("resourceIds")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.ResourceIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Runtimes != nil {
+		ok := object.Key("runtimes")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.Runtimes, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SortBy) > 0 {
+		ok := object.Key("sortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("sortOrder")
+		ok.String(string(v.SortOrder))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLambdaLayerAggregation(v *types.LambdaLayerAggregation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FunctionNames != nil {
+		ok := object.Key("functionNames")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.FunctionNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LayerArns != nil {
+		ok := object.Key("layerArns")
+		if err := awsRestjson1_serializeDocumentStringFilterList(v.LayerArns, ok); err != nil {
 			return err
 		}
 	}
@@ -3275,6 +3438,13 @@ func awsRestjson1_serializeDocumentPackageFilter(v *types.PackageFilter, value s
 	if v.Release != nil {
 		ok := object.Key("release")
 		if err := awsRestjson1_serializeDocumentStringFilter(v.Release, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceLambdaLayerArn != nil {
+		ok := object.Key("sourceLambdaLayerArn")
+		if err := awsRestjson1_serializeDocumentStringFilter(v.SourceLambdaLayerArn, ok); err != nil {
 			return err
 		}
 	}

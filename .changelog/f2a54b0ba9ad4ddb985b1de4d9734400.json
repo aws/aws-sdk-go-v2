@@ -1,0 +1,8 @@
+{
+    "id": "f2a54b0b-a9ad-4ddb-985b-1de4d9734400",
+    "type": "feature",
+    "description": "This release adds support for Inspector to scan AWS Lambda.",
+    "modules": [
+        "service/inspector2"
+    ]
+}

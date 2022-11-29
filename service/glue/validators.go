@@ -4355,6 +4355,11 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("PostgreSQLCatalogTarget", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.DynamicTransform != nil {
+		if err := validateDynamicTransform(v.DynamicTransform); err != nil {
+			invalidParams.AddNested("DynamicTransform", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4953,6 +4958,38 @@ func validateDropNullFields(v *types.DropNullFields) error {
 		if err := validateNullValueFields(v.NullTextList); err != nil {
 			invalidParams.AddNested("NullTextList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDynamicTransform(v *types.DynamicTransform) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DynamicTransform"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TransformName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TransformName"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Parameters != nil {
+		if err := validateTransformConfigParameterList(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FunctionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionName"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6405,6 +6442,41 @@ func validateTaskRunSortCriteria(v *types.TaskRunSortCriteria) error {
 	}
 	if len(v.SortDirection) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SortDirection"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformConfigParameter(v *types.TransformConfigParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformConfigParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformConfigParameterList(v []types.TransformConfigParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformConfigParameterList"}
+	for i := range v {
+		if err := validateTransformConfigParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

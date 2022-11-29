@@ -39,7 +39,7 @@ type GetFindingsFilterInput struct {
 
 type GetFindingsFilterOutput struct {
 
-	// The action that's performed on findings that meet the filter criteria
+	// The action that's performed on findings that match the filter criteria
 	// (findingCriteria). Possible values are: ARCHIVE, suppress (automatically
 	// archive) the findings; and, NOOP, don't perform any action on the findings.
 	Action types.FindingsFilterAction

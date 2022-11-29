@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Revokes function-use permission from an Amazon Web Services service or another
-// account. You can get the ID of the statement from the output of GetPolicy.
+// Revokes function-use permission from an Amazon Web Service or another Amazon Web
+// Services account. You can get the ID of the statement from the output of
+// GetPolicy.
 func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionInput, optFns ...func(*Options)) (*RemovePermissionOutput, error) {
 	if params == nil {
 		params = &RemovePermissionInput{}
@@ -32,12 +33,12 @@ type RemovePermissionInput struct {
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	// * Function
-	// name - my-function (name-only), my-function:v1 (with alias).
+	// name – my-function (name-only), my-function:v1 (with alias).
 	//
-	// * Function ARN -
+	// * Function ARN –
 	// arn:aws:lambda:us-west-2:123456789012:function:my-function.
 	//
-	// * Partial ARN -
+	// * Partial ARN –
 	// 123456789012:function:my-function.
 	//
 	// You can append a version number or alias to
@@ -56,7 +57,7 @@ type RemovePermissionInput struct {
 	// function.
 	Qualifier *string
 
-	// Only update the policy if the revision ID matches the ID that's specified. Use
+	// Update the policy only if the revision ID matches the ID that's specified. Use
 	// this option to avoid modifying a policy that has changed since you last read it.
 	RevisionId *string
 

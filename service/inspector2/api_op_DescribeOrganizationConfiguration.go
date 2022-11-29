@@ -12,7 +12,7 @@ import (
 )
 
 // Describe Amazon Inspector configuration settings for an Amazon Web Services
-// organization
+// organization.
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}

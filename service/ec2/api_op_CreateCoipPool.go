@@ -48,7 +48,7 @@ type CreateCoipPoolInput struct {
 
 type CreateCoipPoolOutput struct {
 
-	// Describes a customer-owned address pool.
+	// Information about the CoIP address pool.
 	CoipPool *types.CoipPool
 
 	// Metadata pertaining to the operation's result.

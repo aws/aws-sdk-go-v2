@@ -13,9 +13,9 @@ import (
 // Deletes a Lambda function. To delete a specific function version, use the
 // Qualifier parameter. Otherwise, all versions and aliases are deleted. To delete
 // Lambda event source mappings that invoke a function, use
-// DeleteEventSourceMapping. For Amazon Web Services services and resources that
-// invoke your function directly, delete the trigger in the service where you
-// originally configured it.
+// DeleteEventSourceMapping. For Amazon Web Services and resources that invoke your
+// function directly, delete the trigger in the service where you originally
+// configured it.
 func (c *Client) DeleteFunction(ctx context.Context, params *DeleteFunctionInput, optFns ...func(*Options)) (*DeleteFunctionOutput, error) {
 	if params == nil {
 		params = &DeleteFunctionInput{}
@@ -35,13 +35,13 @@ type DeleteFunctionInput struct {
 
 	// The name of the Lambda function or version. Name formats
 	//
-	// * Function name -
+	// * Function name –
 	// my-function (name-only), my-function:1 (with version).
 	//
-	// * Function ARN -
+	// * Function ARN –
 	// arn:aws:lambda:us-west-2:123456789012:function:my-function.
 	//
-	// * Partial ARN -
+	// * Partial ARN –
 	// 123456789012:function:my-function.
 	//
 	// You can append a version number or alias to
@@ -51,8 +51,8 @@ type DeleteFunctionInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// Specify a version to delete. You can't delete a version that's referenced by an
-	// alias.
+	// Specify a version to delete. You can't delete a version that an alias
+	// references.
 	Qualifier *string
 
 	noSmithyDocumentSerde

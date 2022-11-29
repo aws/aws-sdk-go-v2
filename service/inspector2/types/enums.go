@@ -46,6 +46,7 @@ type AggregationResourceType string
 const (
 	AggregationResourceTypeAwsEc2Instance       AggregationResourceType = "AWS_EC2_INSTANCE"
 	AggregationResourceTypeAwsEcrContainerImage AggregationResourceType = "AWS_ECR_CONTAINER_IMAGE"
+	AggregationResourceTypeAwsLambdaFunction    AggregationResourceType = "AWS_LAMBDA_FUNCTION"
 )
 
 // Values returns all known values for AggregationResourceType. Note that this can
@@ -55,6 +56,7 @@ func (AggregationResourceType) Values() []AggregationResourceType {
 	return []AggregationResourceType{
 		"AWS_EC2_INSTANCE",
 		"AWS_ECR_CONTAINER_IMAGE",
+		"AWS_LAMBDA_FUNCTION",
 	}
 }
 
@@ -62,15 +64,17 @@ type AggregationType string
 
 // Enum values for AggregationType
 const (
-	AggregationTypeFindingType     AggregationType = "FINDING_TYPE"
-	AggregationTypePackage         AggregationType = "PACKAGE"
-	AggregationTypeTitle           AggregationType = "TITLE"
-	AggregationTypeRepository      AggregationType = "REPOSITORY"
-	AggregationTypeAmi             AggregationType = "AMI"
-	AggregationTypeAwsEc2Instance  AggregationType = "AWS_EC2_INSTANCE"
-	AggregationTypeAwsEcrContainer AggregationType = "AWS_ECR_CONTAINER"
-	AggregationTypeImageLayer      AggregationType = "IMAGE_LAYER"
-	AggregationTypeAccount         AggregationType = "ACCOUNT"
+	AggregationTypeFindingType       AggregationType = "FINDING_TYPE"
+	AggregationTypePackage           AggregationType = "PACKAGE"
+	AggregationTypeTitle             AggregationType = "TITLE"
+	AggregationTypeRepository        AggregationType = "REPOSITORY"
+	AggregationTypeAmi               AggregationType = "AMI"
+	AggregationTypeAwsEc2Instance    AggregationType = "AWS_EC2_INSTANCE"
+	AggregationTypeAwsEcrContainer   AggregationType = "AWS_ECR_CONTAINER"
+	AggregationTypeImageLayer        AggregationType = "IMAGE_LAYER"
+	AggregationTypeAccount           AggregationType = "ACCOUNT"
+	AggregationTypeAwsLambdaFunction AggregationType = "AWS_LAMBDA_FUNCTION"
+	AggregationTypeLambdaLayer       AggregationType = "LAMBDA_LAYER"
 )
 
 // Values returns all known values for AggregationType. Note that this can be
@@ -87,6 +91,8 @@ func (AggregationType) Values() []AggregationType {
 		"AWS_ECR_CONTAINER",
 		"IMAGE_LAYER",
 		"ACCOUNT",
+		"AWS_LAMBDA_FUNCTION",
+		"LAMBDA_LAYER",
 	}
 }
 
@@ -109,6 +115,24 @@ func (AmiSortBy) Values() []AmiSortBy {
 		"HIGH",
 		"ALL",
 		"AFFECTED_INSTANCES",
+	}
+}
+
+type Architecture string
+
+// Enum values for Architecture
+const (
+	ArchitectureX8664 Architecture = "X86_64"
+	ArchitectureArm64 Architecture = "ARM64"
+)
+
+// Values returns all known values for Architecture. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Architecture) Values() []Architecture {
+	return []Architecture{
+		"X86_64",
+		"ARM64",
 	}
 }
 
@@ -155,6 +179,7 @@ const (
 	CoverageResourceTypeAwsEc2Instance       CoverageResourceType = "AWS_EC2_INSTANCE"
 	CoverageResourceTypeAwsEcrContainerImage CoverageResourceType = "AWS_ECR_CONTAINER_IMAGE"
 	CoverageResourceTypeAwsEcrRepository     CoverageResourceType = "AWS_ECR_REPOSITORY"
+	CoverageResourceTypeAwsLambdaFunction    CoverageResourceType = "AWS_LAMBDA_FUNCTION"
 )
 
 // Values returns all known values for CoverageResourceType. Note that this can be
@@ -165,6 +190,7 @@ func (CoverageResourceType) Values() []CoverageResourceType {
 		"AWS_EC2_INSTANCE",
 		"AWS_ECR_CONTAINER_IMAGE",
 		"AWS_ECR_REPOSITORY",
+		"AWS_LAMBDA_FUNCTION",
 	}
 }
 
@@ -364,6 +390,24 @@ func (ErrorCode) Values() []ErrorCode {
 	}
 }
 
+type ExploitAvailable string
+
+// Enum values for ExploitAvailable
+const (
+	ExploitAvailableYes ExploitAvailable = "YES"
+	ExploitAvailableNo  ExploitAvailable = "NO"
+)
+
+// Values returns all known values for ExploitAvailable. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExploitAvailable) Values() []ExploitAvailable {
+	return []ExploitAvailable{
+		"YES",
+		"NO",
+	}
+}
+
 type ExternalReportStatus string
 
 // Enum values for ExternalReportStatus
@@ -522,8 +566,9 @@ type FreeTrialType string
 
 // Enum values for FreeTrialType
 const (
-	FreeTrialTypeEc2 FreeTrialType = "EC2"
-	FreeTrialTypeEcr FreeTrialType = "ECR"
+	FreeTrialTypeEc2    FreeTrialType = "EC2"
+	FreeTrialTypeEcr    FreeTrialType = "ECR"
+	FreeTrialTypeLambda FreeTrialType = "LAMBDA"
 )
 
 // Values returns all known values for FreeTrialType. Note that this can be
@@ -533,6 +578,7 @@ func (FreeTrialType) Values() []FreeTrialType {
 	return []FreeTrialType{
 		"EC2",
 		"ECR",
+		"LAMBDA",
 	}
 }
 
@@ -574,6 +620,46 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ImageLayerSortBy) Values() []ImageLayerSortBy {
 	return []ImageLayerSortBy{
+		"CRITICAL",
+		"HIGH",
+		"ALL",
+	}
+}
+
+type LambdaFunctionSortBy string
+
+// Enum values for LambdaFunctionSortBy
+const (
+	LambdaFunctionSortByCritical LambdaFunctionSortBy = "CRITICAL"
+	LambdaFunctionSortByHigh     LambdaFunctionSortBy = "HIGH"
+	LambdaFunctionSortByAll      LambdaFunctionSortBy = "ALL"
+)
+
+// Values returns all known values for LambdaFunctionSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LambdaFunctionSortBy) Values() []LambdaFunctionSortBy {
+	return []LambdaFunctionSortBy{
+		"CRITICAL",
+		"HIGH",
+		"ALL",
+	}
+}
+
+type LambdaLayerSortBy string
+
+// Enum values for LambdaLayerSortBy
+const (
+	LambdaLayerSortByCritical LambdaLayerSortBy = "CRITICAL"
+	LambdaLayerSortByHigh     LambdaLayerSortBy = "HIGH"
+	LambdaLayerSortByAll      LambdaLayerSortBy = "ALL"
+)
+
+// Values returns all known values for LambdaLayerSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LambdaLayerSortBy) Values() []LambdaLayerSortBy {
+	return []LambdaLayerSortBy{
 		"CRITICAL",
 		"HIGH",
 		"ALL",
@@ -702,6 +788,24 @@ func (PackageSortBy) Values() []PackageSortBy {
 	}
 }
 
+type PackageType string
+
+// Enum values for PackageType
+const (
+	PackageTypeImage PackageType = "IMAGE"
+	PackageTypeZip   PackageType = "ZIP"
+)
+
+// Values returns all known values for PackageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PackageType) Values() []PackageType {
+	return []PackageType{
+		"IMAGE",
+		"ZIP",
+	}
+}
+
 type RelationshipStatus string
 
 // Enum values for RelationshipStatus
@@ -810,8 +914,9 @@ type ResourceScanType string
 
 // Enum values for ResourceScanType
 const (
-	ResourceScanTypeEc2 ResourceScanType = "EC2"
-	ResourceScanTypeEcr ResourceScanType = "ECR"
+	ResourceScanTypeEc2    ResourceScanType = "EC2"
+	ResourceScanTypeEcr    ResourceScanType = "ECR"
+	ResourceScanTypeLambda ResourceScanType = "LAMBDA"
 )
 
 // Values returns all known values for ResourceScanType. Note that this can be
@@ -821,6 +926,7 @@ func (ResourceScanType) Values() []ResourceScanType {
 	return []ResourceScanType{
 		"EC2",
 		"ECR",
+		"LAMBDA",
 	}
 }
 
@@ -831,6 +937,7 @@ const (
 	ResourceTypeAwsEc2Instance       ResourceType = "AWS_EC2_INSTANCE"
 	ResourceTypeAwsEcrContainerImage ResourceType = "AWS_ECR_CONTAINER_IMAGE"
 	ResourceTypeAwsEcrRepository     ResourceType = "AWS_ECR_REPOSITORY"
+	ResourceTypeAwsLambdaFunction    ResourceType = "AWS_LAMBDA_FUNCTION"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -841,6 +948,43 @@ func (ResourceType) Values() []ResourceType {
 		"AWS_EC2_INSTANCE",
 		"AWS_ECR_CONTAINER_IMAGE",
 		"AWS_ECR_REPOSITORY",
+		"AWS_LAMBDA_FUNCTION",
+	}
+}
+
+type Runtime string
+
+// Enum values for Runtime
+const (
+	RuntimeNodejs      Runtime = "NODEJS"
+	RuntimeNodejs12X   Runtime = "NODEJS_12_X"
+	RuntimeNodejs14X   Runtime = "NODEJS_14_X"
+	RuntimeNodejs16X   Runtime = "NODEJS_16_X"
+	RuntimeJava8       Runtime = "JAVA_8"
+	RuntimeJava8Al2    Runtime = "JAVA_8_AL2"
+	RuntimeJava11      Runtime = "JAVA_11"
+	RuntimePython37    Runtime = "PYTHON_3_7"
+	RuntimePython38    Runtime = "PYTHON_3_8"
+	RuntimePython39    Runtime = "PYTHON_3_9"
+	RuntimeUnsupported Runtime = "UNSUPPORTED"
+)
+
+// Values returns all known values for Runtime. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Runtime) Values() []Runtime {
+	return []Runtime{
+		"NODEJS",
+		"NODEJS_12_X",
+		"NODEJS_14_X",
+		"NODEJS_16_X",
+		"JAVA_8",
+		"JAVA_8_AL2",
+		"JAVA_11",
+		"PYTHON_3_7",
+		"PYTHON_3_8",
+		"PYTHON_3_9",
+		"UNSUPPORTED",
 	}
 }
 
@@ -882,6 +1026,8 @@ const (
 	ScanStatusReasonPendingDisable          ScanStatusReason = "PENDING_DISABLE"
 	ScanStatusReasonNoInventory             ScanStatusReason = "NO_INVENTORY"
 	ScanStatusReasonStaleInventory          ScanStatusReason = "STALE_INVENTORY"
+	ScanStatusReasonExcludedByTag           ScanStatusReason = "EXCLUDED_BY_TAG"
+	ScanStatusReasonUnsupportedRuntime      ScanStatusReason = "UNSUPPORTED_RUNTIME"
 )
 
 // Values returns all known values for ScanStatusReason. Note that this can be
@@ -905,6 +1051,8 @@ func (ScanStatusReason) Values() []ScanStatusReason {
 		"PENDING_DISABLE",
 		"NO_INVENTORY",
 		"STALE_INVENTORY",
+		"EXCLUDED_BY_TAG",
+		"UNSUPPORTED_RUNTIME",
 	}
 }
 
@@ -930,8 +1078,9 @@ type Service string
 
 // Enum values for Service
 const (
-	ServiceEc2 Service = "EC2"
-	ServiceEcr Service = "ECR"
+	ServiceEc2    Service = "EC2"
+	ServiceEcr    Service = "ECR"
+	ServiceLambda Service = "LAMBDA"
 )
 
 // Values returns all known values for Service. Note that this can be expanded in
@@ -941,6 +1090,7 @@ func (Service) Values() []Service {
 	return []Service{
 		"EC2",
 		"ECR",
+		"LAMBDA",
 	}
 }
 
@@ -1104,9 +1254,10 @@ type UsageType string
 
 // Enum values for UsageType
 const (
-	UsageTypeEc2InstanceHours UsageType = "EC2_INSTANCE_HOURS"
-	UsageTypeEcrInitialScan   UsageType = "ECR_INITIAL_SCAN"
-	UsageTypeEcrRescan        UsageType = "ECR_RESCAN"
+	UsageTypeEc2InstanceHours    UsageType = "EC2_INSTANCE_HOURS"
+	UsageTypeEcrInitialScan      UsageType = "ECR_INITIAL_SCAN"
+	UsageTypeEcrRescan           UsageType = "ECR_RESCAN"
+	UsageTypeLambdaFunctionHours UsageType = "LAMBDA_FUNCTION_HOURS"
 )
 
 // Values returns all known values for UsageType. Note that this can be expanded in
@@ -1117,6 +1268,7 @@ func (UsageType) Values() []UsageType {
 		"EC2_INSTANCE_HOURS",
 		"ECR_INITIAL_SCAN",
 		"ECR_RESCAN",
+		"LAMBDA_FUNCTION_HOURS",
 	}
 }
 

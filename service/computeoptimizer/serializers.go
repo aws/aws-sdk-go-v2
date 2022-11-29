@@ -1146,6 +1146,18 @@ func awsAwsjson10_serializeDocumentExportableVolumeFields(v []types.ExportableVo
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentExternalMetricsPreference(v *types.ExternalMetricsPreference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Source) > 0 {
+		ok := object.Key("source")
+		ok.String(string(v.Source))
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentFilter(v *types.Filter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1915,6 +1927,13 @@ func awsAwsjson10_serializeOpDocumentPutRecommendationPreferencesInput(v *PutRec
 	if len(v.EnhancedInfrastructureMetrics) > 0 {
 		ok := object.Key("enhancedInfrastructureMetrics")
 		ok.String(string(v.EnhancedInfrastructureMetrics))
+	}
+
+	if v.ExternalMetricsPreference != nil {
+		ok := object.Key("externalMetricsPreference")
+		if err := awsAwsjson10_serializeDocumentExternalMetricsPreference(v.ExternalMetricsPreference, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.InferredWorkloadTypes) > 0 {

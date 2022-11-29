@@ -57,7 +57,7 @@ type ModifyLocalGatewayRouteInput struct {
 
 type ModifyLocalGatewayRouteOutput struct {
 
-	// Describes a route for a local gateway route table.
+	// Information about the local gateway route table.
 	Route *types.LocalGatewayRoute
 
 	// Metadata pertaining to the operation's result.

@@ -29,6 +29,12 @@ func ExampleAggregationRequest_outputUsage() {
 	case *types.AggregationRequestMemberImageLayerAggregation:
 		_ = v.Value // Value is types.ImageLayerAggregation
 
+	case *types.AggregationRequestMemberLambdaFunctionAggregation:
+		_ = v.Value // Value is types.LambdaFunctionAggregation
+
+	case *types.AggregationRequestMemberLambdaLayerAggregation:
+		_ = v.Value // Value is types.LambdaLayerAggregation
+
 	case *types.AggregationRequestMemberPackageAggregation:
 		_ = v.Value // Value is types.PackageAggregation
 
@@ -47,6 +53,8 @@ func ExampleAggregationRequest_outputUsage() {
 	}
 }
 
+var _ *types.LambdaFunctionAggregation
+var _ *types.LambdaLayerAggregation
 var _ *types.AwsEcrContainerAggregation
 var _ *types.TitleAggregation
 var _ *types.ImageLayerAggregation
@@ -79,6 +87,12 @@ func ExampleAggregationResponse_outputUsage() {
 	case *types.AggregationResponseMemberImageLayerAggregation:
 		_ = v.Value // Value is types.ImageLayerAggregationResponse
 
+	case *types.AggregationResponseMemberLambdaFunctionAggregation:
+		_ = v.Value // Value is types.LambdaFunctionAggregationResponse
+
+	case *types.AggregationResponseMemberLambdaLayerAggregation:
+		_ = v.Value // Value is types.LambdaLayerAggregationResponse
+
 	case *types.AggregationResponseMemberPackageAggregation:
 		_ = v.Value // Value is types.PackageAggregationResponse
 
@@ -102,7 +116,9 @@ var _ *types.AmiAggregationResponse
 var _ *types.PackageAggregationResponse
 var _ *types.RepositoryAggregationResponse
 var _ *types.ImageLayerAggregationResponse
+var _ *types.LambdaLayerAggregationResponse
 var _ *types.TitleAggregationResponse
 var _ *types.FindingTypeAggregationResponse
+var _ *types.LambdaFunctionAggregationResponse
 var _ *types.AwsEcrContainerAggregationResponse
 var _ *types.Ec2InstanceAggregationResponse

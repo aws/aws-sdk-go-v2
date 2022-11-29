@@ -51,7 +51,7 @@ type SearchResourcesInput struct {
 
 type SearchResourcesOutput struct {
 
-	// An array of objects, one for each resource that meets the filter criteria
+	// An array of objects, one for each resource that matches the filter criteria
 	// specified in the request.
 	MatchingResources []types.MatchingResource
 

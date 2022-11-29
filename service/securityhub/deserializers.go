@@ -48289,6 +48289,11 @@ func awsRestjson1_deserializeDocumentStandard(v **types.Standard, value interfac
 				sv.StandardsArn = ptr.String(jtv)
 			}
 
+		case "StandardsManagedBy":
+			if err := awsRestjson1_deserializeDocumentStandardsManagedBy(&sv.StandardsManagedBy, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -48520,6 +48525,55 @@ func awsRestjson1_deserializeDocumentStandardsInputParameterMap(v *map[string]st
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentStandardsManagedBy(v **types.StandardsManagedBy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StandardsManagedBy
+	if *v == nil {
+		sv = &types.StandardsManagedBy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Company":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Company = ptr.String(jtv)
+			}
+
+		case "Product":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Product = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

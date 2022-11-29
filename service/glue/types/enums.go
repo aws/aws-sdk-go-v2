@@ -999,6 +999,34 @@ func (NodeType) Values() []NodeType {
 	}
 }
 
+type ParamType string
+
+// Enum values for ParamType
+const (
+	ParamTypeStr     ParamType = "str"
+	ParamTypeInt     ParamType = "int"
+	ParamTypeFloat   ParamType = "float"
+	ParamTypeComplex ParamType = "complex"
+	ParamTypeBool    ParamType = "bool"
+	ParamTypeList    ParamType = "list"
+	ParamTypeNull    ParamType = "null"
+)
+
+// Values returns all known values for ParamType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ParamType) Values() []ParamType {
+	return []ParamType{
+		"str",
+		"int",
+		"float",
+		"complex",
+		"bool",
+		"list",
+		"null",
+	}
+}
+
 type ParquetCompressionType string
 
 // Enum values for ParquetCompressionType

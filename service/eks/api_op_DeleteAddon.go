@@ -45,7 +45,7 @@ type DeleteAddonInput struct {
 
 	// Specifying this option preserves the add-on software on your cluster but Amazon
 	// EKS stops managing any settings for the add-on. If an IAM account is associated
-	// with the add-on, it is not removed.
+	// with the add-on, it isn't removed.
 	Preserve bool
 
 	noSmithyDocumentSerde

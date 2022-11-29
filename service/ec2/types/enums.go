@@ -4652,6 +4652,22 @@ func (MembershipType) Values() []MembershipType {
 	}
 }
 
+type MetricType string
+
+// Enum values for MetricType
+const (
+	MetricTypeAggregateLatency MetricType = "aggregate-latency"
+)
+
+// Values returns all known values for MetricType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MetricType) Values() []MetricType {
+	return []MetricType{
+		"aggregate-latency",
+	}
+}
+
 type ModifyAvailabilityZoneOptInStatus string
 
 // Enum values for ModifyAvailabilityZoneOptInStatus
@@ -5025,6 +5041,32 @@ func (PaymentOption) Values() []PaymentOption {
 		"AllUpfront",
 		"PartialUpfront",
 		"NoUpfront",
+	}
+}
+
+type PeriodType string
+
+// Enum values for PeriodType
+const (
+	PeriodTypeFiveMinutes    PeriodType = "five-minutes"
+	PeriodTypeFifteenMinutes PeriodType = "fifteen-minutes"
+	PeriodTypeOneHour        PeriodType = "one-hour"
+	PeriodTypeThreeHours     PeriodType = "three-hours"
+	PeriodTypeOneDay         PeriodType = "one-day"
+	PeriodTypeOneWeek        PeriodType = "one-week"
+)
+
+// Values returns all known values for PeriodType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PeriodType) Values() []PeriodType {
+	return []PeriodType{
+		"five-minutes",
+		"fifteen-minutes",
+		"one-hour",
+		"three-hours",
+		"one-day",
+		"one-week",
 	}
 }
 
@@ -6017,6 +6059,22 @@ func (StaticSourcesSupportValue) Values() []StaticSourcesSupportValue {
 	return []StaticSourcesSupportValue{
 		"enable",
 		"disable",
+	}
+}
+
+type StatisticType string
+
+// Enum values for StatisticType
+const (
+	StatisticTypeP50 StatisticType = "p50"
+)
+
+// Values returns all known values for StatisticType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StatisticType) Values() []StatisticType {
+	return []StatisticType{
+		"p50",
 	}
 }
 

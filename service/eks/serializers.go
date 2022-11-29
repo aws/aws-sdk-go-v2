@@ -1171,6 +1171,24 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAddonVersionsInput(v *DescribeA
 		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
+	if v.Owners != nil {
+		for i := range v.Owners {
+			encoder.AddQuery("owners").String(v.Owners[i])
+		}
+	}
+
+	if v.Publishers != nil {
+		for i := range v.Publishers {
+			encoder.AddQuery("publishers").String(v.Publishers[i])
+		}
+	}
+
+	if v.Types != nil {
+		for i := range v.Types {
+			encoder.AddQuery("types").String(v.Types[i])
+		}
+	}
+
 	return nil
 }
 

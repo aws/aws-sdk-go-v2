@@ -13,7 +13,7 @@ import (
 )
 
 // Retrieves (queries) statistical data and other information about one or more S3
-// buckets that Amazon Macie monitors and analyzes.
+// buckets that Amazon Macie monitors and analyzes for an account.
 func (c *Client) DescribeBuckets(ctx context.Context, params *DescribeBucketsInput, optFns ...func(*Options)) (*DescribeBucketsOutput, error) {
 	if params == nil {
 		params = &DescribeBucketsInput{}
@@ -50,7 +50,7 @@ type DescribeBucketsInput struct {
 
 type DescribeBucketsOutput struct {
 
-	// An array of objects, one for each bucket that meets the filter criteria
+	// An array of objects, one for each bucket that matches the filter criteria
 	// specified in the request.
 	Buckets []types.BucketMetadata
 
