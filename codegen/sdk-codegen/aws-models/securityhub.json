@@ -22692,7 +22692,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -23158,6 +23158,58 @@
                                 "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://securityhub-fips.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://securityhub-fips.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://securityhub.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "me-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://securityhub.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -24747,10 +24799,16 @@
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether the standard is enabled by default. When Security Hub is enabled from the console, if a\n         standard is enabled by default, the check box for that standard is selected by\n         default.</p>\n         <p>When Security Hub is enabled using the <code>EnableSecurityHub</code> API operation, the\n         standard is enabled by default unless <code>EnableDefaultStandards</code> is set to\n            <code>false</code>.</p>"
                     }
+                },
+                "StandardsManagedBy": {
+                    "target": "com.amazonaws.securityhub#StandardsManagedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about the management of a standard.\n      </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about a specific standard.</p>"
+                "smithy.api#documentation": "<p>Provides information about a specific security standard.</p>"
             }
         },
         "com.amazonaws.securityhub#Standards": {
@@ -24840,6 +24898,26 @@
             },
             "value": {
                 "target": "com.amazonaws.securityhub#NonEmptyString"
+            }
+        },
+        "com.amazonaws.securityhub#StandardsManagedBy": {
+            "type": "structure",
+            "members": {
+                "Company": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the company that manages a specific security standard. For existing\n         standards, the value is equal to <code>Amazon Web Services</code>.</p>"
+                    }
+                },
+                "Product": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for the product that manages a specific security standard. For existing\n         standards, the value is equal to the Amazon Web Services service that manages the\n         standard.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details about the management of a security standard.</p>"
             }
         },
         "com.amazonaws.securityhub#StandardsStatus": {

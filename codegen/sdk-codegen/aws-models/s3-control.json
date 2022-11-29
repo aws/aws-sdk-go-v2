@@ -142,6 +142,9 @@
                     "target": "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyStatus"
                 },
                 {
+                    "target": "com.amazonaws.s3control#GetMultiRegionAccessPointRoutes"
+                },
+                {
                     "target": "com.amazonaws.s3control#GetPublicAccessBlock"
                 },
                 {
@@ -203,6 +206,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3control#PutStorageLensConfigurationTagging"
+                },
+                {
+                    "target": "com.amazonaws.s3control#SubmitMultiRegionAccessPointRoutes"
                 },
                 {
                     "target": "com.amazonaws.s3control#UpdateJobPriority"
@@ -541,8 +547,8 @@
                                                                                                                                             "authSchemes": [
                                                                                                                                                 {
                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                     "signingName": "s3-outposts",
+                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                     "signingRegion": "{Region}"
                                                                                                                                                 }
                                                                                                                                             ]
@@ -569,8 +575,8 @@
                                                                                                                                             "authSchemes": [
                                                                                                                                                 {
                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                     "signingName": "s3-outposts",
+                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                     "signingRegion": "{Region}"
                                                                                                                                                 }
                                                                                                                                             ]
@@ -587,8 +593,8 @@
                                                                                                                                             "authSchemes": [
                                                                                                                                                 {
                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                     "signingName": "s3-outposts",
+                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                     "signingRegion": "{Region}"
                                                                                                                                                 }
                                                                                                                                             ]
@@ -1058,8 +1064,8 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingName": "s3-outposts",
+                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingRegion": "{accessPointArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
@@ -1101,8 +1107,8 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingName": "s3-outposts",
+                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingRegion": "{accessPointArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
@@ -1126,8 +1132,8 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingName": "s3-outposts",
+                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingRegion": "{accessPointArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
@@ -1690,8 +1696,8 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingName": "s3-outposts",
+                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingRegion": "{bucketArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
@@ -1733,8 +1739,8 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingName": "s3-outposts",
+                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingRegion": "{bucketArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
@@ -1758,8 +1764,8 @@
                                                                                                                                                                                                                                                                                             "authSchemes": [
                                                                                                                                                                                                                                                                                                 {
                                                                                                                                                                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingName": "s3-outposts",
+                                                                                                                                                                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                                                                                                                                                                     "signingRegion": "{bucketArn#region}"
                                                                                                                                                                                                                                                                                                 }
                                                                                                                                                                                                                                                                                             ]
@@ -2112,8 +2118,8 @@
                                                                                                                                             "authSchemes": [
                                                                                                                                                 {
                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                     "signingName": "s3",
+                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                     "signingRegion": "{Region}"
                                                                                                                                                 }
                                                                                                                                             ]
@@ -2130,8 +2136,8 @@
                                                                                                                                             "authSchemes": [
                                                                                                                                                 {
                                                                                                                                                     "name": "sigv4",
-                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                     "signingName": "s3",
+                                                                                                                                                    "disableDoubleEncoding": true,
                                                                                                                                                     "signingRegion": "{Region}"
                                                                                                                                                 }
                                                                                                                                             ]
@@ -2200,8 +2206,8 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingName": "s3",
+                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
@@ -2237,8 +2243,8 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingName": "s3",
+                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
@@ -2299,8 +2305,8 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingName": "s3",
+                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
@@ -2336,8 +2342,8 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingName": "s3",
+                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
@@ -2398,8 +2404,8 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingName": "s3",
+                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
@@ -2435,8 +2441,8 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingName": "s3",
+                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
@@ -2497,8 +2503,8 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingName": "s3",
+                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
@@ -2534,8 +2540,8 @@
                                                                                                                                     "authSchemes": [
                                                                                                                                         {
                                                                                                                                             "name": "sigv4",
-                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingName": "s3",
+                                                                                                                                            "disableDoubleEncoding": true,
                                                                                                                                             "signingRegion": "{Region}"
                                                                                                                                         }
                                                                                                                                     ]
@@ -8925,7 +8931,7 @@
                 "target": "com.amazonaws.s3control#GetBucketVersioningResult"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation returns the versioning state only for S3 on Outposts buckets. To return the versioning\n            state for an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html\">GetBucketVersioning</a> in\n            the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Returns the versioning state for an S3 on Outposts bucket. With versioning, you can save multiple\n         distinct copies of your data and recover from unintended user actions and\n         application failures.</p>         \n         <p>If you've never set versioning on your bucket, it has no versioning state. In that case,\n         the <code>GetBucketVersioning</code> request does not return a versioning state\n         value.</p>\n         <p>For more information about versioning, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html\">Versioning</a> in the <i>Amazon S3\n            User Guide</i>.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html#API_control_GetBucketVersioning_Examples\">Examples</a> section.</p>\n         <p>The following operations are related to <code>GetBucketVersioning</code> for S3 on Outposts.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html\">PutBucketVersioning</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This operation returns the versioning state only for S3 on Outposts buckets. To return\n            the versioning state for an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html\">GetBucketVersioning</a> in\n            the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Returns the versioning state for an S3 on Outposts bucket. With versioning, you can save\n         multiple distinct copies of your data and recover from unintended user actions and\n         application failures.</p>\n         <p>If you've never set versioning on your bucket, it has no versioning state. In that case,\n         the <code>GetBucketVersioning</code> request does not return a versioning state\n         value.</p>\n         <p>For more information about versioning, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html\">Versioning</a> in the <i>Amazon S3\n            User Guide</i>.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html#API_control_GetBucketVersioning_Examples\">Examples</a> section.</p>\n         <p>The following operations are related to <code>GetBucketVersioning</code> for\n         S3 on Outposts.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html\">PutBucketVersioning</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -9063,7 +9069,7 @@
                 },
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/v20180820/mrap/instances/{Name}",
+                    "uri": "/v20180820/mrap/instances/{Name+}",
                     "code": 200
                 },
                 "smithy.api#httpChecksumRequired": {},
@@ -9089,7 +9095,7 @@
                 },
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/v20180820/mrap/instances/{Name}/policy",
+                    "uri": "/v20180820/mrap/instances/{Name+}/policy",
                     "code": 200
                 },
                 "smithy.api#httpChecksumRequired": {},
@@ -9151,7 +9157,7 @@
                 },
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/v20180820/mrap/instances/{Name}/policystatus",
+                    "uri": "/v20180820/mrap/instances/{Name+}/policystatus",
                     "code": 200
                 },
                 "smithy.api#httpChecksumRequired": {},
@@ -9227,6 +9233,74 @@
                     "target": "com.amazonaws.s3control#MultiRegionAccessPointReport",
                     "traits": {
                         "smithy.api#documentation": "<p>A container element containing the details of the requested Multi-Region Access Point.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointRoutes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetMultiRegionAccessPointRoutesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetMultiRegionAccessPointRoutesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the routing configuration for a Multi-Region Access Point, indicating which Regions are active or\n         passive.</p>\n         <p>To obtain routing control changes and failover requests, use the Amazon S3 failover control\n         infrastructure endpoints in these five Amazon Web Services Regions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>us-east-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>us-west-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ap-southeast-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ap-northeast-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eu-west-1</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Your Amazon S3 bucket does not need to be in these five Regions.</p>\n         </note>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/mrap/instances/{Mrap+}/routes",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointRoutesRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "Mrap": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Multi-Region Access Point ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointRoutesResult": {
+            "type": "structure",
+            "members": {
+                "Mrap": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Multi-Region Access Point ARN.</p>"
+                    }
+                },
+                "Routes": {
+                    "target": "com.amazonaws.s3control#RouteList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The different routes that make up the route configuration. Active routes return a value\n         of <code>100</code>, and passive routes return a value of <code>0</code>.</p>"
                     }
                 }
             }
@@ -11120,6 +11194,16 @@
                 "smithy.api#pattern": "^\\S+$"
             }
         },
+        "com.amazonaws.s3control#MultiRegionAccessPointId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\:.-]{3,200}$"
+            }
+        },
         "com.amazonaws.s3control#MultiRegionAccessPointName": {
             "type": "string",
             "traits": {
@@ -11227,6 +11311,33 @@
                 "traits": {
                     "smithy.api#xmlName": "AccessPoint"
                 }
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointRoute": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3control#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket for which you'll submit a routing configuration change.\n         Either the <code>Bucket</code> or the <code>Region</code> value must be provided. If both\n         are provided, the bucket must be in the specified Region.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.s3control#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region to which you'll be submitting a routing configuration change. Either\n         the <code>Bucket</code> or the <code>Region</code> value must be provided. If both are\n         provided, the bucket must be in the specified Region.</p>"
+                    }
+                },
+                "TrafficDialPercentage": {
+                    "target": "com.amazonaws.s3control#TrafficDialPercentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The traffic state for the specified bucket or Amazon Web Services Region. </p>\n         <p>A value of <code>0</code> indicates a passive state, which means that no new traffic\n         will be routed to the\n         Region. </p>\n         <p>A value of <code>100</code> indicates an active state, which means that traffic will be\n         routed to the specified Region. </p>\n         <p>When\n         the routing configuration for a Region is changed from active to passive, any in-progress\n         operations (uploads, copies, deletes, and so on) to the formerly active Region will\n         continue to run to until a final success or failure status is reached.</p>\n         <p>If all Regions in the routing configuration are designated as passive, you'll receive an\n            <code>InvalidRequest</code> error. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure for a Multi-Region Access Point that indicates where Amazon S3 traffic can be routed. Routes can be\n         either active or passive. Active routes can process Amazon S3 requests through the Multi-Region Access Point, but\n         passive routes are not eligible to process Amazon S3 requests. </p>\n         <p>Each route contains the Amazon S3 bucket name and the Amazon Web Services Region that the bucket is located\n         in. The route also includes the <code>TrafficDialPercentage</code> value, which shows\n         whether the bucket and Region are active (indicated by a value of <code>100</code>) or\n         passive (indicated by a value of <code>0</code>).</p>"
             }
         },
         "com.amazonaws.s3control#MultiRegionAccessPointStatus": {
@@ -11534,7 +11645,7 @@
                 "AllowedFeatures": {
                     "target": "com.amazonaws.s3control#ObjectLambdaAllowedFeaturesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for allowed features. Valid inputs are <code>GetObject-Range</code>, <code>GetObject-PartNumber</code>, <code>HeadObject-Range</code>, and <code>HeadObject-PartNumber</code>.</p>"
+                        "smithy.api#documentation": "<p>A container for allowed features. Valid inputs are <code>GetObject-Range</code>,\n            <code>GetObject-PartNumber</code>, <code>HeadObject-Range</code>, and\n            <code>HeadObject-PartNumber</code>.</p>"
                     }
                 },
                 "TransformationConfigurations": {
@@ -11582,7 +11693,7 @@
                 "Actions": {
                     "target": "com.amazonaws.s3control#ObjectLambdaTransformationConfigurationActionsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for the action of an Object Lambda Access Point configuration. Valid inputs are\n         <code>GetObject</code>, <code>ListObjects</code>, <code>HeadObject</code>, and <code>ListObjectsV2</code>.</p>",
+                        "smithy.api#documentation": "<p>A container for the action of an Object Lambda Access Point configuration. Valid inputs are\n            <code>GetObject</code>, <code>ListObjects</code>, <code>HeadObject</code>, and\n            <code>ListObjectsV2</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12225,7 +12336,7 @@
                 "target": "smithy.api#Unit"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This operation sets the versioning state only for S3 on Outposts buckets. To set the\n            versioning state for an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html\">PutBucketVersioning</a> in\n            the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Sets the versioning state for an S3 on Outposts bucket. With versioning, you can save multiple\n         distinct copies of your data and recover from unintended user actions and\n         application failures.</p>         \n         <p>You can set the versioning state to one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Enabled</b> - Enables versioning for the objects in the bucket. \n               All objects added to the bucket receive a unique version ID.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Suspended</b> - Suspends versioning for the objects\n               in the bucket. All objects added to the bucket receive the version ID\n                  <code>null</code>.</p>\n            </li>\n         </ul>\n         <p>If you've never set versioning on your bucket, it has no versioning state. In that\n         case, a <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html\">\n            GetBucketVersioning</a> request does not return a versioning state value.</p>\n         <p>When you enable S3 Versioning, for each object in your bucket, you have a current\n         version and zero or more noncurrent versions. You can configure your bucket S3 Lifecycle\n         rules to expire noncurrent versions after a specified time period. For more information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsLifecycleManaging.html\"> Creating and managing\n            a lifecycle configuration for your S3 on Outposts bucket</a> in the <i>Amazon S3\n            User Guide</i>.</p>  \n         <p>If you have an object expiration lifecycle policy in your non-versioned bucket and you want to maintain the same \n            permanent delete behavior when you enable versioning, you must add a noncurrent expiration policy. \n            The noncurrent expiration lifecycle policy will manage the deletes of the noncurrent object versions \n            in the version-enabled bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html\">Versioning</a> in the <i>Amazon S3 User Guide</i>.</p> \n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html#API_control_PutBucketVersioning_Examples\">Examples</a> section.</p>\n         <p>The following operations are related to <code>PutBucketVersioning</code> for S3 on Outposts.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html\">GetBucketVersioning</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This operation sets the versioning state only for S3 on Outposts buckets. To set the\n            versioning state for an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html\">PutBucketVersioning</a> in\n            the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Sets the versioning state for an S3 on Outposts bucket. With versioning, you can save\n         multiple distinct copies of your data and recover from unintended user actions and\n         application failures.</p>\n         <p>You can set the versioning state to one of the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Enabled</b> - Enables versioning for the objects in\n               the bucket. All objects added to the bucket receive a unique version ID.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Suspended</b> - Suspends versioning for the objects\n               in the bucket. All objects added to the bucket receive the version ID\n                  <code>null</code>.</p>\n            </li>\n         </ul>\n         <p>If you've never set versioning on your bucket, it has no versioning state. In that case,\n         a <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html\">\n            GetBucketVersioning</a> request does not return a versioning state value.</p>\n         <p>When you enable S3 Versioning, for each object in your bucket, you have a current\n         version and zero or more noncurrent versions. You can configure your bucket S3 Lifecycle\n         rules to expire noncurrent versions after a specified time period. For more information,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsLifecycleManaging.html\"> Creating and managing\n            a lifecycle configuration for your S3 on Outposts bucket</a> in the <i>Amazon S3\n            User Guide</i>.</p>\n         <p>If you have an object expiration lifecycle policy in your non-versioned bucket and you\n         want to maintain the same permanent delete behavior when you enable versioning, you must\n         add a noncurrent expiration policy. The noncurrent expiration lifecycle policy will manage\n         the deletes of the noncurrent object versions in the version-enabled bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html\">Versioning</a> in the <i>Amazon S3\n            User Guide</i>.</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request. In addition, you must use an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived by using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html#API_control_PutBucketVersioning_Examples\">Examples</a> section.</p>\n         <p>The following operations are related to <code>PutBucketVersioning</code> for\n         S3 on Outposts.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html\">GetBucketVersioning</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html\">PutBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html\">GetBucketLifecycleConfiguration</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -12799,6 +12910,15 @@
                 }
             }
         },
+        "com.amazonaws.s3control#RouteList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#MultiRegionAccessPointRoute",
+                "traits": {
+                    "smithy.api#xmlName": "Route"
+                }
+            }
+        },
         "com.amazonaws.s3control#S3AWSRegion": {
             "type": "string",
             "traits": {
@@ -13081,7 +13201,7 @@
                 "TargetKeyPrefix": {
                     "target": "com.amazonaws.s3control#NonEmptyMaxLength1024String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the folder prefix into which you would like the objects to be copied. For\n         example, to copy objects into a folder named <code>Folder1</code> in the destination bucket, set the\n         TargetKeyPrefix to <code>Folder1</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the folder prefix into which you would like the objects to be copied. For\n         example, to copy objects into a folder named <code>Folder1</code> in the destination\n         bucket, set the TargetKeyPrefix to <code>Folder1</code>.</p>"
                     }
                 },
                 "ObjectLockLegalHoldStatus": {
@@ -13112,7 +13232,7 @@
                 "ChecksumAlgorithm": {
                     "target": "com.amazonaws.s3control#S3ChecksumAlgorithm",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the algorithm you want Amazon S3 to use to create the checksum. For more information\n            see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CheckingObjectIntegrity.xml\">\n                Checking object integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates the algorithm you want Amazon S3 to use to create the checksum. For more\n         information see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CheckingObjectIntegrity.xml\"> Checking object\n            integrity</a> in the <i>Amazon S3 User Guide</i>.</p>"
                     }
                 }
             },
@@ -13593,7 +13713,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Directs the specified job to invoke <code>ReplicateObject</code> on every object in the job's\n         manifest.</p>"
+                "smithy.api#documentation": "<p>Directs the specified job to invoke <code>ReplicateObject</code> on every object in the\n         job's manifest.</p>"
             }
         },
         "com.amazonaws.s3control#S3Retention": {
@@ -13810,7 +13930,7 @@
                 "KeyId": {
                     "target": "com.amazonaws.s3control#KmsKeyArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric encryption customer managed\n         key to use for encrypting generated manifest objects.</p>",
+                        "smithy.api#documentation": "<p>Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric encryption\n         customer managed key to use for encrypting generated manifest objects.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14069,6 +14189,68 @@
                 "smithy.api#pattern": "^[A-Za-z0-9\\+\\:\\/\\=\\?\\#-_]+$"
             }
         },
+        "com.amazonaws.s3control#SubmitMultiRegionAccessPointRoutes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#SubmitMultiRegionAccessPointRoutesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#SubmitMultiRegionAccessPointRoutesResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Submits an updated route configuration for a Multi-Region Access Point. This API operation updates the\n         routing status for the specified Regions from active to passive, or from passive to active.\n         A value of <code>0</code> indicates a passive status, which means that traffic won't be\n         routed to the specified Region. A value of <code>100</code> indicates an active status,\n         which means that traffic will be routed to the specified Region. At least one Region must be active at all times.</p>\n         <p>When\n         the routing configuration is changed, any in-progress operations (uploads, copies, deletes,\n         and so on) to formerly active Regions will continue to run to their\n         final completion state (success or failure). The routing configurations of any Regions that\n         aren’t specified remain unchanged.</p>\n         <note>\n            <p>Updated routing configurations might not be immediately applied.\n            It\n            can take up to 2 minutes for your changes to take effect.</p>\n         </note>\n         <p>To submit routing control changes and failover requests, use the Amazon S3 failover control\n         infrastructure endpoints in these five Amazon Web Services Regions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>us-east-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>us-west-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ap-southeast-2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ap-northeast-1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eu-west-1</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>Your Amazon S3 bucket does not need to be in these five Regions.</p>\n         </note>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/v20180820/mrap/instances/{Mrap+}/routes",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.rules#staticContextParams": {
+                    "RequiresAccountId": {
+                        "value": true
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#SubmitMultiRegionAccessPointRoutesRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {},
+                        "smithy.rules#contextParam": {
+                            "name": "AccountId"
+                        }
+                    }
+                },
+                "Mrap": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Multi-Region Access Point ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RouteUpdates": {
+                    "target": "com.amazonaws.s3control#RouteList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The different routes that make up the new route configuration. Active routes return a\n         value of <code>100</code>, and passive routes return a value of <code>0</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#SubmitMultiRegionAccessPointRoutesResult": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.s3control#SuspendedCause": {
             "type": "string",
             "traits": {
@@ -14141,6 +14323,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>Amazon S3 throws this exception if you have too many tags in your tag set.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.s3control#TrafficDialPercentage": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.s3control#Transition": {
@@ -14418,7 +14609,7 @@
                 "MFADelete": {
                     "target": "com.amazonaws.s3control#MFADelete",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether MFA delete is enabled or disabled in the bucket versioning configuration\n         for the S3 on Outposts bucket.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether MFA delete is enabled or disabled in the bucket versioning\n         configuration for the S3 on Outposts bucket.</p>",
                         "smithy.api#xmlName": "MfaDelete"
                     }
                 },

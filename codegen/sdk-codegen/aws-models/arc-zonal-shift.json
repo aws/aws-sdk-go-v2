@@ -1,0 +1,1685 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.arczonalshift#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.arczonalshift#AppliedStatus": {
+            "type": "enum",
+            "members": {
+                "APPLIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APPLIED"
+                    }
+                },
+                "NOT_APPLIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_APPLIED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#AppliedWeights": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.arczonalshift#AvailabilityZone"
+            },
+            "value": {
+                "target": "com.amazonaws.arczonalshift#Weight"
+            }
+        },
+        "com.amazonaws.arczonalshift#AvailabilityZone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#AvailabilityZones": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arczonalshift#AvailabilityZone"
+            }
+        },
+        "com.amazonaws.arczonalshift#CancelZonalShift": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.arczonalshift#CancelZonalShiftRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.arczonalshift#ZonalShift"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.arczonalshift#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancel a zonal shift in Amazon Route 53 Application Recovery Controller that you've started for a resource in your AWS account in an AWS Region. </p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/zonalshifts/{zonalShiftId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#CancelZonalShiftRequest": {
+            "type": "structure",
+            "members": {
+                "zonalShiftId": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The internally-generated identifier of a zonal shift.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.arczonalshift#ZonalShiftResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.arczonalshift#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.arczonalshift#ConflictExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the conflict exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "zonalShiftId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The zonal shift ID associated with the conflict exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request could not be processed because of conflict in the current state of the resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.arczonalshift#ConflictExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ZonalShiftAlreadyExists",
+                        "name": "ZONAL_SHIFT_ALREADY_EXISTS"
+                    },
+                    {
+                        "value": "ZonalShiftStatusNotActive",
+                        "name": "ZONAL_SHIFT_STATUS_NOT_ACTIVE"
+                    },
+                    {
+                        "value": "SimultaneousZonalShiftsConflict",
+                        "name": "SIMULTANEOUS_ZONAL_SHIFTS_CONFLICT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.arczonalshift#ExpiresIn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^([1-9][0-9]*)(m|h)$"
+            }
+        },
+        "com.amazonaws.arczonalshift#ExpiryTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.arczonalshift#GetManagedResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.arczonalshift#GetManagedResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.arczonalshift#GetManagedResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.arczonalshift#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get information about a resource that's been registered for zonal shifts with Amazon Route 53 Application Recovery Controller in this AWS Region. Resources that are registered for\n   \t\tzonal shifts are managed resources in Route 53 ARC.</p>\n   \t     <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/managedresources/{resourceIdentifier}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.arczonalshift#GetManagedResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.arczonalshift#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n   \t     <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.arczonalshift#ManagedResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.arczonalshift#GetManagedResourceResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.arczonalshift#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the resource.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.arczonalshift#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource.</p>"
+                    }
+                },
+                "appliedWeights": {
+                    "target": "com.amazonaws.arczonalshift#AppliedWeights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of key-value pairs that indicate whether resources are active in Availability Zones or not.  \n   \t\tThe key name is the Availability Zone where the resource is deployed. The value is 1 or 0.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "zonalShifts": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftsInResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The zonal shifts that are currently active for a resource. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.arczonalshift#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There was an internal server error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.arczonalshift#ListManagedResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.arczonalshift#ListManagedResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.arczonalshift#ListManagedResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.arczonalshift#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the resources in your AWS account in this AWS Region that are managed for zonal shifts in Amazon Route 53 Application Recovery Controller, and information \n   \t\tabout them. The information includes their Amazon Resource Names (ARNs), the Availability Zones the resources are deployed in, and \n   \t\tthe resource name.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/managedresources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.arczonalshift#ListManagedResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the \n   \t\tprevious request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous \n   \t\tcall's <code>NextToken</code> response to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.arczonalshift#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.arczonalshift#ListManagedResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.arczonalshift#ManagedResourceSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The items in the response list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the \n   \t\tprevious request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous \n   \t\tcall's <code>NextToken</code> response to request the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.arczonalshift#ListZonalShifts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.arczonalshift#ListZonalShiftsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.arczonalshift#ListZonalShiftsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.arczonalshift#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the active zonal shifts in Amazon Route 53 Application Recovery Controller in your AWS account in this AWS Region.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/zonalshifts",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.arczonalshift#ListZonalShiftsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the \n   \t\tprevious request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous \n   \t\tcall's <code>NextToken</code> response to request the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status for a zonal shift.</p>\n   \t     <p>The <code>Status</code> for a zonal shift can have one of the following values:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <b>ACTIVE</b>: The zonal shift is started and active.</p>\n            </li>\n            <li>\n               <p>\n                  <b>EXPIRED</b>: The zonal shift has expired (the expiry time was exceeded).</p>\n            </li>\n            <li>\n               <p>\n                  <b>CANCELED</b>: The zonal shift was canceled.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpQuery": "status"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.arczonalshift#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.arczonalshift#ListZonalShiftsResponse": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The items in the response list.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that you want to receive the next page of results. Valid only if you received a <code>NextToken</code> response in the \n   \t\tprevious request. If you did, it indicates that more output is available. Set this parameter to the value provided by the previous \n   \t\tcall's <code>NextToken</code> response to request the next page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.arczonalshift#ManagedResource": {
+            "type": "resource",
+            "identifiers": {
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.arczonalshift#ResourceIdentifier"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.arczonalshift#GetManagedResource"
+            },
+            "list": {
+                "target": "com.amazonaws.arczonalshift#ListManagedResources"
+            }
+        },
+        "com.amazonaws.arczonalshift#ManagedResourceSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arczonalshift#ManagedResourceSummary"
+            }
+        },
+        "com.amazonaws.arczonalshift#ManagedResourceSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.arczonalshift#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the managed resource.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.arczonalshift#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the managed resource.</p>"
+                    }
+                },
+                "availabilityZones": {
+                    "target": "com.amazonaws.arczonalshift#AvailabilityZones",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zones that a resource is deployed in.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex structure for a managed resource in an account.</p>\n   \t     <p>A managed resource is a Network Load Balancer or Application Load Balancer that has been registered with Route 53 ARC by Elastic Load Balancing. You can start a\n   \t\tzonal shift in Route 53 ARC for a managed resource to temporarily move traffic for the resource away from an Availability Zone in an AWS Region.</p>\n   \t     <note>\n            <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.arczonalshift#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#PercDataPlane": {
+            "type": "service",
+            "version": "2022-10-30",
+            "resources": [
+                {
+                    "target": "com.amazonaws.arczonalshift#ManagedResource"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftResource"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ZonalShifts"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ARC Zonal Shift",
+                    "endpointPrefix": "arc-zonal-shift"
+                },
+                "aws.auth#sigv4": {
+                    "name": "arc-zonal-shift"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "Authorization",
+                        "Date",
+                        "X-Amz-Date",
+                        "X-Amz-Security-Token",
+                        "X-Amz-Target",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-ErrorType",
+                        "x-amzn-RequestId",
+                        "x-amzn-ErrorMessage",
+                        "x-amzn-trace-id",
+                        "Date"
+                    ]
+                },
+                "smithy.api#documentation": "<p>This is the API Reference Guide for the zonal shift feature of Amazon Route 53 Application Recovery Controller. This guide is for developers who need detailed information about \n\t\t\tzonal shift API actions, data types, and errors.</p>\n\t\t       <p>Zonal shift is in preview release for Amazon Route 53 Application Recovery Controller and is subject to change.</p>\n\t\t       <p>Zonal shift in Route 53 ARC enables you to move traffic for a load balancer resource away from an Availability Zone. Starting \n\t\t\ta zonal shift helps your application recover immediately, for example, from a developer's bad code deployment \n\t\t\tor from an AWS infrastructure failure in a single Availability Zone, reducing the impact and time lost from an issue \n\t\t\tin one zone. </p>\n\t\t       <p>Supported AWS resources are automatically registered with Route 53 ARC. Resources that are registered for zonal shifts \n\t\t\tin Route 53 ARC are managed resources in Route 53 ARC. You can start a zonal shift for any managed resource in your account in a Region. \n\t\t\tAt this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>\n\t\t       <p>Zonal shifts are temporary. You must specify an expiration when you start a zonal shift, of up to three days initially. \n\t\t\tIf you want to still keep traffic away from an Availability Zone, you can update the zonal shift and set a new expiration. \n\t\t\tYou can also cancel a zonal shift, before it expires, for example, if you're ready to restore traffic to the Availability Zone.</p>\n\t\t       <p>For more information about using zonal shift, see the \n\t\t\t<a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route53-recovery.html\">Amazon Route 53 Application Recovery Controller Developer Guide</a>.</p>",
+                "smithy.api#title": "AWS ARC - Zonal Shift",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://arc-zonal-shift-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://arc-zonal-shift-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://arc-zonal-shift.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://arc-zonal-shift.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://arc-zonal-shift.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:.*$"
+            }
+        },
+        "com.amazonaws.arczonalshift#ResourceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#ResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input requested a resource that was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.arczonalshift#StartTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.arczonalshift#StartZonalShift": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.arczonalshift#StartZonalShiftRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.arczonalshift#ZonalShift"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.arczonalshift#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>You start a zonal shift to temporarily move load balancer traffic away from an Availability Zone in a AWS Region,\n   \t\tto help your application recover immediately, for example, from a developer's bad code deployment or from an AWS \n   \t\tinfrastructure failure in a single Availability Zone. You can start a zonal shift in Route 53 ARC only for managed\n   \t\tresources in your account in an AWS Region. Resources are automatically registered with Route 53 ARC by AWS services.</p>\n   \t     <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>\n   \t     <p>When you start a zonal shift, traffic for the resource is no longer routed to the Availability Zone. The\n   \t\tzonal shift is created immediately in Route 53 ARC. However, it can take a short time, typically up to a few minutes,\n   \t\tfor existing, in-progress connections in the Availability Zone to complete.</p>\n   \t     <p>For more information, see <a href=\"https://docs.aws.amazon.com/r53recovery/latest/dg/arc-zonal-shift.html\">Zonal shift</a>\n   \t\tin the Amazon Route 53 Application Recovery Controller Developer Guide.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/zonalshifts",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#StartZonalShiftRequest": {
+            "type": "structure",
+            "members": {
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.arczonalshift#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n   \t     <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awayFrom": {
+                    "target": "com.amazonaws.arczonalshift#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. \n   \t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the AWS Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiresIn": {
+                    "target": "com.amazonaws.arczonalshift#ExpiresIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The length of time that you want a zonal shift to be active, which Route 53 ARC converts to an expiry time (expiration time).\n   \t\tZonal shifts are temporary. You can set a zonal shift to be active initially for up to three days (72 hours).</p>\n   \t     <p>If you want to still keep traffic away from an Availability Zone, you can update the \n   \t\tzonal shift and set a new expiration. You can also cancel a zonal shift, before it expires, for example, if you're ready to \n   \t\trestore traffic to the Availability Zone.</p>\n   \t     <p>To set a length of time for a zonal shift to be active, specify a whole number, and then one of the following, with no space:</p>\n   \t\n   \t     <ul>\n            <li>\n               <p>\n                  <b>A lowercase letter m:</b> To specify that the value is in minutes.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A lowercase letter h:</b> To specify that the value is in hours.</p>\n            </li>\n         </ul>\n   \t     <p>For example: <code>20h</code> means the zonal shift expires in 20 hours. <code>120m</code> means the zonal shift expires in 120 minutes (2 hours).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment that you enter about the zonal shift. Only the latest comment is retained; no comment\n   \t\thistory is maintained. A new comment overwrites any existing comment string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.arczonalshift#ZonalShifts"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.arczonalshift#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.arczonalshift#UpdateZonalShift": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.arczonalshift#UpdateZonalShiftRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.arczonalshift#ZonalShift"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.arczonalshift#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update an active zonal shift in Amazon Route 53 Application Recovery Controller in your AWS account. You can update a zonal shift to set a new expiration, or \n   \tedit or replace the comment for the zonal shift. </p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/zonalshifts/{zonalShiftId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#UpdateZonalShiftRequest": {
+            "type": "structure",
+            "members": {
+                "zonalShiftId": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a zonal shift.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment that you enter about the zonal shift. Only the latest comment is retained; no comment\n   \t\thistory is maintained. A new comment overwrites any existing comment string.</p>"
+                    }
+                },
+                "expiresIn": {
+                    "target": "com.amazonaws.arczonalshift#ExpiresIn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The length of time that you want a zonal shift to be active, which Route 53 ARC converts to an expiry time (expiration time).\n   \t\tZonal shifts are temporary. You can set a zonal shift to be active initially for up to three days (72 hours).</p>\n   \t     <p>If you want to still keep traffic away from an Availability Zone, you can update the \n   \t\tzonal shift and set a new expiration. You can also cancel a zonal shift, before it expires, for example, if you're ready to \n   \t\trestore traffic to the Availability Zone.</p>\n   \t     <p>To set a length of time for a zonal shift to be active, specify a whole number, and then one of the following, with no space:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <b>A lowercase letter m:</b> To specify that the value is in minutes.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A lowercase letter h:</b> To specify that the value is in hours.</p>\n            </li>\n         </ul>\n   \t     <p>For example: <code>20h</code> means the zonal shift expires in 20 hours. <code>120m</code> means the zonal shift expires in 120 minutes (2 hours).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.arczonalshift#ZonalShiftResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.arczonalshift#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.arczonalshift#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the validation exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.arczonalshift#ValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "InvalidExpiresIn",
+                        "name": "INVALID_EXPIRES_IN"
+                    },
+                    {
+                        "value": "InvalidStatus",
+                        "name": "INVALID_STATUS"
+                    },
+                    {
+                        "value": "MissingValue",
+                        "name": "MISSING_VALUE"
+                    },
+                    {
+                        "value": "InvalidToken",
+                        "name": "INVALID_TOKEN"
+                    },
+                    {
+                        "value": "InvalidResourceIdentifier",
+                        "name": "INVALID_RESOURCE_IDENTIFIER"
+                    },
+                    {
+                        "value": "InvalidAz",
+                        "name": "INVALID_AZ"
+                    },
+                    {
+                        "value": "UnsupportedAz",
+                        "name": "UNSUPPORTED_AZ"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.arczonalshift#Weight": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0.0,
+                    "max": 1.0
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#ZonalShift": {
+            "type": "structure",
+            "members": {
+                "zonalShiftId": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a zonal shift.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.arczonalshift#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n\t\t       <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awayFrom": {
+                    "target": "com.amazonaws.arczonalshift#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. \n\t\t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the AWS Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiryTime": {
+                    "target": "com.amazonaws.arczonalshift#ExpiryTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry time (expiration time) for the zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. \n\t\t\tYou can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift \n\t\t\tto set a new expiration at any time. </p>\n\t\t       <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts \n\t\t\tto an expiry time (expiration time). You can cancel a zonal shift, for example, if you're ready to restore traffic to the Availability Zone. Or you\n\t\t\tcan update the zonal shift to specify another length of time to expire in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.arczonalshift#StartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (UTC) when the zonal shift is started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status for a zonal shift.</p>\n   \t     <p>The <code>Status</code> for a zonal shift can have one of the following values:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <b>ACTIVE:</b> The zonal shift is started and active.</p>\n            </li>\n            <li>\n               <p>\n                  <b>EXPIRED:</b> The zonal shift has expired (the expiry time was exceeded).</p>\n            </li>\n            <li>\n               <p>\n                  <b>CANCELED:</b> The zonal shift was canceled.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment that you enter about the zonal shift. Only the latest comment is retained; no comment\n   \t\thistory is maintained. A new comment overwrites any existing comment string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#ZonalShiftComment": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#ZonalShiftId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-]+$"
+            }
+        },
+        "com.amazonaws.arczonalshift#ZonalShiftInResource": {
+            "type": "structure",
+            "members": {
+                "appliedStatus": {
+                    "target": "com.amazonaws.arczonalshift#AppliedStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <code>appliedStatus</code> for a zonal shift for a resource can have one of two values: <code>APPLIED</code>\n   \t\tor <code>NOT_APPLIED</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "zonalShiftId": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a zonal shift.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.arczonalshift#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n   \t     <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awayFrom": {
+                    "target": "com.amazonaws.arczonalshift#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. \n   \t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the AWS Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiryTime": {
+                    "target": "com.amazonaws.arczonalshift#ExpiryTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry time (expiration time) for the zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. \n   \t\tYou can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift \n   \t\tto set a new expiration at any time. </p>\n   \t     <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts \n   \t\tto an expiry time (expiration time). You can cancel a zonal shift, for example, if you're ready to restore traffic to the Availability Zone. Or you\n   \t\tcan update the zonal shift to specify another length of time to expire in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.arczonalshift#StartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (UTC) when the zonal shift is started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment that you enter about the zonal shift. Only the latest comment is retained; no comment\n   \t\thistory is maintained. That is, a new comment overwrites any existing comment string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A complex structure that lists the zonal shifts for a managed resource and their statuses for the resource.</p>"
+            }
+        },
+        "com.amazonaws.arczonalshift#ZonalShiftResource": {
+            "type": "resource",
+            "identifiers": {
+                "zonalShiftId": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftId"
+                }
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.arczonalshift#CancelZonalShift"
+                },
+                {
+                    "target": "com.amazonaws.arczonalshift#UpdateZonalShift"
+                }
+            ]
+        },
+        "com.amazonaws.arczonalshift#ZonalShiftStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "EXPIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED"
+                    }
+                },
+                "CANCELED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANCELED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.arczonalshift#ZonalShiftSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arczonalshift#ZonalShiftSummary"
+            }
+        },
+        "com.amazonaws.arczonalshift#ZonalShiftSummary": {
+            "type": "structure",
+            "members": {
+                "zonalShiftId": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a zonal shift.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.arczonalshift#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the resource to include in a zonal shift. The identifier is the Amazon Resource Name (ARN) for the resource.</p>\n   \t     <p>At this time, you can only start a zonal shift for Network Load Balancers and Application Load Balancers with cross-zone load balancing turned off.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "awayFrom": {
+                    "target": "com.amazonaws.arczonalshift#AvailabilityZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone that traffic is moved away from for a resource when you start a zonal shift. \n   \t\tUntil the zonal shift expires or you cancel it, traffic for the resource is instead moved to other Availability Zones in the AWS Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expiryTime": {
+                    "target": "com.amazonaws.arczonalshift#ExpiryTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiry time (expiration time) for the zonal shift. A zonal shift is temporary and must be set to expire when you start the zonal shift. \n   \t\tYou can initially set a zonal shift to expire in a maximum of three days (72 hours). However, you can update a zonal shift \n   \t\tto set a new expiration at any time. </p>\n   \t     <p>When you start a zonal shift, you specify how long you want it to be active, which Route 53 ARC converts \n   \t\tto an expiry time (expiration time). You can cancel a zonal shift, for example, if you're ready to restore traffic to the Availability Zone. Or you\n   \t\tcan update the zonal shift to specify another length of time to expire in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.arczonalshift#StartTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time (UTC) when the zonal shift is started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status for a zonal shift.</p>\n   \t     <p>The <code>Status</code> for a zonal shift can have one of the following values:</p>\n   \t     <ul>\n            <li>\n               <p>\n                  <b>ACTIVE:</b> The zonal shift is started and active.</p>\n            </li>\n            <li>\n               <p>\n                  <b>EXPIRED:</b> The zonal shift has expired (the expiry time was exceeded).</p>\n            </li>\n            <li>\n               <p>\n                  <b>CANCELED:</b> The zonal shift was canceled.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "comment": {
+                    "target": "com.amazonaws.arczonalshift#ZonalShiftComment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment that you enter about the zonal shift. Only the latest comment is retained; no comment\n   \t\thistory is maintained. That is, a new comment overwrites any existing comment string.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You start a zonal shift to temporarily move load balancer traffic away from an Availability Zone in a AWS Region.\n   \t\tA zonal shift helps your application recover immediately, for example, from a developer's bad code deployment or from an AWS \n   \t\tinfrastructure failure in a single Availability Zone. You can start a zonal shift in Route 53 ARC only for managed\n   \t\tresources in your account in an AWS Region. Supported AWS resources are automatically registered with Route 53 ARC.</p>\n   \t     <p>Zonal shifts are temporary. A zonal shift can be active for up to three days (72 hours).</p>\n   \t     <p>When you start a zonal shift, you specify how long you want it to be active, which Amazon Route 53 Application Recovery Controller converts \n   \t\tto an expiry time (expiration time). You can cancel a zonal shift, for example, if you're ready to restore traffic to the Availability Zone. Or you\n   \t\tcan extend the zonal shift by updating the expiration so the zonal shift is active longer.</p>"
+            }
+        },
+        "com.amazonaws.arczonalshift#ZonalShifts": {
+            "type": "resource",
+            "identifiers": {
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.arczonalshift#ResourceIdentifier"
+                }
+            },
+            "list": {
+                "target": "com.amazonaws.arczonalshift#ListZonalShifts"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.arczonalshift#StartZonalShift"
+                }
+            ]
+        },
+        "com.amazonaws.arczonalshift#ZonalShiftsInResource": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.arczonalshift#ZonalShiftInResource"
+            }
+        }
+    }
+}
