@@ -1,3 +1,7 @@
+# v1.24.0 (2022-11-29)
+
+* **Feature**: Added support for configuring Macie to continually sample objects from S3 buckets and inspect them for sensitive data. Results appear in statistics, findings, and other data that Macie provides.
+
 # v1.23.6 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.24.0 (2022-11-29)
+
+* **Feature**: Adds support for additional EKS add-ons metadata and filtering fields
+
 # v1.23.0 (2022-11-16)
 
 * **Feature**: Adds support for customer-provided placement groups for Kubernetes control plane instances when creating local EKS clusters on Outposts

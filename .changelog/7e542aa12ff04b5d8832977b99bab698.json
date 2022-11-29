@@ -1,8 +1,0 @@
-{
-    "id": "7e542aa1-2ff0-4b5d-8832-977b99bab698",
-    "type": "feature",
-    "description": "Adds support for additional EKS add-ons metadata and filtering fields",
-    "modules": [
-        "service/eks"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.28.0 (2022-11-29)
+
+* **Feature**: This release adds new Describe APIs and updates Create and Update APIs to support the data model for Dashboards, Analyses, and Templates.
+
 # v1.27.0 (2022-11-18)
 
 * **Feature**: This release adds the following: 1) Asset management for centralized assets governance 2) QuickSight Q now supports public embedding 3) New Termination protection flag to mitigate accidental deletes 4) Athena data sources now accept a custom IAM role 5) QuickSight supports connectivity to Databricks

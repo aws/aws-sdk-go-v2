@@ -1,3 +1,7 @@
+# v1.36.0 (2022-11-29)
+
+* **Feature**: This release allows the creation of Custom Visual Transforms (Dynamic Transforms) to be created via AWS Glue CLI/SDK.
+
 # v1.35.0 (2022-11-18)
 
 * **Feature**: AWSGlue Crawler - Adding support for Table and Column level Comments with database level datatypes for JDBC based crawler.

@@ -1,3 +1,36 @@
+# Release (2022-11-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.0.0](service/arczonalshift/CHANGELOG.md#v100-2022-11-29)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Route 53 Application Recovery Controller Zonal Shift is a new service that makes it easy to shift traffic away from an Availability Zone in a Region. See the developer guide for more information: https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route53-recovery.html
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.18.0](service/computeoptimizer/CHANGELOG.md#v1180-2022-11-29)
+  * **Feature**: Adds support for a new recommendation preference that makes it possible for customers to optimize their EC2 recommendations by utilizing an external metrics ingestion service to provide metrics.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.28.0](service/configservice/CHANGELOG.md#v1280-2022-11-29)
+  * **Feature**: With this release, you can use AWS Config to evaluate your resources for compliance with Config rules before they are created or updated. Using Config rules in proactive mode enables you to test and build compliant resource templates or check resource configurations at the time they are provisioned.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.73.0](service/ec2/CHANGELOG.md#v1730-2022-11-29)
+  * **Feature**: Introduces ENA Express, which uses AWS SRD and dynamic routing to increase throughput and minimize latency, adds support for trust relationships between Reachability Analyzer and AWS Organizations to enable cross-account analysis, and adds support for Infrastructure Performance metric subscriptions.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.24.0](service/eks/CHANGELOG.md#v1240-2022-11-29)
+  * **Feature**: Adds support for additional EKS add-ons metadata and filtering fields
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.26.0](service/fsx/CHANGELOG.md#v1260-2022-11-29)
+  * **Feature**: This release adds support for 4GB/s / 160K PIOPS FSx for ONTAP file systems and 10GB/s / 350K PIOPS FSx for OpenZFS file systems (Single_AZ_2). For FSx for ONTAP, this also adds support for DP volumes, snapshot policy, copy tags to backups, and Multi-AZ route table updates.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.36.0](service/glue/CHANGELOG.md#v1360-2022-11-29)
+  * **Feature**: This release allows the creation of Custom Visual Transforms (Dynamic Transforms) to be created via AWS Glue CLI/SDK.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.9.0](service/inspector2/CHANGELOG.md#v190-2022-11-29)
+  * **Feature**: This release adds support for Inspector to scan AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.26.0](service/lambda/CHANGELOG.md#v1260-2022-11-29)
+  * **Feature**: Adds support for Lambda SnapStart, which helps improve the startup performance of functions. Customers can now manage SnapStart based functions via CreateFunction and UpdateFunctionConfiguration APIs
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.1.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v110-2022-11-29)
+  * **Feature**: AWS now offers fully-compliant, Amazon-provided licenses for Microsoft Office Professional Plus 2021 Amazon Machine Images (AMIs) on Amazon EC2. These AMIs are now available on the Amazon EC2 console and on AWS Marketplace to launch instances on-demand without any long-term licensing commitments.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.24.0](service/macie2/CHANGELOG.md#v1240-2022-11-29)
+  * **Feature**: Added support for configuring Macie to continually sample objects from S3 buckets and inspect them for sensitive data. Results appear in statistics, findings, and other data that Macie provides.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.28.0](service/quicksight/CHANGELOG.md#v1280-2022-11-29)
+  * **Feature**: This release adds new Describe APIs and updates Create and Update APIs to support the data model for Dashboards, Analyses, and Templates.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.27.0](service/s3control/CHANGELOG.md#v1270-2022-11-29)
+  * **Feature**: Added two new APIs to support Amazon S3 Multi-Region Access Point failover controls: GetMultiRegionAccessPointRoutes and SubmitMultiRegionAccessPointRoutes. The failover control APIs are supported in the following Regions: us-east-1, us-west-2, eu-west-1, ap-southeast-2, and ap-northeast-1.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.25.0](service/securityhub/CHANGELOG.md#v1250-2022-11-29)
+  * **Feature**: Adding StandardsManagedBy field to DescribeStandards API response
+
 # Release (2022-11-28)
 
 ## Module Highlights

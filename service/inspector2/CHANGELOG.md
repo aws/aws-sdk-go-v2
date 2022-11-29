@@ -1,3 +1,7 @@
+# v1.9.0 (2022-11-29)
+
+* **Feature**: This release adds support for Inspector to scan AWS Lambda.
+
 # v1.8.3 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

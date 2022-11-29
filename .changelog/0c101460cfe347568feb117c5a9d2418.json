@@ -1,8 +1,0 @@
-{
-    "id": "0c101460-cfe3-4756-8feb-117c5a9d2418",
-    "type": "feature",
-    "description": "This release allows the creation of Custom Visual Transforms (Dynamic Transforms) to be created via AWS Glue CLI/SDK.",
-    "modules": [
-        "service/glue"
-    ]
-}

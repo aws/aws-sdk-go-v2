@@ -1,3 +1,7 @@
+# v1.25.0 (2022-11-29)
+
+* **Feature**: Adding StandardsManagedBy field to DescribeStandards API response
+
 # v1.24.0 (2022-11-17)
 
 * **Feature**: Added SourceLayerArn and SourceLayerHash field for security findings.  Updated AwsLambdaFunction Resource detail

@@ -1,3 +1,7 @@
+# v1.28.0 (2022-11-29)
+
+* **Feature**: With this release, you can use AWS Config to evaluate your resources for compliance with Config rules before they are created or updated. Using Config rules in proactive mode enables you to test and build compliant resource templates or check resource configurations at the time they are provisioned.
+
 # v1.27.5 (2022-11-22)
 
 * No change notes available for this release.

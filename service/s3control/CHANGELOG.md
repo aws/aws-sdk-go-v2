@@ -1,3 +1,7 @@
+# v1.27.0 (2022-11-29)
+
+* **Feature**: Added two new APIs to support Amazon S3 Multi-Region Access Point failover controls: GetMultiRegionAccessPointRoutes and SubmitMultiRegionAccessPointRoutes. The failover control APIs are supported in the following Regions: us-east-1, us-west-2, eu-west-1, ap-southeast-2, and ap-northeast-1.
+
 # v1.26.1 (2022-11-22)
 
 * No change notes available for this release.

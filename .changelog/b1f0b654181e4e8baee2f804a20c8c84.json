@@ -1,8 +1,0 @@
-{
-    "id": "b1f0b654-181e-4e8b-aee2-f804a20c8c84",
-    "type": "feature",
-    "description": "Adding StandardsManagedBy field to DescribeStandards API response",
-    "modules": [
-        "service/securityhub"
-    ]
-}

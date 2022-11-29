@@ -1,8 +1,0 @@
-{
-    "id": "698ef9e5-b15c-408b-9745-5bc7415f5165",
-    "type": "feature",
-    "description": "Adds support for Lambda SnapStart, which helps improve the startup performance of functions. Customers can now manage SnapStart based functions via CreateFunction and UpdateFunctionConfiguration APIs",
-    "modules": [
-        "service/lambda"
-    ]
-}

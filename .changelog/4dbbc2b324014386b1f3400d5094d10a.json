@@ -1,8 +1,0 @@
-{
-    "id": "4dbbc2b3-2401-4386-b1f3-400d5094d10a",
-    "type": "feature",
-    "description": "Added two new APIs to support Amazon S3 Multi-Region Access Point failover controls: GetMultiRegionAccessPointRoutes and SubmitMultiRegionAccessPointRoutes. The failover control APIs are supported in the following Regions: us-east-1, us-west-2, eu-west-1, ap-southeast-2, and ap-northeast-1.",
-    "modules": [
-        "service/s3control"
-    ]
-}

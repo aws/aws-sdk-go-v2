@@ -1,3 +1,7 @@
+# v1.73.0 (2022-11-29)
+
+* **Feature**: Introduces ENA Express, which uses AWS SRD and dynamic routing to increase throughput and minimize latency, adds support for trust relationships between Reachability Analyzer and AWS Organizations to enable cross-account analysis, and adds support for Infrastructure Performance metric subscriptions.
+
 # v1.72.1 (2022-11-22)
 
 * No change notes available for this release.

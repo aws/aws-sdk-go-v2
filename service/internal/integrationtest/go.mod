@@ -23,7 +23,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.13.19
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.12.3
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.21.1
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.27.5
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.28.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.14.2
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.22.1
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.14.2
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.15.4
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.16
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.7
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.72.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.73.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.23
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.20.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.18.0
@@ -46,14 +46,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/firehose v1.14.23
 	github.com/aws/aws-sdk-go-v2/service/gamelift v1.15.7
 	github.com/aws/aws-sdk-go-v2/service/glacier v1.13.19
-	github.com/aws/aws-sdk-go-v2/service/glue v1.35.0
+	github.com/aws/aws-sdk-go-v2/service/glue v1.36.0
 	github.com/aws/aws-sdk-go-v2/service/health v1.15.22
 	github.com/aws/aws-sdk-go-v2/service/iam v1.18.23
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.19
 	github.com/aws/aws-sdk-go-v2/service/iot v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.24
 	github.com/aws/aws-sdk-go-v2/service/kms v1.18.18
-	github.com/aws/aws-sdk-go-v2/service/lambda v1.25.1
+	github.com/aws/aws-sdk-go-v2/service/lambda v1.26.0
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.24.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.19
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.18.3
@@ -67,7 +67,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.19
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.21
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.29.4
-	github.com/aws/aws-sdk-go-v2/service/s3control v1.26.1
+	github.com/aws/aws-sdk-go-v2/service/s3control v1.27.0
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.16.8
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.15.0
 	github.com/aws/aws-sdk-go-v2/service/ses v1.14.21
