@@ -17,8 +17,10 @@ import (
 // compares the computed HMAC to the HMAC that you specify. If the HMACs are
 // identical, the verification succeeds; otherwise, it fails. Verification
 // indicates that the message hasn't changed since the HMAC was calculated, and the
-// specified key was used to generate and verify the HMAC. This operation is part
-// of KMS support for HMAC KMS keys. For details, see HMAC keys in KMS
+// specified key was used to generate and verify the HMAC. HMAC KMS keys and the
+// HMAC algorithms that KMS uses conform to industry standards defined in RFC 2104
+// (https://datatracker.ietf.org/doc/html/rfc2104). This operation is part of KMS
+// support for HMAC KMS keys. For details, see HMAC keys in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html) in the Key
 // Management Service Developer Guide. The KMS key that you use for this operation
 // must be in a compatible key state. For details, see Key states of KMS keys

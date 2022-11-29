@@ -13,16 +13,15 @@ import (
 // Disables automatic rotation of the key material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) of the
 // specified symmetric encryption KMS key. Automatic key rotation is supported only
-// on symmetric encryption KMS keys. You cannot enable or disable automatic
-// rotation of asymmetric KMS keys
+// on symmetric encryption KMS keys. You cannot enable automatic rotation of
+// asymmetric KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html),
 // HMAC KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html),
 // KMS keys with imported key material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html), or
 // KMS keys in a custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
-// The key rotation status of these KMS keys is always false. To enable or disable
-// automatic rotation of a set of related multi-Region keys
+// To enable or disable automatic rotation of a set of related multi-Region keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate),
 // set the property on the primary key. You can enable (EnableKeyRotation) and
 // disable automatic rotation of the key material in customer managed KMS keys

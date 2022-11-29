@@ -14,7 +14,7 @@ import (
 // Adds or edits tags on a customer managed key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk).
 // Tagging or untagging a KMS key can allow or deny permission to the KMS key. For
-// details, see ABAC in KMS
+// details, see ABAC for KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 // Management Service Developer Guide. Each tag consists of a tag key and a tag
 // value, both of which are case-sensitive strings. The tag value can be an empty

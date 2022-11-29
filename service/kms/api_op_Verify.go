@@ -26,17 +26,18 @@ import (
 // and signing algorithm that were used to produce the signature. You can also
 // verify the digital signature by using the public key of the KMS key outside of
 // KMS. Use the GetPublicKey operation to download the public key in the asymmetric
-// KMS key and then use the public key to verify the signature outside of KMS. To
-// verify a signature outside of KMS with an SM2 public key, you must specify the
-// distinguishing ID. By default, KMS uses 1234567812345678 as the distinguishing
-// ID. For more information, see Offline verification with SM2 key pairs
-// (https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification)
-// in Key Management Service Developer Guide. The advantage of using the Verify
-// operation is that it is performed within KMS. As a result, it's easy to call,
-// the operation is performed within the FIPS boundary, it is logged in CloudTrail,
-// and you can use key policy and IAM policy to determine who is authorized to use
-// the KMS key to verify signatures. The KMS key that you use for this operation
-// must be in a compatible key state. For details, see Key states of KMS keys
+// KMS key and then use the public key to verify the signature outside of KMS. The
+// advantage of using the Verify operation is that it is performed within KMS. As a
+// result, it's easy to call, the operation is performed within the FIPS boundary,
+// it is logged in CloudTrail, and you can use key policy and IAM policy to
+// determine who is authorized to use the KMS key to verify signatures. To verify a
+// signature outside of KMS with an SM2 public key (China Regions only), you must
+// specify the distinguishing ID. By default, KMS uses 1234567812345678 as the
+// distinguishing ID. For more information, see Offline verification with SM2 key
+// pairs
+// (https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification).
+// The KMS key that you use for this operation must be in a compatible key state.
+// For details, see Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: Yes. To perform this
 // operation with a KMS key in a different Amazon Web Services account, specify the

@@ -21,15 +21,14 @@ import (
 // key material for your KMS keys in CloudTrail and Amazon CloudWatch. Automatic
 // key rotation is supported only on symmetric encryption KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks).
-// You cannot enable or disable automatic rotation of asymmetric KMS keys
+// You cannot enable automatic rotation of asymmetric KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html),
 // HMAC KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html),
 // KMS keys with imported key material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html), or
 // KMS keys in a custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
-// The key rotation status of these KMS keys is always false. To enable or disable
-// automatic rotation of a set of related multi-Region keys
+// To enable or disable automatic rotation of a set of related multi-Region keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-manage.html#multi-region-rotate),
 // set the property on the primary key.. You can enable (EnableKeyRotation) and
 // disable automatic rotation (DisableKeyRotation) of the key material in customer

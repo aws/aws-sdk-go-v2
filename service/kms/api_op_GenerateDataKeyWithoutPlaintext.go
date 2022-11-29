@@ -30,11 +30,16 @@ import (
 // GenerateDataKeyPairWithoutPlaintext operations. To generate a data key, you must
 // specify the symmetric encryption KMS key that is used to encrypt the data key.
 // You cannot use an asymmetric KMS key or a key in a custom key store to generate
-// a data key. To get the type of your KMS key, use the DescribeKey operation. If
-// the operation succeeds, you will find the encrypted copy of the data key in the
-// CiphertextBlob field. You can use an optional encryption context to add
-// additional security to the encryption operation. If you specify an
-// EncryptionContext, you must specify the same encryption context (a
+// a data key. To get the type of your KMS key, use the DescribeKey operation. You
+// must also specify the length of the data key. Use either the KeySpec or
+// NumberOfBytes parameters (but not both). For 128-bit and 256-bit data keys, use
+// the KeySpec parameter. To generate an SM4 data key (China Regions only), specify
+// a KeySpec value of AES_128 or NumberOfBytes value of 128. The symmetric
+// encryption key used in China Regions to encrypt your data key is an SM4
+// encryption key. If the operation succeeds, you will find the encrypted copy of
+// the data key in the CiphertextBlob field. You can use an optional encryption
+// context to add additional security to the encryption operation. If you specify
+// an EncryptionContext, you must specify the same encryption context (a
 // case-sensitive exact match) when decrypting the encrypted data key. Otherwise,
 // the request to decrypt fails with an InvalidCiphertextException. For more
 // information, see Encryption Context

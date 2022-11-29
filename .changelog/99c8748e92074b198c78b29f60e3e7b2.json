@@ -1,0 +1,8 @@
+{
+    "id": "99c8748e-9207-4b19-8c78-b29f60e3e7b2",
+    "type": "feature",
+    "description": "This release adds support for AWS Verified Access and the Hpc6id Amazon EC2 compute optimized instance type, which features 3rd generation Intel Xeon Scalable processors.",
+    "modules": [
+        "service/ec2"
+    ]
+}

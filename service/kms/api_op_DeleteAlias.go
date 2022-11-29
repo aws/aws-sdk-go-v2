@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes the specified alias. Adding, deleting, or updating an alias can allow or
-// deny permission to the KMS key. For details, see ABAC in KMS
+// deny permission to the KMS key. For details, see ABAC for KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 // Management Service Developer Guide. Because an alias is not a property of a KMS
 // key, you can delete and change the aliases of a KMS key without affecting the

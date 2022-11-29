@@ -1,0 +1,8 @@
+{
+    "id": "347243e1-6fd4-4a8a-8cac-9e19b870b9d8",
+    "type": "feature",
+    "description": "Amazon Omics is a new, purpose-built service that can be used by healthcare and life science organizations to store, query, and analyze omics data. The insights from that data can be used to accelerate scientific discoveries and improve healthcare.",
+    "modules": [
+        "service/omics"
+    ]
+}

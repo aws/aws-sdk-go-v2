@@ -1335,6 +1335,24 @@ func (DestinationFileFormat) Values() []DestinationFileFormat {
 	}
 }
 
+type DeviceTrustProviderType string
+
+// Enum values for DeviceTrustProviderType
+const (
+	DeviceTrustProviderTypeJamf        DeviceTrustProviderType = "jamf"
+	DeviceTrustProviderTypeCrowdstrike DeviceTrustProviderType = "crowdstrike"
+)
+
+// Values returns all known values for DeviceTrustProviderType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DeviceTrustProviderType) Values() []DeviceTrustProviderType {
+	return []DeviceTrustProviderType{
+		"jamf",
+		"crowdstrike",
+	}
+}
+
 type DeviceType string
 
 // Enum values for DeviceType
@@ -3257,6 +3275,7 @@ const (
 	InstanceTypeU24tb1112xlarge InstanceType = "u-24tb1.112xlarge"
 	InstanceTypeTrn12xlarge     InstanceType = "trn1.2xlarge"
 	InstanceTypeTrn132xlarge    InstanceType = "trn1.32xlarge"
+	InstanceTypeHpc6id32xlarge  InstanceType = "hpc6id.32xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -3837,6 +3856,7 @@ func (InstanceType) Values() []InstanceType {
 		"u-24tb1.112xlarge",
 		"trn1.2xlarge",
 		"trn1.32xlarge",
+		"hpc6id.32xlarge",
 	}
 }
 
@@ -5550,6 +5570,11 @@ const (
 	ResourceTypeCapacityReservationFleet                               ResourceType = "capacity-reservation-fleet"
 	ResourceTypeTrafficMirrorFilterRule                                ResourceType = "traffic-mirror-filter-rule"
 	ResourceTypeVpcEndpointConnectionDeviceType                        ResourceType = "vpc-endpoint-connection-device-type"
+	ResourceTypeVerifiedAccessInstance                                 ResourceType = "verified-access-instance"
+	ResourceTypeVerifiedAccessGroup                                    ResourceType = "verified-access-group"
+	ResourceTypeVerifiedAccessEndpoint                                 ResourceType = "verified-access-endpoint"
+	ResourceTypeVerifiedAccessPolicy                                   ResourceType = "verified-access-policy"
+	ResourceTypeVerifiedAccessTrustProvider                            ResourceType = "verified-access-trust-provider"
 	ResourceTypeVpnConnectionDeviceType                                ResourceType = "vpn-connection-device-type"
 )
 
@@ -5634,6 +5659,11 @@ func (ResourceType) Values() []ResourceType {
 		"capacity-reservation-fleet",
 		"traffic-mirror-filter-rule",
 		"vpc-endpoint-connection-device-type",
+		"verified-access-instance",
+		"verified-access-group",
+		"verified-access-endpoint",
+		"verified-access-policy",
+		"verified-access-trust-provider",
 		"vpn-connection-device-type",
 	}
 }
@@ -6884,6 +6914,24 @@ func (TransportProtocol) Values() []TransportProtocol {
 	}
 }
 
+type TrustProviderType string
+
+// Enum values for TrustProviderType
+const (
+	TrustProviderTypeUser   TrustProviderType = "user"
+	TrustProviderTypeDevice TrustProviderType = "device"
+)
+
+// Values returns all known values for TrustProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TrustProviderType) Values() []TrustProviderType {
+	return []TrustProviderType{
+		"user",
+		"device",
+	}
+}
+
 type TunnelInsideIpVersion string
 
 // Enum values for TunnelInsideIpVersion
@@ -6963,6 +7011,122 @@ func (UsageClassType) Values() []UsageClassType {
 	return []UsageClassType{
 		"spot",
 		"on-demand",
+	}
+}
+
+type UserTrustProviderType string
+
+// Enum values for UserTrustProviderType
+const (
+	UserTrustProviderTypeIamIdentityCenter UserTrustProviderType = "iam-identity-center"
+	UserTrustProviderTypeOidc              UserTrustProviderType = "oidc"
+)
+
+// Values returns all known values for UserTrustProviderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UserTrustProviderType) Values() []UserTrustProviderType {
+	return []UserTrustProviderType{
+		"iam-identity-center",
+		"oidc",
+	}
+}
+
+type VerifiedAccessEndpointAttachmentType string
+
+// Enum values for VerifiedAccessEndpointAttachmentType
+const (
+	VerifiedAccessEndpointAttachmentTypeVpc VerifiedAccessEndpointAttachmentType = "vpc"
+)
+
+// Values returns all known values for VerifiedAccessEndpointAttachmentType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (VerifiedAccessEndpointAttachmentType) Values() []VerifiedAccessEndpointAttachmentType {
+	return []VerifiedAccessEndpointAttachmentType{
+		"vpc",
+	}
+}
+
+type VerifiedAccessEndpointProtocol string
+
+// Enum values for VerifiedAccessEndpointProtocol
+const (
+	VerifiedAccessEndpointProtocolHttp  VerifiedAccessEndpointProtocol = "http"
+	VerifiedAccessEndpointProtocolHttps VerifiedAccessEndpointProtocol = "https"
+)
+
+// Values returns all known values for VerifiedAccessEndpointProtocol. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (VerifiedAccessEndpointProtocol) Values() []VerifiedAccessEndpointProtocol {
+	return []VerifiedAccessEndpointProtocol{
+		"http",
+		"https",
+	}
+}
+
+type VerifiedAccessEndpointStatusCode string
+
+// Enum values for VerifiedAccessEndpointStatusCode
+const (
+	VerifiedAccessEndpointStatusCodePending  VerifiedAccessEndpointStatusCode = "pending"
+	VerifiedAccessEndpointStatusCodeActive   VerifiedAccessEndpointStatusCode = "active"
+	VerifiedAccessEndpointStatusCodeUpdating VerifiedAccessEndpointStatusCode = "updating"
+	VerifiedAccessEndpointStatusCodeDeleting VerifiedAccessEndpointStatusCode = "deleting"
+	VerifiedAccessEndpointStatusCodeDeleted  VerifiedAccessEndpointStatusCode = "deleted"
+)
+
+// Values returns all known values for VerifiedAccessEndpointStatusCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (VerifiedAccessEndpointStatusCode) Values() []VerifiedAccessEndpointStatusCode {
+	return []VerifiedAccessEndpointStatusCode{
+		"pending",
+		"active",
+		"updating",
+		"deleting",
+		"deleted",
+	}
+}
+
+type VerifiedAccessEndpointType string
+
+// Enum values for VerifiedAccessEndpointType
+const (
+	VerifiedAccessEndpointTypeLoadBalancer     VerifiedAccessEndpointType = "load-balancer"
+	VerifiedAccessEndpointTypeNetworkInterface VerifiedAccessEndpointType = "network-interface"
+)
+
+// Values returns all known values for VerifiedAccessEndpointType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VerifiedAccessEndpointType) Values() []VerifiedAccessEndpointType {
+	return []VerifiedAccessEndpointType{
+		"load-balancer",
+		"network-interface",
+	}
+}
+
+type VerifiedAccessLogDeliveryStatusCode string
+
+// Enum values for VerifiedAccessLogDeliveryStatusCode
+const (
+	VerifiedAccessLogDeliveryStatusCodeSuccess VerifiedAccessLogDeliveryStatusCode = "success"
+	VerifiedAccessLogDeliveryStatusCodeFailed  VerifiedAccessLogDeliveryStatusCode = "failed"
+)
+
+// Values returns all known values for VerifiedAccessLogDeliveryStatusCode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (VerifiedAccessLogDeliveryStatusCode) Values() []VerifiedAccessLogDeliveryStatusCode {
+	return []VerifiedAccessLogDeliveryStatusCode{
+		"success",
+		"failed",
 	}
 }
 

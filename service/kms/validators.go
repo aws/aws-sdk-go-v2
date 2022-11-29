@@ -1125,6 +1125,24 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateXksProxyAuthenticationCredentialType(v *types.XksProxyAuthenticationCredentialType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "XksProxyAuthenticationCredentialType"}
+	if v.AccessKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessKeyId"))
+	}
+	if v.RawSecretAccessKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RawSecretAccessKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelKeyDeletionInput(v *CancelKeyDeletionInput) error {
 	if v == nil {
 		return nil
@@ -1180,6 +1198,11 @@ func validateOpCreateCustomKeyStoreInput(v *CreateCustomKeyStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateCustomKeyStoreInput"}
 	if v.CustomKeyStoreName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomKeyStoreName"))
+	}
+	if v.XksProxyAuthenticationCredential != nil {
+		if err := validateXksProxyAuthenticationCredentialType(v.XksProxyAuthenticationCredential); err != nil {
+			invalidParams.AddNested("XksProxyAuthenticationCredential", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1812,6 +1835,11 @@ func validateOpUpdateCustomKeyStoreInput(v *UpdateCustomKeyStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCustomKeyStoreInput"}
 	if v.CustomKeyStoreId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CustomKeyStoreId"))
+	}
+	if v.XksProxyAuthenticationCredential != nil {
+		if err := validateXksProxyAuthenticationCredentialType(v.XksProxyAuthenticationCredential); err != nil {
+			invalidParams.AddNested("XksProxyAuthenticationCredential", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

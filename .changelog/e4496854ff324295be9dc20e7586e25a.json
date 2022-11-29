@@ -1,0 +1,8 @@
+{
+    "id": "e4496854-ff32-4295-be9d-c20e7586e25a",
+    "type": "feature",
+    "description": "Amazon Security Lake automatically centralizes security data from cloud, on-premises, and custom sources into a purpose-built data lake stored in your account. Security Lake makes it easier to analyze security data, so you can improve the protection of your workloads, applications, and data",
+    "modules": [
+        "service/securitylake"
+    ]
+}

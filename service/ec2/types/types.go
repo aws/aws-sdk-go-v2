@@ -2160,6 +2160,52 @@ type CreateTransitGatewayVpcAttachmentRequestOptions struct {
 	noSmithyDocumentSerde
 }
 
+type CreateVerifiedAccessEndpointEniOptions struct {
+	NetworkInterfaceId *string
+
+	Port *int32
+
+	Protocol VerifiedAccessEndpointProtocol
+
+	noSmithyDocumentSerde
+}
+
+type CreateVerifiedAccessEndpointLoadBalancerOptions struct {
+	LoadBalancerArn *string
+
+	Port *int32
+
+	Protocol VerifiedAccessEndpointProtocol
+
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+type CreateVerifiedAccessTrustProviderDeviceOptions struct {
+	TenantId *string
+
+	noSmithyDocumentSerde
+}
+
+type CreateVerifiedAccessTrustProviderOidcOptions struct {
+	AuthorizationEndpoint *string
+
+	ClientId *string
+
+	ClientSecret *string
+
+	Issuer *string
+
+	Scope *string
+
+	TokenEndpoint *string
+
+	UserInfoEndpoint *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the user or group to be added or removed from the list of create
 // volume permissions for a volume.
 type CreateVolumePermission struct {
@@ -2572,6 +2618,12 @@ type DestinationOptionsResponse struct {
 
 	// Indicates whether to partition the flow log per hour.
 	PerHourPartition *bool
+
+	noSmithyDocumentSerde
+}
+
+type DeviceOptions struct {
+	TenantId *string
 
 	noSmithyDocumentSerde
 }
@@ -9246,6 +9298,30 @@ type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 	noSmithyDocumentSerde
 }
 
+type ModifyVerifiedAccessEndpointEniOptions struct {
+	Port *int32
+
+	Protocol VerifiedAccessEndpointProtocol
+
+	noSmithyDocumentSerde
+}
+
+type ModifyVerifiedAccessEndpointLoadBalancerOptions struct {
+	Port *int32
+
+	Protocol VerifiedAccessEndpointProtocol
+
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+type ModifyVerifiedAccessTrustProviderOidcOptions struct {
+	Scope *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon Web Services Site-to-Site VPN tunnel options to modify.
 type ModifyVpnTunnelOptionsSpecification struct {
 
@@ -10116,6 +10192,24 @@ type NewDhcpConfiguration struct {
 
 	// One or more values for the DHCP option.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+type OidcOptions struct {
+	AuthorizationEndpoint *string
+
+	ClientId *string
+
+	ClientSecret *string
+
+	Issuer *string
+
+	Scope *string
+
+	TokenEndpoint *string
+
+	UserInfoEndpoint *string
 
 	noSmithyDocumentSerde
 }
@@ -15965,6 +16059,258 @@ type VCpuInfo struct {
 	// The valid number of threads per core that can be configured for the instance
 	// type.
 	ValidThreadsPerCore []int32
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessEndpoint struct {
+	ApplicationDomain *string
+
+	AttachmentType VerifiedAccessEndpointAttachmentType
+
+	CreationTime *string
+
+	DeletionTime *string
+
+	Description *string
+
+	DeviceValidationDomain *string
+
+	DomainCertificateArn *string
+
+	EndpointDomain *string
+
+	EndpointType VerifiedAccessEndpointType
+
+	LastUpdatedTime *string
+
+	LoadBalancerOptions *VerifiedAccessEndpointLoadBalancerOptions
+
+	NetworkInterfaceOptions *VerifiedAccessEndpointEniOptions
+
+	SecurityGroupIds []string
+
+	Status *VerifiedAccessEndpointStatus
+
+	Tags []Tag
+
+	VerifiedAccessEndpointId *string
+
+	VerifiedAccessGroupId *string
+
+	VerifiedAccessInstanceId *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessEndpointEniOptions struct {
+	NetworkInterfaceId *string
+
+	Port *int32
+
+	Protocol VerifiedAccessEndpointProtocol
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessEndpointLoadBalancerOptions struct {
+	LoadBalancerArn *string
+
+	Port *int32
+
+	Protocol VerifiedAccessEndpointProtocol
+
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessEndpointStatus struct {
+	Code VerifiedAccessEndpointStatusCode
+
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessGroup struct {
+	CreationTime *string
+
+	DeletionTime *string
+
+	Description *string
+
+	LastUpdatedTime *string
+
+	Owner *string
+
+	Tags []Tag
+
+	VerifiedAccessGroupArn *string
+
+	VerifiedAccessGroupId *string
+
+	VerifiedAccessInstanceId *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessInstance struct {
+	CreationTime *string
+
+	Description *string
+
+	LastUpdatedTime *string
+
+	Tags []Tag
+
+	VerifiedAccessInstanceId *string
+
+	VerifiedAccessTrustProviders []VerifiedAccessTrustProviderCondensed
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessInstanceLoggingConfiguration struct {
+	AccessLogs *VerifiedAccessLogs
+
+	VerifiedAccessInstanceId *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessLogCloudWatchLogsDestination struct {
+	DeliveryStatus *VerifiedAccessLogDeliveryStatus
+
+	Enabled *bool
+
+	LogGroup *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessLogCloudWatchLogsDestinationOptions struct {
+
+	// This member is required.
+	Enabled *bool
+
+	LogGroup *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessLogDeliveryStatus struct {
+	Code VerifiedAccessLogDeliveryStatusCode
+
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessLogKinesisDataFirehoseDestination struct {
+	DeliveryStatus *VerifiedAccessLogDeliveryStatus
+
+	DeliveryStream *string
+
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessLogKinesisDataFirehoseDestinationOptions struct {
+
+	// This member is required.
+	Enabled *bool
+
+	DeliveryStream *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessLogOptions struct {
+	CloudWatchLogs *VerifiedAccessLogCloudWatchLogsDestinationOptions
+
+	KinesisDataFirehose *VerifiedAccessLogKinesisDataFirehoseDestinationOptions
+
+	S3 *VerifiedAccessLogS3DestinationOptions
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessLogs struct {
+	CloudWatchLogs *VerifiedAccessLogCloudWatchLogsDestination
+
+	KinesisDataFirehose *VerifiedAccessLogKinesisDataFirehoseDestination
+
+	S3 *VerifiedAccessLogS3Destination
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessLogS3Destination struct {
+	BucketName *string
+
+	BucketOwner *string
+
+	DeliveryStatus *VerifiedAccessLogDeliveryStatus
+
+	Enabled *bool
+
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessLogS3DestinationOptions struct {
+
+	// This member is required.
+	Enabled *bool
+
+	BucketName *string
+
+	BucketOwner *string
+
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessTrustProvider struct {
+	CreationTime *string
+
+	Description *string
+
+	DeviceOptions *DeviceOptions
+
+	DeviceTrustProviderType DeviceTrustProviderType
+
+	LastUpdatedTime *string
+
+	OidcOptions *OidcOptions
+
+	PolicyReferenceName *string
+
+	Tags []Tag
+
+	TrustProviderType TrustProviderType
+
+	UserTrustProviderType UserTrustProviderType
+
+	VerifiedAccessTrustProviderId *string
+
+	noSmithyDocumentSerde
+}
+
+type VerifiedAccessTrustProviderCondensed struct {
+	Description *string
+
+	DeviceTrustProviderType DeviceTrustProviderType
+
+	TrustProviderType TrustProviderType
+
+	UserTrustProviderType UserTrustProviderType
+
+	VerifiedAccessTrustProviderId *string
 
 	noSmithyDocumentSerde
 }

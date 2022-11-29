@@ -7,7 +7,7 @@
 // management web service. This guide describes the KMS operations that you can
 // call programmatically. For general information about KMS, see the  Key
 // Management Service Developer Guide
-// (https://docs.aws.amazon.com/kms/latest/developerguide/). KMS is replacing the
+// (https://docs.aws.amazon.com/kms/latest/developerguide/). KMS has replaced the
 // term customer master key (CMK) with KMS key and KMS key. The concept has not
 // changed. To prevent breaking changes, KMS is keeping some variations of this
 // term. Amazon Web Services provides SDKs that consist of libraries and sample
@@ -31,11 +31,11 @@
 // (ECDHE). Most modern systems such as Java 7 and later support these modes.
 // Signing Requests Requests must be signed by using an access key ID and a secret
 // access key. We strongly recommend that you do not use your Amazon Web Services
-// account (root) access key ID and secret key for everyday work with KMS. Instead,
-// use the access key ID and secret access key for an IAM user. You can also use
-// the Amazon Web Services Security Token Service to generate temporary security
-// credentials that you can use to sign requests. All KMS operations require
-// Signature Version 4
+// account (root) access key ID and secret access key for everyday work with KMS.
+// Instead, use the access key ID and secret access key for an IAM user. You can
+// also use the Amazon Web Services Security Token Service to generate temporary
+// security credentials that you can use to sign requests. All KMS operations
+// require Signature Version 4
 // (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 // Logging API Requests KMS supports CloudTrail, a service that logs Amazon Web
 // Services API calls and related events for your Amazon Web Services account and

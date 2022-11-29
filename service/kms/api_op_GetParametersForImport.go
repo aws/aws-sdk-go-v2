@@ -20,13 +20,13 @@ import (
 // and an import token. Use the public key to encrypt the symmetric key material.
 // Store the import token to send with a subsequent ImportKeyMaterial request. You
 // must specify the key ID of the symmetric encryption KMS key into which you will
-// import key material. This KMS key's Origin must be EXTERNAL. You must also
-// specify the wrapping algorithm and type of wrapping key (public key) that you
-// will use to encrypt the key material. You cannot perform this operation on an
-// asymmetric KMS key, an HMAC KMS key, or on any KMS key in a different Amazon Web
-// Services account. To import key material, you must use the public key and import
-// token from the same response. These items are valid for 24 hours. The expiration
-// date and time appear in the GetParametersForImport response. You cannot use an
+// import key material. The KMS key Origin must be EXTERNAL. You must also specify
+// the wrapping algorithm and type of wrapping key (public key) that you will use
+// to encrypt the key material. You cannot perform this operation on an asymmetric
+// KMS key, an HMAC KMS key, or on any KMS key in a different Amazon Web Services
+// account. To import key material, you must use the public key and import token
+// from the same response. These items are valid for 24 hours. The expiration date
+// and time appear in the GetParametersForImport response. You cannot use an
 // expired token in an ImportKeyMaterial request. If your key and token expire,
 // send another GetParametersForImport request. The KMS key that you use for this
 // operation must be in a compatible key state. For details, see Key states of KMS

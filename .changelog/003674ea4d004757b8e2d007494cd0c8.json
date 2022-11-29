@@ -1,0 +1,8 @@
+{
+    "id": "003674ea-4d00-4757-b8e2-d007494cd0c8",
+    "type": "feature",
+    "description": "Publish SDK for Amazon OpenSearch Serverless",
+    "modules": [
+        "service/opensearchserverless"
+    ]
+}

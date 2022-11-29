@@ -34,8 +34,8 @@ import (
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 // in the Key Management Service Developer Guide. The Decrypt operation also
 // decrypts ciphertext that was encrypted outside of KMS by the public key in an
-// KMS asymmetric KMS key. However, it cannot decrypt ciphertext produced by other
-// libraries, such as the Amazon Web Services Encryption SDK
+// KMS asymmetric KMS key. However, it cannot decrypt symmetric ciphertext produced
+// by other libraries, such as the Amazon Web Services Encryption SDK
 // (https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/) or Amazon
 // S3 client-side encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html).

@@ -12,10 +12,10 @@ import (
 )
 
 // Creates a Kinesis Data Firehose delivery stream. By default, you can create up
-// to 50 delivery streams per AWS Region. This is an asynchronous operation that
-// immediately returns. The initial status of the delivery stream is CREATING.
-// After the delivery stream is created, its status is ACTIVE and it now accepts
-// data. If the delivery stream creation fails, the status transitions to
+// to 50 delivery streams per Amazon Web Services Region. This is an asynchronous
+// operation that immediately returns. The initial status of the delivery stream is
+// CREATING. After the delivery stream is created, its status is ACTIVE and it now
+// accepts data. If the delivery stream creation fails, the status transitions to
 // CREATING_FAILED. Attempts to send data to a delivery stream that is not in the
 // ACTIVE state cause an exception. To check the state of a delivery stream, use
 // DescribeDeliveryStream. If the status of a delivery stream is CREATING_FAILED,
@@ -87,13 +87,20 @@ func (c *Client) CreateDeliveryStream(ctx context.Context, params *CreateDeliver
 
 type CreateDeliveryStreamInput struct {
 
-	// The name of the delivery stream. This name must be unique per AWS account in the
-	// same AWS Region. If the delivery streams are in different accounts or different
-	// Regions, you can have multiple delivery streams with the same name.
+	// The name of the delivery stream. This name must be unique per Amazon Web
+	// Services account in the same Amazon Web Services Region. If the delivery streams
+	// are in different accounts or different Regions, you can have multiple delivery
+	// streams with the same name.
 	//
 	// This member is required.
 	DeliveryStreamName *string
 
+	// The destination in the Serverless offering for Amazon OpenSearch Service. You
+	// can specify only one destination.
+	AmazonOpenSearchServerlessDestinationConfiguration *types.AmazonOpenSearchServerlessDestinationConfiguration
+
+	// The destination in Amazon OpenSearch Service. You can specify only one
+	// destination.
 	AmazonopensearchserviceDestinationConfiguration *types.AmazonopensearchserviceDestinationConfiguration
 
 	// Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed
@@ -137,13 +144,13 @@ type CreateDeliveryStreamInput struct {
 	SplunkDestinationConfiguration *types.SplunkDestinationConfiguration
 
 	// A set of tags to assign to the delivery stream. A tag is a key-value pair that
-	// you can define and assign to AWS resources. Tags are metadata. For example, you
-	// can add friendly names and descriptions or other types of information that can
-	// help you distinguish the delivery stream. For more information about tags, see
-	// Using Cost Allocation Tags
+	// you can define and assign to Amazon Web Services resources. Tags are metadata.
+	// For example, you can add friendly names and descriptions or other types of
+	// information that can help you distinguish the delivery stream. For more
+	// information about tags, see Using Cost Allocation Tags
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-	// in the AWS Billing and Cost Management User Guide. You can specify up to 50 tags
-	// when creating a delivery stream.
+	// in the Amazon Web Services Billing and Cost Management User Guide. You can
+	// specify up to 50 tags when creating a delivery stream.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

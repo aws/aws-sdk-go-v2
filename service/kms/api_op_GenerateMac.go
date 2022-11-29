@@ -12,14 +12,15 @@ import (
 )
 
 // Generates a hash-based message authentication code (HMAC) for a message using an
-// HMAC KMS key and a MAC algorithm that the key supports. The MAC algorithm
-// computes the HMAC for the message and the key as described in RFC 2104
-// (https://datatracker.ietf.org/doc/html/rfc2104). You can use the HMAC that this
-// operation generates with the VerifyMac operation to demonstrate that the
-// original message has not changed. Also, because a secret key is used to create
-// the hash, you can verify that the party that generated the hash has the required
-// secret key. This operation is part of KMS support for HMAC KMS keys. For
-// details, see HMAC keys in KMS
+// HMAC KMS key and a MAC algorithm that the key supports. HMAC KMS keys and the
+// HMAC algorithms that KMS uses conform to industry standards defined in RFC 2104
+// (https://datatracker.ietf.org/doc/html/rfc2104). You can use value that
+// GenerateMac returns in the VerifyMac operation to demonstrate that the original
+// message has not changed. Also, because a secret key is used to create the hash,
+// you can verify that the party that generated the hash has the required secret
+// key. You can also use the raw result to implement HMAC-based algorithms such as
+// key derivation functions. This operation is part of KMS support for HMAC KMS
+// keys. For details, see HMAC keys in KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/hmac.html) in the Key
 // Management Service Developer Guide . Best practices recommend that you limit the
 // time during which any signing mechanism, including an HMAC, is effective. This
@@ -93,8 +94,9 @@ type GenerateMacOutput struct {
 	// The HMAC KMS key used in the operation.
 	KeyId *string
 
-	// The hash-based message authentication code (HMAC) for the given message, key,
-	// and MAC algorithm.
+	// The hash-based message authentication code (HMAC) that was generated for the
+	// specified message, HMAC KMS key, and MAC algorithm. This is the standard, raw
+	// HMAC defined in RFC 2104 (https://datatracker.ietf.org/doc/html/rfc2104).
 	Mac []byte
 
 	// The MAC algorithm that was used to generate the HMAC.
