@@ -1,3 +1,25 @@
+# Release (2022-11-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.18.0](service/accessanalyzer/CHANGELOG.md#v1180-2022-11-30)
+  * **Feature**: This release adds support for S3 cross account access points. IAM Access Analyzer will now produce public or cross account findings when it detects bucket delegation to external account access points.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.20.0](service/athena/CHANGELOG.md#v1200-2022-11-30)
+  * **Feature**: This release includes support for using Apache Spark in Amazon Athena.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.17.0](service/dataexchange/CHANGELOG.md#v1170-2022-11-30)
+  * **Feature**: This release enables data providers to license direct access to data in their Amazon S3 buckets or AWS Lake Formation data lakes through AWS Data Exchange. Subscribers get read-only access to the data and can use it in downstream AWS services, like Amazon Athena, without creating or managing copies.
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.0.0](service/docdbelastic/CHANGELOG.md#v100-2022-11-30)
+  * **Release**: New AWS service client module
+  * **Feature**: Launched Amazon DocumentDB Elastic Clusters. You can now use the SDK to create, list, update and delete Amazon DocumentDB Elastic Cluster resources
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.37.0](service/glue/CHANGELOG.md#v1370-2022-11-30)
+  * **Feature**: This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.28.0](service/s3control/CHANGELOG.md#v1280-2022-11-30)
+  * **Feature**: Amazon S3 now supports cross-account access points. S3 bucket owners can now allow trusted AWS accounts to create access points associated with their bucket.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.56.0](service/sagemaker/CHANGELOG.md#v1560-2022-11-30)
+  * **Feature**: Added Models as part of the Search API. Added Model shadow deployments in realtime inference, and shadow testing in managed inference. Added support for shared spaces, geospatial APIs, Model Cards, AutoMLJobStep in pipelines, Git repositories on user profiles and domains, Model sharing in Jumpstart.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.0.0](service/sagemakergeospatial/CHANGELOG.md#v100-2022-11-30)
+  * **Release**: New AWS service client module
+  * **Feature**: This release provides Amazon SageMaker geospatial APIs to build, train, deploy and visualize geospatial models.
+
 # Release (2022-11-29.2)
 
 ## Module Highlights

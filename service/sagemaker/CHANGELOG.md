@@ -1,3 +1,7 @@
+# v1.56.0 (2022-11-30)
+
+* **Feature**: Added Models as part of the Search API. Added Model shadow deployments in realtime inference, and shadow testing in managed inference. Added support for shared spaces, geospatial APIs, Model Cards, AutoMLJobStep in pipelines, Git repositories on user profiles and domains, Model sharing in Jumpstart.
+
 # v1.55.0 (2022-11-18)
 
 * **Feature**: Added DisableProfiler flag as a new field in ProfilerConfig

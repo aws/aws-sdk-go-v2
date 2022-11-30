@@ -1,8 +1,0 @@
-{
-    "id": "9b44f4ae-1f9f-4fd0-aa4d-203c84edd105",
-    "type": "feature",
-    "description": "Launched Amazon DocumentDB Elastic Clusters. You can now use the SDK to create, list, update and delete Amazon DocumentDB Elastic Cluster resources",
-    "modules": [
-        "service/docdbelastic"
-    ]
-}

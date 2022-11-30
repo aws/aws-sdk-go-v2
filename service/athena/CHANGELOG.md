@@ -1,3 +1,7 @@
+# v1.20.0 (2022-11-30)
+
+* **Feature**: This release includes support for using Apache Spark in Amazon Athena.
+
 # v1.19.1 (2022-11-08)
 
 * No change notes available for this release.

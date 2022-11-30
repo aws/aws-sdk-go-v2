@@ -1,3 +1,7 @@
+# v1.37.0 (2022-11-30)
+
+* **Feature**: This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations.
+
 # v1.36.0 (2022-11-29)
 
 * **Feature**: This release allows the creation of Custom Visual Transforms (Dynamic Transforms) to be created via AWS Glue CLI/SDK.

@@ -1,8 +1,0 @@
-{
-    "id": "a6103375-d0e4-4e3d-9b94-0151c69b8071",
-    "type": "feature",
-    "description": "Added Models as part of the Search API. Added Model shadow deployments in realtime inference, and shadow testing in managed inference. Added support for shared spaces, geospatial APIs, Model Cards, AutoMLJobStep in pipelines, Git repositories on user profiles and domains, Model sharing in Jumpstart.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

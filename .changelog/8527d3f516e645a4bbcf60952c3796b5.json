@@ -1,8 +1,0 @@
-{
-    "id": "8527d3f5-16e6-45a4-bbcf-60952c3796b5",
-    "type": "feature",
-    "description": "This release includes support for using Apache Spark in Amazon Athena.",
-    "modules": [
-        "service/athena"
-    ]
-}
