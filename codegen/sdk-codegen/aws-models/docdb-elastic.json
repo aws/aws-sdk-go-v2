@@ -1,0 +1,2292 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.docdbelastic#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message explaining why access was denied.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception that occurs when there are not sufficient permissions to perform an action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.docdbelastic#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#Auth": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PLAIN_TEXT",
+                        "name": "PLAIN_TEXT"
+                    },
+                    {
+                        "value": "SECRET_ARN",
+                        "name": "SECRET_ARN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.docdbelastic#ChimeraDbLionfishServiceLambda": {
+            "type": "service",
+            "version": "2022-11-28",
+            "operations": [
+                {
+                    "target": "com.amazonaws.docdbelastic#CreateCluster"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#CreateClusterSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#DeleteCluster"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#DeleteClusterSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#GetCluster"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#GetClusterSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ListClusters"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ListClusterSnapshots"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#RestoreClusterFromSnapshot"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#UpdateCluster"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "DocDB Elastic",
+                    "arnNamespace": "docdb-elastic",
+                    "cloudTrailEventSource": "CASCADES_EVENT_SOURCE"
+                },
+                "aws.auth#sigv4": {
+                    "name": "docdb-elastic"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-trace-id"
+                    ],
+                    "maxAge": 86400
+                },
+                "smithy.api#documentation": "<p>The new Amazon Elastic DocumentDB service endpoint.</p>",
+                "smithy.api#title": "Amazon DocumentDB Elastic Clusters",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://docdb-elastic-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://docdb-elastic-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://docdb-elastic.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://docdb-elastic.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://docdb-elastic.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#Cluster": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.docdbelastic#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterEndpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL used to connect to the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the Elastic DocumentDB cluster was created in Universal Coordinated Time (UTC).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "adminUserName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster administrator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "authType": {
+                    "target": "com.amazonaws.docdbelastic#Auth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type for the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shardCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity of each shard in the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shardCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of shards in the  Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.docdbelastic#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups associated with this cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.docdbelastic#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "preferredMaintenanceWindow": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur,\n      in Universal Coordinated Time (UTC).</p>\n         <p>\n            <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB cluster.</p>"
+            }
+        },
+        "com.amazonaws.docdbelastic#ClusterInList": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.docdbelastic#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of Elastic DocumentDB cluster.</p>"
+            }
+        },
+        "com.amazonaws.docdbelastic#ClusterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.docdbelastic#ClusterInList"
+            }
+        },
+        "com.amazonaws.docdbelastic#ClusterSnapshot": {
+            "type": "structure",
+            "members": {
+                "subnetIds": {
+                    "target": "com.amazonaws.docdbelastic#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the IDs of subnets associated with the DB cluster snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB snapshot</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotCreationTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the Elastic DocumentDB snapshot was created in Universal Coordinated Time (UTC).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterCreationTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the Elastic DocumentDB cluster was created in Universal Coordinated Time (UTC).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.docdbelastic#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.docdbelastic#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the IDs of the VPC security groups associated with the cluster snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "adminUserName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster administrator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB snapshot.</p>"
+            }
+        },
+        "com.amazonaws.docdbelastic#ClusterSnapshotInList": {
+            "type": "structure",
+            "members": {
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB snapshot</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.docdbelastic#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotCreationTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the Elastic DocumentDB snapshot was created in Universal Coordinated Time (UTC).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of Elastic DocumentDB snapshots.</p>"
+            }
+        },
+        "com.amazonaws.docdbelastic#ClusterSnapshotList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.docdbelastic#ClusterSnapshotInList"
+            }
+        },
+        "com.amazonaws.docdbelastic#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource where there was an access conflict.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource where there was an access conflict.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There was an access conflict.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.docdbelastic#CreateCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#CreateClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#CreateClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new Elastic DocumentDB cluster and returns its Cluster structure.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cluster"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#CreateClusterInput": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new Elastic DocumentDB cluster. This parameter is stored as\n      a lowercase string.</p>\n         <p>\n            <i>Constraints</i>:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>\n            <i>Example</i>: <code>my-cluster</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "authType": {
+                    "target": "com.amazonaws.docdbelastic#Auth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type for the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "adminUserName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster administrator.</p>\n         <p>\n            <i>Constraints</i>:</p>\n         <ul>\n            <li>\n               <p>Must be from 1 to 63 letters or numbers.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "adminUserPassword": {
+                    "target": "com.amazonaws.docdbelastic#Password",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password for the Elastic DocumentDB cluster administrator and can\n      contain any printable ASCII characters.</p>\n         <p>\n            <i>Constraints</i>:</p>\n         <ul>\n            <li>\n               <p>Must contain from 8 to 100 characters.</p>\n            </li>\n            <li>\n               <p>Cannot contain a forward slash (/), double quote (\"), or the \"at\" symbol (@).</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shardCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity of each shard in the new Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "shardCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of shards to create in the new Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.docdbelastic#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups to associate with the new\n      Elastic DocumentDB cluster.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.docdbelastic#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the new Elastic DocumentDB cluster.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.</p>\n         <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS\n        encryption key. If you are creating a cluster using the same Amazon account\n        that owns this KMS encryption key, you can use the KMS key alias instead\n        of the ARN as the KMS encryption key.</p>\n         <p>If an encryption key is not specified, Elastic DocumentDB uses the\n        default encryption key that KMS creates for your account. Your account\n        has a different default encryption key for each Amazon Region.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token for the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "preferredMaintenanceWindow": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur,\n      in Universal Coordinated Time (UTC).</p>\n         <p>\n            <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n         </p>\n         <p>\n            <i>Default</i>: a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week.</p>\n         <p>\n            <i>Valid days</i>: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n         <p>\n            <i>Constraints</i>: Minimum 30-minute window.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.docdbelastic#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be assigned to the new Elastic DocumentDB cluster.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#CreateClusterOutput": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.docdbelastic#Cluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new Elastic DocumentDB cluster that has been created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#CreateClusterSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#CreateClusterSnapshotInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#CreateClusterSnapshotOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a snapshot of a cluster.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cluster-snapshot"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#CreateClusterSnapshotInput": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster that the snapshot will be taken from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 63
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.docdbelastic#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be assigned to the new Elastic DocumentDB snapshot.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#CreateClusterSnapshotOutput": {
+            "type": "structure",
+            "members": {
+                "snapshot": {
+                    "target": "com.amazonaws.docdbelastic#ClusterSnapshot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about the new Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#DeleteCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#DeleteClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#DeleteClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a Elastic DocumentDB cluster.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/cluster/{clusterArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#DeleteClusterInput": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster that is to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "clusterArn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#DeleteClusterOutput": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.docdbelastic#Cluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about the newly deleted Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#DeleteClusterSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#DeleteClusterSnapshotInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#DeleteClusterSnapshotOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a Elastic DocumentDB snapshot.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/cluster-snapshot/{snapshotArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#DeleteClusterSnapshotInput": {
+            "type": "structure",
+            "members": {
+                "snapshotArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB snapshot that is to be deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "snapshotArn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#DeleteClusterSnapshotOutput": {
+            "type": "structure",
+            "members": {
+                "snapshot": {
+                    "target": "com.amazonaws.docdbelastic#ClusterSnapshot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about the newly deleted Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#GetCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#GetClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#GetClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB cluster.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/cluster/{clusterArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#GetClusterInput": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "clusterArn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#GetClusterOutput": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.docdbelastic#Cluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#GetClusterSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#GetClusterSnapshotInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#GetClusterSnapshotOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB snapshot</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/cluster-snapshot/{snapshotArn}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#GetClusterSnapshotInput": {
+            "type": "structure",
+            "members": {
+                "snapshotArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "snapshotArn"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#GetClusterSnapshotOutput": {
+            "type": "structure",
+            "members": {
+                "snapshot": {
+                    "target": "com.amazonaws.docdbelastic#ClusterSnapshot",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about a specific Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>There was an internal server error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#ListClusterSnapshots": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#ListClusterSnapshotsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#ListClusterSnapshotsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about Elastic DocumentDB snapshots for a specified cluster.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/cluster-snapshots"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "snapshots"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#ListClusterSnapshotsInput": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#httpQuery": "clusterArn"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.docdbelastic#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nextToken which is used the get the next page of data.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of entries to recieve in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 20,
+                            "max": 100
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#ListClusterSnapshotsOutput": {
+            "type": "structure",
+            "members": {
+                "snapshots": {
+                    "target": "com.amazonaws.docdbelastic#ClusterSnapshotList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Elastic DocumentDB snapshots for a specified cluster.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.docdbelastic#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response will provide a nextToken if there is more data beyond the maxResults.</p>\n         <p>If there is no more data in the responce, the nextToken will not be returned.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#ListClusters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#ListClustersInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#ListClustersOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about provisioned Elastic DocumentDB clusters.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/clusters"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "clusters"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#ListClustersInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.docdbelastic#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nextToken which is used the get the next page of data.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of entries to recieve in the response.</p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#ListClustersOutput": {
+            "type": "structure",
+            "members": {
+                "clusters": {
+                    "target": "com.amazonaws.docdbelastic#ClusterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Elastic DocumentDB cluster.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.docdbelastic#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The response will provide a nextToken if there is more data beyond the maxResults.</p>\n         <p>If there is no more data in the responce, the nextToken will not be returned.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all tags on a Elastic DocumentDB resource</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "GET"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.docdbelastic#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.docdbelastic#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags for the specified Elastic DocumentDB resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Token or cursor used in paginated operations.\n\nWhen this value is provided as operation input, the service returns results from where the previous response left off.\nWhen this value is present in operation output, it indicates that there are more results to retrieve.\n\nThis should be opaque to not expose implementation details and potentially versioned to allow evolution of pagination\nstrategy.\n"
+            }
+        },
+        "com.amazonaws.docdbelastic#Password": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message describing the failure.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource that could not be located.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource that could not be found.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource could not be located.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.docdbelastic#RestoreClusterFromSnapshot": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#RestoreClusterFromSnapshotInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#RestoreClusterFromSnapshotOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Restores a Elastic DocumentDB cluster from a snapshot.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cluster-snapshot/{snapshotArn}/restore"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#RestoreClusterFromSnapshotInput": {
+            "type": "structure",
+            "members": {
+                "clusterName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "snapshotArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB snapshot.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "snapshotArn"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.docdbelastic#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups to associate with the\n      Elastic DocumentDB cluster.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.docdbelastic#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EC2 subnet IDs for the Elastic DocumentDB cluster.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key identifier to use to encrypt the new Elastic DocumentDB cluster.</p>\n         <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS\n        encryption key. If you are creating a cluster using the same Amazon account\n        that owns this KMS encryption key, you can use the KMS key alias instead\n        of the ARN as the KMS encryption key.</p>\n         <p>If an encryption key is not specified here, Elastic DocumentDB uses the\n        default encryption key that KMS creates for your account. Your account\n        has a different default encryption key for each Amazon Region.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.docdbelastic#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the tag names to be assigned to the restored DB cluster,\n      in the form of an array of key-value pairs in which the key\n      is the tag name and the value is the key value.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#RestoreClusterFromSnapshotOutput": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.docdbelastic#Cluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about a the restored Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service quota for the action was exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.docdbelastic#Status": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
+                    },
+                    {
+                        "value": "VPC_ENDPOINT_LIMIT_EXCEEDED",
+                        "name": "VPC_ENDPOINT_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "IP_ADDRESS_LIMIT_EXCEEDED",
+                        "name": "IP_ADDRESS_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "INVALID_SECURITY_GROUP_ID",
+                        "name": "INVALID_SECURITY_GROUP_ID"
+                    },
+                    {
+                        "value": "INVALID_SUBNET_ID",
+                        "name": "INVALID_SUBNET_ID"
+                    },
+                    {
+                        "value": "INACCESSIBLE_ENCRYPTION_CREDS",
+                        "name": "INACCESSIBLE_ENCRYPTION_CREDS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.docdbelastic#StringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.docdbelastic#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.docdbelastic#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.docdbelastic#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.docdbelastic#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.docdbelastic#TagValue"
+            }
+        },
+        "com.amazonaws.docdbelastic#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds metadata tags to a Elastic DocumentDB resource</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.docdbelastic#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.docdbelastic#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be assigned to the Elastic DocumentDB resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.docdbelastic#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying the operation.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>ThrottlingException will be thrown when request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes metadata tags to a Elastic DocumentDB resource</p>",
+                "smithy.api#http": {
+                    "uri": "/tags/{resourceArn}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.docdbelastic#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.docdbelastic#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys to be removed from the Elastic DocumentDB resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.docdbelastic#UpdateCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.docdbelastic#UpdateClusterInput"
+            },
+            "output": {
+                "target": "com.amazonaws.docdbelastic#UpdateClusterOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.docdbelastic#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.docdbelastic#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies a Elastic DocumentDB cluster. This includes updating admin-username/password, \n    upgrading API version setting up a backup window and maintenance window</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/cluster/{clusterArn}"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.docdbelastic#UpdateClusterInput": {
+            "type": "structure",
+            "members": {
+                "clusterArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The arn of the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "clusterArn"
+                    }
+                },
+                "authType": {
+                    "target": "com.amazonaws.docdbelastic#Auth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type for the Elastic DocumentDB cluster.</p>"
+                    }
+                },
+                "shardCapacity": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capacity of each shard in the Elastic DocumentDB cluster.</p>"
+                    }
+                },
+                "shardCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of shards to create in the Elastic DocumentDB cluster.</p>"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.docdbelastic#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of EC2 VPC security groups to associate with the new\n      Elastic DocumentDB cluster.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.docdbelastic#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of shards to create in the Elastic DocumentDB cluster.</p>"
+                    }
+                },
+                "adminUserPassword": {
+                    "target": "com.amazonaws.docdbelastic#Password",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password for the Elastic DocumentDB cluster administrator. This password can\n      contain any printable ASCII character except forward slash (/),\n      double quote (\"), or the \"at\" symbol (@).</p>\n         <p>\n            <i>Constraints</i>: Must contain from 8 to 100 characters.</p>"
+                    }
+                },
+                "clientToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client token for the Elastic DocumentDB cluster.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "preferredMaintenanceWindow": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur,\n      in Universal Coordinated Time (UTC).</p>\n         <p>\n            <i>Format</i>: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n         </p>\n         <p>\n            <i>Default</i>: a 30-minute window selected at random from an 8-hour block of time for each Amazon Web Services Region, occurring on a random day of the week.</p>\n         <p>\n            <i>Valid days</i>: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n         <p>\n            <i>Constraints</i>: Minimum 30-minute window.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#UpdateClusterOutput": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.docdbelastic#Cluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns information about the updated Elastic DocumentDB cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.docdbelastic#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message describing the validation exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.docdbelastic#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the validation exception occurred (one of <code>unknownOperation</code>,\n      <code>cannotParse</code>, <code>fieldValidationFailed</code>, or <code>other</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.docdbelastic#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the fields in which the validation exception occurred.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure defining a validation exception.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.docdbelastic#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field where the validation exception occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message describing the validation exception in this field.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A specific field in which a given validation exception occurred.</p>"
+            }
+        },
+        "com.amazonaws.docdbelastic#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.docdbelastic#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.docdbelastic#ValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "unknownOperation",
+                        "name": "UNKNOWN_OPERATION"
+                    },
+                    {
+                        "value": "cannotParse",
+                        "name": "CANNOT_PARSE"
+                    },
+                    {
+                        "value": "fieldValidationFailed",
+                        "name": "FIELD_VALIDATION_FAILED"
+                    },
+                    {
+                        "value": "other",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        }
+    }
+}
