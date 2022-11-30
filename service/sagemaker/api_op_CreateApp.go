@@ -47,11 +47,6 @@ type CreateAppInput struct {
 	// This member is required.
 	DomainId *string
 
-	// The user profile name.
-	//
-	// This member is required.
-	UserProfileName *string
-
 	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image
 	// created on the instance. The value of InstanceType passed as part of the
 	// ResourceSpec in the CreateApp call overrides the value passed as part of the
@@ -60,9 +55,15 @@ type CreateAppInput struct {
 	// the CreateApp call fails with a request validation error.
 	ResourceSpec *types.ResourceSpec
 
+	// The name of the space.
+	SpaceName *string
+
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
 	// resource.
 	Tags []types.Tag
+
+	// The user profile name.
+	UserProfileName *string
 
 	noSmithyDocumentSerde
 }

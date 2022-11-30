@@ -52,7 +52,7 @@ type DisassociateTrialComponentOutput struct {
 	// The Amazon Resource Name (ARN) of the trial.
 	TrialArn *string
 
-	// The ARN of the trial component.
+	// The Amazon Resource Name (ARN) of the trial component.
 	TrialComponentArn *string
 
 	// Metadata pertaining to the operation's result.

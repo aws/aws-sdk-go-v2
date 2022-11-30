@@ -51,7 +51,8 @@ func (c *Client) DeleteAccessPoint(ctx context.Context, params *DeleteAccessPoin
 
 type DeleteAccessPointInput struct {
 
-	// The account ID for the account that owns the specified access point.
+	// The Amazon Web Services account ID for the account that owns the specified
+	// access point.
 	//
 	// This member is required.
 	AccountId *string

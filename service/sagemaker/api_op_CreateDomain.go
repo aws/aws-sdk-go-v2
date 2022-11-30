@@ -111,6 +111,9 @@ type CreateDomainInput struct {
 	// provided.
 	AppSecurityGroupManagement types.AppSecurityGroupManagement
 
+	// The default settings used to create a space.
+	DefaultSpaceSettings *types.DefaultSpaceSettings
+
 	// A collection of Domain settings.
 	DomainSettings *types.DomainSettings
 

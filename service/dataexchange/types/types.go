@@ -57,7 +57,7 @@ type AssetDestinationEntry struct {
 	// This member is required.
 	AssetId *string
 
-	// The S3 bucket that is the destination for the asset.
+	// The Amazon S3 bucket that is the destination for the asset.
 	//
 	// This member is required.
 	Bucket *string
@@ -68,27 +68,36 @@ type AssetDestinationEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the asset.
+// Details about the asset.
 type AssetDetails struct {
 
 	// Information about the API Gateway API asset.
 	ApiGatewayApiAsset *ApiGatewayApiAsset
 
+	// The AWS Lake Formation data permission that is the asset.
+	LakeFormationDataPermissionAsset *LakeFormationDataPermissionAsset
+
 	// The Amazon Redshift datashare that is the asset.
 	RedshiftDataShareAsset *RedshiftDataShareAsset
 
-	// The S3 object that is the asset.
+	// The Amazon S3 data access that is the asset.
+	S3DataAccessAsset *S3DataAccessAsset
+
+	// The Amazon S3 object that is the asset.
 	S3SnapshotAsset *S3SnapshotAsset
 
 	noSmithyDocumentSerde
 }
 
-// An asset in AWS Data Exchange is a piece of data (S3 object) or a means of
-// fulfilling data (Amazon Redshift datashare or Amazon API Gateway API). The asset
-// can be a structured data file, an image file, or some other data file that can
-// be stored as an S3 object, an Amazon API Gateway API, or an Amazon Redshift
-// datashare. When you create an import job for your files, API Gateway APIs, or
-// Amazon Redshift datashares, you create an asset in AWS Data Exchange.
+// An asset in AWS Data Exchange is a piece of data (Amazon S3 object) or a means
+// of fulfilling data (Amazon Redshift datashare or Amazon API Gateway API, AWS
+// Lake Formation data permission, or Amazon S3 data access). The asset can be a
+// structured data file, an image file, or some other data file that can be stored
+// as an Amazon S3 object, an Amazon API Gateway API, or an Amazon Redshift
+// datashare, an AWS Lake Formation data permission, or an Amazon S3 data access.
+// When you create an import job for your files, API Gateway APIs, Amazon Redshift
+// datashares, AWS Lake Formation data permission, or Amazon S3 data access, you
+// create an asset in AWS Data Exchange.
 type AssetEntry struct {
 
 	// The ARN for the asset.
@@ -96,7 +105,7 @@ type AssetEntry struct {
 	// This member is required.
 	Arn *string
 
-	// Information about the asset.
+	// Details about the asset.
 	//
 	// This member is required.
 	AssetDetails *AssetDetails
@@ -121,11 +130,13 @@ type AssetEntry struct {
 	// This member is required.
 	Id *string
 
-	// The name of the asset. When importing from Amazon S3, the S3 object key is used
-	// as the asset name. When exporting to Amazon S3, the asset name is used as
-	// default target S3 object key. When importing from Amazon API Gateway API, the
-	// API name is used as the asset name. When importing from Amazon Redshift, the
-	// datashare name is used as the asset name.
+	// The name of the asset. When importing from Amazon S3, the Amazon S3 object key
+	// is used as the asset name. When exporting to Amazon S3, the asset name is used
+	// as default target Amazon S3 object key. When importing from Amazon API Gateway
+	// API, the API name is used as the asset name. When importing from Amazon
+	// Redshift, the datashare name is used as the asset name. When importing from AWS
+	// Lake Formation, the static values of "Database(s) included in LF-tag policy" or
+	// "Table(s) included in LF-tag policy" are used as the asset name.
 	//
 	// This member is required.
 	Name *string
@@ -151,7 +162,7 @@ type AssetEntry struct {
 // The source of the assets.
 type AssetSourceEntry struct {
 
-	// The S3 bucket that's part of the source of the asset.
+	// The Amazon S3 bucket that's part of the source of the asset.
 	//
 	// This member is required.
 	Bucket *string
@@ -168,7 +179,7 @@ type AssetSourceEntry struct {
 // export will be sent.
 type AutoExportRevisionDestinationEntry struct {
 
-	// The S3 bucket that is the destination for the event action.
+	// The Amazon S3 bucket that is the destination for the event action.
 	//
 	// This member is required.
 	Bucket *string
@@ -193,6 +204,77 @@ type AutoExportRevisionToS3RequestDetails struct {
 
 	// Encryption configuration for the auto export job.
 	Encryption *ExportServerSideEncryption
+
+	noSmithyDocumentSerde
+}
+
+// Details of the operation to create an Amazon S3 data access from an S3 bucket.
+type CreateS3DataAccessFromS3BucketRequestDetails struct {
+
+	// Details about the S3 data access source asset.
+	//
+	// This member is required.
+	AssetSource *S3DataAccessAssetSourceEntry
+
+	// The unique identifier for the data set associated with the creation of this
+	// Amazon S3 data access.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The unique identifier for a revision.
+	//
+	// This member is required.
+	RevisionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the response of the operation to create an S3 data access from an
+// S3 bucket.
+type CreateS3DataAccessFromS3BucketResponseDetails struct {
+
+	// Details about the asset source from an Amazon S3 bucket.
+	//
+	// This member is required.
+	AssetSource *S3DataAccessAssetSourceEntry
+
+	// The unique identifier for this data set.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The unique identifier for the revision.
+	//
+	// This member is required.
+	RevisionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The LF-tag policy for database resources.
+type DatabaseLFTagPolicy struct {
+
+	// A list of LF-tag conditions that apply to database resources.
+	//
+	// This member is required.
+	Expression []LFTag
+
+	noSmithyDocumentSerde
+}
+
+// The LF-tag policy and permissions for database resources.
+type DatabaseLFTagPolicyAndPermissions struct {
+
+	// A list of LF-tag conditions that apply to database resources.
+	//
+	// This member is required.
+	Expression []LFTag
+
+	// The permissions granted to subscribers on database resources.
+	//
+	// This member is required.
+	Permissions []DatabaseLFTagPolicyPermission
 
 	noSmithyDocumentSerde
 }
@@ -259,7 +341,7 @@ type Details struct {
 	// Information about the job error.
 	ImportAssetFromSignedUrlJobErrorDetails *ImportAssetFromSignedUrlJobErrorDetails
 
-	// Information about the job error.
+	// Details about the job error.
 	ImportAssetsFromS3JobErrorDetails []AssetSourceEntry
 
 	noSmithyDocumentSerde
@@ -572,10 +654,10 @@ type ImportAssetFromApiGatewayApiResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the job error.
+// Details about the job error.
 type ImportAssetFromSignedUrlJobErrorDetails struct {
 
-	// Information about the job error.
+	// Details about the job error.
 	//
 	// This member is required.
 	AssetName *string
@@ -586,8 +668,8 @@ type ImportAssetFromSignedUrlJobErrorDetails struct {
 // Details of the operation to be performed by the job.
 type ImportAssetFromSignedUrlRequestDetails struct {
 
-	// The name of the asset. When importing from Amazon S3, the S3 object key is used
-	// as the asset name.
+	// The name of the asset. When importing from Amazon S3, the Amazon S3 object key
+	// is used as the asset name.
 	//
 	// This member is required.
 	AssetName *string
@@ -643,6 +725,72 @@ type ImportAssetFromSignedUrlResponseDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the assets imported from an AWS Lake Formation tag policy request.
+type ImportAssetsFromLakeFormationTagPolicyRequestDetails struct {
+
+	// The identifier for the AWS Glue Data Catalog.
+	//
+	// This member is required.
+	CatalogId *string
+
+	// The unique identifier for the data set associated with this import job.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The unique identifier for the revision associated with this import job.
+	//
+	// This member is required.
+	RevisionId *string
+
+	// The IAM role's ARN that allows AWS Data Exchange to assume the role and grant
+	// and revoke permissions of subscribers to AWS Lake Formation data permissions.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// A structure for the database object.
+	Database *DatabaseLFTagPolicyAndPermissions
+
+	// A structure for the table object.
+	Table *TableLFTagPolicyAndPermissions
+
+	noSmithyDocumentSerde
+}
+
+// Details from an import AWS Lake Formation tag policy job response.
+type ImportAssetsFromLakeFormationTagPolicyResponseDetails struct {
+
+	// The identifier for the AWS Glue Data Catalog.
+	//
+	// This member is required.
+	CatalogId *string
+
+	// The unique identifier for the data set associated with this import job.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The unique identifier for the revision associated with this import job.
+	//
+	// This member is required.
+	RevisionId *string
+
+	// The IAM role's ARN that allows AWS Data Exchange to assume the role and grant
+	// and revoke permissions to AWS Lake Formation data permissions.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// A structure for the database object.
+	Database *DatabaseLFTagPolicyAndPermissions
+
+	// A structure for the table object.
+	Table *TableLFTagPolicyAndPermissions
+
+	noSmithyDocumentSerde
+}
+
 // Details from an import from Amazon Redshift datashare request.
 type ImportAssetsFromRedshiftDataSharesRequestDetails struct {
 
@@ -688,7 +836,7 @@ type ImportAssetsFromRedshiftDataSharesResponseDetails struct {
 // Details of the operation to be performed by the job.
 type ImportAssetsFromS3RequestDetails struct {
 
-	// Is a list of S3 bucket and object key pairs.
+	// Is a list of Amazon S3 bucket and object key pairs.
 	//
 	// This member is required.
 	AssetSources []AssetSourceEntry
@@ -806,7 +954,93 @@ type JobError struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the origin of the data set.
+// The AWS Lake Formation data permission asset.
+type LakeFormationDataPermissionAsset struct {
+
+	// Details about the AWS Lake Formation data permission.
+	//
+	// This member is required.
+	LakeFormationDataPermissionDetails *LakeFormationDataPermissionDetails
+
+	// The data permission type.
+	//
+	// This member is required.
+	LakeFormationDataPermissionType LakeFormationDataPermissionType
+
+	// The permissions granted to the subscribers on the resource.
+	//
+	// This member is required.
+	Permissions []LFPermission
+
+	// The IAM role's ARN that allows AWS Data Exchange to assume the role and grant
+	// and revoke permissions to AWS Lake Formation data permissions.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the AWS Lake Formation data permission.
+type LakeFormationDataPermissionDetails struct {
+
+	// Details about the LF-tag policy.
+	LFTagPolicy *LFTagPolicyDetails
+
+	noSmithyDocumentSerde
+}
+
+// Details about the AWS Lake Formation resource (Table or Database) included in
+// the AWS Lake Formation data permission.
+type LFResourceDetails struct {
+
+	// Details about the database resource included in the AWS Lake Formation data
+	// permission.
+	Database *DatabaseLFTagPolicy
+
+	// Details about the table resource included in the AWS Lake Formation data
+	// permission.
+	Table *TableLFTagPolicy
+
+	noSmithyDocumentSerde
+}
+
+// A structure that allows an LF-admin to grant permissions on certain conditions.
+type LFTag struct {
+
+	// The key name for the LF-tag.
+	//
+	// This member is required.
+	TagKey *string
+
+	// A list of LF-tag values.
+	//
+	// This member is required.
+	TagValues []string
+
+	noSmithyDocumentSerde
+}
+
+// Details about the LF-tag policy.
+type LFTagPolicyDetails struct {
+
+	// The identifier for the AWS Glue Data Catalog.
+	//
+	// This member is required.
+	CatalogId *string
+
+	// Details for the Lake Formation Resources included in the LF-tag policy.
+	//
+	// This member is required.
+	ResourceDetails *LFResourceDetails
+
+	// The resource type for which the LF-tag policy applies.
+	//
+	// This member is required.
+	ResourceType LFResourceType
+
+	noSmithyDocumentSerde
+}
+
+// Details about the origin of the data set.
 type OriginDetails struct {
 
 	// The product ID of the origin of the data set.
@@ -842,6 +1076,9 @@ type RedshiftDataShareAssetSourceEntry struct {
 // The details for the request.
 type RequestDetails struct {
 
+	// Details of the request to create S3 data access from the Amazon S3 bucket.
+	CreateS3DataAccessFromS3Bucket *CreateS3DataAccessFromS3BucketRequestDetails
+
 	// Details about the export to signed URL request.
 	ExportAssetToSignedUrl *ExportAssetToSignedUrlRequestDetails
 
@@ -857,10 +1094,13 @@ type RequestDetails struct {
 	// Details about the import from Amazon S3 request.
 	ImportAssetFromSignedUrl *ImportAssetFromSignedUrlRequestDetails
 
+	// Request details for the ImportAssetsFromLakeFormationTagPolicy job.
+	ImportAssetsFromLakeFormationTagPolicy *ImportAssetsFromLakeFormationTagPolicyRequestDetails
+
 	// Details from an import from Amazon Redshift datashare request.
 	ImportAssetsFromRedshiftDataShares *ImportAssetsFromRedshiftDataSharesRequestDetails
 
-	// Information about the import asset from API Gateway API request.
+	// Details about the import asset from API Gateway API request.
 	ImportAssetsFromS3 *ImportAssetsFromS3RequestDetails
 
 	noSmithyDocumentSerde
@@ -868,6 +1108,9 @@ type RequestDetails struct {
 
 // Details for the response.
 type ResponseDetails struct {
+
+	// Response details from the CreateS3DataAccessFromS3Bucket job.
+	CreateS3DataAccessFromS3Bucket *CreateS3DataAccessFromS3BucketResponseDetails
 
 	// Details for the export to signed URL response.
 	ExportAssetToSignedUrl *ExportAssetToSignedUrlResponseDetails
@@ -884,6 +1127,9 @@ type ResponseDetails struct {
 	// Details for the import from signed URL response.
 	ImportAssetFromSignedUrl *ImportAssetFromSignedUrlResponseDetails
 
+	// Response details from the ImportAssetsFromLakeFormationTagPolicy job.
+	ImportAssetsFromLakeFormationTagPolicy *ImportAssetsFromLakeFormationTagPolicyResponseDetails
+
 	// Details from an import from Amazon Redshift datashare response.
 	ImportAssetsFromRedshiftDataShares *ImportAssetsFromRedshiftDataSharesResponseDetails
 
@@ -896,7 +1142,7 @@ type ResponseDetails struct {
 // The destination where the assets in the revision will be exported.
 type RevisionDestinationEntry struct {
 
-	// The S3 bucket that is the destination for the assets in the revision.
+	// The Amazon S3 bucket that is the destination for the assets in the revision.
 	//
 	// This member is required.
 	Bucket *string
@@ -928,7 +1174,7 @@ type RevisionEntry struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The unique identifier for the data set associated with this revision.
+	// The unique identifier for the data set associated with the data set revision.
 	//
 	// This member is required.
 	DataSetId *string
@@ -984,13 +1230,82 @@ type RevisionPublished struct {
 	noSmithyDocumentSerde
 }
 
-// The S3 object that is the asset.
+// The Amazon S3 data access that is the asset.
+type S3DataAccessAsset struct {
+
+	// The Amazon S3 bucket hosting data to be shared in the S3 data access.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The Amazon S3 bucket used for hosting shared data in the Amazon S3 data access.
+	KeyPrefixes []string
+
+	// S3 keys made available using this asset.
+	Keys []string
+
+	// The automatically-generated bucket-style alias for your Amazon S3 Access Point.
+	// Customers can access their entitled data using the S3 Access Point alias.
+	S3AccessPointAlias *string
+
+	// The ARN for your Amazon S3 Access Point. Customers can also access their
+	// entitled data using the S3 Access Point ARN.
+	S3AccessPointArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Source details for an Amazon S3 data access asset.
+type S3DataAccessAssetSourceEntry struct {
+
+	// The Amazon S3 bucket used for hosting shared data in the Amazon S3 data access.
+	//
+	// This member is required.
+	Bucket *string
+
+	// Organizes Amazon S3 asset key prefixes stored in an Amazon S3 bucket.
+	KeyPrefixes []string
+
+	// The keys used to create the Amazon S3 data access.
+	Keys []string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 object that is the asset.
 type S3SnapshotAsset struct {
 
-	// The size of the S3 object that is the object.
+	// The size of the Amazon S3 object that is the object.
 	//
 	// This member is required.
 	Size float64
+
+	noSmithyDocumentSerde
+}
+
+// The LF-tag policy for a table resource.
+type TableLFTagPolicy struct {
+
+	// A list of LF-tag conditions that apply to table resources.
+	//
+	// This member is required.
+	Expression []LFTag
+
+	noSmithyDocumentSerde
+}
+
+// The LF-tag policy and permissions that apply to table resources.
+type TableLFTagPolicyAndPermissions struct {
+
+	// A list of LF-tag conditions that apply to table resources.
+	//
+	// This member is required.
+	Expression []LFTag
+
+	// The permissions granted to subscribers on table resources.
+	//
+	// This member is required.
+	Permissions []TableTagPolicyLFPermission
 
 	noSmithyDocumentSerde
 }

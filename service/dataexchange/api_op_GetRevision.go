@@ -53,7 +53,7 @@ type GetRevisionOutput struct {
 	// The date and time that the revision was created, in ISO 8601 format.
 	CreatedAt *time.Time
 
-	// The unique identifier for the data set associated with this revision.
+	// The unique identifier for the data set associated with the data set revision.
 	DataSetId *string
 
 	// To publish a revision to a data set in a product, the revision must first be

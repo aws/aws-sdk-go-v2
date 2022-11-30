@@ -559,7 +559,9 @@ type ConfigurationMemberSqsQueue struct {
 
 func (*ConfigurationMemberSqsQueue) isConfiguration() {}
 
-// The criteria to use in the filter that defines the archive rule.
+// The criteria to use in the filter that defines the archive rule. For more
+// information on available filter keys, see IAM Access Analyzer filter keys
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html).
 type Criterion struct {
 
 	// A "contains" operator to match for the filter used to create the rule.
@@ -773,6 +775,9 @@ type FindingSource struct {
 // Includes details about how the access that generated the finding is granted.
 // This is populated for Amazon S3 bucket findings.
 type FindingSourceDetail struct {
+
+	// The account of the cross-account access point that generated the finding.
+	AccessPointAccount *string
 
 	// The ARN of the access point that generated the finding. The ARN format depends
 	// on whether the ARN represents an access point or a multi-region access point.

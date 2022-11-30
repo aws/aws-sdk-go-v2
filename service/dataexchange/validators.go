@@ -726,6 +726,53 @@ func validateAutoExportRevisionToS3RequestDetails(v *types.AutoExportRevisionToS
 	}
 }
 
+func validateCreateS3DataAccessFromS3BucketRequestDetails(v *types.CreateS3DataAccessFromS3BucketRequestDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateS3DataAccessFromS3BucketRequestDetails"}
+	if v.AssetSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AssetSource"))
+	} else if v.AssetSource != nil {
+		if err := validateS3DataAccessAssetSourceEntry(v.AssetSource); err != nil {
+			invalidParams.AddNested("AssetSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDatabaseLFTagPolicyAndPermissions(v *types.DatabaseLFTagPolicyAndPermissions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatabaseLFTagPolicyAndPermissions"}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	} else if v.Expression != nil {
+		if err := validateListOfLFTags(v.Expression); err != nil {
+			invalidParams.AddNested("Expression", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Permissions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEvent(v *types.Event) error {
 	if v == nil {
 		return nil
@@ -893,6 +940,40 @@ func validateImportAssetFromSignedUrlRequestDetails(v *types.ImportAssetFromSign
 	}
 }
 
+func validateImportAssetsFromLakeFormationTagPolicyRequestDetails(v *types.ImportAssetsFromLakeFormationTagPolicyRequestDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportAssetsFromLakeFormationTagPolicyRequestDetails"}
+	if v.CatalogId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CatalogId"))
+	}
+	if v.Database != nil {
+		if err := validateDatabaseLFTagPolicyAndPermissions(v.Database); err != nil {
+			invalidParams.AddNested("Database", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Table != nil {
+		if err := validateTableLFTagPolicyAndPermissions(v.Table); err != nil {
+			invalidParams.AddNested("Table", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.DataSetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if v.RevisionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateImportAssetsFromRedshiftDataSharesRequestDetails(v *types.ImportAssetsFromRedshiftDataSharesRequestDetails) error {
 	if v == nil {
 		return nil
@@ -943,6 +1024,24 @@ func validateImportAssetsFromS3RequestDetails(v *types.ImportAssetsFromS3Request
 	}
 }
 
+func validateLFTag(v *types.LFTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LFTag"}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if v.TagValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateListOfAssetDestinationEntry(v []types.AssetDestinationEntry) error {
 	if v == nil {
 		return nil
@@ -967,6 +1066,23 @@ func validateListOfAssetSourceEntry(v []types.AssetSourceEntry) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfAssetSourceEntry"}
 	for i := range v {
 		if err := validateAssetSourceEntry(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListOfLFTags(v []types.LFTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfLFTags"}
+	for i := range v {
+		if err := validateLFTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1066,6 +1182,16 @@ func validateRequestDetails(v *types.RequestDetails) error {
 			invalidParams.AddNested("ImportAssetFromApiGatewayApi", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CreateS3DataAccessFromS3Bucket != nil {
+		if err := validateCreateS3DataAccessFromS3BucketRequestDetails(v.CreateS3DataAccessFromS3Bucket); err != nil {
+			invalidParams.AddNested("CreateS3DataAccessFromS3Bucket", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ImportAssetsFromLakeFormationTagPolicy != nil {
+		if err := validateImportAssetsFromLakeFormationTagPolicyRequestDetails(v.ImportAssetsFromLakeFormationTagPolicy); err != nil {
+			invalidParams.AddNested("ImportAssetsFromLakeFormationTagPolicy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1098,6 +1224,43 @@ func validateRevisionPublished(v *types.RevisionPublished) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RevisionPublished"}
 	if v.DataSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DataAccessAssetSourceEntry(v *types.S3DataAccessAssetSourceEntry) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DataAccessAssetSourceEntry"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTableLFTagPolicyAndPermissions(v *types.TableLFTagPolicyAndPermissions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TableLFTagPolicyAndPermissions"}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	} else if v.Expression != nil {
+		if err := validateListOfLFTags(v.Expression); err != nil {
+			invalidParams.AddNested("Expression", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Permissions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -111,6 +111,13 @@ type CreateEndpointConfigInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html).
 	KmsKeyId *string
 
+	// Array of ProductionVariant objects. There is one for each model that you want to
+	// host at this endpoint in shadow mode with production traffic replicated from the
+	// model specified on ProductionVariants.If you use this field, you can only
+	// specify one variant for ProductionVariants and one variant for
+	// ShadowProductionVariants.
+	ShadowProductionVariants []types.ProductionVariant
+
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
 	// environment. For more information, see Tagging Amazon Web Services Resources

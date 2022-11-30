@@ -111,9 +111,10 @@ type FindingSourceType string
 
 // Enum values for FindingSourceType
 const (
-	FindingSourceTypePolicy        FindingSourceType = "POLICY"
-	FindingSourceTypeBucketAcl     FindingSourceType = "BUCKET_ACL"
-	FindingSourceTypeS3AccessPoint FindingSourceType = "S3_ACCESS_POINT"
+	FindingSourceTypePolicy               FindingSourceType = "POLICY"
+	FindingSourceTypeBucketAcl            FindingSourceType = "BUCKET_ACL"
+	FindingSourceTypeS3AccessPoint        FindingSourceType = "S3_ACCESS_POINT"
+	FindingSourceTypeS3AccessPointAccount FindingSourceType = "S3_ACCESS_POINT_ACCOUNT"
 )
 
 // Values returns all known values for FindingSourceType. Note that this can be
@@ -124,6 +125,7 @@ func (FindingSourceType) Values() []FindingSourceType {
 		"POLICY",
 		"BUCKET_ACL",
 		"S3_ACCESS_POINT",
+		"S3_ACCESS_POINT_ACCOUNT",
 	}
 }
 

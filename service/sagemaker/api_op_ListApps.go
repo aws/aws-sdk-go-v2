@@ -46,6 +46,9 @@ type ListAppsInput struct {
 	// The sort order for the results. The default is Ascending.
 	SortOrder types.SortOrder
 
+	// A parameter to search by space name.
+	SpaceNameEquals *string
+
 	// A parameter to search by user profile name.
 	UserProfileNameEquals *string
 

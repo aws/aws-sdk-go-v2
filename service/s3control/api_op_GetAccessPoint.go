@@ -54,7 +54,8 @@ func (c *Client) GetAccessPoint(ctx context.Context, params *GetAccessPointInput
 
 type GetAccessPointInput struct {
 
-	// The account ID for the account that owns the specified access point.
+	// The Amazon Web Services account ID for the account that owns the specified
+	// access point.
 	//
 	// This member is required.
 	AccountId *string
@@ -86,6 +87,10 @@ type GetAccessPointOutput struct {
 
 	// The name of the bucket associated with the specified access point.
 	Bucket *string
+
+	// The Amazon Web Services account ID associated with the S3 bucket associated with
+	// this access point.
+	BucketAccountId *string
 
 	// The date and time when the specified access point was created.
 	CreationDate *time.Time

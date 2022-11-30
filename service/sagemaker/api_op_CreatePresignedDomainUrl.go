@@ -61,6 +61,9 @@ type CreatePresignedDomainUrlInput struct {
 	// The session expiration duration in seconds. This value defaults to 43200.
 	SessionExpirationDurationInSeconds *int32
 
+	// The name of the space.
+	SpaceName *string
+
 	noSmithyDocumentSerde
 }
 

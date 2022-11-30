@@ -695,6 +695,9 @@ type CodeGenConfigurationNode struct {
 	// Specifies a DynamoDB data source in the Glue Data Catalog.
 	DynamoDBCatalogSource *DynamoDBCatalogSource
 
+	// Specifies your data quality evaluation criteria.
+	EvaluateDataQuality *EvaluateDataQuality
+
 	// Specifies a transform that locates records in the dataset that have missing
 	// values and adds a new field with a value determined by imputation. The input
 	// data set is used to train the machine learning model that determines what the
@@ -1883,6 +1886,273 @@ type DataLakePrincipal struct {
 	noSmithyDocumentSerde
 }
 
+// Additional run options you can specify for an evaluation run.
+type DataQualityEvaluationRunAdditionalRunOptions struct {
+
+	// Whether or not to enable CloudWatch metrics.
+	CloudWatchMetricsEnabled *bool
+
+	// Prefix for Amazon S3 to store results.
+	ResultsS3Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a data quality result.
+type DataQualityResult struct {
+
+	// The date and time when this data quality run completed.
+	CompletedOn *time.Time
+
+	// The table associated with the data quality result, if any.
+	DataSource *DataSource
+
+	// In the context of a job in Glue Studio, each node in the canvas is typically
+	// assigned some sort of name and data quality nodes will have names. In the case
+	// of multiple nodes, the evaluationContext can differentiate the nodes.
+	EvaluationContext *string
+
+	// The job name associated with the data quality result, if any.
+	JobName *string
+
+	// The job run ID associated with the data quality result, if any.
+	JobRunId *string
+
+	// A unique result ID for the data quality result.
+	ResultId *string
+
+	// A list of DataQualityRuleResult objects representing the results for each rule.
+	RuleResults []DataQualityRuleResult
+
+	// The unique run ID for the ruleset evaluation for this data quality result.
+	RulesetEvaluationRunId *string
+
+	// The name of the ruleset associated with the data quality result.
+	RulesetName *string
+
+	// An aggregate data quality score. Represents the ratio of rules that passed to
+	// the total number of rules.
+	Score *float64
+
+	// The date and time when this data quality run started.
+	StartedOn *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes a data quality result.
+type DataQualityResultDescription struct {
+
+	// The table name associated with the data quality result.
+	DataSource *DataSource
+
+	// The job name associated with the data quality result.
+	JobName *string
+
+	// The job run ID associated with the data quality result.
+	JobRunId *string
+
+	// The unique result ID for this data quality result.
+	ResultId *string
+
+	// The time that the run started for this data quality result.
+	StartedOn *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Criteria used to return data quality results.
+type DataQualityResultFilterCriteria struct {
+
+	// Filter results by the specified data source. For example, retrieving all results
+	// for an Glue table.
+	DataSource *DataSource
+
+	// Filter results by the specified job name.
+	JobName *string
+
+	// Filter results by the specified job run ID.
+	JobRunId *string
+
+	// Filter results by runs that started after this time.
+	StartedAfter *time.Time
+
+	// Filter results by runs that started before this time.
+	StartedBefore *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes the result of a data quality rule recommendation run.
+type DataQualityRuleRecommendationRunDescription struct {
+
+	// The data source (Glue table) associated with the recommendation run.
+	DataSource *DataSource
+
+	// The unique run identifier associated with this run.
+	RunId *string
+
+	// The date and time when this run started.
+	StartedOn *time.Time
+
+	// The status for this run.
+	Status TaskStatusType
+
+	noSmithyDocumentSerde
+}
+
+// A filter for listing data quality recommendation runs.
+type DataQualityRuleRecommendationRunFilter struct {
+
+	// Filter based on a specified data source (Glue table).
+	//
+	// This member is required.
+	DataSource *DataSource
+
+	// Filter based on time for results started after provided time.
+	StartedAfter *time.Time
+
+	// Filter based on time for results started before provided time.
+	StartedBefore *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Describes the result of the evaluation of a data quality rule.
+type DataQualityRuleResult struct {
+
+	// A description of the data quality rule.
+	Description *string
+
+	// An evaluation message.
+	EvaluationMessage *string
+
+	// The name of the data quality rule.
+	Name *string
+
+	// A pass or fail status for the rule.
+	Result DataQualityRuleResultStatus
+
+	noSmithyDocumentSerde
+}
+
+// Describes the result of a data quality ruleset evaluation run.
+type DataQualityRulesetEvaluationRunDescription struct {
+
+	// The data source (an Glue table) associated with the run.
+	DataSource *DataSource
+
+	// The unique run identifier associated with this run.
+	RunId *string
+
+	// The date and time when the run started.
+	StartedOn *time.Time
+
+	// The status for this run.
+	Status TaskStatusType
+
+	noSmithyDocumentSerde
+}
+
+// The filter criteria.
+type DataQualityRulesetEvaluationRunFilter struct {
+
+	// Filter based on a data source (an Glue table) associated with the run.
+	//
+	// This member is required.
+	DataSource *DataSource
+
+	// Filter results by runs that started after this time.
+	StartedAfter *time.Time
+
+	// Filter results by runs that started before this time.
+	StartedBefore *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The criteria used to filter data quality rulesets.
+type DataQualityRulesetFilterCriteria struct {
+
+	// Filter on rulesets created after this date.
+	CreatedAfter *time.Time
+
+	// Filter on rulesets created before this date.
+	CreatedBefore *time.Time
+
+	// The description of the ruleset filter criteria.
+	Description *string
+
+	// Filter on rulesets last modified after this date.
+	LastModifiedAfter *time.Time
+
+	// Filter on rulesets last modified before this date.
+	LastModifiedBefore *time.Time
+
+	// The name of the ruleset filter criteria.
+	Name *string
+
+	// The name and database name of the target table.
+	TargetTable *DataQualityTargetTable
+
+	noSmithyDocumentSerde
+}
+
+// Describes a data quality ruleset returned by GetDataQualityRuleset.
+type DataQualityRulesetListDetails struct {
+
+	// The date and time the data quality ruleset was created.
+	CreatedOn *time.Time
+
+	// A description of the data quality ruleset.
+	Description *string
+
+	// The date and time the data quality ruleset was last modified.
+	LastModifiedOn *time.Time
+
+	// The name of the data quality ruleset.
+	Name *string
+
+	// When a ruleset was created from a recommendation run, this run ID is generated
+	// to link the two together.
+	RecommendationRunId *string
+
+	// The number of rules in the ruleset.
+	RuleCount *int32
+
+	// An object representing an Glue table.
+	TargetTable *DataQualityTargetTable
+
+	noSmithyDocumentSerde
+}
+
+// An object representing an Glue table.
+type DataQualityTargetTable struct {
+
+	// The name of the database where the Glue table exists.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The name of the Glue table.
+	//
+	// This member is required.
+	TableName *string
+
+	noSmithyDocumentSerde
+}
+
+// A data source (an Glue table) for which you want data quality results.
+type DataSource struct {
+
+	// An Glue table.
+	//
+	// This member is required.
+	GlueTable *GlueTable
+
+	noSmithyDocumentSerde
+}
+
 // A structure representing the datatype of the value.
 type Datatype struct {
 
@@ -2215,6 +2485,35 @@ type DoubleColumnStatisticsData struct {
 	noSmithyDocumentSerde
 }
 
+// Options to configure how your data quality evaluation results are published.
+type DQResultsPublishingOptions struct {
+
+	// Enable metrics for your data quality results.
+	CloudWatchMetricsEnabled *bool
+
+	// The context of the evaluation.
+	EvaluationContext *string
+
+	// Enable publishing for your data quality results.
+	ResultsPublishingEnabled *bool
+
+	// The Amazon S3 prefix prepended to the results.
+	ResultsS3Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Options to configure how your job will stop if your data quality evaluation
+// fails.
+type DQStopJobOnFailureOptions struct {
+
+	// When to stop job if your data quality evaluation fails. Options are Immediate or
+	// AfterDataLoad.
+	StopJobOnFailureTiming DQStopJobOnFailureTiming
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a transform that removes rows of repeating data from a data set.
 type DropDuplicates struct {
 
@@ -2430,6 +2729,37 @@ type ErrorDetails struct {
 
 	// The error message for an error.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies your data quality evaluation criteria.
+type EvaluateDataQuality struct {
+
+	// The inputs of your data quality evaluation.
+	//
+	// This member is required.
+	Inputs []string
+
+	// The name of the data quality evaluation.
+	//
+	// This member is required.
+	Name *string
+
+	// The ruleset for your data quality evaluation.
+	//
+	// This member is required.
+	Ruleset *string
+
+	// The output of your data quality evaluation.
+	Output DQTransformOutput
+
+	// Options to configure how your results are published.
+	PublishingOptions *DQResultsPublishingOptions
+
+	// Options to configure how your job will stop if your data quality evaluation
+	// fails.
+	StopJobOnFailureOptions *DQStopJobOnFailureOptions
 
 	noSmithyDocumentSerde
 }
@@ -2744,6 +3074,16 @@ type GlueTable struct {
 	//
 	// This member is required.
 	TableName *string
+
+	// Additional options for the table. Currently there are two keys supported:
+	//
+	// *
+	// pushDownPredicate: to filter on partitions without having to list and read all
+	// the files in your dataset.
+	//
+	// * catalogPartitionPredicate: to use server-side
+	// partition pruning using partition indexes in the Glue Data Catalog.
+	AdditionalOptions map[string]string
 
 	// A unique identifier for the Glue Data Catalog.
 	CatalogId *string

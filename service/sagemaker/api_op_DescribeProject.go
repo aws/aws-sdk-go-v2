@@ -73,11 +73,11 @@ type DescribeProjectOutput struct {
 	ServiceCatalogProvisioningDetails *types.ServiceCatalogProvisioningDetails
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	CreatedBy *types.UserContext
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	LastModifiedBy *types.UserContext
 
 	// The timestamp when project was last modified.

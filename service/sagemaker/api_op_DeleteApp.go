@@ -44,9 +44,10 @@ type DeleteAppInput struct {
 	// This member is required.
 	DomainId *string
 
+	// The name of the space.
+	SpaceName *string
+
 	// The user profile name.
-	//
-	// This member is required.
 	UserProfileName *string
 
 	noSmithyDocumentSerde

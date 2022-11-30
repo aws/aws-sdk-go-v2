@@ -50,14 +50,14 @@ type DescribeArtifactOutput struct {
 	ArtifactType *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	CreatedBy *types.UserContext
 
 	// When the artifact was created.
 	CreationTime *time.Time
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	LastModifiedBy *types.UserContext
 
 	// When the artifact was last modified.

@@ -110,6 +110,17 @@ func awsRestxml_serializeOpDocumentCreateAccessPointInput(v *CreateAccessPointIn
 		el := value.MemberElement(root)
 		el.String(*v.Bucket)
 	}
+	if v.BucketAccountId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "BucketAccountId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.BucketAccountId)
+	}
 	if v.PublicAccessBlockConfiguration != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

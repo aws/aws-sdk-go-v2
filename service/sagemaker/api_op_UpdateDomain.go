@@ -34,6 +34,9 @@ type UpdateDomainInput struct {
 	// This member is required.
 	DomainId *string
 
+	// The default settings used to create a space within the Domain.
+	DefaultSpaceSettings *types.DefaultSpaceSettings
+
 	// A collection of settings.
 	DefaultUserSettings *types.UserSettings
 

@@ -1,0 +1,8 @@
+{
+    "id": "2a3e1df1-41e6-4376-846e-9390fda6830b",
+    "type": "feature",
+    "description": "This release provides Amazon SageMaker geospatial APIs to build, train, deploy and visualize geospatial models.",
+    "modules": [
+        "service/sagemakergeospatial"
+    ]
+}

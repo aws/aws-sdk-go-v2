@@ -92,6 +92,25 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified session already exists.
+type SessionAlreadyExistsException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SessionAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SessionAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SessionAlreadyExistsException) ErrorCode() string             { return "SessionAlreadyExistsException" }
+func (e *SessionAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Indicates that the request was throttled.
 type TooManyRequestsException struct {
 	Message *string

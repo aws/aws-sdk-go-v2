@@ -50,7 +50,7 @@ type DescribeContextOutput struct {
 	ContextType *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	CreatedBy *types.UserContext
 
 	// When the context was created.
@@ -60,7 +60,7 @@ type DescribeContextOutput struct {
 	Description *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	LastModifiedBy *types.UserContext
 
 	// When the context was last modified.

@@ -59,8 +59,8 @@ func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPoin
 
 type CreateAccessPointInput struct {
 
-	// The Amazon Web Services account ID for the owner of the bucket for which you
-	// want to create an access point.
+	// The Amazon Web Services account ID for the account that owns the specified
+	// access point.
 	//
 	// This member is required.
 	AccountId *string
@@ -82,6 +82,10 @@ type CreateAccessPointInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	// The Amazon Web Services account ID associated with the S3 bucket associated with
+	// this access point.
+	BucketAccountId *string
 
 	// The PublicAccessBlock configuration that you want to apply to the access point.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration

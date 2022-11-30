@@ -45,6 +45,10 @@ type AccessPoint struct {
 	// The name or alias of the access point.
 	Alias *string
 
+	// The Amazon Web Services account ID associated with the S3 bucket associated with
+	// this access point.
+	BucketAccountId *string
+
 	// The virtual private cloud (VPC) configuration for this access point, if one
 	// exists. This element is empty if this access point is an Amazon S3 on Outposts
 	// access point that is used by other Amazon Web Services.

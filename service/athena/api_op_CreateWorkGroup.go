@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a workgroup with the specified name.
+// Creates a workgroup with the specified name. Only one of Configurations or
+// Configuration can be specified; Configurations for a workgroup with multi engine
+// support (for example, an Apache Spark enabled workgroup) or Configuration for an
+// Athena SQL workgroup.
 func (c *Client) CreateWorkGroup(ctx context.Context, params *CreateWorkGroupInput, optFns ...func(*Options)) (*CreateWorkGroupOutput, error) {
 	if params == nil {
 		params = &CreateWorkGroupInput{}
@@ -34,13 +37,14 @@ type CreateWorkGroupInput struct {
 	// This member is required.
 	Name *string
 
-	// The configuration for the workgroup, which includes the location in Amazon S3
-	// where query results are stored, the encryption configuration, if any, used for
-	// encrypting query results, whether the Amazon CloudWatch Metrics are enabled for
-	// the workgroup, the limit for the amount of bytes scanned (cutoff) per query, if
-	// it is specified, and whether workgroup's settings (specified with
-	// EnforceWorkGroupConfiguration) in the WorkGroupConfiguration override
-	// client-side settings. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
+	// Contains configuration information for creating an Athena SQL workgroup, which
+	// includes the location in Amazon S3 where query results are stored, the
+	// encryption configuration, if any, used for encrypting query results, whether the
+	// Amazon CloudWatch Metrics are enabled for the workgroup, the limit for the
+	// amount of bytes scanned (cutoff) per query, if it is specified, and whether
+	// workgroup's settings (specified with EnforceWorkGroupConfiguration) in the
+	// WorkGroupConfiguration override client-side settings. See
+	// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	Configuration *types.WorkGroupConfiguration
 
 	// The workgroup description.

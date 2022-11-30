@@ -65,7 +65,7 @@ type DescribeExperimentOutput struct {
 	// When the experiment was last modified.
 	LastModifiedTime *time.Time
 
-	// The ARN of the source and, optionally, the type.
+	// The Amazon Resource Name (ARN) of the source and, optionally, the type.
 	Source *types.ExperimentSource
 
 	// Metadata pertaining to the operation's result.

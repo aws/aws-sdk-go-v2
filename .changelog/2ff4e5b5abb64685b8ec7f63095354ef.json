@@ -1,0 +1,8 @@
+{
+    "id": "2ff4e5b5-abb6-4685-b8ec-7f63095354ef",
+    "type": "feature",
+    "description": "Amazon S3 now supports cross-account access points. S3 bucket owners can now allow trusted AWS accounts to create access points associated with their bucket.",
+    "modules": [
+        "service/s3control"
+    ]
+}

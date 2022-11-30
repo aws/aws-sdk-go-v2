@@ -170,6 +170,26 @@ func (m *validateOpBatchGetCustomEntityTypes) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetDataQualityResult struct {
+}
+
+func (*validateOpBatchGetDataQualityResult) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetDataQualityResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetDataQualityResultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetDataQualityResultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetDevEndpoints struct {
 }
 
@@ -305,6 +325,46 @@ func (m *validateOpBatchUpdatePartition) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchUpdatePartitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCancelDataQualityRuleRecommendationRun struct {
+}
+
+func (*validateOpCancelDataQualityRuleRecommendationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelDataQualityRuleRecommendationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelDataQualityRuleRecommendationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelDataQualityRuleRecommendationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCancelDataQualityRulesetEvaluationRun struct {
+}
+
+func (*validateOpCancelDataQualityRulesetEvaluationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelDataQualityRulesetEvaluationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelDataQualityRulesetEvaluationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelDataQualityRulesetEvaluationRunInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -485,6 +545,26 @@ func (m *validateOpCreateDatabase) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDatabaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDataQualityRuleset struct {
+}
+
+func (*validateOpCreateDataQualityRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataQualityRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDataQualityRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDataQualityRulesetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -925,6 +1005,26 @@ func (m *validateOpDeleteDatabase) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDatabaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDataQualityRuleset struct {
+}
+
+func (*validateOpDeleteDataQualityRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataQualityRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDataQualityRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDataQualityRulesetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1425,6 +1525,86 @@ func (m *validateOpGetDatabase) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDatabaseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataQualityResult struct {
+}
+
+func (*validateOpGetDataQualityResult) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataQualityResult) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataQualityResultInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataQualityResultInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataQualityRuleRecommendationRun struct {
+}
+
+func (*validateOpGetDataQualityRuleRecommendationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataQualityRuleRecommendationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataQualityRuleRecommendationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataQualityRuleRecommendationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataQualityRulesetEvaluationRun struct {
+}
+
+func (*validateOpGetDataQualityRulesetEvaluationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataQualityRulesetEvaluationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataQualityRulesetEvaluationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataQualityRulesetEvaluationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDataQualityRuleset struct {
+}
+
+func (*validateOpGetDataQualityRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataQualityRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDataQualityRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDataQualityRulesetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2170,6 +2350,86 @@ func (m *validateOpListCrawls) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDataQualityResults struct {
+}
+
+func (*validateOpListDataQualityResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataQualityResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataQualityResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataQualityResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataQualityRuleRecommendationRuns struct {
+}
+
+func (*validateOpListDataQualityRuleRecommendationRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataQualityRuleRecommendationRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataQualityRuleRecommendationRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataQualityRuleRecommendationRunsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataQualityRulesetEvaluationRuns struct {
+}
+
+func (*validateOpListDataQualityRulesetEvaluationRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataQualityRulesetEvaluationRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataQualityRulesetEvaluationRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataQualityRulesetEvaluationRunsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDataQualityRulesets struct {
+}
+
+func (*validateOpListDataQualityRulesets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDataQualityRulesets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDataQualityRulesetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDataQualityRulesetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListMLTransforms struct {
 }
 
@@ -2465,6 +2725,46 @@ func (m *validateOpStartCrawlerSchedule) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartCrawlerScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartDataQualityRuleRecommendationRun struct {
+}
+
+func (*validateOpStartDataQualityRuleRecommendationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDataQualityRuleRecommendationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDataQualityRuleRecommendationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDataQualityRuleRecommendationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartDataQualityRulesetEvaluationRun struct {
+}
+
+func (*validateOpStartDataQualityRulesetEvaluationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDataQualityRulesetEvaluationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDataQualityRulesetEvaluationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDataQualityRulesetEvaluationRunInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2910,6 +3210,26 @@ func (m *validateOpUpdateDatabase) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDataQualityRuleset struct {
+}
+
+func (*validateOpUpdateDataQualityRuleset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataQualityRuleset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDataQualityRulesetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDataQualityRulesetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateDevEndpoint struct {
 }
 
@@ -3142,6 +3462,10 @@ func addOpBatchGetCustomEntityTypesValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpBatchGetCustomEntityTypes{}, middleware.After)
 }
 
+func addOpBatchGetDataQualityResultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetDataQualityResult{}, middleware.After)
+}
+
 func addOpBatchGetDevEndpointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetDevEndpoints{}, middleware.After)
 }
@@ -3168,6 +3492,14 @@ func addOpBatchStopJobRunValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpBatchUpdatePartitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchUpdatePartition{}, middleware.After)
+}
+
+func addOpCancelDataQualityRuleRecommendationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelDataQualityRuleRecommendationRun{}, middleware.After)
+}
+
+func addOpCancelDataQualityRulesetEvaluationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelDataQualityRulesetEvaluationRun{}, middleware.After)
 }
 
 func addOpCancelMLTaskRunValidationMiddleware(stack *middleware.Stack) error {
@@ -3204,6 +3536,10 @@ func addOpCreateCustomEntityTypeValidationMiddleware(stack *middleware.Stack) er
 
 func addOpCreateDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDatabase{}, middleware.After)
+}
+
+func addOpCreateDataQualityRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataQualityRuleset{}, middleware.After)
 }
 
 func addOpCreateDevEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -3292,6 +3628,10 @@ func addOpDeleteCustomEntityTypeValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDeleteDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDatabase{}, middleware.After)
+}
+
+func addOpDeleteDataQualityRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataQualityRuleset{}, middleware.After)
 }
 
 func addOpDeleteDevEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -3392,6 +3732,22 @@ func addOpGetCustomEntityTypeValidationMiddleware(stack *middleware.Stack) error
 
 func addOpGetDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDatabase{}, middleware.After)
+}
+
+func addOpGetDataQualityResultValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataQualityResult{}, middleware.After)
+}
+
+func addOpGetDataQualityRuleRecommendationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataQualityRuleRecommendationRun{}, middleware.After)
+}
+
+func addOpGetDataQualityRulesetEvaluationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataQualityRulesetEvaluationRun{}, middleware.After)
+}
+
+func addOpGetDataQualityRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataQualityRuleset{}, middleware.After)
 }
 
 func addOpGetDevEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -3542,6 +3898,22 @@ func addOpListCrawlsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCrawls{}, middleware.After)
 }
 
+func addOpListDataQualityResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataQualityResults{}, middleware.After)
+}
+
+func addOpListDataQualityRuleRecommendationRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataQualityRuleRecommendationRuns{}, middleware.After)
+}
+
+func addOpListDataQualityRulesetEvaluationRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataQualityRulesetEvaluationRuns{}, middleware.After)
+}
+
+func addOpListDataQualityRulesetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDataQualityRulesets{}, middleware.After)
+}
+
 func addOpListMLTransformsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMLTransforms{}, middleware.After)
 }
@@ -3600,6 +3972,14 @@ func addOpStartCrawlerValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartCrawlerScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCrawlerSchedule{}, middleware.After)
+}
+
+func addOpStartDataQualityRuleRecommendationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDataQualityRuleRecommendationRun{}, middleware.After)
+}
+
+func addOpStartDataQualityRulesetEvaluationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDataQualityRulesetEvaluationRun{}, middleware.After)
 }
 
 func addOpStartExportLabelsTaskRunValidationMiddleware(stack *middleware.Stack) error {
@@ -3688,6 +4068,10 @@ func addOpUpdateCrawlerScheduleValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateDatabaseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDatabase{}, middleware.After)
+}
+
+func addOpUpdateDataQualityRulesetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataQualityRuleset{}, middleware.After)
 }
 
 func addOpUpdateDevEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -4360,6 +4744,11 @@ func validateCodeGenConfigurationNode(v *types.CodeGenConfigurationNode) error {
 			invalidParams.AddNested("DynamicTransform", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EvaluateDataQuality != nil {
+		if err := validateEvaluateDataQuality(v.EvaluateDataQuality); err != nil {
+			invalidParams.AddNested("EvaluateDataQuality", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4795,6 +5184,115 @@ func validateDataCatalogEncryptionSettings(v *types.DataCatalogEncryptionSetting
 	}
 }
 
+func validateDataQualityResultFilterCriteria(v *types.DataQualityResultFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQualityResultFilterCriteria"}
+	if v.DataSource != nil {
+		if err := validateDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataQualityRuleRecommendationRunFilter(v *types.DataQualityRuleRecommendationRunFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQualityRuleRecommendationRunFilter"}
+	if v.DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	} else if v.DataSource != nil {
+		if err := validateDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataQualityRulesetEvaluationRunFilter(v *types.DataQualityRulesetEvaluationRunFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQualityRulesetEvaluationRunFilter"}
+	if v.DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	} else if v.DataSource != nil {
+		if err := validateDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataQualityRulesetFilterCriteria(v *types.DataQualityRulesetFilterCriteria) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQualityRulesetFilterCriteria"}
+	if v.TargetTable != nil {
+		if err := validateDataQualityTargetTable(v.TargetTable); err != nil {
+			invalidParams.AddNested("TargetTable", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataQualityTargetTable(v *types.DataQualityTargetTable) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataQualityTargetTable"}
+	if v.TableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableName"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDataSource(v *types.DataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSource"}
+	if v.GlueTable == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlueTable"))
+	} else if v.GlueTable != nil {
+		if err := validateGlueTable(v.GlueTable); err != nil {
+			invalidParams.AddNested("GlueTable", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDatatype(v *types.Datatype) error {
 	if v == nil {
 		return nil
@@ -5026,6 +5524,27 @@ func validateEncryptionAtRest(v *types.EncryptionAtRest) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionAtRest"}
 	if len(v.CatalogEncryptionMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("CatalogEncryptionMode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEvaluateDataQuality(v *types.EvaluateDataQuality) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EvaluateDataQuality"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Inputs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Inputs"))
+	}
+	if v.Ruleset == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ruleset"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6799,6 +7318,21 @@ func validateOpBatchGetCustomEntityTypesInput(v *BatchGetCustomEntityTypesInput)
 	}
 }
 
+func validateOpBatchGetDataQualityResultInput(v *BatchGetDataQualityResultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetDataQualityResultInput"}
+	if v.ResultIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetDevEndpointsInput(v *BatchGetDevEndpointsInput) error {
 	if v == nil {
 		return nil
@@ -6919,6 +7453,36 @@ func validateOpBatchUpdatePartitionInput(v *BatchUpdatePartitionInput) error {
 		if err := validateBatchUpdatePartitionRequestEntryList(v.Entries); err != nil {
 			invalidParams.AddNested("Entries", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelDataQualityRuleRecommendationRunInput(v *CancelDataQualityRuleRecommendationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelDataQualityRuleRecommendationRunInput"}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelDataQualityRulesetEvaluationRunInput(v *CancelDataQualityRulesetEvaluationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelDataQualityRulesetEvaluationRunInput"}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7100,6 +7664,29 @@ func validateOpCreateDatabaseInput(v *CreateDatabaseInput) error {
 	} else if v.DatabaseInput != nil {
 		if err := validateDatabaseInput(v.DatabaseInput); err != nil {
 			invalidParams.AddNested("DatabaseInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDataQualityRulesetInput(v *CreateDataQualityRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDataQualityRulesetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Ruleset == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ruleset"))
+	}
+	if v.TargetTable != nil {
+		if err := validateDataQualityTargetTable(v.TargetTable); err != nil {
+			invalidParams.AddNested("TargetTable", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -7555,6 +8142,21 @@ func validateOpDeleteDatabaseInput(v *DeleteDatabaseInput) error {
 	}
 }
 
+func validateOpDeleteDataQualityRulesetInput(v *DeleteDataQualityRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataQualityRulesetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDevEndpointInput(v *DeleteDevEndpointInput) error {
 	if v == nil {
 		return nil
@@ -7965,6 +8567,66 @@ func validateOpGetDatabaseInput(v *GetDatabaseInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDatabaseInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataQualityResultInput(v *GetDataQualityResultInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataQualityResultInput"}
+	if v.ResultId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResultId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataQualityRuleRecommendationRunInput(v *GetDataQualityRuleRecommendationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataQualityRuleRecommendationRunInput"}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataQualityRulesetEvaluationRunInput(v *GetDataQualityRulesetEvaluationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataQualityRulesetEvaluationRunInput"}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDataQualityRulesetInput(v *GetDataQualityRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDataQualityRulesetInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -8656,6 +9318,74 @@ func validateOpListCrawlsInput(v *ListCrawlsInput) error {
 	}
 }
 
+func validateOpListDataQualityResultsInput(v *ListDataQualityResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataQualityResultsInput"}
+	if v.Filter != nil {
+		if err := validateDataQualityResultFilterCriteria(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataQualityRuleRecommendationRunsInput(v *ListDataQualityRuleRecommendationRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataQualityRuleRecommendationRunsInput"}
+	if v.Filter != nil {
+		if err := validateDataQualityRuleRecommendationRunFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataQualityRulesetEvaluationRunsInput(v *ListDataQualityRulesetEvaluationRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataQualityRulesetEvaluationRunsInput"}
+	if v.Filter != nil {
+		if err := validateDataQualityRulesetEvaluationRunFilter(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDataQualityRulesetsInput(v *ListDataQualityRulesetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDataQualityRulesetsInput"}
+	if v.Filter != nil {
+		if err := validateDataQualityRulesetFilterCriteria(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListMLTransformsInput(v *ListMLTransformsInput) error {
 	if v == nil {
 		return nil
@@ -8900,6 +9630,53 @@ func validateOpStartCrawlerScheduleInput(v *StartCrawlerScheduleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartCrawlerScheduleInput"}
 	if v.CrawlerName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CrawlerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDataQualityRuleRecommendationRunInput(v *StartDataQualityRuleRecommendationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDataQualityRuleRecommendationRunInput"}
+	if v.DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	} else if v.DataSource != nil {
+		if err := validateDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDataQualityRulesetEvaluationRunInput(v *StartDataQualityRulesetEvaluationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDataQualityRulesetEvaluationRunInput"}
+	if v.DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	} else if v.DataSource != nil {
+		if err := validateDataSource(v.DataSource); err != nil {
+			invalidParams.AddNested("DataSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.RulesetNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RulesetNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9310,6 +10087,21 @@ func validateOpUpdateDatabaseInput(v *UpdateDatabaseInput) error {
 		if err := validateDatabaseInput(v.DatabaseInput); err != nil {
 			invalidParams.AddNested("DatabaseInput", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDataQualityRulesetInput(v *UpdateDataQualityRulesetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataQualityRulesetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

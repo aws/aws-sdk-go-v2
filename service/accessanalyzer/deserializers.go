@@ -6161,6 +6161,15 @@ func awsRestjson1_deserializeDocumentFindingSourceDetail(v **types.FindingSource
 
 	for key, value := range shape {
 		switch key {
+		case "accessPointAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessPointAccount = ptr.String(jtv)
+			}
+
 		case "accessPointArn":
 			if value != nil {
 				jtv, ok := value.(string)

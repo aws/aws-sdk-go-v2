@@ -44,7 +44,7 @@ type DescribeLineageGroupInput struct {
 type DescribeLineageGroupOutput struct {
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	CreatedBy *types.UserContext
 
 	// The creation time of lineage group.
@@ -57,7 +57,7 @@ type DescribeLineageGroupOutput struct {
 	DisplayName *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	LastModifiedBy *types.UserContext
 
 	// The last modified time of the lineage group.

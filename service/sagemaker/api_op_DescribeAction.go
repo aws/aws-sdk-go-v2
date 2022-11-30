@@ -50,7 +50,7 @@ type DescribeActionOutput struct {
 	ActionType *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	CreatedBy *types.UserContext
 
 	// When the action was created.
@@ -60,7 +60,7 @@ type DescribeActionOutput struct {
 	Description *string
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	LastModifiedBy *types.UserContext
 
 	// When the action was last modified.

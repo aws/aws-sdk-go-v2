@@ -1,0 +1,8 @@
+{
+    "id": "745182c0-1cb6-4eb8-ab85-d22e1568cba7",
+    "type": "feature",
+    "description": "This release adds support for S3 cross account access points. IAM Access Analyzer will now produce public or cross account findings when it detects bucket delegation to external account access points.",
+    "modules": [
+        "service/accessanalyzer"
+    ]
+}

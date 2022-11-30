@@ -2292,6 +2292,19 @@ func awsRestxml_deserializeOpDocumentGetAccessPointOutput(v **GetAccessPointOutp
 				sv.Bucket = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("BucketAccountId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.BucketAccountId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("CreationDate", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -8029,6 +8042,19 @@ func awsRestxml_deserializeDocumentAccessPoint(v **types.AccessPoint, decoder sm
 			{
 				xtv := string(val)
 				sv.Bucket = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("BucketAccountId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.BucketAccountId = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):

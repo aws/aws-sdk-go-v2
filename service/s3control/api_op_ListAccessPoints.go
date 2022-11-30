@@ -15,16 +15,17 @@ import (
 	"strings"
 )
 
-// Returns a list of the access points currently associated with the specified
-// bucket. You can retrieve up to 1000 access points per call. If the specified
-// bucket has more than 1,000 access points (or the number specified in maxResults,
-// whichever is less), the response will include a continuation token that you can
-// use to list the additional access points. All Amazon S3 on Outposts REST API
-// requests for this action require an additional parameter of x-amz-outpost-id to
-// be passed with the request. In addition, you must use an S3 on Outposts endpoint
-// hostname prefix instead of s3-control. For an example of the request syntax for
-// Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and
-// the x-amz-outpost-id derived by using the access point ARN, see the Examples
+// Returns a list of the access points owned by the current account associated with
+// the specified bucket. You can retrieve up to 1000 access points per call. If the
+// specified bucket has more than 1,000 access points (or the number specified in
+// maxResults, whichever is less), the response will include a continuation token
+// that you can use to list the additional access points. All Amazon S3 on Outposts
+// REST API requests for this action require an additional parameter of
+// x-amz-outpost-id to be passed with the request. In addition, you must use an S3
+// on Outposts endpoint hostname prefix instead of s3-control. For an example of
+// the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts
+// endpoint hostname prefix and the x-amz-outpost-id derived by using the access
+// point ARN, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html#API_control_GetAccessPoint_Examples)
 // section. The following actions are related to ListAccessPoints:
 //
@@ -56,8 +57,8 @@ func (c *Client) ListAccessPoints(ctx context.Context, params *ListAccessPointsI
 
 type ListAccessPointsInput struct {
 
-	// The Amazon Web Services account ID for owner of the bucket whose access points
-	// you want to list.
+	// The Amazon Web Services account ID for the account that owns the specified
+	// access points.
 	//
 	// This member is required.
 	AccountId *string
