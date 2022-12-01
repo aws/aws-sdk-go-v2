@@ -52,6 +52,9 @@
                     "target": "com.amazonaws.sfn#DescribeExecution"
                 },
                 {
+                    "target": "com.amazonaws.sfn#DescribeMapRun"
+                },
+                {
                     "target": "com.amazonaws.sfn#DescribeStateMachine"
                 },
                 {
@@ -68,6 +71,9 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#ListExecutions"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ListMapRuns"
                 },
                 {
                     "target": "com.amazonaws.sfn#ListStateMachines"
@@ -100,6 +106,9 @@
                     "target": "com.amazonaws.sfn#UntagResource"
                 },
                 {
+                    "target": "com.amazonaws.sfn#UpdateMapRun"
+                },
+                {
                     "target": "com.amazonaws.sfn#UpdateStateMachine"
                 }
             ],
@@ -125,7 +134,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -2778,10 +2787,13 @@
             "errors": [
                 {
                     "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a state machine. This is an asynchronous operation: It sets the state machine's\n      status to <code>DELETING</code> and begins the deletion process. </p>\n         <note>\n            <p>For <code>EXPRESS</code> state machines, the deletion will happen eventually (usually\n        less than a minute). Running executions may emit logs after <code>DeleteStateMachine</code>\n        API is called.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes a state machine. This is an asynchronous operation: It sets the state machine's\n      status to <code>DELETING</code> and begins the deletion process. </p>\n    \n         <p>If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException.</p>\n    \n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n    \n         <note>\n            <p>For <code>EXPRESS</code> state machines, the deletion will happen eventually (usually\n        less than a minute). Running executions may emit logs after <code>DeleteStateMachine</code>\n        API is called.</p>\n         </note>"
             }
         },
         "com.amazonaws.sfn#DeleteStateMachineInput": {
@@ -2875,7 +2887,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an execution.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
+                "smithy.api#documentation": "<p>Provides all information about a state machine execution, such as the state machine associated with the execution, the execution input and output, and relevant execution metadata. Use this API action to return the Map Run ARN if the execution was dispatched by a Map Run.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>\n         <p>This API action is not supported by <code>EXPRESS</code> state machine executions unless they were dispatched by a Map Run.</p>"
             }
         },
         "com.amazonaws.sfn#DescribeExecutionInput": {
@@ -2956,6 +2968,133 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The X-Ray trace header that was passed to the execution.</p>"
                     }
+                },
+                "mapRunArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies a Map Run, which dispatched this execution.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.sfn#SensitiveError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error string if the state machine execution failed.</p>"
+                    }
+                },
+                "cause": {
+                    "target": "com.amazonaws.sfn#SensitiveCause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cause string if the state machine execution failed.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sfn#DescribeMapRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#DescribeMapRunInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#DescribeMapRunOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a Map Run's configuration, progress, and results. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html\">Examining Map Run</a> in the <i>Step Functions Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.sfn#DescribeMapRunInput": {
+            "type": "structure",
+            "members": {
+                "mapRunArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies a Map Run.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sfn#DescribeMapRunOutput": {
+            "type": "structure",
+            "members": {
+                "mapRunArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies a Map Run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the execution in which the Map Run was started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.sfn#MapRunStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Map Run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the Map Run was started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stopDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when the Map Run was stopped.</p>"
+                    }
+                },
+                "maxConcurrency": {
+                    "target": "com.amazonaws.sfn#MaxConcurrency",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of child workflow executions configured to run in parallel for the Map Run at the same time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "toleratedFailurePercentage": {
+                    "target": "com.amazonaws.sfn#ToleratedFailurePercentage",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum percentage of failed child workflow executions before the Map Run fails.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "toleratedFailureCount": {
+                    "target": "com.amazonaws.sfn#ToleratedFailureCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of failed child workflow executions before the Map Run fails.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "itemCounts": {
+                    "target": "com.amazonaws.sfn#MapRunItemCounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object that contains information about the total number of items, and the item count for each processing status, such as <code>pending</code> and <code>failed</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionCounts": {
+                    "target": "com.amazonaws.sfn#MapRunExecutionCounts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON object that contains information about the total number of child workflow executions for the Map Run, and the count of child workflow executions for each status, such as <code>failed</code> and <code>succeeded</code>.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },
@@ -2976,7 +3115,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a state machine.</p> \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Provides information about a state machine's definition, its IAM role Amazon Resource Name (ARN), and configuration. If the state machine ARN is a qualified state machine ARN, the response returned includes the <code>Map</code> state's label.</p>\n    \n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n    \n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note>"
             }
         },
         "com.amazonaws.sfn#DescribeStateMachineForExecution": {
@@ -2996,7 +3135,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the state machine associated with a specific execution.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
+                "smithy.api#documentation": "<p>Provides information about a state machine's definition, its execution role ARN, and configuration. If an execution was dispatched by a Map Run, the Map Run is returned in the response. Additionally, the state machine returned will be the state machine associated with the Map Run.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>"
             }
         },
         "com.amazonaws.sfn#DescribeStateMachineForExecutionInput": {
@@ -3056,6 +3195,18 @@
                     "target": "com.amazonaws.sfn#TracingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Selects whether X-Ray tracing is enabled.</p>"
+                    }
+                },
+                "mapRunArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Map Run that started the child workflow execution. This field is returned only if the <code>executionArn</code> is a child workflow execution that was started by a Distributed Map state.</p>"
+                    }
+                },
+                "label": {
+                    "target": "com.amazonaws.sfn#MapRunLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-defined or an auto-generated string that identifies a <code>Map</code> state. This ﬁeld is returned only if the <code>executionArn</code> is a child workflow execution that was started by a Distributed Map state.</p>"
                     }
                 }
             }
@@ -3130,6 +3281,12 @@
                     "target": "com.amazonaws.sfn#TracingConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Selects whether X-Ray tracing is enabled.</p>"
+                    }
+                },
+                "label": {
+                    "target": "com.amazonaws.sfn#MapRunLabel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A user-defined or an auto-generated string that identifies a <code>Map</code> state. This parameter is present only if the <code>stateMachineArn</code> specified in input is a qualified state machine ARN.</p>"
                     }
                 }
             }
@@ -3273,6 +3430,19 @@
                     "target": "com.amazonaws.sfn#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>If the execution already ended, the date the execution stopped.</p>"
+                    }
+                },
+                "mapRunArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Map Run. This field is returned only if <code>mapRunArn</code> was specified in the <code>ListExecutions</code> API action. If <code>stateMachineArn</code> was specified in <code>ListExecutions</code>, the <code>mapRunArn</code> isn't returned.</p>"
+                    }
+                },
+                "itemCount": {
+                    "target": "com.amazonaws.sfn#UnsignedInteger",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The total number of items processed in a child workflow execution. This field is returned only if <code>mapRunArn</code> was specified in the <code>ListExecutions</code> API action. If <code>stateMachineArn</code> was specified in <code>ListExecutions</code>, the <code>itemCount</code> field isn't returned.</p>"
                     }
                 }
             },
@@ -3699,6 +3869,18 @@
                 },
                 "stateExitedEventDetails": {
                     "target": "com.amazonaws.sfn#StateExitedEventDetails"
+                },
+                "mapRunStartedEventDetails": {
+                    "target": "com.amazonaws.sfn#MapRunStartedEventDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains details, such as <code>mapRunArn</code>, and the start date and time of a Map Run. <code>mapRunArn</code> is the Amazon Resource Name (ARN) of the Map Run that was started.</p>"
+                    }
+                },
+                "mapRunFailedEventDetails": {
+                    "target": "com.amazonaws.sfn#MapRunFailedEventDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains error and cause details about a Map Run that failed.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4061,6 +4243,30 @@
                     "traits": {
                         "smithy.api#enumValue": "WaitStateExited"
                     }
+                },
+                "MapRunAborted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MapRunAborted"
+                    }
+                },
+                "MapRunFailed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MapRunFailed"
+                    }
+                },
+                "MapRunStarted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MapRunStarted"
+                    }
+                },
+                "MapRunSucceeded": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MapRunSucceeded"
+                    }
                 }
             }
         },
@@ -4090,7 +4296,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The provided Amazon Resource Name (ARN) is invalid.</p>",
+                "smithy.api#documentation": "<p>The provided Amazon Resource Name (ARN) is not valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4102,7 +4308,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The provided Amazon States Language definition is invalid.</p>",
+                "smithy.api#documentation": "<p>The provided Amazon States Language definition is not valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4114,7 +4320,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The provided JSON input data is invalid.</p>",
+                "smithy.api#documentation": "<p>The provided JSON input data is not valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4138,7 +4344,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The provided name is invalid.</p>",
+                "smithy.api#documentation": "<p>The provided name is not valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4150,7 +4356,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The provided JSON output data is invalid.</p>",
+                "smithy.api#documentation": "<p>The provided JSON output data is not valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4162,7 +4368,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The provided token is invalid.</p>",
+                "smithy.api#documentation": "<p>The provided token is not valid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4393,14 +4599,20 @@
                     "target": "com.amazonaws.sfn#InvalidToken"
                 },
                 {
+                    "target": "com.amazonaws.sfn#ResourceNotFound"
+                },
+                {
                     "target": "com.amazonaws.sfn#StateMachineDoesNotExist"
                 },
                 {
                     "target": "com.amazonaws.sfn#StateMachineTypeNotSupported"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the executions of a state machine that meet the filtering criteria. Results are\n      sorted by time, with the most recent execution first.</p> \n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>",
+                "smithy.api#documentation": "<p>Lists all executions of a state machine or a Map Run. You can list all executions related to a state machine by specifying a state machine Amazon Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN.</p>\n         <p>Results are\n      sorted by time, with the most recent execution first.</p>\n         <p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p>\n         </note> \n         <p>This API action is not supported by <code>EXPRESS</code> state machines.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -4415,8 +4627,7 @@
                 "stateMachineArn": {
                     "target": "com.amazonaws.sfn#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine whose executions is listed.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the state machine whose executions is listed.</p>\n         <p>You can specify either a <code>mapRunArn</code> or a <code>stateMachineArn</code>, but not both.</p>"
                     }
                 },
                 "statusFilter": {
@@ -4436,6 +4647,12 @@
                     "target": "com.amazonaws.sfn#ListExecutionsPageToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+                    }
+                },
+                "mapRunArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Map Run that started the child workflow executions. If the <code>mapRunArn</code> field is specified, a list of all of the child workflow executions started by a Map Run is returned. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html\">Examining Map Run</a> in the <i>Step Functions Developer Guide</i>.</p>\n         <p>You can specify either a <code>mapRunArn</code> or a <code>stateMachineArn</code>, but not both.</p>"
                     }
                 }
             }
@@ -4464,6 +4681,78 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 3096
+                }
+            }
+        },
+        "com.amazonaws.sfn#ListMapRuns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#ListMapRunsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#ListMapRunsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#ExecutionDoesNotExist"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#InvalidToken"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all Map Runs that were started by a given state machine execution. Use this API action to obtain Map Run ARNs, and then call <code>DescribeMapRun</code> to obtain more information, if needed.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "mapRuns",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.sfn#ListMapRunsInput": {
+            "type": "structure",
+            "members": {
+                "executionArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the execution for which the Map Runs must be listed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.sfn#PageSize",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of results that are returned per call. You can use <code>nextToken</code> to obtain further pages of results.\n    The default is 100 and the maximum allowed page size is 1000. A value of 0 uses the default.</p> \n         <p>This is only an upper limit. The actual number of results returned per call might be fewer than the specified maximum.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.sfn#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sfn#ListMapRunsOutput": {
+            "type": "structure",
+            "members": {
+                "mapRuns": {
+                    "target": "com.amazonaws.sfn#MapRunList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that lists information related to a Map Run, such as the Amazon Resource Name (ARN) of the Map Run and the ARN of the state machine that started the Map Run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.sfn#PageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page.\n    Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+                    }
                 }
             }
         },
@@ -4649,7 +4938,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1600
+                    "max": 2000
                 }
             }
         },
@@ -4674,6 +4963,264 @@
                 "smithy.api#documentation": "<p>Contains details about an iteration of a Map state.</p>"
             }
         },
+        "com.amazonaws.sfn#MapRunExecutionCounts": {
+            "type": "structure",
+            "members": {
+                "pending": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of child workflow executions that were started by a Map Run, but haven't started executing yet. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "running": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of child workflow executions that were started by a Map Run and are currently in-progress.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "succeeded": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of child workflow executions that were started by a Map Run and have completed successfully.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failed": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of child workflow executions that were started by a Map Run, but have failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timedOut": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of child workflow executions that were started by a Map Run and have timed out.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aborted": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of child workflow executions that were started by a Map Run and were running, but were either stopped by the user or by Step Functions because the Map Run failed. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "total": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of child workflow executions that were started by a Map Run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resultsWritten": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Returns the count of child workflow executions whose results were written by <code>ResultWriter</code>. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html\">ResultWriter</a> in the <i>Step Functions Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about all of the child workflow executions started by a Map Run.</p>"
+            }
+        },
+        "com.amazonaws.sfn#MapRunFailedEventDetails": {
+            "type": "structure",
+            "members": {
+                "error": {
+                    "target": "com.amazonaws.sfn#SensitiveError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code of the Map Run failure.</p>"
+                    }
+                },
+                "cause": {
+                    "target": "com.amazonaws.sfn#SensitiveCause",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a Map Run failure event that occurred during a state machine execution.</p>"
+            }
+        },
+        "com.amazonaws.sfn#MapRunItemCounts": {
+            "type": "structure",
+            "members": {
+                "pending": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of items to process in child workflow executions that haven't started running yet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "running": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of items being processed in child workflow executions that are currently in-progress.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "succeeded": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of items processed in child workflow executions that have completed successfully.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "failed": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of items processed in child workflow executions that have failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timedOut": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of items processed in child workflow executions that have timed out.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "aborted": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of items processed in child workflow executions that were either stopped by the user or by Step Functions, because the Map Run failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "total": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of items processed in all the child workflow executions started by a Map Run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resultsWritten": {
+                    "target": "com.amazonaws.sfn#UnsignedLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Returns the count of items whose results were written by <code>ResultWriter</code>. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html\">ResultWriter</a> in the <i>Step Functions Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about items that were processed in all of the child workflow executions that were started by a Map Run.</p>"
+            }
+        },
+        "com.amazonaws.sfn#MapRunLabel": {
+            "type": "string"
+        },
+        "com.amazonaws.sfn#MapRunList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sfn#MapRunListItem"
+            }
+        },
+        "com.amazonaws.sfn#MapRunListItem": {
+            "type": "structure",
+            "members": {
+                "executionArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>executionArn</code> of the execution from which the Map Run was started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mapRunArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Map Run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stateMachineArn": {
+                    "target": "com.amazonaws.sfn#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the executed state machine.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date on which the Map Run started.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "stopDate": {
+                    "target": "com.amazonaws.sfn#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date on which the Map Run stopped.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a specific Map Run.</p>"
+            }
+        },
+        "com.amazonaws.sfn#MapRunStartedEventDetails": {
+            "type": "structure",
+            "members": {
+                "mapRunArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Map Run that was started.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a Map Run that was started during a state machine execution.</p>"
+            }
+        },
+        "com.amazonaws.sfn#MapRunStatus": {
+            "type": "enum",
+            "members": {
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "ABORTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ABORTED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sfn#MapStateStartedEventDetails": {
             "type": "structure",
             "members": {
@@ -4687,6 +5234,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about a Map state that was started.</p>"
+            }
+        },
+        "com.amazonaws.sfn#MaxConcurrency": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.sfn#MissingRequiredParameter": {
@@ -4959,10 +5515,13 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#StateMachineDoesNotExist"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a state machine execution.</p>\n         <note>\n            <p>\n               <code>StartExecution</code> is idempotent for <code>STANDARD</code> workflows. For a\n          <code>STANDARD</code> workflow, if <code>StartExecution</code> is called with the same\n        name and input as a running execution, the call will succeed and return the same response as\n        the original request. If the execution is closed or if the input is different, it will\n        return a <code>400 ExecutionAlreadyExists</code> error. Names can be reused after 90 days. </p>\n            <p>\n               <code>StartExecution</code> is not idempotent for <code>EXPRESS</code> workflows. </p>\n         </note>",
+                "smithy.api#documentation": "<p>Starts a state machine execution. If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException.</p>\n    \n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n    \n         <note>\n            <p>\n               <code>StartExecution</code> is idempotent for <code>STANDARD</code> workflows. For a\n          <code>STANDARD</code> workflow, if <code>StartExecution</code> is called with the same\n        name and input as a running execution, the call will succeed and return the same response as\n        the original request. If the execution is closed or if the input is different, it will\n        return a <code>400 ExecutionAlreadyExists</code> error. Names can be reused after 90 days. </p>\n            <p>\n               <code>StartExecution</code> is not idempotent for <code>EXPRESS</code> workflows. </p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5371,6 +5930,9 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
                 }
             ],
             "traits": {
@@ -5868,6 +6430,25 @@
         "com.amazonaws.sfn#Timestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.sfn#ToleratedFailureCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.sfn#ToleratedFailurePercentage": {
+            "type": "float",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.sfn#TooManyTags": {
             "type": "structure",
             "members": {
@@ -5918,6 +6499,15 @@
                 }
             }
         },
+        "com.amazonaws.sfn#UnsignedLong": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.sfn#UntagResource": {
             "type": "operation",
             "input": {
@@ -5961,6 +6551,66 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.sfn#UpdateMapRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#UpdateMapRunInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#UpdateMapRunOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ResourceNotFound"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an in-progress Map Run's configuration to include changes to the settings that control maximum concurrency and Map Run failure.</p>"
+            }
+        },
+        "com.amazonaws.sfn#UpdateMapRunInput": {
+            "type": "structure",
+            "members": {
+                "mapRunArn": {
+                    "target": "com.amazonaws.sfn#LongArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a Map Run.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxConcurrency": {
+                    "target": "com.amazonaws.sfn#MaxConcurrency",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of child workflow executions that can be specified to run in parallel for the Map Run at the same time.</p>"
+                    }
+                },
+                "toleratedFailurePercentage": {
+                    "target": "com.amazonaws.sfn#ToleratedFailurePercentage",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum percentage of failed items before the Map Run fails.</p>"
+                    }
+                },
+                "toleratedFailureCount": {
+                    "target": "com.amazonaws.sfn#ToleratedFailureCount",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of failed items before the Map Run fails.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sfn#UpdateMapRunOutput": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.sfn#UpdateStateMachine": {
             "type": "operation",
             "input": {
@@ -5990,10 +6640,13 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#StateMachineDoesNotExist"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing state machine by modifying its <code>definition</code>,\n        <code>roleArn</code>, or <code>loggingConfiguration</code>. Running executions will continue\n      to use the previous <code>definition</code> and <code>roleArn</code>. You must include at\n      least one of <code>definition</code> or <code>roleArn</code> or you will receive a\n        <code>MissingRequiredParameter</code> error.</p>\n         <note>\n            <p>All <code>StartExecution</code> calls within a few seconds will use the updated\n          <code>definition</code> and <code>roleArn</code>. Executions started immediately after\n        calling <code>UpdateStateMachine</code> may use the previous state machine\n          <code>definition</code> and <code>roleArn</code>. </p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates an existing state machine by modifying its <code>definition</code>,\n        <code>roleArn</code>, or <code>loggingConfiguration</code>. Running executions will continue\n      to use the previous <code>definition</code> and <code>roleArn</code>. You must include at\n      least one of <code>definition</code> or <code>roleArn</code> or you will receive a\n        <code>MissingRequiredParameter</code> error.</p>\n    \n         <p>If the given state machine Amazon Resource Name (ARN) is a qualified state machine ARN, it will fail with ValidationException.</p>\n    \n         <p>A qualified state machine ARN refers to a <i>Distributed Map state</i> defined within a state machine. For example, the qualified state machine ARN <code>arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel</code> refers to a <i>Distributed Map state</i> with a label <code>mapStateLabel</code> in the state machine named <code>stateMachineName</code>.</p>\n    \n         <note>\n            <p>All <code>StartExecution</code> calls within a few seconds will use the updated\n          <code>definition</code> and <code>roleArn</code>. Executions started immediately after\n        calling <code>UpdateStateMachine</code> may use the previous state machine\n          <code>definition</code> and <code>roleArn</code>. </p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -6041,6 +6694,48 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the state machine was updated.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sfn#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.sfn#ErrorMessage"
+                },
+                "reason": {
+                    "target": "com.amazonaws.sfn#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input does not satisfy the constraints specified by an Amazon Web Services service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.sfn#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "API_DOES_NOT_SUPPORT_LABELED_ARNS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_DOES_NOT_SUPPORT_LABELED_ARNS"
+                    }
+                },
+                "MISSING_REQUIRED_PARAMETER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_REQUIRED_PARAMETER"
+                    }
+                },
+                "CANNOT_UPDATE_COMPLETED_MAP_RUN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANNOT_UPDATE_COMPLETED_MAP_RUN"
                     }
                 }
             }

@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -49,18 +49,20 @@
             }
         },
         "com.amazonaws.comprehend#AugmentedManifestsDocumentTypeFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PLAIN_TEXT_DOCUMENT",
-                        "name": "PLAIN_TEXT_DOCUMENT"
-                    },
-                    {
-                        "value": "SEMI_STRUCTURED_DOCUMENT",
-                        "name": "SEMI_STRUCTURED_DOCUMENT"
+            "type": "enum",
+            "members": {
+                "PLAIN_TEXT_DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLAIN_TEXT_DOCUMENT"
                     }
-                ]
+                },
+                "SEMI_STRUCTURED_DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEMI_STRUCTURED_DOCUMENT"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#AugmentedManifestsListItem": {
@@ -690,6 +692,157 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.comprehend#Block": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.comprehend#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the block.</p>"
+                    }
+                },
+                "BlockType": {
+                    "target": "com.amazonaws.comprehend#BlockType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The block represents a line of text or one word of text.</p>\n         <ul>\n            <li>\n               <p>WORD - A word that's detected on a document page. \n        A word is one or more ISO basic Latin script characters that aren't separated by spaces.</p>\n            </li>\n            <li>\n               <p>LINE - A string of tab-delimited, contiguous words \n        that are detected on a document page</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Text": {
+                    "target": "com.amazonaws.comprehend#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The word or line of text extracted from the block.</p>"
+                    }
+                },
+                "Page": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Page number where the block appears.</p>"
+                    }
+                },
+                "Geometry": {
+                    "target": "com.amazonaws.comprehend#Geometry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Co-ordinates of the rectangle or polygon that contains the text.</p>"
+                    }
+                },
+                "Relationships": {
+                    "target": "com.amazonaws.comprehend#ListOfRelationships",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of child blocks of the current block. \n      For example, a LINE object has child blocks for each WORD block that's part of the line of text. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about each word or line of text in the input document.</p>\n         <p>For additional information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/API_Block.html\">Block</a> in the Amazon Textract API reference.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#BlockReference": {
+            "type": "structure",
+            "members": {
+                "BlockId": {
+                    "target": "com.amazonaws.comprehend#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the block.</p>"
+                    }
+                },
+                "BeginOffset": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Offset of the start of the block within its parent block.</p>"
+                    }
+                },
+                "EndOffset": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Offset of the end of the block within its parent block.</p>"
+                    }
+                },
+                "ChildBlocks": {
+                    "target": "com.amazonaws.comprehend#ListOfChildBlocks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of child blocks within this block.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to a block. </p>"
+            }
+        },
+        "com.amazonaws.comprehend#BlockType": {
+            "type": "enum",
+            "members": {
+                "LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LINE"
+                    }
+                },
+                "WORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WORD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#BoundingBox": {
+            "type": "structure",
+            "members": {
+                "Height": {
+                    "target": "com.amazonaws.comprehend#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The height of the bounding box as a ratio of the overall document page height.</p>"
+                    }
+                },
+                "Left": {
+                    "target": "com.amazonaws.comprehend#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The left coordinate of the bounding box as a ratio of overall document page width.</p>"
+                    }
+                },
+                "Top": {
+                    "target": "com.amazonaws.comprehend#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The top coordinate of the bounding box as a ratio of overall document page height.</p>"
+                    }
+                },
+                "Width": {
+                    "target": "com.amazonaws.comprehend#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The width of the bounding box as a ratio of the overall document page width.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The bounding box around the detected page\n     or around an element on a document page. \n    The left (x-coordinate) and top (y-coordinate) are coordinates that \n      represent the top and left sides of the bounding box. Note that the upper-left \n      corner of the image is the origin (0,0). </p>\n         <p>For additional information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/API_BoundingBox.html\">BoundingBox</a> in the Amazon Textract API reference.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#ChildBlock": {
+            "type": "structure",
+            "members": {
+                "ChildBlockId": {
+                    "target": "com.amazonaws.comprehend#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier for the child block.</p>"
+                    }
+                },
+                "BeginOffset": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Offset of the start of the child block within its parent block.</p>"
+                    }
+                },
+                "EndOffset": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Offset of the end of the child block within its parent block.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Nested block contained within a block.</p>"
+            }
+        },
         "com.amazonaws.comprehend#ClassifierEvaluationMetrics": {
             "type": "structure",
             "members": {
@@ -802,7 +955,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new document classification request to analyze a single document in real-time,\n      using a previously created and trained custom model and an endpoint.</p>"
+                "smithy.api#documentation": "<p>Creates a new document classification request to analyze a single document in real-time,\n      using a previously created and trained custom model and an endpoint.</p>\n         <p>You can input plain text or you can upload a single-page input document (text, PDF, Word, or image). </p>\n         <p>If the system detects errors while processing a page in the input document, \n      the API response includes an entry in <code>Errors</code> that describes the errors.</p>\n         <p>If the system detects a document-level error in your input document, the API returns an \n      <code>InvalidRequestException</code> error response.      \n      For details about this exception, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html\">\n        Errors in semi-structured documents</a> in the Comprehend Developer Guide.    \n    </p>"
             }
         },
         "com.amazonaws.comprehend#ClassifyDocumentRequest": {
@@ -811,8 +964,7 @@
                 "Text": {
                     "target": "com.amazonaws.comprehend#CustomerInputString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The document text to be analyzed.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The document text to be analyzed. If you enter text using this parameter,\n      do not use the <code>Bytes</code> parameter.</p>"
                     }
                 },
                 "EndpointArn": {
@@ -820,6 +972,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the endpoint. For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Bytes": {
+                    "target": "com.amazonaws.comprehend#SemiStructuredDocumentBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the <code>Bytes</code> parameter to input a text, PDF, Word or image file.\n      You can also use the <code>Bytes</code> parameter to input an Amazon Textract <code>DetectDocumentText</code> \n      or <code>AnalyzeDocument</code> output file.</p>\n         <p>Provide the input document as a sequence of base64-encoded bytes. \n      If your code uses an Amazon Web Services SDK to classify documents, the SDK may encode \n      the document file bytes for you. </p>\n         <p>The maximum length of this field depends on the input document type. For details, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html\">\n        Inputs for real-time custom analysis</a> in the Comprehend Developer Guide. </p>\n         <p>If you use the <code>Bytes</code> parameter, do not use the <code>Text</code> parameter.</p>"
+                    }
+                },
+                "DocumentReaderConfig": {
+                    "target": "com.amazonaws.comprehend#DocumentReaderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides configuration parameters to override the default actions for extracting text \n      from PDF documents and image files.</p>"
                     }
                 }
             }
@@ -837,6 +1001,24 @@
                     "target": "com.amazonaws.comprehend#ListOfLabels",
                     "traits": {
                         "smithy.api#documentation": "<p>The labels used the document being analyzed. These are used for multi-label trained\n      models. Individual labels represent different categories that are related in some manner and\n      are not mutually exclusive. For example, a movie can be just an action movie, or it can be an\n      action movie, a science fiction movie, and a comedy, all at the same time. </p>"
+                    }
+                },
+                "DocumentMetadata": {
+                    "target": "com.amazonaws.comprehend#DocumentMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Extraction information about the document. This field is present\n      in the response only if your request includes the <code>Byte</code> parameter. </p>"
+                    }
+                },
+                "DocumentType": {
+                    "target": "com.amazonaws.comprehend#ListOfDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document type for each page in the input document. This field is present\n      in the response only if your request includes the <code>Byte</code> parameter. </p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.comprehend#ListOfErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Page-level errors that the system detected while processing the input document. \n      The field is empty if the system encountered no errors.</p>"
                     }
                 }
             },
@@ -906,21 +1088,6 @@
         },
         "com.amazonaws.comprehend#Comprehend_20171127": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Comprehend",
-                    "arnNamespace": "comprehend",
-                    "cloudFormationName": "Comprehend",
-                    "cloudTrailEventSource": "comprehend.amazonaws.com",
-                    "endpointPrefix": "comprehend"
-                },
-                "aws.auth#sigv4": {
-                    "name": "comprehend"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Comprehend is an AWS service for gaining insight into the content of documents.\n      Use these actions to determine the topics contained in your documents, the topics they\n      discuss, the predominant sentiment expressed in them, the predominant language used, and\n      more.</p>",
-                "smithy.api#title": "Amazon Comprehend"
-            },
             "version": "2017-11-27",
             "operations": [
                 {
@@ -1142,7 +1309,1572 @@
                 {
                     "target": "com.amazonaws.comprehend#UpdateEndpoint"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Comprehend",
+                    "arnNamespace": "comprehend",
+                    "cloudFormationName": "Comprehend",
+                    "cloudTrailEventSource": "comprehend.amazonaws.com",
+                    "endpointPrefix": "comprehend"
+                },
+                "aws.auth#sigv4": {
+                    "name": "comprehend"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Amazon Comprehend is an AWS service for gaining insight into the content of documents.\n      Use these actions to determine the topics contained in your documents, the topics they\n      discuss, the predominant sentiment expressed in them, the predominant language used, and\n      more.</p>",
+                "smithy.api#title": "Amazon Comprehend",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://comprehend-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://comprehend-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://comprehend.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://comprehend.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://comprehend.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.comprehend#ConcurrentModificationException": {
             "type": "structure",
@@ -1528,7 +3260,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p> You can specify any of the following languages supported by Amazon Comprehend: English\n      (\"en\"), Spanish (\"es\"), French (\"fr\"), Italian (\"it\"), German (\"de\"), or Portuguese (\"pt\").\n      All documents must be in the same language.</p>",
+                        "smithy.api#documentation": "<p> You can specify any of the following languages: English\n      (\"en\"), Spanish (\"es\"), French (\"fr\"), Italian (\"it\"), German (\"de\"), or Portuguese (\"pt\").\n      If you plan to use this entity recognizer with PDF, Word, or image input files, you must \n      specify English as the language. \n      All training documents must be in the same language.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2243,7 +3975,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.comprehend#ComprehendModelArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the policy to describe.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the custom model version that has the resource policy.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2500,7 +4232,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Inspects text for named entities, and returns information about them. For more\n      information, about named entities, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html\">Entities</a> in the Comprehend Developer Guide.</p>"
+                "smithy.api#documentation": "<p>Detects named entities in input text when you use the pre-trained model. \n      Detects custom entities if you have a custom entity recognition model. </p>\n         <p>\n      When detecting named entities using the pre-trained model, use plain text as the input.\n      For more information about named entities, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html\">Entities</a> in the Comprehend Developer Guide.</p>\n         <p>When you use a custom entity recognition model, \n      you can input plain text or you can upload a single-page input document (text, PDF, Word, or image). </p>\n         <p>If the system detects errors while processing a page in the input document, the API response \n       includes an entry in <code>Errors</code> for each error. </p>\n         <p>If the system detects a document-level error in your input document, the API returns an \n       <code>InvalidRequestException</code> error response.      \n      For details about this exception, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html\">\n        Errors in semi-structured documents</a> in the Comprehend Developer Guide.    \n    </p>"
             }
         },
         "com.amazonaws.comprehend#DetectEntitiesRequest": {
@@ -2509,20 +4241,31 @@
                 "Text": {
                     "target": "com.amazonaws.comprehend#CustomerInputString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A UTF-8 text string. The maximum string size is 100 KB.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>A UTF-8 text string. The maximum string size is 100 KB. If you enter text using this parameter,\n    do not use the <code>Bytes</code> parameter.</p>"
                     }
                 },
                 "LanguageCode": {
                     "target": "com.amazonaws.comprehend#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language of the input documents. You can specify any of the primary languages\n      supported by Amazon Comprehend. All documents must be in the same language.</p>\n         <p>If your request includes the endpoint for a custom entity recognition model, Amazon\n      Comprehend uses the language of your custom model, and it ignores any language code that you\n      specify here.</p>"
+                        "smithy.api#documentation": "<p>The language of the input documents. You can specify any of the primary languages\n      supported by Amazon Comprehend. If your request includes the endpoint for a custom entity recognition model, Amazon\n      Comprehend uses the language of your custom model, and it ignores any language code that you\n      specify here.</p>\n         <p>All input documents must be in the same language.</p>"
                     }
                 },
                 "EndpointArn": {
                     "target": "com.amazonaws.comprehend#EntityRecognizerEndpointArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name of an endpoint that is associated with a custom entity\n      recognition model. Provide an endpoint if you want to detect entities by using your own custom\n      model instead of the default model that is used by Amazon Comprehend.</p>\n         <p>If you specify an endpoint, Amazon Comprehend uses the language of your custom model, and\n      it ignores any language code that you provide in your request.</p>\n         <p>For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>"
+                    }
+                },
+                "Bytes": {
+                    "target": "com.amazonaws.comprehend#SemiStructuredDocumentBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field applies only when you use a custom entity recognition model that\n      was trained with PDF annotations. For other cases,  \n      enter your text input in the <code>Text</code> field.</p>    \n         <p> \n      Use the <code>Bytes</code> parameter to input a text, PDF, Word or image file.\n      Using a plain-text file in the <code>Bytes</code> parameter is equivelent to using the \n      <code>Text</code> parameter (the <code>Entities</code> field in the response is identical).</p>\n         <p>You can also use the <code>Bytes</code> parameter to input an Amazon Textract <code>DetectDocumentText</code> \n      or <code>AnalyzeDocument</code> output file.</p>\n         <p>Provide the input document as a sequence of base64-encoded bytes. \n      If your code uses an Amazon Web Services SDK to detect entities, the SDK may encode \n      the document file bytes for you. </p>\n         <p>The maximum length of this field depends on the input document type. For details, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html\">\n        Inputs for real-time custom analysis</a> in the Comprehend Developer Guide. </p>\n         <p>If you use the <code>Bytes</code> parameter, do not use the <code>Text</code> parameter.</p>"
+                    }
+                },
+                "DocumentReaderConfig": {
+                    "target": "com.amazonaws.comprehend#DocumentReaderConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides configuration parameters to override the default actions for extracting text \n      from PDF documents and image files.</p>"
                     }
                 }
             }
@@ -2534,6 +4277,30 @@
                     "target": "com.amazonaws.comprehend#ListOfEntities",
                     "traits": {
                         "smithy.api#documentation": "<p>A collection of entities identified in the input text. For each entity, the response\n      provides the entity text, entity type, where the entity text begins and ends, and the level of\n      confidence that Amazon Comprehend has in the detection. </p>\n         <p>If your request uses a custom entity recognition model, Amazon Comprehend detects the\n      entities that the model is trained to recognize. Otherwise, it detects the default entity\n      types. For a list of default entity types, see\n      <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-entities.html\">Entities</a> in the Comprehend Developer Guide.\n    </p>"
+                    }
+                },
+                "DocumentMetadata": {
+                    "target": "com.amazonaws.comprehend#DocumentMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the document, discovered during text extraction. This field is present\n      in the response only if your request used the <code>Byte</code> parameter. </p>"
+                    }
+                },
+                "DocumentType": {
+                    "target": "com.amazonaws.comprehend#ListOfDocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document type for each page in the input document. This field is present\n      in the response only if your request used the <code>Byte</code> parameter. </p>"
+                    }
+                },
+                "Blocks": {
+                    "target": "com.amazonaws.comprehend#ListOfBlocks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about each block of text in the input document.   \n      Blocks are nested. A page block contains a block for each line of text, \n      which contains a block for each word. </p>\n         <p>The <code>Block</code> content for a Word input document does not include a <code>Geometry</code> field.</p>\n         <p>The <code>Block</code> field is not present in the response for plain-text inputs.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.comprehend#ListOfErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Page-level errors that the system detected while processing the input document. \n      The field is empty if the system encountered no errors.</p>"
                     }
                 }
             },
@@ -2853,6 +4620,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The confidence score that Amazon Comprehend has this class correctly attributed.</p>"
                     }
+                },
+                "Page": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Page number in the input document. This field is present\n      in the response only if your request includes the <code>Byte</code> parameter. </p>"
+                    }
                 }
             },
             "traits": {
@@ -3000,18 +4773,20 @@
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierDataFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "COMPREHEND_CSV",
-                        "name": "COMPREHEND_CSV"
-                    },
-                    {
-                        "value": "AUGMENTED_MANIFEST",
-                        "name": "AUGMENTED_MANIFEST"
+            "type": "enum",
+            "members": {
+                "COMPREHEND_CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPREHEND_CSV"
                     }
-                ]
+                },
+                "AUGMENTED_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUGMENTED_MANIFEST"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierEndpointArn": {
@@ -3095,18 +4870,20 @@
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MULTI_CLASS",
-                        "name": "MULTI_CLASS"
-                    },
-                    {
-                        "value": "MULTI_LABEL",
-                        "name": "MULTI_LABEL"
+            "type": "enum",
+            "members": {
+                "MULTI_CLASS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI_CLASS"
                     }
-                ]
+                },
+                "MULTI_LABEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI_LABEL"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#DocumentClassifierOutputDataConfig": {
@@ -3309,56 +5086,90 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The confidence score that Amazon Comprehend has this label correctly attributed.</p>"
                     }
+                },
+                "Page": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Page number where the label occurs. This field is present\n      in the response only if your request includes the <code>Byte</code> parameter. </p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies one of the label or labels that categorize the document being analyzed.</p>"
             }
         },
-        "com.amazonaws.comprehend#DocumentReadAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TEXTRACT_DETECT_DOCUMENT_TEXT",
-                        "name": "TEXTRACT_DETECT_DOCUMENT_TEXT"
-                    },
-                    {
-                        "value": "TEXTRACT_ANALYZE_DOCUMENT",
-                        "name": "TEXTRACT_ANALYZE_DOCUMENT"
+        "com.amazonaws.comprehend#DocumentMetadata": {
+            "type": "structure",
+            "members": {
+                "Pages": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of pages in the document.</p>"
                     }
-                ]
+                },
+                "ExtractedCharacters": {
+                    "target": "com.amazonaws.comprehend#ListOfExtractedCharacters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of pages in the document, with the number of characters extracted from each page.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the document, discovered during text extraction.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#DocumentReadAction": {
+            "type": "enum",
+            "members": {
+                "TEXTRACT_DETECT_DOCUMENT_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXTRACT_DETECT_DOCUMENT_TEXT"
+                    }
+                },
+                "TEXTRACT_ANALYZE_DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXTRACT_ANALYZE_DOCUMENT"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#DocumentReadFeatureTypes": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>A list of the types of analyses to perform. This field specifies what feature types\n      need to be extracted from the document where entity recognition is expected.</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>TABLES</code> - Add TABLES to the list to return information about the tables\n          that are detected in the input document. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FORMS</code> - Add FORMS to return detected form data. </p>\n            </li>\n         </ul>",
-                "smithy.api#enum": [
-                    {
-                        "value": "TABLES",
-                        "name": "TABLES"
-                    },
-                    {
-                        "value": "FORMS",
-                        "name": "FORMS"
+            "type": "enum",
+            "members": {
+                "TABLES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TABLES"
                     }
-                ]
+                },
+                "FORMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORMS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the type of Amazon Textract features to apply. If you chose <code>TEXTRACT_ANALYZE_DOCUMENT</code> \n      as the read action, you must specify one or both of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABLES</code> - Returns additional information about any tables that are detected in the input document. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FORMS</code> - Returns additional information about any forms that are detected in the input document. </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.comprehend#DocumentReadMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SERVICE_DEFAULT",
-                        "name": "SERVICE_DEFAULT"
-                    },
-                    {
-                        "value": "FORCE_DOCUMENT_READ_ACTION",
-                        "name": "FORCE_DOCUMENT_READ_ACTION"
+            "type": "enum",
+            "members": {
+                "SERVICE_DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE_DEFAULT"
                     }
-                ]
+                },
+                "FORCE_DOCUMENT_READ_ACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FORCE_DOCUMENT_READ_ACTION"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#DocumentReaderConfig": {
@@ -3367,25 +5178,92 @@
                 "DocumentReadAction": {
                     "target": "com.amazonaws.comprehend#DocumentReadAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>This enum field will start with two values which will apply to PDFs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TEXTRACT_DETECT_DOCUMENT_TEXT</code> - The service calls DetectDocumentText\n          for PDF documents per page.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TEXTRACT_ANALYZE_DOCUMENT</code> - The service calls AnalyzeDocument for PDF\n          documents per page.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>This field defines the Amazon Textract API operation that Amazon Comprehend uses to extract text from PDF files and image files.\n      Enter one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TEXTRACT_DETECT_DOCUMENT_TEXT</code> - The Amazon Comprehend service uses the <code>DetectDocumentText</code>\n           API operation. </p>\n            </li>\n            <li>\n               <p>\n                  <code>TEXTRACT_ANALYZE_DOCUMENT</code> - The Amazon Comprehend service uses the <code>AnalyzeDocument</code>  \n          API operation. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "DocumentReadMode": {
                     "target": "com.amazonaws.comprehend#DocumentReadMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>This enum field provides two values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SERVICE_DEFAULT</code> - use service defaults for Document reading. For\n          Digital PDF it would mean using an internal parser instead of Textract APIs</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORCE_DOCUMENT_READ_ACTION</code> - Always use specified action for\n          DocumentReadAction, including Digital PDF. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Determines the text extraction actions for PDF files. Enter one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SERVICE_DEFAULT</code> - use the Amazon Comprehend service defaults for PDF files.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FORCE_DOCUMENT_READ_ACTION</code> - Amazon Comprehend uses the Textract API specified by\n          DocumentReadAction for all PDF files, including digital PDF files. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "FeatureTypes": {
                     "target": "com.amazonaws.comprehend#ListOfDocumentReadFeatureTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how the text in an input file should be processed:</p>"
+                        "smithy.api#documentation": "<p>Specifies the type of Amazon Textract features to apply. If you chose <code>TEXTRACT_ANALYZE_DOCUMENT</code> \n      as the read action, you must specify one or both of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TABLES</code> - Returns information about any tables that are detected in the input document. </p>\n            </li>\n            <li>\n               <p>\n                  <code>FORMS</code> - Returns information and the data from any forms that are detected in the input document. </p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input properties for a topic detection job.</p>"
+                "smithy.api#documentation": "<p>Provides configuration parameters to override the default actions for extracting text from PDF documents and image files. </p>\n         <p> By default, Amazon Comprehend performs the following actions to extract text from files, based on the input file type: </p>\n         <ul>\n            <li>\n               <p>\n                  <b>Word files</b> - Amazon Comprehend parser extracts the text. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Digital PDF files</b> - Amazon Comprehend parser extracts the text. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Image files and scanned PDF files</b> - Amazon Comprehend uses the Amazon Textract <code>DetectDocumentText</code> \n          API to extract the text. </p>\n            </li>\n         </ul> \n         <p>\n            <code>DocumentReaderConfig</code> does not apply to plain text files or Word files.</p>\n         <p> \n        For image files and PDF documents, you can override these default actions using the fields listed below.  \n        For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/detecting-cer.html#detecting-cer-pdf\">\n        Setting text extraction options</a>.  \n    </p>"
+            }
+        },
+        "com.amazonaws.comprehend#DocumentType": {
+            "type": "enum",
+            "members": {
+                "NATIVE_PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NATIVE_PDF"
+                    }
+                },
+                "SCANNED_PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCANNED_PDF"
+                    }
+                },
+                "MS_WORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MS_WORD"
+                    }
+                },
+                "IMAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMAGE"
+                    }
+                },
+                "PLAIN_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLAIN_TEXT"
+                    }
+                },
+                "TEXTRACT_DETECT_DOCUMENT_TEXT_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXTRACT_DETECT_DOCUMENT_TEXT_JSON"
+                    }
+                },
+                "TEXTRACT_ANALYZE_DOCUMENT_JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXTRACT_ANALYZE_DOCUMENT_JSON"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#DocumentTypeListItem": {
+            "type": "structure",
+            "members": {
+                "Page": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Page number.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.comprehend#DocumentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Document type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Document type for each page in the document.</p>"
             }
         },
         "com.amazonaws.comprehend#DominantLanguage": {
@@ -3527,10 +5405,7 @@
             }
         },
         "com.amazonaws.comprehend#Double": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.comprehend#EndpointFilter": {
             "type": "structure",
@@ -3645,30 +5520,38 @@
             }
         },
         "com.amazonaws.comprehend#EndpointStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "IN_SERVICE",
-                        "name": "IN_SERVICE"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "IN_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_SERVICE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#EntitiesDetectionJobFilter": {
@@ -3813,7 +5696,7 @@
                 "Type": {
                     "target": "com.amazonaws.comprehend#EntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity's type.</p>"
+                        "smithy.api#documentation": "<p>The entity type. For entity detection using the built-in model, this field contains one of the \n      standard entity types listed below.</p>\n         <p>For custom entity detection, this field contains one of the \n      entity types that you specified when you trained your custom model.</p>"
                     }
                 },
                 "Text": {
@@ -3825,13 +5708,19 @@
                 "BeginOffset": {
                     "target": "com.amazonaws.comprehend#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The zero-based offset from the beginning of the source text to the first character in the\n      entity.</p>"
+                        "smithy.api#documentation": "<p>The zero-based offset from the beginning of the source text to the first character in the\n      entity.</p> \n         <p>This field is empty for non-text input.</p>"
                     }
                 },
                 "EndOffset": {
                     "target": "com.amazonaws.comprehend#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The zero-based offset from the beginning of the source text to the last character in the\n      entity.</p>"
+                        "smithy.api#documentation": "<p>The zero-based offset from the beginning of the source text to the last character in the\n      entity.</p>\n         <p>This field is empty for non-text input.</p>"
+                    }
+                },
+                "BlockReferences": {
+                    "target": "com.amazonaws.comprehend#ListOfBlockReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A reference to each block for this entity. This field is empty for plain-text input.</p>"
                     }
                 }
             },
@@ -3897,18 +5786,20 @@
             }
         },
         "com.amazonaws.comprehend#EntityRecognizerDataFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "COMPREHEND_CSV",
-                        "name": "COMPREHEND_CSV"
-                    },
-                    {
-                        "value": "AUGMENTED_MANIFEST",
-                        "name": "AUGMENTED_MANIFEST"
+            "type": "enum",
+            "members": {
+                "COMPREHEND_CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPREHEND_CSV"
                     }
-                ]
+                },
+                "AUGMENTED_MANIFEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUGMENTED_MANIFEST"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#EntityRecognizerDocuments": {
@@ -4286,46 +6177,62 @@
             }
         },
         "com.amazonaws.comprehend#EntityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PERSON",
-                        "name": "PERSON"
-                    },
-                    {
-                        "value": "LOCATION",
-                        "name": "LOCATION"
-                    },
-                    {
-                        "value": "ORGANIZATION",
-                        "name": "ORGANIZATION"
-                    },
-                    {
-                        "value": "COMMERCIAL_ITEM",
-                        "name": "COMMERCIAL_ITEM"
-                    },
-                    {
-                        "value": "EVENT",
-                        "name": "EVENT"
-                    },
-                    {
-                        "value": "DATE",
-                        "name": "DATE"
-                    },
-                    {
-                        "value": "QUANTITY",
-                        "name": "QUANTITY"
-                    },
-                    {
-                        "value": "TITLE",
-                        "name": "TITLE"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "PERSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERSON"
                     }
-                ]
+                },
+                "LOCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOCATION"
+                    }
+                },
+                "ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORGANIZATION"
+                    }
+                },
+                "COMMERCIAL_ITEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMMERCIAL_ITEM"
+                    }
+                },
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT"
+                    }
+                },
+                "DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE"
+                    }
+                },
+                "QUANTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUANTITY"
+                    }
+                },
+                "TITLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TITLE"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#EntityTypeName": {
@@ -4383,6 +6290,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An entity type within a labeled training dataset that Amazon Comprehend uses to train a\n      custom entity recognizer.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#ErrorsListItem": {
+            "type": "structure",
+            "members": {
+                "Page": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Page number where the error occurred.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.comprehend#PageBasedErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error code for the cause of the error.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.comprehend#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Text message explaining the reason for the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Text extraction encountered one or more page-level errors in the input document.</p>\n         <p>The <code>ErrorCode</code> contains one of the following values:</p>\n         <ul>\n            <li>\n               <p>TEXTRACT_BAD_PAGE - Amazon Textract cannot read the page. For more information\n          about page limits in Amazon Textract, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/limits-document.html\">\n            Page Quotas in Amazon Textract</a>.</p>\n            </li>\n            <li>\n               <p>TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED - The number of requests exceeded your throughput limit.\n          For more information about throughput quotas in Amazon Textract, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/limits-quotas-explained.html\"> \n            Default quotas in Amazon Textract</a>.</p>\n            </li>\n            <li>\n               <p>PAGE_CHARACTERS_EXCEEDED - Too many text characters on the page (10,000 characters maximum).</p>\n            </li>\n            <li>\n               <p>PAGE_SIZE_EXCEEDED - The maximum page size is 10 MB.</p>\n            </li>\n            <li>\n               <p>INTERNAL_SERVER_ERROR - The request encountered a service issue. Try the API request again.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.comprehend#EventTypeString": {
@@ -4513,10 +6446,47 @@
                 "target": "com.amazonaws.comprehend#EventsDetectionJobProperties"
             }
         },
-        "com.amazonaws.comprehend#Float": {
-            "type": "float",
+        "com.amazonaws.comprehend#ExtractedCharactersListItem": {
+            "type": "structure",
+            "members": {
+                "Page": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Page number.</p>"
+                    }
+                },
+                "Count": {
+                    "target": "com.amazonaws.comprehend#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of characters extracted from each page.</p>"
+                    }
+                }
+            },
             "traits": {
-                "smithy.api#box": {}
+                "smithy.api#documentation": "<p>Array of the number of characters extracted from each page.</p>"
+            }
+        },
+        "com.amazonaws.comprehend#Float": {
+            "type": "float"
+        },
+        "com.amazonaws.comprehend#Geometry": {
+            "type": "structure",
+            "members": {
+                "BoundingBox": {
+                    "target": "com.amazonaws.comprehend#BoundingBox",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An axis-aligned coarse representation of the location of the recognized item on the \n      document page.</p>"
+                    }
+                },
+                "Polygon": {
+                    "target": "com.amazonaws.comprehend#Polygon",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Within the bounding box, a fine-grained polygon around the recognized item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the location of items on a document page.</p>\n         <p>For additional information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/API_Geometry.html\">Geometry</a> in the Amazon Textract API reference.</p>"
             }
         },
         "com.amazonaws.comprehend#IamRoleArn": {
@@ -4626,7 +6596,6 @@
         "com.amazonaws.comprehend#InferenceUnitsInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -4651,34 +6620,33 @@
                 "DocumentReaderConfig": {
                     "target": "com.amazonaws.comprehend#DocumentReaderConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The document reader config field applies only for InputDataConfig of\n      StartEntitiesDetectionJob. </p>\n         <p>Use DocumentReaderConfig to provide specifications about how you want your inference\n      documents read. Currently it applies for PDF documents in StartEntitiesDetectionJob custom\n      inference.</p>"
+                        "smithy.api#documentation": "<p>Provides configuration parameters to override the default actions for extracting text \n      from PDF documents and image files.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input properties for an inference job.</p>"
+                "smithy.api#documentation": "<p>The input properties for an inference job. The document reader config field applies \n      only to non-text inputs for custom analysis.</p>"
             }
         },
         "com.amazonaws.comprehend#InputFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ONE_DOC_PER_FILE",
-                        "name": "ONE_DOC_PER_FILE"
-                    },
-                    {
-                        "value": "ONE_DOC_PER_LINE",
-                        "name": "ONE_DOC_PER_LINE"
+            "type": "enum",
+            "members": {
+                "ONE_DOC_PER_FILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE_DOC_PER_FILE"
                     }
-                ]
+                },
+                "ONE_DOC_PER_LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONE_DOC_PER_LINE"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.comprehend#InternalServerException": {
             "type": "structure",
@@ -4706,17 +6674,77 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.comprehend#InvalidRequestDetail": {
+            "type": "structure",
+            "members": {
+                "Reason": {
+                    "target": "com.amazonaws.comprehend#InvalidRequestDetailReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reason code is <code>INVALID_DOCUMENT</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides additional detail about why the request failed:</p>\n         <ul>\n            <li>\n               <p>Document size is too large - Check the size of your file and resubmit the request.</p>\n            </li>\n            <li>\n               <p>Document type is not supported - Check the file type and resubmit the request.</p>\n            </li>\n            <li>\n               <p>Too many pages in the document - Check the number of pages in your file and resubmit the request.</p>\n            </li>\n            <li>\n               <p>Access denied to Amazon Textract - Verify that your account has permission to use Amazon Textract API operations and resubmit the request.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.comprehend#InvalidRequestDetailReason": {
+            "type": "enum",
+            "members": {
+                "DOCUMENT_SIZE_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENT_SIZE_EXCEEDED"
+                    }
+                },
+                "UNSUPPORTED_DOC_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSUPPORTED_DOC_TYPE"
+                    }
+                },
+                "PAGE_LIMIT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAGE_LIMIT_EXCEEDED"
+                    }
+                },
+                "TEXTRACT_ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXTRACT_ACCESS_DENIED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.comprehend#InvalidRequestException": {
             "type": "structure",
             "members": {
                 "Message": {
                     "target": "com.amazonaws.comprehend#String"
+                },
+                "Reason": {
+                    "target": "com.amazonaws.comprehend#InvalidRequestReason"
+                },
+                "Detail": {
+                    "target": "com.amazonaws.comprehend#InvalidRequestDetail"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The request is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.comprehend#InvalidRequestReason": {
+            "type": "enum",
+            "members": {
+                "INVALID_DOCUMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_DOCUMENT"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#JobId": {
@@ -4753,34 +6781,44 @@
             }
         },
         "com.amazonaws.comprehend#JobStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUBMITTED",
-                        "name": "SUBMITTED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "COMPLETED"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "STOP_REQUESTED",
-                        "name": "STOP_REQUESTED"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+            "type": "enum",
+            "members": {
+                "SUBMITTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBMITTED"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "STOP_REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_REQUESTED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#KeyPhrase": {
@@ -4973,58 +7011,80 @@
             }
         },
         "com.amazonaws.comprehend#LanguageCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "en",
-                        "name": "EN"
-                    },
-                    {
-                        "value": "es",
-                        "name": "ES"
-                    },
-                    {
-                        "value": "fr",
-                        "name": "FR"
-                    },
-                    {
-                        "value": "de",
-                        "name": "DE"
-                    },
-                    {
-                        "value": "it",
-                        "name": "IT"
-                    },
-                    {
-                        "value": "pt",
-                        "name": "PT"
-                    },
-                    {
-                        "value": "ar",
-                        "name": "AR"
-                    },
-                    {
-                        "value": "hi",
-                        "name": "HI"
-                    },
-                    {
-                        "value": "ja",
-                        "name": "JA"
-                    },
-                    {
-                        "value": "ko",
-                        "name": "KO"
-                    },
-                    {
-                        "value": "zh",
-                        "name": "ZH"
-                    },
-                    {
-                        "value": "zh-TW",
-                        "name": "ZH_TW"
+            "type": "enum",
+            "members": {
+                "EN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en"
                     }
-                ]
+                },
+                "ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es"
+                    }
+                },
+                "FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr"
+                    }
+                },
+                "DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de"
+                    }
+                },
+                "IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "it"
+                    }
+                },
+                "PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt"
+                    }
+                },
+                "AR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ar"
+                    }
+                },
+                "HI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "hi"
+                    }
+                },
+                "JA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ja"
+                    }
+                },
+                "KO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ko"
+                    }
+                },
+                "ZH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh"
+                    }
+                },
+                "ZH_TW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "zh-TW"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#ListDocumentClassificationJobs": {
@@ -5322,7 +7382,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of all existing endpoints that you've created.\n      For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>"
+                "smithy.api#documentation": "<p>Gets a list of all existing endpoints that you've created.\n      For information about endpoints, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html\">Managing endpoints</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "EndpointPropertiesList",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.comprehend#ListEndpointsRequest": {
@@ -5711,6 +7777,24 @@
                 }
             }
         },
+        "com.amazonaws.comprehend#ListOfBlockReferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#BlockReference"
+            }
+        },
+        "com.amazonaws.comprehend#ListOfBlocks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#Block"
+            }
+        },
+        "com.amazonaws.comprehend#ListOfChildBlocks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#ChildBlock"
+            }
+        },
         "com.amazonaws.comprehend#ListOfClasses": {
             "type": "list",
             "member": {
@@ -5771,6 +7855,12 @@
                 }
             }
         },
+        "com.amazonaws.comprehend#ListOfDocumentType": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#DocumentTypeListItem"
+            }
+        },
         "com.amazonaws.comprehend#ListOfDominantLanguages": {
             "type": "list",
             "member": {
@@ -5787,6 +7877,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.comprehend#EntityLabel"
+            }
+        },
+        "com.amazonaws.comprehend#ListOfErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#ErrorsListItem"
+            }
+        },
+        "com.amazonaws.comprehend#ListOfExtractedCharacters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#ExtractedCharactersListItem"
             }
         },
         "com.amazonaws.comprehend#ListOfKeyPhrases": {
@@ -5817,6 +7919,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.comprehend#PiiEntityType"
+            }
+        },
+        "com.amazonaws.comprehend#ListOfRelationships": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#RelationshipsListItem"
             }
         },
         "com.amazonaws.comprehend#ListOfSyntaxTokens": {
@@ -5854,7 +7962,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of the PII entity detection jobs that you have submitted.</p>"
+                "smithy.api#documentation": "<p>Gets a list of the PII entity detection jobs that you have submitted.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "PiiEntitiesDetectionJobPropertiesList",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.comprehend#ListPiiEntitiesDetectionJobsRequest": {
@@ -6175,7 +8289,6 @@
         "com.amazonaws.comprehend#MaxResultsInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -6200,44 +8313,55 @@
             }
         },
         "com.amazonaws.comprehend#ModelStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "SUBMITTED",
-                        "name": "SUBMITTED"
-                    },
-                    {
-                        "value": "TRAINING",
-                        "name": "TRAINING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "STOP_REQUESTED",
-                        "name": "STOP_REQUESTED"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
-                    },
-                    {
-                        "value": "IN_ERROR",
-                        "name": "IN_ERROR"
-                    },
-                    {
-                        "value": "TRAINED",
-                        "name": "TRAINED"
+            "type": "enum",
+            "members": {
+                "SUBMITTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBMITTED"
                     }
-                ]
+                },
+                "TRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRAINING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "STOP_REQUESTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOP_REQUESTED"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                },
+                "IN_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_ERROR"
+                    }
+                },
+                "TRAINED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRAINED"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#NumberOfTopicsInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -6265,6 +8389,41 @@
                 "smithy.api#documentation": "<p>Provides configuration parameters for the output of inference jobs.</p>\n         <p></p>"
             }
         },
+        "com.amazonaws.comprehend#PageBasedErrorCode": {
+            "type": "enum",
+            "members": {
+                "TEXTRACT_BAD_PAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXTRACT_BAD_PAGE"
+                    }
+                },
+                "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED"
+                    }
+                },
+                "PAGE_CHARACTERS_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAGE_CHARACTERS_EXCEEDED"
+                    }
+                },
+                "PAGE_SIZE_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PAGE_SIZE_EXCEEDED"
+                    }
+                },
+                "INTERNAL_SERVER_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNAL_SERVER_ERROR"
+                    }
+                }
+            }
+        },
         "com.amazonaws.comprehend#PartOfSpeechTag": {
             "type": "structure",
             "members": {
@@ -6286,82 +8445,116 @@
             }
         },
         "com.amazonaws.comprehend#PartOfSpeechTagType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ADJ",
-                        "name": "ADJ"
-                    },
-                    {
-                        "value": "ADP",
-                        "name": "ADP"
-                    },
-                    {
-                        "value": "ADV",
-                        "name": "ADV"
-                    },
-                    {
-                        "value": "AUX",
-                        "name": "AUX"
-                    },
-                    {
-                        "value": "CONJ",
-                        "name": "CONJ"
-                    },
-                    {
-                        "value": "CCONJ",
-                        "name": "CCONJ"
-                    },
-                    {
-                        "value": "DET",
-                        "name": "DET"
-                    },
-                    {
-                        "value": "INTJ",
-                        "name": "INTJ"
-                    },
-                    {
-                        "value": "NOUN",
-                        "name": "NOUN"
-                    },
-                    {
-                        "value": "NUM",
-                        "name": "NUM"
-                    },
-                    {
-                        "value": "O",
-                        "name": "O"
-                    },
-                    {
-                        "value": "PART",
-                        "name": "PART"
-                    },
-                    {
-                        "value": "PRON",
-                        "name": "PRON"
-                    },
-                    {
-                        "value": "PROPN",
-                        "name": "PROPN"
-                    },
-                    {
-                        "value": "PUNCT",
-                        "name": "PUNCT"
-                    },
-                    {
-                        "value": "SCONJ",
-                        "name": "SCONJ"
-                    },
-                    {
-                        "value": "SYM",
-                        "name": "SYM"
-                    },
-                    {
-                        "value": "VERB",
-                        "name": "VERB"
+            "type": "enum",
+            "members": {
+                "ADJ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADJ"
                     }
-                ]
+                },
+                "ADP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADP"
+                    }
+                },
+                "ADV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADV"
+                    }
+                },
+                "AUX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUX"
+                    }
+                },
+                "CONJ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONJ"
+                    }
+                },
+                "CCONJ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CCONJ"
+                    }
+                },
+                "DET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DET"
+                    }
+                },
+                "INTJ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTJ"
+                    }
+                },
+                "NOUN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOUN"
+                    }
+                },
+                "NUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUM"
+                    }
+                },
+                "O": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "O"
+                    }
+                },
+                "PART": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PART"
+                    }
+                },
+                "PRON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRON"
+                    }
+                },
+                "PROPN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROPN"
+                    }
+                },
+                "PUNCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUNCT"
+                    }
+                },
+                "SCONJ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SCONJ"
+                    }
+                },
+                "SYM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SYM"
+                    }
+                },
+                "VERB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERB"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#PiiEntitiesDetectionJobFilter": {
@@ -6489,33 +8682,37 @@
             }
         },
         "com.amazonaws.comprehend#PiiEntitiesDetectionMaskMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "MASK",
-                        "name": "MASK"
-                    },
-                    {
-                        "value": "REPLACE_WITH_PII_ENTITY_TYPE",
-                        "name": "REPLACE_WITH_PII_ENTITY_TYPE"
+            "type": "enum",
+            "members": {
+                "MASK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MASK"
                     }
-                ]
+                },
+                "REPLACE_WITH_PII_ENTITY_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REPLACE_WITH_PII_ENTITY_TYPE"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#PiiEntitiesDetectionMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ONLY_REDACTION",
-                        "name": "ONLY_REDACTION"
-                    },
-                    {
-                        "value": "ONLY_OFFSETS",
-                        "name": "ONLY_OFFSETS"
+            "type": "enum",
+            "members": {
+                "ONLY_REDACTION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONLY_REDACTION"
                     }
-                ]
+                },
+                "ONLY_OFFSETS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ONLY_OFFSETS"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#PiiEntity": {
@@ -6551,158 +8748,230 @@
             }
         },
         "com.amazonaws.comprehend#PiiEntityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BANK_ACCOUNT_NUMBER",
-                        "name": "BANK_ACCOUNT_NUMBER"
-                    },
-                    {
-                        "value": "BANK_ROUTING",
-                        "name": "BANK_ROUTING"
-                    },
-                    {
-                        "value": "CREDIT_DEBIT_NUMBER",
-                        "name": "CREDIT_DEBIT_NUMBER"
-                    },
-                    {
-                        "value": "CREDIT_DEBIT_CVV",
-                        "name": "CREDIT_DEBIT_CVV"
-                    },
-                    {
-                        "value": "CREDIT_DEBIT_EXPIRY",
-                        "name": "CREDIT_DEBIT_EXPIRY"
-                    },
-                    {
-                        "value": "PIN",
-                        "name": "PIN"
-                    },
-                    {
-                        "value": "EMAIL",
-                        "name": "EMAIL"
-                    },
-                    {
-                        "value": "ADDRESS",
-                        "name": "ADDRESS"
-                    },
-                    {
-                        "value": "NAME",
-                        "name": "NAME"
-                    },
-                    {
-                        "value": "PHONE",
-                        "name": "PHONE"
-                    },
-                    {
-                        "value": "SSN",
-                        "name": "SSN"
-                    },
-                    {
-                        "value": "DATE_TIME",
-                        "name": "DATE_TIME"
-                    },
-                    {
-                        "value": "PASSPORT_NUMBER",
-                        "name": "PASSPORT_NUMBER"
-                    },
-                    {
-                        "value": "DRIVER_ID",
-                        "name": "DRIVER_ID"
-                    },
-                    {
-                        "value": "URL",
-                        "name": "URL"
-                    },
-                    {
-                        "value": "AGE",
-                        "name": "AGE"
-                    },
-                    {
-                        "value": "USERNAME",
-                        "name": "USERNAME"
-                    },
-                    {
-                        "value": "PASSWORD",
-                        "name": "PASSWORD"
-                    },
-                    {
-                        "value": "AWS_ACCESS_KEY",
-                        "name": "AWS_ACCESS_KEY"
-                    },
-                    {
-                        "value": "AWS_SECRET_KEY",
-                        "name": "AWS_SECRET_KEY"
-                    },
-                    {
-                        "value": "IP_ADDRESS",
-                        "name": "IP_ADDRESS"
-                    },
-                    {
-                        "value": "MAC_ADDRESS",
-                        "name": "MAC_ADDRESS"
-                    },
-                    {
-                        "value": "ALL",
-                        "name": "ALL"
-                    },
-                    {
-                        "value": "LICENSE_PLATE",
-                        "name": "LICENSE_PLATE"
-                    },
-                    {
-                        "value": "VEHICLE_IDENTIFICATION_NUMBER",
-                        "name": "VEHICLE_IDENTIFICATION_NUMBER"
-                    },
-                    {
-                        "value": "UK_NATIONAL_INSURANCE_NUMBER",
-                        "name": "UK_NATIONAL_INSURANCE_NUMBER"
-                    },
-                    {
-                        "value": "CA_SOCIAL_INSURANCE_NUMBER",
-                        "name": "CA_SOCIAL_INSURANCE_NUMBER"
-                    },
-                    {
-                        "value": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER",
-                        "name": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
-                    },
-                    {
-                        "value": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER",
-                        "name": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
-                    },
-                    {
-                        "value": "IN_PERMANENT_ACCOUNT_NUMBER",
-                        "name": "IN_PERMANENT_ACCOUNT_NUMBER"
-                    },
-                    {
-                        "value": "IN_NREGA",
-                        "name": "IN_NREGA"
-                    },
-                    {
-                        "value": "INTERNATIONAL_BANK_ACCOUNT_NUMBER",
-                        "name": "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
-                    },
-                    {
-                        "value": "SWIFT_CODE",
-                        "name": "SWIFT_CODE"
-                    },
-                    {
-                        "value": "UK_NATIONAL_HEALTH_SERVICE_NUMBER",
-                        "name": "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
-                    },
-                    {
-                        "value": "CA_HEALTH_NUMBER",
-                        "name": "CA_HEALTH_NUMBER"
-                    },
-                    {
-                        "value": "IN_AADHAAR",
-                        "name": "IN_AADHAAR"
-                    },
-                    {
-                        "value": "IN_VOTER_NUMBER",
-                        "name": "IN_VOTER_NUMBER"
+            "type": "enum",
+            "members": {
+                "BANK_ACCOUNT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BANK_ACCOUNT_NUMBER"
                     }
-                ]
+                },
+                "BANK_ROUTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BANK_ROUTING"
+                    }
+                },
+                "CREDIT_DEBIT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_DEBIT_NUMBER"
+                    }
+                },
+                "CREDIT_DEBIT_CVV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_DEBIT_CVV"
+                    }
+                },
+                "CREDIT_DEBIT_EXPIRY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREDIT_DEBIT_EXPIRY"
+                    }
+                },
+                "PIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PIN"
+                    }
+                },
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
+                    }
+                },
+                "ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADDRESS"
+                    }
+                },
+                "NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NAME"
+                    }
+                },
+                "PHONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PHONE"
+                    }
+                },
+                "SSN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SSN"
+                    }
+                },
+                "DATE_TIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE_TIME"
+                    }
+                },
+                "PASSPORT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSPORT_NUMBER"
+                    }
+                },
+                "DRIVER_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRIVER_ID"
+                    }
+                },
+                "URL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "URL"
+                    }
+                },
+                "AGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGE"
+                    }
+                },
+                "USERNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "USERNAME"
+                    }
+                },
+                "PASSWORD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PASSWORD"
+                    }
+                },
+                "AWS_ACCESS_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_ACCESS_KEY"
+                    }
+                },
+                "AWS_SECRET_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_SECRET_KEY"
+                    }
+                },
+                "IP_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IP_ADDRESS"
+                    }
+                },
+                "MAC_ADDRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAC_ADDRESS"
+                    }
+                },
+                "ALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL"
+                    }
+                },
+                "LICENSE_PLATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LICENSE_PLATE"
+                    }
+                },
+                "VEHICLE_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VEHICLE_IDENTIFICATION_NUMBER"
+                    }
+                },
+                "UK_NATIONAL_INSURANCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UK_NATIONAL_INSURANCE_NUMBER"
+                    }
+                },
+                "CA_SOCIAL_INSURANCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CA_SOCIAL_INSURANCE_NUMBER"
+                    }
+                },
+                "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "US_INDIVIDUAL_TAX_IDENTIFICATION_NUMBER"
+                    }
+                },
+                "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UK_UNIQUE_TAXPAYER_REFERENCE_NUMBER"
+                    }
+                },
+                "IN_PERMANENT_ACCOUNT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PERMANENT_ACCOUNT_NUMBER"
+                    }
+                },
+                "IN_NREGA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_NREGA"
+                    }
+                },
+                "INTERNATIONAL_BANK_ACCOUNT_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNATIONAL_BANK_ACCOUNT_NUMBER"
+                    }
+                },
+                "SWIFT_CODE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SWIFT_CODE"
+                    }
+                },
+                "UK_NATIONAL_HEALTH_SERVICE_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UK_NATIONAL_HEALTH_SERVICE_NUMBER"
+                    }
+                },
+                "CA_HEALTH_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CA_HEALTH_NUMBER"
+                    }
+                },
+                "IN_AADHAAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_AADHAAR"
+                    }
+                },
+                "IN_VOTER_NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_VOTER_NUMBER"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#PiiOutputDataConfig": {
@@ -6726,6 +8995,26 @@
                 "smithy.api#documentation": "<p>Provides configuration parameters for the output of PII entity detection jobs.</p>"
             }
         },
+        "com.amazonaws.comprehend#Point": {
+            "type": "structure",
+            "members": {
+                "X": {
+                    "target": "com.amazonaws.comprehend#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the X coordinate for a point on a polygon</p>"
+                    }
+                },
+                "Y": {
+                    "target": "com.amazonaws.comprehend#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the Y coordinate for a point on a polygon</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The X and Y coordinates of a point on a document page.</p>\n         <p>For additional information, see <a href=\"https://docs.aws.amazon.com/textract/latest/dg/API_Point.html\">Point</a> in the Amazon Textract API reference.</p>"
+            }
+        },
         "com.amazonaws.comprehend#Policy": {
             "type": "string",
             "traits": {
@@ -6744,6 +9033,12 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[0-9A-Fa-f]+$"
+            }
+        },
+        "com.amazonaws.comprehend#Polygon": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#Point"
             }
         },
         "com.amazonaws.comprehend#PutResourcePolicy": {
@@ -6831,6 +9126,37 @@
                 "smithy.api#documentation": "<p>Provides configuration parameters for PII entity redaction.</p>"
             }
         },
+        "com.amazonaws.comprehend#RelationshipType": {
+            "type": "enum",
+            "members": {
+                "CHILD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CHILD"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.comprehend#RelationshipsListItem": {
+            "type": "structure",
+            "members": {
+                "Ids": {
+                    "target": "com.amazonaws.comprehend#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifers of the child blocks.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.comprehend#RelationshipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Only supported relationship is a child relationship.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of child blocks for the current block.</p>"
+            }
+        },
         "com.amazonaws.comprehend#ResourceInUseException": {
             "type": "structure",
             "members": {
@@ -6912,6 +9238,14 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 5
+                }
+            }
+        },
+        "com.amazonaws.comprehend#SemiStructuredDocumentBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
                 }
             }
         },
@@ -7072,41 +9406,49 @@
             }
         },
         "com.amazonaws.comprehend#SentimentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "POSITIVE",
-                        "name": "POSITIVE"
-                    },
-                    {
-                        "value": "NEGATIVE",
-                        "name": "NEGATIVE"
-                    },
-                    {
-                        "value": "NEUTRAL",
-                        "name": "NEUTRAL"
-                    },
-                    {
-                        "value": "MIXED",
-                        "name": "MIXED"
+            "type": "enum",
+            "members": {
+                "POSITIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSITIVE"
                     }
-                ]
+                },
+                "NEGATIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEGATIVE"
+                    }
+                },
+                "NEUTRAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEUTRAL"
+                    }
+                },
+                "MIXED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MIXED"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#Split": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TRAIN",
-                        "name": "TRAIN"
-                    },
-                    {
-                        "value": "TEST",
-                        "name": "TEST"
+            "type": "enum",
+            "members": {
+                "TRAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRAIN"
                     }
-                ]
+                },
+                "TEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TEST"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#StartDocumentClassificationJob": {
@@ -8611,6 +10953,12 @@
                 }
             }
         },
+        "com.amazonaws.comprehend#StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.comprehend#String"
+            }
+        },
         "com.amazonaws.comprehend#SubnetId": {
             "type": "string",
             "traits": {
@@ -8634,34 +10982,44 @@
             }
         },
         "com.amazonaws.comprehend#SyntaxLanguageCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "en",
-                        "name": "EN"
-                    },
-                    {
-                        "value": "es",
-                        "name": "ES"
-                    },
-                    {
-                        "value": "fr",
-                        "name": "FR"
-                    },
-                    {
-                        "value": "de",
-                        "name": "DE"
-                    },
-                    {
-                        "value": "it",
-                        "name": "IT"
-                    },
-                    {
-                        "value": "pt",
-                        "name": "PT"
+            "type": "enum",
+            "members": {
+                "EN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en"
                     }
-                ]
+                },
+                "ES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es"
+                    }
+                },
+                "FR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fr"
+                    }
+                },
+                "DE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "de"
+                    }
+                },
+                "IT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "it"
+                    }
+                },
+                "PT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pt"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#SyntaxToken": {
@@ -8952,78 +11310,110 @@
             }
         },
         "com.amazonaws.comprehend#TargetedSentimentEntityType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PERSON",
-                        "name": "PERSON"
-                    },
-                    {
-                        "value": "LOCATION",
-                        "name": "LOCATION"
-                    },
-                    {
-                        "value": "ORGANIZATION",
-                        "name": "ORGANIZATION"
-                    },
-                    {
-                        "value": "FACILITY",
-                        "name": "FACILITY"
-                    },
-                    {
-                        "value": "BRAND",
-                        "name": "BRAND"
-                    },
-                    {
-                        "value": "COMMERCIAL_ITEM",
-                        "name": "COMMERCIAL_ITEM"
-                    },
-                    {
-                        "value": "MOVIE",
-                        "name": "MOVIE"
-                    },
-                    {
-                        "value": "MUSIC",
-                        "name": "MUSIC"
-                    },
-                    {
-                        "value": "BOOK",
-                        "name": "BOOK"
-                    },
-                    {
-                        "value": "SOFTWARE",
-                        "name": "SOFTWARE"
-                    },
-                    {
-                        "value": "GAME",
-                        "name": "GAME"
-                    },
-                    {
-                        "value": "PERSONAL_TITLE",
-                        "name": "PERSONAL_TITLE"
-                    },
-                    {
-                        "value": "EVENT",
-                        "name": "EVENT"
-                    },
-                    {
-                        "value": "DATE",
-                        "name": "DATE"
-                    },
-                    {
-                        "value": "QUANTITY",
-                        "name": "QUANTITY"
-                    },
-                    {
-                        "value": "ATTRIBUTE",
-                        "name": "ATTRIBUTE"
-                    },
-                    {
-                        "value": "OTHER",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "PERSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERSON"
                     }
-                ]
+                },
+                "LOCATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LOCATION"
+                    }
+                },
+                "ORGANIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ORGANIZATION"
+                    }
+                },
+                "FACILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FACILITY"
+                    }
+                },
+                "BRAND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BRAND"
+                    }
+                },
+                "COMMERCIAL_ITEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMMERCIAL_ITEM"
+                    }
+                },
+                "MOVIE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MOVIE"
+                    }
+                },
+                "MUSIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MUSIC"
+                    }
+                },
+                "BOOK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOOK"
+                    }
+                },
+                "SOFTWARE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SOFTWARE"
+                    }
+                },
+                "GAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GAME"
+                    }
+                },
+                "PERSONAL_TITLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PERSONAL_TITLE"
+                    }
+                },
+                "EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EVENT"
+                    }
+                },
+                "DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE"
+                    }
+                },
+                "QUANTITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUANTITY"
+                    }
+                },
+                "ATTRIBUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTRIBUTE"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
             }
         },
         "com.amazonaws.comprehend#TargetedSentimentMention": {
