@@ -1,8 +1,0 @@
-{
-    "id": "03e1296c-3e67-4d59-9065-61aa986b9b9b",
-    "type": "feature",
-    "description": "This release adds support for the AWS Step Functions Map state in Distributed mode. The changes include a new MapRun resource and several new and modified APIs.",
-    "modules": [
-        "service/sfn"
-    ]
-}

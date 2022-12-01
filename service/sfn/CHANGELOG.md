@@ -1,3 +1,7 @@
+# v1.16.0 (2022-12-01)
+
+* **Feature**: This release adds support for the AWS Step Functions Map state in Distributed mode. The changes include a new MapRun resource and several new and modified APIs.
+
 # v1.15.1 (2022-11-22)
 
 * No change notes available for this release.

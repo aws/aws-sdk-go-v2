@@ -1,3 +1,19 @@
+# Release (2022-12-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.0.0](service/codecatalyst/CHANGELOG.md#v100-2022-12-01)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds operations that support customers using the AWS Toolkits and Amazon CodeCatalyst, a unified software development service that helps developers develop, deploy, and maintain applications in the cloud. For more information, see the documentation.
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.20.0](service/comprehend/CHANGELOG.md#v1200-2022-12-01)
+  * **Feature**: Comprehend now supports semi-structured documents (such as PDF files or image files) as inputs for custom analysis using the synchronous APIs (ClassifyDocument and DetectEntities).
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.16.0](service/gamelift/CHANGELOG.md#v1160-2022-12-01)
+  * **Feature**: GameLift introduces a new feature, GameLift Anywhere. GameLift Anywhere allows you to integrate your own compute resources with GameLift. You can also use GameLift Anywhere to iteratively test your game servers without uploading the build to GameLift for every iteration.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.0.0](service/pipes/CHANGELOG.md#v100-2022-12-01)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS introduces new Amazon EventBridge Pipes which allow you to connect sources (SQS, Kinesis, DDB, Kafka, MQ) to Targets (14+ EventBridge Targets) without any code, with filtering, batching, input transformation, and an optional Enrichment stage (Lambda, StepFunctions, ApiGateway, ApiDestinations)
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.16.0](service/sfn/CHANGELOG.md#v1160-2022-12-01)
+  * **Feature**: This release adds support for the AWS Step Functions Map state in Distributed mode. The changes include a new MapRun resource and several new and modified APIs.
+
 # Release (2022-11-30)
 
 ## Module Highlights

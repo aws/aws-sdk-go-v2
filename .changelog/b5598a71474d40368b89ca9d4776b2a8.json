@@ -1,8 +1,0 @@
-{
-    "id": "b5598a71-474d-4036-8b89-ca9d4776b2a8",
-    "type": "feature",
-    "description": "GameLift introduces a new feature, GameLift Anywhere. GameLift Anywhere allows you to integrate your own compute resources with GameLift. You can also use GameLift Anywhere to iteratively test your game servers without uploading the build to GameLift for every iteration.",
-    "modules": [
-        "service/gamelift"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "246335b3-d433-49b0-9c88-80839bf638f8",
-    "type": "feature",
-    "description": "This release adds operations that support customers using the AWS Toolkits and Amazon CodeCatalyst, a unified software development service that helps developers develop, deploy, and maintain applications in the cloud. For more information, see the documentation.",
-    "modules": [
-        "service/codecatalyst"
-    ]
-}

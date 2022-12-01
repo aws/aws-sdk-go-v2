@@ -1,8 +1,0 @@
-{
-    "id": "67af669e-7338-45ed-b9ee-72ed359b422d",
-    "type": "feature",
-    "description": "Comprehend now supports semi-structured documents (such as PDF files or image files) as inputs for custom analysis using the synchronous APIs (ClassifyDocument and DetectEntities).",
-    "modules": [
-        "service/comprehend"
-    ]
-}
