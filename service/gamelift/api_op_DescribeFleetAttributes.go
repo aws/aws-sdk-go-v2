@@ -30,11 +30,6 @@ import (
 // this limit, the request fails and the error message contains the maximum allowed
 // number. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
-// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
-// | DescribeFleetPortSettings | DescribeFleetUtilization |
-// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetAttributes(ctx context.Context, params *DescribeFleetAttributesInput, optFns ...func(*Options)) (*DescribeFleetAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeFleetAttributesInput{}
@@ -50,7 +45,6 @@ func (c *Client) DescribeFleetAttributes(ctx context.Context, params *DescribeFl
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeFleetAttributesInput struct {
 
 	// A list of unique fleet identifiers to retrieve attributes for. You can use
@@ -72,7 +66,6 @@ type DescribeFleetAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeFleetAttributesOutput struct {
 
 	// A collection of objects containing attribute metadata for each requested fleet

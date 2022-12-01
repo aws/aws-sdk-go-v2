@@ -60,11 +60,6 @@ import (
 // usage data for each requested instance type. Learn more Setting up GameLift
 // fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions CreateFleet | UpdateFleetCapacity | PutScalingPolicy |
-// DescribeEC2InstanceLimits | DescribeFleetAttributes |
-// DescribeFleetLocationAttributes | UpdateFleetAttributes | StopFleetActions |
-// DeleteFleet | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeEC2InstanceLimits(ctx context.Context, params *DescribeEC2InstanceLimitsInput, optFns ...func(*Options)) (*DescribeEC2InstanceLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeEC2InstanceLimitsInput{}
@@ -80,7 +75,6 @@ func (c *Client) DescribeEC2InstanceLimits(ctx context.Context, params *Describe
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeEC2InstanceLimitsInput struct {
 
 	// Name of an Amazon EC2 instance type that is supported in GameLift. A fleet
@@ -96,7 +90,6 @@ type DescribeEC2InstanceLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeEC2InstanceLimitsOutput struct {
 
 	// The maximum number of instances for the specified instance type.

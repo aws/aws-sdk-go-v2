@@ -125,7 +125,7 @@ func (e *ExecutionLimitExceeded) ErrorMessage() string {
 func (e *ExecutionLimitExceeded) ErrorCode() string             { return "ExecutionLimitExceeded" }
 func (e *ExecutionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided Amazon Resource Name (ARN) is invalid.
+// The provided Amazon Resource Name (ARN) is not valid.
 type InvalidArn struct {
 	Message *string
 
@@ -144,7 +144,7 @@ func (e *InvalidArn) ErrorMessage() string {
 func (e *InvalidArn) ErrorCode() string             { return "InvalidArn" }
 func (e *InvalidArn) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided Amazon States Language definition is invalid.
+// The provided Amazon States Language definition is not valid.
 type InvalidDefinition struct {
 	Message *string
 
@@ -163,7 +163,7 @@ func (e *InvalidDefinition) ErrorMessage() string {
 func (e *InvalidDefinition) ErrorCode() string             { return "InvalidDefinition" }
 func (e *InvalidDefinition) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided JSON input data is invalid.
+// The provided JSON input data is not valid.
 type InvalidExecutionInput struct {
 	Message *string
 
@@ -200,7 +200,7 @@ func (e *InvalidLoggingConfiguration) ErrorMessage() string {
 func (e *InvalidLoggingConfiguration) ErrorCode() string             { return "InvalidLoggingConfiguration" }
 func (e *InvalidLoggingConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided name is invalid.
+// The provided name is not valid.
 type InvalidName struct {
 	Message *string
 
@@ -219,7 +219,7 @@ func (e *InvalidName) ErrorMessage() string {
 func (e *InvalidName) ErrorCode() string             { return "InvalidName" }
 func (e *InvalidName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided JSON output data is invalid.
+// The provided JSON output data is not valid.
 type InvalidOutput struct {
 	Message *string
 
@@ -238,7 +238,7 @@ func (e *InvalidOutput) ErrorMessage() string {
 func (e *InvalidOutput) ErrorCode() string             { return "InvalidOutput" }
 func (e *InvalidOutput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided token is invalid.
+// The provided token is not valid.
 type InvalidToken struct {
 	Message *string
 
@@ -473,3 +473,25 @@ func (e *TooManyTags) ErrorMessage() string {
 }
 func (e *TooManyTags) ErrorCode() string             { return "TooManyTags" }
 func (e *TooManyTags) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The input does not satisfy the constraints specified by an Amazon Web Services
+// service.
+type ValidationException struct {
+	Message *string
+
+	Reason ValidationExceptionReason
+
+	noSmithyDocumentSerde
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

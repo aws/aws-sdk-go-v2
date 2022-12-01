@@ -4934,6 +4934,18 @@ func awsAwsjson11_serializeOpDocumentClassifyDocumentInput(v *ClassifyDocumentIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.Bytes != nil {
+		ok := object.Key("Bytes")
+		ok.Base64EncodeBytes(v.Bytes)
+	}
+
+	if v.DocumentReaderConfig != nil {
+		ok := object.Key("DocumentReaderConfig")
+		if err := awsAwsjson11_serializeDocumentDocumentReaderConfig(v.DocumentReaderConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EndpointArn != nil {
 		ok := object.Key("EndpointArn")
 		ok.String(*v.EndpointArn)
@@ -5375,6 +5387,18 @@ func awsAwsjson11_serializeOpDocumentDetectDominantLanguageInput(v *DetectDomina
 func awsAwsjson11_serializeOpDocumentDetectEntitiesInput(v *DetectEntitiesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Bytes != nil {
+		ok := object.Key("Bytes")
+		ok.Base64EncodeBytes(v.Bytes)
+	}
+
+	if v.DocumentReaderConfig != nil {
+		ok := object.Key("DocumentReaderConfig")
+		if err := awsAwsjson11_serializeDocumentDocumentReaderConfig(v.DocumentReaderConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.EndpointArn != nil {
 		ok := object.Key("EndpointArn")

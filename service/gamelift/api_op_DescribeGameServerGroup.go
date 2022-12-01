@@ -20,11 +20,6 @@ import (
 // value. If successful, a GameServerGroup object is returned. Learn more GameLift
 // FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related actions CreateGameServerGroup | ListGameServerGroups |
-// DescribeGameServerGroup | UpdateGameServerGroup | DeleteGameServerGroup |
-// ResumeGameServerGroup | SuspendGameServerGroup | DescribeGameServerInstances |
-// All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGameServerGroupInput, optFns ...func(*Options)) (*DescribeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerGroupInput{}
@@ -42,8 +37,7 @@ func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGa
 
 type DescribeGameServerGroupInput struct {
 
-	// A unique identifier for the game server group. Use either the GameServerGroup
-	// name or ARN value.
+	// A unique identifier for the game server group. Use either the name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

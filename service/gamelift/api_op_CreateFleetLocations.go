@@ -16,24 +16,17 @@ import (
 // auto-scaling, and other configuration settings. This operation cannot be used
 // with fleets that don't support remote locations. Fleets can have multiple
 // locations only if they reside in Amazon Web Services Regions that support this
-// feature (see CreateFleet for the complete list) and were created after the
-// feature was released in March 2021. To add fleet locations, specify the fleet to
-// be updated and provide a list of one or more locations. If successful, this
-// operation returns the list of added locations with their status set to NEW.
-// GameLift initiates the process of starting an instance in each added location.
-// You can track the status of each new location by monitoring location creation
-// events using DescribeFleetEvents. Alternatively, you can poll location status by
-// calling DescribeFleetLocationAttributes. After a location status becomes ACTIVE,
-// you can adjust the location's capacity as needed with UpdateFleetCapacity. Learn
-// more Setting up fleets
+// feature and were created after the feature was released in March 2021. To add
+// fleet locations, specify the fleet to be updated and provide a list of one or
+// more locations. If successful, this operation returns the list of added
+// locations with their status set to NEW. GameLift initiates the process of
+// starting an instance in each added location. You can track the status of each
+// new location by monitoring location creation events using DescribeFleetEvents
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html).
+// Learn more Setting up fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)Multi-location
 // fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions CreateFleetLocations | DescribeFleetLocationAttributes |
-// DescribeFleetLocationCapacity | DescribeFleetLocationUtilization |
-// DescribeFleetAttributes | DescribeFleetCapacity | DescribeFleetUtilization |
-// UpdateFleetCapacity | StopFleetActions | DeleteFleetLocations | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateFleetLocations(ctx context.Context, params *CreateFleetLocationsInput, optFns ...func(*Options)) (*CreateFleetLocationsOutput, error) {
 	if params == nil {
 		params = &CreateFleetLocationsInput{}
@@ -49,7 +42,6 @@ func (c *Client) CreateFleetLocations(ctx context.Context, params *CreateFleetLo
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type CreateFleetLocationsInput struct {
 
 	// A unique identifier for the fleet to add locations to. You can use either the
@@ -68,7 +60,6 @@ type CreateFleetLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type CreateFleetLocationsOutput struct {
 
 	// The Amazon Resource Name (ARN

@@ -11,16 +11,11 @@ import (
 )
 
 // Removes a VPC peering connection. To delete the connection, you must have a
-// valid authorization for the VPC peering connection that you want to delete. You
-// can check for an authorization by calling DescribeVpcPeeringAuthorizations or
-// request a new one using CreateVpcPeeringAuthorization. Once a valid
-// authorization exists, call this operation from the Amazon Web Services account
-// that is used to manage the Amazon GameLift fleets. Identify the connection to
-// delete by the connection ID and fleet ID. If successful, the connection is
-// removed. Related actions CreateVpcPeeringAuthorization |
-// DescribeVpcPeeringAuthorizations | DeleteVpcPeeringAuthorization |
-// CreateVpcPeeringConnection | DescribeVpcPeeringConnections |
-// DeleteVpcPeeringConnection | All APIs by task
+// valid authorization for the VPC peering connection that you want to delete..
+// Once a valid authorization exists, call this operation from the Amazon Web
+// Services account that is used to manage the Amazon GameLift fleets. Identify the
+// connection to delete by the connection ID and fleet ID. If successful, the
+// connection is removed. Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteVpcPeeringConnectionInput, optFns ...func(*Options)) (*DeleteVpcPeeringConnectionOutput, error) {
 	if params == nil {
@@ -37,7 +32,6 @@ func (c *Client) DeleteVpcPeeringConnection(ctx context.Context, params *DeleteV
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DeleteVpcPeeringConnectionInput struct {
 
 	// A unique identifier for the fleet. This fleet specified must match the fleet
@@ -47,9 +41,7 @@ type DeleteVpcPeeringConnectionInput struct {
 	// This member is required.
 	FleetId *string
 
-	// A unique identifier for a VPC peering connection. This value is included in the
-	// VpcPeeringConnection object, which can be retrieved by calling
-	// DescribeVpcPeeringConnections.
+	// A unique identifier for a VPC peering connection.
 	//
 	// This member is required.
 	VpcPeeringConnectionId *string

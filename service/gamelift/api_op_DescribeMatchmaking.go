@@ -20,15 +20,10 @@ import (
 // practice can cause you to exceed your API limit, which results in errors.
 // Instead, as a best practice, set up an Amazon Simple Notification Service to
 // receive notifications, and provide the topic ARN in the matchmaking
-// configuration. Continuously polling ticket status with DescribeMatchmaking
-// should only be used for games in development with low matchmaking usage. Learn
-// more  Add FlexMatch to a game client
+// configuration. Learn more  Add FlexMatch to a game client
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
 // Set Up FlexMatch event notification
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
-// Related actions StartMatchmaking | DescribeMatchmaking | StopMatchmaking |
-// AcceptMatch | StartMatchBackfill | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeMatchmaking(ctx context.Context, params *DescribeMatchmakingInput, optFns ...func(*Options)) (*DescribeMatchmakingOutput, error) {
 	if params == nil {
 		params = &DescribeMatchmakingInput{}
@@ -44,7 +39,6 @@ func (c *Client) DescribeMatchmaking(ctx context.Context, params *DescribeMatchm
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeMatchmakingInput struct {
 
 	// A unique identifier for a matchmaking ticket. You can include up to 10 ID
@@ -56,7 +50,6 @@ type DescribeMatchmakingInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeMatchmakingOutput struct {
 
 	// A collection of existing matchmaking ticket objects matching the request.

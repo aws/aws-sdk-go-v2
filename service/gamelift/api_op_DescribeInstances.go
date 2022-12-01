@@ -33,8 +33,7 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)Debug
 // Fleet Issues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
-// Related actions DescribeInstances | GetInstanceAccess |
-// DescribeEC2InstanceLimits | All APIs by task
+// Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstancesInput, optFns ...func(*Options)) (*DescribeInstancesOutput, error) {
 	if params == nil {
@@ -51,7 +50,6 @@ func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstance
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeInstancesInput struct {
 
 	// A unique identifier for the fleet to retrieve instance information for. You can
@@ -80,7 +78,6 @@ type DescribeInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeInstancesOutput struct {
 
 	// A collection of objects containing properties for each instance returned.

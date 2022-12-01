@@ -37,9 +37,6 @@ import (
 // Once a game server is successfully updated, the relevant statuses and
 // timestamps are updated. Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related actions RegisterGameServer | ListGameServers | ClaimGameServer |
-// DescribeGameServer | UpdateGameServer | DeregisterGameServer | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) UpdateGameServer(ctx context.Context, params *UpdateGameServerInput, optFns ...func(*Options)) (*UpdateGameServerOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerInput{}
@@ -58,7 +55,6 @@ func (c *Client) UpdateGameServer(ctx context.Context, params *UpdateGameServerI
 type UpdateGameServerInput struct {
 
 	// A unique identifier for the game server group where the game server is running.
-	// Use either the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
@@ -70,7 +66,7 @@ type UpdateGameServerInput struct {
 
 	// A set of custom game server properties, formatted as a single string value. This
 	// data is passed to a game client or service when it requests information on game
-	// servers using ListGameServers or ClaimGameServer.
+	// servers.
 	GameServerData *string
 
 	// Indicates health status of the game server. A request that includes this

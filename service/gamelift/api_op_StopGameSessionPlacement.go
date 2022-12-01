@@ -13,11 +13,7 @@ import (
 
 // Cancels a game session placement that is in PENDING status. To stop a placement,
 // provide the placement ID values. If successful, the placement is moved to
-// CANCELLED status. Related actions CreateGameSession | DescribeGameSessions |
-// DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |
-// GetGameSessionLogUrl | StartGameSessionPlacement | DescribeGameSessionPlacement
-// | StopGameSessionPlacement | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// CANCELLED status.
 func (c *Client) StopGameSessionPlacement(ctx context.Context, params *StopGameSessionPlacementInput, optFns ...func(*Options)) (*StopGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &StopGameSessionPlacementInput{}
@@ -33,10 +29,9 @@ func (c *Client) StopGameSessionPlacement(ctx context.Context, params *StopGameS
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type StopGameSessionPlacementInput struct {
 
-	// A unique identifier for a game session placement to cancel.
+	// A unique identifier for a game session placement to stop.
 	//
 	// This member is required.
 	PlacementId *string
@@ -44,7 +39,6 @@ type StopGameSessionPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type StopGameSessionPlacementOutput struct {
 
 	// Object that describes the canceled game session placement, with CANCELLED status

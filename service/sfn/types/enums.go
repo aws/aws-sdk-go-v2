@@ -85,6 +85,10 @@ const (
 	HistoryEventTypeWaitStateAborted             HistoryEventType = "WaitStateAborted"
 	HistoryEventTypeWaitStateEntered             HistoryEventType = "WaitStateEntered"
 	HistoryEventTypeWaitStateExited              HistoryEventType = "WaitStateExited"
+	HistoryEventTypeMapRunAborted                HistoryEventType = "MapRunAborted"
+	HistoryEventTypeMapRunFailed                 HistoryEventType = "MapRunFailed"
+	HistoryEventTypeMapRunStarted                HistoryEventType = "MapRunStarted"
+	HistoryEventTypeMapRunSucceeded              HistoryEventType = "MapRunSucceeded"
 )
 
 // Values returns all known values for HistoryEventType. Note that this can be
@@ -147,6 +151,10 @@ func (HistoryEventType) Values() []HistoryEventType {
 		"WaitStateAborted",
 		"WaitStateEntered",
 		"WaitStateExited",
+		"MapRunAborted",
+		"MapRunFailed",
+		"MapRunStarted",
+		"MapRunSucceeded",
 	}
 }
 
@@ -169,6 +177,28 @@ func (LogLevel) Values() []LogLevel {
 		"ERROR",
 		"FATAL",
 		"OFF",
+	}
+}
+
+type MapRunStatus string
+
+// Enum values for MapRunStatus
+const (
+	MapRunStatusRunning   MapRunStatus = "RUNNING"
+	MapRunStatusSucceeded MapRunStatus = "SUCCEEDED"
+	MapRunStatusFailed    MapRunStatus = "FAILED"
+	MapRunStatusAborted   MapRunStatus = "ABORTED"
+)
+
+// Values returns all known values for MapRunStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MapRunStatus) Values() []MapRunStatus {
+	return []MapRunStatus{
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"ABORTED",
 	}
 }
 
@@ -225,5 +255,25 @@ func (SyncExecutionStatus) Values() []SyncExecutionStatus {
 		"SUCCEEDED",
 		"FAILED",
 		"TIMED_OUT",
+	}
+}
+
+type ValidationExceptionReason string
+
+// Enum values for ValidationExceptionReason
+const (
+	ValidationExceptionReasonApiDoesNotSupportLabeledArns ValidationExceptionReason = "API_DOES_NOT_SUPPORT_LABELED_ARNS"
+	ValidationExceptionReasonMissingRequiredParameter     ValidationExceptionReason = "MISSING_REQUIRED_PARAMETER"
+	ValidationExceptionReasonCannotUpdateCompletedMapRun  ValidationExceptionReason = "CANNOT_UPDATE_COMPLETED_MAP_RUN"
+)
+
+// Values returns all known values for ValidationExceptionReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidationExceptionReason) Values() []ValidationExceptionReason {
+	return []ValidationExceptionReason{
+		"API_DOES_NOT_SUPPORT_LABELED_ARNS",
+		"MISSING_REQUIRED_PARAMETER",
+		"CANNOT_UPDATE_COMPLETED_MAP_RUN",
 	}
 }

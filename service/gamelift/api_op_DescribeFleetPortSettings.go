@@ -30,11 +30,6 @@ import (
 // If the requested fleet has been deleted, the result set is empty. Learn more
 // Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
-// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
-// | DescribeFleetPortSettings | DescribeFleetUtilization |
-// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetPortSettings(ctx context.Context, params *DescribeFleetPortSettingsInput, optFns ...func(*Options)) (*DescribeFleetPortSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetPortSettingsInput{}
@@ -50,7 +45,6 @@ func (c *Client) DescribeFleetPortSettings(ctx context.Context, params *Describe
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeFleetPortSettingsInput struct {
 
 	// A unique identifier for the fleet to retrieve port settings for. You can use
@@ -66,7 +60,6 @@ type DescribeFleetPortSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeFleetPortSettingsOutput struct {
 
 	// The Amazon Resource Name (ARN

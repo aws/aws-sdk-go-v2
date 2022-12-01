@@ -15,23 +15,17 @@ import (
 // This operation is used with the GameLift FleetIQ solution and game server
 // groups. Retrieves status information about the Amazon EC2 instances associated
 // with a GameLift FleetIQ game server group. Use this operation to detect when
-// instances are active or not available to host new game servers. If you are
-// looking for instance configuration information, call DescribeGameServerGroup or
-// access the corresponding Auto Scaling group properties. To request status for
-// all instances in the game server group, provide a game server group ID only. To
-// request status for specific instances, provide the game server group ID and one
-// or more instance IDs. Use the pagination parameters to retrieve results in
-// sequential segments. If successful, a collection of GameServerInstance objects
-// is returned. This operation is not designed to be called with every game server
-// claim request; this practice can cause you to exceed your API limit, which
-// results in errors. Instead, as a best practice, cache the results and refresh
-// your cache no more than once every 10 seconds. Learn more GameLift FleetIQ Guide
+// instances are active or not available to host new game servers. To request
+// status for all instances in the game server group, provide a game server group
+// ID only. To request status for specific instances, provide the game server group
+// ID and one or more instance IDs. Use the pagination parameters to retrieve
+// results in sequential segments. If successful, a collection of
+// GameServerInstance objects is returned. This operation is not designed to be
+// called with every game server claim request; this practice can cause you to
+// exceed your API limit, which results in errors. Instead, as a best practice,
+// cache the results and refresh your cache no more than once every 10 seconds.
+// Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related actions CreateGameServerGroup | ListGameServerGroups |
-// DescribeGameServerGroup | UpdateGameServerGroup | DeleteGameServerGroup |
-// ResumeGameServerGroup | SuspendGameServerGroup | DescribeGameServerInstances |
-// All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) DescribeGameServerInstances(ctx context.Context, params *DescribeGameServerInstancesInput, optFns ...func(*Options)) (*DescribeGameServerInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerInstancesInput{}
@@ -49,8 +43,7 @@ func (c *Client) DescribeGameServerInstances(ctx context.Context, params *Descri
 
 type DescribeGameServerInstancesInput struct {
 
-	// A unique identifier for the game server group. Use either the GameServerGroup
-	// name or ARN value.
+	// A unique identifier for the game server group. Use either the name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

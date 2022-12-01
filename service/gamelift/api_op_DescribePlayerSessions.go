@@ -28,10 +28,7 @@ import (
 // player session ID, game session ID, or player ID. You can filter this request by
 // player session status. Use the pagination parameters to retrieve results as a
 // set of sequential pages. If successful, a PlayerSession object is returned for
-// each session that matches the request. Available in Amazon GameLift Local.
-// Related actions CreatePlayerSession | CreatePlayerSessions |
-// DescribePlayerSessions | StartGameSessionPlacement |
-// DescribeGameSessionPlacement | All APIs by task
+// each session that matches the request. Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribePlayerSessions(ctx context.Context, params *DescribePlayerSessionsInput, optFns ...func(*Options)) (*DescribePlayerSessionsOutput, error) {
 	if params == nil {
@@ -48,7 +45,6 @@ func (c *Client) DescribePlayerSessions(ctx context.Context, params *DescribePla
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribePlayerSessionsInput struct {
 
 	// A unique identifier for the game session to retrieve player sessions for.
@@ -71,15 +67,17 @@ type DescribePlayerSessionsInput struct {
 	// A unique identifier for a player session to retrieve.
 	PlayerSessionId *string
 
-	// Player session status to filter results on. Possible player session statuses
-	// include the following:
+	// Player session status to filter results on. Note that when a PlayerSessionId or
+	// PlayerId is provided in a DescribePlayerSessions request, then the
+	// PlayerSessionStatusFilter has no effect on the response. Possible player session
+	// statuses include the following:
 	//
-	// * RESERVED -- The player session request has been
-	// received, but the player has not yet connected to the server process and/or been
-	// validated.
+	// * RESERVED -- The player session request has
+	// been received, but the player has not yet connected to the server process and/or
+	// been validated.
 	//
-	// * ACTIVE -- The player has been validated by the server process and
-	// is currently connected.
+	// * ACTIVE -- The player has been validated by the server process
+	// and is currently connected.
 	//
 	// * COMPLETED -- The player connection has been
 	// dropped.
@@ -91,7 +89,6 @@ type DescribePlayerSessionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribePlayerSessionsOutput struct {
 
 	// A token that indicates where to resume retrieving results on the next call to

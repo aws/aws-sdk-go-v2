@@ -17,13 +17,6 @@ import (
 //
 // * Build a rule set
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
-//
-// Related
-// actions CreateMatchmakingConfiguration | DescribeMatchmakingConfigurations |
-// UpdateMatchmakingConfiguration | DeleteMatchmakingConfiguration |
-// CreateMatchmakingRuleSet | DescribeMatchmakingRuleSets |
-// ValidateMatchmakingRuleSet | DeleteMatchmakingRuleSet | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ValidateMatchmakingRuleSet(ctx context.Context, params *ValidateMatchmakingRuleSetInput, optFns ...func(*Options)) (*ValidateMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &ValidateMatchmakingRuleSetInput{}
@@ -39,7 +32,6 @@ func (c *Client) ValidateMatchmakingRuleSet(ctx context.Context, params *Validat
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type ValidateMatchmakingRuleSetInput struct {
 
 	// A collection of matchmaking rules to validate, formatted as a JSON string.
@@ -50,7 +42,6 @@ type ValidateMatchmakingRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type ValidateMatchmakingRuleSetOutput struct {
 
 	// A response indicating whether the rule set is valid.

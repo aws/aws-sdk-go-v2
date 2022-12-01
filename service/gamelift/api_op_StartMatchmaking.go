@@ -32,9 +32,6 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
 // How GameLift FlexMatch works
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
-// Related actions StartMatchmaking | DescribeMatchmaking | StopMatchmaking |
-// AcceptMatch | StartMatchBackfill | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) StartMatchmaking(ctx context.Context, params *StartMatchmakingInput, optFns ...func(*Options)) (*StartMatchmakingOutput, error) {
 	if params == nil {
 		params = &StartMatchmakingInput{}
@@ -50,7 +47,6 @@ func (c *Client) StartMatchmaking(ctx context.Context, params *StartMatchmakingI
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type StartMatchmakingInput struct {
 
 	// Name of the matchmaking configuration to use for this request. Matchmaking
@@ -63,7 +59,8 @@ type StartMatchmakingInput struct {
 	// Information on each player to be matched. This information must include a player
 	// ID, and may contain player attributes and latency data to be used in the
 	// matchmaking process. After a successful match, Player objects contain the name
-	// of the team the player is assigned to.
+	// of the team the player is assigned to. You can include up to 10 Players in a
+	// StartMatchmaking request.
 	//
 	// This member is required.
 	Players []types.Player
@@ -76,7 +73,6 @@ type StartMatchmakingInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type StartMatchmakingOutput struct {
 
 	// Ticket representing the matchmaking request. This object include the information

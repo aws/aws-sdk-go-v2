@@ -28,16 +28,10 @@ import (
 // the type of actions to suspend.
 //
 // If successful, GameLift no longer initiates
-// scaling events except in response to manual changes using UpdateFleetCapacity.
-// You can view a fleet's stopped actions using DescribeFleetAttributes or
-// DescribeFleetLocationAttributes. Suspended activity can be restarted using
-// StartFleetActions. Learn more Setting up GameLift Fleets
+// scaling events except in response to manual changes using UpdateFleetCapacity
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html).
+// Learn more Setting up GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions CreateFleet | UpdateFleetCapacity | PutScalingPolicy |
-// DescribeEC2InstanceLimits | DescribeFleetAttributes |
-// DescribeFleetLocationAttributes | UpdateFleetAttributes | StopFleetActions |
-// DeleteFleet | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsInput, optFns ...func(*Options)) (*StopFleetActionsOutput, error) {
 	if params == nil {
 		params = &StopFleetActionsInput{}
@@ -53,7 +47,6 @@ func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsI
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type StopFleetActionsInput struct {
 
 	// List of actions to suspend on the fleet.
@@ -74,7 +67,6 @@ type StopFleetActionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the input for a request operation.
 type StopFleetActionsOutput struct {
 
 	// The Amazon Resource Name (ARN

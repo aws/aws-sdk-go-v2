@@ -190,6 +190,26 @@ func (m *validateOpCreateGameSessionQueue) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLocation struct {
+}
+
+func (*validateOpCreateLocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMatchmakingConfiguration struct {
 }
 
@@ -450,6 +470,26 @@ func (m *validateOpDeleteGameSessionQueue) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteLocation struct {
+}
+
+func (*validateOpDeleteLocation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLocation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLocationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLocationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMatchmakingConfiguration struct {
 }
 
@@ -570,6 +610,26 @@ func (m *validateOpDeleteVpcPeeringConnection) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeregisterCompute struct {
+}
+
+func (*validateOpDeregisterCompute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterCompute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterComputeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterComputeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeregisterGameServer struct {
 }
 
@@ -625,6 +685,26 @@ func (m *validateOpDescribeBuild) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeBuildInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeCompute struct {
+}
+
+func (*validateOpDescribeCompute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeCompute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeComputeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeComputeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -910,6 +990,46 @@ func (m *validateOpDescribeScript) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetComputeAccess struct {
+}
+
+func (*validateOpGetComputeAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetComputeAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetComputeAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetComputeAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetComputeAuthToken struct {
+}
+
+func (*validateOpGetComputeAuthToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetComputeAuthToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetComputeAuthTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetComputeAuthTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetGameSessionLogUrl struct {
 }
 
@@ -945,6 +1065,26 @@ func (m *validateOpGetInstanceAccess) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetInstanceAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCompute struct {
+}
+
+func (*validateOpListCompute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCompute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListComputeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListComputeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1005,6 +1145,26 @@ func (m *validateOpPutScalingPolicy) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutScalingPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRegisterCompute struct {
+}
+
+func (*validateOpRegisterCompute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterCompute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterComputeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterComputeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1586,6 +1746,10 @@ func addOpCreateGameSessionQueueValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateGameSessionQueue{}, middleware.After)
 }
 
+func addOpCreateLocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLocation{}, middleware.After)
+}
+
 func addOpCreateMatchmakingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMatchmakingConfiguration{}, middleware.After)
 }
@@ -1638,6 +1802,10 @@ func addOpDeleteGameSessionQueueValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteGameSessionQueue{}, middleware.After)
 }
 
+func addOpDeleteLocationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLocation{}, middleware.After)
+}
+
 func addOpDeleteMatchmakingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMatchmakingConfiguration{}, middleware.After)
 }
@@ -1662,6 +1830,10 @@ func addOpDeleteVpcPeeringConnectionValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpDeleteVpcPeeringConnection{}, middleware.After)
 }
 
+func addOpDeregisterComputeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterCompute{}, middleware.After)
+}
+
 func addOpDeregisterGameServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterGameServer{}, middleware.After)
 }
@@ -1672,6 +1844,10 @@ func addOpDescribeAliasValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeBuildValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeBuild{}, middleware.After)
+}
+
+func addOpDescribeComputeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeCompute{}, middleware.After)
 }
 
 func addOpDescribeFleetEventsValidationMiddleware(stack *middleware.Stack) error {
@@ -1730,12 +1906,24 @@ func addOpDescribeScriptValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeScript{}, middleware.After)
 }
 
+func addOpGetComputeAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetComputeAccess{}, middleware.After)
+}
+
+func addOpGetComputeAuthTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetComputeAuthToken{}, middleware.After)
+}
+
 func addOpGetGameSessionLogUrlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGameSessionLogUrl{}, middleware.After)
 }
 
 func addOpGetInstanceAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetInstanceAccess{}, middleware.After)
+}
+
+func addOpListComputeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCompute{}, middleware.After)
 }
 
 func addOpListGameServersValidationMiddleware(stack *middleware.Stack) error {
@@ -1748,6 +1936,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutScalingPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutScalingPolicy{}, middleware.After)
+}
+
+func addOpRegisterComputeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterCompute{}, middleware.After)
 }
 
 func addOpRegisterGameServerValidationMiddleware(stack *middleware.Stack) error {
@@ -1856,6 +2048,21 @@ func addOpUpdateScriptValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpValidateMatchmakingRuleSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpValidateMatchmakingRuleSet{}, middleware.After)
+}
+
+func validateAnywhereConfiguration(v *types.AnywhereConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AnywhereConfiguration"}
+	if v.Cost == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Cost"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateCertificateConfiguration(v *types.CertificateConfiguration) error {
@@ -1990,6 +2197,38 @@ func validateIpPermissionsList(v []types.IpPermission) error {
 	invalidParams := smithy.InvalidParamsError{Context: "IpPermissionsList"}
 	for i := range v {
 		if err := validateIpPermission(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLocationConfiguration(v *types.LocationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LocationConfiguration"}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLocationConfigurationList(v []types.LocationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LocationConfigurationList"}
+	for i := range v {
+		if err := validateLocationConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2198,9 +2437,6 @@ func validateOpCreateFleetInput(v *CreateFleetInput) error {
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if len(v.EC2InstanceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("EC2InstanceType"))
-	}
 	if v.EC2InboundPermissions != nil {
 		if err := validateIpPermissionsList(v.EC2InboundPermissions); err != nil {
 			invalidParams.AddNested("EC2InboundPermissions", err.(smithy.InvalidParamsError))
@@ -2216,9 +2452,19 @@ func validateOpCreateFleetInput(v *CreateFleetInput) error {
 			invalidParams.AddNested("CertificateConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Locations != nil {
+		if err := validateLocationConfigurationList(v.Locations); err != nil {
+			invalidParams.AddNested("Locations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AnywhereConfiguration != nil {
+		if err := validateAnywhereConfiguration(v.AnywhereConfiguration); err != nil {
+			invalidParams.AddNested("AnywhereConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2238,6 +2484,10 @@ func validateOpCreateFleetLocationsInput(v *CreateFleetLocationsInput) error {
 	}
 	if v.Locations == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Locations"))
+	} else if v.Locations != nil {
+		if err := validateLocationConfigurationList(v.Locations); err != nil {
+			invalidParams.AddNested("Locations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2317,6 +2567,26 @@ func validateOpCreateGameSessionQueueInput(v *CreateGameSessionQueueInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGameSessionQueueInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLocationInput(v *CreateLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLocationInput"}
+	if v.LocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationName"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -2572,6 +2842,21 @@ func validateOpDeleteGameSessionQueueInput(v *DeleteGameSessionQueueInput) error
 	}
 }
 
+func validateOpDeleteLocationInput(v *DeleteLocationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLocationInput"}
+	if v.LocationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMatchmakingConfigurationInput(v *DeleteMatchmakingConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -2671,6 +2956,24 @@ func validateOpDeleteVpcPeeringConnectionInput(v *DeleteVpcPeeringConnectionInpu
 	}
 }
 
+func validateOpDeregisterComputeInput(v *DeregisterComputeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterComputeInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.ComputeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeregisterGameServerInput(v *DeregisterGameServerInput) error {
 	if v == nil {
 		return nil
@@ -2711,6 +3014,24 @@ func validateOpDescribeBuildInput(v *DescribeBuildInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeBuildInput"}
 	if v.BuildId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BuildId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeComputeInput(v *DescribeComputeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeComputeInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.ComputeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2938,6 +3259,42 @@ func validateOpDescribeScriptInput(v *DescribeScriptInput) error {
 	}
 }
 
+func validateOpGetComputeAccessInput(v *GetComputeAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetComputeAccessInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.ComputeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetComputeAuthTokenInput(v *GetComputeAuthTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetComputeAuthTokenInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.ComputeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetGameSessionLogUrlInput(v *GetGameSessionLogUrlInput) error {
 	if v == nil {
 		return nil
@@ -2963,6 +3320,21 @@ func validateOpGetInstanceAccessInput(v *GetInstanceAccessInput) error {
 	}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListComputeInput(v *ListComputeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListComputeInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3019,6 +3391,24 @@ func validateOpPutScalingPolicyInput(v *PutScalingPolicyInput) error {
 		if err := validateTargetConfiguration(v.TargetConfiguration); err != nil {
 			invalidParams.AddNested("TargetConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterComputeInput(v *RegisterComputeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterComputeInput"}
+	if v.FleetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.ComputeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3319,6 +3709,11 @@ func validateOpUpdateFleetAttributesInput(v *UpdateFleetAttributesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFleetAttributesInput"}
 	if v.FleetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FleetId"))
+	}
+	if v.AnywhereConfiguration != nil {
+		if err := validateAnywhereConfiguration(v.AnywhereConfiguration); err != nil {
+			invalidParams.AddNested("AnywhereConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

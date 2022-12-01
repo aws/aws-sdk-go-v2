@@ -21,8 +21,7 @@ import (
 // script is updated and acquired by a fleet instance, the new version is used for
 // all new game sessions. Learn more Amazon GameLift Realtime Servers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
-// Related actions CreateScript | ListScripts | DescribeScript | UpdateScript |
-// DeleteScript | All APIs by task
+// Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateScript(ctx context.Context, params *UpdateScriptInput, optFns ...func(*Options)) (*UpdateScriptOutput, error) {
 	if params == nil {
@@ -61,8 +60,8 @@ type UpdateScriptInput struct {
 	// version.
 	StorageLocation *types.S3Location
 
-	// Version information that is associated with a build or script. Version strings
-	// do not need to be unique.
+	// Version information associated with a build or script. Version strings do not
+	// need to be unique.
 	Version *string
 
 	// A data object containing your Realtime scripts and dependencies as a zip file.

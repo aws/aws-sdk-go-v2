@@ -12,9 +12,13 @@ import (
 	"time"
 )
 
-// Describes an execution. This operation is eventually consistent. The results are
-// best effort and may not reflect very recent updates and changes. This API action
-// is not supported by EXPRESS state machines.
+// Provides all information about a state machine execution, such as the state
+// machine associated with the execution, the execution input and output, and
+// relevant execution metadata. Use this API action to return the Map Run ARN if
+// the execution was dispatched by a Map Run. This operation is eventually
+// consistent. The results are best effort and may not reflect very recent updates
+// and changes. This API action is not supported by EXPRESS state machine
+// executions unless they were dispatched by a Map Run.
 func (c *Client) DescribeExecution(ctx context.Context, params *DescribeExecutionInput, optFns ...func(*Options)) (*DescribeExecutionOutput, error) {
 	if params == nil {
 		params = &DescribeExecutionInput{}
@@ -62,6 +66,12 @@ type DescribeExecutionOutput struct {
 	// This member is required.
 	Status types.ExecutionStatus
 
+	// The cause string if the state machine execution failed.
+	Cause *string
+
+	// The error string if the state machine execution failed.
+	Error *string
+
 	// The string that contains the JSON input data of the execution. Length
 	// constraints apply to the payload size, and are expressed as bytes in UTF-8
 	// encoding.
@@ -69,6 +79,10 @@ type DescribeExecutionOutput struct {
 
 	// Provides details about execution input or output.
 	InputDetails *types.CloudWatchEventsExecutionDataDetails
+
+	// The Amazon Resource Name (ARN) that identifies a Map Run, which dispatched this
+	// execution.
+	MapRunArn *string
 
 	// The name of the execution. A name must not contain:
 	//

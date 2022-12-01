@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the executions of a state machine that meet the filtering criteria.
+// Lists all executions of a state machine or a Map Run. You can list all
+// executions related to a state machine by specifying a state machine Amazon
+// Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN.
 // Results are sorted by time, with the most recent execution first. If nextToken
 // is returned, there are more results available. The value of nextToken is a
 // unique pagination token for each page. Make the call again using the returned
@@ -38,10 +40,14 @@ func (c *Client) ListExecutions(ctx context.Context, params *ListExecutionsInput
 
 type ListExecutionsInput struct {
 
-	// The Amazon Resource Name (ARN) of the state machine whose executions is listed.
-	//
-	// This member is required.
-	StateMachineArn *string
+	// The Amazon Resource Name (ARN) of the Map Run that started the child workflow
+	// executions. If the mapRunArn field is specified, a list of all of the child
+	// workflow executions started by a Map Run is returned. For more information, see
+	// Examining Map Run
+	// (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
+	// in the Step Functions Developer Guide. You can specify either a mapRunArn or a
+	// stateMachineArn, but not both.
+	MapRunArn *string
 
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
@@ -56,6 +62,10 @@ type ListExecutionsInput struct {
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string
+
+	// The Amazon Resource Name (ARN) of the state machine whose executions is listed.
+	// You can specify either a mapRunArn or a stateMachineArn, but not both.
+	StateMachineArn *string
 
 	// If specified, only list the executions whose current execution status matches
 	// the given filter.
@@ -127,9 +137,6 @@ func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpListExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListExecutions(options.Region), middleware.Before); err != nil {

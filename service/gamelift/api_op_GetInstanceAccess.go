@@ -22,14 +22,13 @@ import (
 // secret can be handled as part of the GetInstanceAccess request, as shown in one
 // of the examples for this operation. To request access to a specific instance,
 // specify the IDs of both the instance and the fleet it belongs to. You can
-// retrieve a fleet's instance IDs by calling DescribeInstances. If successful, an
-// InstanceAccess object is returned that contains the instance's IP address and a
-// set of credentials. Learn more Remotely Access Fleet Instances
+// retrieve a fleet's instance IDs by calling DescribeInstances
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeInstances.html).
+// Learn more Remotely Access Fleet Instances
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)Debug
 // Fleet Issues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
-// Related actions DescribeInstances | GetInstanceAccess |
-// DescribeEC2InstanceLimits | All APIs by task
+// Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) GetInstanceAccess(ctx context.Context, params *GetInstanceAccessInput, optFns ...func(*Options)) (*GetInstanceAccessOutput, error) {
 	if params == nil {
@@ -46,7 +45,6 @@ func (c *Client) GetInstanceAccess(ctx context.Context, params *GetInstanceAcces
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type GetInstanceAccessInput struct {
 
 	// A unique identifier for the fleet that contains the instance you want access to.
@@ -66,7 +64,6 @@ type GetInstanceAccessInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type GetInstanceAccessOutput struct {
 
 	// The connection information for a fleet instance, including IP address and access

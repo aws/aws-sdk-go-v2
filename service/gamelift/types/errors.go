@@ -196,8 +196,8 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A service resource associated with the request could not be found. Clients
-// should not retry such requests.
+// THe requested resources was not found. The resource was either not created yet
+// or deleted.
 type NotFoundException struct {
 	Message *string
 

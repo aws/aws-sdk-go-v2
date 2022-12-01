@@ -16,10 +16,7 @@ import (
 // the Amazon Web Services Service Limits
 // (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift)
 // page for maximum log file sizes. Log files that exceed this limit are not saved.
-// Related actions CreateGameSession | DescribeGameSessions |
-// DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |
-// GetGameSessionLogUrl | StartGameSessionPlacement | DescribeGameSessionPlacement
-// | StopGameSessionPlacement | All APIs by task
+// All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) GetGameSessionLogUrl(ctx context.Context, params *GetGameSessionLogUrlInput, optFns ...func(*Options)) (*GetGameSessionLogUrlOutput, error) {
 	if params == nil {
@@ -36,7 +33,6 @@ func (c *Client) GetGameSessionLogUrl(ctx context.Context, params *GetGameSessio
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type GetGameSessionLogUrlInput struct {
 
 	// A unique identifier for the game session to get logs for.
@@ -47,7 +43,6 @@ type GetGameSessionLogUrlInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type GetGameSessionLogUrlOutput struct {
 
 	// Location of the requested game session logs, available for download. This URL is

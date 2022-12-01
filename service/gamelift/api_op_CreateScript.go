@@ -37,8 +37,7 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)Set
 // Up a Role for Amazon GameLift Access
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html)
-// Related actions CreateScript | ListScripts | DescribeScript | UpdateScript |
-// DeleteScript | All APIs by task
+// Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, optFns ...func(*Options)) (*CreateScriptOutput, error) {
 	if params == nil {
@@ -58,7 +57,9 @@ func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, op
 type CreateScriptInput struct {
 
 	// A descriptive label that is associated with a script. Script names do not need
-	// to be unique. You can use UpdateScript to change this value later.
+	// to be unique. You can use UpdateScript
+	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html)
+	// to change this value later.
 	Name *string
 
 	// The location of the Amazon S3 bucket where a zipped file containing your
@@ -77,13 +78,20 @@ type CreateScriptInput struct {
 	// information, see  Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
 	// Web Services General Reference. Once the resource is created, you can use
-	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
-	// tags. The maximum tag limit may be lower than stated. See the Amazon Web
-	// Services General Reference for actual tagging limits.
+	// TagResource
+	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_TagResource.html),
+	// UntagResource
+	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UntagResource.html),
+	// and ListTagsForResource
+	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListTagsForResource.html)
+	// to add, remove, and view tags. The maximum tag limit may be lower than stated.
+	// See the Amazon Web Services General Reference for actual tagging limits.
 	Tags []types.Tag
 
-	// Version information that is associated with a build or script. Version strings
-	// do not need to be unique. You can use UpdateScript to change this value later.
+	// Version information associated with a build or script. Version strings do not
+	// need to be unique. You can use UpdateScript
+	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html)
+	// to change this value later.
 	Version *string
 
 	// A data object containing your Realtime scripts and dependencies as a zip file.

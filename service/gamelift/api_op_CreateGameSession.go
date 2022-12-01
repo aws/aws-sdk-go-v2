@@ -14,36 +14,38 @@ import (
 // Creates a multiplayer game session for players in a specific fleet location.
 // This operation prompts an available server process to start a game session and
 // retrieves connection information for the new game session. As an alternative,
-// consider using the GameLift game session placement feature with with
-// StartGameSessionPlacement, which uses FleetIQ algorithms and queues to optimize
-// the placement process. When creating a game session, you specify exactly where
-// you want to place it and provide a set of game session configuration settings.
-// The fleet must be in ACTIVE status before a game session can be created in it.
-// This operation can be used in the following ways:
-//
-// * To create a game session on
-// an instance in a fleet's home Region, provide a fleet or alias ID along with
-// your game session configuration.
+// consider using the GameLift game session placement feature with
+// StartGameSessionPlacement
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
+// , which uses FleetIQ algorithms and queues to optimize the placement process.
+// When creating a game session, you specify exactly where you want to place it and
+// provide a set of game session configuration settings. The fleet must be in
+// ACTIVE status before a game session can be created in it. This operation can be
+// used in the following ways:
 //
 // * To create a game session on an instance in a
-// fleet's remote location, provide a fleet or alias ID and a location name, along
-// with your game session configuration.
+// fleet's home Region, provide a fleet or alias ID along with your game session
+// configuration.
 //
-// If successful, a workflow is initiated to
-// start a new game session. A GameSession object is returned containing the game
-// session configuration and status. When the status is ACTIVE, game session
-// connection information is provided and player sessions can be created for the
-// game session. By default, newly created game sessions are open to new players.
-// You can restrict new player access by using UpdateGameSession to change the game
-// session's player session creation policy. Game session logs are retained for all
-// active game sessions for 14 days. To access the logs, call GetGameSessionLogUrl
+// * To create a game session on an instance in a fleet's remote
+// location, provide a fleet or alias ID and a location name, along with your game
+// session configuration.
+//
+// If successful, a workflow is initiated to start a new
+// game session. A GameSession object is returned containing the game session
+// configuration and status. When the status is ACTIVE, game session connection
+// information is provided and player sessions can be created for the game session.
+// By default, newly created game sessions are open to new players. You can
+// restrict new player access by using UpdateGameSession
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)
+// to change the game session's player session creation policy. Game session logs
+// are retained for all active game sessions for 14 days. To access the logs, call
+// GetGameSessionLogUrl
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_GetGameSessionLogUrl.html)
 // to download the log files. Available in Amazon GameLift Local. Learn more Start
 // a game session
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
-// Related actions CreateGameSession | DescribeGameSessions |
-// DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |
-// GetGameSessionLogUrl | StartGameSessionPlacement | DescribeGameSessionPlacement
-// | StopGameSessionPlacement | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)All
+// APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateGameSession(ctx context.Context, params *CreateGameSessionInput, optFns ...func(*Options)) (*CreateGameSessionOutput, error) {
 	if params == nil {
@@ -60,7 +62,6 @@ func (c *Client) CreateGameSession(ctx context.Context, params *CreateGameSessio
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type CreateGameSessionInput struct {
 
 	// The maximum number of players that can be connected simultaneously to the game
@@ -88,21 +89,20 @@ type CreateGameSessionInput struct {
 	FleetId *string
 
 	// A set of custom properties for a game session, formatted as key:value pairs.
-	// These properties are passed to a game server process in the GameSession object
-	// with a request to start a new game session (see Start a Game Session
+	// These properties are passed to a game server process with a request to start a
+	// new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
-	// This data is passed to a game server process in the GameSession object with a
-	// request to start a new game session (see Start a Game Session
+	// This data is passed to a game server process with a request to start a new game
+	// session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	GameSessionData *string
 
-	// This parameter is no longer preferred. Please use IdempotencyToken instead.
-	// Custom string that uniquely identifies a request for a new game session. Maximum
-	// token length is 48 characters. If provided, this string is included in the new
-	// game session's ID.
+	// This parameter is deprecated. Use IdempotencyToken instead. Custom string that
+	// uniquely identifies a request for a new game session. Maximum token length is 48
+	// characters. If provided, this string is included in the new game session's ID.
 	GameSessionId *string
 
 	// Custom string that uniquely identifies the new game session request. This is
@@ -127,7 +127,6 @@ type CreateGameSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type CreateGameSessionOutput struct {
 
 	// Object that describes the newly created game session record.

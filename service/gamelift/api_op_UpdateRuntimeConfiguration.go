@@ -23,11 +23,6 @@ import (
 // existing processes when they shut down. Updating a fleet's runtime configuration
 // never affects existing server processes. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions CreateFleetLocations | UpdateFleetAttributes |
-// UpdateFleetCapacity | UpdateFleetPortSettings | UpdateRuntimeConfiguration |
-// StopFleetActions | StartFleetActions | PutScalingPolicy | DeleteFleet |
-// DeleteFleetLocations | DeleteScalingPolicy | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateRuntimeConfigurationInput, optFns ...func(*Options)) (*UpdateRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateRuntimeConfigurationInput{}
@@ -43,7 +38,6 @@ func (c *Client) UpdateRuntimeConfiguration(ctx context.Context, params *UpdateR
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type UpdateRuntimeConfigurationInput struct {
 
 	// A unique identifier for the fleet to update runtime configuration for. You can
@@ -52,7 +46,7 @@ type UpdateRuntimeConfigurationInput struct {
 	// This member is required.
 	FleetId *string
 
-	// Instructions for launching server processes on each instance in the fleet.
+	// Instructions for alaunching server processes on each instance in the fleet.
 	// Server processes run either a custom game build executable or a Realtime Servers
 	// script. The runtime configuration lists the types of server processes to run on
 	// an instance, how to launch them, and the number of processes to run
@@ -64,7 +58,6 @@ type UpdateRuntimeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type UpdateRuntimeConfigurationOutput struct {
 
 	// The runtime configuration currently in use by all instances in the fleet. If the

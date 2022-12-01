@@ -15,32 +15,30 @@ import (
 // Retrieves utilization statistics for one or more fleets. Utilization data
 // provides a snapshot of how the fleet's hosting resources are currently being
 // used. For fleets with remote locations, this operation retrieves data for the
-// fleet's home Region only. See DescribeFleetLocationUtilization to get
-// utilization statistics for a fleet's remote locations. This operation can be
-// used in the following ways:
+// fleet's home Region only. See DescribeFleetLocationUtilization
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationUtilization.html)
+// to get utilization statistics for a fleet's remote locations. This operation can
+// be used in the following ways:
 //
-// * To get utilization data for one or more specific
-// fleets, provide a list of fleet IDs or fleet ARNs.
+// * To get utilization data for one or more
+// specific fleets, provide a list of fleet IDs or fleet ARNs.
 //
-// * To get utilization data
-// for all fleets, do not provide a fleet identifier.
+// * To get
+// utilization data for all fleets, do not provide a fleet identifier.
 //
-// When requesting multiple
-// fleets, use the pagination parameters to retrieve results as a set of sequential
-// pages. If successful, a FleetUtilization object is returned for each requested
-// fleet ID, unless the fleet identifier is not found. Each fleet utilization
-// object includes a Location property, which is set to the fleet's home Region.
-// Some API operations may limit the number of fleet IDs allowed in one request. If
-// a request exceeds this limit, the request fails and the error message includes
-// the maximum allowed. Learn more Setting up GameLift Fleets
+// When
+// requesting multiple fleets, use the pagination parameters to retrieve results as
+// a set of sequential pages. If successful, a FleetUtilization
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_FleetUtilization.html)
+// object is returned for each requested fleet ID, unless the fleet identifier is
+// not found. Each fleet utilization object includes a Location property, which is
+// set to the fleet's home Region. Some API operations may limit the number of
+// fleet IDs allowed in one request. If a request exceeds this limit, the request
+// fails and the error message includes the maximum allowed. Learn more Setting up
+// GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)GameLift
 // Metrics for Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
-// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
-// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
-// | DescribeFleetPortSettings | DescribeFleetUtilization |
-// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetUtilization(ctx context.Context, params *DescribeFleetUtilizationInput, optFns ...func(*Options)) (*DescribeFleetUtilizationOutput, error) {
 	if params == nil {
 		params = &DescribeFleetUtilizationInput{}
@@ -56,12 +54,11 @@ func (c *Client) DescribeFleetUtilization(ctx context.Context, params *DescribeF
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeFleetUtilizationInput struct {
 
-	// A unique identifier for the fleet(s) to retrieve utilization data for. You can
-	// use either the fleet ID or ARN value. To retrieve attributes for all current
-	// fleets, do not include this parameter.
+	// A unique identifier for the fleet to retrieve utilization data for. You can use
+	// either the fleet ID or ARN value. To retrieve attributes for all current fleets,
+	// do not include this parameter.
 	FleetIds []string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -78,7 +75,6 @@ type DescribeFleetUtilizationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeFleetUtilizationOutput struct {
 
 	// A collection of objects containing utilization information for each requested

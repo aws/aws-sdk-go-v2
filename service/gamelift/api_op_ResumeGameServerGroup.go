@@ -13,7 +13,7 @@ import (
 
 // This operation is used with the GameLift FleetIQ solution and game server
 // groups. Reinstates activity on a game server group after it has been suspended.
-// A game server group might be suspended by theSuspendGameServerGroup operation,
+// A game server group might be suspended by the SuspendGameServerGroup operation,
 // or it might be suspended involuntarily due to a configuration problem. In the
 // second case, you can manually resume activity on the group once the
 // configuration problem has been resolved. Refer to the game server group status
@@ -23,11 +23,6 @@ import (
 // resumed activity is no longer listed in SuspendedActions. Learn more GameLift
 // FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related actions CreateGameServerGroup | ListGameServerGroups |
-// DescribeGameServerGroup | UpdateGameServerGroup | DeleteGameServerGroup |
-// ResumeGameServerGroup | SuspendGameServerGroup | DescribeGameServerInstances |
-// All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameServerGroupInput, optFns ...func(*Options)) (*ResumeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &ResumeGameServerGroupInput{}
@@ -45,8 +40,7 @@ func (c *Client) ResumeGameServerGroup(ctx context.Context, params *ResumeGameSe
 
 type ResumeGameServerGroupInput struct {
 
-	// A unique identifier for the game server group. Use either the GameServerGroup
-	// name or ARN value.
+	// A unique identifier for the game server group. Use either the name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

@@ -21,11 +21,6 @@ import (
 // set of sequential pages. If successful, a collection of event log entries
 // matching the request are returned. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
-// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
-// | DescribeFleetPortSettings | DescribeFleetUtilization |
-// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetEvents(ctx context.Context, params *DescribeFleetEventsInput, optFns ...func(*Options)) (*DescribeFleetEventsOutput, error) {
 	if params == nil {
 		params = &DescribeFleetEventsInput{}
@@ -41,7 +36,6 @@ func (c *Client) DescribeFleetEvents(ctx context.Context, params *DescribeFleetE
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeFleetEventsInput struct {
 
 	// A unique identifier for the fleet to get event logs for. You can use either the
@@ -74,7 +68,6 @@ type DescribeFleetEventsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeFleetEventsOutput struct {
 
 	// A collection of objects containing event log entries for the specified fleet.

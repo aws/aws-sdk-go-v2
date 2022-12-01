@@ -129,6 +129,26 @@ func (m *validateOpDescribeExecution) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeMapRun struct {
+}
+
+func (*validateOpDescribeMapRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMapRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMapRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMapRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeStateMachineForExecution struct {
 }
 
@@ -209,21 +229,21 @@ func (m *validateOpGetExecutionHistory) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListExecutions struct {
+type validateOpListMapRuns struct {
 }
 
-func (*validateOpListExecutions) ID() string {
+func (*validateOpListMapRuns) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpListExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpListMapRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*ListExecutionsInput)
+	input, ok := in.Parameters.(*ListMapRunsInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpListExecutionsInput(input); err != nil {
+	if err := validateOpListMapRunsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -409,6 +429,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMapRun struct {
+}
+
+func (*validateOpUpdateMapRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMapRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMapRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMapRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateStateMachine struct {
 }
 
@@ -453,6 +493,10 @@ func addOpDescribeExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeExecution{}, middleware.After)
 }
 
+func addOpDescribeMapRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMapRun{}, middleware.After)
+}
+
 func addOpDescribeStateMachineForExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeStateMachineForExecution{}, middleware.After)
 }
@@ -469,8 +513,8 @@ func addOpGetExecutionHistoryValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetExecutionHistory{}, middleware.After)
 }
 
-func addOpListExecutionsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListExecutions{}, middleware.After)
+func addOpListMapRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMapRuns{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -507,6 +551,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateMapRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMapRun{}, middleware.After)
 }
 
 func addOpUpdateStateMachineValidationMiddleware(stack *middleware.Stack) error {
@@ -609,6 +657,21 @@ func validateOpDescribeExecutionInput(v *DescribeExecutionInput) error {
 	}
 }
 
+func validateOpDescribeMapRunInput(v *DescribeMapRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMapRunInput"}
+	if v.MapRunArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MapRunArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeStateMachineForExecutionInput(v *DescribeStateMachineForExecutionInput) error {
 	if v == nil {
 		return nil
@@ -669,13 +732,13 @@ func validateOpGetExecutionHistoryInput(v *GetExecutionHistoryInput) error {
 	}
 }
 
-func validateOpListExecutionsInput(v *ListExecutionsInput) error {
+func validateOpListMapRunsInput(v *ListMapRunsInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListExecutionsInput"}
-	if v.StateMachineArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StateMachineArn"))
+	invalidParams := smithy.InvalidParamsError{Context: "ListMapRunsInput"}
+	if v.ExecutionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -820,6 +883,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMapRunInput(v *UpdateMapRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMapRunInput"}
+	if v.MapRunArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MapRunArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

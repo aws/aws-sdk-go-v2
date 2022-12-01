@@ -18,8 +18,7 @@ import (
 // if the script record no longer exists, the instance will go into an error state
 // and be unable to host game sessions. Learn more Amazon GameLift Realtime Servers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
-// Related actions CreateScript | ListScripts | DescribeScript | UpdateScript |
-// DeleteScript | All APIs by task
+// Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteScript(ctx context.Context, params *DeleteScriptInput, optFns ...func(*Options)) (*DeleteScriptOutput, error) {
 	if params == nil {

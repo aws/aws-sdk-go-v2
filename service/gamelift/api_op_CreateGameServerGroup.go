@@ -48,11 +48,6 @@ import (
 // as part of its balancing activities to optimize for availability and cost. Learn
 // more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related actions CreateGameServerGroup | ListGameServerGroups |
-// DescribeGameServerGroup | UpdateGameServerGroup | DeleteGameServerGroup |
-// ResumeGameServerGroup | SuspendGameServerGroup | DescribeGameServerInstances |
-// All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) CreateGameServerGroup(ctx context.Context, params *CreateGameServerGroupInput, optFns ...func(*Options)) (*CreateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &CreateGameServerGroupInput{}
@@ -179,10 +174,7 @@ type CreateGameServerGroupInput struct {
 	// useful for resource management, access management, and cost allocation. For more
 	// information, see  Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference. Once the resource is created, you can use
-	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
-	// tags, respectively. The maximum tag limit may be lower than stated. See the
-	// Amazon Web Services General Reference for actual tagging limits.
+	// Web Services General Reference.
 	Tags []types.Tag
 
 	// A list of virtual private cloud (VPC) subnets to use with instances in the game

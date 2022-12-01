@@ -21,6 +21,24 @@ func (AugmentedManifestsDocumentTypeFormat) Values() []AugmentedManifestsDocumen
 	}
 }
 
+type BlockType string
+
+// Enum values for BlockType
+const (
+	BlockTypeLine BlockType = "LINE"
+	BlockTypeWord BlockType = "WORD"
+)
+
+// Values returns all known values for BlockType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (BlockType) Values() []BlockType {
+	return []BlockType{
+		"LINE",
+		"WORD",
+	}
+}
+
 type DocumentClassifierDataFormat string
 
 // Enum values for DocumentClassifierDataFormat
@@ -108,6 +126,34 @@ func (DocumentReadMode) Values() []DocumentReadMode {
 	return []DocumentReadMode{
 		"SERVICE_DEFAULT",
 		"FORCE_DOCUMENT_READ_ACTION",
+	}
+}
+
+type DocumentType string
+
+// Enum values for DocumentType
+const (
+	DocumentTypeNativePdf                      DocumentType = "NATIVE_PDF"
+	DocumentTypeScannedPdf                     DocumentType = "SCANNED_PDF"
+	DocumentTypeMsWord                         DocumentType = "MS_WORD"
+	DocumentTypeImage                          DocumentType = "IMAGE"
+	DocumentTypePlainText                      DocumentType = "PLAIN_TEXT"
+	DocumentTypeTextractDetectDocumentTextJson DocumentType = "TEXTRACT_DETECT_DOCUMENT_TEXT_JSON"
+	DocumentTypeTextractAnalyzeDocumentJson    DocumentType = "TEXTRACT_ANALYZE_DOCUMENT_JSON"
+)
+
+// Values returns all known values for DocumentType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DocumentType) Values() []DocumentType {
+	return []DocumentType{
+		"NATIVE_PDF",
+		"SCANNED_PDF",
+		"MS_WORD",
+		"IMAGE",
+		"PLAIN_TEXT",
+		"TEXTRACT_DETECT_DOCUMENT_TEXT_JSON",
+		"TEXTRACT_ANALYZE_DOCUMENT_JSON",
 	}
 }
 
@@ -203,6 +249,44 @@ func (InputFormat) Values() []InputFormat {
 	}
 }
 
+type InvalidRequestDetailReason string
+
+// Enum values for InvalidRequestDetailReason
+const (
+	InvalidRequestDetailReasonDocumentSizeExceeded InvalidRequestDetailReason = "DOCUMENT_SIZE_EXCEEDED"
+	InvalidRequestDetailReasonUnsupportedDocType   InvalidRequestDetailReason = "UNSUPPORTED_DOC_TYPE"
+	InvalidRequestDetailReasonPageLimitExceeded    InvalidRequestDetailReason = "PAGE_LIMIT_EXCEEDED"
+	InvalidRequestDetailReasonTextractAccessDenied InvalidRequestDetailReason = "TEXTRACT_ACCESS_DENIED"
+)
+
+// Values returns all known values for InvalidRequestDetailReason. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvalidRequestDetailReason) Values() []InvalidRequestDetailReason {
+	return []InvalidRequestDetailReason{
+		"DOCUMENT_SIZE_EXCEEDED",
+		"UNSUPPORTED_DOC_TYPE",
+		"PAGE_LIMIT_EXCEEDED",
+		"TEXTRACT_ACCESS_DENIED",
+	}
+}
+
+type InvalidRequestReason string
+
+// Enum values for InvalidRequestReason
+const (
+	InvalidRequestReasonInvalidDocument InvalidRequestReason = "INVALID_DOCUMENT"
+)
+
+// Values returns all known values for InvalidRequestReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InvalidRequestReason) Values() []InvalidRequestReason {
+	return []InvalidRequestReason{
+		"INVALID_DOCUMENT",
+	}
+}
+
 type JobStatus string
 
 // Enum values for JobStatus
@@ -292,6 +376,30 @@ func (ModelStatus) Values() []ModelStatus {
 		"STOPPED",
 		"IN_ERROR",
 		"TRAINED",
+	}
+}
+
+type PageBasedErrorCode string
+
+// Enum values for PageBasedErrorCode
+const (
+	PageBasedErrorCodeTextractBadPage                       PageBasedErrorCode = "TEXTRACT_BAD_PAGE"
+	PageBasedErrorCodeTextractProvisionedThroughputExceeded PageBasedErrorCode = "TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED"
+	PageBasedErrorCodePageCharactersExceeded                PageBasedErrorCode = "PAGE_CHARACTERS_EXCEEDED"
+	PageBasedErrorCodePageSizeExceeded                      PageBasedErrorCode = "PAGE_SIZE_EXCEEDED"
+	PageBasedErrorCodeInternalServerError                   PageBasedErrorCode = "INTERNAL_SERVER_ERROR"
+)
+
+// Values returns all known values for PageBasedErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PageBasedErrorCode) Values() []PageBasedErrorCode {
+	return []PageBasedErrorCode{
+		"TEXTRACT_BAD_PAGE",
+		"TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED",
+		"PAGE_CHARACTERS_EXCEEDED",
+		"PAGE_SIZE_EXCEEDED",
+		"INTERNAL_SERVER_ERROR",
 	}
 }
 
@@ -466,6 +574,22 @@ func (PiiEntityType) Values() []PiiEntityType {
 		"CA_HEALTH_NUMBER",
 		"IN_AADHAAR",
 		"IN_VOTER_NUMBER",
+	}
+}
+
+type RelationshipType string
+
+// Enum values for RelationshipType
+const (
+	RelationshipTypeChild RelationshipType = "CHILD"
+)
+
+// Values returns all known values for RelationshipType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RelationshipType) Values() []RelationshipType {
+	return []RelationshipType{
+		"CHILD",
 	}
 }
 

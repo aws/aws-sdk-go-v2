@@ -65,7 +65,6 @@ func (c *Client) CreateGameSessionQueue(ctx context.Context, params *CreateGameS
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type CreateGameSessionQueueInput struct {
 
 	// A descriptive label that is associated with game session queue. Queue names must
@@ -113,10 +112,7 @@ type CreateGameSessionQueueInput struct {
 	// useful for resource management, access management and cost allocation. For more
 	// information, see  Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference. Once the resource is created, you can use
-	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
-	// tags. The maximum tag limit may be lower than stated. See the Amazon Web
-	// Services General Reference for actual tagging limits.
+	// Web Services General Reference.
 	Tags []types.Tag
 
 	// The maximum time, in seconds, that a new game session placement request remains
@@ -127,7 +123,6 @@ type CreateGameSessionQueueInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type CreateGameSessionQueueOutput struct {
 
 	// An object that describes the newly created game session queue.

@@ -16,29 +16,20 @@ import (
 // the matchmaking configuration sets out rules for matching players and forming
 // teams. If you're also using GameLift hosting, it defines how to start game
 // sessions for each match. Your matchmaking system can use multiple configurations
-// to handle different game scenarios. All matchmaking requests (StartMatchmaking
-// or StartMatchBackfill) identify the matchmaking configuration to use and provide
-// player attributes consistent with that configuration. To create a matchmaking
-// configuration, you must provide the following: configuration name and FlexMatch
-// mode (with or without GameLift hosting); a rule set that specifies how to
-// evaluate players and find acceptable matches; whether player acceptance is
-// required; and the maximum time allowed for a matchmaking attempt. When using
-// FlexMatch with GameLift hosting, you also need to identify the game session
-// queue to use when starting a game session for the match. In addition, you must
-// set up an Amazon Simple Notification Service topic to receive matchmaking
-// notifications. Provide the topic ARN in the matchmaking configuration. An
-// alternative method, continuously polling ticket status with DescribeMatchmaking,
-// is only suitable for games in development with low matchmaking usage. Learn more
-// Design a FlexMatch matchmaker
+// to handle different game scenarios. All matchmaking requests identify the
+// matchmaking configuration to use and provide player attributes consistent with
+// that configuration. To create a matchmaking configuration, you must provide the
+// following: configuration name and FlexMatch mode (with or without GameLift
+// hosting); a rule set that specifies how to evaluate players and find acceptable
+// matches; whether player acceptance is required; and the maximum time allowed for
+// a matchmaking attempt. When using FlexMatch with GameLift hosting, you also need
+// to identify the game session queue to use when starting a game session for the
+// match. In addition, you must set up an Amazon Simple Notification Service topic
+// to receive matchmaking notifications. Provide the topic ARN in the matchmaking
+// configuration. Learn more  Design a FlexMatch matchmaker
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
 // Set up FlexMatch event notification
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
-// Related actions CreateMatchmakingConfiguration |
-// DescribeMatchmakingConfigurations | UpdateMatchmakingConfiguration |
-// DeleteMatchmakingConfiguration | CreateMatchmakingRuleSet |
-// DescribeMatchmakingRuleSets | ValidateMatchmakingRuleSet |
-// DeleteMatchmakingRuleSet | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateMatchmakingConfiguration(ctx context.Context, params *CreateMatchmakingConfigurationInput, optFns ...func(*Options)) (*CreateMatchmakingConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateMatchmakingConfigurationInput{}
@@ -54,7 +45,6 @@ func (c *Client) CreateMatchmakingConfiguration(ctx context.Context, params *Cre
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type CreateMatchmakingConfigurationInput struct {
 
 	// A flag that determines whether a match that was created with this configuration
@@ -99,9 +89,9 @@ type CreateMatchmakingConfigurationInput struct {
 	// The method used to backfill game sessions that are created with this matchmaking
 	// configuration. Specify MANUAL when your game manages backfill requests manually
 	// or does not use the match backfill feature. Specify AUTOMATIC to have GameLift
-	// create a StartMatchBackfill request whenever a game session has one or more open
-	// slots. Learn more about manual and automatic backfill in  Backfill Existing
-	// Games with FlexMatch
+	// create a backfill request whenever a game session has one or more open slots.
+	// Learn more about manual and automatic backfill in  Backfill Existing Games with
+	// FlexMatch
 	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html).
 	// Automatic backfill is not available when FlexMatchMode is set to STANDALONE.
 	BackfillMode types.BackfillMode
@@ -126,8 +116,8 @@ type CreateMatchmakingConfigurationInput struct {
 	FlexMatchMode types.FlexMatchMode
 
 	// A set of custom properties for a game session, formatted as key:value pairs.
-	// These properties are passed to a game server process in the GameSession object
-	// with a request to start a new game session (see Start a Game Session
+	// These properties are passed to a game server process with a request to start a
+	// new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for a
 	// successful match. This parameter is not used if FlexMatchMode is set to
@@ -135,8 +125,8 @@ type CreateMatchmakingConfigurationInput struct {
 	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
-	// This data is passed to a game server process in the GameSession object with a
-	// request to start a new game session (see Start a Game Session
+	// This data is passed to a game server process with a request to start a new game
+	// session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for a
 	// successful match. This parameter is not used if FlexMatchMode is set to
@@ -164,16 +154,12 @@ type CreateMatchmakingConfigurationInput struct {
 	// useful for resource management, access management and cost allocation. For more
 	// information, see  Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference. Once the resource is created, you can use
-	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
-	// tags. The maximum tag limit may be lower than stated. See the Amazon Web
-	// Services General Reference for actual tagging limits.
+	// Web Services General Reference.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type CreateMatchmakingConfigurationOutput struct {
 
 	// Object that describes the newly created matchmaking configuration.

@@ -15,8 +15,7 @@ import (
 // Retrieves all aliases for this Amazon Web Services account. You can filter the
 // result set by alias name and/or routing strategy type. Use the pagination
 // parameters to retrieve results in sequential pages. Returned aliases are not
-// listed in any particular order. Related actions CreateAlias | ListAliases |
-// DescribeAlias | UpdateAlias | DeleteAlias | ResolveAlias | All APIs by task
+// listed in any particular order. Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {
@@ -33,7 +32,6 @@ func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optF
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type ListAliasesInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -59,13 +57,14 @@ type ListAliasesInput struct {
 	//
 	// * TERMINAL -- The alias does not resolve to a fleet but instead can be
 	// used to display a message to the user. A terminal alias throws a
-	// TerminalRoutingStrategyException with the RoutingStrategy message embedded.
+	// TerminalRoutingStrategyException with the RoutingStrategy
+	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_RoutingStrategy.html)
+	// message embedded.
 	RoutingStrategyType types.RoutingStrategyType
 
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type ListAliasesOutput struct {
 
 	// A collection of alias resources that match the request parameters.

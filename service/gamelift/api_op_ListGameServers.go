@@ -18,9 +18,6 @@ import (
 // Use the pagination parameters to retrieve results in a set of sequential
 // segments. Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related actions RegisterGameServer | ListGameServers | ClaimGameServer |
-// DescribeGameServer | UpdateGameServer | DeregisterGameServer | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInput, optFns ...func(*Options)) (*ListGameServersOutput, error) {
 	if params == nil {
 		params = &ListGameServersInput{}
@@ -39,7 +36,7 @@ func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInp
 type ListGameServersInput struct {
 
 	// An identifier for the game server group to retrieve a list of game servers from.
-	// Use either the GameServerGroup name or ARN value.
+	// Use either the name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

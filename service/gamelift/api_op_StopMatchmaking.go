@@ -21,9 +21,6 @@ import (
 // back an empty JSON struct with the HTTP 200 response (not an empty HTTP body).
 // Learn more  Add FlexMatch to a game client
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
-// Related actions StartMatchmaking | DescribeMatchmaking | StopMatchmaking |
-// AcceptMatch | StartMatchBackfill | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) StopMatchmaking(ctx context.Context, params *StopMatchmakingInput, optFns ...func(*Options)) (*StopMatchmakingOutput, error) {
 	if params == nil {
 		params = &StopMatchmakingInput{}
@@ -39,7 +36,6 @@ func (c *Client) StopMatchmaking(ctx context.Context, params *StopMatchmakingInp
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type StopMatchmakingInput struct {
 
 	// A unique identifier for a matchmaking ticket.

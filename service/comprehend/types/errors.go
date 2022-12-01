@@ -93,6 +93,9 @@ func (e *InvalidFilterException) ErrorFault() smithy.ErrorFault { return smithy.
 type InvalidRequestException struct {
 	Message *string
 
+	Reason InvalidRequestReason
+	Detail *InvalidRequestDetail
+
 	noSmithyDocumentSerde
 }
 

@@ -17,14 +17,8 @@ import (
 // such as to retrieve only active scaling policies. Use the pagination parameters
 // to retrieve results as a set of sequential pages. If successful, set of
 // ScalingPolicy objects is returned for the fleet. A fleet may have all of its
-// scaling policies suspended (StopFleetActions). This operation does not affect
-// the status of the scaling policies, which remains ACTIVE. To see whether a
-// fleet's scaling policies are in force or suspended, call DescribeFleetAttributes
-// and check the stopped actions. Related actions DescribeFleetCapacity |
-// UpdateFleetCapacity | DescribeEC2InstanceLimits | PutScalingPolicy |
-// DescribeScalingPolicies | DeleteScalingPolicy | StopFleetActions |
-// StartFleetActions | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// scaling policies suspended. This operation does not affect the status of the
+// scaling policies, which remains ACTIVE.
 func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeScalingPoliciesInput, optFns ...func(*Options)) (*DescribeScalingPoliciesOutput, error) {
 	if params == nil {
 		params = &DescribeScalingPoliciesInput{}
@@ -40,7 +34,6 @@ func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeSc
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeScalingPoliciesInput struct {
 
 	// A unique identifier for the fleet for which to retrieve scaling policies. You
@@ -89,7 +82,6 @@ type DescribeScalingPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeScalingPoliciesOutput struct {
 
 	// A token that indicates where to resume retrieving results on the next call to

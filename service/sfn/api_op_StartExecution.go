@@ -11,7 +11,14 @@ import (
 	"time"
 )
 
-// Starts a state machine execution. StartExecution is idempotent for STANDARD
+// Starts a state machine execution. If the given state machine Amazon Resource
+// Name (ARN) is a qualified state machine ARN, it will fail with
+// ValidationException. A qualified state machine ARN refers to a Distributed Map
+// state defined within a state machine. For example, the qualified state machine
+// ARN
+// arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel
+// refers to a Distributed Map state with a label mapStateLabel in the state
+// machine named stateMachineName. StartExecution is idempotent for STANDARD
 // workflows. For a STANDARD workflow, if StartExecution is called with the same
 // name and input as a running execution, the call will succeed and return the same
 // response as the original request. If the execution is closed or if the input is
