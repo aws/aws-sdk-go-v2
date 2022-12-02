@@ -1,0 +1,8 @@
+{
+    "id": "98db6200-b3c1-42ff-8fcb-3bc5f5f9dd49",
+    "type": "documentation",
+    "description": "This release adds the message payload-filtering feature to the SNS Subscribe, SetSubscriptionAttributes, and GetSubscriptionAttributes API actions",
+    "modules": [
+        "service/sns"
+    ]
+}

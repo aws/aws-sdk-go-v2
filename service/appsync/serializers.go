@@ -1579,7 +1579,7 @@ func (m *awsRestjson1_serializeOpEvaluateCode) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/dataplane-evaluatecode")
+	opPath, opQuery := httpbinding.SplitURI("/v1/dataplane-evaluatecode")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"

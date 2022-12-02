@@ -1443,6 +1443,24 @@ func (CmafManifestDurationFormat) Values() []CmafManifestDurationFormat {
 	}
 }
 
+type CmafMpdManifestBandwidthType string
+
+// Enum values for CmafMpdManifestBandwidthType
+const (
+	CmafMpdManifestBandwidthTypeAverage CmafMpdManifestBandwidthType = "AVERAGE"
+	CmafMpdManifestBandwidthTypeMax     CmafMpdManifestBandwidthType = "MAX"
+)
+
+// Values returns all known values for CmafMpdManifestBandwidthType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CmafMpdManifestBandwidthType) Values() []CmafMpdManifestBandwidthType {
+	return []CmafMpdManifestBandwidthType{
+		"AVERAGE",
+		"MAX",
+	}
+}
+
 type CmafMpdProfile string
 
 // Enum values for CmafMpdProfile
@@ -1550,6 +1568,24 @@ func (CmafTargetDurationCompatibilityMode) Values() []CmafTargetDurationCompatib
 	return []CmafTargetDurationCompatibilityMode{
 		"LEGACY",
 		"SPEC_COMPLIANT",
+	}
+}
+
+type CmafVideoCompositionOffsets string
+
+// Enum values for CmafVideoCompositionOffsets
+const (
+	CmafVideoCompositionOffsetsSigned   CmafVideoCompositionOffsets = "SIGNED"
+	CmafVideoCompositionOffsetsUnsigned CmafVideoCompositionOffsets = "UNSIGNED"
+)
+
+// Values returns all known values for CmafVideoCompositionOffsets. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CmafVideoCompositionOffsets) Values() []CmafVideoCompositionOffsets {
+	return []CmafVideoCompositionOffsets{
+		"SIGNED",
+		"UNSIGNED",
 	}
 }
 
@@ -1701,6 +1737,25 @@ func (CmfcKlvMetadata) Values() []CmfcKlvMetadata {
 	}
 }
 
+type CmfcManifestMetadataSignaling string
+
+// Enum values for CmfcManifestMetadataSignaling
+const (
+	CmfcManifestMetadataSignalingEnabled  CmfcManifestMetadataSignaling = "ENABLED"
+	CmfcManifestMetadataSignalingDisabled CmfcManifestMetadataSignaling = "DISABLED"
+)
+
+// Values returns all known values for CmfcManifestMetadataSignaling. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CmfcManifestMetadataSignaling) Values() []CmfcManifestMetadataSignaling {
+	return []CmfcManifestMetadataSignaling{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type CmfcScte35Esam string
 
 // Enum values for CmfcScte35Esam
@@ -1752,6 +1807,24 @@ func (CmfcTimedMetadata) Values() []CmfcTimedMetadata {
 	return []CmfcTimedMetadata{
 		"PASSTHROUGH",
 		"NONE",
+	}
+}
+
+type CmfcTimedMetadataBoxVersion string
+
+// Enum values for CmfcTimedMetadataBoxVersion
+const (
+	CmfcTimedMetadataBoxVersionVersion0 CmfcTimedMetadataBoxVersion = "VERSION_0"
+	CmfcTimedMetadataBoxVersionVersion1 CmfcTimedMetadataBoxVersion = "VERSION_1"
+)
+
+// Values returns all known values for CmfcTimedMetadataBoxVersion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CmfcTimedMetadataBoxVersion) Values() []CmfcTimedMetadataBoxVersion {
+	return []CmfcTimedMetadataBoxVersion{
+		"VERSION_0",
+		"VERSION_1",
 	}
 }
 
@@ -1994,6 +2067,25 @@ func (DashIsoIntervalCadence) Values() []DashIsoIntervalCadence {
 	}
 }
 
+type DashIsoMpdManifestBandwidthType string
+
+// Enum values for DashIsoMpdManifestBandwidthType
+const (
+	DashIsoMpdManifestBandwidthTypeAverage DashIsoMpdManifestBandwidthType = "AVERAGE"
+	DashIsoMpdManifestBandwidthTypeMax     DashIsoMpdManifestBandwidthType = "MAX"
+)
+
+// Values returns all known values for DashIsoMpdManifestBandwidthType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DashIsoMpdManifestBandwidthType) Values() []DashIsoMpdManifestBandwidthType {
+	return []DashIsoMpdManifestBandwidthType{
+		"AVERAGE",
+		"MAX",
+	}
+}
+
 type DashIsoMpdProfile string
 
 // Enum values for DashIsoMpdProfile
@@ -2083,6 +2175,25 @@ func (DashIsoSegmentLengthControl) Values() []DashIsoSegmentLengthControl {
 	return []DashIsoSegmentLengthControl{
 		"EXACT",
 		"GOP_MULTIPLE",
+	}
+}
+
+type DashIsoVideoCompositionOffsets string
+
+// Enum values for DashIsoVideoCompositionOffsets
+const (
+	DashIsoVideoCompositionOffsetsSigned   DashIsoVideoCompositionOffsets = "SIGNED"
+	DashIsoVideoCompositionOffsetsUnsigned DashIsoVideoCompositionOffsets = "UNSIGNED"
+)
+
+// Values returns all known values for DashIsoVideoCompositionOffsets. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DashIsoVideoCompositionOffsets) Values() []DashIsoVideoCompositionOffsets {
+	return []DashIsoVideoCompositionOffsets{
+		"SIGNED",
+		"UNSIGNED",
 	}
 }
 
@@ -5964,6 +6075,24 @@ func (MpdKlvMetadata) Values() []MpdKlvMetadata {
 	}
 }
 
+type MpdManifestMetadataSignaling string
+
+// Enum values for MpdManifestMetadataSignaling
+const (
+	MpdManifestMetadataSignalingEnabled  MpdManifestMetadataSignaling = "ENABLED"
+	MpdManifestMetadataSignalingDisabled MpdManifestMetadataSignaling = "DISABLED"
+)
+
+// Values returns all known values for MpdManifestMetadataSignaling. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MpdManifestMetadataSignaling) Values() []MpdManifestMetadataSignaling {
+	return []MpdManifestMetadataSignaling{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type MpdScte35Esam string
 
 // Enum values for MpdScte35Esam
@@ -6015,6 +6144,24 @@ func (MpdTimedMetadata) Values() []MpdTimedMetadata {
 	return []MpdTimedMetadata{
 		"PASSTHROUGH",
 		"NONE",
+	}
+}
+
+type MpdTimedMetadataBoxVersion string
+
+// Enum values for MpdTimedMetadataBoxVersion
+const (
+	MpdTimedMetadataBoxVersionVersion0 MpdTimedMetadataBoxVersion = "VERSION_0"
+	MpdTimedMetadataBoxVersionVersion1 MpdTimedMetadataBoxVersion = "VERSION_1"
+)
+
+// Values returns all known values for MpdTimedMetadataBoxVersion. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MpdTimedMetadataBoxVersion) Values() []MpdTimedMetadataBoxVersion {
+	return []MpdTimedMetadataBoxVersion{
+		"VERSION_0",
+		"VERSION_1",
 	}
 }
 

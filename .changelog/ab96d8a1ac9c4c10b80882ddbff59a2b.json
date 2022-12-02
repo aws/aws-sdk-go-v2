@@ -1,0 +1,8 @@
+{
+    "id": "ab96d8a1-ac9c-4c10-b808-82ddbff59a2b",
+    "type": "feature",
+    "description": "CreateEnvironmentAccountConnection RoleArn input is now optional",
+    "modules": [
+        "service/proton"
+    ]
+}

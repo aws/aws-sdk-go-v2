@@ -44,6 +44,11 @@ type CreateSnapshotInput struct {
 	// How long to retain the created snapshot.
 	RetentionPeriod *int32
 
+	// An array of Tag objects
+	// (https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html)
+	// to associate with the snapshot.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 

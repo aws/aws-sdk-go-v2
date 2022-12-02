@@ -47,16 +47,16 @@ type GetCredentialsInput struct {
 	// * Must be 1 to 64 alphanumeric characters or hyphens.
 	//
 	// * Must
-	// contain only lowercase letters, numbers, underscore, plus sign, period (dot), at
-	// symbol (@), or hyphen.
+	// contain only uppercase or lowercase letters, numbers, underscore, plus sign,
+	// period (dot), at symbol (@), or hyphen.
 	//
-	// * The first character must be a letter.
+	// * The first character must be a
+	// letter.
 	//
-	// * Must not
-	// contain a colon ( : ) or slash ( / ).
+	// * Must not contain a colon ( : ) or slash ( / ).
 	//
-	// * Cannot be a reserved word. A list of
-	// reserved words can be found in Reserved Words
+	// * Cannot be a
+	// reserved word. A list of reserved words can be found in Reserved Words
 	// (https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html) in the
 	// Amazon Redshift Database Developer Guide
 	DbName *string

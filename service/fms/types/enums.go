@@ -294,7 +294,8 @@ type ThirdPartyFirewall string
 
 // Enum values for ThirdPartyFirewall
 const (
-	ThirdPartyFirewallPaloAltoNetworksCloudNgfw ThirdPartyFirewall = "PALO_ALTO_NETWORKS_CLOUD_NGFW"
+	ThirdPartyFirewallPaloAltoNetworksCloudNgfw    ThirdPartyFirewall = "PALO_ALTO_NETWORKS_CLOUD_NGFW"
+	ThirdPartyFirewallFortigateCloudNativeFirewall ThirdPartyFirewall = "FORTIGATE_CLOUD_NATIVE_FIREWALL"
 )
 
 // Values returns all known values for ThirdPartyFirewall. Note that this can be
@@ -303,6 +304,7 @@ const (
 func (ThirdPartyFirewall) Values() []ThirdPartyFirewall {
 	return []ThirdPartyFirewall{
 		"PALO_ALTO_NETWORKS_CLOUD_NGFW",
+		"FORTIGATE_CLOUD_NATIVE_FIREWALL",
 	}
 }
 

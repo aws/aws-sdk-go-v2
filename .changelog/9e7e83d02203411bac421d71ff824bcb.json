@@ -1,0 +1,8 @@
+{
+    "id": "9e7e83d0-2203-411b-ac42-1d71ff824bcb",
+    "type": "feature",
+    "description": "AWS Firewall Manager now supports Fortigate Cloud Native Firewall as a Service as a third-party policy type.",
+    "modules": [
+        "service/fms"
+    ]
+}

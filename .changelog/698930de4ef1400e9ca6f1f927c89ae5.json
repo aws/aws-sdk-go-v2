@@ -1,0 +1,8 @@
+{
+    "id": "698930de-4ef1-400e-9ca6-f1f927c89ae5",
+    "type": "feature",
+    "description": "Updates to Event Signaling and Management (ESAM) API and documentation.",
+    "modules": [
+        "service/medialive"
+    ]
+}

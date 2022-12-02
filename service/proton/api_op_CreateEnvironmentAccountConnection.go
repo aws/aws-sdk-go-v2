@@ -52,13 +52,6 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// This member is required.
 	ManagementAccountId *string
 
-	// The Amazon Resource Name (ARN) of the IAM service role that's created in the
-	// environment account. Proton uses this role to provision infrastructure resources
-	// in the associated environment account.
-	//
-	// This member is required.
-	RoleArn *string
-
 	// When included, if two identical requests are made with the same client token,
 	// Proton returns the environment account connection that the first request
 	// created.
@@ -78,6 +71,11 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html) in the
 	// Proton User Guide.
 	ComponentRoleArn *string
+
+	// The Amazon Resource Name (ARN) of the IAM service role that's created in the
+	// environment account. Proton uses this role to provision infrastructure resources
+	// in the associated environment account.
+	RoleArn *string
 
 	// An optional list of metadata items that you can associate with the Proton
 	// environment account connection. A tag is a key-value pair. For more information,

@@ -39,11 +39,14 @@ type AacSettings struct {
 	// AAC Profile.
 	CodecProfile AacCodecProfile
 
-	// Mono (Audio Description), Mono, Stereo, or 5.1 channel layout. Valid values
-	// depend on rate control mode and profile. "1.0 - Audio Description (Receiver
-	// Mix)" setting receives a stereo description plus control track and emits a mono
-	// AAC encode of the description track, with control data emitted in the PES header
-	// as per ETSI TS 101 154 Annex E.
+	// The Coding mode that you specify determines the number of audio channels and the
+	// audio channel layout metadata in your AAC output. Valid coding modes depend on
+	// the Rate control mode and Profile that you select. The following list shows the
+	// number of audio channels and channel layout for each coding mode. * 1.0 Audio
+	// Description (Receiver Mix): One channel, C. Includes audio description data from
+	// your stereo input. For more information see ETSI TS 101 154 Annex E. * 1.0 Mono:
+	// One channel, C. * 2.0 Stereo: Two channels, L, R. * 5.1 Surround: Five channels,
+	// C, L, R, Ls, Rs, LFE.
 	CodingMode AacCodingMode
 
 	// Rate Control Mode.
@@ -53,7 +56,14 @@ type AacSettings struct {
 	// you must choose "No container" for the output container.
 	RawFormat AacRawFormat
 
-	// Sample rate in Hz. Valid values depend on rate control mode and profile.
+	// Specify the Sample rate in Hz. Valid sample rates depend on the Profile and
+	// Coding mode that you select. The following list shows valid sample rates for
+	// each Profile and Coding mode. * LC Profile, Coding mode 1.0, 2.0, and Receiver
+	// Mix: 8000, 12000, 16000, 22050, 24000, 32000, 44100, 48000, 88200, 96000. * LC
+	// Profile, Coding mode 5.1: 32000, 44100, 48000, 96000. * HEV1 Profile, Coding
+	// mode 1.0 and Receiver Mix: 22050, 24000, 32000, 44100, 48000. * HEV1 Profile,
+	// Coding mode 2.0 and 5.1: 32000, 44100, 48000, 96000. * HEV2 Profile, Coding mode
+	// 2.0: 22050, 24000, 32000, 44100, 48000.
 	SampleRate int32
 
 	// Use MPEG-2 AAC instead of MPEG-4 AAC audio for raw or MPEG-2 Transport Stream
@@ -1493,6 +1503,14 @@ type CmafGroupSettings struct {
 	// is 3.5 seconds.
 	MinFinalSegmentLength float64
 
+	// Specify how the value for bandwidth is determined for each video Representation
+	// in your output MPD manifest. We recommend that you choose a MPD manifest
+	// bandwidth type that is compatible with your downstream player configuration.
+	// Max: Use the same value that you specify for Max bitrate in the video output, in
+	// bits per second. Average: Use the calculated average bitrate of the encoded
+	// video output, in bits per second.
+	MpdManifestBandwidthType CmafMpdManifestBandwidthType
+
 	// Specify whether your DASH profile is on-demand or main. When you choose Main
 	// profile (MAIN_PROFILE), the service signals
 	// urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you
@@ -1547,6 +1565,15 @@ type CmafGroupSettings struct {
 	// when the actual duration of a track in a segment is longer than the target
 	// duration.
 	TargetDurationCompatibilityMode CmafTargetDurationCompatibilityMode
+
+	// Specify the video sample composition time offset mode in the output fMP4 TRUN
+	// box. For wider player compatibility, set Video composition offsets to Unsigned
+	// or leave blank. The earliest presentation time may be greater than zero, and
+	// sample composition time offsets will increment using unsigned integers. For
+	// strict fMP4 video and audio timing, set Video composition offsets to Signed. The
+	// earliest presentation time will be equal to zero, and sample composition time
+	// offsets will increment using signed integers.
+	VideoCompositionOffsets CmafVideoCompositionOffsets
 
 	// When set to ENABLED, a DASH MPD manifest will be generated for this output.
 	WriteDashManifest CmafWriteDASHManifest
@@ -1693,6 +1720,15 @@ type CmfcSettings struct {
 	// leave blank.
 	KlvMetadata CmfcKlvMetadata
 
+	// To add an InbandEventStream element in your output MPD manifest for each type of
+	// event message, set Manifest metadata signaling to Enabled. For ID3 event
+	// messages, the InbandEventStream element schemeIdUri will be same value that you
+	// specify for ID3 metadata scheme ID URI. For SCTE35 event messages, the
+	// InbandEventStream element schemeIdUri will be "urn:scte:scte35:2013:bin". To
+	// leave these elements out of your output MPD manifest, set Manifest metadata
+	// signaling to Disabled.
+	ManifestMetadataSignaling CmfcManifestMetadataSignaling
+
 	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT
 	// to put SCTE-35 markers in this output at the insertion points that you specify
 	// in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
@@ -1710,6 +1746,25 @@ type CmfcSettings struct {
 	// metadata in a separate Event Message (eMSG) box. To exclude this ID3 metadata:
 	// Set ID3 metadata to None (NONE) or leave blank.
 	TimedMetadata CmfcTimedMetadata
+
+	// Specify the event message box (eMSG) version for ID3 timed metadata in your
+	// output. For more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.3
+	// Syntax. Leave blank to use the default value Version 0. When you specify Version
+	// 1, you must also set ID3 metadata (timedMetadata) to Passthrough.
+	TimedMetadataBoxVersion CmfcTimedMetadataBoxVersion
+
+	// Specify the event message box (eMSG) scheme ID URI (scheme_id_uri) for ID3 timed
+	// metadata in your output. For more informaiton, see ISO/IEC 23009-1:2022 section
+	// 5.10.3.3.4 Semantics. Leave blank to use the default value:
+	// https://aomedia.org/emsg/ID3 When you specify a value for ID3 metadata scheme ID
+	// URI, you must also set ID3 metadata (timedMetadata) to Passthrough.
+	TimedMetadataSchemeIdUri *string
+
+	// Specify the event message box (eMSG) value for ID3 timed metadata in your
+	// output. For more informaiton, see ISO/IEC 23009-1:2022 section 5.10.3.3.4
+	// Semantics. When you specify a value for ID3 Metadata Value, you must also set
+	// ID3 metadata (timedMetadata) to Passthrough.
+	TimedMetadataValue *string
 
 	noSmithyDocumentSerde
 }
@@ -1950,6 +2005,14 @@ type DashIsoGroupSettings struct {
 	// is 3.5 seconds.
 	MinFinalSegmentLength float64
 
+	// Specify how the value for bandwidth is determined for each video Representation
+	// in your output MPD manifest. We recommend that you choose a MPD manifest
+	// bandwidth type that is compatible with your downstream player configuration.
+	// Max: Use the same value that you specify for Max bitrate in the video output, in
+	// bits per second. Average: Use the calculated average bitrate of the encoded
+	// video output, in bits per second.
+	MpdManifestBandwidthType DashIsoMpdManifestBandwidthType
+
 	// Specify whether your DASH profile is on-demand or main. When you choose Main
 	// profile (MAIN_PROFILE), the service signals
 	// urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you
@@ -1989,6 +2052,15 @@ type DashIsoGroupSettings struct {
 	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
 	// lengths to match the next GOP boundary.
 	SegmentLengthControl DashIsoSegmentLengthControl
+
+	// Specify the video sample composition time offset mode in the output fMP4 TRUN
+	// box. For wider player compatibility, set Video composition offsets to Unsigned
+	// or leave blank. The earliest presentation time may be greater than zero, and
+	// sample composition time offsets will increment using unsigned integers. For
+	// strict fMP4 video and audio timing, set Video composition offsets to Signed. The
+	// earliest presentation time will be equal to zero, and sample composition time
+	// offsets will increment using signed integers.
+	VideoCompositionOffsets DashIsoVideoCompositionOffsets
 
 	// If you get an HTTP error in the 400 range when you play back your DASH output,
 	// enable this setting and run your transcoding job again. When you enable this
@@ -5757,6 +5829,15 @@ type MpdSettings struct {
 	// leave blank.
 	KlvMetadata MpdKlvMetadata
 
+	// To add an InbandEventStream element in your output MPD manifest for each type of
+	// event message, set Manifest metadata signaling to Enabled. For ID3 event
+	// messages, the InbandEventStream element schemeIdUri will be same value that you
+	// specify for ID3 metadata scheme ID URI. For SCTE35 event messages, the
+	// InbandEventStream element schemeIdUri will be "urn:scte:scte35:2013:bin". To
+	// leave these elements out of your output MPD manifest, set Manifest metadata
+	// signaling to Disabled.
+	ManifestMetadataSignaling MpdManifestMetadataSignaling
+
 	// Use this setting only when you specify SCTE-35 markers from ESAM. Choose INSERT
 	// to put SCTE-35 markers in this output at the insertion points that you specify
 	// in an ESAM XML document. Provide the document in the setting SCC XML (sccXml).
@@ -5774,6 +5855,25 @@ type MpdSettings struct {
 	// metadata in a separate Event Message (eMSG) box. To exclude this ID3 metadata:
 	// Set ID3 metadata to None (NONE) or leave blank.
 	TimedMetadata MpdTimedMetadata
+
+	// Specify the event message box (eMSG) version for ID3 timed metadata in your
+	// output. For more information, see ISO/IEC 23009-1:2022 section 5.10.3.3.3
+	// Syntax. Leave blank to use the default value Version 0. When you specify Version
+	// 1, you must also set ID3 metadata (timedMetadata) to Passthrough.
+	TimedMetadataBoxVersion MpdTimedMetadataBoxVersion
+
+	// Specify the event message box (eMSG) scheme ID URI (scheme_id_uri) for ID3 timed
+	// metadata in your output. For more informaiton, see ISO/IEC 23009-1:2022 section
+	// 5.10.3.3.4 Semantics. Leave blank to use the default value:
+	// https://aomedia.org/emsg/ID3 When you specify a value for ID3 metadata scheme ID
+	// URI, you must also set ID3 metadata (timedMetadata) to Passthrough.
+	TimedMetadataSchemeIdUri *string
+
+	// Specify the event message box (eMSG) value for ID3 timed metadata in your
+	// output. For more informaiton, see ISO/IEC 23009-1:2022 section 5.10.3.3.4
+	// Semantics. When you specify a value for ID3 Metadata Value, you must also set
+	// ID3 metadata (timedMetadata) to Passthrough.
+	TimedMetadataValue *string
 
 	noSmithyDocumentSerde
 }
@@ -6012,7 +6112,7 @@ type Mpeg2Settings struct {
 
 	// Specify whether this output's video uses the D10 syntax. Keep the default value
 	// to not use the syntax. Related settings: When you choose D10 (D_10) for your MXF
-	// profile (profile), you must also set this value to to D10 (D_10).
+	// profile (profile), you must also set this value to D10 (D_10).
 	Syntax Mpeg2Syntax
 
 	// When you do frame rate conversion from 23.976 frames per second (fps) to 29.97

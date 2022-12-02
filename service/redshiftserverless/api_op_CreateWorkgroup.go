@@ -53,6 +53,10 @@ type CreateWorkgroupInput struct {
 	// VPC instead of over the internet.
 	EnhancedVpcRouting *bool
 
+	// The custom port to use when connecting to a workgroup. Valid port ranges are
+	// 5431-5455 and 8191-8215. The default is 5439.
+	Port *int32
+
 	// A value that specifies whether the workgroup can be accessed from a public
 	// network.
 	PubliclyAccessible *bool

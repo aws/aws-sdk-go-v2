@@ -8459,6 +8459,15 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				}
 			}
 
+		case "mpdManifestBandwidthType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafMpdManifestBandwidthType to be of type string, got %T instead", value)
+				}
+				sv.MpdManifestBandwidthType = types.CmafMpdManifestBandwidthType(jtv)
+			}
+
 		case "mpdProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8524,6 +8533,15 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 					return fmt.Errorf("expected CmafTargetDurationCompatibilityMode to be of type string, got %T instead", value)
 				}
 				sv.TargetDurationCompatibilityMode = types.CmafTargetDurationCompatibilityMode(jtv)
+			}
+
+		case "videoCompositionOffsets":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafVideoCompositionOffsets to be of type string, got %T instead", value)
+				}
+				sv.VideoCompositionOffsets = types.CmafVideoCompositionOffsets(jtv)
 			}
 
 		case "writeDashManifest":
@@ -8773,6 +8791,15 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 				sv.KlvMetadata = types.CmfcKlvMetadata(jtv)
 			}
 
+		case "manifestMetadataSignaling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcManifestMetadataSignaling to be of type string, got %T instead", value)
+				}
+				sv.ManifestMetadataSignaling = types.CmfcManifestMetadataSignaling(jtv)
+			}
+
 		case "scte35Esam":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8798,6 +8825,33 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 					return fmt.Errorf("expected CmfcTimedMetadata to be of type string, got %T instead", value)
 				}
 				sv.TimedMetadata = types.CmfcTimedMetadata(jtv)
+			}
+
+		case "timedMetadataBoxVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcTimedMetadataBoxVersion to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadataBoxVersion = types.CmfcTimedMetadataBoxVersion(jtv)
+			}
+
+		case "timedMetadataSchemeIdUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax1000 to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadataSchemeIdUri = ptr.String(jtv)
+			}
+
+		case "timedMetadataValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax1000 to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadataValue = ptr.String(jtv)
 			}
 
 		default:
@@ -9285,6 +9339,15 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				}
 			}
 
+		case "mpdManifestBandwidthType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashIsoMpdManifestBandwidthType to be of type string, got %T instead", value)
+				}
+				sv.MpdManifestBandwidthType = types.DashIsoMpdManifestBandwidthType(jtv)
+			}
+
 		case "mpdProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9332,6 +9395,15 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 					return fmt.Errorf("expected DashIsoSegmentLengthControl to be of type string, got %T instead", value)
 				}
 				sv.SegmentLengthControl = types.DashIsoSegmentLengthControl(jtv)
+			}
+
+		case "videoCompositionOffsets":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashIsoVideoCompositionOffsets to be of type string, got %T instead", value)
+				}
+				sv.VideoCompositionOffsets = types.DashIsoVideoCompositionOffsets(jtv)
 			}
 
 		case "writeSegmentTimelineInRepresentation":
@@ -17001,6 +17073,15 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 				sv.KlvMetadata = types.MpdKlvMetadata(jtv)
 			}
 
+		case "manifestMetadataSignaling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MpdManifestMetadataSignaling to be of type string, got %T instead", value)
+				}
+				sv.ManifestMetadataSignaling = types.MpdManifestMetadataSignaling(jtv)
+			}
+
 		case "scte35Esam":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17026,6 +17107,33 @@ func awsRestjson1_deserializeDocumentMpdSettings(v **types.MpdSettings, value in
 					return fmt.Errorf("expected MpdTimedMetadata to be of type string, got %T instead", value)
 				}
 				sv.TimedMetadata = types.MpdTimedMetadata(jtv)
+			}
+
+		case "timedMetadataBoxVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MpdTimedMetadataBoxVersion to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadataBoxVersion = types.MpdTimedMetadataBoxVersion(jtv)
+			}
+
+		case "timedMetadataSchemeIdUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax1000 to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadataSchemeIdUri = ptr.String(jtv)
+			}
+
+		case "timedMetadataValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax1000 to be of type string, got %T instead", value)
+				}
+				sv.TimedMetadataValue = ptr.String(jtv)
 			}
 
 		default:

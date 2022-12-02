@@ -31,11 +31,11 @@ func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput
 type ListNamespacesInput struct {
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken to display the next page of results.
 	MaxResults *int32
 
 	// If your initial ListNamespaces operation returns a nextToken, you can include
-	// the returned nextToken in subsequent ListNamespaces operations, which returns
+	// the returned nextToken in following ListNamespaces operations, which returns
 	// results in the next page.
 	NextToken *string
 
@@ -131,7 +131,7 @@ var _ ListNamespacesAPIClient = (*Client)(nil)
 // ListNamespacesPaginatorOptions is the paginator options for ListNamespaces
 type ListNamespacesPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken to display the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

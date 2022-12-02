@@ -1917,9 +1917,6 @@ func validateOpCreateEnvironmentAccountConnectionInput(v *CreateEnvironmentAccou
 	if v.ManagementAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ManagementAccountId"))
 	}
-	if v.RoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
-	}
 	if v.EnvironmentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentName"))
 	}

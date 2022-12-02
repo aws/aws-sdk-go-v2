@@ -17200,7 +17200,7 @@ func awsRestjson1_deserializeDocumentEsam(v **types.Esam, value interface{}) err
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMax2048 to be of type string, got %T instead", value)
 				}
 				sv.PoisEndpoint = ptr.String(jtv)
 			}

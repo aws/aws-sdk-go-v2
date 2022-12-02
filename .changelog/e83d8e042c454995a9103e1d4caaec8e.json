@@ -1,0 +1,8 @@
+{
+    "id": "e83d8e04-2c45-4995-a910-3e1d4caaec8e",
+    "type": "feature",
+    "description": "Fixes the URI for the evaluatecode endpoint to include the /v1 prefix (ie. \"/v1/dataplane-evaluatecode\").",
+    "modules": [
+        "service/appsync"
+    ]
+}

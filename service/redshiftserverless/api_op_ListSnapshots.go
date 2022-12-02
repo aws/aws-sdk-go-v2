@@ -35,7 +35,7 @@ type ListSnapshotsInput struct {
 	EndTime *time.Time
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken to display the next page of results.
 	MaxResults *int32
 
 	// The Amazon Resource Name (ARN) of the namespace from which to list all
@@ -145,7 +145,7 @@ var _ ListSnapshotsAPIClient = (*Client)(nil)
 // ListSnapshotsPaginatorOptions is the paginator options for ListSnapshots
 type ListSnapshotsPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken to display the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
