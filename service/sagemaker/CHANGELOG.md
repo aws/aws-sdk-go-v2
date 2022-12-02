@@ -1,3 +1,7 @@
+# v1.56.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2022-11-30)
 
 * **Feature**: Added Models as part of the Search API. Added Model shadow deployments in realtime inference, and shadow testing in managed inference. Added support for shared spaces, geospatial APIs, Model Cards, AutoMLJobStep in pipelines, Git repositories on user profiles and domains, Model sharing in Jumpstart.

@@ -1,3 +1,7 @@
+# v1.19.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-10-28)
 
 * **Feature**: This release introduces support for SCTE-35 segmentation descriptor messages which can be sent within time signal messages.

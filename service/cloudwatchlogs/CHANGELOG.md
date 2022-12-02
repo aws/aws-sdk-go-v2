@@ -1,3 +1,7 @@
+# v1.17.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.0 (2022-11-28)
 
 * **Feature**: Updates to support CloudWatch Logs data protection and CloudWatch cross-account observability

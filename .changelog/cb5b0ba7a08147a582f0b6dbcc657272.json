@@ -1,8 +1,0 @@
-{
-    "id": "cb5b0ba7-a081-47a5-82f0-b6dbcc657272",
-    "type": "feature",
-    "description": "Add Table Level Restore operations for Amazon Redshift Serverless. Add multi-port support for Amazon Redshift Serverless endpoints. Add Tagging support to Snapshots and Recovery Points in Amazon Redshift Serverless.",
-    "modules": [
-        "service/redshiftserverless"
-    ]
-}

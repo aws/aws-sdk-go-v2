@@ -1,3 +1,7 @@
+# v1.20.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-11-30)
 
 * **Feature**: This release includes support for using Apache Spark in Amazon Athena.

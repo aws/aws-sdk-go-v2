@@ -1,3 +1,7 @@
+# v1.15.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-11-17)
 
 * **Feature**: This release adds support for tagged resource associations, which allows you to associate a group of resources with a defined resource tag key and value to the application.

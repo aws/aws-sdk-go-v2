@@ -1,3 +1,7 @@
+# v1.26.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2022-11-02)
 
 * **Feature**: This release adds the ListAssetModelProperties and ListAssetProperties APIs. You can list all properties that belong to a single asset model or asset using these two new APIs.

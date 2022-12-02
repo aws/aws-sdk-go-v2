@@ -1,3 +1,7 @@
+# v1.22.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2022-11-28)
 
 * **Feature**: This release adds support for 'inputType' for post-call and real-time (streaming) Call Analytics within Amazon Transcribe.

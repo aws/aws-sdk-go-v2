@@ -1,3 +1,7 @@
+# v1.25.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2022-11-18)
 
 * **Feature**: Adds a NONE encryption algorithm type to AS2 connectors, providing support for skipping encryption of the AS2 message body when a HTTPS URL is also specified.

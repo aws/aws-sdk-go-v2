@@ -1,3 +1,7 @@
+# v1.13.4 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.3 (2022-11-14)
 
 * **Documentation**: Updating the API docs data type: NetworkEthereumAttributes, and the operations DeleteNode, and CreateNode to also include the supported Goerli network.

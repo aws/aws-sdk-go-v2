@@ -1,3 +1,7 @@
+# v1.26.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2022-11-07)
 
 * **Feature**: Amazon Lex now supports new APIs for viewing and editing Custom Vocabulary in bots.

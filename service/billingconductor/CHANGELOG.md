@@ -1,3 +1,7 @@
+# v1.2.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2022-11-16)
 
 * **Feature**: This release adds a new feature BillingEntity pricing rule.

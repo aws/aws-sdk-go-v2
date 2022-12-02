@@ -1,3 +1,7 @@
+# v1.7.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2022-11-23)
 
 * **Feature**: This release adds support for Rule Lock for Recycle Bin, which allows you to lock retention rules so that they can no longer be modified or deleted.

@@ -1,3 +1,7 @@
+# v1.24.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2022-11-29)
 
 * **Feature**: Adds support for additional EKS add-ons metadata and filtering fields

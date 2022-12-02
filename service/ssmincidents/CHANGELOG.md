@@ -1,3 +1,7 @@
+# v1.19.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-11-16)
 
 * **Feature**: Add support for PagerDuty integrations on ResponsePlan, IncidentRecord, and RelatedItem APIs

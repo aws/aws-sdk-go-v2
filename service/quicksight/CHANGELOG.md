@@ -1,3 +1,7 @@
+# v1.28.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2022-11-29)
 
 * **Feature**: This release adds new Describe APIs and updates Create and Update APIs to support the data model for Dashboards, Analyses, and Templates.

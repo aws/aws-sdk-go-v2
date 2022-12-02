@@ -1,3 +1,7 @@
+# v1.15.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-11-29.2)
 
 * **Feature**: Allow support for the Serverless offering for Amazon OpenSearch Service as a Kinesis Data Firehose delivery destination.

@@ -1,3 +1,7 @@
+# v1.18.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2022-11-29)
 
 * **Feature**: Adds support for a new recommendation preference that makes it possible for customers to optimize their EC2 recommendations by utilizing an external metrics ingestion service to provide metrics.

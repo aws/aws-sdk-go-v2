@@ -1,3 +1,7 @@
+# v1.10.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.0 (2022-11-23)
 
 * **Feature**: This release includes support for configuring a Grafana workspace to connect to a datasource within a VPC as well as new APIs for configuring Grafana settings.

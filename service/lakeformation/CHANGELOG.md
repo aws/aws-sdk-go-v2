@@ -1,3 +1,7 @@
+# v1.18.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2022-11-14)
 
 * **Feature**: This release adds a new parameter "Parameters" in the DataLakeSettings.

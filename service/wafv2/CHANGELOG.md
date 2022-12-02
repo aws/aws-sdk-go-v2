@@ -1,3 +1,7 @@
+# v1.23.2 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.1 (2022-11-07)
 
 * **Documentation**: The geo match statement now adds labels for country and region. You can match requests at the region level by combining a geo match statement with label match statements.

@@ -1,3 +1,8 @@
+# v1.3.0 (2022-12-02)
+
+* **Feature**: Add Table Level Restore operations for Amazon Redshift Serverless. Add multi-port support for Amazon Redshift Serverless endpoints. Add Tagging support to Snapshots and Recovery Points in Amazon Redshift Serverless.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.13 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

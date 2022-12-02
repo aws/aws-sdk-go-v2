@@ -1,3 +1,7 @@
+# v1.15.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2022-11-22)
 
 * **Feature**: Support for Apache Flink 1.15 in Kinesis Data Analytics.

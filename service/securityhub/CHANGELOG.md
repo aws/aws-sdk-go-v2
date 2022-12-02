@@ -1,3 +1,7 @@
+# v1.25.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2022-11-29)
 
 * **Feature**: Adding StandardsManagedBy field to DescribeStandards API response

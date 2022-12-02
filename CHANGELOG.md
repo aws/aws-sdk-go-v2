@@ -1,3 +1,28 @@
+# Release (2022-12-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.17.0](service/appsync/CHANGELOG.md#v1170-2022-12-02)
+  * **Feature**: Fixes the URI for the evaluatecode endpoint to include the /v1 prefix (ie. "/v1/dataplane-evaluatecode").
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.20.1](service/ecs/CHANGELOG.md#v1201-2022-12-02)
+  * **Documentation**: Documentation updates for Amazon ECS
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.21.0](service/fms/CHANGELOG.md#v1210-2022-12-02)
+  * **Feature**: AWS Firewall Manager now supports Fortigate Cloud Native Firewall as a Service as a third-party policy type.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.28.0](service/mediaconvert/CHANGELOG.md#v1280-2022-12-02)
+  * **Feature**: The AWS Elemental MediaConvert SDK has added support for configurable ID3 eMSG box attributes and the ability to signal them with InbandEventStream tags in DASH and CMAF outputs.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.25.0](service/medialive/CHANGELOG.md#v1250-2022-12-02)
+  * **Feature**: Updates to Event Signaling and Management (ESAM) API and documentation.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.21.0](service/polly/CHANGELOG.md#v1210-2022-12-02)
+  * **Feature**: Add language code for Finnish (fi-FI)
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.18.0](service/proton/CHANGELOG.md#v1180-2022-12-02)
+  * **Feature**: CreateEnvironmentAccountConnection RoleArn input is now optional
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.3.0](service/redshiftserverless/CHANGELOG.md#v130-2022-12-02)
+  * **Feature**: Add Table Level Restore operations for Amazon Redshift Serverless. Add multi-port support for Amazon Redshift Serverless endpoints. Add Tagging support to Snapshots and Recovery Points in Amazon Redshift Serverless.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.18.7](service/sns/CHANGELOG.md#v1187-2022-12-02)
+  * **Documentation**: This release adds the message payload-filtering feature to the SNS Subscribe, SetSubscriptionAttributes, and GetSubscriptionAttributes API actions
+
 # Release (2022-12-01)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "0f6d347a-f164-4022-aa96-86caef1914c5",
-    "type": "feature",
-    "description": "The AWS Elemental MediaConvert SDK has added support for configurable ID3 eMSG box attributes and the ability to signal them with InbandEventStream tags in DASH and CMAF outputs.",
-    "modules": [
-        "service/mediaconvert"
-    ]
-}

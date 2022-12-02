@@ -1,3 +1,8 @@
+# v1.25.0 (2022-12-02)
+
+* **Feature**: Updates to Event Signaling and Management (ESAM) API and documentation.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,8 @@
+# v1.21.0 (2022-12-02)
+
+* **Feature**: AWS Firewall Manager now supports Fortigate Cloud Native Firewall as a Service as a third-party policy type.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-11-08)
 
 * **Feature**: AWS Firewall Manager now supports importing existing AWS Network Firewall firewalls into Firewall Manager policies.

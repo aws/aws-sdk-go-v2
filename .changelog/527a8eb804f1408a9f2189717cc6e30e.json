@@ -1,8 +1,0 @@
-{
-    "id": "527a8eb8-04f1-408a-9f21-89717cc6e30e",
-    "type": "feature",
-    "description": "Add language code for Finnish (fi-FI)",
-    "modules": [
-        "service/polly"
-    ]
-}

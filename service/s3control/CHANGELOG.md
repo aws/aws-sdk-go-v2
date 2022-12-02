@@ -1,3 +1,7 @@
+# v1.28.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2022-11-30)
 
 * **Feature**: Amazon S3 now supports cross-account access points. S3 bucket owners can now allow trusted AWS accounts to create access points associated with their bucket.

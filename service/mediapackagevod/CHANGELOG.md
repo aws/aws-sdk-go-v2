@@ -1,3 +1,7 @@
+# v1.19.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-11-09)
 
 * **Feature**: This release adds "IncludeIframeOnlyStream" for Dash endpoints.

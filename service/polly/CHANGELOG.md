@@ -1,3 +1,8 @@
+# v1.21.0 (2022-12-02)
+
+* **Feature**: Add language code for Finnish (fi-FI)
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-11-17)
 
 * **Feature**: Add two new neural voices - Ola (pl-PL) and Hala (ar-AE).

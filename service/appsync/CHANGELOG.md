@@ -1,3 +1,8 @@
+# v1.17.0 (2022-12-02)
+
+* **Feature**: Fixes the URI for the evaluatecode endpoint to include the /v1 prefix (ie. "/v1/dataplane-evaluatecode").
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.0 (2022-11-17)
 
 * **Feature**: This release introduces the APPSYNC_JS runtime, and adds support for JavaScript in AppSync functions and AppSync pipeline resolvers.

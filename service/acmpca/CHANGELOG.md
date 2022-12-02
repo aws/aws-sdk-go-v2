@@ -1,3 +1,7 @@
+# v1.19.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.0 (2022-10-24)
 
 * **Feature**: AWS Private Certificate Authority (AWS Private CA) now offers usage modes which are combination of features to address specific use cases.

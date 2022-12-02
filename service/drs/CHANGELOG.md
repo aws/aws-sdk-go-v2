@@ -1,3 +1,7 @@
+# v1.9.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2022-11-28)
 
 * **Feature**: Non breaking changes to existing APIs, and additional APIs added to support in-AWS failing back using AWS Elastic Disaster Recovery.

@@ -1,3 +1,7 @@
+# v1.21.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2022-11-18)
 
 * **Feature**: CloudFront API support for staging distributions and associated traffic management policies.

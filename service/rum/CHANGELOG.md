@@ -1,3 +1,7 @@
+# v1.8.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2022-11-17)
 
 * **Feature**: CloudWatch RUM now supports custom events. To use custom events, create an app monitor or update an app monitor with CustomEvent Status as ENABLED.

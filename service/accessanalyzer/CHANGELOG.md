@@ -1,3 +1,7 @@
+# v1.18.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2022-11-30)
 
 * **Feature**: This release adds support for S3 cross account access points. IAM Access Analyzer will now produce public or cross account findings when it detects bucket delegation to external account access points.

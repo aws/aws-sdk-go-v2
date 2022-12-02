@@ -1,3 +1,8 @@
+# v1.20.1 (2022-12-02)
+
+* **Documentation**: Documentation updates for Amazon ECS
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.0 (2022-11-28)
 
 * **Feature**: This release adds support for ECS Service Connect, a new capability that simplifies writing and operating resilient distributed applications. This release updates the TaskDefinition, Cluster, Service mutation APIs with Service connect constructs and also adds a new ListServicesByNamespace API.
