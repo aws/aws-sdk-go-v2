@@ -1,0 +1,8 @@
+{
+    "id": "f5b32267-5874-4372-af61-76d20a96a186",
+    "type": "feature",
+    "description": "Adds PendingVerification error type to messaging APIs to block the resource usage for accounts identified as being fraudulent.",
+    "modules": [
+        "service/ivschat"
+    ]
+}

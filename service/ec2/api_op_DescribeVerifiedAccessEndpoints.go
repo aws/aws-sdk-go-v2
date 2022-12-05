@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Describe Amazon Web Services Verified Access endpoints.
 func (c *Client) DescribeVerifiedAccessEndpoints(ctx context.Context, params *DescribeVerifiedAccessEndpointsInput, optFns ...func(*Options)) (*DescribeVerifiedAccessEndpointsOutput, error) {
 	if params == nil {
 		params = &DescribeVerifiedAccessEndpointsInput{}
@@ -28,26 +29,42 @@ func (c *Client) DescribeVerifiedAccessEndpoints(ctx context.Context, params *De
 }
 
 type DescribeVerifiedAccessEndpointsInput struct {
+
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
 	DryRun *bool
 
+	// One or more filters. Filter names and values are case-sensitive.
 	Filters []types.Filter
 
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
 	MaxResults *int32
 
+	// The token for the next page of results.
 	NextToken *string
 
+	// The ID of the Amazon Web Services Verified Access endpoint.
 	VerifiedAccessEndpointIds []string
 
+	// The ID of the Amazon Web Services Verified Access group.
 	VerifiedAccessGroupId *string
 
+	// The ID of the Amazon Web Services Verified Access instance.
 	VerifiedAccessInstanceId *string
 
 	noSmithyDocumentSerde
 }
 
 type DescribeVerifiedAccessEndpointsOutput struct {
+
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
+	// The ID of the Amazon Web Services Verified Access endpoint.
 	VerifiedAccessEndpoints []types.VerifiedAccessEndpoint
 
 	// Metadata pertaining to the operation's result.
@@ -127,6 +144,8 @@ var _ DescribeVerifiedAccessEndpointsAPIClient = (*Client)(nil)
 // DescribeVerifiedAccessEndpointsPaginatorOptions is the paginator options for
 // DescribeVerifiedAccessEndpoints
 type DescribeVerifiedAccessEndpointsPaginatorOptions struct {
+	// The maximum number of results to return with a single call. To retrieve the
+	// remaining results, make another call with the returned nextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

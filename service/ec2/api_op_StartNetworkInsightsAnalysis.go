@@ -43,6 +43,7 @@ type StartNetworkInsightsAnalysisInput struct {
 	// This member is required.
 	NetworkInsightsPathId *string
 
+	// The member accounts that contain resources that the path can traverse.
 	AdditionalAccounts []string
 
 	// Checks whether you have the required permissions for the action, without

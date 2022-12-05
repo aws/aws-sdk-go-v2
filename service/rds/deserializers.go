@@ -13998,6 +13998,9 @@ func awsAwsquery_deserializeOpErrorRestoreDBClusterFromSnapshot(response *smithy
 	case strings.EqualFold("InvalidDBClusterSnapshotStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBClusterSnapshotStateFault(response, errorBody)
 
+	case strings.EqualFold("InvalidDBInstanceState", errorCode):
+		return awsAwsquery_deserializeErrorInvalidDBInstanceStateFault(response, errorBody)
+
 	case strings.EqualFold("InvalidDBSnapshotState", errorCode):
 		return awsAwsquery_deserializeErrorInvalidDBSnapshotStateFault(response, errorBody)
 

@@ -11,6 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Modifies the specified Verified Access endpoint policy.
 func (c *Client) ModifyVerifiedAccessEndpointPolicy(ctx context.Context, params *ModifyVerifiedAccessEndpointPolicyInput, optFns ...func(*Options)) (*ModifyVerifiedAccessEndpointPolicyOutput, error) {
 	if params == nil {
 		params = &ModifyVerifiedAccessEndpointPolicyInput{}
@@ -28,24 +29,39 @@ func (c *Client) ModifyVerifiedAccessEndpointPolicy(ctx context.Context, params 
 
 type ModifyVerifiedAccessEndpointPolicyInput struct {
 
+	// The status of the Verified Access policy.
+	//
 	// This member is required.
 	PolicyEnabled *bool
 
+	// The ID of the Amazon Web Services Verified Access endpoint.
+	//
 	// This member is required.
 	VerifiedAccessEndpointId *string
 
+	// A unique, case-sensitive token that you provide to ensure idempotency of your
+	// modification request. For more information, see Ensuring Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
 
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
 	DryRun *bool
 
+	// The Amazon Web Services Verified Access policy document.
 	PolicyDocument *string
 
 	noSmithyDocumentSerde
 }
 
 type ModifyVerifiedAccessEndpointPolicyOutput struct {
+
+	// The Amazon Web Services Verified Access policy document.
 	PolicyDocument *string
 
+	// The status of the Verified Access policy.
 	PolicyEnabled *bool
 
 	// Metadata pertaining to the operation's result.

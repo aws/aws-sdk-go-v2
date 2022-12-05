@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the curent Infrastructure Performance metric subscriptions.
+// Describes the current Infrastructure Performance metric subscriptions.
 func (c *Client) DescribeAwsNetworkPerformanceMetricSubscriptions(ctx context.Context, params *DescribeAwsNetworkPerformanceMetricSubscriptionsInput, optFns ...func(*Options)) (*DescribeAwsNetworkPerformanceMetricSubscriptionsOutput, error) {
 	if params == nil {
 		params = &DescribeAwsNetworkPerformanceMetricSubscriptionsInput{}

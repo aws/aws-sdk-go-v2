@@ -365,6 +365,26 @@ func (FindingReasonCode) Values() []FindingReasonCode {
 	}
 }
 
+type GenerationStatus string
+
+// Enum values for GenerationStatus
+const (
+	GenerationStatusSucceeded  GenerationStatus = "SUCCEEDED"
+	GenerationStatusProcessing GenerationStatus = "PROCESSING"
+	GenerationStatusFailed     GenerationStatus = "FAILED"
+)
+
+// Values returns all known values for GenerationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (GenerationStatus) Values() []GenerationStatus {
+	return []GenerationStatus{
+		"SUCCEEDED",
+		"PROCESSING",
+		"FAILED",
+	}
+}
+
 type Granularity string
 
 // Enum values for Granularity

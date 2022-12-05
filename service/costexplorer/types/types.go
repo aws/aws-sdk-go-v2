@@ -904,6 +904,29 @@ type ForecastResult struct {
 	noSmithyDocumentSerde
 }
 
+// The summary of the Savings Plans recommendation generation.
+type GenerationSummary struct {
+
+	// Indicates the estimated time for when the recommendation generation will
+	// complete.
+	EstimatedCompletionTime *string
+
+	// Indicates the completion time of the recommendation generation.
+	GenerationCompletionTime *string
+
+	// Indicates the start time of the recommendation generation.
+	GenerationStartedTime *string
+
+	// Indicates whether the recommendation generation succeeded, is processing, or
+	// failed.
+	GenerationStatus GenerationStatus
+
+	// Indicates the ID for this specific recommendation.
+	RecommendationId *string
+
+	noSmithyDocumentSerde
+}
+
 // One level of grouped data in the results.
 type Group struct {
 

@@ -12,6 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Detach a trust provider from an Amazon Web Services Verified Access instance.
 func (c *Client) DetachVerifiedAccessTrustProvider(ctx context.Context, params *DetachVerifiedAccessTrustProviderInput, optFns ...func(*Options)) (*DetachVerifiedAccessTrustProviderOutput, error) {
 	if params == nil {
 		params = &DetachVerifiedAccessTrustProviderInput{}
@@ -29,22 +30,36 @@ func (c *Client) DetachVerifiedAccessTrustProvider(ctx context.Context, params *
 
 type DetachVerifiedAccessTrustProviderInput struct {
 
+	// The ID of the Amazon Web Services Verified Access instance.
+	//
 	// This member is required.
 	VerifiedAccessInstanceId *string
 
+	// The ID of the Amazon Web Services Verified Access trust provider.
+	//
 	// This member is required.
 	VerifiedAccessTrustProviderId *string
 
+	// A unique, case-sensitive token that you provide to ensure idempotency of your
+	// modification request. For more information, see Ensuring Idempotency
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
 
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
 	DryRun *bool
 
 	noSmithyDocumentSerde
 }
 
 type DetachVerifiedAccessTrustProviderOutput struct {
+
+	// The ID of the Amazon Web Services Verified Access instance.
 	VerifiedAccessInstance *types.VerifiedAccessInstance
 
+	// The ID of the Amazon Web Services Verified Access trust provider.
 	VerifiedAccessTrustProvider *types.VerifiedAccessTrustProvider
 
 	// Metadata pertaining to the operation's result.

@@ -51,6 +51,8 @@ const (
 	CLMLanguageCodeEsUs CLMLanguageCode = "es-US"
 	CLMLanguageCodeEnGb CLMLanguageCode = "en-GB"
 	CLMLanguageCodeEnAu CLMLanguageCode = "en-AU"
+	CLMLanguageCodeDeDe CLMLanguageCode = "de-DE"
+	CLMLanguageCodeJaJp CLMLanguageCode = "ja-JP"
 )
 
 // Values returns all known values for CLMLanguageCode. Note that this can be
@@ -63,6 +65,8 @@ func (CLMLanguageCode) Values() []CLMLanguageCode {
 		"es-US",
 		"en-GB",
 		"en-AU",
+		"de-DE",
+		"ja-JP",
 	}
 }
 

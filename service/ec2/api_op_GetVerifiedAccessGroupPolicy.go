@@ -10,6 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Shows the contents of the Verified Access policy associated with the group.
 func (c *Client) GetVerifiedAccessGroupPolicy(ctx context.Context, params *GetVerifiedAccessGroupPolicyInput, optFns ...func(*Options)) (*GetVerifiedAccessGroupPolicyOutput, error) {
 	if params == nil {
 		params = &GetVerifiedAccessGroupPolicyInput{}
@@ -27,17 +28,26 @@ func (c *Client) GetVerifiedAccessGroupPolicy(ctx context.Context, params *GetVe
 
 type GetVerifiedAccessGroupPolicyInput struct {
 
+	// The ID of the Amazon Web Services Verified Access group.
+	//
 	// This member is required.
 	VerifiedAccessGroupId *string
 
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
 	DryRun *bool
 
 	noSmithyDocumentSerde
 }
 
 type GetVerifiedAccessGroupPolicyOutput struct {
+
+	// The Amazon Web Services Verified Access policy document.
 	PolicyDocument *string
 
+	// The status of the Verified Access policy.
 	PolicyEnabled *bool
 
 	// Metadata pertaining to the operation's result.

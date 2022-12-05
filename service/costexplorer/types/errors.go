@@ -45,6 +45,25 @@ func (e *DataUnavailableException) ErrorMessage() string {
 func (e *DataUnavailableException) ErrorCode() string             { return "DataUnavailableException" }
 func (e *DataUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A request to generate a recommendation is already in progress.
+type GenerationExistsException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *GenerationExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *GenerationExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *GenerationExistsException) ErrorCode() string             { return "GenerationExistsException" }
+func (e *GenerationExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The pagination token is invalid. Try again without a pagination token.
 type InvalidNextTokenException struct {
 	Message *string

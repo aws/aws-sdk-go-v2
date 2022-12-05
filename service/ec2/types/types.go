@@ -2160,47 +2160,73 @@ type CreateTransitGatewayVpcAttachmentRequestOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Options for a network interface-type endpoint.
 type CreateVerifiedAccessEndpointEniOptions struct {
+
+	// The ID of the network interface.
 	NetworkInterfaceId *string
 
+	// The IP port number.
 	Port *int32
 
+	// The IP protocol.
 	Protocol VerifiedAccessEndpointProtocol
 
 	noSmithyDocumentSerde
 }
 
+// Describes a load balancer when creating an Amazon Web Services Verified Access
+// endpoint using the load-balancer type.
 type CreateVerifiedAccessEndpointLoadBalancerOptions struct {
+
+	// The ARN of the load balancer.
 	LoadBalancerArn *string
 
+	// The IP port number.
 	Port *int32
 
+	// The IP protocol.
 	Protocol VerifiedAccessEndpointProtocol
 
+	// The IDs of the subnets.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
 }
 
+// Options for a device-identity type trust provider.
 type CreateVerifiedAccessTrustProviderDeviceOptions struct {
+
+	// The ID of the tenant application with the device-identity provider.
 	TenantId *string
 
 	noSmithyDocumentSerde
 }
 
+// Options for an OIDC-based, user-identity type trust provider.
 type CreateVerifiedAccessTrustProviderOidcOptions struct {
+
+	// The OIDC authorization endpoint.
 	AuthorizationEndpoint *string
 
+	// The client identifier.
 	ClientId *string
 
+	// The client secret.
 	ClientSecret *string
 
+	// The OIDC issuer.
 	Issuer *string
 
+	// OpenID Connect (OIDC) scopes are used by an application during authentication to
+	// authorize access to a user's details. Each scope returns a specific set of user
+	// attributes.
 	Scope *string
 
+	// The OIDC token endpoint.
 	TokenEndpoint *string
 
+	// The OIDC user info endpoint.
 	UserInfoEndpoint *string
 
 	noSmithyDocumentSerde
@@ -2622,7 +2648,11 @@ type DestinationOptionsResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Options for an Amazon Web Services Verified Access device-identity based trust
+// provider.
 type DeviceOptions struct {
+
+	// The ID of the tenant application with the device-identity provider.
 	TenantId *string
 
 	noSmithyDocumentSerde
@@ -9298,25 +9328,40 @@ type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Options for a network-interface type Verified Access endpoint.
 type ModifyVerifiedAccessEndpointEniOptions struct {
+
+	// The IP port number.
 	Port *int32
 
+	// The IP protocol.
 	Protocol VerifiedAccessEndpointProtocol
 
 	noSmithyDocumentSerde
 }
 
+// Describes a load balancer when creating an Amazon Web Services Verified Access
+// endpoint using the load-balancer type.
 type ModifyVerifiedAccessEndpointLoadBalancerOptions struct {
+
+	// The IP port number.
 	Port *int32
 
+	// The IP protocol.
 	Protocol VerifiedAccessEndpointProtocol
 
+	// The IDs of the subnets.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
 }
 
+// OpenID Connect options for an oidc-type, user-identity based trust provider.
 type ModifyVerifiedAccessTrustProviderOidcOptions struct {
+
+	// OpenID Connect (OIDC) scopes are used by an application during authentication to
+	// authorize access to a user's details. Each scope returns a specific set of user
+	// attributes.
 	Scope *string
 
 	noSmithyDocumentSerde
@@ -9828,6 +9873,8 @@ type NetworkInsightsAccessScopeContent struct {
 
 // Describes a network insights analysis.
 type NetworkInsightsAnalysis struct {
+
+	// The member accounts that contain resources that the path can traverse.
 	AdditionalAccounts []string
 
 	// Potential intermediate components.
@@ -9869,6 +9916,7 @@ type NetworkInsightsAnalysis struct {
 	// The status message, if the status is failed.
 	StatusMessage *string
 
+	// Potential intermediate accounts.
 	SuggestedAccounts []string
 
 	// The tags.
@@ -9889,6 +9937,7 @@ type NetworkInsightsPath struct {
 	// The Amazon Web Services resource that is the destination of the path.
 	Destination *string
 
+	// The Amazon Resource Name (ARN) of the destination.
 	DestinationArn *string
 
 	// The IP address of the Amazon Web Services resource that is the destination of
@@ -9910,6 +9959,7 @@ type NetworkInsightsPath struct {
 	// The Amazon Web Services resource that is the source of the path.
 	Source *string
 
+	// The Amazon Resource Name (ARN) of the source.
 	SourceArn *string
 
 	// The IP address of the Amazon Web Services resource that is the source of the
@@ -10196,19 +10246,28 @@ type NewDhcpConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Options for OIDC-based, user-identity type trust provider.
 type OidcOptions struct {
+
+	// The OIDC authorization endpoint.
 	AuthorizationEndpoint *string
 
+	// The client identifier.
 	ClientId *string
 
+	// The client secret.
 	ClientSecret *string
 
+	// The OIDC issuer.
 	Issuer *string
 
+	// The OpenID Connect (OIDC) scope specified.
 	Scope *string
 
+	// The OIDC token endpoint.
 	TokenEndpoint *string
 
+	// The OIDC user info endpoint.
 	UserInfoEndpoint *string
 
 	noSmithyDocumentSerde
@@ -16063,253 +16122,385 @@ type VCpuInfo struct {
 	noSmithyDocumentSerde
 }
 
+// An Amazon Web Services Verified Access endpoint specifies the application that
+// Amazon Web Services Verified Access provides access to. It must be attached to
+// an Amazon Web Services Verified Access group. An Amazon Web Services Verified
+// Access endpoint must also have an attached access policy before you attached it
+// to a group.
 type VerifiedAccessEndpoint struct {
+
+	// The DNS name for users to reach your application.
 	ApplicationDomain *string
 
+	// The type of attachment used to provide connectivity between the Amazon Web
+	// Services Verified Access endpoint and the application.
 	AttachmentType VerifiedAccessEndpointAttachmentType
 
+	// The creation time.
 	CreationTime *string
 
+	// The deletion time.
 	DeletionTime *string
 
+	// A description for the Amazon Web Services Verified Access endpoint.
 	Description *string
 
+	// Returned if endpoint has a device trust provider attached.
 	DeviceValidationDomain *string
 
+	// The ARN of a public TLS/SSL certificate imported into or created with ACM.
 	DomainCertificateArn *string
 
+	// A DNS name that is generated for the endpoint.
 	EndpointDomain *string
 
+	// The type of Amazon Web Services Verified Access endpoint. Incoming application
+	// requests will be sent to an IP address, load balancer or a network interface
+	// depending on the endpoint type specified.
 	EndpointType VerifiedAccessEndpointType
 
+	// The last updated time.
 	LastUpdatedTime *string
 
+	// The load balancer details if creating the Amazon Web Services Verified Access
+	// endpoint as load-balancertype.
 	LoadBalancerOptions *VerifiedAccessEndpointLoadBalancerOptions
 
+	// The options for network-interface type endpoint.
 	NetworkInterfaceOptions *VerifiedAccessEndpointEniOptions
 
+	// The IDs of the security groups for the endpoint.
 	SecurityGroupIds []string
 
+	// The endpoint status.
 	Status *VerifiedAccessEndpointStatus
 
+	// The tags.
 	Tags []Tag
 
+	// The ID of the Amazon Web Services Verified Access endpoint.
 	VerifiedAccessEndpointId *string
 
+	// The ID of the Amazon Web Services Verified Access group.
 	VerifiedAccessGroupId *string
 
+	// The ID of the Amazon Web Services Verified Access instance.
 	VerifiedAccessInstanceId *string
 
 	noSmithyDocumentSerde
 }
 
+// Options for a network-interface type endpoint.
 type VerifiedAccessEndpointEniOptions struct {
+
+	// The ID of the network interface.
 	NetworkInterfaceId *string
 
+	// The IP port number.
 	Port *int32
 
+	// The IP protocol.
 	Protocol VerifiedAccessEndpointProtocol
 
 	noSmithyDocumentSerde
 }
 
+// Describes a load balancer when creating an Amazon Web Services Verified Access
+// endpoint using the load-balancer type.
 type VerifiedAccessEndpointLoadBalancerOptions struct {
+
+	// The ARN of the load balancer.
 	LoadBalancerArn *string
 
+	// The IP port number.
 	Port *int32
 
+	// The IP protocol.
 	Protocol VerifiedAccessEndpointProtocol
 
+	// The IDs of the subnets.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
 }
 
+// Describes the status of a Verified Access endpoint.
 type VerifiedAccessEndpointStatus struct {
+
+	// The status code of the Verified Access endpoint.
 	Code VerifiedAccessEndpointStatusCode
 
+	// The status message of the Verified Access endpoint.
 	Message *string
 
 	noSmithyDocumentSerde
 }
 
+// Describes a Verified Access group.
 type VerifiedAccessGroup struct {
+
+	// The creation time.
 	CreationTime *string
 
+	// The deletion time.
 	DeletionTime *string
 
+	// A description for the Amazon Web Services Verified Access group.
 	Description *string
 
+	// The last updated time.
 	LastUpdatedTime *string
 
+	// The Amazon Web Services account number that owns the group.
 	Owner *string
 
+	// The tags.
 	Tags []Tag
 
+	// The ARN of the Verified Access group.
 	VerifiedAccessGroupArn *string
 
+	// The ID of the Verified Access group.
 	VerifiedAccessGroupId *string
 
+	// The ID of the Amazon Web Services Verified Access instance.
 	VerifiedAccessInstanceId *string
 
 	noSmithyDocumentSerde
 }
 
+// Describes a Verified Access instance.
 type VerifiedAccessInstance struct {
+
+	// The creation time.
 	CreationTime *string
 
+	// A description for the Amazon Web Services Verified Access instance.
 	Description *string
 
+	// The last updated time.
 	LastUpdatedTime *string
 
+	// The tags.
 	Tags []Tag
 
+	// The ID of the Amazon Web Services Verified Access instance.
 	VerifiedAccessInstanceId *string
 
+	// The IDs of the Amazon Web Services Verified Access trust providers.
 	VerifiedAccessTrustProviders []VerifiedAccessTrustProviderCondensed
 
 	noSmithyDocumentSerde
 }
 
+// Describes logging options for an Amazon Web Services Verified Access instance.
 type VerifiedAccessInstanceLoggingConfiguration struct {
+
+	// Details about the logging options.
 	AccessLogs *VerifiedAccessLogs
 
+	// The ID of the Amazon Web Services Verified Access instance.
 	VerifiedAccessInstanceId *string
 
 	noSmithyDocumentSerde
 }
 
+// Options for CloudWatch Logs as a logging destination.
 type VerifiedAccessLogCloudWatchLogsDestination struct {
+
+	// The delivery status for access logs.
 	DeliveryStatus *VerifiedAccessLogDeliveryStatus
 
+	// Indicates whether logging is enabled.
 	Enabled *bool
 
+	// The ID of the CloudWatch Logs log group.
 	LogGroup *string
 
 	noSmithyDocumentSerde
 }
 
+// Options for CloudWatch Logs as a logging destination.
 type VerifiedAccessLogCloudWatchLogsDestinationOptions struct {
 
+	// Indicates whether logging is enabled.
+	//
 	// This member is required.
 	Enabled *bool
 
+	// The ID of the CloudWatch Logs log group.
 	LogGroup *string
 
 	noSmithyDocumentSerde
 }
 
+// Describes a log delivery status.
 type VerifiedAccessLogDeliveryStatus struct {
+
+	// The status code.
 	Code VerifiedAccessLogDeliveryStatusCode
 
+	// The status message.
 	Message *string
 
 	noSmithyDocumentSerde
 }
 
+// Options for Kinesis as a logging destination.
 type VerifiedAccessLogKinesisDataFirehoseDestination struct {
+
+	// The delivery status.
 	DeliveryStatus *VerifiedAccessLogDeliveryStatus
 
+	// The ID of the delivery stream.
 	DeliveryStream *string
 
+	// Indicates whether logging is enabled.
 	Enabled *bool
 
 	noSmithyDocumentSerde
 }
 
+// Describes Amazon Kinesis Data Firehose logging options.
 type VerifiedAccessLogKinesisDataFirehoseDestinationOptions struct {
 
+	// Indicates whether logging is enabled.
+	//
 	// This member is required.
 	Enabled *bool
 
+	// The ID of the delivery stream.
 	DeliveryStream *string
 
 	noSmithyDocumentSerde
 }
 
+// Describes the destinations for Verified Access logs.
 type VerifiedAccessLogOptions struct {
+
+	// Sends Verified Access logs to CloudWatch Logs.
 	CloudWatchLogs *VerifiedAccessLogCloudWatchLogsDestinationOptions
 
+	// Sends Verified Access logs to Kinesis.
 	KinesisDataFirehose *VerifiedAccessLogKinesisDataFirehoseDestinationOptions
 
+	// Sends Verified Access logs to Amazon S3.
 	S3 *VerifiedAccessLogS3DestinationOptions
 
 	noSmithyDocumentSerde
 }
 
+// Describes the destinations for Verified Access logs.
 type VerifiedAccessLogs struct {
+
+	// CloudWatch Logs logging destination.
 	CloudWatchLogs *VerifiedAccessLogCloudWatchLogsDestination
 
+	// Kinesis logging destination.
 	KinesisDataFirehose *VerifiedAccessLogKinesisDataFirehoseDestination
 
+	// Amazon S3 logging options.
 	S3 *VerifiedAccessLogS3Destination
 
 	noSmithyDocumentSerde
 }
 
+// Options for Amazon S3 as a logging destination.
 type VerifiedAccessLogS3Destination struct {
+
+	// The bucket name.
 	BucketName *string
 
+	// The Amazon Web Services account number that owns the bucket.
 	BucketOwner *string
 
+	// The delivery status.
 	DeliveryStatus *VerifiedAccessLogDeliveryStatus
 
+	// Indicates whether logging is enabled.
 	Enabled *bool
 
+	// The bucket prefix.
 	Prefix *string
 
 	noSmithyDocumentSerde
 }
 
+// Options for Amazon S3 as a logging destination.
 type VerifiedAccessLogS3DestinationOptions struct {
 
+	// Indicates whether logging is enabled.
+	//
 	// This member is required.
 	Enabled *bool
 
+	// The bucket name.
 	BucketName *string
 
+	// The ID of the Amazon Web Services account that owns the Amazon S3 bucket.
 	BucketOwner *string
 
+	// The bucket prefix.
 	Prefix *string
 
 	noSmithyDocumentSerde
 }
 
+// Describes a Verified Access trust provider.
 type VerifiedAccessTrustProvider struct {
+
+	// The creation time.
 	CreationTime *string
 
+	// A description for the Amazon Web Services Verified Access trust provider.
 	Description *string
 
+	// The options for device-identity type trust provider.
 	DeviceOptions *DeviceOptions
 
+	// The type of device-based trust provider.
 	DeviceTrustProviderType DeviceTrustProviderType
 
+	// The last updated time.
 	LastUpdatedTime *string
 
+	// The OpenID Connect details for an oidc-type, user-identity based trust provider.
 	OidcOptions *OidcOptions
 
+	// The identifier to be used when working with policy rules.
 	PolicyReferenceName *string
 
+	// The tags.
 	Tags []Tag
 
+	// The type of Verified Access trust provider.
 	TrustProviderType TrustProviderType
 
+	// The type of user-based trust provider.
 	UserTrustProviderType UserTrustProviderType
 
+	// The ID of the Amazon Web Services Verified Access trust provider.
 	VerifiedAccessTrustProviderId *string
 
 	noSmithyDocumentSerde
 }
 
+// Condensed information about a trust provider.
 type VerifiedAccessTrustProviderCondensed struct {
+
+	// The description of trust provider.
 	Description *string
 
+	// The type of device-based trust provider.
 	DeviceTrustProviderType DeviceTrustProviderType
 
+	// The type of trust provider (user- or device-based).
 	TrustProviderType TrustProviderType
 
+	// The type of user-based trust provider.
 	UserTrustProviderType UserTrustProviderType
 
+	// The ID of the trust provider.
 	VerifiedAccessTrustProviderId *string
 
 	noSmithyDocumentSerde

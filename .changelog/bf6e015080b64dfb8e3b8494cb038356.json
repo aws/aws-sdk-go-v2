@@ -1,0 +1,8 @@
+{
+    "id": "bf6e0150-80b6-4dfb-8e3b-8494cb038356",
+    "type": "feature",
+    "description": "This release introduces two new APIs that offer a 1-click experience to refresh Savings Plans recommendations. The two APIs are StartSavingsPlansPurchaseRecommendationGeneration and ListSavingsPlansPurchaseRecommendationGeneration.",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

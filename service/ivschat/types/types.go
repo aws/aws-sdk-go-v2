@@ -33,7 +33,7 @@ type DestinationConfiguration interface {
 	isDestinationConfiguration()
 }
 
-// Name of the Amazon CloudWatch Logs destination where chat activity will be
+// An Amazon CloudWatch Logs destination configuration where chat activity will be
 // logged.
 type DestinationConfigurationMemberCloudWatchLogs struct {
 	Value CloudWatchLogsDestinationConfiguration
@@ -43,8 +43,8 @@ type DestinationConfigurationMemberCloudWatchLogs struct {
 
 func (*DestinationConfigurationMemberCloudWatchLogs) isDestinationConfiguration() {}
 
-// Name of the Amazon Kinesis Data Firehose destination where chat activity will be
-// logged
+// An Amazon Kinesis Data Firehose destination configuration where chat activity
+// will be logged.
 type DestinationConfigurationMemberFirehose struct {
 	Value FirehoseDestinationConfiguration
 
@@ -53,7 +53,7 @@ type DestinationConfigurationMemberFirehose struct {
 
 func (*DestinationConfigurationMemberFirehose) isDestinationConfiguration() {}
 
-// Name of the Amazon S3 bucket where chat activity will be logged.
+// An Amazon S3 destination configuration where chat activity will be logged.
 type DestinationConfigurationMemberS3 struct {
 	Value S3DestinationConfiguration
 
