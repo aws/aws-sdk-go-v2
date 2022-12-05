@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+import software.amazon.smithy.aws.traits.protocols.AwsQueryCompatibleTrait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.CodegenUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -163,6 +164,12 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         writer.write("");
         handleDecodeError(writer);
         writer.write("errorBody.Seek(0, io.SeekStart)");
+        if (context.getService().hasTrait(AwsQueryCompatibleTrait.class)) {
+            writer.write("codeFromHeader := getAwsQueryErrorCode(response)");
+            writer.openBlock("if codeFromHeader != \"\" {", "}", () -> {
+                writer.write("output.SetErrorCode(codeFromHeader)");
+            });
+        }
         writer.write("return output");
     }
 

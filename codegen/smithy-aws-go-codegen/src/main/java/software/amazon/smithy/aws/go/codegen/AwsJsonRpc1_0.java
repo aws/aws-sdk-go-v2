@@ -19,6 +19,7 @@ import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeAwsQue
 
 import software.amazon.smithy.aws.traits.protocols.AwsJson1_0Trait;
 import software.amazon.smithy.aws.traits.protocols.AwsQueryCompatibleTrait;
+import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.model.shapes.ShapeId;
 
 /**
@@ -44,7 +45,25 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
         super.writeErrorMessageCodeDeserializer(context);
         if (context.getService().hasTrait(AwsQueryCompatibleTrait.class)) {
-            writeAwsQueryErrorCodeDeserializer(context);
+            // writeAwsQueryErrorCodeDeserializer(context);
+        }
+    }
+
+    @Override
+    public void generateSharedDeserializerComponents(GenerationContext context) {
+        super.generateSharedDeserializerComponents(context);
+        if (context.getService().hasTrait(AwsQueryCompatibleTrait.class)) {
+            GoWriter writer = context.getWriter().get();
+            writer.openBlock("func getAwsQueryErrorCode(response *smithyhttp.Response) {", "}", () -> {
+                writer.write("queryCodeHeader := response.Header.Get(\"x-amzn-query-error\")");
+                writer.openBlock("if queryCodeHeader != \"\" {", "}", () -> {
+                    writer.write("queryCodeParts := strings.Split(queryCodeHeader, \";\")");
+                    writer.openBlock("if queryCodeParts != nil && len(queryCodeParts) == 2 {", "}", () -> {
+                        writer.write("return queryCodeParts[0]");
+                    });
+                    writer.write("return \"\"");
+                });
+            });
         }
     }
 }
