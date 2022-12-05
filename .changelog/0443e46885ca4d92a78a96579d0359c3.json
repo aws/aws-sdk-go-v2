@@ -1,8 +1,0 @@
-{
-    "id": "0443e468-85ca-4d92-a78a-96579d0359c3",
-    "type": "feature",
-    "description": "Amazon Transcribe now supports creating custom language models in the following languages: Japanese (ja-JP) and German (de-DE).",
-    "modules": [
-        "service/transcribe"
-    ]
-}

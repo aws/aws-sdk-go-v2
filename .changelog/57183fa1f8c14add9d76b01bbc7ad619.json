@@ -1,8 +1,0 @@
-{
-    "id": "57183fa1-f8c1-4add-9d76-b01bbc7ad619",
-    "type": "feature",
-    "description": "This release adds the InvalidDBInstanceStateFault to the RestoreDBClusterFromSnapshot operation.",
-    "modules": [
-        "service/rds"
-    ]
-}

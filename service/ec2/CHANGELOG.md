@@ -1,3 +1,7 @@
+# v1.75.0 (2022-12-05)
+
+* **Feature**: Documentation updates for EC2.
+
 # v1.74.1 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

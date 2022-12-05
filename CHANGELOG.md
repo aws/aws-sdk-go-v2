@@ -1,3 +1,17 @@
+# Release (2022-12-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.22.0](service/costexplorer/CHANGELOG.md#v1220-2022-12-05)
+  * **Feature**: This release introduces two new APIs that offer a 1-click experience to refresh Savings Plans recommendations. The two APIs are StartSavingsPlansPurchaseRecommendationGeneration and ListSavingsPlansPurchaseRecommendationGeneration.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.75.0](service/ec2/CHANGELOG.md#v1750-2022-12-05)
+  * **Feature**: Documentation updates for EC2.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.2.0](service/ivschat/CHANGELOG.md#v120-2022-12-05)
+  * **Feature**: Adds PendingVerification error type to messaging APIs to block the resource usage for accounts identified as being fraudulent.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.32.0](service/rds/CHANGELOG.md#v1320-2022-12-05)
+  * **Feature**: This release adds the InvalidDBInstanceStateFault to the RestoreDBClusterFromSnapshot operation.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.23.0](service/transcribe/CHANGELOG.md#v1230-2022-12-05)
+  * **Feature**: Amazon Transcribe now supports creating custom language models in the following languages: Japanese (ja-JP) and German (de-DE).
+
 # Release (2022-12-02)
 
 ## General Highlights

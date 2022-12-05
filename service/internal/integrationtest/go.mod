@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.17
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.8
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.74.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.75.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.24
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.18.1
@@ -60,7 +60,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.20
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.22
 	github.com/aws/aws-sdk-go-v2/service/polly v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/rds v1.31.1
+	github.com/aws/aws-sdk-go-v2/service/rds v1.32.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.17
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.21.1
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.25.1

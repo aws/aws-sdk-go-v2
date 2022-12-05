@@ -1,3 +1,7 @@
+# v1.32.0 (2022-12-05)
+
+* **Feature**: This release adds the InvalidDBInstanceStateFault to the RestoreDBClusterFromSnapshot operation.
+
 # v1.31.1 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions
