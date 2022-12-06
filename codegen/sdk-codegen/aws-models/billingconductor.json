@@ -73,7 +73,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -669,8 +669,8 @@
                                         "authSchemes": [
                                             {
                                                 "name": "sigv4",
-                                                "signingRegion": "us-east-1",
-                                                "signingName": "billingconductor"
+                                                "signingName": "billingconductor",
+                                                "signingRegion": "us-east-1"
                                             }
                                         ]
                                     },
@@ -678,9 +678,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "aws-global",
-                                "UseDualStack": false
+                                "Region": "aws-global"
                             }
                         },
                         {
@@ -691,9 +691,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -703,9 +703,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -715,9 +715,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1761,6 +1761,21 @@
                 }
             }
         },
+        "com.amazonaws.billingconductor#CreateFreeTierConfig": {
+            "type": "structure",
+            "members": {
+                "Activated": {
+                    "target": "com.amazonaws.billingconductor#TieringActivated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Activate or deactivate Amazon Web Services Free Tier.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The possible Amazon Web Services Free Tier configurations.\n    </p>"
+            }
+        },
         "com.amazonaws.billingconductor#CreatePricingPlan": {
             "type": "operation",
             "input": {
@@ -1940,8 +1955,7 @@
                 "ModifierPercentage": {
                     "target": "com.amazonaws.billingconductor#ModifierPercentage",
                     "traits": {
-                        "smithy.api#documentation": "<p> A percentage modifier that's applied on the public pricing rates. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p> A percentage modifier that's applied on the public pricing rates. </p>"
                     }
                 },
                 "Service": {
@@ -1961,6 +1975,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace.\n    </p>"
                     }
+                },
+                "Tiering": {
+                    "target": "com.amazonaws.billingconductor#CreateTieringInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The set of tiering configurations for the pricing rule.\n    </p>"
+                    }
                 }
             }
         },
@@ -1973,6 +1993,21 @@
                         "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the created pricing rule. </p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.billingconductor#CreateTieringInput": {
+            "type": "structure",
+            "members": {
+                "FreeTier": {
+                    "target": "com.amazonaws.billingconductor#CreateFreeTierConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The possible Amazon Web Services Free Tier configurations.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The set of tiering configurations for the pricing rule.\n    </p>"
             }
         },
         "com.amazonaws.billingconductor#Currency": {
@@ -2816,6 +2851,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.billingconductor#DisassociateResourceResponseElement"
+            }
+        },
+        "com.amazonaws.billingconductor#FreeTierConfig": {
+            "type": "structure",
+            "members": {
+                "Activated": {
+                    "target": "com.amazonaws.billingconductor#TieringActivated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Activate or deactivate Amazon Web Services Free Tier application.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The possible Amazon Web Services Free Tier configurations.\n    </p>"
             }
         },
         "com.amazonaws.billingconductor#Instant": {
@@ -4339,7 +4389,6 @@
                 }
             ],
             "traits": {
-                "aws.cloudformation#cfnResource": {},
                 "aws.iam#conditionKeys": [
                     "aws:ResourceTag/${TagKey}"
                 ],
@@ -4476,6 +4525,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace.\n    </p>"
                     }
+                },
+                "Tiering": {
+                    "target": "com.amazonaws.billingconductor#Tiering",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The set of tiering configurations for the pricing rule.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -4523,6 +4578,10 @@
                     {
                         "value": "DISCOUNT",
                         "name": "DISCOUNT"
+                    },
+                    {
+                        "value": "TIERING",
+                        "name": "TIERING"
                     }
                 ]
             }
@@ -4780,6 +4839,24 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }
+        },
+        "com.amazonaws.billingconductor#Tiering": {
+            "type": "structure",
+            "members": {
+                "FreeTier": {
+                    "target": "com.amazonaws.billingconductor#FreeTierConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The possible Amazon Web Services Free Tier configurations.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The set of tiering configurations for the pricing rule.\n    </p>"
+            }
+        },
+        "com.amazonaws.billingconductor#TieringActivated": {
+            "type": "boolean"
         },
         "com.amazonaws.billingconductor#Token": {
             "type": "string"
@@ -5178,6 +5255,21 @@
                 "smithy.api#documentation": "<p>\n      A representation of the new charge details that are associated with a percentage custom line item.\n    </p>"
             }
         },
+        "com.amazonaws.billingconductor#UpdateFreeTierConfig": {
+            "type": "structure",
+            "members": {
+                "Activated": {
+                    "target": "com.amazonaws.billingconductor#TieringActivated",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Activate or deactivate application of Amazon Web Services Free Tier.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The possible Amazon Web Services Free Tier configurations.\n    </p>"
+            }
+        },
         "com.amazonaws.billingconductor#UpdatePricingPlan": {
             "type": "operation",
             "input": {
@@ -5348,6 +5440,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The new modifier to show pricing plan rates as a percentage.\n    </p>"
                     }
+                },
+                "Tiering": {
+                    "target": "com.amazonaws.billingconductor#UpdateTieringInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The set of tiering configurations for the pricing rule.\n    </p>"
+                    }
                 }
             }
         },
@@ -5415,7 +5513,28 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The seller of services provided by Amazon Web Services, their affiliates, or third-party providers selling services via Amazon Web Services Marketplace.\n    </p>"
                     }
+                },
+                "Tiering": {
+                    "target": "com.amazonaws.billingconductor#UpdateTieringInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The set of tiering configurations for the pricing rule.\n    </p>"
+                    }
                 }
+            }
+        },
+        "com.amazonaws.billingconductor#UpdateTieringInput": {
+            "type": "structure",
+            "members": {
+                "FreeTier": {
+                    "target": "com.amazonaws.billingconductor#UpdateFreeTierConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The possible Amazon Web Services Free Tier configurations.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The set of tiering configurations for the pricing rule.\n    </p>"
             }
         },
         "com.amazonaws.billingconductor#ValidationException": {
@@ -5677,6 +5796,18 @@
                     {
                         "value": "ILLEGAL_MODIFIER_PERCENTAGE",
                         "name": "ILLEGAL_MODIFIER_PERCENTAGE"
+                    },
+                    {
+                        "value": "ILLEGAL_TYPE",
+                        "name": "ILLEGAL_TYPE"
+                    },
+                    {
+                        "value": "ILLEGAL_ENDED_BILLINGGROUP",
+                        "name": "ILLEGAL_ENDED_BILLINGGROUP"
+                    },
+                    {
+                        "value": "ILLEGAL_TIERING_INPUT",
+                        "name": "ILLEGAL_TIERING_INPUT"
                     }
                 ]
             }
