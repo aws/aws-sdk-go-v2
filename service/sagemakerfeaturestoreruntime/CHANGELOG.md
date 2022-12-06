@@ -1,3 +1,7 @@
+# v1.12.0 (2022-12-06)
+
+* **Feature**: For online + offline Feature Groups, added ability to target PutRecord and DeleteRecord actions to only online store, or only offline store. If target store parameter is not specified, actions will apply to both stores.
+
 # v1.11.20 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

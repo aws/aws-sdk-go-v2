@@ -1,3 +1,7 @@
+# v1.33.0 (2022-12-06)
+
+* **Feature**: This release adds the BlueGreenDeploymentNotFoundFault to the AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource operations.
+
 # v1.32.0 (2022-12-05)
 
 * **Feature**: This release adds the InvalidDBInstanceStateFault to the RestoreDBClusterFromSnapshot operation.

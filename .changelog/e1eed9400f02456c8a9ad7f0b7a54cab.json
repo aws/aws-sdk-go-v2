@@ -1,8 +1,0 @@
-{
-    "id": "e1eed940-0f02-456c-8a9a-d7f0b7a54cab",
-    "type": "feature",
-    "description": "This release adds the Tiering Pricing Rule feature.",
-    "modules": [
-        "service/billingconductor"
-    ]
-}

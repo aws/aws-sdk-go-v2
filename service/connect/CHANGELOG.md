@@ -1,3 +1,7 @@
+# v1.39.0 (2022-12-06)
+
+* **Feature**: This release provides APIs that enable you to programmatically manage rules for Contact Lens conversational analytics and third party applications. For more information, see   https://docs.aws.amazon.com/connect/latest/APIReference/rules-api.html
+
 # v1.38.1 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

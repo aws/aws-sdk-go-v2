@@ -1,3 +1,15 @@
+# Release (2022-12-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.3.0](service/billingconductor/CHANGELOG.md#v130-2022-12-06)
+  * **Feature**: This release adds the Tiering Pricing Rule feature.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.39.0](service/connect/CHANGELOG.md#v1390-2022-12-06)
+  * **Feature**: This release provides APIs that enable you to programmatically manage rules for Contact Lens conversational analytics and third party applications. For more information, see   https://docs.aws.amazon.com/connect/latest/APIReference/rules-api.html
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.33.0](service/rds/CHANGELOG.md#v1330-2022-12-06)
+  * **Feature**: This release adds the BlueGreenDeploymentNotFoundFault to the AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource operations.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.12.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1120-2022-12-06)
+  * **Feature**: For online + offline Feature Groups, added ability to target PutRecord and DeleteRecord actions to only online store, or only offline store. If target store parameter is not specified, actions will apply to both stores.
+
 # Release (2022-12-05)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "a1b84569-7a5f-4970-a018-9fb189738c48",
-    "type": "feature",
-    "description": "Endpoint Ruleset update: Use http instead of https for the \"local\" region.",
-    "modules": [
-        "service/dynamodb"
-    ]
-}
