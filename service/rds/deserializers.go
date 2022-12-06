@@ -358,6 +358,9 @@ func awsAwsquery_deserializeOpErrorAddTagsToResource(response *smithyhttp.Respon
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("BlueGreenDeploymentNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorBlueGreenDeploymentNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
@@ -10071,6 +10074,9 @@ func awsAwsquery_deserializeOpErrorListTagsForResource(response *smithyhttp.Resp
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("BlueGreenDeploymentNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorBlueGreenDeploymentNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 
@@ -13479,6 +13485,9 @@ func awsAwsquery_deserializeOpErrorRemoveTagsFromResource(response *smithyhttp.R
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("BlueGreenDeploymentNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorBlueGreenDeploymentNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("DBClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorDBClusterNotFoundFault(response, errorBody)
 

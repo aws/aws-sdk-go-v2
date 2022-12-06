@@ -10,7 +10,7 @@ import (
 type BatchGetRecordError struct {
 
 	// The error code of an error that has occured when attempting to retrieve a batch
-	// of Records. For more information on errors, see  Errors
+	// of Records. For more information on errors, see Errors
 	// (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors).
 	//
 	// This member is required.

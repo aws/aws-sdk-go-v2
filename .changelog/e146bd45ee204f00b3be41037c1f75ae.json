@@ -1,0 +1,8 @@
+{
+    "id": "e146bd45-ee20-4f00-b3be-41037c1f75ae",
+    "type": "feature",
+    "description": "This release provides APIs that enable you to programmatically manage rules for Contact Lens conversational analytics and third party applications. For more information, see   https://docs.aws.amazon.com/connect/latest/APIReference/rules-api.html",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -6,13 +6,14 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Record from a FeatureGroup. A new record will show up in the
-// OfflineStore when the DeleteRecord API is called. This record will have a value
-// of True in the is_deleted column.
+// Deletes a Record from a FeatureGroup. When the DeleteRecord API is called a new
+// record will be added to the OfflineStore and the Record will be removed from the
+// OnlineStore. This record will have a value of True in the is_deleted column.
 func (c *Client) DeleteRecord(ctx context.Context, params *DeleteRecordInput, optFns ...func(*Options)) (*DeleteRecordOutput, error) {
 	if params == nil {
 		params = &DeleteRecordInput{}
@@ -46,6 +47,11 @@ type DeleteRecordInput struct {
 	//
 	// This member is required.
 	RecordIdentifierValueAsString *string
+
+	// A list of stores from which you're deleting the record. By default, Feature
+	// Store deletes the record from all of the stores that you're using for the
+	// FeatureGroup.
+	TargetStores []types.TargetStore
 
 	noSmithyDocumentSerde
 }

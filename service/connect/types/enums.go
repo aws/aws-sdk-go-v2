@@ -2,6 +2,28 @@
 
 package types
 
+type ActionType string
+
+// Enum values for ActionType
+const (
+	ActionTypeCreateTask               ActionType = "CREATE_TASK"
+	ActionTypeAssignContactCategory    ActionType = "ASSIGN_CONTACT_CATEGORY"
+	ActionTypeGenerateEventbridgeEvent ActionType = "GENERATE_EVENTBRIDGE_EVENT"
+	ActionTypeSendNotification         ActionType = "SEND_NOTIFICATION"
+)
+
+// Values returns all known values for ActionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionType) Values() []ActionType {
+	return []ActionType{
+		"CREATE_TASK",
+		"ASSIGN_CONTACT_CATEGORY",
+		"GENERATE_EVENTBRIDGE_EVENT",
+		"SEND_NOTIFICATION",
+	}
+}
+
 type AgentStatusState string
 
 // Enum values for AgentStatusState
@@ -296,6 +318,32 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type EventSourceName string
+
+// Enum values for EventSourceName
+const (
+	EventSourceNameOnPostCallAnalysisAvailable     EventSourceName = "OnPostCallAnalysisAvailable"
+	EventSourceNameOnRealTimeCallAnalysisAvailable EventSourceName = "OnRealTimeCallAnalysisAvailable"
+	EventSourceNameOnPostChatAnalysisAvailable     EventSourceName = "OnPostChatAnalysisAvailable"
+	EventSourceNameOnZendeskTicketCreate           EventSourceName = "OnZendeskTicketCreate"
+	EventSourceNameOnZendeskTicketStatusUpdate     EventSourceName = "OnZendeskTicketStatusUpdate"
+	EventSourceNameOnSalesforceCaseCreate          EventSourceName = "OnSalesforceCaseCreate"
+)
+
+// Values returns all known values for EventSourceName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventSourceName) Values() []EventSourceName {
+	return []EventSourceName{
+		"OnPostCallAnalysisAvailable",
+		"OnRealTimeCallAnalysisAvailable",
+		"OnPostChatAnalysisAvailable",
+		"OnZendeskTicketCreate",
+		"OnZendeskTicketStatusUpdate",
+		"OnSalesforceCaseCreate",
+	}
+}
+
 type Grouping string
 
 // Enum values for Grouping
@@ -565,6 +613,38 @@ func (MonitorCapability) Values() []MonitorCapability {
 	return []MonitorCapability{
 		"SILENT_MONITOR",
 		"BARGE",
+	}
+}
+
+type NotificationContentType string
+
+// Enum values for NotificationContentType
+const (
+	NotificationContentTypePlainText NotificationContentType = "PLAIN_TEXT"
+)
+
+// Values returns all known values for NotificationContentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationContentType) Values() []NotificationContentType {
+	return []NotificationContentType{
+		"PLAIN_TEXT",
+	}
+}
+
+type NotificationDeliveryType string
+
+// Enum values for NotificationDeliveryType
+const (
+	NotificationDeliveryTypeEmail NotificationDeliveryType = "EMAIL"
+)
+
+// Values returns all known values for NotificationDeliveryType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationDeliveryType) Values() []NotificationDeliveryType {
+	return []NotificationDeliveryType{
+		"EMAIL",
 	}
 }
 
@@ -1264,6 +1344,24 @@ func (ResourceType) Values() []ResourceType {
 		"HIERARCHY_LEVEL",
 		"HIERARCHY_GROUP",
 		"USER",
+	}
+}
+
+type RulePublishStatus string
+
+// Enum values for RulePublishStatus
+const (
+	RulePublishStatusDraft     RulePublishStatus = "DRAFT"
+	RulePublishStatusPublished RulePublishStatus = "PUBLISHED"
+)
+
+// Values returns all known values for RulePublishStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RulePublishStatus) Values() []RulePublishStatus {
+	return []RulePublishStatus{
+		"DRAFT",
+		"PUBLISHED",
 	}
 }
 

@@ -760,6 +760,13 @@ func awsRestjson1_serializeOpDocumentCreatePricingRuleInput(v *CreatePricingRule
 		}
 	}
 
+	if v.Tiering != nil {
+		ok := object.Key("Tiering")
+		if err := awsRestjson1_serializeDocumentCreateTieringInput(v.Tiering, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
@@ -2601,6 +2608,13 @@ func awsRestjson1_serializeOpDocumentUpdatePricingRuleInput(v *UpdatePricingRule
 		ok.String(*v.Name)
 	}
 
+	if v.Tiering != nil {
+		ok := object.Key("Tiering")
+		if err := awsRestjson1_serializeDocumentUpdateTieringInput(v.Tiering, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))
@@ -2652,6 +2666,32 @@ func awsRestjson1_serializeDocumentComputationPreference(v *types.ComputationPre
 	if v.PricingPlanArn != nil {
 		ok := object.Key("PricingPlanArn")
 		ok.String(*v.PricingPlanArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCreateFreeTierConfig(v *types.CreateFreeTierConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Activated != nil {
+		ok := object.Key("Activated")
+		ok.Boolean(*v.Activated)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCreateTieringInput(v *types.CreateTieringInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FreeTier != nil {
+		ok := object.Key("FreeTier")
+		if err := awsRestjson1_serializeDocumentCreateFreeTierConfig(v.FreeTier, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3081,6 +3121,32 @@ func awsRestjson1_serializeDocumentUpdateCustomLineItemPercentageChargeDetails(v
 		default:
 			ok.Double(*v.PercentageValue)
 
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateFreeTierConfig(v *types.UpdateFreeTierConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Activated != nil {
+		ok := object.Key("Activated")
+		ok.Boolean(*v.Activated)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateTieringInput(v *types.UpdateTieringInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FreeTier != nil {
+		ok := object.Key("FreeTier")
+		if err := awsRestjson1_serializeDocumentUpdateFreeTierConfig(v.FreeTier, ok); err != nil {
+			return err
 		}
 	}
 

@@ -138,6 +138,28 @@ type ComputationPreference struct {
 	noSmithyDocumentSerde
 }
 
+// The possible Amazon Web Services Free Tier configurations.
+type CreateFreeTierConfig struct {
+
+	// Activate or deactivate Amazon Web Services Free Tier.
+	//
+	// This member is required.
+	Activated *bool
+
+	noSmithyDocumentSerde
+}
+
+// The set of tiering configurations for the pricing rule.
+type CreateTieringInput struct {
+
+	// The possible Amazon Web Services Free Tier configurations.
+	//
+	// This member is required.
+	FreeTier *CreateFreeTierConfig
+
+	noSmithyDocumentSerde
+}
+
 // The billing period range in which the custom line item request will be applied.
 type CustomLineItemBillingPeriodRange struct {
 
@@ -291,6 +313,17 @@ type DisassociateResourceResponseElement struct {
 
 	// An AssociateResourceError that's shown if the resource disassociation fails.
 	Error *AssociateResourceError
+
+	noSmithyDocumentSerde
+}
+
+// The possible Amazon Web Services Free Tier configurations.
+type FreeTierConfig struct {
+
+	// Activate or deactivate Amazon Web Services Free Tier application.
+	//
+	// This member is required.
+	Activated *bool
 
 	noSmithyDocumentSerde
 }
@@ -531,8 +564,22 @@ type PricingRuleListElement struct {
 	// PricingRule is applicable for.
 	Service *string
 
+	// The set of tiering configurations for the pricing rule.
+	Tiering *Tiering
+
 	// The type of pricing rule.
 	Type PricingRuleType
+
+	noSmithyDocumentSerde
+}
+
+// The set of tiering configurations for the pricing rule.
+type Tiering struct {
+
+	// The possible Amazon Web Services Free Tier configurations.
+	//
+	// This member is required.
+	FreeTier *FreeTierConfig
 
 	noSmithyDocumentSerde
 }
@@ -573,6 +620,28 @@ type UpdateCustomLineItemPercentageChargeDetails struct {
 	//
 	// This member is required.
 	PercentageValue *float64
+
+	noSmithyDocumentSerde
+}
+
+// The possible Amazon Web Services Free Tier configurations.
+type UpdateFreeTierConfig struct {
+
+	// Activate or deactivate application of Amazon Web Services Free Tier.
+	//
+	// This member is required.
+	Activated *bool
+
+	noSmithyDocumentSerde
+}
+
+// The set of tiering configurations for the pricing rule.
+type UpdateTieringInput struct {
+
+	// The possible Amazon Web Services Free Tier configurations.
+	//
+	// This member is required.
+	FreeTier *UpdateFreeTierConfig
 
 	noSmithyDocumentSerde
 }

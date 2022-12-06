@@ -31,11 +31,6 @@ func (c *Client) CreatePricingRule(ctx context.Context, params *CreatePricingRul
 
 type CreatePricingRuleInput struct {
 
-	// A percentage modifier that's applied on the public pricing rates.
-	//
-	// This member is required.
-	ModifierPercentage *float64
-
 	// The pricing rule name. The names must be unique to each pricing rule.
 	//
 	// This member is required.
@@ -63,12 +58,18 @@ type CreatePricingRuleInput struct {
 	// The pricing rule description.
 	Description *string
 
+	// A percentage modifier that's applied on the public pricing rates.
+	ModifierPercentage *float64
+
 	// If the Scope attribute is set to SERVICE, the attribute indicates which service
 	// the PricingRule is applicable for.
 	Service *string
 
 	// A map that contains tag keys and tag values that are attached to a pricing rule.
 	Tags map[string]string
+
+	// The set of tiering configurations for the pricing rule.
+	Tiering *types.CreateTieringInput
 
 	noSmithyDocumentSerde
 }

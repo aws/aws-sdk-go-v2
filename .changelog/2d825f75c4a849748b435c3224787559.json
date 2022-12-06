@@ -1,0 +1,8 @@
+{
+    "id": "2d825f75-c4a8-4974-8b43-5c3224787559",
+    "type": "feature",
+    "description": "Endpoint Ruleset update: Use http instead of https for the \"local\" region.",
+    "modules": [
+        "service/dynamodbstreams"
+    ]
+}

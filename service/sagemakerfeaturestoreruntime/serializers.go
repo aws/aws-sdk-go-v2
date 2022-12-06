@@ -147,6 +147,12 @@ func awsRestjson1_serializeOpHttpBindingsDeleteRecordInput(v *DeleteRecordInput,
 		encoder.SetQuery("RecordIdentifierValueAsString").String(*v.RecordIdentifierValueAsString)
 	}
 
+	if v.TargetStores != nil {
+		for i := range v.TargetStores {
+			encoder.AddQuery("TargetStores").String(string(v.TargetStores[i]))
+		}
+	}
+
 	return nil
 }
 
@@ -298,6 +304,13 @@ func awsRestjson1_serializeOpDocumentPutRecordInput(v *PutRecordInput, value smi
 		}
 	}
 
+	if v.TargetStores != nil {
+		ok := object.Key("TargetStores")
+		if err := awsRestjson1_serializeDocumentTargetStores(v.TargetStores, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -388,6 +401,17 @@ func awsRestjson1_serializeDocumentRecordIdentifiers(v []string, value smithyjso
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTargetStores(v []types.TargetStore, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }

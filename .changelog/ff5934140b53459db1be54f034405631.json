@@ -1,0 +1,8 @@
+{
+    "id": "ff593414-0b53-459d-b1be-54f034405631",
+    "type": "feature",
+    "description": "This release adds the BlueGreenDeploymentNotFoundFault to the AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource operations.",
+    "modules": [
+        "service/rds"
+    ]
+}

@@ -27,7 +27,7 @@ func (e *AccessForbidden) ErrorCode() string             { return "AccessForbidd
 func (e *AccessForbidden) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal failure occurred. Try your request again. If the problem persists,
-// contact AWS customer support.
+// contact Amazon Web Services customer support.
 type InternalFailure struct {
 	Message *string
 
