@@ -55,6 +55,11 @@ type CreateAddonInput struct {
 	// of the request.
 	ClientRequestToken *string
 
+	// The set of configuration values for the add-on being created. Whatever values
+	// provided here are validated against the schema from DescribeAddonConfiguration
+	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html).
+	ConfigurationValues *string
+
 	// How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are
 	// handled based on the value you choose:
 	//

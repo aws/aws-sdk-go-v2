@@ -176,6 +176,51 @@ func (e *CNAMEAlreadyExists) ErrorMessage() string {
 func (e *CNAMEAlreadyExists) ErrorCode() string             { return "CNAMEAlreadyExists" }
 func (e *CNAMEAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// A continuous deployment policy with this configuration already exists.
+type ContinuousDeploymentPolicyAlreadyExists struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ContinuousDeploymentPolicyAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ContinuousDeploymentPolicyAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ContinuousDeploymentPolicyAlreadyExists) ErrorCode() string {
+	return "ContinuousDeploymentPolicyAlreadyExists"
+}
+func (e *ContinuousDeploymentPolicyAlreadyExists) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// You cannot delete a continuous deployment policy that is associated with a
+// primary distribution.
+type ContinuousDeploymentPolicyInUse struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ContinuousDeploymentPolicyInUse) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ContinuousDeploymentPolicyInUse) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ContinuousDeploymentPolicyInUse) ErrorCode() string {
+	return "ContinuousDeploymentPolicyInUse"
+}
+func (e *ContinuousDeploymentPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The caller reference you attempted to create the distribution with is associated
 // with another distribution.
 type DistributionAlreadyExists struct {
@@ -1109,6 +1154,27 @@ func (e *NoSuchCloudFrontOriginAccessIdentity) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// The continuous deployment policy doesn’t exist.
+type NoSuchContinuousDeploymentPolicy struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NoSuchContinuousDeploymentPolicy) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NoSuchContinuousDeploymentPolicy) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NoSuchContinuousDeploymentPolicy) ErrorCode() string {
+	return "NoSuchContinuousDeploymentPolicy"
+}
+func (e *NoSuchContinuousDeploymentPolicy) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified distribution does not exist.
 type NoSuchDistribution struct {
 	Message *string
@@ -1853,6 +1919,30 @@ func (e *TooManyCloudFrontOriginAccessIdentities) ErrorCode() string {
 	return "TooManyCloudFrontOriginAccessIdentities"
 }
 func (e *TooManyCloudFrontOriginAccessIdentities) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// You have reached the maximum number of continuous deployment policies for this
+// Amazon Web Services account.
+type TooManyContinuousDeploymentPolicies struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyContinuousDeploymentPolicies) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyContinuousDeploymentPolicies) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyContinuousDeploymentPolicies) ErrorCode() string {
+	return "TooManyContinuousDeploymentPolicies"
+}
+func (e *TooManyContinuousDeploymentPolicies) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 

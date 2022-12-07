@@ -230,6 +230,26 @@ func (m *validateOpDeregisterCluster) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAddonConfiguration struct {
+}
+
+func (*validateOpDescribeAddonConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAddonConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAddonConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAddonConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAddon struct {
 }
 
@@ -694,6 +714,10 @@ func addOpDeregisterClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterCluster{}, middleware.After)
 }
 
+func addOpDescribeAddonConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAddonConfiguration{}, middleware.After)
+}
+
 func addOpDescribeAddonValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAddon{}, middleware.After)
 }
@@ -1058,6 +1082,24 @@ func validateOpDeregisterClusterInput(v *DeregisterClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterClusterInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAddonConfigurationInput(v *DescribeAddonConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAddonConfigurationInput"}
+	if v.AddonName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddonName"))
+	}
+	if v.AddonVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddonVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

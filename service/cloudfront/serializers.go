@@ -6339,6 +6339,73 @@ func awsRestxml_serializeOpHttpBindingsUpdateDistributionInput(v *UpdateDistribu
 	return nil
 }
 
+type awsRestxml_serializeOpUpdateDistributionWithStagingConfig struct {
+}
+
+func (*awsRestxml_serializeOpUpdateDistributionWithStagingConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpUpdateDistributionWithStagingConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateDistributionWithStagingConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-05-31/distribution/{Id}/promote-staging-config")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsUpdateDistributionWithStagingConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsUpdateDistributionWithStagingConfigInput(v *UpdateDistributionWithStagingConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	if v.IfMatch != nil && len(*v.IfMatch) > 0 {
+		locationName := "If-Match"
+		encoder.SetHeader(locationName).String(*v.IfMatch)
+	}
+
+	if v.StagingDistributionId != nil {
+		encoder.SetQuery("StagingDistributionId").String(*v.StagingDistributionId)
+	}
+
+	return nil
+}
+
 type awsRestxml_serializeOpUpdateFieldLevelEncryptionConfig struct {
 }
 
@@ -8730,6 +8797,17 @@ func awsRestxml_serializeDocumentDistributionConfig(v *types.DistributionConfig,
 		el := value.MemberElement(root)
 		el.String(*v.Comment)
 	}
+	if v.ContinuousDeploymentPolicyId != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "ContinuousDeploymentPolicyId",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.ContinuousDeploymentPolicyId)
+	}
 	if v.CustomErrorResponses != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -8862,6 +8940,17 @@ func awsRestxml_serializeDocumentDistributionConfig(v *types.DistributionConfig,
 		if err := awsRestxml_serializeDocumentRestrictions(v.Restrictions, el); err != nil {
 			return err
 		}
+	}
+	if v.Staging != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Staging",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(*v.Staging)
 	}
 	if v.ViewerCertificate != nil {
 		rootAttr := []smithyxml.Attr{}

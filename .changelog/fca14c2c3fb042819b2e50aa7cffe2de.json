@@ -1,0 +1,8 @@
+{
+    "id": "fca14c2c-3fb0-4281-9b2e-50aa7cffe2de",
+    "type": "feature",
+    "description": "Introducing UpdateDistributionWithStagingConfig that can be used to promote the staging configuration to the production.",
+    "modules": [
+        "service/cloudfront"
+    ]
+}

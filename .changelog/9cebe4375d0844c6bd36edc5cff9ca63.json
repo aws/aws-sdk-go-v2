@@ -1,0 +1,8 @@
+{
+    "id": "9cebe437-5d08-44c6-bd36-edc5cff9ca63",
+    "type": "documentation",
+    "description": "Updated examples and exceptions for External Key Store (XKS).",
+    "modules": [
+        "service/kms"
+    ]
+}

@@ -894,6 +894,9 @@ func awsRestxml_deserializeOpErrorCreateContinuousDeploymentPolicy(response *smi
 	case strings.EqualFold("AccessDenied", errorCode):
 		return awsRestxml_deserializeErrorAccessDenied(response, errorBody)
 
+	case strings.EqualFold("ContinuousDeploymentPolicyAlreadyExists", errorCode):
+		return awsRestxml_deserializeErrorContinuousDeploymentPolicyAlreadyExists(response, errorBody)
+
 	case strings.EqualFold("InconsistentQuantities", errorCode):
 		return awsRestxml_deserializeErrorInconsistentQuantities(response, errorBody)
 
@@ -902,6 +905,9 @@ func awsRestxml_deserializeOpErrorCreateContinuousDeploymentPolicy(response *smi
 
 	case strings.EqualFold("StagingDistributionInUse", errorCode):
 		return awsRestxml_deserializeErrorStagingDistributionInUse(response, errorBody)
+
+	case strings.EqualFold("TooManyContinuousDeploymentPolicies", errorCode):
+		return awsRestxml_deserializeErrorTooManyContinuousDeploymentPolicies(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1065,6 +1071,9 @@ func awsRestxml_deserializeOpErrorCreateDistribution(response *smithyhttp.Respon
 	case strings.EqualFold("CNAMEAlreadyExists", errorCode):
 		return awsRestxml_deserializeErrorCNAMEAlreadyExists(response, errorBody)
 
+	case strings.EqualFold("ContinuousDeploymentPolicyInUse", errorCode):
+		return awsRestxml_deserializeErrorContinuousDeploymentPolicyInUse(response, errorBody)
+
 	case strings.EqualFold("DistributionAlreadyExists", errorCode):
 		return awsRestxml_deserializeErrorDistributionAlreadyExists(response, errorBody)
 
@@ -1154,6 +1163,9 @@ func awsRestxml_deserializeOpErrorCreateDistribution(response *smithyhttp.Respon
 
 	case strings.EqualFold("NoSuchCachePolicy", errorCode):
 		return awsRestxml_deserializeErrorNoSuchCachePolicy(response, errorBody)
+
+	case strings.EqualFold("NoSuchContinuousDeploymentPolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchContinuousDeploymentPolicy(response, errorBody)
 
 	case strings.EqualFold("NoSuchFieldLevelEncryptionConfig", errorCode):
 		return awsRestxml_deserializeErrorNoSuchFieldLevelEncryptionConfig(response, errorBody)
@@ -1410,6 +1422,9 @@ func awsRestxml_deserializeOpErrorCreateDistributionWithTags(response *smithyhtt
 	case strings.EqualFold("CNAMEAlreadyExists", errorCode):
 		return awsRestxml_deserializeErrorCNAMEAlreadyExists(response, errorBody)
 
+	case strings.EqualFold("ContinuousDeploymentPolicyInUse", errorCode):
+		return awsRestxml_deserializeErrorContinuousDeploymentPolicyInUse(response, errorBody)
+
 	case strings.EqualFold("DistributionAlreadyExists", errorCode):
 		return awsRestxml_deserializeErrorDistributionAlreadyExists(response, errorBody)
 
@@ -1499,6 +1514,9 @@ func awsRestxml_deserializeOpErrorCreateDistributionWithTags(response *smithyhtt
 
 	case strings.EqualFold("NoSuchCachePolicy", errorCode):
 		return awsRestxml_deserializeErrorNoSuchCachePolicy(response, errorBody)
+
+	case strings.EqualFold("NoSuchContinuousDeploymentPolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchContinuousDeploymentPolicy(response, errorBody)
 
 	case strings.EqualFold("NoSuchFieldLevelEncryptionConfig", errorCode):
 		return awsRestxml_deserializeErrorNoSuchFieldLevelEncryptionConfig(response, errorBody)
@@ -4138,11 +4156,17 @@ func awsRestxml_deserializeOpErrorDeleteContinuousDeploymentPolicy(response *smi
 	case strings.EqualFold("AccessDenied", errorCode):
 		return awsRestxml_deserializeErrorAccessDenied(response, errorBody)
 
+	case strings.EqualFold("ContinuousDeploymentPolicyInUse", errorCode):
+		return awsRestxml_deserializeErrorContinuousDeploymentPolicyInUse(response, errorBody)
+
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
 
 	case strings.EqualFold("InvalidIfMatchVersion", errorCode):
 		return awsRestxml_deserializeErrorInvalidIfMatchVersion(response, errorBody)
+
+	case strings.EqualFold("NoSuchContinuousDeploymentPolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchContinuousDeploymentPolicy(response, errorBody)
 
 	case strings.EqualFold("PreconditionFailed", errorCode):
 		return awsRestxml_deserializeErrorPreconditionFailed(response, errorBody)
@@ -6043,6 +6067,9 @@ func awsRestxml_deserializeOpErrorGetContinuousDeploymentPolicy(response *smithy
 	case strings.EqualFold("AccessDenied", errorCode):
 		return awsRestxml_deserializeErrorAccessDenied(response, errorBody)
 
+	case strings.EqualFold("NoSuchContinuousDeploymentPolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchContinuousDeploymentPolicy(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6196,6 +6223,9 @@ func awsRestxml_deserializeOpErrorGetContinuousDeploymentPolicyConfig(response *
 	switch {
 	case strings.EqualFold("AccessDenied", errorCode):
 		return awsRestxml_deserializeErrorAccessDenied(response, errorBody)
+
+	case strings.EqualFold("NoSuchContinuousDeploymentPolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchContinuousDeploymentPolicy(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -10139,6 +10169,9 @@ func awsRestxml_deserializeOpErrorListContinuousDeploymentPolicies(response *smi
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
 
+	case strings.EqualFold("NoSuchContinuousDeploymentPolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchContinuousDeploymentPolicy(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -13774,6 +13807,9 @@ func awsRestxml_deserializeOpErrorUpdateContinuousDeploymentPolicy(response *smi
 	case strings.EqualFold("InvalidIfMatchVersion", errorCode):
 		return awsRestxml_deserializeErrorInvalidIfMatchVersion(response, errorBody)
 
+	case strings.EqualFold("NoSuchContinuousDeploymentPolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchContinuousDeploymentPolicy(response, errorBody)
+
 	case strings.EqualFold("PreconditionFailed", errorCode):
 		return awsRestxml_deserializeErrorPreconditionFailed(response, errorBody)
 
@@ -13937,6 +13973,9 @@ func awsRestxml_deserializeOpErrorUpdateDistribution(response *smithyhttp.Respon
 	case strings.EqualFold("CNAMEAlreadyExists", errorCode):
 		return awsRestxml_deserializeErrorCNAMEAlreadyExists(response, errorBody)
 
+	case strings.EqualFold("ContinuousDeploymentPolicyInUse", errorCode):
+		return awsRestxml_deserializeErrorContinuousDeploymentPolicyInUse(response, errorBody)
+
 	case strings.EqualFold("IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior", errorCode):
 		return awsRestxml_deserializeErrorIllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior(response, errorBody)
 
@@ -14023,6 +14062,9 @@ func awsRestxml_deserializeOpErrorUpdateDistribution(response *smithyhttp.Respon
 
 	case strings.EqualFold("NoSuchCachePolicy", errorCode):
 		return awsRestxml_deserializeErrorNoSuchCachePolicy(response, errorBody)
+
+	case strings.EqualFold("NoSuchContinuousDeploymentPolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchContinuousDeploymentPolicy(response, errorBody)
 
 	case strings.EqualFold("NoSuchDistribution", errorCode):
 		return awsRestxml_deserializeErrorNoSuchDistribution(response, errorBody)
@@ -14149,6 +14191,337 @@ func awsRestxml_deserializeOpDocumentUpdateDistributionOutput(v **UpdateDistribu
 	var sv *UpdateDistributionOutput
 	if *v == nil {
 		sv = &UpdateDistributionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Distribution", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentDistribution(&sv.Distribution, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestxml_deserializeOpUpdateDistributionWithStagingConfig struct {
+}
+
+func (*awsRestxml_deserializeOpUpdateDistributionWithStagingConfig) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpUpdateDistributionWithStagingConfig) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorUpdateDistributionWithStagingConfig(response, &metadata)
+	}
+	output := &UpdateDistributionWithStagingConfigOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeOpHttpBindingsUpdateDistributionWithStagingConfigOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeDocumentDistribution(&output.Distribution, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorUpdateDistributionWithStagingConfig(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("AccessDenied", errorCode):
+		return awsRestxml_deserializeErrorAccessDenied(response, errorBody)
+
+	case strings.EqualFold("CNAMEAlreadyExists", errorCode):
+		return awsRestxml_deserializeErrorCNAMEAlreadyExists(response, errorBody)
+
+	case strings.EqualFold("IllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior", errorCode):
+		return awsRestxml_deserializeErrorIllegalFieldLevelEncryptionConfigAssociationWithCacheBehavior(response, errorBody)
+
+	case strings.EqualFold("IllegalUpdate", errorCode):
+		return awsRestxml_deserializeErrorIllegalUpdate(response, errorBody)
+
+	case strings.EqualFold("InconsistentQuantities", errorCode):
+		return awsRestxml_deserializeErrorInconsistentQuantities(response, errorBody)
+
+	case strings.EqualFold("InvalidArgument", errorCode):
+		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
+
+	case strings.EqualFold("InvalidDefaultRootObject", errorCode):
+		return awsRestxml_deserializeErrorInvalidDefaultRootObject(response, errorBody)
+
+	case strings.EqualFold("InvalidErrorCode", errorCode):
+		return awsRestxml_deserializeErrorInvalidErrorCode(response, errorBody)
+
+	case strings.EqualFold("InvalidForwardCookies", errorCode):
+		return awsRestxml_deserializeErrorInvalidForwardCookies(response, errorBody)
+
+	case strings.EqualFold("InvalidFunctionAssociation", errorCode):
+		return awsRestxml_deserializeErrorInvalidFunctionAssociation(response, errorBody)
+
+	case strings.EqualFold("InvalidGeoRestrictionParameter", errorCode):
+		return awsRestxml_deserializeErrorInvalidGeoRestrictionParameter(response, errorBody)
+
+	case strings.EqualFold("InvalidHeadersForS3Origin", errorCode):
+		return awsRestxml_deserializeErrorInvalidHeadersForS3Origin(response, errorBody)
+
+	case strings.EqualFold("InvalidIfMatchVersion", errorCode):
+		return awsRestxml_deserializeErrorInvalidIfMatchVersion(response, errorBody)
+
+	case strings.EqualFold("InvalidLambdaFunctionAssociation", errorCode):
+		return awsRestxml_deserializeErrorInvalidLambdaFunctionAssociation(response, errorBody)
+
+	case strings.EqualFold("InvalidLocationCode", errorCode):
+		return awsRestxml_deserializeErrorInvalidLocationCode(response, errorBody)
+
+	case strings.EqualFold("InvalidMinimumProtocolVersion", errorCode):
+		return awsRestxml_deserializeErrorInvalidMinimumProtocolVersion(response, errorBody)
+
+	case strings.EqualFold("InvalidOriginAccessControl", errorCode):
+		return awsRestxml_deserializeErrorInvalidOriginAccessControl(response, errorBody)
+
+	case strings.EqualFold("InvalidOriginAccessIdentity", errorCode):
+		return awsRestxml_deserializeErrorInvalidOriginAccessIdentity(response, errorBody)
+
+	case strings.EqualFold("InvalidOriginKeepaliveTimeout", errorCode):
+		return awsRestxml_deserializeErrorInvalidOriginKeepaliveTimeout(response, errorBody)
+
+	case strings.EqualFold("InvalidOriginReadTimeout", errorCode):
+		return awsRestxml_deserializeErrorInvalidOriginReadTimeout(response, errorBody)
+
+	case strings.EqualFold("InvalidQueryStringParameters", errorCode):
+		return awsRestxml_deserializeErrorInvalidQueryStringParameters(response, errorBody)
+
+	case strings.EqualFold("InvalidRelativePath", errorCode):
+		return awsRestxml_deserializeErrorInvalidRelativePath(response, errorBody)
+
+	case strings.EqualFold("InvalidRequiredProtocol", errorCode):
+		return awsRestxml_deserializeErrorInvalidRequiredProtocol(response, errorBody)
+
+	case strings.EqualFold("InvalidResponseCode", errorCode):
+		return awsRestxml_deserializeErrorInvalidResponseCode(response, errorBody)
+
+	case strings.EqualFold("InvalidTTLOrder", errorCode):
+		return awsRestxml_deserializeErrorInvalidTTLOrder(response, errorBody)
+
+	case strings.EqualFold("InvalidViewerCertificate", errorCode):
+		return awsRestxml_deserializeErrorInvalidViewerCertificate(response, errorBody)
+
+	case strings.EqualFold("InvalidWebACLId", errorCode):
+		return awsRestxml_deserializeErrorInvalidWebACLId(response, errorBody)
+
+	case strings.EqualFold("MissingBody", errorCode):
+		return awsRestxml_deserializeErrorMissingBody(response, errorBody)
+
+	case strings.EqualFold("NoSuchCachePolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchCachePolicy(response, errorBody)
+
+	case strings.EqualFold("NoSuchDistribution", errorCode):
+		return awsRestxml_deserializeErrorNoSuchDistribution(response, errorBody)
+
+	case strings.EqualFold("NoSuchFieldLevelEncryptionConfig", errorCode):
+		return awsRestxml_deserializeErrorNoSuchFieldLevelEncryptionConfig(response, errorBody)
+
+	case strings.EqualFold("NoSuchOrigin", errorCode):
+		return awsRestxml_deserializeErrorNoSuchOrigin(response, errorBody)
+
+	case strings.EqualFold("NoSuchOriginRequestPolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchOriginRequestPolicy(response, errorBody)
+
+	case strings.EqualFold("NoSuchRealtimeLogConfig", errorCode):
+		return awsRestxml_deserializeErrorNoSuchRealtimeLogConfig(response, errorBody)
+
+	case strings.EqualFold("NoSuchResponseHeadersPolicy", errorCode):
+		return awsRestxml_deserializeErrorNoSuchResponseHeadersPolicy(response, errorBody)
+
+	case strings.EqualFold("PreconditionFailed", errorCode):
+		return awsRestxml_deserializeErrorPreconditionFailed(response, errorBody)
+
+	case strings.EqualFold("RealtimeLogConfigOwnerMismatch", errorCode):
+		return awsRestxml_deserializeErrorRealtimeLogConfigOwnerMismatch(response, errorBody)
+
+	case strings.EqualFold("TooManyCacheBehaviors", errorCode):
+		return awsRestxml_deserializeErrorTooManyCacheBehaviors(response, errorBody)
+
+	case strings.EqualFold("TooManyCertificates", errorCode):
+		return awsRestxml_deserializeErrorTooManyCertificates(response, errorBody)
+
+	case strings.EqualFold("TooManyCookieNamesInWhiteList", errorCode):
+		return awsRestxml_deserializeErrorTooManyCookieNamesInWhiteList(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionCNAMEs", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionCNAMEs(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionsAssociatedToCachePolicy", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToCachePolicy(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionsAssociatedToFieldLevelEncryptionConfig", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToFieldLevelEncryptionConfig(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionsAssociatedToKeyGroup", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToKeyGroup(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionsAssociatedToOriginRequestPolicy", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginRequestPolicy(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionsAssociatedToResponseHeadersPolicy", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToResponseHeadersPolicy(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionsWithFunctionAssociations", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsWithFunctionAssociations(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionsWithLambdaAssociations", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsWithLambdaAssociations(response, errorBody)
+
+	case strings.EqualFold("TooManyDistributionsWithSingleFunctionARN", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsWithSingleFunctionARN(response, errorBody)
+
+	case strings.EqualFold("TooManyFunctionAssociations", errorCode):
+		return awsRestxml_deserializeErrorTooManyFunctionAssociations(response, errorBody)
+
+	case strings.EqualFold("TooManyHeadersInForwardedValues", errorCode):
+		return awsRestxml_deserializeErrorTooManyHeadersInForwardedValues(response, errorBody)
+
+	case strings.EqualFold("TooManyKeyGroupsAssociatedToDistribution", errorCode):
+		return awsRestxml_deserializeErrorTooManyKeyGroupsAssociatedToDistribution(response, errorBody)
+
+	case strings.EqualFold("TooManyLambdaFunctionAssociations", errorCode):
+		return awsRestxml_deserializeErrorTooManyLambdaFunctionAssociations(response, errorBody)
+
+	case strings.EqualFold("TooManyOriginCustomHeaders", errorCode):
+		return awsRestxml_deserializeErrorTooManyOriginCustomHeaders(response, errorBody)
+
+	case strings.EqualFold("TooManyOriginGroupsPerDistribution", errorCode):
+		return awsRestxml_deserializeErrorTooManyOriginGroupsPerDistribution(response, errorBody)
+
+	case strings.EqualFold("TooManyOrigins", errorCode):
+		return awsRestxml_deserializeErrorTooManyOrigins(response, errorBody)
+
+	case strings.EqualFold("TooManyQueryStringParameters", errorCode):
+		return awsRestxml_deserializeErrorTooManyQueryStringParameters(response, errorBody)
+
+	case strings.EqualFold("TooManyTrustedSigners", errorCode):
+		return awsRestxml_deserializeErrorTooManyTrustedSigners(response, errorBody)
+
+	case strings.EqualFold("TrustedKeyGroupDoesNotExist", errorCode):
+		return awsRestxml_deserializeErrorTrustedKeyGroupDoesNotExist(response, errorBody)
+
+	case strings.EqualFold("TrustedSignerDoesNotExist", errorCode):
+		return awsRestxml_deserializeErrorTrustedSignerDoesNotExist(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpHttpBindingsUpdateDistributionWithStagingConfigOutput(v *UpdateDistributionWithStagingConfigOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("ETag"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ETag = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestxml_deserializeOpDocumentUpdateDistributionWithStagingConfigOutput(v **UpdateDistributionWithStagingConfigOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *UpdateDistributionWithStagingConfigOutput
+	if *v == nil {
+		sv = &UpdateDistributionWithStagingConfigOutput{}
 	} else {
 		sv = *v
 	}
@@ -16290,6 +16663,94 @@ func awsRestxml_deserializeErrorCNAMEAlreadyExists(response *smithyhttp.Response
 	return output
 }
 
+func awsRestxml_deserializeErrorContinuousDeploymentPolicyAlreadyExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ContinuousDeploymentPolicyAlreadyExists{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentContinuousDeploymentPolicyAlreadyExists(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsRestxml_deserializeErrorContinuousDeploymentPolicyInUse(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ContinuousDeploymentPolicyInUse{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentContinuousDeploymentPolicyInUse(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsRestxml_deserializeErrorDistributionAlreadyExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.DistributionAlreadyExists{}
 	var buff [1024]byte
@@ -18314,6 +18775,50 @@ func awsRestxml_deserializeErrorNoSuchCloudFrontOriginAccessIdentity(response *s
 	return output
 }
 
+func awsRestxml_deserializeErrorNoSuchContinuousDeploymentPolicy(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.NoSuchContinuousDeploymentPolicy{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentNoSuchContinuousDeploymentPolicy(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsRestxml_deserializeErrorNoSuchDistribution(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchDistribution{}
 	var buff [1024]byte
@@ -19930,6 +20435,50 @@ func awsRestxml_deserializeErrorTooManyCloudFrontOriginAccessIdentities(response
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyCloudFrontOriginAccessIdentities(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsRestxml_deserializeErrorTooManyContinuousDeploymentPolicies(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.TooManyContinuousDeploymentPolicies{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentTooManyContinuousDeploymentPolicies(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -25298,6 +25847,55 @@ func awsRestxml_deserializeDocumentContinuousDeploymentPolicy(v **types.Continuo
 	return nil
 }
 
+func awsRestxml_deserializeDocumentContinuousDeploymentPolicyAlreadyExists(v **types.ContinuousDeploymentPolicyAlreadyExists, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ContinuousDeploymentPolicyAlreadyExists
+	if *v == nil {
+		sv = &types.ContinuousDeploymentPolicyAlreadyExists{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentContinuousDeploymentPolicyConfig(v **types.ContinuousDeploymentPolicyConfig, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25346,6 +25944,55 @@ func awsRestxml_deserializeDocumentContinuousDeploymentPolicyConfig(v **types.Co
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentTrafficConfig(&sv.TrafficConfig, nodeDecoder); err != nil {
 				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentContinuousDeploymentPolicyInUse(v **types.ContinuousDeploymentPolicyInUse, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ContinuousDeploymentPolicyInUse
+	if *v == nil {
+		sv = &types.ContinuousDeploymentPolicyInUse{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:
@@ -26782,6 +27429,19 @@ func awsRestxml_deserializeDocumentDistributionConfig(v **types.DistributionConf
 				sv.Comment = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("ContinuousDeploymentPolicyId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ContinuousDeploymentPolicyId = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("CustomErrorResponses", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentCustomErrorResponses(&sv.CustomErrorResponses, nodeDecoder); err != nil {
@@ -26887,6 +27547,22 @@ func awsRestxml_deserializeDocumentDistributionConfig(v **types.DistributionConf
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentRestrictions(&sv.Restrictions, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("Staging", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
+				}
+				sv.Staging = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ViewerCertificate", t.Name.Local):
@@ -27482,6 +28158,22 @@ func awsRestxml_deserializeDocumentDistributionSummary(v **types.DistributionSum
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentRestrictions(&sv.Restrictions, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("Staging", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected boolean to be of type *bool, got %T instead", val)
+				}
+				sv.Staging = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("Status", t.Name.Local):
@@ -33559,6 +34251,55 @@ func awsRestxml_deserializeDocumentNoSuchCloudFrontOriginAccessIdentity(v **type
 	var sv *types.NoSuchCloudFrontOriginAccessIdentity
 	if *v == nil {
 		sv = &types.NoSuchCloudFrontOriginAccessIdentity{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentNoSuchContinuousDeploymentPolicy(v **types.NoSuchContinuousDeploymentPolicy, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.NoSuchContinuousDeploymentPolicy
+	if *v == nil {
+		sv = &types.NoSuchContinuousDeploymentPolicy{}
 	} else {
 		sv = *v
 	}
@@ -41989,6 +42730,55 @@ func awsRestxml_deserializeDocumentTooManyCloudFrontOriginAccessIdentities(v **t
 	var sv *types.TooManyCloudFrontOriginAccessIdentities
 	if *v == nil {
 		sv = &types.TooManyCloudFrontOriginAccessIdentities{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentTooManyContinuousDeploymentPolicies(v **types.TooManyContinuousDeploymentPolicies, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.TooManyContinuousDeploymentPolicies
+	if *v == nil {
+		sv = &types.TooManyContinuousDeploymentPolicies{}
 	} else {
 		sv = *v
 	}

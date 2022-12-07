@@ -556,7 +556,7 @@ type Tag struct {
 
 // Information about the external key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key)that
-// is associated with a KMS key in an external key store. These fields appear in a
+// is associated with a KMS key in an external key store. This element appears in a
 // CreateKey or DescribeKey response only for a KMS key in an external key store.
 // The external key is a symmetric encryption key that is hosted by an external key
 // manager outside of Amazon Web Services. When you use the KMS key in an external

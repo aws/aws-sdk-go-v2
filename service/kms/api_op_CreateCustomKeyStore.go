@@ -137,11 +137,11 @@ type CreateCustomKeyStoreInput struct {
 	// account password; it does not change the password in the CloudHSM cluster.
 	KeyStorePassword *string
 
-	// * CreateCustom Specifies the certificate for an CloudHSM key store. This
-	// parameter is required for custom key stores with a CustomKeyStoreType of
-	// AWS_CLOUDHSM. Enter the content of the trust anchor certificate for the CloudHSM
-	// cluster. This is the content of the customerCA.crt file that you created when
-	// you initialized the cluster
+	// Specifies the certificate for an CloudHSM key store. This parameter is required
+	// for custom key stores with a CustomKeyStoreType of AWS_CLOUDHSM. Enter the
+	// content of the trust anchor certificate for the CloudHSM cluster. This is the
+	// content of the customerCA.crt file that you created when you initialized the
+	// cluster
 	// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html).
 	TrustAnchorCertificate *string
 

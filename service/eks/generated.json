@@ -21,6 +21,7 @@
         "api_op_DeleteNodegroup.go",
         "api_op_DeregisterCluster.go",
         "api_op_DescribeAddon.go",
+        "api_op_DescribeAddonConfiguration.go",
         "api_op_DescribeAddonVersions.go",
         "api_op_DescribeCluster.go",
         "api_op_DescribeFargateProfile.go",

@@ -10248,6 +10248,15 @@ func awsAwsjson11_deserializeDocumentRootCause(v **types.RootCause, value interf
 				sv.LinkedAccount = ptr.String(jtv)
 			}
 
+		case "LinkedAccountName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.LinkedAccountName = ptr.String(jtv)
+			}
+
 		case "Region":
 			if value != nil {
 				jtv, ok := value.(string)

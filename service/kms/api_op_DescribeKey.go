@@ -21,11 +21,11 @@ import (
 // of the key material. It includes fields, like KeySpec, that help you distinguish
 // different types of KMS keys. It also displays the key usage (encryption,
 // signing, or generating and verifying MACs) and the algorithms that the KMS key
-// supports. For multi-Region keys, it displays the primary key and all related
-// replica keys. For KMS keys in CloudHSM key stores, it includes information about
-// the custom key store, such as the key store ID and the CloudHSM cluster ID. For
-// KMS key in external key stores, it includes the custom key store ID and the ID
-// and status of the associated external key. DescribeKey does not return the
+// supports. For multi-Region keys, DescribeKey displays the primary key and all
+// related replica keys. For KMS keys in CloudHSM key stores, it includes
+// information about the key store, such as the key store ID and the CloudHSM
+// cluster ID. For KMS keys in external key stores, it includes the custom key
+// store ID and the ID of the external key. DescribeKey does not return the
 // following information:
 //
 // * Aliases associated with the KMS key. To get this

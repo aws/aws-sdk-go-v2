@@ -1478,12 +1478,16 @@ type RightsizingRecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The combination of Amazon Web Service, linked account, Region, and usage type
-// where a cost anomaly is observed.
+// The combination of Amazon Web Service, linked account, linked account name,
+// Region, and usage type where a cost anomaly is observed. The linked account name
+// will only be available when the account name can be identified.
 type RootCause struct {
 
 	// The member account value that's associated with the cost anomaly.
 	LinkedAccount *string
+
+	// The member account name value that's associated with the cost anomaly.
+	LinkedAccountName *string
 
 	// The Amazon Web Services Region that's associated with the cost anomaly.
 	Region *string

@@ -1025,12 +1025,11 @@ type ContinuousDeploymentSingleHeaderConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the percentage of traffic to send to a staging distribution, expressed
-// as a decimal number between 0 and 1.
+// Contains the percentage of traffic to send to a staging distribution.
 type ContinuousDeploymentSingleWeightConfig struct {
 
-	// The percentage of traffic to send to the staging distribution, expressed as a
-	// decimal number between 0 and 1.
+	// The percentage of traffic to send to a staging distribution, expressed as a
+	// decimal number between 0 and .15.
 	//
 	// This member is required.
 	Weight *float32
@@ -1629,6 +1628,10 @@ type DistributionConfig struct {
 	// A complex type that contains zero or more CacheBehavior elements.
 	CacheBehaviors *CacheBehaviors
 
+	// The identifier of a continuous deployment policy. For more information, see
+	// CreateContinuousDeploymentPolicy.
+	ContinuousDeploymentPolicyId *string
+
 	// A complex type that controls the following:
 	//
 	// * Whether CloudFront replaces HTTP
@@ -1737,6 +1740,11 @@ type DistributionConfig struct {
 	// A complex type that identifies ways in which you want to restrict distribution
 	// of your content.
 	Restrictions *Restrictions
+
+	// A Boolean that indicates whether this is a staging distribution. When this value
+	// is true, this is a staging distribution. When this value is false, this is not a
+	// staging distribution.
+	Staging *bool
 
 	// A complex type that determines the distribution’s SSL/TLS configuration for
 	// communicating with viewers.
@@ -1939,6 +1947,11 @@ type DistributionSummary struct {
 	//
 	// This member is required.
 	Restrictions *Restrictions
+
+	// Whether the primary distribution has a staging distribution enabled.
+	//
+	// This member is required.
+	Staging *bool
 
 	// The current status of the distribution. When the status is Deployed, the
 	// distribution's information is propagated to all CloudFront edge locations.

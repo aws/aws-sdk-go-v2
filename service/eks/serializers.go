@@ -285,6 +285,11 @@ func awsRestjson1_serializeOpDocumentCreateAddonInput(v *CreateAddonInput, value
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.ConfigurationValues != nil {
+		ok := object.Key("configurationValues")
+		ok.String(*v.ConfigurationValues)
+	}
+
 	if len(v.ResolveConflicts) > 0 {
 		ok := object.Key("resolveConflicts")
 		ok.String(string(v.ResolveConflicts))
@@ -1104,6 +1109,63 @@ func awsRestjson1_serializeOpHttpBindingsDescribeAddonInput(v *DescribeAddonInpu
 		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeAddonConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeAddonConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeAddonConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAddonConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/addons/configuration-schemas")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeAddonConfigurationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeAddonConfigurationInput(v *DescribeAddonConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AddonName != nil {
+		encoder.SetQuery("addonName").String(*v.AddonName)
+	}
+
+	if v.AddonVersion != nil {
+		encoder.SetQuery("addonVersion").String(*v.AddonVersion)
 	}
 
 	return nil
@@ -2413,6 +2475,11 @@ func awsRestjson1_serializeOpDocumentUpdateAddonInput(v *UpdateAddonInput, value
 	if v.ClientRequestToken != nil {
 		ok := object.Key("clientRequestToken")
 		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.ConfigurationValues != nil {
+		ok := object.Key("configurationValues")
+		ok.String(*v.ConfigurationValues)
 	}
 
 	if len(v.ResolveConflicts) > 0 {
