@@ -1,3 +1,7 @@
+# v1.19.2 (2022-12-07)
+
+* **Documentation**: Updated examples and exceptions for External Key Store (XKS).
+
 # v1.19.1 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.25.0 (2022-12-07)
+
+* **Feature**: Adds support for EKS add-ons configurationValues fields and DescribeAddonConfiguration function
+
 # v1.24.1 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

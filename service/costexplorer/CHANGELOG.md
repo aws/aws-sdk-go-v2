@@ -1,3 +1,7 @@
+# v1.23.0 (2022-12-07)
+
+* **Feature**: This release adds the LinkedAccountName field to the GetAnomalies API response under RootCause
+
 # v1.22.0 (2022-12-05)
 
 * **Feature**: This release introduces two new APIs that offer a 1-click experience to refresh Savings Plans recommendations. The two APIs are StartSavingsPlansPurchaseRecommendationGeneration and ListSavingsPlansPurchaseRecommendationGeneration.

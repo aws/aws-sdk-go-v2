@@ -1,3 +1,15 @@
+# Release (2022-12-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.22.0](service/cloudfront/CHANGELOG.md#v1220-2022-12-07)
+  * **Feature**: Introducing UpdateDistributionWithStagingConfig that can be used to promote the staging configuration to the production.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.23.0](service/costexplorer/CHANGELOG.md#v1230-2022-12-07)
+  * **Feature**: This release adds the LinkedAccountName field to the GetAnomalies API response under RootCause
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.25.0](service/eks/CHANGELOG.md#v1250-2022-12-07)
+  * **Feature**: Adds support for EKS add-ons configurationValues fields and DescribeAddonConfiguration function
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.19.2](service/kms/CHANGELOG.md#v1192-2022-12-07)
+  * **Documentation**: Updated examples and exceptions for External Key Store (XKS).
+
 # Release (2022-12-06)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "0ef54184-9045-4827-aadf-a882dcbcd781",
-    "type": "feature",
-    "description": "This release adds the LinkedAccountName field to the GetAnomalies API response under RootCause",
-    "modules": [
-        "service/costexplorer"
-    ]
-}

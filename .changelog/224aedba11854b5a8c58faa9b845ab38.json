@@ -1,8 +1,0 @@
-{
-    "id": "224aedba-1185-4b5a-8c58-faa9b845ab38",
-    "type": "feature",
-    "description": "Adds support for EKS add-ons configurationValues fields and DescribeAddonConfiguration function",
-    "modules": [
-        "service/eks"
-    ]
-}
