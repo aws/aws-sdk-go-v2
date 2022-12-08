@@ -75,7 +75,7 @@ all: generate unit
 gen-config-asserts gen-repo-mod-replace gen-mod-replace-smithy gen-mod-dropreplace-smithy-% gen-aws-ptrs tidy-modules-% \
 add-module-license-files sync-models sync-endpoints-model sync-endpoints.json clone-v1-models gen-internal-codegen \
 sync-api-models copy-attributevalue-feature min-go-version-% update-requires smithy-annotate-stable \
-update-module-metadata download-modules-%
+update-module-metadata download-modules-% smithy-generate-with-version
 
 generate: smithy-generate update-requires gen-repo-mod-replace update-module-metadata smithy-annotate-stable \
 gen-config-asserts gen-internal-codegen copy-attributevalue-feature gen-mod-dropreplace-smithy-. min-go-version-. \
@@ -83,6 +83,10 @@ tidy-modules-. add-module-license-files gen-aws-ptrs format
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
+
+smithy-generate-with-version:
+	@# smithy-generate-with-version command overrides gradle property with `smithyVersion` environment variable
+	cd codegen && ./gradlew -PsmithyVersion=$$smithyVersion clean build -Plog-tests && ./gradlew clean
 
 smithy-build:
 	cd codegen && ./gradlew clean build -Plog-tests
