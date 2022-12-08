@@ -12,6 +12,7 @@
         "api_op_GetApplicationComponentStrategies.go",
         "api_op_GetAssessment.go",
         "api_op_GetImportFileTask.go",
+        "api_op_GetLatestAssessmentId.go",
         "api_op_GetPortfolioPreferences.go",
         "api_op_GetPortfolioSummary.go",
         "api_op_GetRecommendationReportDetails.go",

@@ -47,6 +47,25 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Dependency encountered an error.
+type DependencyException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DependencyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DependencyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DependencyException) ErrorCode() string             { return "DependencyException" }
+func (e *DependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // The server experienced an internal error. Try again.
 type InternalServerException struct {
 	Message *string

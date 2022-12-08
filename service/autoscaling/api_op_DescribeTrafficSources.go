@@ -11,47 +11,49 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a warm pool and its instances. For more information, see
-// Warm pools for Amazon EC2 Auto Scaling
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html)
-// in the Amazon EC2 Auto Scaling User Guide.
-func (c *Client) DescribeWarmPool(ctx context.Context, params *DescribeWarmPoolInput, optFns ...func(*Options)) (*DescribeWarmPoolOutput, error) {
+// Reserved for use with Amazon VPC Lattice, which is in preview and subject to
+// change. Do not use this API for production workloads. This API is also subject
+// to change. Gets information about the traffic sources for the specified Auto
+// Scaling group.
+func (c *Client) DescribeTrafficSources(ctx context.Context, params *DescribeTrafficSourcesInput, optFns ...func(*Options)) (*DescribeTrafficSourcesOutput, error) {
 	if params == nil {
-		params = &DescribeWarmPoolInput{}
+		params = &DescribeTrafficSourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWarmPool", params, optFns, c.addOperationDescribeWarmPoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DescribeTrafficSources", params, optFns, c.addOperationDescribeTrafficSourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeWarmPoolOutput)
+	out := result.(*DescribeTrafficSourcesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeWarmPoolInput struct {
+type DescribeTrafficSourcesInput struct {
 
 	// The name of the Auto Scaling group.
 	//
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The maximum number of instances to return with this call. The maximum value is
-	// 50.
+	// The type of traffic source you are describing. Currently, the only valid value
+	// is vpc-lattice.
+	//
+	// This member is required.
+	TrafficSourceType *string
+
+	// The maximum number of items to return with this call. The maximum value is 50.
 	MaxRecords *int32
 
-	// The token for the next set of instances to return. (You received this token from
-	// a previous call.)
+	// The token for the next set of items to return. (You received this token from a
+	// previous call.)
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-type DescribeWarmPoolOutput struct {
-
-	// The instances that are currently in the warm pool.
-	Instances []types.Instance
+type DescribeTrafficSourcesOutput struct {
 
 	// This string indicates that the response contains more items than can be returned
 	// in a single response. To receive additional items, specify this string for the
@@ -59,8 +61,8 @@ type DescribeWarmPoolOutput struct {
 	// there are no more items to return.
 	NextToken *string
 
-	// The warm pool configuration details.
-	WarmPoolConfiguration *types.WarmPoolConfiguration
+	// Information about the traffic sources.
+	TrafficSources []types.TrafficSourceState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -68,12 +70,12 @@ type DescribeWarmPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeWarmPool{}, middleware.After)
+func (c *Client) addOperationDescribeTrafficSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeTrafficSources{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeWarmPool{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeTrafficSources{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -113,10 +115,10 @@ func (c *Client) addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeWarmPoolValidationMiddleware(stack); err != nil {
+	if err = addOpDescribeTrafficSourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWarmPool(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTrafficSources(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,11 +133,11 @@ func (c *Client) addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeWarmPool(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDescribeTrafficSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "autoscaling",
-		OperationName: "DescribeWarmPool",
+		OperationName: "DescribeTrafficSources",
 	}
 }

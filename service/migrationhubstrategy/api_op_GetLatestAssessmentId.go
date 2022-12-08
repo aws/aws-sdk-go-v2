@@ -6,57 +6,47 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Saves the specified migration and modernization preferences.
-func (c *Client) PutPortfolioPreferences(ctx context.Context, params *PutPortfolioPreferencesInput, optFns ...func(*Options)) (*PutPortfolioPreferencesOutput, error) {
+// Retrieve the latest ID of a specific assessment task.
+func (c *Client) GetLatestAssessmentId(ctx context.Context, params *GetLatestAssessmentIdInput, optFns ...func(*Options)) (*GetLatestAssessmentIdOutput, error) {
 	if params == nil {
-		params = &PutPortfolioPreferencesInput{}
+		params = &GetLatestAssessmentIdInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "PutPortfolioPreferences", params, optFns, c.addOperationPutPortfolioPreferencesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetLatestAssessmentId", params, optFns, c.addOperationGetLatestAssessmentIdMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*PutPortfolioPreferencesOutput)
+	out := result.(*GetLatestAssessmentIdOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type PutPortfolioPreferencesInput struct {
-
-	// The classification for application component types.
-	ApplicationMode types.ApplicationMode
-
-	// The transformation preferences for non-database applications.
-	ApplicationPreferences *types.ApplicationPreferences
-
-	// The transformation preferences for database applications.
-	DatabasePreferences *types.DatabasePreferences
-
-	// The rank of the business goals based on priority.
-	PrioritizeBusinessGoals *types.PrioritizeBusinessGoals
-
+type GetLatestAssessmentIdInput struct {
 	noSmithyDocumentSerde
 }
 
-type PutPortfolioPreferencesOutput struct {
+type GetLatestAssessmentIdOutput struct {
+
+	// The latest ID for the specific assessment task.
+	Id *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationPutPortfolioPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutPortfolioPreferences{}, middleware.After)
+func (c *Client) addOperationGetLatestAssessmentIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLatestAssessmentId{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutPortfolioPreferences{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLatestAssessmentId{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -96,10 +86,7 @@ func (c *Client) addOperationPutPortfolioPreferencesMiddlewares(stack *middlewar
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpPutPortfolioPreferencesValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutPortfolioPreferences(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLatestAssessmentId(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -114,11 +101,11 @@ func (c *Client) addOperationPutPortfolioPreferencesMiddlewares(stack *middlewar
 	return nil
 }
 
-func newServiceMetadataMiddleware_opPutPortfolioPreferences(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetLatestAssessmentId(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "migrationhub-strategy",
-		OperationName: "PutPortfolioPreferences",
+		OperationName: "GetLatestAssessmentId",
 	}
 }

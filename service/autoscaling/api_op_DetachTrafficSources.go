@@ -6,61 +6,64 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Detaches one or more target groups from the specified Auto Scaling group. When
-// you detach a target group, it enters the Removing state while deregistering the
-// instances in the group. When all instances are deregistered, then you can no
-// longer describe the target group using the DescribeLoadBalancerTargetGroups API
-// call. The instances remain running. You can use this operation to detach target
-// groups that were attached by using AttachLoadBalancerTargetGroups, but not for
-// target groups that were attached by using AttachTrafficSources.
-func (c *Client) DetachLoadBalancerTargetGroups(ctx context.Context, params *DetachLoadBalancerTargetGroupsInput, optFns ...func(*Options)) (*DetachLoadBalancerTargetGroupsOutput, error) {
+// Reserved for use with Amazon VPC Lattice, which is in preview and subject to
+// change. Do not use this API for production workloads. This API is also subject
+// to change. Detaches one or more traffic sources from the specified Auto Scaling
+// group.
+func (c *Client) DetachTrafficSources(ctx context.Context, params *DetachTrafficSourcesInput, optFns ...func(*Options)) (*DetachTrafficSourcesOutput, error) {
 	if params == nil {
-		params = &DetachLoadBalancerTargetGroupsInput{}
+		params = &DetachTrafficSourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DetachLoadBalancerTargetGroups", params, optFns, c.addOperationDetachLoadBalancerTargetGroupsMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DetachTrafficSources", params, optFns, c.addOperationDetachTrafficSourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DetachLoadBalancerTargetGroupsOutput)
+	out := result.(*DetachTrafficSourcesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DetachLoadBalancerTargetGroupsInput struct {
+type DetachTrafficSourcesInput struct {
 
 	// The name of the Auto Scaling group.
 	//
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The Amazon Resource Names (ARN) of the target groups. You can specify up to 10
-	// target groups.
+	// The unique identifiers of one or more traffic sources you are detaching. You can
+	// specify up to 10 traffic sources. Currently, you must specify an Amazon Resource
+	// Name (ARN) for an existing VPC Lattice target group. When you detach a target
+	// group, it enters the Removing state while deregistering the instances in the
+	// group. When all instances are deregistered, then you can no longer describe the
+	// target group using the DescribeTrafficSources API call. The instances continue
+	// to run.
 	//
 	// This member is required.
-	TargetGroupARNs []string
+	TrafficSources []types.TrafficSourceIdentifier
 
 	noSmithyDocumentSerde
 }
 
-type DetachLoadBalancerTargetGroupsOutput struct {
+type DetachTrafficSourcesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDetachLoadBalancerTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachLoadBalancerTargetGroups{}, middleware.After)
+func (c *Client) addOperationDetachTrafficSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpDetachTrafficSources{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDetachLoadBalancerTargetGroups{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDetachTrafficSources{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -100,10 +103,10 @@ func (c *Client) addOperationDetachLoadBalancerTargetGroupsMiddlewares(stack *mi
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDetachLoadBalancerTargetGroupsValidationMiddleware(stack); err != nil {
+	if err = addOpDetachTrafficSourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetachLoadBalancerTargetGroups(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetachTrafficSources(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -118,11 +121,11 @@ func (c *Client) addOperationDetachLoadBalancerTargetGroupsMiddlewares(stack *mi
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDetachLoadBalancerTargetGroups(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDetachTrafficSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "autoscaling",
-		OperationName: "DetachLoadBalancerTargetGroups",
+		OperationName: "DetachTrafficSources",
 	}
 }

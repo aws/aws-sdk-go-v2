@@ -13,93 +13,62 @@ import (
 	"time"
 )
 
-// Retrieves information about an entity.
-func (c *Client) GetEntity(ctx context.Context, params *GetEntityInput, optFns ...func(*Options)) (*GetEntityOutput, error) {
+// This action creates a SyncJob.
+func (c *Client) CreateSyncJob(ctx context.Context, params *CreateSyncJobInput, optFns ...func(*Options)) (*CreateSyncJobOutput, error) {
 	if params == nil {
-		params = &GetEntityInput{}
+		params = &CreateSyncJobInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "GetEntity", params, optFns, c.addOperationGetEntityMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "CreateSyncJob", params, optFns, c.addOperationCreateSyncJobMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*GetEntityOutput)
+	out := result.(*CreateSyncJobOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type GetEntityInput struct {
+type CreateSyncJobInput struct {
 
-	// The ID of the entity.
+	// The SyncJob IAM role. This IAM role is used by the sync job to read from the
+	// syncSource, and create, update or delete the corresponding resources.
 	//
 	// This member is required.
-	EntityId *string
+	SyncRole *string
 
-	// The ID of the workspace.
+	// The sync source. Currently the only supported syncSoucre is SITEWISE .
+	//
+	// This member is required.
+	SyncSource *string
+
+	// The workspace Id.
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	// The SyncJob tags.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-type GetEntityOutput struct {
+type CreateSyncJobOutput struct {
 
-	// The ARN of the entity.
+	// The SyncJob ARN.
 	//
 	// This member is required.
 	Arn *string
 
-	// The date and time when the entity was created.
+	// The date and time for the SyncJob creation.
 	//
 	// This member is required.
 	CreationDateTime *time.Time
 
-	// The ID of the entity.
+	// The SyncJob response state.
 	//
 	// This member is required.
-	EntityId *string
-
-	// The name of the entity.
-	//
-	// This member is required.
-	EntityName *string
-
-	// A Boolean value that specifies whether the entity has associated child entities.
-	//
-	// This member is required.
-	HasChildEntities *bool
-
-	// The ID of the parent entity for this entity.
-	//
-	// This member is required.
-	ParentEntityId *string
-
-	// The current status of the entity.
-	//
-	// This member is required.
-	Status *types.Status
-
-	// The date and time when the entity was last updated.
-	//
-	// This member is required.
-	UpdateDateTime *time.Time
-
-	// The ID of the workspace.
-	//
-	// This member is required.
-	WorkspaceId *string
-
-	// An object that maps strings to the components in the entity. Each string in the
-	// mapping must be unique to this object.
-	Components map[string]types.ComponentResponse
-
-	// The description of the entity.
-	Description *string
-
-	// The syncSource of the sync job, if this entity was created by a sync job.
-	SyncSource *string
+	State types.SyncJobState
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -107,12 +76,12 @@ type GetEntityOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationGetEntityMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEntity{}, middleware.After)
+func (c *Client) addOperationCreateSyncJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSyncJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEntity{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSyncJob{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -152,13 +121,13 @@ func (c *Client) addOperationGetEntityMiddlewares(stack *middleware.Stack, optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opGetEntityMiddleware(stack); err != nil {
+	if err = addEndpointPrefix_opCreateSyncJobMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpGetEntityValidationMiddleware(stack); err != nil {
+	if err = addOpCreateSyncJobValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEntity(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSyncJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,14 +142,14 @@ func (c *Client) addOperationGetEntityMiddlewares(stack *middleware.Stack, optio
 	return nil
 }
 
-type endpointPrefix_opGetEntityMiddleware struct {
+type endpointPrefix_opCreateSyncJobMiddleware struct {
 }
 
-func (*endpointPrefix_opGetEntityMiddleware) ID() string {
+func (*endpointPrefix_opCreateSyncJobMiddleware) ID() string {
 	return "EndpointHostPrefix"
 }
 
-func (m *endpointPrefix_opGetEntityMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *endpointPrefix_opCreateSyncJobMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
@@ -196,15 +165,15 @@ func (m *endpointPrefix_opGetEntityMiddleware) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
-func addEndpointPrefix_opGetEntityMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opGetEntityMiddleware{}, `OperationSerializer`, middleware.After)
+func addEndpointPrefix_opCreateSyncJobMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opCreateSyncJobMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
-func newServiceMetadataMiddleware_opGetEntity(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opCreateSyncJob(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "iottwinmaker",
-		OperationName: "GetEntity",
+		OperationName: "CreateSyncJob",
 	}
 }

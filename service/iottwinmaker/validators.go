@@ -90,6 +90,26 @@ func (m *validateOpCreateScene) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSyncJob struct {
+}
+
+func (*validateOpCreateSyncJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSyncJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSyncJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSyncJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWorkspace struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpDeleteScene) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteSceneInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSyncJob struct {
+}
+
+func (*validateOpDeleteSyncJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSyncJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSyncJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSyncJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +350,26 @@ func (m *validateOpGetScene) HandleInitialize(ctx context.Context, in middleware
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSyncJob struct {
+}
+
+func (*validateOpGetSyncJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSyncJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSyncJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSyncJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWorkspace struct {
 }
 
@@ -385,6 +445,46 @@ func (m *validateOpListScenes) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListScenesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSyncJobs struct {
+}
+
+func (*validateOpListSyncJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSyncJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSyncJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSyncJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSyncResources struct {
+}
+
+func (*validateOpListSyncResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSyncResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSyncResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSyncResourcesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -566,6 +666,10 @@ func addOpCreateSceneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateScene{}, middleware.After)
 }
 
+func addOpCreateSyncJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSyncJob{}, middleware.After)
+}
+
 func addOpCreateWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkspace{}, middleware.After)
 }
@@ -580,6 +684,10 @@ func addOpDeleteEntityValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteSceneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteScene{}, middleware.After)
+}
+
+func addOpDeleteSyncJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSyncJob{}, middleware.After)
 }
 
 func addOpDeleteWorkspaceValidationMiddleware(stack *middleware.Stack) error {
@@ -610,6 +718,10 @@ func addOpGetSceneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetScene{}, middleware.After)
 }
 
+func addOpGetSyncJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSyncJob{}, middleware.After)
+}
+
 func addOpGetWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkspace{}, middleware.After)
 }
@@ -624,6 +736,14 @@ func addOpListEntitiesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListScenesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListScenes{}, middleware.After)
+}
+
+func addOpListSyncJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSyncJobs{}, middleware.After)
+}
+
+func addOpListSyncResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSyncResources{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1131,6 +1251,27 @@ func validateOpCreateSceneInput(v *CreateSceneInput) error {
 	}
 }
 
+func validateOpCreateSyncJobInput(v *CreateSyncJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSyncJobInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.SyncSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncSource"))
+	}
+	if v.SyncRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateWorkspaceInput(v *CreateWorkspaceInput) error {
 	if v == nil {
 		return nil
@@ -1198,6 +1339,24 @@ func validateOpDeleteSceneInput(v *DeleteSceneInput) error {
 	}
 	if v.SceneId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SceneId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSyncJobInput(v *DeleteSyncJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSyncJobInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.SyncSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1334,6 +1493,21 @@ func validateOpGetSceneInput(v *GetSceneInput) error {
 	}
 }
 
+func validateOpGetSyncJobInput(v *GetSyncJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSyncJobInput"}
+	if v.SyncSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncSource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetWorkspaceInput(v *GetWorkspaceInput) error {
 	if v == nil {
 		return nil
@@ -1386,6 +1560,39 @@ func validateOpListScenesInput(v *ListScenesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListScenesInput"}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSyncJobsInput(v *ListSyncJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSyncJobsInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSyncResourcesInput(v *ListSyncResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSyncResourcesInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if v.SyncSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SyncSource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

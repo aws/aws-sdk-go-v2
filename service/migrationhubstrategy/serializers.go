@@ -246,6 +246,51 @@ func awsRestjson1_serializeOpHttpBindingsGetImportFileTaskInput(v *GetImportFile
 	return nil
 }
 
+type awsRestjson1_serializeOpGetLatestAssessmentId struct {
+}
+
+func (*awsRestjson1_serializeOpGetLatestAssessmentId) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetLatestAssessmentId) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetLatestAssessmentIdInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/get-latest-assessment-id")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetLatestAssessmentIdInput(v *GetLatestAssessmentIdInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetPortfolioPreferences struct {
 }
 
@@ -882,6 +927,11 @@ func awsRestjson1_serializeOpDocumentPutPortfolioPreferencesInput(v *PutPortfoli
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ApplicationMode) > 0 {
+		ok := object.Key("applicationMode")
+		ok.String(string(v.ApplicationMode))
+	}
+
 	if v.ApplicationPreferences != nil {
 		ok := object.Key("applicationPreferences")
 		if err := awsRestjson1_serializeDocumentApplicationPreferences(v.ApplicationPreferences, ok); err != nil {
@@ -965,6 +1015,13 @@ func awsRestjson1_serializeOpHttpBindingsStartAssessmentInput(v *StartAssessment
 func awsRestjson1_serializeOpDocumentStartAssessmentInput(v *StartAssessmentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AssessmentTargets != nil {
+		ok := object.Key("assessmentTargets")
+		if err := awsRestjson1_serializeDocumentAssessmentTargets(v.AssessmentTargets, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.S3bucketForAnalysisData != nil {
 		ok := object.Key("s3bucketForAnalysisData")
@@ -1282,6 +1339,16 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationComponentConfigInput(v *Up
 		ok.String(*v.ApplicationComponentId)
 	}
 
+	if len(v.AppType) > 0 {
+		ok := object.Key("appType")
+		ok.String(string(v.AppType))
+	}
+
+	if v.ConfigureOnly != nil {
+		ok := object.Key("configureOnly")
+		ok.Boolean(*v.ConfigureOnly)
+	}
+
 	if len(v.InclusionStatus) > 0 {
 		ok := object.Key("inclusionStatus")
 		ok.String(string(v.InclusionStatus))
@@ -1395,6 +1462,54 @@ func awsRestjson1_serializeDocumentApplicationPreferences(v *types.ApplicationPr
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssessmentTarget(v *types.AssessmentTarget, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Condition) > 0 {
+		ok := object.Key("condition")
+		ok.String(string(v.Condition))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentAssessmentTargetValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssessmentTargets(v []types.AssessmentTarget, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAssessmentTarget(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssessmentTargetValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -1694,6 +1809,11 @@ func awsRestjson1_serializeDocumentSourceCode(v *types.SourceCode, value smithyj
 	if v.Location != nil {
 		ok := object.Key("location")
 		ok.String(*v.Location)
+	}
+
+	if v.ProjectName != nil {
+		ok := object.Key("projectName")
+		ok.String(*v.ProjectName)
 	}
 
 	if v.SourceVersion != nil {

@@ -11,69 +11,60 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a warm pool and its instances. For more information, see
-// Warm pools for Amazon EC2 Auto Scaling
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html)
-// in the Amazon EC2 Auto Scaling User Guide.
-func (c *Client) DescribeWarmPool(ctx context.Context, params *DescribeWarmPoolInput, optFns ...func(*Options)) (*DescribeWarmPoolOutput, error) {
+// Reserved for use with Amazon VPC Lattice, which is in preview and subject to
+// change. Do not use this API for production workloads. This API is also subject
+// to change. Attaches one or more traffic sources to the specified Auto Scaling
+// group. To describe the traffic sources for an Auto Scaling group, call the
+// DescribeTrafficSources API. To detach a traffic source from the Auto Scaling
+// group, call the DetachTrafficSources API. This operation is additive and does
+// not detach existing traffic sources from the Auto Scaling group.
+func (c *Client) AttachTrafficSources(ctx context.Context, params *AttachTrafficSourcesInput, optFns ...func(*Options)) (*AttachTrafficSourcesOutput, error) {
 	if params == nil {
-		params = &DescribeWarmPoolInput{}
+		params = &AttachTrafficSourcesInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DescribeWarmPool", params, optFns, c.addOperationDescribeWarmPoolMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AttachTrafficSources", params, optFns, c.addOperationAttachTrafficSourcesMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DescribeWarmPoolOutput)
+	out := result.(*AttachTrafficSourcesOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DescribeWarmPoolInput struct {
+type AttachTrafficSourcesInput struct {
 
 	// The name of the Auto Scaling group.
 	//
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// The maximum number of instances to return with this call. The maximum value is
-	// 50.
-	MaxRecords *int32
-
-	// The token for the next set of instances to return. (You received this token from
-	// a previous call.)
-	NextToken *string
+	// The unique identifiers of one or more traffic sources. You can specify up to 10
+	// traffic sources. Currently, you must specify an Amazon Resource Name (ARN) for
+	// an existing VPC Lattice target group. Amazon EC2 Auto Scaling registers the
+	// running instances with the attached target groups. The target groups receive
+	// incoming traffic and route requests to one or more registered targets.
+	//
+	// This member is required.
+	TrafficSources []types.TrafficSourceIdentifier
 
 	noSmithyDocumentSerde
 }
 
-type DescribeWarmPoolOutput struct {
-
-	// The instances that are currently in the warm pool.
-	Instances []types.Instance
-
-	// This string indicates that the response contains more items than can be returned
-	// in a single response. To receive additional items, specify this string for the
-	// NextToken value when requesting the next set of items. This value is null when
-	// there are no more items to return.
-	NextToken *string
-
-	// The warm pool configuration details.
-	WarmPoolConfiguration *types.WarmPoolConfiguration
-
+type AttachTrafficSourcesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeWarmPool{}, middleware.After)
+func (c *Client) addOperationAttachTrafficSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsAwsquery_serializeOpAttachTrafficSources{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeWarmPool{}, middleware.After)
+	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpAttachTrafficSources{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -113,10 +104,10 @@ func (c *Client) addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDescribeWarmPoolValidationMiddleware(stack); err != nil {
+	if err = addOpAttachTrafficSourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWarmPool(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachTrafficSources(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -131,11 +122,11 @@ func (c *Client) addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDescribeWarmPool(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opAttachTrafficSources(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "autoscaling",
-		OperationName: "DescribeWarmPool",
+		OperationName: "AttachTrafficSources",
 	}
 }

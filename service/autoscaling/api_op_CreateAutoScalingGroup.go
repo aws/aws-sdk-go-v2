@@ -136,21 +136,21 @@ type CreateAutoScalingGroupInput struct {
 
 	// The amount of time, in seconds, that Amazon EC2 Auto Scaling waits before
 	// checking the health status of an EC2 instance that has come into service and
-	// marking it unhealthy due to a failed Elastic Load Balancing or custom health
-	// check. This is useful if your instances do not immediately pass these health
-	// checks after they enter the InService state. For more information, see Set the
-	// health check grace period for an Auto Scaling group
+	// marking it unhealthy due to a failed health check. This is useful if your
+	// instances do not immediately pass their health checks after they enter the
+	// InService state. For more information, see Set the health check grace period for
+	// an Auto Scaling group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/health-check-grace-period.html)
 	// in the Amazon EC2 Auto Scaling User Guide. Default: 0 seconds
 	HealthCheckGracePeriod *int32
 
-	// The service to use for the health checks. The valid values are EC2 (default) and
-	// ELB. If you configure an Auto Scaling group to use load balancer (ELB) health
-	// checks, it considers the instance unhealthy if it fails either the EC2 status
-	// checks or the load balancer health checks. For more information, see Health
-	// checks for Auto Scaling instances
+	// Determines whether any additional health checks are performed on the instances
+	// in this group. Amazon EC2 health checks are always on. For more information, see
+	// Health checks for Auto Scaling instances
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html) in the
-	// Amazon EC2 Auto Scaling User Guide.
+	// Amazon EC2 Auto Scaling User Guide. The valid values are EC2 (default), ELB, and
+	// VPC_LATTICE. The VPC_LATTICE health check type is reserved for use with VPC
+	// Lattice, which is in preview release and is subject to change.
 	HealthCheckType *string
 
 	// The ID of the instance used to base the launch configuration on. If specified,
@@ -238,11 +238,11 @@ type CreateAutoScalingGroupInput struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Tags []types.Tag
 
-	// The Amazon Resource Names (ARN) of the target groups to associate with the Auto
-	// Scaling group. Instances are registered as targets with the target groups. The
-	// target groups receive incoming traffic and route requests to one or more
-	// registered targets. For more information, see Use Elastic Load Balancing to
-	// distribute traffic across the instances in your Auto Scaling group
+	// The Amazon Resource Names (ARN) of the Elastic Load Balancing target groups to
+	// associate with the Auto Scaling group. Instances are registered as targets with
+	// the target groups. The target groups receive incoming traffic and route requests
+	// to one or more registered targets. For more information, see Use Elastic Load
+	// Balancing to distribute traffic across the instances in your Auto Scaling group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	TargetGroupARNs []string
@@ -256,6 +256,15 @@ type CreateAutoScalingGroupInput struct {
 	// | OldestLaunchConfiguration | OldestLaunchTemplate |
 	// arn:aws:lambda:region:account-id:function:my-function:my-alias
 	TerminationPolicies []string
+
+	// Reserved for use with Amazon VPC Lattice, which is in preview release and is
+	// subject to change. Do not use this parameter for production workloads. It is
+	// also subject to change. The unique identifiers of one or more traffic sources.
+	// Currently, you must specify an Amazon Resource Name (ARN) for an existing VPC
+	// Lattice target group. Amazon EC2 Auto Scaling registers the running instances
+	// with the attached target groups. The target groups receive incoming traffic and
+	// route requests to one or more registered targets.
+	TrafficSources []types.TrafficSourceIdentifier
 
 	// A comma-separated list of subnet IDs for a virtual private cloud (VPC) where
 	// instances in the Auto Scaling group can be created. If you specify
