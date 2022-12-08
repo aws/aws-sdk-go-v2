@@ -1,3 +1,7 @@
+# v1.25.0 (2022-12-08)
+
+* **Feature**: Adds support for metric math for target tracking scaling policies, saving you the cost and effort of publishing a custom metric to CloudWatch. Also adds support for VPC Lattice by adding the Attach/Detach/DescribeTrafficSources APIs and a new health check type to the CreateAutoScalingGroup API.
+
 # v1.24.4 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

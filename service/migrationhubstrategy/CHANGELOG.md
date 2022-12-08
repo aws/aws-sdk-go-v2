@@ -1,3 +1,7 @@
+# v1.6.0 (2022-12-08)
+
+* **Feature**: This release adds known application filtering, server selection for assessments, support for potential recommendations, and indications for configuration and assessment status. For more information, see the AWS Migration Hub documentation at https://docs.aws.amazon.com/migrationhub/index.html
+
 # v1.5.20 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "c4980648-0a52-4a77-8626-6fc46b4c5a68",
-    "type": "feature",
-    "description": "Adds support for metric math for target tracking scaling policies, saving you the cost and effort of publishing a custom metric to CloudWatch. Also adds support for VPC Lattice by adding the Attach/Detach/DescribeTrafficSources APIs and a new health check type to the CreateAutoScalingGroup API.",
-    "modules": [
-        "service/autoscaling"
-    ]
-}
