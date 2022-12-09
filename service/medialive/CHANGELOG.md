@@ -1,3 +1,7 @@
+# v1.26.0 (2022-12-09)
+
+* **Feature**: Link devices now support buffer size (latency) configuration. A higher latency value means a longer delay in transmitting from the device to MediaLive, but improved resiliency. A lower latency value means a shorter delay, but less resiliency.
+
 # v1.25.0 (2022-12-02)
 
 * **Feature**: Updates to Event Signaling and Management (ESAM) API and documentation.

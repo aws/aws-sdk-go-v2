@@ -1,3 +1,7 @@
+# v1.20.0 (2022-12-09)
+
+* **Feature**: This release provides the approximate number of assets in a packaging group.
+
 # v1.19.1 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

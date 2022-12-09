@@ -1,3 +1,15 @@
+# Release (2022-12-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.17.2](service/cloudwatchlogs/CHANGELOG.md#v1172-2022-12-09)
+  * **Documentation**: Doc-only update for CloudWatch Logs, for Tagging Permissions clarifications
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.1.0](service/iotfleetwise/CHANGELOG.md#v110-2022-12-09)
+  * **Feature**: Deprecated assignedValue property for actuators and attributes.  Added a message to invalid nodes and invalid decoder manifest exceptions.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.26.0](service/medialive/CHANGELOG.md#v1260-2022-12-09)
+  * **Feature**: Link devices now support buffer size (latency) configuration. A higher latency value means a longer delay in transmitting from the device to MediaLive, but improved resiliency. A lower latency value means a shorter delay, but less resiliency.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.20.0](service/mediapackagevod/CHANGELOG.md#v1200-2022-12-09)
+  * **Feature**: This release provides the approximate number of assets in a packaging group.
+
 # Release (2022-12-08)
 
 ## Module Highlights

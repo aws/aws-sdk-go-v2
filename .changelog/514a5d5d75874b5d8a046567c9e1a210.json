@@ -1,8 +1,0 @@
-{
-    "id": "514a5d5d-7587-4b5d-8a04-6567c9e1a210",
-    "type": "feature",
-    "description": "Link devices now support buffer size (latency) configuration. A higher latency value means a longer delay in transmitting from the device to MediaLive, but improved resiliency. A lower latency value means a shorter delay, but less resiliency.",
-    "modules": [
-        "service/medialive"
-    ]
-}

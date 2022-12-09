@@ -1,8 +1,0 @@
-{
-    "id": "0b65c064-e8fc-48bf-9ebb-3990f2f03bd7",
-    "type": "feature",
-    "description": "This release provides the approximate number of assets in a packaging group.",
-    "modules": [
-        "service/mediapackagevod"
-    ]
-}
