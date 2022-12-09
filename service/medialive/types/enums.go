@@ -3040,7 +3040,8 @@ type InputDeviceType string
 
 // Enum values for InputDeviceType
 const (
-	InputDeviceTypeHd InputDeviceType = "HD"
+	InputDeviceTypeHd  InputDeviceType = "HD"
+	InputDeviceTypeUhd InputDeviceType = "UHD"
 )
 
 // Values returns all known values for InputDeviceType. Note that this can be
@@ -3049,6 +3050,7 @@ const (
 func (InputDeviceType) Values() []InputDeviceType {
 	return []InputDeviceType{
 		"HD",
+		"UHD",
 	}
 }
 

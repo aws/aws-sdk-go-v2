@@ -28,6 +28,8 @@ type Actuator struct {
 	AllowedValues []string
 
 	// A specified value for the actuator.
+	//
+	// Deprecated: assignedValue is no longer in use
 	AssignedValue *string
 
 	// A brief description of the actuator.
@@ -64,6 +66,8 @@ type Attribute struct {
 	AllowedValues []string
 
 	// A specified value for the attribute.
+	//
+	// Deprecated: assignedValue is no longer in use
 	AssignedValue *string
 
 	// The default value of the attribute.

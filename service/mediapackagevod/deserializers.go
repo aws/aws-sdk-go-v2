@@ -1737,6 +1737,19 @@ func awsRestjson1_deserializeOpDocumentDescribePackagingGroupOutput(v **Describe
 
 	for key, value := range shape {
 		switch key {
+		case "approximateAssetCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ApproximateAssetCount = int32(i64)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2765,6 +2778,19 @@ func awsRestjson1_deserializeOpDocumentUpdatePackagingGroupOutput(v **UpdatePack
 
 	for key, value := range shape {
 		switch key {
+		case "approximateAssetCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ApproximateAssetCount = int32(i64)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4559,6 +4585,19 @@ func awsRestjson1_deserializeDocumentPackagingGroup(v **types.PackagingGroup, va
 
 	for key, value := range shape {
 		switch key {
+		case "approximateAssetCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ApproximateAssetCount = int32(i64)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)

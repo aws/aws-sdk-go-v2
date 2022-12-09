@@ -8015,6 +8015,11 @@ func awsRestjson1_serializeDocumentInputDeviceConfigurableSettings(v *types.Inpu
 		ok.String(string(v.ConfiguredInput))
 	}
 
+	if v.LatencyMs != 0 {
+		ok := object.Key("latencyMs")
+		ok.Integer(v.LatencyMs)
+	}
+
 	if v.MaxBitrate != 0 {
 		ok := object.Key("maxBitrate")
 		ok.Integer(v.MaxBitrate)

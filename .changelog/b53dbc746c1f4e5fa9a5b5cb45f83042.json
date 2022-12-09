@@ -1,0 +1,8 @@
+{
+    "id": "b53dbc74-6c1f-4e5f-a9a5-b5cb45f83042",
+    "type": "feature",
+    "description": "Deprecated assignedValue property for actuators and attributes.  Added a message to invalid nodes and invalid decoder manifest exceptions.",
+    "modules": [
+        "service/iotfleetwise"
+    ]
+}

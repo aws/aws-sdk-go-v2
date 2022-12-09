@@ -39,6 +39,9 @@ type DescribePackagingGroupInput struct {
 
 type DescribePackagingGroupOutput struct {
 
+	// The approximate asset count of the PackagingGroup.
+	ApproximateAssetCount int32
+
 	// The ARN of the PackagingGroup.
 	Arn *string
 

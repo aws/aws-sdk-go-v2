@@ -8027,6 +8027,15 @@ func awsAwsjson10_deserializeDocumentDecoderManifestValidationException(v **type
 				return err
 			}
 
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -8464,6 +8473,15 @@ func awsAwsjson10_deserializeDocumentInvalidNodeException(v **types.InvalidNodeE
 		case "invalidNodes":
 			if err := awsAwsjson10_deserializeDocumentNodes(&sv.InvalidNodes, value); err != nil {
 				return err
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "reason":

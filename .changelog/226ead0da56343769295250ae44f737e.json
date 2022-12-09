@@ -1,0 +1,8 @@
+{
+    "id": "226ead0d-a563-4376-9295-250ae44f737e",
+    "type": "documentation",
+    "description": "Doc-only update for CloudWatch Logs, for Tagging Permissions clarifications",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

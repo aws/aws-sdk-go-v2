@@ -2858,6 +2858,9 @@ type InputDeviceConfigurableSettings struct {
 	// you want to use a specific source, specify the source.
 	ConfiguredInput InputDeviceConfiguredInput
 
+	// The Link device's buffer size (latency) in milliseconds (ms).
+	LatencyMs int32
+
 	// The maximum bitrate in bits per second. Set a value here to throttle the bitrate
 	// of the source video.
 	MaxBitrate int32
@@ -2885,6 +2888,10 @@ type InputDeviceHdSettings struct {
 
 	// The height of the video source, in pixels.
 	Height int32
+
+	// The Link device's buffer size (latency) in milliseconds (ms). You can specify
+	// this value.
+	LatencyMs int32
 
 	// The current maximum bitrate for ingesting this source, in bits per second. You
 	// can specify this maximum.
@@ -3005,6 +3012,10 @@ type InputDeviceUhdSettings struct {
 
 	// The height of the video source, in pixels.
 	Height int32
+
+	// The Link device's buffer size (latency) in milliseconds (ms). You can specify
+	// this value.
+	LatencyMs int32
 
 	// The current maximum bitrate for ingesting this source, in bits per second. You
 	// can specify this maximum.
