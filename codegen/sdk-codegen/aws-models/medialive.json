@@ -12215,6 +12215,14 @@
                         "smithy.api#documentation": "The maximum bitrate in bits per second. Set a value here to throttle the bitrate of the source video.",
                         "smithy.api#jsonName": "maxBitrate"
                     }
+                },
+                "LatencyMs": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "The Link device's buffer size (latency) in milliseconds (ms).",
+                        "smithy.api#jsonName": "latencyMs"
+                    }
                 }
             },
             "traits": {
@@ -12328,6 +12336,14 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "The width of the video source, in pixels.",
                         "smithy.api#jsonName": "width"
+                    }
+                },
+                "LatencyMs": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.",
+                        "smithy.api#jsonName": "latencyMs"
                     }
                 }
             },
@@ -12595,6 +12611,12 @@
                     "traits": {
                         "smithy.api#enumValue": "HD"
                     }
+                },
+                "UHD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UHD"
+                    }
                 }
             },
             "traits": {
@@ -12662,6 +12684,14 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "The width of the video source, in pixels.",
                         "smithy.api#jsonName": "width"
+                    }
+                },
+                "LatencyMs": {
+                    "target": "com.amazonaws.medialive#__integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "The Link device's buffer size (latency) in milliseconds (ms). You can specify this value.",
+                        "smithy.api#jsonName": "latencyMs"
                     }
                 }
             },
@@ -15959,15 +15989,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -16228,8 +16249,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -16241,8 +16262,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -16252,8 +16273,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-iso-east-1"
                             }
                         },
@@ -16265,9 +16286,57 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medialive-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://medialive.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -16278,8 +16347,8 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -16290,8 +16359,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
@@ -16302,8 +16371,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
