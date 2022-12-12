@@ -223,20 +223,6 @@ final class AwsProtocolUtils {
         ).generateProtocolTests();
     }
 
-    public static void writeAwsQueryErrorCodeDeserializer(GenerationContext context) {
-        GoWriter writer = context.getWriter().get();
-        writer.write("queryCodeHeader := response.Header.Get(\"x-amzn-query-error\")");
-        writer.openBlock("if queryCodeHeader != \"\" {", "}", () -> {
-                writer.write("queryCodeParts := strings.Split(queryCodeHeader, \";\")");
-                writer.openBlock("if queryCodeParts != nil && len(queryCodeParts) == 2 {", "}", () -> {
-                        writer.openBlock("return &smithy.GenericAPIError{", "}", () -> {
-                                writer.write("Code:    queryCodeParts[0],");
-                                writer.write("Message: errorMessage,");
-                        });
-                });
-        });
-    }
-
     public static void writeJsonErrorMessageCodeDeserializer(GenerationContext context) {
         GoWriter writer = context.getWriter().get();
         // The error code could be in the headers, even though for this protocol it should be in the body.
