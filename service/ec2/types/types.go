@@ -4440,6 +4440,8 @@ type FpgaImage struct {
 	// The FPGA image identifier (AFI ID).
 	FpgaImageId *string
 
+	InstanceTypes []string
+
 	// The name of the AFI.
 	Name *string
 
@@ -13515,15 +13517,11 @@ type SpotFleetRequestConfigData struct {
 	// For more information, see Allocation strategies for Spot Instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html)
 	// in the Amazon EC2 User Guide. priceCapacityOptimized (recommended) Spot Fleet
-	// identifies the pools with
-	//
-	// the highest capacity availability for the number of
+	// identifies the pools with the highest capacity availability for the number of
 	// instances that are launching. This means that we will request Spot Instances
 	// from the pools that we believe have the lowest chance of interruption in the
 	// near term. Spot Fleet then requests Spot Instances from the lowest priced of
-	// these pools. capacityOptimized Spot Fleet identifies the pools with
-	//
-	// the highest
+	// these pools. capacityOptimized Spot Fleet identifies the pools with the highest
 	// capacity availability for the number of instances that are launching. This means
 	// that we will request Spot Instances from the pools that we believe have the
 	// lowest chance of interruption in the near term. To give certain instance types a
@@ -13882,15 +13880,11 @@ type SpotOptions struct {
 	// For more information, see Allocation strategies for Spot Instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html)
 	// in the Amazon EC2 User Guide. price-capacity-optimized (recommended) EC2 Fleet
-	// identifies the pools with
-	//
-	// the highest capacity availability for the number of
+	// identifies the pools with the highest capacity availability for the number of
 	// instances that are launching. This means that we will request Spot Instances
 	// from the pools that we believe have the lowest chance of interruption in the
 	// near term. EC2 Fleet then requests Spot Instances from the lowest priced of
-	// these pools. capacity-optimized EC2 Fleet identifies the pools with
-	//
-	// the highest
+	// these pools. capacity-optimized EC2 Fleet identifies the pools with the highest
 	// capacity availability for the number of instances that are launching. This means
 	// that we will request Spot Instances from the pools that we believe have the
 	// lowest chance of interruption in the near term. To give certain instance types a
@@ -13966,15 +13960,11 @@ type SpotOptionsRequest struct {
 	// For more information, see Allocation strategies for Spot Instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html)
 	// in the Amazon EC2 User Guide. price-capacity-optimized (recommended) EC2 Fleet
-	// identifies the pools with
-	//
-	// the highest capacity availability for the number of
+	// identifies the pools with the highest capacity availability for the number of
 	// instances that are launching. This means that we will request Spot Instances
 	// from the pools that we believe have the lowest chance of interruption in the
 	// near term. EC2 Fleet then requests Spot Instances from the lowest priced of
-	// these pools. capacity-optimized EC2 Fleet identifies the pools with
-	//
-	// the highest
+	// these pools. capacity-optimized EC2 Fleet identifies the pools with the highest
 	// capacity availability for the number of instances that are launching. This means
 	// that we will request Spot Instances from the pools that we believe have the
 	// lowest chance of interruption in the near term. To give certain instance types a

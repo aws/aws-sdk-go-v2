@@ -1,0 +1,8 @@
+{
+    "id": "ce1f5fea-7aab-4b14-84fd-9bd22bfd6396",
+    "type": "documentation",
+    "description": "This documentation update adds kms:GenerateDataKey as a required permission to StartModelPackagingJob.",
+    "modules": [
+        "service/lookoutvision"
+    ]
+}

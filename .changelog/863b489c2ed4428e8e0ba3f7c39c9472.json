@@ -1,0 +1,8 @@
+{
+    "id": "863b489c-2ed4-428e-8e0b-a3f7c39c9472",
+    "type": "feature",
+    "description": "Adds support for \"aliases\" and \"categories\", inclusion and exclusion filters for labels and label categories, and aggregating labels by video segment timestamps for Stored Video Label Detection APIs.",
+    "modules": [
+        "service/rekognition"
+    ]
+}

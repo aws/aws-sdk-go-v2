@@ -254,6 +254,30 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The Exception rendered when the Amazon Kinesis Video Stream can't find a
+// stream's edge configuration that you specified.
+type StreamEdgeConfigurationNotFoundException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *StreamEdgeConfigurationNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *StreamEdgeConfigurationNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *StreamEdgeConfigurationNotFoundException) ErrorCode() string {
+	return "StreamEdgeConfigurationNotFoundException"
+}
+func (e *StreamEdgeConfigurationNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // You have exceeded the limit of tags that you can associate with the resource. A
 // Kinesis video stream can support up to 50 tags.
 type TagsPerResourceExceededLimitException struct {

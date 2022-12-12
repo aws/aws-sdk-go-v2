@@ -1,0 +1,8 @@
+{
+    "id": "b194bfc1-28d6-43c9-ba49-4dbb85fb8f10",
+    "type": "feature",
+    "description": "This release adds support for Lambda alias service endpoints. Lambda alias ARNs can now be passed into CreateService.",
+    "modules": [
+        "service/migrationhubrefactorspaces"
+    ]
+}

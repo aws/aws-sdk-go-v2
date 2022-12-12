@@ -1,0 +1,8 @@
+{
+    "id": "fa61e0fe-7460-4964-883c-523ade6ebaf2",
+    "type": "feature",
+    "description": "This release allows custom strings in PartyType and Gender through 2 new attributes in the CreateProfile and UpdateProfile APIs: PartyTypeString and GenderString.",
+    "modules": [
+        "service/customerprofiles"
+    ]
+}

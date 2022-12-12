@@ -458,6 +458,11 @@ func awsRestjson1_serializeOpDocumentCreateProfileInput(v *CreateProfileInput, v
 		ok.String(string(v.Gender))
 	}
 
+	if v.GenderString != nil {
+		ok := object.Key("GenderString")
+		ok.String(*v.GenderString)
+	}
+
 	if v.HomePhoneNumber != nil {
 		ok := object.Key("HomePhoneNumber")
 		ok.String(*v.HomePhoneNumber)
@@ -488,6 +493,11 @@ func awsRestjson1_serializeOpDocumentCreateProfileInput(v *CreateProfileInput, v
 	if len(v.PartyType) > 0 {
 		ok := object.Key("PartyType")
 		ok.String(string(v.PartyType))
+	}
+
+	if v.PartyTypeString != nil {
+		ok := object.Key("PartyTypeString")
+		ok.String(*v.PartyTypeString)
 	}
 
 	if v.PersonalEmailAddress != nil {
@@ -3281,6 +3291,11 @@ func awsRestjson1_serializeOpDocumentUpdateProfileInput(v *UpdateProfileInput, v
 		ok.String(string(v.Gender))
 	}
 
+	if v.GenderString != nil {
+		ok := object.Key("GenderString")
+		ok.String(*v.GenderString)
+	}
+
 	if v.HomePhoneNumber != nil {
 		ok := object.Key("HomePhoneNumber")
 		ok.String(*v.HomePhoneNumber)
@@ -3311,6 +3326,11 @@ func awsRestjson1_serializeOpDocumentUpdateProfileInput(v *UpdateProfileInput, v
 	if len(v.PartyType) > 0 {
 		ok := object.Key("PartyType")
 		ok.String(string(v.PartyType))
+	}
+
+	if v.PartyTypeString != nil {
+		ok := object.Key("PartyTypeString")
+		ok.String(*v.PartyTypeString)
 	}
 
 	if v.PersonalEmailAddress != nil {

@@ -5576,6 +5576,7 @@ const (
 	ResourceTypeVerifiedAccessPolicy                                   ResourceType = "verified-access-policy"
 	ResourceTypeVerifiedAccessTrustProvider                            ResourceType = "verified-access-trust-provider"
 	ResourceTypeVpnConnectionDeviceType                                ResourceType = "vpn-connection-device-type"
+	ResourceTypeVpcBlockPublicAccessExclusion                          ResourceType = "vpc-block-public-access-exclusion"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -5665,6 +5666,7 @@ func (ResourceType) Values() []ResourceType {
 		"verified-access-policy",
 		"verified-access-trust-provider",
 		"vpn-connection-device-type",
+		"vpc-block-public-access-exclusion",
 	}
 }
 

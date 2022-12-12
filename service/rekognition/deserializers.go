@@ -14057,9 +14057,48 @@ func awsAwsjson11_deserializeDocumentLabelDetection(v **types.LabelDetection, va
 
 	for key, value := range shape {
 		switch key {
+		case "DurationMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ULong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationMillis = ptr.Int64(i64)
+			}
+
+		case "EndTimestampMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ULong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndTimestampMillis = ptr.Int64(i64)
+			}
+
 		case "Label":
 			if err := awsAwsjson11_deserializeDocumentLabel(&sv.Label, value); err != nil {
 				return err
+			}
+
+		case "StartTimestampMillis":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ULong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartTimestampMillis = ptr.Int64(i64)
 			}
 
 		case "Timestamp":

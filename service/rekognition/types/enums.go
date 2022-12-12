@@ -288,6 +288,40 @@ func (KnownGenderType) Values() []KnownGenderType {
 	}
 }
 
+type LabelDetectionAggregateBy string
+
+// Enum values for LabelDetectionAggregateBy
+const (
+	LabelDetectionAggregateByTimestamps LabelDetectionAggregateBy = "TIMESTAMPS"
+	LabelDetectionAggregateBySegments   LabelDetectionAggregateBy = "SEGMENTS"
+)
+
+// Values returns all known values for LabelDetectionAggregateBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LabelDetectionAggregateBy) Values() []LabelDetectionAggregateBy {
+	return []LabelDetectionAggregateBy{
+		"TIMESTAMPS",
+		"SEGMENTS",
+	}
+}
+
+type LabelDetectionFeatureName string
+
+// Enum values for LabelDetectionFeatureName
+const (
+	LabelDetectionFeatureNameGeneralLabels LabelDetectionFeatureName = "GENERAL_LABELS"
+)
+
+// Values returns all known values for LabelDetectionFeatureName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LabelDetectionFeatureName) Values() []LabelDetectionFeatureName {
+	return []LabelDetectionFeatureName{
+		"GENERAL_LABELS",
+	}
+}
+
 type LabelDetectionSortBy string
 
 // Enum values for LabelDetectionSortBy

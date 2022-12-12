@@ -22,9 +22,7 @@ import (
 // SUCCEEDED. If so, call GetPersonTracking and pass the job identifier (JobId)
 // from the initial call to StartPersonTracking. GetPersonTracking returns an
 // array, Persons, of tracked persons and the time(s) their paths were tracked in
-// the video. GetPersonTracking only returns the default
-//
-// facial attributes
+// the video. GetPersonTracking only returns the default facial attributes
 // (BoundingBox, Confidence, Landmarks, Pose, and Quality). The other facial
 // attributes listed in the Face object of the following response syntax are not
 // returned. For more information, see FaceDetail in the Amazon Rekognition

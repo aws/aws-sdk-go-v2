@@ -50,12 +50,16 @@ import (
 // in the Lambda Developer Guide. For Lambda endpoints, a check is performed to
 // determine that a Lambda function with the specified ARN exists. If it does not
 // exist, the health check fails. For public URLs, a connection is opened to the
-// public endpoint. If the URL is not reachable, the health check fails. For
-// private URLS, a target group is created on the Elastic Load Balancing and the
-// target group health check is run. The HealthCheckProtocol, HealthCheckPort, and
-// HealthCheckPath are the same protocol, port, and path specified in the URL or
-// health URL, if used. All other settings use the default values, as described in
-// Health checks for your target groups
+// public endpoint. If the URL is not reachable, the health check fails. Refactor
+// Spaces automatically resolves the public Domain Name System (DNS) names that are
+// set in CreateServiceRequest$UrlEndpoint when you create a service. The DNS names
+// resolve when the DNS time-to-live (TTL) expires, or every 60 seconds for TTLs
+// less than 60 seconds. This periodic DNS resolution ensures that the route
+// configuration remains up-to-date. For private URLS, a target group is created on
+// the Elastic Load Balancing and the target group health check is run. The
+// HealthCheckProtocol, HealthCheckPort, and HealthCheckPath are the same protocol,
+// port, and path specified in the URL or health URL, if used. All other settings
+// use the default values, as described in Health checks for your target groups
 // (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html).
 // The health check is considered successful if at least one target within the
 // target group transitions to a healthy state. Services can have HTTP or HTTPS URL

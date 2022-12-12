@@ -2836,13 +2836,16 @@ type OptionGroup struct {
 	// and non-VPC instances.
 	AllowsVpcAndNonVpcInstanceMemberships bool
 
+	// Indicates when the option group was copied.
+	CopyTimestamp *time.Time
+
 	// Indicates the name of the engine that this option group can be applied to.
 	EngineName *string
 
 	// Indicates the major engine version associated with this option group.
 	MajorEngineVersion *string
 
-	// The Amazon Resource Name (ARN) for the option group.
+	// Specifies the Amazon Resource Name (ARN) for the option group.
 	OptionGroupArn *string
 
 	// Provides a description of the option group.
@@ -2853,6 +2856,13 @@ type OptionGroup struct {
 
 	// Indicates what options are available in the option group.
 	Options []Option
+
+	// Specifies the Amazon Web Services account ID for the option group from which
+	// this option group is copied.
+	SourceAccountId *string
+
+	// Specifies the name of the option group from which this option group is copied.
+	SourceOptionGroup *string
 
 	// If AllowsVpcAndNonVpcInstanceMemberships is false, this field is blank. If
 	// AllowsVpcAndNonVpcInstanceMemberships is true and this field is blank, then this
@@ -2880,6 +2890,9 @@ type OptionGroupMembership struct {
 
 // Available option.
 type OptionGroupOption struct {
+
+	// Specifies whether the option can be copied across Amazon Web Services accounts.
+	CopyableCrossAccount *bool
 
 	// If the option requires a port, specifies the default port for the option.
 	DefaultPort *int32

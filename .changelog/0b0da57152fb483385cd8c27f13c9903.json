@@ -1,0 +1,8 @@
+{
+    "id": "0b0da571-52fb-4833-85cd-8c27f13c9903",
+    "type": "feature",
+    "description": "This release introduces support SageMaker Metrics APIs.",
+    "modules": [
+        "service/sagemakermetrics"
+    ]
+}

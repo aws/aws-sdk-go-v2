@@ -9968,6 +9968,11 @@ func awsAwsquery_serializeOpDocumentCopyDBSnapshotInput(v *CopyDBSnapshotInput, 
 	object := value.Object()
 	_ = object
 
+	if v.CopyOptionGroup != nil {
+		objectKey := object.Key("CopyOptionGroup")
+		objectKey.Boolean(*v.CopyOptionGroup)
+	}
+
 	if v.CopyTags != nil {
 		objectKey := object.Key("CopyTags")
 		objectKey.Boolean(*v.CopyTags)

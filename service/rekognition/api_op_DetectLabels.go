@@ -54,56 +54,57 @@ import (
 // Possible Aliases for the label.
 //
 // * Categories - The label categories that the
-// detected label belongs to. A given label can belong to more than one
-// category.
+// detected label belongs to.
 //
-// * BoundingBox — Bounding boxes are described for all instances of
-// detected common object labels, returned in an array of Instance objects. An
-// Instance object contains a BoundingBox object, describing the location of the
-// label on the input image. It also includes the confidence for the accuracy of
-// the detected bounding box.
+// * BoundingBox — Bounding boxes are described for all
+// instances of detected common object labels, returned in an array of Instance
+// objects. An Instance object contains a BoundingBox object, describing the
+// location of the label on the input image. It also includes the confidence for
+// the accuracy of the detected bounding box.
 //
-// The API returns the following information regarding
-// the image, as part of the ImageProperties structure:
+// The API returns the following
+// information regarding the image, as part of the ImageProperties structure:
 //
-// * Quality - Information
-// about the Sharpness, Brightness, and Contrast of the input image, scored between
-// 0 to 100. Image quality is returned for the entire image, as well as the
-// background and the foreground.
+// *
+// Quality - Information about the Sharpness, Brightness, and Contrast of the input
+// image, scored between 0 to 100. Image quality is returned for the entire image,
+// as well as the background and the foreground.
 //
-// * Dominant Color - An array of the dominant
-// colors in the image.
+// * Dominant Color - An array of
+// the dominant colors in the image.
 //
-// * Foreground - Information about the Sharpness and
-// Brightness of the input image’s foreground.
+// * Foreground - Information about the
+// sharpness, brightness, and dominant colors of the input image’s foreground.
 //
-// * Background - Information about
-// the Sharpness and Brightness of the input image’s background.
+// *
+// Background - Information about the sharpness, brightness, and dominant colors of
+// the input image’s background.
 //
-// The list of
-// returned labels will include at least one label for every detected object, along
-// with information about that label. In the following example, suppose the input
-// image has a lighthouse, the sea, and a rock. The response includes all three
-// labels, one for each object, as well as the confidence in the label: {Name:
-// lighthouse, Confidence: 98.4629}
+// The list of returned labels will include at least
+// one label for every detected object, along with information about that label. In
+// the following example, suppose the input image has a lighthouse, the sea, and a
+// rock. The response includes all three labels, one for each object, as well as
+// the confidence in the label: {Name: lighthouse, Confidence: 98.4629}
 //
-//	{Name: rock,Confidence: 79.2097}
+//	{Name:
 //
-// {Name:
-// sea,Confidence: 75.061} The list of labels can include multiple labels for the
-// same object. For example, if the input image shows a flower (for example, a
-// tulip), the operation might return the following three labels. {Name:
-// flower,Confidence: 99.0562}
+// rock,Confidence: 79.2097}
 //
-//	{Name: plant,Confidence: 99.0562}
+// {Name: sea,Confidence: 75.061} The list of labels can
+// include multiple labels for the same object. For example, if the input image
+// shows a flower (for example, a tulip), the operation might return the following
+// three labels. {Name: flower,Confidence: 99.0562}
 //
-// {Name:
-// tulip,Confidence: 99.0562} In this example, the detection algorithm more
-// precisely identifies the flower as a tulip. If the object detected is a person,
-// the operation doesn't provide the same facial details that the DetectFaces
-// operation provides. This is a stateless API operation. That is, the operation
-// does not persist any data. This operation requires permissions to perform the
-// rekognition:DetectLabels action.
+//	{Name: plant,Confidence:
+//
+// 99.0562}
+//
+// {Name: tulip,Confidence: 99.0562} In this example, the detection
+// algorithm more precisely identifies the flower as a tulip. If the object
+// detected is a person, the operation doesn't provide the same facial details that
+// the DetectFaces operation provides. This is a stateless API operation. That is,
+// the operation does not persist any data. This operation requires permissions to
+// perform the rekognition:DetectLabels action.
 func (c *Client) DetectLabels(ctx context.Context, params *DetectLabelsInput, optFns ...func(*Options)) (*DetectLabelsOutput, error) {
 	if params == nil {
 		params = &DetectLabelsInput{}

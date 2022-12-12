@@ -80,6 +80,9 @@ type UpdateProfileInput struct {
 	// The gender with which the customer identifies.
 	Gender types.Gender
 
+	// An alternative to Gender which accepts any string as input.
+	GenderString *string
+
 	// The customer’s home phone number.
 	HomePhoneNumber *string
 
@@ -97,6 +100,9 @@ type UpdateProfileInput struct {
 
 	// The type of profile used to describe the customer.
 	PartyType types.PartyType
+
+	// An alternative to PartyType which accepts any string as input.
+	PartyTypeString *string
 
 	// The customer’s personal email address.
 	PersonalEmailAddress *string

@@ -342,6 +342,79 @@ func awsRestjson1_serializeOpDocumentDeleteStreamInput(v *DeleteStreamInput, val
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeEdgeConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeEdgeConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeEdgeConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeEdgeConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/describeEdgeConfiguration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDescribeEdgeConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeEdgeConfigurationInput(v *DescribeEdgeConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDescribeEdgeConfigurationInput(v *DescribeEdgeConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
+	if v.StreamName != nil {
+		ok := object.Key("StreamName")
+		ok.String(*v.StreamName)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeImageGenerationConfiguration struct {
 }
 
@@ -1083,6 +1156,86 @@ func awsRestjson1_serializeOpDocumentListTagsForStreamInput(v *ListTagsForStream
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
+	if v.StreamName != nil {
+		ok := object.Key("StreamName")
+		ok.String(*v.StreamName)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStartEdgeConfigurationUpdate struct {
+}
+
+func (*awsRestjson1_serializeOpStartEdgeConfigurationUpdate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartEdgeConfigurationUpdate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartEdgeConfigurationUpdateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/startEdgeConfigurationUpdate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartEdgeConfigurationUpdateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartEdgeConfigurationUpdateInput(v *StartEdgeConfigurationUpdateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartEdgeConfigurationUpdateInput(v *StartEdgeConfigurationUpdateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EdgeConfig != nil {
+		ok := object.Key("EdgeConfig")
+		if err := awsRestjson1_serializeDocumentEdgeConfig(v.EdgeConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.StreamARN != nil {
@@ -1841,6 +1994,63 @@ func awsRestjson1_serializeDocumentChannelNameCondition(v *types.ChannelNameCond
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDeletionConfig(v *types.DeletionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeleteAfterUpload != nil {
+		ok := object.Key("DeleteAfterUpload")
+		ok.Boolean(*v.DeleteAfterUpload)
+	}
+
+	if v.EdgeRetentionInHours != nil {
+		ok := object.Key("EdgeRetentionInHours")
+		ok.Integer(*v.EdgeRetentionInHours)
+	}
+
+	if v.LocalSizeConfig != nil {
+		ok := object.Key("LocalSizeConfig")
+		if err := awsRestjson1_serializeDocumentLocalSizeConfig(v.LocalSizeConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEdgeConfig(v *types.EdgeConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeletionConfig != nil {
+		ok := object.Key("DeletionConfig")
+		if err := awsRestjson1_serializeDocumentDeletionConfig(v.DeletionConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HubDeviceArn != nil {
+		ok := object.Key("HubDeviceArn")
+		ok.String(*v.HubDeviceArn)
+	}
+
+	if v.RecorderConfig != nil {
+		ok := object.Key("RecorderConfig")
+		if err := awsRestjson1_serializeDocumentRecorderConfig(v.RecorderConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UploaderConfig != nil {
+		ok := object.Key("UploaderConfig")
+		if err := awsRestjson1_serializeDocumentUploaderConfig(v.UploaderConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFormatConfig(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1931,6 +2141,40 @@ func awsRestjson1_serializeDocumentListOfProtocols(v []types.ChannelProtocol, va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentLocalSizeConfig(v *types.LocalSizeConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxLocalMediaSizeInMB != nil {
+		ok := object.Key("MaxLocalMediaSizeInMB")
+		ok.Integer(*v.MaxLocalMediaSizeInMB)
+	}
+
+	if len(v.StrategyOnFullSize) > 0 {
+		ok := object.Key("StrategyOnFullSize")
+		ok.String(string(v.StrategyOnFullSize))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaSourceConfig(v *types.MediaSourceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MediaUriSecretArn != nil {
+		ok := object.Key("MediaUriSecretArn")
+		ok.String(*v.MediaUriSecretArn)
+	}
+
+	if len(v.MediaUriType) > 0 {
+		ok := object.Key("MediaUriType")
+		ok.String(string(v.MediaUriType))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNotificationConfiguration(v *types.NotificationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1962,6 +2206,27 @@ func awsRestjson1_serializeDocumentNotificationDestinationConfig(v *types.Notifi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRecorderConfig(v *types.RecorderConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MediaSourceConfig != nil {
+		ok := object.Key("MediaSourceConfig")
+		if err := awsRestjson1_serializeDocumentMediaSourceConfig(v.MediaSourceConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ScheduleConfig != nil {
+		ok := object.Key("ScheduleConfig")
+		if err := awsRestjson1_serializeDocumentScheduleConfig(v.ScheduleConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentResourceTags(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1970,6 +2235,23 @@ func awsRestjson1_serializeDocumentResourceTags(v map[string]string, value smith
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScheduleConfig(v *types.ScheduleConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationInSeconds != nil {
+		ok := object.Key("DurationInSeconds")
+		ok.Integer(*v.DurationInSeconds)
+	}
+
+	if v.ScheduleExpression != nil {
+		ok := object.Key("ScheduleExpression")
+		ok.String(*v.ScheduleExpression)
+	}
+
 	return nil
 }
 
@@ -2072,5 +2354,19 @@ func awsRestjson1_serializeDocumentTagOnCreateList(v []types.Tag, value smithyjs
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUploaderConfig(v *types.UploaderConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ScheduleConfig != nil {
+		ok := object.Key("ScheduleConfig")
+		if err := awsRestjson1_serializeDocumentScheduleConfig(v.ScheduleConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }

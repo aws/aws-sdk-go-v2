@@ -38116,6 +38116,23 @@ func awsAwsquery_deserializeDocumentOptionGroup(v **types.OptionGroup, decoder s
 				sv.AllowsVpcAndNonVpcInstanceMemberships = xtv
 			}
 
+		case strings.EqualFold("CopyTimestamp", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.CopyTimestamp = ptr.Time(t)
+			}
+
 		case strings.EqualFold("EngineName", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -38185,6 +38202,32 @@ func awsAwsquery_deserializeDocumentOptionGroup(v **types.OptionGroup, decoder s
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentOptionsList(&sv.Options, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("SourceAccountId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SourceAccountId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("SourceOptionGroup", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SourceOptionGroup = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("VpcId", t.Name.Local):
@@ -38464,6 +38507,22 @@ func awsAwsquery_deserializeDocumentOptionGroupOption(v **types.OptionGroupOptio
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
+		case strings.EqualFold("CopyableCrossAccount", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.CopyableCrossAccount = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("DefaultPort", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

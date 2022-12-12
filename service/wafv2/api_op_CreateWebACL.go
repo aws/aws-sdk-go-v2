@@ -112,7 +112,8 @@ type CreateWebACLInput struct {
 	// only for the domain of the protected resource. With a token domain list, WAF
 	// accepts the resource's host domain plus all domains in the token domain list,
 	// including their prefixed subdomains. Example JSON: "TokenDomains": {
-	// "mywebsite.com", "myotherwebsite.com" }
+	// "mywebsite.com", "myotherwebsite.com" } Public suffixes aren't allowed. For
+	// example, you can't use usa.gov or co.uk as token domains.
 	TokenDomains []string
 
 	noSmithyDocumentSerde
