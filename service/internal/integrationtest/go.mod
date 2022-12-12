@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.26
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.24
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.14.12
-	github.com/aws/aws-sdk-go-v2/service/appstream v1.18.1
+	github.com/aws/aws-sdk-go-v2/service/appstream v1.18.2
 	github.com/aws/aws-sdk-go-v2/service/athena v1.20.2
 	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.25.0
 	github.com/aws/aws-sdk-go-v2/service/batch v1.19.2
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.15.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.19.17
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.17.8
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.75.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.76.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.17.24
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.20.1
 	github.com/aws/aws-sdk-go-v2/service/efs v1.18.1
@@ -60,9 +60,9 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.13.20
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.11.22
 	github.com/aws/aws-sdk-go-v2/service/polly v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/rds v1.33.0
+	github.com/aws/aws-sdk-go-v2/service/rds v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.26.17
-	github.com/aws/aws-sdk-go-v2/service/rekognition v1.21.1
+	github.com/aws/aws-sdk-go-v2/service/rekognition v1.22.0
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.25.1
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.12.20
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.15.22
@@ -84,7 +84,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.8.1
 	github.com/aws/aws-sdk-go-v2/service/waf v1.11.20
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.12.21
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.23.2
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.23.3
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.27.1
 	github.com/aws/smithy-go v1.13.5
 	github.com/google/go-cmp v0.5.8

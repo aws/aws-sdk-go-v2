@@ -1,3 +1,7 @@
+# v1.34.0 (2022-12-12)
+
+* **Feature**: Update the RDS API model to support copying option groups during the CopyDBSnapshot operation
+
 # v1.33.0 (2022-12-06)
 
 * **Feature**: This release adds the BlueGreenDeploymentNotFoundFault to the AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource operations.

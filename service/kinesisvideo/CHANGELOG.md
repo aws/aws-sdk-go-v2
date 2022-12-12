@@ -1,3 +1,7 @@
+# v1.13.0 (2022-12-12)
+
+* **Feature**: This release adds support for public preview of Kinesis Video Stream at Edge enabling customers to provide configuration for the Kinesis Video Stream EdgeAgent running on an on-premise IoT device. Customers can now locally record from cameras and stream videos to the cloud on configured schedule.
+
 # v1.12.17 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

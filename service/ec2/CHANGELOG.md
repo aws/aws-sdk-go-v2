@@ -1,3 +1,7 @@
+# v1.76.0 (2022-12-12)
+
+* **Feature**: This release updates DescribeFpgaImages to show supported instance types of AFIs in its response.
+
 # v1.75.0 (2022-12-05)
 
 * **Feature**: Documentation updates for EC2.

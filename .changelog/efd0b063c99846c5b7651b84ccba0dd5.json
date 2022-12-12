@@ -1,8 +1,0 @@
-{
-    "id": "efd0b063-c998-46c5-b765-1b84ccba0dd5",
-    "type": "documentation",
-    "description": "Documents the naming requirement for logging destinations that you use with web ACLs.",
-    "modules": [
-        "service/wafv2"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "8f44e34a-8ccc-4ac3-9149-8806094e85b2",
-    "type": "feature",
-    "description": "This release updates DescribeFpgaImages to show supported instance types of AFIs in its response.",
-    "modules": [
-        "service/ec2"
-    ]
-}

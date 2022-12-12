@@ -1,3 +1,26 @@
+# Release (2022-12-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.21.0](service/customerprofiles/CHANGELOG.md#v1210-2022-12-12)
+  * **Feature**: This release allows custom strings in PartyType and Gender through 2 new attributes in the CreateProfile and UpdateProfile APIs: PartyTypeString and GenderString.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.76.0](service/ec2/CHANGELOG.md#v1760-2022-12-12)
+  * **Feature**: This release updates DescribeFpgaImages to show supported instance types of AFIs in its response.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.13.0](service/kinesisvideo/CHANGELOG.md#v1130-2022-12-12)
+  * **Feature**: This release adds support for public preview of Kinesis Video Stream at Edge enabling customers to provide configuration for the Kinesis Video Stream EdgeAgent running on an on-premise IoT device. Customers can now locally record from cameras and stream videos to the cloud on configured schedule.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutvision`: [v1.14.13](service/lookoutvision/CHANGELOG.md#v11413-2022-12-12)
+  * **Documentation**: This documentation update adds kms:GenerateDataKey as a required permission to StartModelPackagingJob.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.7.0](service/migrationhubrefactorspaces/CHANGELOG.md#v170-2022-12-12)
+  * **Feature**: This release adds support for Lambda alias service endpoints. Lambda alias ARNs can now be passed into CreateService.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.34.0](service/rds/CHANGELOG.md#v1340-2022-12-12)
+  * **Feature**: Update the RDS API model to support copying option groups during the CopyDBSnapshot operation
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.22.0](service/rekognition/CHANGELOG.md#v1220-2022-12-12)
+  * **Feature**: Adds support for "aliases" and "categories", inclusion and exclusion filters for labels and label categories, and aggregating labels by video segment timestamps for Stored Video Label Detection APIs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.0.0](service/sagemakermetrics/CHANGELOG.md#v100-2022-12-12)
+  * **Release**: New AWS service client module
+  * **Feature**: This release introduces support SageMaker Metrics APIs.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.23.3](service/wafv2/CHANGELOG.md#v1233-2022-12-12)
+  * **Documentation**: Documents the naming requirement for logging destinations that you use with web ACLs.
+
 # Release (2022-12-09)
 
 ## Module Highlights

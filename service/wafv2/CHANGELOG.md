@@ -1,3 +1,7 @@
+# v1.23.3 (2022-12-12)
+
+* **Documentation**: Documents the naming requirement for logging destinations that you use with web ACLs.
+
 # v1.23.2 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.7.0 (2022-12-12)
+
+* **Feature**: This release adds support for Lambda alias service endpoints. Lambda alias ARNs can now be passed into CreateService.
+
 # v1.6.14 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

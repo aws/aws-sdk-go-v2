@@ -1,3 +1,7 @@
+# v1.14.13 (2022-12-12)
+
+* **Documentation**: This documentation update adds kms:GenerateDataKey as a required permission to StartModelPackagingJob.
+
 # v1.14.12 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

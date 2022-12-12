@@ -1,8 +1,0 @@
-{
-    "id": "cfb4661a-80b3-445e-855c-b7df773e55b6",
-    "type": "feature",
-    "description": "Update the RDS API model to support copying option groups during the CopyDBSnapshot operation",
-    "modules": [
-        "service/rds"
-    ]
-}
