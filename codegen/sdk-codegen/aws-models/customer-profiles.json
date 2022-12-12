@@ -980,6 +980,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A key value pair of attributes of a customer profile.</p>"
                     }
+                },
+                "PartyTypeString": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alternative to <code>PartyType</code> which accepts any string as input.</p>"
+                    }
+                },
+                "GenderString": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alternative to <code>Gender</code> which accepts any string as input.</p>"
+                    }
                 }
             }
         },
@@ -1133,7 +1145,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -1182,15 +1194,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -1454,8 +1457,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1467,8 +1470,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1480,8 +1483,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1493,8 +1496,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1506,8 +1509,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1519,8 +1522,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1532,8 +1535,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1545,8 +1548,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1558,8 +1561,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1571,8 +1574,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1584,8 +1587,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1597,8 +1600,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1610,8 +1613,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1623,8 +1626,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1636,8 +1639,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1649,8 +1652,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1662,8 +1665,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1675,8 +1678,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1688,8 +1691,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1701,8 +1704,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1714,8 +1717,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1727,8 +1730,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1740,8 +1743,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1753,8 +1756,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1766,8 +1769,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1779,8 +1782,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1792,8 +1795,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1805,8 +1808,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -1818,8 +1821,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1831,8 +1834,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1844,8 +1847,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1857,8 +1860,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -1870,8 +1873,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1883,8 +1886,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1896,8 +1899,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1909,8 +1912,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1922,8 +1925,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1935,8 +1938,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1948,8 +1951,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1961,8 +1964,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1974,8 +1977,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1986,8 +1989,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1998,8 +2001,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2926,7 +2929,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Tests the auto-merging settings of your Identity Resolution Job without merging your data. It randomly\n         selects a sample of matching groups from the existing matching results, and applies the\n         automerging settings that you provided. You can then view the number of profiles in the\n         sample, the number of matches, and the number of profiles identified to be merged. This\n         enables you to evaluate the accuracy of the attributes in your matching list. </p>\n         <p>You can't view which profiles are matched and would be merged.</p>\n         <important>\n         \n            <p>We strongly recommend you use this API to do a dry run of the automerging process\n            before running the Identity Resolution Job. Include <b>at least</b> two matching\n            attributes. If your matching list includes too few attributes (such as only\n               <code>FirstName</code> or only <code>LastName</code>), there may be a large number of\n            matches. This increases the chances of erroneous merges.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Tests the auto-merging settings of your Identity Resolution Job without merging your data. It randomly\n         selects a sample of matching groups from the existing matching results, and applies the\n         automerging settings that you provided. You can then view the number of profiles in the\n         sample, the number of matches, and the number of profiles identified to be merged. This\n         enables you to evaluate the accuracy of the attributes in your matching list. </p>\n         <p>You can't view which profiles are matched and would be merged.</p>\n         <important>\n            <p>We strongly recommend you use this API to do a dry run of the automerging process\n            before running the Identity Resolution Job. Include <b>at least</b> two matching\n            attributes. If your matching list includes too few attributes (such as only\n               <code>FirstName</code> or only <code>LastName</code>), there may be a large number of\n            matches. This increases the chances of erroneous merges.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/identity-resolution-jobs/auto-merging-preview",
@@ -3378,7 +3381,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or\n            <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable identity resolution: set <code>Matching</code> to true.</p>\n         <p>GetMatches returns potentially matching profiles, based on the results of the latest run\n         of a machine learning process. </p>\n         <important>\n            <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly\nbatch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every \nSaturday at 12AM UTC to detect duplicate profiles in your domains. </p>\n            <p>After the Identity Resolution Job completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from\nS3.</p>\n         </important>\n\n         <p>Amazon Connect uses the following profile attributes to identify matches:</p>\n         <ul>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>HomePhoneNumber</p>\n            </li>\n            <li>\n               <p>BusinessPhoneNumber</p>\n            </li>\n            <li>\n               <p>MobilePhoneNumber</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>PersonalEmailAddress</p>\n            </li>\n            <li>\n               <p>BusinessEmailAddress</p>\n            </li>\n            <li>\n               <p>FullName</p>\n            </li>\n         </ul>\n         <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing\n         email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and\n            <b>johndoe@anycompany.com</b>, or different phone number\n         formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>",
+                "smithy.api#documentation": "<p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or\n            <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable identity resolution: set <code>Matching</code> to true.</p>\n         <p>GetMatches returns potentially matching profiles, based on the results of the latest run\n         of a machine learning process. </p>\n         <important>\n            <p>The process of matching duplicate profiles. If <code>Matching</code> = <code>true</code>, Amazon Connect Customer Profiles starts a weekly\nbatch process called Identity Resolution Job. If you do not specify a date and time for Identity Resolution Job to run, by default it runs every \nSaturday at 12AM UTC to detect duplicate profiles in your domains. </p>\n            <p>After the Identity Resolution Job completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results. Or, if you have configured <code>ExportingConfig</code> in the <code>MatchingRequest</code>, you can download the results from\nS3.</p>\n         </important>\n         <p>Amazon Connect uses the following profile attributes to identify matches:</p>\n         <ul>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>HomePhoneNumber</p>\n            </li>\n            <li>\n               <p>BusinessPhoneNumber</p>\n            </li>\n            <li>\n               <p>MobilePhoneNumber</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>PersonalEmailAddress</p>\n            </li>\n            <li>\n               <p>BusinessEmailAddress</p>\n            </li>\n            <li>\n               <p>FullName</p>\n            </li>\n         </ul>\n         <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing\n         email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and\n            <b>johndoe@anycompany.com</b>, or different phone number\n         formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/domains/{DomainName}/matches",
@@ -5381,7 +5384,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs an AWS Lambda job that does the following:</p>\n         <ol>\n            <li>\n               <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the\n               main profile.</p>\n            </li>\n            <li>\n               <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main\n               profile.</p>\n            </li>\n            <li>\n               <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p>\n            </li>\n            <li>\n               <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the\n               main profile.</p>\n            </li>\n            <li>\n               <p>Standard fields are merged as follows:</p>\n               <ol>\n                  <li>\n                     <p>Fields are always \"union\"-ed if there are no conflicts in standard fields or\n                     attributeKeys.</p>\n                  </li>\n                  <li>\n                     <p>When there are conflicting fields:</p>\n\n                     <ol>\n                        <li>\n                           <p>If no <code>SourceProfileIds</code> entry is specified, the main\n                           Profile value is always taken. </p>\n                        </li>\n                        <li>\n                           <p>If a <code>SourceProfileIds</code> entry is specified, the specified\n                           profileId is always taken, even if it is a NULL value.</p>\n                        </li>\n                     </ol>\n                  </li>\n               </ol>\n            </li>\n         </ol>\n         <p>You can use MergeProfiles together with <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>, which\n         returns potentially matching profiles, or use it with the results of another matching\n         system. After profiles have been merged, they cannot be separated (unmerged).</p>",
+                "smithy.api#documentation": "<p>Runs an AWS Lambda job that does the following:</p>\n         <ol>\n            <li>\n               <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the\n               main profile.</p>\n            </li>\n            <li>\n               <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main\n               profile.</p>\n            </li>\n            <li>\n               <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p>\n            </li>\n            <li>\n               <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the\n               main profile.</p>\n            </li>\n            <li>\n               <p>Standard fields are merged as follows:</p>\n               <ol>\n                  <li>\n                     <p>Fields are always \"union\"-ed if there are no conflicts in standard fields or\n                     attributeKeys.</p>\n                  </li>\n                  <li>\n                     <p>When there are conflicting fields:</p>\n                     <ol>\n                        <li>\n                           <p>If no <code>SourceProfileIds</code> entry is specified, the main\n                           Profile value is always taken. </p>\n                        </li>\n                        <li>\n                           <p>If a <code>SourceProfileIds</code> entry is specified, the specified\n                           profileId is always taken, even if it is a NULL value.</p>\n                        </li>\n                     </ol>\n                  </li>\n               </ol>\n            </li>\n         </ol>\n         <p>You can use MergeProfiles together with <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>, which\n         returns potentially matching profiles, or use it with the results of another matching\n         system. After profiles have been merged, they cannot be separated (unmerged).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/profiles/objects/merge",
@@ -7880,6 +7883,18 @@
                     "target": "com.amazonaws.customerprofiles#UpdateAttributes",
                     "traits": {
                         "smithy.api#documentation": "<p>A key value pair of attributes of a customer profile.</p>"
+                    }
+                },
+                "PartyTypeString": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alternative to <code>PartyType</code> which accepts any string as input.</p>"
+                    }
+                },
+                "GenderString": {
+                    "target": "com.amazonaws.customerprofiles#string0To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An alternative to <code>Gender</code> which accepts any string as input.</p>"
                     }
                 }
             }
