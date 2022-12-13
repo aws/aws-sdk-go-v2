@@ -20,7 +20,6 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
-        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.15",

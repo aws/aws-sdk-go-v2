@@ -3861,6 +3861,9 @@ type UserAuthConfig struct {
 	// the underlying database.
 	AuthScheme AuthScheme
 
+	// The type of authentication the proxy uses for connections from clients.
+	ClientPasswordAuthType ClientPasswordAuthType
+
 	// A user-specified description about the authentication used by a proxy to log in
 	// as a specific database user.
 	Description *string
@@ -3888,6 +3891,9 @@ type UserAuthConfigInfo struct {
 	// The type of authentication that the proxy uses for connections from the proxy to
 	// the underlying database.
 	AuthScheme AuthScheme
+
+	// The type of authentication the proxy uses for connections from clients.
+	ClientPasswordAuthType ClientPasswordAuthType
 
 	// A user-specified description about the authentication used by a proxy to log in
 	// as a specific database user.

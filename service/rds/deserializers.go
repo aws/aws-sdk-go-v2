@@ -45218,6 +45218,19 @@ func awsAwsquery_deserializeDocumentUserAuthConfigInfo(v **types.UserAuthConfigI
 				sv.AuthScheme = types.AuthScheme(xtv)
 			}
 
+		case strings.EqualFold("ClientPasswordAuthType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ClientPasswordAuthType = types.ClientPasswordAuthType(xtv)
+			}
+
 		case strings.EqualFold("Description", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

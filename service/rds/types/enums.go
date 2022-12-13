@@ -134,6 +134,28 @@ func (AutomationMode) Values() []AutomationMode {
 	}
 }
 
+type ClientPasswordAuthType string
+
+// Enum values for ClientPasswordAuthType
+const (
+	ClientPasswordAuthTypeMysqlNativePassword     ClientPasswordAuthType = "MYSQL_NATIVE_PASSWORD"
+	ClientPasswordAuthTypePostgresScramSha256     ClientPasswordAuthType = "POSTGRES_SCRAM_SHA_256"
+	ClientPasswordAuthTypePostgresMd5             ClientPasswordAuthType = "POSTGRES_MD5"
+	ClientPasswordAuthTypeSqlServerAuthentication ClientPasswordAuthType = "SQL_SERVER_AUTHENTICATION"
+)
+
+// Values returns all known values for ClientPasswordAuthType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ClientPasswordAuthType) Values() []ClientPasswordAuthType {
+	return []ClientPasswordAuthType{
+		"MYSQL_NATIVE_PASSWORD",
+		"POSTGRES_SCRAM_SHA_256",
+		"POSTGRES_MD5",
+		"SQL_SERVER_AUTHENTICATION",
+	}
+}
+
 type CustomEngineVersionStatus string
 
 // Enum values for CustomEngineVersionStatus

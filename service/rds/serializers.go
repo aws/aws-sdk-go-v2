@@ -9638,6 +9638,11 @@ func awsAwsquery_serializeDocumentUserAuthConfig(v *types.UserAuthConfig, value 
 		objectKey.String(string(v.AuthScheme))
 	}
 
+	if len(v.ClientPasswordAuthType) > 0 {
+		objectKey := object.Key("ClientPasswordAuthType")
+		objectKey.String(string(v.ClientPasswordAuthType))
+	}
+
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)
