@@ -1,8 +1,0 @@
-{
-    "id": "6fd48e42-c23a-4ce7-ab71-86adc3bb9028",
-    "type": "feature",
-    "description": "Merging mainline branch for service model into mainline release branch. There are no new APIs.",
-    "modules": [
-        "service/cloudtrail"
-    ]
-}

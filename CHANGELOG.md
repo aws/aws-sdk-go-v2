@@ -1,3 +1,13 @@
+# Release (2022-12-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.21.0](service/cloudtrail/CHANGELOG.md#v1210-2022-12-13)
+  * **Feature**: Merging mainline branch for service model into mainline release branch. There are no new APIs.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.11.21](service/marketplaceentitlementservice/CHANGELOG.md#v11121-2022-12-13)
+  * **Bug Fix**: Fixing a shape type in the marketplaceentitlementservice client
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.35.0](service/rds/CHANGELOG.md#v1350-2022-12-13)
+  * **Feature**: This deployment adds ClientPasswordAuthType field to the Auth structure of the DBProxy.
+
 # Release (2022-12-12)
 
 ## Module Highlights

@@ -1,8 +1,0 @@
-{
-    "id": "3a27c4e0-1f32-4659-833a-f6218317451b",
-    "type": "bugfix",
-    "description": "Fixing a shape type in the marketplaceentitlementservice client",
-    "modules": [
-        "service/marketplaceentitlementservice"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "71ba70b6-f89a-4b45-aba3-45246828c814",
-    "type": "feature",
-    "description": "This deployment adds ClientPasswordAuthType field to the Auth structure of the DBProxy.",
-    "modules": [
-        "service/rds"
-    ]
-}

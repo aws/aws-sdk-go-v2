@@ -1,3 +1,7 @@
+# v1.21.0 (2022-12-13)
+
+* **Feature**: Merging mainline branch for service model into mainline release branch. There are no new APIs.
+
 # v1.20.4 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

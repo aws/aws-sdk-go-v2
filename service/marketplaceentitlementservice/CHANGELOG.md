@@ -1,3 +1,7 @@
+# v1.11.21 (2022-12-13)
+
+* **Bug Fix**: Fixing a shape type in the marketplaceentitlementservice client
+
 # v1.11.20 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

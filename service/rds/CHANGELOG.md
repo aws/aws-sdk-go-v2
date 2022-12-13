@@ -1,3 +1,7 @@
+# v1.35.0 (2022-12-13)
+
+* **Feature**: This deployment adds ClientPasswordAuthType field to the Auth structure of the DBProxy.
+
 # v1.34.0 (2022-12-12)
 
 * **Feature**: Update the RDS API model to support copying option groups during the CopyDBSnapshot operation
