@@ -3,5 +3,5 @@
 // package. The package is forked, because the package a part of the unstable
 // and unversioned golang.org/x/sync module.
 //
-// https://github.com/golang/sync/tree/67f06af15bc961c363a7260195bcd53487529a21/singleflight
+// https://github.com/golang/sync/tree/8fcdb60fdcc0539c5e357b2308249e4e752147f1/singleflight
 package singleflight
