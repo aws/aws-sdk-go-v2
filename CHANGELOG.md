@@ -1,3 +1,17 @@
+# Release (2022-12-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.23.0](service/cloudwatch/CHANGELOG.md#v1230-2022-12-14)
+  * **Feature**: Adding support for Metrics Insights Alarms
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.24.0](service/costexplorer/CHANGELOG.md#v1240-2022-12-14)
+  * **Feature**: This release supports percentage-based thresholds on Cost Anomaly Detection alert subscriptions.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.16.0](service/networkmanager/CHANGELOG.md#v1160-2022-12-14)
+  * **Feature**: Appliance Mode support for AWS Cloud WAN.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.17.0](service/redshiftdata/CHANGELOG.md#v1170-2022-12-14)
+  * **Feature**: This release adds a new --client-token field to ExecuteStatement and BatchExecuteStatement operations. Customers can now run queries with the additional client token parameter to ensures idempotency.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.0.1](service/sagemakermetrics/CHANGELOG.md#v101-2022-12-14)
+  * **Documentation**: Update SageMaker Metrics documentation.
+
 # Release (2022-12-13)
 
 ## Module Highlights

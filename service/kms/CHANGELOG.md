@@ -1,3 +1,7 @@
+# v1.19.3 (2022-12-14)
+
+* No change notes available for this release.
+
 # v1.19.2 (2022-12-07)
 
 * **Documentation**: Updated examples and exceptions for External Key Store (XKS).

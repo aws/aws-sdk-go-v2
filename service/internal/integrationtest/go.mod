@@ -16,7 +16,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudhsmv2 v1.13.22
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.13.20
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.21.0
-	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.22.1
+	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.23.0
 	github.com/aws/aws-sdk-go-v2/service/codebuild v1.19.20
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.13.20
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.15.6
@@ -52,7 +52,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.12.20
 	github.com/aws/aws-sdk-go-v2/service/iot v1.32.1
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.15.25
-	github.com/aws/aws-sdk-go-v2/service/kms v1.19.2
+	github.com/aws/aws-sdk-go-v2/service/kms v1.19.3
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.26.1
 	github.com/aws/aws-sdk-go-v2/service/lightsail v1.24.1
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.11.20

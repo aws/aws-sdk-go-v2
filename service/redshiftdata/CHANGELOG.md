@@ -1,3 +1,7 @@
+# v1.17.0 (2022-12-14)
+
+* **Feature**: This release adds a new --client-token field to ExecuteStatement and BatchExecuteStatement operations. Customers can now run queries with the additional client token parameter to ensures idempotency.
+
 # v1.16.14 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

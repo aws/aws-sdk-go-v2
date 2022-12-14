@@ -1,8 +1,0 @@
-{
-    "id": "f7664cd4-88ea-45c9-af41-83a21e954082",
-    "type": "feature",
-    "description": "Adding support for Metrics Insights Alarms",
-    "modules": [
-        "service/cloudwatch"
-    ]
-}

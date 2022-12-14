@@ -1,8 +1,0 @@
-{
-    "id": "32531961-4c93-4564-8efd-4656aea71b1f",
-    "type": "feature",
-    "description": "Appliance Mode support for AWS Cloud WAN.",
-    "modules": [
-        "service/networkmanager"
-    ]
-}

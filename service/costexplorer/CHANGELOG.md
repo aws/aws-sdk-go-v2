@@ -1,3 +1,7 @@
+# v1.24.0 (2022-12-14)
+
+* **Feature**: This release supports percentage-based thresholds on Cost Anomaly Detection alert subscriptions.
+
 # v1.23.0 (2022-12-07)
 
 * **Feature**: This release adds the LinkedAccountName field to the GetAnomalies API response under RootCause

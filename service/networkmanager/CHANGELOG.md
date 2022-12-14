@@ -1,3 +1,7 @@
+# v1.16.0 (2022-12-14)
+
+* **Feature**: Appliance Mode support for AWS Cloud WAN.
+
 # v1.15.8 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions
