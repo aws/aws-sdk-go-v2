@@ -6819,6 +6819,11 @@ func awsRestjson1_serializeDocumentVpcOptions(v *types.VpcOptions, value smithyj
 	object := value.Object()
 	defer object.Close()
 
+	if v.ApplianceModeSupport {
+		ok := object.Key("ApplianceModeSupport")
+		ok.Boolean(v.ApplianceModeSupport)
+	}
+
 	if v.Ipv6Support {
 		ok := object.Key("Ipv6Support")
 		ok.Boolean(v.Ipv6Support)

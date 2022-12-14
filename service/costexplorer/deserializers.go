@@ -5207,6 +5207,11 @@ func awsAwsjson11_deserializeDocumentAnomalySubscription(v **types.AnomalySubscr
 				}
 			}
 
+		case "ThresholdExpression":
+			if err := awsAwsjson11_deserializeDocumentExpression(&sv.ThresholdExpression, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -8093,6 +8098,74 @@ func awsAwsjson11_deserializeDocumentImpact(v **types.Impact, value interface{})
 				}
 			}
 
+		case "TotalActualSpend":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.TotalActualSpend = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.TotalActualSpend = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected NullableNonNegativeDouble to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "TotalExpectedSpend":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.TotalExpectedSpend = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.TotalExpectedSpend = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected NullableNonNegativeDouble to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "TotalImpact":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8123,6 +8196,40 @@ func awsAwsjson11_deserializeDocumentImpact(v **types.Impact, value interface{})
 
 				default:
 					return fmt.Errorf("expected GenericDouble to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "TotalImpactPercentage":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.TotalImpactPercentage = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.TotalImpactPercentage = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected NullableNonNegativeDouble to be a JSON Number, got %T instead", value)
 
 				}
 			}

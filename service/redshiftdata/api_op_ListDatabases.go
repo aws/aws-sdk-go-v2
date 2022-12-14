@@ -27,6 +27,12 @@ import (
 // is required. When connecting to a serverless workgroup, specify the workgroup
 // name and database name. Also, permission to call the
 // redshift-serverless:GetCredentials operation is required.
+//
+// For more information
+// about the Amazon Redshift Data API and CLI usage examples, see Using the Amazon
+// Redshift Data API
+// (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the Amazon
+// Redshift Management Guide.
 func (c *Client) ListDatabases(ctx context.Context, params *ListDatabasesInput, optFns ...func(*Options)) (*ListDatabasesOutput, error) {
 	if params == nil {
 		params = &ListDatabasesInput{}

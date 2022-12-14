@@ -4,6 +4,7 @@ package redshiftdata
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
@@ -26,7 +27,13 @@ import (
 // database name, and the database user name. Also, permission to call the
 // redshift:GetClusterCredentials operation is required. When connecting to a
 // serverless workgroup, specify the workgroup name and database name. Also,
-// permission to call the redshift-serverless:GetCredentials operation is required.
+// permission to call the redshift-serverless:GetCredentials operation is
+// required.
+//
+// For more information about the Amazon Redshift Data API and CLI usage
+// examples, see Using the Amazon Redshift Data API
+// (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the Amazon
+// Redshift Management Guide.
 func (c *Client) BatchExecuteStatement(ctx context.Context, params *BatchExecuteStatementInput, optFns ...func(*Options)) (*BatchExecuteStatementOutput, error) {
 	if params == nil {
 		params = &BatchExecuteStatementInput{}
@@ -50,10 +57,18 @@ type BatchExecuteStatementInput struct {
 	// This member is required.
 	Database *string
 
-	// One or more SQL statements to run.
+	// One or more SQL statements to run. The SQL statements are run as a single
+	// transaction. They run serially in the order of the array. Subsequent SQL
+	// statements don't start until the previous statement in the array completes. If
+	// any SQL statement fails, then because they are run as one transaction, all work
+	// is rolled back.
 	//
 	// This member is required.
 	Sqls []string
+
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	ClientToken *string
 
 	// The cluster identifier. This parameter is required when connecting to a cluster
 	// and authenticating using either Secrets Manager or temporary credentials.
@@ -161,6 +176,9 @@ func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opBatchExecuteStatementMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpBatchExecuteStatementValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -177,6 +195,39 @@ func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpBatchExecuteStatement struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpBatchExecuteStatement) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpBatchExecuteStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*BatchExecuteStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *BatchExecuteStatementInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opBatchExecuteStatementMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpBatchExecuteStatement{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opBatchExecuteStatement(region string) *awsmiddleware.RegisterServiceMetadata {

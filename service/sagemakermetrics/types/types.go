@@ -13,16 +13,16 @@ type BatchPutMetricsError struct {
 	// The error code of an error that occured when attempting to put metrics.
 	//
 	// *
-	// METRIC_LIMIT_EXCEEDED - The max amount of metrics per resource has been
+	// METRIC_LIMIT_EXCEEDED: The maximum amount of metrics per resource is
 	// exceeded.
 	//
-	// * INTERNAL_ERROR - An internal error occured.
+	// * INTERNAL_ERROR: An internal error occured.
 	//
-	// * VALIDATION_ERROR -
-	// The metric data failed validation.
+	// * VALIDATION_ERROR: The
+	// metric data failed validation.
 	//
-	// * CONFLICT_ERROR - Multiple requests
-	// attempted to modify the same data simultaneously.
+	// * CONFLICT_ERROR: Multiple requests attempted to
+	// modify the same data simultaneously.
 	Code PutMetricsErrorCode
 
 	// An index that corresponds to the metric in the request.
@@ -39,7 +39,7 @@ type RawMetricData struct {
 	// This member is required.
 	MetricName *string
 
-	// The time when the metric was recorded.
+	// The time that the metric was recorded.
 	//
 	// This member is required.
 	Timestamp *time.Time
@@ -49,7 +49,7 @@ type RawMetricData struct {
 	// This member is required.
 	Value float64
 
-	// Metric step (aka Epoch).
+	// The metric step (epoch).
 	Step *int32
 
 	noSmithyDocumentSerde

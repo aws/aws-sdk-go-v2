@@ -2177,6 +2177,13 @@ func awsAwsjson11_serializeDocumentAnomalySubscription(v *types.AnomalySubscript
 		}
 	}
 
+	if v.ThresholdExpression != nil {
+		ok := object.Key("ThresholdExpression")
+		if err := awsAwsjson11_serializeDocumentExpression(v.ThresholdExpression, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3990,6 +3997,13 @@ func awsAwsjson11_serializeOpDocumentUpdateAnomalySubscriptionInput(v *UpdateAno
 		default:
 			ok.Double(*v.Threshold)
 
+		}
+	}
+
+	if v.ThresholdExpression != nil {
+		ok := object.Key("ThresholdExpression")
+		if err := awsAwsjson11_serializeDocumentExpression(v.ThresholdExpression, ok); err != nil {
+			return err
 		}
 	}
 

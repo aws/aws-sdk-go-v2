@@ -1340,6 +1340,11 @@ type VpcAttachment struct {
 // Describes the VPC options.
 type VpcOptions struct {
 
+	// Indicates whether appliance mode is supported. If enabled, traffic flow between
+	// a source and destination use the same Availability Zone for the VPC attachment
+	// for the lifetime of that flow. The default value is false.
+	ApplianceModeSupport bool
+
 	// Indicates whether IPv6 is supported.
 	Ipv6Support bool
 

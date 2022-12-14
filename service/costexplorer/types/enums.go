@@ -245,38 +245,40 @@ type Dimension string
 
 // Enum values for Dimension
 const (
-	DimensionAz                         Dimension = "AZ"
-	DimensionInstanceType               Dimension = "INSTANCE_TYPE"
-	DimensionLinkedAccount              Dimension = "LINKED_ACCOUNT"
-	DimensionLinkedAccountName          Dimension = "LINKED_ACCOUNT_NAME"
-	DimensionOperation                  Dimension = "OPERATION"
-	DimensionPurchaseType               Dimension = "PURCHASE_TYPE"
-	DimensionRegion                     Dimension = "REGION"
-	DimensionService                    Dimension = "SERVICE"
-	DimensionServiceCode                Dimension = "SERVICE_CODE"
-	DimensionUsageType                  Dimension = "USAGE_TYPE"
-	DimensionUsageTypeGroup             Dimension = "USAGE_TYPE_GROUP"
-	DimensionRecordType                 Dimension = "RECORD_TYPE"
-	DimensionOperatingSystem            Dimension = "OPERATING_SYSTEM"
-	DimensionTenancy                    Dimension = "TENANCY"
-	DimensionScope                      Dimension = "SCOPE"
-	DimensionPlatform                   Dimension = "PLATFORM"
-	DimensionSubscriptionId             Dimension = "SUBSCRIPTION_ID"
-	DimensionLegalEntityName            Dimension = "LEGAL_ENTITY_NAME"
-	DimensionDeploymentOption           Dimension = "DEPLOYMENT_OPTION"
-	DimensionDatabaseEngine             Dimension = "DATABASE_ENGINE"
-	DimensionCacheEngine                Dimension = "CACHE_ENGINE"
-	DimensionInstanceTypeFamily         Dimension = "INSTANCE_TYPE_FAMILY"
-	DimensionBillingEntity              Dimension = "BILLING_ENTITY"
-	DimensionReservationId              Dimension = "RESERVATION_ID"
-	DimensionResourceId                 Dimension = "RESOURCE_ID"
-	DimensionRightsizingType            Dimension = "RIGHTSIZING_TYPE"
-	DimensionSavingsPlansType           Dimension = "SAVINGS_PLANS_TYPE"
-	DimensionSavingsPlanArn             Dimension = "SAVINGS_PLAN_ARN"
-	DimensionPaymentOption              Dimension = "PAYMENT_OPTION"
-	DimensionAgreementEndDateTimeAfter  Dimension = "AGREEMENT_END_DATE_TIME_AFTER"
-	DimensionAgreementEndDateTimeBefore Dimension = "AGREEMENT_END_DATE_TIME_BEFORE"
-	DimensionInvoicingEntity            Dimension = "INVOICING_ENTITY"
+	DimensionAz                           Dimension = "AZ"
+	DimensionInstanceType                 Dimension = "INSTANCE_TYPE"
+	DimensionLinkedAccount                Dimension = "LINKED_ACCOUNT"
+	DimensionLinkedAccountName            Dimension = "LINKED_ACCOUNT_NAME"
+	DimensionOperation                    Dimension = "OPERATION"
+	DimensionPurchaseType                 Dimension = "PURCHASE_TYPE"
+	DimensionRegion                       Dimension = "REGION"
+	DimensionService                      Dimension = "SERVICE"
+	DimensionServiceCode                  Dimension = "SERVICE_CODE"
+	DimensionUsageType                    Dimension = "USAGE_TYPE"
+	DimensionUsageTypeGroup               Dimension = "USAGE_TYPE_GROUP"
+	DimensionRecordType                   Dimension = "RECORD_TYPE"
+	DimensionOperatingSystem              Dimension = "OPERATING_SYSTEM"
+	DimensionTenancy                      Dimension = "TENANCY"
+	DimensionScope                        Dimension = "SCOPE"
+	DimensionPlatform                     Dimension = "PLATFORM"
+	DimensionSubscriptionId               Dimension = "SUBSCRIPTION_ID"
+	DimensionLegalEntityName              Dimension = "LEGAL_ENTITY_NAME"
+	DimensionDeploymentOption             Dimension = "DEPLOYMENT_OPTION"
+	DimensionDatabaseEngine               Dimension = "DATABASE_ENGINE"
+	DimensionCacheEngine                  Dimension = "CACHE_ENGINE"
+	DimensionInstanceTypeFamily           Dimension = "INSTANCE_TYPE_FAMILY"
+	DimensionBillingEntity                Dimension = "BILLING_ENTITY"
+	DimensionReservationId                Dimension = "RESERVATION_ID"
+	DimensionResourceId                   Dimension = "RESOURCE_ID"
+	DimensionRightsizingType              Dimension = "RIGHTSIZING_TYPE"
+	DimensionSavingsPlansType             Dimension = "SAVINGS_PLANS_TYPE"
+	DimensionSavingsPlanArn               Dimension = "SAVINGS_PLAN_ARN"
+	DimensionPaymentOption                Dimension = "PAYMENT_OPTION"
+	DimensionAgreementEndDateTimeAfter    Dimension = "AGREEMENT_END_DATE_TIME_AFTER"
+	DimensionAgreementEndDateTimeBefore   Dimension = "AGREEMENT_END_DATE_TIME_BEFORE"
+	DimensionInvoicingEntity              Dimension = "INVOICING_ENTITY"
+	DimensionAnomalyTotalImpactAbsolute   Dimension = "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
+	DimensionAnomalyTotalImpactPercentage Dimension = "ANOMALY_TOTAL_IMPACT_PERCENTAGE"
 )
 
 // Values returns all known values for Dimension. Note that this can be expanded in
@@ -316,6 +318,8 @@ func (Dimension) Values() []Dimension {
 		"AGREEMENT_END_DATE_TIME_AFTER",
 		"AGREEMENT_END_DATE_TIME_BEFORE",
 		"INVOICING_ENTITY",
+		"ANOMALY_TOTAL_IMPACT_ABSOLUTE",
+		"ANOMALY_TOTAL_IMPACT_PERCENTAGE",
 	}
 }
 
@@ -449,13 +453,14 @@ type MatchOption string
 
 // Enum values for MatchOption
 const (
-	MatchOptionEquals          MatchOption = "EQUALS"
-	MatchOptionAbsent          MatchOption = "ABSENT"
-	MatchOptionStartsWith      MatchOption = "STARTS_WITH"
-	MatchOptionEndsWith        MatchOption = "ENDS_WITH"
-	MatchOptionContains        MatchOption = "CONTAINS"
-	MatchOptionCaseSensitive   MatchOption = "CASE_SENSITIVE"
-	MatchOptionCaseInsensitive MatchOption = "CASE_INSENSITIVE"
+	MatchOptionEquals             MatchOption = "EQUALS"
+	MatchOptionAbsent             MatchOption = "ABSENT"
+	MatchOptionStartsWith         MatchOption = "STARTS_WITH"
+	MatchOptionEndsWith           MatchOption = "ENDS_WITH"
+	MatchOptionContains           MatchOption = "CONTAINS"
+	MatchOptionCaseSensitive      MatchOption = "CASE_SENSITIVE"
+	MatchOptionCaseInsensitive    MatchOption = "CASE_INSENSITIVE"
+	MatchOptionGreaterThanOrEqual MatchOption = "GREATER_THAN_OR_EQUAL"
 )
 
 // Values returns all known values for MatchOption. Note that this can be expanded
@@ -470,6 +475,7 @@ func (MatchOption) Values() []MatchOption {
 		"CONTAINS",
 		"CASE_SENSITIVE",
 		"CASE_INSENSITIVE",
+		"GREATER_THAN_OR_EQUAL",
 	}
 }
 

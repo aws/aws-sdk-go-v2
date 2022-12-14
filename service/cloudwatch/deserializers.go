@@ -8209,6 +8209,19 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 				sv.EvaluationPeriods = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("EvaluationState", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EvaluationState = types.EvaluationState(xtv)
+			}
+
 		case strings.EqualFold("ExtendedStatistic", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -8307,6 +8320,23 @@ func awsAwsquery_deserializeDocumentMetricAlarm(v **types.MetricAlarm, decoder s
 			{
 				xtv := string(val)
 				sv.StateReasonData = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("StateTransitionedTimestamp", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.StateTransitionedTimestamp = ptr.Time(t)
 			}
 
 		case strings.EqualFold("StateUpdatedTimestamp", t.Name.Local):

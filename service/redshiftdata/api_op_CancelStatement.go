@@ -10,7 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a running query. To be canceled, a query must be running.
+// Cancels a running query. To be canceled, a query must be running. For more
+// information about the Amazon Redshift Data API and CLI usage examples, see Using
+// the Amazon Redshift Data API
+// (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the Amazon
+// Redshift Management Guide.
 func (c *Client) CancelStatement(ctx context.Context, params *CancelStatementInput, optFns ...func(*Options)) (*CancelStatementOutput, error) {
 	if params == nil {
 		params = &CancelStatementInput{}

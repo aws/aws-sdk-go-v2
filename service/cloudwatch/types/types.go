@@ -573,6 +573,13 @@ type MetricAlarm struct {
 	// The number of periods over which data is compared to the specified threshold.
 	EvaluationPeriods *int32
 
+	// If the value of this field is PARTIAL_DATA, the alarm is being evaluated based
+	// on only partial data. This happens if the query used for the alarm returns more
+	// than 10,000 metrics. For more information, see Create alarms on Metrics Insights
+	// queries
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html).
+	EvaluationState EvaluationState
+
 	// The percentile statistic for the metric associated with the alarm. Specify a
 	// value between p0.0 and p100.
 	ExtendedStatistic *string
@@ -608,7 +615,11 @@ type MetricAlarm struct {
 	// An explanation for the alarm state, in JSON format.
 	StateReasonData *string
 
-	// The time stamp of the last update to the alarm state.
+	// The date and time that the alarm's StateValue most recently changed.
+	StateTransitionedTimestamp *time.Time
+
+	// The time stamp of the last update to the value of either the StateValue or
+	// EvaluationState parameters.
 	StateUpdatedTimestamp *time.Time
 
 	// The state value for the alarm.

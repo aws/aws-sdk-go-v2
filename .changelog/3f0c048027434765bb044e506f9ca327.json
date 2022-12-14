@@ -1,0 +1,8 @@
+{
+    "id": "3f0c0480-2743-4765-bb04-4e506f9ca327",
+    "type": "documentation",
+    "description": "Update SageMaker Metrics documentation.",
+    "modules": [
+        "service/sagemakermetrics"
+    ]
+}

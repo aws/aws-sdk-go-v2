@@ -19965,6 +19965,15 @@ func awsRestjson1_deserializeDocumentVpcOptions(v **types.VpcOptions, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "ApplianceModeSupport":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ApplianceModeSupport = jtv
+			}
+
 		case "Ipv6Support":
 			if value != nil {
 				jtv, ok := value.(bool)

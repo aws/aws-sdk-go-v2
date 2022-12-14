@@ -55,10 +55,9 @@ type GetMetricWidgetImageInput struct {
 	// The format of the resulting image. Only PNG images are supported. The default is
 	// png. If you specify png, the API returns an HTTP response with the content-type
 	// set to text/xml. The image data is in a MetricWidgetImage field. For example:
-	// <GetMetricWidgetImageResponse xmlns=>
+	// >
 	//
-	//
-	// iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...
+	//     iVBORw0KGgoAAAANSUhEUgAAAlgAAAGQEAYAAAAip...
 	//
 	//
 	// 6f0d4192-4d42-11e8-82c1-f539a07e0e3b
