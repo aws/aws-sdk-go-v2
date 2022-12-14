@@ -1363,8 +1363,10 @@
                 "Threshold": {
                     "target": "com.amazonaws.costexplorer#NullableNonNegativeDouble",
                     "traits": {
-                        "smithy.api#documentation": "<p>The dollar value that triggers a notification if the threshold is exceeded. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#deprecated": {
+                            "message": "Threshold has been deprecated in favor of ThresholdExpression"
+                        },
+                        "smithy.api#documentation": "<p>(deprecated)</p>\n         <p>The dollar value that triggers a notification if the threshold is exceeded. </p>\n         <p>This field has been deprecated. To specify a threshold, use ThresholdExpression.\n            Continued use of Threshold will be treated as shorthand syntax for a\n            ThresholdExpression.</p>\n         <p>One of Threshold or ThresholdExpression is required for this resource.</p>"
                     }
                 },
                 "Frequency": {
@@ -1379,6 +1381,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name for the subscription. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ThresholdExpression": {
+                    "target": "com.amazonaws.costexplorer#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to specify the anomalies that you want to generate alerts for. This supports\n            dimensions and nested expressions. The supported dimensions are\n                <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and\n                <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>. The supported nested expression types\n            are <code>AND</code> and <code>OR</code>. The match option\n                <code>GREATER_THAN_OR_EQUAL</code> is required. Values must be numbers between 0 and\n            10,000,000,000.</p>\n         <p>One of Threshold or ThresholdExpression is required for this resource.</p>\n         <p>The following are examples of valid ThresholdExpressions:</p>\n         <ul>\n            <li>\n               <p>Absolute threshold: <code>{ \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>Percentage threshold: <code>{ \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AND</code> two thresholds together: <code>{ \"And\": [ { \"Dimensions\": {\n                        \"Key\": \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [\n                        \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } }, { \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> two thresholds together: <code>{ \"Or\": [ { \"Dimensions\": {\n                        \"Key\": \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [\n                        \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } }, { \"Dimensions\": { \"Key\":\n                        \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\"\n                        ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2300,7 +2308,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a subscription to a cost anomaly detection monitor. You can use each subscription to\n      define subscribers with email or SNS notifications. Email subscribers can set a dollar\n      threshold and a time frequency for receiving notifications. </p>"
+                "smithy.api#documentation": "<p>Adds an alert subscription to a cost anomaly detection monitor. You can use each\n      subscription to define subscribers with email or SNS notifications. Email subscribers can set\n      an absolute or percentage threshold and a time frequency for receiving notifications. </p>"
             }
         },
         "com.amazonaws.costexplorer#CreateAnomalySubscriptionRequest": {
@@ -2884,6 +2892,18 @@
                     "traits": {
                         "smithy.api#enumValue": "INVOICING_ENTITY"
                     }
+                },
+                "ANOMALY_TOTAL_IMPACT_ABSOLUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANOMALY_TOTAL_IMPACT_ABSOLUTE"
+                    }
+                },
+                "ANOMALY_TOTAL_IMPACT_PERCENTAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANOMALY_TOTAL_IMPACT_PERCENTAGE"
+                    }
                 }
             }
         },
@@ -2893,7 +2913,7 @@
                 "Key": {
                     "target": "com.amazonaws.costexplorer#Dimension",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the metadata types that you can use to filter and group your results. For\n            example, <code>AZ</code> returns a list of Availability Zones.\n                <code>LINK_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in\n                <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/AAPI_CostCategoryRule.html\">CostCategoryRule</a>.</p>"
+                        "smithy.api#documentation": "<p>The names of the metadata types that you can use to filter and group your results. For\n            example, <code>AZ</code> returns a list of Availability Zones.</p>\n         <p>Not all dimensions are supported in each API. Refer to the documentation for each\n            specific API to see what is supported.</p>\n         <p>\n            <code>LINK_ACCOUNT_NAME</code> and <code>SERVICE_CODE</code> can only be used in\n                <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule</a>.</p>\n         <p>\n            <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and\n                <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code> can only be used in <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_AnomalySubscription.html\">AnomalySubscriptions</a>.</p>"
                     }
                 },
                 "Values": {
@@ -2905,7 +2925,7 @@
                 "MatchOptions": {
                     "target": "com.amazonaws.costexplorer#MatchOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The match options that you can use to filter your results. <code>MatchOptions</code>\n            is only applicable for actions related to Cost Category. The default values for\n                <code>MatchOptions</code> are <code>EQUALS</code> and\n            <code>CASE_SENSITIVE</code>.</p>"
+                        "smithy.api#documentation": "<p>The match options that you can use to filter your results.</p>\n         <p>\n            <code>MatchOptions</code> is only applicable for actions related to Cost Category and\n            Anomaly Subscriptions. Refer to the documentation for each specific API to see what is\n            supported.</p>\n         <p>The default values for <code>MatchOptions</code> are <code>EQUALS</code> and\n                <code>CASE_SENSITIVE</code>.</p>"
                     }
                 }
             },
@@ -3320,7 +3340,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p>\n         <ul>\n            <li>\n               <p>Simple dimension values - You can set the dimension name and values for the\n                    filters that you plan to use. For example, you can filter for\n                        <code>REGION==us-east-1 OR REGION==us-west-1</code>. For\n                        <code>GetRightsizingRecommendation</code>, the Region is a full name (for\n                    example, <code>REGION==US East (N. Virginia)</code>. The <code>Expression</code>\n                    example is as follows:</p>\n               <p>\n                  <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\", “us-west-1” ]\n                        } }</code>\n               </p>\n               <p>The list of dimension values are OR'd together to retrieve cost or usage data.\n                    You can create <code>Expression</code> and <code>DimensionValues</code> objects\n                    using either <code>with*</code> methods or <code>set*</code> methods in multiple\n                    lines. </p>\n            </li>\n            <li>\n               <p>Compound dimension values with logical operations - You can use multiple\n                        <code>Expression</code> types and the logical operators\n                        <code>AND/OR/NOT</code> to create a list of one or more\n                        <code>Expression</code> objects. By doing this, you can filter on more\n                    advanced options. For example, you can filter on <code>((REGION == us-east-1 OR\n                        REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=\n                        DataTransfer)</code>. The <code>Expression</code> for that is as\n                    follows:</p>\n               <p>\n                  <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\", \"Values\": [\n                        \"us-east-1\", \"us-west-1\" ] }}, {\"Tags\": { \"Key\": \"TagName\", \"Values\":\n                        [\"Value1\"] } } ]}, {\"Not\": {\"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\":\n                        [\"DataTransfer\"] }}} ] } </code>\n               </p>\n               <note>\n                  <p>Because each <code>Expression</code> can have only one operator, the\n                        service returns an error if more than one is specified. The following\n                        example shows an <code>Expression</code> object that creates an\n                        error.</p>\n               </note>\n               <p>\n                  <code> { \"And\": [ ... ], \"DimensionValues\": { \"Dimension\": \"USAGE_TYPE\",\n                        \"Values\": [ \"DataTransfer\" ] } } </code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and\n                NOT isn't supported. OR isn't supported between different dimensions, or dimensions\n                and tags. NOT operators aren't supported. Dimensions are also limited to\n                    <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or\n                    <code>RIGHTSIZING_TYPE</code>.</p>\n            <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is\n                supported. AND and OR aren't supported. Dimensions are limited to\n                    <code>LINKED_ACCOUNT</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter in various Cost Explorer APIs.</p>\n         <p>Not all <code>Expression</code> types are supported in each API. Refer to the\n            documentation for each specific API to see what is supported.</p>\n         <p>There are two patterns:</p>\n         <ul>\n            <li>\n               <p>Simple dimension values.</p>\n               <ul>\n                  <li>\n                     <p>There are three types of simple dimension values:\n                                <code>CostCategories</code>, <code>Tags</code>, and\n                                <code>Dimensions</code>.</p>\n                     <ul>\n                        <li>\n                           <p>Specify the <code>CostCategories</code> field to define a\n                                    filter that acts on Cost Categories.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>Tags</code> field to define a filter that\n                                    acts on Cost Allocation Tags.</p>\n                        </li>\n                        <li>\n                           <p>Specify the <code>Dimensions</code> field to define a filter\n                                    that acts on the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_DimensionValues.html\">\n                                 <code>DimensionValues</code>\n                              </a>.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>For each filter type, you can set the dimension name and values for\n                            the filters that you plan to use.</p>\n                     <ul>\n                        <li>\n                           <p>For example, you can filter for <code>REGION==us-east-1 OR\n                                        REGION==us-west-1</code>. For\n                                        <code>GetRightsizingRecommendation</code>, the Region is a\n                                    full name (for example, <code>REGION==US East (N.\n                                        Virginia)</code>.</p>\n                        </li>\n                        <li>\n                           <p>The corresponding <code>Expression</code> for this example is\n                                    as follows: <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [\n                                        \"us-east-1\", “us-west-1” ] } }</code>\n                           </p>\n                        </li>\n                        <li>\n                           <p>As shown in the previous example, lists of dimension values\n                                    are combined with <code>OR</code> when applying the\n                                    filter.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>You can also set different match options to further control how the\n                            filter behaves. Not all APIs support match options. Refer to the\n                            documentation for each specific API to see what is supported.</p>\n                     <ul>\n                        <li>\n                           <p>For example, you can filter for linked account names that\n                                    start with “a”.</p>\n                        </li>\n                        <li>\n                           <p>The corresponding <code>Expression</code> for this example is\n                                    as follows: <code>{ \"Dimensions\": { \"Key\":\n                                        \"LINKED_ACCOUNT_NAME\", \"MatchOptions\": [ \"STARTS_WITH\" ],\n                                        \"Values\": [ \"a\" ] } }</code>\n                           </p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Compound <code>Expression</code> types with logical operations.</p>\n               <ul>\n                  <li>\n                     <p>You can use multiple <code>Expression</code> types and the logical\n                            operators <code>AND/OR/NOT</code> to create a list of one or more\n                                <code>Expression</code> objects. By doing this, you can filter by\n                            more advanced options.</p>\n                  </li>\n                  <li>\n                     <p>For example, you can filter by <code>((REGION == us-east-1 OR REGION\n                                == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=\n                                DataTransfer)</code>.</p>\n                  </li>\n                  <li>\n                     <p>The corresponding <code>Expression</code> for this example is as\n                            follows: <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\",\n                                \"Values\": [ \"us-east-1\", \"us-west-1\" ] }}, {\"Tags\": { \"Key\":\n                                \"TagName\", \"Values\": [\"Value1\"] } } ]}, {\"Not\": {\"Dimensions\": {\n                                \"Key\": \"USAGE_TYPE\", \"Values\": [\"DataTransfer\"] }}} ] }\n                            </code>\n                     </p>\n                  </li>\n               </ul>\n               <note>\n                  <p>Because each <code>Expression</code> can have only one operator, the\n                        service returns an error if more than one is specified. The following\n                        example shows an <code>Expression</code> object that creates an error:\n                            <code> { \"And\": [ ... ], \"Dimensions\": { \"Key\": \"USAGE_TYPE\", \"Values\":\n                            [ \"DataTransfer\" ] } } </code>\n                  </p>\n                  <p>The following is an example of the corresponding error message:\n                            <code>\"Expression has more than one roots. Only one root operator is\n                            allowed for each expression: And, Or, Not, Dimensions, Tags,\n                            CostCategories\"</code>\n                  </p>\n               </note>\n            </li>\n         </ul>\n         <note>\n            <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and\n                NOT isn't supported. OR isn't supported between different dimensions, or dimensions\n                and tags. NOT operators aren't supported. Dimensions are also limited to\n                    <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or\n                    <code>RIGHTSIZING_TYPE</code>.</p>\n            <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is\n                supported. AND and OR aren't supported. Dimensions are limited to\n                    <code>LINKED_ACCOUNT</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.costexplorer#Expressions": {
@@ -3593,7 +3613,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves all of the cost anomalies detected on your account during the time period that's\n      specified by the <code>DateInterval</code> object. </p>"
+                "smithy.api#documentation": "<p>Retrieves all of the cost anomalies detected on your account during the time period that's\n      specified by the <code>DateInterval</code> object. Anomalies are available for up to 90\n      days.</p>"
             }
         },
         "com.amazonaws.costexplorer#GetAnomaliesRequest": {
@@ -5362,7 +5382,7 @@
                     "target": "com.amazonaws.costexplorer#GenericDouble",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The maximum dollar value that's observed for an anomaly. </p>",
+                        "smithy.api#documentation": "<p>The maximum dollar value that's observed for an anomaly.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5370,7 +5390,25 @@
                     "target": "com.amazonaws.costexplorer#GenericDouble",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The cumulative dollar value that's observed for an anomaly. </p>"
+                        "smithy.api#documentation": "<p>The cumulative dollar difference between the total actual spend and total expected\n            spend. It is calculated as <code>TotalActualSpend - TotalExpectedSpend</code>.</p>"
+                    }
+                },
+                "TotalActualSpend": {
+                    "target": "com.amazonaws.costexplorer#NullableNonNegativeDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cumulative dollar amount that was actually spent during the anomaly.</p>"
+                    }
+                },
+                "TotalExpectedSpend": {
+                    "target": "com.amazonaws.costexplorer#NullableNonNegativeDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cumulative dollar amount that was expected to be spent during the anomaly. It is\n            calculated using advanced machine learning models to determine the typical spending\n            pattern based on historical data for a customer.</p>"
+                    }
+                },
+                "TotalImpactPercentage": {
+                    "target": "com.amazonaws.costexplorer#NullableNonNegativeDouble",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cumulative percentage difference between the total actual spend and total expected\n            spend. It is calculated as <code>(TotalImpact / TotalExpectedSpend) * 100</code>. When\n                <code>TotalExpectedSpend</code> is zero, this field is omitted. Expected spend can\n            be zero in situations such as when you start to use a service for the first time.</p>"
                     }
                 }
             },
@@ -5766,6 +5804,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CASE_INSENSITIVE"
+                    }
+                },
+                "GREATER_THAN_OR_EQUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GREATER_THAN_OR_EQUAL"
                     }
                 }
             }
@@ -8370,7 +8414,10 @@
                 "Threshold": {
                     "target": "com.amazonaws.costexplorer#NullableNonNegativeDouble",
                     "traits": {
-                        "smithy.api#documentation": "<p>The update to the threshold value for receiving notifications. </p>"
+                        "smithy.api#deprecated": {
+                            "message": "Threshold has been deprecated in favor of ThresholdExpression"
+                        },
+                        "smithy.api#documentation": "<p>(deprecated)</p>\n         <p>The update to the threshold value for receiving notifications. </p>\n         <p>This field has been deprecated. To update a threshold, use ThresholdExpression. Continued\n      use of Threshold will be treated as shorthand syntax for a ThresholdExpression.</p>"
                     }
                 },
                 "Frequency": {
@@ -8395,6 +8442,12 @@
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
                         "smithy.api#documentation": "<p>The new name of the subscription. </p>"
+                    }
+                },
+                "ThresholdExpression": {
+                    "target": "com.amazonaws.costexplorer#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The update to the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object\n      used to specify the anomalies that you want to generate alerts for. This supports dimensions\n      and nested expressions. The supported dimensions are\n        <code>ANOMALY_TOTAL_IMPACT_ABSOLUTE</code> and <code>ANOMALY_TOTAL_IMPACT_PERCENTAGE</code>.\n      The supported nested expression types are <code>AND</code> and <code>OR</code>. The match\n      option <code>GREATER_THAN_OR_EQUAL</code> is required. Values must be numbers between 0 and\n      10,000,000,000.</p>\n         <p>The following are examples of valid ThresholdExpressions:</p>\n         <ul>\n            <li>\n               <p>Absolute threshold: <code>{ \"Dimensions\": { \"Key\": \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\",\n            \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>Percentage threshold: <code>{ \"Dimensions\": { \"Key\":\n            \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ],\n            \"Values\": [ \"100\" ] } }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AND</code> two thresholds together: <code>{ \"And\": [ { \"Dimensions\": { \"Key\":\n            \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\":\n            [ \"100\" ] } }, { \"Dimensions\": { \"Key\": \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\",\n            \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OR</code> two thresholds together: <code>{ \"Or\": [ { \"Dimensions\": { \"Key\":\n            \"ANOMALY_TOTAL_IMPACT_ABSOLUTE\", \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\":\n            [ \"100\" ] } }, { \"Dimensions\": { \"Key\": \"ANOMALY_TOTAL_IMPACT_PERCENTAGE\",\n            \"MatchOptions\": [ \"GREATER_THAN_OR_EQUAL\" ], \"Values\": [ \"100\" ] } } ] }</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             }

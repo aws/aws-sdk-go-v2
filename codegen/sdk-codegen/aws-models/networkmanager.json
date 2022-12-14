@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -619,69 +619,91 @@
             }
         },
         "com.amazonaws.networkmanager#AttachmentState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "REJECTED",
-                        "name": "REJECTED"
-                    },
-                    {
-                        "value": "PENDING_ATTACHMENT_ACCEPTANCE",
-                        "name": "PENDING_ATTACHMENT_ACCEPTANCE"
-                    },
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "PENDING_NETWORK_UPDATE",
-                        "name": "PENDING_NETWORK_UPDATE"
-                    },
-                    {
-                        "value": "PENDING_TAG_ACCEPTANCE",
-                        "name": "PENDING_TAG_ACCEPTANCE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "REJECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REJECTED"
                     }
-                ]
+                },
+                "PENDING_ATTACHMENT_ACCEPTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_ATTACHMENT_ACCEPTANCE"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "PENDING_NETWORK_UPDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_NETWORK_UPDATE"
+                    }
+                },
+                "PENDING_TAG_ACCEPTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_TAG_ACCEPTANCE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#AttachmentType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONNECT",
-                        "name": "CONNECT"
-                    },
-                    {
-                        "value": "SITE_TO_SITE_VPN",
-                        "name": "SITE_TO_SITE_VPN"
-                    },
-                    {
-                        "value": "VPC",
-                        "name": "VPC"
-                    },
-                    {
-                        "value": "TRANSIT_GATEWAY_ROUTE_TABLE",
-                        "name": "TRANSIT_GATEWAY_ROUTE_TABLE"
+            "type": "enum",
+            "members": {
+                "CONNECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECT"
                     }
-                ]
+                },
+                "SITE_TO_SITE_VPN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SITE_TO_SITE_VPN"
+                    }
+                },
+                "VPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC"
+                    }
+                },
+                "TRANSIT_GATEWAY_ROUTE_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIT_GATEWAY_ROUTE_TABLE"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#Bandwidth": {
@@ -719,122 +741,161 @@
             }
         },
         "com.amazonaws.networkmanager#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.networkmanager#ChangeAction": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ADD",
-                        "name": "ADD"
-                    },
-                    {
-                        "value": "MODIFY",
-                        "name": "MODIFY"
-                    },
-                    {
-                        "value": "REMOVE",
-                        "name": "REMOVE"
+            "type": "enum",
+            "members": {
+                "ADD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADD"
                     }
-                ]
+                },
+                "MODIFY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODIFY"
+                    }
+                },
+                "REMOVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVE"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#ChangeSetState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING_GENERATION",
-                        "name": "PENDING_GENERATION"
-                    },
-                    {
-                        "value": "FAILED_GENERATION",
-                        "name": "FAILED_GENERATION"
-                    },
-                    {
-                        "value": "READY_TO_EXECUTE",
-                        "name": "READY_TO_EXECUTE"
-                    },
-                    {
-                        "value": "EXECUTING",
-                        "name": "EXECUTING"
-                    },
-                    {
-                        "value": "EXECUTION_SUCCEEDED",
-                        "name": "EXECUTION_SUCCEEDED"
-                    },
-                    {
-                        "value": "OUT_OF_DATE",
-                        "name": "OUT_OF_DATE"
+            "type": "enum",
+            "members": {
+                "PENDING_GENERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_GENERATION"
                     }
-                ]
+                },
+                "FAILED_GENERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_GENERATION"
+                    }
+                },
+                "READY_TO_EXECUTE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY_TO_EXECUTE"
+                    }
+                },
+                "EXECUTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXECUTING"
+                    }
+                },
+                "EXECUTION_SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXECUTION_SUCCEEDED"
+                    }
+                },
+                "OUT_OF_DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OUT_OF_DATE"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#ChangeStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "NOT_STARTED",
-                        "name": "NOT_STARTED"
-                    },
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "COMPLETE",
-                        "name": "COMPLETE"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "NOT_STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_STARTED"
                     }
-                ]
+                },
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETE"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#ChangeType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CORE_NETWORK_SEGMENT",
-                        "name": "CORE_NETWORK_SEGMENT"
-                    },
-                    {
-                        "value": "CORE_NETWORK_EDGE",
-                        "name": "CORE_NETWORK_EDGE"
-                    },
-                    {
-                        "value": "ATTACHMENT_MAPPING",
-                        "name": "ATTACHMENT_MAPPING"
-                    },
-                    {
-                        "value": "ATTACHMENT_ROUTE_PROPAGATION",
-                        "name": "ATTACHMENT_ROUTE_PROPAGATION"
-                    },
-                    {
-                        "value": "ATTACHMENT_ROUTE_STATIC",
-                        "name": "ATTACHMENT_ROUTE_STATIC"
-                    },
-                    {
-                        "value": "CORE_NETWORK_CONFIGURATION",
-                        "name": "CORE_NETWORK_CONFIGURATION"
-                    },
-                    {
-                        "value": "SEGMENTS_CONFIGURATION",
-                        "name": "SEGMENTS_CONFIGURATION"
-                    },
-                    {
-                        "value": "SEGMENT_ACTIONS_CONFIGURATION",
-                        "name": "SEGMENT_ACTIONS_CONFIGURATION"
-                    },
-                    {
-                        "value": "ATTACHMENT_POLICIES_CONFIGURATION",
-                        "name": "ATTACHMENT_POLICIES_CONFIGURATION"
+            "type": "enum",
+            "members": {
+                "CORE_NETWORK_SEGMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CORE_NETWORK_SEGMENT"
                     }
-                ]
+                },
+                "CORE_NETWORK_EDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CORE_NETWORK_EDGE"
+                    }
+                },
+                "ATTACHMENT_MAPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHMENT_MAPPING"
+                    }
+                },
+                "ATTACHMENT_ROUTE_PROPAGATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHMENT_ROUTE_PROPAGATION"
+                    }
+                },
+                "ATTACHMENT_ROUTE_STATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHMENT_ROUTE_STATIC"
+                    }
+                },
+                "CORE_NETWORK_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CORE_NETWORK_CONFIGURATION"
+                    }
+                },
+                "SEGMENTS_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEGMENTS_CONFIGURATION"
+                    }
+                },
+                "SEGMENT_ACTIONS_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEGMENT_ACTIONS_CONFIGURATION"
+                    }
+                },
+                "ATTACHMENT_POLICIES_CONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ATTACHMENT_POLICIES_CONFIGURATION"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#ClientToken": {
@@ -1018,26 +1079,32 @@
             }
         },
         "com.amazonaws.networkmanager#ConnectPeerAssociationState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "deleted"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#ConnectPeerBgpConfiguration": {
@@ -1133,26 +1200,32 @@
             }
         },
         "com.amazonaws.networkmanager#ConnectPeerState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#ConnectPeerSummary": {
@@ -1344,56 +1417,66 @@
             }
         },
         "com.amazonaws.networkmanager#ConnectionState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "updating"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#ConnectionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UP",
-                        "name": "UP"
-                    },
-                    {
-                        "value": "DOWN",
-                        "name": "DOWN"
+            "type": "enum",
+            "members": {
+                "UP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UP"
                     }
-                ]
+                },
+                "DOWN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOWN"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#ConnectionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "BGP",
-                        "name": "BGP"
-                    },
-                    {
-                        "value": "IPSEC",
-                        "name": "IPSEC"
+            "type": "enum",
+            "members": {
+                "BGP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BGP"
                     }
-                ]
+                },
+                "IPSEC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IPSEC"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#ConstrainedString": {
@@ -1765,18 +1848,20 @@
             }
         },
         "com.amazonaws.networkmanager#CoreNetworkPolicyAlias": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "LIVE",
-                        "name": "LIVE"
-                    },
-                    {
-                        "value": "LATEST",
-                        "name": "LATEST"
+            "type": "enum",
+            "members": {
+                "LIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LIVE"
                     }
-                ]
+                },
+                "LATEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATEST"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#CoreNetworkPolicyDocument": {
@@ -1954,26 +2039,32 @@
             }
         },
         "com.amazonaws.networkmanager#CoreNetworkState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#CoreNetworkSummary": {
@@ -3173,26 +3264,32 @@
             }
         },
         "com.amazonaws.networkmanager#CustomerGatewayAssociationState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "deleted"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#DateTime": {
@@ -4176,26 +4273,32 @@
             }
         },
         "com.amazonaws.networkmanager#DeviceState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "updating"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#DisassociateConnectPeer": {
@@ -6943,26 +7046,32 @@
             }
         },
         "com.amazonaws.networkmanager#GlobalNetworkState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "updating"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#IPAddress": {
@@ -6976,10 +7085,7 @@
             }
         },
         "com.amazonaws.networkmanager#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.networkmanager#InternalServerException": {
             "type": "structure",
@@ -7127,26 +7233,32 @@
             }
         },
         "com.amazonaws.networkmanager#LinkAssociationState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "deleted"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#LinkId": {
@@ -7172,26 +7284,32 @@
             }
         },
         "com.amazonaws.networkmanager#LinkState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "updating"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#ListAttachments": {
@@ -7779,15 +7897,11 @@
             }
         },
         "com.amazonaws.networkmanager#Long": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.networkmanager#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -7796,21 +7910,6 @@
         },
         "com.amazonaws.networkmanager#NetworkManager": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "NetworkManager",
-                    "arnNamespace": "networkmanager",
-                    "cloudFormationName": "NetworkManager",
-                    "cloudTrailEventSource": "networkmanager.amazonaws.com",
-                    "endpointPrefix": "networkmanager"
-                },
-                "aws.auth#sigv4": {
-                    "name": "networkmanager"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services enables you to centrally manage your Amazon Web Services Cloud WAN core network and your Transit Gateway network across Amazon Web Services accounts, Regions, and on-premises locations.</p>",
-                "smithy.api#title": "AWS Network Manager"
-            },
             "version": "2019-07-05",
             "operations": [
                 {
@@ -8068,7 +8167,970 @@
                 {
                     "target": "com.amazonaws.networkmanager#UpdateVpcAttachment"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "NetworkManager",
+                    "arnNamespace": "networkmanager",
+                    "cloudFormationName": "NetworkManager",
+                    "cloudTrailEventSource": "networkmanager.amazonaws.com",
+                    "endpointPrefix": "networkmanager"
+                },
+                "aws.auth#sigv4": {
+                    "name": "networkmanager"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Amazon Web Services enables you to centrally manage your Amazon Web Services Cloud WAN core network and your Transit Gateway network across Amazon Web Services accounts, Regions, and on-premises locations.</p>",
+                "smithy.api#title": "AWS Network Manager",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "stringEquals",
+                                            "argv": [
+                                                {
+                                                    "fn": "getAttr",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "PartitionResult"
+                                                        },
+                                                        "name"
+                                                    ]
+                                                },
+                                                "aws"
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://networkmanager-fips.{Region}.api.aws",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "name": "sigv4",
+                                                                            "signingRegion": "us-west-2",
+                                                                            "signingName": "networkmanager"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://networkmanager-fips.{Region}.amazonaws.com",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "name": "sigv4",
+                                                                            "signingRegion": "us-west-2",
+                                                                            "signingName": "networkmanager"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://networkmanager.{Region}.api.aws",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "name": "sigv4",
+                                                                            "signingRegion": "us-west-2",
+                                                                            "signingName": "networkmanager"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://networkmanager.us-west-2.amazonaws.com",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingRegion": "us-west-2",
+                                                            "signingName": "networkmanager"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "stringEquals",
+                                            "argv": [
+                                                {
+                                                    "fn": "getAttr",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "PartitionResult"
+                                                        },
+                                                        "name"
+                                                    ]
+                                                },
+                                                "aws-us-gov"
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://networkmanager-fips.{Region}.api.aws",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "name": "sigv4",
+                                                                            "signingRegion": "us-gov-west-1",
+                                                                            "signingName": "networkmanager"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsFIPS"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://networkmanager-fips.{Region}.amazonaws.com",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "name": "sigv4",
+                                                                            "signingRegion": "us-gov-west-1",
+                                                                            "signingName": "networkmanager"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "FIPS is enabled but this partition does not support FIPS",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                true,
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "supportsDualStack"
+                                                                    ]
+                                                                }
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://networkmanager.{Region}.api.aws",
+                                                                "properties": {
+                                                                    "authSchemes": [
+                                                                        {
+                                                                            "name": "sigv4",
+                                                                            "signingRegion": "us-gov-west-1",
+                                                                            "signingName": "networkmanager"
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "error": "DualStack is enabled but this partition does not support DualStack",
+                                                    "type": "error"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://networkmanager.us-gov-west-1.amazonaws.com",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingRegion": "us-gov-west-1",
+                                                            "signingName": "networkmanager"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://networkmanager-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://networkmanager-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://networkmanager.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "aws-global"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://networkmanager.us-west-2.amazonaws.com",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingRegion": "us-west-2",
+                                                            "signingName": "networkmanager"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "aws-us-gov-global"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://networkmanager.us-gov-west-1.amazonaws.com",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingRegion": "us-gov-west-1",
+                                                            "signingName": "networkmanager"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": "https://networkmanager.{Region}.{PartitionResult#dnsSuffix}",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region aws-global with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingRegion": "us-west-2",
+                                                "signingName": "networkmanager",
+                                                "name": "sigv4"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://networkmanager.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "aws-global",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region aws-us-gov-global with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "signingRegion": "us-gov-west-1",
+                                                "signingName": "networkmanager",
+                                                "name": "sigv4"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://networkmanager.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "aws-us-gov-global",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.networkmanager#NetworkResource": {
             "type": "structure",
@@ -8221,6 +9283,7 @@
                 "IsMiddlebox": {
                     "target": "com.amazonaws.networkmanager#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether this is a middlebox appliance.</p>"
                     }
                 }
@@ -8570,37 +9633,43 @@
             }
         },
         "com.amazonaws.networkmanager#PeeringState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATING",
-                        "name": "CREATING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
                     }
-                ]
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#PeeringType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TRANSIT_GATEWAY",
-                        "name": "TRANSIT_GATEWAY"
+            "type": "enum",
+            "members": {
+                "TRANSIT_GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIT_GATEWAY"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.networkmanager#ProposedSegmentChange": {
@@ -9080,10 +10149,7 @@
             }
         },
         "com.amazonaws.networkmanager#RetryAfterSeconds": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.networkmanager#RouteAnalysis": {
             "type": "structure",
@@ -9133,12 +10199,14 @@
                 "IncludeReturnPath": {
                     "target": "com.amazonaws.networkmanager#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether to analyze the return path. The return path is not analyzed if the forward path\n            analysis does not succeed.</p>"
                     }
                 },
                 "UseMiddleboxes": {
                     "target": "com.amazonaws.networkmanager#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether to include the location of middlebox appliances in the route analysis.</p>"
                     }
                 },
@@ -9186,69 +10254,91 @@
             }
         },
         "com.amazonaws.networkmanager#RouteAnalysisCompletionReasonCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND",
-                        "name": "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND"
-                    },
-                    {
-                        "value": "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY",
-                        "name": "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY"
-                    },
-                    {
-                        "value": "CYCLIC_PATH_DETECTED",
-                        "name": "CYCLIC_PATH_DETECTED"
-                    },
-                    {
-                        "value": "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND",
-                        "name": "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND"
-                    },
-                    {
-                        "value": "ROUTE_NOT_FOUND",
-                        "name": "ROUTE_NOT_FOUND"
-                    },
-                    {
-                        "value": "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND",
-                        "name": "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND"
-                    },
-                    {
-                        "value": "INACTIVE_ROUTE_FOR_DESTINATION_FOUND",
-                        "name": "INACTIVE_ROUTE_FOR_DESTINATION_FOUND"
-                    },
-                    {
-                        "value": "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH",
-                        "name": "TRANSIT_GATEWAY_ATTACHMENT"
-                    },
-                    {
-                        "value": "MAX_HOPS_EXCEEDED",
-                        "name": "MAX_HOPS_EXCEEDED"
-                    },
-                    {
-                        "value": "POSSIBLE_MIDDLEBOX",
-                        "name": "POSSIBLE_MIDDLEBOX"
-                    },
-                    {
-                        "value": "NO_DESTINATION_ARN_PROVIDED",
-                        "name": "NO_DESTINATION_ARN_PROVIDED"
+            "type": "enum",
+            "members": {
+                "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND"
                     }
-                ]
+                },
+                "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY"
+                    }
+                },
+                "CYCLIC_PATH_DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CYCLIC_PATH_DETECTED"
+                    }
+                },
+                "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND"
+                    }
+                },
+                "ROUTE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTE_NOT_FOUND"
+                    }
+                },
+                "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND"
+                    }
+                },
+                "INACTIVE_ROUTE_FOR_DESTINATION_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INACTIVE_ROUTE_FOR_DESTINATION_FOUND"
+                    }
+                },
+                "TRANSIT_GATEWAY_ATTACHMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIT_GATEWAY_ATTACHMENT_ATTACH_ARN_NO_MATCH"
+                    }
+                },
+                "MAX_HOPS_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MAX_HOPS_EXCEEDED"
+                    }
+                },
+                "POSSIBLE_MIDDLEBOX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POSSIBLE_MIDDLEBOX"
+                    }
+                },
+                "NO_DESTINATION_ARN_PROVIDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_DESTINATION_ARN_PROVIDED"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#RouteAnalysisCompletionResultCode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONNECTED",
-                        "name": "CONNECTED"
-                    },
-                    {
-                        "value": "NOT_CONNECTED",
-                        "name": "NOT_CONNECTED"
+            "type": "enum",
+            "members": {
+                "CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONNECTED"
                     }
-                ]
+                },
+                "NOT_CONNECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_CONNECTED"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#RouteAnalysisEndpointOptions": {
@@ -9318,37 +10408,43 @@
             }
         },
         "com.amazonaws.networkmanager#RouteAnalysisStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "RUNNING",
-                        "name": "running"
-                    },
-                    {
-                        "value": "COMPLETED",
-                        "name": "completed"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "failed"
+            "type": "enum",
+            "members": {
+                "running": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
                     }
-                ]
+                },
+                "completed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COMPLETED"
+                    }
+                },
+                "failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#RouteState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
-                    },
-                    {
-                        "value": "BLACKHOLE",
-                        "name": "BLACKHOLE"
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
                     }
-                ]
+                },
+                "BLACKHOLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BLACKHOLE"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#RouteStateList": {
@@ -9378,33 +10474,37 @@
             }
         },
         "com.amazonaws.networkmanager#RouteTableType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TRANSIT_GATEWAY_ROUTE_TABLE",
-                        "name": "TRANSIT_GATEWAY_ROUTE_TABLE"
-                    },
-                    {
-                        "value": "CORE_NETWORK_SEGMENT",
-                        "name": "CORE_NETWORK_SEGMENT"
+            "type": "enum",
+            "members": {
+                "TRANSIT_GATEWAY_ROUTE_TABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRANSIT_GATEWAY_ROUTE_TABLE"
                     }
-                ]
+                },
+                "CORE_NETWORK_SEGMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CORE_NETWORK_SEGMENT"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#RouteType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PROPAGATED",
-                        "name": "PROPAGATED"
-                    },
-                    {
-                        "value": "STATIC",
-                        "name": "STATIC"
+            "type": "enum",
+            "members": {
+                "PROPAGATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROPAGATED"
                     }
-                ]
+                },
+                "STATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATIC"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#RouteTypeList": {
@@ -9564,26 +10664,32 @@
             }
         },
         "com.amazonaws.networkmanager#SiteState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "updating"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "updating": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#SiteToSiteVpnAttachment": {
@@ -9635,7 +10741,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables for the Network Manager service for an Amazon Web Services Organization. This can only be called by a management account within the organization. </p>",
+                "smithy.api#documentation": "<p>Enables the Network Manager service for an Amazon Web Services Organization. This can only be called by a management account within the organization. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/organizations/service-access",
@@ -9731,12 +10837,14 @@
                 "IncludeReturnPath": {
                     "target": "com.amazonaws.networkmanager#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether to analyze the return path. The default is <code>false</code>.</p>"
                     }
                 },
                 "UseMiddleboxes": {
                     "target": "com.amazonaws.networkmanager#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether to include the location of middlebox appliances in the route analysis.\n            The default is <code>false</code>.</p>"
                     }
                 }
@@ -10027,26 +11135,32 @@
             }
         },
         "com.amazonaws.networkmanager#TransitGatewayConnectPeerAssociationState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "deleted"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#TransitGatewayPeering": {
@@ -10118,30 +11232,38 @@
             }
         },
         "com.amazonaws.networkmanager#TransitGatewayRegistrationState": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "pending"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "available"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "deleting"
-                    },
-                    {
-                        "value": "DELETED",
-                        "name": "deleted"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "failed"
+            "type": "enum",
+            "members": {
+                "pending": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "available": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "deleting": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "deleted": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "failed": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#TransitGatewayRegistrationStateReason": {
@@ -10198,14 +11320,14 @@
             }
         },
         "com.amazonaws.networkmanager#TunnelProtocol": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "GRE",
-                        "name": "GRE"
+            "type": "enum",
+            "members": {
+                "GRE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRE"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.networkmanager#UntagResource": {
@@ -11000,26 +12122,32 @@
             }
         },
         "com.amazonaws.networkmanager#ValidationExceptionReason": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "UnknownOperation",
-                        "name": "UNKNOWN_OPERATION"
-                    },
-                    {
-                        "value": "CannotParse",
-                        "name": "CANNOT_PARSE"
-                    },
-                    {
-                        "value": "FieldValidationFailed",
-                        "name": "FIELD_VALIDATION_FAILED"
-                    },
-                    {
-                        "value": "Other",
-                        "name": "OTHER"
+            "type": "enum",
+            "members": {
+                "UNKNOWN_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UnknownOperation"
                     }
-                ]
+                },
+                "CANNOT_PARSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CannotParse"
+                    }
+                },
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FieldValidationFailed"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Other"
+                    }
+                }
             }
         },
         "com.amazonaws.networkmanager#VpcArn": {
@@ -11064,7 +12192,15 @@
                 "Ipv6Support": {
                     "target": "com.amazonaws.networkmanager#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Indicates whether IPv6 is supported.</p>"
+                    }
+                },
+                "ApplianceModeSupport": {
+                    "target": "com.amazonaws.networkmanager#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates whether appliance mode is supported.  If enabled, traffic flow between a source and destination use the same Availability Zone for the VPC attachment for the lifetime of that flow. The default value is <code>false</code>.</p>"
                     }
                 }
             },

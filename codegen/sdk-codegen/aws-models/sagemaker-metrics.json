@@ -38,7 +38,7 @@
                 "target": "com.amazonaws.sagemakermetrics#BatchPutMetricsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Used to ingest training metrics into SageMaker which can be visualized in SageMaker Studio and\n         retrieved with the <code>GetMetrics</code> API.\n      </p>",
+                "smithy.api#documentation": "<p>Used to ingest training metrics into SageMaker. These metrics can be visualized in SageMaker Studio and\n         retrieved with the <code>GetMetrics</code> API.\n      </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/BatchPutMetrics",
@@ -52,7 +52,7 @@
                 "Code": {
                     "target": "com.amazonaws.sagemakermetrics#PutMetricsErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The error code of an error that occured when attempting to put metrics.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>METRIC_LIMIT_EXCEEDED</code> - The max amount of metrics per resource has been exceeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code> - An internal error occured.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VALIDATION_ERROR</code> - The metric data failed validation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONFLICT_ERROR</code> - Multiple requests attempted to modify the same data simultaneously.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The error code of an error that occured when attempting to put metrics.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>METRIC_LIMIT_EXCEEDED</code>: The maximum amount of metrics per resource is\n               exceeded.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INTERNAL_ERROR</code>: An internal error occured.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VALIDATION_ERROR</code>: The metric data failed validation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONFLICT_ERROR</code>: Multiple requests attempted to modify the same data\n               simultaneously.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MetricIndex": {
@@ -85,7 +85,7 @@
                 "TrialComponentName": {
                     "target": "com.amazonaws.sagemakermetrics#ExperimentEntityName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of Trial Component to associate the metrics with.</p>",
+                        "smithy.api#documentation": "<p>The name of the Trial Component to associate with the metrics.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -104,7 +104,7 @@
                 "Errors": {
                     "target": "com.amazonaws.sagemakermetrics#BatchPutMetricsErrorList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any errors that occur when inserting metric data will appear in this.</p>"
+                        "smithy.api#documentation": "<p>Lists any errors that occur when inserting metric data.</p>"
                     }
                 }
             }
@@ -183,14 +183,14 @@
                 "Timestamp": {
                     "target": "com.amazonaws.sagemakermetrics#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time when the metric was recorded.</p>",
+                        "smithy.api#documentation": "<p>The time that the metric was recorded.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Step": {
                     "target": "com.amazonaws.sagemakermetrics#Step",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metric step (aka Epoch).\n      </p>"
+                        "smithy.api#documentation": "<p>The metric step (epoch).\n      </p>"
                     }
                 },
                 "Value": {
@@ -551,8 +551,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -564,8 +564,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -577,8 +577,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -590,8 +590,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -603,8 +603,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -616,8 +616,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -629,8 +629,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -642,8 +642,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -653,8 +653,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -666,8 +666,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -677,8 +677,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -690,8 +690,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -703,8 +703,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -716,8 +716,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -729,8 +729,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -742,8 +742,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -753,8 +753,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -766,8 +766,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -777,8 +777,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -790,8 +790,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -803,8 +803,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -815,8 +815,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -827,8 +827,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }

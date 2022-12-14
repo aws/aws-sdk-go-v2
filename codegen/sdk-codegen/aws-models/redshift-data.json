@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.redshiftdata#ActiveStatementsExceededException": {
             "type": "structure",
@@ -34,7 +34,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition\n      language (DDL). \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Runs one or more SQL statements, which can be data manipulation language (DML) or data definition\n      language (DDL). \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n      <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n      <i>Amazon Redshift Management Guide</i>. </p>"
             }
         },
         "com.amazonaws.redshiftdata#BatchExecuteStatementException": {
@@ -66,7 +66,7 @@
                 "Sqls": {
                     "target": "com.amazonaws.redshiftdata#SqlList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more SQL statements to run. </p>",
+                        "smithy.api#documentation": "<p>One or more SQL statements to run. \n      \n      The SQL statements are run as a single transaction. They run serially in the order of the array. \n      Subsequent SQL statements don't start until the previous statement in the array completes. \n      If any SQL statement fails, then because they are run as one transaction, all work is rolled back.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -111,6 +111,13 @@
                     "target": "com.amazonaws.redshiftdata#WorkgroupNameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.redshiftdata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             }
@@ -166,22 +173,13 @@
             "type": "blob"
         },
         "com.amazonaws.redshiftdata#BoxedBoolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.redshiftdata#BoxedDouble": {
-            "type": "double",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "double"
         },
         "com.amazonaws.redshiftdata#BoxedLong": {
-            "type": "long",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "long"
         },
         "com.amazonaws.redshiftdata#CancelStatement": {
             "type": "operation",
@@ -206,7 +204,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a running query. To be canceled, a query must be running. </p>"
+                "smithy.api#documentation": "<p>Cancels a running query. To be canceled, a query must be running. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>"
             }
         },
         "com.amazonaws.redshiftdata#CancelStatementRequest": {
@@ -232,6 +230,15 @@
                 }
             }
         },
+        "com.amazonaws.redshiftdata#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.redshiftdata#ColumnList": {
             "type": "list",
             "member": {
@@ -244,18 +251,21 @@
                 "isCaseSensitive": {
                     "target": "com.amazonaws.redshiftdata#bool",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the column is case-sensitive. </p>"
                     }
                 },
                 "isCurrency": {
                     "target": "com.amazonaws.redshiftdata#bool",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether the column contains currency values.</p>"
                     }
                 },
                 "isSigned": {
                     "target": "com.amazonaws.redshiftdata#bool",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A value that indicates whether an integer column is signed.</p>"
                     }
                 },
@@ -274,18 +284,21 @@
                 "nullable": {
                     "target": "com.amazonaws.redshiftdata#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>A value that indicates whether the column is nullable. </p>"
                     }
                 },
                 "precision": {
                     "target": "com.amazonaws.redshiftdata#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The precision value of a decimal number column. </p>"
                     }
                 },
                 "scale": {
                     "target": "com.amazonaws.redshiftdata#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The scale value of a decimal number column. </p>"
                     }
                 },
@@ -310,6 +323,7 @@
                 "length": {
                     "target": "com.amazonaws.redshiftdata#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The length of the column.</p>"
                     }
                 },
@@ -372,7 +386,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the details about a specific instance when a query was run by the Amazon Redshift Data API. The information\n      includes when the query started, when it finished, the query status, the number of rows returned, and the SQL\n      statement. </p>",
+                "smithy.api#documentation": "<p>Describes the details about a specific instance when a query was run by the Amazon Redshift Data API. The information\n      includes when the query started, when it finished, the query status, the number of rows returned, and the SQL\n      statement. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#readonly": {}
             }
         },
@@ -425,6 +439,7 @@
                 "Duration": {
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time in nanoseconds that the statement ran. </p>"
                     }
                 },
@@ -455,6 +470,7 @@
                 "RedshiftPid": {
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The process identifier from Amazon Redshift. </p>"
                     }
                 },
@@ -473,18 +489,21 @@
                 "ResultRows": {
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Either the number of rows returned from the SQL statement or the number of rows affected.\n        If result size is greater than zero, the result rows can be the number of rows affected by SQL statements such as INSERT, UPDATE, DELETE, COPY, and others. \n        A <code>-1</code> indicates the value is null.</p>"
                     }
                 },
                 "ResultSize": {
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size in bytes of the returned results. A <code>-1</code> indicates the value is null.</p>"
                     }
                 },
                 "RedshiftQueryId": {
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The identifier of the query generated by Amazon Redshift. \n      These identifiers are also available in the <code>query</code> column of the <code>STL_QUERY</code> system view. </p>"
                     }
                 },
@@ -528,12 +547,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the detailed information about a table from metadata in the cluster. The\n      information includes its columns. \n      A token is returned to page through the column list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Describes the detailed information about a table from metadata in the cluster. The\n      information includes its columns. \n      A token is returned to page through the column list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "ColumnList",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "ColumnList"
                 },
                 "smithy.api#readonly": {}
             }
@@ -593,6 +612,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.redshiftdata#PageSize",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of tables to return in the response. \n      If more tables exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
                     }
                 },
@@ -647,7 +667,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition\n      language (DDL). This statement must be a single SQL statement. \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Runs an SQL statement, which can be data manipulation language (DML) or data definition\n      language (DDL). This statement must be a single SQL statement. \n      Depending on the authorization\n      method, use one of the following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>"
             }
         },
         "com.amazonaws.redshiftdata#ExecuteStatementException": {
@@ -731,6 +751,13 @@
                     "target": "com.amazonaws.redshiftdata#WorkgroupNameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The serverless workgroup name. This parameter is required when connecting to a serverless workgroup and authenticating using either Secrets Manager or temporary credentials.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.redshiftdata#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
                     }
                 }
             }
@@ -852,7 +879,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Fetches the temporarily cached result of an SQL statement. \n       A token is returned to page through the statement results. </p>",
+                "smithy.api#documentation": "<p>Fetches the temporarily cached result of an SQL statement. \n       A token is returned to page through the statement results. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -898,6 +925,7 @@
                 "TotalNumRows": {
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The total number of rows in the result set returned from a query. \n       You can use this number to estimate the number of calls to the <code>GetStatementResult</code> operation needed to page through the results. </p>"
                     }
                 },
@@ -910,7 +938,10 @@
             }
         },
         "com.amazonaws.redshiftdata#Integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.redshiftdata#InternalServerException": {
             "type": "structure",
@@ -949,12 +980,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the databases in a cluster. \n      A token is returned to page through the database list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>List the databases in a cluster. \n      A token is returned to page through the database list.\n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Databases",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "Databases"
                 },
                 "smithy.api#readonly": {}
             }
@@ -996,6 +1027,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.redshiftdata#PageSize",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of databases to return in the response. \n       If more databases exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
                     }
                 },
@@ -1044,12 +1076,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the schemas in a database. \n      A token is returned to page through the schema list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Lists the schemas in a database. \n      A token is returned to page through the schema list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Schemas",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "Schemas"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1103,6 +1135,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.redshiftdata#PageSize",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of schemas to return in the response. \n       If more schemas exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
                     }
                 },
@@ -1148,12 +1181,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List of SQL statements. By default, only finished statements are shown. \n        A token is returned to page through the statement list. </p>",
+                "smithy.api#documentation": "<p>List of SQL statements. By default, only finished statements are shown. \n        A token is returned to page through the statement list. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Statements",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "Statements"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1161,6 +1194,7 @@
         "com.amazonaws.redshiftdata#ListStatementsLimit": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
@@ -1179,6 +1213,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.redshiftdata#ListStatementsLimit",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of SQL statements to return in the response. \n       If more SQL statements exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
                     }
                 },
@@ -1240,12 +1275,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then \n       all tables in the database are returned.\n      A token is returned to page through the table list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>List the tables in a database. If neither <code>SchemaPattern</code> nor <code>TablePattern</code> are specified, then \n       all tables in the database are returned.\n      A token is returned to page through the table list. \n      Depending on the authorization method, use one of the\n      following combinations of request parameters: </p>\n         <ul>\n            <li>\n               <p>Secrets Manager - when connecting to a cluster, specify the Amazon Resource Name (ARN) of the secret, the database name, and the cluster identifier that matches the cluster in the secret.\nWhen connecting to a serverless workgroup, specify the Amazon Resource Name (ARN) of the secret and the database name. </p>\n            </li>\n            <li>\n               <p>Temporary credentials - when connecting to a cluster, specify the cluster identifier, the database name, and the database user name. \nAlso, permission to call the <code>redshift:GetClusterCredentials</code> operation is required.\nWhen connecting to a serverless workgroup, specify the workgroup name and database name. Also, permission to call the <code>redshift-serverless:GetCredentials</code> operation is required. </p>\n            </li>\n         </ul>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "items": "Tables",
-                    "pageSize": "MaxResults"
+                    "pageSize": "MaxResults",
+                    "items": "Tables"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1305,6 +1340,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.redshiftdata#PageSize",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of tables to return in the response. \n       If more tables exist than fit in one response, then <code>NextToken</code> is returned to page through the results. </p>"
                     }
                 },
@@ -1337,11 +1373,15 @@
             "type": "string"
         },
         "com.amazonaws.redshiftdata#Long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.redshiftdata#PageSize": {
             "type": "integer",
             "traits": {
+                "smithy.api#default": 0,
                 "smithy.api#range": {
                     "min": 0,
                     "max": 1000
@@ -1364,22 +1404,6 @@
         },
         "com.amazonaws.redshiftdata#RedshiftData": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Redshift Data",
-                    "arnNamespace": "redshift-data",
-                    "cloudFormationName": "RedshiftData",
-                    "cloudTrailEventSource": "redshift-data.amazonaws.com",
-                    "endpointPrefix": "redshift-data"
-                },
-                "aws.auth#sigv4": {
-                    "name": "redshift-data"
-                },
-                "aws.protocols#awsJson1_1": {},
-                "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You\n      can run SQL statements, which are committed if the statement succeeds. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Cluster Management Guide</i>. </p>",
-                "smithy.api#title": "Redshift Data API Service"
-            },
             "version": "2019-12-20",
             "operations": [
                 {
@@ -1412,7 +1436,372 @@
                 {
                     "target": "com.amazonaws.redshiftdata#ListTables"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Redshift Data",
+                    "arnNamespace": "redshift-data"
+                },
+                "aws.auth#sigv4": {
+                    "name": "redshift-data"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#cors": {},
+                "smithy.api#documentation": "<p>You can use the Amazon Redshift Data API to run queries on Amazon Redshift tables. You\n      can run SQL statements, which are committed if the statement succeeds. </p>\n         <p>For more information about the Amazon Redshift Data API and CLI usage examples, see \n       <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html\">Using the Amazon Redshift Data API</a> in the \n       <i>Amazon Redshift Management Guide</i>. </p>",
+                "smithy.api#title": "Redshift Data API Service",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://redshift-data-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://redshift-data-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://redshift-data.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://redshift-data.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.redshiftdata#ResourceNotFoundException": {
             "type": "structure",
@@ -1472,7 +1861,7 @@
                 "value": {
                     "target": "com.amazonaws.redshiftdata#ParameterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the parameter. \n    Amazon Redshift implicitly converts to the proper data type. For more inforation, see \n      <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html\">Data types</a> in the \n      <i>Amazon Redshift Database Developer Guide</i>. </p>",
+                        "smithy.api#documentation": "<p>The value of the parameter. \n    Amazon Redshift implicitly converts to the proper data type. For more information, see \n      <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html\">Data types</a> in the \n      <i>Amazon Redshift Database Developer Guide</i>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1592,28 +1981,28 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SUBMITTED",
-                        "name": "SUBMITTED"
+                        "name": "SUBMITTED",
+                        "value": "SUBMITTED"
                     },
                     {
-                        "value": "PICKED",
-                        "name": "PICKED"
+                        "name": "PICKED",
+                        "value": "PICKED"
                     },
                     {
-                        "value": "STARTED",
-                        "name": "STARTED"
+                        "name": "STARTED",
+                        "value": "STARTED"
                     },
                     {
-                        "value": "FINISHED",
-                        "name": "FINISHED"
+                        "name": "FINISHED",
+                        "value": "FINISHED"
                     },
                     {
-                        "value": "ABORTED",
-                        "name": "ABORTED"
+                        "name": "ABORTED",
+                        "value": "ABORTED"
                     },
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     }
                 ]
             }
@@ -1632,32 +2021,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "SUBMITTED",
-                        "name": "SUBMITTED"
+                        "name": "SUBMITTED",
+                        "value": "SUBMITTED"
                     },
                     {
-                        "value": "PICKED",
-                        "name": "PICKED"
+                        "name": "PICKED",
+                        "value": "PICKED"
                     },
                     {
-                        "value": "STARTED",
-                        "name": "STARTED"
+                        "name": "STARTED",
+                        "value": "STARTED"
                     },
                     {
-                        "value": "FINISHED",
-                        "name": "FINISHED"
+                        "name": "FINISHED",
+                        "value": "FINISHED"
                     },
                     {
-                        "value": "ABORTED",
-                        "name": "ABORTED"
+                        "name": "ABORTED",
+                        "value": "ABORTED"
                     },
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     },
                     {
-                        "value": "ALL",
-                        "name": "ALL"
+                        "name": "ALL",
+                        "value": "ALL"
                     }
                 ]
             }
@@ -1678,6 +2067,7 @@
                 "Duration": {
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The amount of time in nanoseconds that the statement ran.</p>"
                     }
                 },
@@ -1714,18 +2104,21 @@
                 "ResultRows": {
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Either the number of rows returned from the SQL statement or the number of rows affected. \n      If result size is greater than zero, the result rows can be the number of rows affected by SQL statements such as INSERT, UPDATE, DELETE, COPY, and others.\n      A <code>-1</code> indicates the value is null.</p>"
                     }
                 },
                 "ResultSize": {
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The size in bytes of the returned results. A <code>-1</code> indicates the value is null.</p>"
                     }
                 },
                 "RedshiftQueryId": {
                     "target": "com.amazonaws.redshiftdata#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The SQL statement identifier. This value is a universally unique identifier (UUID) generated by Amazon Redshift Data API. </p>"
                     }
                 },
@@ -1805,7 +2198,10 @@
             }
         },
         "com.amazonaws.redshiftdata#bool": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         }
     }
 }
