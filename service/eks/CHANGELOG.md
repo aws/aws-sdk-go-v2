@@ -1,3 +1,8 @@
+# v1.26.0 (2022-12-15)
+
+* **Feature**: Add support for Windows managed nodes groups.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2022-12-07)
 
 * **Feature**: Adds support for EKS add-ons configurationValues fields and DescribeAddonConfiguration function

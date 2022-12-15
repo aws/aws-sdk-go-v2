@@ -1,3 +1,7 @@
+# v1.22.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2022-12-12)
 
 * **Feature**: Adds support for "aliases" and "categories", inclusion and exclusion filters for labels and label categories, and aggregating labels by video segment timestamps for Stored Video Label Detection APIs.

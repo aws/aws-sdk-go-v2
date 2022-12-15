@@ -1,3 +1,8 @@
+# v1.19.5 (2022-12-15)
+
+* **Documentation**: This release adds support for a new style, "VectorOpenDataStandardLight" which can be used with the new data source, "Open Data Maps (Preview)".
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.4 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

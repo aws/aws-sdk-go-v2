@@ -1,3 +1,38 @@
+# Release (2022-12-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.17.3
+  * **Bug Fix**: Unify logic between shared config and in finding home directory
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.18.5](config/CHANGELOG.md#v1185-2022-12-15)
+  * **Bug Fix**: Unify logic between shared config and in finding home directory
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.13.5](credentials/CHANGELOG.md#v1135-2022-12-15)
+  * **Bug Fix**: Unify logic between shared config and in finding home directory
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.8.0](service/backupgateway/CHANGELOG.md#v180-2022-12-15)
+  * **Feature**: This release adds support for VMware vSphere tags, enabling customer to protect VMware virtual machines using tag-based policies for AWS tags mapped from vSphere tags. This release also adds support for customer-accessible gateway-hypervisor interaction log and upload bandwidth rate limit schedule.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.40.0](service/connect/CHANGELOG.md#v1400-2022-12-15)
+  * **Feature**: Added support for "English - New Zealand" and "English - South African" to be used with Amazon Connect Custom Vocabulary APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.21.0](service/ecs/CHANGELOG.md#v1210-2022-12-15)
+  * **Feature**: This release adds support for container port ranges in ECS, a new capability that allows customers to provide container port ranges to simplify use cases where multiple ports are in use in a container. This release updates TaskDefinition mutation APIs and the Task description APIs.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.26.0](service/eks/CHANGELOG.md#v1260-2022-12-15)
+  * **Feature**: Add support for Windows managed nodes groups.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.38.0](service/glue/CHANGELOG.md#v1380-2022-12-15)
+  * **Feature**: This release adds support for AWS Glue Crawler with native DeltaLake tables, allowing Crawlers to classify Delta Lake format tables and catalog them for query engines to query against.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.16.0](service/kinesis/CHANGELOG.md#v1160-2022-12-15)
+  * **Feature**: Added StreamARN parameter for Kinesis Data Streams APIs. Added a new opaque pagination token for ListStreams. SDKs will auto-generate Account Endpoint when accessing Kinesis Data Streams.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.19.5](service/location/CHANGELOG.md#v1195-2022-12-15)
+  * **Documentation**: This release adds support for a new style, "VectorOpenDataStandardLight" which can be used with the new data source, "Open Data Maps (Preview)".
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.2.0](service/m2/CHANGELOG.md#v120-2022-12-15)
+  * **Feature**: Adds an optional create-only `KmsKeyId` property to Environment and Application resources.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.57.0](service/sagemaker/CHANGELOG.md#v1570-2022-12-15)
+  * **Feature**: SageMaker Inference Recommender now allows customers to load tests their models on various instance types using private VPC.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.26.0](service/securityhub/CHANGELOG.md#v1260-2022-12-15)
+  * **Feature**: Added new resource details objects to ASFF, including resources for AwsEc2LaunchTemplate, AwsSageMakerNotebookInstance, AwsWafv2WebAcl and AwsWafv2RuleGroup.
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.16.0](service/translate/CHANGELOG.md#v1160-2022-12-15)
+  * **Feature**: Raised the input byte size limit of the Text field in the TranslateText API to 10000 bytes.
+
 # Release (2022-12-14)
 
 ## Module Highlights

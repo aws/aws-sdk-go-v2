@@ -1,8 +1,0 @@
-{
-    "id": "87a961f8-1941-4ccb-99e7-d89fa874eb5f",
-    "type": "feature",
-    "description": "This release adds support for container port ranges in ECS, a new capability that allows customers to provide container port ranges to simplify use cases where multiple ports are in use in a container. This release updates TaskDefinition mutation APIs and the Task description APIs.",
-    "modules": [
-        "service/ecs"
-    ]
-}

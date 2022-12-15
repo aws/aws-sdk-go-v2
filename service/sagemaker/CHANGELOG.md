@@ -1,3 +1,8 @@
+# v1.57.0 (2022-12-15)
+
+* **Feature**: SageMaker Inference Recommender now allows customers to load tests their models on various instance types using private VPC.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.1 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.2.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2022-12-05)
 
 * **Feature**: Adds PendingVerification error type to messaging APIs to block the resource usage for accounts identified as being fraudulent.

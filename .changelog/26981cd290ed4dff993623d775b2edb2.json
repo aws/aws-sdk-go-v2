@@ -1,8 +1,0 @@
-{
-    "id": "26981cd2-90ed-4dff-9936-23d775b2edb2",
-    "type": "feature",
-    "description": "Adds an optional create-only `KmsKeyId` property to Environment and Application resources.",
-    "modules": [
-        "service/m2"
-    ]
-}

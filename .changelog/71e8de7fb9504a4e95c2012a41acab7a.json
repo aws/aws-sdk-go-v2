@@ -1,8 +1,0 @@
-{
-    "id": "71e8de7f-b950-4a4e-95c2-012a41acab7a",
-    "type": "feature",
-    "description": "This release adds support for VMware vSphere tags, enabling customer to protect VMware virtual machines using tag-based policies for AWS tags mapped from vSphere tags. This release also adds support for customer-accessible gateway-hypervisor interaction log and upload bandwidth rate limit schedule.",
-    "modules": [
-        "service/backupgateway"
-    ]
-}

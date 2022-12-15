@@ -1,3 +1,7 @@
+# v1.22.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.22.0 (2022-12-07)
 
 * **Feature**: Introducing UpdateDistributionWithStagingConfig that can be used to promote the staging configuration to the production.

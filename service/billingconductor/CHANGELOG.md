@@ -1,3 +1,7 @@
+# v1.3.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.0 (2022-12-06)
 
 * **Feature**: This release adds the Tiering Pricing Rule feature.

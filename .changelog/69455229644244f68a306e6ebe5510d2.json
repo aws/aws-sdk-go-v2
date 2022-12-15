@@ -1,8 +1,0 @@
-{
-    "id": "69455229-6442-44f6-8a30-6e6ebe5510d2",
-    "type": "feature",
-    "description": "Added support for \"English - New Zealand\" and \"English - South African\" to be used with Amazon Connect Custom Vocabulary APIs.",
-    "modules": [
-        "service/connect"
-    ]
-}

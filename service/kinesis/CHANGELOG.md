@@ -1,3 +1,8 @@
+# v1.16.0 (2022-12-15)
+
+* **Feature**: Added StreamARN parameter for Kinesis Data Streams APIs. Added a new opaque pagination token for ListStreams. SDKs will auto-generate Account Endpoint when accessing Kinesis Data Streams.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.25 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "e7f2b78f-6ce6-40c6-83d0-d856aed7584c",
-    "type": "feature",
-    "description": "Add support for Windows managed nodes groups.",
-    "modules": [
-        "service/eks"
-    ]
-}

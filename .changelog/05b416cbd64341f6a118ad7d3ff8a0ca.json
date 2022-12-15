@@ -1,8 +1,0 @@
-{
-    "id": "05b416cb-d643-41f6-a118-ad7d3ff8a0ca",
-    "type": "feature",
-    "description": "This release adds support for AWS Glue Crawler with native DeltaLake tables, allowing Crawlers to classify Delta Lake format tables and catalog them for query engines to query against.",
-    "modules": [
-        "service/glue"
-    ]
-}

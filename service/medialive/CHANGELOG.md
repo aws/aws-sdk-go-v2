@@ -1,3 +1,7 @@
+# v1.26.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2022-12-09)
 
 * **Feature**: Link devices now support buffer size (latency) configuration. A higher latency value means a longer delay in transmitting from the device to MediaLive, but improved resiliency. A lower latency value means a shorter delay, but less resiliency.

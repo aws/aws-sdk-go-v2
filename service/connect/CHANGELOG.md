@@ -1,3 +1,8 @@
+# v1.40.0 (2022-12-15)
+
+* **Feature**: Added support for "English - New Zealand" and "English - South African" to be used with Amazon Connect Custom Vocabulary APIs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2022-12-06)
 
 * **Feature**: This release provides APIs that enable you to programmatically manage rules for Contact Lens conversational analytics and third party applications. For more information, see   https://docs.aws.amazon.com/connect/latest/APIReference/rules-api.html

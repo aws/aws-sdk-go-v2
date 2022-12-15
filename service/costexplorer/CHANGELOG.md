@@ -1,3 +1,7 @@
+# v1.24.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.0 (2022-12-14)
 
 * **Feature**: This release supports percentage-based thresholds on Cost Anomaly Detection alert subscriptions.

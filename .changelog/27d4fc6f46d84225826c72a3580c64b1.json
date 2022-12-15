@@ -1,8 +1,0 @@
-{
-    "id": "27d4fc6f-46d8-4225-826c-72a3580c64b1",
-    "type": "feature",
-    "description": "Added StreamARN parameter for Kinesis Data Streams APIs. Added a new opaque pagination token for ListStreams. SDKs will auto-generate Account Endpoint when accessing Kinesis Data Streams.",
-    "modules": [
-        "service/kinesis"
-    ]
-}

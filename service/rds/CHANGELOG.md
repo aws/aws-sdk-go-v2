@@ -1,3 +1,7 @@
+# v1.35.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2022-12-13)
 
 * **Feature**: This deployment adds ClientPasswordAuthType field to the Auth structure of the DBProxy.

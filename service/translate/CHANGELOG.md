@@ -1,3 +1,8 @@
+# v1.16.0 (2022-12-15)
+
+* **Feature**: Raised the input byte size limit of the Text field in the TranslateText API to 10000 bytes.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.4 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

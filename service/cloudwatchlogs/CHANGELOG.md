@@ -1,3 +1,7 @@
+# v1.17.3 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.17.2 (2022-12-09)
 
 * **Documentation**: Doc-only update for CloudWatch Logs, for Tagging Permissions clarifications

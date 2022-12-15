@@ -1,3 +1,7 @@
+# v1.23.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.23.0 (2022-12-14)
 
 * **Feature**: Adding support for Metrics Insights Alarms

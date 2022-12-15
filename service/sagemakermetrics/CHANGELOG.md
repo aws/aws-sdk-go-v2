@@ -1,3 +1,7 @@
+# v1.0.2 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.1 (2022-12-14)
 
 * **Documentation**: Update SageMaker Metrics documentation.

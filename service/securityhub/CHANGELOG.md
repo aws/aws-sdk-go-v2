@@ -1,3 +1,8 @@
+# v1.26.0 (2022-12-15)
+
+* **Feature**: Added new resource details objects to ASFF, including resources for AwsEc2LaunchTemplate, AwsSageMakerNotebookInstance, AwsWafv2WebAcl and AwsWafv2RuleGroup.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.1 (2022-12-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

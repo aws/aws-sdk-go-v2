@@ -1,3 +1,7 @@
+# v1.18.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2022-12-02)
 
 * **Feature**: CreateEnvironmentAccountConnection RoleArn input is now optional

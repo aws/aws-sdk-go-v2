@@ -1,3 +1,8 @@
+# v1.2.0 (2022-12-15)
+
+* **Feature**: Adds an optional create-only `KmsKeyId` property to Environment and Application resources.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.6 (2022-12-12)
 
 * No change notes available for this release.
