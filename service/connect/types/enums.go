@@ -1625,6 +1625,8 @@ const (
 	VocabularyLanguageCodePtBr VocabularyLanguageCode = "pt-BR"
 	VocabularyLanguageCodePtPt VocabularyLanguageCode = "pt-PT"
 	VocabularyLanguageCodeZhCn VocabularyLanguageCode = "zh-CN"
+	VocabularyLanguageCodeEnNz VocabularyLanguageCode = "en-NZ"
+	VocabularyLanguageCodeEnZa VocabularyLanguageCode = "en-ZA"
 )
 
 // Values returns all known values for VocabularyLanguageCode. Note that this can
@@ -1653,6 +1655,8 @@ func (VocabularyLanguageCode) Values() []VocabularyLanguageCode {
 		"pt-BR",
 		"pt-PT",
 		"zh-CN",
+		"en-NZ",
+		"en-ZA",
 	}
 }
 

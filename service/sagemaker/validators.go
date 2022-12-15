@@ -9889,6 +9889,29 @@ func validateRecommendationJobInputConfig(v *types.RecommendationJobInputConfig)
 			invalidParams.AddNested("Endpoints", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.VpcConfig != nil {
+		if err := validateRecommendationJobVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecommendationJobVpcConfig(v *types.RecommendationJobVpcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommendationJobVpcConfig"}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

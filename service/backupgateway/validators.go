@@ -110,6 +110,26 @@ func (m *validateOpDisassociateGatewayFromServer) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetBandwidthRateLimitSchedule struct {
+}
+
+func (*validateOpGetBandwidthRateLimitSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBandwidthRateLimitSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBandwidthRateLimitScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBandwidthRateLimitScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetGateway struct {
 }
 
@@ -125,6 +145,46 @@ func (m *validateOpGetGateway) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetHypervisor struct {
+}
+
+func (*validateOpGetHypervisor) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetHypervisor) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetHypervisorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetHypervisorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetHypervisorPropertyMappings struct {
+}
+
+func (*validateOpGetHypervisorPropertyMappings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetHypervisorPropertyMappings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetHypervisorPropertyMappingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetHypervisorPropertyMappingsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +250,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutBandwidthRateLimitSchedule struct {
+}
+
+func (*validateOpPutBandwidthRateLimitSchedule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutBandwidthRateLimitSchedule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutBandwidthRateLimitScheduleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutBandwidthRateLimitScheduleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutHypervisorPropertyMappings struct {
+}
+
+func (*validateOpPutHypervisorPropertyMappings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutHypervisorPropertyMappings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutHypervisorPropertyMappingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutHypervisorPropertyMappingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutMaintenanceStartTime struct {
 }
 
@@ -205,6 +305,26 @@ func (m *validateOpPutMaintenanceStartTime) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutMaintenanceStartTimeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartVirtualMachinesMetadataSync struct {
+}
+
+func (*validateOpStartVirtualMachinesMetadataSync) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartVirtualMachinesMetadataSync) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartVirtualMachinesMetadataSyncInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartVirtualMachinesMetadataSyncInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,8 +470,20 @@ func addOpDisassociateGatewayFromServerValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDisassociateGatewayFromServer{}, middleware.After)
 }
 
+func addOpGetBandwidthRateLimitScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBandwidthRateLimitSchedule{}, middleware.After)
+}
+
 func addOpGetGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGateway{}, middleware.After)
+}
+
+func addOpGetHypervisorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetHypervisor{}, middleware.After)
+}
+
+func addOpGetHypervisorPropertyMappingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetHypervisorPropertyMappings{}, middleware.After)
 }
 
 func addOpGetVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
@@ -366,8 +498,20 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutBandwidthRateLimitScheduleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutBandwidthRateLimitSchedule{}, middleware.After)
+}
+
+func addOpPutHypervisorPropertyMappingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutHypervisorPropertyMappings{}, middleware.After)
+}
+
 func addOpPutMaintenanceStartTimeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutMaintenanceStartTime{}, middleware.After)
+}
+
+func addOpStartVirtualMachinesMetadataSyncValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartVirtualMachinesMetadataSync{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -392,6 +536,50 @@ func addOpUpdateGatewaySoftwareNowValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateHypervisorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateHypervisor{}, middleware.After)
+}
+
+func validateBandwidthRateLimitInterval(v *types.BandwidthRateLimitInterval) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BandwidthRateLimitInterval"}
+	if v.StartHourOfDay == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartHourOfDay"))
+	}
+	if v.EndHourOfDay == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndHourOfDay"))
+	}
+	if v.StartMinuteOfHour == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartMinuteOfHour"))
+	}
+	if v.EndMinuteOfHour == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndMinuteOfHour"))
+	}
+	if v.DaysOfWeek == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DaysOfWeek"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBandwidthRateLimitIntervals(v []types.BandwidthRateLimitInterval) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BandwidthRateLimitIntervals"}
+	for i := range v {
+		if err := validateBandwidthRateLimitInterval(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateTag(v *types.Tag) error {
@@ -419,6 +607,47 @@ func validateTags(v []types.Tag) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVmwareToAwsTagMapping(v *types.VmwareToAwsTagMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VmwareToAwsTagMapping"}
+	if v.VmwareCategory == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VmwareCategory"))
+	}
+	if v.VmwareTagName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VmwareTagName"))
+	}
+	if v.AwsTagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsTagKey"))
+	}
+	if v.AwsTagValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsTagValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVmwareToAwsTagMappings(v []types.VmwareToAwsTagMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VmwareToAwsTagMappings"}
+	for i := range v {
+		if err := validateVmwareToAwsTagMapping(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -518,6 +747,21 @@ func validateOpDisassociateGatewayFromServerInput(v *DisassociateGatewayFromServ
 	}
 }
 
+func validateOpGetBandwidthRateLimitScheduleInput(v *GetBandwidthRateLimitScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBandwidthRateLimitScheduleInput"}
+	if v.GatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetGatewayInput(v *GetGatewayInput) error {
 	if v == nil {
 		return nil
@@ -525,6 +769,36 @@ func validateOpGetGatewayInput(v *GetGatewayInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetGatewayInput"}
 	if v.GatewayArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetHypervisorInput(v *GetHypervisorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetHypervisorInput"}
+	if v.HypervisorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HypervisorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetHypervisorPropertyMappingsInput(v *GetHypervisorPropertyMappingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetHypervisorPropertyMappingsInput"}
+	if v.HypervisorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HypervisorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -586,6 +860,53 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPutBandwidthRateLimitScheduleInput(v *PutBandwidthRateLimitScheduleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutBandwidthRateLimitScheduleInput"}
+	if v.GatewayArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayArn"))
+	}
+	if v.BandwidthRateLimitIntervals == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BandwidthRateLimitIntervals"))
+	} else if v.BandwidthRateLimitIntervals != nil {
+		if err := validateBandwidthRateLimitIntervals(v.BandwidthRateLimitIntervals); err != nil {
+			invalidParams.AddNested("BandwidthRateLimitIntervals", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutHypervisorPropertyMappingsInput(v *PutHypervisorPropertyMappingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutHypervisorPropertyMappingsInput"}
+	if v.HypervisorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HypervisorArn"))
+	}
+	if v.VmwareToAwsTagMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VmwareToAwsTagMappings"))
+	} else if v.VmwareToAwsTagMappings != nil {
+		if err := validateVmwareToAwsTagMappings(v.VmwareToAwsTagMappings); err != nil {
+			invalidParams.AddNested("VmwareToAwsTagMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutMaintenanceStartTimeInput(v *PutMaintenanceStartTimeInput) error {
 	if v == nil {
 		return nil
@@ -599,6 +920,21 @@ func validateOpPutMaintenanceStartTimeInput(v *PutMaintenanceStartTimeInput) err
 	}
 	if v.MinuteOfHour == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinuteOfHour"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartVirtualMachinesMetadataSyncInput(v *StartVirtualMachinesMetadataSyncInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartVirtualMachinesMetadataSyncInput"}
+	if v.HypervisorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HypervisorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

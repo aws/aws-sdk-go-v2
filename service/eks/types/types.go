@@ -24,13 +24,13 @@ type Addon struct {
 	// The name of the cluster.
 	ClusterName *string
 
-	// The provided configuration values.
+	// The configuration values that you provided.
 	ConfigurationValues *string
 
 	// The date and time that the add-on was created.
 	CreatedAt *time.Time
 
-	// An object representing the health of the add-on.
+	// An object that represents the health of the add-on.
 	Health *AddonHealth
 
 	// Information about an Amazon EKS add-on from the Amazon Web Services Marketplace.
@@ -45,8 +45,8 @@ type Addon struct {
 	// The publisher of the add-on.
 	Publisher *string
 
-	// The Amazon Resource Name (ARN) of the IAM role that is bound to the Kubernetes
-	// service account used by the add-on.
+	// The Amazon Resource Name (ARN) of the IAM role that's bound to the Kubernetes
+	// service account that the add-on uses.
 	ServiceAccountRoleArn *string
 
 	// The status of the add-on.
@@ -1099,13 +1099,18 @@ type RemoteAccessConfig struct {
 	// nodes in the managed node group. For more information, see Amazon EC2 key pairs
 	// and Linux instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the
-	// Amazon Elastic Compute Cloud User Guide for Linux Instances.
+	// Amazon Elastic Compute Cloud User Guide for Linux Instances. For Windows, an
+	// Amazon EC2 SSH key is used to obtain the RDP password. For more information, see
+	// Amazon EC2 key pairs and Windows instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-key-pairs.html) in
+	// the Amazon Elastic Compute Cloud User Guide for Windows Instances.
 	Ec2SshKey *string
 
-	// The security group ids that are allowed SSH access (port 22) to the nodes. If
-	// you specify an Amazon EC2 SSH key but do not specify a source security group
-	// when you create a managed node group, then port 22 on the nodes is opened to the
-	// internet (0.0.0.0/0). For more information, see Security Groups for Your VPC
+	// The security group IDs that are allowed SSH access (port 22) to the nodes. For
+	// Windows, the port is 3389. If you specify an Amazon EC2 SSH key but don't
+	// specify a source security group when you create a managed node group, then the
+	// port on the nodes is opened to the internet (0.0.0.0/0). For more information,
+	// see Security Groups for Your VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in
 	// the Amazon Virtual Private Cloud User Guide.
 	SourceSecurityGroups []string

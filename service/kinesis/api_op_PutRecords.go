@@ -13,22 +13,23 @@ import (
 
 // Writes multiple data records into a Kinesis data stream in a single call (also
 // referred to as a PutRecords request). Use this operation to send data into the
-// stream for data ingestion and processing. Each PutRecords request can support up
-// to 500 records. Each record in the request can be as large as 1 MiB, up to a
-// limit of 5 MiB for the entire request, including partition keys. Each shard can
-// support writes up to 1,000 records per second, up to a maximum data write total
-// of 1 MiB per second. You must specify the name of the stream that captures,
-// stores, and transports the data; and an array of request Records, with each
-// record in the array requiring a partition key and data blob. The record size
-// limit applies to the total size of the partition key and data blob. The data
-// blob can be any type of data; for example, a segment from a log file,
-// geographic/location data, website clickstream data, and so on. The partition key
-// is used by Kinesis Data Streams as input to a hash function that maps the
-// partition key and associated data to a specific shard. An MD5 hash function is
-// used to map partition keys to 128-bit integer values and to map associated data
-// records to shards. As a result of this hashing mechanism, all data records with
-// the same partition key map to the same shard within the stream. For more
-// information, see Adding Data to a Stream
+// stream for data ingestion and processing. When invoking this API, it is
+// recommended you use the StreamARN input parameter rather than the StreamName
+// input parameter. Each PutRecords request can support up to 500 records. Each
+// record in the request can be as large as 1 MiB, up to a limit of 5 MiB for the
+// entire request, including partition keys. Each shard can support writes up to
+// 1,000 records per second, up to a maximum data write total of 1 MiB per second.
+// You must specify the name of the stream that captures, stores, and transports
+// the data; and an array of request Records, with each record in the array
+// requiring a partition key and data blob. The record size limit applies to the
+// total size of the partition key and data blob. The data blob can be any type of
+// data; for example, a segment from a log file, geographic/location data, website
+// clickstream data, and so on. The partition key is used by Kinesis Data Streams
+// as input to a hash function that maps the partition key and associated data to a
+// specific shard. An MD5 hash function is used to map partition keys to 128-bit
+// integer values and to map associated data records to shards. As a result of this
+// hashing mechanism, all data records with the same partition key map to the same
+// shard within the stream. For more information, see Adding Data to a Stream
 // (https://docs.aws.amazon.com/kinesis/latest/dev/developing-producers-with-sdk.html#kinesis-using-sdk-java-add-data-to-stream)
 // in the Amazon Kinesis Data Streams Developer Guide. Each record in the Records
 // array may include an optional parameter, ExplicitHashKey, which overrides the
@@ -87,9 +88,10 @@ type PutRecordsInput struct {
 	// This member is required.
 	Records []types.PutRecordsRequestEntry
 
+	// The ARN of the stream.
+	StreamARN *string
+
 	// The stream name associated with the request.
-	//
-	// This member is required.
 	StreamName *string
 
 	noSmithyDocumentSerde

@@ -1738,6 +1738,11 @@ func awsAwsjson11_serializeOpDocumentAddTagsToStreamInput(v *AddTagsToStreamInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
 		ok.String(*v.StreamName)
@@ -1786,6 +1791,11 @@ func awsAwsjson11_serializeOpDocumentDecreaseStreamRetentionPeriodInput(v *Decre
 		ok.Integer(*v.RetentionPeriodHours)
 	}
 
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
 		ok.String(*v.StreamName)
@@ -1801,6 +1811,11 @@ func awsAwsjson11_serializeOpDocumentDeleteStreamInput(v *DeleteStreamInput, val
 	if v.EnforceConsumerDeletion != nil {
 		ok := object.Key("EnforceConsumerDeletion")
 		ok.Boolean(*v.EnforceConsumerDeletion)
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
 	}
 
 	if v.StreamName != nil {
@@ -1876,6 +1891,11 @@ func awsAwsjson11_serializeOpDocumentDescribeStreamInput(v *DescribeStreamInput,
 		ok.Integer(*v.Limit)
 	}
 
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
 		ok.String(*v.StreamName)
@@ -1887,6 +1907,11 @@ func awsAwsjson11_serializeOpDocumentDescribeStreamInput(v *DescribeStreamInput,
 func awsAwsjson11_serializeOpDocumentDescribeStreamSummaryInput(v *DescribeStreamSummaryInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
 
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
@@ -1907,6 +1932,11 @@ func awsAwsjson11_serializeOpDocumentDisableEnhancedMonitoringInput(v *DisableEn
 		}
 	}
 
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
 		ok.String(*v.StreamName)
@@ -1924,6 +1954,11 @@ func awsAwsjson11_serializeOpDocumentEnableEnhancedMonitoringInput(v *EnableEnha
 		if err := awsAwsjson11_serializeDocumentMetricsNameList(v.ShardLevelMetrics, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
 	}
 
 	if v.StreamName != nil {
@@ -1948,6 +1983,11 @@ func awsAwsjson11_serializeOpDocumentGetRecordsInput(v *GetRecordsInput, value s
 		ok.String(*v.ShardIterator)
 	}
 
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
 	return nil
 }
 
@@ -1970,6 +2010,11 @@ func awsAwsjson11_serializeOpDocumentGetShardIteratorInput(v *GetShardIteratorIn
 		ok.String(*v.StartingSequenceNumber)
 	}
 
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
 		ok.String(*v.StreamName)
@@ -1990,6 +2035,11 @@ func awsAwsjson11_serializeOpDocumentIncreaseStreamRetentionPeriodInput(v *Incre
 	if v.RetentionPeriodHours != nil {
 		ok := object.Key("RetentionPeriodHours")
 		ok.Integer(*v.RetentionPeriodHours)
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
 	}
 
 	if v.StreamName != nil {
@@ -2024,6 +2074,11 @@ func awsAwsjson11_serializeOpDocumentListShardsInput(v *ListShardsInput, value s
 		if err := awsAwsjson11_serializeDocumentShardFilter(v.ShardFilter, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
 	}
 
 	if v.StreamCreationTimestamp != nil {
@@ -2080,6 +2135,11 @@ func awsAwsjson11_serializeOpDocumentListStreamsInput(v *ListStreamsInput, value
 		ok.Integer(*v.Limit)
 	}
 
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
 	return nil
 }
 
@@ -2095,6 +2155,11 @@ func awsAwsjson11_serializeOpDocumentListTagsForStreamInput(v *ListTagsForStream
 	if v.Limit != nil {
 		ok := object.Key("Limit")
 		ok.Integer(*v.Limit)
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
 	}
 
 	if v.StreamName != nil {
@@ -2117,6 +2182,11 @@ func awsAwsjson11_serializeOpDocumentMergeShardsInput(v *MergeShardsInput, value
 	if v.ShardToMerge != nil {
 		ok := object.Key("ShardToMerge")
 		ok.String(*v.ShardToMerge)
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
 	}
 
 	if v.StreamName != nil {
@@ -2151,6 +2221,11 @@ func awsAwsjson11_serializeOpDocumentPutRecordInput(v *PutRecordInput, value smi
 		ok.String(*v.SequenceNumberForOrdering)
 	}
 
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
 		ok.String(*v.StreamName)
@@ -2168,6 +2243,11 @@ func awsAwsjson11_serializeOpDocumentPutRecordsInput(v *PutRecordsInput, value s
 		if err := awsAwsjson11_serializeDocumentPutRecordsRequestEntryList(v.Records, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
 	}
 
 	if v.StreamName != nil {
@@ -2199,6 +2279,11 @@ func awsAwsjson11_serializeOpDocumentRemoveTagsFromStreamInput(v *RemoveTagsFrom
 	object := value.Object()
 	defer object.Close()
 
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
 		ok.String(*v.StreamName)
@@ -2228,6 +2313,11 @@ func awsAwsjson11_serializeOpDocumentSplitShardInput(v *SplitShardInput, value s
 		ok.String(*v.ShardToSplit)
 	}
 
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
 		ok.String(*v.StreamName)
@@ -2250,6 +2340,11 @@ func awsAwsjson11_serializeOpDocumentStartStreamEncryptionInput(v *StartStreamEn
 		ok.String(*v.KeyId)
 	}
 
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
+	}
+
 	if v.StreamName != nil {
 		ok := object.Key("StreamName")
 		ok.String(*v.StreamName)
@@ -2270,6 +2365,11 @@ func awsAwsjson11_serializeOpDocumentStopStreamEncryptionInput(v *StopStreamEncr
 	if v.KeyId != nil {
 		ok := object.Key("KeyId")
 		ok.String(*v.KeyId)
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
 	}
 
 	if v.StreamName != nil {
@@ -2311,6 +2411,11 @@ func awsAwsjson11_serializeOpDocumentUpdateShardCountInput(v *UpdateShardCountIn
 	if len(v.ScalingType) > 0 {
 		ok := object.Key("ScalingType")
 		ok.String(string(v.ScalingType))
+	}
+
+	if v.StreamARN != nil {
+		ok := object.Key("StreamARN")
+		ok.String(*v.StreamARN)
 	}
 
 	if v.StreamName != nil {

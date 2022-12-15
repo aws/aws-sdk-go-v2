@@ -36,13 +36,14 @@ type UpdateInferenceExperimentInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon S3 storage configuration for the inference experiment.
+	// The Amazon S3 location and configuration for storing inference request and
+	// response data.
 	DataStorageConfig *types.InferenceExperimentDataStorageConfig
 
 	// The description of the inference experiment.
 	Description *string
 
-	// Array of ModelVariantConfigSummary objects. There is one for each variant, whose
+	// An array of ModelVariantConfig objects. There is one for each variant, whose
 	// infrastructure configuration you want to update.
 	ModelVariants []types.ModelVariantConfig
 
@@ -52,7 +53,11 @@ type UpdateInferenceExperimentInput struct {
 	// only the end date.
 	Schedule *types.InferenceExperimentSchedule
 
-	// The Amazon S3 storage configuration for the inference experiment.
+	// The configuration of ShadowMode inference experiment type. Use this field to
+	// specify a production variant which takes all the inference requests, and a
+	// shadow variant to which Amazon SageMaker replicates a percentage of the
+	// inference requests. For the shadow variant also specify the percentage of
+	// requests that Amazon SageMaker replicates.
 	ShadowModeConfig *types.ShadowModeConfig
 
 	noSmithyDocumentSerde

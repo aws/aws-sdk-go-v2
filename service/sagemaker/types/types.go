@@ -3057,11 +3057,11 @@ type DataCaptureConfig struct {
 	EnableCapture bool
 
 	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
-	// key that SageMaker uses to encrypt data on the storage volume attached to the ML
-	// compute instance that hosts the endpoint. The KmsKeyId can be any of the
-	// following formats:
+	// key that SageMaker uses to encrypt the captured data at rest using Amazon S3
+	// server-side encryption. The KmsKeyId can be any of the following formats:
 	//
-	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key
+	// ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// * Key ARN:
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
@@ -4164,10 +4164,9 @@ type Endpoint struct {
 	// variant is a model.
 	ProductionVariants []ProductionVariantSummary
 
-	// Array of ProductionVariant objects, one for each model that you want to host at
-	// this endpoint in shadow mode with production traffic replicated from the model
-	// specified on ProductionVariants.If you use this field, you can only specify one
-	// variant for ProductionVariants and one variant for ShadowProductionVariants.
+	// A list of the shadow variants hosted on the endpoint. Each shadow variant is a
+	// model in shadow mode with production traffic replicated from the proudction
+	// variant.
 	ShadowProductionVariants []ProductionVariantSummary
 
 	// A list of the tags associated with the endpoint. For more information, see
@@ -4294,7 +4293,8 @@ type EndpointMetadata struct {
 	// see EndpointSummary$EndpointStatus.
 	EndpointStatus EndpointStatus
 
-	// If the status of the endpoint is Failed, this provides the reason why it failed.
+	// If the status of the endpoint is Failed, or the status is InService but update
+	// operation fails, this provides the reason why it failed.
 	FailureReason *string
 
 	noSmithyDocumentSerde
@@ -7081,10 +7081,14 @@ type HyperParameterTuningJobWarmStartConfig struct {
 }
 
 // The configuration of resources, including compute instances and storage volumes
-// for use in training jobs launched by hyperparameter tuning jobs. Specify one or
-// more instance type and count and the allocation strategy for instance selection.
-// HyperParameterTuningResourceConfig supports all of the capabilities of
-// ResourceConfig with added functionality for flexible instance management.
+// for use in training jobs launched by hyperparameter tuning jobs.
+// HyperParameterTuningResourceConfig is similar to ResourceConfig, but has the
+// additional InstanceConfigs and AllocationStrategy fields to allow for flexible
+// instance management. Specify one or more instance types, count, and the
+// allocation strategy for instance selection. HyperParameterTuningResourceConfig
+// supports the capabilities of ResourceConfig with the exception of
+// KeepAlivePeriodInSeconds. Hyperparameter tuning jobs use warm pools by default,
+// which reuse clusters between training jobs.
 type HyperParameterTuningResourceConfig struct {
 
 	// The strategy that determines the order of preference for resources specified in
@@ -7272,10 +7276,11 @@ type InferenceExecutionConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon S3 location and configuration for storing inference experiment data.
+// The Amazon S3 location and configuration for storing inference request and
+// response data.
 type InferenceExperimentDataStorageConfig struct {
 
-	// The Amazon S3 bucket where the inference experiment data is stored.
+	// The Amazon S3 bucket where the inference request and response data is stored.
 	//
 	// This member is required.
 	Destination *string
@@ -7284,9 +7289,8 @@ type InferenceExperimentDataStorageConfig struct {
 	// specified SageMaker will by default base64 encode when capturing the data.
 	ContentType *CaptureContentTypeHeader
 
-	// The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service
-	// key that Amazon SageMaker uses to encrypt captured data when uploading to Amazon
-	// S3.
+	// The Amazon Web Services Key Management Service key that Amazon SageMaker uses to
+	// encrypt captured data at rest using Amazon S3 server-side encryption.
 	KmsKey *string
 
 	noSmithyDocumentSerde
@@ -7340,7 +7344,8 @@ type InferenceExperimentSummary struct {
 	Description *string
 
 	// The ARN of the IAM role that Amazon SageMaker can assume to access model
-	// artifacts and container images.
+	// artifacts and container images, and manage Amazon SageMaker Inference endpoints
+	// for model deployment.
 	RoleArn *string
 
 	// The duration for which the inference experiment ran or will run. The maximum
@@ -9624,7 +9629,7 @@ type ModelVariantConfig struct {
 	// This member is required.
 	InfrastructureConfig *ModelInfrastructureConfig
 
-	// The name of the model.
+	// The name of the Amazon SageMaker Model entity.
 	//
 	// This member is required.
 	ModelName *string
@@ -9645,12 +9650,29 @@ type ModelVariantConfigSummary struct {
 	// This member is required.
 	InfrastructureConfig *ModelInfrastructureConfig
 
-	// The name of the model.
+	// The name of the Amazon SageMaker Model entity.
 	//
 	// This member is required.
 	ModelName *string
 
-	// The status of the deployment.
+	// The status of deployment for the model variant on the hosted inference
+	// endpoint.
+	//
+	// * Creating - Amazon SageMaker is preparing the model variant on the
+	// hosted inference endpoint.
+	//
+	// * InService - The model variant is running on the
+	// hosted inference endpoint.
+	//
+	// * Updating - Amazon SageMaker is updating the model
+	// variant on the hosted inference endpoint.
+	//
+	// * Deleting - Amazon SageMaker is
+	// deleting the model variant on the hosted inference endpoint.
+	//
+	// * Deleted - The
+	// model variant has been deleted on the hosted inference endpoint. This can only
+	// happen after stopping the experiment.
 	//
 	// This member is required.
 	Status ModelVariantStatus
@@ -10472,8 +10494,8 @@ type OfflineStoreConfig struct {
 	// table when configuring an OfflineStore.
 	DisableGlueTableCreation bool
 
-	// Format for the offline store feature group. Iceberg is the optimal format for
-	// feature groups shared between offline and online stores.
+	// Format for the offline store table. Supported formats are Glue (Default) and
+	// Apache Iceberg (https://iceberg.apache.org/).
 	TableFormat TableFormat
 
 	noSmithyDocumentSerde
@@ -10986,13 +11008,13 @@ type PendingDeploymentSummary struct {
 	// This member is required.
 	EndpointConfigName *string
 
-	// List of PendingProductionVariantSummary objects.
+	// An array of PendingProductionVariantSummary objects, one for each model hosted
+	// behind this endpoint for the in-progress deployment.
 	ProductionVariants []PendingProductionVariantSummary
 
-	// Array of ProductionVariant objects, one for each model that you want to host at
-	// this endpoint in shadow mode with production traffic replicated from the model
-	// specified on ProductionVariants.If you use this field, you can only specify one
-	// variant for ProductionVariants and one variant for ShadowProductionVariants.
+	// An array of PendingProductionVariantSummary objects, one for each model hosted
+	// behind this endpoint in shadow mode with production traffic replicated from the
+	// model specified on ProductionVariants for the in-progress deployment.
 	ShadowProductionVariants []PendingProductionVariantSummary
 
 	// The start time of the deployment.
@@ -12501,15 +12523,16 @@ type QueryFilters struct {
 	noSmithyDocumentSerde
 }
 
-// The infrastructure configuration for deploying the model to real-time inference.
+// The infrastructure configuration for deploying the model to a real-time
+// inference endpoint.
 type RealTimeInferenceConfig struct {
 
-	// The instance type the model is deployed to.
+	// The number of instances of the type specified by InstanceType.
 	//
 	// This member is required.
 	InstanceCount *int32
 
-	// The number of instances of the type specified by InstanceType.
+	// The instance type the model is deployed to.
 	//
 	// This member is required.
 	InstanceType InstanceType
@@ -12646,6 +12669,10 @@ type RecommendationJobInputConfig struct {
 	// documentation.
 	VolumeKmsKeyId *string
 
+	// Inference Recommender provisions SageMaker endpoints with access to VPC in the
+	// inference recommendation job.
+	VpcConfig *RecommendationJobVpcConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -12721,6 +12748,24 @@ type RecommendationJobStoppingConditions struct {
 	// fetch the response from the container of a model and the time taken to complete
 	// the inference in the container.
 	ModelLatencyThresholds []ModelLatencyThreshold
+
+	noSmithyDocumentSerde
+}
+
+// Inference Recommender provisions SageMaker endpoints with access to VPC in the
+// inference recommendation job.
+type RecommendationJobVpcConfig struct {
+
+	// The VPC security group IDs. IDs have the form of sg-xxxxxxxx. Specify the
+	// security groups for the VPC that is specified in the Subnets field.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// The ID of the subnets in the VPC to which you want to connect your model.
+	//
+	// This member is required.
+	Subnets []string
 
 	noSmithyDocumentSerde
 }
@@ -12875,8 +12920,8 @@ type ResolvedAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the resources, including ML compute instances and ML storage volumes,
-// to use for model training.
+// Describes the resources, including machine learning (ML) compute instances and
+// ML storage volumes, to use for model training.
 type ResourceConfig struct {
 
 	// The size of the ML storage volume that you want to provision. ML storage volumes
@@ -12910,7 +12955,24 @@ type ResourceConfig struct {
 	// The configuration of a heterogeneous cluster in JSON format.
 	InstanceGroups []InstanceGroup
 
-	// The ML compute instance type.
+	// The ML compute instance type. SageMaker Training on Amazon Elastic Compute Cloud
+	// (EC2) P4de instances is in preview release starting December 9th, 2022. Amazon
+	// EC2 P4de instances (http://aws.amazon.com/ec2/instance-types/p4/) (currently in
+	// preview) are powered by 8 NVIDIA A100 GPUs with 80GB high-performance HBM2e GPU
+	// memory, which accelerate the speed of training ML models that need to be trained
+	// on large datasets of high-resolution data. In this preview release, Amazon
+	// SageMaker supports ML training jobs on P4de instances (ml.p4de.24xlarge) to
+	// reduce model training time. The ml.p4de.24xlarge instances are available in the
+	// following Amazon Web Services Regions.
+	//
+	// * US East (N. Virginia) (us-east-1)
+	//
+	// *
+	// US West (Oregon) (us-west-2)
+	//
+	// To request quota limit increase and start using
+	// P4de instances, contact the SageMaker Training service team through your account
+	// team.
 	InstanceType TrainingInstanceType
 
 	// The duration of time in seconds to retain configured resources in a warm pool
@@ -13502,8 +13564,11 @@ type ServiceCatalogProvisioningUpdateDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Shows which variant is a production variant and which variant is a shadow
-// variant. For shadow variants, also shows the sampling percentages.
+// The configuration of ShadowMode inference experiment type, which specifies a
+// production variant to take all the inference requests, and a shadow variant to
+// which Amazon SageMaker replicates a percentage of the inference requests. For
+// the shadow variant it also specifies the percentage of requests that Amazon
+// SageMaker replicates.
 type ShadowModeConfig struct {
 
 	// List of shadow variant configurations.
@@ -13511,7 +13576,7 @@ type ShadowModeConfig struct {
 	// This member is required.
 	ShadowModelVariants []ShadowModelVariantConfig
 
-	// The name of the production variant.
+	// The name of the production variant, which takes all the inference requests.
 	//
 	// This member is required.
 	SourceModelVariantName *string
@@ -13522,7 +13587,8 @@ type ShadowModeConfig struct {
 // The name and sampling percentage of a shadow variant.
 type ShadowModelVariantConfig struct {
 
-	// The percentage of inference requests that are replicated to the shadow variant.
+	// The percentage of inference requests that Amazon SageMaker replicates from the
+	// production variant to the shadow variant.
 	//
 	// This member is required.
 	SamplingPercentage int32

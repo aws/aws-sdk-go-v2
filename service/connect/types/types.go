@@ -434,7 +434,7 @@ type ContactFlowModuleSummary struct {
 
 // Contains summary information about a flow. You can also create and update flows
 // using the Amazon Connect Flow language
-// (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
+// (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
 type ContactFlowSummary struct {
 
 	// The Amazon Resource Name (ARN) of the flow.

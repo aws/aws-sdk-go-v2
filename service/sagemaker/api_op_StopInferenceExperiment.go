@@ -48,8 +48,8 @@ type StopInferenceExperimentInput struct {
 	// This member is required.
 	Name *string
 
-	// Array of ModelVariantConfig objects. There is one for each variant that you want
-	// to deploy after the inference experiment stops. Each ModelVariantConfig
+	// An array of ModelVariantConfig objects. There is one for each variant that you
+	// want to deploy after the inference experiment stops. Each ModelVariantConfig
 	// describes the infrastructure configuration for deploying the corresponding
 	// variant.
 	DesiredModelVariants []types.ModelVariantConfig

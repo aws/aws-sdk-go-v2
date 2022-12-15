@@ -2796,6 +2796,790 @@ type AwsEc2InstanceNetworkInterfacesDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a block device mapping for an Amazon Elastic Compute Cloud
+// (Amazon EC2) launch template.
+type AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails struct {
+
+	// The device name.
+	DeviceName *string
+
+	// Parameters used to automatically set up Amazon EBS volumes when the instance is
+	// launched.
+	Ebs *AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails
+
+	// Omits the device from the block device mapping when an empty string is
+	// specified.
+	NoDevice *string
+
+	// The virtual device name (ephemeralN). Instance store volumes are numbered
+	// starting from 0. An instance type with 2 available instance store volumes can
+	// specify mappings for ephemeral0 and ephemeral1. The number of available instance
+	// store volumes depends on the instance type.
+	VirtualName *string
+
+	noSmithyDocumentSerde
+}
+
+// Parameters for a block device for an Amazon Elastic Block Store (Amazon EBS)
+// volume in an Amazon EC2 launch template.
+type AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails struct {
+
+	// Indicates whether the EBS volume is deleted on instance termination.
+	DeleteOnTermination bool
+
+	// Indicates whether the EBS volume is encrypted. Encrypted volumes can only be
+	// attached to instances that support Amazon EBS encryption. If you're creating a
+	// volume from a snapshot, you can't specify an encryption value.
+	Encrypted bool
+
+	// The number of I/O operations per second (IOPS).
+	Iops int32
+
+	// The Amazon Resource Name (ARN) of the symmetric Key Management Service (KMS)
+	// customer managed key used for encryption.
+	KmsKeyId *string
+
+	// The ID of the EBS snapshot.
+	SnapshotId *string
+
+	// The throughput to provision for a gp3 volume, with a maximum of 1,000 MiB/s.
+	Throughput int32
+
+	// The size of the volume, in GiBs. You must specify either a snapshot ID or a
+	// volume size.
+	VolumeSize int32
+
+	// The volume type.
+	VolumeType *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the target Capacity Reservation or Capacity Reservation group
+// in which to run an Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails struct {
+
+	// The ID of the Capacity Reservation in which to run the instance.
+	CapacityReservationId *string
+
+	// The Amazon Resource Name (ARN) of the Capacity Reservation resource group in
+	// which to run the instance.
+	CapacityReservationResourceGroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the Capacity Reservation targeting option of an Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails struct {
+
+	// Indicates the instance's Capacity Reservation preferences. If equal to open, the
+	// instance can run in any open Capacity Reservation that has matching attributes
+	// (instance type, platform, Availability Zone). If equal to none, the instance
+	// avoids running in a Capacity Reservation even if one is available. The instance
+	// runs in On-Demand capacity.
+	CapacityReservationPreference *string
+
+	// Specifies a target Capacity Reservation.
+	CapacityReservationTarget *AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the CPU options for an Amazon EC2 instance. For more information, see
+// Optimize CPU options
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html)
+// in the Amazon Elastic Compute Cloud User Guide.
+type AwsEc2LaunchTemplateDataCpuOptionsDetails struct {
+
+	// The number of CPU cores for the instance.
+	CoreCount int32
+
+	// The number of threads per CPU core. A value of 1 disables multithreading for the
+	// instance, The default value is 2.
+	ThreadsPerCore int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the credit option for CPU usage of a T2, T3, or T3a Amazon EC2
+// instance.
+type AwsEc2LaunchTemplateDataCreditSpecificationDetails struct {
+
+	// The credit option for CPU usage of a T instance.
+	CpuCredits *string
+
+	noSmithyDocumentSerde
+}
+
+// The information to include in an Amazon Elastic Compute Cloud (Amazon EC2)
+// launch template.
+type AwsEc2LaunchTemplateDataDetails struct {
+
+	// Information about a block device mapping for an Amazon EC2 launch template.
+	BlockDeviceMappingSet []AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails
+
+	// Specifies an instance's Capacity Reservation targeting option. You can specify
+	// only one option at a time.
+	CapacityReservationSpecification *AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails
+
+	// Specifies the CPU options for an instance. For more information, see Optimize
+	// CPU options
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html)
+	// in the Amazon Elastic Compute Cloud User Guide.
+	CpuOptions *AwsEc2LaunchTemplateDataCpuOptionsDetails
+
+	// Specifies the credit option for CPU usage of a T2, T3, or T3a instance.
+	CreditSpecification *AwsEc2LaunchTemplateDataCreditSpecificationDetails
+
+	// Indicates whether to enable the instance for stop protection. For more
+	// information, see Enable stop protection
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Stop_Start.html#Using_StopProtection)
+	// in the Amazon EC2 User Guide.
+	DisableApiStop bool
+
+	// If you set this parameter to true, you can't terminate the instance using the
+	// Amazon EC2 console, CLI, or API. If set to true, you can.
+	DisableApiTermination bool
+
+	// Indicates whether the instance is optimized for Amazon EBS I/O.
+	EbsOptimized bool
+
+	// Provides details about Elastic Graphics accelerators to associate with the
+	// instance.
+	ElasticGpuSpecificationSet []AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails
+
+	// The Amazon Elastic Inference accelerator for the instance.
+	ElasticInferenceAcceleratorSet []AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails
+
+	// Indicates whether the Amazon EC2 instance is enabled for Amazon Web Services
+	// Nitro Enclaves.
+	EnclaveOptions *AwsEc2LaunchTemplateDataEnclaveOptionsDetails
+
+	// Specifies whether your Amazon EC2 instance is configured for hibernation.
+	HibernationOptions *AwsEc2LaunchTemplateDataHibernationOptionsDetails
+
+	// The name or Amazon Resource Name (ARN) of an IAM instance profile.
+	IamInstanceProfile *AwsEc2LaunchTemplateDataIamInstanceProfileDetails
+
+	// The ID of the Amazon Machine Image (AMI).
+	ImageId *string
+
+	// Provides the options for specifying the instance initiated shutdown behavior.
+	InstanceInitiatedShutdownBehavior *string
+
+	// Specifies the market (purchasing) option for an instance.
+	InstanceMarketOptions *AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails
+
+	// The attributes for the instance types. When you specify instance attributes,
+	// Amazon EC2 will identify instance types with these attributes. If you specify
+	// InstanceRequirements, you can't specify InstanceType.
+	InstanceRequirements *AwsEc2LaunchTemplateDataInstanceRequirementsDetails
+
+	// The instance type. For more information, see Instance types
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html) in the
+	// Amazon EC2 User Guide. If you specify InstanceType, you can't specify
+	// InstanceRequirements.
+	InstanceType *string
+
+	// The ID of the kernel.
+	KernelId *string
+
+	// The name of the key pair that allows users to connect to the instance.
+	KeyName *string
+
+	// Specifies a license configuration for an instance.
+	LicenseSet []AwsEc2LaunchTemplateDataLicenseSetDetails
+
+	// The maintenance options of your instance.
+	MaintenanceOptions *AwsEc2LaunchTemplateDataMaintenanceOptionsDetails
+
+	// The metadata options for the instance. For more information, see Instance
+	// metadata and user data
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
+	// in the Amazon EC2 User Guide.
+	MetadataOptions *AwsEc2LaunchTemplateDataMetadataOptionsDetails
+
+	// The monitoring for the instance.
+	Monitoring *AwsEc2LaunchTemplateDataMonitoringDetails
+
+	// Specifies the parameters for a network interface that is attached to the
+	// instance.
+	NetworkInterfaceSet []AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails
+
+	// Specifies the placement of an instance.
+	Placement *AwsEc2LaunchTemplateDataPlacementDetails
+
+	// The options for the instance hostname.
+	PrivateDnsNameOptions *AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails
+
+	// The ID of the RAM disk.
+	RamDiskId *string
+
+	// One or more security group IDs.
+	SecurityGroupIdSet []string
+
+	// One or more security group names. For a nondefault VPC, you must use security
+	// group IDs instead. You cannot specify both a security group ID and security name
+	// in the same request.
+	SecurityGroupSet []string
+
+	// The user data to make available to the instance.
+	UserData *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about an Elastic Graphics specification for an Amazon EC2
+// launch template.
+type AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails struct {
+
+	// The type of Elastic Graphics accelerator.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details for an Amazon Elastic Inference accelerator.
+type AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails struct {
+
+	// The number of Elastic Inference accelerators to attach to the instance.
+	Count int32
+
+	// The type of Elastic Inference accelerator.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Indicates whether the instance is enabled for Amazon Web Services Nitro
+// Enclaves.
+type AwsEc2LaunchTemplateDataEnclaveOptionsDetails struct {
+
+	// If this parameter is set to true, the instance is enabled for Amazon Web
+	// Services Nitro Enclaves.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies whether your Amazon EC2 instance is configured for hibernation.
+type AwsEc2LaunchTemplateDataHibernationOptionsDetails struct {
+
+	// If you set this parameter to true, the instance is enabled for hibernation.
+	Configured bool
+
+	noSmithyDocumentSerde
+}
+
+// Provides details for an Identity and Access Management (IAM) instance profile,
+// which is a container for an IAM role for your instance.
+type AwsEc2LaunchTemplateDataIamInstanceProfileDetails struct {
+
+	// The Amazon Resource Name (ARN) of the instance profile.
+	Arn *string
+
+	// The name of the instance profile.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the market (purchasing) option for an Amazon EC2
+// instance.
+type AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails struct {
+
+	// The market type.
+	MarketType *string
+
+	// The options for Spot Instances.
+	SpotOptions *AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the market (purchasing) options for Spot Instances.
+type AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails struct {
+
+	// Deprecated.
+	BlockDurationMinutes int32
+
+	// The behavior when a Spot Instance is interrupted.
+	InstanceInterruptionBehavior *string
+
+	// The maximum hourly price you're willing to pay for the Spot Instances.
+	MaxPrice *string
+
+	// The Spot Instance request type.
+	SpotInstanceType *string
+
+	// The end date of the request, in UTC format (YYYY-MM-DDTHH:MM:SSZ), for
+	// persistent requests.
+	ValidUntil *string
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web
+// Services Inferentia chips) on an Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails struct {
+
+	// The maximum number of accelerators. If this parameter isn't specified, there's
+	// no maximum limit. To exclude accelerator-enabled instance types, set Max to 0.
+	Max int32
+
+	// The minimum number of accelerators. If this parameter isn't specified, there's
+	// no minimum limit.
+	Min int32
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum amount of memory, in MiB, for the accelerators on an
+// Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails struct {
+
+	// The maximum amount of memory, in MiB. If this parameter isn't specified, there's
+	// no maximum limit.
+	Max int32
+
+	// The minimum amount of memory, in MiB. If 0 is specified, there's no maximum
+	// limit.
+	Min int32
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum baseline bandwidth to Amazon Elastic Block Store (Amazon
+// EBS), in Mbps. For more information, see Amazon EBS–optimized instances
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the
+// Amazon EC2 User Guide.
+type AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails struct {
+
+	// The maximum baseline bandwidth, in Mbps. If this parameter is omitted, there's
+	// no maximum limit.
+	Max int32
+
+	// The minimum baseline bandwidth, in Mbps. If this parameter is omitted, there's
+	// no minimum limit.
+	Min int32
+
+	noSmithyDocumentSerde
+}
+
+// The attributes for the Amazon EC2 instance types.
+type AwsEc2LaunchTemplateDataInstanceRequirementsDetails struct {
+
+	// The minimum and maximum number of accelerators (GPUs, FPGAs, or Amazon Web
+	// Services Inferentia chips) on an instance.
+	AcceleratorCount *AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails
+
+	// Indicates whether instance types must have accelerators by specific
+	// manufacturers.
+	AcceleratorManufacturers []string
+
+	// The accelerators that must be on the instance type.
+	AcceleratorNames []string
+
+	// The minimum and maximum amount of total accelerator memory, in MiB.
+	AcceleratorTotalMemoryMiB *AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails
+
+	// The accelerator types that must be on the instance type.
+	AcceleratorTypes []string
+
+	// Indicates whether bare metal instance types must be included, excluded, or
+	// required.
+	BareMetal *string
+
+	// The minimum and maximum baseline bandwidth to Amazon EBS, in Mbps. For more
+	// information, see Amazon EBS optimized instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-optimized.html) in the
+	// Amazon EC2 User Guide.
+	BaselineEbsBandwidthMbps *AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails
+
+	// Indicates whether burstable performance T instance types are included, excluded,
+	// or required. For more information, Burstable performance instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)
+	// in the Amazon EC2 User Guide.
+	BurstablePerformance *string
+
+	// The CPU manufacturers to include.
+	CpuManufacturers []string
+
+	// The instance types to exclude.
+	ExcludedInstanceTypes []string
+
+	// Indicates whether current or previous generation instance types are included.
+	InstanceGenerations []string
+
+	// Indicates whether instance types with instance store volumes are included,
+	// excluded, or required. For more information, see Amazon EC2 instance store
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in
+	// the Amazon EC2 User Guide.
+	LocalStorage *string
+
+	// The type of local storage that is required.
+	LocalStorageTypes []string
+
+	// The minimum and maximum amount of memory per vCPU, in GiB.
+	MemoryGiBPerVCpu *AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails
+
+	// The minimum and maximum amount of memory, in MiB.
+	MemoryMiB *AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails
+
+	// The minimum and maximum number of network interfaces.
+	NetworkInterfaceCount *AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails
+
+	// The price protection threshold for On-Demand Instances. This is the maximum
+	// you’ll pay for an On-Demand Instance, expressed as a percentage above the least
+	// expensive current generation M, C, or R instance type with your specified
+	// attributes. When Amazon EC2 selects instance types with your attributes, it
+	// excludes instance types priced above your threshold. The parameter accepts an
+	// integer, which Amazon EC2 interprets as a percentage. A high value, such as
+	// 999999, turns off price protection.
+	OnDemandMaxPricePercentageOverLowestPrice int32
+
+	// Indicates whether instance types must support hibernation for On-Demand
+	// Instances.
+	RequireHibernateSupport bool
+
+	// The price protection threshold for Spot Instances. This is the maximum you’ll
+	// pay for a Spot Instance, expressed as a percentage above the least expensive
+	// current generation M, C, or R instance type with your specified attributes. When
+	// Amazon EC2 selects instance types with your attributes, it excludes instance
+	// types priced above your threshold. The parameter accepts an integer, which
+	// Amazon EC2 interprets as a percentage. A high value, such as 999999, turns off
+	// price protection.
+	SpotMaxPricePercentageOverLowestPrice int32
+
+	// The minimum and maximum amount of total local storage, in GB.
+	TotalLocalStorageGB *AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails
+
+	// The minimum and maximum number of vCPUs.
+	VCpuCount *AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum amount of memory per vCPU, in GiB.
+type AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails struct {
+
+	// The maximum amount of memory per vCPU, in GiB. If this parameter is omitted,
+	// there's no maximum limit.
+	Max float64
+
+	// The minimum amount of memory per vCPU, in GiB. If this parameter is omitted,
+	// there's no maximum limit.
+	Min float64
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum amount of memory, in MiB, for an Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails struct {
+
+	// The maximum amount of memory, in MiB.
+	Max int32
+
+	// The minimum amount of memory, in MiB.
+	Min int32
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum number of network interfaces to be attached to an Amazon
+// EC2 instance.
+type AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails struct {
+
+	// The maximum number of network interfaces.
+	Max int32
+
+	// The minimum number of network interfaces.
+	Min int32
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum amount of total local storage, in GB, that an Amazon EC2
+// instance uses.
+type AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails struct {
+
+	// The maximum amount of total local storage, in GB.
+	Max float64
+
+	// The minimum amount of total local storage, in GB.
+	Min float64
+
+	noSmithyDocumentSerde
+}
+
+// The minimum and maximum number of vCPUs for an Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails struct {
+
+	// The maximum number of vCPUs.
+	Max int32
+
+	// The minimum number of vCPUs.
+	Min int32
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the license configuration for an Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataLicenseSetDetails struct {
+
+	// The Amazon Resource Name (ARN) of the license configuration.
+	LicenseConfigurationArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The maintenance options of an Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataMaintenanceOptionsDetails struct {
+
+	// Disables the automatic recovery behavior of your instance or sets it to default.
+	AutoRecovery *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the metadata options for an Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataMetadataOptionsDetails struct {
+
+	// Enables or disables the HTTP metadata endpoint on your instances. If the
+	// parameter is not specified, the default state is enabled, and you won’t be able
+	// to access your instance metadata.
+	HttpEndpoint *string
+
+	// Enables or disables the IPv6 endpoint for the instance metadata service.
+	HttpProtocolIpv6 *string
+
+	// The desired HTTP PUT response hop limit for instance metadata requests. The
+	// larger the number, the further instance metadata requests can travel.
+	HttpPutResponseHopLimit int32
+
+	// The state of token usage for your instance metadata requests.
+	HttpTokens *string
+
+	// When set to enabled, this parameter allows access to instance tags from the
+	// instance metadata. When set to disabled, it turns off access to instance tags
+	// from the instance metadata. For more information, see Work with instance tags in
+	// instance metadata
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html#work-with-tags-in-IMDS)
+	// in the Amazon EC2 User Guide.
+	InstanceMetadataTags *string
+
+	noSmithyDocumentSerde
+}
+
+// The monitoring for an Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataMonitoringDetails struct {
+
+	// Enables detailed monitoring when true is specified. Otherwise, basic monitoring
+	// is enabled. For more information about detailed monitoring, see Enable or turn
+	// off detailed monitoring for your instances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-cloudwatch-new.html)
+	// in the Amazon EC2 User Guide.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+// One or more network interfaces to attach to an Amazon EC2 instance. If you
+// specify a network interface, you must specify security groups and subnets as
+// part of the network interface.
+type AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails struct {
+
+	// Indicates whether to associate a Carrier IP address with eth0 for a new network
+	// interface. You use this option when you launch an instance in a Wavelength Zone
+	// and want to associate a Carrier IP address with the network interface. For more
+	// information, see Carrier IP address
+	// (https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip)
+	// in the Wavelength Developer Guide.
+	AssociateCarrierIpAddress bool
+
+	// Associates a public IPv4 address with eth0 for a new network interface.
+	AssociatePublicIpAddress bool
+
+	// Indicates whether the network interface is deleted when the instance is
+	// terminated.
+	DeleteOnTermination bool
+
+	// A description for the network interface.
+	Description *string
+
+	// The device index for the network interface attachment.
+	DeviceIndex int32
+
+	// The IDs of one or more security groups.
+	Groups []string
+
+	// The type of network interface.
+	InterfaceType *string
+
+	// The number of IPv4 prefixes to be automatically assigned to the network
+	// interface. You cannot use this option if you use the Ipv4Prefixes option.
+	Ipv4PrefixCount int32
+
+	// One or more IPv4 prefixes to be assigned to the network interface. You cannot
+	// use this option if you use the Ipv4PrefixCount option.
+	Ipv4Prefixes []AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails
+
+	// The number of IPv6 addresses to assign to a network interface. Amazon EC2
+	// automatically selects the IPv6 addresses from the subnet range. You can't use
+	// this option if you use Ipv6Addresses.
+	Ipv6AddressCount int32
+
+	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your
+	// subnet. You can't use this option if you use Ipv6AddressCount.
+	Ipv6Addresses []AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails
+
+	// The number of IPv6 prefixes to be automatically assigned to the network
+	// interface. You cannot use this option if you use the Ipv6Prefix option.
+	Ipv6PrefixCount int32
+
+	// One or more IPv6 prefixes to be assigned to the network interface. You cannot
+	// use this option if you use the Ipv6PrefixCount option.
+	Ipv6Prefixes []AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails
+
+	// The index of the network card. Some instance types support multiple network
+	// cards. The primary network interface must be assigned to network card index 0.
+	// The default is network card index 0.
+	NetworkCardIndex int32
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string
+
+	// The primary private IPv4 address of the network interface.
+	PrivateIpAddress *string
+
+	// One or more private IPv4 addresses.
+	PrivateIpAddresses []AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails
+
+	// The number of secondary private IPv4 addresses to assign to a network interface.
+	SecondaryPrivateIpAddressCount int32
+
+	// The ID of the subnet for the network interface.
+	SubnetId *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details on one or more IPv4 prefixes for a network interface.
+type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails struct {
+
+	// The IPv4 prefix. For more information, see Assigning prefixes to Amazon EC2
+	// network interfaces
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the
+	// Amazon Elastic Compute Cloud User Guide.
+	Ipv4Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an IPv6 address in an Amazon EC2 launch template.
+type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails struct {
+
+	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your
+	// subnet.
+	Ipv6Address *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details on one or more IPv6 prefixes to be assigned to the network
+// interface.
+type AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails struct {
+
+	// The IPv6 prefix.
+	Ipv6Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// One or more private IPv4 addresses.
+type AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails struct {
+
+	// Indicates whether the private IPv4 address is the primary private IPv4 address.
+	// Only one IPv4 address can be designated as primary.
+	Primary bool
+
+	// The private IPv4 address.
+	PrivateIpAddress *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about the placement of an Amazon EC2 instance.
+type AwsEc2LaunchTemplateDataPlacementDetails struct {
+
+	// The affinity setting for an instance on an EC2 Dedicated Host.
+	Affinity *string
+
+	// The Availability Zone for the instance.
+	AvailabilityZone *string
+
+	// The name of the placement group for the instance.
+	GroupName *string
+
+	// The ID of the Dedicated Host for the instance.
+	HostId *string
+
+	// The Amazon Resource Name (ARN) of the host resource group in which to launch the
+	// instances.
+	HostResourceGroupArn *string
+
+	// The number of the partition the instance should launch in.
+	PartitionNumber int32
+
+	// Reserved for future use.
+	SpreadDomain *string
+
+	// The tenancy of the instance (if the instance is running in a VPC). An instance
+	// with a tenancy of dedicated runs on single-tenant hardware.
+	Tenancy *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the options for Amazon EC2 instance hostnames.
+type AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails struct {
+
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS AAAA
+	// records.
+	EnableResourceNameDnsAAAARecord bool
+
+	// Indicates whether to respond to DNS queries for instance hostnames with DNS A
+	// records.
+	EnableResourceNameDnsARecord bool
+
+	// The type of hostname for EC2 instances.
+	HostnameType *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the properties for creating an Amazon Elastic Compute Cloud (Amazon
+// EC2) launch template.
+type AwsEc2LaunchTemplateDetails struct {
+
+	// The default version of the launch template.
+	DefaultVersionNumber int64
+
+	// An ID for the launch template.
+	Id *string
+
+	// The latest version of the launch template.
+	LatestVersionNumber int64
+
+	// The information to include in the launch template.
+	LaunchTemplateData *AwsEc2LaunchTemplateDataDetails
+
+	// A name for the launch template.
+	LaunchTemplateName *string
+
+	noSmithyDocumentSerde
+}
+
 // An association between the network ACL and a subnet.
 type AwsEc2NetworkAclAssociation struct {
 
@@ -8775,6 +9559,112 @@ type AwsS3ObjectDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Provides details about an Amazon SageMaker notebook instance.
+type AwsSageMakerNotebookInstanceDetails struct {
+
+	// A list of Amazon Elastic Inference instance types to associate with the notebook
+	// instance. Currently, only one instance type can be associated with a notebook
+	// instance.
+	AcceleratorTypes []string
+
+	// An array of up to three Git repositories associated with the notebook instance.
+	// These can be either the names of Git repositories stored as resources in your
+	// account, or the URL of Git repositories in AWS CodeCommit
+	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
+	// other Git repository. These repositories are cloned at the same level as the
+	// default repository of your notebook instance. For more information, see
+	// Associating Git repositories with SageMaker notebook instances
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html) in the
+	// Amazon SageMaker Developer Guide.
+	AdditionalCodeRepositories []string
+
+	// The Git repository associated with the notebook instance as its default code
+	// repository. This can be either the name of a Git repository stored as a resource
+	// in your account, or the URL of a Git repository in AWS CodeCommit
+	// (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html) or in any
+	// other Git repository. When you open a notebook instance, it opens in the
+	// directory that contains this repository. For more information, see Associating
+	// Git repositories with SageMaker notebook instances
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/nbi-git-repo.html) in the
+	// Amazon SageMaker Developer Guide.
+	DefaultCodeRepository *string
+
+	// Sets whether SageMaker provides internet access to the notebook instance. If you
+	// set this to Disabled, this notebook instance is able to access resources only in
+	// your VPC, and is not be able to connect to SageMaker training and endpoint
+	// services unless you configure a Network Address Translation (NAT) Gateway in
+	// your VPC.
+	DirectInternetAccess *string
+
+	// If status of the instance is Failed, the reason it failed.
+	FailureReason *string
+
+	// Information on the IMDS configuration of the notebook instance.
+	InstanceMetadataServiceConfiguration *AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails
+
+	// The type of machine learning (ML) compute instance to launch for the notebook
+	// instance.
+	InstanceType *string
+
+	// The Amazon Resource Name (ARN) of an Key Management Service (KMS) key that
+	// SageMaker uses to encrypt data on the storage volume attached to your notebook
+	// instance. The KMS key you provide must be enabled. For information, see Enabling
+	// and disabling keys
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/enabling-keys.html) in
+	// the Key Management Service Developer Guide.
+	KmsKeyId *string
+
+	// The network interface ID that SageMaker created when the instance was created.
+	NetworkInterfaceId *string
+
+	// The Amazon Resource Name (ARN) of the notebook instance.
+	NotebookInstanceArn *string
+
+	// The name of a notebook instance lifecycle configuration.
+	NotebookInstanceLifecycleConfigName *string
+
+	// The name of the new notebook instance.
+	NotebookInstanceName *string
+
+	// The status of the notebook instance.
+	NotebookInstanceStatus *string
+
+	// The platform identifier of the notebook instance runtime environment.
+	PlatformIdentifier *string
+
+	// The Amazon Resource Name (ARN) of the IAM role associated with the instance.
+	RoleArn *string
+
+	// Whether root access is enabled or disabled for users of the notebook instance.
+	RootAccess *string
+
+	// The VPC security group IDs.
+	SecurityGroups []string
+
+	// The ID of the VPC subnet to which you have a connectivity from your ML compute
+	// instance.
+	SubnetId *string
+
+	// The URL that you use to connect to the Jupyter notebook that is running in your
+	// notebook instance.
+	Url *string
+
+	// The size, in GB, of the ML storage volume to attach to the notebook instance.
+	VolumeSizeInGB int32
+
+	noSmithyDocumentSerde
+}
+
+// Information on the instance metadata service (IMDS) configuration of the
+// notebook instance.
+type AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails struct {
+
+	// Indicates the minimum IMDS version that the notebook instance supports.
+	MinimumInstanceMetadataServiceVersion *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about an Secrets Manager secret.
 type AwsSecretsManagerSecretDetails struct {
 
@@ -9999,6 +10889,281 @@ type AwsWafRulePredicateListDetails struct {
 
 	// The type of predicate in a rule, such as ByteMatch or IPSet.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that WAF should allow the request and optionally defines additional
+// custom handling for the request.
+type AwsWafv2ActionAllowDetails struct {
+
+	// Defines custom handling for the web request. For information about customizing
+	// web requests and responses, see Customizing web requests and responses in WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the WAF Developer Guide..
+	CustomRequestHandling *AwsWafv2CustomRequestHandlingDetails
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that WAF should block the request and optionally defines additional
+// custom handling for the response to the web request.
+type AwsWafv2ActionBlockDetails struct {
+
+	// Defines a custom response for the web request. For information, see Customizing
+	// web requests and responses in WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the WAF Developer Guide..
+	CustomResponse *AwsWafv2CustomResponseDetails
+
+	noSmithyDocumentSerde
+}
+
+// A custom header for custom request and response handling.
+type AwsWafv2CustomHttpHeader struct {
+
+	// The name of the custom header.
+	Name *string
+
+	// The value of the custom header.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Custom request handling behavior that inserts custom headers into a web request.
+// WAF uses custom request handling when the rule action doesn't block the request.
+type AwsWafv2CustomRequestHandlingDetails struct {
+
+	// The HTTP headers to insert into the request.
+	InsertHeaders []AwsWafv2CustomHttpHeader
+
+	noSmithyDocumentSerde
+}
+
+// A custom response to send to the client. You can define a custom response for
+// rule actions and default web ACL actions that are set to block.
+type AwsWafv2CustomResponseDetails struct {
+
+	// References the response body that you want WAF to return to the web request
+	// client. You can define a custom response for a rule action or a default web ACL
+	// action that is set to block.
+	CustomResponseBodyKey *string
+
+	// The HTTP status code to return to the client. For a list of status codes that
+	// you can use in your custom responses, see Supported status codes for custom
+	// response
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html)
+	// in the WAF Developer Guide.
+	ResponseCode int32
+
+	// The HTTP headers to use in the response.
+	ResponseHeaders []AwsWafv2CustomHttpHeader
+
+	noSmithyDocumentSerde
+}
+
+// Details about an WAFv2 rule group.
+type AwsWafv2RuleGroupDetails struct {
+
+	// The Amazon Resource Name (ARN) of the entity.
+	Arn *string
+
+	// The web ACL capacity units (WCUs) required for this rule group.
+	Capacity int64
+
+	// A description of the rule group that helps with identification.
+	Description *string
+
+	// A unique identifier for the rule group.
+	Id *string
+
+	// The name of the rule group. You cannot change the name of a rule group after you
+	// create it.
+	Name *string
+
+	// The Rule statements used to identify the web requests that you want to allow,
+	// block, or count. Each rule includes one top-level statement that WAF uses to
+	// identify matching web requests, and parameters that govern how WAF handles them.
+	Rules []AwsWafv2RulesDetails
+
+	// Specifies whether the rule group is for an Amazon CloudFront distribution or for
+	// a regional application. A regional application can be an Application Load
+	// Balancer (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, or an
+	// Amazon Cognito user pool.
+	Scope *string
+
+	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	VisibilityConfig *AwsWafv2VisibilityConfigDetails
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that WAF should run a CAPTCHA check against the request.
+type AwsWafv2RulesActionCaptchaDetails struct {
+
+	// Defines custom handling for the web request, used when the CAPTCHA inspection
+	// determines that the request's token is valid and unexpired. For more
+	// information, see Customizing web requests and responses in WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the WAF Developer Guide..
+	CustomRequestHandling *AwsWafv2CustomRequestHandlingDetails
+
+	noSmithyDocumentSerde
+}
+
+// Specifies that WAF should count the request.
+type AwsWafv2RulesActionCountDetails struct {
+
+	// Defines custom handling for the web request. For more information, see
+	// Customizing web requests and responses in WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the WAF Developer Guide..
+	CustomRequestHandling *AwsWafv2CustomRequestHandlingDetails
+
+	noSmithyDocumentSerde
+}
+
+// The action that WAF should take on a web request when it matches a rule's
+// statement. Settings at the web ACL level can override the rule action setting.
+type AwsWafv2RulesActionDetails struct {
+
+	// Instructs WAF to allow the web request.
+	Allow *AwsWafv2ActionAllowDetails
+
+	// Instructs WAF to block the web request.
+	Block *AwsWafv2ActionBlockDetails
+
+	// Instructs WAF to run a CAPTCHA check against the web request.
+	Captcha *AwsWafv2RulesActionCaptchaDetails
+
+	// Instructs WAF to count the web request and then continue evaluating the request
+	// using the remaining rules in the web ACL.
+	Count *AwsWafv2RulesActionCountDetails
+
+	noSmithyDocumentSerde
+}
+
+// Provides details about rules in a rule group. A rule identifies web requests
+// that you want to allow, block, or count. Each rule includes one top-level
+// Statement that AWS WAF uses to identify matching web requests, and parameters
+// that govern how AWS WAF handles them.
+type AwsWafv2RulesDetails struct {
+
+	// The action that WAF should take on a web request when it matches the rule
+	// statement. Settings at the web ACL level can override the rule action setting.
+	Action *AwsWafv2RulesActionDetails
+
+	// The name of the rule.
+	Name *string
+
+	// The action to use in the place of the action that results from the rule group
+	// evaluation.
+	OverrideAction *string
+
+	// If you define more than one Rule in a WebACL, WAF evaluates each request against
+	// the Rules in order based on the value of Priority. WAF processes rules with
+	// lower priority first. The priorities don't need to be consecutive, but they must
+	// all be different.
+	Priority int32
+
+	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	VisibilityConfig *AwsWafv2VisibilityConfigDetails
+
+	noSmithyDocumentSerde
+}
+
+// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+type AwsWafv2VisibilityConfigDetails struct {
+
+	// A boolean indicating whether the associated resource sends metrics to Amazon
+	// CloudWatch. For the list of available metrics, see WAF metrics and dimensions
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#waf-metrics)
+	// in the WAF Developer Guide.
+	CloudWatchMetricsEnabled bool
+
+	// A name of the Amazon CloudWatch metric.
+	MetricName *string
+
+	// A boolean indicating whether WAF should store a sampling of the web requests
+	// that match the rules. You can view the sampled requests through the WAF console.
+	SampledRequestsEnabled bool
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the action that Amazon CloudFront or WAF takes when a web request
+// matches the conditions in the rule.
+type AwsWafv2WebAclActionDetails struct {
+
+	// Specifies that WAF should allow requests by default.
+	Allow *AwsWafv2ActionAllowDetails
+
+	// Specifies that WAF should block requests by default.
+	Block *AwsWafv2ActionBlockDetails
+
+	noSmithyDocumentSerde
+}
+
+// Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
+// their own CaptchaConfig settings.
+type AwsWafv2WebAclCaptchaConfigDetails struct {
+
+	// Determines how long a CAPTCHA timestamp in the token remains valid after the
+	// client successfully solves a CAPTCHA puzzle.
+	ImmunityTimeProperty *AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails
+
+	noSmithyDocumentSerde
+}
+
+// Used for CAPTCHA and challenge token settings. Determines how long a CAPTCHA or
+// challenge timestamp remains valid after WAF updates it for a successful CAPTCHA
+// or challenge response.
+type AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails struct {
+
+	// The amount of time, in seconds, that a CAPTCHA or challenge timestamp is
+	// considered valid by WAF.
+	ImmunityTime int64
+
+	noSmithyDocumentSerde
+}
+
+// Details about an WAFv2 web Access Control List (ACL).
+type AwsWafv2WebAclDetails struct {
+
+	// The Amazon Resource Name (ARN) of the web ACL that you want to associate with
+	// the resource.
+	Arn *string
+
+	// The web ACL capacity units (WCUs) currently being used by this web ACL.
+	Capacity int64
+
+	// Specifies how WAF should handle CAPTCHA evaluations for rules that don't have
+	// their own CaptchaConfig settings.
+	CaptchaConfig *AwsWafv2WebAclCaptchaConfigDetails
+
+	// The action to perform if none of the Rules contained in the web ACL match.
+	DefaultAction *AwsWafv2WebAclActionDetails
+
+	// A description of the web ACL that helps with identification.
+	Description *string
+
+	// A unique identifier for the web ACL.
+	Id *string
+
+	// Indicates whether this web ACL is managed by Firewall Manager.
+	ManagedbyFirewallManager bool
+
+	// The name of the web ACL.
+	Name *string
+
+	// The Rule statements used to identify the web requests that you want to allow,
+	// block, or count. Each rule includes one top-level statement that WAF uses to
+	// identify matching web requests, and parameters that govern how WAF handles them.
+	Rules []AwsWafv2RulesDetails
+
+	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
+	VisibilityConfig *AwsWafv2VisibilityConfigDetails
 
 	noSmithyDocumentSerde
 }
@@ -11469,6 +12634,10 @@ type ResourceDetails struct {
 	// Details about an EC2 instance related to a finding.
 	AwsEc2Instance *AwsEc2InstanceDetails
 
+	// Specifies the properties for creating an Amazon Elastic Compute Cloud (Amazon
+	// EC2) launch template.
+	AwsEc2LaunchTemplate *AwsEc2LaunchTemplateDetails
+
 	// Details about an EC2 network access control list (ACL).
 	AwsEc2NetworkAcl *AwsEc2NetworkAclDetails
 
@@ -11614,6 +12783,9 @@ type ResourceDetails struct {
 	// Details about an S3 object related to a finding.
 	AwsS3Object *AwsS3ObjectDetails
 
+	// Provides details about an Amazon SageMaker notebook instance.
+	AwsSageMakerNotebookInstance *AwsSageMakerNotebookInstanceDetails
+
 	// Details about a Secrets Manager secret.
 	AwsSecretsManagerSecret *AwsSecretsManagerSecretDetails
 
@@ -11650,6 +12822,12 @@ type ResourceDetails struct {
 
 	// Details for an WAF web ACL.
 	AwsWafWebAcl *AwsWafWebAclDetails
+
+	// Details about an WAFv2 rule group.
+	AwsWafv2RuleGroup *AwsWafv2RuleGroupDetails
+
+	// Details about an WAFv2 web Access Control List (ACL).
+	AwsWafv2WebAcl *AwsWafv2WebAclDetails
 
 	// Information about the encryption configuration for X-Ray.
 	AwsXrayEncryptionConfig *AwsXrayEncryptionConfigDetails

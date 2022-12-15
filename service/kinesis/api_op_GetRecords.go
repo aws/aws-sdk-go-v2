@@ -13,14 +13,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets data records from a Kinesis data stream's shard. Specify a shard iterator
-// using the ShardIterator parameter. The shard iterator specifies the position in
-// the shard from which you want to start reading data records sequentially. If
-// there are no records available in the portion of the shard that the iterator
-// points to, GetRecords returns an empty list. It might take multiple calls to get
-// to a portion of the shard that contains records. You can scale by provisioning
-// multiple shards per stream while considering service limits (for more
-// information, see Amazon Kinesis Data Streams Limits
+// Gets data records from a Kinesis data stream's shard. When invoking this API, it
+// is recommended you use the StreamARN input parameter in addition to the
+// ShardIterator parameter. Specify a shard iterator using the ShardIterator
+// parameter. The shard iterator specifies the position in the shard from which you
+// want to start reading data records sequentially. If there are no records
+// available in the portion of the shard that the iterator points to, GetRecords
+// returns an empty list. It might take multiple calls to get to a portion of the
+// shard that contains records. You can scale by provisioning multiple shards per
+// stream while considering service limits (for more information, see Amazon
+// Kinesis Data Streams Limits
 // (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide). Your application should
 // have one thread per shard, each reading continuously from its stream. To read
@@ -92,6 +94,9 @@ type GetRecordsInput struct {
 	// specify a value that is greater than 10,000, GetRecords throws
 	// InvalidArgumentException. The default value is 10,000.
 	Limit *int32
+
+	// The ARN of the stream.
+	StreamARN *string
 
 	noSmithyDocumentSerde
 }

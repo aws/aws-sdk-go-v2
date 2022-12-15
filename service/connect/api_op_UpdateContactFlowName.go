@@ -12,7 +12,7 @@ import (
 
 // The name of the flow. You can also create and update flows using the Amazon
 // Connect Flow language
-// (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
+// (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
 func (c *Client) UpdateContactFlowName(ctx context.Context, params *UpdateContactFlowNameInput, optFns ...func(*Options)) (*UpdateContactFlowNameOutput, error) {
 	if params == nil {
 		params = &UpdateContactFlowNameInput{}

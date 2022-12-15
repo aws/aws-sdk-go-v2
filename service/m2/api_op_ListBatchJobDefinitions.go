@@ -13,8 +13,8 @@ import (
 )
 
 // Lists all the available batch job definitions based on the batch job resources
-// uploaded during the application creation. The listed batch job definitions can
-// then be used to start a batch job.
+// uploaded during the application creation. You can use the batch job definitions
+// in the list to start a batch job.
 func (c *Client) ListBatchJobDefinitions(ctx context.Context, params *ListBatchJobDefinitionsInput, optFns ...func(*Options)) (*ListBatchJobDefinitionsOutput, error) {
 	if params == nil {
 		params = &ListBatchJobDefinitionsInput{}

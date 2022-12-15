@@ -13277,6 +13277,11 @@ func awsAwsjson11_serializeDocumentDeltaTarget(v *types.DeltaTarget, value smith
 		ok.String(*v.ConnectionName)
 	}
 
+	if v.CreateNativeDeltaTable != nil {
+		ok := object.Key("CreateNativeDeltaTable")
+		ok.Boolean(*v.CreateNativeDeltaTable)
+	}
+
 	if v.DeltaTables != nil {
 		ok := object.Key("DeltaTables")
 		if err := awsAwsjson11_serializeDocumentPathList(v.DeltaTables, ok); err != nil {

@@ -81,16 +81,20 @@ type GetApplicationOutput struct {
 	// The description of the application.
 	Description *string
 
-	// The identifier of the environment where the application will be deployed.
+	// The identifier of the runtime environment where you want to deploy the
+	// application.
 	EnvironmentId *string
 
-	// The timestamp when the application was last started. Null until the application
-	// has started running for the first time.
+	// The identifier of a customer managed key.
+	KmsKeyId *string
+
+	// The timestamp when you last started the application. Null until the application
+	// runs for the first time.
 	LastStartTime *time.Time
 
 	// The Amazon Resource Name (ARN) for the network load balancer listener created in
 	// your Amazon Web Services account. Amazon Web Services Mainframe Modernization
-	// creates this listener on your behalf the first time you deploy an application.
+	// creates this listener for you the first time you deploy an application.
 	ListenerArns []string
 
 	// The port associated with the network load balancer listener created in your
@@ -102,9 +106,9 @@ type GetApplicationOutput struct {
 	LoadBalancerDnsName *string
 
 	// The list of log summaries. Each log summary includes the log type as well as the
-	// log group identifier. These are CloudWatch logs. The Amazon Web Services
-	// Mainframe Modernization application log is pushed to CloudWatch under the
-	// customer's account.
+	// log group identifier. These are CloudWatch logs. Amazon Web Services Mainframe
+	// Modernization pushes the application log to CloudWatch under the customer's
+	// account.
 	LogGroups []types.LogGroupSummary
 
 	// The reason for the reported status.

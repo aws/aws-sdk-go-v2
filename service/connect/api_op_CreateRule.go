@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a rule for the specified Amazon Connect instance.
+// Creates a rule for the specified Amazon Connect instance. Use the Rules Function
+// language
+// (https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html)
+// to code conditions for the rule.
 func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns ...func(*Options)) (*CreateRuleOutput, error) {
 	if params == nil {
 		params = &CreateRuleInput{}

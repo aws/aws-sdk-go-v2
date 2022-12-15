@@ -30,16 +30,17 @@ func (c *Client) ListEnvironments(ctx context.Context, params *ListEnvironmentsI
 
 type ListEnvironmentsInput struct {
 
-	// The engine type for the environment.
+	// The engine type for the runtime environment.
 	EngineType types.EngineType
 
-	// The maximum number of environments to return.
+	// The maximum number of runtime environments to return.
 	MaxResults *int32
 
-	// The name of the environment.
+	// The names of the runtime environments. Must be unique within the account.
 	Names []string
 
-	// A pagination token to control the number of environments displayed in the list.
+	// A pagination token to control the number of runtime environments displayed in
+	// the list.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,13 +48,14 @@ type ListEnvironmentsInput struct {
 
 type ListEnvironmentsOutput struct {
 
-	// Returns a list of summary details for all the environments in your account.
+	// Returns a list of summary details for all the runtime environments in your
+	// account.
 	//
 	// This member is required.
 	Environments []types.EnvironmentSummary
 
 	// A pagination token that's returned when the response doesn't contain all the
-	// environments.
+	// runtime environments.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -132,7 +134,7 @@ var _ ListEnvironmentsAPIClient = (*Client)(nil)
 
 // ListEnvironmentsPaginatorOptions is the paginator options for ListEnvironments
 type ListEnvironmentsPaginatorOptions struct {
-	// The maximum number of environments to return.
+	// The maximum number of runtime environments to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -32721,6 +32721,15 @@ func awsAwsjson11_deserializeDocumentDeltaTarget(v **types.DeltaTarget, value in
 				sv.ConnectionName = ptr.String(jtv)
 			}
 
+		case "CreateNativeDeltaTable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected NullableBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.CreateNativeDeltaTable = ptr.Bool(jtv)
+			}
+
 		case "DeltaTables":
 			if err := awsAwsjson11_deserializeDocumentPathList(&sv.DeltaTables, value); err != nil {
 				return err

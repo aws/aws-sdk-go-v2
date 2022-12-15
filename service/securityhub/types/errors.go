@@ -49,9 +49,7 @@ func (e *InternalException) ErrorMessage() string {
 func (e *InternalException) ErrorCode() string             { return "InternalException" }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// There is an issue with the account used to make the request. Either Security Hub
-// is not enabled for the account, or the account does not have permission to
-// perform this action.
+// The account doesn't have permission to perform this action.
 type InvalidAccessException struct {
 	Message *string
 

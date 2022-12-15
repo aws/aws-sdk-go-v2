@@ -23210,6 +23210,13 @@ func awsAwsjson11_serializeDocumentRecommendationJobInputConfig(v *types.Recomme
 		ok.String(*v.VolumeKmsKeyId)
 	}
 
+	if v.VpcConfig != nil {
+		ok := object.Key("VpcConfig")
+		if err := awsAwsjson11_serializeDocumentRecommendationJobVpcConfig(v.VpcConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -23299,6 +23306,49 @@ func awsAwsjson11_serializeDocumentRecommendationJobSupportedContentTypes(v []st
 }
 
 func awsAwsjson11_serializeDocumentRecommendationJobSupportedInstanceTypes(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecommendationJobVpcConfig(v *types.RecommendationJobVpcConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("SecurityGroupIds")
+		if err := awsAwsjson11_serializeDocumentRecommendationJobVpcSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Subnets != nil {
+		ok := object.Key("Subnets")
+		if err := awsAwsjson11_serializeDocumentRecommendationJobVpcSubnets(v.Subnets, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecommendationJobVpcSecurityGroupIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecommendationJobVpcSubnets(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 

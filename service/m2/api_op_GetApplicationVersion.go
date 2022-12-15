@@ -56,7 +56,7 @@ type GetApplicationVersionOutput struct {
 	CreationTime *time.Time
 
 	// The content of the application definition. This is a JSON object that contains
-	// the resource configuration/definitions that identify an application.
+	// the resource configuration and definitions that identify an application.
 	//
 	// This member is required.
 	DefinitionContent *string

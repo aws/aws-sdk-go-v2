@@ -21,14 +21,16 @@ import (
 // highly recommended that you use the DescribeStreamSummary API to get a
 // summarized description of the specified Kinesis data stream and the ListShards
 // API to list the shards in a specified data stream and obtain information about
-// each shard. The information returned includes the stream name, Amazon Resource
-// Name (ARN), creation time, enhanced metric configuration, and shard map. The
-// shard map is an array of shard objects. For each shard object, there is the hash
-// key and sequence number ranges that the shard spans, and the IDs of any earlier
-// shards that played in a role in creating the shard. Every record ingested in the
-// stream is identified by a sequence number, which is assigned when the record is
-// put into the stream. You can limit the number of shards returned by each call.
-// For more information, see Retrieving Shards from a Stream
+// each shard. When invoking this API, it is recommended you use the StreamARN
+// input parameter rather than the StreamName input parameter. The information
+// returned includes the stream name, Amazon Resource Name (ARN), creation time,
+// enhanced metric configuration, and shard map. The shard map is an array of shard
+// objects. For each shard object, there is the hash key and sequence number ranges
+// that the shard spans, and the IDs of any earlier shards that played in a role in
+// creating the shard. Every record ingested in the stream is identified by a
+// sequence number, which is assigned when the record is put into the stream. You
+// can limit the number of shards returned by each call. For more information, see
+// Retrieving Shards from a Stream
 // (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html)
 // in the Amazon Kinesis Data Streams Developer Guide. There are no guarantees
 // about the chronological order shards returned. To process shards in
@@ -53,11 +55,6 @@ func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput
 // Represents the input for DescribeStream.
 type DescribeStreamInput struct {
 
-	// The name of the stream to describe.
-	//
-	// This member is required.
-	StreamName *string
-
 	// The shard ID of the shard to start with. Specify this parameter to indicate that
 	// you want to describe the stream starting with the shard whose ID immediately
 	// follows ExclusiveStartShardId. If you don't specify this parameter, the default
@@ -68,6 +65,12 @@ type DescribeStreamInput struct {
 	// The maximum number of shards to return in a single call. The default value is
 	// 100. If you specify a value greater than 100, at most 100 results are returned.
 	Limit *int32
+
+	// The ARN of the stream.
+	StreamARN *string
+
+	// The name of the stream to describe.
+	StreamName *string
 
 	noSmithyDocumentSerde
 }
@@ -131,9 +134,6 @@ func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpDescribeStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStream(options.Region), middleware.Before); err != nil {

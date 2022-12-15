@@ -4532,9 +4532,19 @@ func awsAwsjson11_serializeDocumentNetworkBinding(v *types.NetworkBinding, value
 		ok.Integer(*v.ContainerPort)
 	}
 
+	if v.ContainerPortRange != nil {
+		ok := object.Key("containerPortRange")
+		ok.String(*v.ContainerPortRange)
+	}
+
 	if v.HostPort != nil {
 		ok := object.Key("hostPort")
 		ok.Integer(*v.HostPort)
+	}
+
+	if v.HostPortRange != nil {
+		ok := object.Key("hostPortRange")
+		ok.String(*v.HostPortRange)
 	}
 
 	if len(v.Protocol) > 0 {
@@ -4674,6 +4684,11 @@ func awsAwsjson11_serializeDocumentPortMapping(v *types.PortMapping, value smith
 	if v.ContainerPort != nil {
 		ok := object.Key("containerPort")
 		ok.Integer(*v.ContainerPort)
+	}
+
+	if v.ContainerPortRange != nil {
+		ok := object.Key("containerPortRange")
+		ok.String(*v.ContainerPortRange)
 	}
 
 	if v.HostPort != nil {

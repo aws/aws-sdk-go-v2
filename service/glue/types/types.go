@@ -2235,6 +2235,10 @@ type DeltaTarget struct {
 	// The name of the connection to use to connect to the Delta table target.
 	ConnectionName *string
 
+	// Specifies whether the crawler will create native tables, to allow integration
+	// with query engines that support querying of the Delta transaction log directly.
+	CreateNativeDeltaTable *bool
+
 	// A list of the Amazon S3 paths to the Delta tables.
 	DeltaTables []string
 

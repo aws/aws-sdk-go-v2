@@ -84,12 +84,8 @@ type InputDataConfig struct {
 	ContentType *string
 
 	// The URI of the AWS S3 folder that contains the input files. Amazon Translate
-	// translates all the files in the folder. The folder must be in the same Region as
-	// the API endpoint you are calling. The URI can also point to a single input
-	// document, or it can provide the prefix for a collection of input documents. For
-	// example. if you use the URI S3://bucketName/prefix and the prefix is a single
-	// file, Amazon Translate uses that files as input. If more than one file begins
-	// with the prefix, Amazon Translate uses all of them as input.
+	// translates all the files in the folder and all its sub-folders. The folder must
+	// be in the same Region as the API endpoint you are calling.
 	//
 	// This member is required.
 	S3Uri *string
@@ -489,8 +485,8 @@ type TranslationSettings struct {
 	// translation will ignore the formality setting. If you specify multiple target
 	// languages for the job, translate ignores the formality setting for any
 	// unsupported target language. For a list of target languages that support
-	// formality, see Setting Formality
-	// (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html)
+	// formality, see Supported languages
+	// (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html#customizing-translations-formality-languages)
 	// in the Amazon Translate Developer Guide.
 	Formality Formality
 
@@ -499,9 +495,9 @@ type TranslationSettings struct {
 	// Amazon Translate replaces them with the grawlix string “?$#@$“. This 5-character
 	// sequence is used for each profane word or phrase, regardless of the length or
 	// number of words. Amazon Translate doesn't detect profanity in all of its
-	// supported languages. For languages that support profanity detection, see Masking
-	// profanity
-	// (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html)
+	// supported languages. For languages that don't support profanity detection, see
+	// Unsupported languages
+	// (https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html#customizing-translations-profanity-languages)
 	// in the Amazon Translate Developer Guide. If you specify multiple target
 	// languages for the job, all the target languages must support profanity masking.
 	// If any of the target languages don't support profanity masking, the translation

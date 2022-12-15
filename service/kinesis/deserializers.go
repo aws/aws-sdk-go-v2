@@ -99,6 +99,9 @@ func awsAwsjson11_deserializeOpErrorAddTagsToStream(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -292,6 +295,9 @@ func awsAwsjson11_deserializeOpErrorDecreaseStreamRetentionPeriod(response *smit
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -390,6 +396,12 @@ func awsAwsjson11_deserializeOpErrorDeleteStream(response *smithyhttp.Response, 
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InvalidArgumentException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
+
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
@@ -713,6 +725,12 @@ func awsAwsjson11_deserializeOpErrorDescribeStream(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InvalidArgumentException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
+
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
@@ -944,6 +962,12 @@ func awsAwsjson11_deserializeOpErrorDescribeStreamSummary(response *smithyhttp.R
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InvalidArgumentException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
+
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
@@ -1058,6 +1082,9 @@ func awsAwsjson11_deserializeOpErrorDisableEnhancedMonitoring(response *smithyht
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -1178,6 +1205,9 @@ func awsAwsjson11_deserializeOpErrorEnableEnhancedMonitoring(response *smithyhtt
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -1298,6 +1328,9 @@ func awsAwsjson11_deserializeOpErrorGetRecords(response *smithyhttp.Response, me
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ExpiredIteratorException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredIteratorException(response, errorBody)
 
@@ -1436,6 +1469,9 @@ func awsAwsjson11_deserializeOpErrorGetShardIterator(response *smithyhttp.Respon
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -1531,6 +1567,9 @@ func awsAwsjson11_deserializeOpErrorIncreaseStreamRetentionPeriod(response *smit
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -1651,6 +1690,9 @@ func awsAwsjson11_deserializeOpErrorListShards(response *smithyhttp.Response, me
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ExpiredNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredNextTokenException(response, errorBody)
 
@@ -1897,6 +1939,12 @@ func awsAwsjson11_deserializeOpErrorListStreams(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("ExpiredNextTokenException", errorCode):
+		return awsAwsjson11_deserializeErrorExpiredNextTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidArgumentException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
+
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
@@ -2008,6 +2056,9 @@ func awsAwsjson11_deserializeOpErrorListTagsForStream(response *smithyhttp.Respo
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -2103,6 +2154,9 @@ func awsAwsjson11_deserializeOpErrorMergeShards(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -2226,6 +2280,9 @@ func awsAwsjson11_deserializeOpErrorPutRecord(response *smithyhttp.Response, met
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -2361,6 +2418,9 @@ func awsAwsjson11_deserializeOpErrorPutRecords(response *smithyhttp.Response, me
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -2594,6 +2654,9 @@ func awsAwsjson11_deserializeOpErrorRemoveTagsFromStream(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -2692,6 +2755,9 @@ func awsAwsjson11_deserializeOpErrorSplitShard(response *smithyhttp.Response, me
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -2793,6 +2859,9 @@ func awsAwsjson11_deserializeOpErrorStartStreamEncryption(response *smithyhttp.R
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -2909,6 +2978,9 @@ func awsAwsjson11_deserializeOpErrorStopStreamEncryption(response *smithyhttp.Re
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -3001,6 +3073,9 @@ func awsAwsjson11_deserializeOpErrorSubscribeToShard(response *smithyhttp.Respon
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -3121,6 +3196,9 @@ func awsAwsjson11_deserializeOpErrorUpdateShardCount(response *smithyhttp.Respon
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("InvalidArgumentException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArgumentException(response, errorBody)
 
@@ -4472,6 +4550,41 @@ func awsAwsjson11_deserializeOpDocumentSubscribeToShardOutput(v **SubscribeToSha
 	return nil
 }
 
+func awsAwsjson11_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.AccessDeniedException{}
+	err := awsAwsjson11_deserializeDocumentAccessDeniedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorExpiredIteratorException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -4960,6 +5073,46 @@ func awsAwsjson11_deserializeErrorValidationException(response *smithyhttp.Respo
 
 	errorBody.Seek(0, io.SeekStart)
 	return output
+}
+
+func awsAwsjson11_deserializeDocumentAccessDeniedException(v **types.AccessDeniedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessDeniedException
+	if *v == nil {
+		sv = &types.AccessDeniedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 func awsAwsjson11_deserializeDocumentConsumer(v **types.Consumer, value interface{}) error {
@@ -6057,6 +6210,119 @@ func awsAwsjson11_deserializeDocumentStreamNameList(v *[]string, value interface
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStreamSummary(v **types.StreamSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StreamSummary
+	if *v == nil {
+		sv = &types.StreamSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StreamARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamARN to be of type string, got %T instead", value)
+				}
+				sv.StreamARN = ptr.String(jtv)
+			}
+
+		case "StreamCreationTimestamp":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StreamCreationTimestamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "StreamModeDetails":
+			if err := awsAwsjson11_deserializeDocumentStreamModeDetails(&sv.StreamModeDetails, value); err != nil {
+				return err
+			}
+
+		case "StreamName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamName to be of type string, got %T instead", value)
+				}
+				sv.StreamName = ptr.String(jtv)
+			}
+
+		case "StreamStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamStatus to be of type string, got %T instead", value)
+				}
+				sv.StreamStatus = types.StreamStatus(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStreamSummaryList(v *[]types.StreamSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StreamSummary
+	if *v == nil {
+		cv = []types.StreamSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StreamSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentStreamSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6403,6 +6669,15 @@ func awsAwsjson11_deserializeOpDocumentDisableEnhancedMonitoringOutput(v **Disab
 				return err
 			}
 
+		case "StreamARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamARN to be of type string, got %T instead", value)
+				}
+				sv.StreamARN = ptr.String(jtv)
+			}
+
 		case "StreamName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6451,6 +6726,15 @@ func awsAwsjson11_deserializeOpDocumentEnableEnhancedMonitoringOutput(v **Enable
 		case "DesiredShardLevelMetrics":
 			if err := awsAwsjson11_deserializeDocumentMetricsNameList(&sv.DesiredShardLevelMetrics, value); err != nil {
 				return err
+			}
+
+		case "StreamARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamARN to be of type string, got %T instead", value)
+				}
+				sv.StreamARN = ptr.String(jtv)
 			}
 
 		case "StreamName":
@@ -6695,8 +6979,22 @@ func awsAwsjson11_deserializeOpDocumentListStreamsOutput(v **ListStreamsOutput, 
 				sv.HasMoreStreams = ptr.Bool(jtv)
 			}
 
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		case "StreamNames":
 			if err := awsAwsjson11_deserializeDocumentStreamNameList(&sv.StreamNames, value); err != nil {
+				return err
+			}
+
+		case "StreamSummaries":
+			if err := awsAwsjson11_deserializeDocumentStreamSummaryList(&sv.StreamSummaries, value); err != nil {
 				return err
 			}
 
@@ -6939,6 +7237,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateShardCountOutput(v **UpdateShardCou
 					return err
 				}
 				sv.CurrentShardCount = ptr.Int32(int32(i64))
+			}
+
+		case "StreamARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamARN to be of type string, got %T instead", value)
+				}
+				sv.StreamARN = ptr.String(jtv)
 			}
 
 		case "StreamName":

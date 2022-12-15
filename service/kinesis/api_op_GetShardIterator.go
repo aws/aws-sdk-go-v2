@@ -13,28 +13,30 @@ import (
 )
 
 // Gets an Amazon Kinesis shard iterator. A shard iterator expires 5 minutes after
-// it is returned to the requester. A shard iterator specifies the shard position
-// from which to start reading data records sequentially. The position is specified
-// using the sequence number of a data record in a shard. A sequence number is the
-// identifier associated with every record ingested in the stream, and is assigned
-// when a record is put into the stream. Each stream has one or more shards. You
-// must specify the shard iterator type. For example, you can set the
-// ShardIteratorType parameter to read exactly from the position denoted by a
-// specific sequence number by using the AT_SEQUENCE_NUMBER shard iterator type.
-// Alternatively, the parameter can read right after the sequence number by using
-// the AFTER_SEQUENCE_NUMBER shard iterator type, using sequence numbers returned
-// by earlier calls to PutRecord, PutRecords, GetRecords, or DescribeStream. In the
-// request, you can specify the shard iterator type AT_TIMESTAMP to read records
-// from an arbitrary point in time, TRIM_HORIZON to cause ShardIterator to point to
-// the last untrimmed record in the shard in the system (the oldest data record in
-// the shard), or LATEST so that you always read the most recent data in the shard.
-// When you read repeatedly from a stream, use a GetShardIterator request to get
-// the first shard iterator for use in your first GetRecords request and for
-// subsequent reads use the shard iterator returned by the GetRecords request in
-// NextShardIterator. A new shard iterator is returned by every GetRecords request
-// in NextShardIterator, which you use in the ShardIterator parameter of the next
-// GetRecords request. If a GetShardIterator request is made too often, you receive
-// a ProvisionedThroughputExceededException. For more information about throughput
+// it is returned to the requester. When invoking this API, it is recommended you
+// use the StreamARN input parameter rather than the StreamName input parameter. A
+// shard iterator specifies the shard position from which to start reading data
+// records sequentially. The position is specified using the sequence number of a
+// data record in a shard. A sequence number is the identifier associated with
+// every record ingested in the stream, and is assigned when a record is put into
+// the stream. Each stream has one or more shards. You must specify the shard
+// iterator type. For example, you can set the ShardIteratorType parameter to read
+// exactly from the position denoted by a specific sequence number by using the
+// AT_SEQUENCE_NUMBER shard iterator type. Alternatively, the parameter can read
+// right after the sequence number by using the AFTER_SEQUENCE_NUMBER shard
+// iterator type, using sequence numbers returned by earlier calls to PutRecord,
+// PutRecords, GetRecords, or DescribeStream. In the request, you can specify the
+// shard iterator type AT_TIMESTAMP to read records from an arbitrary point in
+// time, TRIM_HORIZON to cause ShardIterator to point to the last untrimmed record
+// in the shard in the system (the oldest data record in the shard), or LATEST so
+// that you always read the most recent data in the shard. When you read repeatedly
+// from a stream, use a GetShardIterator request to get the first shard iterator
+// for use in your first GetRecords request and for subsequent reads use the shard
+// iterator returned by the GetRecords request in NextShardIterator. A new shard
+// iterator is returned by every GetRecords request in NextShardIterator, which you
+// use in the ShardIterator parameter of the next GetRecords request. If a
+// GetShardIterator request is made too often, you receive a
+// ProvisionedThroughputExceededException. For more information about throughput
 // limits, see GetRecords, and Streams Limits
 // (https://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html)
 // in the Amazon Kinesis Data Streams Developer Guide. If the shard is closed,
@@ -90,14 +92,15 @@ type GetShardIteratorInput struct {
 	// This member is required.
 	ShardIteratorType types.ShardIteratorType
 
-	// The name of the Amazon Kinesis data stream.
-	//
-	// This member is required.
-	StreamName *string
-
 	// The sequence number of the data record in the shard from which to start reading.
 	// Used with shard iterator type AT_SEQUENCE_NUMBER and AFTER_SEQUENCE_NUMBER.
 	StartingSequenceNumber *string
+
+	// The ARN of the stream.
+	StreamARN *string
+
+	// The name of the Amazon Kinesis data stream.
+	StreamName *string
 
 	// The time stamp of the data record from which to start reading. Used with shard
 	// iterator type AT_TIMESTAMP. A time stamp is the Unix epoch date with precision

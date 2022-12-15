@@ -12625,6 +12625,15 @@ func awsAwsjson11_deserializeDocumentNetworkBinding(v **types.NetworkBinding, va
 				sv.ContainerPort = ptr.Int32(int32(i64))
 			}
 
+		case "containerPortRange":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContainerPortRange = ptr.String(jtv)
+			}
+
 		case "hostPort":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12636,6 +12645,15 @@ func awsAwsjson11_deserializeDocumentNetworkBinding(v **types.NetworkBinding, va
 					return err
 				}
 				sv.HostPort = ptr.Int32(int32(i64))
+			}
+
+		case "hostPortRange":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.HostPortRange = ptr.String(jtv)
 			}
 
 		case "protocol":
@@ -13146,6 +13164,15 @@ func awsAwsjson11_deserializeDocumentPortMapping(v **types.PortMapping, value in
 					return err
 				}
 				sv.ContainerPort = ptr.Int32(int32(i64))
+			}
+
+		case "containerPortRange":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContainerPortRange = ptr.String(jtv)
 			}
 
 		case "hostPort":

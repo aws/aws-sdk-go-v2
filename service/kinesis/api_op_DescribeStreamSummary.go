@@ -12,10 +12,12 @@ import (
 )
 
 // Provides a summarized description of the specified Kinesis data stream without
-// the shard list. The information returned includes the stream name, Amazon
-// Resource Name (ARN), status, record retention period, approximate creation time,
-// monitoring, encryption details, and open shard count. DescribeStreamSummary has
-// a limit of 20 transactions per second per account.
+// the shard list. When invoking this API, it is recommended you use the StreamARN
+// input parameter rather than the StreamName input parameter. The information
+// returned includes the stream name, Amazon Resource Name (ARN), status, record
+// retention period, approximate creation time, monitoring, encryption details, and
+// open shard count. DescribeStreamSummary has a limit of 20 transactions per
+// second per account.
 func (c *Client) DescribeStreamSummary(ctx context.Context, params *DescribeStreamSummaryInput, optFns ...func(*Options)) (*DescribeStreamSummaryOutput, error) {
 	if params == nil {
 		params = &DescribeStreamSummaryInput{}
@@ -33,9 +35,10 @@ func (c *Client) DescribeStreamSummary(ctx context.Context, params *DescribeStre
 
 type DescribeStreamSummaryInput struct {
 
+	// The ARN of the stream.
+	StreamARN *string
+
 	// The name of the stream to describe.
-	//
-	// This member is required.
 	StreamName *string
 
 	noSmithyDocumentSerde
@@ -97,9 +100,6 @@ func (c *Client) addOperationDescribeStreamSummaryMiddlewares(stack *middleware.
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpDescribeStreamSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStreamSummary(options.Region), middleware.Before); err != nil {

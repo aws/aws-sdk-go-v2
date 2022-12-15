@@ -290,6 +290,61 @@ func (m *awsAwsjson10_serializeOpDisassociateGatewayFromServer) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpGetBandwidthRateLimitSchedule struct {
+}
+
+func (*awsAwsjson10_serializeOpGetBandwidthRateLimitSchedule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetBandwidthRateLimitSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetBandwidthRateLimitScheduleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("BackupOnPremises_v20210101.GetBandwidthRateLimitSchedule")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetBandwidthRateLimitScheduleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpGetGateway struct {
 }
 
@@ -330,6 +385,116 @@ func (m *awsAwsjson10_serializeOpGetGateway) HandleSerialize(ctx context.Context
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentGetGatewayInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpGetHypervisor struct {
+}
+
+func (*awsAwsjson10_serializeOpGetHypervisor) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetHypervisor) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetHypervisorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("BackupOnPremises_v20210101.GetHypervisor")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetHypervisorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpGetHypervisorPropertyMappings struct {
+}
+
+func (*awsAwsjson10_serializeOpGetHypervisorPropertyMappings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpGetHypervisorPropertyMappings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetHypervisorPropertyMappingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("BackupOnPremises_v20210101.GetHypervisorPropertyMappings")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentGetHypervisorPropertyMappingsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -675,6 +840,116 @@ func (m *awsAwsjson10_serializeOpListVirtualMachines) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpPutBandwidthRateLimitSchedule struct {
+}
+
+func (*awsAwsjson10_serializeOpPutBandwidthRateLimitSchedule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpPutBandwidthRateLimitSchedule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutBandwidthRateLimitScheduleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("BackupOnPremises_v20210101.PutBandwidthRateLimitSchedule")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentPutBandwidthRateLimitScheduleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpPutHypervisorPropertyMappings struct {
+}
+
+func (*awsAwsjson10_serializeOpPutHypervisorPropertyMappings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpPutHypervisorPropertyMappings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutHypervisorPropertyMappingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("BackupOnPremises_v20210101.PutHypervisorPropertyMappings")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentPutHypervisorPropertyMappingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpPutMaintenanceStartTime struct {
 }
 
@@ -715,6 +990,61 @@ func (m *awsAwsjson10_serializeOpPutMaintenanceStartTime) HandleSerialize(ctx co
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentPutMaintenanceStartTimeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpStartVirtualMachinesMetadataSync struct {
+}
+
+func (*awsAwsjson10_serializeOpStartVirtualMachinesMetadataSync) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpStartVirtualMachinesMetadataSync) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartVirtualMachinesMetadataSyncInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("BackupOnPremises_v20210101.StartVirtualMachinesMetadataSync")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentStartVirtualMachinesMetadataSyncInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1059,6 +1389,69 @@ func (m *awsAwsjson10_serializeOpUpdateHypervisor) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson10_serializeDocumentBandwidthRateLimitInterval(v *types.BandwidthRateLimitInterval, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AverageUploadRateLimitInBitsPerSec != nil {
+		ok := object.Key("AverageUploadRateLimitInBitsPerSec")
+		ok.Long(*v.AverageUploadRateLimitInBitsPerSec)
+	}
+
+	if v.DaysOfWeek != nil {
+		ok := object.Key("DaysOfWeek")
+		if err := awsAwsjson10_serializeDocumentDaysOfWeek(v.DaysOfWeek, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EndHourOfDay != nil {
+		ok := object.Key("EndHourOfDay")
+		ok.Integer(*v.EndHourOfDay)
+	}
+
+	if v.EndMinuteOfHour != nil {
+		ok := object.Key("EndMinuteOfHour")
+		ok.Integer(*v.EndMinuteOfHour)
+	}
+
+	if v.StartHourOfDay != nil {
+		ok := object.Key("StartHourOfDay")
+		ok.Integer(*v.StartHourOfDay)
+	}
+
+	if v.StartMinuteOfHour != nil {
+		ok := object.Key("StartMinuteOfHour")
+		ok.Integer(*v.StartMinuteOfHour)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentBandwidthRateLimitIntervals(v []types.BandwidthRateLimitInterval, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentBandwidthRateLimitInterval(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentDaysOfWeek(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1094,6 +1487,46 @@ func awsAwsjson10_serializeDocumentTags(v []types.Tag, value smithyjson.Value) e
 	for i := range v {
 		av := array.Value()
 		if err := awsAwsjson10_serializeDocumentTag(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentVmwareToAwsTagMapping(v *types.VmwareToAwsTagMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AwsTagKey != nil {
+		ok := object.Key("AwsTagKey")
+		ok.String(*v.AwsTagKey)
+	}
+
+	if v.AwsTagValue != nil {
+		ok := object.Key("AwsTagValue")
+		ok.String(*v.AwsTagValue)
+	}
+
+	if v.VmwareCategory != nil {
+		ok := object.Key("VmwareCategory")
+		ok.String(*v.VmwareCategory)
+	}
+
+	if v.VmwareTagName != nil {
+		ok := object.Key("VmwareTagName")
+		ok.String(*v.VmwareTagName)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentVmwareToAwsTagMappings(v []types.VmwareToAwsTagMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson10_serializeDocumentVmwareToAwsTagMapping(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -1182,6 +1615,18 @@ func awsAwsjson10_serializeOpDocumentDisassociateGatewayFromServerInput(v *Disas
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentGetBandwidthRateLimitScheduleInput(v *GetBandwidthRateLimitScheduleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GatewayArn != nil {
+		ok := object.Key("GatewayArn")
+		ok.String(*v.GatewayArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentGetGatewayInput(v *GetGatewayInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1189,6 +1634,30 @@ func awsAwsjson10_serializeOpDocumentGetGatewayInput(v *GetGatewayInput, value s
 	if v.GatewayArn != nil {
 		ok := object.Key("GatewayArn")
 		ok.String(*v.GatewayArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetHypervisorInput(v *GetHypervisorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HypervisorArn != nil {
+		ok := object.Key("HypervisorArn")
+		ok.String(*v.HypervisorArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentGetHypervisorPropertyMappingsInput(v *GetHypervisorPropertyMappingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HypervisorArn != nil {
+		ok := object.Key("HypervisorArn")
+		ok.String(*v.HypervisorArn)
 	}
 
 	return nil
@@ -1313,6 +1782,49 @@ func awsAwsjson10_serializeOpDocumentListVirtualMachinesInput(v *ListVirtualMach
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentPutBandwidthRateLimitScheduleInput(v *PutBandwidthRateLimitScheduleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BandwidthRateLimitIntervals != nil {
+		ok := object.Key("BandwidthRateLimitIntervals")
+		if err := awsAwsjson10_serializeDocumentBandwidthRateLimitIntervals(v.BandwidthRateLimitIntervals, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GatewayArn != nil {
+		ok := object.Key("GatewayArn")
+		ok.String(*v.GatewayArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentPutHypervisorPropertyMappingsInput(v *PutHypervisorPropertyMappingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HypervisorArn != nil {
+		ok := object.Key("HypervisorArn")
+		ok.String(*v.HypervisorArn)
+	}
+
+	if v.IamRoleArn != nil {
+		ok := object.Key("IamRoleArn")
+		ok.String(*v.IamRoleArn)
+	}
+
+	if v.VmwareToAwsTagMappings != nil {
+		ok := object.Key("VmwareToAwsTagMappings")
+		if err := awsAwsjson10_serializeDocumentVmwareToAwsTagMappings(v.VmwareToAwsTagMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentPutMaintenanceStartTimeInput(v *PutMaintenanceStartTimeInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1340,6 +1852,18 @@ func awsAwsjson10_serializeOpDocumentPutMaintenanceStartTimeInput(v *PutMaintena
 	if v.MinuteOfHour != nil {
 		ok := object.Key("MinuteOfHour")
 		ok.Integer(*v.MinuteOfHour)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentStartVirtualMachinesMetadataSyncInput(v *StartVirtualMachinesMetadataSyncInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HypervisorArn != nil {
+		ok := object.Key("HypervisorArn")
+		ok.String(*v.HypervisorArn)
 	}
 
 	return nil
@@ -1451,6 +1975,11 @@ func awsAwsjson10_serializeOpDocumentUpdateHypervisorInput(v *UpdateHypervisorIn
 	if v.HypervisorArn != nil {
 		ok := object.Key("HypervisorArn")
 		ok.String(*v.HypervisorArn)
+	}
+
+	if v.LogGroupArn != nil {
+		ok := object.Key("LogGroupArn")
+		ok.String(*v.LogGroupArn)
 	}
 
 	if v.Name != nil {

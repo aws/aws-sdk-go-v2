@@ -15,7 +15,10 @@ import (
 // in your IAM policy to refine the conditions for the policy statement, for
 // example limit the actions to a specific cluster, you receive an
 // AccessDeniedException when there is a mismatch between the condition key value
-// and the corresponding parameter value.
+// and the corresponding parameter value. For information about required
+// permissions and considerations, see Using Amazon ECS Exec for debugging
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.htm) in
+// the Amazon ECS Developer Guide.
 func (c *Client) ExecuteCommand(ctx context.Context, params *ExecuteCommandInput, optFns ...func(*Options)) (*ExecuteCommandOutput, error) {
 	if params == nil {
 		params = &ExecuteCommandInput{}

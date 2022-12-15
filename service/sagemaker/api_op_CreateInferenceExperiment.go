@@ -12,9 +12,9 @@ import (
 )
 
 // Creates an inference experiment using the configurations specified in the
-// request. Use this API to schedule an experiment to compare model variants on a
-// Amazon SageMaker inference endpoint. For more information about inference
-// experiments, see Shadow tests
+// request. Use this API to setup and schedule an experiment to compare model
+// variants on a Amazon SageMaker inference endpoint. For more information about
+// inference experiments, see Shadow tests
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html). Amazon
 // SageMaker begins your experiment at the scheduled time and routes traffic to
 // your endpoint's model variants based on your specified configuration. While the
@@ -45,9 +45,9 @@ type CreateInferenceExperimentInput struct {
 	// This member is required.
 	EndpointName *string
 
-	// Array of ModelVariantConfigSummary objects. There is one for each variant in the
-	// inference experiment. Each ModelVariantConfigSummary object in the array
-	// describes the infrastructure configuration for the corresponding variant.
+	// An array of ModelVariantConfig objects. There is one for each variant in the
+	// inference experiment. Each ModelVariantConfig object in the array describes the
+	// infrastructure configuration for the corresponding variant.
 	//
 	// This member is required.
 	ModelVariants []types.ModelVariantConfig
@@ -58,13 +58,17 @@ type CreateInferenceExperimentInput struct {
 	Name *string
 
 	// The ARN of the IAM role that Amazon SageMaker can assume to access model
-	// artifacts and container images.
+	// artifacts and container images, and manage Amazon SageMaker Inference endpoints
+	// for model deployment.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Shows which variant is the production variant and which variant is the shadow
-	// variant. For the shadow variant, also shows the sampling percentage.
+	// The configuration of ShadowMode inference experiment type. Use this field to
+	// specify a production variant which takes all the inference requests, and a
+	// shadow variant to which Amazon SageMaker replicates a percentage of the
+	// inference requests. For the shadow variant also specify the percentage of
+	// requests that Amazon SageMaker replicates.
 	//
 	// This member is required.
 	ShadowModeConfig *types.ShadowModeConfig
@@ -79,9 +83,9 @@ type CreateInferenceExperimentInput struct {
 	// This member is required.
 	Type types.InferenceExperimentType
 
-	// The storage configuration for the inference experiment. This is an optional
-	// parameter that you can use for data capture. For more information, see Capture
-	// data
+	// The Amazon S3 location and configuration for storing inference request and
+	// response data. This is an optional parameter that you can use for data capture.
+	// For more information, see Capture data
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html).
 	DataStorageConfig *types.InferenceExperimentDataStorageConfig
 
@@ -124,7 +128,8 @@ type CreateInferenceExperimentInput struct {
 	KmsKey *string
 
 	// The duration for which you want the inference experiment to run. If you don't
-	// specify this field, the experiment automatically concludes after 7 days.
+	// specify this field, the experiment automatically starts immediately upon
+	// creation and concludes after 7 days.
 	Schedule *types.InferenceExperimentSchedule
 
 	// Array of key-value pairs. You can use tags to categorize your Amazon Web

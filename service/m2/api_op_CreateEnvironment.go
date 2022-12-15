@@ -30,17 +30,17 @@ func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmen
 
 type CreateEnvironmentInput struct {
 
-	// The engine type for the environment.
+	// The engine type for the runtime environment.
 	//
 	// This member is required.
 	EngineType types.EngineType
 
-	// The type of instance for the environment.
+	// The type of instance for the runtime environment.
 	//
 	// This member is required.
 	InstanceType *string
 
-	// The unique identifier of the environment.
+	// The name of the runtime environment. Must be unique within the account.
 	//
 	// This member is required.
 	Name *string
@@ -52,32 +52,36 @@ type CreateEnvironmentInput struct {
 	// The service also handles deleting the clientToken after it expires.
 	ClientToken *string
 
-	// The description of the environment.
+	// The description of the runtime environment.
 	Description *string
 
-	// The version of the engine type for the environment.
+	// The version of the engine type for the runtime environment.
 	EngineVersion *string
 
 	// The details of a high availability configuration for this runtime environment.
 	HighAvailabilityConfig *types.HighAvailabilityConfig
 
-	// Configures a desired maintenance window for the environment. If you do not
-	// provide a value, a random system-generated value will be assigned.
+	// The identifier of a customer managed key.
+	KmsKeyId *string
+
+	// Configures the maintenance window you want for the runtime environment. If you
+	// do not provide a value, a random system-generated value will be assigned.
 	PreferredMaintenanceWindow *string
 
-	// Specifies whether the environment is publicly accessible.
+	// Specifies whether the runtime environment is publicly accessible.
 	PubliclyAccessible bool
 
-	// The list of security groups for the VPC associated with this environment.
+	// The list of security groups for the VPC associated with this runtime
+	// environment.
 	SecurityGroupIds []string
 
-	// Optional. The storage configurations for this environment.
+	// Optional. The storage configurations for this runtime environment.
 	StorageConfigurations []types.StorageConfiguration
 
-	// The list of subnets associated with the VPC for this environment.
+	// The list of subnets associated with the VPC for this runtime environment.
 	SubnetIds []string
 
-	// The tags for the environment.
+	// The tags for the runtime environment.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -85,7 +89,7 @@ type CreateEnvironmentInput struct {
 
 type CreateEnvironmentOutput struct {
 
-	// The identifier of this environment.
+	// The unique identifier of the runtime environment.
 	//
 	// This member is required.
 	EnvironmentId *string

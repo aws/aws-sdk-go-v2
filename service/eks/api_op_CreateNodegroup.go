@@ -21,10 +21,10 @@ import (
 // (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html). An
 // Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated
 // Amazon EC2 instances that are managed by Amazon Web Services for an Amazon EKS
-// cluster. Each node group uses a version of the Amazon EKS optimized Amazon Linux
-// 2 AMI. For more information, see Managed Node Groups
+// cluster. For more information, see Managed node groups
 // (https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html) in
-// the Amazon EKS User Guide.
+// the Amazon EKS User Guide. Windows AMI types are only supported for commercial
+// Regions that support Windows Amazon EKS.
 func (c *Client) CreateNodegroup(ctx context.Context, params *CreateNodegroupInput, optFns ...func(*Options)) (*CreateNodegroupOutput, error) {
 	if params == nil {
 		params = &CreateNodegroupInput{}
@@ -82,13 +82,12 @@ type CreateNodegroupInput struct {
 	// This member is required.
 	Subnets []string
 
-	// The AMI type for your node group. GPU instance types should use the
-	// AL2_x86_64_GPU AMI type. Non-GPU instances should use the AL2_x86_64 AMI type.
-	// Arm instances should use the AL2_ARM_64 AMI type. All types use the Amazon EKS
-	// optimized Amazon Linux 2 AMI. If you specify launchTemplate, and your launch
+	// The AMI type for your node group. If you specify launchTemplate, and your launch
 	// template uses a custom AMI, then don't specify amiType, or the node group
-	// deployment will fail. For more information about using launch templates with
-	// Amazon EKS, see Launch template support
+	// deployment will fail. If your launch template uses a Windows custom AMI, then
+	// add eks:kube-proxy-windows to your Windows nodes rolearn in the
+	// aws-authConfigMap. For more information about using launch templates with Amazon
+	// EKS, see Launch template support
 	// (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the
 	// Amazon EKS User Guide.
 	AmiType types.AMITypes
@@ -101,18 +100,19 @@ type CreateNodegroupInput struct {
 	ClientRequestToken *string
 
 	// The root device disk size (in GiB) for your node group instances. The default
-	// disk size is 20 GiB. If you specify launchTemplate, then don't specify diskSize,
-	// or the node group deployment will fail. For more information about using launch
+	// disk size is 20 GiB for Linux and Bottlerocket. The default disk size is 50 GiB
+	// for Windows. If you specify launchTemplate, then don't specify diskSize, or the
+	// node group deployment will fail. For more information about using launch
 	// templates with Amazon EKS, see Launch template support
 	// (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the
 	// Amazon EKS User Guide.
 	DiskSize *int32
 
 	// Specify the instance types for a node group. If you specify a GPU instance type,
-	// be sure to specify AL2_x86_64_GPU with the amiType parameter. If you specify
-	// launchTemplate, then you can specify zero or one instance type in your launch
-	// template or you can specify 0-20 instance types for instanceTypes. If however,
-	// you specify an instance type in your launch template and specify any
+	// make sure to also specify an applicable GPU AMI type with the amiType parameter.
+	// If you specify launchTemplate, then you can specify zero or one instance type in
+	// your launch template or you can specify 0-20 instance types for instanceTypes.
+	// If however, you specify an instance type in your launch template and specify any
 	// instanceTypes, the node group deployment will fail. If you don't specify an
 	// instance type in a launch template or for instanceTypes, then t3.medium is used,
 	// by default. If you specify Spot for capacityType, then we recommend specifying
@@ -136,9 +136,13 @@ type CreateNodegroupInput struct {
 
 	// The AMI version of the Amazon EKS optimized AMI to use with your node group. By
 	// default, the latest available AMI version for the node group's current
-	// Kubernetes version is used. For more information, see Amazon EKS optimized
-	// Amazon Linux 2 AMI versions
+	// Kubernetes version is used. For information about Linux versions, see Amazon EKS
+	// optimized Amazon Linux AMI versions
 	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
+	// in the Amazon EKS User Guide. Amazon EKS managed node groups support the
+	// November 2022 and later releases of the Windows AMIs. For information about
+	// Windows versions, see Amazon EKS optimized Windows AMI versions
+	// (https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html)
 	// in the Amazon EKS User Guide. If you specify launchTemplate, and your launch
 	// template uses a custom AMI, then don't specify releaseVersion, or the node group
 	// deployment will fail. For more information about using launch templates with
@@ -147,10 +151,11 @@ type CreateNodegroupInput struct {
 	// Amazon EKS User Guide.
 	ReleaseVersion *string
 
-	// The remote access (SSH) configuration to use with your node group. If you
-	// specify launchTemplate, then don't specify remoteAccess, or the node group
-	// deployment will fail. For more information about using launch templates with
-	// Amazon EKS, see Launch template support
+	// The remote access configuration to use with your node group. For Linux, the
+	// protocol is SSH. For Windows, the protocol is RDP. If you specify
+	// launchTemplate, then don't specify remoteAccess, or the node group deployment
+	// will fail. For more information about using launch templates with Amazon EKS,
+	// see Launch template support
 	// (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the
 	// Amazon EKS User Guide.
 	RemoteAccess *types.RemoteAccessConfig

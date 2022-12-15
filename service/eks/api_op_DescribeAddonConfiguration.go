@@ -28,9 +28,10 @@ func (c *Client) DescribeAddonConfiguration(ctx context.Context, params *Describ
 
 type DescribeAddonConfigurationInput struct {
 
-	// The name of the add-on. The name must match one of the names returned by
+	// The name of the add-on. The name must match one of the names that
 	// DescribeAddonVersions
-	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html).
+	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html)
+	// returns.
 	//
 	// This member is required.
 	AddonName *string
@@ -55,8 +56,8 @@ type DescribeAddonConfigurationOutput struct {
 	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html).
 	AddonVersion *string
 
-	// A JSON schema used to validate provided configuration values when creating or
-	// updating an addon.
+	// A JSON schema that's used to validate the configuration values that you provide
+	// when an addon is created or updated.
 	ConfigurationSchema *string
 
 	// Metadata pertaining to the operation's result.

@@ -573,6 +573,35 @@ type StreamModeDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The summary of a stream.
+type StreamSummary struct {
+
+	// The ARN of the stream.
+	//
+	// This member is required.
+	StreamARN *string
+
+	// The name of a stream.
+	//
+	// This member is required.
+	StreamName *string
+
+	// The status of the stream.
+	//
+	// This member is required.
+	StreamStatus StreamStatus
+
+	// The timestamp at which the stream was created.
+	StreamCreationTimestamp *time.Time
+
+	// Specifies the capacity mode to which you want to set your data stream.
+	// Currently, in Kinesis Data Streams, you can choose between an on-demand capacity
+	// mode and a provisioned capacity mode for your data streams.
+	StreamModeDetails *StreamModeDetails
+
+	noSmithyDocumentSerde
+}
+
 // After you call SubscribeToShard, Kinesis Data Streams sends events of this type
 // over an HTTP/2 connection to your consumer.
 type SubscribeToShardEvent struct {

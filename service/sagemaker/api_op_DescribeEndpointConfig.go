@@ -78,11 +78,9 @@ type DescribeEndpointConfigOutput struct {
 	// storing it on the ML storage volume attached to the instance.
 	KmsKeyId *string
 
-	// Array of ProductionVariant objects. There is one for each model that you want to
-	// host at this endpoint in shadow mode with production traffic replicated from the
-	// model specified on ProductionVariants.If you use this field, you can only
-	// specify one variant for ProductionVariants and one variant for
-	// ShadowProductionVariants.
+	// An array of ProductionVariant objects, one for each model that you want to host
+	// at this endpoint in shadow mode with production traffic replicated from the
+	// model specified on ProductionVariants.
 	ShadowProductionVariants []types.ProductionVariant
 
 	// Metadata pertaining to the operation's result.

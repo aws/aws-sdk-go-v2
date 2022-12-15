@@ -7,6 +7,26 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// Specifies that you do not have the permissions required to perform this
+// operation.
+type AccessDeniedException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The provided iterator exceeds the maximum age allowed.
 type ExpiredIteratorException struct {
 	Message *string
@@ -299,6 +319,9 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Specifies that you tried to invoke this API for a data stream with the on-demand
+// capacity mode. This API is only supported for data streams with the provisioned
+// capacity mode.
 type ValidationException struct {
 	Message *string
 

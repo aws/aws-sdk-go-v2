@@ -50,8 +50,8 @@ type DescribeInferenceExperimentOutput struct {
 	// This member is required.
 	EndpointMetadata *types.EndpointMetadata
 
-	// Array of ModelVariantConfigSummary objects. There is one for each variant in the
-	// inference experiment. Each ModelVariantConfigSummary object in the array
+	// An array of ModelVariantConfigSummary objects. There is one for each variant in
+	// the inference experiment. Each ModelVariantConfigSummary object in the array
 	// describes the infrastructure configuration for deploying the corresponding
 	// variant.
 	//
@@ -69,25 +69,26 @@ type DescribeInferenceExperimentOutput struct {
 	// * Creating - Amazon SageMaker is creating your
 	// experiment.
 	//
-	// * Created - Amazon SageMaker has finished creating your experiment
-	// and it will begin at the scheduled time.
+	// * Created - Amazon SageMaker has finished the creation of your
+	// experiment and will begin the experiment at the scheduled time.
 	//
-	// * Updating - When you make changes to
-	// your experiment, your experiment shows as updating.
-	//
-	// * Starting - Amazon
-	// SageMaker is beginning your experiment.
-	//
-	// * Running - Your experiment is in
-	// progress.
-	//
-	// * Stopping - Amazon SageMaker is stopping your experiment.
+	// * Updating -
+	// When you make changes to your experiment, your experiment shows as updating.
 	//
 	// *
-	// Completed - Your experiment has completed.
+	// Starting - Amazon SageMaker is beginning your experiment.
 	//
-	// * Cancelled - When you conclude your
-	// experiment early, it shows as canceled.
+	// * Running - Your
+	// experiment is in progress.
+	//
+	// * Stopping - Amazon SageMaker is stopping your
+	// experiment.
+	//
+	// * Completed - Your experiment has completed.
+	//
+	// * Cancelled - When
+	// you conclude your experiment early using the StopInferenceExperiment API, or if
+	// any operation fails with an unexpected error, it shows as cancelled.
 	//
 	// This member is required.
 	Status types.InferenceExperimentStatus
@@ -97,13 +98,14 @@ type DescribeInferenceExperimentOutput struct {
 	// This member is required.
 	Type types.InferenceExperimentType
 
-	// The timestamp at which the inference experiment was completed or will complete.
+	// The timestamp at which the inference experiment was completed.
 	CompletionTime *time.Time
 
 	// The timestamp at which you created the inference experiment.
 	CreationTime *time.Time
 
-	// The Amazon S3 storage configuration for the inference experiment.
+	// The Amazon S3 location and configuration for storing inference request and
+	// response data.
 	DataStorageConfig *types.InferenceExperimentDataStorageConfig
 
 	// The description of the inference experiment.
@@ -119,17 +121,22 @@ type DescribeInferenceExperimentOutput struct {
 	LastModifiedTime *time.Time
 
 	// The ARN of the IAM role that Amazon SageMaker can assume to access model
-	// artifacts and container images.
+	// artifacts and container images, and manage Amazon SageMaker Inference endpoints
+	// for model deployment.
 	RoleArn *string
 
 	// The duration for which the inference experiment ran or will run.
 	Schedule *types.InferenceExperimentSchedule
 
-	// Shows which variant is a production variant and which variant is a shadow
-	// variant. For shadow variants, also shows the sampling percentage.
+	// The configuration of ShadowMode inference experiment type, which shows the
+	// production variant that takes all the inference requests, and the shadow variant
+	// to which Amazon SageMaker replicates a percentage of the inference requests. For
+	// the shadow variant it also shows the percentage of requests that Amazon
+	// SageMaker replicates.
 	ShadowModeConfig *types.ShadowModeConfig
 
-	// The error message for the inference experiment status result.
+	// The error message or client-specified Reason from the StopInferenceExperiment
+	// API, that explains the status of the inference experiment.
 	StatusReason *string
 
 	// Metadata pertaining to the operation's result.

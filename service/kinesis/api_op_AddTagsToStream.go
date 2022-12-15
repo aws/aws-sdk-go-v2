@@ -11,10 +11,11 @@ import (
 )
 
 // Adds or updates tags for the specified Kinesis data stream. You can assign up to
-// 50 tags to a data stream. If tags have already been assigned to the stream,
-// AddTagsToStream overwrites any existing tags that correspond to the specified
-// tag keys. AddTagsToStream has a limit of five transactions per second per
-// account.
+// 50 tags to a data stream. When invoking this API, it is recommended you use the
+// StreamARN input parameter rather than the StreamName input parameter. If tags
+// have already been assigned to the stream, AddTagsToStream overwrites any
+// existing tags that correspond to the specified tag keys. AddTagsToStream has a
+// limit of five transactions per second per account.
 func (c *Client) AddTagsToStream(ctx context.Context, params *AddTagsToStreamInput, optFns ...func(*Options)) (*AddTagsToStreamOutput, error) {
 	if params == nil {
 		params = &AddTagsToStreamInput{}
@@ -33,15 +34,16 @@ func (c *Client) AddTagsToStream(ctx context.Context, params *AddTagsToStreamInp
 // Represents the input for AddTagsToStream.
 type AddTagsToStreamInput struct {
 
-	// The name of the stream.
-	//
-	// This member is required.
-	StreamName *string
-
 	// A set of up to 10 key-value pairs to use to create the tags.
 	//
 	// This member is required.
 	Tags map[string]string
+
+	// The ARN of the stream.
+	StreamARN *string
+
+	// The name of the stream.
+	StreamName *string
 
 	noSmithyDocumentSerde
 }

@@ -71,8 +71,8 @@ type ApplicationSummary struct {
 	// This member is required.
 	Status ApplicationLifecycle
 
-	// Indicates whether there is an ongoing deployment or if the application has ever
-	// deployed successfully.
+	// Indicates either an ongoing deployment or if the application has ever deployed
+	// successfully.
 	DeploymentStatus ApplicationDeploymentLifecycle
 
 	// The description of the application.
@@ -81,8 +81,8 @@ type ApplicationSummary struct {
 	// The unique identifier of the runtime environment that hosts this application.
 	EnvironmentId *string
 
-	// The timestamp when the application was last started. Null until the application
-	// has started running for the first time.
+	// The timestamp when you last started the application. Null until the application
+	// runs for the first time.
 	LastStartTime *time.Time
 
 	// Indicates the status of the latest version of the application.
@@ -218,8 +218,7 @@ type DataSet struct {
 	// This member is required.
 	DatasetName *string
 
-	// The type of dataset. Possible values include VSAM, IS, PS, GDG, PO, PS, UNKNOWN
-	// etc.
+	// The type of dataset. The only supported value is VSAM.
 	//
 	// This member is required.
 	DatasetOrg DatasetOrgAttributes
@@ -408,8 +407,7 @@ type DataSetSummary struct {
 	// The timestamp when the data set was created.
 	CreationTime *time.Time
 
-	// The type of data set. Possible values include VSAM, IS, PS, GDG, PO, PS, or
-	// unknown.
+	// The type of data set. The only supported value is VSAM.
 	DataSetOrg *string
 
 	// The format of the data set.
@@ -495,7 +493,7 @@ type DeploymentSummary struct {
 	// This member is required.
 	DeploymentId *string
 
-	// The unique identifier of the environment.
+	// The unique identifier of the runtime environment.
 	//
 	// This member is required.
 	EnvironmentId *string
@@ -543,16 +541,16 @@ type EngineVersionsSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Contains a subset of the possible environment attributes. Used in the
+// Contains a subset of the possible runtime environment attributes. Used in the
 // environment list.
 type EnvironmentSummary struct {
 
-	// The timestamp when the environment was created.
+	// The timestamp when the runtime environment was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The target platform for the environment.
+	// The target platform for the runtime environment.
 	//
 	// This member is required.
 	EngineType EngineType
@@ -572,17 +570,17 @@ type EnvironmentSummary struct {
 	// This member is required.
 	EnvironmentId *string
 
-	// The instance type of the environment.
+	// The instance type of the runtime environment.
 	//
 	// This member is required.
 	InstanceType *string
 
-	// The name of the environment.
+	// The name of the runtime environment.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of the environment
+	// The status of the runtime environment
 	//
 	// This member is required.
 	Status EnvironmentLifecycle
@@ -698,8 +696,8 @@ type HighAvailabilityConfig struct {
 	noSmithyDocumentSerde
 }
 
-// A subset of the attributes about a log group. In CloudWatch a log group is a
-// group of log streams that share the same retention, monitoring, and access
+// A subset of the attributes that describe a log group. In CloudWatch a log group
+// is a group of log streams that share the same retention, monitoring, and access
 // control settings.
 type LogGroupSummary struct {
 
@@ -734,7 +732,7 @@ type PendingMaintenance struct {
 	// The specific runtime engine that the maintenance schedule applies to.
 	EngineVersion *string
 
-	// The maintenance schedule for the engine version.
+	// The maintenance schedule for the runtime engine version.
 	Schedule *MaintenanceSchedule
 
 	noSmithyDocumentSerde
@@ -800,7 +798,7 @@ type ScriptBatchJobIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the storage configuration for an environment.
+// Defines the storage configuration for a runtime environment.
 //
 // The following types satisfy this interface:
 //
