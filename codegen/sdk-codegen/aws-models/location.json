@@ -3447,7 +3447,7 @@
                 "FontStack": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n        <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n        <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorHereContrast – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – \n                    <code>Fira GO Italic</code> | <code>Fira GO Map</code> | \n                    <code>Fira GO Map Bold</code> | <code>Noto Sans CJK JP Bold</code> | \n                    <code>Noto Sans CJK JP Light</code> | \n                    <code>Noto Sans CJK JP Regular</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A comma-separated list of fonts to load glyphs from in order of preference. For\n            example, <code>Noto Sans Regular, Arial Unicode</code>.</p>\n        <p>Valid fonts stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri</a> styles: </p>\n        <ul>\n            <li>\n                <p>VectorEsriDarkGrayCanvas – <code>Ubuntu Medium Italic</code> | <code>Ubuntu\n                        Medium</code> | <code>Ubuntu Italic</code> | <code>Ubuntu Regular</code> |\n                        <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriLightGrayCanvas – <code>Ubuntu Italic</code> | <code>Ubuntu\n                        Regular</code> | <code>Ubuntu Light</code> | <code>Ubuntu Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriTopographic – <code>Noto Sans Italic</code> | <code>Noto Sans\n                        Regular</code> | <code>Noto Sans Bold</code> | <code>Noto Serif\n                        Regular</code> | <code>Roboto Condensed Light Italic</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriStreets – <code>Arial Regular</code> | <code>Arial Italic</code> |\n                        <code>Arial Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorEsriNavigation – <code>Arial Regular</code> | <code>Arial Italic</code>\n                    | <code>Arial Bold</code>\n               </p>\n            </li>\n         </ul>\n        <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE Technologies</a> styles:</p>\n        <ul>\n            <li>\n                <p>VectorHereContrast – <code>Fira \n                    GO Regular</code> | <code>Fira GO Bold</code>\n               </p>\n            </li>\n            <li>\n                <p>VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite – \n                    <code>Fira GO Italic</code> | <code>Fira GO Map</code> | \n                    <code>Fira GO Map Bold</code> | <code>Noto Sans CJK JP Bold</code> | \n                    <code>Noto Sans CJK JP Light</code> | \n                    <code>Noto Sans CJK JP Regular</code>\n               </p>\n            </li>\n         </ul>\n        <p>Valid font stacks for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data (Preview)</a> styles:</p>\n        <ul>\n            <li>\n                <p>VectorOpenDataStandardLight – \n                    <code>Amazon Ember Regular,Noto Sans Regular</code> |\n                    <code>Amazon Ember Bold,Noto Sans Bold</code> | \n                    <code>Amazon Ember Medium,Noto Sans Medium</code> |\n                    <code>Amazon Ember Regular Italic,Noto Sans Italic</code> | \n                    <code>Amazon Ember Condensed RC Regular,Noto Sans Regular</code> | \n                    <code>Amazon Ember Condensed RC Bold,Noto Sans Bold</code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>The fonts used by <code>VectorOpenDataStandardLight</code> are combined fonts\n                that use <code>Amazon Ember</code> for most glyphs but <code>Noto Sans</code> \n                for glyphs unsupported by <code>Amazon Ember</code>.</p>\n        </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5464,9 +5464,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -5477,9 +5477,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -5490,9 +5490,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -5503,9 +5503,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -5516,9 +5516,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -5529,9 +5529,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -5542,9 +5542,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -5555,9 +5555,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -5568,9 +5568,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -5581,9 +5581,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -5594,9 +5594,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -5607,9 +5607,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -5620,9 +5620,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -5633,9 +5633,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -5646,9 +5646,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -5659,9 +5659,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -5672,9 +5672,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -5685,9 +5685,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -5698,9 +5698,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -5711,9 +5711,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -5724,9 +5724,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -5737,9 +5737,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -5750,9 +5750,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -5763,9 +5763,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -5776,9 +5776,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -5789,9 +5789,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -5802,9 +5802,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -5815,9 +5815,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -5828,9 +5828,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -5841,9 +5841,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -5854,9 +5854,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -5867,9 +5867,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -5880,9 +5880,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -5893,9 +5893,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -5906,9 +5906,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -5919,9 +5919,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -5932,9 +5932,9 @@
                                 }
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5944,9 +5944,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5956,9 +5956,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
+                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -5973,7 +5973,7 @@
                 "Style": {
                     "target": "com.amazonaws.location#MapStyle",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorHereContrast</code> – The HERE Contrast (Berlin) map style is a high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n                <note>\n                  <p>The <code>VectorHereContrast</code> style has been renamed from <code>VectorHereBerlin</code>. \n                    <code>VectorHereBerlin</code> has been deprecated, but will continue to work in \n                    applications that use it.</p>\n               </note>\n            </li>\n            <li>\n                <p>\n                  <code>VectorHereExplore</code> – A default HERE map style containing a \n                    neutral, global map and its features including roads, buildings, landmarks, \n                    and water features. It also now includes a fully designed map of Japan.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorHereExploreTruck</code> – A global map containing truck \n                    restrictions and attributes (e.g. width / height / HAZMAT) symbolized with \n                    highlighted segments and icons on top of HERE Explore to support use cases \n                    within transport and logistics.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RasterHereExploreSatellite</code> – A global map containing high\n                    resolution satellite imagery.</p>\n            </li>\n            <li>\n                <p>\n                  <code>HybridHereExploreSatellite</code> – A global map displaying the road \n                    network, street names, and city labels over satellite imagery. This style \n                    will automatically retrieve both raster and vector tiles, and your charges \n                    will be based on total tiles retrieved.</p>\n                <note>\n                  <p>Hybrid styles use both vector and raster tiles when rendering the \n                    map that you see. This means that more tiles are retrieved than when using \n                    either vector or raster tiles alone. Your charges will include all tiles \n                    retrieved.</p>\n               </note>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the map style selected from an available data provider.</p>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/esri.html\">Esri map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorEsriDarkGrayCanvas</code> – The Esri Dark Gray Canvas map style. A\n                    vector basemap with a dark gray, neutral background with minimal colors, labels,\n                    and features that's designed to draw attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RasterEsriImagery</code> – The Esri Imagery map style. A raster basemap\n                    that provides one meter or better satellite and aerial imagery in many parts of\n                    the world and lower resolution satellite imagery worldwide. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriLightGrayCanvas</code> – The Esri Light Gray Canvas map style,\n                    which provides a detailed vector basemap with a light gray, neutral background\n                    style with minimal colors, labels, and features that's designed to draw\n                    attention to your thematic content. </p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriTopographic</code> – The Esri Light map style, which provides\n                    a detailed vector basemap with a classic Esri map style.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriStreets</code> – The Esri World Streets map style, which\n                    provides a detailed vector basemap for the world symbolized with a classic Esri\n                    street map style. The vector tile layer is similar in content and style to the\n                    World Street Map raster map.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorEsriNavigation</code> – The Esri World Navigation map style, which\n                    provides a detailed basemap for the world symbolized with a custom navigation\n                    map style that's designed for use during the day in mobile devices.</p>\n            </li>\n         </ul>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/HERE.html\">HERE\n                Technologies map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorHereContrast</code> – The HERE Contrast (Berlin) map style is a \n                    high contrast\n                    detailed base map of the world that blends 3D and 2D rendering.</p>\n                <note>\n                  <p>The <code>VectorHereContrast</code> style has been renamed from \n                    <code>VectorHereBerlin</code>. \n                    <code>VectorHereBerlin</code> has been deprecated, but will continue to work in \n                    applications that use it.</p>\n               </note>\n            </li>\n            <li>\n                <p>\n                  <code>VectorHereExplore</code> – A default HERE map style containing a \n                    neutral, global map and its features including roads, buildings, landmarks, \n                    and water features. It also now includes a fully designed map of Japan.</p>\n            </li>\n            <li>\n                <p>\n                  <code>VectorHereExploreTruck</code> – A global map containing truck \n                    restrictions and attributes (e.g. width / height / HAZMAT) symbolized with \n                    highlighted segments and icons on top of HERE Explore to support use cases \n                    within transport and logistics.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RasterHereExploreSatellite</code> – A global map containing high\n                    resolution satellite imagery.</p>\n            </li>\n            <li>\n                <p>\n                  <code>HybridHereExploreSatellite</code> – A global map displaying the road \n                    network, street names, and city labels over satellite imagery. This style \n                    will automatically retrieve both raster and vector tiles, and your charges \n                    will be based on total tiles retrieved.</p>\n                <note>\n                  <p>Hybrid styles use both vector and raster tiles when rendering the \n                    map that you see. This means that more tiles are retrieved than when using \n                    either vector or raster tiles alone. Your charges will include all tiles \n                    retrieved.</p>\n               </note>\n            </li>\n         </ul>\n        <p>Valid <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html\">Open Data (Preview) map styles</a>:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>VectorOpenDataStandardLight</code> – The Open Data Standard Light \n                    (preview) map style provides a detailed basemap for the world suitable for\n                    website and mobile application use. The map includes highways major roads, \n                    minor roads, railways, water features, cities, parks, landmarks, building\n                    footprints, and administrative boundaries.</p>\n                <important>\n                  <p>Open Data maps is in preview. We may add, change, or remove \n                    features before announcing general availability. For more information, see\n                    <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/open-data.html#open-data-preview\">Open Data is in preview release</a>.</p>\n               </important>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }

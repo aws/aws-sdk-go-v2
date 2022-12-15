@@ -100,8 +100,1289 @@
                     "name": "translate"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Provides language translation for input text in the source language to the specified target language.</p>",
-                "smithy.api#title": "Amazon Translate"
+                "smithy.api#documentation": "<p>Provides translation of the input content from the source language to the target language.</p>",
+                "smithy.api#title": "Amazon Translate",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://translate-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://translate-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://translate.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://translate.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://translate.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
             }
         },
         "com.amazonaws.translate#AppliedTerminology": {
@@ -135,9 +1416,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5000
+                    "max": 10000
                 },
-                "smithy.api#pattern": "^[\\P{M}\\p{M}]{1,5000}$"
+                "smithy.api#pattern": "^[\\P{M}\\p{M}]{1,10000}$"
             }
         },
         "com.amazonaws.translate#ClientTokenString": {
@@ -836,7 +2117,7 @@
                 "S3Uri": {
                     "target": "com.amazonaws.translate#S3Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the AWS S3 folder that contains the input files. Amazon Translate translates all the\n      files in the folder. The folder must be in the same Region as the API endpoint you are\n      calling.</p>\n         <note>\n            <p>The URI can also point to a single input document, or it can provide the prefix for a collection of\n      input documents. For example. if you use the URI <code>S3://bucketName/prefix</code> and the\n      prefix is a single file, Amazon Translate uses that files as input. If more than one file begins with the\n      prefix, Amazon Translate uses all of them as input.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The URI of the AWS S3 folder that contains the input files. Amazon Translate translates all the\n      files in the folder and all its sub-folders. The folder must be in the same Region as the API endpoint you are\n      calling.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1215,7 +2496,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags associated with a given Amazon Translate resource. \n      For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/tagging.html\">\n        Tagging your resources</a>.</p>"
+                "smithy.api#documentation": "<p>Lists all tags associated with a given Amazon Translate resource.\n      For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/tagging.html\">\n        Tagging your resources</a>.</p>"
             }
         },
         "com.amazonaws.translate#ListTagsForResourceRequest": {
@@ -1759,7 +3040,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous batch translation job. Use batch translation jobs to\n      translate large volumes of text across multiple documents at once. \n      For batch translation, the input documents must share the same source language. You can specify one \n      or more target languages. Batch translation translates each input document into each of the target languages.\n      For more information, see\n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/async.html\">Asynchronous batch processing</a> \n         </p>\n\n         <p>Batch translation jobs can be described with the <a>DescribeTextTranslationJob</a> operation, listed with the <a>ListTextTranslationJobs</a> operation, and stopped with the <a>StopTextTranslationJob</a> operation.</p>\n         <note>\n            <p>Amazon Translate does not support batch translation of multiple source languages at once.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Starts an asynchronous batch translation job. Use batch translation jobs to\n      translate large volumes of text across multiple documents at once.\n      For batch translation, you can input documents with different source languages (specify <code>auto</code>\n      as the source language). You can specify one\n      or more target languages. Batch translation translates each input document into each of the target languages.\n      For more information, see\n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/async.html\">Asynchronous batch processing</a>.</p>\n\n         <p>Batch translation jobs can be described with the <a>DescribeTextTranslationJob</a> operation, listed with the <a>ListTextTranslationJobs</a> operation, and stopped with the <a>StopTextTranslationJob</a> operation.</p>"
             }
         },
         "com.amazonaws.translate#StartTextTranslationJobRequest": {
@@ -1788,21 +3069,21 @@
                 "DataAccessRoleArn": {
                     "target": "com.amazonaws.translate#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role\n      that grants Amazon Translate read access to your input data. For more information, see \n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/identity-and-access-management.html\">Identity and access management </a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Identity Access and Management (IAM) role\n      that grants Amazon Translate read access to your input data. For more information, see\n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/identity-and-access-management.html\">Identity and access management </a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SourceLanguageCode": {
                     "target": "com.amazonaws.translate#LanguageCodeString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code of the input language. For a list of language codes, see  \n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>\n         <p>Amazon Translate does not automatically detect a source language during batch translation jobs.</p>",
+                        "smithy.api#documentation": "<p>The language code of the input language. Specify the language if all input documents share the same language.\n      If you don't know the language of the source files, or your input documents contains different source\n      languages, select <code>auto</code>. Amazon Translate auto detects the source language for each input document.\n      For a list of supported language codes, see\n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TargetLanguageCodes": {
                     "target": "com.amazonaws.translate#TargetLanguageCodeStringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target languages of the translation job. Enter up to 10 language codes.   \n      Each input file is translated into each target language.</p>\n         <p>Each language code is two or five characters long. For a list of language codes, see  \n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>",
+                        "smithy.api#documentation": "<p>The target languages of the translation job. Enter up to 10 language codes.\n      Each input file is translated into each target language.</p>\n         <p>Each language code is 2 or 5 characters long. For a list of language codes, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1815,7 +3096,7 @@
                 "ParallelDataNames": {
                     "target": "com.amazonaws.translate#ResourceNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a parallel data resource to add to the translation job. This resource consists\n      of examples that show how you want segments of text to be translated. \n      If you specify multiple target languages for\n      the job, the parallel data file must include translations for\n      all the target languages.</p>\n         <p>When you add parallel\n      data to a translation job, you create an <i>Active Custom Translation</i> job. </p>\n         <p>This parameter accepts only one parallel data resource.</p>\n         <note>\n            <p>Active Custom Translation jobs are priced at a higher rate than other jobs that don't\n        use parallel data. For more information, see <a href=\"http://aws.amazon.com/translate/pricing/\">Amazon Translate pricing</a>.</p>\n         </note>\n         <p>For a list of available parallel data resources, use the <a>ListParallelData</a> operation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-parallel-data.html\">\n    Customizing your translations with parallel data</a>.</p>"
+                        "smithy.api#documentation": "<p>The name of a parallel data resource to add to the translation job. This resource consists\n      of examples that show how you want segments of text to be translated.\n      If you specify multiple target languages for\n      the job, the parallel data file must include translations for\n      all the target languages.</p>\n         <p>When you add parallel\n      data to a translation job, you create an <i>Active Custom Translation</i> job. </p>\n         <p>This parameter accepts only one parallel data resource.</p>\n         <note>\n            <p>Active Custom Translation jobs are priced at a higher rate than other jobs that don't\n        use parallel data. For more information, see <a href=\"http://aws.amazon.com/translate/pricing/\">Amazon Translate pricing</a>.</p>\n         </note>\n         <p>For a list of available parallel data resources, use the <a>ListParallelData</a> operation.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-parallel-data.html\">\n    Customizing your translations with parallel data</a>.</p>"
                     }
                 },
                 "ClientToken": {
@@ -1994,7 +3275,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates a specific tag with a resource. A tag is a key-value pair\n      that adds as a metadata to a resource.  \n      For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/tagging.html\">\n        Tagging your resources</a>.</p>"
+                "smithy.api#documentation": "<p>Associates a specific tag with a resource. A tag is a key-value pair\n      that adds as a metadata to a resource.\n      For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/tagging.html\">\n        Tagging your resources</a>.</p>"
             }
         },
         "com.amazonaws.translate#TagResourceRequest": {
@@ -2100,7 +3381,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The data associated with the custom terminology. For information about the custom terminology file, see \n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/creating-custom-terminology.html\">\n      Creating a Custom Terminology</a>.</p>"
+                "smithy.api#documentation": "<p>The data associated with the custom terminology. For information about the custom terminology file, see\n      <a href=\"https://docs.aws.amazon.com/translate/latest/dg/creating-custom-terminology.html\">\n      Creating a Custom Terminology</a>.</p>"
             }
         },
         "com.amazonaws.translate#TerminologyDataFormat": {
@@ -2481,7 +3762,7 @@
                 "Text": {
                     "target": "com.amazonaws.translate#BoundedLengthString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The text to translate. The text string can be a maximum of 5,000 bytes long. Depending on\n      your character set, this may be fewer than 5,000 characters.</p>",
+                        "smithy.api#documentation": "<p>The text to translate. The text string can be a maximum of 10,000 bytes long. Depending on\n      your character set, this may be fewer than 10,000 characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2517,7 +3798,7 @@
             "type": "structure",
             "members": {
                 "TranslatedText": {
-                    "target": "com.amazonaws.translate#String",
+                    "target": "com.amazonaws.translate#TranslatedTextString",
                     "traits": {
                         "smithy.api#documentation": "<p>The translated text.</p>",
                         "smithy.api#required": {}
@@ -2551,24 +3832,34 @@
                 }
             }
         },
+        "com.amazonaws.translate#TranslatedTextString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20000
+                },
+                "smithy.api#pattern": "^[\\P{M}\\p{M}]{0,20000}$"
+            }
+        },
         "com.amazonaws.translate#TranslationSettings": {
             "type": "structure",
             "members": {
                 "Formality": {
                     "target": "com.amazonaws.translate#Formality",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can optionally specify the desired level of formality for translations\n        to supported target languages. The formality\n      setting controls the level of formal language usage (also known as <a href=\"https://en.wikipedia.org/wiki/Register_(sociolinguistics)\">register</a>) in the\n      translation output.  You can set the value to informal or formal. If you don't specify a value for\n      formality, or if the target language doesn't support formality, the translation will\n      ignore the formality setting.</p>\n         <p> If you specify multiple target languages for the job, translate ignores\n      the formality setting for any unsupported target language.</p>\n         <p>For a list of target languages that support formality, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html\">Setting Formality</a>\n      in the Amazon Translate Developer Guide.</p>"
+                        "smithy.api#documentation": "<p>You can optionally specify the desired level of formality for translations\n        to supported target languages. The formality\n      setting controls the level of formal language usage (also known as <a href=\"https://en.wikipedia.org/wiki/Register_(sociolinguistics)\">register</a>) in the\n      translation output.  You can set the value to informal or formal. If you don't specify a value for\n      formality, or if the target language doesn't support formality, the translation will\n      ignore the formality setting.</p>\n         <p> If you specify multiple target languages for the job, translate ignores\n      the formality setting for any unsupported target language.</p>\n         <p>For a list of target languages that support formality, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-formality.html#customizing-translations-formality-languages\">Supported languages</a>\n      in the Amazon Translate Developer Guide.</p>"
                     }
                 },
                 "Profanity": {
                     "target": "com.amazonaws.translate#Profanity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable the profanity setting if you want Amazon Translate to mask profane words and\n      phrases in your translation output.</p>\n         <p>To mask profane words and phrases, Amazon Translate replaces them with the grawlix string\n      “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the\n      length or number of words.</p>\n         <p>Amazon Translate doesn't detect profanity in all of its supported languages. For languages\n      that support profanity detection, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html\">Masking\n        profanity</a> in the Amazon Translate Developer Guide.</p>\n         <p>If you specify multiple target languages for the job, all the\n      target languages must support profanity masking. If any of the\n      target languages don't support profanity masking, the\n      translation job won't mask profanity for any target\n      language.</p>"
+                        "smithy.api#documentation": "<p>Enable the profanity setting if you want Amazon Translate to mask profane words and\n      phrases in your translation output.</p>\n         <p>To mask profane words and phrases, Amazon Translate replaces them with the grawlix string\n      “?$#@$“. This 5-character sequence is used for each profane word or phrase, regardless of the\n      length or number of words.</p>\n         <p>Amazon Translate doesn't detect profanity in all of its supported languages. For languages\n      that don't support profanity detection, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/customizing-translations-profanity.html#customizing-translations-profanity-languages\">Unsupported languages</a> in the Amazon Translate Developer Guide.</p>\n         <p>If you specify multiple target languages for the job, all the\n      target languages must support profanity masking. If any of the\n      target languages don't support profanity masking, the\n      translation job won't mask profanity for any target\n      language.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Optional settings that configure the translation output. Use these settings for \n      real time translations and asynchronous translation jobs.</p>"
+                "smithy.api#documentation": "<p>Optional settings that configure the translation output. Use these settings for\n      real time translations and asynchronous translation jobs.</p>"
             }
         },
         "com.amazonaws.translate#UnboundedLengthString": {
@@ -2641,7 +3932,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a specific tag associated with an Amazon Translate resource. \n      For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/tagging.html\">\n        Tagging your resources</a>.</p>"
+                "smithy.api#documentation": "<p>Removes a specific tag associated with an Amazon Translate resource.\n      For more information, see <a href=\"https://docs.aws.amazon.com/translate/latest/dg/tagging.html\">\n        Tagging your resources</a>.</p>"
             }
         },
         "com.amazonaws.translate#UntagResourceRequest": {

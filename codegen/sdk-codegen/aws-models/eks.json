@@ -79,6 +79,30 @@
                     "traits": {
                         "smithy.api#enumValue": "BOTTLEROCKET_x86_64_NVIDIA"
                     }
+                },
+                "WINDOWS_CORE_2019_x86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_CORE_2019_x86_64"
+                    }
+                },
+                "WINDOWS_FULL_2019_x86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_FULL_2019_x86_64"
+                    }
+                },
+                "WINDOWS_CORE_2022_x86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_CORE_2022_x86_64"
+                    }
+                },
+                "WINDOWS_FULL_2022_x86_64": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WINDOWS_FULL_2022_x86_64"
+                    }
                 }
             }
         },
@@ -204,7 +228,7 @@
                     "name": "eks"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy\n            for you to run Kubernetes on Amazon Web Services without needing to stand up or maintain\n            your own Kubernetes control plane. Kubernetes is an open-source system for automating\n            the deployment, scaling, and management of containerized applications. </p>\n        <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so\n            you can use all the existing plugins and tooling from the Kubernetes community.\n            Applications running on Amazon EKS are fully compatible with applications\n            running on any standard Kubernetes environment, whether running in on-premises data\n            centers or public clouds. This means that you can easily migrate any standard Kubernetes\n            application to Amazon EKS without any code modification required.</p>",
+                "smithy.api#documentation": "<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy\n            for you to run Kubernetes on Amazon Web Services without needing to stand up or maintain\n            your own Kubernetes control plane. Kubernetes is an open-source system for automating\n            the deployment, scaling, and management of containerized applications. </p>\n         <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so\n            you can use all the existing plugins and tooling from the Kubernetes community.\n            Applications running on Amazon EKS are fully compatible with applications\n            running on any standard Kubernetes environment, whether running in on-premises data\n            centers or public clouds. This means that you can easily migrate any standard Kubernetes\n            application to Amazon EKS without any code modification required.</p>",
                 "smithy.api#title": "Amazon Elastic Kubernetes Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -573,8 +597,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -586,8 +610,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -599,8 +623,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -612,8 +636,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -625,8 +649,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -638,8 +662,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -651,8 +675,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -664,8 +688,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -677,8 +701,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -690,8 +714,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -703,8 +727,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -716,8 +740,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -729,8 +753,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -742,8 +766,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -755,8 +779,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -768,8 +792,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -781,8 +805,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -794,8 +818,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -807,8 +831,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -820,8 +844,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -833,8 +857,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -846,8 +870,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -859,8 +883,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -872,8 +896,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -885,8 +909,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -898,8 +922,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -911,8 +935,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -924,8 +948,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -937,8 +961,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -950,8 +974,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -963,8 +987,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -976,8 +1000,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -989,8 +1013,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1002,8 +1026,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1015,8 +1039,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1028,8 +1052,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1041,8 +1065,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1054,8 +1078,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1067,8 +1091,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1080,8 +1104,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1093,8 +1117,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1106,8 +1130,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1119,8 +1143,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1132,8 +1156,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1145,8 +1169,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1158,8 +1182,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1171,8 +1195,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1184,8 +1208,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1197,8 +1221,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1210,8 +1234,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1223,8 +1247,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1236,8 +1260,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1249,8 +1273,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1262,8 +1286,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1275,8 +1299,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1288,8 +1312,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1301,8 +1325,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1314,8 +1338,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1327,8 +1351,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1340,8 +1364,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1353,8 +1377,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1366,8 +1390,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1379,8 +1403,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1392,8 +1416,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1405,8 +1429,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1418,8 +1442,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1431,8 +1455,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1444,8 +1468,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1457,8 +1481,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1470,8 +1494,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1483,8 +1507,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1496,8 +1520,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1509,8 +1533,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1522,8 +1546,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1535,8 +1559,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1548,8 +1572,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1561,8 +1585,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1574,8 +1598,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1587,8 +1611,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1600,8 +1624,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1613,8 +1637,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1626,8 +1650,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1639,8 +1663,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1652,8 +1676,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1665,8 +1689,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1678,8 +1702,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1691,8 +1715,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1704,8 +1728,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1717,8 +1741,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1730,8 +1754,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1743,8 +1767,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1756,8 +1780,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1769,8 +1793,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1782,8 +1806,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1795,8 +1819,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1808,8 +1832,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1821,8 +1845,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1834,8 +1858,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1847,8 +1871,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1860,8 +1884,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1873,8 +1897,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1886,8 +1910,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1899,8 +1923,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1912,8 +1936,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1923,8 +1947,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1936,8 +1960,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1947,8 +1971,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1960,8 +1984,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1973,8 +1997,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1986,8 +2010,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1999,8 +2023,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2012,8 +2036,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2025,8 +2049,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2038,8 +2062,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2051,8 +2075,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2064,8 +2088,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2077,8 +2101,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2090,8 +2114,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2103,8 +2127,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2116,8 +2140,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2129,8 +2153,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2142,8 +2166,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2155,8 +2179,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2168,8 +2192,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2181,8 +2205,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2194,8 +2218,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2207,8 +2231,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2220,8 +2244,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2231,8 +2255,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2244,8 +2268,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2255,8 +2279,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2268,8 +2292,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2281,8 +2305,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2293,8 +2317,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2305,8 +2329,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2358,7 +2382,7 @@
                 "health": {
                     "target": "com.amazonaws.eks#AddonHealth",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object representing the health of the add-on.</p>"
+                        "smithy.api#documentation": "<p>An object that represents the health of the add-on.</p>"
                     }
                 },
                 "addonArn": {
@@ -2382,7 +2406,7 @@
                 "serviceAccountRoleArn": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that is bound to the Kubernetes service\n            account used by the add-on.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that's bound to the Kubernetes service account\n            that the add-on uses.</p>"
                     }
                 },
                 "tags": {
@@ -2412,7 +2436,7 @@
                 "configurationValues": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provided configuration values.</p>"
+                        "smithy.api#documentation": "<p>The configuration values that you provided.</p>"
                     }
                 }
             },
@@ -2690,7 +2714,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associate encryption configuration to an existing cluster.</p>\n        <p>You can use this API to enable encryption on existing clusters which do not have\n            encryption already enabled. This allows you to implement a defense-in-depth security\n            strategy without migrating applications to new Amazon EKS clusters.</p>",
+                "smithy.api#documentation": "<p>Associate encryption configuration to an existing cluster.</p>\n         <p>You can use this API to enable encryption on existing clusters which do not have\n            encryption already enabled. This allows you to implement a defense-in-depth security\n            strategy without migrating applications to new Amazon EKS clusters.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/encryption-config/associate",
@@ -2762,7 +2786,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associate an identity provider configuration to a cluster.</p>\n        <p>If you want to authenticate identities using an identity provider, you can create an\n            identity provider configuration and associate it to your cluster. After configuring\n            authentication to your cluster you can create Kubernetes <code>roles</code> and\n                <code>clusterroles</code> to assign permissions to the roles, and then bind the\n            roles to the identities using Kubernetes <code>rolebindings</code> and\n                <code>clusterrolebindings</code>. For more information see <a href=\"https://kubernetes.io/docs/reference/access-authn-authz/rbac/\">Using RBAC\n                Authorization</a> in the Kubernetes documentation.</p>",
+                "smithy.api#documentation": "<p>Associate an identity provider configuration to a cluster.</p>\n         <p>If you want to authenticate identities using an identity provider, you can create an\n            identity provider configuration and associate it to your cluster. After configuring\n            authentication to your cluster you can create Kubernetes <code>roles</code> and\n                <code>clusterroles</code> to assign permissions to the roles, and then bind the\n            roles to the identities using Kubernetes <code>rolebindings</code> and\n                <code>clusterrolebindings</code>. For more information see <a href=\"https://kubernetes.io/docs/reference/access-authn-authz/rbac/\">Using RBAC\n                Authorization</a> in the Kubernetes documentation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/identity-provider-configs/associate",
@@ -3404,7 +3428,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon EKS add-on.</p>\n        <p>Amazon EKS add-ons help to automate the provisioning and lifecycle management\n            of common operational software for Amazon EKS clusters. For more information,\n            see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html\">Amazon EKS add-ons</a> in the <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon EKS add-on.</p>\n         <p>Amazon EKS add-ons help to automate the provisioning and lifecycle management\n            of common operational software for Amazon EKS clusters. For more information,\n            see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html\">Amazon EKS add-ons</a> in the <i>Amazon EKS User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/addons",
@@ -3426,7 +3450,7 @@
                 "addonName": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the add-on. The name must match one of the names returned by <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html\">\n               <code>DescribeAddonVersions</code>\n            </a>.</p>",
+                        "smithy.api#documentation": "<p>The name of the add-on. The name must match one of the names that <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html\">\n               <code>DescribeAddonVersions</code>\n            </a> returns.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3439,13 +3463,13 @@
                 "serviceAccountRoleArn": {
                     "target": "com.amazonaws.eks#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on's service account. The role must be assigned the IAM permissions required by the add-on. If you don't specify an existing IAM role, then the add-on uses the\n     permissions assigned to the node IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">Amazon EKS node IAM role</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <note>\n            <p>To specify an existing IAM role, you must have an IAM OpenID Connect (OIDC) provider created for\n                your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html\">Enabling\n                    IAM roles for service accounts on your cluster</a> in the\n                <i>Amazon EKS User Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on's service account. The role must be assigned the IAM permissions required by the add-on. If you don't specify an existing IAM role, then the add-on uses the\n     permissions assigned to the node IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">Amazon EKS node IAM role</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <note>\n            <p>To specify an existing IAM role, you must have an IAM OpenID Connect (OIDC) provider created for\n                your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html\">Enabling\n                    IAM roles for service accounts on your cluster</a> in the\n                <i>Amazon EKS User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "resolveConflicts": {
                     "target": "com.amazonaws.eks#ResolveConflicts",
                     "traits": {
-                        "smithy.api#documentation": "<p>How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are\n            handled based on the value you choose:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>None</b> – If the self-managed version of\n                    the add-on is installed on your cluster, Amazon EKS doesn't change the\n                    value. Creation of the add-on might fail.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Overwrite</b> – If the self-managed\n                    version of the add-on is installed on your cluster and the Amazon EKS\n                    default value is different than the existing value, Amazon EKS changes\n                    the value to the Amazon EKS default value.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Preserve</b> – Not supported. You can set\n                    this value when updating an add-on though. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html\">UpdateAddon</a>.</p>\n            </li>\n         </ul>\n        <p>If you don't currently have the self-managed version of the add-on installed on your\n            cluster, the Amazon EKS add-on is installed. Amazon EKS sets all values\n            to default values, regardless of the option that you specify.</p>"
+                        "smithy.api#documentation": "<p>How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are\n            handled based on the value you choose:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>None</b> – If the self-managed version of\n                    the add-on is installed on your cluster, Amazon EKS doesn't change the\n                    value. Creation of the add-on might fail.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Overwrite</b> – If the self-managed\n                    version of the add-on is installed on your cluster and the Amazon EKS\n                    default value is different than the existing value, Amazon EKS changes\n                    the value to the Amazon EKS default value.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Preserve</b> – Not supported. You can set\n                    this value when updating an add-on though. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_UpdateAddon.html\">UpdateAddon</a>.</p>\n            </li>\n         </ul>\n         <p>If you don't currently have the self-managed version of the add-on installed on your\n            cluster, the Amazon EKS add-on is installed. Amazon EKS sets all values\n            to default values, regardless of the option that you specify.</p>"
                     }
                 },
                 "clientRequestToken": {
@@ -3464,7 +3488,7 @@
                 "configurationValues": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The set of configuration values for the add-on being created. Whatever values\n            provided here are validated against the schema from <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html\">\n               <code>DescribeAddonConfiguration</code>\n            </a>.</p>"
+                        "smithy.api#documentation": "<p>The set of configuration values for the add-on that's created. The values that you\n            provide are validated against the schema in <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html\">\n               <code>DescribeAddonConfiguration</code>\n            </a>.</p>"
                     }
                 }
             }
@@ -3509,7 +3533,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon EKS control plane. </p>\n        <p>The Amazon EKS control plane consists of control plane instances that run the\n            Kubernetes software, such as <code>etcd</code> and the API server. The control plane\n            runs in an account managed by Amazon Web Services, and the Kubernetes API is exposed by\n            the Amazon EKS API server endpoint. Each Amazon EKS cluster control\n            plane is single tenant and unique. It runs on its own set of Amazon EC2\n            instances.</p>\n        <p>The cluster control plane is provisioned across multiple Availability Zones and\n            fronted by an Elastic Load Balancing\n            Network Load Balancer. Amazon EKS also provisions elastic network interfaces in\n            your VPC subnets to provide connectivity from the control plane instances to the nodes\n            (for example, to support <code>kubectl exec</code>, <code>logs</code>, and\n                <code>proxy</code> data flows).</p>\n        <p>Amazon EKS nodes run in your Amazon Web Services account and connect to your\n            cluster's control plane over the Kubernetes API server endpoint and a certificate file\n            that is created for your cluster.</p>\n        \n        <p>In most cases, it takes several minutes to create a cluster. After you create an\n                Amazon EKS cluster, you must configure your Kubernetes tooling to\n            communicate with the API server and launch nodes into your cluster. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html\">Managing Cluster Authentication</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching\n                    Amazon EKS nodes</a> in the <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon EKS control plane. </p>\n         <p>The Amazon EKS control plane consists of control plane instances that run the\n            Kubernetes software, such as <code>etcd</code> and the API server. The control plane\n            runs in an account managed by Amazon Web Services, and the Kubernetes API is exposed by\n            the Amazon EKS API server endpoint. Each Amazon EKS cluster control\n            plane is single tenant and unique. It runs on its own set of Amazon EC2\n            instances.</p>\n         <p>The cluster control plane is provisioned across multiple Availability Zones and\n            fronted by an Elastic Load Balancing\n            Network Load Balancer. Amazon EKS also provisions elastic network interfaces in\n            your VPC subnets to provide connectivity from the control plane instances to the nodes\n            (for example, to support <code>kubectl exec</code>, <code>logs</code>, and\n                <code>proxy</code> data flows).</p>\n         <p>Amazon EKS nodes run in your Amazon Web Services account and connect to your\n            cluster's control plane over the Kubernetes API server endpoint and a certificate file\n            that is created for your cluster.</p>\n         <p>In most cases, it takes several minutes to create a cluster. After you create an\n                Amazon EKS cluster, you must configure your Kubernetes tooling to\n            communicate with the API server and launch nodes into your cluster. For more\n            information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managing-auth.html\">Managing Cluster Authentication</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-workers.html\">Launching\n                    Amazon EKS nodes</a> in the <i>Amazon EKS User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters",
@@ -3530,7 +3554,7 @@
                 "version": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The desired Kubernetes version for your cluster. If you don't specify a value here,\n            the default version available in Amazon EKS is used.</p>\n        <note>\n            <p>The default version might not be the latest version available.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The desired Kubernetes version for your cluster. If you don't specify a value here,\n            the default version available in Amazon EKS is used.</p>\n         <note>\n            <p>The default version might not be the latest version available.</p>\n         </note>"
                     }
                 },
                 "roleArn": {
@@ -3556,7 +3580,7 @@
                 "logging": {
                     "target": "com.amazonaws.eks#Logging",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n                CloudWatch Logs. By default, cluster control plane logs aren't exported to\n                CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n        <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n                CloudWatch Logs. By default, cluster control plane logs aren't exported to\n                CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>"
                     }
                 },
                 "clientRequestToken": {
@@ -3626,7 +3650,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Fargate profile for your Amazon EKS cluster. You\n            must have at least one Fargate profile in a cluster to be able to run\n            pods on Fargate.</p>\n        <p>The Fargate profile allows an administrator to declare which pods run\n            on Fargate and specify which pods run on which Fargate\n            profile. This declaration is done through the profile’s selectors. Each profile can have\n            up to five selectors that contain a namespace and labels. A namespace is required for\n            every selector. The label field consists of multiple optional key-value pairs. Pods that\n            match the selectors are scheduled on Fargate. If a to-be-scheduled pod\n            matches any of the selectors in the Fargate profile, then that pod is run\n            on Fargate.</p>\n        <p>When you create a Fargate profile, you must specify a pod execution\n            role to use with the pods that are scheduled with the profile. This role is added to the\n            cluster's Kubernetes <a href=\"https://kubernetes.io/docs/admin/authorization/rbac/\">Role Based Access Control</a> (RBAC) for authorization so that the\n                <code>kubelet</code> that is running on the Fargate infrastructure\n            can register with your Amazon EKS cluster so that it can appear in your cluster\n            as a node. The pod execution role also provides IAM permissions to the\n                Fargate infrastructure to allow read access to Amazon ECR\n            image repositories. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod\n                Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>Fargate profiles are immutable. However, you can create a new updated\n            profile to replace an existing profile and then delete the original after the updated\n            profile has finished creating.</p>\n        <p>If any Fargate profiles in a cluster are in the <code>DELETING</code>\n            status, you must wait for that Fargate profile to finish deleting before\n            you can create any other profiles in that cluster.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html\">Fargate Profile</a> in the\n            <i>Amazon EKS User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates an Fargate profile for your Amazon EKS cluster. You\n            must have at least one Fargate profile in a cluster to be able to run\n            pods on Fargate.</p>\n         <p>The Fargate profile allows an administrator to declare which pods run\n            on Fargate and specify which pods run on which Fargate\n            profile. This declaration is done through the profile’s selectors. Each profile can have\n            up to five selectors that contain a namespace and labels. A namespace is required for\n            every selector. The label field consists of multiple optional key-value pairs. Pods that\n            match the selectors are scheduled on Fargate. If a to-be-scheduled pod\n            matches any of the selectors in the Fargate profile, then that pod is run\n            on Fargate.</p>\n         <p>When you create a Fargate profile, you must specify a pod execution\n            role to use with the pods that are scheduled with the profile. This role is added to the\n            cluster's Kubernetes <a href=\"https://kubernetes.io/docs/admin/authorization/rbac/\">Role Based Access Control</a> (RBAC) for authorization so that the\n                <code>kubelet</code> that is running on the Fargate infrastructure\n            can register with your Amazon EKS cluster so that it can appear in your cluster\n            as a node. The pod execution role also provides IAM permissions to the\n                Fargate infrastructure to allow read access to Amazon ECR\n            image repositories. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/pod-execution-role.html\">Pod\n                Execution Role</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <p>Fargate profiles are immutable. However, you can create a new updated\n            profile to replace an existing profile and then delete the original after the updated\n            profile has finished creating.</p>\n         <p>If any Fargate profiles in a cluster are in the <code>DELETING</code>\n            status, you must wait for that Fargate profile to finish deleting before\n            you can create any other profiles in that cluster.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/fargate-profile.html\">Fargate Profile</a> in the\n            <i>Amazon EKS User Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/fargate-profiles",
@@ -3729,7 +3753,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a managed node group for an Amazon EKS cluster. You can only create a\n            node group for your cluster that is equal to the current Kubernetes version for the\n            cluster. All node groups are created with the latest AMI release version for the\n            respective minor Kubernetes version of the cluster, unless you deploy a custom AMI using\n            a launch template. For more information about using launch templates, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch\n                template support</a>.</p>\n        <p>An Amazon EKS managed node group is an Amazon EC2\n            Auto Scaling group and associated Amazon EC2 instances that are managed by\n                Amazon Web Services for an Amazon EKS cluster. Each node group uses a version\n            of the Amazon EKS optimized Amazon Linux 2 AMI. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed\n                Node Groups</a> in the <i>Amazon EKS User Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Creates a managed node group for an Amazon EKS cluster. You can only create a\n            node group for your cluster that is equal to the current Kubernetes version for the\n            cluster. All node groups are created with the latest AMI release version for the\n            respective minor Kubernetes version of the cluster, unless you deploy a custom AMI using\n            a launch template. For more information about using launch templates, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch\n                template support</a>.</p>\n         <p>An Amazon EKS managed node group is an Amazon EC2\n            Auto Scaling group and associated Amazon EC2 instances that are managed by\n                Amazon Web Services for an Amazon EKS cluster. For more information, see\n                <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html\">Managed node groups</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <note>\n            <p>Windows AMI types are only supported for commercial Regions that support Windows\n                    Amazon EKS.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/node-groups",
@@ -3764,7 +3788,7 @@
                 "diskSize": {
                     "target": "com.amazonaws.eks#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The root device disk size (in GiB) for your node group instances. The default disk\n            size is 20 GiB. If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The root device disk size (in GiB) for your node group instances. The default disk\n            size is 20 GiB for Linux and Bottlerocket. The default disk size is 50 GiB for Windows.\n            If you specify <code>launchTemplate</code>, then don't specify  <code>diskSize</code>, or the node group \n            deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "subnets": {
@@ -3777,19 +3801,19 @@
                 "instanceTypes": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the instance types for a node group. If you specify a GPU instance type, be\n            sure to specify <code>AL2_x86_64_GPU</code> with the <code>amiType</code> parameter. If\n            you specify <code>launchTemplate</code>, then you can specify zero or one instance type\n            in your launch template <i>or</i> you can specify 0-20 instance types for\n                <code>instanceTypes</code>. If however, you specify an instance type in your launch\n            template <i>and</i> specify any <code>instanceTypes</code>, the node group\n            deployment will fail. If you don't specify an instance type in a launch template or for\n                <code>instanceTypes</code>, then <code>t3.medium</code> is used, by default. If you\n            specify <code>Spot</code> for <code>capacityType</code>, then we recommend specifying\n            multiple values for <code>instanceTypes</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types\">Managed node group capacity types</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in\n            the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specify the instance types for a node group. If you specify a GPU instance type, make\n            sure to also specify an applicable GPU AMI type with the <code>amiType</code> parameter.\n            If you specify <code>launchTemplate</code>, then you can specify zero or one instance\n            type in your launch template <i>or</i> you can specify 0-20 instance types\n            for <code>instanceTypes</code>. If however, you specify an instance type in your launch\n            template <i>and</i> specify any <code>instanceTypes</code>, the node group\n            deployment will fail. If you don't specify an instance type in a launch template or for\n                <code>instanceTypes</code>, then <code>t3.medium</code> is used, by default. If you\n            specify <code>Spot</code> for <code>capacityType</code>, then we recommend specifying\n            multiple values for <code>instanceTypes</code>. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types\">Managed node group capacity types</a> and <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in\n            the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "amiType": {
                     "target": "com.amazonaws.eks#AMITypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AMI type for your node group. GPU instance types should use the\n                <code>AL2_x86_64_GPU</code> AMI type. Non-GPU instances should use the\n                <code>AL2_x86_64</code> AMI type. Arm instances should use the\n                <code>AL2_ARM_64</code> AMI type. All types use the Amazon EKS optimized\n            Amazon Linux 2 AMI. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI,\n                then don't specify <code>amiType</code>, or the node group  deployment\n            will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The AMI type for your node group. If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI,\n                then don't specify <code>amiType</code>, or the node group  deployment\n            will fail. If your launch template uses a Windows custom AMI, then add\n                <code>eks:kube-proxy-windows</code> to your Windows nodes <code>rolearn</code> in\n            the <code>aws-auth</code>\n            <code>ConfigMap</code>. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "remoteAccess": {
                     "target": "com.amazonaws.eks#RemoteAccessConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The remote access (SSH) configuration to use with your node group. If you specify <code>launchTemplate</code>,\n            then don't specify  <code>remoteAccess</code>, or the node group  deployment\n            will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The remote access configuration to use with your node group.\n            For Linux, the protocol is SSH. For Windows, the protocol is RDP.\n            If you specify <code>launchTemplate</code>, then don't specify \n                <code>remoteAccess</code>, or the node group  deployment will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "nodeRole": {
@@ -3851,7 +3875,7 @@
                 "releaseVersion": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AMI version of the Amazon EKS optimized AMI to use with your node group.\n            By default, the latest available AMI version for the node group's current Kubernetes\n            version is used. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux 2 AMI versions</a> in the <i>Amazon EKS User Guide</i>.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>releaseVersion</code>,\n            or the node group  deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The AMI version of the Amazon EKS optimized AMI to use with your node group.\n            By default, the latest available AMI version for the node group's current Kubernetes version\n            is used. For information about Linux versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux AMI versions</a> in the <i>Amazon EKS User Guide</i>. Amazon EKS managed node groups support the November 2022 and later releases of the\n            Windows AMIs. For information about Windows versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html\">Amazon EKS optimized Windows AMI versions</a> in the\n            <i>Amazon EKS User Guide</i>.</p>\n         <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify \n                <code>releaseVersion</code>, or the node group  deployment will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 }
             }
@@ -3893,7 +3917,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete an Amazon EKS add-on.</p>\n        <p>When you remove the add-on, it will also be deleted from the cluster. You can always\n            manually start an add-on on the cluster using the Kubernetes API.</p>",
+                "smithy.api#documentation": "<p>Delete an Amazon EKS add-on.</p>\n         <p>When you remove the add-on, it will also be deleted from the cluster. You can always\n            manually start an add-on on the cluster using the Kubernetes API.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/clusters/{clusterName}/addons/{addonName}",
@@ -3964,7 +3988,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the Amazon EKS cluster control plane.</p>\n        <p>If you have active services in your cluster that are associated with a load balancer,\n            you must delete those services before deleting the cluster so that the load balancers\n            are deleted properly. Otherwise, you can have orphaned resources in your VPC that\n            prevent you from being able to delete the VPC. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html\">Deleting a\n                Cluster</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>If you have managed node groups or Fargate profiles attached to the\n            cluster, you must delete them first. For more information, see <a>DeleteNodegroup</a> and <a>DeleteFargateProfile</a>.</p>",
+                "smithy.api#documentation": "<p>Deletes the Amazon EKS cluster control plane.</p>\n         <p>If you have active services in your cluster that are associated with a load balancer,\n            you must delete those services before deleting the cluster so that the load balancers\n            are deleted properly. Otherwise, you can have orphaned resources in your VPC that\n            prevent you from being able to delete the VPC. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/delete-cluster.html\">Deleting a\n                Cluster</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <p>If you have managed node groups or Fargate profiles attached to the\n            cluster, you must delete them first. For more information, see <a>DeleteNodegroup</a> and <a>DeleteFargateProfile</a>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/clusters/{name}",
@@ -4019,7 +4043,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Fargate profile.</p>\n        <p>When you delete a Fargate profile, any pods running on Fargate that were created with the profile are deleted. If those pods match\n            another Fargate profile, then they are scheduled on Fargate with that profile. If they no longer match any Fargate profiles, then\n            they are not scheduled on Fargate and they may remain in a pending\n            state.</p>\n        <p>Only one Fargate profile in a cluster can be in the\n                <code>DELETING</code> status at a time. You must wait for a Fargate\n            profile to finish deleting before you can delete any other profiles in that\n            cluster.</p>",
+                "smithy.api#documentation": "<p>Deletes an Fargate profile.</p>\n         <p>When you delete a Fargate profile, any pods running on Fargate that were created with the profile are deleted. If those pods match\n            another Fargate profile, then they are scheduled on Fargate with that profile. If they no longer match any Fargate profiles, then\n            they are not scheduled on Fargate and they may remain in a pending\n            state.</p>\n         <p>Only one Fargate profile in a cluster can be in the\n                <code>DELETING</code> status at a time. You must wait for a Fargate\n            profile to finish deleting before you can delete any other profiles in that\n            cluster.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/clusters/{clusterName}/fargate-profiles/{fargateProfileName}",
@@ -4312,7 +4336,7 @@
                 "addonName": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the add-on. The name must match one of the names returned by <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html\">\n               <code>DescribeAddonVersions</code>\n            </a>.</p>",
+                        "smithy.api#documentation": "<p>The name of the add-on. The name must match one of the names that <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html\">\n               <code>DescribeAddonVersions</code>\n            </a> returns.</p>",
                         "smithy.api#httpQuery": "addonName",
                         "smithy.api#required": {}
                     }
@@ -4345,7 +4369,7 @@
                 "configurationSchema": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON schema used to validate provided configuration values when creating or updating an addon.</p>"
+                        "smithy.api#documentation": "<p>A JSON schema that's used to validate the configuration values that you provide when\n            an addon is created or updated.</p>"
                     }
                 }
             }
@@ -4433,7 +4457,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>DescribeAddonVersionsRequest</code> where <code>maxResults</code> was used and\n            the results exceeded the value of that parameter. Pagination continues from the end of\n            the previous results that returned the <code>nextToken</code> value.</p>\n        <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>DescribeAddonVersionsRequest</code> where <code>maxResults</code> was used and\n            the results exceeded the value of that parameter. Pagination continues from the end of\n            the previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -4488,7 +4512,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>DescribeAddonVersionsResponse</code> where <code>maxResults</code> was used\n            and the results exceeded the value of that parameter. Pagination continues from the end\n            of the previous results that returned the <code>nextToken</code> value.</p>\n        <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>DescribeAddonVersionsResponse</code> where <code>maxResults</code> was used\n            and the results exceeded the value of that parameter. Pagination continues from the end\n            of the previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 }
             }
@@ -4516,7 +4540,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns descriptive information about an Amazon EKS cluster.</p>\n        <p>The API server endpoint and certificate authority data returned by this operation are\n            required for <code>kubelet</code> and <code>kubectl</code> to communicate with your\n            Kubernetes API server. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html\">Create a\n                kubeconfig for Amazon EKS</a>.</p>\n        <note>\n            <p>The API server endpoint and certificate authority data aren't available until the\n                cluster reaches the <code>ACTIVE</code> state.</p>\n        </note>",
+                "smithy.api#documentation": "<p>Returns descriptive information about an Amazon EKS cluster.</p>\n         <p>The API server endpoint and certificate authority data returned by this operation are\n            required for <code>kubelet</code> and <code>kubectl</code> to communicate with your\n            Kubernetes API server. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html\">Create a\n                kubeconfig for Amazon EKS</a>.</p>\n         <note>\n            <p>The API server endpoint and certificate authority data aren't available until the\n                cluster reaches the <code>ACTIVE</code> state.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/clusters/{name}",
@@ -4939,7 +4963,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns descriptive information about an update against your Amazon EKS\n            cluster or associated managed node group or Amazon EKS add-on.</p>\n        <p>When the status of the update is <code>Succeeded</code>, the update is complete. If an\n            update fails, the status is <code>Failed</code>, and an error detail explains the reason\n            for the failure.</p>",
+                "smithy.api#documentation": "<p>Returns descriptive information about an update against your Amazon EKS\n            cluster or associated managed node group or Amazon EKS add-on.</p>\n         <p>When the status of the update is <code>Succeeded</code>, the update is complete. If an\n            update fails, the status is <code>Failed</code>, and an error detail explains the reason\n            for the failure.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/clusters/{name}/updates/{updateId}",
@@ -5210,7 +5234,7 @@
                 "errorCode": {
                     "target": "com.amazonaws.eks#ErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description of the error. </p>\n        <ul>\n            <li>\n                <p>\n                  <b>SubnetNotFound</b>: We couldn't find one of the\n                    subnets associated with the cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>SecurityGroupNotFound</b>: We couldn't find one\n                    of the security groups associated with the cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>EniLimitReached</b>: You have reached the elastic\n                    network interface limit for your account.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IpNotAvailable</b>: A subnet associated with the\n                    cluster doesn't have any free IP addresses.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AccessDenied</b>: You don't have permissions to\n                    perform the specified operation.</p>\n            </li>\n            <li>\n                <p>\n                  <b>OperationNotPermitted</b>: The service role\n                    associated with the cluster doesn't have the required access permissions for\n                        Amazon EKS.</p>\n            </li>\n            <li>\n                <p>\n                  <b>VpcIdNotFound</b>: We couldn't find the VPC\n                    associated with the cluster.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A brief description of the error. </p>\n         <ul>\n            <li>\n               <p>\n                  <b>SubnetNotFound</b>: We couldn't find one of the\n                    subnets associated with the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>SecurityGroupNotFound</b>: We couldn't find one\n                    of the security groups associated with the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>EniLimitReached</b>: You have reached the elastic\n                    network interface limit for your account.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IpNotAvailable</b>: A subnet associated with the\n                    cluster doesn't have any free IP addresses.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AccessDenied</b>: You don't have permissions to\n                    perform the specified operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>OperationNotPermitted</b>: The service role\n                    associated with the cluster doesn't have the required access permissions for\n                        Amazon EKS.</p>\n            </li>\n            <li>\n               <p>\n                  <b>VpcIdNotFound</b>: We couldn't find the VPC\n                    associated with the cluster.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "errorMessage": {
@@ -5524,7 +5548,7 @@
                 "code": {
                     "target": "com.amazonaws.eks#NodegroupIssueCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A brief description of the error.</p>\n        <ul>\n            <li>\n                <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or\n                    more of your managed nodes is failing to authenticate or authorize with your\n                    Kubernetes cluster API server.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch\n                    instances.</p>\n            </li>\n            <li>\n                <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be\n                    able to recreate an Auto Scaling group with the same settings to\n                    recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>ClusterUnreachable</b>: Amazon EKS or one\n                    or more of your managed nodes is unable to to communicate with your Kubernetes\n                    cluster API server. This can happen if there are network disruptions or if API\n                    servers are timing out processing requests. </p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be\n                    able to recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not\n                    match the version that Amazon EKS created. You may be able to revert to\n                    the version that Amazon EKS created to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                        Amazon EC2 subnets specified for a node group do not automatically\n                    assign public IP addresses to instances launched into it. If you want your\n                    instances to be assigned a public IP address, then you need to enable the\n                        <code>auto-assign public IP address</code> setting for the subnet. See\n                        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public IPv4 addressing attribute for your subnet</a> in the\n                        <i>Amazon VPC User Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be\n                    able to recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                        IAM role for your managed node group. You may be able to\n                    recreate an IAM role with the same settings to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is unable to launch any more instances of the specified instance\n                    type. You may be able to request an Amazon EC2 instance limit increase\n                    to recover.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n            <li>\n                <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of\n                    this failure are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">node IAM\n                        role</a> permissions or lack of outbound internet access for the nodes.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A brief description of the error.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AccessDenied</b>: Amazon EKS or one or\n                    more of your managed nodes is failing to authenticate or authorize with your\n                    Kubernetes cluster API server.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AsgInstanceLaunchFailures</b>: Your Auto Scaling group is experiencing failures while attempting to launch\n                    instances.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AutoScalingGroupNotFound</b>: We couldn't find\n                    the Auto Scaling group associated with the managed node group. You may be\n                    able to recreate an Auto Scaling group with the same settings to\n                    recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ClusterUnreachable</b>: Amazon EKS or one\n                    or more of your managed nodes is unable to to communicate with your Kubernetes\n                    cluster API server. This can happen if there are network disruptions or if API\n                    servers are timing out processing requests. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2LaunchTemplateNotFound</b>: We couldn't find\n                    the Amazon EC2 launch template for your managed node group. You may be\n                    able to recreate a launch template with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2LaunchTemplateVersionMismatch</b>: The Amazon EC2 launch template version for your managed node group does not\n                    match the version that Amazon EKS created. You may be able to revert to\n                    the version that Amazon EKS created to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SecurityGroupDeletionFailure</b>: We could not\n                    delete the remote access security group for your managed node group. Remove any\n                    dependencies from the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SecurityGroupNotFound</b>: We couldn't find\n                    the cluster security group for the cluster. You must recreate your\n                    cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Ec2SubnetInvalidConfiguration</b>: One or more\n                        Amazon EC2 subnets specified for a node group do not automatically\n                    assign public IP addresses to instances launched into it. If you want your\n                    instances to be assigned a public IP address, then you need to enable the\n                        <code>auto-assign public IP address</code> setting for the subnet. See\n                        <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-ip-addressing.html#subnet-public-ip\">Modifying\n                        the public IPv4 addressing attribute for your subnet</a> in the\n                        <i>Amazon VPC User Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IamInstanceProfileNotFound</b>: We couldn't find\n                    the IAM instance profile for your managed node group. You may be\n                    able to recreate an instance profile with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>IamNodeRoleNotFound</b>: We couldn't find the\n                        IAM role for your managed node group. You may be able to\n                    recreate an IAM role with the same settings to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InstanceLimitExceeded</b>: Your Amazon Web Services account is unable to launch any more instances of the specified instance\n                    type. You may be able to request an Amazon EC2 instance limit increase\n                    to recover.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InsufficientFreeAddresses</b>: One or more of the\n                    subnets associated with your managed node group does not have enough available\n                    IP addresses for new nodes.</p>\n            </li>\n            <li>\n               <p>\n                  <b>InternalFailure</b>: These errors are usually\n                    caused by an Amazon EKS server-side issue.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NodeCreationFailure</b>: Your launched instances\n                    are unable to register with your Amazon EKS cluster. Common causes of\n                    this failure are insufficient <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">node IAM\n                        role</a> permissions or lack of outbound internet access for the nodes.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "message": {
@@ -5556,13 +5580,13 @@
                 "serviceIpv4Cidr": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Don't specify a value if you select <code>ipv6</code> for <b>ipFamily</b>. The CIDR block to assign Kubernetes service IP addresses from.\n            If you don't specify a block, Kubernetes assigns addresses from either the <code>10.100.0.0/16</code>\n            or <code>172.20.0.0/16</code> CIDR blocks. We recommend that you specify a block that does not\n            overlap with resources in other networks that are peered or connected to your VPC. The\n            block must meet the following requirements:</p>\n        <ul>\n            <li>\n                <p>Within one of the following private IP address blocks: <code>10.0.0.0/8</code>,\n                    <code>172.16.0.0/12</code>, or <code>192.168.0.0/16</code>.</p>\n            </li>\n            <li>\n                <p>Doesn't overlap with any CIDR block assigned to the VPC that you selected for\n                    VPC.</p>\n            </li>\n            <li>\n                <p>Between /24 and /12.</p>\n            </li>\n         </ul>\n        <important>\n            <p>You can only specify a custom CIDR block when you create a cluster and can't\n                change this value once the cluster is created.</p>\n        </important>"
+                        "smithy.api#documentation": "<p>Don't specify a value if you select <code>ipv6</code> for <b>ipFamily</b>. The CIDR block to assign Kubernetes service IP addresses from.\n            If you don't specify a block, Kubernetes assigns addresses from either the <code>10.100.0.0/16</code>\n            or <code>172.20.0.0/16</code> CIDR blocks. We recommend that you specify a block that does not\n            overlap with resources in other networks that are peered or connected to your VPC. The\n            block must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Within one of the following private IP address blocks: <code>10.0.0.0/8</code>,\n                    <code>172.16.0.0/12</code>, or <code>192.168.0.0/16</code>.</p>\n            </li>\n            <li>\n               <p>Doesn't overlap with any CIDR block assigned to the VPC that you selected for\n                    VPC.</p>\n            </li>\n            <li>\n               <p>Between /24 and /12.</p>\n            </li>\n         </ul>\n         <important>\n            <p>You can only specify a custom CIDR block when you create a cluster and can't\n                change this value once the cluster is created.</p>\n         </important>"
                     }
                 },
                 "ipFamily": {
                     "target": "com.amazonaws.eks#IpFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify which IP family is used to assign Kubernetes pod and service IP addresses. If\n            you don't specify a value, <code>ipv4</code> is used by default. You can only specify an\n            IP family when you create a cluster and can't change this value once the cluster is\n            created. If you specify <code>ipv6</code>, the VPC and subnets that you specify for\n            cluster creation must have both <code>IPv4</code> and <code>IPv6</code> CIDR blocks assigned to them. You can't\n            specify <code>ipv6</code> for clusters in China Regions.</p>\n        <p>You can only specify <code>ipv6</code> for <code>1.21</code> and later clusters that use version\n            <code>1.10.1</code> or later of the Amazon VPC CNI add-on. If you specify <code>ipv6</code>, then ensure\n            that your VPC meets the requirements listed in the considerations listed in <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html\">Assigning IPv6\n                addresses to pods and services</a> in the Amazon EKS User Guide.\n            Kubernetes assigns services <code>IPv6</code> addresses from the unique local address range\n            <code>(fc00::/7)</code>. You can't specify a custom <code>IPv6</code> CIDR block. Pod addresses are assigned from\n            the subnet's <code>IPv6</code> CIDR.</p>"
+                        "smithy.api#documentation": "<p>Specify which IP family is used to assign Kubernetes pod and service IP addresses. If\n            you don't specify a value, <code>ipv4</code> is used by default. You can only specify an\n            IP family when you create a cluster and can't change this value once the cluster is\n            created. If you specify <code>ipv6</code>, the VPC and subnets that you specify for\n            cluster creation must have both <code>IPv4</code> and <code>IPv6</code> CIDR blocks assigned to them. You can't\n            specify <code>ipv6</code> for clusters in China Regions.</p>\n         <p>You can only specify <code>ipv6</code> for <code>1.21</code> and later clusters that use version\n            <code>1.10.1</code> or later of the Amazon VPC CNI add-on. If you specify <code>ipv6</code>, then ensure\n            that your VPC meets the requirements listed in the considerations listed in <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cni-ipv6.html\">Assigning IPv6\n                addresses to pods and services</a> in the Amazon EKS User Guide.\n            Kubernetes assigns services <code>IPv6</code> addresses from the unique local address range\n            <code>(fc00::/7)</code>. You can't specify a custom <code>IPv6</code> CIDR block. Pod addresses are assigned from\n            the subnet's <code>IPv6</code> CIDR.</p>"
                     }
                 }
             },
@@ -5576,7 +5600,7 @@
                 "serviceIpv4Cidr": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The CIDR block that Kubernetes pod and service IP addresses are assigned from.\n            Kubernetes assigns addresses from an IPv4 CIDR block assigned to a subnet that the node\n            is in. If you didn't specify a CIDR block when you created the cluster, then Kubernetes\n            assigns addresses from either the 10.100.0.0/16 or 172.20.0.0/16 CIDR blocks. If this\n            was specified, then it was specified when the cluster was created and it can't be\n            changed.</p>"
+                        "smithy.api#documentation": "<p>The CIDR block that Kubernetes pod and service IP addresses are assigned from. Kubernetes\n            assigns addresses from an IPv4 CIDR block assigned to a subnet that the node is in. If\n            you didn't specify a CIDR block when you created the cluster, then Kubernetes assigns\n            addresses from either the <code>10.100.0.0/16</code> or <code>172.20.0.0/16</code> CIDR\n            blocks. If this was specified, then it was specified when the cluster was created and it\n            can't be changed.</p>"
                     }
                 },
                 "serviceIpv6Cidr": {
@@ -5602,7 +5626,7 @@
                 "name": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the launch template.</p>\n        <p>You must specify either the launch template name or the launch template ID in the\n            request, but not both.</p>"
+                        "smithy.api#documentation": "<p>The name of the launch template.</p>\n         <p>You must specify either the launch template name or the launch template ID in the\n            request, but not both.</p>"
                     }
                 },
                 "version": {
@@ -5614,12 +5638,12 @@
                 "id": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the launch template.</p>\n        <p>You must specify either the launch template ID or the launch template name in the\n            request, but not both.</p>"
+                        "smithy.api#documentation": "<p>The ID of the launch template.</p>\n         <p>You must specify either the launch template ID or the launch template name in the\n            request, but not both.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object representing a node group launch template specification. The launch template\n            can't include <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">\n               <code>SubnetId</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\">\n               <code>IamInstanceProfile</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">\n               <code>RequestSpotInstances</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html\">\n               <code>HibernationOptions</code>\n            </a>, or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html\">\n               <code>TerminateInstances</code>\n            </a>, or the node group  deployment or\n            update will fail. For more information about launch templates, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html\">\n               <code>CreateLaunchTemplate</code>\n            </a> in the Amazon EC2 API\n            Reference. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>You must specify either the launch template ID or the launch template name in the\n            request, but not both.</p>"
+                "smithy.api#documentation": "<p>An object representing a node group launch template specification. The launch template\n            can't include <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">\n               <code>SubnetId</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html\">\n               <code>IamInstanceProfile</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">\n               <code>RequestSpotInstances</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_HibernationOptionsRequest.html\">\n               <code>HibernationOptions</code>\n            </a>, or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TerminateInstances.html\">\n               <code>TerminateInstances</code>\n            </a>, or the node group  deployment or\n            update will fail. For more information about launch templates, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateLaunchTemplate.html\">\n               <code>CreateLaunchTemplate</code>\n            </a> in the Amazon EC2 API\n            Reference. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <p>You must specify either the launch template ID or the launch template name in the\n            request, but not both.</p>"
             }
         },
         "com.amazonaws.eks#ListAddons": {
@@ -5683,7 +5707,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListAddonsRequest</code> where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>\n        <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListAddonsRequest</code> where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -5710,7 +5734,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListAddonsResponse</code> where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>\n        <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListAddonsResponse</code> where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 }
             }
@@ -5765,7 +5789,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListClusters</code> request where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>\n        <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListClusters</code> request where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n         </note>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
@@ -6421,7 +6445,7 @@
                 "labels": {
                     "target": "com.amazonaws.eks#labelsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Kubernetes labels applied to the nodes in the node group.</p>\n        <note>\n            <p>Only labels that are applied with the Amazon EKS API are shown here. There\n                may be other Kubernetes labels applied to the nodes in this group.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The Kubernetes labels applied to the nodes in the node group.</p>\n         <note>\n            <p>Only labels that are applied with the Amazon EKS API are shown here. There\n                may be other Kubernetes labels applied to the nodes in this group.</p>\n         </note>"
                     }
                 },
                 "taints": {
@@ -6642,7 +6666,7 @@
                 "desiredSize": {
                     "target": "com.amazonaws.eks#ZeroCapacity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current number of nodes that the managed node group should maintain.</p>\n        <important>\n            <p>If you use Cluster Autoscaler, you shouldn't change the desiredSize value\n                directly, as this can cause the Cluster Autoscaler to suddenly scale up or scale\n                down.</p>\n        </important>\n        <p>Whenever this parameter changes, the number of worker nodes in the node group is\n            updated to the specified size. If this parameter is given a value that is smaller than\n            the current number of running worker nodes, the necessary number of worker nodes are\n            terminated to match the given value.\n            \n            When using CloudFormation, no action occurs if you remove this parameter from your CFN\n            template.</p>\n        <p>This parameter can be different from minSize in some cases, such as when starting with\n            extra hosts for testing. This parameter can also be different when you want to start\n            with an estimated number of needed hosts, but let Cluster Autoscaler reduce the number\n            if there are too many. When Cluster Autoscaler is used, the desiredSize parameter is\n            altered by Cluster Autoscaler (but can be out-of-date for short periods of time).\n            Cluster Autoscaler doesn't scale a managed node group lower than minSize or higher than\n            maxSize.</p>"
+                        "smithy.api#documentation": "<p>The current number of nodes that the managed node group should maintain.</p>\n         <important>\n            <p>If you use Cluster Autoscaler, you shouldn't change the desiredSize value\n                directly, as this can cause the Cluster Autoscaler to suddenly scale up or scale\n                down.</p>\n         </important>\n         <p>Whenever this parameter changes, the number of worker nodes in the node group is\n            updated to the specified size. If this parameter is given a value that is smaller than\n            the current number of running worker nodes, the necessary number of worker nodes are\n            terminated to match the given value.\n            \n            When using CloudFormation, no action occurs if you remove this parameter from your CFN\n            template.</p>\n         <p>This parameter can be different from minSize in some cases, such as when starting with\n            extra hosts for testing. This parameter can also be different when you want to start\n            with an estimated number of needed hosts, but let Cluster Autoscaler reduce the number\n            if there are too many. When Cluster Autoscaler is used, the desiredSize parameter is\n            altered by Cluster Autoscaler (but can be out-of-date for short periods of time).\n            Cluster Autoscaler doesn't scale a managed node group lower than minSize or higher than\n            maxSize.</p>"
                     }
                 }
             },
@@ -6904,7 +6928,7 @@
                 "controlPlaneInstanceType": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. Choose an instance type based on the number of nodes\n            that your cluster will have. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>The instance type that you specify is used for all Kubernetes control plane instances. The\n            instance type can't be changed after cluster creation. The control plane is not\n            automatically scaled by Amazon EKS.</p>\n        <p> </p>",
+                        "smithy.api#documentation": "<p>The Amazon EC2 instance type that you want to use for your local Amazon EKS cluster on Outposts. Choose an instance type based on the number of nodes\n            that your cluster will have. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-outposts-capacity-considerations.html\">Capacity\n                considerations</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <p>The instance type that you specify is used for all Kubernetes control plane instances. The\n            instance type can't be changed after cluster creation. The control plane is not\n            automatically scaled by Amazon EKS.</p>\n         <p> </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7005,7 +7029,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Connects a Kubernetes cluster to the Amazon EKS control plane. </p>\n        <p>Any Kubernetes cluster can be connected to the Amazon EKS control plane to\n            view current information about the cluster and its nodes. </p>\n        <p>Cluster connection requires two steps. First, send a <code>\n               <a>RegisterClusterRequest</a>\n            </code> to add it to the Amazon EKS\n            control plane.</p>\n        <p>Second, a <a href=\"https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml\">Manifest</a> containing the <code>activationID</code> and\n                <code>activationCode</code> must be applied to the Kubernetes cluster through it's\n            native provider to provide visibility.</p>\n        \n        <p>After the Manifest is updated and applied, then the connected cluster is visible to\n            the Amazon EKS control plane. If the Manifest is not applied within three days,\n            then the connected cluster will no longer be visible and must be deregistered. See <a>DeregisterCluster</a>.</p>",
+                "smithy.api#documentation": "<p>Connects a Kubernetes cluster to the Amazon EKS control plane. </p>\n         <p>Any Kubernetes cluster can be connected to the Amazon EKS control plane to\n            view current information about the cluster and its nodes. </p>\n         <p>Cluster connection requires two steps. First, send a <code>\n               <a>RegisterClusterRequest</a>\n            </code> to add it to the Amazon EKS\n            control plane.</p>\n         <p>Second, a <a href=\"https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml\">Manifest</a> containing the <code>activationID</code> and\n                <code>activationCode</code> must be applied to the Kubernetes cluster through it's\n            native provider to provide visibility.</p>\n         <p>After the Manifest is updated and applied, then the connected cluster is visible to\n            the Amazon EKS control plane. If the Manifest is not applied within three days,\n            then the connected cluster will no longer be visible and must be deregistered. See <a>DeregisterCluster</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/cluster-registrations",
@@ -7059,13 +7083,13 @@
                 "ec2SshKey": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon EC2 SSH key name that provides access for SSH communication with the\n            nodes in the managed node group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs and Linux instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EC2 SSH key name that provides access for SSH communication with\n            the nodes in the managed node group. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs and Linux instances</a> in the <i>Amazon Elastic Compute Cloud User Guide for Linux Instances</i>. For\n            Windows, an Amazon EC2 SSH key is used to obtain the RDP password. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-key-pairs.html\">Amazon EC2 key pairs and Windows instances</a> in\n            the <i>Amazon Elastic Compute Cloud User Guide for Windows Instances</i>.</p>"
                     }
                 },
                 "sourceSecurityGroups": {
                     "target": "com.amazonaws.eks#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The security group ids that are allowed SSH access (port 22) to the nodes. If you specify\n            an Amazon EC2 SSH key but do not specify a source security group when you create\n            a managed node group, then port 22 on the nodes is opened to the internet (0.0.0.0/0).\n            For more information, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the\n            <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The security group IDs that are allowed SSH access (port 22) to the nodes. For\n            Windows, the port is 3389. If you specify an Amazon EC2 SSH key but don't\n            specify a source security group when you create a managed node group, then the port on\n            the nodes is opened to the internet (<code>0.0.0.0/0</code>). For more information, see\n                <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the <i>Amazon Virtual Private Cloud User Guide</i>.</p>"
                     }
                 }
             },
@@ -7591,13 +7615,13 @@
                 "serviceAccountRoleArn": {
                     "target": "com.amazonaws.eks#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on's service account. The role must be assigned the IAM permissions required by the add-on. If you don't specify an existing IAM role, then the add-on uses the\n     permissions assigned to the node IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">Amazon EKS node IAM role</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <note>\n            <p>To specify an existing IAM role, you must have an IAM OpenID Connect (OIDC) provider created for\n                your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html\">Enabling\n                    IAM roles for service accounts on your cluster</a> in the\n                <i>Amazon EKS User Guide</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an existing IAM role to bind to the add-on's service account. The role must be assigned the IAM permissions required by the add-on. If you don't specify an existing IAM role, then the add-on uses the\n     permissions assigned to the node IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html\">Amazon EKS node IAM role</a> in the <i>Amazon EKS User Guide</i>.</p>\n         <note>\n            <p>To specify an existing IAM role, you must have an IAM OpenID Connect (OIDC) provider created for\n                your cluster. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html\">Enabling\n                    IAM roles for service accounts on your cluster</a> in the\n                <i>Amazon EKS User Guide</i>.</p>\n         </note>"
                     }
                 },
                 "resolveConflicts": {
                     "target": "com.amazonaws.eks#ResolveConflicts",
                     "traits": {
-                        "smithy.api#documentation": "<p>How to resolve field value conflicts for an Amazon EKS add-on if you've\n            changed a value from the Amazon EKS default value. Conflicts are handled based\n            on the option you choose:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>None</b> – Amazon EKS doesn't\n                    change the value. The update might fail.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Overwrite</b> – Amazon EKS\n                    overwrites the changed value back to the Amazon EKS default\n                    value.</p>\n            </li>\n            <li>\n                <p>\n                  <b>Preserve</b> – Amazon EKS\n                    preserves the value. If you choose this option, we recommend that you test any\n                    field and value changes on a non-production cluster before updating the add-on\n                    on your production cluster.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>How to resolve field value conflicts for an Amazon EKS add-on if you've\n            changed a value from the Amazon EKS default value. Conflicts are handled based\n            on the option you choose:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>None</b> – Amazon EKS doesn't\n                    change the value. The update might fail.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Overwrite</b> – Amazon EKS\n                    overwrites the changed value back to the Amazon EKS default\n                    value.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Preserve</b> – Amazon EKS\n                    preserves the value. If you choose this option, we recommend that you test any\n                    field and value changes on a non-production cluster before updating the add-on\n                    on your production cluster.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "clientRequestToken": {
@@ -7610,7 +7634,7 @@
                 "configurationValues": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of configuration values for the add-on being created. Whatever values provided here are validated against the schema from <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html\">DescribeAddonConfiguration</a>\n         </p>"
+                        "smithy.api#documentation": "<p>The set of configuration values for the add-on that's created. The values that you\n            provide are validated against the schema in <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html\">DescribeAddonConfiguration</a>.</p>"
                     }
                 }
             }
@@ -7652,7 +7676,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to\n            function during the update. The response output includes an update ID that you can use\n            to track the status of your cluster update with the <a>DescribeUpdate</a> API\n            operation.</p>\n        <p>You can use this API operation to enable or disable exporting the Kubernetes control\n            plane logs for your cluster to CloudWatch Logs. By default, cluster control plane\n            logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n        <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n        </note>\n        <p>You can also use this API operation to enable or disable public and private access to\n            your cluster's Kubernetes API server endpoint. By default, public access is enabled, and\n            private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. </p>\n        <important>\n            <p>You can't update the subnets or security group IDs for an existing cluster.</p>\n        </important>\n        <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>",
+                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to\n            function during the update. The response output includes an update ID that you can use\n            to track the status of your cluster update with the <a>DescribeUpdate</a> API\n            operation.</p>\n         <p>You can use this API operation to enable or disable exporting the Kubernetes control\n            plane logs for your cluster to CloudWatch Logs. By default, cluster control plane\n            logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>\n         <p>You can also use this API operation to enable or disable public and private access to\n            your cluster's Kubernetes API server endpoint. By default, public access is enabled, and\n            private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS cluster endpoint access control</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>. </p>\n         <important>\n            <p>You can't update the subnets or security group IDs for an existing cluster.</p>\n         </important>\n         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{name}/update-config",
@@ -7677,7 +7701,7 @@
                 "logging": {
                     "target": "com.amazonaws.eks#Logging",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n                CloudWatch Logs. By default, cluster control plane logs aren't exported to\n                CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n        <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Enable or disable exporting the Kubernetes control plane logs for your cluster to\n                CloudWatch Logs. By default, cluster control plane logs aren't exported to\n                CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS cluster control plane logs</a> in the\n                <i>\n               <i>Amazon EKS User Guide</i>\n            </i>.</p>\n         <note>\n            <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to\n                exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">CloudWatch\n                Pricing</a>.</p>\n         </note>"
                     }
                 },
                 "clientRequestToken": {
@@ -7726,7 +7750,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster to the specified Kubernetes version. Your\n            cluster continues to function during the update. The response output includes an update\n            ID that you can use to track the status of your cluster update with the <a>DescribeUpdate</a> API operation.</p>\n        <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>\n        <p>If your cluster has managed node groups attached to it, all of your node groups’\n            Kubernetes versions must match the cluster’s Kubernetes version in order to update the\n            cluster to a new Kubernetes version.</p>",
+                "smithy.api#documentation": "<p>Updates an Amazon EKS cluster to the specified Kubernetes version. Your\n            cluster continues to function during the update. The response output includes an update\n            ID that you can use to track the status of your cluster update with the <a>DescribeUpdate</a> API operation.</p>\n         <p>Cluster updates are asynchronous, and they should finish within a few minutes. During\n            an update, the cluster status moves to <code>UPDATING</code> (this status transition is\n            eventually consistent). When the update is complete (either <code>Failed</code> or\n                <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>\n         <p>If your cluster has managed node groups attached to it, all of your node groups’\n            Kubernetes versions must match the cluster’s Kubernetes version in order to update the\n            cluster to a new Kubernetes version.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{name}/updates",
@@ -7918,7 +7942,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the Kubernetes version or AMI version of an Amazon EKS managed node\n            group.</p>\n        <p>You can update a node group using a launch template only if the node group was\n            originally deployed with a launch template. If you need to update a custom AMI in a node\n            group that was deployed with a launch template, then update your custom AMI, specify the\n            new ID in a new version of the launch template, and then update the node group to the\n            new version of the launch template.</p>\n        <p>If you update without a launch template, then you can update to the latest available\n            AMI version of a node group's current Kubernetes version by not specifying a Kubernetes\n            version in the request. You can update to the latest AMI version of your cluster's\n            current Kubernetes version by specifying your cluster's Kubernetes version in the\n            request. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux 2 AMI versions</a> in the <i>Amazon EKS User Guide</i>.</p>\n        <p>You cannot roll back a node group to an earlier Kubernetes version or AMI\n            version.</p>\n        <p>When a node in a managed node group is terminated due to a scaling action or update,\n            the pods in that node are drained first. Amazon EKS attempts to drain the nodes\n            gracefully and will fail if it is unable to do so. You can <code>force</code> the update\n            if Amazon EKS is unable to drain the nodes as a result of a pod disruption\n            budget issue.</p>",
+                "smithy.api#documentation": "<p>Updates the Kubernetes version or AMI version of an Amazon EKS managed node\n            group.</p>\n         <p>You can update a node group using a launch template only if the node group was\n            originally deployed with a launch template. If you need to update a custom AMI in a node\n            group that was deployed with a launch template, then update your custom AMI, specify the\n            new ID in a new version of the launch template, and then update the node group to the\n            new version of the launch template.</p>\n         <p>If you update without a launch template, then you can update to the latest available\n            AMI version of a node group's current Kubernetes version by not specifying a Kubernetes version in\n            the request. You can update to the latest AMI version of your cluster's current Kubernetes\n            version by specifying your cluster's Kubernetes version in the request. For information about\n            Linux versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux AMI versions</a> in the\n            <i>Amazon EKS User Guide</i>. For information about Windows versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html\">Amazon EKS optimized Windows AMI versions</a> in the\n            <i>Amazon EKS User Guide</i>. </p>\n         <p>You cannot roll back a node group to an earlier Kubernetes version or AMI\n            version.</p>\n         <p>When a node in a managed node group is terminated due to a scaling action or update,\n            the pods in that node are drained first. Amazon EKS attempts to drain the nodes\n            gracefully and will fail if it is unable to do so. You can <code>force</code> the update\n            if Amazon EKS is unable to drain the nodes as a result of a pod disruption\n            budget issue.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/clusters/{clusterName}/node-groups/{nodegroupName}/update-version",
@@ -7954,7 +7978,7 @@
                 "releaseVersion": {
                     "target": "com.amazonaws.eks#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AMI version of the Amazon EKS optimized AMI to use for the update. By\n            default, the latest available AMI version for the node group's Kubernetes version is\n            used. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux 2 AMI versions </a> in the <i>Amazon EKS User Guide</i>.\n            If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify  <code>releaseVersion</code>,\n            or the node group  update will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The AMI version of the Amazon EKS optimized AMI to use for the update. By\n            default, the latest available AMI version for the node group's Kubernetes version is used.\n            For information about Linux versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html\">Amazon EKS optimized Amazon Linux AMI versions</a> in the <i>Amazon EKS User Guide</i>. Amazon EKS managed node groups support the November 2022 and later releases of the\n            Windows AMIs. For information about Windows versions, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html\">Amazon EKS optimized Windows AMI versions</a> in the\n            <i>Amazon EKS User Guide</i>.</p>\n         <p>If you specify <code>launchTemplate</code>, and your launch template uses a custom AMI, then don't specify \n                <code>releaseVersion</code>, or the node group  update will fail.\n            For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the <i>Amazon EKS User Guide</i>.</p>"
                     }
                 },
                 "launchTemplate": {

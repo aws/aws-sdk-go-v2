@@ -970,7 +970,7 @@
                     "name": "connect"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and\n   manage a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize\n   contact routing. You can also resolve customer issues more efficiently by getting customers in\n   touch with the appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There\n   are also limits to the number of requests that you can make per second. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For\n   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>\n         <note>\n            <p>Working with flows? Check out the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow\n    language</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and\n   manage a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize\n   contact routing. You can also resolve customer issues more efficiently by getting customers in\n   touch with the appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There\n   are also limits to the number of requests that you can make per second. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For\n   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>",
                 "smithy.api#title": "Amazon Connect Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -2975,7 +2975,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>\n  \n         <p>Pattern: <code>^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$</code>\n         </p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>\n         <p>Pattern: <code>^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$</code>\n         </p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -3515,7 +3515,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains summary information about a flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>"
+                "smithy.api#documentation": "<p>Contains summary information about a flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>"
             }
         },
         "com.amazonaws.connect#ContactFlowSummaryList": {
@@ -3917,7 +3917,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a flow for the specified Amazon Connect instance.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a flow for the specified Amazon Connect instance.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact-flows/{InstanceId}",
@@ -4753,7 +4753,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a rule for the specified Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>Creates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to code conditions for the rule.\n  </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/rules/{InstanceId}",
@@ -4930,7 +4930,7 @@
                 "TagRestrictedResources": {
                     "target": "com.amazonaws.connect#TagRestrictedResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect.</p>"
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code> | <code>SecurityProfile</code> | <code>Queue</code> | \n   <code>RoutingProfile</code>\n         </p>"
                     }
                 }
             }
@@ -6377,7 +6377,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a traffic distribution group. This API can be called only in the Region where the traffic distribution group is\n   created.</p>\n\n         <p>For more information about deleting traffic distribution groups, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html\">Delete traffic distribution groups</a> in\n   the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Deletes a traffic distribution group. This API can be called only in the Region where the traffic distribution group is\n   created.</p>\n         <p>For more information about deleting traffic distribution groups, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html\">Delete traffic distribution groups</a> in\n   the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/traffic-distribution-group/{TrafficDistributionGroupId}",
@@ -6788,7 +6788,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
+                "smithy.api#documentation": "<p>Describes the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contact-flows/{InstanceId}/{ContactFlowId}",
@@ -8922,7 +8922,7 @@
                 "CurrentMetrics": {
                     "target": "com.amazonaws.connect#CurrentMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics\n   are available. For a description of all the metrics, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html\">Real-time Metrics\n    Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <dl>\n            <dt>AGENTS_AFTER_CONTACT_WORK</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time\">ACW</a>\n               </p>\n\n            </dd>\n            <dt>AGENTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time\">Available</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ERROR</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time\">Error</a>\n               </p>\n            </dd>\n            <dt>AGENTS_NON_PRODUCTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time\">NPT (Non-Productive Time)</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CALL</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CONTACT</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ONLINE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time\">Online</a>\n               </p>\n            </dd>\n            <dt>AGENTS_STAFFED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time\">Staffed</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_IN_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time\">In\n       queue</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_SCHEDULED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time\">Scheduled</a>\n               </p>\n            </dd>\n            <dt>OLDEST_CONTACT_AGE</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>When you use groupings, Unit says SECONDS and the Value is returned in SECONDS. </p>\n               <p>When you do not use groupings, Unit says SECONDS but the Value is returned in\n      MILLISECONDS. For example, if you get a response like this:</p>\n               <p>\n                  <code>{ \"Metric\": { \"Name\": \"OLDEST_CONTACT_AGE\", \"Unit\": \"SECONDS\" }, \"Value\": 24113.0\n      </code>}</p>\n               <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p>\n\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time\">Oldest</a>\n               </p>\n            </dd>\n            <dt>SLOTS_ACTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time\">Active</a>\n               </p>\n            </dd>\n            <dt>SLOTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time\">Availability</a>\n               </p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics\n   are available. For a description of all the metrics, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html\">Real-time Metrics\n    Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <dl>\n            <dt>AGENTS_AFTER_CONTACT_WORK</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time\">ACW</a>\n               </p>\n            </dd>\n            <dt>AGENTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time\">Available</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ERROR</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time\">Error</a>\n               </p>\n            </dd>\n            <dt>AGENTS_NON_PRODUCTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time\">NPT (Non-Productive Time)</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CALL</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CONTACT</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ONLINE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time\">Online</a>\n               </p>\n            </dd>\n            <dt>AGENTS_STAFFED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time\">Staffed</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_IN_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time\">In\n       queue</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_SCHEDULED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time\">Scheduled</a>\n               </p>\n            </dd>\n            <dt>OLDEST_CONTACT_AGE</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>When you use groupings, Unit says SECONDS and the Value is returned in SECONDS. </p>\n               <p>When you do not use groupings, Unit says SECONDS but the Value is returned in\n      MILLISECONDS. For example, if you get a response like this:</p>\n               <p>\n                  <code>{ \"Metric\": { \"Name\": \"OLDEST_CONTACT_AGE\", \"Unit\": \"SECONDS\" }, \"Value\": 24113.0\n      </code>}</p>\n               <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time\">Oldest</a>\n               </p>\n            </dd>\n            <dt>SLOTS_ACTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time\">Active</a>\n               </p>\n            </dd>\n            <dt>SLOTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time\">Availability</a>\n               </p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9158,7 +9158,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets historical metric data from the specified Amazon Connect instance.</p>\n\n         <p>For a description of each historical metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics\n    Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Gets historical metric data from the specified Amazon Connect instance.</p>\n         <p>For a description of each historical metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics\n    Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/metrics/historical/{InstanceId}",
@@ -9206,13 +9206,13 @@
                 "Groupings": {
                     "target": "com.amazonaws.connect#Groupings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when results are grouped by\n   queue, the metrics returned are grouped by queue. The values returned apply to the metrics for\n   each queue rather than aggregated for all queues.</p>\n\n         <p>If no grouping is specified, a summary of metrics for all queues is returned.</p>"
+                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when results are grouped by\n   queue, the metrics returned are grouped by queue. The values returned apply to the metrics for\n   each queue rather than aggregated for all queues.</p>\n         <p>If no grouping is specified, a summary of metrics for all queues is returned.</p>"
                     }
                 },
                 "HistoricalMetrics": {
                     "target": "com.amazonaws.connect#HistoricalMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <note>\n            <p>This API does not support a contacts\n    incoming metric (there's no CONTACTS_INCOMING metric missing from the documented list). </p>\n         </note>\n\n         <dl>\n            <dt>ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>API_CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CALLBACK_CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_CONSULTED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED_INCOMING</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED_OUTBOUND</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_MISSED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_IN</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>HOLD_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>OCCUPANCY</dt>\n            <dd>\n               <p>Unit: PERCENT</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: MAX</p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: PERCENT</p>\n               <p>Statistic: AVG</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <note>\n            <p>This API does not support a contacts\n    incoming metric (there's no CONTACTS_INCOMING metric missing from the documented list). </p>\n         </note>\n         <dl>\n            <dt>ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>API_CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CALLBACK_CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_CONSULTED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED_INCOMING</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED_OUTBOUND</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_MISSED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_IN</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>HOLD_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>OCCUPANCY</dt>\n            <dd>\n               <p>Unit: PERCENT</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: MAX</p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: PERCENT</p>\n               <p>Statistic: AVG</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11488,7 +11488,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the flows for the specified Amazon Connect instance.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>\n         <p>For more information about flows, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html\">Flows</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Provides information about the flows for the specified Amazon Connect instance.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>\n         <p>For more information about flows, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html\">Flows</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contact-flows-summary/{InstanceId}",
@@ -11929,7 +11929,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n\n         <p>Returns a paginated list of storage configs for the identified instance and resource\n   type.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Returns a paginated list of storage configs for the identified instance and resource\n   type.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/storage-configs",
@@ -12349,7 +12349,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n    Contact Center</a> in the <i>Amazon Connect Administrator\n   Guide</i>.</p>\n\n         <important>\n            <p>The phone number <code>Arn</code> value that is returned from each of the items in the\n     <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList\">PhoneNumberSummaryList</a> cannot be used to tag phone number resources. It will fail with\n    a <code>ResourceNotFoundException</code>. Instead, use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> API.\n    It returns the new phone number ARN that can be used to tag phone number resources.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n    Contact Center</a> in the <i>Amazon Connect Administrator\n   Guide</i>.</p>\n         <important>\n            <p>The phone number <code>Arn</code> value that is returned from each of the items in the\n     <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList\">PhoneNumberSummaryList</a> cannot be used to tag phone number resources. It will fail with\n    a <code>ResourceNotFoundException</code>. Instead, use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> API.\n    It returns the new phone number ARN that can be used to tag phone number resources.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/phone-numbers-summary/{InstanceId}",
@@ -17304,7 +17304,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When a contact is being recorded, and the recording has been suspended using\n   SuspendContactRecording, this API resumes recording the call.</p>\n\n         <p>Only voice recordings are supported at this time.</p>",
+                "smithy.api#documentation": "<p>When a contact is being recorded, and the recording has been suspended using\n   SuspendContactRecording, this API resumes recording the call.</p>\n         <p>Only voice recordings are supported at this time.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/resume-recording",
@@ -17612,7 +17612,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The search criteria to be used to return routing profiles.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with\n    a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will throw invalid results. </p>\n   \n         </note>"
+                "smithy.api#documentation": "<p>The search criteria to be used to return routing profiles.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with\n    a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will throw invalid results. </p>\n         </note>"
             }
         },
         "com.amazonaws.connect#RoutingProfileSearchFilter": {
@@ -18310,7 +18310,7 @@
                 "SearchCriteria": {
                     "target": "com.amazonaws.connect#SecurityProfileSearchCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search criteria to be used to return security profiles. </p>\n         <note>\n            <p>The <code>name</code> field support \"contains\" queries with a minimum of 2 characters and\n    maximum of 25 characters. Any queries with character lengths outside of this range will throw\n    invalid results.</p>\n         </note>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n   \n         </note>"
+                        "smithy.api#documentation": "<p>The search criteria to be used to return security profiles. </p>\n         <note>\n            <p>The <code>name</code> field support \"contains\" queries with a minimum of 2 characters and\n    maximum of 25 characters. Any queries with character lengths outside of this range will throw\n    invalid results.</p>\n         </note>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n         </note>"
                     }
                 },
                 "SearchFilter": {
@@ -18370,7 +18370,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches users in an Amazon Connect instance, with optional filtering.</p>\n  \n         <note>\n            <p>\n               <code>AfterContactWorkTimeLimit</code> is returned in milliseconds. </p>\n         </note>",
+                "smithy.api#documentation": "<p>Searches users in an Amazon Connect instance, with optional filtering.</p>\n         <note>\n            <p>\n               <code>AfterContactWorkTimeLimit</code> is returned in milliseconds. </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/search-users",
@@ -18936,7 +18936,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token\n   required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web Services Support. </p>\n\n         <p>For more information about chat, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat.html\">Chat</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token\n   required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web Services Support. </p>\n         <p>For more information about chat, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat.html\">Chat</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/chat",
@@ -19047,7 +19047,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts recording the contact: </p>\n         <ul>\n            <li>\n               <p>If the API is called <i>before</i> the agent joins the call, recording\n     starts when the agent joins the call.</p>\n            </li>\n            <li>\n               <p>If the API is called <i>after</i> the agent joins the call, recording starts\n     at the time of the API call.</p>\n            </li>\n         </ul>\n\n         <p>StartContactRecording is a one-time action. For example, if you use StopContactRecording to\n   stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios\n   where the recording has started and you want to suspend and resume it, such as when collecting\n   sensitive information (for example, a credit card number), use SuspendContactRecording and\n   ResumeContactRecording.</p>\n         <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording\n    behavior</a> block.</p>\n         <p>Only voice recordings are supported at this time.</p>",
+                "smithy.api#documentation": "<p>Starts recording the contact: </p>\n         <ul>\n            <li>\n               <p>If the API is called <i>before</i> the agent joins the call, recording\n     starts when the agent joins the call.</p>\n            </li>\n            <li>\n               <p>If the API is called <i>after</i> the agent joins the call, recording starts\n     at the time of the API call.</p>\n            </li>\n         </ul>\n         <p>StartContactRecording is a one-time action. For example, if you use StopContactRecording to\n   stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios\n   where the recording has started and you want to suspend and resume it, such as when collecting\n   sensitive information (for example, a credit card number), use SuspendContactRecording and\n   ResumeContactRecording.</p>\n         <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording\n    behavior</a> block.</p>\n         <p>Only voice recordings are supported at this time.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/start-recording",
@@ -19204,7 +19204,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Places an outbound call to a contact, and then initiates the flow. It performs the actions\n   in the flow that's specified (in <code>ContactFlowId</code>).</p>\n\n         <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If\n   the flow places an outbound call to a contact, and then puts the contact in queue, the call is\n   then routed to the agent, like any other inbound case.</p>\n\n         <p>There is a 60-second dialing timeout for this operation. If the call is not connected after\n   60 seconds, it fails.</p>\n         <note>\n            <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK\n    mobile numbers, you must submit a service quota increase request. For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n     Guide</i>. </p>\n         </note>\n         <note>\n            <p>Campaign calls are not allowed by default. Before you can make a call with\n     <code>TrafficType</code> = <code>CAMPAIGN</code>, you must submit a service quota increase\n    request to the quota <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas\">Amazon Connect campaigns</a>. </p>\n         </note>",
+                "smithy.api#documentation": "<p>Places an outbound call to a contact, and then initiates the flow. It performs the actions\n   in the flow that's specified (in <code>ContactFlowId</code>).</p>\n         <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If\n   the flow places an outbound call to a contact, and then puts the contact in queue, the call is\n   then routed to the agent, like any other inbound case.</p>\n         <p>There is a 60-second dialing timeout for this operation. If the call is not connected after\n   60 seconds, it fails.</p>\n         <note>\n            <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK\n    mobile numbers, you must submit a service quota increase request. For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n     Guide</i>. </p>\n         </note>\n         <note>\n            <p>Campaign calls are not allowed by default. Before you can make a call with\n     <code>TrafficType</code> = <code>CAMPAIGN</code>, you must submit a service quota increase\n    request to the quota <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas\">Amazon Connect campaigns</a>. </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/outbound-voice",
@@ -19463,7 +19463,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for the following initiation\n   methods:</p>\n  \n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for the following initiation\n   methods:</p>\n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/stop",
@@ -19491,7 +19491,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops recording a call when a contact is being recorded. StopContactRecording is a one-time\n   action. If you use StopContactRecording to stop recording an ongoing call, you can't use\n   StartContactRecording to restart it. For scenarios where the recording has started and you want\n   to suspend it for sensitive information (for example, to collect a credit card number), and then\n   restart it, use SuspendContactRecording and ResumeContactRecording.</p>\n\n         <p>Only voice recordings are supported at this time.</p>",
+                "smithy.api#documentation": "<p>Stops recording a call when a contact is being recorded. StopContactRecording is a one-time\n   action. If you use StopContactRecording to stop recording an ongoing call, you can't use\n   StartContactRecording to restart it. For scenarios where the recording has started and you want\n   to suspend it for sensitive information (for example, to collect a credit card number), and then\n   restart it, use SuspendContactRecording and ResumeContactRecording.</p>\n         <p>Only voice recordings are supported at this time.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/stop-recording",
@@ -19700,7 +19700,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition. </p>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n   \n         </note>"
+                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition. </p>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n         </note>"
             }
         },
         "com.amazonaws.connect#StringReference": {
@@ -21002,7 +21002,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
+                "smithy.api#documentation": "<p>Updates the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact-flows/{InstanceId}/{ContactFlowId}/content",
@@ -21032,7 +21032,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ContactFlowContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON string that represents flow's content. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language-example.html\">Example contact\n    flow in Amazon Connect Flow language</a> in the <i>Amazon Connect\n    Administrator Guide</i>. </p>",
+                        "smithy.api#documentation": "<p>The JSON string that represents flow's content. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example contact\n    flow in Amazon Connect Flow language</a>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -21295,7 +21295,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The name of the flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
+                "smithy.api#documentation": "<p>The name of the flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact-flows/{InstanceId}/{ContactFlowId}/name",
@@ -22493,7 +22493,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a rule for the specified Amazon Connect instance.</p>",
+                "smithy.api#documentation": "<p>Updates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to code conditions for the rule.\n  </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/rules/{InstanceId}/{RuleId}",
@@ -22835,7 +22835,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony\n    traffic distribution across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony\n    traffic distribution across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/traffic-distribution/{Id}",
@@ -23629,7 +23629,7 @@
                     "target": "com.amazonaws.connect#AfterContactWorkTimeLimit",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The After Call Work (ACW) timeout setting, in seconds.</p>\n  \n         <note>\n            <p>When returned by a <code>SearchUsers</code> call, <code>AfterContactWorkTimeLimit</code> is\n    returned in milliseconds. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The After Call Work (ACW) timeout setting, in seconds.</p>\n         <note>\n            <p>When returned by a <code>SearchUsers</code> call, <code>AfterContactWorkTimeLimit</code> is\n    returned in milliseconds. </p>\n         </note>"
                     }
                 },
                 "DeskPhoneNumber": {
@@ -24065,6 +24065,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "zh-CN"
+                    }
+                },
+                "EN_NZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-NZ"
+                    }
+                },
+                "EN_ZA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-ZA"
                     }
                 }
             }
