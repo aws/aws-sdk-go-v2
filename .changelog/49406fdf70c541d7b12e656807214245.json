@@ -1,0 +1,10 @@
+{
+    "id": "49406fdf-70c5-41d7-b12e-656807214245",
+    "type": "bugfix",
+    "description": "Unify logic between shared config and in finding home directory",
+    "modules": [
+        ".",
+        "config",
+        "credentials"
+    ]
+}

@@ -1,7 +1,6 @@
 package ssocreds
 
 import (
-	"fmt"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -25,22 +24,22 @@ func TestStandardSSOCacheTokenFilepath(t *testing.T) {
 
 	cases := map[string]struct {
 		key            string
-		osUserHomeDir  func() (string, error)
+		osUserHomeDir  func() string
 		expectFilename string
 		expectErr      string
 	}{
 		"success": {
 			key: "https://example.awsapps.com/start",
-			osUserHomeDir: func() (string, error) {
-				return os.TempDir(), nil
+			osUserHomeDir: func() string {
+				return os.TempDir()
 			},
 			expectFilename: filepath.Join(os.TempDir(), ".aws", "sso", "cache",
 				"e8be5486177c5b5392bd9aa76563515b29358e6e.json"),
 		},
 		"failure": {
 			key: "https://example.awsapps.com/start",
-			osUserHomeDir: func() (string, error) {
-				return "", fmt.Errorf("some error")
+			osUserHomeDir: func() string {
+				return ""
 			},
 			expectErr: "some error",
 		},
@@ -54,9 +53,6 @@ func TestStandardSSOCacheTokenFilepath(t *testing.T) {
 			if c.expectErr != "" {
 				if err == nil {
 					t.Fatalf("expect error, got none")
-				}
-				if e, a := c.expectErr, err.Error(); !strings.Contains(a, e) {
-					t.Fatalf("expect %v error in %v", e, a)
 				}
 				return
 			}
