@@ -1,3 +1,7 @@
+# v1.58.0 (2022-12-16)
+
+* **Feature**: AWS sagemaker - Features: This release adds support for random seed, it's an integer value used to initialize a pseudo-random number generator. Setting a random seed will allow the hyperparameter tuning search strategies to produce more consistent configurations for the same tuning job.
+
 # v1.57.0 (2022-12-15)
 
 * **Feature**: SageMaker Inference Recommender now allows customers to load tests their models on various instance types using private VPC.

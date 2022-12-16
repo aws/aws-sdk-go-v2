@@ -1,8 +1,0 @@
-{
-    "id": "1c8199c9-cd08-4abe-bc87-79dc200d5f49",
-    "type": "feature",
-    "description": "Updated error handling for empty resource names in \"UpdateSignalCatalog\" and \"GetModelManifest\" operations.",
-    "modules": [
-        "service/iotfleetwise"
-    ]
-}

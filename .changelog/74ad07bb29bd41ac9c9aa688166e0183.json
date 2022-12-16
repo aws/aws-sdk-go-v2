@@ -1,8 +1,0 @@
-{
-    "id": "74ad07bb-29bd-41ac-9c9a-a688166e0183",
-    "type": "documentation",
-    "description": "This release provides the valid characters for the Description and Name field.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

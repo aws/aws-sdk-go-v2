@@ -1,3 +1,21 @@
+# Release (2022-12-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.22.0](service/appflow/CHANGELOG.md#v1220-2022-12-16)
+  * **Feature**: This release updates the ListConnectorEntities API action so that it returns paginated responses that customers can retrieve with next tokens.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.22.2](service/cloudfront/CHANGELOG.md#v1222-2022-12-16)
+  * **Documentation**: Updated documentation for CloudFront
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.20.0](service/datasync/CHANGELOG.md#v1200-2022-12-16)
+  * **Feature**: AWS DataSync now supports the use of tags with task executions. With this new feature, you can apply tags each time you execute a task, giving you greater control and management over your task executions.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.18.3](service/efs/CHANGELOG.md#v1183-2022-12-16)
+  * **Documentation**: General documentation updates for EFS.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.16.6](service/guardduty/CHANGELOG.md#v1166-2022-12-16)
+  * **Documentation**: This release provides the valid characters for the Description and Name field.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.2.0](service/iotfleetwise/CHANGELOG.md#v120-2022-12-16)
+  * **Feature**: Updated error handling for empty resource names in "UpdateSignalCatalog" and "GetModelManifest" operations.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.58.0](service/sagemaker/CHANGELOG.md#v1580-2022-12-16)
+  * **Feature**: AWS sagemaker - Features: This release adds support for random seed, it's an integer value used to initialize a pseudo-random number generator. Setting a random seed will allow the hyperparameter tuning search strategies to produce more consistent configurations for the same tuning job.
+
 # Release (2022-12-15)
 
 ## General Highlights

@@ -1,3 +1,7 @@
+# v1.16.6 (2022-12-16)
+
+* **Documentation**: This release provides the valid characters for the Description and Name field.
+
 # v1.16.5 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

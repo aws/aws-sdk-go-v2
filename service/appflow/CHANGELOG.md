@@ -1,3 +1,7 @@
+# v1.22.0 (2022-12-16)
+
+* **Feature**: This release updates the ListConnectorEntities API action so that it returns paginated responses that customers can retrieve with next tokens.
+
 # v1.21.2 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

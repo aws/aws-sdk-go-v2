@@ -1,3 +1,7 @@
+# v1.22.2 (2022-12-16)
+
+* **Documentation**: Updated documentation for CloudFront
+
 # v1.22.1 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

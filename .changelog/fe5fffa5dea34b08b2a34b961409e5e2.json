@@ -1,8 +1,0 @@
-{
-    "id": "fe5fffa5-dea3-4b08-b2a3-4b961409e5e2",
-    "type": "feature",
-    "description": "This release updates the ListConnectorEntities API action so that it returns paginated responses that customers can retrieve with next tokens.",
-    "modules": [
-        "service/appflow"
-    ]
-}

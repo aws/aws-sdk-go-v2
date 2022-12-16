@@ -1,3 +1,7 @@
+# v1.2.0 (2022-12-16)
+
+* **Feature**: Updated error handling for empty resource names in "UpdateSignalCatalog" and "GetModelManifest" operations.
+
 # v1.1.1 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions
