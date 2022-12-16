@@ -16,7 +16,7 @@ import (
 // distributions and Amazon Web Services accounts for each conflicting alias. In
 // the returned list, the distribution and account IDs are partially hidden, which
 // allows you to identify the distributions and accounts that you own, but helps to
-// protect the information of ones that you don’t own. Use this operation to find
+// protect the information of ones that you don't own. Use this operation to find
 // aliases that are in use in CloudFront that conflict or overlap with the provided
 // alias. For example, if you provide www.example.com as input, the returned list
 // can include www.example.com and the overlapping wildcard alternate domain name
@@ -65,8 +65,8 @@ type ListConflictingAliasesInput struct {
 
 	// Use this field when paginating results to indicate where to begin in the list of
 	// conflicting aliases. The response includes conflicting aliases in the list that
-	// occur after the marker. To get the next page of the list, set this field’s value
-	// to the value of NextMarker from the current page’s response.
+	// occur after the marker. To get the next page of the list, set this field's value
+	// to the value of NextMarker from the current page's response.
 	Marker *string
 
 	// The maximum number of conflicting aliases that you want in the response.

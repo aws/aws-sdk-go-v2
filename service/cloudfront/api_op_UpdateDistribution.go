@@ -27,14 +27,14 @@ import (
 // must rename the ETag field to IfMatch, leaving the value unchanged. (Set the
 // value of IfMatch to the value of ETag, then remove the ETag field.)
 //
-// * You can’t
+// * You can't
 // change the value of CallerReference.
 //
 // * Submit an UpdateDistribution request,
 // providing the distribution configuration. The new configuration replaces the
 // existing configuration. The values that you specify in an UpdateDistribution
 // request are not merged into your existing configuration. Make sure to include
-// all fields: the ones that you modified and also the ones that you didn’t.
+// all fields: the ones that you modified and also the ones that you didn't.
 func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistributionInput, optFns ...func(*Options)) (*UpdateDistributionOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionInput{}

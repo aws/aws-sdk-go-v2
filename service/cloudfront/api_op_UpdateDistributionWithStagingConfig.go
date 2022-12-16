@@ -17,11 +17,11 @@ import (
 // otherwise its configuration is overwritten to match the staging distribution.
 // You can use this operation in a continuous deployment workflow after you have
 // tested configuration changes on the staging distribution. After using a
-// continuous deployment policy to move a portion of your domain name’s traffic to
+// continuous deployment policy to move a portion of your domain name's traffic to
 // the staging distribution and verifying that it works as intended, you can use
-// this operation to copy the staging distribution’s configuration to the primary
+// this operation to copy the staging distribution's configuration to the primary
 // distribution. This action will disable the continuous deployment policy and move
-// your domain’s traffic back to the primary distribution.
+// your domain's traffic back to the primary distribution.
 func (c *Client) UpdateDistributionWithStagingConfig(ctx context.Context, params *UpdateDistributionWithStagingConfigInput, optFns ...func(*Options)) (*UpdateDistributionWithStagingConfigOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionWithStagingConfigInput{}
@@ -62,7 +62,7 @@ type UpdateDistributionWithStagingConfigOutput struct {
 	// the details about how to track and manage content delivery.
 	Distribution *types.Distribution
 
-	// The current version of the primary distribution (after it’s updated).
+	// The current version of the primary distribution (after it's updated).
 	ETag *string
 
 	// Metadata pertaining to the operation's result.

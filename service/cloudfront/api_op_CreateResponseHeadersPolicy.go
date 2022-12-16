@@ -16,7 +16,7 @@ import (
 // response headers policy, you provide some metadata about the policy, and a set
 // of configurations that specify the response headers. After you create a response
 // headers policy, you can use its ID to attach it to one or more cache behaviors
-// in a CloudFront distribution. When it’s attached to a cache behavior, CloudFront
+// in a CloudFront distribution. When it's attached to a cache behavior, CloudFront
 // adds the headers in the policy to HTTP responses that it sends for requests that
 // match the cache behavior.
 func (c *Client) CreateResponseHeadersPolicy(ctx context.Context, params *CreateResponseHeadersPolicyInput, optFns ...func(*Options)) (*CreateResponseHeadersPolicyOutput, error) {

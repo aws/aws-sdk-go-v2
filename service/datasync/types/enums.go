@@ -422,13 +422,14 @@ type S3StorageClass string
 
 // Enum values for S3StorageClass
 const (
-	S3StorageClassStandard           S3StorageClass = "STANDARD"
-	S3StorageClassStandardIa         S3StorageClass = "STANDARD_IA"
-	S3StorageClassOnezoneIa          S3StorageClass = "ONEZONE_IA"
-	S3StorageClassIntelligentTiering S3StorageClass = "INTELLIGENT_TIERING"
-	S3StorageClassGlacier            S3StorageClass = "GLACIER"
-	S3StorageClassDeepArchive        S3StorageClass = "DEEP_ARCHIVE"
-	S3StorageClassOutposts           S3StorageClass = "OUTPOSTS"
+	S3StorageClassStandard                S3StorageClass = "STANDARD"
+	S3StorageClassStandardIa              S3StorageClass = "STANDARD_IA"
+	S3StorageClassOnezoneIa               S3StorageClass = "ONEZONE_IA"
+	S3StorageClassIntelligentTiering      S3StorageClass = "INTELLIGENT_TIERING"
+	S3StorageClassGlacier                 S3StorageClass = "GLACIER"
+	S3StorageClassDeepArchive             S3StorageClass = "DEEP_ARCHIVE"
+	S3StorageClassOutposts                S3StorageClass = "OUTPOSTS"
+	S3StorageClassGlacierInstantRetrieval S3StorageClass = "GLACIER_INSTANT_RETRIEVAL"
 )
 
 // Values returns all known values for S3StorageClass. Note that this can be
@@ -443,6 +444,7 @@ func (S3StorageClass) Values() []S3StorageClass {
 		"GLACIER",
 		"DEEP_ARCHIVE",
 		"OUTPOSTS",
+		"GLACIER_INSTANT_RETRIEVAL",
 	}
 }
 

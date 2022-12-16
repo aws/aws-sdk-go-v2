@@ -28,7 +28,7 @@ import (
 // * Use
 // UpdateContinuousDeploymentPolicy, providing the entire continuous deployment
 // policy configuration, including the fields that you modified and those that you
-// didn’t.
+// didn't.
 func (c *Client) UpdateContinuousDeploymentPolicy(ctx context.Context, params *UpdateContinuousDeploymentPolicyInput, optFns ...func(*Options)) (*UpdateContinuousDeploymentPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateContinuousDeploymentPolicyInput{}

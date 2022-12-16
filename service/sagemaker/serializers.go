@@ -19899,6 +19899,11 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningJobConfig(v *types.HyperP
 		}
 	}
 
+	if v.RandomSeed != nil {
+		ok := object.Key("RandomSeed")
+		ok.Integer(*v.RandomSeed)
+	}
+
 	if v.ResourceLimits != nil {
 		ok := object.Key("ResourceLimits")
 		if err := awsAwsjson11_serializeDocumentResourceLimits(v.ResourceLimits, ok); err != nil {

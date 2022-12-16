@@ -39,7 +39,7 @@ type ListOriginRequestPoliciesInput struct {
 	// Use this field when paginating results to indicate where to begin in your list
 	// of origin request policies. The response includes origin request policies in the
 	// list that occur after the marker. To get the next page of the list, set this
-	// field’s value to the value of NextMarker from the current page’s response.
+	// field's value to the value of NextMarker from the current page's response.
 	Marker *string
 
 	// The maximum number of origin request policies that you want in the response.

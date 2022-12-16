@@ -393,7 +393,7 @@ func (e *FunctionAlreadyExists) ErrorMessage() string {
 func (e *FunctionAlreadyExists) ErrorCode() string             { return "FunctionAlreadyExists" }
 func (e *FunctionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Cannot delete the function because it’s attached to one or more cache behaviors.
+// Cannot delete the function because it's attached to one or more cache behaviors.
 type FunctionInUse struct {
 	Message *string
 
@@ -1154,7 +1154,7 @@ func (e *NoSuchCloudFrontOriginAccessIdentity) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The continuous deployment policy doesn’t exist.
+// The continuous deployment policy doesn't exist.
 type NoSuchContinuousDeploymentPolicy struct {
 	Message *string
 

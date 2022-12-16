@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a cache policy. After you create a cache policy, you can attach it to
-// one or more cache behaviors. When it’s attached to a cache behavior, the cache
+// one or more cache behaviors. When it's attached to a cache behavior, the cache
 // policy determines the following:
 //
 // * The values that CloudFront includes in the
@@ -26,8 +26,8 @@ import (
 // The
 // headers, cookies, and query strings that are included in the cache key are
 // automatically included in requests that CloudFront sends to the origin.
-// CloudFront sends a request when it can’t find an object in its cache that
-// matches the request’s cache key. If you want to send values to the origin but
+// CloudFront sends a request when it can't find an object in its cache that
+// matches the request's cache key. If you want to send values to the origin but
 // not include them in the cache key, use OriginRequestPolicy. For more information
 // about cache policies, see Controlling the cache key
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html)

@@ -14,17 +14,7 @@ import (
 // Configures a task, which defines where and how DataSync transfers your data. A
 // task includes a source location, a destination location, and the preferences for
 // how and when you want to transfer your data (such as bandwidth limits,
-// scheduling, among other options). When you create a task that transfers data
-// between Amazon Web Services services in different Amazon Web Services Regions,
-// one of your locations must reside in the Region where you're using DataSync. For
-// more information, see the following topics:
-//
-// * Working with DataSync locations
-// (https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html)
-//
-// *
-// Configure DataSync task settings
-// (https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html)
+// scheduling, among other options).
 func (c *Client) CreateTask(ctx context.Context, params *CreateTaskInput, optFns ...func(*Options)) (*CreateTaskOutput, error) {
 	if params == nil {
 		params = &CreateTaskInput{}
@@ -58,31 +48,25 @@ type CreateTaskInput struct {
 	// to monitor and log events in the task.
 	CloudWatchLogGroupArn *string
 
-	// A list of filter rules that determines which files to exclude from a task. The
-	// list should contain a single filter string that consists of the patterns to
-	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
-	// "/folder1|/folder2".
+	// Specifies a list of filter rules that exclude specific data during your
+	// transfer. For more information and examples, see Filtering data transferred by
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
 	Excludes []types.FilterRule
 
-	// A list of filter rules that determines which files to include when running a
-	// task. The pattern contains a single filter string that consists of the patterns
-	// to include. The patterns are delimited by "|" (that is, a pipe), for example,
-	// "/folder1|/folder2".
+	// Specifies a list of filter rules that include specific data during your
+	// transfer. For more information and examples, see Filtering data transferred by
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
 	Includes []types.FilterRule
 
 	// The name of a task. This value is a text reference that is used to identify the
 	// task in the console.
 	Name *string
 
-	// The set of configuration options that control the behavior of a single execution
-	// of the task that occurs when you call StartTaskExecution. You can configure
-	// these options to preserve metadata such as user ID (UID) and group ID (GID),
-	// file permissions, data integrity verification, and so on. For each individual
-	// task execution, you can override these options by specifying the OverrideOptions
-	// before starting the task execution. For more information, see the
-	// StartTaskExecution
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
-	// operation.
+	// Specifies the configuration options for a task. Some options include preserving
+	// file or object metadata and verifying data integrity. You can also override
+	// these options before starting an individual run of a task (also known as a task
+	// execution). For more information, see StartTaskExecution
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html).
 	Options *types.Options
 
 	// Specifies a schedule used to periodically transfer files from a source to a
@@ -91,8 +75,9 @@ type CreateTaskInput struct {
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html).
 	Schedule *types.TaskSchedule
 
-	// The key-value pair that represents the tag that you want to add to the resource.
-	// The value can be an empty string.
+	// Specifies the tags that you want to apply to the Amazon Resource Name (ARN)
+	// representing the task. Tags are key-value pairs that help you manage, filter,
+	// and search for your DataSync resources.
 	Tags []types.TagListEntry
 
 	noSmithyDocumentSerde

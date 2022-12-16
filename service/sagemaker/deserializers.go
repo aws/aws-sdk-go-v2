@@ -46737,6 +46737,19 @@ func awsAwsjson11_deserializeDocumentHyperParameterTuningJobConfig(v **types.Hyp
 				return err
 			}
 
+		case "RandomSeed":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RandomSeed to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RandomSeed = ptr.Int32(int32(i64))
+			}
+
 		case "ResourceLimits":
 			if err := awsAwsjson11_deserializeDocumentResourceLimits(&sv.ResourceLimits, value); err != nil {
 				return err

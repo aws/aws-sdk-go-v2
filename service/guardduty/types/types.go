@@ -1738,7 +1738,7 @@ type Scan struct {
 	// Represents total bytes that were scanned.
 	TotalBytes int64
 
-	// Represents the reason the scan was triggered.
+	// Specifies the reason why the scan was initiated.
 	TriggerDetails *TriggerDetails
 
 	noSmithyDocumentSerde

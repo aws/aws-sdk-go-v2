@@ -39,32 +39,24 @@ type UpdateTaskInput struct {
 	// group.
 	CloudWatchLogGroupArn *string
 
-	// A list of filter rules that determines which files to exclude from a task. The
-	// list should contain a single filter string that consists of the patterns to
-	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
-	// "/folder1|/folder2".
+	// Specifies a list of filter rules that exclude specific data during your
+	// transfer. For more information and examples, see Filtering data transferred by
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
 	Excludes []types.FilterRule
 
-	// A list of filter rules that determines which files to include when running a
-	// task. The pattern contains a single filter string that consists of the patterns
-	// to include. The patterns are delimited by "|" (that is, a pipe), for example,
-	// "/folder1|/folder2".
+	// Specifies a list of filter rules that include specific data during your
+	// transfer. For more information and examples, see Filtering data transferred by
+	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
 	Includes []types.FilterRule
 
 	// The name of the task to update.
 	Name *string
 
-	// Represents the options that are available to control the behavior of a
-	// StartTaskExecution
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
-	// operation. Behavior includes preserving metadata such as user ID (UID), group ID
-	// (GID), and file permissions, and also overwriting files in the destination, data
-	// integrity verification, and so on. A task has a set of default options
-	// associated with it. If you don't specify an option in StartTaskExecution
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html),
-	// the default value is used. You can override the defaults options on each task
-	// execution by specifying an overriding Options value to StartTaskExecution
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html).
+	// Configures your DataSync task settings. These options include how DataSync
+	// handles files, objects, and their associated metadata. You also can specify how
+	// DataSync verifies data integrity, set bandwidth limits for your task, among
+	// other options. Each task setting has a default value. Unless you need to, you
+	// don't have to configure any of these Options before starting your task.
 	Options *types.Options
 
 	// Specifies a schedule used to periodically transfer files from a source to a

@@ -11,10 +11,10 @@ import (
 )
 
 // Deletes an origin request policy. You cannot delete an origin request policy if
-// it’s attached to any cache behaviors. First update your distributions to remove
+// it's attached to any cache behaviors. First update your distributions to remove
 // the origin request policy from all cache behaviors, then delete the origin
 // request policy. To delete an origin request policy, you must provide the
-// policy’s identifier and version. To get the identifier, you can use
+// policy's identifier and version. To get the identifier, you can use
 // ListOriginRequestPolicies or GetOriginRequestPolicy.
 func (c *Client) DeleteOriginRequestPolicy(ctx context.Context, params *DeleteOriginRequestPolicyInput, optFns ...func(*Options)) (*DeleteOriginRequestPolicyOutput, error) {
 	if params == nil {
@@ -40,7 +40,7 @@ type DeleteOriginRequestPolicyInput struct {
 	Id *string
 
 	// The version of the origin request policy that you are deleting. The version is
-	// the origin request policy’s ETag value, which you can get using
+	// the origin request policy's ETag value, which you can get using
 	// ListOriginRequestPolicies, GetOriginRequestPolicy, or
 	// GetOriginRequestPolicyConfig.
 	IfMatch *string

@@ -6824,8 +6824,8 @@ type HyperParameterTuningInstanceConfig struct {
 // Configures a hyperparameter tuning job.
 type HyperParameterTuningJobConfig struct {
 
-	// The ResourceLimits object that specifies the maximum number of training jobs and
-	// parallel training jobs for this tuning job.
+	// The ResourceLimits object that specifies the maximum number of training and
+	// parallel training jobs that can be used for this hyperparameter tuning job.
 	//
 	// This member is required.
 	ResourceLimits *ResourceLimits
@@ -6838,13 +6838,20 @@ type HyperParameterTuningJobConfig struct {
 	// This member is required.
 	Strategy HyperParameterTuningJobStrategyType
 
-	// The HyperParameterTuningJobObjective object that specifies the objective metric
-	// for this tuning job.
+	// The HyperParameterTuningJobObjective specifies the objective metric used to
+	// evaluate the performance of training jobs launched by this tuning job.
 	HyperParameterTuningJobObjective *HyperParameterTuningJobObjective
 
 	// The ParameterRanges object that specifies the ranges of hyperparameters that
-	// this tuning job searches.
+	// this tuning job searches over to find the optimal configuration for the highest
+	// model performance against .your chosen objective metric.
 	ParameterRanges *ParameterRanges
+
+	// A value used to initialize a pseudo-random number generator. Setting a random
+	// seed and using the same seed later for the same tuning job will allow
+	// hyperparameter optimization to find more a consistent hyperparameter
+	// configuration between the two runs.
+	RandomSeed *int32
 
 	// The configuration for the Hyperband optimization strategy. This parameter should
 	// be provided only if Hyperband is selected as the strategy for

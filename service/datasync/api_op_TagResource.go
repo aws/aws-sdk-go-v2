@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies a key-value pair to an Amazon Web Services resource.
+// Applies a tag to an Amazon Web Services resource. Tags are key-value pairs that
+// can help you manage, filter, and search for your resources. These include
+// DataSync resources, such as locations, tasks, and task executions.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -30,12 +32,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 // TagResourceRequest
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource to apply the tag to.
+	// Specifies the Amazon Resource Name (ARN) of the resource to apply the tag to.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The tags to apply.
+	// Specifies the tags that you want to apply to the resource.
 	//
 	// This member is required.
 	Tags []types.TagListEntry

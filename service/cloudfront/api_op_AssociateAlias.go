@@ -11,7 +11,7 @@ import (
 )
 
 // Associates an alias (also known as a CNAME or an alternate domain name) with a
-// CloudFront distribution. With this operation you can move an alias that’s
+// CloudFront distribution. With this operation you can move an alias that's
 // already in use on a CloudFront distribution to a different distribution in one
 // step. This prevents the downtime that could occur if you first remove the alias
 // from one distribution and then separately add the alias to another distribution.
@@ -44,7 +44,7 @@ type AssociateAliasInput struct {
 	// This member is required.
 	Alias *string
 
-	// The ID of the distribution that you’re associating the alias with.
+	// The ID of the distribution that you're associating the alias with.
 	//
 	// This member is required.
 	TargetDistributionId *string

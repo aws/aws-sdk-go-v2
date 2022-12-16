@@ -24,7 +24,7 @@ import (
 //
 // * Call UpdateCachePolicy by providing the entire cache
 // policy configuration, including the fields that you modified and those that you
-// didn’t.
+// didn't.
 func (c *Client) UpdateCachePolicy(ctx context.Context, params *UpdateCachePolicyInput, optFns ...func(*Options)) (*UpdateCachePolicyOutput, error) {
 	if params == nil {
 		params = &UpdateCachePolicyInput{}
@@ -48,14 +48,14 @@ type UpdateCachePolicyInput struct {
 	CachePolicyConfig *types.CachePolicyConfig
 
 	// The unique identifier for the cache policy that you are updating. The identifier
-	// is returned in a cache behavior’s CachePolicyId field in the response to
+	// is returned in a cache behavior's CachePolicyId field in the response to
 	// GetDistributionConfig.
 	//
 	// This member is required.
 	Id *string
 
 	// The version of the cache policy that you are updating. The version is returned
-	// in the cache policy’s ETag field in the response to GetCachePolicyConfig.
+	// in the cache policy's ETag field in the response to GetCachePolicyConfig.
 	IfMatch *string
 
 	noSmithyDocumentSerde

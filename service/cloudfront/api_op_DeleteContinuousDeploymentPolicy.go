@@ -11,7 +11,7 @@ import (
 )
 
 // Deletes a continuous deployment policy. You cannot delete a continuous
-// deployment policy that’s attached to a primary distribution. First update your
+// deployment policy that's attached to a primary distribution. First update your
 // distribution to remove the continuous deployment policy, then you can delete the
 // policy.
 func (c *Client) DeleteContinuousDeploymentPolicy(ctx context.Context, params *DeleteContinuousDeploymentPolicyInput, optFns ...func(*Options)) (*DeleteContinuousDeploymentPolicyOutput, error) {

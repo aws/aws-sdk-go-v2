@@ -1788,6 +1788,15 @@ func awsRestjson1_deserializeOpDocumentListConnectorEntitiesOutput(v **ListConne
 				return err
 			}
 
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

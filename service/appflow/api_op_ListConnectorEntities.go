@@ -50,6 +50,14 @@ type ListConnectorEntitiesInput struct {
 	// supported by the provider.
 	EntitiesPath *string
 
+	// The maximum number of items that the operation returns in the response.
+	MaxResults *int32
+
+	// A token that was provided by your prior ListConnectorEntities operation if the
+	// response was too big for the page size. You specify this token to get the next
+	// page of results in paginated response.
+	NextToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -61,6 +69,11 @@ type ListConnectorEntitiesOutput struct {
 	//
 	// This member is required.
 	ConnectorEntityMap map[string][]types.ConnectorEntity
+
+	// A token that you specify in your next ListConnectorEntities operation to get the
+	// next page of results in paginated response. The ListConnectorEntities operation
+	// provides this token if the response is too big for the page size.
+	NextToken *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

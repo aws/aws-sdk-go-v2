@@ -1,0 +1,8 @@
+{
+    "id": "50f8e64c-e670-44b0-96e6-f78e35504b74",
+    "type": "documentation",
+    "description": "General documentation updates for EFS.",
+    "modules": [
+        "service/efs"
+    ]
+}

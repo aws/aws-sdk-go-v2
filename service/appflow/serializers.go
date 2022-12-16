@@ -928,6 +928,16 @@ func awsRestjson1_serializeOpDocumentListConnectorEntitiesInput(v *ListConnector
 		ok.String(*v.EntitiesPath)
 	}
 
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
 	return nil
 }
 
