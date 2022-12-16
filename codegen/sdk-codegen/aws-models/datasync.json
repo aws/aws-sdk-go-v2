@@ -191,7 +191,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Activates an DataSync agent that you have deployed in your storage\n      environment. The activation process associates your agent with your account. In the activation\n      process, you specify information such as the Amazon Web Services Region that you want to\n      activate the agent in. You activate the agent in the Amazon Web Services Region where your\n      target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region.</p>\n         <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to\n      a VPC endpoint so you can run tasks without going over the public internet.</p>\n         <p>You can use an agent for more than one location. If a task uses multiple agents, all of\n      them need to have status AVAILABLE for the task to run. If you use multiple agents for a\n      source location, the status of all the agents must be AVAILABLE for the task to run. </p>\n    \n\n         <p>Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that\n      ensures minimal interruption to your tasks.</p>"
+                "smithy.api#documentation": "<p>Activates an DataSync agent that you have deployed in your storage\n      environment. The activation process associates your agent with your account. In the activation\n      process, you specify information such as the Amazon Web Services Region that you want to\n      activate the agent in. You activate the agent in the Amazon Web Services Region where your\n      target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region.</p>\n         <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to\n      a VPC endpoint so you can run tasks without going over the public internet.</p>\n         <p>You can use an agent for more than one location. If a task uses multiple agents, all of\n      them need to have status AVAILABLE for the task to run. If you use multiple agents for a\n      source location, the status of all the agents must be AVAILABLE for the task to run. </p>\n         <p>Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that\n      ensures minimal interruption to your tasks.</p>"
             }
         },
         "com.amazonaws.datasync#CreateAgentRequest": {
@@ -200,7 +200,7 @@
                 "ActivationKey": {
                     "target": "com.amazonaws.datasync#ActivationKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>Your agent activation key. You can get the activation key either by sending an HTTP GET\n      request with redirects that enable you to get the agent IP address (port 80). Alternatively,\n      you can get it from the DataSync console.</p>\n         <p>The redirect URL returned in the response provides you the activation key for your\n      agent in the query string parameter <code>activationKey</code>. It might also include other\n      activation-related parameters; however, these are merely defaults. The arguments you pass to\n      this API call determine the actual configuration of your agent.</p>\n    \n\n         <p>For more information, see Activating an Agent in the <i>DataSync\n        User Guide.</i>\n         </p>",
+                        "smithy.api#documentation": "<p>Your agent activation key. You can get the activation key either by sending an HTTP GET\n      request with redirects that enable you to get the agent IP address (port 80). Alternatively,\n      you can get it from the DataSync console.</p>\n         <p>The redirect URL returned in the response provides you the activation key for your\n      agent in the query string parameter <code>activationKey</code>. It might also include other\n      activation-related parameters; however, these are merely defaults. The arguments you pass to\n      this API call determine the actual configuration of your agent.</p>\n         <p>For more information, see Activating an Agent in the <i>DataSync\n        User Guide.</i>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -763,7 +763,7 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#NfsSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source\n      location or write data to the NFS destination. The NFS path should be a path that's\n      exported by the NFS server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other NFS clients in your network. </p>\n         <p>To see all the paths exported by your NFS server, run \"<code>showmount -e\n        nfs-server-name</code>\" from an NFS client that has access to your server. You can specify\n      any directory that appears in the results, and any subdirectory of that directory. Ensure that\n      the NFS export is accessible without Kerberos authentication. </p>\n         <p>To transfer all the data in the folder you specified, DataSync needs to have\n      permissions to read all the data. To ensure this, either configure the NFS export with\n        <code>no_root_squash,</code> or ensure that the permissions for all of the files that you\n      want DataSync allow read access for all users. Doing either enables the agent to read the\n      files. For the agent to access directories, you must additionally enable all execute\n      access.</p>\n         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>\n    \n         <p>For information about NFS export configuration, see 18.7. The /etc/exports\n      Configuration File in the Red Hat Enterprise Linux documentation.</p>",
+                        "smithy.api#documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source\n      location or write data to the NFS destination. The NFS path should be a path that's\n      exported by the NFS server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other NFS clients in your network. </p>\n         <p>To see all the paths exported by your NFS server, run \"<code>showmount -e\n        nfs-server-name</code>\" from an NFS client that has access to your server. You can specify\n      any directory that appears in the results, and any subdirectory of that directory. Ensure that\n      the NFS export is accessible without Kerberos authentication. </p>\n         <p>To transfer all the data in the folder you specified, DataSync needs to have\n      permissions to read all the data. To ensure this, either configure the NFS export with\n        <code>no_root_squash,</code> or ensure that the permissions for all of the files that you\n      want DataSync allow read access for all users. Doing either enables the agent to read the\n      files. For the agent to access directories, you must additionally enable all execute\n      access.</p>\n         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>\n         <p>For information about NFS export configuration, see 18.7. The /etc/exports\n      Configuration File in the Red Hat Enterprise Linux documentation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -934,7 +934,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer.</p>\n\n    \n         <p>For\n      more information, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli\">Create an Amazon S3 location</a>\n      in the <i>DataSync User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates an endpoint for an Amazon S3 bucket that DataSync can access for a transfer.</p>\n         <p>For\n      more information, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli\">Create an Amazon S3 location</a>\n      in the <i>DataSync User Guide</i>.</p>"
             }
         },
         "com.amazonaws.datasync#CreateLocationS3Request": {
@@ -956,7 +956,7 @@
                 "S3StorageClass": {
                     "target": "com.amazonaws.datasync#S3StorageClass",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 storage class that you want to store your files in when this location is\n      used as a task destination. For buckets in Amazon Web Services Regions, the storage class defaults to Standard.\n      For buckets on Outposts, the storage class defaults to Amazon Web Services S3 Outposts.</p>\n      \n         <p>For more information about S3 storage classes, see <a href=\"http://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a>. Some storage classes have behaviors that\n      can affect your S3 storage cost. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with S3 storage classes in DataSync</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 storage class that you want to store your files in when this location is\n      used as a task destination. For buckets in Amazon Web Services Regions, the storage class defaults to Standard.\n      For buckets on Outposts, the storage class defaults to Amazon Web Services S3 Outposts.</p>\n         <p>For more information about S3 storage classes, see <a href=\"http://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a>. Some storage classes have behaviors that\n      can affect your S3 storage cost. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with S3 storage classes in DataSync</a>.</p>"
                     }
                 },
                 "S3Config": {
@@ -1022,7 +1022,7 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#SmbSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source\n      location or write data to the SMB destination. The SMB path should be a path that's\n      exported by the SMB server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other SMB clients in your network.</p>\n         <note>\n            <p>\n               <code>Subdirectory</code> must be specified with forward slashes. For example,\n          <code>/path/to/folder</code>.</p>\n         </note>\n\n         <p>To transfer all the data in the folder you specified, DataSync needs to have permissions\n      to mount the SMB share, as well as to access all the data in that share. To ensure this,\n      either ensure that the user/password specified belongs to the user who can mount the share,\n      and who has the appropriate permissions for all of the files and directories that you want\n      DataSync to access, or use credentials of a member of the Backup Operators group to mount\n      the share. Doing either enables the agent to access the data. For the agent to access\n      directories, you must additionally enable all execute access.</p>",
+                        "smithy.api#documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source\n      location or write data to the SMB destination. The SMB path should be a path that's\n      exported by the SMB server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other SMB clients in your network.</p>\n         <note>\n            <p>\n               <code>Subdirectory</code> must be specified with forward slashes. For example,\n          <code>/path/to/folder</code>.</p>\n         </note>\n         <p>To transfer all the data in the folder you specified, DataSync needs to have permissions\n      to mount the SMB share, as well as to access all the data in that share. To ensure this,\n      either ensure that the user/password specified belongs to the user who can mount the share,\n      and who has the appropriate permissions for all of the files and directories that you want\n      DataSync to access, or use credentials of a member of the Backup Operators group to mount\n      the share. Doing either enables the agent to access the data. For the agent to access\n      directories, you must additionally enable all execute access.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1036,7 +1036,7 @@
                 "User": {
                     "target": "com.amazonaws.datasync#SmbUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user who can mount the share, has the permissions to access files and folders in the\n      SMB share.</p>\n    \n         <p>For information about choosing a user name that ensures sufficient permissions to files,\n      folders, and metadata, see the <a href=\"create-smb-location.html#SMBuser\">User setting</a> for SMB locations.</p>",
+                        "smithy.api#documentation": "<p>The user who can mount the share, has the permissions to access files and folders in the\n      SMB share.</p>\n         <p>For information about choosing a user name that ensures sufficient permissions to files,\n      folders, and metadata, see the <a href=\"create-smb-location.html#SMBuser\">User setting</a> for SMB locations.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1108,7 +1108,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures a task, which defines where and how DataSync transfers your\n      data.</p>\n         <p>A task includes a source location, a destination location, and the preferences for how and\n      when you want to transfer your data (such as bandwidth limits, scheduling, among other\n      options).</p>\n         <p>When you create a task that transfers data between Amazon Web Services services in\n      different Amazon Web Services Regions, one of your locations must reside in the Region where\n      you're using DataSync.</p>\n         <p>For more information, see the following topics:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-locations.html\">Working with DataSync locations</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html\">Configure DataSync task settings</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Configures a task, which defines where and how DataSync transfers your\n      data.</p>\n         <p>A task includes a source location, a destination location, and the preferences for how and\n      when you want to transfer your data (such as bandwidth limits, scheduling, among other\n      options).</p>"
             }
         },
         "com.amazonaws.datasync#CreateTaskRequest": {
@@ -1143,13 +1143,13 @@
                 "Options": {
                     "target": "com.amazonaws.datasync#Options",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of configuration options that control the behavior of a single execution of the\n      task that occurs when you call <code>StartTaskExecution</code>. You can configure these\n      options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data\n      integrity verification, and so on.</p>\n         <p>For each individual task execution, you can override these options by specifying the\n        <code>OverrideOptions</code> before starting the task execution. For more information, see\n      the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a> operation. </p>"
+                        "smithy.api#documentation": "<p>Specifies the configuration options for a task. Some options include preserving file or object metadata and verifying data integrity.</p>\n         <p>You can also override these options before starting an individual run of a task (also\n      known as a <i>task execution</i>). For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a>.</p>"
                     }
                 },
                 "Excludes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should\n      contain a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>\n         <p>\n    </p>"
+                        "smithy.api#documentation": "<p>Specifies a list of filter rules that exclude specific data during your transfer. For more\n      information and examples, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">Filtering data transferred by DataSync</a>.</p>"
                     }
                 },
                 "Schedule": {
@@ -1161,13 +1161,13 @@
                 "Tags": {
                     "target": "com.amazonaws.datasync#InputTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key-value pair that represents the tag that you want to add to the resource. The\n      value can be an empty string. </p>"
+                        "smithy.api#documentation": "<p>Specifies the tags that you want to apply to the Amazon Resource Name (ARN)\n      representing the task.</p>\n         <p>\n            <i>Tags</i> are key-value pairs that help you manage, filter, and search\n      for your DataSync resources.</p>"
                     }
                 },
                 "Includes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern contains a single filter string that consists of the patterns to include. The patterns\n      are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies a list of filter rules that include specific data during your transfer. For more information and examples, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">Filtering data transferred by DataSync</a>.</p>"
                     }
                 }
             },
@@ -1284,7 +1284,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a task.</p>"
+                "smithy.api#documentation": "<p>Deletes an DataSync task.</p>"
             }
         },
         "com.amazonaws.datasync#DeleteTaskRequest": {
@@ -1293,7 +1293,7 @@
                 "TaskArn": {
                     "target": "com.amazonaws.datasync#TaskArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task to delete.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the task that you want to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2248,7 +2248,7 @@
                 "Status": {
                     "target": "com.amazonaws.datasync#TaskExecutionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the task execution. </p>\n\n    \n         <p>For detailed information about task execution statuses, see Understanding\n      Task Statuses in the <i>DataSync User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>The status of the task execution. </p>\n         <p>For detailed information about task execution statuses, see Understanding\n      Task Statuses in the <i>DataSync User Guide.</i>\n         </p>"
                     }
                 },
                 "Options": {
@@ -2257,13 +2257,13 @@
                 "Excludes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should\n      contain a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code>\n         </p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that exclude specific data during your transfer. For more information and examples, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">Filtering data transferred by DataSync</a>.</p>"
                     }
                 },
                 "Includes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      list should contain a single filter string that consists of the patterns to include. The\n      patterns are delimited by \"|\" (that is, a pipe), for example: <code>\"/folder1|/folder2\"</code>\n         </p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that include specific data during your transfer. For more information and examples, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">Filtering data transferred by DataSync</a>.</p>"
                     }
                 },
                 "StartTime": {
@@ -2276,7 +2276,7 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The expected number of files that is to be transferred over the network. This value is\n      calculated during the PREPARING phase, before the TRANSFERRING phase. This value is the\n      expected number of files to be transferred. It's calculated based on comparing the\n      content of the source and destination locations and finding the delta that needs to be\n      transferred. </p>"
+                        "smithy.api#documentation": "<p>The expected number of files that is to be transferred over the network. This value is\n      calculated during the <code>PREPARING</code> phase before the <code>TRANSFERRING</code> phase\n      of the task execution. This value is the expected number of files to be transferred. It's\n      calculated based on comparing the content of the source and destination locations and finding\n      the delta that needs to be transferred. </p>"
                     }
                 },
                 "EstimatedBytesToTransfer": {
@@ -2290,7 +2290,7 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The actual number of files that was transferred over the network. This value is\n      calculated and updated on an ongoing basis during the TRANSFERRING phase. It's updated\n      periodically when each file is read from the source and sent over the network. </p>\n         <p>If failures occur during a transfer, this value can be less than\n        <code>EstimatedFilesToTransfer</code>. This value can also be greater than\n        <code>EstimatedFilesTransferred</code> in some cases. This element is\n      implementation-specific for some location types, so don't use it as an indicator for a correct\n      file number or to monitor your task execution.</p>"
+                        "smithy.api#documentation": "<p>The actual number of files that was transferred over the network. This value is\n      calculated and updated on an ongoing basis during the <code>TRANSFERRING</code> phase of the\n      task execution. It's updated periodically when each file is read from the source and sent over\n      the network. </p>\n         <p>If failures occur during a transfer, this value can be less than\n        <code>EstimatedFilesToTransfer</code>. In some cases, this value can also be greater than\n        <code>EstimatedFilesToTransfer</code>. This element is implementation-specific for some\n      location types, so don't use it as an indicator for a correct file number or to monitor your\n      task execution.</p>"
                     }
                 },
                 "BytesWritten": {
@@ -2304,7 +2304,7 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The physical number of bytes transferred over the network.</p>"
+                        "smithy.api#documentation": "<p>The total number of bytes that are involved in the transfer. For the number of bytes\n      sent over the network, see <code>BytesCompressed</code>. </p>"
                     }
                 },
                 "Result": {
@@ -2317,7 +2317,7 @@
                     "target": "com.amazonaws.datasync#long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The physical number of bytes transferred over the network after compression was applied.\n      In most cases, this number is less than <code>BytesTransferred</code>.</p>"
+                        "smithy.api#documentation": "<p>The physical number of bytes transferred over the network after compression was applied.\n      In most cases, this number is less than <code>BytesTransferred</code> unless the data isn't\n      compressible.</p>"
                     }
                 }
             },
@@ -2352,7 +2352,7 @@
                 "Status": {
                     "target": "com.amazonaws.datasync#TaskStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the task that was described.</p>\n\n    \n         <p>For detailed information about task execution statuses, see Understanding\n      Task Statuses in the <i>DataSync User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The status of the task that was described.</p>\n         <p>For detailed information about task execution statuses, see Understanding\n      Task Statuses in the <i>DataSync User Guide</i>.</p>"
                     }
                 },
                 "Name": {
@@ -2364,7 +2364,7 @@
                 "CurrentTaskExecutionArn": {
                     "target": "com.amazonaws.datasync#TaskExecutionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution that is syncing files.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task execution that is transferring files.</p>"
                     }
                 },
                 "SourceLocationArn": {
@@ -2382,31 +2382,31 @@
                 "CloudWatchLogGroupArn": {
                     "target": "com.amazonaws.datasync#LogGroupArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to\n      monitor and log events in the task.</p>\n\n    \n         <p>For more information on these groups, see Working with Log Groups and Log\n      Streams in the <i>Amazon CloudWatch User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used to\n      monitor and log events in the task.</p>\n         <p>For more information on these groups, see Working with Log Groups and Log\n      Streams in the <i>Amazon CloudWatch User Guide</i>.</p>"
                     }
                 },
                 "SourceNetworkInterfaceArns": {
                     "target": "com.amazonaws.datasync#SourceNetworkInterfaceArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the source elastic network interfaces (ENIs) that were\n      created for your subnet.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the network interfaces created for your source location. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces\">Network interface requirements</a>.</p>"
                     }
                 },
                 "DestinationNetworkInterfaceArns": {
                     "target": "com.amazonaws.datasync#DestinationNetworkInterfaceArns",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the destination elastic network interfaces (ENIs) that\n      were created for your subnet.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the network interfaces created for your destination location. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces\">Network interface requirements</a>.</p>"
                     }
                 },
                 "Options": {
                     "target": "com.amazonaws.datasync#Options",
                     "traits": {
-                        "smithy.api#documentation": "<p>The set of configuration options that control the behavior of a single execution of the\n      task that occurs when you call <code>StartTaskExecution</code>. You can configure these\n      options to preserve metadata such as user ID (UID) and group (GID), file permissions, data\n      integrity verification, and so on.</p>\n         <p>For each individual task execution, you can override these options by specifying the\n      overriding <code>OverrideOptions</code> value to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a> operation. </p>"
+                        "smithy.api#documentation": "<p>The configuration options that control the behavior of the <code>StartTaskExecution</code> operation. Some options include preserving file or object metadata and verifying data integrity.</p>\n         <p>You can override these options for each task execution. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a>.</p>"
                     }
                 },
                 "Excludes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should\n      contain a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>\n         <p>\n    </p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that exclude specific data during your transfer. For more information and examples, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">Filtering data transferred by DataSync</a>.</p>"
                     }
                 },
                 "Schedule": {
@@ -2436,7 +2436,7 @@
                 "Includes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern contains a single filter string that consists of the patterns to include. The patterns\n      are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2</code>\".</p>"
+                        "smithy.api#documentation": "<p>A list of filter rules that include specific data during your transfer. For more information and examples, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">Filtering data transferred by DataSync</a>.</p>"
                     }
                 }
             },
@@ -2817,14 +2817,14 @@
                     "name": "datasync"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>DataSync</fullname>\n\n         <p>DataSync is a managed data transfer service that makes it simpler for you\n      to automate moving data between on-premises storage and Amazon Web Services storage services. You also can use DataSync to transfer data between other cloud providers and Amazon Web Services storage services.</p>\n         <p>This API interface reference includes documentation for using DataSync\n      programmatically. For complete information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html\">DataSync User\n          Guide</a>\n            </i>.</p>",
+                "smithy.api#documentation": "<fullname>DataSync</fullname>\n         <p>DataSync is a managed data transfer service that makes it simpler for you\n      to automate moving data between on-premises storage and Amazon Web Services storage services. You also can use DataSync to transfer data between other cloud providers and Amazon Web Services storage services.</p>\n         <p>This API interface reference includes documentation for using DataSync\n      programmatically. For complete information, see the <i>\n               <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html\">DataSync User\n        Guide</a>\n            </i>.</p>",
                 "smithy.api#title": "AWS DataSync",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -2873,15 +2873,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -3145,8 +3136,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -3158,8 +3149,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -3171,8 +3162,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -3184,8 +3175,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -3197,8 +3188,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -3210,8 +3201,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -3223,8 +3214,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -3236,8 +3227,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -3249,8 +3240,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3262,8 +3253,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3275,8 +3266,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3288,8 +3279,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -3301,8 +3292,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "me-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -3314,8 +3305,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "me-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -3327,8 +3318,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "me-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -3340,8 +3331,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "me-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -3353,8 +3344,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -3366,8 +3357,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -3379,8 +3370,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -3392,8 +3383,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -3405,8 +3396,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -3418,8 +3409,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -3431,8 +3422,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -3444,8 +3435,56 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-iso-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync-fips.us-iso-west-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-iso-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-iso-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://datasync.us-iso-west-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-iso-west-1"
                             }
                         },
                         {
@@ -3457,8 +3496,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -3470,8 +3509,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -3483,8 +3522,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -3496,8 +3535,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -3509,8 +3548,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -3522,8 +3561,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -3535,8 +3574,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -3548,8 +3587,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -3561,8 +3600,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -3574,8 +3613,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -3587,8 +3626,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -3600,8 +3639,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -3613,8 +3652,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -3626,8 +3665,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -3639,8 +3678,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -3652,8 +3691,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -3665,8 +3704,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -3678,8 +3717,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -3691,8 +3730,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -3704,8 +3743,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -3717,8 +3756,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -3730,8 +3769,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -3743,8 +3782,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -3756,8 +3795,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -3769,8 +3808,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -3782,8 +3821,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -3795,8 +3834,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -3808,8 +3847,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -3821,8 +3860,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -3834,8 +3873,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -3847,8 +3886,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -3860,8 +3899,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -3873,8 +3912,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -3886,8 +3925,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -3899,8 +3938,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -3912,8 +3951,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -3925,8 +3964,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -3938,8 +3977,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -3951,8 +3990,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -3964,8 +4003,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -3977,8 +4016,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -3990,8 +4029,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -4003,8 +4042,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -4016,8 +4055,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -4029,8 +4068,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -4042,8 +4081,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -4055,8 +4094,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -4068,8 +4107,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -4081,8 +4120,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -4094,8 +4133,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -4107,8 +4146,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -4120,8 +4159,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -4133,8 +4172,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -4146,8 +4185,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -4159,8 +4198,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -4172,8 +4211,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -4185,8 +4224,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -4198,8 +4237,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -4211,8 +4250,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -4224,8 +4263,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -4237,8 +4276,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -4250,8 +4289,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -4263,8 +4302,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -4276,8 +4315,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -4289,8 +4328,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -4302,8 +4341,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -4315,8 +4354,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -4328,8 +4367,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -4339,8 +4378,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -4352,8 +4391,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -4363,8 +4402,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -4376,8 +4415,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -4389,8 +4428,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -4402,8 +4441,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -4415,8 +4454,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -4428,8 +4467,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -4441,8 +4480,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -4454,8 +4493,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -4467,8 +4506,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -4480,8 +4519,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -4493,8 +4532,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -4506,8 +4545,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -4519,8 +4558,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -4532,8 +4571,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -4545,8 +4584,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -4558,8 +4597,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -4571,8 +4610,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -4584,8 +4623,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -4595,8 +4634,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -4608,8 +4647,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -4619,8 +4658,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -4632,8 +4671,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -4645,8 +4684,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4657,8 +4696,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -4669,8 +4708,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -5233,7 +5272,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all the tags associated with a specified resource. </p>",
+                "smithy.api#documentation": "<p>Returns all the tags associated with an Amazon Web Services resource.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -5248,20 +5287,20 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.datasync#TaggableResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource whose tags to list.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the resource that you want tag information on.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.datasync#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of locations to return.</p>"
+                        "smithy.api#documentation": "<p>Specifies how many results that you want in the response.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.datasync#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>An opaque string that indicates the position at which to begin the next list of\n      locations.</p>"
+                        "smithy.api#documentation": "<p>Specifies an opaque string that indicates the position to begin the next list of results in the response.</p>"
                     }
                 }
             },
@@ -5275,13 +5314,13 @@
                 "Tags": {
                     "target": "com.amazonaws.datasync#OutputTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Array of resource tags.</p>"
+                        "smithy.api#documentation": "<p>An array of tags applied to the specified resource.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.datasync#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>An opaque string that indicates the position at which to begin returning the next list\n      of resource tags.</p>"
+                        "smithy.api#documentation": "<p>The opaque string that indicates the position to begin the next list of results in the response.</p>"
                     }
                 }
             },
@@ -5622,7 +5661,7 @@
                 "Version": {
                     "target": "com.amazonaws.datasync#NfsVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the NFS version that you want DataSync to use when mounting your NFS share. If the server refuses to use the version specified, the task fails.</p>\n\n         <p>You can specify the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTOMATIC</code> (default): DataSync chooses NFS version 4.1.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NFS3</code>: Stateless protocol version that allows for asynchronous\n          writes on the server.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NFSv4_0</code>: Stateful, firewall-friendly protocol version that supports\n          delegations and pseudo file systems.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NFSv4_1</code>: Stateful protocol version that supports sessions,\n          directory delegations, and parallel data processing. NFS version 4.1 also includes all\n          features available in version 4.0.</p>\n            </li>\n         </ul>\n         <note>\n            <p>DataSync currently only supports NFS version 3 with Amazon FSx for NetApp ONTAP locations.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the NFS version that you want DataSync to use when mounting your NFS share. If the server refuses to use the version specified, the task fails.</p>\n         <p>You can specify the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AUTOMATIC</code> (default): DataSync chooses NFS version 4.1.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NFS3</code>: Stateless protocol version that allows for asynchronous\n          writes on the server.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NFSv4_0</code>: Stateful, firewall-friendly protocol version that supports\n          delegations and pseudo file systems.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NFSv4_1</code>: Stateful protocol version that supports sessions,\n          directory delegations, and parallel data processing. NFS version 4.1 also includes all\n          features available in version 4.0.</p>\n            </li>\n         </ul>\n         <note>\n            <p>DataSync currently only supports NFS version 3 with Amazon FSx for NetApp ONTAP locations.</p>\n         </note>"
                     }
                 }
             },
@@ -5838,96 +5877,96 @@
                 "VerifyMode": {
                     "target": "com.amazonaws.datasync#VerifyMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether a data integrity verification should be performed at\n      the end of a task execution after all data and metadata have been transferred. \n      For more information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html\">Configure task settings</a>.\n    </p>\n         <p>Default value: <code>POINT_IN_TIME_CONSISTENT</code>\n         </p>\n         <p>\n            <code>ONLY_FILES_TRANSFERRED</code> (recommended): Perform verification only on files\n      that were transferred. </p>\n    \n         <p>\n            <code>POINT_IN_TIME_CONSISTENT</code>: Scan the entire source and entire destination at\n      the end of the transfer to verify that source and destination are fully synchronized. This\n      option isn't supported when transferring to S3 Glacier Flexible Retrieval or S3 Glacier Deep Archive storage classes.</p>\n         <p>\n            <code>NONE</code>: No additional verification is done at the end of the transfer, but\n      all data transmissions are integrity-checked with checksum verification during the\n      transfer.</p>"
+                        "smithy.api#documentation": "<p>Specifies how and when DataSync  checks the integrity of your data during a\n      transfer. </p>\n         <p>Default value: <code>POINT_IN_TIME_CONSISTENT</code>\n         </p>\n         <p>\n            <code>ONLY_FILES_TRANSFERRED</code> (recommended): DataSync calculates the checksum of\n      transferred files and metadata at the source location. At the end of the transfer, DataSync then\n      compares this checksum to the checksum calculated on those files at the destination.</p>\n         <p>We recommend this option when transferring to S3 Glacier Flexible Retrieval or\n        S3 Glacier Deep Archive storage classes. For more information, see\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Storage class\n        considerations with Amazon S3 locations</a>.</p>\n         <p>\n            <code>POINT_IN_TIME_CONSISTENT</code>: At the end of the transfer, DataSync\n      scans the entire source and destination to verify that both locations are fully\n      synchronized.</p>\n         <p>You can't use this option when transferring to S3 Glacier Flexible Retrieval or\n        S3 Glacier Deep Archive storage classes. For more information, see\n        <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Storage class\n        considerations with Amazon S3 locations</a>.</p>\n         <p>\n            <code>NONE</code>: DataSync doesn't run additional verification at the end of\n      the transfer. All data transmissions are still integrity-checked with checksum verification\n      during the transfer.</p>"
                     }
                 },
                 "OverwriteMode": {
                     "target": "com.amazonaws.datasync#OverwriteMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether files at the destination should be overwritten or\n      preserved when copying files. If set to <code>NEVER</code> a destination file will not be\n      replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to\n      protect against overwriting those changes. </p>\n         <p>Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a>\n      in the <i>DataSync\n        User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether data at the destination location should be overwritten or preserved. If\n      set to <code>NEVER</code>, a destination file for example will not be replaced by a source\n      file (even if the destination file differs from the source file). If you modify files in the\n      destination and you sync the files, you can use this value to protect against overwriting\n      those changes. </p>\n         <p>Some storage classes have specific behaviors that can affect your Amazon S3\n      storage cost. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations\n        when working with Amazon S3 storage classes in DataSync </a>.</p>"
                     }
                 },
                 "Atime": {
                     "target": "com.amazonaws.datasync#Atime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A file metadata value that shows the last time a file was accessed (that is, when the\n      file was read or written to). If you set <code>Atime</code> to <code>BEST_EFFORT</code>,\n        DataSync attempts to preserve the original <code>Atime</code> attribute on all\n      source files (that is, the version before the <code>PREPARING</code> phase). However,\n        <code>Atime</code>'s behavior is not fully standard across platforms, so DataSync can only do this on a best-effort basis. </p>\n         <p>Default value: <code>BEST_EFFORT</code>\n         </p>\n         <p>\n            <code>BEST_EFFORT</code>: Attempt to preserve the per-file <code>Atime</code> value\n      (recommended).</p>\n         <p>\n            <code>NONE</code>: Ignore <code>Atime</code>.</p>\n         <note>\n            <p>If <code>Atime</code> is set to <code>BEST_EFFORT</code>, <code>Mtime</code> must be set\n        to <code>PRESERVE</code>. </p>\n            <p>If <code>Atime</code> is set to <code>NONE</code>, <code>Mtime</code> must also be\n          <code>NONE</code>. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether to preserve metadata indicating the last time a file was read or\n      written to. If you set <code>Atime</code> to <code>BEST_EFFORT</code>, DataSync\n      attempts to preserve the original <code>Atime</code> attribute on all source files (that is,\n      the version before the <code>PREPARING</code> phase of the task execution).</p>\n         <note>\n            <p>The behavior of <code>Atime</code> isn't fully standard across platforms, so DataSync can only do this on a best-effort basis.</p>\n         </note>\n         <p>Default value: <code>BEST_EFFORT</code>\n         </p>\n         <p>\n            <code>BEST_EFFORT</code>: Attempt to preserve the per-file <code>Atime</code> value\n      (recommended).</p>\n         <p>\n            <code>NONE</code>: Ignore <code>Atime</code>.</p>\n         <note>\n            <p>If <code>Atime</code> is set to <code>BEST_EFFORT</code>, <code>Mtime</code> must be set\n        to <code>PRESERVE</code>. </p>\n            <p>If <code>Atime</code> is set to <code>NONE</code>, <code>Mtime</code> must also be\n          <code>NONE</code>. </p>\n         </note>"
                     }
                 },
                 "Mtime": {
                     "target": "com.amazonaws.datasync#Mtime",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates the last time that a file was modified (that is, a file was\n      written to) before the <code>PREPARING</code> phase. This option is required for cases when\n      you need to run the same task more than one time. </p>\n         <p>Default Value: <code>PRESERVE</code>\n         </p>\n         <p>\n            <code>PRESERVE</code>: Preserve original <code>Mtime</code> (recommended)</p>\n         <p>\n            <code>NONE</code>: Ignore <code>Mtime</code>. </p>\n         <note>\n            <p>If <code>Mtime</code> is set to <code>PRESERVE</code>, <code>Atime</code> must be set to\n          <code>BEST_EFFORT</code>.</p>\n            <p>If <code>Mtime</code> is set to <code>NONE</code>, <code>Atime</code> must also be set\n        to <code>NONE</code>. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether to preserve metadata indicating the last time that a file was written\n      to before the <code>PREPARING</code> phase of your task execution. This option is required\n      when you need to run the a task more than once.</p>\n         <p>Default Value: <code>PRESERVE</code>\n         </p>\n         <p>\n            <code>PRESERVE</code>: Preserve original <code>Mtime</code> (recommended)</p>\n         <p>\n            <code>NONE</code>: Ignore <code>Mtime</code>. </p>\n         <note>\n            <p>If <code>Mtime</code> is set to <code>PRESERVE</code>, <code>Atime</code> must be set to\n          <code>BEST_EFFORT</code>.</p>\n            <p>If <code>Mtime</code> is set to <code>NONE</code>, <code>Atime</code> must also be set\n        to <code>NONE</code>. </p>\n         </note>"
                     }
                 },
                 "Uid": {
                     "target": "com.amazonaws.datasync#Uid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The POSIX user ID (UID) of the file's owner.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata copied by DataSync</a>.</p>\n         <p>Default value: <code>INT_VALUE</code>. This preserves the integer value of the ID.</p>\n         <p>\n            <code>INT_VALUE</code>: Preserve the integer value of UID and group ID (GID)\n      (recommended).</p>\n         <p>\n            <code>NONE</code>: Ignore UID and GID. </p>"
+                        "smithy.api#documentation": "<p>Specifies the POSIX user ID (UID) of the file's owner.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata copied by DataSync</a>.</p>\n         <p>Default value: <code>INT_VALUE</code>. This preserves the integer value of the ID.</p>\n         <p>\n            <code>INT_VALUE</code>: Preserve the integer value of UID and group ID (GID)\n      (recommended).</p>\n         <p>\n            <code>NONE</code>: Ignore UID and GID. </p>"
                     }
                 },
                 "Gid": {
                     "target": "com.amazonaws.datasync#Gid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The POSIX group ID (GID) of the file's owners.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata copied by DataSync</a>.</p>\n         <p>Default value: <code>INT_VALUE</code>. This preserves the integer value of the ID.</p>\n         <p>\n            <code>INT_VALUE</code>: Preserve the integer value of user ID (UID) and GID\n      (recommended).</p>\n         <p>\n            <code>NONE</code>: Ignore UID and GID.</p>"
+                        "smithy.api#documentation": "<p>Specifies the POSIX group ID (GID) of the file's owners.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata copied by DataSync</a>.</p>\n         <p>Default value: <code>INT_VALUE</code>. This preserves the integer value of the ID.</p>\n         <p>\n            <code>INT_VALUE</code>: Preserve the integer value of user ID (UID) and GID\n      (recommended).</p>\n         <p>\n            <code>NONE</code>: Ignore UID and GID.</p>"
                     }
                 },
                 "PreserveDeletedFiles": {
                     "target": "com.amazonaws.datasync#PreserveDeletedFiles",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that specifies whether files in the destination that don't exist in the source\n      file system should be preserved. This option can affect your storage cost. \n      If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed\n      information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a> in the <i>DataSync User\n        Guide</i>.</p>\n         <p>Default value: <code>PRESERVE</code>\n         </p>\n         <p>\n            <code>PRESERVE</code>: Ignore such destination files (recommended). </p>\n         <p>\n            <code>REMOVE</code>: Delete destination files that aren’t present in the\n      source.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether files in the destination location that don't exist in the source\n      should be preserved. This option can affect your Amazon S3 storage cost. If your task\n      deletes objects, you might incur minimum storage duration charges for certain storage classes.\n      For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations\n        when working with Amazon S3 storage classes in DataSync </a>.</p>\n         <p>Default value: <code>PRESERVE</code>\n         </p>\n         <p>\n            <code>PRESERVE</code>: Ignore such destination files (recommended). </p>\n         <p>\n            <code>REMOVE</code>: Delete destination files that aren’t present in the\n      source.</p>"
                     }
                 },
                 "PreserveDevices": {
                     "target": "com.amazonaws.datasync#PreserveDevices",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether DataSync should preserve the metadata of block\n      and character devices in the source file system, and re-create the files with that device name\n      and metadata on the destination. DataSync does not copy the contents of such devices, only the\n      name and metadata. </p>\n         <note>\n            <p>DataSync can't sync the actual contents of such devices, because they are\n        nonterminal and don't return an end-of-file (EOF) marker.</p>\n         </note>\n         <p>Default value: <code>NONE</code>\n         </p>\n         <p>\n            <code>NONE</code>: Ignore special devices (recommended). </p>\n         <p>\n            <code>PRESERVE</code>: Preserve character and block device metadata. This option isn't\n      currently supported for Amazon EFS. </p>"
+                        "smithy.api#documentation": "<p>Specifies whether DataSync should preserve the metadata of block and\n      character devices in the source location and recreate the files with that device name and\n      metadata on the destination. DataSync copies only the name and metadata of such\n      devices.</p>\n         <note>\n            <p>DataSync can't copy the actual contents of these devices because they're\n        nonterminal and don't return an end-of-file (EOF) marker.</p>\n         </note>\n         <p>Default value: <code>NONE</code>\n         </p>\n         <p>\n            <code>NONE</code>: Ignore special devices (recommended). </p>\n         <p>\n            <code>PRESERVE</code>: Preserve character and block device metadata. This option\n      currently isn't supported for Amazon EFS. </p>"
                     }
                 },
                 "PosixPermissions": {
                     "target": "com.amazonaws.datasync#PosixPermissions",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines which users or groups can access a file for a specific purpose\n      such as reading, writing, or execution of the file.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata copied by DataSync</a>.</p>\n         <p>Default value: <code>PRESERVE</code>\n         </p>\n         <p>\n            <code>PRESERVE</code>: Preserve POSIX-style permissions (recommended).</p>\n         <p>\n            <code>NONE</code>: Ignore permissions. </p>\n         <note>\n            <p>DataSync can preserve extant permissions of a source location.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies which users or groups can access a file for a specific purpose such as reading,\n      writing, or execution of the file.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata copied by DataSync</a>.</p>\n         <p>Default value: <code>PRESERVE</code>\n         </p>\n         <p>\n            <code>PRESERVE</code>: Preserve POSIX-style permissions (recommended).</p>\n         <p>\n            <code>NONE</code>: Ignore permissions. </p>\n         <note>\n            <p>DataSync can preserve extant permissions of a source location.</p>\n         </note>"
                     }
                 },
                 "BytesPerSecond": {
                     "target": "com.amazonaws.datasync#BytesPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that limits the bandwidth used by DataSync. For example, if you want\n      DataSync to use a maximum of 1 MB, set this value to <code>1048576</code>\n        (<code>=1024*1024</code>).</p>"
+                        "smithy.api#documentation": "<p>Limits the bandwidth used by a DataSync task. For example, if you want\n        DataSync to use a maximum of 1 MB, set this value to <code>1048576</code>\n        (<code>=1024*1024</code>).</p>"
                     }
                 },
                 "TaskQueueing": {
                     "target": "com.amazonaws.datasync#TaskQueueing",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether tasks should be queued before executing the tasks. If set\n      to <code>ENABLED</code>, the tasks will be queued. The default is <code>ENABLED</code>.</p>\n         <p>If you use the same agent to run multiple tasks, you can enable the tasks to run in\n      series. For more information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#queue-task-execution\">Queueing task executions</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether tasks should be queued before executing the tasks. The default is\n        <code>ENABLED</code>, which means the tasks will be queued.</p>\n         <p>If you use the same agent to run multiple tasks, you can enable the tasks to run in\n      series. For more information, see \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#queue-task-execution\">Queueing task executions</a>.</p>"
                     }
                 },
                 "LogLevel": {
                     "target": "com.amazonaws.datasync#LogLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines the type of logs that DataSync publishes to a log stream in the\n      Amazon CloudWatch log group that you provide. For more information about providing a log group\n      for DataSync, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateTask.html#DataSync-CreateTask-request-CloudWatchLogGroupArn\">CloudWatchLogGroupArn</a>. If set to <code>OFF</code>, no logs are published.\n        <code>BASIC</code> publishes logs on errors for individual files transferred, and\n        <code>TRANSFER</code> publishes logs for every file or object that is transferred and\n      integrity checked.</p>"
+                        "smithy.api#documentation": "<p>Specifies the type of logs that DataSync publishes to a Amazon CloudWatch Logs log\n      group. To specify the log group, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateTask.html#DataSync-CreateTask-request-CloudWatchLogGroupArn\">CloudWatchLogGroupArn</a>.</p>\n         <p>If you set <code>LogLevel</code> to <code>OFF</code>, no logs are published.\n        <code>BASIC</code> publishes logs on errors for individual files transferred.\n        <code>TRANSFER</code> publishes logs for every file or object that is transferred and\n      integrity checked.</p>"
                     }
                 },
                 "TransferMode": {
                     "target": "com.amazonaws.datasync#TransferMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines whether DataSync transfers only the data and metadata that differ between the source \n      and the destination location, or whether DataSync transfers all the content from the source, without comparing to \n      the destination location. </p>\n         <p>\n            <code>CHANGED</code>: DataSync copies only data or metadata that is new or\n      different content from the source location to the destination location.</p>\n         <p>\n            <code>ALL</code>: DataSync copies all source location content to the\n      destination, without comparing to existing content on the destination.</p>"
+                        "smithy.api#documentation": "<p>Determines whether DataSync transfers only the data and metadata that differ\n      between the source and the destination location or transfers all the content from the source\n      (without comparing what's in the destination).</p>\n         <p>\n            <code>CHANGED</code>: DataSync copies only data or metadata that is new or\n      different content from the source location to the destination location.</p>\n         <p>\n            <code>ALL</code>: DataSync copies all source location content to the destination\n      (without comparing what's in the destination).</p>"
                     }
                 },
                 "SecurityDescriptorCopyFlags": {
                     "target": "com.amazonaws.datasync#SmbSecurityDescriptorCopyFlags",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that determines which components of the SMB security descriptor are copied from source\n      to destination objects.\n      </p>\n         <p>This value is only used for transfers \n      between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File\n      Server locations. For more information about how \n      DataSync handles metadata, see\n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html\">How DataSync Handles Metadata and Special Files</a>.\n    </p>\n         <p>Default value: <code>OWNER_DACL</code>\n         </p>\n\n         <p>\n            <code>OWNER_DACL</code>: For each copied object, DataSync copies the following\n      metadata:</p>\n         <ul>\n            <li>\n               <p>Object owner.</p>\n            </li>\n            <li>\n               <p>NTFS discretionary access control lists (DACLs), which determine whether to \n        grant access to an object.</p>\n            </li>\n         </ul>\n         <p>When choosing this option, DataSync does NOT copy the NTFS system access control lists\n      (SACLs), which are used by administrators to log attempts to access a secured object.</p>\n    \n         <p>\n            <code>OWNER_DACL_SACL</code>: For each copied object, DataSync copies the following\n      metadata:</p> \n         <ul>\n            <li>\n               <p>Object owner.</p>\n            </li>\n            <li>\n               <p>NTFS discretionary access control lists (DACLs), which determine whether to\n          grant access to an object.</p>\n            </li>\n            <li>\n               <p>NTFS system access control lists (SACLs), which are used by administrators \n          to log attempts to access a secured object.</p>\n            </li>\n         </ul>\n         <p>Copying SACLs requires granting additional permissions to the Windows user that DataSync\n      uses to access your SMB location. For information about choosing a user that ensures\n      sufficient permissions to files, folders, and metadata, see <a href=\"create-smb-location.html#SMBuser\">user</a>.</p>\n    \n         <p>\n            <code>NONE</code>: None of the SMB security descriptor components are copied. Destination\n      objects are owned by the user that was provided for accessing the destination location. DACLs\n      and SACLs are set based on the destination server’s configuration. </p>"
+                        "smithy.api#documentation": "<p>Specifies which components of the SMB security descriptor are copied from source to\n      destination objects. </p>\n         <p>This value is only used for transfers between SMB and Amazon FSx for Windows File Server\n      locations or between two FSx for Windows File Server locations. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html\">how DataSync handles metadata</a>.</p>\n         <p>Default value: <code>OWNER_DACL</code>\n         </p>\n         <p>\n            <code>OWNER_DACL</code>: For each copied object, DataSync copies the following\n      metadata:</p>\n         <ul>\n            <li>\n               <p>The object owner.</p>\n            </li>\n            <li>\n               <p>NTFS discretionary access control lists (DACLs), which determine whether to \n        grant access to an object.</p>\n               <p>DataSync won't copy NTFS system access control lists (SACLs) with this\n          option.</p>\n            </li>\n         </ul>\n         <p>\n            <code>OWNER_DACL_SACL</code>: For each copied object, DataSync copies the\n      following metadata:</p>\n         <ul>\n            <li>\n               <p>The object owner.</p>\n            </li>\n            <li>\n               <p>NTFS discretionary access control lists (DACLs), which determine whether to\n          grant access to an object.</p>\n            </li>\n            <li>\n               <p>SACLs, which are used by administrators to log attempts to access a secured object.</p>\n               <p>Copying SACLs requires granting additional permissions to the Windows user that\n          DataSync uses to access your SMB location. For information about choosing a user that\n          ensures sufficient permissions to files, folders, and metadata, see <a href=\"create-smb-location.html#SMBuser\">user</a>.</p>\n            </li>\n         </ul>\n         <p>\n            <code>NONE</code>: None of the SMB security descriptor components are copied. Destination\n      objects are owned by the user that was provided for accessing the destination location. DACLs\n      and SACLs are set based on the destination server’s configuration. </p>"
                     }
                 },
                 "ObjectTags": {
                     "target": "com.amazonaws.datasync#ObjectTags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether object tags are maintained when transferring between object storage systems. If you want your DataSync task to ignore object tags, specify the <code>NONE</code> value.</p>\n         <p>Default Value: <code>PRESERVE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies whether object tags are preserved when transferring between object storage\n      systems. If you want your DataSync task to ignore object tags, specify the\n        <code>NONE</code> value.</p>\n         <p>Default Value: <code>PRESERVE</code>\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the options that are available to control the behavior of a \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a>\n      operation. Behavior includes preserving metadata such as user\n      ID (UID), group ID (GID), and file permissions, and also overwriting files in the destination,\n      data integrity verification, and so on.</p>\n         <p>A task has a set of default options associated with it. If you don't specify an option\n      in <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a>, \n      the default value is used. You can override the\n      defaults options on each task execution by specifying an overriding <code>Options</code> value\n      to <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html\">StartTaskExecution</a>.</p>"
+                "smithy.api#documentation": "<p>Configures your DataSync task settings. These options include how DataSync handles files, objects, and their associated metadata. You also can specify how\n        DataSync verifies data integrity, set bandwidth limits for your task, among other\n      options.</p>\n         <p>Each task setting has a default value. Unless you need to, you don't have to configure\n      any of these <code>Options</code> before starting your task.</p>"
             }
         },
         "com.amazonaws.datasync#OutputTagList": {
@@ -6131,7 +6170,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role used to access\n      an Amazon S3 bucket.</p>\n    \n         <p>For detailed information about using such a role, see Creating a Location for\n      Amazon S3 in the <i>DataSync User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role used to access\n      an Amazon S3 bucket.</p>\n         <p>For detailed information about using such a role, see Creating a Location for\n      Amazon S3 in the <i>DataSync User Guide</i>.</p>"
             }
         },
         "com.amazonaws.datasync#S3StorageClass": {
@@ -6177,6 +6216,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "OUTPOSTS"
+                    }
+                },
+                "GLACIER_INSTANT_RETRIEVAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLACIER_INSTANT_RETRIEVAL"
                     }
                 }
             }
@@ -6335,7 +6380,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents\n      an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a\n      time.</p>\n         <p>\n            <code>TaskExecution</code> has the following transition phases: INITIALIZING |\n      PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p>\n    \n         <p>For detailed information, see the Task Execution section in the Components and\n      Terminology topic in the <i>DataSync User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts an DataSync task. For each task, you can only run one task execution at a time.</p>\n         <p>There are several phases to a task execution. For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses\">Task execution statuses</a>.</p>"
             }
         },
         "com.amazonaws.datasync#StartTaskExecutionRequest": {
@@ -6344,7 +6389,7 @@
                 "TaskArn": {
                     "target": "com.amazonaws.datasync#TaskArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the task to start.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the task that you want to start.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6354,13 +6399,19 @@
                 "Includes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern should contain a single filter string that consists of the patterns to include. The\n      patterns are delimited by \"|\" (that is, a pipe), for example,\n      <code>\"/folder1|/folder2\"</code>. </p>\n    \n         <p>\n    </p>"
+                        "smithy.api#documentation": "<p>Specifies a list of filter rules that determines which files to include when running a\n      task. The pattern should contain a single filter string that consists of the patterns to\n      include. The patterns are delimited by \"|\" (that is, a pipe), for example,\n        <code>\"/folder1|/folder2\"</code>. </p>"
                     }
                 },
                 "Excludes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list\n      contains a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>"
+                        "smithy.api#documentation": "<p>Specifies a list of filter rules that determines which files to exclude from a task. The\n      list contains a single filter string that consists of the patterns to exclude. The patterns\n      are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.datasync#InputTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the tags that you want to apply to the Amazon Resource Name (ARN) representing the task execution.</p>\n         <p>\n            <i>Tags</i> are key-value pairs that help you manage, filter, and search for your DataSync resources.</p>"
                     }
                 }
             },
@@ -6374,7 +6425,7 @@
                 "TaskExecutionArn": {
                     "target": "com.amazonaws.datasync#TaskExecutionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specific task execution that was\n      started.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the running task execution.</p>"
                     }
                 }
             },
@@ -6432,7 +6483,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a single entry in a list of Amazon Web Services resource tags. <code>TagListEntry</code>\n      returns an array that contains a list of tasks when the \n      <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html\">ListTagsForResource</a>\n      operation is called.</p>"
+                "smithy.api#documentation": "<p>A key-value pair representing a single tag that's been applied to an Amazon Web Services\n      resource.</p>"
             }
         },
         "com.amazonaws.datasync#TagResource": {
@@ -6452,7 +6503,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies a key-value pair to an Amazon Web Services resource.</p>"
+                "smithy.api#documentation": "<p>Applies a <i>tag</i> to an Amazon Web Services\n      resource. Tags are key-value pairs that can help you manage, filter, and search for your resources.</p>\n         <p>These include DataSync resources, such as locations, tasks, and task executions.</p>"
             }
         },
         "com.amazonaws.datasync#TagResourceRequest": {
@@ -6461,14 +6512,14 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.datasync#TaggableResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to apply the tag to.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the resource to apply the tag to.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.datasync#InputTagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to apply.</p>",
+                        "smithy.api#documentation": "<p>Specifies the tags that you want to apply to the resource.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6498,7 +6549,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[0-9a-z]{17}$"
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:(agent|task|location)/(agent|task|loc)-[a-f0-9]{17}(/execution/exec-[a-f0-9]{17})?$"
             }
         },
         "com.amazonaws.datasync#TaskArn": {
@@ -6873,7 +6924,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a tag from an Amazon Web Services resource.</p>"
+                "smithy.api#documentation": "<p>Removes tags from an Amazon Web Services resource.</p>"
             }
         },
         "com.amazonaws.datasync#UntagResourceRequest": {
@@ -6882,14 +6933,14 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.datasync#TaggableResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to remove the tag from.</p>",
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the resource to remove the tags from.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Keys": {
                     "target": "com.amazonaws.datasync#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The keys in the key-value pair in the tag to remove.</p>",
+                        "smithy.api#documentation": "<p>Specifies the keys in the tags that you want to remove.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7088,7 +7139,7 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#NfsSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source\n      location or write data to the NFS destination. The NFS path should be a path that's\n      exported by the NFS server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other NFS clients in your network.</p>\n    \n         <p>To see all the paths exported by your NFS server, run \"<code>showmount -e\n        nfs-server-name</code>\" from an NFS client that has access to your server. You can specify\n        any directory that appears in the results, and any subdirectory of that directory. Ensure that\n        the NFS export is accessible without Kerberos authentication. </p>\n         <p>To transfer all the data in the folder that you specified, DataSync must have\n      permissions to read all the data. To ensure this, either configure the NFS export with\n        <code>no_root_squash</code>, or ensure that the files you want DataSync to\n      access have permissions that allow read access for all users. Doing either option enables the\n      agent to read the files. For the agent to access directories, you must additionally enable all\n      execute access.</p>\n         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>\n     \n         <p>For information about NFS export configuration, see 18.7. The /etc/exports\n      Configuration File in the Red Hat Enterprise Linux documentation.</p>"
+                        "smithy.api#documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source\n      location or write data to the NFS destination. The NFS path should be a path that's\n      exported by the NFS server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other NFS clients in your network.</p>\n         <p>To see all the paths exported by your NFS server, run \"<code>showmount -e\n        nfs-server-name</code>\" from an NFS client that has access to your server. You can specify\n        any directory that appears in the results, and any subdirectory of that directory. Ensure that\n        the NFS export is accessible without Kerberos authentication. </p>\n         <p>To transfer all the data in the folder that you specified, DataSync must have\n      permissions to read all the data. To ensure this, either configure the NFS export with\n        <code>no_root_squash</code>, or ensure that the files you want DataSync to\n      access have permissions that allow read access for all users. Doing either option enables the\n      agent to read the files. For the agent to access directories, you must additionally enable all\n      execute access.</p>\n         <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>\n         <p>For information about NFS export configuration, see 18.7. The /etc/exports\n      Configuration File in the Red Hat Enterprise Linux documentation.</p>"
                     }
                 },
                 "OnPremConfig": {
@@ -7214,7 +7265,7 @@
                 "Subdirectory": {
                     "target": "com.amazonaws.datasync#SmbSubdirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source\n      location or write data to the SMB destination. The SMB path should be a path that's\n      exported by the SMB server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other SMB clients in your network.</p>\n         <note>\n            <p>\n               <code>Subdirectory</code> must be specified with forward slashes. For example,\n      <code>/path/to/folder</code>.</p>\n         </note>\n    \n         <p>To transfer all the data in the folder that you specified, DataSync must have\n      permissions to mount the SMB share and to access all the data in that share. To ensure this,\n      do either of the following:</p>\n         <ul>\n            <li>\n               <p>Ensure that the user/password specified belongs to the user who can mount the share\n          and who has the appropriate permissions for all of the files and directories that you want\n          DataSync to access.</p>\n            </li>\n            <li>\n               <p>Use credentials of a member of the Backup Operators group to mount the share. </p>\n            </li>\n         </ul>\n         <p>Doing either of these options enables the agent to access the data. For the agent to\n      access directories, you must also enable all execute access.</p>"
+                        "smithy.api#documentation": "<p>The subdirectory in the SMB file system that is used to read data from the SMB source\n      location or write data to the SMB destination. The SMB path should be a path that's\n      exported by the SMB server, or a subdirectory of that path. The path should be such that it\n      can be mounted by other SMB clients in your network.</p>\n         <note>\n            <p>\n               <code>Subdirectory</code> must be specified with forward slashes. For example,\n      <code>/path/to/folder</code>.</p>\n         </note>\n         <p>To transfer all the data in the folder that you specified, DataSync must have\n      permissions to mount the SMB share and to access all the data in that share. To ensure this,\n      do either of the following:</p>\n         <ul>\n            <li>\n               <p>Ensure that the user/password specified belongs to the user who can mount the share\n          and who has the appropriate permissions for all of the files and directories that you want\n          DataSync to access.</p>\n            </li>\n            <li>\n               <p>Use credentials of a member of the Backup Operators group to mount the share. </p>\n            </li>\n         </ul>\n         <p>Doing either of these options enables the agent to access the data. For the agent to\n      access directories, you must also enable all execute access.</p>"
                     }
                 },
                 "User": {
@@ -7287,7 +7338,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates execution of a task.</p>\n         <p>You can modify bandwidth throttling for a task execution that is running or queued.\n      For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#adjust-bandwidth-throttling\">Adjusting Bandwidth Throttling for a Task Execution</a>.</p>\n    \n         <note>\n            <p>The only <code>Option</code> that can be modified by <code>UpdateTaskExecution</code> \n        is <code>\n                  <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond\">BytesPerSecond</a>\n               </code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Updates execution of a task.</p>\n         <p>You can modify bandwidth throttling for a task execution that is running or queued.\n      For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#adjust-bandwidth-throttling\">Adjusting Bandwidth Throttling for a Task Execution</a>.</p>\n         <note>\n            <p>The only <code>Option</code> that can be modified by <code>UpdateTaskExecution</code> \n        is <code>\n                  <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond\">BytesPerSecond</a>\n               </code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.datasync#UpdateTaskExecutionRequest": {
@@ -7328,7 +7379,7 @@
                 "Excludes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should\n      contain a single filter string that consists of the patterns to exclude. The patterns are\n      delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>\n         <p>\n    </p>"
+                        "smithy.api#documentation": "<p>Specifies a list of filter rules that exclude specific data during your transfer. For more information and examples, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">Filtering data transferred by DataSync</a>.</p>"
                     }
                 },
                 "Schedule": {
@@ -7352,7 +7403,7 @@
                 "Includes": {
                     "target": "com.amazonaws.datasync#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of filter rules that determines which files to include when running a task. The\n      pattern contains a single filter string that consists of the patterns to include. The patterns\n      are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies a list of filter rules that include specific data during your transfer. For more information and examples, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html\">Filtering data transferred by DataSync</a>.</p>"
                     }
                 }
             },
