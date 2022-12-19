@@ -27,6 +27,7 @@ func (c *Client) DeleteClusterParameterGroup(ctx context.Context, params *Delete
 	return out, nil
 }
 
+//
 type DeleteClusterParameterGroupInput struct {
 
 	// The name of the parameter group to be deleted. Constraints:

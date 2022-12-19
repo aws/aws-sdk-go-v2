@@ -32,6 +32,7 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 	return out, nil
 }
 
+//
 type CreateEndpointInput struct {
 
 	// The database endpoint identifier. Identifiers must begin with a letter and must
@@ -248,6 +249,7 @@ type CreateEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CreateEndpointOutput struct {
 
 	// The endpoint that was created.

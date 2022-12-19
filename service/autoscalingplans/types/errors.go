@@ -12,6 +12,8 @@ import (
 type ConcurrentUpdateException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *ConcurrentUpdateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConcurrentUpdateException) ErrorCode() string             { return "ConcurrentUpdateException" }
+func (e *ConcurrentUpdateException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConcurrentUpdateException"
+	}
+	return *e.Code
+}
 func (e *ConcurrentUpdateException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The service encountered an internal error.
 type InternalServiceException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *InternalServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
+func (e *InternalServiceException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServiceException"
+	}
+	return *e.Code
+}
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The token provided is not valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -62,13 +78,20 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.Code
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your account exceeded a limit. This exception is thrown when a per-account
 // resource limit is exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -82,12 +105,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified object could not be found.
 type ObjectNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -101,12 +131,19 @@ func (e *ObjectNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ObjectNotFoundException) ErrorCode() string             { return "ObjectNotFoundException" }
+func (e *ObjectNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ObjectNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception was thrown for a validation issue. Review the parameters provided.
 type ValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -120,5 +157,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationException"
+	}
+	return *e.Code
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

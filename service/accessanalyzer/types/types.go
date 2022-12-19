@@ -202,9 +202,8 @@ type AccessPreviewSummary struct {
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketAcl.html).
 //
 // The following types satisfy this interface:
-//
-//	AclGranteeMemberId
-//	AclGranteeMemberUri
+//  AclGranteeMemberId
+//  AclGranteeMemberUri
 type AclGrantee interface {
 	isAclGrantee()
 }
@@ -444,18 +443,17 @@ type CloudTrailProperties struct {
 // control configuration.
 //
 // The following types satisfy this interface:
-//
-//	ConfigurationMemberEbsSnapshot
-//	ConfigurationMemberEcrRepository
-//	ConfigurationMemberEfsFileSystem
-//	ConfigurationMemberIamRole
-//	ConfigurationMemberKmsKey
-//	ConfigurationMemberRdsDbClusterSnapshot
-//	ConfigurationMemberRdsDbSnapshot
-//	ConfigurationMemberS3Bucket
-//	ConfigurationMemberSecretsManagerSecret
-//	ConfigurationMemberSnsTopic
-//	ConfigurationMemberSqsQueue
+//  ConfigurationMemberEbsSnapshot
+//  ConfigurationMemberEcrRepository
+//  ConfigurationMemberEfsFileSystem
+//  ConfigurationMemberIamRole
+//  ConfigurationMemberKmsKey
+//  ConfigurationMemberRdsDbClusterSnapshot
+//  ConfigurationMemberRdsDbSnapshot
+//  ConfigurationMemberS3Bucket
+//  ConfigurationMemberSecretsManagerSecret
+//  ConfigurationMemberSnsTopic
+//  ConfigurationMemberSqsQueue
 type Configuration interface {
 	isConfiguration()
 }
@@ -1109,9 +1107,8 @@ type Location struct {
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html).
 //
 // The following types satisfy this interface:
-//
-//	NetworkOriginConfigurationMemberInternetConfiguration
-//	NetworkOriginConfigurationMemberVpcConfiguration
+//  NetworkOriginConfigurationMemberInternetConfiguration
+//  NetworkOriginConfigurationMemberVpcConfiguration
 type NetworkOriginConfiguration interface {
 	isNetworkOriginConfiguration()
 }
@@ -1141,11 +1138,10 @@ func (*NetworkOriginConfigurationMemberVpcConfiguration) isNetworkOriginConfigur
 // A single element in a path through the JSON representation of a policy.
 //
 // The following types satisfy this interface:
-//
-//	PathElementMemberIndex
-//	PathElementMemberKey
-//	PathElementMemberSubstring
-//	PathElementMemberValue
+//  PathElementMemberIndex
+//  PathElementMemberKey
+//  PathElementMemberSubstring
+//  PathElementMemberValue
 type PathElement interface {
 	isPathElement()
 }
@@ -1252,8 +1248,7 @@ type Position struct {
 // The values for a manual Amazon RDS DB cluster snapshot attribute.
 //
 // The following types satisfy this interface:
-//
-//	RdsDbClusterSnapshotAttributeValueMemberAccountIds
+//  RdsDbClusterSnapshotAttributeValueMemberAccountIds
 type RdsDbClusterSnapshotAttributeValue interface {
 	isRdsDbClusterSnapshotAttributeValue()
 }
@@ -1319,8 +1314,7 @@ type RdsDbClusterSnapshotConfiguration struct {
 // restore a manual DB snapshot.
 //
 // The following types satisfy this interface:
-//
-//	RdsDbSnapshotAttributeValueMemberAccountIds
+//  RdsDbSnapshotAttributeValueMemberAccountIds
 type RdsDbSnapshotAttributeValue interface {
 	isRdsDbSnapshotAttributeValue()
 }

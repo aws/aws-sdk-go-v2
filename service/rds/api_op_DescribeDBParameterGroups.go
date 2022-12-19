@@ -30,6 +30,7 @@ func (c *Client) DescribeDBParameterGroups(ctx context.Context, params *Describe
 	return out, nil
 }
 
+//
 type DescribeDBParameterGroupsInput struct {
 
 	// The name of a specific DB parameter group to return details for. Constraints:

@@ -11,6 +11,8 @@ import (
 type InternalServerErrorException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
+func (e *InternalServerErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request is not valid.
 type InvalidRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +77,19 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
+func (e *ResourceAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceAlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -80,12 +103,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of requests exceeds the limit.
 type TooManyRequestsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -99,12 +129,19 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.Code
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You are not authorized to perform this action.
 type UnauthorizedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -118,5 +155,10 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
+func (e *UnauthorizedException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnauthorizedException"
+	}
+	return *e.Code
+}
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

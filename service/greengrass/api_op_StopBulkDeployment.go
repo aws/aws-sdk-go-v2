@@ -11,8 +11,8 @@ import (
 )
 
 // Stops the execution of a bulk deployment. This action returns a status of
-// ”Stopping” until the deployment is stopped. You cannot start a new bulk
-// deployment while a previous deployment is in the ”Stopping” state. This action
+// ''Stopping'' until the deployment is stopped. You cannot start a new bulk
+// deployment while a previous deployment is in the ''Stopping'' state. This action
 // doesn't rollback completed deployments or cancel pending deployments.
 func (c *Client) StopBulkDeployment(ctx context.Context, params *StopBulkDeploymentInput, optFns ...func(*Options)) (*StopBulkDeploymentOutput, error) {
 	if params == nil {

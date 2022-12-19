@@ -25,7 +25,12 @@ func (e *BaseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BaseException) ErrorCode() string             { return "BaseException" }
+func (e *BaseException) ErrorCode() string {
+	if e.Code == nil {
+		return "BaseException"
+	}
+	return *e.Code
+}
 func (e *BaseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted an operation which is not enabled.
@@ -46,7 +51,12 @@ func (e *DisabledOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DisabledOperationException) ErrorCode() string             { return "DisabledAction" }
+func (e *DisabledOperationException) ErrorCode() string {
+	if e.Code == nil {
+		return "DisabledAction"
+	}
+	return *e.Code
+}
 func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal error occurred while processing the request. If this problem
@@ -69,7 +79,12 @@ func (e *InternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalException) ErrorCode() string             { return "InternalException" }
+func (e *InternalException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalException"
+	}
+	return *e.Code
+}
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request was rejected because it specified an invalid type definition.
@@ -90,7 +105,12 @@ func (e *InvalidTypeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTypeException) ErrorCode() string             { return "InvalidType" }
+func (e *InvalidTypeException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidType"
+	}
+	return *e.Code
+}
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because a resource limit has already been met.
@@ -111,7 +131,12 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceeded" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceeded"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create a resource that already
@@ -133,7 +158,12 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExists" }
+func (e *ResourceAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceAlreadyExists"
+	}
+	return *e.Code
+}
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to reference a resource that does
@@ -155,7 +185,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFound" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFound"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it has invalid parameters.
@@ -176,5 +211,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationException"
+	}
+	return *e.Code
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

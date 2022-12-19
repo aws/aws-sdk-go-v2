@@ -41,6 +41,7 @@ func (c *Client) RefreshTrustedAdvisorCheck(ctx context.Context, params *Refresh
 	return out, nil
 }
 
+//
 type RefreshTrustedAdvisorCheckInput struct {
 
 	// The unique identifier for the Trusted Advisor check to refresh. Specifying the

@@ -150,6 +150,7 @@ type CloudWatchEventsExecutionDataDetails struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CloudWatchLogsLogGroup struct {
 
 	// The ARN of the the CloudWatch log group to which you want your logs emitted to.
@@ -516,6 +517,7 @@ type LambdaFunctionTimedOutEventDetails struct {
 	noSmithyDocumentSerde
 }
 
+//
 type LogDestination struct {
 
 	// An object describing a CloudWatch log group. For more information, see

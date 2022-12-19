@@ -31,6 +31,7 @@ func (c *Client) DeleteConfigRule(ctx context.Context, params *DeleteConfigRuleI
 	return out, nil
 }
 
+//
 type DeleteConfigRuleInput struct {
 
 	// The name of the Config rule that you want to delete.

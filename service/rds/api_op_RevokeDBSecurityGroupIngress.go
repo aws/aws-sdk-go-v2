@@ -40,6 +40,7 @@ func (c *Client) RevokeDBSecurityGroupIngress(ctx context.Context, params *Revok
 	return out, nil
 }
 
+//
 type RevokeDBSecurityGroupIngressInput struct {
 
 	// The name of the DB security group to revoke ingress from.

@@ -7,6 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+//
 type InternalFailureException struct {
 	Message *string
 
@@ -24,9 +25,15 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalFailureException"
+	}
+	return *e.Code
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+//
 type InvalidRequestException struct {
 	Message *string
 
@@ -44,9 +51,15 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+//
 type ResourceConflictException struct {
 	Message *string
 
@@ -64,9 +77,15 @@ func (e *ResourceConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
+func (e *ResourceConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceConflictException"
+	}
+	return *e.Code
+}
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+//
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -84,9 +103,15 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+//
 type TooManyRequestsException struct {
 	Message *string
 
@@ -104,5 +129,10 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.Code
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

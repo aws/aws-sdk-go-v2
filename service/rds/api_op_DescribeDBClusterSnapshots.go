@@ -41,6 +41,7 @@ func (c *Client) DescribeDBClusterSnapshots(ctx context.Context, params *Describ
 	return out, nil
 }
 
+//
 type DescribeDBClusterSnapshotsInput struct {
 
 	// The ID of the DB cluster to retrieve the list of DB cluster snapshots for. This

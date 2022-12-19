@@ -12,6 +12,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,13 +26,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request is not well formed. For example, a value is invalid or a required
 // field is missing. Check the field values, and try again.
 type BadRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -44,12 +53,19 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "BadRequestException"
+	}
+	return *e.Code
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a conflict processing the request. Try your request again.
 type ConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -63,12 +79,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal Amazon Lex error occurred. Try your request again.
 type InternalFailureException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -82,12 +105,19 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalFailureException"
+	}
+	return *e.Code
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request exceeded a limit. Try your request again.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RetryAfterSeconds *string
 
@@ -103,13 +133,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource specified in the request was not found. Check the resource and try
 // again.
 type NotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -123,13 +160,20 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotFoundException"
+	}
+	return *e.Code
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The checksum of the resource that you are trying to change does not match the
 // checksum in the request. Check the resource's checksum and try again.
 type PreconditionFailedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -143,7 +187,12 @@ func (e *PreconditionFailedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PreconditionFailedException) ErrorCode() string             { return "PreconditionFailedException" }
+func (e *PreconditionFailedException) ErrorCode() string {
+	if e.Code == nil {
+		return "PreconditionFailedException"
+	}
+	return *e.Code
+}
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource that you are attempting to delete is referred to by another
@@ -153,9 +202,11 @@ func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return sm
 //
 // "resourceReference": {
 //
-//	"name": string, "version": string } }
+//     "name": string, "version": string } }
 type ResourceInUseException struct {
 	Message *string
+
+	Code *string
 
 	ReferenceType    ReferenceType
 	ExampleReference *ResourceReference
@@ -172,5 +223,10 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceInUseException"
+	}
+	return *e.Code
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -1205,11 +1205,10 @@ type ValidationExceptionField struct {
 // one field. It can be boolValue, doubleValue, longValue, or stringValue.
 //
 // The following types satisfy this interface:
-//
-//	VariableValueMemberBoolValue
-//	VariableValueMemberDoubleValue
-//	VariableValueMemberLongValue
-//	VariableValueMemberStringValue
+//  VariableValueMemberBoolValue
+//  VariableValueMemberDoubleValue
+//  VariableValueMemberLongValue
+//  VariableValueMemberStringValue
 type VariableValue interface {
 	isVariableValue()
 }

@@ -12,6 +12,8 @@ import (
 type ConcurrentModificationException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,13 +27,18 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.Code == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.Code
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified input parameter has a value that is not valid.
 type InvalidArgumentException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -45,7 +52,12 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
+func (e *InvalidArgumentException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidArgumentException"
+	}
+	return *e.Code
+}
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Kinesis Data Firehose throws this exception when an attempt to put records or to
@@ -69,12 +81,19 @@ func (e *InvalidKMSResourceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidKMSResourceException) ErrorCode() string             { return "InvalidKMSResourceException" }
+func (e *InvalidKMSResourceException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidKMSResourceException"
+	}
+	return *e.Code
+}
 func (e *InvalidKMSResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have already reached the limit for a requested resource.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -88,12 +107,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource is already in use and not available for this operation.
 type ResourceInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -107,12 +133,19 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceInUseException"
+	}
+	return *e.Code
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource could not be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -126,7 +159,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is unavailable. Back off and retry the operation. If you continue to
@@ -136,6 +174,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // (https://docs.aws.amazon.com/firehose/latest/dev/limits.html).
 type ServiceUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -149,5 +189,10 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }

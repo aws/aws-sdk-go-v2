@@ -11,6 +11,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
+	Code *string
+
 	RequestID *string
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "BadRequestException"
+	}
+	return *e.Code
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Provides information about an API request or response.
 type ConflictException struct {
 	Message *string
+
+	Code *string
 
 	RequestID *string
 
@@ -46,12 +55,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Provides information about an API request or response.
 type ForbiddenException struct {
 	Message *string
+
+	Code *string
 
 	RequestID *string
 
@@ -67,12 +83,19 @@ func (e *ForbiddenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorCode() string {
+	if e.Code == nil {
+		return "ForbiddenException"
+	}
+	return *e.Code
+}
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Provides information about an API request or response.
 type InternalServerErrorException struct {
 	Message *string
+
+	Code *string
 
 	RequestID *string
 
@@ -88,12 +111,19 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
+func (e *InternalServerErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Provides information about an API request or response.
 type MethodNotAllowedException struct {
 	Message *string
+
+	Code *string
 
 	RequestID *string
 
@@ -109,12 +139,19 @@ func (e *MethodNotAllowedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MethodNotAllowedException) ErrorCode() string             { return "MethodNotAllowedException" }
+func (e *MethodNotAllowedException) ErrorCode() string {
+	if e.Code == nil {
+		return "MethodNotAllowedException"
+	}
+	return *e.Code
+}
 func (e *MethodNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Provides information about an API request or response.
 type NotFoundException struct {
 	Message *string
+
+	Code *string
 
 	RequestID *string
 
@@ -130,12 +167,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotFoundException"
+	}
+	return *e.Code
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Provides information about an API request or response.
 type PayloadTooLargeException struct {
 	Message *string
+
+	Code *string
 
 	RequestID *string
 
@@ -151,12 +195,19 @@ func (e *PayloadTooLargeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PayloadTooLargeException) ErrorCode() string             { return "PayloadTooLargeException" }
+func (e *PayloadTooLargeException) ErrorCode() string {
+	if e.Code == nil {
+		return "PayloadTooLargeException"
+	}
+	return *e.Code
+}
 func (e *PayloadTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Provides information about an API request or response.
 type TooManyRequestsException struct {
 	Message *string
+
+	Code *string
 
 	RequestID *string
 
@@ -172,5 +223,10 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.Code
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

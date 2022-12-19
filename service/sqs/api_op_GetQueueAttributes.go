@@ -29,6 +29,7 @@ func (c *Client) GetQueueAttributes(ctx context.Context, params *GetQueueAttribu
 	return out, nil
 }
 
+//
 type GetQueueAttributesInput struct {
 
 	// The URL of the Amazon SQS queue whose attribute information is retrieved. Queue

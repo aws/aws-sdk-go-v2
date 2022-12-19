@@ -114,10 +114,9 @@ type AnalyticsExportDestination struct {
 // filter is provided, all objects will be considered in any analysis.
 //
 // The following types satisfy this interface:
-//
-//	AnalyticsFilterMemberAnd
-//	AnalyticsFilterMemberPrefix
-//	AnalyticsFilterMemberTag
+//  AnalyticsFilterMemberAnd
+//  AnalyticsFilterMemberPrefix
+//  AnalyticsFilterMemberTag
 type AnalyticsFilter interface {
 	isAnalyticsFilter()
 }
@@ -350,6 +349,7 @@ type Condition struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ContinuationEvent struct {
 	noSmithyDocumentSerde
 }
@@ -2283,12 +2283,11 @@ type LifecycleRuleAndOperator struct {
 // Filter must have exactly one of Prefix, Tag, or And specified.
 //
 // The following types satisfy this interface:
-//
-//	LifecycleRuleFilterMemberAnd
-//	LifecycleRuleFilterMemberObjectSizeGreaterThan
-//	LifecycleRuleFilterMemberObjectSizeLessThan
-//	LifecycleRuleFilterMemberPrefix
-//	LifecycleRuleFilterMemberTag
+//  LifecycleRuleFilterMemberAnd
+//  LifecycleRuleFilterMemberObjectSizeGreaterThan
+//  LifecycleRuleFilterMemberObjectSizeLessThan
+//  LifecycleRuleFilterMemberPrefix
+//  LifecycleRuleFilterMemberTag
 type LifecycleRuleFilter interface {
 	isLifecycleRuleFilter()
 }
@@ -2450,11 +2449,10 @@ type MetricsConfiguration struct {
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html).
 //
 // The following types satisfy this interface:
-//
-//	MetricsFilterMemberAccessPointArn
-//	MetricsFilterMemberAnd
-//	MetricsFilterMemberPrefix
-//	MetricsFilterMemberTag
+//  MetricsFilterMemberAccessPointArn
+//  MetricsFilterMemberAnd
+//  MetricsFilterMemberPrefix
+//  MetricsFilterMemberTag
 type MetricsFilter interface {
 	isMetricsFilter()
 }
@@ -3236,10 +3234,9 @@ type ReplicationRuleAndOperator struct {
 // applies. A Filter must specify exactly one Prefix, Tag, or an And child element.
 //
 // The following types satisfy this interface:
-//
-//	ReplicationRuleFilterMemberAnd
-//	ReplicationRuleFilterMemberPrefix
-//	ReplicationRuleFilterMemberTag
+//  ReplicationRuleFilterMemberAnd
+//  ReplicationRuleFilterMemberPrefix
+//  ReplicationRuleFilterMemberTag
 type ReplicationRuleFilter interface {
 	isReplicationRuleFilter()
 }
@@ -3455,12 +3452,11 @@ type ScanRange struct {
 // The container for selecting objects from a content event stream.
 //
 // The following types satisfy this interface:
-//
-//	SelectObjectContentEventStreamMemberCont
-//	SelectObjectContentEventStreamMemberEnd
-//	SelectObjectContentEventStreamMemberProgress
-//	SelectObjectContentEventStreamMemberRecords
-//	SelectObjectContentEventStreamMemberStats
+//  SelectObjectContentEventStreamMemberCont
+//  SelectObjectContentEventStreamMemberEnd
+//  SelectObjectContentEventStreamMemberProgress
+//  SelectObjectContentEventStreamMemberRecords
+//  SelectObjectContentEventStreamMemberStats
 type SelectObjectContentEventStream interface {
 	isSelectObjectContentEventStream()
 }

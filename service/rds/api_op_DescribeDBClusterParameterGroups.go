@@ -36,6 +36,7 @@ func (c *Client) DescribeDBClusterParameterGroups(ctx context.Context, params *D
 	return out, nil
 }
 
+//
 type DescribeDBClusterParameterGroupsInput struct {
 
 	// The name of a specific DB cluster parameter group to return details for.
@@ -63,6 +64,7 @@ type DescribeDBClusterParameterGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeDBClusterParameterGroupsOutput struct {
 
 	// A list of DB cluster parameter groups.

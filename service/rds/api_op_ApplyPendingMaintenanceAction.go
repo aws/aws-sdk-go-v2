@@ -28,6 +28,7 @@ func (c *Client) ApplyPendingMaintenanceAction(ctx context.Context, params *Appl
 	return out, nil
 }
 
+//
 type ApplyPendingMaintenanceActionInput struct {
 
 	// The pending maintenance action to apply to this resource. Valid values:

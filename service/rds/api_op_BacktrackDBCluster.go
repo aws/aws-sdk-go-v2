@@ -31,6 +31,7 @@ func (c *Client) BacktrackDBCluster(ctx context.Context, params *BacktrackDBClus
 	return out, nil
 }
 
+//
 type BacktrackDBClusterInput struct {
 
 	// The timestamp of the time to backtrack the DB cluster to, specified in ISO 8601

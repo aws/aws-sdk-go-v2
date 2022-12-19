@@ -11,6 +11,8 @@ import (
 type ComplexError struct {
 	Message *string
 
+	Code *string
+
 	TopLevel *string
 	Nested   *ComplexNestedErrorData
 
@@ -26,13 +28,19 @@ func (e *ComplexError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ComplexError) ErrorCode() string             { return "ComplexError" }
+func (e *ComplexError) ErrorCode() string {
+	if e.Code == nil {
+		return "ComplexError"
+	}
+	return *e.Code
+}
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type ErrorWithMembers struct {
 	Message *string
 
-	Code         *string
+	Code *string
+
 	ComplexData  *KitchenSink
 	IntegerField *int32
 	ListField    []string
@@ -51,11 +59,18 @@ func (e *ErrorWithMembers) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ErrorWithMembers) ErrorCode() string             { return "ErrorWithMembers" }
+func (e *ErrorWithMembers) ErrorCode() string {
+	if e.Code == nil {
+		return "ErrorWithMembers"
+	}
+	return *e.Code
+}
 func (e *ErrorWithMembers) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type ErrorWithoutMembers struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -69,13 +84,20 @@ func (e *ErrorWithoutMembers) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ErrorWithoutMembers) ErrorCode() string             { return "ErrorWithoutMembers" }
+func (e *ErrorWithoutMembers) ErrorCode() string {
+	if e.Code == nil {
+		return "ErrorWithoutMembers"
+	}
+	return *e.Code
+}
 func (e *ErrorWithoutMembers) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // This error has test cases that test some of the dark corners of Amazon service
 // framework history. It should only be implemented by clients.
 type FooError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -89,12 +111,19 @@ func (e *FooError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FooError) ErrorCode() string             { return "FooError" }
+func (e *FooError) ErrorCode() string {
+	if e.Code == nil {
+		return "FooError"
+	}
+	return *e.Code
+}
 func (e *FooError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // This error is thrown when an invalid greeting value is provided.
 type InvalidGreeting struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -108,5 +137,10 @@ func (e *InvalidGreeting) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidGreeting) ErrorCode() string             { return "InvalidGreeting" }
+func (e *InvalidGreeting) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidGreeting"
+	}
+	return *e.Code
+}
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

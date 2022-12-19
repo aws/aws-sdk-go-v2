@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There is an error in the call or in a SQL statement.
 type BadRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "BadRequestException"
+	}
+	return *e.Code
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There are insufficient privileges to make the call.
 type ForbiddenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +77,19 @@ func (e *ForbiddenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorCode() string {
+	if e.Code == nil {
+		return "ForbiddenException"
+	}
+	return *e.Code
+}
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal error occurred.
 type InternalServerErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -80,12 +103,19 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
+func (e *InternalServerErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The resourceArn, secretArn, or transactionId value can't be found.
 type NotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -99,12 +129,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotFoundException"
+	}
+	return *e.Code
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service specified by the resourceArn parameter is not available.
 type ServiceUnavailableError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -118,12 +155,19 @@ func (e *ServiceUnavailableError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableError) ErrorCode() string             { return "ServiceUnavailableError" }
+func (e *ServiceUnavailableError) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableError"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The execution of the SQL statement timed out.
 type StatementTimeoutException struct {
 	Message *string
+
+	Code *string
 
 	DbConnectionId int64
 
@@ -139,5 +183,10 @@ func (e *StatementTimeoutException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StatementTimeoutException) ErrorCode() string             { return "StatementTimeoutException" }
+func (e *StatementTimeoutException) ErrorCode() string {
+	if e.Code == nil {
+		return "StatementTimeoutException"
+	}
+	return *e.Code
+}
 func (e *StatementTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

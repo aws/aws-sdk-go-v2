@@ -43,6 +43,7 @@ func (c *Client) SetQueueAttributes(ctx context.Context, params *SetQueueAttribu
 	return out, nil
 }
 
+//
 type SetQueueAttributesInput struct {
 
 	// A map of attributes to set. The following lists the names, descriptions, and

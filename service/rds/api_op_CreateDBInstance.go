@@ -36,6 +36,7 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 	return out, nil
 }
 
+//
 type CreateDBInstanceInput struct {
 
 	// The compute and memory capacity of the DB instance, for example db.m5.large. Not

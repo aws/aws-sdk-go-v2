@@ -11,8 +11,7 @@ import (
 // defines the action.
 //
 // The following types satisfy this interface:
-//
-//	ActionMemberSsmAutomation
+//  ActionMemberSsmAutomation
 type Action interface {
 	isAction()
 }
@@ -45,9 +44,8 @@ type AddRegionAction struct {
 // Use the AttributeValueList to filter by string or integer values.
 //
 // The following types satisfy this interface:
-//
-//	AttributeValueListMemberIntegerValues
-//	AttributeValueListMemberStringValues
+//  AttributeValueListMemberIntegerValues
+//  AttributeValueListMemberStringValues
 type AttributeValueList interface {
 	isAttributeValueList()
 }
@@ -74,8 +72,7 @@ func (*AttributeValueListMemberStringValues) isAttributeValueList() {}
 // beginning of the incident.
 //
 // The following types satisfy this interface:
-//
-//	AutomationExecutionMemberSsmExecutionArn
+//  AutomationExecutionMemberSsmExecutionArn
 type AutomationExecution interface {
 	isAutomationExecution()
 }
@@ -92,9 +89,8 @@ func (*AutomationExecutionMemberSsmExecutionArn) isAutomationExecution() {}
 // The Chatbot chat channel used for collaboration during an incident.
 //
 // The following types satisfy this interface:
-//
-//	ChatChannelMemberChatbotSns
-//	ChatChannelMemberEmpty
+//  ChatChannelMemberChatbotSns
+//  ChatChannelMemberEmpty
 type ChatChannel interface {
 	isChatChannel()
 }
@@ -125,10 +121,9 @@ func (*ChatChannelMemberEmpty) isChatChannel() {}
 // specified for a conditional, the values are ORd.
 //
 // The following types satisfy this interface:
-//
-//	ConditionMemberAfter
-//	ConditionMemberBefore
-//	ConditionMemberEquals
+//  ConditionMemberAfter
+//  ConditionMemberBefore
+//  ConditionMemberEquals
 type Condition interface {
 	isCondition()
 }
@@ -176,8 +171,7 @@ type DeleteRegionAction struct {
 // The dynamic SSM parameter value.
 //
 // The following types satisfy this interface:
-//
-//	DynamicSsmParameterValueMemberVariable
+//  DynamicSsmParameterValueMemberVariable
 type DynamicSsmParameterValue interface {
 	isDynamicSsmParameterValue()
 }
@@ -202,9 +196,8 @@ type EmptyChatChannel struct {
 // Web Services resource or a RelatedItem ID.
 //
 // The following types satisfy this interface:
-//
-//	EventReferenceMemberRelatedItemId
-//	EventReferenceMemberResource
+//  EventReferenceMemberRelatedItemId
+//  EventReferenceMemberResource
 type EventReference interface {
 	isEventReference()
 }
@@ -448,8 +441,7 @@ type IncidentTemplate struct {
 // Information about third-party services integrated into a response plan.
 //
 // The following types satisfy this interface:
-//
-//	IntegrationMemberPagerDutyConfiguration
+//  IntegrationMemberPagerDutyConfiguration
 type Integration interface {
 	isIntegration()
 }
@@ -483,11 +475,10 @@ type ItemIdentifier struct {
 // Describes a related item.
 //
 // The following types satisfy this interface:
-//
-//	ItemValueMemberArn
-//	ItemValueMemberMetricDefinition
-//	ItemValueMemberPagerDutyIncidentDetail
-//	ItemValueMemberUrl
+//  ItemValueMemberArn
+//  ItemValueMemberMetricDefinition
+//  ItemValueMemberPagerDutyIncidentDetail
+//  ItemValueMemberUrl
 type ItemValue interface {
 	isItemValue()
 }
@@ -532,8 +523,7 @@ func (*ItemValueMemberUrl) isItemValue() {}
 // The SNS targets that are notified when updates are made to an incident.
 //
 // The following types satisfy this interface:
-//
-//	NotificationTargetItemMemberSnsTopicArn
+//  NotificationTargetItemMemberSnsTopicArn
 type NotificationTargetItem interface {
 	isNotificationTargetItem()
 }
@@ -659,9 +649,8 @@ type RelatedItem struct {
 // Details about the related item you're adding.
 //
 // The following types satisfy this interface:
-//
-//	RelatedItemsUpdateMemberItemToAdd
-//	RelatedItemsUpdateMemberItemToRemove
+//  RelatedItemsUpdateMemberItemToAdd
+//  RelatedItemsUpdateMemberItemToRemove
 type RelatedItemsUpdate interface {
 	isRelatedItemsUpdate()
 }
@@ -875,9 +864,8 @@ type TriggerDetails struct {
 // Details used when updating the replication set.
 //
 // The following types satisfy this interface:
-//
-//	UpdateReplicationSetActionMemberAddRegionAction
-//	UpdateReplicationSetActionMemberDeleteRegionAction
+//  UpdateReplicationSetActionMemberAddRegionAction
+//  UpdateReplicationSetActionMemberDeleteRegionAction
 type UpdateReplicationSetAction interface {
 	isUpdateReplicationSetAction()
 }

@@ -11,6 +11,8 @@ import (
 type ActiveStatementsExceededException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,13 +26,18 @@ func (e *ActiveStatementsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActiveStatementsExceededException) ErrorCode() string {
-	return "ActiveStatementsExceededException"
+	if e.Code == nil {
+		return "ActiveStatementsExceededException"
+	}
+	return *e.Code
 }
 func (e *ActiveStatementsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An SQL statement encountered an environmental error while running.
 type BatchExecuteStatementException struct {
 	Message *string
+
+	Code *string
 
 	StatementId *string
 
@@ -46,12 +53,19 @@ func (e *BatchExecuteStatementException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BatchExecuteStatementException) ErrorCode() string             { return "BatchExecuteStatementException" }
+func (e *BatchExecuteStatementException) ErrorCode() string {
+	if e.Code == nil {
+		return "BatchExecuteStatementException"
+	}
+	return *e.Code
+}
 func (e *BatchExecuteStatementException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Connection to a database failed.
 type DatabaseConnectionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -65,12 +79,19 @@ func (e *DatabaseConnectionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DatabaseConnectionException) ErrorCode() string             { return "DatabaseConnectionException" }
+func (e *DatabaseConnectionException) ErrorCode() string {
+	if e.Code == nil {
+		return "DatabaseConnectionException"
+	}
+	return *e.Code
+}
 func (e *DatabaseConnectionException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The SQL statement encountered an environmental error while running.
 type ExecuteStatementException struct {
 	Message *string
+
+	Code *string
 
 	StatementId *string
 
@@ -86,12 +107,19 @@ func (e *ExecuteStatementException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExecuteStatementException) ErrorCode() string             { return "ExecuteStatementException" }
+func (e *ExecuteStatementException) ErrorCode() string {
+	if e.Code == nil {
+		return "ExecuteStatementException"
+	}
+	return *e.Code
+}
 func (e *ExecuteStatementException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The Amazon Redshift Data API operation failed due to invalid input.
 type InternalServerException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -105,12 +133,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerException"
+	}
+	return *e.Code
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The Amazon Redshift Data API operation failed due to a missing resource.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	ResourceId *string
 
@@ -126,12 +161,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Amazon Redshift Data API operation failed due to invalid input.
 type ValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -145,5 +187,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationException"
+	}
+	return *e.Code
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

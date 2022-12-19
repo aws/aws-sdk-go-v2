@@ -97,9 +97,8 @@ type AwsSsoAuthentication struct {
 // error.
 //
 // The following types satisfy this interface:
-//
-//	IdpMetadataMemberUrl
-//	IdpMetadataMemberXml
+//  IdpMetadataMemberUrl
+//  IdpMetadataMemberXml
 type IdpMetadata interface {
 	isIdpMetadata()
 }

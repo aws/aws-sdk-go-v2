@@ -28,6 +28,7 @@ func (c *Client) ListGroundStations(ctx context.Context, params *ListGroundStati
 	return out, nil
 }
 
+//
 type ListGroundStationsInput struct {
 
 	// Maximum number of ground stations returned.
@@ -43,6 +44,7 @@ type ListGroundStationsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ListGroundStationsOutput struct {
 
 	// List of ground stations.

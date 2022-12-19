@@ -37,6 +37,7 @@ func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplic
 	return out, nil
 }
 
+//
 type DescribeApplicationInput struct {
 
 	// Name of the application.
@@ -47,6 +48,7 @@ type DescribeApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeApplicationOutput struct {
 
 	// Provides a description of the application, such as the application Amazon

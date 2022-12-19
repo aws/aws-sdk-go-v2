@@ -42,6 +42,7 @@ func (c *Client) AuthorizeClusterSecurityGroupIngress(ctx context.Context, param
 	return out, nil
 }
 
+//
 type AuthorizeClusterSecurityGroupIngressInput struct {
 
 	// The name of the security group to which the ingress rule is added.

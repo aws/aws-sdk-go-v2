@@ -1511,12 +1511,11 @@ type Tag struct {
 // single value.
 //
 // The following types satisfy this interface:
-//
-//	TypedAttributeValueMemberBinaryValue
-//	TypedAttributeValueMemberBooleanValue
-//	TypedAttributeValueMemberDatetimeValue
-//	TypedAttributeValueMemberNumberValue
-//	TypedAttributeValueMemberStringValue
+//  TypedAttributeValueMemberBinaryValue
+//  TypedAttributeValueMemberBooleanValue
+//  TypedAttributeValueMemberDatetimeValue
+//  TypedAttributeValueMemberNumberValue
+//  TypedAttributeValueMemberStringValue
 type TypedAttributeValue interface {
 	isTypedAttributeValue()
 }

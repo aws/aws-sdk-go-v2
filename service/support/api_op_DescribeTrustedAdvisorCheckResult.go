@@ -59,6 +59,7 @@ func (c *Client) DescribeTrustedAdvisorCheckResult(ctx context.Context, params *
 	return out, nil
 }
 
+//
 type DescribeTrustedAdvisorCheckResultInput struct {
 
 	// The unique identifier for the Trusted Advisor check.

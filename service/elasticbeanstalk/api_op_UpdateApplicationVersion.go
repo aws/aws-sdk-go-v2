@@ -29,6 +29,7 @@ func (c *Client) UpdateApplicationVersion(ctx context.Context, params *UpdateApp
 	return out, nil
 }
 
+//
 type UpdateApplicationVersionInput struct {
 
 	// The name of the application associated with this version. If no application is

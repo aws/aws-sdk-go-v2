@@ -12,6 +12,8 @@ import (
 type AccessDeniedFault struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *AccessDeniedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedFault) ErrorCode() string             { return "AccessDeniedFault" }
+func (e *AccessDeniedFault) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedFault"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified collector doesn't exist.
 type CollectorNotFoundFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *CollectorNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CollectorNotFoundFault) ErrorCode() string             { return "CollectorNotFoundFault" }
+func (e *CollectorNotFoundFault) ErrorCode() string {
+	if e.Code == nil {
+		return "CollectorNotFoundFault"
+	}
+	return *e.Code
+}
 func (e *CollectorNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There are not enough resources allocated to the database migration.
 type InsufficientResourceCapacityFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -63,13 +79,18 @@ func (e *InsufficientResourceCapacityFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientResourceCapacityFault) ErrorCode() string {
-	return "InsufficientResourceCapacityFault"
+	if e.Code == nil {
+		return "InsufficientResourceCapacityFault"
+	}
+	return *e.Code
 }
 func (e *InsufficientResourceCapacityFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The certificate was not valid.
 type InvalidCertificateFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -83,12 +104,19 @@ func (e *InvalidCertificateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidCertificateFault) ErrorCode() string             { return "InvalidCertificateFault" }
+func (e *InvalidCertificateFault) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidCertificateFault"
+	}
+	return *e.Code
+}
 func (e *InvalidCertificateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The action or operation requested isn't valid.
 type InvalidOperationFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -102,13 +130,20 @@ func (e *InvalidOperationFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidOperationFault) ErrorCode() string             { return "InvalidOperationFault" }
+func (e *InvalidOperationFault) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidOperationFault"
+	}
+	return *e.Code
+}
 func (e *InvalidOperationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource is in a state that prevents it from being used for database
 // migration.
 type InvalidResourceStateFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -122,12 +157,19 @@ func (e *InvalidResourceStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidResourceStateFault) ErrorCode() string             { return "InvalidResourceStateFault" }
+func (e *InvalidResourceStateFault) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidResourceStateFault"
+	}
+	return *e.Code
+}
 func (e *InvalidResourceStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The subnet provided is invalid.
 type InvalidSubnet struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -141,13 +183,20 @@ func (e *InvalidSubnet) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSubnet) ErrorCode() string             { return "InvalidSubnet" }
+func (e *InvalidSubnet) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidSubnet"
+	}
+	return *e.Code
+}
 func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The ciphertext references a key that doesn't exist or that the DMS account
 // doesn't have access to.
 type KMSAccessDeniedFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -161,12 +210,19 @@ func (e *KMSAccessDeniedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSAccessDeniedFault) ErrorCode() string             { return "KMSAccessDeniedFault" }
+func (e *KMSAccessDeniedFault) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSAccessDeniedFault"
+	}
+	return *e.Code
+}
 func (e *KMSAccessDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified KMS key isn't enabled.
 type KMSDisabledFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -180,12 +236,19 @@ func (e *KMSDisabledFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSDisabledFault) ErrorCode() string             { return "KMSDisabledFault" }
+func (e *KMSDisabledFault) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSDisabledFault"
+	}
+	return *e.Code
+}
 func (e *KMSDisabledFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An Key Management Service (KMS) error is preventing access to KMS.
 type KMSFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -199,12 +262,19 @@ func (e *KMSFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSFault) ErrorCode() string             { return "KMSFault" }
+func (e *KMSFault) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSFault"
+	}
+	return *e.Code
+}
 func (e *KMSFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The state of the specified KMS resource isn't valid for this request.
 type KMSInvalidStateFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -218,12 +288,19 @@ func (e *KMSInvalidStateFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSInvalidStateFault) ErrorCode() string             { return "KMSInvalidStateFault" }
+func (e *KMSInvalidStateFault) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSInvalidStateFault"
+	}
+	return *e.Code
+}
 func (e *KMSInvalidStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // DMS cannot access the KMS key.
 type KMSKeyNotAccessibleFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -237,12 +314,19 @@ func (e *KMSKeyNotAccessibleFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSKeyNotAccessibleFault) ErrorCode() string             { return "KMSKeyNotAccessibleFault" }
+func (e *KMSKeyNotAccessibleFault) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSKeyNotAccessibleFault"
+	}
+	return *e.Code
+}
 func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified KMS entity or resource can't be found.
 type KMSNotFoundFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -256,12 +340,19 @@ func (e *KMSNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSNotFoundFault) ErrorCode() string             { return "KMSNotFoundFault" }
+func (e *KMSNotFoundFault) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSNotFoundFault"
+	}
+	return *e.Code
+}
 func (e *KMSNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This request triggered KMS request throttling.
 type KMSThrottlingFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -275,13 +366,20 @@ func (e *KMSThrottlingFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSThrottlingFault) ErrorCode() string             { return "KMSThrottlingFault" }
+func (e *KMSThrottlingFault) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSThrottlingFault"
+	}
+	return *e.Code
+}
 func (e *KMSThrottlingFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The replication subnet group does not cover enough Availability Zones (AZs).
 // Edit the replication subnet group and add more AZs.
 type ReplicationSubnetGroupDoesNotCoverEnoughAZs struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -296,7 +394,10 @@ func (e *ReplicationSubnetGroupDoesNotCoverEnoughAZs) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationSubnetGroupDoesNotCoverEnoughAZs) ErrorCode() string {
-	return "ReplicationSubnetGroupDoesNotCoverEnoughAZs"
+	if e.Code == nil {
+		return "ReplicationSubnetGroupDoesNotCoverEnoughAZs"
+	}
+	return *e.Code
 }
 func (e *ReplicationSubnetGroupDoesNotCoverEnoughAZs) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -305,6 +406,8 @@ func (e *ReplicationSubnetGroupDoesNotCoverEnoughAZs) ErrorFault() smithy.ErrorF
 // The resource you are attempting to create already exists.
 type ResourceAlreadyExistsFault struct {
 	Message *string
+
+	Code *string
 
 	ResourceArn *string
 
@@ -320,12 +423,19 @@ func (e *ResourceAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAlreadyExistsFault) ErrorCode() string             { return "ResourceAlreadyExistsFault" }
+func (e *ResourceAlreadyExistsFault) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceAlreadyExistsFault"
+	}
+	return *e.Code
+}
 func (e *ResourceAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource could not be found.
 type ResourceNotFoundFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -339,12 +449,19 @@ func (e *ResourceNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundFault) ErrorCode() string             { return "ResourceNotFoundFault" }
+func (e *ResourceNotFoundFault) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundFault"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for this resource quota has been exceeded.
 type ResourceQuotaExceededFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -358,12 +475,19 @@ func (e *ResourceQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceQuotaExceededFault) ErrorCode() string             { return "ResourceQuotaExceededFault" }
+func (e *ResourceQuotaExceededFault) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceQuotaExceededFault"
+	}
+	return *e.Code
+}
 func (e *ResourceQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Insufficient privileges are preventing access to an Amazon S3 object.
 type S3AccessDeniedFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -377,12 +501,19 @@ func (e *S3AccessDeniedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *S3AccessDeniedFault) ErrorCode() string             { return "S3AccessDeniedFault" }
+func (e *S3AccessDeniedFault) ErrorCode() string {
+	if e.Code == nil {
+		return "S3AccessDeniedFault"
+	}
+	return *e.Code
+}
 func (e *S3AccessDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A specified Amazon S3 bucket, bucket folder, or other object can't be found.
 type S3ResourceNotFoundFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -396,12 +527,19 @@ func (e *S3ResourceNotFoundFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *S3ResourceNotFoundFault) ErrorCode() string             { return "S3ResourceNotFoundFault" }
+func (e *S3ResourceNotFoundFault) ErrorCode() string {
+	if e.Code == nil {
+		return "S3ResourceNotFoundFault"
+	}
+	return *e.Code
+}
 func (e *S3ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The SNS topic is invalid.
 type SNSInvalidTopicFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -415,12 +553,19 @@ func (e *SNSInvalidTopicFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SNSInvalidTopicFault) ErrorCode() string             { return "SNSInvalidTopicFault" }
+func (e *SNSInvalidTopicFault) ErrorCode() string {
+	if e.Code == nil {
+		return "SNSInvalidTopicFault"
+	}
+	return *e.Code
+}
 func (e *SNSInvalidTopicFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You are not authorized for the SNS subscription.
 type SNSNoAuthorizationFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -434,12 +579,19 @@ func (e *SNSNoAuthorizationFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SNSNoAuthorizationFault) ErrorCode() string             { return "SNSNoAuthorizationFault" }
+func (e *SNSNoAuthorizationFault) ErrorCode() string {
+	if e.Code == nil {
+		return "SNSNoAuthorizationFault"
+	}
+	return *e.Code
+}
 func (e *SNSNoAuthorizationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The storage quota has been exceeded.
 type StorageQuotaExceededFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -453,12 +605,19 @@ func (e *StorageQuotaExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StorageQuotaExceededFault) ErrorCode() string             { return "StorageQuotaExceededFault" }
+func (e *StorageQuotaExceededFault) ErrorCode() string {
+	if e.Code == nil {
+		return "StorageQuotaExceededFault"
+	}
+	return *e.Code
+}
 func (e *StorageQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified subnet is already in use.
 type SubnetAlreadyInUse struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -472,12 +631,19 @@ func (e *SubnetAlreadyInUse) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubnetAlreadyInUse) ErrorCode() string             { return "SubnetAlreadyInUse" }
+func (e *SubnetAlreadyInUse) ErrorCode() string {
+	if e.Code == nil {
+		return "SubnetAlreadyInUse"
+	}
+	return *e.Code
+}
 func (e *SubnetAlreadyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An upgrade dependency is preventing the database migration.
 type UpgradeDependencyFailureFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -491,5 +657,10 @@ func (e *UpgradeDependencyFailureFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UpgradeDependencyFailureFault) ErrorCode() string             { return "UpgradeDependencyFailureFault" }
+func (e *UpgradeDependencyFailureFault) ErrorCode() string {
+	if e.Code == nil {
+		return "UpgradeDependencyFailureFault"
+	}
+	return *e.Code
+}
 func (e *UpgradeDependencyFailureFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

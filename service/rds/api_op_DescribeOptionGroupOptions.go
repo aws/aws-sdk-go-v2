@@ -28,6 +28,7 @@ func (c *Client) DescribeOptionGroupOptions(ctx context.Context, params *Describ
 	return out, nil
 }
 
+//
 type DescribeOptionGroupOptionsInput struct {
 
 	// A required parameter. Options available for the given engine name are described.
@@ -81,6 +82,7 @@ type DescribeOptionGroupOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeOptionGroupOptionsOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

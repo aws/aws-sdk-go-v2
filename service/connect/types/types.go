@@ -1627,13 +1627,12 @@ type Reference struct {
 // one non null field between the URL and attachment based on the reference type.
 //
 // The following types satisfy this interface:
-//
-//	ReferenceSummaryMemberAttachment
-//	ReferenceSummaryMemberDate
-//	ReferenceSummaryMemberEmail
-//	ReferenceSummaryMemberNumber
-//	ReferenceSummaryMemberString
-//	ReferenceSummaryMemberUrl
+//  ReferenceSummaryMemberAttachment
+//  ReferenceSummaryMemberDate
+//  ReferenceSummaryMemberEmail
+//  ReferenceSummaryMemberNumber
+//  ReferenceSummaryMemberString
+//  ReferenceSummaryMemberUrl
 type ReferenceSummary interface {
 	isReferenceSummary()
 }

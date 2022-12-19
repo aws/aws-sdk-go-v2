@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+//
 type Application struct {
 
 	//
@@ -36,6 +37,7 @@ type Application struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ApplicationCredential struct {
 
 	//
@@ -56,6 +58,7 @@ type ApplicationCredential struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ApplicationSummary struct {
 
 	//
@@ -73,6 +76,7 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+//
 type Component struct {
 
 	//
@@ -102,6 +106,7 @@ type Component struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ComponentSummary struct {
 
 	//
@@ -119,6 +124,7 @@ type ComponentSummary struct {
 	noSmithyDocumentSerde
 }
 
+//
 type Database struct {
 
 	//
@@ -157,6 +163,7 @@ type Database struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DatabaseSummary struct {
 
 	//
@@ -180,6 +187,7 @@ type DatabaseSummary struct {
 	noSmithyDocumentSerde
 }
 
+//
 type Host struct {
 
 	//
@@ -197,6 +205,7 @@ type Host struct {
 	noSmithyDocumentSerde
 }
 
+//
 type Operation struct {
 
 	//

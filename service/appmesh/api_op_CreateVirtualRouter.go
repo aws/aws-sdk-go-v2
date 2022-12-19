@@ -35,6 +35,7 @@ func (c *Client) CreateVirtualRouter(ctx context.Context, params *CreateVirtualR
 	return out, nil
 }
 
+//
 type CreateVirtualRouterInput struct {
 
 	// The name of the service mesh to create the virtual router in.
@@ -72,6 +73,7 @@ type CreateVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CreateVirtualRouterOutput struct {
 
 	// The full description of your virtual router following the create call.

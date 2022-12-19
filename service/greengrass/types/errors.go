@@ -11,6 +11,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
+	Code *string
+
 	ErrorDetails []ErrorDetail
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "BadRequestException"
+	}
+	return *e.Code
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // General error information.
 type InternalServerErrorException struct {
 	Message *string
+
+	Code *string
 
 	ErrorDetails []ErrorDetail
 
@@ -46,5 +55,10 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
+func (e *InternalServerErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }

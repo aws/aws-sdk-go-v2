@@ -13,6 +13,8 @@ import (
 type ConflictException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,13 +27,20 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified fleet has no available instances to fulfill a CreateGameSession
 // request. Clients can retry such requests immediately or after a waiting period.
 type FleetCapacityExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -45,13 +54,20 @@ func (e *FleetCapacityExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FleetCapacityExceededException) ErrorCode() string             { return "FleetCapacityExceededException" }
+func (e *FleetCapacityExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "FleetCapacityExceededException"
+	}
+	return *e.Code
+}
 func (e *FleetCapacityExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The game instance is currently full and cannot allow the requested player(s) to
 // join. Clients can retry such requests immediately or after a waiting period.
 type GameSessionFullException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -65,13 +81,20 @@ func (e *GameSessionFullException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *GameSessionFullException) ErrorCode() string             { return "GameSessionFullException" }
+func (e *GameSessionFullException) ErrorCode() string {
+	if e.Code == nil {
+		return "GameSessionFullException"
+	}
+	return *e.Code
+}
 func (e *GameSessionFullException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A game session with this custom ID string already exists in this fleet. Resolve
 // this conflict before retrying this request.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -86,7 +109,10 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	return "IdempotentParameterMismatchException"
+	if e.Code == nil {
+		return "IdempotentParameterMismatchException"
+	}
+	return *e.Code
 }
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -96,6 +122,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // request. Clients can retry such requests immediately or after a waiting period.
 type InternalServiceException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -109,7 +137,12 @@ func (e *InternalServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
+func (e *InternalServiceException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServiceException"
+	}
+	return *e.Code
+}
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The requested operation would cause a conflict with the current state of a
@@ -117,6 +150,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // before retrying.
 type InvalidFleetStatusException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -130,7 +165,12 @@ func (e *InvalidFleetStatusException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidFleetStatusException) ErrorCode() string             { return "InvalidFleetStatusException" }
+func (e *InvalidFleetStatusException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidFleetStatusException"
+	}
+	return *e.Code
+}
 func (e *InvalidFleetStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation would cause a conflict with the current state of a
@@ -138,6 +178,8 @@ func (e *InvalidFleetStatusException) ErrorFault() smithy.ErrorFault { return sm
 // conflict before retrying.
 type InvalidGameSessionStatusException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -152,7 +194,10 @@ func (e *InvalidGameSessionStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGameSessionStatusException) ErrorCode() string {
-	return "InvalidGameSessionStatusException"
+	if e.Code == nil {
+		return "InvalidGameSessionStatusException"
+	}
+	return *e.Code
 }
 func (e *InvalidGameSessionStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -160,6 +205,8 @@ func (e *InvalidGameSessionStatusException) ErrorFault() smithy.ErrorFault { ret
 // parameter values before retrying.
 type InvalidRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -173,13 +220,20 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation would cause the resource to exceed the allowed service
 // limit. Resolve the issue before retrying.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -193,13 +247,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // THe requested resources was not found. The resource was either not created yet
 // or deleted.
 type NotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -213,7 +274,12 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotFoundException"
+	}
+	return *e.Code
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified game server group has no available game servers to fulfill a
@@ -221,6 +287,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // waiting period.
 type OutOfCapacityException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -234,7 +302,12 @@ func (e *OutOfCapacityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OutOfCapacityException) ErrorCode() string             { return "OutOfCapacityException" }
+func (e *OutOfCapacityException) ErrorCode() string {
+	if e.Code == nil {
+		return "OutOfCapacityException"
+	}
+	return *e.Code
+}
 func (e *OutOfCapacityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested tagging operation did not succeed. This may be due to invalid tag
@@ -242,6 +315,8 @@ func (e *OutOfCapacityException) ErrorFault() smithy.ErrorFault { return smithy.
 // retrying.
 type TaggingFailedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -255,7 +330,12 @@ func (e *TaggingFailedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TaggingFailedException) ErrorCode() string             { return "TaggingFailedException" }
+func (e *TaggingFailedException) ErrorCode() string {
+	if e.Code == nil {
+		return "TaggingFailedException"
+	}
+	return *e.Code
+}
 func (e *TaggingFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is unable to resolve the routing for a particular alias because it
@@ -265,6 +345,8 @@ func (e *TaggingFailedException) ErrorFault() smithy.ErrorFault { return smithy.
 // modified.
 type TerminalRoutingStrategyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -279,13 +361,18 @@ func (e *TerminalRoutingStrategyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TerminalRoutingStrategyException) ErrorCode() string {
-	return "TerminalRoutingStrategyException"
+	if e.Code == nil {
+		return "TerminalRoutingStrategyException"
+	}
+	return *e.Code
 }
 func (e *TerminalRoutingStrategyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The client failed authentication. Clients should not retry such requests.
 type UnauthorizedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -299,12 +386,19 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
+func (e *UnauthorizedException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnauthorizedException"
+	}
+	return *e.Code
+}
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation is not supported in the Region specified.
 type UnsupportedRegionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -318,5 +412,10 @@ func (e *UnsupportedRegionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedRegionException) ErrorCode() string             { return "UnsupportedRegionException" }
+func (e *UnsupportedRegionException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnsupportedRegionException"
+	}
+	return *e.Code
+}
 func (e *UnsupportedRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

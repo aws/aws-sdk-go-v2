@@ -11,6 +11,8 @@ import (
 type DuplicateResourceException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *DuplicateResourceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateResourceException) ErrorCode() string             { return "DuplicateResourceException" }
+func (e *DuplicateResourceException) ErrorCode() string {
+	if e.Code == nil {
+		return "DuplicateResourceException"
+	}
+	return *e.Code
+}
 func (e *DuplicateResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more parameters provided to the operation are not valid.
 type InvalidParametersException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -42,7 +51,12 @@ func (e *InvalidParametersException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParametersException) ErrorCode() string             { return "InvalidParametersException" }
+func (e *InvalidParametersException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParametersException"
+	}
+	return *e.Code
+}
 func (e *InvalidParametersException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An attempt was made to modify a resource that is in a state that is not valid.
@@ -50,6 +64,8 @@ func (e *InvalidParametersException) ErrorFault() smithy.ErrorFault { return smi
 // operation.
 type InvalidStateException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -63,7 +79,12 @@ func (e *InvalidStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidStateException) ErrorCode() string             { return "InvalidStateException" }
+func (e *InvalidStateException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidStateException"
+	}
+	return *e.Code
+}
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The current limits of the service would have been exceeded by this operation.
@@ -71,6 +92,8 @@ func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.F
 // operation.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -84,12 +107,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation is not supported.
 type OperationNotSupportedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -103,13 +133,20 @@ func (e *OperationNotSupportedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationNotSupportedException) ErrorCode() string             { return "OperationNotSupportedException" }
+func (e *OperationNotSupportedException) ErrorCode() string {
+	if e.Code == nil {
+		return "OperationNotSupportedException"
+	}
+	return *e.Code
+}
 func (e *OperationNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource that is currently in use. Ensure that the resource is not in use and
 // retry the operation.
 type ResourceInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -123,12 +160,19 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceInUseException"
+	}
+	return *e.Code
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -142,7 +186,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An operation requiring TagOptions failed because the TagOptions migration
@@ -151,6 +200,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // operation.
 type TagOptionNotMigratedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -164,5 +215,10 @@ func (e *TagOptionNotMigratedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagOptionNotMigratedException) ErrorCode() string             { return "TagOptionNotMigratedException" }
+func (e *TagOptionNotMigratedException) ErrorCode() string {
+	if e.Code == nil {
+		return "TagOptionNotMigratedException"
+	}
+	return *e.Code
+}
 func (e *TagOptionNotMigratedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

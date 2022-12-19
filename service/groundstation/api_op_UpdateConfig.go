@@ -29,6 +29,7 @@ func (c *Client) UpdateConfig(ctx context.Context, params *UpdateConfigInput, op
 	return out, nil
 }
 
+//
 type UpdateConfigInput struct {
 
 	// Parameters of a Config.
@@ -54,6 +55,7 @@ type UpdateConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type UpdateConfigOutput struct {
 
 	// ARN of a Config.

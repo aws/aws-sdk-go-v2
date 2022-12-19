@@ -27,6 +27,7 @@ func (c *Client) ReserveContact(ctx context.Context, params *ReserveContactInput
 	return out, nil
 }
 
+//
 type ReserveContactInput struct {
 
 	// End time of a contact in UTC.
@@ -60,6 +61,7 @@ type ReserveContactInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ReserveContactOutput struct {
 
 	// UUID of a contact.

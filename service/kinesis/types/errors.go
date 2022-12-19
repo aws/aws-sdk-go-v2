@@ -12,6 +12,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The provided iterator exceeds the maximum age allowed.
 type ExpiredIteratorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *ExpiredIteratorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExpiredIteratorException) ErrorCode() string             { return "ExpiredIteratorException" }
+func (e *ExpiredIteratorException) ErrorCode() string {
+	if e.Code == nil {
+		return "ExpiredIteratorException"
+	}
+	return *e.Code
+}
 func (e *ExpiredIteratorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The pagination token passed to the operation is expired.
 type ExpiredNextTokenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -62,13 +78,20 @@ func (e *ExpiredNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExpiredNextTokenException) ErrorCode() string             { return "ExpiredNextTokenException" }
+func (e *ExpiredNextTokenException) ErrorCode() string {
+	if e.Code == nil {
+		return "ExpiredNextTokenException"
+	}
+	return *e.Code
+}
 func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The processing of the request failed because of an unknown error, exception, or
 // failure.
 type InternalFailureException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -82,13 +105,20 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalFailureException"
+	}
+	return *e.Code
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // A specified parameter exceeds its restrictions, is not supported, or can't be
 // used. For more information, see the returned message.
 type InvalidArgumentException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -102,13 +132,20 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
+func (e *InvalidArgumentException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidArgumentException"
+	}
+	return *e.Code
+}
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The ciphertext references a key that doesn't exist or that you don't have access
 // to.
 type KMSAccessDeniedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -122,13 +159,20 @@ func (e *KMSAccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSAccessDeniedException) ErrorCode() string             { return "KMSAccessDeniedException" }
+func (e *KMSAccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSAccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *KMSAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the specified customer master key (CMK) isn't
 // enabled.
 type KMSDisabledException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -142,7 +186,12 @@ func (e *KMSDisabledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSDisabledException) ErrorCode() string             { return "KMSDisabledException" }
+func (e *KMSDisabledException) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSDisabledException"
+	}
+	return *e.Code
+}
 func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the state of the specified resource isn't valid
@@ -152,6 +201,8 @@ func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // Amazon Web Services Key Management Service Developer Guide.
 type KMSInvalidStateException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -165,13 +216,20 @@ func (e *KMSInvalidStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSInvalidStateException) ErrorCode() string             { return "KMSInvalidStateException" }
+func (e *KMSInvalidStateException) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSInvalidStateException"
+	}
+	return *e.Code
+}
 func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the specified entity or resource can't be
 // found.
 type KMSNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -185,12 +243,19 @@ func (e *KMSNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSNotFoundException) ErrorCode() string             { return "KMSNotFoundException" }
+func (e *KMSNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSNotFoundException"
+	}
+	return *e.Code
+}
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Amazon Web Services access key ID needs a subscription for the service.
 type KMSOptInRequired struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -204,7 +269,12 @@ func (e *KMSOptInRequired) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSOptInRequired) ErrorCode() string             { return "KMSOptInRequired" }
+func (e *KMSOptInRequired) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSOptInRequired"
+	}
+	return *e.Code
+}
 func (e *KMSOptInRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied due to request throttling. For more information about
@@ -213,6 +283,8 @@ func (e *KMSOptInRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // in the Amazon Web Services Key Management Service Developer Guide.
 type KMSThrottlingException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -226,13 +298,20 @@ func (e *KMSThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KMSThrottlingException) ErrorCode() string             { return "KMSThrottlingException" }
+func (e *KMSThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "KMSThrottlingException"
+	}
+	return *e.Code
+}
 func (e *KMSThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested resource exceeds the maximum number allowed, or the number of
 // concurrent stream requests exceeds the maximum number allowed.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -246,7 +325,12 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request rate for the stream is too high, or the requested data is too large
@@ -259,6 +343,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // Web Services General Reference.
 type ProvisionedThroughputExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -273,7 +359,10 @@ func (e *ProvisionedThroughputExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProvisionedThroughputExceededException) ErrorCode() string {
-	return "ProvisionedThroughputExceededException"
+	if e.Code == nil {
+		return "ProvisionedThroughputExceededException"
+	}
+	return *e.Code
 }
 func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -283,6 +372,8 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 // resource must be in the ACTIVE state.
 type ResourceInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -296,13 +387,20 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceInUseException"
+	}
+	return *e.Code
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested resource could not be found. The stream might not be specified
 // correctly.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -316,7 +414,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Specifies that you tried to invoke this API for a data stream with the on-demand
@@ -324,6 +427,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // capacity mode.
 type ValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -337,5 +442,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationException"
+	}
+	return *e.Code
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

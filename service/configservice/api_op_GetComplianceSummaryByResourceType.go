@@ -29,6 +29,7 @@ func (c *Client) GetComplianceSummaryByResourceType(ctx context.Context, params 
 	return out, nil
 }
 
+//
 type GetComplianceSummaryByResourceTypeInput struct {
 
 	// Specify one or more resource types to get the number of resources that are
@@ -41,6 +42,7 @@ type GetComplianceSummaryByResourceTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type GetComplianceSummaryByResourceTypeOutput struct {
 
 	// The number of resources that are compliant and the number that are noncompliant.

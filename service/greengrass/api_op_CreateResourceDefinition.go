@@ -13,7 +13,7 @@ import (
 
 // Creates a resource definition which contains a list of resources to be used in a
 // group. You can create an initial version of the definition by providing a list
-// of resources now, or use ”CreateResourceDefinitionVersion” later.
+// of resources now, or use ''CreateResourceDefinitionVersion'' later.
 func (c *Client) CreateResourceDefinition(ctx context.Context, params *CreateResourceDefinitionInput, optFns ...func(*Options)) (*CreateResourceDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateResourceDefinitionInput{}

@@ -27,6 +27,7 @@ func (c *Client) CreateMissionProfile(ctx context.Context, params *CreateMission
 	return out, nil
 }
 
+//
 type CreateMissionProfileInput struct {
 
 	// A list of lists of ARNs. Each list of ARNs is an edge, with a from Config and a
@@ -66,6 +67,7 @@ type CreateMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CreateMissionProfileOutput struct {
 
 	// UUID of a mission profile.

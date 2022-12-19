@@ -27,6 +27,7 @@ func (c *Client) ModifyEventSubscription(ctx context.Context, params *ModifyEven
 	return out, nil
 }
 
+//
 type ModifyEventSubscriptionInput struct {
 
 	// The name of the DMS event notification subscription to be modified.
@@ -53,6 +54,7 @@ type ModifyEventSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ModifyEventSubscriptionOutput struct {
 
 	// The modified event subscription.

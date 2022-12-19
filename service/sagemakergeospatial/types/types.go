@@ -7,13 +7,15 @@ import (
 	"time"
 )
 
-// The following types satisfy this interface:
 //
-//	AreaOfInterestMemberAreaOfInterestGeometry
+//
+// The following types satisfy this interface:
+//  AreaOfInterestMemberAreaOfInterestGeometry
 type AreaOfInterest interface {
 	isAreaOfInterest()
 }
 
+//
 type AreaOfInterestMemberAreaOfInterestGeometry struct {
 	Value AreaOfInterestGeometry
 
@@ -22,14 +24,16 @@ type AreaOfInterestMemberAreaOfInterestGeometry struct {
 
 func (*AreaOfInterestMemberAreaOfInterestGeometry) isAreaOfInterest() {}
 
-// The following types satisfy this interface:
 //
-//	AreaOfInterestGeometryMemberMultiPolygonGeometry
-//	AreaOfInterestGeometryMemberPolygonGeometry
+//
+// The following types satisfy this interface:
+//  AreaOfInterestGeometryMemberMultiPolygonGeometry
+//  AreaOfInterestGeometryMemberPolygonGeometry
 type AreaOfInterestGeometry interface {
 	isAreaOfInterestGeometry()
 }
 
+//
 type AreaOfInterestGeometryMemberMultiPolygonGeometry struct {
 	Value MultiPolygonGeometryInput
 
@@ -38,6 +42,7 @@ type AreaOfInterestGeometryMemberMultiPolygonGeometry struct {
 
 func (*AreaOfInterestGeometryMemberMultiPolygonGeometry) isAreaOfInterestGeometry() {}
 
+//
 type AreaOfInterestGeometryMemberPolygonGeometry struct {
 	Value PolygonGeometryInput
 
@@ -46,6 +51,7 @@ type AreaOfInterestGeometryMemberPolygonGeometry struct {
 
 func (*AreaOfInterestGeometryMemberPolygonGeometry) isAreaOfInterestGeometry() {}
 
+//
 type AssetValue struct {
 
 	//
@@ -54,6 +60,7 @@ type AssetValue struct {
 	noSmithyDocumentSerde
 }
 
+//
 type BandMathConfigInput struct {
 
 	//
@@ -65,10 +72,12 @@ type BandMathConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CloudMaskingConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CloudRemovalConfigInput struct {
 
 	// The name of the algorithm used for cloud removal.
@@ -83,6 +92,7 @@ type CloudRemovalConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CustomIndicesInput struct {
 
 	//
@@ -103,6 +113,7 @@ type EarthObservationJobErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
+//
 type EoCloudCoverInput struct {
 
 	//
@@ -118,13 +129,15 @@ type EoCloudCoverInput struct {
 	noSmithyDocumentSerde
 }
 
-// The following types satisfy this interface:
 //
-//	EojDataSourceConfigInputMemberS3Data
+//
+// The following types satisfy this interface:
+//  EojDataSourceConfigInputMemberS3Data
 type EojDataSourceConfigInput interface {
 	isEojDataSourceConfigInput()
 }
 
+//
 type EojDataSourceConfigInputMemberS3Data struct {
 	Value S3DataInput
 
@@ -146,6 +159,7 @@ type ExportErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ExportErrorDetailsOutput struct {
 
 	//
@@ -157,6 +171,7 @@ type ExportErrorDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ExportS3DataInput struct {
 
 	// The URL to the Amazon S3 data input.
@@ -203,6 +218,7 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
+//
 type Geometry struct {
 
 	//
@@ -290,20 +306,20 @@ type ItemSource struct {
 // The input structure for the JobConfig in an EarthObservationJob.
 //
 // The following types satisfy this interface:
-//
-//	JobConfigInputMemberBandMathConfig
-//	JobConfigInputMemberCloudMaskingConfig
-//	JobConfigInputMemberCloudRemovalConfig
-//	JobConfigInputMemberGeoMosaicConfig
-//	JobConfigInputMemberLandCoverSegmentationConfig
-//	JobConfigInputMemberResamplingConfig
-//	JobConfigInputMemberStackConfig
-//	JobConfigInputMemberTemporalStatisticsConfig
-//	JobConfigInputMemberZonalStatisticsConfig
+//  JobConfigInputMemberBandMathConfig
+//  JobConfigInputMemberCloudMaskingConfig
+//  JobConfigInputMemberCloudRemovalConfig
+//  JobConfigInputMemberGeoMosaicConfig
+//  JobConfigInputMemberLandCoverSegmentationConfig
+//  JobConfigInputMemberResamplingConfig
+//  JobConfigInputMemberStackConfig
+//  JobConfigInputMemberTemporalStatisticsConfig
+//  JobConfigInputMemberZonalStatisticsConfig
 type JobConfigInput interface {
 	isJobConfigInput()
 }
 
+//
 type JobConfigInputMemberBandMathConfig struct {
 	Value BandMathConfigInput
 
@@ -358,6 +374,7 @@ type JobConfigInputMemberResamplingConfig struct {
 
 func (*JobConfigInputMemberResamplingConfig) isJobConfigInput() {}
 
+//
 type JobConfigInputMemberStackConfig struct {
 	Value StackConfigInput
 
@@ -386,10 +403,12 @@ type JobConfigInputMemberZonalStatisticsConfig struct {
 
 func (*JobConfigInputMemberZonalStatisticsConfig) isJobConfigInput() {}
 
+//
 type LandCoverSegmentationConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type LandsatCloudCoverLandInput struct {
 
 	//
@@ -483,6 +502,7 @@ type ListVectorEnrichmentJobOutputConfig struct {
 	noSmithyDocumentSerde
 }
 
+//
 type MapMatchingConfig struct {
 
 	//
@@ -508,6 +528,7 @@ type MapMatchingConfig struct {
 	noSmithyDocumentSerde
 }
 
+//
 type MultiPolygonGeometryInput struct {
 
 	// The coordinates of the multipolygon geometry.
@@ -518,6 +539,7 @@ type MultiPolygonGeometryInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type Operation struct {
 
 	//
@@ -564,6 +586,7 @@ type OutputConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type OutputResolutionResamplingInput struct {
 
 	//
@@ -574,6 +597,7 @@ type OutputResolutionResamplingInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type OutputResolutionStackInput struct {
 
 	//
@@ -585,6 +609,7 @@ type OutputResolutionStackInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type PlatformInput struct {
 
 	// The value of the platform.
@@ -598,6 +623,7 @@ type PlatformInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type PolygonGeometryInput struct {
 
 	//
@@ -608,6 +634,7 @@ type PolygonGeometryInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type Properties struct {
 
 	//
@@ -631,18 +658,20 @@ type Properties struct {
 	noSmithyDocumentSerde
 }
 
-// The following types satisfy this interface:
 //
-//	PropertyMemberEoCloudCover
-//	PropertyMemberLandsatCloudCoverLand
-//	PropertyMemberPlatform
-//	PropertyMemberViewOffNadir
-//	PropertyMemberViewSunAzimuth
-//	PropertyMemberViewSunElevation
+//
+// The following types satisfy this interface:
+//  PropertyMemberEoCloudCover
+//  PropertyMemberLandsatCloudCoverLand
+//  PropertyMemberPlatform
+//  PropertyMemberViewOffNadir
+//  PropertyMemberViewSunAzimuth
+//  PropertyMemberViewSunElevation
 type Property interface {
 	isProperty()
 }
 
+//
 type PropertyMemberEoCloudCover struct {
 	Value EoCloudCoverInput
 
@@ -651,6 +680,7 @@ type PropertyMemberEoCloudCover struct {
 
 func (*PropertyMemberEoCloudCover) isProperty() {}
 
+//
 type PropertyMemberLandsatCloudCoverLand struct {
 	Value LandsatCloudCoverLandInput
 
@@ -659,6 +689,7 @@ type PropertyMemberLandsatCloudCoverLand struct {
 
 func (*PropertyMemberLandsatCloudCoverLand) isProperty() {}
 
+//
 type PropertyMemberPlatform struct {
 	Value PlatformInput
 
@@ -667,6 +698,7 @@ type PropertyMemberPlatform struct {
 
 func (*PropertyMemberPlatform) isProperty() {}
 
+//
 type PropertyMemberViewOffNadir struct {
 	Value ViewOffNadirInput
 
@@ -675,6 +707,7 @@ type PropertyMemberViewOffNadir struct {
 
 func (*PropertyMemberViewOffNadir) isProperty() {}
 
+//
 type PropertyMemberViewSunAzimuth struct {
 	Value ViewSunAzimuthInput
 
@@ -683,6 +716,7 @@ type PropertyMemberViewSunAzimuth struct {
 
 func (*PropertyMemberViewSunAzimuth) isProperty() {}
 
+//
 type PropertyMemberViewSunElevation struct {
 	Value ViewSunElevationInput
 
@@ -691,6 +725,7 @@ type PropertyMemberViewSunElevation struct {
 
 func (*PropertyMemberViewSunElevation) isProperty() {}
 
+//
 type PropertyFilter struct {
 
 	//
@@ -701,6 +736,7 @@ type PropertyFilter struct {
 	noSmithyDocumentSerde
 }
 
+//
 type PropertyFilters struct {
 
 	//
@@ -749,6 +785,7 @@ type RasterDataCollectionMetadata struct {
 	noSmithyDocumentSerde
 }
 
+//
 type RasterDataCollectionQueryInput struct {
 
 	// The Amazon Resource Name (ARN) of the raster data collection.
@@ -770,6 +807,7 @@ type RasterDataCollectionQueryInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type RasterDataCollectionQueryOutput struct {
 
 	//
@@ -817,6 +855,7 @@ type RasterDataCollectionQueryWithBandFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ResamplingConfigInput struct {
 
 	//
@@ -833,6 +872,7 @@ type ResamplingConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ReverseGeocodingConfig struct {
 
 	//
@@ -867,6 +907,7 @@ type S3DataInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type StackConfigInput struct {
 
 	//
@@ -878,6 +919,7 @@ type StackConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type TemporalStatisticsConfigInput struct {
 
 	//
@@ -910,6 +952,7 @@ type TimeRangeFilterInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type UserDefined struct {
 
 	//
@@ -928,13 +971,13 @@ type UserDefined struct {
 // It contains configs such as ReverseGeocodingConfig and MapMatchingConfig.
 //
 // The following types satisfy this interface:
-//
-//	VectorEnrichmentJobConfigMemberMapMatchingConfig
-//	VectorEnrichmentJobConfigMemberReverseGeocodingConfig
+//  VectorEnrichmentJobConfigMemberMapMatchingConfig
+//  VectorEnrichmentJobConfigMemberReverseGeocodingConfig
 type VectorEnrichmentJobConfig interface {
 	isVectorEnrichmentJobConfig()
 }
 
+//
 type VectorEnrichmentJobConfigMemberMapMatchingConfig struct {
 	Value MapMatchingConfig
 
@@ -943,6 +986,7 @@ type VectorEnrichmentJobConfigMemberMapMatchingConfig struct {
 
 func (*VectorEnrichmentJobConfigMemberMapMatchingConfig) isVectorEnrichmentJobConfig() {}
 
+//
 type VectorEnrichmentJobConfigMemberReverseGeocodingConfig struct {
 	Value ReverseGeocodingConfig
 
@@ -951,13 +995,15 @@ type VectorEnrichmentJobConfigMemberReverseGeocodingConfig struct {
 
 func (*VectorEnrichmentJobConfigMemberReverseGeocodingConfig) isVectorEnrichmentJobConfig() {}
 
-// The following types satisfy this interface:
 //
-//	VectorEnrichmentJobDataSourceConfigInputMemberS3Data
+//
+// The following types satisfy this interface:
+//  VectorEnrichmentJobDataSourceConfigInputMemberS3Data
 type VectorEnrichmentJobDataSourceConfigInput interface {
 	isVectorEnrichmentJobDataSourceConfigInput()
 }
 
+//
 type VectorEnrichmentJobDataSourceConfigInputMemberS3Data struct {
 	Value VectorEnrichmentJobS3Data
 
@@ -1024,6 +1070,7 @@ type VectorEnrichmentJobS3Data struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ViewOffNadirInput struct {
 
 	//
@@ -1039,6 +1086,7 @@ type ViewOffNadirInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ViewSunAzimuthInput struct {
 
 	//
@@ -1054,6 +1102,7 @@ type ViewSunAzimuthInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ViewSunElevationInput struct {
 
 	// The lower bound to view the sun elevation.
@@ -1069,6 +1118,7 @@ type ViewSunElevationInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ZonalStatisticsConfigInput struct {
 
 	//

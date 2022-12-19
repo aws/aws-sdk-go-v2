@@ -28,6 +28,7 @@ func (c *Client) DescribeContact(ctx context.Context, params *DescribeContactInp
 	return out, nil
 }
 
+//
 type DescribeContactInput struct {
 
 	// UUID of a contact.
@@ -38,6 +39,7 @@ type DescribeContactInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeContactOutput struct {
 
 	// UUID of a contact.

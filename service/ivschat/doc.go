@@ -105,7 +105,7 @@
 // events to clients of a room; e.g., to notify clients to change the way the chat
 // UI is rendered.
 //
-// # Chat Token Endpoint
+// Chat Token Endpoint
 //
 // * CreateChatToken — Creates an encrypted
 // token that is used by a chat participant to establish an individual WebSocket
@@ -114,7 +114,7 @@
 // becomes invalid at the token-expiration timestamp included in the
 // response.
 //
-// # Room Endpoints
+// Room Endpoints
 //
 // * CreateRoom — Creates a room that allows clients to
 // connect and pass messages.
@@ -130,7 +130,7 @@
 // *
 // UpdateRoom — Updates a room’s configuration.
 //
-// # Logging Configuration Endpoints
+// Logging Configuration Endpoints
 //
 // *
 // CreateLoggingConfiguration — Creates a logging configuration that allows clients
@@ -149,7 +149,7 @@
 // * UpdateLoggingConfiguration — Updates a specified logging
 // configuration.
 //
-// # Tags Endpoints
+// Tags Endpoints
 //
 // * ListTagsForResource — Gets information about
 // AWS tags for the specified ARN.

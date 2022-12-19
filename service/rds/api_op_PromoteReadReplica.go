@@ -39,6 +39,7 @@ func (c *Client) PromoteReadReplica(ctx context.Context, params *PromoteReadRepl
 	return out, nil
 }
 
+//
 type PromoteReadReplicaInput struct {
 
 	// The DB instance identifier. This value is stored as a lowercase string.

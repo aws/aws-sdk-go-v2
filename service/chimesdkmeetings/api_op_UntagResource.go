@@ -29,8 +29,7 @@ import (
 // that created the resource. For example, to remove the tags from an Amazon EC2
 // instance using the UntagResources operation, you must have both of the following
 // permissions: tag:UntagResource
-//
-//	ChimeSDKMeetings:DeleteTags
+//     ChimeSDKMeetings:DeleteTags
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

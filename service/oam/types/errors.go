@@ -11,6 +11,8 @@ import (
 type ConflictException struct {
 	Message *string
 
+	Code *string
+
 	AmznErrorType *string
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Unexpected error while processing the request. Retry the request.
 type InternalServiceFault struct {
 	Message *string
+
+	Code *string
 
 	AmznErrorType *string
 
@@ -46,12 +55,19 @@ func (e *InternalServiceFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceFault) ErrorCode() string             { return "InternalServiceFault" }
+func (e *InternalServiceFault) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServiceFault"
+	}
+	return *e.Code
+}
 func (e *InternalServiceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // A parameter is specified incorrectly.
 type InvalidParameterException struct {
 	Message *string
+
+	Code *string
 
 	AmznErrorType *string
 
@@ -67,12 +83,19 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A required parameter is missing from the request.
 type MissingRequiredParameterException struct {
 	Message *string
+
+	Code *string
 
 	AmznErrorType *string
 
@@ -89,13 +112,18 @@ func (e *MissingRequiredParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingRequiredParameterException) ErrorCode() string {
-	return "MissingRequiredParameterException"
+	if e.Code == nil {
+		return "MissingRequiredParameterException"
+	}
+	return *e.Code
 }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request references a resource that does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	AmznErrorType *string
 
@@ -111,12 +139,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would cause a service quota to be exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	Code *string
 
 	AmznErrorType *string
 
@@ -132,12 +167,19 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.Code
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource can have no more than 50 tags.
 type TooManyTagsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -151,12 +193,19 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyTagsException"
+	}
+	return *e.Code
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value of a parameter in the request caused an error.
 type ValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -170,5 +219,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationException"
+	}
+	return *e.Code
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

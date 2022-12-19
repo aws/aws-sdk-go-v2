@@ -28,6 +28,7 @@ func (c *Client) ListVirtualNodes(ctx context.Context, params *ListVirtualNodesI
 	return out, nil
 }
 
+//
 type ListVirtualNodesInput struct {
 
 	// The name of the service mesh to list virtual nodes in.
@@ -59,6 +60,7 @@ type ListVirtualNodesInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ListVirtualNodesOutput struct {
 
 	// The list of existing virtual nodes for the specified service mesh.

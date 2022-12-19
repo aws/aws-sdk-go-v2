@@ -34,10 +34,9 @@ type CaseEventIncludedData struct {
 // A filter for cases. Only one value can be provided.
 //
 // The following types satisfy this interface:
-//
-//	CaseFilterMemberAndAll
-//	CaseFilterMemberField
-//	CaseFilterMemberNot
+//  CaseFilterMemberAndAll
+//  CaseFilterMemberField
+//  CaseFilterMemberNot
 type CaseFilter interface {
 	isCaseFilter()
 }
@@ -223,13 +222,12 @@ type FieldError struct {
 // A filter for fields. Only one value can be provided.
 //
 // The following types satisfy this interface:
-//
-//	FieldFilterMemberContains
-//	FieldFilterMemberEqualTo
-//	FieldFilterMemberGreaterThan
-//	FieldFilterMemberGreaterThanOrEqualTo
-//	FieldFilterMemberLessThan
-//	FieldFilterMemberLessThanOrEqualTo
+//  FieldFilterMemberContains
+//  FieldFilterMemberEqualTo
+//  FieldFilterMemberGreaterThan
+//  FieldFilterMemberGreaterThanOrEqualTo
+//  FieldFilterMemberLessThan
+//  FieldFilterMemberLessThanOrEqualTo
 type FieldFilter interface {
 	isFieldFilter()
 }
@@ -417,10 +415,9 @@ type FieldValue struct {
 // Object to store union of Field values.
 //
 // The following types satisfy this interface:
-//
-//	FieldValueUnionMemberBooleanValue
-//	FieldValueUnionMemberDoubleValue
-//	FieldValueUnionMemberStringValue
+//  FieldValueUnionMemberBooleanValue
+//  FieldValueUnionMemberDoubleValue
+//  FieldValueUnionMemberStringValue
 type FieldValueUnion interface {
 	isFieldValueUnion()
 }
@@ -504,8 +501,7 @@ type LayoutConfiguration struct {
 // Object to store union of different versions of layout content.
 //
 // The following types satisfy this interface:
-//
-//	LayoutContentMemberBasic
+//  LayoutContentMemberBasic
 type LayoutContent interface {
 	isLayoutContent()
 }
@@ -554,9 +550,8 @@ type LayoutSummary struct {
 // Represents the content of a particular type of related item.
 //
 // The following types satisfy this interface:
-//
-//	RelatedItemContentMemberComment
-//	RelatedItemContentMemberContact
+//  RelatedItemContentMemberComment
+//  RelatedItemContentMemberContact
 type RelatedItemContent interface {
 	isRelatedItemContent()
 }
@@ -593,9 +588,8 @@ type RelatedItemEventIncludedData struct {
 // Represents the content of a related item to be created.
 //
 // The following types satisfy this interface:
-//
-//	RelatedItemInputContentMemberComment
-//	RelatedItemInputContentMemberContact
+//  RelatedItemInputContentMemberComment
+//  RelatedItemInputContentMemberContact
 type RelatedItemInputContent interface {
 	isRelatedItemInputContent()
 }
@@ -621,9 +615,8 @@ func (*RelatedItemInputContentMemberContact) isRelatedItemInputContent() {}
 // The list of types of related items and their parameters to use for filtering.
 //
 // The following types satisfy this interface:
-//
-//	RelatedItemTypeFilterMemberComment
-//	RelatedItemTypeFilterMemberContact
+//  RelatedItemTypeFilterMemberComment
+//  RelatedItemTypeFilterMemberContact
 type RelatedItemTypeFilter interface {
 	isRelatedItemTypeFilter()
 }
@@ -715,8 +708,7 @@ type SearchRelatedItemsResponseItem struct {
 // This represents a sections within a panel or tab of the page layout.
 //
 // The following types satisfy this interface:
-//
-//	SectionMemberFieldGroup
+//  SectionMemberFieldGroup
 type Section interface {
 	isSection()
 }

@@ -12,6 +12,8 @@ import (
 type ConcurrentModificationException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,7 +27,10 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.Code == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.Code
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -49,6 +54,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 type ConstraintViolationException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -61,13 +68,20 @@ func (e *ConstraintViolationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConstraintViolationException) ErrorCode() string             { return "ConstraintViolationException" }
+func (e *ConstraintViolationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConstraintViolationException"
+	}
+	return *e.Code
+}
 func (e *ConstraintViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request processing failed because of an unknown error, exception, or
 // failure. You can retry the request.
 type InternalServiceException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -81,7 +95,12 @@ func (e *InternalServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
+func (e *InternalServiceException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServiceException"
+	}
+	return *e.Code
+}
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // This error indicates one of the following:
@@ -105,6 +124,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidParameterException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -117,13 +138,20 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A PaginationToken is valid for a maximum of 15 minutes. Your request was denied
 // because the specified PaginationToken has expired.
 type PaginationTokenExpiredException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -138,13 +166,18 @@ func (e *PaginationTokenExpiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PaginationTokenExpiredException) ErrorCode() string {
-	return "PaginationTokenExpiredException"
+	if e.Code == nil {
+		return "PaginationTokenExpiredException"
+	}
+	return *e.Code
 }
 func (e *PaginationTokenExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied to limit the frequency of submitted requests.
 type ThrottledException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -158,5 +191,10 @@ func (e *ThrottledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottledException) ErrorCode() string             { return "ThrottledException" }
+func (e *ThrottledException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottledException"
+	}
+	return *e.Code
+}
 func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

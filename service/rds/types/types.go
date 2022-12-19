@@ -2829,6 +2829,7 @@ type OptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+//
 type OptionGroup struct {
 
 	// Indicates whether this option group can be applied to both VPC and non-VPC

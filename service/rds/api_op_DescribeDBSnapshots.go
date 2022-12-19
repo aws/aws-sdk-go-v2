@@ -35,6 +35,7 @@ func (c *Client) DescribeDBSnapshots(ctx context.Context, params *DescribeDBSnap
 	return out, nil
 }
 
+//
 type DescribeDBSnapshotsInput struct {
 
 	// The ID of the DB instance to retrieve the list of DB snapshots for. This

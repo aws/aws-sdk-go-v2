@@ -42,6 +42,7 @@ func (c *Client) DescribeDBClusters(ctx context.Context, params *DescribeDBClust
 	return out, nil
 }
 
+//
 type DescribeDBClustersInput struct {
 
 	// The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of the

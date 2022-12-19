@@ -13,6 +13,8 @@ import (
 type AccountSendingPausedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,12 +27,19 @@ func (e *AccountSendingPausedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccountSendingPausedException) ErrorCode() string             { return "AccountSendingPausedException" }
+func (e *AccountSendingPausedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccountSendingPausedException"
+	}
+	return *e.Code
+}
 func (e *AccountSendingPausedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a resource could not be created because of a naming conflict.
 type AlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	Name *string
 
@@ -46,12 +55,19 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExists" }
+func (e *AlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "AlreadyExists"
+	}
+	return *e.Code
+}
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the delete operation could not be completed.
 type CannotDeleteException struct {
 	Message *string
+
+	Code *string
 
 	Name *string
 
@@ -67,13 +83,20 @@ func (e *CannotDeleteException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CannotDeleteException) ErrorCode() string             { return "CannotDelete" }
+func (e *CannotDeleteException) ErrorCode() string {
+	if e.Code == nil {
+		return "CannotDelete"
+	}
+	return *e.Code
+}
 func (e *CannotDeleteException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the configuration set could not be created because of a naming
 // conflict.
 type ConfigurationSetAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	ConfigurationSetName *string
 
@@ -90,7 +113,10 @@ func (e *ConfigurationSetAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetAlreadyExistsException) ErrorCode() string {
-	return "ConfigurationSetAlreadyExists"
+	if e.Code == nil {
+		return "ConfigurationSetAlreadyExists"
+	}
+	return *e.Code
 }
 func (e *ConfigurationSetAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -99,6 +125,8 @@ func (e *ConfigurationSetAlreadyExistsException) ErrorFault() smithy.ErrorFault 
 // Indicates that the configuration set does not exist.
 type ConfigurationSetDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	ConfigurationSetName *string
 
@@ -115,7 +143,10 @@ func (e *ConfigurationSetDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetDoesNotExistException) ErrorCode() string {
-	return "ConfigurationSetDoesNotExist"
+	if e.Code == nil {
+		return "ConfigurationSetDoesNotExist"
+	}
+	return *e.Code
 }
 func (e *ConfigurationSetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -126,6 +157,8 @@ func (e *ConfigurationSetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 // UpdateConfigurationSetSendingEnabled.
 type ConfigurationSetSendingPausedException struct {
 	Message *string
+
+	Code *string
 
 	ConfigurationSetName *string
 
@@ -142,7 +175,10 @@ func (e *ConfigurationSetSendingPausedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetSendingPausedException) ErrorCode() string {
-	return "ConfigurationSetSendingPausedException"
+	if e.Code == nil {
+		return "ConfigurationSetSendingPausedException"
+	}
+	return *e.Code
 }
 func (e *ConfigurationSetSendingPausedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -151,6 +187,8 @@ func (e *ConfigurationSetSendingPausedException) ErrorFault() smithy.ErrorFault 
 // Indicates that custom verification email template provided content is invalid.
 type CustomVerificationEmailInvalidContentException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -165,7 +203,10 @@ func (e *CustomVerificationEmailInvalidContentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomVerificationEmailInvalidContentException) ErrorCode() string {
-	return "CustomVerificationEmailInvalidContent"
+	if e.Code == nil {
+		return "CustomVerificationEmailInvalidContent"
+	}
+	return *e.Code
 }
 func (e *CustomVerificationEmailInvalidContentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -175,6 +216,8 @@ func (e *CustomVerificationEmailInvalidContentException) ErrorFault() smithy.Err
 // already exists.
 type CustomVerificationEmailTemplateAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	CustomVerificationEmailTemplateName *string
 
@@ -191,7 +234,10 @@ func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorMessage() s
 	return *e.Message
 }
 func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorCode() string {
-	return "CustomVerificationEmailTemplateAlreadyExists"
+	if e.Code == nil {
+		return "CustomVerificationEmailTemplateAlreadyExists"
+	}
+	return *e.Code
 }
 func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -201,6 +247,8 @@ func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorFault() smi
 // does not exist.
 type CustomVerificationEmailTemplateDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	CustomVerificationEmailTemplateName *string
 
@@ -217,7 +265,10 @@ func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorMessage() st
 	return *e.Message
 }
 func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorCode() string {
-	return "CustomVerificationEmailTemplateDoesNotExist"
+	if e.Code == nil {
+		return "CustomVerificationEmailTemplateDoesNotExist"
+	}
+	return *e.Code
 }
 func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -227,6 +278,8 @@ func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorFault() smit
 // conflict.
 type EventDestinationAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	ConfigurationSetName *string
 	EventDestinationName *string
@@ -244,7 +297,10 @@ func (e *EventDestinationAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDestinationAlreadyExistsException) ErrorCode() string {
-	return "EventDestinationAlreadyExists"
+	if e.Code == nil {
+		return "EventDestinationAlreadyExists"
+	}
+	return *e.Code
 }
 func (e *EventDestinationAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -253,6 +309,8 @@ func (e *EventDestinationAlreadyExistsException) ErrorFault() smithy.ErrorFault 
 // Indicates that the event destination does not exist.
 type EventDestinationDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	ConfigurationSetName *string
 	EventDestinationName *string
@@ -270,7 +328,10 @@ func (e *EventDestinationDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDestinationDoesNotExistException) ErrorCode() string {
-	return "EventDestinationDoesNotExist"
+	if e.Code == nil {
+		return "EventDestinationDoesNotExist"
+	}
+	return *e.Code
 }
 func (e *EventDestinationDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -281,6 +342,8 @@ func (e *EventDestinationDoesNotExistException) ErrorFault() smithy.ErrorFault {
 // email.
 type FromEmailAddressNotVerifiedException struct {
 	Message *string
+
+	Code *string
 
 	FromEmailAddress *string
 
@@ -297,7 +360,10 @@ func (e *FromEmailAddressNotVerifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FromEmailAddressNotVerifiedException) ErrorCode() string {
-	return "FromEmailAddressNotVerified"
+	if e.Code == nil {
+		return "FromEmailAddressNotVerified"
+	}
+	return *e.Code
 }
 func (e *FromEmailAddressNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -307,6 +373,8 @@ func (e *FromEmailAddressNotVerifiedException) ErrorFault() smithy.ErrorFault {
 // message for details.
 type InvalidCloudWatchDestinationException struct {
 	Message *string
+
+	Code *string
 
 	ConfigurationSetName *string
 	EventDestinationName *string
@@ -324,7 +392,10 @@ func (e *InvalidCloudWatchDestinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCloudWatchDestinationException) ErrorCode() string {
-	return "InvalidCloudWatchDestination"
+	if e.Code == nil {
+		return "InvalidCloudWatchDestination"
+	}
+	return *e.Code
 }
 func (e *InvalidCloudWatchDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -334,6 +405,8 @@ func (e *InvalidCloudWatchDestinationException) ErrorFault() smithy.ErrorFault {
 // details.
 type InvalidConfigurationSetException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -347,12 +420,19 @@ func (e *InvalidConfigurationSetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidConfigurationSetException) ErrorCode() string             { return "InvalidConfigurationSet" }
+func (e *InvalidConfigurationSetException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidConfigurationSet"
+	}
+	return *e.Code
+}
 func (e *InvalidConfigurationSetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that provided delivery option is invalid.
 type InvalidDeliveryOptionsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -366,13 +446,20 @@ func (e *InvalidDeliveryOptionsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDeliveryOptionsException) ErrorCode() string             { return "InvalidDeliveryOptions" }
+func (e *InvalidDeliveryOptionsException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidDeliveryOptions"
+	}
+	return *e.Code
+}
 func (e *InvalidDeliveryOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the Amazon Kinesis Firehose destination is invalid. See the error
 // message for details.
 type InvalidFirehoseDestinationException struct {
 	Message *string
+
+	Code *string
 
 	ConfigurationSetName *string
 	EventDestinationName *string
@@ -389,7 +476,12 @@ func (e *InvalidFirehoseDestinationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidFirehoseDestinationException) ErrorCode() string { return "InvalidFirehoseDestination" }
+func (e *InvalidFirehoseDestinationException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidFirehoseDestination"
+	}
+	return *e.Code
+}
 func (e *InvalidFirehoseDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -400,6 +492,8 @@ func (e *InvalidFirehoseDestinationException) ErrorFault() smithy.ErrorFault {
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html).
 type InvalidLambdaFunctionException struct {
 	Message *string
+
+	Code *string
 
 	FunctionArn *string
 
@@ -415,13 +509,20 @@ func (e *InvalidLambdaFunctionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidLambdaFunctionException) ErrorCode() string             { return "InvalidLambdaFunction" }
+func (e *InvalidLambdaFunctionException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidLambdaFunction"
+	}
+	return *e.Code
+}
 func (e *InvalidLambdaFunctionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the provided policy is invalid. Check the error stack for more
 // information about what caused the error.
 type InvalidPolicyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -435,13 +536,20 @@ func (e *InvalidPolicyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPolicyException) ErrorCode() string             { return "InvalidPolicy" }
+func (e *InvalidPolicyException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidPolicy"
+	}
+	return *e.Code
+}
 func (e *InvalidPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that one or more of the replacement values you provided is invalid.
 // This error may occur when the TemplateData object contains invalid JSON.
 type InvalidRenderingParameterException struct {
 	Message *string
+
+	Code *string
 
 	TemplateName *string
 
@@ -457,7 +565,12 @@ func (e *InvalidRenderingParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRenderingParameterException) ErrorCode() string { return "InvalidRenderingParameter" }
+func (e *InvalidRenderingParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRenderingParameter"
+	}
+	return *e.Code
+}
 func (e *InvalidRenderingParameterException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -469,6 +582,8 @@ func (e *InvalidRenderingParameterException) ErrorFault() smithy.ErrorFault {
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html).
 type InvalidS3ConfigurationException struct {
 	Message *string
+
+	Code *string
 
 	Bucket *string
 
@@ -484,13 +599,20 @@ func (e *InvalidS3ConfigurationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidS3ConfigurationException) ErrorCode() string             { return "InvalidS3Configuration" }
+func (e *InvalidS3ConfigurationException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidS3Configuration"
+	}
+	return *e.Code
+}
 func (e *InvalidS3ConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the Amazon Simple Notification Service (Amazon SNS) destination
 // is invalid. See the error message for details.
 type InvalidSNSDestinationException struct {
 	Message *string
+
+	Code *string
 
 	ConfigurationSetName *string
 	EventDestinationName *string
@@ -507,7 +629,12 @@ func (e *InvalidSNSDestinationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSNSDestinationException) ErrorCode() string             { return "InvalidSNSDestination" }
+func (e *InvalidSNSDestinationException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidSNSDestination"
+	}
+	return *e.Code
+}
 func (e *InvalidSNSDestinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES
@@ -516,6 +643,8 @@ func (e *InvalidSNSDestinationException) ErrorFault() smithy.ErrorFault { return
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html).
 type InvalidSnsTopicException struct {
 	Message *string
+
+	Code *string
 
 	Topic *string
 
@@ -531,13 +660,20 @@ func (e *InvalidSnsTopicException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSnsTopicException) ErrorCode() string             { return "InvalidSnsTopic" }
+func (e *InvalidSnsTopicException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidSnsTopic"
+	}
+	return *e.Code
+}
 func (e *InvalidSnsTopicException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the template that you specified could not be rendered. This issue
 // may occur when a template refers to a partial that does not exist.
 type InvalidTemplateException struct {
 	Message *string
+
+	Code *string
 
 	TemplateName *string
 
@@ -553,7 +689,12 @@ func (e *InvalidTemplateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTemplateException) ErrorCode() string             { return "InvalidTemplate" }
+func (e *InvalidTemplateException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidTemplate"
+	}
+	return *e.Code
+}
 func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the custom domain to be used for open and click tracking
@@ -568,6 +709,8 @@ func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidTrackingOptionsException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -580,7 +723,12 @@ func (e *InvalidTrackingOptionsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTrackingOptionsException) ErrorCode() string             { return "InvalidTrackingOptions" }
+func (e *InvalidTrackingOptionsException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidTrackingOptions"
+	}
+	return *e.Code
+}
 func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a resource could not be created because of service limits. For a
@@ -588,6 +736,8 @@ func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { retur
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html).
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -601,7 +751,12 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceeded" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceeded"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the message could not be sent because Amazon SES could not read
@@ -611,6 +766,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-edit.html).
 type MailFromDomainNotVerifiedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -625,7 +782,10 @@ func (e *MailFromDomainNotVerifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MailFromDomainNotVerifiedException) ErrorCode() string {
-	return "MailFromDomainNotVerifiedException"
+	if e.Code == nil {
+		return "MailFromDomainNotVerifiedException"
+	}
+	return *e.Code
 }
 func (e *MailFromDomainNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -635,6 +795,8 @@ func (e *MailFromDomainNotVerifiedException) ErrorFault() smithy.ErrorFault {
 // error stack for more information about what caused the error.
 type MessageRejected struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -648,7 +810,12 @@ func (e *MessageRejected) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MessageRejected) ErrorCode() string             { return "MessageRejected" }
+func (e *MessageRejected) ErrorCode() string {
+	if e.Code == nil {
+		return "MessageRejected"
+	}
+	return *e.Code
+}
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that one or more of the replacement values for the specified template
@@ -656,6 +823,8 @@ func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // all of the replacement tags in the specified template.
 type MissingRenderingAttributeException struct {
 	Message *string
+
+	Code *string
 
 	TemplateName *string
 
@@ -671,7 +840,12 @@ func (e *MissingRenderingAttributeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MissingRenderingAttributeException) ErrorCode() string { return "MissingRenderingAttribute" }
+func (e *MissingRenderingAttributeException) ErrorCode() string {
+	if e.Code == nil {
+		return "MissingRenderingAttribute"
+	}
+	return *e.Code
+}
 func (e *MissingRenderingAttributeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -679,6 +853,8 @@ func (e *MissingRenderingAttributeException) ErrorFault() smithy.ErrorFault {
 // Indicates that the account has not been granted production access.
 type ProductionAccessNotGrantedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -692,7 +868,12 @@ func (e *ProductionAccessNotGrantedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ProductionAccessNotGrantedException) ErrorCode() string { return "ProductionAccessNotGranted" }
+func (e *ProductionAccessNotGrantedException) ErrorCode() string {
+	if e.Code == nil {
+		return "ProductionAccessNotGranted"
+	}
+	return *e.Code
+}
 func (e *ProductionAccessNotGrantedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -700,6 +881,8 @@ func (e *ProductionAccessNotGrantedException) ErrorFault() smithy.ErrorFault {
 // Indicates that the provided receipt rule does not exist.
 type RuleDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	Name *string
 
@@ -715,12 +898,19 @@ func (e *RuleDoesNotExistException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RuleDoesNotExistException) ErrorCode() string             { return "RuleDoesNotExist" }
+func (e *RuleDoesNotExistException) ErrorCode() string {
+	if e.Code == nil {
+		return "RuleDoesNotExist"
+	}
+	return *e.Code
+}
 func (e *RuleDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the provided receipt rule set does not exist.
 type RuleSetDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	Name *string
 
@@ -736,13 +926,20 @@ func (e *RuleSetDoesNotExistException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RuleSetDoesNotExistException) ErrorCode() string             { return "RuleSetDoesNotExist" }
+func (e *RuleSetDoesNotExistException) ErrorCode() string {
+	if e.Code == nil {
+		return "RuleSetDoesNotExist"
+	}
+	return *e.Code
+}
 func (e *RuleSetDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the Template object you specified does not exist in your Amazon
 // SES account.
 type TemplateDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	TemplateName *string
 
@@ -758,13 +955,20 @@ func (e *TemplateDoesNotExistException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TemplateDoesNotExistException) ErrorCode() string             { return "TemplateDoesNotExist" }
+func (e *TemplateDoesNotExistException) ErrorCode() string {
+	if e.Code == nil {
+		return "TemplateDoesNotExist"
+	}
+	return *e.Code
+}
 func (e *TemplateDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the configuration set you specified already contains a
 // TrackingOptions object.
 type TrackingOptionsAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	ConfigurationSetName *string
 
@@ -781,7 +985,10 @@ func (e *TrackingOptionsAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrackingOptionsAlreadyExistsException) ErrorCode() string {
-	return "TrackingOptionsAlreadyExistsException"
+	if e.Code == nil {
+		return "TrackingOptionsAlreadyExistsException"
+	}
+	return *e.Code
 }
 func (e *TrackingOptionsAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -790,6 +997,8 @@ func (e *TrackingOptionsAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 // Indicates that the TrackingOptions object you specified does not exist.
 type TrackingOptionsDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	ConfigurationSetName *string
 
@@ -806,7 +1015,10 @@ func (e *TrackingOptionsDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrackingOptionsDoesNotExistException) ErrorCode() string {
-	return "TrackingOptionsDoesNotExistException"
+	if e.Code == nil {
+		return "TrackingOptionsDoesNotExistException"
+	}
+	return *e.Code
 }
 func (e *TrackingOptionsDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

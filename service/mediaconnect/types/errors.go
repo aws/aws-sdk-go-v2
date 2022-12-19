@@ -13,6 +13,8 @@ import (
 type AddFlowOutputs420Exception struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,7 +27,12 @@ func (e *AddFlowOutputs420Exception) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AddFlowOutputs420Exception) ErrorCode() string             { return "AddFlowOutputs420Exception" }
+func (e *AddFlowOutputs420Exception) ErrorCode() string {
+	if e.Code == nil {
+		return "AddFlowOutputs420Exception"
+	}
+	return *e.Code
+}
 func (e *AddFlowOutputs420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
@@ -33,6 +40,8 @@ func (e *AddFlowOutputs420Exception) ErrorFault() smithy.ErrorFault { return smi
 // exception.
 type BadRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -46,7 +55,12 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "BadRequestException"
+	}
+	return *e.Code
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
@@ -54,6 +68,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // exception.
 type CreateFlow420Exception struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -67,7 +83,12 @@ func (e *CreateFlow420Exception) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CreateFlow420Exception) ErrorCode() string             { return "CreateFlow420Exception" }
+func (e *CreateFlow420Exception) ErrorCode() string {
+	if e.Code == nil {
+		return "CreateFlow420Exception"
+	}
+	return *e.Code
+}
 func (e *CreateFlow420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
@@ -75,6 +96,8 @@ func (e *CreateFlow420Exception) ErrorFault() smithy.ErrorFault { return smithy.
 // exception.
 type ForbiddenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -88,7 +111,12 @@ func (e *ForbiddenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorCode() string {
+	if e.Code == nil {
+		return "ForbiddenException"
+	}
+	return *e.Code
+}
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
@@ -96,6 +124,8 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // exception.
 type GrantFlowEntitlements420Exception struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -110,7 +140,10 @@ func (e *GrantFlowEntitlements420Exception) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GrantFlowEntitlements420Exception) ErrorCode() string {
-	return "GrantFlowEntitlements420Exception"
+	if e.Code == nil {
+		return "GrantFlowEntitlements420Exception"
+	}
+	return *e.Code
 }
 func (e *GrantFlowEntitlements420Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -119,6 +152,8 @@ func (e *GrantFlowEntitlements420Exception) ErrorFault() smithy.ErrorFault { ret
 // exception.
 type InternalServerErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -132,7 +167,12 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
+func (e *InternalServerErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
@@ -140,6 +180,8 @@ func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return s
 // exception.
 type NotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -153,7 +195,12 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotFoundException"
+	}
+	return *e.Code
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
@@ -161,6 +208,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // exception.
 type ServiceUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -174,7 +223,12 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Exception raised by AWS Elemental MediaConnect. See the error message and
@@ -182,6 +236,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // exception.
 type TooManyRequestsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -195,5 +251,10 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.Code
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

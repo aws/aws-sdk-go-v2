@@ -12,6 +12,8 @@ import (
 type InternalServiceErrorException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceErrorException) ErrorCode() string             { return "InternalServiceErrorException" }
+func (e *InternalServiceErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServiceErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // One or more parameters in your request was invalid.
 type InvalidParameterException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The calls to the GetEntitlements API are throttled.
 type ThrottlingException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -62,5 +78,10 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottlingException"
+	}
+	return *e.Code
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

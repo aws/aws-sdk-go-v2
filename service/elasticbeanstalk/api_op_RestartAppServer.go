@@ -27,6 +27,7 @@ func (c *Client) RestartAppServer(ctx context.Context, params *RestartAppServerI
 	return out, nil
 }
 
+//
 type RestartAppServerInput struct {
 
 	// The ID of the environment to restart the server for. Condition: You must specify

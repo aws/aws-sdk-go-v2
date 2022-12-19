@@ -39,6 +39,7 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 	return out, nil
 }
 
+//
 type RemovePermissionInput struct {
 
 	// The identification of the permission to remove. This is the label added using

@@ -31,6 +31,7 @@ func (c *Client) DisableSnapshotCopy(ctx context.Context, params *DisableSnapsho
 	return out, nil
 }
 
+//
 type DisableSnapshotCopyInput struct {
 
 	// The unique identifier of the source cluster that you want to disable copying of

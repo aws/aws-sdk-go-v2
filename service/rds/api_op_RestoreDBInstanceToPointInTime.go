@@ -38,6 +38,7 @@ func (c *Client) RestoreDBInstanceToPointInTime(ctx context.Context, params *Res
 	return out, nil
 }
 
+//
 type RestoreDBInstanceToPointInTimeInput struct {
 
 	// The name of the new DB instance to be created. Constraints:

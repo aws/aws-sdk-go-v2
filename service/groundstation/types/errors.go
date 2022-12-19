@@ -11,6 +11,8 @@ import (
 type DependencyException struct {
 	Message *string
 
+	Code *string
+
 	ParameterName *string
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *DependencyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DependencyException) ErrorCode() string             { return "DependencyException" }
+func (e *DependencyException) ErrorCode() string {
+	if e.Code == nil {
+		return "DependencyException"
+	}
+	return *e.Code
+}
 func (e *DependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // One or more parameters are not valid.
 type InvalidParameterException struct {
 	Message *string
+
+	Code *string
 
 	ParameterName *string
 
@@ -46,12 +55,19 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Account limits for this resource have been exceeded.
 type ResourceLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	ParameterName *string
 
@@ -67,12 +83,19 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
+func (e *ResourceLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -86,5 +109,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

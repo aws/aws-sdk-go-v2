@@ -29,6 +29,7 @@ func (c *Client) CancelReplicationTaskAssessmentRun(ctx context.Context, params 
 	return out, nil
 }
 
+//
 type CancelReplicationTaskAssessmentRunInput struct {
 
 	// Amazon Resource Name (ARN) of the premigration assessment run to be canceled.
@@ -39,6 +40,7 @@ type CancelReplicationTaskAssessmentRunInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CancelReplicationTaskAssessmentRunOutput struct {
 
 	// The ReplicationTaskAssessmentRun object for the canceled assessment run.

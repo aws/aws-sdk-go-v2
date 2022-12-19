@@ -28,6 +28,7 @@ func (c *Client) DeleteVirtualRouter(ctx context.Context, params *DeleteVirtualR
 	return out, nil
 }
 
+//
 type DeleteVirtualRouterInput struct {
 
 	// The name of the service mesh to delete the virtual router in.
@@ -49,6 +50,7 @@ type DeleteVirtualRouterInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DeleteVirtualRouterOutput struct {
 
 	// The virtual router that was deleted.

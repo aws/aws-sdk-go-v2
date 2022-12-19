@@ -27,6 +27,7 @@ func (c *Client) GetSatellite(ctx context.Context, params *GetSatelliteInput, op
 	return out, nil
 }
 
+//
 type GetSatelliteInput struct {
 
 	// UUID of a satellite.
@@ -37,6 +38,7 @@ type GetSatelliteInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type GetSatelliteOutput struct {
 
 	// The current ephemeris being used to compute the trajectory of the satellite.

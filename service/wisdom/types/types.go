@@ -81,8 +81,7 @@ type AssistantAssociationData struct {
 // The data that is input into Wisdom as a result of the assistant association.
 //
 // The following types satisfy this interface:
-//
-//	AssistantAssociationInputDataMemberKnowledgeBaseId
+//  AssistantAssociationInputDataMemberKnowledgeBaseId
 type AssistantAssociationInputData interface {
 	isAssistantAssociationInputData()
 }
@@ -99,8 +98,7 @@ func (*AssistantAssociationInputDataMemberKnowledgeBaseId) isAssistantAssociatio
 // The data that is output as a result of the assistant association.
 //
 // The following types satisfy this interface:
-//
-//	AssistantAssociationOutputDataMemberKnowledgeBaseAssociation
+//  AssistantAssociationOutputDataMemberKnowledgeBaseAssociation
 type AssistantAssociationOutputData interface {
 	isAssistantAssociationOutputData()
 }
@@ -648,8 +646,7 @@ type RecommendationTrigger struct {
 // A union type containing information related to the trigger.
 //
 // The following types satisfy this interface:
-//
-//	RecommendationTriggerDataMemberQuery
+//  RecommendationTriggerDataMemberQuery
 type RecommendationTriggerData interface {
 	isRecommendationTriggerData()
 }
@@ -780,8 +777,7 @@ type SessionSummary struct {
 // Configuration information about the external data source.
 //
 // The following types satisfy this interface:
-//
-//	SourceConfigurationMemberAppIntegrations
+//  SourceConfigurationMemberAppIntegrations
 type SourceConfiguration interface {
 	isSourceConfiguration()
 }

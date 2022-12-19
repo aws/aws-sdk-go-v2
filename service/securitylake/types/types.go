@@ -208,9 +208,8 @@ type RetentionSetting struct {
 // Security Lake.
 //
 // The following types satisfy this interface:
-//
-//	SourceTypeMemberAwsSourceType
-//	SourceTypeMemberCustomSourceType
+//  SourceTypeMemberAwsSourceType
+//  SourceTypeMemberCustomSourceType
 type SourceType interface {
 	isSourceType()
 }

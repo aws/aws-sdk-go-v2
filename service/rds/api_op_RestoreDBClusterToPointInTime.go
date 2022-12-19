@@ -44,6 +44,7 @@ func (c *Client) RestoreDBClusterToPointInTime(ctx context.Context, params *Rest
 	return out, nil
 }
 
+//
 type RestoreDBClusterToPointInTimeInput struct {
 
 	// The name of the new DB cluster to be created. Constraints:

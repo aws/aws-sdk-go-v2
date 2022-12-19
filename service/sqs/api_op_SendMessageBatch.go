@@ -45,6 +45,7 @@ func (c *Client) SendMessageBatch(ctx context.Context, params *SendMessageBatchI
 	return out, nil
 }
 
+//
 type SendMessageBatchInput struct {
 
 	// A list of SendMessageBatchRequestEntry items.

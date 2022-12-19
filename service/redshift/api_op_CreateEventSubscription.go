@@ -45,6 +45,7 @@ func (c *Client) CreateEventSubscription(ctx context.Context, params *CreateEven
 	return out, nil
 }
 
+//
 type CreateEventSubscriptionInput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic used to transmit the

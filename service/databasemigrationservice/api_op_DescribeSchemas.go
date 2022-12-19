@@ -27,6 +27,7 @@ func (c *Client) DescribeSchemas(ctx context.Context, params *DescribeSchemasInp
 	return out, nil
 }
 
+//
 type DescribeSchemasInput struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -48,6 +49,7 @@ type DescribeSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeSchemasOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

@@ -48,6 +48,7 @@ func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, op
 	return out, nil
 }
 
+//
 type DescribeTagsInput struct {
 
 	// A value that indicates the starting point for the next set of response records
@@ -116,6 +117,7 @@ type DescribeTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeTagsOutput struct {
 
 	// A value that indicates the starting point for the next set of response records

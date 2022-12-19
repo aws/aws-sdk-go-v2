@@ -11,6 +11,8 @@ import (
 type ConflictException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exceeded the maximum limit for connections.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Resource not found. Verify the connection resource ARN and try again.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +77,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Resource not found. Verify the ARN for the host resource and try again.
 type ResourceUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -80,12 +103,19 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceUnavailableException) ErrorCode() string             { return "ResourceUnavailableException" }
+func (e *ResourceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation is not supported. Check the connection status and try again.
 type UnsupportedOperationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -99,5 +129,10 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
+func (e *UnsupportedOperationException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnsupportedOperationException"
+	}
+	return *e.Code
+}
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

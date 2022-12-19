@@ -27,6 +27,7 @@ func (c *Client) DeleteDBParameterGroup(ctx context.Context, params *DeleteDBPar
 	return out, nil
 }
 
+//
 type DeleteDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:

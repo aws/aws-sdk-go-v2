@@ -639,8 +639,7 @@ type CodeContentUpdate struct {
 // the following sample records use CSV format, where the records use the '\n' as
 // the row delimiter and a comma (",") as the column delimiter: "name1",
 // "address1"
-//
-//	"name2", "address2"
+//     "name2", "address2"
 type CSVMappingParameters struct {
 
 	// The column delimiter. For example, in a CSV format, a comma (",") is the typical

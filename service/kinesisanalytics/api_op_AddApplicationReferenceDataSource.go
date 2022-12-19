@@ -42,6 +42,7 @@ func (c *Client) AddApplicationReferenceDataSource(ctx context.Context, params *
 	return out, nil
 }
 
+//
 type AddApplicationReferenceDataSourceInput struct {
 
 	// Name of an existing application.
@@ -71,6 +72,7 @@ type AddApplicationReferenceDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type AddApplicationReferenceDataSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

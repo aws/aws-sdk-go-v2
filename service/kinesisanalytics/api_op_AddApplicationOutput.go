@@ -50,6 +50,7 @@ func (c *Client) AddApplicationOutput(ctx context.Context, params *AddApplicatio
 	return out, nil
 }
 
+//
 type AddApplicationOutputInput struct {
 
 	// Name of the application to which you want to add the output configuration.
@@ -78,6 +79,7 @@ type AddApplicationOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type AddApplicationOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -33,6 +33,7 @@ func (c *Client) DescribeReplicationTaskAssessmentResults(ctx context.Context, p
 	return out, nil
 }
 
+//
 type DescribeReplicationTaskAssessmentResultsInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -54,6 +55,7 @@ type DescribeReplicationTaskAssessmentResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeReplicationTaskAssessmentResultsOutput struct {
 
 	// - The Amazon S3 bucket where the task assessment report is located.

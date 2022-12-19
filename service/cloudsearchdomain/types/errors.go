@@ -11,6 +11,8 @@ import (
 type DocumentServiceException struct {
 	Message *string
 
+	Code *string
+
 	Status *string
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *DocumentServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DocumentServiceException) ErrorCode() string             { return "DocumentServiceException" }
+func (e *DocumentServiceException) ErrorCode() string {
+	if e.Code == nil {
+		return "DocumentServiceException"
+	}
+	return *e.Code
+}
 func (e *DocumentServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Information about any problems encountered while processing a search request.
 type SearchException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -44,5 +53,10 @@ func (e *SearchException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SearchException) ErrorCode() string             { return "SearchException" }
+func (e *SearchException) ErrorCode() string {
+	if e.Code == nil {
+		return "SearchException"
+	}
+	return *e.Code
+}
 func (e *SearchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

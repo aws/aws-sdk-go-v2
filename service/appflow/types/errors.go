@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,7 +25,12 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a conflict when processing the request (for example, a flow with the
@@ -31,6 +38,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // names and try again.
 type ConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -44,12 +53,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error occurred when authenticating with the connector endpoint.
 type ConnectorAuthenticationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -64,13 +80,18 @@ func (e *ConnectorAuthenticationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConnectorAuthenticationException) ErrorCode() string {
-	return "ConnectorAuthenticationException"
+	if e.Code == nil {
+		return "ConnectorAuthenticationException"
+	}
+	return *e.Code
 }
 func (e *ConnectorAuthenticationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error occurred when retrieving data from the connector endpoint.
 type ConnectorServerException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -84,13 +105,20 @@ func (e *ConnectorServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConnectorServerException) ErrorCode() string             { return "ConnectorServerException" }
+func (e *ConnectorServerException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConnectorServerException"
+	}
+	return *e.Code
+}
 func (e *ConnectorServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal service error occurred during the processing of your request. Try
 // again later.
 type InternalServerException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -104,13 +132,20 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerException"
+	}
+	return *e.Code
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The resource specified in the request (such as the source or destination
 // connector profile) is not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -124,13 +159,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would cause a service quota (such as the number of flows) to be
 // exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -144,13 +186,20 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.Code
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // API calls have exceeded the maximum allowed API request rate per account and per
 // Region.
 type ThrottlingException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -164,12 +213,19 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottlingException"
+	}
+	return *e.Code
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation is not supported for the current flow.
 type UnsupportedOperationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -183,12 +239,19 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
+func (e *UnsupportedOperationException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnsupportedOperationException"
+	}
+	return *e.Code
+}
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request has invalid or missing parameters.
 type ValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -202,5 +265,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationException"
+	}
+	return *e.Code
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

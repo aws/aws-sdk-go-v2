@@ -12,7 +12,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Context map[string]string
 
 	noSmithyDocumentSerde
@@ -27,14 +28,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Another operation is in progress.
 type ConflictException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Context map[string]string
 
 	noSmithyDocumentSerde
@@ -49,14 +56,20 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal error has occurred. Please retry your request.
 type InternalServerErrorException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Context map[string]string
 
 	noSmithyDocumentSerde
@@ -71,14 +84,20 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
+func (e *InternalServerErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The specified resource could not be found.
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Context map[string]string
 
 	noSmithyDocumentSerde
@@ -93,7 +112,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your current quota does not allow you to perform the request action. You can
@@ -102,7 +126,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ServiceQuotaExceededException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Context map[string]string
 
 	noSmithyDocumentSerde
@@ -117,14 +142,20 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.Code
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request throughput limit was exceeded.
 type ThrottlingException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Context map[string]string
 
 	noSmithyDocumentSerde
@@ -139,14 +170,20 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottlingException"
+	}
+	return *e.Code
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One of the parameters in the request is invalid.
 type ValidationException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Context map[string]string
 
 	noSmithyDocumentSerde
@@ -161,5 +198,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationException"
+	}
+	return *e.Code
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -44,9 +44,8 @@ type Address struct {
 // unique GroupDisplayName.
 //
 // The following types satisfy this interface:
-//
-//	AlternateIdentifierMemberExternalId
-//	AlternateIdentifierMemberUniqueAttribute
+//  AlternateIdentifierMemberExternalId
+//  AlternateIdentifierMemberUniqueAttribute
 type AlternateIdentifier interface {
 	isAlternateIdentifier()
 }
@@ -212,8 +211,7 @@ type GroupMembershipExistenceResult struct {
 // An object containing the identifier of a group member.
 //
 // The following types satisfy this interface:
-//
-//	MemberIdMemberUserId
+//  MemberIdMemberUserId
 type MemberId interface {
 	isMemberId()
 }

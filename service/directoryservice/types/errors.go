@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	Code *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An authentication error occurred.
 type AuthenticationFailedException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -46,12 +55,19 @@ func (e *AuthenticationFailedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthenticationFailedException) ErrorCode() string             { return "AuthenticationFailedException" }
+func (e *AuthenticationFailedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AuthenticationFailedException"
+	}
+	return *e.Code
+}
 func (e *AuthenticationFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The certificate has already been registered into the system.
 type CertificateAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -68,7 +84,10 @@ func (e *CertificateAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateAlreadyExistsException) ErrorCode() string {
-	return "CertificateAlreadyExistsException"
+	if e.Code == nil {
+		return "CertificateAlreadyExistsException"
+	}
+	return *e.Code
 }
 func (e *CertificateAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -76,6 +95,8 @@ func (e *CertificateAlreadyExistsException) ErrorFault() smithy.ErrorFault { ret
 // activities.
 type CertificateDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -92,7 +113,10 @@ func (e *CertificateDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateDoesNotExistException) ErrorCode() string {
-	return "CertificateDoesNotExistException"
+	if e.Code == nil {
+		return "CertificateDoesNotExistException"
+	}
+	return *e.Code
 }
 func (e *CertificateDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -100,6 +124,8 @@ func (e *CertificateDoesNotExistException) ErrorFault() smithy.ErrorFault { retu
 // removed without disabling LDAP security.
 type CertificateInUseException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -115,13 +141,20 @@ func (e *CertificateInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CertificateInUseException) ErrorCode() string             { return "CertificateInUseException" }
+func (e *CertificateInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "CertificateInUseException"
+	}
+	return *e.Code
+}
 func (e *CertificateInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The certificate could not be added because the certificate limit has been
 // reached.
 type CertificateLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -138,13 +171,18 @@ func (e *CertificateLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateLimitExceededException) ErrorCode() string {
-	return "CertificateLimitExceededException"
+	if e.Code == nil {
+		return "CertificateLimitExceededException"
+	}
+	return *e.Code
 }
 func (e *CertificateLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A client exception has occurred.
 type ClientException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -160,13 +198,20 @@ func (e *ClientException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClientException) ErrorCode() string             { return "ClientException" }
+func (e *ClientException) ErrorCode() string {
+	if e.Code == nil {
+		return "ClientException"
+	}
+	return *e.Code
+}
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Region you specified is the same Region where the Managed Microsoft AD
 // directory was created. Specify a different Region and try again.
 type DirectoryAlreadyInRegionException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -183,7 +228,10 @@ func (e *DirectoryAlreadyInRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryAlreadyInRegionException) ErrorCode() string {
-	return "DirectoryAlreadyInRegionException"
+	if e.Code == nil {
+		return "DirectoryAlreadyInRegionException"
+	}
+	return *e.Code
 }
 func (e *DirectoryAlreadyInRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -191,6 +239,8 @@ func (e *DirectoryAlreadyInRegionException) ErrorFault() smithy.ErrorFault { ret
 // account.
 type DirectoryAlreadySharedException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -207,13 +257,18 @@ func (e *DirectoryAlreadySharedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryAlreadySharedException) ErrorCode() string {
-	return "DirectoryAlreadySharedException"
+	if e.Code == nil {
+		return "DirectoryAlreadySharedException"
+	}
+	return *e.Code
 }
 func (e *DirectoryAlreadySharedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified directory does not exist in the system.
 type DirectoryDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -229,12 +284,19 @@ func (e *DirectoryDoesNotExistException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DirectoryDoesNotExistException) ErrorCode() string             { return "DirectoryDoesNotExistException" }
+func (e *DirectoryDoesNotExistException) ErrorCode() string {
+	if e.Code == nil {
+		return "DirectoryDoesNotExistException"
+	}
+	return *e.Code
+}
 func (e *DirectoryDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The directory is already updated to desired update type settings.
 type DirectoryInDesiredStateException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -251,7 +313,10 @@ func (e *DirectoryInDesiredStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryInDesiredStateException) ErrorCode() string {
-	return "DirectoryInDesiredStateException"
+	if e.Code == nil {
+		return "DirectoryInDesiredStateException"
+	}
+	return *e.Code
 }
 func (e *DirectoryInDesiredStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -260,6 +325,8 @@ func (e *DirectoryInDesiredStateException) ErrorFault() smithy.ErrorFault { retu
 // region.
 type DirectoryLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -276,7 +343,10 @@ func (e *DirectoryLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryLimitExceededException) ErrorCode() string {
-	return "DirectoryLimitExceededException"
+	if e.Code == nil {
+		return "DirectoryLimitExceededException"
+	}
+	return *e.Code
 }
 func (e *DirectoryLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -284,6 +354,8 @@ func (e *DirectoryLimitExceededException) ErrorFault() smithy.ErrorFault { retur
 // account.
 type DirectoryNotSharedException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -299,12 +371,19 @@ func (e *DirectoryNotSharedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DirectoryNotSharedException) ErrorCode() string             { return "DirectoryNotSharedException" }
+func (e *DirectoryNotSharedException) ErrorCode() string {
+	if e.Code == nil {
+		return "DirectoryNotSharedException"
+	}
+	return *e.Code
+}
 func (e *DirectoryNotSharedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified directory is unavailable or could not be found.
 type DirectoryUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -320,13 +399,20 @@ func (e *DirectoryUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DirectoryUnavailableException) ErrorCode() string             { return "DirectoryUnavailableException" }
+func (e *DirectoryUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "DirectoryUnavailableException"
+	}
+	return *e.Code
+}
 func (e *DirectoryUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum allowed number of domain controllers per directory was exceeded. The
 // default limit per directory is 20 domain controllers.
 type DomainControllerLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -343,7 +429,10 @@ func (e *DomainControllerLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DomainControllerLimitExceededException) ErrorCode() string {
-	return "DomainControllerLimitExceededException"
+	if e.Code == nil {
+		return "DomainControllerLimitExceededException"
+	}
+	return *e.Code
 }
 func (e *DomainControllerLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -352,6 +441,8 @@ func (e *DomainControllerLimitExceededException) ErrorFault() smithy.ErrorFault 
 // The specified entity already exists.
 type EntityAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -367,12 +458,19 @@ func (e *EntityAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntityAlreadyExistsException) ErrorCode() string             { return "EntityAlreadyExistsException" }
+func (e *EntityAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "EntityAlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified entity could not be found.
 type EntityDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -388,12 +486,19 @@ func (e *EntityDoesNotExistException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntityDoesNotExistException) ErrorCode() string             { return "EntityDoesNotExistException" }
+func (e *EntityDoesNotExistException) ErrorCode() string {
+	if e.Code == nil {
+		return "EntityDoesNotExistException"
+	}
+	return *e.Code
+}
 func (e *EntityDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified directory setting is not compatible with other settings.
 type IncompatibleSettingsException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -409,12 +514,19 @@ func (e *IncompatibleSettingsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IncompatibleSettingsException) ErrorCode() string             { return "IncompatibleSettingsException" }
+func (e *IncompatibleSettingsException) ErrorCode() string {
+	if e.Code == nil {
+		return "IncompatibleSettingsException"
+	}
+	return *e.Code
+}
 func (e *IncompatibleSettingsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The account does not have sufficient permission to perform the operation.
 type InsufficientPermissionsException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -431,13 +543,18 @@ func (e *InsufficientPermissionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientPermissionsException) ErrorCode() string {
-	return "InsufficientPermissionsException"
+	if e.Code == nil {
+		return "InsufficientPermissionsException"
+	}
+	return *e.Code
 }
 func (e *InsufficientPermissionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The certificate PEM that was provided has incorrect encoding.
 type InvalidCertificateException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -453,12 +570,19 @@ func (e *InvalidCertificateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidCertificateException) ErrorCode() string             { return "InvalidCertificateException" }
+func (e *InvalidCertificateException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidCertificateException"
+	}
+	return *e.Code
+}
 func (e *InvalidCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Client authentication is already enabled.
 type InvalidClientAuthStatusException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -475,7 +599,10 @@ func (e *InvalidClientAuthStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClientAuthStatusException) ErrorCode() string {
-	return "InvalidClientAuthStatusException"
+	if e.Code == nil {
+		return "InvalidClientAuthStatusException"
+	}
+	return *e.Code
 }
 func (e *InvalidClientAuthStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -483,6 +610,8 @@ func (e *InvalidClientAuthStatusException) ErrorFault() smithy.ErrorFault { retu
 // status.
 type InvalidLDAPSStatusException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -498,12 +627,19 @@ func (e *InvalidLDAPSStatusException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidLDAPSStatusException) ErrorCode() string             { return "InvalidLDAPSStatusException" }
+func (e *InvalidLDAPSStatusException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidLDAPSStatusException"
+	}
+	return *e.Code
+}
 func (e *InvalidLDAPSStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The NextToken value is not valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -519,12 +655,19 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.Code
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more parameters are not valid.
 type InvalidParameterException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -540,13 +683,20 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The new password provided by the user does not meet the password complexity
 // requirements defined in your directory.
 type InvalidPasswordException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -562,12 +712,19 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPasswordException) ErrorCode() string             { return "InvalidPasswordException" }
+func (e *InvalidPasswordException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidPasswordException"
+	}
+	return *e.Code
+}
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified shared target is not valid.
 type InvalidTargetException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -583,13 +740,20 @@ func (e *InvalidTargetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTargetException) ErrorCode() string             { return "InvalidTargetException" }
+func (e *InvalidTargetException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidTargetException"
+	}
+	return *e.Code
+}
 func (e *InvalidTargetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum allowed number of IP addresses was exceeded. The default limit is
 // 100 IP address blocks.
 type IpRouteLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -605,13 +769,20 @@ func (e *IpRouteLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IpRouteLimitExceededException) ErrorCode() string             { return "IpRouteLimitExceededException" }
+func (e *IpRouteLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "IpRouteLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *IpRouteLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Client authentication setup could not be completed because at least one valid
 // certificate must be registered in the system.
 type NoAvailableCertificateException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -628,7 +799,10 @@ func (e *NoAvailableCertificateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAvailableCertificateException) ErrorCode() string {
-	return "NoAvailableCertificateException"
+	if e.Code == nil {
+		return "NoAvailableCertificateException"
+	}
+	return *e.Code
 }
 func (e *NoAvailableCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -636,6 +810,8 @@ func (e *NoAvailableCertificateException) ErrorFault() smithy.ErrorFault { retur
 // organization.
 type OrganizationsException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -651,13 +827,20 @@ func (e *OrganizationsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OrganizationsException) ErrorCode() string             { return "OrganizationsException" }
+func (e *OrganizationsException) ErrorCode() string {
+	if e.Code == nil {
+		return "OrganizationsException"
+	}
+	return *e.Code
+}
 func (e *OrganizationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have reached the limit for maximum number of simultaneous Region
 // replications per directory.
 type RegionLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -673,12 +856,19 @@ func (e *RegionLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RegionLimitExceededException) ErrorCode() string             { return "RegionLimitExceededException" }
+func (e *RegionLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "RegionLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *RegionLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception has occurred in Directory Service.
 type ServiceException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -694,13 +884,20 @@ func (e *ServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
+func (e *ServiceException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceException"
+	}
+	return *e.Code
+}
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The maximum number of Amazon Web Services accounts that you can share with this
 // directory has been reached.
 type ShareLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -716,7 +913,12 @@ func (e *ShareLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ShareLimitExceededException) ErrorCode() string             { return "ShareLimitExceededException" }
+func (e *ShareLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "ShareLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *ShareLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum number of manual snapshots for the directory has been reached. You
@@ -724,6 +926,8 @@ func (e *ShareLimitExceededException) ErrorFault() smithy.ErrorFault { return sm
 // directory.
 type SnapshotLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -739,12 +943,19 @@ func (e *SnapshotLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SnapshotLimitExceededException) ErrorCode() string             { return "SnapshotLimitExceededException" }
+func (e *SnapshotLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "SnapshotLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *SnapshotLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum allowed number of tags was exceeded.
 type TagLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -760,12 +971,19 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagLimitExceededException) ErrorCode() string             { return "TagLimitExceededException" }
+func (e *TagLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "TagLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation is not supported.
 type UnsupportedOperationException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -781,12 +999,19 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
+func (e *UnsupportedOperationException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnsupportedOperationException"
+	}
+	return *e.Code
+}
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified directory setting is not supported.
 type UnsupportedSettingsException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -802,12 +1027,19 @@ func (e *UnsupportedSettingsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedSettingsException) ErrorCode() string             { return "UnsupportedSettingsException" }
+func (e *UnsupportedSettingsException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnsupportedSettingsException"
+	}
+	return *e.Code
+}
 func (e *UnsupportedSettingsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user provided a username that does not exist in your directory.
 type UserDoesNotExistException struct {
 	Message *string
+
+	Code *string
 
 	RequestId *string
 
@@ -823,5 +1055,10 @@ func (e *UserDoesNotExistException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UserDoesNotExistException) ErrorCode() string             { return "UserDoesNotExistException" }
+func (e *UserDoesNotExistException) ErrorCode() string {
+	if e.Code == nil {
+		return "UserDoesNotExistException"
+	}
+	return *e.Code
+}
 func (e *UserDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

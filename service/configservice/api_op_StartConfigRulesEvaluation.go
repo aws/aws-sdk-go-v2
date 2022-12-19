@@ -54,6 +54,7 @@ func (c *Client) StartConfigRulesEvaluation(ctx context.Context, params *StartCo
 	return out, nil
 }
 
+//
 type StartConfigRulesEvaluationInput struct {
 
 	// The list of names of Config rules that you want to run evaluations for.

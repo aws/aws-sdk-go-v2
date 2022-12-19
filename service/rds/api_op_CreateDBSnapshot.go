@@ -28,6 +28,7 @@ func (c *Client) CreateDBSnapshot(ctx context.Context, params *CreateDBSnapshotI
 	return out, nil
 }
 
+//
 type CreateDBSnapshotInput struct {
 
 	// The identifier of the DB instance that you want to create the snapshot of.

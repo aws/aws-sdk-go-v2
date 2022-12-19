@@ -741,6 +741,7 @@ type Prediction struct {
 	noSmithyDocumentSerde
 }
 
+//
 type QueriesConfig struct {
 
 	//

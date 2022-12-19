@@ -41,9 +41,8 @@ type AudioEvent struct {
 // (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html).
 //
 // The following types satisfy this interface:
-//
-//	AudioStreamMemberAudioEvent
-//	AudioStreamMemberConfigurationEvent
+//  AudioStreamMemberAudioEvent
+//  AudioStreamMemberConfigurationEvent
 type AudioStream interface {
 	isAudioStream()
 }
@@ -142,9 +141,8 @@ type CallAnalyticsItem struct {
 // details are provided in the UtteranceEvent and CategoryEvent objects.
 //
 // The following types satisfy this interface:
-//
-//	CallAnalyticsTranscriptResultStreamMemberCategoryEvent
-//	CallAnalyticsTranscriptResultStreamMemberUtteranceEvent
+//  CallAnalyticsTranscriptResultStreamMemberCategoryEvent
+//  CallAnalyticsTranscriptResultStreamMemberUtteranceEvent
 type CallAnalyticsTranscriptResultStream interface {
 	isCallAnalyticsTranscriptResultStream()
 }
@@ -474,8 +472,7 @@ type MedicalTranscriptEvent struct {
 // Contains detailed information about your streaming session.
 //
 // The following types satisfy this interface:
-//
-//	MedicalTranscriptResultStreamMemberTranscriptEvent
+//  MedicalTranscriptResultStreamMemberTranscriptEvent
 type MedicalTranscriptResultStream interface {
 	isMedicalTranscriptResultStream()
 }
@@ -667,8 +664,7 @@ type TranscriptEvent struct {
 // Contains detailed information about your streaming session.
 //
 // The following types satisfy this interface:
-//
-//	TranscriptResultStreamMemberTranscriptEvent
+//  TranscriptResultStreamMemberTranscriptEvent
 type TranscriptResultStream interface {
 	isTranscriptResultStream()
 }

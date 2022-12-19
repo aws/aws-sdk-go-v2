@@ -26,6 +26,7 @@ func (c *Client) CancelContact(ctx context.Context, params *CancelContactInput, 
 	return out, nil
 }
 
+//
 type CancelContactInput struct {
 
 	// UUID of a contact.
@@ -36,6 +37,7 @@ type CancelContactInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CancelContactOutput struct {
 
 	// UUID of a contact.

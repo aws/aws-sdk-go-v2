@@ -26,6 +26,7 @@ func (c *Client) DeleteReplicationSubnetGroup(ctx context.Context, params *Delet
 	return out, nil
 }
 
+//
 type DeleteReplicationSubnetGroupInput struct {
 
 	// The subnet group name of the replication instance.
@@ -36,6 +37,7 @@ type DeleteReplicationSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DeleteReplicationSubnetGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

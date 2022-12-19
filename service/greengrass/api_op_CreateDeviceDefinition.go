@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a device definition. You may provide the initial version of the device
-// definition now or use ”CreateDeviceDefinitionVersion” at a later time.
+// definition now or use ''CreateDeviceDefinitionVersion'' at a later time.
 func (c *Client) CreateDeviceDefinition(ctx context.Context, params *CreateDeviceDefinitionInput, optFns ...func(*Options)) (*CreateDeviceDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateDeviceDefinitionInput{}

@@ -11,6 +11,8 @@ import (
 type AccountActionRequiredException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *AccountActionRequiredException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccountActionRequiredException) ErrorCode() string             { return "AccountActionRequiredException" }
+func (e *AccountActionRequiredException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccountActionRequiredException"
+	}
+	return *e.Code
+}
 func (e *AccountActionRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request cannot be processed because some parameter is not valid or the
 // project state prevents the operation from being performed.
 type BadRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,13 +52,20 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "BadRequestException"
+	}
+	return *e.Code
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service has encountered an unexpected error condition which prevents it from
 // servicing the request.
 type InternalFailureException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -63,7 +79,12 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalFailureException"
+	}
+	return *e.Code
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // There are too many AWS Mobile Hub projects in the account or the account has
@@ -72,6 +93,8 @@ func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smith
 // your request.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RetryAfterSeconds *string
 
@@ -87,12 +110,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No entity can be found with the specified identifier.
 type NotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -106,13 +136,20 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotFoundException"
+	}
+	return *e.Code
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is temporarily unavailable. The request should be retried after some
 // time delay.
 type ServiceUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	RetryAfterSeconds *string
 
@@ -128,13 +165,20 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Too many requests have been received for this AWS account in too short a time.
 // The request should be retried after some time delay.
 type TooManyRequestsException struct {
 	Message *string
+
+	Code *string
 
 	RetryAfterSeconds *string
 
@@ -150,12 +194,19 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.Code
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Credentials of the caller are insufficient to authorize the request.
 type UnauthorizedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -169,5 +220,10 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
+func (e *UnauthorizedException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnauthorizedException"
+	}
+	return *e.Code
+}
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -32,6 +32,7 @@ func (c *Client) CreateClusterSubnetGroup(ctx context.Context, params *CreateClu
 	return out, nil
 }
 
+//
 type CreateClusterSubnetGroupInput struct {
 
 	// The name for the subnet group. Amazon Redshift stores the value as a lowercase

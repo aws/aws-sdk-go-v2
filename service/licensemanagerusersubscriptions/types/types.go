@@ -35,8 +35,7 @@ type Filter struct {
 // Details about an identity provider.
 //
 // The following types satisfy this interface:
-//
-//	IdentityProviderMemberActiveDirectoryIdentityProvider
+//  IdentityProviderMemberActiveDirectoryIdentityProvider
 type IdentityProvider interface {
 	isIdentityProvider()
 }

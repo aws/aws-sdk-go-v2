@@ -15,6 +15,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -27,7 +29,12 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation that you attempted requires you to have the
@@ -36,6 +43,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // permission.
 type AccessDeniedForDependencyException struct {
 	Message *string
+
+	Code *string
 
 	Reason AccessDeniedForDependencyExceptionReason
 
@@ -52,7 +61,10 @@ func (e *AccessDeniedForDependencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedForDependencyException) ErrorCode() string {
-	return "AccessDeniedForDependencyException"
+	if e.Code == nil {
+		return "AccessDeniedForDependencyException"
+	}
+	return *e.Code
 }
 func (e *AccessDeniedForDependencyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -61,6 +73,8 @@ func (e *AccessDeniedForDependencyException) ErrorFault() smithy.ErrorFault {
 // You attempted to close an account that is already closed.
 type AccountAlreadyClosedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -74,13 +88,20 @@ func (e *AccountAlreadyClosedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccountAlreadyClosedException) ErrorCode() string             { return "AccountAlreadyClosedException" }
+func (e *AccountAlreadyClosedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccountAlreadyClosedException"
+	}
+	return *e.Code
+}
 func (e *AccountAlreadyClosedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified account is already a delegated administrator for this Amazon Web
 // Services service.
 type AccountAlreadyRegisteredException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -95,7 +116,10 @@ func (e *AccountAlreadyRegisteredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountAlreadyRegisteredException) ErrorCode() string {
-	return "AccountAlreadyRegisteredException"
+	if e.Code == nil {
+		return "AccountAlreadyRegisteredException"
+	}
+	return *e.Code
 }
 func (e *AccountAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -104,6 +128,8 @@ func (e *AccountAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { ret
 // a member of an organization.
 type AccountNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -117,13 +143,20 @@ func (e *AccountNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccountNotFoundException) ErrorCode() string             { return "AccountNotFoundException" }
+func (e *AccountNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccountNotFoundException"
+	}
+	return *e.Code
+}
 func (e *AccountNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified account is not a delegated administrator for this Amazon Web
 // Services service.
 type AccountNotRegisteredException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -137,7 +170,12 @@ func (e *AccountNotRegisteredException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccountNotRegisteredException) ErrorCode() string             { return "AccountNotRegisteredException" }
+func (e *AccountNotRegisteredException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccountNotRegisteredException"
+	}
+	return *e.Code
+}
 func (e *AccountNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't invite an existing account to your organization until you verify that
@@ -147,6 +185,8 @@ func (e *AccountNotRegisteredException) ErrorFault() smithy.ErrorFault { return 
 // in the Organizations User Guide.
 type AccountOwnerNotVerifiedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -161,7 +201,10 @@ func (e *AccountOwnerNotVerifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountOwnerNotVerifiedException) ErrorCode() string {
-	return "AccountOwnerNotVerifiedException"
+	if e.Code == nil {
+		return "AccountOwnerNotVerifiedException"
+	}
+	return *e.Code
 }
 func (e *AccountOwnerNotVerifiedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -169,6 +212,8 @@ func (e *AccountOwnerNotVerifiedException) ErrorFault() smithy.ErrorFault { retu
 // only one organization at a time.
 type AlreadyInOrganizationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -182,13 +227,20 @@ func (e *AlreadyInOrganizationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AlreadyInOrganizationException) ErrorCode() string             { return "AlreadyInOrganizationException" }
+func (e *AlreadyInOrganizationException) ErrorCode() string {
+	if e.Code == nil {
+		return "AlreadyInOrganizationException"
+	}
+	return *e.Code
+}
 func (e *AlreadyInOrganizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your account isn't a member of an organization. To make this request, you must
 // use the credentials of an account that belongs to an organization.
 type AWSOrganizationsNotInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -203,7 +255,10 @@ func (e *AWSOrganizationsNotInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AWSOrganizationsNotInUseException) ErrorCode() string {
-	return "AWSOrganizationsNotInUseException"
+	if e.Code == nil {
+		return "AWSOrganizationsNotInUseException"
+	}
+	return *e.Code
 }
 func (e *AWSOrganizationsNotInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -211,6 +266,8 @@ func (e *AWSOrganizationsNotInUseException) ErrorFault() smithy.ErrorFault { ret
 // the ChildId that you specified.
 type ChildNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -224,13 +281,20 @@ func (e *ChildNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ChildNotFoundException) ErrorCode() string             { return "ChildNotFoundException" }
+func (e *ChildNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ChildNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ChildNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The target of the operation is currently being modified by a different request.
 // Try again later.
 type ConcurrentModificationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -245,7 +309,10 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.Code == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.Code
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -253,6 +320,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // resource.
 type ConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -266,7 +335,12 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Performing this operation violates a minimum or maximum value limit. For
@@ -446,6 +520,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type ConstraintViolationException struct {
 	Message *string
 
+	Code *string
+
 	Reason ConstraintViolationExceptionReason
 
 	noSmithyDocumentSerde
@@ -460,13 +536,20 @@ func (e *ConstraintViolationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConstraintViolationException) ErrorCode() string             { return "ConstraintViolationException" }
+func (e *ConstraintViolationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConstraintViolationException"
+	}
+	return *e.Code
+}
 func (e *ConstraintViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // We can't find an create account request with the CreateAccountRequestId that you
 // specified.
 type CreateAccountStatusNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -481,7 +564,10 @@ func (e *CreateAccountStatusNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CreateAccountStatusNotFoundException) ErrorCode() string {
-	return "CreateAccountStatusNotFoundException"
+	if e.Code == nil {
+		return "CreateAccountStatusNotFoundException"
+	}
+	return *e.Code
 }
 func (e *CreateAccountStatusNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -491,6 +577,8 @@ func (e *CreateAccountStatusNotFoundException) ErrorFault() smithy.ErrorFault {
 // you specified.
 type DestinationParentNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -505,7 +593,10 @@ func (e *DestinationParentNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DestinationParentNotFoundException) ErrorCode() string {
-	return "DestinationParentNotFoundException"
+	if e.Code == nil {
+		return "DestinationParentNotFoundException"
+	}
+	return *e.Code
 }
 func (e *DestinationParentNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -514,6 +605,8 @@ func (e *DestinationParentNotFoundException) ErrorFault() smithy.ErrorFault {
 // That account is already present in the specified destination.
 type DuplicateAccountException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -527,7 +620,12 @@ func (e *DuplicateAccountException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateAccountException) ErrorCode() string             { return "DuplicateAccountException" }
+func (e *DuplicateAccountException) ErrorCode() string {
+	if e.Code == nil {
+		return "DuplicateAccountException"
+	}
+	return *e.Code
+}
 func (e *DuplicateAccountException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A handshake with the same action and target already exists. For example, if you
@@ -537,6 +635,8 @@ func (e *DuplicateAccountException) ErrorFault() smithy.ErrorFault { return smit
 // considered duplicates are canceled or declined.
 type DuplicateHandshakeException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -550,12 +650,19 @@ func (e *DuplicateHandshakeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateHandshakeException) ErrorCode() string             { return "DuplicateHandshakeException" }
+func (e *DuplicateHandshakeException) ErrorCode() string {
+	if e.Code == nil {
+		return "DuplicateHandshakeException"
+	}
+	return *e.Code
+}
 func (e *DuplicateHandshakeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An OU with the same name already exists.
 type DuplicateOrganizationalUnitException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -570,7 +677,10 @@ func (e *DuplicateOrganizationalUnitException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateOrganizationalUnitException) ErrorCode() string {
-	return "DuplicateOrganizationalUnitException"
+	if e.Code == nil {
+		return "DuplicateOrganizationalUnitException"
+	}
+	return *e.Code
 }
 func (e *DuplicateOrganizationalUnitException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -579,6 +689,8 @@ func (e *DuplicateOrganizationalUnitException) ErrorFault() smithy.ErrorFault {
 // The selected policy is already attached to the specified target.
 type DuplicatePolicyAttachmentException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -593,7 +705,10 @@ func (e *DuplicatePolicyAttachmentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicatePolicyAttachmentException) ErrorCode() string {
-	return "DuplicatePolicyAttachmentException"
+	if e.Code == nil {
+		return "DuplicatePolicyAttachmentException"
+	}
+	return *e.Code
 }
 func (e *DuplicatePolicyAttachmentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -602,6 +717,8 @@ func (e *DuplicatePolicyAttachmentException) ErrorFault() smithy.ErrorFault {
 // A policy with the same name already exists.
 type DuplicatePolicyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -615,7 +732,12 @@ func (e *DuplicatePolicyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicatePolicyException) ErrorCode() string             { return "DuplicatePolicyException" }
+func (e *DuplicatePolicyException) ErrorCode() string {
+	if e.Code == nil {
+		return "DuplicatePolicyException"
+	}
+	return *e.Code
+}
 func (e *DuplicatePolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // If you ran this action on the management account, this policy type is not
@@ -624,6 +746,8 @@ func (e *DuplicatePolicyException) ErrorFault() smithy.ErrorFault { return smith
 // about attaching a policy of this type to the account.
 type EffectivePolicyNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -638,7 +762,10 @@ func (e *EffectivePolicyNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EffectivePolicyNotFoundException) ErrorCode() string {
-	return "EffectivePolicyNotFoundException"
+	if e.Code == nil {
+		return "EffectivePolicyNotFoundException"
+	}
+	return *e.Code
 }
 func (e *EffectivePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -648,6 +775,8 @@ func (e *EffectivePolicyNotFoundException) ErrorFault() smithy.ErrorFault { retu
 // (https://console.aws.amazon.com/support/home#/).
 type FinalizingOrganizationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -662,7 +791,10 @@ func (e *FinalizingOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FinalizingOrganizationException) ErrorCode() string {
-	return "FinalizingOrganizationException"
+	if e.Code == nil {
+		return "FinalizingOrganizationException"
+	}
+	return *e.Code
 }
 func (e *FinalizingOrganizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -670,6 +802,8 @@ func (e *FinalizingOrganizationException) ErrorFault() smithy.ErrorFault { retur
 // can't accept a handshake that was already accepted.
 type HandshakeAlreadyInStateException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -684,7 +818,10 @@ func (e *HandshakeAlreadyInStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HandshakeAlreadyInStateException) ErrorCode() string {
-	return "HandshakeAlreadyInStateException"
+	if e.Code == nil {
+		return "HandshakeAlreadyInStateException"
+	}
+	return *e.Code
 }
 func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -737,6 +874,8 @@ func (e *HandshakeAlreadyInStateException) ErrorFault() smithy.ErrorFault { retu
 type HandshakeConstraintViolationException struct {
 	Message *string
 
+	Code *string
+
 	Reason HandshakeConstraintViolationExceptionReason
 
 	noSmithyDocumentSerde
@@ -752,7 +891,10 @@ func (e *HandshakeConstraintViolationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HandshakeConstraintViolationException) ErrorCode() string {
-	return "HandshakeConstraintViolationException"
+	if e.Code == nil {
+		return "HandshakeConstraintViolationException"
+	}
+	return *e.Code
 }
 func (e *HandshakeConstraintViolationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -761,6 +903,8 @@ func (e *HandshakeConstraintViolationException) ErrorFault() smithy.ErrorFault {
 // We can't find a handshake with the HandshakeId that you specified.
 type HandshakeNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -774,7 +918,12 @@ func (e *HandshakeNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HandshakeNotFoundException) ErrorCode() string             { return "HandshakeNotFoundException" }
+func (e *HandshakeNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "HandshakeNotFoundException"
+	}
+	return *e.Code
+}
 func (e *HandshakeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't perform the operation on the handshake in its current state. For
@@ -782,6 +931,8 @@ func (e *HandshakeNotFoundException) ErrorFault() smithy.ErrorFault { return smi
 // handshake that was already declined.
 type InvalidHandshakeTransitionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -796,7 +947,10 @@ func (e *InvalidHandshakeTransitionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidHandshakeTransitionException) ErrorCode() string {
-	return "InvalidHandshakeTransitionException"
+	if e.Code == nil {
+		return "InvalidHandshakeTransitionException"
+	}
+	return *e.Code
 }
 func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -889,6 +1043,8 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 type InvalidInputException struct {
 	Message *string
 
+	Code *string
+
 	Reason InvalidInputExceptionReason
 
 	noSmithyDocumentSerde
@@ -903,7 +1059,12 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidInputException"
+	}
+	return *e.Code
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The provided policy document doesn't meet the requirements of the specified
@@ -913,6 +1074,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // in the Organizations User Guide.
 type MalformedPolicyDocumentException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -927,7 +1090,10 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedPolicyDocumentException) ErrorCode() string {
-	return "MalformedPolicyDocumentException"
+	if e.Code == nil {
+		return "MalformedPolicyDocumentException"
+	}
+	return *e.Code
 }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -936,6 +1102,8 @@ func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { retu
 // first delete the current organization of the management account.
 type MasterCannotLeaveOrganizationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -950,7 +1118,10 @@ func (e *MasterCannotLeaveOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MasterCannotLeaveOrganizationException) ErrorCode() string {
-	return "MasterCannotLeaveOrganizationException"
+	if e.Code == nil {
+		return "MasterCannotLeaveOrganizationException"
+	}
+	return *e.Code
 }
 func (e *MasterCannotLeaveOrganizationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -960,6 +1131,8 @@ func (e *MasterCannotLeaveOrganizationException) ErrorFault() smithy.ErrorFault 
 // OUs, remove all child OUs, and try the operation again.
 type OrganizationalUnitNotEmptyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -974,7 +1147,10 @@ func (e *OrganizationalUnitNotEmptyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationalUnitNotEmptyException) ErrorCode() string {
-	return "OrganizationalUnitNotEmptyException"
+	if e.Code == nil {
+		return "OrganizationalUnitNotEmptyException"
+	}
+	return *e.Code
 }
 func (e *OrganizationalUnitNotEmptyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -983,6 +1159,8 @@ func (e *OrganizationalUnitNotEmptyException) ErrorFault() smithy.ErrorFault {
 // We can't find an OU with the OrganizationalUnitId that you specified.
 type OrganizationalUnitNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -997,7 +1175,10 @@ func (e *OrganizationalUnitNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationalUnitNotFoundException) ErrorCode() string {
-	return "OrganizationalUnitNotFoundException"
+	if e.Code == nil {
+		return "OrganizationalUnitNotFoundException"
+	}
+	return *e.Code
 }
 func (e *OrganizationalUnitNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1008,6 +1189,8 @@ func (e *OrganizationalUnitNotFoundException) ErrorFault() smithy.ErrorFault {
 // policies.
 type OrganizationNotEmptyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1021,12 +1204,19 @@ func (e *OrganizationNotEmptyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OrganizationNotEmptyException) ErrorCode() string             { return "OrganizationNotEmptyException" }
+func (e *OrganizationNotEmptyException) ErrorCode() string {
+	if e.Code == nil {
+		return "OrganizationNotEmptyException"
+	}
+	return *e.Code
+}
 func (e *OrganizationNotEmptyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // We can't find a root or OU with the ParentId that you specified.
 type ParentNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1040,13 +1230,20 @@ func (e *ParentNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ParentNotFoundException) ErrorCode() string             { return "ParentNotFoundException" }
+func (e *ParentNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ParentNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ParentNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Changes to the effective policy are in progress, and its contents can't be
 // returned. Try the operation again later.
 type PolicyChangesInProgressException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1061,7 +1258,10 @@ func (e *PolicyChangesInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyChangesInProgressException) ErrorCode() string {
-	return "PolicyChangesInProgressException"
+	if e.Code == nil {
+		return "PolicyChangesInProgressException"
+	}
+	return *e.Code
 }
 func (e *PolicyChangesInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1069,6 +1269,8 @@ func (e *PolicyChangesInProgressException) ErrorFault() smithy.ErrorFault { retu
 // roots, OUs, and accounts before performing this operation.
 type PolicyInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1082,12 +1284,19 @@ func (e *PolicyInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyInUseException) ErrorCode() string             { return "PolicyInUseException" }
+func (e *PolicyInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "PolicyInUseException"
+	}
+	return *e.Code
+}
 func (e *PolicyInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The policy isn't attached to the specified target in the specified root.
 type PolicyNotAttachedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1101,12 +1310,19 @@ func (e *PolicyNotAttachedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyNotAttachedException) ErrorCode() string             { return "PolicyNotAttachedException" }
+func (e *PolicyNotAttachedException) ErrorCode() string {
+	if e.Code == nil {
+		return "PolicyNotAttachedException"
+	}
+	return *e.Code
+}
 func (e *PolicyNotAttachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // We can't find a policy with the PolicyId that you specified.
 type PolicyNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1120,12 +1336,19 @@ func (e *PolicyNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyNotFoundException) ErrorCode() string             { return "PolicyNotFoundException" }
+func (e *PolicyNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "PolicyNotFoundException"
+	}
+	return *e.Code
+}
 func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified policy type is already enabled in the specified root.
 type PolicyTypeAlreadyEnabledException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1140,7 +1363,10 @@ func (e *PolicyTypeAlreadyEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyTypeAlreadyEnabledException) ErrorCode() string {
-	return "PolicyTypeAlreadyEnabledException"
+	if e.Code == nil {
+		return "PolicyTypeAlreadyEnabledException"
+	}
+	return *e.Code
 }
 func (e *PolicyTypeAlreadyEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1152,6 +1378,8 @@ func (e *PolicyTypeAlreadyEnabledException) ErrorFault() smithy.ErrorFault { ret
 // the Organizations User Guide.
 type PolicyTypeNotAvailableForOrganizationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1166,7 +1394,10 @@ func (e *PolicyTypeNotAvailableForOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PolicyTypeNotAvailableForOrganizationException) ErrorCode() string {
-	return "PolicyTypeNotAvailableForOrganizationException"
+	if e.Code == nil {
+		return "PolicyTypeNotAvailableForOrganizationException"
+	}
+	return *e.Code
 }
 func (e *PolicyTypeNotAvailableForOrganizationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1181,6 +1412,8 @@ func (e *PolicyTypeNotAvailableForOrganizationException) ErrorFault() smithy.Err
 type PolicyTypeNotEnabledException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1193,12 +1426,19 @@ func (e *PolicyTypeNotEnabledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyTypeNotEnabledException) ErrorCode() string             { return "PolicyTypeNotEnabledException" }
+func (e *PolicyTypeNotEnabledException) ErrorCode() string {
+	if e.Code == nil {
+		return "PolicyTypeNotEnabledException"
+	}
+	return *e.Code
+}
 func (e *PolicyTypeNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // We can't find a resource policy request with the parameter that you specified.
 type ResourcePolicyNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1213,13 +1453,18 @@ func (e *ResourcePolicyNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourcePolicyNotFoundException) ErrorCode() string {
-	return "ResourcePolicyNotFoundException"
+	if e.Code == nil {
+		return "ResourcePolicyNotFoundException"
+	}
+	return *e.Code
 }
 func (e *ResourcePolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // We can't find a root with the RootId that you specified.
 type RootNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1233,13 +1478,20 @@ func (e *RootNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RootNotFoundException) ErrorCode() string             { return "RootNotFoundException" }
+func (e *RootNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "RootNotFoundException"
+	}
+	return *e.Code
+}
 func (e *RootNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Organizations can't complete your request because of an internal service error.
 // Try again later.
 type ServiceException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1253,12 +1505,19 @@ func (e *ServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
+func (e *ServiceException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceException"
+	}
+	return *e.Code
+}
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // We can't find a source root or OU with the ParentId that you specified.
 type SourceParentNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1272,13 +1531,20 @@ func (e *SourceParentNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SourceParentNotFoundException) ErrorCode() string             { return "SourceParentNotFoundException" }
+func (e *SourceParentNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "SourceParentNotFoundException"
+	}
+	return *e.Code
+}
 func (e *SourceParentNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // We can't find a root, OU, account, or policy with the TargetId that you
 // specified.
 type TargetNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1292,7 +1558,12 @@ func (e *TargetNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TargetNotFoundException) ErrorCode() string             { return "TargetNotFoundException" }
+func (e *TargetNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "TargetNotFoundException"
+	}
+	return *e.Code
+}
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have sent too many requests in too short a period of time. The quota helps
@@ -1302,6 +1573,8 @@ func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // the Organizations User Guide.
 type TooManyRequestsException struct {
 	Message *string
+
+	Code *string
 
 	Type *string
 
@@ -1317,12 +1590,19 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.Code
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This action isn't available in the current Amazon Web Services Region.
 type UnsupportedAPIEndpointException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -1337,6 +1617,9 @@ func (e *UnsupportedAPIEndpointException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedAPIEndpointException) ErrorCode() string {
-	return "UnsupportedAPIEndpointException"
+	if e.Code == nil {
+		return "UnsupportedAPIEndpointException"
+	}
+	return *e.Code
 }
 func (e *UnsupportedAPIEndpointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

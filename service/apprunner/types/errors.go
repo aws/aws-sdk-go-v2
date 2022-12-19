@@ -11,6 +11,8 @@ import (
 type InternalServiceErrorException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceErrorException) ErrorCode() string             { return "InternalServiceErrorException" }
+func (e *InternalServiceErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServiceErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // One or more input parameters aren't valid. Refer to the API action's document
 // page, correct the input parameters, and try the action again.
 type InvalidRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't perform this action when the resource is in its current state.
 type InvalidStateException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -62,13 +78,20 @@ func (e *InvalidStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidStateException) ErrorCode() string             { return "InvalidStateException" }
+func (e *InvalidStateException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidStateException"
+	}
+	return *e.Code
+}
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource doesn't exist for the specified Amazon Resource Name (ARN) in your
 // Amazon Web Services account.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -82,7 +105,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // App Runner can't create this resource. You've reached your account quota for
@@ -91,6 +119,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // Amazon Web Services General Reference.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -104,5 +134,10 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.Code
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

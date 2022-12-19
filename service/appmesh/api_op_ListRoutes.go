@@ -28,6 +28,7 @@ func (c *Client) ListRoutes(ctx context.Context, params *ListRoutesInput, optFns
 	return out, nil
 }
 
+//
 type ListRoutesInput struct {
 
 	// The name of the service mesh to list routes in.
@@ -64,6 +65,7 @@ type ListRoutesInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ListRoutesOutput struct {
 
 	// The list of existing routes for the specified service mesh and virtual router.

@@ -29,6 +29,7 @@ func (c *Client) RefreshSchemas(ctx context.Context, params *RefreshSchemasInput
 	return out, nil
 }
 
+//
 type RefreshSchemasInput struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -44,6 +45,7 @@ type RefreshSchemasInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type RefreshSchemasOutput struct {
 
 	// The status of the refreshed schema.

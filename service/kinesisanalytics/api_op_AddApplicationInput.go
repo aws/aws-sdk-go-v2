@@ -42,6 +42,7 @@ func (c *Client) AddApplicationInput(ctx context.Context, params *AddApplication
 	return out, nil
 }
 
+//
 type AddApplicationInputInput struct {
 
 	// Name of your existing Amazon Kinesis Analytics application to which you want to
@@ -67,6 +68,7 @@ type AddApplicationInputInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type AddApplicationInputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

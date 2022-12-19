@@ -37,6 +37,7 @@ func (c *Client) DescribeHsmConfigurations(ctx context.Context, params *Describe
 	return out, nil
 }
 
+//
 type DescribeHsmConfigurationsInput struct {
 
 	// The identifier of a specific Amazon Redshift HSM configuration to be described.
@@ -78,6 +79,7 @@ type DescribeHsmConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeHsmConfigurationsOutput struct {
 
 	// A list of HsmConfiguration objects.

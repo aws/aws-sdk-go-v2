@@ -39,6 +39,7 @@ func (c *Client) ModifyDBParameterGroup(ctx context.Context, params *ModifyDBPar
 	return out, nil
 }
 
+//
 type ModifyDBParameterGroupInput struct {
 
 	// The name of the DB parameter group. Constraints:

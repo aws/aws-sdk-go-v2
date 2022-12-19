@@ -29,6 +29,7 @@ func (c *Client) DescribeValidDBInstanceModifications(ctx context.Context, param
 	return out, nil
 }
 
+//
 type DescribeValidDBInstanceModificationsInput struct {
 
 	// The customer identifier or the ARN of your DB instance.

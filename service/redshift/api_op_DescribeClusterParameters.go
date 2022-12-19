@@ -37,6 +37,7 @@ func (c *Client) DescribeClusterParameters(ctx context.Context, params *Describe
 	return out, nil
 }
 
+//
 type DescribeClusterParametersInput struct {
 
 	// The name of a cluster parameter group for which to return details.

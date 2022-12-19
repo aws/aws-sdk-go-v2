@@ -29,6 +29,7 @@ func (c *Client) DescribeOrderableReplicationInstances(ctx context.Context, para
 	return out, nil
 }
 
+//
 type DescribeOrderableReplicationInstancesInput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -45,6 +46,7 @@ type DescribeOrderableReplicationInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeOrderableReplicationInstancesOutput struct {
 
 	// An optional pagination token provided by a previous request. If this parameter

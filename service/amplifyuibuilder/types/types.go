@@ -636,10 +636,9 @@ type FieldInputConfig struct {
 // Describes the field position.
 //
 // The following types satisfy this interface:
-//
-//	FieldPositionMemberBelow
-//	FieldPositionMemberFixed
-//	FieldPositionMemberRightOf
+//  FieldPositionMemberBelow
+//  FieldPositionMemberFixed
+//  FieldPositionMemberRightOf
 type FieldPosition interface {
 	isFieldPosition()
 }
@@ -850,9 +849,8 @@ type FormStyle struct {
 // Describes the configuration settings for the form's style properties.
 //
 // The following types satisfy this interface:
-//
-//	FormStyleConfigMemberTokenReference
-//	FormStyleConfigMemberValue
+//  FormStyleConfigMemberTokenReference
+//  FormStyleConfigMemberValue
 type FormStyleConfig interface {
 	isFormStyleConfig()
 }

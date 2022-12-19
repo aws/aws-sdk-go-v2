@@ -30,6 +30,7 @@ func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *Get
 	return out, nil
 }
 
+//
 type GetComplianceDetailsByResourceInput struct {
 
 	// Filters the results by compliance. The allowed values are COMPLIANT,
@@ -56,6 +57,7 @@ type GetComplianceDetailsByResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type GetComplianceDetailsByResourceOutput struct {
 
 	// Indicates whether the specified Amazon Web Services resource complies each

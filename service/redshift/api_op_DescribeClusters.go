@@ -45,6 +45,7 @@ func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersI
 	return out, nil
 }
 
+//
 type DescribeClustersInput struct {
 
 	// The unique identifier of a cluster whose properties you are requesting. This

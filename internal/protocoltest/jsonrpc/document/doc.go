@@ -11,21 +11,21 @@
 //
 // The following examples show how you can create document types using basic Go types.
 //
-//	NewLazyDocument(map[string]interface{}{
-//	    "favoriteNumber": 42,
-//	    "fruits":         []string{"apple", "orange"},
-//	    "capitals":       map[string]interface{}{
-//	        "Washington": "Olympia",
-//	        "Oregon":     "Salem",
-//	    },
-//	    "skyIsBlue":      true,
-//	})
+//   NewLazyDocument(map[string]interface{}{
+//       "favoriteNumber": 42,
+//       "fruits":         []string{"apple", "orange"},
+//       "capitals":       map[string]interface{}{
+//           "Washington": "Olympia",
+//           "Oregon":     "Salem",
+//       },
+//       "skyIsBlue":      true,
+//   })
 //
-//	NewLazyDocument(3.14159)
+//   NewLazyDocument(3.14159)
 //
-//	NewLazyDocument([]interface{"One", 2, 3, 3.5, "four"})
+//   NewLazyDocument([]interface{"One", 2, 3, 3.5, "four"})
 //
-//	NewLazyDocument(true)
+//   NewLazyDocument(true)
 //
 // Services can send document types as part of their API responses. To retrieve the content of a response document
 // you use the UnmarshalSmithyDocument method on the response document. When calling UnmarshalSmithyDocument you pass
@@ -33,34 +33,35 @@
 //
 // For example, if you expect to receive key/value map from the service response:
 //
-//	var kv map[string]interface{}
-//	if err := outputDocument.UnmarshalSmithyDocument(&kv); err != nil {
-//	    // handle error
-//	}
+//   var kv map[string]interface{}
+//   if err := outputDocument.UnmarshalSmithyDocument(&kv); err != nil {
+//       // handle error
+//   }
 //
 // If a service can return one or more data-types in the response, you can use an empty interface and type switch to
 // dynamically handle the response type.
 //
-//	var v interface{}
-//	if err := outputDocument.UnmarshalSmithyDocument(&v); err != nil {
-//	   // handle error
-//	}
+//   var v interface{}
+//   if err := outputDocument.UnmarshalSmithyDocument(&v); err != nil {
+//      // handle error
+//   }
 //
-//	switch vv := v.(type) {
-//	case map[string]interface{}:
-//	    // handle key/value map
-//	case []interface{}:
-//	    // handle array of values
-//	case bool:
-//	    // handle boolean
-//	case document.Number:
-//	    // handle an arbitrary precision number
-//	case string:
-//	   // handle string
-//	default:
-//	   // handle unknown case
-//	}
+//   switch vv := v.(type) {
+//   case map[string]interface{}:
+//       // handle key/value map
+//   case []interface{}:
+//       // handle array of values
+//   case bool:
+//       // handle boolean
+//   case document.Number:
+//       // handle an arbitrary precision number
+//   case string:
+//      // handle string
+//   default:
+//      // handle unknown case
+//   }
 //
 // The mapping of Go types to document types is covered in more depth in https://pkg.go.dev/github.com/aws/smithy-go/document
 // including more in depth examples that cover user-defined structure types.
+//
 package document

@@ -25,7 +25,12 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerException"
+	}
+	return *e.Code
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Bad request. The request is missing required parameters or has invalid
@@ -33,7 +38,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 type InvalidRequestException struct {
 	Message *string
 
-	Code                        *string
+	Code *string
+
 	RequiredParameters          []string
 	MutuallyExclusiveParameters []string
 
@@ -49,14 +55,20 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because a limit was exceeded.
 type LimitExceededException struct {
 	Message *string
 
-	Code         *string
+	Code *string
+
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -71,14 +83,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A requested resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code         *string
+	Code *string
+
 	ResourceType *string
 	ResourceIds  []string
 
@@ -94,5 +112,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -11,6 +11,8 @@ import (
 type AccessForbidden struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *AccessForbidden) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessForbidden) ErrorCode() string             { return "AccessForbidden" }
+func (e *AccessForbidden) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessForbidden"
+	}
+	return *e.Code
+}
 func (e *AccessForbidden) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal failure occurred. Try your request again. If the problem persists,
 // contact Amazon Web Services customer support.
 type InternalFailure struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *InternalFailure) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailure) ErrorCode() string             { return "InternalFailure" }
+func (e *InternalFailure) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalFailure"
+	}
+	return *e.Code
+}
 func (e *InternalFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // A resource that is required to perform an action was not found.
 type ResourceNotFound struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -62,12 +78,19 @@ func (e *ResourceNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFound) ErrorCode() string             { return "ResourceNotFound" }
+func (e *ResourceNotFound) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFound"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is currently unavailable.
 type ServiceUnavailable struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -81,12 +104,19 @@ func (e *ServiceUnavailable) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailable) ErrorCode() string             { return "ServiceUnavailable" }
+func (e *ServiceUnavailable) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailable"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // There was an error validating your request.
 type ValidationError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -100,5 +130,10 @@ func (e *ValidationError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationError) ErrorCode() string             { return "ValidationError" }
+func (e *ValidationError) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationError"
+	}
+	return *e.Code
+}
 func (e *ValidationError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

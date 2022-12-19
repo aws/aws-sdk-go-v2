@@ -37,6 +37,7 @@ func (c *Client) DescribeDBInstances(ctx context.Context, params *DescribeDBInst
 	return out, nil
 }
 
+//
 type DescribeDBInstancesInput struct {
 
 	// The user-supplied instance identifier or the Amazon Resource Name (ARN) of the

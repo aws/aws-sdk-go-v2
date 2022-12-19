@@ -28,6 +28,7 @@ func (c *Client) UpdateMesh(ctx context.Context, params *UpdateMeshInput, optFns
 	return out, nil
 }
 
+//
 type UpdateMeshInput struct {
 
 	// The name of the service mesh to update.
@@ -45,6 +46,7 @@ type UpdateMeshInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type UpdateMeshOutput struct {
 
 	// An object that represents a service mesh returned by a describe operation.

@@ -11,6 +11,8 @@ import (
 type InternalException struct {
 	Message *string
 
+	Code *string
+
 	ErrorCode_ *string
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *InternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalException) ErrorCode() string             { return "InternalException" }
+func (e *InternalException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalException"
+	}
+	return *e.Code
+}
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // This exception is thrown when the client submits a malformed request.
 type InvalidRequestException struct {
 	Message *string
+
+	Code *string
 
 	ErrorCode_        *string
 	DatasyncErrorCode *string
@@ -47,5 +56,10 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

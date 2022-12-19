@@ -26,6 +26,7 @@ func (c *Client) GetMissionProfile(ctx context.Context, params *GetMissionProfil
 	return out, nil
 }
 
+//
 type GetMissionProfileInput struct {
 
 	// UUID of a mission profile.
@@ -36,6 +37,7 @@ type GetMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type GetMissionProfileOutput struct {
 
 	// Amount of time after a contact ends that you’d like to receive a CloudWatch

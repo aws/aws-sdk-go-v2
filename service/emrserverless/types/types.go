@@ -219,9 +219,8 @@ type InitialCapacityConfig struct {
 // The driver that the job runs on.
 //
 // The following types satisfy this interface:
-//
-//	JobDriverMemberHive
-//	JobDriverMemberSparkSubmit
+//  JobDriverMemberHive
+//  JobDriverMemberSparkSubmit
 type JobDriver interface {
 	isJobDriver()
 }

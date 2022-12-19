@@ -14,6 +14,8 @@ import (
 type ClientLimitExceededException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -26,13 +28,20 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClientLimitExceededException) ErrorCode() string             { return "ClientLimitExceededException" }
+func (e *ClientLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "ClientLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A specified parameter exceeds its restrictions, is not supported, or can't be
 // used.
 type InvalidArgumentException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -46,13 +55,20 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
+func (e *InvalidArgumentException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidArgumentException"
+	}
+	return *e.Code
+}
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The codec private data in at least one of the tracks of the video stream is not
 // valid for this operation.
 type InvalidCodecPrivateDataException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -67,7 +83,10 @@ func (e *InvalidCodecPrivateDataException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCodecPrivateDataException) ErrorCode() string {
-	return "InvalidCodecPrivateDataException"
+	if e.Code == nil {
+		return "InvalidCodecPrivateDataException"
+	}
+	return *e.Code
 }
 func (e *InvalidCodecPrivateDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -75,6 +94,8 @@ func (e *InvalidCodecPrivateDataException) ErrorFault() smithy.ErrorFault { retu
 // specified codec.
 type InvalidMediaFrameException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -88,12 +109,19 @@ func (e *InvalidMediaFrameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidMediaFrameException) ErrorCode() string             { return "InvalidMediaFrameException" }
+func (e *InvalidMediaFrameException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidMediaFrameException"
+	}
+	return *e.Code
+}
 func (e *InvalidMediaFrameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // No codec private data was found in at least one of tracks of the video stream.
 type MissingCodecPrivateDataException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -108,7 +136,10 @@ func (e *MissingCodecPrivateDataException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingCodecPrivateDataException) ErrorCode() string {
-	return "MissingCodecPrivateDataException"
+	if e.Code == nil {
+		return "MissingCodecPrivateDataException"
+	}
+	return *e.Code
 }
 func (e *MissingCodecPrivateDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -116,6 +147,8 @@ func (e *MissingCodecPrivateDataException) ErrorFault() smithy.ErrorFault { retu
 // is, has a DataRetentionInHours of 0).
 type NoDataRetentionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -129,13 +162,20 @@ func (e *NoDataRetentionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoDataRetentionException) ErrorCode() string             { return "NoDataRetentionException" }
+func (e *NoDataRetentionException) ErrorCode() string {
+	if e.Code == nil {
+		return "NoDataRetentionException"
+	}
+	return *e.Code
+}
 func (e *NoDataRetentionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Status Code: 403, The caller is not authorized to perform an operation on the
 // given stream, or the token has expired.
 type NotAuthorizedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -149,7 +189,12 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
+func (e *NotAuthorizedException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotAuthorizedException"
+	}
+	return *e.Code
+}
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // GetMedia throws this error when Kinesis Video Streams can't find the stream that
@@ -160,6 +205,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // fragments within the last 30 seconds.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -173,7 +220,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The type of the media (for example, h.264 or h.265 video or ACC or G.711 audio)
@@ -182,6 +234,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // optionally, the codec ID for track 2 should be A_AAC.
 type UnsupportedStreamMediaTypeException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -196,7 +250,10 @@ func (e *UnsupportedStreamMediaTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedStreamMediaTypeException) ErrorCode() string {
-	return "UnsupportedStreamMediaTypeException"
+	if e.Code == nil {
+		return "UnsupportedStreamMediaTypeException"
+	}
+	return *e.Code
 }
 func (e *UnsupportedStreamMediaTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

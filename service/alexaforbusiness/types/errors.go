@@ -11,6 +11,8 @@ import (
 type AlreadyExistsException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
+func (e *AlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "AlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There is a concurrent modification of resources.
 type ConcurrentModificationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,7 +52,10 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.Code == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.Code
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -51,6 +63,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // longer managed by this account.
 type DeviceNotRegisteredException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -64,12 +78,19 @@ func (e *DeviceNotRegisteredException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DeviceNotRegisteredException) ErrorCode() string             { return "DeviceNotRegisteredException" }
+func (e *DeviceNotRegisteredException) ErrorCode() string {
+	if e.Code == nil {
+		return "DeviceNotRegisteredException"
+	}
+	return *e.Code
+}
 func (e *DeviceNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Certificate Authority can't issue or revoke a certificate.
 type InvalidCertificateAuthorityException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -84,7 +105,10 @@ func (e *InvalidCertificateAuthorityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCertificateAuthorityException) ErrorCode() string {
-	return "InvalidCertificateAuthorityException"
+	if e.Code == nil {
+		return "InvalidCertificateAuthorityException"
+	}
+	return *e.Code
 }
 func (e *InvalidCertificateAuthorityException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -93,6 +117,8 @@ func (e *InvalidCertificateAuthorityException) ErrorFault() smithy.ErrorFault {
 // The device is in an invalid state.
 type InvalidDeviceException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -106,12 +132,19 @@ func (e *InvalidDeviceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDeviceException) ErrorCode() string             { return "InvalidDeviceException" }
+func (e *InvalidDeviceException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidDeviceException"
+	}
+	return *e.Code
+}
 func (e *InvalidDeviceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A password in SecretsManager is in an invalid state.
 type InvalidSecretsManagerResourceException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -126,7 +159,10 @@ func (e *InvalidSecretsManagerResourceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSecretsManagerResourceException) ErrorCode() string {
-	return "InvalidSecretsManagerResourceException"
+	if e.Code == nil {
+		return "InvalidSecretsManagerResourceException"
+	}
+	return *e.Code
 }
 func (e *InvalidSecretsManagerResourceException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -135,6 +171,8 @@ func (e *InvalidSecretsManagerResourceException) ErrorFault() smithy.ErrorFault 
 // The service linked role is locked for deletion.
 type InvalidServiceLinkedRoleStateException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -149,7 +187,10 @@ func (e *InvalidServiceLinkedRoleStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidServiceLinkedRoleStateException) ErrorCode() string {
-	return "InvalidServiceLinkedRoleStateException"
+	if e.Code == nil {
+		return "InvalidServiceLinkedRoleStateException"
+	}
+	return *e.Code
 }
 func (e *InvalidServiceLinkedRoleStateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -158,6 +199,8 @@ func (e *InvalidServiceLinkedRoleStateException) ErrorFault() smithy.ErrorFault 
 // The attempt to update a user is invalid due to the user's current status.
 type InvalidUserStatusException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -171,12 +214,19 @@ func (e *InvalidUserStatusException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidUserStatusException) ErrorCode() string             { return "InvalidUserStatusException" }
+func (e *InvalidUserStatusException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidUserStatusException"
+	}
+	return *e.Code
+}
 func (e *InvalidUserStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You are performing an action that would put you beyond your account's limits.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -190,12 +240,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The name sent in the request is already in use.
 type NameInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -209,12 +266,19 @@ func (e *NameInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NameInUseException) ErrorCode() string             { return "NameInUseException" }
+func (e *NameInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "NameInUseException"
+	}
+	return *e.Code
+}
 func (e *NameInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource is not found.
 type NotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -228,12 +292,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotFoundException"
+	}
+	return *e.Code
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Another resource is associated with the resource in the request.
 type ResourceAssociatedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -247,12 +318,19 @@ func (e *ResourceAssociatedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAssociatedException) ErrorCode() string             { return "ResourceAssociatedException" }
+func (e *ResourceAssociatedException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceAssociatedException"
+	}
+	return *e.Code
+}
 func (e *ResourceAssociatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource in the request is already in use.
 type ResourceInUseException struct {
 	Message *string
+
+	Code *string
 
 	ClientRequestToken *string
 
@@ -268,12 +346,19 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceInUseException"
+	}
+	return *e.Code
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The skill must be linked to a third-party account.
 type SkillNotLinkedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -287,13 +372,20 @@ func (e *SkillNotLinkedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SkillNotLinkedException) ErrorCode() string             { return "SkillNotLinkedException" }
+func (e *SkillNotLinkedException) ErrorCode() string {
+	if e.Code == nil {
+		return "SkillNotLinkedException"
+	}
+	return *e.Code
+}
 func (e *SkillNotLinkedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The caller has no permissions to operate on the resource involved in the API
 // call.
 type UnauthorizedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -307,5 +399,10 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
+func (e *UnauthorizedException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnauthorizedException"
+	}
+	return *e.Code
+}
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

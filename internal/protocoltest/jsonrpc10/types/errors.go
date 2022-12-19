@@ -11,6 +11,8 @@ import (
 type ComplexError struct {
 	Message *string
 
+	Code *string
+
 	TopLevel *string
 	Nested   *ComplexNestedErrorData
 
@@ -26,13 +28,20 @@ func (e *ComplexError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ComplexError) ErrorCode() string             { return "ComplexError" }
+func (e *ComplexError) ErrorCode() string {
+	if e.Code == nil {
+		return "ComplexError"
+	}
+	return *e.Code
+}
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This error has test cases that test some of the dark corners of Amazon service
 // framework history. It should only be implemented by clients.
 type FooError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -46,12 +55,19 @@ func (e *FooError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FooError) ErrorCode() string             { return "FooError" }
+func (e *FooError) ErrorCode() string {
+	if e.Code == nil {
+		return "FooError"
+	}
+	return *e.Code
+}
 func (e *FooError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // This error is thrown when an invalid greeting value is provided.
 type InvalidGreeting struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -65,5 +81,10 @@ func (e *InvalidGreeting) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidGreeting) ErrorCode() string             { return "InvalidGreeting" }
+func (e *InvalidGreeting) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidGreeting"
+	}
+	return *e.Code
+}
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

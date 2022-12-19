@@ -68,6 +68,7 @@ func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optF
 	return out, nil
 }
 
+//
 type CreateQueueInput struct {
 
 	// The name of the new queue. The following limits apply to this name:

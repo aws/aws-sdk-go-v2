@@ -11,6 +11,8 @@ import (
 type ComplexError struct {
 	Message *string
 
+	Code *string
+
 	TopLevel *string
 	Nested   *ComplexNestedErrorData
 
@@ -26,11 +28,18 @@ func (e *ComplexError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ComplexError) ErrorCode() string             { return "ComplexError" }
+func (e *ComplexError) ErrorCode() string {
+	if e.Code == nil {
+		return "ComplexError"
+	}
+	return *e.Code
+}
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type CustomCodeError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -44,12 +53,19 @@ func (e *CustomCodeError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CustomCodeError) ErrorCode() string             { return "Customized" }
+func (e *CustomCodeError) ErrorCode() string {
+	if e.Code == nil {
+		return "Customized"
+	}
+	return *e.Code
+}
 func (e *CustomCodeError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This error is thrown when an invalid greeting value is provided.
 type InvalidGreeting struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -63,5 +79,10 @@ func (e *InvalidGreeting) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidGreeting) ErrorCode() string             { return "InvalidGreeting" }
+func (e *InvalidGreeting) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidGreeting"
+	}
+	return *e.Code
+}
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

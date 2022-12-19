@@ -228,8 +228,7 @@ type LatestDeviceJob struct {
 // representation of the overrides document.
 //
 // The following types satisfy this interface:
-//
-//	ManifestOverridesPayloadMemberPayloadData
+//  ManifestOverridesPayloadMemberPayloadData
 type ManifestOverridesPayload interface {
 	isManifestOverridesPayload()
 }
@@ -249,8 +248,7 @@ func (*ManifestOverridesPayloadMemberPayloadData) isManifestOverridesPayload() {
 // your application source.
 //
 // The following types satisfy this interface:
-//
-//	ManifestPayloadMemberPayloadData
+//  ManifestPayloadMemberPayloadData
 type ManifestPayload interface {
 	isManifestPayload()
 }

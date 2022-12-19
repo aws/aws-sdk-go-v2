@@ -32,6 +32,7 @@ func (c *Client) ModifyReplicationTask(ctx context.Context, params *ModifyReplic
 	return out, nil
 }
 
+//
 type ModifyReplicationTaskInput struct {
 
 	// The Amazon Resource Name (ARN) of the replication task.
@@ -99,6 +100,7 @@ type ModifyReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ModifyReplicationTaskOutput struct {
 
 	// The replication task that was modified.

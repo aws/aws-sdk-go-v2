@@ -36,6 +36,7 @@ func (c *Client) DeleteDBSecurityGroup(ctx context.Context, params *DeleteDBSecu
 	return out, nil
 }
 
+//
 type DeleteDBSecurityGroupInput struct {
 
 	// The name of the DB security group to delete. You can't delete the default DB

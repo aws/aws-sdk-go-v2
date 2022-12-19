@@ -19,7 +19,7 @@
 // Submits the metering record for a set of customers. BatchMeterUsage is called
 // from a software-as-a-service (SaaS) application.
 //
-// # Accepting New Customers
+// Accepting New Customers
 //
 // *
 // ResolveCustomer - Called by a SaaS application during the registration process.

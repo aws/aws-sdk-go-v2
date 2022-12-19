@@ -12,6 +12,8 @@ import (
 type CustomerNotEntitledException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *CustomerNotEntitledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CustomerNotEntitledException) ErrorCode() string             { return "CustomerNotEntitledException" }
+func (e *CustomerNotEntitledException) ErrorCode() string {
+	if e.Code == nil {
+		return "CustomerNotEntitledException"
+	}
+	return *e.Code
+}
 func (e *CustomerNotEntitledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The API is disabled in the Region.
 type DisabledApiException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,7 +52,12 @@ func (e *DisabledApiException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DisabledApiException) ErrorCode() string             { return "DisabledApiException" }
+func (e *DisabledApiException) ErrorCode() string {
+	if e.Code == nil {
+		return "DisabledApiException"
+	}
+	return *e.Code
+}
 func (e *DisabledApiException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A metering record has already been emitted by the same EC2 instance, ECS task,
@@ -51,6 +65,8 @@ func (e *DisabledApiException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // usageQuantity.
 type DuplicateRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -64,7 +80,12 @@ func (e *DuplicateRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateRequestException) ErrorCode() string             { return "DuplicateRequestException" }
+func (e *DuplicateRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "DuplicateRequestException"
+	}
+	return *e.Code
+}
 func (e *DuplicateRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The submitted registration token has expired. This can happen if the buyer's
@@ -74,6 +95,8 @@ func (e *DuplicateRequestException) ErrorFault() smithy.ErrorFault { return smit
 // it is submitted by the buyer's browser.
 type ExpiredTokenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -87,13 +110,20 @@ func (e *ExpiredTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExpiredTokenException) ErrorCode() string             { return "ExpiredTokenException" }
+func (e *ExpiredTokenException) ErrorCode() string {
+	if e.Code == nil {
+		return "ExpiredTokenException"
+	}
+	return *e.Code
+}
 func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal error has occurred. Retry your request. If the problem persists,
 // post a message with details on the AWS forums.
 type InternalServiceErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -107,12 +137,19 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceErrorException) ErrorCode() string             { return "InternalServiceErrorException" }
+func (e *InternalServiceErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServiceErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // You have metered usage for a CustomerIdentifier that does not exist.
 type InvalidCustomerIdentifierException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -127,7 +164,10 @@ func (e *InvalidCustomerIdentifierException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCustomerIdentifierException) ErrorCode() string {
-	return "InvalidCustomerIdentifierException"
+	if e.Code == nil {
+		return "InvalidCustomerIdentifierException"
+	}
+	return *e.Code
 }
 func (e *InvalidCustomerIdentifierException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -138,6 +178,8 @@ func (e *InvalidCustomerIdentifierException) ErrorFault() smithy.ErrorFault {
 // Region of the resource must match.
 type InvalidEndpointRegionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -151,13 +193,20 @@ func (e *InvalidEndpointRegionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidEndpointRegionException) ErrorCode() string             { return "InvalidEndpointRegionException" }
+func (e *InvalidEndpointRegionException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidEndpointRegionException"
+	}
+	return *e.Code
+}
 func (e *InvalidEndpointRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The product code passed does not match the product code used for publishing the
 // product.
 type InvalidProductCodeException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -171,12 +220,19 @@ func (e *InvalidProductCodeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidProductCodeException) ErrorCode() string             { return "InvalidProductCodeException" }
+func (e *InvalidProductCodeException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidProductCodeException"
+	}
+	return *e.Code
+}
 func (e *InvalidProductCodeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Public Key version is invalid.
 type InvalidPublicKeyVersionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -191,7 +247,10 @@ func (e *InvalidPublicKeyVersionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPublicKeyVersionException) ErrorCode() string {
-	return "InvalidPublicKeyVersionException"
+	if e.Code == nil {
+		return "InvalidPublicKeyVersionException"
+	}
+	return *e.Code
 }
 func (e *InvalidPublicKeyVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -200,6 +259,8 @@ func (e *InvalidPublicKeyVersionException) ErrorFault() smithy.ErrorFault { retu
 // withRegion(“us-east-1”) when calling RegisterUsage.
 type InvalidRegionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -213,12 +274,19 @@ func (e *InvalidRegionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRegionException) ErrorCode() string             { return "InvalidRegionException" }
+func (e *InvalidRegionException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRegionException"
+	}
+	return *e.Code
+}
 func (e *InvalidRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The tag is invalid, or the number of tags is greater than 5.
 type InvalidTagException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -232,12 +300,19 @@ func (e *InvalidTagException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTagException) ErrorCode() string             { return "InvalidTagException" }
+func (e *InvalidTagException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidTagException"
+	}
+	return *e.Code
+}
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Registration token is invalid.
 type InvalidTokenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -251,13 +326,20 @@ func (e *InvalidTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTokenException) ErrorCode() string             { return "InvalidTokenException" }
+func (e *InvalidTokenException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidTokenException"
+	}
+	return *e.Code
+}
 func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The usage allocation objects are invalid, or the number of allocations is
 // greater than 500 for a single usage record.
 type InvalidUsageAllocationsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -272,7 +354,10 @@ func (e *InvalidUsageAllocationsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidUsageAllocationsException) ErrorCode() string {
-	return "InvalidUsageAllocationsException"
+	if e.Code == nil {
+		return "InvalidUsageAllocationsException"
+	}
+	return *e.Code
 }
 func (e *InvalidUsageAllocationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -280,6 +365,8 @@ func (e *InvalidUsageAllocationsException) ErrorFault() smithy.ErrorFault { retu
 // products.
 type InvalidUsageDimensionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -293,13 +380,20 @@ func (e *InvalidUsageDimensionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidUsageDimensionException) ErrorCode() string             { return "InvalidUsageDimensionException" }
+func (e *InvalidUsageDimensionException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidUsageDimensionException"
+	}
+	return *e.Code
+}
 func (e *InvalidUsageDimensionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // AWS Marketplace does not support metering usage from the underlying platform.
 // Currently, Amazon ECS, Amazon EKS, and AWS Fargate are supported.
 type PlatformNotSupportedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -313,12 +407,19 @@ func (e *PlatformNotSupportedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PlatformNotSupportedException) ErrorCode() string             { return "PlatformNotSupportedException" }
+func (e *PlatformNotSupportedException) ErrorCode() string {
+	if e.Code == nil {
+		return "PlatformNotSupportedException"
+	}
+	return *e.Code
+}
 func (e *PlatformNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The calls to the API are throttled.
 type ThrottlingException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -332,7 +433,12 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottlingException"
+	}
+	return *e.Code
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The timestamp value passed in the UsageRecord is out of allowed range. For
@@ -340,6 +446,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // entire batch is not processed. You must remove invalid records and try again.
 type TimestampOutOfBoundsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -353,5 +461,10 @@ func (e *TimestampOutOfBoundsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TimestampOutOfBoundsException) ErrorCode() string             { return "TimestampOutOfBoundsException" }
+func (e *TimestampOutOfBoundsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TimestampOutOfBoundsException"
+	}
+	return *e.Code
+}
 func (e *TimestampOutOfBoundsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -43,6 +43,7 @@ func (c *Client) RestoreDBInstanceFromDBSnapshot(ctx context.Context, params *Re
 	return out, nil
 }
 
+//
 type RestoreDBInstanceFromDBSnapshotInput struct {
 
 	// Name of the DB instance to create from the DB snapshot. This parameter isn't

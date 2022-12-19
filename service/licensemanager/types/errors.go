@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Amazon Web Services user account does not have permission to perform the
 // action. Check the IAM policy associated with this account.
 type AuthorizationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *AuthorizationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationException) ErrorCode() string             { return "AuthorizationException" }
+func (e *AuthorizationException) ErrorCode() string {
+	if e.Code == nil {
+		return "AuthorizationException"
+	}
+	return *e.Code
+}
 func (e *AuthorizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a conflict processing the request. Try your request again.
 type ConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -62,12 +78,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The entitlement is not allowed.
 type EntitlementNotAllowedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -81,12 +104,19 @@ func (e *EntitlementNotAllowedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntitlementNotAllowedException) ErrorCode() string             { return "EntitlementNotAllowedException" }
+func (e *EntitlementNotAllowedException) ErrorCode() string {
+	if e.Code == nil {
+		return "EntitlementNotAllowedException"
+	}
+	return *e.Code
+}
 func (e *EntitlementNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A dependency required to run the API is missing.
 type FailedDependencyException struct {
 	Message *string
+
+	Code *string
 
 	ErrorCode_ *string
 
@@ -102,12 +132,19 @@ func (e *FailedDependencyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FailedDependencyException) ErrorCode() string             { return "FailedDependencyException" }
+func (e *FailedDependencyException) ErrorCode() string {
+	if e.Code == nil {
+		return "FailedDependencyException"
+	}
+	return *e.Code
+}
 func (e *FailedDependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request uses too many filters or too many filter values.
 type FilterLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -121,12 +158,19 @@ func (e *FilterLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FilterLimitExceededException) ErrorCode() string             { return "FilterLimitExceededException" }
+func (e *FilterLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "FilterLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *FilterLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more parameter values are not valid.
 type InvalidParameterValueException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -140,7 +184,12 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
+func (e *InvalidParameterValueException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterValueException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // License Manager cannot allocate a license to a resource because of its state.
@@ -148,6 +197,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 // shutting down.
 type InvalidResourceStateException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -161,12 +212,19 @@ func (e *InvalidResourceStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidResourceStateException) ErrorCode() string             { return "InvalidResourceStateException" }
+func (e *InvalidResourceStateException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidResourceStateException"
+	}
+	return *e.Code
+}
 func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You do not have enough licenses available to support a new resource launch.
 type LicenseUsageException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -180,13 +238,20 @@ func (e *LicenseUsageException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LicenseUsageException) ErrorCode() string             { return "LicenseUsageException" }
+func (e *LicenseUsageException) ErrorCode() string {
+	if e.Code == nil {
+		return "LicenseUsageException"
+	}
+	return *e.Code
+}
 func (e *LicenseUsageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There are no entitlements found for this license, or the entitlement maximum
 // count is reached.
 type NoEntitlementsAllowedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -200,12 +265,19 @@ func (e *NoEntitlementsAllowedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoEntitlementsAllowedException) ErrorCode() string             { return "NoEntitlementsAllowedException" }
+func (e *NoEntitlementsAllowedException) ErrorCode() string {
+	if e.Code == nil {
+		return "NoEntitlementsAllowedException"
+	}
+	return *e.Code
+}
 func (e *NoEntitlementsAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Too many requests have been submitted. Try again after a brief wait.
 type RateLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -219,12 +291,19 @@ func (e *RateLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RateLimitExceededException) ErrorCode() string             { return "RateLimitExceededException" }
+func (e *RateLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "RateLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *RateLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This is not the correct Region for the resource. Try again.
 type RedirectException struct {
 	Message *string
+
+	Code *string
 
 	Location *string
 
@@ -240,12 +319,19 @@ func (e *RedirectException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RedirectException) ErrorCode() string             { return "RedirectException" }
+func (e *RedirectException) ErrorCode() string {
+	if e.Code == nil {
+		return "RedirectException"
+	}
+	return *e.Code
+}
 func (e *RedirectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your resource limits have been exceeded.
 type ResourceLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -259,12 +345,19 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
+func (e *ResourceLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -278,12 +371,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The server experienced an internal error. Try again.
 type ServerInternalException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -297,12 +397,19 @@ func (e *ServerInternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServerInternalException) ErrorCode() string             { return "ServerInternalException" }
+func (e *ServerInternalException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServerInternalException"
+	}
+	return *e.Code
+}
 func (e *ServerInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The digital signature method is unsupported. Try your request again.
 type UnsupportedDigitalSignatureMethodException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -317,7 +424,10 @@ func (e *UnsupportedDigitalSignatureMethodException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedDigitalSignatureMethodException) ErrorCode() string {
-	return "UnsupportedDigitalSignatureMethodException"
+	if e.Code == nil {
+		return "UnsupportedDigitalSignatureMethodException"
+	}
+	return *e.Code
 }
 func (e *UnsupportedDigitalSignatureMethodException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -326,6 +436,8 @@ func (e *UnsupportedDigitalSignatureMethodException) ErrorFault() smithy.ErrorFa
 // The provided input is not valid. Try your request again.
 type ValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -339,5 +451,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationException"
+	}
+	return *e.Code
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

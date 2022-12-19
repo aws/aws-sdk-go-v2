@@ -33,6 +33,7 @@ func (c *Client) DeleteApplicationOutput(ctx context.Context, params *DeleteAppl
 	return out, nil
 }
 
+//
 type DeleteApplicationOutputInput struct {
 
 	// Amazon Kinesis Analytics application name.
@@ -65,6 +66,7 @@ type DeleteApplicationOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DeleteApplicationOutputOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -39,6 +39,7 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 	return out, nil
 }
 
+//
 type DescribeEventsInput struct {
 
 	// The number of minutes to retrieve events for. Default: 60

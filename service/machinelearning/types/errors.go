@@ -13,7 +13,7 @@ import (
 type IdempotentParameterMismatchException struct {
 	Message *string
 
-	Code int32
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -28,7 +28,10 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	return "IdempotentParameterMismatchException"
+	if e.Code == nil {
+		return "IdempotentParameterMismatchException"
+	}
+	return *e.Code
 }
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -38,7 +41,7 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 type InternalServerException struct {
 	Message *string
 
-	Code int32
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -52,14 +55,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerException"
+	}
+	return *e.Code
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // An error on the client occurred. Typically, the cause is an invalid input value.
 type InvalidInputException struct {
 	Message *string
 
-	Code int32
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -73,11 +81,18 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidInputException"
+	}
+	return *e.Code
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type InvalidTagException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -91,7 +106,12 @@ func (e *InvalidTagException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTagException) ErrorCode() string             { return "InvalidTagException" }
+func (e *InvalidTagException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidTagException"
+	}
+	return *e.Code
+}
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The subscriber exceeded the maximum number of operations. This exception can
@@ -99,7 +119,7 @@ func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type LimitExceededException struct {
 	Message *string
 
-	Code int32
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -113,12 +133,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The exception is thrown when a predict request is made to an unmounted MLModel.
 type PredictorNotMountedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -132,14 +159,19 @@ func (e *PredictorNotMountedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PredictorNotMountedException) ErrorCode() string             { return "PredictorNotMountedException" }
+func (e *PredictorNotMountedException) ErrorCode() string {
+	if e.Code == nil {
+		return "PredictorNotMountedException"
+	}
+	return *e.Code
+}
 func (e *PredictorNotMountedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A specified resource cannot be located.
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code int32
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -153,11 +185,18 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type TagLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -171,5 +210,10 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagLimitExceededException) ErrorCode() string             { return "TagLimitExceededException" }
+func (e *TagLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "TagLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

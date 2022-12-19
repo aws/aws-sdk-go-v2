@@ -11,6 +11,8 @@ import (
 type CertificateValidationException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,7 +25,12 @@ func (e *CertificateValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CertificateValidationException) ErrorCode() string             { return "CertificateValidationException" }
+func (e *CertificateValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "CertificateValidationException"
+	}
+	return *e.Code
+}
 func (e *CertificateValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The contents of the request were invalid. For example, this code is returned
@@ -31,6 +38,8 @@ func (e *CertificateValidationException) ErrorFault() smithy.ErrorFault { return
 // contains details about the error.
 type InvalidRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -44,7 +53,12 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An update attempted to change the job execution to a state that is invalid
@@ -53,6 +67,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // error message also contains the executionState field.
 type InvalidStateTransitionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -67,13 +83,18 @@ func (e *InvalidStateTransitionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateTransitionException) ErrorCode() string {
-	return "InvalidStateTransitionException"
+	if e.Code == nil {
+		return "InvalidStateTransitionException"
+	}
+	return *e.Code
 }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -87,12 +108,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -106,12 +134,19 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The job is in a terminal state.
 type TerminalStateException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -125,12 +160,19 @@ func (e *TerminalStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TerminalStateException) ErrorCode() string             { return "TerminalStateException" }
+func (e *TerminalStateException) ErrorCode() string {
+	if e.Code == nil {
+		return "TerminalStateException"
+	}
+	return *e.Code
+}
 func (e *TerminalStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The rate exceeds the limit.
 type ThrottlingException struct {
 	Message *string
+
+	Code *string
 
 	Payload []byte
 
@@ -146,5 +188,10 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottlingException"
+	}
+	return *e.Code
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -24,7 +24,12 @@ func (e *ForbiddenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorCode() string {
+	if e.Code == nil {
+		return "ForbiddenException"
+	}
+	return *e.Code
+}
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type InternalFailureException struct {
@@ -44,7 +49,12 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalFailureException"
+	}
+	return *e.Code
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 type InvalidRequestException struct {
@@ -64,7 +74,12 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type PreconditionFailedException struct {
@@ -84,7 +99,12 @@ func (e *PreconditionFailedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PreconditionFailedException) ErrorCode() string             { return "PreconditionFailedException" }
+func (e *PreconditionFailedException) ErrorCode() string {
+	if e.Code == nil {
+		return "PreconditionFailedException"
+	}
+	return *e.Code
+}
 func (e *PreconditionFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type RangeNotSatisfiableException struct {
@@ -104,7 +124,12 @@ func (e *RangeNotSatisfiableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RangeNotSatisfiableException) ErrorCode() string             { return "RangeNotSatisfiableException" }
+func (e *RangeNotSatisfiableException) ErrorCode() string {
+	if e.Code == nil {
+		return "RangeNotSatisfiableException"
+	}
+	return *e.Code
+}
 func (e *RangeNotSatisfiableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type ResourceConflictException struct {
@@ -124,7 +149,12 @@ func (e *ResourceConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
+func (e *ResourceConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceConflictException"
+	}
+	return *e.Code
+}
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type ResourceNotFoundException struct {
@@ -144,5 +174,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

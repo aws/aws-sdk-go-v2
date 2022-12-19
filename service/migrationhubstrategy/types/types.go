@@ -323,10 +323,9 @@ type DatabaseConfigDetail struct {
 // Preferences for migrating a database to AWS.
 //
 // The following types satisfy this interface:
-//
-//	DatabaseMigrationPreferenceMemberHeterogeneous
-//	DatabaseMigrationPreferenceMemberHomogeneous
-//	DatabaseMigrationPreferenceMemberNoPreference
+//  DatabaseMigrationPreferenceMemberHeterogeneous
+//  DatabaseMigrationPreferenceMemberHomogeneous
+//  DatabaseMigrationPreferenceMemberNoPreference
 type DatabaseMigrationPreference interface {
 	isDatabaseMigrationPreference()
 }
@@ -494,10 +493,9 @@ type IPAddressBasedRemoteInfo struct {
 // Preferences for migrating an application to AWS.
 //
 // The following types satisfy this interface:
-//
-//	ManagementPreferenceMemberAwsManagedResources
-//	ManagementPreferenceMemberNoPreference
-//	ManagementPreferenceMemberSelfManageResources
+//  ManagementPreferenceMemberAwsManagedResources
+//  ManagementPreferenceMemberNoPreference
+//  ManagementPreferenceMemberSelfManageResources
 type ManagementPreference interface {
 	isManagementPreference()
 }

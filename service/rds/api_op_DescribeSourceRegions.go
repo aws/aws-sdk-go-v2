@@ -36,6 +36,7 @@ func (c *Client) DescribeSourceRegions(ctx context.Context, params *DescribeSour
 	return out, nil
 }
 
+//
 type DescribeSourceRegionsInput struct {
 
 	// This parameter isn't currently supported.

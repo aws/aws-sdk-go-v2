@@ -12,6 +12,8 @@ import (
 type ConcurrentModificationException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,13 +27,18 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.Code == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.Code
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a conflict processing the request. Try your request again.
 type ConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -45,7 +52,12 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The confidence that Amazon Comprehend accurately detected the source language is
@@ -56,6 +68,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // operation in the Amazon Comprehend Developer Guide.
 type DetectedLanguageLowConfidenceException struct {
 	Message *string
+
+	Code *string
 
 	DetectedLanguageCode *string
 
@@ -72,7 +86,10 @@ func (e *DetectedLanguageLowConfidenceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DetectedLanguageLowConfidenceException) ErrorCode() string {
-	return "DetectedLanguageLowConfidenceException"
+	if e.Code == nil {
+		return "DetectedLanguageLowConfidenceException"
+	}
+	return *e.Code
 }
 func (e *DetectedLanguageLowConfidenceException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -81,6 +98,8 @@ func (e *DetectedLanguageLowConfidenceException) ErrorFault() smithy.ErrorFault 
 // An internal server error occurred. Retry your request.
 type InternalServerException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -94,12 +113,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerException"
+	}
+	return *e.Code
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The filter specified for the operation is not valid. Specify a different filter.
 type InvalidFilterException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -113,13 +139,20 @@ func (e *InvalidFilterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidFilterException) ErrorCode() string             { return "InvalidFilterException" }
+func (e *InvalidFilterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidFilterException"
+	}
+	return *e.Code
+}
 func (e *InvalidFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value of the parameter is not valid. Review the value of the parameter you
 // are using to correct it, and then retry your operation.
 type InvalidParameterValueException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -133,13 +166,20 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
+func (e *InvalidParameterValueException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterValueException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request that you made is not valid. Check your request to determine why it's
 // not valid and then retry the request.
 type InvalidRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -153,13 +193,20 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified limit has been exceeded. Review your request and retry it with a
 // quantity below the stated limit.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -173,7 +220,12 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource you are looking for has not been found. Review the resource you're
@@ -181,6 +233,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // retrying the revised request.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -194,13 +248,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Amazon Translate service is temporarily unavailable. Wait a bit and then
 // retry your request.
 type ServiceUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -214,13 +275,20 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The size of the text you submitted exceeds the size limit. Reduce the size of
 // the text or use a smaller document and then retry your request.
 type TextSizeLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -234,13 +302,20 @@ func (e *TextSizeLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TextSizeLimitExceededException) ErrorCode() string             { return "TextSizeLimitExceededException" }
+func (e *TextSizeLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "TextSizeLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have made too many requests within a short period of time. Wait for a short
 // time and then try your request again.
 type TooManyRequestsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -254,12 +329,19 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.Code
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have added too many tags to this resource. The maximum is 50 tags.
 type TooManyTagsException struct {
 	Message *string
+
+	Code *string
 
 	ResourceArn *string
 
@@ -275,12 +357,19 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyTagsException"
+	}
+	return *e.Code
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Requested display language code is not supported.
 type UnsupportedDisplayLanguageCodeException struct {
 	Message *string
+
+	Code *string
 
 	DisplayLanguageCode *string
 
@@ -297,7 +386,10 @@ func (e *UnsupportedDisplayLanguageCodeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedDisplayLanguageCodeException) ErrorCode() string {
-	return "UnsupportedDisplayLanguageCodeException"
+	if e.Code == nil {
+		return "UnsupportedDisplayLanguageCodeException"
+	}
+	return *e.Code
 }
 func (e *UnsupportedDisplayLanguageCodeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -309,6 +401,8 @@ func (e *UnsupportedDisplayLanguageCodeException) ErrorFault() smithy.ErrorFault
 // (https://docs.aws.amazon.com/translate/latest/dg/how-to-error-msg.html).
 type UnsupportedLanguagePairException struct {
 	Message *string
+
+	Code *string
 
 	SourceLanguageCode *string
 	TargetLanguageCode *string
@@ -326,6 +420,9 @@ func (e *UnsupportedLanguagePairException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedLanguagePairException) ErrorCode() string {
-	return "UnsupportedLanguagePairException"
+	if e.Code == nil {
+		return "UnsupportedLanguagePairException"
+	}
+	return *e.Code
 }
 func (e *UnsupportedLanguagePairException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

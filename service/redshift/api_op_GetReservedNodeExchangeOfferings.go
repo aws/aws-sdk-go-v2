@@ -29,6 +29,7 @@ func (c *Client) GetReservedNodeExchangeOfferings(ctx context.Context, params *G
 	return out, nil
 }
 
+//
 type GetReservedNodeExchangeOfferingsInput struct {
 
 	// A string representing the node identifier for the DC1 Reserved Node to be

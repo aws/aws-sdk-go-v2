@@ -11,6 +11,8 @@ import (
 type MarketplaceCommerceAnalyticsException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,7 +26,10 @@ func (e *MarketplaceCommerceAnalyticsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MarketplaceCommerceAnalyticsException) ErrorCode() string {
-	return "MarketplaceCommerceAnalyticsException"
+	if e.Code == nil {
+		return "MarketplaceCommerceAnalyticsException"
+	}
+	return *e.Code
 }
 func (e *MarketplaceCommerceAnalyticsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer

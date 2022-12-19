@@ -31,6 +31,7 @@ func (c *Client) DescribeDBSubnetGroups(ctx context.Context, params *DescribeDBS
 	return out, nil
 }
 
+//
 type DescribeDBSubnetGroupsInput struct {
 
 	// The name of the DB subnet group to return details for.

@@ -35,6 +35,7 @@ func (c *Client) DeleteDBCluster(ctx context.Context, params *DeleteDBClusterInp
 	return out, nil
 }
 
+//
 type DeleteDBClusterInput struct {
 
 	// The DB cluster identifier for the DB cluster to be deleted. This parameter isn't

@@ -37,6 +37,7 @@ func (c *Client) CreateDBCluster(ctx context.Context, params *CreateDBClusterInp
 	return out, nil
 }
 
+//
 type CreateDBClusterInput struct {
 
 	// The DB cluster identifier. This parameter is stored as a lowercase string.

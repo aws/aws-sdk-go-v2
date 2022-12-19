@@ -11,6 +11,8 @@ import (
 type ForbiddenException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *ForbiddenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorCode() string {
+	if e.Code == nil {
+		return "ForbiddenException"
+	}
+	return *e.Code
+}
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The connection with the provided id no longer exists.
 type GoneException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -42,13 +51,20 @@ func (e *GoneException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *GoneException) ErrorCode() string             { return "GoneException" }
+func (e *GoneException) ErrorCode() string {
+	if e.Code == nil {
+		return "GoneException"
+	}
+	return *e.Code
+}
 func (e *GoneException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The client is sending more than the allowed number of requests per unit of time
 // or the WebSocket client side buffer is full.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -62,12 +78,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The data has exceeded the maximum size allowed.
 type PayloadTooLargeException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -81,5 +104,10 @@ func (e *PayloadTooLargeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PayloadTooLargeException) ErrorCode() string             { return "PayloadTooLargeException" }
+func (e *PayloadTooLargeException) ErrorCode() string {
+	if e.Code == nil {
+		return "PayloadTooLargeException"
+	}
+	return *e.Code
+}
 func (e *PayloadTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

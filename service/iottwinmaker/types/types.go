@@ -69,6 +69,7 @@ type ColumnDescription struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ComponentPropertyGroupRequest struct {
 
 	// The group type.
@@ -420,10 +421,9 @@ type LambdaFunction struct {
 // accepted as a valid input.
 //
 // The following types satisfy this interface:
-//
-//	ListComponentTypesFilterMemberExtendsFrom
-//	ListComponentTypesFilterMemberIsAbstract
-//	ListComponentTypesFilterMemberNamespace
+//  ListComponentTypesFilterMemberExtendsFrom
+//  ListComponentTypesFilterMemberIsAbstract
+//  ListComponentTypesFilterMemberNamespace
 type ListComponentTypesFilter interface {
 	isListComponentTypesFilter()
 }
@@ -459,10 +459,9 @@ func (*ListComponentTypesFilterMemberNamespace) isListComponentTypesFilter() {}
 // An object that filters items in a list of entities.
 //
 // The following types satisfy this interface:
-//
-//	ListEntitiesFilterMemberComponentTypeId
-//	ListEntitiesFilterMemberExternalId
-//	ListEntitiesFilterMemberParentEntityId
+//  ListEntitiesFilterMemberComponentTypeId
+//  ListEntitiesFilterMemberExternalId
+//  ListEntitiesFilterMemberParentEntityId
 type ListEntitiesFilter interface {
 	isListEntitiesFilter()
 }
@@ -663,6 +662,7 @@ type PropertyFilter struct {
 	noSmithyDocumentSerde
 }
 
+//
 type PropertyGroupRequest struct {
 
 	// The group type.
@@ -935,11 +935,10 @@ type SyncJobSummary struct {
 // The sync resource filter.
 //
 // The following types satisfy this interface:
-//
-//	SyncResourceFilterMemberExternalId
-//	SyncResourceFilterMemberResourceId
-//	SyncResourceFilterMemberResourceType
-//	SyncResourceFilterMemberState
+//  SyncResourceFilterMemberExternalId
+//  SyncResourceFilterMemberResourceId
+//  SyncResourceFilterMemberResourceType
+//  SyncResourceFilterMemberState
 type SyncResourceFilter interface {
 	isSyncResourceFilter()
 }

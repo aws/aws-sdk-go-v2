@@ -33,6 +33,7 @@ func (c *Client) CreateDBClusterSnapshot(ctx context.Context, params *CreateDBCl
 	return out, nil
 }
 
+//
 type CreateDBClusterSnapshotInput struct {
 
 	// The identifier of the DB cluster to create a snapshot for. This parameter isn't

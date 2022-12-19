@@ -28,6 +28,7 @@ func (c *Client) DescribeOptionGroups(ctx context.Context, params *DescribeOptio
 	return out, nil
 }
 
+//
 type DescribeOptionGroupsInput struct {
 
 	// Filters the list of option groups to only include groups associated with a

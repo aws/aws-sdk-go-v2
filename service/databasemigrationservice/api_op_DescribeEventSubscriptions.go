@@ -31,6 +31,7 @@ func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *Describ
 	return out, nil
 }
 
+//
 type DescribeEventSubscriptionsInput struct {
 
 	// Filters applied to event subscriptions. Valid filter names:
@@ -54,6 +55,7 @@ type DescribeEventSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeEventSubscriptionsOutput struct {
 
 	// A list of event subscriptions.

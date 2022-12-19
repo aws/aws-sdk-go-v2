@@ -27,6 +27,7 @@ func (c *Client) RebuildEnvironment(ctx context.Context, params *RebuildEnvironm
 	return out, nil
 }
 
+//
 type RebuildEnvironmentInput struct {
 
 	// The ID of the environment to rebuild. Condition: You must specify either this or

@@ -27,6 +27,7 @@ func (c *Client) ModifyReplicationSubnetGroup(ctx context.Context, params *Modif
 	return out, nil
 }
 
+//
 type ModifyReplicationSubnetGroupInput struct {
 
 	// The name of the replication instance subnet group.
@@ -45,6 +46,7 @@ type ModifyReplicationSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ModifyReplicationSubnetGroupOutput struct {
 
 	// The modified replication subnet group.

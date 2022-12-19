@@ -36,6 +36,7 @@ func (c *Client) CopyClusterSnapshot(ctx context.Context, params *CopyClusterSna
 	return out, nil
 }
 
+//
 type CopyClusterSnapshotInput struct {
 
 	// The identifier for the source snapshot. Constraints:

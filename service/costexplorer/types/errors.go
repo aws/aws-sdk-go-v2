@@ -11,6 +11,8 @@ import (
 type BillExpirationException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *BillExpirationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BillExpirationException) ErrorCode() string             { return "BillExpirationException" }
+func (e *BillExpirationException) ErrorCode() string {
+	if e.Code == nil {
+		return "BillExpirationException"
+	}
+	return *e.Code
+}
 func (e *BillExpirationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested data is unavailable.
 type DataUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *DataUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DataUnavailableException) ErrorCode() string             { return "DataUnavailableException" }
+func (e *DataUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "DataUnavailableException"
+	}
+	return *e.Code
+}
 func (e *DataUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A request to generate a recommendation is already in progress.
 type GenerationExistsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +77,19 @@ func (e *GenerationExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *GenerationExistsException) ErrorCode() string             { return "GenerationExistsException" }
+func (e *GenerationExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "GenerationExistsException"
+	}
+	return *e.Code
+}
 func (e *GenerationExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The pagination token is invalid. Try again without a pagination token.
 type InvalidNextTokenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -80,12 +103,19 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.Code
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You made too many calls in a short period of time. Try again later.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -99,13 +129,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your request parameters changed between pages. Try again with the old parameters
 // or without a pagination token.
 type RequestChangedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -119,12 +156,19 @@ func (e *RequestChangedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RequestChangedException) ErrorCode() string             { return "RequestChangedException" }
+func (e *RequestChangedException) ErrorCode() string {
+	if e.Code == nil {
+		return "RequestChangedException"
+	}
+	return *e.Code
+}
 func (e *RequestChangedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified ARN in the request doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	ResourceName *string
 
@@ -140,13 +184,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've reached the limit on the number of resources you can create, or exceeded
 // the size of an individual resource.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -160,13 +211,20 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.Code
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Can occur if you specify a number of tags for a resource greater than the
 // maximum 50 user tags per resource.
 type TooManyTagsException struct {
 	Message *string
+
+	Code *string
 
 	ResourceName *string
 
@@ -182,12 +240,19 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyTagsException"
+	}
+	return *e.Code
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The cost anomaly monitor does not exist for the account.
 type UnknownMonitorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -201,12 +266,19 @@ func (e *UnknownMonitorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnknownMonitorException) ErrorCode() string             { return "UnknownMonitorException" }
+func (e *UnknownMonitorException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnknownMonitorException"
+	}
+	return *e.Code
+}
 func (e *UnknownMonitorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The cost anomaly subscription does not exist for the account.
 type UnknownSubscriptionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -220,7 +292,12 @@ func (e *UnknownSubscriptionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnknownSubscriptionException) ErrorCode() string             { return "UnknownSubscriptionException" }
+func (e *UnknownSubscriptionException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnknownSubscriptionException"
+	}
+	return *e.Code
+}
 func (e *UnknownSubscriptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Cost Explorer was unable to identify the usage unit. Provide
@@ -228,6 +305,8 @@ func (e *UnknownSubscriptionException) ErrorFault() smithy.ErrorFault { return s
 // example: hours.
 type UnresolvableUsageUnitException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -241,5 +320,10 @@ func (e *UnresolvableUsageUnitException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnresolvableUsageUnitException) ErrorCode() string             { return "UnresolvableUsageUnitException" }
+func (e *UnresolvableUsageUnitException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnresolvableUsageUnitException"
+	}
+	return *e.Code
+}
 func (e *UnresolvableUsageUnitException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

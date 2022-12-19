@@ -27,6 +27,7 @@ func (c *Client) DeleteConfig(ctx context.Context, params *DeleteConfigInput, op
 	return out, nil
 }
 
+//
 type DeleteConfigInput struct {
 
 	// UUID of a Config.
@@ -42,6 +43,7 @@ type DeleteConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DeleteConfigOutput struct {
 
 	// ARN of a Config.

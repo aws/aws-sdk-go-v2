@@ -48,6 +48,7 @@ func (c *Client) DescribeComplianceByConfigRule(ctx context.Context, params *Des
 	return out, nil
 }
 
+//
 type DescribeComplianceByConfigRuleInput struct {
 
 	// Filters the results by compliance. The allowed values are COMPLIANT and
@@ -64,6 +65,7 @@ type DescribeComplianceByConfigRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeComplianceByConfigRuleOutput struct {
 
 	// Indicates whether each of the specified Config rules is compliant.

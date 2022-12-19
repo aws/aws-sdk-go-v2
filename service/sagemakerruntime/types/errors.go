@@ -12,6 +12,8 @@ import (
 type InternalDependencyException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *InternalDependencyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalDependencyException) ErrorCode() string             { return "InternalDependencyException" }
+func (e *InternalDependencyException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalDependencyException"
+	}
+	return *e.Code
+}
 func (e *InternalDependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // An internal failure occurred.
 type InternalFailure struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *InternalFailure) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailure) ErrorCode() string             { return "InternalFailure" }
+func (e *InternalFailure) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalFailure"
+	}
+	return *e.Code
+}
 func (e *InternalFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Model (owned by the customer in the container) returned 4xx or 5xx error code.
 type ModelError struct {
 	Message *string
+
+	Code *string
 
 	OriginalStatusCode *int32
 	OriginalMessage    *string
@@ -66,7 +82,12 @@ func (e *ModelError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ModelError) ErrorCode() string             { return "ModelError" }
+func (e *ModelError) ErrorCode() string {
+	if e.Code == nil {
+		return "ModelError"
+	}
+	return *e.Code
+}
 func (e *ModelError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Either a serverless endpoint variant's resources are still being provisioned, or
@@ -74,6 +95,8 @@ func (e *ModelError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient 
 // and try your request again.
 type ModelNotReadyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -87,12 +110,19 @@ func (e *ModelNotReadyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ModelNotReadyException) ErrorCode() string             { return "ModelNotReadyException" }
+func (e *ModelNotReadyException) ErrorCode() string {
+	if e.Code == nil {
+		return "ModelNotReadyException"
+	}
+	return *e.Code
+}
 func (e *ModelNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is unavailable. Try your call again.
 type ServiceUnavailable struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -106,12 +136,19 @@ func (e *ServiceUnavailable) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailable) ErrorCode() string             { return "ServiceUnavailable" }
+func (e *ServiceUnavailable) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailable"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Inspect your request and try again.
 type ValidationError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -125,5 +162,10 @@ func (e *ValidationError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationError) ErrorCode() string             { return "ValidationError" }
+func (e *ValidationError) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationError"
+	}
+	return *e.Code
+}
 func (e *ValidationError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

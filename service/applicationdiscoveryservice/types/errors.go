@@ -12,6 +12,8 @@ import (
 type AuthorizationErrorException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,11 +26,19 @@ func (e *AuthorizationErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AuthorizationErrorException) ErrorCode() string             { return "AuthorizationErrorException" }
+func (e *AuthorizationErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "AuthorizationErrorException"
+	}
+	return *e.Code
+}
 func (e *AuthorizationErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+//
 type ConflictErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +52,19 @@ func (e *ConflictErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictErrorException) ErrorCode() string             { return "ConflictErrorException" }
+func (e *ConflictErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictErrorException"
+	}
+	return *e.Code
+}
 func (e *ConflictErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The home region is not set. Set the home region to continue.
 type HomeRegionNotSetException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +78,19 @@ func (e *HomeRegionNotSetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HomeRegionNotSetException) ErrorCode() string             { return "HomeRegionNotSetException" }
+func (e *HomeRegionNotSetException) ErrorCode() string {
+	if e.Code == nil {
+		return "HomeRegionNotSetException"
+	}
+	return *e.Code
+}
 func (e *HomeRegionNotSetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more parameters are not valid. Verify the parameters and try again.
 type InvalidParameterException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -80,13 +104,20 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value of one or more parameters are either invalid or out of range. Verify
 // the parameter values and try again.
 type InvalidParameterValueException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -100,12 +131,19 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
+func (e *InvalidParameterValueException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterValueException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This operation is not permitted.
 type OperationNotPermittedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -119,7 +157,12 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
+func (e *OperationNotPermittedException) ErrorCode() string {
+	if e.Code == nil {
+		return "OperationNotPermittedException"
+	}
+	return *e.Code
+}
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This issue occurs when the same clientRequestToken is used with the
@@ -129,6 +172,8 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 // clientRequestToken, and try again.
 type ResourceInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -142,13 +187,20 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceInUseException"
+	}
+	return *e.Code
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified configuration ID was not located. Verify the configuration ID and
 // try again.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -162,12 +214,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The server experienced an internal error. Try again.
 type ServerInternalErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -181,5 +240,10 @@ func (e *ServerInternalErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServerInternalErrorException) ErrorCode() string             { return "ServerInternalErrorException" }
+func (e *ServerInternalErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServerInternalErrorException"
+	}
+	return *e.Code
+}
 func (e *ServerInternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }

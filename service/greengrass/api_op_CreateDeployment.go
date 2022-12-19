@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a deployment. ”CreateDeployment” requests are idempotent with respect
-// to the ”X-Amzn-Client-Token” token and the request parameters.
+// Creates a deployment. ''CreateDeployment'' requests are idempotent with respect
+// to the ''X-Amzn-Client-Token'' token and the request parameters.
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentInput{}

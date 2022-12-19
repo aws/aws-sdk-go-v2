@@ -222,17 +222,14 @@ type AdditionalDataset struct {
 }
 
 // Provides information about the method used to transform attributes. The
-//
-//	following is an example using the RETAIL domain: {
-//	    "AttributeName":
-//
+// following is an example using the RETAIL domain: {
+//     "AttributeName":
 // "demand",
 //
-//	"Transformations": {"aggregation": "sum", "middlefill": "zero",
-//
+//     "Transformations": {"aggregation": "sum", "middlefill": "zero",
 // "backfill": "zero"}
 //
-//	}
+//     }
 type AttributeConfig struct {
 
 	// The name of the attribute as specified in the schema. Amazon Forecast supports
@@ -773,19 +770,21 @@ type ExplainabilitySummary struct {
 // This object belongs to the CreatePredictor operation. If you created your
 // predictor with CreateAutoPredictor, see AttributeConfig. Provides featurization
 // (transformation) information for a dataset field. This object is part of the
+// FeaturizationConfig object. For example: {
+//     "AttributeName": "demand",
 //
-//	FeaturizationConfig object. For example: {
-//	    "AttributeName": "demand",
 //
 // FeaturizationPipeline [ {
 //
-//	"FeaturizationMethodName": "filling",
+//     "FeaturizationMethodName": "filling",
+//
 //
 // "FeaturizationMethodParameters": {"aggregation": "avg", "backfill": "nan"}
 //
+//
 // } ]
 //
-//	}
+//     }
 type Featurization struct {
 
 	// The name of the schema attribute that specifies the data field to be featurized.
@@ -849,14 +848,14 @@ type FeaturizationConfig struct {
 // Provides information about the method that featurizes (transforms) a dataset
 // field. The method is part of the FeaturizationPipeline of the Featurization
 // object. The following is an example of how you specify a FeaturizationMethod
+// object. {
+//     "FeaturizationMethodName": "filling",
 //
-//	object. {
-//	    "FeaturizationMethodName": "filling",
 //
 // "FeaturizationMethodParameters": {"aggregation": "sum", "middlefill": "zero",
 // "backfill": "zero"}
 //
-//	}
+//     }
 type FeaturizationMethod struct {
 
 	// The name of the method. The "filling" method is the only supported method.

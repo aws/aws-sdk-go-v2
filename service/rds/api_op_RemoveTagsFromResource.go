@@ -29,6 +29,7 @@ func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsF
 	return out, nil
 }
 
+//
 type RemoveTagsFromResourceInput struct {
 
 	// The Amazon RDS resource that the tags are removed from. This value is an Amazon

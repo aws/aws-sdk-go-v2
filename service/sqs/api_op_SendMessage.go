@@ -31,6 +31,7 @@ func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optF
 	return out, nil
 }
 
+//
 type SendMessageInput struct {
 
 	// The message to send. The minimum size is one character. The maximum size is 256

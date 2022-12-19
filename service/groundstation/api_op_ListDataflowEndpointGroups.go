@@ -28,6 +28,7 @@ func (c *Client) ListDataflowEndpointGroups(ctx context.Context, params *ListDat
 	return out, nil
 }
 
+//
 type ListDataflowEndpointGroupsInput struct {
 
 	// Maximum number of dataflow endpoint groups returned.
@@ -40,6 +41,7 @@ type ListDataflowEndpointGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ListDataflowEndpointGroupsOutput struct {
 
 	// A list of dataflow endpoint groups.

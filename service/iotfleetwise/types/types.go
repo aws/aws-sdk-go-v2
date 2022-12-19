@@ -251,9 +251,8 @@ type CloudWatchLogDeliveryOptions struct {
 // Specifies what data to collect and how often or when to collect it.
 //
 // The following types satisfy this interface:
-//
-//	CollectionSchemeMemberConditionBasedCollectionScheme
-//	CollectionSchemeMemberTimeBasedCollectionScheme
+//  CollectionSchemeMemberConditionBasedCollectionScheme
+//  CollectionSchemeMemberTimeBasedCollectionScheme
 type CollectionScheme interface {
 	isCollectionScheme()
 }
@@ -447,8 +446,7 @@ type FleetSummary struct {
 // in a VSS format.
 //
 // The following types satisfy this interface:
-//
-//	FormattedVssMemberVssJson
+//  FormattedVssMemberVssJson
 type FormattedVss interface {
 	isFormattedVss()
 }
@@ -574,8 +572,7 @@ type ModelManifestSummary struct {
 // Specifications for defining a vehicle network.
 //
 // The following types satisfy this interface:
-//
-//	NetworkFileDefinitionMemberCanDbc
+//  NetworkFileDefinitionMemberCanDbc
 type NetworkFileDefinition interface {
 	isNetworkFileDefinition()
 }
@@ -624,11 +621,10 @@ type NetworkInterface struct {
 // attribute, branch, or sensor.
 //
 // The following types satisfy this interface:
-//
-//	NodeMemberActuator
-//	NodeMemberAttribute
-//	NodeMemberBranch
-//	NodeMemberSensor
+//  NodeMemberActuator
+//  NodeMemberAttribute
+//  NodeMemberBranch
+//  NodeMemberSensor
 type Node interface {
 	isNode()
 }

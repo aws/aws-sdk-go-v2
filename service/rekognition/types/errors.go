@@ -11,7 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -26,7 +27,12 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of in-progress human reviews you have has exceeded the number
@@ -34,10 +40,11 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type HumanLoopQuotaExceededException struct {
 	Message *string
 
+	Code *string
+
 	ResourceType *string
 	QuotaCode    *string
 	ServiceCode  *string
-	Code         *string
 	Logref       *string
 
 	noSmithyDocumentSerde
@@ -53,7 +60,10 @@ func (e *HumanLoopQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HumanLoopQuotaExceededException) ErrorCode() string {
-	return "HumanLoopQuotaExceededException"
+	if e.Code == nil {
+		return "HumanLoopQuotaExceededException"
+	}
+	return *e.Code
 }
 func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -63,7 +73,8 @@ func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { retur
 type IdempotentParameterMismatchException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -79,7 +90,10 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	return "IdempotentParameterMismatchException"
+	if e.Code == nil {
+		return "IdempotentParameterMismatchException"
+	}
+	return *e.Code
 }
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -92,7 +106,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 type ImageTooLargeException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -107,14 +122,20 @@ func (e *ImageTooLargeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ImageTooLargeException) ErrorCode() string             { return "ImageTooLargeException" }
+func (e *ImageTooLargeException) ErrorCode() string {
+	if e.Code == nil {
+		return "ImageTooLargeException"
+	}
+	return *e.Code
+}
 func (e *ImageTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Rekognition experienced a service issue. Try your call again.
 type InternalServerError struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -129,14 +150,20 @@ func (e *InternalServerError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
+func (e *InternalServerError) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerError"
+	}
+	return *e.Code
+}
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The provided image format is not supported.
 type InvalidImageFormatException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -151,14 +178,20 @@ func (e *InvalidImageFormatException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidImageFormatException) ErrorCode() string             { return "InvalidImageFormatException" }
+func (e *InvalidImageFormatException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidImageFormatException"
+	}
+	return *e.Code
+}
 func (e *InvalidImageFormatException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Pagination token in the request is not valid.
 type InvalidPaginationTokenException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -174,7 +207,10 @@ func (e *InvalidPaginationTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPaginationTokenException) ErrorCode() string {
-	return "InvalidPaginationTokenException"
+	if e.Code == nil {
+		return "InvalidPaginationTokenException"
+	}
+	return *e.Code
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -183,7 +219,8 @@ func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { retur
 type InvalidParameterException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -198,14 +235,20 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The supplied revision id for the project policy is invalid.
 type InvalidPolicyRevisionIdException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -221,7 +264,10 @@ func (e *InvalidPolicyRevisionIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPolicyRevisionIdException) ErrorCode() string {
-	return "InvalidPolicyRevisionIdException"
+	if e.Code == nil {
+		return "InvalidPolicyRevisionIdException"
+	}
+	return *e.Code
 }
 func (e *InvalidPolicyRevisionIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -229,7 +275,8 @@ func (e *InvalidPolicyRevisionIdException) ErrorFault() smithy.ErrorFault { retu
 type InvalidS3ObjectException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -244,7 +291,12 @@ func (e *InvalidS3ObjectException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidS3ObjectException) ErrorCode() string             { return "InvalidS3ObjectException" }
+func (e *InvalidS3ObjectException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidS3ObjectException"
+	}
+	return *e.Code
+}
 func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An Amazon Rekognition service limit was exceeded. For example, if you start too
@@ -255,7 +307,8 @@ func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smith
 type LimitExceededException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -270,7 +323,12 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The format of the project policy document that you supplied to PutProjectPolicy
@@ -278,7 +336,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type MalformedPolicyDocumentException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -294,7 +353,10 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedPolicyDocumentException) ErrorCode() string {
-	return "MalformedPolicyDocumentException"
+	if e.Code == nil {
+		return "MalformedPolicyDocumentException"
+	}
+	return *e.Code
 }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -303,7 +365,8 @@ func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { retu
 type ProvisionedThroughputExceededException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -319,7 +382,10 @@ func (e *ProvisionedThroughputExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProvisionedThroughputExceededException) ErrorCode() string {
-	return "ProvisionedThroughputExceededException"
+	if e.Code == nil {
+		return "ProvisionedThroughputExceededException"
+	}
+	return *e.Code
 }
 func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -329,7 +395,8 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 type ResourceAlreadyExistsException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -344,14 +411,20 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
+func (e *ResourceAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceAlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource is already being used.
 type ResourceInUseException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -366,14 +439,20 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceInUseException"
+	}
+	return *e.Code
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource specified in the request cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -388,7 +467,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested resource isn't ready. For example, this exception occurs when you
@@ -396,7 +480,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ResourceNotReadyException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -411,7 +496,12 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
+func (e *ResourceNotReadyException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotReadyException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The size of the collection exceeds the allowed limit. For more information, see
@@ -420,7 +510,8 @@ func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smit
 type ServiceQuotaExceededException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -435,7 +526,12 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.Code
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Rekognition is temporarily unable to process the request. Try your call
@@ -443,7 +539,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 type ThrottlingException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -458,7 +555,12 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottlingException"
+	}
+	return *e.Code
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The file size or duration of the supplied media is too large. The maximum file
@@ -466,7 +568,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type VideoTooLargeException struct {
 	Message *string
 
-	Code   *string
+	Code *string
+
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -481,5 +584,10 @@ func (e *VideoTooLargeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *VideoTooLargeException) ErrorCode() string             { return "VideoTooLargeException" }
+func (e *VideoTooLargeException) ErrorCode() string {
+	if e.Code == nil {
+		return "VideoTooLargeException"
+	}
+	return *e.Code
+}
 func (e *VideoTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

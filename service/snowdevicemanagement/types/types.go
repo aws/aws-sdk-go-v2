@@ -31,9 +31,8 @@ type Capacity struct {
 // The command given to the device to execute.
 //
 // The following types satisfy this interface:
-//
-//	CommandMemberReboot
-//	CommandMemberUnlock
+//  CommandMemberReboot
+//  CommandMemberUnlock
 type Command interface {
 	isCommand()
 }

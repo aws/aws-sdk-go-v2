@@ -26,6 +26,7 @@ func (c *Client) DeleteOptionGroup(ctx context.Context, params *DeleteOptionGrou
 	return out, nil
 }
 
+//
 type DeleteOptionGroupInput struct {
 
 	// The name of the option group to be deleted. You can't delete default option

@@ -11,6 +11,8 @@ import (
 type ConcurrentModificationException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,7 +26,10 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.Code == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.Code
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -32,6 +37,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // a different identity ID.
 type DeveloperUserAlreadyRegisteredException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -46,7 +53,10 @@ func (e *DeveloperUserAlreadyRegisteredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DeveloperUserAlreadyRegisteredException) ErrorCode() string {
-	return "DeveloperUserAlreadyRegisteredException"
+	if e.Code == nil {
+		return "DeveloperUserAlreadyRegisteredException"
+	}
+	return *e.Code
 }
 func (e *DeveloperUserAlreadyRegisteredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -56,6 +66,8 @@ func (e *DeveloperUserAlreadyRegisteredException) ErrorFault() smithy.ErrorFault
 // responding
 type ExternalServiceException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -69,12 +81,19 @@ func (e *ExternalServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExternalServiceException) ErrorCode() string             { return "ExternalServiceException" }
+func (e *ExternalServiceException) ErrorCode() string {
+	if e.Code == nil {
+		return "ExternalServiceException"
+	}
+	return *e.Code
+}
 func (e *ExternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Thrown when the service encounters an error during processing the request.
 type InternalErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -88,13 +107,20 @@ func (e *InternalErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
+func (e *InternalErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Thrown if the identity pool has no role associated for the given auth type
 // (auth/unauth) or if the AssumeRole fails.
 type InvalidIdentityPoolConfigurationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -109,7 +135,10 @@ func (e *InvalidIdentityPoolConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidIdentityPoolConfigurationException) ErrorCode() string {
-	return "InvalidIdentityPoolConfigurationException"
+	if e.Code == nil {
+		return "InvalidIdentityPoolConfigurationException"
+	}
+	return *e.Code
 }
 func (e *InvalidIdentityPoolConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -118,6 +147,8 @@ func (e *InvalidIdentityPoolConfigurationException) ErrorFault() smithy.ErrorFau
 // Thrown for missing or bad input parameter(s).
 type InvalidParameterException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -131,12 +162,19 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Thrown when the total number of user pools has exceeded a preset limit.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -150,12 +188,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Thrown when a user is not authorized to access the requested resource.
 type NotAuthorizedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -169,13 +214,20 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
+func (e *NotAuthorizedException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotAuthorizedException"
+	}
+	return *e.Code
+}
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Thrown when a user tries to use a login which is already linked to another
 // account.
 type ResourceConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -189,13 +241,20 @@ func (e *ResourceConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
+func (e *ResourceConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceConflictException"
+	}
+	return *e.Code
+}
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Thrown when the requested resource (for example, a dataset or record) does not
 // exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -209,12 +268,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Thrown when a request is throttled.
 type TooManyRequestsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -228,5 +294,10 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.Code
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

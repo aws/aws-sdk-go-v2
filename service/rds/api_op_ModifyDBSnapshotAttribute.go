@@ -41,6 +41,7 @@ func (c *Client) ModifyDBSnapshotAttribute(ctx context.Context, params *ModifyDB
 	return out, nil
 }
 
+//
 type ModifyDBSnapshotAttributeInput struct {
 
 	// The name of the DB snapshot attribute to modify. To manage authorization for

@@ -40,6 +40,7 @@ func (c *Client) CreateEventSubscription(ctx context.Context, params *CreateEven
 	return out, nil
 }
 
+//
 type CreateEventSubscriptionInput struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic created for event
@@ -84,6 +85,7 @@ type CreateEventSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CreateEventSubscriptionOutput struct {
 
 	// The event subscription that was created.

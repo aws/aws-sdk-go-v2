@@ -7,8 +7,11 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+//
 type WAFBadRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -22,12 +25,19 @@ func (e *WAFBadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFBadRequestException) ErrorCode() string             { return "WAFBadRequestException" }
+func (e *WAFBadRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFBadRequestException"
+	}
+	return *e.Code
+}
 func (e *WAFBadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The name specified is invalid.
 type WAFDisallowedNameException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -41,7 +51,12 @@ func (e *WAFDisallowedNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFDisallowedNameException) ErrorCode() string             { return "WAFDisallowedNameException" }
+func (e *WAFDisallowedNameException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFDisallowedNameException"
+	}
+	return *e.Code
+}
 func (e *WAFDisallowedNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed due to a problem with the migration. The failure cause is
@@ -72,6 +87,8 @@ func (e *WAFDisallowedNameException) ErrorFault() smithy.ErrorFault { return smi
 type WAFEntityMigrationException struct {
 	Message *string
 
+	Code *string
+
 	MigrationErrorType   MigrationErrorType
 	MigrationErrorReason *string
 
@@ -87,13 +104,20 @@ func (e *WAFEntityMigrationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFEntityMigrationException) ErrorCode() string             { return "WAFEntityMigrationException" }
+func (e *WAFEntityMigrationException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFEntityMigrationException"
+	}
+	return *e.Code
+}
 func (e *WAFEntityMigrationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because of a system problem, even though the request was
 // valid. Retry your request.
 type WAFInternalErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -107,13 +131,20 @@ func (e *WAFInternalErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFInternalErrorException) ErrorCode() string             { return "WAFInternalErrorException" }
+func (e *WAFInternalErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFInternalErrorException"
+	}
+	return *e.Code
+}
 func (e *WAFInternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The operation failed because you tried to create, update, or delete an object by
 // using an invalid account identifier.
 type WAFInvalidAccountException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -127,7 +158,12 @@ func (e *WAFInvalidAccountException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFInvalidAccountException) ErrorCode() string             { return "WAFInvalidAccountException" }
+func (e *WAFInvalidAccountException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFInvalidAccountException"
+	}
+	return *e.Code
+}
 func (e *WAFInvalidAccountException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because there was nothing to do. For example:
@@ -151,6 +187,8 @@ func (e *WAFInvalidAccountException) ErrorFault() smithy.ErrorFault { return smi
 type WAFInvalidOperationException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -163,7 +201,12 @@ func (e *WAFInvalidOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFInvalidOperationException) ErrorCode() string             { return "WAFInvalidOperationException" }
+func (e *WAFInvalidOperationException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFInvalidOperationException"
+	}
+	return *e.Code
+}
 func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because AWS WAF didn't recognize a parameter in the
@@ -199,6 +242,8 @@ func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return s
 type WAFInvalidParameterException struct {
 	Message *string
 
+	Code *string
+
 	Field     ParameterExceptionField
 	Parameter *string
 	Reason    ParameterExceptionReason
@@ -215,7 +260,12 @@ func (e *WAFInvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFInvalidParameterException) ErrorCode() string             { return "WAFInvalidParameterException" }
+func (e *WAFInvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFInvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because the specified policy is not in the proper format.
@@ -247,6 +297,8 @@ func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return s
 type WAFInvalidPermissionPolicyException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -260,7 +312,10 @@ func (e *WAFInvalidPermissionPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidPermissionPolicyException) ErrorCode() string {
-	return "WAFInvalidPermissionPolicyException"
+	if e.Code == nil {
+		return "WAFInvalidPermissionPolicyException"
+	}
+	return *e.Code
 }
 func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -269,6 +324,8 @@ func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 // The regular expression (regex) you specified in RegexPatternString is invalid.
 type WAFInvalidRegexPatternException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -283,7 +340,10 @@ func (e *WAFInvalidRegexPatternException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidRegexPatternException) ErrorCode() string {
-	return "WAFInvalidRegexPatternException"
+	if e.Code == nil {
+		return "WAFInvalidRegexPatternException"
+	}
+	return *e.Code
 }
 func (e *WAFInvalidRegexPatternException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -293,6 +353,8 @@ func (e *WAFInvalidRegexPatternException) ErrorFault() smithy.ErrorFault { retur
 // the AWS WAF Developer Guide.
 type WAFLimitsExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -306,7 +368,12 @@ func (e *WAFLimitsExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFLimitsExceededException) ErrorCode() string             { return "WAFLimitsExceededException" }
+func (e *WAFLimitsExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFLimitsExceededException"
+	}
+	return *e.Code
+}
 func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because you tried to delete an object that isn't empty. For
@@ -326,6 +393,8 @@ func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smi
 type WAFNonEmptyEntityException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -338,7 +407,12 @@ func (e *WAFNonEmptyEntityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFNonEmptyEntityException) ErrorCode() string             { return "WAFNonEmptyEntityException" }
+func (e *WAFNonEmptyEntityException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFNonEmptyEntityException"
+	}
+	return *e.Code
+}
 func (e *WAFNonEmptyEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because you tried to add an object to or delete an object
@@ -359,6 +433,8 @@ func (e *WAFNonEmptyEntityException) ErrorFault() smithy.ErrorFault { return smi
 type WAFNonexistentContainerException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -372,13 +448,18 @@ func (e *WAFNonexistentContainerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFNonexistentContainerException) ErrorCode() string {
-	return "WAFNonexistentContainerException"
+	if e.Code == nil {
+		return "WAFNonexistentContainerException"
+	}
+	return *e.Code
 }
 func (e *WAFNonexistentContainerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because the referenced object doesn't exist.
 type WAFNonexistentItemException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -392,7 +473,12 @@ func (e *WAFNonexistentItemException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFNonexistentItemException) ErrorCode() string             { return "WAFNonexistentItemException" }
+func (e *WAFNonexistentItemException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFNonexistentItemException"
+	}
+	return *e.Code
+}
 func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because you tried to delete an object that is still in use.
@@ -404,6 +490,8 @@ func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return sm
 // * You tried to delete a Rule that is still referenced by a WebACL.
 type WAFReferencedItemException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -417,7 +505,12 @@ func (e *WAFReferencedItemException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFReferencedItemException) ErrorCode() string             { return "WAFReferencedItemException" }
+func (e *WAFReferencedItemException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFReferencedItemException"
+	}
+	return *e.Code
+}
 func (e *WAFReferencedItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // AWS WAF is not able to access the service linked role. This can be caused by a
@@ -430,6 +523,8 @@ func (e *WAFReferencedItemException) ErrorFault() smithy.ErrorFault { return smi
 // unlocked.
 type WAFServiceLinkedRoleErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -444,7 +539,10 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFServiceLinkedRoleErrorException) ErrorCode() string {
-	return "WAFServiceLinkedRoleErrorException"
+	if e.Code == nil {
+		return "WAFServiceLinkedRoleErrorException"
+	}
+	return *e.Code
 }
 func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -454,6 +552,8 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 // using a change token that has already been used.
 type WAFStaleDataException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -467,12 +567,19 @@ func (e *WAFStaleDataException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFStaleDataException) ErrorCode() string             { return "WAFStaleDataException" }
+func (e *WAFStaleDataException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFStaleDataException"
+	}
+	return *e.Code
+}
 func (e *WAFStaleDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified subscription does not exist.
 type WAFSubscriptionNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -487,12 +594,18 @@ func (e *WAFSubscriptionNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFSubscriptionNotFoundException) ErrorCode() string {
-	return "WAFSubscriptionNotFoundException"
+	if e.Code == nil {
+		return "WAFSubscriptionNotFoundException"
+	}
+	return *e.Code
 }
 func (e *WAFSubscriptionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+//
 type WAFTagOperationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -506,11 +619,19 @@ func (e *WAFTagOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WAFTagOperationException) ErrorCode() string             { return "WAFTagOperationException" }
+func (e *WAFTagOperationException) ErrorCode() string {
+	if e.Code == nil {
+		return "WAFTagOperationException"
+	}
+	return *e.Code
+}
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+//
 type WAFTagOperationInternalErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -525,7 +646,10 @@ func (e *WAFTagOperationInternalErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFTagOperationInternalErrorException) ErrorCode() string {
-	return "WAFTagOperationInternalErrorException"
+	if e.Code == nil {
+		return "WAFTagOperationInternalErrorException"
+	}
+	return *e.Code
 }
 func (e *WAFTagOperationInternalErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer

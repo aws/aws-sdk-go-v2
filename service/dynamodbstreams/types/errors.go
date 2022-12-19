@@ -13,6 +13,8 @@ import (
 type ExpiredIteratorException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,12 +27,19 @@ func (e *ExpiredIteratorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExpiredIteratorException) ErrorCode() string             { return "ExpiredIteratorException" }
+func (e *ExpiredIteratorException) ErrorCode() string {
+	if e.Code == nil {
+		return "ExpiredIteratorException"
+	}
+	return *e.Code
+}
 func (e *ExpiredIteratorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error occurred on the server side.
 type InternalServerError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -44,7 +53,12 @@ func (e *InternalServerError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
+func (e *InternalServerError) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerError"
+	}
+	return *e.Code
+}
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // There is no limit to the number of daily on-demand backups that can be taken.
@@ -60,6 +74,8 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type LimitExceededException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -72,13 +88,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation tried to access a nonexistent table or index. The resource might
 // not be specified correctly, or its status might not be ACTIVE.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -92,7 +115,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation attempted to read past the oldest stream record in a shard. In
@@ -110,6 +138,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type TrimmedDataAccessException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -122,5 +152,10 @@ func (e *TrimmedDataAccessException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TrimmedDataAccessException) ErrorCode() string             { return "TrimmedDataAccessException" }
+func (e *TrimmedDataAccessException) ErrorCode() string {
+	if e.Code == nil {
+		return "TrimmedDataAccessException"
+	}
+	return *e.Code
+}
 func (e *TrimmedDataAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

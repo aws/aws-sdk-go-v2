@@ -51,6 +51,7 @@ type DeleteVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DeleteVirtualNodeOutput struct {
 
 	// The virtual node that was deleted.

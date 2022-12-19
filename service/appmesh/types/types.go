@@ -10,8 +10,7 @@ import (
 // An object that represents the access logging information for a virtual node.
 //
 // The following types satisfy this interface:
-//
-//	AccessLogMemberFile
+//  AccessLogMemberFile
 type AccessLog interface {
 	isAccessLog()
 }
@@ -76,8 +75,7 @@ type AwsCloudMapServiceDiscovery struct {
 // outbound traffic to.
 //
 // The following types satisfy this interface:
-//
-//	BackendMemberVirtualService
+//  BackendMemberVirtualService
 type Backend interface {
 	isBackend()
 }
@@ -134,9 +132,8 @@ type ClientPolicyTls struct {
 // An object that represents the client's certificate.
 //
 // The following types satisfy this interface:
-//
-//	ClientTlsCertificateMemberFile
-//	ClientTlsCertificateMemberSds
+//  ClientTlsCertificateMemberFile
+//  ClientTlsCertificateMemberSds
 type ClientTlsCertificate interface {
 	isClientTlsCertificate()
 }
@@ -481,12 +478,11 @@ type GrpcGatewayRouteRewrite struct {
 // An object representing the method header to be matched.
 //
 // The following types satisfy this interface:
-//
-//	GrpcMetadataMatchMethodMemberExact
-//	GrpcMetadataMatchMethodMemberPrefix
-//	GrpcMetadataMatchMethodMemberRange
-//	GrpcMetadataMatchMethodMemberRegex
-//	GrpcMetadataMatchMethodMemberSuffix
+//  GrpcMetadataMatchMethodMemberExact
+//  GrpcMetadataMatchMethodMemberPrefix
+//  GrpcMetadataMatchMethodMemberRange
+//  GrpcMetadataMatchMethodMemberRegex
+//  GrpcMetadataMatchMethodMemberSuffix
 type GrpcMetadataMatchMethod interface {
 	isGrpcMetadataMatchMethod()
 }
@@ -655,12 +651,11 @@ type GrpcRouteMetadata struct {
 // An object that represents the match method. Specify one of the match values.
 //
 // The following types satisfy this interface:
-//
-//	GrpcRouteMetadataMatchMethodMemberExact
-//	GrpcRouteMetadataMatchMethodMemberPrefix
-//	GrpcRouteMetadataMatchMethodMemberRange
-//	GrpcRouteMetadataMatchMethodMemberRegex
-//	GrpcRouteMetadataMatchMethodMemberSuffix
+//  GrpcRouteMetadataMatchMethodMemberExact
+//  GrpcRouteMetadataMatchMethodMemberPrefix
+//  GrpcRouteMetadataMatchMethodMemberRange
+//  GrpcRouteMetadataMatchMethodMemberRegex
+//  GrpcRouteMetadataMatchMethodMemberSuffix
 type GrpcRouteMetadataMatchMethod interface {
 	isGrpcRouteMetadataMatchMethod()
 }
@@ -732,12 +727,11 @@ type GrpcTimeout struct {
 // sent in a request. Specify one match method.
 //
 // The following types satisfy this interface:
-//
-//	HeaderMatchMethodMemberExact
-//	HeaderMatchMethodMemberPrefix
-//	HeaderMatchMethodMemberRange
-//	HeaderMatchMethodMemberRegex
-//	HeaderMatchMethodMemberSuffix
+//  HeaderMatchMethodMemberExact
+//  HeaderMatchMethodMemberPrefix
+//  HeaderMatchMethodMemberRange
+//  HeaderMatchMethodMemberRegex
+//  HeaderMatchMethodMemberSuffix
 type HeaderMatchMethod interface {
 	isHeaderMatchMethod()
 }
@@ -1164,11 +1158,10 @@ type Listener struct {
 // An object that represents timeouts for different protocols.
 //
 // The following types satisfy this interface:
-//
-//	ListenerTimeoutMemberGrpc
-//	ListenerTimeoutMemberHttp
-//	ListenerTimeoutMemberHttp2
-//	ListenerTimeoutMemberTcp
+//  ListenerTimeoutMemberGrpc
+//  ListenerTimeoutMemberHttp
+//  ListenerTimeoutMemberHttp2
+//  ListenerTimeoutMemberTcp
 type ListenerTimeout interface {
 	isListenerTimeout()
 }
@@ -1258,10 +1251,9 @@ type ListenerTlsAcmCertificate struct {
 // certificate.
 //
 // The following types satisfy this interface:
-//
-//	ListenerTlsCertificateMemberAcm
-//	ListenerTlsCertificateMemberFile
-//	ListenerTlsCertificateMemberSds
+//  ListenerTlsCertificateMemberAcm
+//  ListenerTlsCertificateMemberFile
+//  ListenerTlsCertificateMemberSds
 type ListenerTlsCertificate interface {
 	isListenerTlsCertificate()
 }
@@ -1351,9 +1343,8 @@ type ListenerTlsValidationContext struct {
 // context trust.
 //
 // The following types satisfy this interface:
-//
-//	ListenerTlsValidationContextTrustMemberFile
-//	ListenerTlsValidationContextTrustMemberSds
+//  ListenerTlsValidationContextTrustMemberFile
+//  ListenerTlsValidationContextTrustMemberSds
 type ListenerTlsValidationContextTrust interface {
 	isListenerTlsValidationContextTrust()
 }
@@ -1390,13 +1381,13 @@ type Logging struct {
 // An object that represents the format for the logs.
 //
 // The following types satisfy this interface:
-//
-//	LoggingFormatMemberJson
-//	LoggingFormatMemberText
+//  LoggingFormatMemberJson
+//  LoggingFormatMemberText
 type LoggingFormat interface {
 	isLoggingFormat()
 }
 
+//
 type LoggingFormatMemberJson struct {
 	Value []JsonFormatRef
 
@@ -1405,6 +1396,7 @@ type LoggingFormatMemberJson struct {
 
 func (*LoggingFormatMemberJson) isLoggingFormat() {}
 
+//
 type LoggingFormatMemberText struct {
 	Value string
 
@@ -1768,9 +1760,8 @@ type RouteStatus struct {
 // An object that represents the service discovery information for a virtual node.
 //
 // The following types satisfy this interface:
-//
-//	ServiceDiscoveryMemberAwsCloudMap
-//	ServiceDiscoveryMemberDns
+//  ServiceDiscoveryMemberAwsCloudMap
+//  ServiceDiscoveryMemberDns
 type ServiceDiscovery interface {
 	isServiceDiscovery()
 }
@@ -1953,10 +1944,9 @@ type TlsValidationContextSdsTrust struct {
 // trust.
 //
 // The following types satisfy this interface:
-//
-//	TlsValidationContextTrustMemberAcm
-//	TlsValidationContextTrustMemberFile
-//	TlsValidationContextTrustMemberSds
+//  TlsValidationContextTrustMemberAcm
+//  TlsValidationContextTrustMemberFile
+//  TlsValidationContextTrustMemberSds
 type TlsValidationContextTrust interface {
 	isTlsValidationContextTrust()
 }
@@ -1994,8 +1984,7 @@ func (*TlsValidationContextTrustMemberSds) isTlsValidationContextTrust() {}
 // The access log configuration for a virtual gateway.
 //
 // The following types satisfy this interface:
-//
-//	VirtualGatewayAccessLogMemberFile
+//  VirtualGatewayAccessLogMemberFile
 type VirtualGatewayAccessLog interface {
 	isVirtualGatewayAccessLog()
 }
@@ -2054,9 +2043,8 @@ type VirtualGatewayClientPolicyTls struct {
 // Security (TLS) certificate.
 //
 // The following types satisfy this interface:
-//
-//	VirtualGatewayClientTlsCertificateMemberFile
-//	VirtualGatewayClientTlsCertificateMemberSds
+//  VirtualGatewayClientTlsCertificateMemberFile
+//  VirtualGatewayClientTlsCertificateMemberSds
 type VirtualGatewayClientTlsCertificate interface {
 	isVirtualGatewayClientTlsCertificate()
 }
@@ -2089,10 +2077,9 @@ func (*VirtualGatewayClientTlsCertificateMemberSds) isVirtualGatewayClientTlsCer
 // 2147483647.
 //
 // The following types satisfy this interface:
-//
-//	VirtualGatewayConnectionPoolMemberGrpc
-//	VirtualGatewayConnectionPoolMemberHttp
-//	VirtualGatewayConnectionPoolMemberHttp2
+//  VirtualGatewayConnectionPoolMemberGrpc
+//  VirtualGatewayConnectionPoolMemberHttp
+//  VirtualGatewayConnectionPoolMemberHttp2
 type VirtualGatewayConnectionPool interface {
 	isVirtualGatewayConnectionPool()
 }
@@ -2329,10 +2316,9 @@ type VirtualGatewayListenerTlsAcmCertificate struct {
 // certificate.
 //
 // The following types satisfy this interface:
-//
-//	VirtualGatewayListenerTlsCertificateMemberAcm
-//	VirtualGatewayListenerTlsCertificateMemberFile
-//	VirtualGatewayListenerTlsCertificateMemberSds
+//  VirtualGatewayListenerTlsCertificateMemberAcm
+//  VirtualGatewayListenerTlsCertificateMemberFile
+//  VirtualGatewayListenerTlsCertificateMemberSds
 type VirtualGatewayListenerTlsCertificate interface {
 	isVirtualGatewayListenerTlsCertificate()
 }
@@ -2422,9 +2408,8 @@ type VirtualGatewayListenerTlsValidationContext struct {
 // Security (TLS) validation context trust.
 //
 // The following types satisfy this interface:
-//
-//	VirtualGatewayListenerTlsValidationContextTrustMemberFile
-//	VirtualGatewayListenerTlsValidationContextTrustMemberSds
+//  VirtualGatewayListenerTlsValidationContextTrustMemberFile
+//  VirtualGatewayListenerTlsValidationContextTrustMemberSds
 type VirtualGatewayListenerTlsValidationContextTrust interface {
 	isVirtualGatewayListenerTlsValidationContextTrust()
 }
@@ -2622,10 +2607,9 @@ type VirtualGatewayTlsValidationContextSdsTrust struct {
 // trust.
 //
 // The following types satisfy this interface:
-//
-//	VirtualGatewayTlsValidationContextTrustMemberAcm
-//	VirtualGatewayTlsValidationContextTrustMemberFile
-//	VirtualGatewayTlsValidationContextTrustMemberSds
+//  VirtualGatewayTlsValidationContextTrustMemberAcm
+//  VirtualGatewayTlsValidationContextTrustMemberFile
+//  VirtualGatewayTlsValidationContextTrustMemberSds
 type VirtualGatewayTlsValidationContextTrust interface {
 	isVirtualGatewayTlsValidationContextTrust()
 }
@@ -2669,11 +2653,10 @@ func (*VirtualGatewayTlsValidationContextTrustMemberSds) isVirtualGatewayTlsVali
 // 2147483647.
 //
 // The following types satisfy this interface:
-//
-//	VirtualNodeConnectionPoolMemberGrpc
-//	VirtualNodeConnectionPoolMemberHttp
-//	VirtualNodeConnectionPoolMemberHttp2
-//	VirtualNodeConnectionPoolMemberTcp
+//  VirtualNodeConnectionPoolMemberGrpc
+//  VirtualNodeConnectionPoolMemberHttp
+//  VirtualNodeConnectionPoolMemberHttp2
+//  VirtualNodeConnectionPoolMemberTcp
 type VirtualNodeConnectionPool interface {
 	isVirtualNodeConnectionPool()
 }
@@ -3073,9 +3056,8 @@ type VirtualServiceData struct {
 // An object that represents the provider for a virtual service.
 //
 // The following types satisfy this interface:
-//
-//	VirtualServiceProviderMemberVirtualNode
-//	VirtualServiceProviderMemberVirtualRouter
+//  VirtualServiceProviderMemberVirtualNode
+//  VirtualServiceProviderMemberVirtualRouter
 type VirtualServiceProvider interface {
 	isVirtualServiceProvider()
 }

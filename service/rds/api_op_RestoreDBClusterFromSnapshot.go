@@ -41,6 +41,7 @@ func (c *Client) RestoreDBClusterFromSnapshot(ctx context.Context, params *Resto
 	return out, nil
 }
 
+//
 type RestoreDBClusterFromSnapshotInput struct {
 
 	// The name of the DB cluster to create from the DB snapshot or DB cluster

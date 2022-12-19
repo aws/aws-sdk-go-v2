@@ -30,6 +30,7 @@ func (c *Client) ResetClusterParameterGroup(ctx context.Context, params *ResetCl
 	return out, nil
 }
 
+//
 type ResetClusterParameterGroupInput struct {
 
 	// The name of the cluster parameter group to be reset.
@@ -49,6 +50,7 @@ type ResetClusterParameterGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ResetClusterParameterGroupOutput struct {
 
 	// The name of the cluster parameter group.

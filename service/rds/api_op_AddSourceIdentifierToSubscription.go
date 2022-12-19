@@ -27,6 +27,7 @@ func (c *Client) AddSourceIdentifierToSubscription(ctx context.Context, params *
 	return out, nil
 }
 
+//
 type AddSourceIdentifierToSubscriptionInput struct {
 
 	// The identifier of the event source to be added. Constraints:

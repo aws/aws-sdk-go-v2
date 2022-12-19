@@ -73,8 +73,7 @@ type Destination struct {
 // Worker orientation measured in units clockwise from north.
 //
 // The following types satisfy this interface:
-//
-//	OrientationMemberDegrees
+//  OrientationMemberDegrees
 type Orientation interface {
 	isOrientation()
 }
@@ -91,8 +90,7 @@ func (*OrientationMemberDegrees) isOrientation() {}
 // Supported coordinates for worker position.
 //
 // The following types satisfy this interface:
-//
-//	PositionCoordinatesMemberCartesianCoordinates
+//  PositionCoordinatesMemberCartesianCoordinates
 type PositionCoordinates interface {
 	isPositionCoordinates()
 }

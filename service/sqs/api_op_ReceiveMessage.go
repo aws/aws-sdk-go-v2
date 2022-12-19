@@ -71,6 +71,7 @@ func (c *Client) ReceiveMessage(ctx context.Context, params *ReceiveMessageInput
 	return out, nil
 }
 
+//
 type ReceiveMessageInput struct {
 
 	// The URL of the Amazon SQS queue from which messages are received. Queue URLs and

@@ -36,6 +36,7 @@ func (c *Client) CopyDBSnapshot(ctx context.Context, params *CopyDBSnapshotInput
 	return out, nil
 }
 
+//
 type CopyDBSnapshotInput struct {
 
 	// The identifier for the source DB snapshot. If the source snapshot is in the same

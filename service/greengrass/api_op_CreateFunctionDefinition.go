@@ -14,7 +14,7 @@ import (
 // Creates a Lambda function definition which contains a list of Lambda functions
 // and their configurations to be used in a group. You can create an initial
 // version of the definition by providing a list of Lambda functions and their
-// configurations now, or use ”CreateFunctionDefinitionVersion” later.
+// configurations now, or use ''CreateFunctionDefinitionVersion'' later.
 func (c *Client) CreateFunctionDefinition(ctx context.Context, params *CreateFunctionDefinitionInput, optFns ...func(*Options)) (*CreateFunctionDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateFunctionDefinitionInput{}

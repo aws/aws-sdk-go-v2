@@ -408,8 +408,8 @@ type FunctionExecutionConfig struct {
 // function. You can specify one or both values to override the default values. We
 // recommend that you avoid running as root unless absolutely necessary to minimize
 // the risk of unintended changes or malicious attacks. To run as root, you must
-// set ”IsolationMode” to ”NoContainer” and update config.json in
-// ”greengrass-root/config” to set ”allowFunctionsToRunAsRoot” to ”yes”.
+// set ''IsolationMode'' to ''NoContainer'' and update config.json in
+// ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
 type FunctionRunAsConfig struct {
 
 	// The group ID whose permissions are used to run a Lambda function.
@@ -615,9 +615,9 @@ type ResourceAccessPolicy struct {
 }
 
 // A container for resource data. The container takes only one of the following
-// supported resource data types: ”LocalDeviceResourceData”,
-// ”LocalVolumeResourceData”, ”SageMakerMachineLearningModelResourceData”,
-// ”S3MachineLearningModelResourceData”, ”SecretsManagerSecretResourceData”.
+// supported resource data types: ''LocalDeviceResourceData'',
+// ''LocalVolumeResourceData'', ''SageMakerMachineLearningModelResourceData'',
+// ''S3MachineLearningModelResourceData'', ''SecretsManagerSecretResourceData''.
 type ResourceDataContainer struct {
 
 	// Attributes that define the local device resource.

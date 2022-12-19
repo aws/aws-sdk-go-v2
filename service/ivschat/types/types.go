@@ -25,10 +25,9 @@ type CloudWatchLogsDestinationConfiguration struct {
 // S3).
 //
 // The following types satisfy this interface:
-//
-//	DestinationConfigurationMemberCloudWatchLogs
-//	DestinationConfigurationMemberFirehose
-//	DestinationConfigurationMemberS3
+//  DestinationConfigurationMemberCloudWatchLogs
+//  DestinationConfigurationMemberFirehose
+//  DestinationConfigurationMemberS3
 type DestinationConfiguration interface {
 	isDestinationConfiguration()
 }

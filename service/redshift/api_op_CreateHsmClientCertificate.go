@@ -35,6 +35,7 @@ func (c *Client) CreateHsmClientCertificate(ctx context.Context, params *CreateH
 	return out, nil
 }
 
+//
 type CreateHsmClientCertificateInput struct {
 
 	// The identifier to be assigned to the new HSM client certificate that the cluster

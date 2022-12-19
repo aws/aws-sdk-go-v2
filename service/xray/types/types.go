@@ -26,10 +26,9 @@ type Alias struct {
 // String.
 //
 // The following types satisfy this interface:
-//
-//	AnnotationValueMemberBooleanValue
-//	AnnotationValueMemberNumberValue
-//	AnnotationValueMemberStringValue
+//  AnnotationValueMemberBooleanValue
+//  AnnotationValueMemberNumberValue
+//  AnnotationValueMemberStringValue
 type AnnotationValue interface {
 	isAnnotationValue()
 }
@@ -79,6 +78,7 @@ type AvailabilityZoneDetail struct {
 	noSmithyDocumentSerde
 }
 
+//
 type BackendConnectionErrors struct {
 
 	//
@@ -1023,6 +1023,7 @@ type Service struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ServiceId struct {
 
 	//
@@ -1094,6 +1095,7 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+//
 type TelemetryRecord struct {
 
 	//

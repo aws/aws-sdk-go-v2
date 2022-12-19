@@ -2,4 +2,5 @@
 
 // Package chimesdkvoice provides the API client, operations, and parameter types
 // for Amazon Chime SDK Voice.
+//
 package chimesdkvoice

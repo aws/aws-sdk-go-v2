@@ -16,6 +16,8 @@ import (
 type ConcurrentModificationException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -29,13 +31,18 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.Code == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.Code
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified pagination token (nextToken) is not valid.
 type InvalidPaginationToken struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -49,12 +56,19 @@ func (e *InvalidPaginationToken) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPaginationToken) ErrorCode() string             { return "InvalidPaginationToken" }
+func (e *InvalidPaginationToken) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidPaginationToken"
+	}
+	return *e.Code
+}
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified locale is not supported.
 type UnsupportedLocale struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -68,5 +82,10 @@ func (e *UnsupportedLocale) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedLocale) ErrorCode() string             { return "UnsupportedLocale" }
+func (e *UnsupportedLocale) ErrorCode() string {
+	if e.Code == nil {
+		return "UnsupportedLocale"
+	}
+	return *e.Code
+}
 func (e *UnsupportedLocale) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -116,11 +116,10 @@ type StepAutomationConfiguration struct {
 // The key value pairs will differ based on your selection of the template.
 //
 // The following types satisfy this interface:
-//
-//	StepInputMemberIntegerValue
-//	StepInputMemberListOfStringsValue
-//	StepInputMemberMapOfStringValue
-//	StepInputMemberStringValue
+//  StepInputMemberIntegerValue
+//  StepInputMemberListOfStringsValue
+//  StepInputMemberMapOfStringValue
+//  StepInputMemberStringValue
 type StepInput interface {
 	isStepInput()
 }
@@ -339,10 +338,9 @@ type WorkflowStepOutput struct {
 // A structure to hold multiple values of an output.
 //
 // The following types satisfy this interface:
-//
-//	WorkflowStepOutputUnionMemberIntegerValue
-//	WorkflowStepOutputUnionMemberListOfStringValue
-//	WorkflowStepOutputUnionMemberStringValue
+//  WorkflowStepOutputUnionMemberIntegerValue
+//  WorkflowStepOutputUnionMemberListOfStringValue
+//  WorkflowStepOutputUnionMemberStringValue
 type WorkflowStepOutputUnion interface {
 	isWorkflowStepOutputUnion()
 }

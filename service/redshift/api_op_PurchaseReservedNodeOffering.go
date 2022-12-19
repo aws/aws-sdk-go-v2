@@ -34,6 +34,7 @@ func (c *Client) PurchaseReservedNodeOffering(ctx context.Context, params *Purch
 	return out, nil
 }
 
+//
 type PurchaseReservedNodeOfferingInput struct {
 
 	// The unique identifier of the reserved node offering you want to purchase.

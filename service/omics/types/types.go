@@ -302,9 +302,8 @@ type FileInformation struct {
 // Formatting options for a file.
 //
 // The following types satisfy this interface:
-//
-//	FormatOptionsMemberTsvOptions
-//	FormatOptionsMemberVcfOptions
+//  FormatOptionsMemberTsvOptions
+//  FormatOptionsMemberVcfOptions
 type FormatOptions interface {
 	isFormatOptions()
 }
@@ -719,8 +718,7 @@ type ReferenceFilter struct {
 // A genome reference.
 //
 // The following types satisfy this interface:
-//
-//	ReferenceItemMemberReferenceArn
+//  ReferenceItemMemberReferenceArn
 type ReferenceItem interface {
 	isReferenceItem()
 }
@@ -1057,8 +1055,7 @@ type StartReferenceImportJobSourceItem struct {
 // Settings for a store.
 //
 // The following types satisfy this interface:
-//
-//	StoreOptionsMemberTsvStoreOptions
+//  StoreOptionsMemberTsvStoreOptions
 type StoreOptions interface {
 	isStoreOptions()
 }

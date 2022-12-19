@@ -29,6 +29,7 @@ func (c *Client) ModifyClusterSubnetGroup(ctx context.Context, params *ModifyClu
 	return out, nil
 }
 
+//
 type ModifyClusterSubnetGroupInput struct {
 
 	// The name of the subnet group to be modified.

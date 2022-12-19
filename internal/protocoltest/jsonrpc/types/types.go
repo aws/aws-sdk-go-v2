@@ -77,16 +77,15 @@ type KitchenSink struct {
 // A union with a representative set of types for members.
 //
 // The following types satisfy this interface:
-//
-//	MyUnionMemberBlobValue
-//	MyUnionMemberBooleanValue
-//	MyUnionMemberEnumValue
-//	MyUnionMemberListValue
-//	MyUnionMemberMapValue
-//	MyUnionMemberNumberValue
-//	MyUnionMemberStringValue
-//	MyUnionMemberStructureValue
-//	MyUnionMemberTimestampValue
+//  MyUnionMemberBlobValue
+//  MyUnionMemberBooleanValue
+//  MyUnionMemberEnumValue
+//  MyUnionMemberListValue
+//  MyUnionMemberMapValue
+//  MyUnionMemberNumberValue
+//  MyUnionMemberStringValue
+//  MyUnionMemberStructureValue
+//  MyUnionMemberTimestampValue
 type MyUnion interface {
 	isMyUnion()
 }

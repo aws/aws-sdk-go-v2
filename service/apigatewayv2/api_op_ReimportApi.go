@@ -28,6 +28,7 @@ func (c *Client) ReimportApi(ctx context.Context, params *ReimportApiInput, optF
 	return out, nil
 }
 
+//
 type ReimportApiInput struct {
 
 	// The API identifier.

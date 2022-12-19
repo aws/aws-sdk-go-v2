@@ -27,6 +27,7 @@ func (c *Client) DeleteVirtualService(ctx context.Context, params *DeleteVirtual
 	return out, nil
 }
 
+//
 type DeleteVirtualServiceInput struct {
 
 	// The name of the service mesh to delete the virtual service in.
@@ -48,6 +49,7 @@ type DeleteVirtualServiceInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DeleteVirtualServiceOutput struct {
 
 	// The virtual service that was deleted.

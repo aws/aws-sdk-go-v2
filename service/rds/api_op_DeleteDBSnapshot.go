@@ -28,6 +28,7 @@ func (c *Client) DeleteDBSnapshot(ctx context.Context, params *DeleteDBSnapshotI
 	return out, nil
 }
 
+//
 type DeleteDBSnapshotInput struct {
 
 	// The DB snapshot identifier. Constraints: Must be the name of an existing DB

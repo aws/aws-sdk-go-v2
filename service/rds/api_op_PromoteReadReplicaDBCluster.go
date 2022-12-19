@@ -27,6 +27,7 @@ func (c *Client) PromoteReadReplicaDBCluster(ctx context.Context, params *Promot
 	return out, nil
 }
 
+//
 type PromoteReadReplicaDBClusterInput struct {
 
 	// The identifier of the DB cluster read replica to promote. This parameter isn't

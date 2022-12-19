@@ -28,6 +28,7 @@ func (c *Client) ImportApi(ctx context.Context, params *ImportApiInput, optFns .
 	return out, nil
 }
 
+//
 type ImportApiInput struct {
 
 	// The OpenAPI definition. Supported only for HTTP APIs.

@@ -26,6 +26,7 @@ func (c *Client) DeleteUserByPrincipalId(ctx context.Context, params *DeleteUser
 	return out, nil
 }
 
+//
 type DeleteUserByPrincipalIdInput struct {
 
 	// The ID for the Amazon Web Services account that the user is in. Currently, you

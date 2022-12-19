@@ -37,6 +37,7 @@ func (c *Client) RestoreTableFromClusterSnapshot(ctx context.Context, params *Re
 	return out, nil
 }
 
+//
 type RestoreTableFromClusterSnapshotInput struct {
 
 	// The identifier of the Amazon Redshift cluster to restore the table to.

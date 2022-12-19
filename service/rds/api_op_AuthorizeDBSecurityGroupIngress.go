@@ -48,6 +48,7 @@ func (c *Client) AuthorizeDBSecurityGroupIngress(ctx context.Context, params *Au
 	return out, nil
 }
 
+//
 type AuthorizeDBSecurityGroupIngressInput struct {
 
 	// The name of the DB security group to add authorization to.

@@ -34,6 +34,7 @@ func (c *Client) DescribeConnections(ctx context.Context, params *DescribeConnec
 	return out, nil
 }
 
+//
 type DescribeConnectionsInput struct {
 
 	// The filters applied to the connection. Valid filter names: endpoint-arn |
@@ -54,6 +55,7 @@ type DescribeConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeConnectionsOutput struct {
 
 	// A description of the connections.

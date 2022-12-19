@@ -1931,7 +1931,7 @@ type DocumentIdentifier struct {
 // *
 // ThirdParty
 //
-// # PlatformTypes
+// PlatformTypes
 //
 // * Linux
 //

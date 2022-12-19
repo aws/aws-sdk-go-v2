@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a subscription definition. You may provide the initial version of the
-// subscription definition now or use ”CreateSubscriptionDefinitionVersion” at a
+// subscription definition now or use ''CreateSubscriptionDefinitionVersion'' at a
 // later time.
 func (c *Client) CreateSubscriptionDefinition(ctx context.Context, params *CreateSubscriptionDefinitionInput, optFns ...func(*Options)) (*CreateSubscriptionDefinitionOutput, error) {
 	if params == nil {

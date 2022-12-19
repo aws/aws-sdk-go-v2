@@ -36,6 +36,7 @@ func (c *Client) DescribeMountTargetSecurityGroups(ctx context.Context, params *
 	return out, nil
 }
 
+//
 type DescribeMountTargetSecurityGroupsInput struct {
 
 	// The ID of the mount target whose security groups you want to retrieve.

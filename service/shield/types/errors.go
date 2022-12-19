@@ -12,6 +12,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,7 +26,12 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // In order to grant the necessary access to the Shield Response Team (SRT) the
@@ -35,6 +42,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
 type AccessDeniedForDependencyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -49,7 +58,10 @@ func (e *AccessDeniedForDependencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedForDependencyException) ErrorCode() string {
-	return "AccessDeniedForDependencyException"
+	if e.Code == nil {
+		return "AccessDeniedForDependencyException"
+	}
+	return *e.Code
 }
 func (e *AccessDeniedForDependencyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -59,6 +71,8 @@ func (e *AccessDeniedForDependencyException) ErrorFault() smithy.ErrorFault {
 // infrastructure. You can retry the request.
 type InternalErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -72,12 +86,19 @@ func (e *InternalErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
+func (e *InternalErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Exception that indicates that the operation would not cause any change to occur.
 type InvalidOperationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -91,7 +112,12 @@ func (e *InvalidOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
+func (e *InvalidOperationException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidOperationException"
+	}
+	return *e.Code
+}
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception that indicates that the NextToken specified in the request is invalid.
@@ -99,6 +125,8 @@ func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smit
 // response.
 type InvalidPaginationTokenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -113,7 +141,10 @@ func (e *InvalidPaginationTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPaginationTokenException) ErrorCode() string {
-	return "InvalidPaginationTokenException"
+	if e.Code == nil {
+		return "InvalidPaginationTokenException"
+	}
+	return *e.Code
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -121,6 +152,8 @@ func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { retur
 // available, this exception includes details in additional properties.
 type InvalidParameterException struct {
 	Message *string
+
+	Code *string
 
 	Reason ValidationExceptionReason
 	Fields []ValidationExceptionField
@@ -137,13 +170,20 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception that indicates that the resource is invalid. You might not have access
 // to the resource, or the resource might not exist.
 type InvalidResourceException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -157,12 +197,19 @@ func (e *InvalidResourceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidResourceException) ErrorCode() string             { return "InvalidResourceException" }
+func (e *InvalidResourceException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidResourceException"
+	}
+	return *e.Code
+}
 func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception that indicates that the operation would exceed a limit.
 type LimitsExceededException struct {
 	Message *string
+
+	Code *string
 
 	Type  *string
 	Limit int64
@@ -179,7 +226,12 @@ func (e *LimitsExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitsExceededException) ErrorCode() string             { return "LimitsExceededException" }
+func (e *LimitsExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitsExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You are trying to update a subscription that has not yet completed the 1-year
@@ -188,6 +240,8 @@ func (e *LimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy
 // AutoRenew prior to that period.
 type LockedSubscriptionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -201,12 +255,19 @@ func (e *LockedSubscriptionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LockedSubscriptionException) ErrorCode() string             { return "LockedSubscriptionException" }
+func (e *LockedSubscriptionException) ErrorCode() string {
+	if e.Code == nil {
+		return "LockedSubscriptionException"
+	}
+	return *e.Code
+}
 func (e *LockedSubscriptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The ARN of the role that you specified does not exist.
 type NoAssociatedRoleException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -220,13 +281,20 @@ func (e *NoAssociatedRoleException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoAssociatedRoleException) ErrorCode() string             { return "NoAssociatedRoleException" }
+func (e *NoAssociatedRoleException) ErrorCode() string {
+	if e.Code == nil {
+		return "NoAssociatedRoleException"
+	}
+	return *e.Code
+}
 func (e *NoAssociatedRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception that indicates that the resource state has been modified by another
 // client. Retrieve the resource and then retry your request.
 type OptimisticLockException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -240,13 +308,20 @@ func (e *OptimisticLockException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OptimisticLockException) ErrorCode() string             { return "OptimisticLockException" }
+func (e *OptimisticLockException) ErrorCode() string {
+	if e.Code == nil {
+		return "OptimisticLockException"
+	}
+	return *e.Code
+}
 func (e *OptimisticLockException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception indicating the specified resource already exists. If available, this
 // exception includes details in additional properties.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	ResourceType *string
 
@@ -262,13 +337,20 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
+func (e *ResourceAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceAlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception indicating the specified resource does not exist. If available, this
 // exception includes details in additional properties.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	ResourceType *string
 
@@ -284,5 +366,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

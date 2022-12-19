@@ -28,6 +28,7 @@ func (c *Client) PutEvaluations(ctx context.Context, params *PutEvaluationsInput
 	return out, nil
 }
 
+//
 type PutEvaluationsInput struct {
 
 	// An encrypted token that associates an evaluation with an Config rule. Identifies
@@ -51,6 +52,7 @@ type PutEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type PutEvaluationsOutput struct {
 
 	// Requests that failed because of a client or server error.

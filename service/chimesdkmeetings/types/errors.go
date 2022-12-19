@@ -11,7 +11,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
-	Code      *string
+	Code *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -26,14 +27,20 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "BadRequestException"
+	}
+	return *e.Code
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Multiple instances of the same request have been made simultaneously.
 type ConflictException struct {
 	Message *string
 
-	Code      *string
+	Code *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -48,14 +55,20 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The client is permanently forbidden from making the request.
 type ForbiddenException struct {
 	Message *string
 
-	Code      *string
+	Code *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -70,14 +83,20 @@ func (e *ForbiddenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorCode() string {
+	if e.Code == nil {
+		return "ForbiddenException"
+	}
+	return *e.Code
+}
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request exceeds the resource limit.
 type LimitExceededException struct {
 	Message *string
 
-	Code      *string
+	Code *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -92,14 +111,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the resources in the request does not exist in the system.
 type NotFoundException struct {
 	Message *string
 
-	Code      *string
+	Code *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -114,14 +139,20 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotFoundException"
+	}
+	return *e.Code
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource that you want to tag couldn't be found.
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code         *string
+	Code *string
+
 	RequestId    *string
 	ResourceName *string
 
@@ -137,14 +168,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service encountered an unexpected error.
 type ServiceFailureException struct {
 	Message *string
 
-	Code      *string
+	Code *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -159,14 +196,20 @@ func (e *ServiceFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceFailureException) ErrorCode() string             { return "ServiceFailureException" }
+func (e *ServiceFailureException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceFailureException"
+	}
+	return *e.Code
+}
 func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The service is currently unavailable.
 type ServiceUnavailableException struct {
 	Message *string
 
-	Code              *string
+	Code *string
+
 	RequestId         *string
 	RetryAfterSeconds *string
 
@@ -182,14 +225,20 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The number of customer requests exceeds the request rate limit.
 type ThrottlingException struct {
 	Message *string
 
-	Code      *string
+	Code *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -204,14 +253,20 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottlingException"
+	}
+	return *e.Code
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Too many tags were added to the specified resource.
 type TooManyTagsException struct {
 	Message *string
 
-	Code         *string
+	Code *string
+
 	RequestId    *string
 	ResourceName *string
 
@@ -227,14 +282,20 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TooManyTagsException"
+	}
+	return *e.Code
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user isn't authorized to request a resource.
 type UnauthorizedException struct {
 	Message *string
 
-	Code      *string
+	Code *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -249,7 +310,12 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
+func (e *UnauthorizedException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnauthorizedException"
+	}
+	return *e.Code
+}
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was well-formed but was unable to be followed due to semantic
@@ -257,7 +323,8 @@ func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type UnprocessableEntityException struct {
 	Message *string
 
-	Code      *string
+	Code *string
+
 	RequestId *string
 
 	noSmithyDocumentSerde
@@ -272,5 +339,10 @@ func (e *UnprocessableEntityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnprocessableEntityException) ErrorCode() string             { return "UnprocessableEntityException" }
+func (e *UnprocessableEntityException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnprocessableEntityException"
+	}
+	return *e.Code
+}
 func (e *UnprocessableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

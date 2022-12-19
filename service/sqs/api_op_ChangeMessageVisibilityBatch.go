@@ -37,6 +37,7 @@ func (c *Client) ChangeMessageVisibilityBatch(ctx context.Context, params *Chang
 	return out, nil
 }
 
+//
 type ChangeMessageVisibilityBatchInput struct {
 
 	// A list of receipt handles of the messages for which the visibility timeout must

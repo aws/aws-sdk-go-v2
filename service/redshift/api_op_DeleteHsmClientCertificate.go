@@ -26,6 +26,7 @@ func (c *Client) DeleteHsmClientCertificate(ctx context.Context, params *DeleteH
 	return out, nil
 }
 
+//
 type DeleteHsmClientCertificateInput struct {
 
 	// The identifier of the HSM client certificate to be deleted.

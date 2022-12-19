@@ -13,6 +13,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,12 +27,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A BatchWrite exception has occurred.
 type BatchWriteException struct {
 	Message *string
+
+	Code *string
 
 	Index int32
 	Type  BatchWriteExceptionType
@@ -47,12 +56,19 @@ func (e *BatchWriteException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BatchWriteException) ErrorCode() string             { return "BatchWriteException" }
+func (e *BatchWriteException) ErrorCode() string {
+	if e.Code == nil {
+		return "BatchWriteException"
+	}
+	return *e.Code
+}
 func (e *BatchWriteException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Cannot list the parents of a Directory root.
 type CannotListParentOfRootException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -67,7 +83,10 @@ func (e *CannotListParentOfRootException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CannotListParentOfRootException) ErrorCode() string {
-	return "CannotListParentOfRootException"
+	if e.Code == nil {
+		return "CannotListParentOfRootException"
+	}
+	return *e.Code
 }
 func (e *CannotListParentOfRootException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -75,6 +94,8 @@ func (e *CannotListParentOfRootException) ErrorFault() smithy.ErrorFault { retur
 // a different name and try again.
 type DirectoryAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -89,7 +110,10 @@ func (e *DirectoryAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryAlreadyExistsException) ErrorCode() string {
-	return "DirectoryAlreadyExistsException"
+	if e.Code == nil {
+		return "DirectoryAlreadyExistsException"
+	}
+	return *e.Code
 }
 func (e *DirectoryAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -97,6 +121,8 @@ func (e *DirectoryAlreadyExistsException) ErrorFault() smithy.ErrorFault { retur
 // The requested resource will eventually cease to exist.
 type DirectoryDeletedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -110,12 +136,19 @@ func (e *DirectoryDeletedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DirectoryDeletedException) ErrorCode() string             { return "DirectoryDeletedException" }
+func (e *DirectoryDeletedException) ErrorCode() string {
+	if e.Code == nil {
+		return "DirectoryDeletedException"
+	}
+	return *e.Code
+}
 func (e *DirectoryDeletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An operation can only operate on a disabled directory.
 type DirectoryNotDisabledException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -129,12 +162,19 @@ func (e *DirectoryNotDisabledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DirectoryNotDisabledException) ErrorCode() string             { return "DirectoryNotDisabledException" }
+func (e *DirectoryNotDisabledException) ErrorCode() string {
+	if e.Code == nil {
+		return "DirectoryNotDisabledException"
+	}
+	return *e.Code
+}
 func (e *DirectoryNotDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Operations are only permitted on enabled directories.
 type DirectoryNotEnabledException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -148,12 +188,19 @@ func (e *DirectoryNotEnabledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DirectoryNotEnabledException) ErrorCode() string             { return "DirectoryNotEnabledException" }
+func (e *DirectoryNotEnabledException) ErrorCode() string {
+	if e.Code == nil {
+		return "DirectoryNotEnabledException"
+	}
+	return *e.Code
+}
 func (e *DirectoryNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A facet with the same name already exists.
 type FacetAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -167,13 +214,20 @@ func (e *FacetAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FacetAlreadyExistsException) ErrorCode() string             { return "FacetAlreadyExistsException" }
+func (e *FacetAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "FacetAlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *FacetAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Occurs when deleting a facet that contains an attribute that is a target to an
 // attribute reference in a different facet.
 type FacetInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -187,12 +241,19 @@ func (e *FacetInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FacetInUseException) ErrorCode() string             { return "FacetInUseException" }
+func (e *FacetInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "FacetInUseException"
+	}
+	return *e.Code
+}
 func (e *FacetInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified Facet could not be found.
 type FacetNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -206,13 +267,20 @@ func (e *FacetNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FacetNotFoundException) ErrorCode() string             { return "FacetNotFoundException" }
+func (e *FacetNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "FacetNotFoundException"
+	}
+	return *e.Code
+}
 func (e *FacetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Facet that you provided was not well formed or could not be validated with
 // the schema.
 type FacetValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -226,7 +294,12 @@ func (e *FacetValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FacetValidationException) ErrorCode() string             { return "FacetValidationException" }
+func (e *FacetValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "FacetValidationException"
+	}
+	return *e.Code
+}
 func (e *FacetValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates a failure occurred while performing a check for backward compatibility
@@ -234,6 +307,8 @@ func (e *FacetValidationException) ErrorFault() smithy.ErrorFault { return smith
 // directory.
 type IncompatibleSchemaException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -247,13 +322,20 @@ func (e *IncompatibleSchemaException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IncompatibleSchemaException) ErrorCode() string             { return "IncompatibleSchemaException" }
+func (e *IncompatibleSchemaException) ErrorCode() string {
+	if e.Code == nil {
+		return "IncompatibleSchemaException"
+	}
+	return *e.Code
+}
 func (e *IncompatibleSchemaException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An object has been attempted to be attached to an object that does not have the
 // appropriate attribute value.
 type IndexedAttributeMissingException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -268,7 +350,10 @@ func (e *IndexedAttributeMissingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IndexedAttributeMissingException) ErrorCode() string {
-	return "IndexedAttributeMissingException"
+	if e.Code == nil {
+		return "IndexedAttributeMissingException"
+	}
+	return *e.Code
 }
 func (e *IndexedAttributeMissingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -279,6 +364,8 @@ func (e *IndexedAttributeMissingException) ErrorFault() smithy.ErrorFault { retu
 // with the service.
 type InternalServiceException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -292,12 +379,19 @@ func (e *InternalServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
+func (e *InternalServiceException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServiceException"
+	}
+	return *e.Code
+}
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Indicates that the provided ARN value is not valid.
 type InvalidArnException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -311,7 +405,12 @@ func (e *InvalidArnException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArnException) ErrorCode() string             { return "InvalidArnException" }
+func (e *InvalidArnException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidArnException"
+	}
+	return *e.Code
+}
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that an attempt to make an attachment was invalid. For example,
@@ -319,6 +418,8 @@ func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // attempting to apply a schema to a directory a second time.
 type InvalidAttachmentException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -332,12 +433,19 @@ func (e *InvalidAttachmentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidAttachmentException) ErrorCode() string             { return "InvalidAttachmentException" }
+func (e *InvalidAttachmentException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidAttachmentException"
+	}
+	return *e.Code
+}
 func (e *InvalidAttachmentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An attempt to modify a Facet resulted in an invalid schema exception.
 type InvalidFacetUpdateException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -351,12 +459,19 @@ func (e *InvalidFacetUpdateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidFacetUpdateException) ErrorCode() string             { return "InvalidFacetUpdateException" }
+func (e *InvalidFacetUpdateException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidFacetUpdateException"
+	}
+	return *e.Code
+}
 func (e *InvalidFacetUpdateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the NextToken value is not valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -370,12 +485,19 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.Code
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Occurs when any of the rule parameter keys or values are invalid.
 type InvalidRuleException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -389,12 +511,19 @@ func (e *InvalidRuleException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRuleException) ErrorCode() string             { return "InvalidRuleException" }
+func (e *InvalidRuleException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRuleException"
+	}
+	return *e.Code
+}
 func (e *InvalidRuleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the provided SchemaDoc value is not valid.
 type InvalidSchemaDocException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -408,7 +537,12 @@ func (e *InvalidSchemaDocException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSchemaDocException) ErrorCode() string             { return "InvalidSchemaDocException" }
+func (e *InvalidSchemaDocException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidSchemaDocException"
+	}
+	return *e.Code
+}
 func (e *InvalidSchemaDocException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Can occur for multiple reasons such as when you tag a resource that doesn’t
@@ -416,6 +550,8 @@ func (e *InvalidSchemaDocException) ErrorFault() smithy.ErrorFault { return smit
 // limit. Allowed limit is 50 tags per resource.
 type InvalidTaggingRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -429,7 +565,12 @@ func (e *InvalidTaggingRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTaggingRequestException) ErrorCode() string             { return "InvalidTaggingRequestException" }
+func (e *InvalidTaggingRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidTaggingRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidTaggingRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that limits are exceeded. See Limits
@@ -437,6 +578,8 @@ func (e *InvalidTaggingRequestException) ErrorFault() smithy.ErrorFault { return
 // for more information.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -450,13 +593,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a link could not be created due to a naming conflict. Choose a
 // different name and then try again.
 type LinkNameAlreadyInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -470,12 +620,19 @@ func (e *LinkNameAlreadyInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LinkNameAlreadyInUseException) ErrorCode() string             { return "LinkNameAlreadyInUseException" }
+func (e *LinkNameAlreadyInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "LinkNameAlreadyInUseException"
+	}
+	return *e.Code
+}
 func (e *LinkNameAlreadyInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the requested operation can only operate on index objects.
 type NotIndexException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -489,13 +646,20 @@ func (e *NotIndexException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotIndexException) ErrorCode() string             { return "NotIndexException" }
+func (e *NotIndexException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotIndexException"
+	}
+	return *e.Code
+}
 func (e *NotIndexException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Occurs when any invalid operations are performed on an object that is not a
 // node, such as calling ListObjectChildren for a leaf node object.
 type NotNodeException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -509,12 +673,19 @@ func (e *NotNodeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotNodeException) ErrorCode() string             { return "NotNodeException" }
+func (e *NotNodeException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotNodeException"
+	}
+	return *e.Code
+}
 func (e *NotNodeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the requested operation can only operate on policy objects.
 type NotPolicyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -528,12 +699,19 @@ func (e *NotPolicyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotPolicyException) ErrorCode() string             { return "NotPolicyException" }
+func (e *NotPolicyException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotPolicyException"
+	}
+	return *e.Code
+}
 func (e *NotPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the object is not attached to the index.
 type ObjectAlreadyDetachedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -547,13 +725,20 @@ func (e *ObjectAlreadyDetachedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ObjectAlreadyDetachedException) ErrorCode() string             { return "ObjectAlreadyDetachedException" }
+func (e *ObjectAlreadyDetachedException) ErrorCode() string {
+	if e.Code == nil {
+		return "ObjectAlreadyDetachedException"
+	}
+	return *e.Code
+}
 func (e *ObjectAlreadyDetachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the requested operation cannot be completed because the object
 // has not been detached from the tree.
 type ObjectNotDetachedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -567,12 +752,19 @@ func (e *ObjectNotDetachedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ObjectNotDetachedException) ErrorCode() string             { return "ObjectNotDetachedException" }
+func (e *ObjectNotDetachedException) ErrorCode() string {
+	if e.Code == nil {
+		return "ObjectNotDetachedException"
+	}
+	return *e.Code
+}
 func (e *ObjectNotDetachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource could not be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -586,7 +778,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Occurs when a conflict with a previous successful write is detected. For
@@ -597,6 +794,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // is the recommended response to this exception.
 type RetryableConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -610,13 +809,20 @@ func (e *RetryableConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RetryableConflictException) ErrorCode() string             { return "RetryableConflictException" }
+func (e *RetryableConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "RetryableConflictException"
+	}
+	return *e.Code
+}
 func (e *RetryableConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a schema could not be created due to a naming conflict. Please
 // select a different name and then try again.
 type SchemaAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -630,12 +836,19 @@ func (e *SchemaAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SchemaAlreadyExistsException) ErrorCode() string             { return "SchemaAlreadyExistsException" }
+func (e *SchemaAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "SchemaAlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *SchemaAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a schema is already published.
 type SchemaAlreadyPublishedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -650,7 +863,10 @@ func (e *SchemaAlreadyPublishedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SchemaAlreadyPublishedException) ErrorCode() string {
-	return "SchemaAlreadyPublishedException"
+	if e.Code == nil {
+		return "SchemaAlreadyPublishedException"
+	}
+	return *e.Code
 }
 func (e *SchemaAlreadyPublishedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -658,6 +874,8 @@ func (e *SchemaAlreadyPublishedException) ErrorFault() smithy.ErrorFault { retur
 // then try the operation again.
 type StillContainsLinksException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -671,12 +889,19 @@ func (e *StillContainsLinksException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StillContainsLinksException) ErrorCode() string             { return "StillContainsLinksException" }
+func (e *StillContainsLinksException) ErrorCode() string {
+	if e.Code == nil {
+		return "StillContainsLinksException"
+	}
+	return *e.Code
+}
 func (e *StillContainsLinksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the requested index type is not supported.
 type UnsupportedIndexTypeException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -690,13 +915,20 @@ func (e *UnsupportedIndexTypeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedIndexTypeException) ErrorCode() string             { return "UnsupportedIndexTypeException" }
+func (e *UnsupportedIndexTypeException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnsupportedIndexTypeException"
+	}
+	return *e.Code
+}
 func (e *UnsupportedIndexTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that your request is malformed in some manner. See the exception
 // message.
 type ValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -710,5 +942,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationException"
+	}
+	return *e.Code
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

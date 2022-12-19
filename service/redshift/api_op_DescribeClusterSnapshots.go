@@ -43,6 +43,7 @@ func (c *Client) DescribeClusterSnapshots(ctx context.Context, params *DescribeC
 	return out, nil
 }
 
+//
 type DescribeClusterSnapshotsInput struct {
 
 	// A value that indicates whether to return snapshots only for an existing cluster.

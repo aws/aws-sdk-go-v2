@@ -13,6 +13,7 @@ type AccessDeniedException struct {
 	Message *string
 
 	Code *string
+
 	Docs *string
 	Tip  *string
 
@@ -28,7 +29,12 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Lightsail throws this exception when an account is still in the setup in
@@ -37,6 +43,7 @@ type AccountSetupInProgressException struct {
 	Message *string
 
 	Code *string
+
 	Docs *string
 	Tip  *string
 
@@ -53,7 +60,10 @@ func (e *AccountSetupInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountSetupInProgressException) ErrorCode() string {
-	return "AccountSetupInProgressException"
+	if e.Code == nil {
+		return "AccountSetupInProgressException"
+	}
+	return *e.Code
 }
 func (e *AccountSetupInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -66,6 +76,7 @@ type InvalidInputException struct {
 	Message *string
 
 	Code *string
+
 	Docs *string
 	Tip  *string
 
@@ -81,7 +92,12 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidInputException"
+	}
+	return *e.Code
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Lightsail throws this exception when it cannot find a resource.
@@ -89,6 +105,7 @@ type NotFoundException struct {
 	Message *string
 
 	Code *string
+
 	Docs *string
 	Tip  *string
 
@@ -104,7 +121,12 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotFoundException"
+	}
+	return *e.Code
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Lightsail throws this exception when an operation fails to execute.
@@ -112,6 +134,7 @@ type OperationFailureException struct {
 	Message *string
 
 	Code *string
+
 	Docs *string
 	Tip  *string
 
@@ -127,7 +150,12 @@ func (e *OperationFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationFailureException) ErrorCode() string             { return "OperationFailureException" }
+func (e *OperationFailureException) ErrorCode() string {
+	if e.Code == nil {
+		return "OperationFailureException"
+	}
+	return *e.Code
+}
 func (e *OperationFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A general service exception.
@@ -135,6 +163,7 @@ type ServiceException struct {
 	Message *string
 
 	Code *string
+
 	Docs *string
 	Tip  *string
 
@@ -150,7 +179,12 @@ func (e *ServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
+func (e *ServiceException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceException"
+	}
+	return *e.Code
+}
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Lightsail throws this exception when the user has not been authenticated.
@@ -158,6 +192,7 @@ type UnauthenticatedException struct {
 	Message *string
 
 	Code *string
+
 	Docs *string
 	Tip  *string
 
@@ -173,5 +208,10 @@ func (e *UnauthenticatedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthenticatedException) ErrorCode() string             { return "UnauthenticatedException" }
+func (e *UnauthenticatedException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnauthenticatedException"
+	}
+	return *e.Code
+}
 func (e *UnauthenticatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

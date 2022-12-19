@@ -12,6 +12,8 @@ import (
 type DecryptionFailure struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,7 +26,12 @@ func (e *DecryptionFailure) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DecryptionFailure) ErrorCode() string             { return "DecryptionFailure" }
+func (e *DecryptionFailure) ErrorCode() string {
+	if e.Code == nil {
+		return "DecryptionFailure"
+	}
+	return *e.Code
+}
 func (e *DecryptionFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Secrets Manager can't encrypt the protected secret text using the provided KMS
@@ -33,6 +40,8 @@ func (e *DecryptionFailure) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html).
 type EncryptionFailure struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -46,12 +55,19 @@ func (e *EncryptionFailure) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EncryptionFailure) ErrorCode() string             { return "EncryptionFailure" }
+func (e *EncryptionFailure) ErrorCode() string {
+	if e.Code == nil {
+		return "EncryptionFailure"
+	}
+	return *e.Code
+}
 func (e *EncryptionFailure) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error occurred on the server side.
 type InternalServiceError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -65,12 +81,19 @@ func (e *InternalServiceError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceError) ErrorCode() string             { return "InternalServiceError" }
+func (e *InternalServiceError) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServiceError"
+	}
+	return *e.Code
+}
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The NextToken value is invalid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -84,12 +107,19 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.Code
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The parameter name or value is invalid.
 type InvalidParameterException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -103,7 +133,12 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A parameter value is not valid for the current state of the resource. Possible
@@ -122,6 +157,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 type InvalidRequestException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -134,12 +171,19 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because it would exceed one of the Secrets Manager quotas.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -153,12 +197,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource policy has syntax errors.
 type MalformedPolicyDocumentException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -173,13 +224,18 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedPolicyDocumentException) ErrorCode() string {
-	return "MalformedPolicyDocumentException"
+	if e.Code == nil {
+		return "MalformedPolicyDocumentException"
+	}
+	return *e.Code
 }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because you did not complete all the prerequisite steps.
 type PreconditionNotMetException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -193,13 +249,20 @@ func (e *PreconditionNotMetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PreconditionNotMetException) ErrorCode() string             { return "PreconditionNotMetException" }
+func (e *PreconditionNotMetException) ErrorCode() string {
+	if e.Code == nil {
+		return "PreconditionNotMetException"
+	}
+	return *e.Code
+}
 func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The BlockPublicPolicy parameter is set to true, and the resource policy did not
 // prevent broad access to the secret.
 type PublicPolicyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -213,12 +276,19 @@ func (e *PublicPolicyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PublicPolicyException) ErrorCode() string             { return "PublicPolicyException" }
+func (e *PublicPolicyException) ErrorCode() string {
+	if e.Code == nil {
+		return "PublicPolicyException"
+	}
+	return *e.Code
+}
 func (e *PublicPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource with the ID you requested already exists.
 type ResourceExistsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -232,12 +302,19 @@ func (e *ResourceExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceExistsException) ErrorCode() string             { return "ResourceExistsException" }
+func (e *ResourceExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceExistsException"
+	}
+	return *e.Code
+}
 func (e *ResourceExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Secrets Manager can't find the resource that you asked for.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -251,5 +328,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

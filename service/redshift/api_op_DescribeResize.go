@@ -31,6 +31,7 @@ func (c *Client) DescribeResize(ctx context.Context, params *DescribeResizeInput
 	return out, nil
 }
 
+//
 type DescribeResizeInput struct {
 
 	// The unique identifier of a cluster whose resize progress you are requesting.

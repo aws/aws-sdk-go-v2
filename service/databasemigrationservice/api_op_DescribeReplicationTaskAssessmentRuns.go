@@ -33,6 +33,7 @@ func (c *Client) DescribeReplicationTaskAssessmentRuns(ctx context.Context, para
 	return out, nil
 }
 
+//
 type DescribeReplicationTaskAssessmentRunsInput struct {
 
 	// Filters applied to the premigration assessment runs described in the form of
@@ -53,6 +54,7 @@ type DescribeReplicationTaskAssessmentRunsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeReplicationTaskAssessmentRunsOutput struct {
 
 	// A pagination token returned for you to pass to a subsequent request. If you pass

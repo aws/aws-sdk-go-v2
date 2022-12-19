@@ -13,7 +13,7 @@ import (
 // Associates a role with your account. AWS IoT Greengrass will use the role to
 // access your Lambda functions and AWS IoT resources. This is necessary for
 // deployments to succeed. The role must have at least minimum permissions in the
-// policy ”AWSGreengrassResourceAccessRolePolicy”.
+// policy ''AWSGreengrassResourceAccessRolePolicy''.
 func (c *Client) AssociateServiceRoleToAccount(ctx context.Context, params *AssociateServiceRoleToAccountInput, optFns ...func(*Options)) (*AssociateServiceRoleToAccountOutput, error) {
 	if params == nil {
 		params = &AssociateServiceRoleToAccountInput{}

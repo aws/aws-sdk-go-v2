@@ -32,6 +32,7 @@ func (c *Client) DescribeDBClusterBacktracks(ctx context.Context, params *Descri
 	return out, nil
 }
 
+//
 type DescribeDBClusterBacktracksInput struct {
 
 	// The DB cluster identifier of the DB cluster to be described. This parameter is

@@ -55,6 +55,7 @@ func (c *Client) AddPermission(ctx context.Context, params *AddPermissionInput, 
 	return out, nil
 }
 
+//
 type AddPermissionInput struct {
 
 	// The Amazon Web Services account numbers of the principals

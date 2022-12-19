@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a logger definition. You may provide the initial version of the logger
-// definition now or use ”CreateLoggerDefinitionVersion” at a later time.
+// definition now or use ''CreateLoggerDefinitionVersion'' at a later time.
 func (c *Client) CreateLoggerDefinition(ctx context.Context, params *CreateLoggerDefinitionInput, optFns ...func(*Options)) (*CreateLoggerDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateLoggerDefinitionInput{}

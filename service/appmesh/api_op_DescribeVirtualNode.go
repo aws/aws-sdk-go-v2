@@ -27,6 +27,7 @@ func (c *Client) DescribeVirtualNode(ctx context.Context, params *DescribeVirtua
 	return out, nil
 }
 
+//
 type DescribeVirtualNodeInput struct {
 
 	// The name of the service mesh that the virtual node resides in.
@@ -48,6 +49,7 @@ type DescribeVirtualNodeInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeVirtualNodeOutput struct {
 
 	// The full description of your virtual node.

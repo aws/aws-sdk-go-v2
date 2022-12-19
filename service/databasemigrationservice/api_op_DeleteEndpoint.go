@@ -28,6 +28,7 @@ func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput
 	return out, nil
 }
 
+//
 type DeleteEndpointInput struct {
 
 	// The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
@@ -38,6 +39,7 @@ type DeleteEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DeleteEndpointOutput struct {
 
 	// The endpoint that was deleted.

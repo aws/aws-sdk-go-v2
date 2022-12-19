@@ -27,6 +27,7 @@ func (c *Client) UpdateMissionProfile(ctx context.Context, params *UpdateMission
 	return out, nil
 }
 
+//
 type UpdateMissionProfileInput struct {
 
 	// UUID of a mission profile.
@@ -60,6 +61,7 @@ type UpdateMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type UpdateMissionProfileOutput struct {
 
 	// UUID of a mission profile.

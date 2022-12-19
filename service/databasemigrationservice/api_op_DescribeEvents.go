@@ -33,6 +33,7 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 	return out, nil
 }
 
+//
 type DescribeEventsInput struct {
 
 	// The duration of the events to be listed.
@@ -71,6 +72,7 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeEventsOutput struct {
 
 	// The events described.

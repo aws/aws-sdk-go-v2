@@ -42,6 +42,7 @@ func (c *Client) ModifyDBClusterSnapshotAttribute(ctx context.Context, params *M
 	return out, nil
 }
 
+//
 type ModifyDBClusterSnapshotAttributeInput struct {
 
 	// The name of the DB cluster snapshot attribute to modify. To manage authorization

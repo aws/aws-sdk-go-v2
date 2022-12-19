@@ -252,6 +252,7 @@ type ExecuteCommandSessionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+//
 type Filter struct {
 
 	//

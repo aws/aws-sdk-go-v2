@@ -11,6 +11,8 @@ import (
 type ConcurrentModificationException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,13 +26,18 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.Code == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.Code
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Some part of the dashboard data is invalid.
 type DashboardInvalidInputError struct {
 	Message *string
+
+	Code *string
 
 	DashboardValidationMessages []DashboardValidationMessage
 
@@ -46,12 +53,19 @@ func (e *DashboardInvalidInputError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DashboardInvalidInputError) ErrorCode() string             { return "InvalidParameterInput" }
+func (e *DashboardInvalidInputError) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterInput"
+	}
+	return *e.Code
+}
 func (e *DashboardInvalidInputError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified dashboard does not exist.
 type DashboardNotFoundError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -65,12 +79,19 @@ func (e *DashboardNotFoundError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DashboardNotFoundError) ErrorCode() string             { return "ResourceNotFound" }
+func (e *DashboardNotFoundError) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFound"
+	}
+	return *e.Code
+}
 func (e *DashboardNotFoundError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request processing has failed due to some unknown error, exception, or failure.
 type InternalServiceFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -84,12 +105,19 @@ func (e *InternalServiceFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceFault) ErrorCode() string             { return "InternalServiceError" }
+func (e *InternalServiceFault) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServiceError"
+	}
+	return *e.Code
+}
 func (e *InternalServiceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Data was not syntactically valid JSON.
 type InvalidFormatFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -103,12 +131,19 @@ func (e *InvalidFormatFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidFormatFault) ErrorCode() string             { return "InvalidFormat" }
+func (e *InvalidFormatFault) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidFormat"
+	}
+	return *e.Code
+}
 func (e *InvalidFormatFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The next token specified is invalid.
 type InvalidNextToken struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -122,12 +157,19 @@ func (e *InvalidNextToken) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextToken) ErrorCode() string             { return "InvalidNextToken" }
+func (e *InvalidNextToken) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidNextToken"
+	}
+	return *e.Code
+}
 func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Parameters were used together that cannot be used together.
 type InvalidParameterCombinationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -142,7 +184,10 @@ func (e *InvalidParameterCombinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterCombinationException) ErrorCode() string {
-	return "InvalidParameterCombination"
+	if e.Code == nil {
+		return "InvalidParameterCombination"
+	}
+	return *e.Code
 }
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -151,6 +196,8 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 // The value of an input parameter is bad or out-of-range.
 type InvalidParameterValueException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -164,12 +211,19 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValue" }
+func (e *InvalidParameterValueException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterValue"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation exceeded one or more limits.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -183,12 +237,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for alarms for this customer has already been reached.
 type LimitExceededFault struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -202,12 +263,19 @@ func (e *LimitExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededFault) ErrorCode() string             { return "LimitExceeded" }
+func (e *LimitExceededFault) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceeded"
+	}
+	return *e.Code
+}
 func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An input parameter that is required is missing.
 type MissingRequiredParameterException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -221,12 +289,19 @@ func (e *MissingRequiredParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MissingRequiredParameterException) ErrorCode() string             { return "MissingParameter" }
+func (e *MissingRequiredParameterException) ErrorCode() string {
+	if e.Code == nil {
+		return "MissingParameter"
+	}
+	return *e.Code
+}
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The named resource does not exist.
 type ResourceNotFound struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -240,12 +315,19 @@ func (e *ResourceNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFound) ErrorCode() string             { return "ResourceNotFound" }
+func (e *ResourceNotFound) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFound"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The named resource does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	ResourceType *string
 	ResourceId   *string
@@ -262,5 +344,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

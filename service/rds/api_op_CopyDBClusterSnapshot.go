@@ -65,6 +65,7 @@ func (c *Client) CopyDBClusterSnapshot(ctx context.Context, params *CopyDBCluste
 	return out, nil
 }
 
+//
 type CopyDBClusterSnapshotInput struct {
 
 	// The identifier of the DB cluster snapshot to copy. This parameter isn't

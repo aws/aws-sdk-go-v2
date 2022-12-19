@@ -86,18 +86,17 @@ type AccountState struct {
 // Contains details about an aggregation request.
 //
 // The following types satisfy this interface:
-//
-//	AggregationRequestMemberAccountAggregation
-//	AggregationRequestMemberAmiAggregation
-//	AggregationRequestMemberAwsEcrContainerAggregation
-//	AggregationRequestMemberEc2InstanceAggregation
-//	AggregationRequestMemberFindingTypeAggregation
-//	AggregationRequestMemberImageLayerAggregation
-//	AggregationRequestMemberLambdaFunctionAggregation
-//	AggregationRequestMemberLambdaLayerAggregation
-//	AggregationRequestMemberPackageAggregation
-//	AggregationRequestMemberRepositoryAggregation
-//	AggregationRequestMemberTitleAggregation
+//  AggregationRequestMemberAccountAggregation
+//  AggregationRequestMemberAmiAggregation
+//  AggregationRequestMemberAwsEcrContainerAggregation
+//  AggregationRequestMemberEc2InstanceAggregation
+//  AggregationRequestMemberFindingTypeAggregation
+//  AggregationRequestMemberImageLayerAggregation
+//  AggregationRequestMemberLambdaFunctionAggregation
+//  AggregationRequestMemberLambdaLayerAggregation
+//  AggregationRequestMemberPackageAggregation
+//  AggregationRequestMemberRepositoryAggregation
+//  AggregationRequestMemberTitleAggregation
 type AggregationRequest interface {
 	isAggregationRequest()
 }
@@ -213,18 +212,17 @@ func (*AggregationRequestMemberTitleAggregation) isAggregationRequest() {}
 // A structure that contains details about the results of an aggregation type.
 //
 // The following types satisfy this interface:
-//
-//	AggregationResponseMemberAccountAggregation
-//	AggregationResponseMemberAmiAggregation
-//	AggregationResponseMemberAwsEcrContainerAggregation
-//	AggregationResponseMemberEc2InstanceAggregation
-//	AggregationResponseMemberFindingTypeAggregation
-//	AggregationResponseMemberImageLayerAggregation
-//	AggregationResponseMemberLambdaFunctionAggregation
-//	AggregationResponseMemberLambdaLayerAggregation
-//	AggregationResponseMemberPackageAggregation
-//	AggregationResponseMemberRepositoryAggregation
-//	AggregationResponseMemberTitleAggregation
+//  AggregationResponseMemberAccountAggregation
+//  AggregationResponseMemberAmiAggregation
+//  AggregationResponseMemberAwsEcrContainerAggregation
+//  AggregationResponseMemberEc2InstanceAggregation
+//  AggregationResponseMemberFindingTypeAggregation
+//  AggregationResponseMemberImageLayerAggregation
+//  AggregationResponseMemberLambdaFunctionAggregation
+//  AggregationResponseMemberLambdaLayerAggregation
+//  AggregationResponseMemberPackageAggregation
+//  AggregationResponseMemberRepositoryAggregation
+//  AggregationResponseMemberTitleAggregation
 type AggregationResponse interface {
 	isAggregationResponse()
 }

@@ -28,6 +28,7 @@ func (c *Client) CreateReplicationTask(ctx context.Context, params *CreateReplic
 	return out, nil
 }
 
+//
 type CreateReplicationTaskInput struct {
 
 	// The migration type. Valid values: full-load | cdc | full-load-and-cdc
@@ -128,6 +129,7 @@ type CreateReplicationTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type CreateReplicationTaskOutput struct {
 
 	// The replication task that was created.

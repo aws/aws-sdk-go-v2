@@ -30,6 +30,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 	return out, nil
 }
 
+//
 type ListTagsForResourceInput struct {
 
 	// The Amazon RDS resource with tags to be listed. This value is an Amazon Resource
@@ -47,6 +48,7 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ListTagsForResourceOutput struct {
 
 	// List of tags returned by the ListTagsForResource operation.

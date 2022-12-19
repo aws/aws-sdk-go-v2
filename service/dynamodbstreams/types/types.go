@@ -14,17 +14,16 @@ import (
 // in the Amazon DynamoDB Developer Guide.
 //
 // The following types satisfy this interface:
-//
-//	AttributeValueMemberB
-//	AttributeValueMemberBOOL
-//	AttributeValueMemberBS
-//	AttributeValueMemberL
-//	AttributeValueMemberM
-//	AttributeValueMemberN
-//	AttributeValueMemberNS
-//	AttributeValueMemberNULL
-//	AttributeValueMemberS
-//	AttributeValueMemberSS
+//  AttributeValueMemberB
+//  AttributeValueMemberBOOL
+//  AttributeValueMemberBS
+//  AttributeValueMemberL
+//  AttributeValueMemberM
+//  AttributeValueMemberN
+//  AttributeValueMemberNS
+//  AttributeValueMemberNULL
+//  AttributeValueMemberS
+//  AttributeValueMemberSS
 type AttributeValue interface {
 	isAttributeValue()
 }

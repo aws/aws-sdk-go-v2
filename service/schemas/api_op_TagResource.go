@@ -26,6 +26,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 	return out, nil
 }
 
+//
 type TagResourceInput struct {
 
 	// The ARN of the resource.

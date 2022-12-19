@@ -173,8 +173,7 @@ type ImportJobProperties struct {
 // The input properties for an import job.
 //
 // The following types satisfy this interface:
-//
-//	InputDataConfigMemberS3Uri
+//  InputDataConfigMemberS3Uri
 type InputDataConfig interface {
 	isInputDataConfig()
 }
@@ -208,8 +207,7 @@ type KmsEncryptionConfig struct {
 // The output data configuration that was supplied when the export job was created.
 //
 // The following types satisfy this interface:
-//
-//	OutputDataConfigMemberS3Configuration
+//  OutputDataConfigMemberS3Configuration
 type OutputDataConfig interface {
 	isOutputDataConfig()
 }

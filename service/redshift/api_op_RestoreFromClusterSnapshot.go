@@ -38,6 +38,7 @@ func (c *Client) RestoreFromClusterSnapshot(ctx context.Context, params *Restore
 	return out, nil
 }
 
+//
 type RestoreFromClusterSnapshotInput struct {
 
 	// The identifier of the cluster that will be created from restoring the snapshot.

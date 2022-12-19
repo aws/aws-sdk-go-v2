@@ -19,8 +19,7 @@ import (
 // parameters. These lists are specified using the param.n notation. Values of n
 // are integers starting from 1. For example, a parameter list with two elements
 // looks like this: &AttributeName.1=first
-//
-//	&AttributeName.2=second
+//     &AttributeName.2=second
 func (c *Client) DeleteMessageBatch(ctx context.Context, params *DeleteMessageBatchInput, optFns ...func(*Options)) (*DeleteMessageBatchOutput, error) {
 	if params == nil {
 		params = &DeleteMessageBatchInput{}
@@ -36,6 +35,7 @@ func (c *Client) DeleteMessageBatch(ctx context.Context, params *DeleteMessageBa
 	return out, nil
 }
 
+//
 type DeleteMessageBatchInput struct {
 
 	// A list of receipt handles for the messages to be deleted.

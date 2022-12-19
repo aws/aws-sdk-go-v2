@@ -32,6 +32,7 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 	return out, nil
 }
 
+//
 type DescribeEventsInput struct {
 
 	// The number of minutes prior to the time of the request for which to retrieve
@@ -102,6 +103,7 @@ type DescribeEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeEventsOutput struct {
 
 	// A list of Event instances.

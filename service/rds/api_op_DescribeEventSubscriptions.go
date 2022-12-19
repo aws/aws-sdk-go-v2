@@ -31,6 +31,7 @@ func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *Describ
 	return out, nil
 }
 
+//
 type DescribeEventSubscriptionsInput struct {
 
 	// This parameter isn't currently supported.

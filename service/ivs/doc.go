@@ -127,7 +127,7 @@
 // * DeleteChannel —
 // Deletes the specified channel.
 //
-// # StreamKey Endpoints
+// StreamKey Endpoints
 //
 // * CreateStreamKey — Creates
 // a stream key, used to initiate a stream, for the specified channel ARN.
@@ -145,7 +145,7 @@
 // * DeleteStreamKey — Deletes the stream key for the specified ARN, so
 // it can no longer be used to stream.
 //
-// # Stream Endpoints
+// Stream Endpoints
 //
 // * GetStream — Gets
 // information about the active (live) stream on a specified channel.
@@ -195,7 +195,7 @@
 // invalidates future viewer tokens generated using the key pair’s
 // privateKey.
 //
-// # RecordingConfiguration Endpoints
+// RecordingConfiguration Endpoints
 //
 // * CreateRecordingConfiguration —
 // Creates a new recording configuration, used to enable recording to Amazon S3.

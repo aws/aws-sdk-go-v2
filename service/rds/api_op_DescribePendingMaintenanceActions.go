@@ -29,6 +29,7 @@ func (c *Client) DescribePendingMaintenanceActions(ctx context.Context, params *
 	return out, nil
 }
 
+//
 type DescribePendingMaintenanceActionsInput struct {
 
 	// A filter that specifies one or more resources to return pending maintenance

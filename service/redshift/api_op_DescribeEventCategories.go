@@ -30,6 +30,7 @@ func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEv
 	return out, nil
 }
 
+//
 type DescribeEventCategoriesInput struct {
 
 	// The source type, such as cluster or parameter group, to which the described
@@ -40,6 +41,7 @@ type DescribeEventCategoriesInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeEventCategoriesOutput struct {
 
 	// A list of event categories descriptions.

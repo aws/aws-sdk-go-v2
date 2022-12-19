@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.Code == nil {
+		return "AccessDeniedException"
+	}
+	return *e.Code
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised to indicate a successfully authorized action when the DryRun
 // flag is set to "true".
 type DryRunOperation struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *DryRunOperation) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DryRunOperation) ErrorCode() string             { return "DryRunOperation" }
+func (e *DryRunOperation) ErrorCode() string {
+	if e.Code == nil {
+		return "DryRunOperation"
+	}
+	return *e.Code
+}
 func (e *DryRunOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The home region is not set. Set the home region to continue.
 type HomeRegionNotSetException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -62,13 +78,20 @@ func (e *HomeRegionNotSetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *HomeRegionNotSetException) ErrorCode() string             { return "HomeRegionNotSetException" }
+func (e *HomeRegionNotSetException) ErrorCode() string {
+	if e.Code == nil {
+		return "HomeRegionNotSetException"
+	}
+	return *e.Code
+}
 func (e *HomeRegionNotSetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised when an internal, configuration, or dependency error is
 // encountered.
 type InternalServerError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -82,13 +105,20 @@ func (e *InternalServerError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
+func (e *InternalServerError) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerError"
+	}
+	return *e.Code
+}
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Exception raised when the provided input violates a policy constraint or is
 // entered in the wrong format or data type.
 type InvalidInputException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -102,7 +132,12 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidInputException"
+	}
+	return *e.Code
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised when there are problems accessing Application Discovery Service
@@ -110,6 +145,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // the migrationhub-discovery role is missing or not configured correctly.
 type PolicyErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -123,7 +160,12 @@ func (e *PolicyErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyErrorException) ErrorCode() string             { return "PolicyErrorException" }
+func (e *PolicyErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "PolicyErrorException"
+	}
+	return *e.Code
+}
 func (e *PolicyErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised when the request references a resource (Application Discovery
@@ -132,6 +174,8 @@ func (e *PolicyErrorException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // Hub's repository.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -145,13 +189,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised when there is an internal, configuration, or dependency error
 // encountered.
 type ServiceUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -165,12 +216,19 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
+
+	Code *string
 
 	RetryAfterSeconds int32
 
@@ -186,13 +244,20 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottlingException"
+	}
+	return *e.Code
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Exception raised to indicate a request was not authorized when the DryRun flag
 // is set to "true".
 type UnauthorizedOperation struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -206,5 +271,10 @@ func (e *UnauthorizedOperation) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthorizedOperation) ErrorCode() string             { return "UnauthorizedOperation" }
+func (e *UnauthorizedOperation) ErrorCode() string {
+	if e.Code == nil {
+		return "UnauthorizedOperation"
+	}
+	return *e.Code
+}
 func (e *UnauthorizedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

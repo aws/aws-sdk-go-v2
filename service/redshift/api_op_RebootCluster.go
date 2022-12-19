@@ -33,6 +33,7 @@ func (c *Client) RebootCluster(ctx context.Context, params *RebootClusterInput, 
 	return out, nil
 }
 
+//
 type RebootClusterInput struct {
 
 	// The cluster identifier.

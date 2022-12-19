@@ -28,6 +28,7 @@ func (c *Client) ListConfigs(ctx context.Context, params *ListConfigsInput, optF
 	return out, nil
 }
 
+//
 type ListConfigsInput struct {
 
 	// Maximum number of Configs returned.
@@ -40,6 +41,7 @@ type ListConfigsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ListConfigsOutput struct {
 
 	// List of Config items.

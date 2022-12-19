@@ -456,8 +456,7 @@ type FilterCriteria struct {
 // The Secrets Manager secret that stores your broker credentials.
 //
 // The following types satisfy this interface:
-//
-//	MQBrokerAccessCredentialsMemberBasicAuth
+//  MQBrokerAccessCredentialsMemberBasicAuth
 type MQBrokerAccessCredentials interface {
 	isMQBrokerAccessCredentials()
 }
@@ -474,9 +473,8 @@ func (*MQBrokerAccessCredentialsMemberBasicAuth) isMQBrokerAccessCredentials() {
 // The Secrets Manager secret that stores your stream credentials.
 //
 // The following types satisfy this interface:
-//
-//	MSKAccessCredentialsMemberClientCertificateTlsAuth
-//	MSKAccessCredentialsMemberSaslScram512Auth
+//  MSKAccessCredentialsMemberClientCertificateTlsAuth
+//  MSKAccessCredentialsMemberSaslScram512Auth
 type MSKAccessCredentials interface {
 	isMSKAccessCredentials()
 }
@@ -1242,11 +1240,10 @@ type SageMakerPipelineParameter struct {
 // The Secrets Manager secret that stores your stream credentials.
 //
 // The following types satisfy this interface:
-//
-//	SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth
-//	SelfManagedKafkaAccessConfigurationCredentialsMemberClientCertificateTlsAuth
-//	SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram256Auth
-//	SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram512Auth
+//  SelfManagedKafkaAccessConfigurationCredentialsMemberBasicAuth
+//  SelfManagedKafkaAccessConfigurationCredentialsMemberClientCertificateTlsAuth
+//  SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram256Auth
+//  SelfManagedKafkaAccessConfigurationCredentialsMemberSaslScram512Auth
 type SelfManagedKafkaAccessConfigurationCredentials interface {
 	isSelfManagedKafkaAccessConfigurationCredentials()
 }

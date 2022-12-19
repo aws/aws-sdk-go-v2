@@ -13,8 +13,9 @@ import (
 type InsufficientCapacityException struct {
 	Message *string
 
-	Type *string
 	Code *string
+
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -28,15 +29,21 @@ func (e *InsufficientCapacityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InsufficientCapacityException) ErrorCode() string             { return "InsufficientCapacityException" }
+func (e *InsufficientCapacityException) ErrorCode() string {
+	if e.Code == nil {
+		return "InsufficientCapacityException"
+	}
+	return *e.Code
+}
 func (e *InsufficientCapacityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if a parameter of the request is incorrectly specified.
 type InvalidParameterValueException struct {
 	Message *string
 
-	Type *string
 	Code *string
+
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -50,15 +57,21 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
+func (e *InvalidParameterValueException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterValueException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the request results in a vault or account limit being exceeded.
 type LimitExceededException struct {
 	Message *string
 
-	Type *string
 	Code *string
+
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -72,15 +85,21 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if a required header or parameter is missing from the request.
 type MissingParameterValueException struct {
 	Message *string
 
-	Type *string
 	Code *string
+
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -94,7 +113,12 @@ func (e *MissingParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MissingParameterValueException) ErrorCode() string             { return "MissingParameterValueException" }
+func (e *MissingParameterValueException) ErrorCode() string {
+	if e.Code == nil {
+		return "MissingParameterValueException"
+	}
+	return *e.Code
+}
 func (e *MissingParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if a retrieval job would exceed the current data policy's retrieval
@@ -102,8 +126,9 @@ func (e *MissingParameterValueException) ErrorFault() smithy.ErrorFault { return
 type PolicyEnforcedException struct {
 	Message *string
 
-	Type *string
 	Code *string
+
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -117,7 +142,12 @@ func (e *PolicyEnforcedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyEnforcedException) ErrorCode() string             { return "PolicyEnforcedException" }
+func (e *PolicyEnforcedException) ErrorCode() string {
+	if e.Code == nil {
+		return "PolicyEnforcedException"
+	}
+	return *e.Code
+}
 func (e *PolicyEnforcedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if, when uploading an archive, Amazon S3 Glacier times out while
@@ -125,8 +155,9 @@ func (e *PolicyEnforcedException) ErrorFault() smithy.ErrorFault { return smithy
 type RequestTimeoutException struct {
 	Message *string
 
-	Type *string
 	Code *string
+
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -140,7 +171,12 @@ func (e *RequestTimeoutException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RequestTimeoutException) ErrorCode() string             { return "RequestTimeoutException" }
+func (e *RequestTimeoutException) ErrorCode() string {
+	if e.Code == nil {
+		return "RequestTimeoutException"
+	}
+	return *e.Code
+}
 func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the specified resource (such as a vault, upload ID, or job ID)
@@ -148,8 +184,9 @@ func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy
 type ResourceNotFoundException struct {
 	Message *string
 
-	Type *string
 	Code *string
+
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -163,15 +200,21 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the service cannot complete the request.
 type ServiceUnavailableException struct {
 	Message *string
 
-	Type *string
 	Code *string
+
+	Type *string
 
 	noSmithyDocumentSerde
 }
@@ -185,5 +228,10 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }

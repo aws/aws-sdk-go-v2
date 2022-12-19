@@ -12,6 +12,8 @@ import (
 type BadGatewayException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,13 +26,20 @@ func (e *BadGatewayException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadGatewayException) ErrorCode() string             { return "BadGatewayException" }
+func (e *BadGatewayException) ErrorCode() string {
+	if e.Code == nil {
+		return "BadGatewayException"
+	}
+	return *e.Code
+}
 func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Request validation failed, there is no usable message in the context, or the bot
 // build failed, is still in progress, or contains unbuilt changes.
 type BadRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -44,12 +53,19 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "BadRequestException"
+	}
+	return *e.Code
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Two clients are using the same AWS account, Amazon Lex bot, and user ID.
 type ConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -63,7 +79,12 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One of the dependencies, such as AWS Lambda or Amazon Polly, threw an exception.
@@ -80,6 +101,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type DependencyFailedException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -92,12 +115,19 @@ func (e *DependencyFailedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DependencyFailedException) ErrorCode() string             { return "DependencyFailedException" }
+func (e *DependencyFailedException) ErrorCode() string {
+	if e.Code == nil {
+		return "DependencyFailedException"
+	}
+	return *e.Code
+}
 func (e *DependencyFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Internal service error. Retry the call.
 type InternalFailureException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -111,12 +141,19 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalFailureException"
+	}
+	return *e.Code
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Exceeded a limit.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	RetryAfterSeconds *string
 
@@ -132,12 +169,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is not used.
 type LoopDetectedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -151,12 +195,19 @@ func (e *LoopDetectedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LoopDetectedException) ErrorCode() string             { return "LoopDetectedException" }
+func (e *LoopDetectedException) ErrorCode() string {
+	if e.Code == nil {
+		return "LoopDetectedException"
+	}
+	return *e.Code
+}
 func (e *LoopDetectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The accept header in the request does not have a valid value.
 type NotAcceptableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -170,13 +221,20 @@ func (e *NotAcceptableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotAcceptableException) ErrorCode() string             { return "NotAcceptableException" }
+func (e *NotAcceptableException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotAcceptableException"
+	}
+	return *e.Code
+}
 func (e *NotAcceptableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource (such as the Amazon Lex bot or an alias) that is referred to is not
 // found.
 type NotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -190,12 +248,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotFoundException"
+	}
+	return *e.Code
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The input speech is too long.
 type RequestTimeoutException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -209,12 +274,19 @@ func (e *RequestTimeoutException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RequestTimeoutException) ErrorCode() string             { return "RequestTimeoutException" }
+func (e *RequestTimeoutException) ErrorCode() string {
+	if e.Code == nil {
+		return "RequestTimeoutException"
+	}
+	return *e.Code
+}
 func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Content-Type header (PostContent API) has an invalid value.
 type UnsupportedMediaTypeException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -228,5 +300,10 @@ func (e *UnsupportedMediaTypeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedMediaTypeException) ErrorCode() string             { return "UnsupportedMediaTypeException" }
+func (e *UnsupportedMediaTypeException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnsupportedMediaTypeException"
+	}
+	return *e.Code
+}
 func (e *UnsupportedMediaTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

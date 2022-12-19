@@ -72,10 +72,9 @@ type AntennaUplinkConfig struct {
 // Details for certain Config object types in a contact.
 //
 // The following types satisfy this interface:
-//
-//	ConfigDetailsMemberAntennaDemodDecodeDetails
-//	ConfigDetailsMemberEndpointDetails
-//	ConfigDetailsMemberS3RecordingDetails
+//  ConfigDetailsMemberAntennaDemodDecodeDetails
+//  ConfigDetailsMemberEndpointDetails
+//  ConfigDetailsMemberS3RecordingDetails
 type ConfigDetails interface {
 	isConfigDetails()
 }
@@ -129,14 +128,13 @@ type ConfigListItem struct {
 // what each type of Config contains.
 //
 // The following types satisfy this interface:
-//
-//	ConfigTypeDataMemberAntennaDownlinkConfig
-//	ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig
-//	ConfigTypeDataMemberAntennaUplinkConfig
-//	ConfigTypeDataMemberDataflowEndpointConfig
-//	ConfigTypeDataMemberS3RecordingConfig
-//	ConfigTypeDataMemberTrackingConfig
-//	ConfigTypeDataMemberUplinkEchoConfig
+//  ConfigTypeDataMemberAntennaDownlinkConfig
+//  ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig
+//  ConfigTypeDataMemberAntennaUplinkConfig
+//  ConfigTypeDataMemberDataflowEndpointConfig
+//  ConfigTypeDataMemberS3RecordingConfig
+//  ConfigTypeDataMemberTrackingConfig
+//  ConfigTypeDataMemberUplinkEchoConfig
 type ConfigTypeData interface {
 	isConfigTypeData()
 }
@@ -405,9 +403,8 @@ type EndpointDetails struct {
 // Ephemeris data.
 //
 // The following types satisfy this interface:
-//
-//	EphemerisDataMemberOem
-//	EphemerisDataMemberTle
+//  EphemerisDataMemberOem
+//  EphemerisDataMemberTle
 type EphemerisData interface {
 	isEphemerisData()
 }
@@ -496,10 +493,11 @@ type EphemerisMetaData struct {
 	noSmithyDocumentSerde
 }
 
-// The following types satisfy this interface:
 //
-//	EphemerisTypeDescriptionMemberOem
-//	EphemerisTypeDescriptionMemberTle
+//
+// The following types satisfy this interface:
+//  EphemerisTypeDescriptionMemberOem
+//  EphemerisTypeDescriptionMemberTle
 type EphemerisTypeDescription interface {
 	isEphemerisTypeDescription()
 }

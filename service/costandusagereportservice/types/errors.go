@@ -12,6 +12,8 @@ import (
 type DuplicateReportNameException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,13 +26,20 @@ func (e *DuplicateReportNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateReportNameException) ErrorCode() string             { return "DuplicateReportNameException" }
+func (e *DuplicateReportNameException) ErrorCode() string {
+	if e.Code == nil {
+		return "DuplicateReportNameException"
+	}
+	return *e.Code
+}
 func (e *DuplicateReportNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error on the server occurred during the processing of your request. Try again
 // later.
 type InternalErrorException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -44,13 +53,20 @@ func (e *InternalErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
+func (e *InternalErrorException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalErrorException"
+	}
+	return *e.Code
+}
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // This account already has five reports defined. To define a new report, you must
 // delete an existing report.
 type ReportLimitReachedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -64,12 +80,19 @@ func (e *ReportLimitReachedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReportLimitReachedException) ErrorCode() string             { return "ReportLimitReachedException" }
+func (e *ReportLimitReachedException) ErrorCode() string {
+	if e.Code == nil {
+		return "ReportLimitReachedException"
+	}
+	return *e.Code
+}
 func (e *ReportLimitReachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The input fails to satisfy the constraints specified by an AWS service.
 type ValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -83,5 +106,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "ValidationException"
+	}
+	return *e.Code
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -648,10 +648,9 @@ type DatastoreStatistics struct {
 // data store is created.
 //
 // The following types satisfy this interface:
-//
-//	DatastoreStorageMemberCustomerManagedS3
-//	DatastoreStorageMemberIotSiteWiseMultiLayerStorage
-//	DatastoreStorageMemberServiceManagedS3
+//  DatastoreStorageMemberCustomerManagedS3
+//  DatastoreStorageMemberIotSiteWiseMultiLayerStorage
+//  DatastoreStorageMemberServiceManagedS3
 type DatastoreStorage interface {
 	isDatastoreStorage()
 }

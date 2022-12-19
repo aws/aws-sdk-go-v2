@@ -41,6 +41,7 @@ func (c *Client) DeleteCluster(ctx context.Context, params *DeleteClusterInput, 
 	return out, nil
 }
 
+//
 type DeleteClusterInput struct {
 
 	// The identifier of the cluster to be deleted. Constraints:

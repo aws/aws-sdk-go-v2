@@ -12,6 +12,8 @@ import (
 type BackupInUseException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *BackupInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BackupInUseException) ErrorCode() string             { return "BackupInUseException" }
+func (e *BackupInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "BackupInUseException"
+	}
+	return *e.Code
+}
 func (e *BackupInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Backup not found for the given BackupARN.
 type BackupNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *BackupNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BackupNotFoundException) ErrorCode() string             { return "BackupNotFoundException" }
+func (e *BackupNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "BackupNotFoundException"
+	}
+	return *e.Code
+}
 func (e *BackupNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A condition specified in the operation could not be evaluated.
 type ConditionalCheckFailedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -63,13 +79,18 @@ func (e *ConditionalCheckFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConditionalCheckFailedException) ErrorCode() string {
-	return "ConditionalCheckFailedException"
+	if e.Code == nil {
+		return "ConditionalCheckFailedException"
+	}
+	return *e.Code
 }
 func (e *ConditionalCheckFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Backups have not yet been enabled for this table.
 type ContinuousBackupsUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -84,7 +105,10 @@ func (e *ContinuousBackupsUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ContinuousBackupsUnavailableException) ErrorCode() string {
-	return "ContinuousBackupsUnavailableException"
+	if e.Code == nil {
+		return "ContinuousBackupsUnavailableException"
+	}
+	return *e.Code
 }
 func (e *ContinuousBackupsUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -94,6 +118,8 @@ func (e *ContinuousBackupsUnavailableException) ErrorFault() smithy.ErrorFault {
 // already exists in the DynamoDB table.
 type DuplicateItemException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -107,12 +133,19 @@ func (e *DuplicateItemException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateItemException) ErrorCode() string             { return "DuplicateItemException" }
+func (e *DuplicateItemException) ErrorCode() string {
+	if e.Code == nil {
+		return "DuplicateItemException"
+	}
+	return *e.Code
+}
 func (e *DuplicateItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a conflict when writing to the specified S3 bucket.
 type ExportConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -126,12 +159,19 @@ func (e *ExportConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExportConflictException) ErrorCode() string             { return "ExportConflictException" }
+func (e *ExportConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ExportConflictException"
+	}
+	return *e.Code
+}
 func (e *ExportConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified export was not found.
 type ExportNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -145,12 +185,19 @@ func (e *ExportNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExportNotFoundException) ErrorCode() string             { return "ExportNotFoundException" }
+func (e *ExportNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ExportNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ExportNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified global table already exists.
 type GlobalTableAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -165,13 +212,18 @@ func (e *GlobalTableAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GlobalTableAlreadyExistsException) ErrorCode() string {
-	return "GlobalTableAlreadyExistsException"
+	if e.Code == nil {
+		return "GlobalTableAlreadyExistsException"
+	}
+	return *e.Code
 }
 func (e *GlobalTableAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified global table does not exist.
 type GlobalTableNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -185,13 +237,20 @@ func (e *GlobalTableNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *GlobalTableNotFoundException) ErrorCode() string             { return "GlobalTableNotFoundException" }
+func (e *GlobalTableNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "GlobalTableNotFoundException"
+	}
+	return *e.Code
+}
 func (e *GlobalTableNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // DynamoDB rejected the request because you retried a request with a different
 // payload but with an idempotent token that was already used.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -206,7 +265,10 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	return "IdempotentParameterMismatchException"
+	if e.Code == nil {
+		return "IdempotentParameterMismatchException"
+	}
+	return *e.Code
 }
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -217,6 +279,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // same client token.
 type ImportConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -230,12 +294,19 @@ func (e *ImportConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ImportConflictException) ErrorCode() string             { return "ImportConflictException" }
+func (e *ImportConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ImportConflictException"
+	}
+	return *e.Code
+}
 func (e *ImportConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified import was not found.
 type ImportNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -249,12 +320,19 @@ func (e *ImportNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ImportNotFoundException) ErrorCode() string             { return "ImportNotFoundException" }
+func (e *ImportNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ImportNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ImportNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation tried to access a nonexistent index.
 type IndexNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -268,12 +346,19 @@ func (e *IndexNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IndexNotFoundException) ErrorCode() string             { return "IndexNotFoundException" }
+func (e *IndexNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "IndexNotFoundException"
+	}
+	return *e.Code
+}
 func (e *IndexNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error occurred on the server side.
 type InternalServerError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -287,11 +372,18 @@ func (e *InternalServerError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
+func (e *InternalServerError) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerError"
+	}
+	return *e.Code
+}
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 type InvalidEndpointException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -305,12 +397,19 @@ func (e *InvalidEndpointException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidEndpointException) ErrorCode() string             { return "InvalidEndpointException" }
+func (e *InvalidEndpointException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidEndpointException"
+	}
+	return *e.Code
+}
 func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified ExportTime is outside of the point in time recovery window.
 type InvalidExportTimeException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -324,13 +423,20 @@ func (e *InvalidExportTimeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidExportTimeException) ErrorCode() string             { return "InvalidExportTimeException" }
+func (e *InvalidExportTimeException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidExportTimeException"
+	}
+	return *e.Code
+}
 func (e *InvalidExportTimeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An invalid restore time was specified. RestoreDateTime must be between
 // EarliestRestorableDateTime and LatestRestorableDateTime.
 type InvalidRestoreTimeException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -344,13 +450,20 @@ func (e *InvalidRestoreTimeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRestoreTimeException) ErrorCode() string             { return "InvalidRestoreTimeException" }
+func (e *InvalidRestoreTimeException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRestoreTimeException"
+	}
+	return *e.Code
+}
 func (e *InvalidRestoreTimeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An item collection is too large. This exception is only returned for tables that
 // have one or more local secondary indexes.
 type ItemCollectionSizeLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -365,7 +478,10 @@ func (e *ItemCollectionSizeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ItemCollectionSizeLimitExceededException) ErrorCode() string {
-	return "ItemCollectionSizeLimitExceededException"
+	if e.Code == nil {
+		return "ItemCollectionSizeLimitExceededException"
+	}
+	return *e.Code
 }
 func (e *ItemCollectionSizeLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -384,6 +500,8 @@ func (e *ItemCollectionSizeLimitExceededException) ErrorFault() smithy.ErrorFaul
 type LimitExceededException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -396,12 +514,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Point in time recovery has not yet been enabled for this source table.
 type PointInTimeRecoveryUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -416,7 +541,10 @@ func (e *PointInTimeRecoveryUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PointInTimeRecoveryUnavailableException) ErrorCode() string {
-	return "PointInTimeRecoveryUnavailableException"
+	if e.Code == nil {
+		return "PointInTimeRecoveryUnavailableException"
+	}
+	return *e.Code
 }
 func (e *PointInTimeRecoveryUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -432,6 +560,8 @@ func (e *PointInTimeRecoveryUnavailableException) ErrorFault() smithy.ErrorFault
 type ProvisionedThroughputExceededException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -445,7 +575,10 @@ func (e *ProvisionedThroughputExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProvisionedThroughputExceededException) ErrorCode() string {
-	return "ProvisionedThroughputExceededException"
+	if e.Code == nil {
+		return "ProvisionedThroughputExceededException"
+	}
+	return *e.Code
 }
 func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -454,6 +587,8 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 // The specified replica is already part of the global table.
 type ReplicaAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -467,12 +602,19 @@ func (e *ReplicaAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReplicaAlreadyExistsException) ErrorCode() string             { return "ReplicaAlreadyExistsException" }
+func (e *ReplicaAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "ReplicaAlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *ReplicaAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified replica is no longer part of the global table.
 type ReplicaNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -486,7 +628,12 @@ func (e *ReplicaNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReplicaNotFoundException) ErrorCode() string             { return "ReplicaNotFoundException" }
+func (e *ReplicaNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ReplicaNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ReplicaNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Throughput exceeds the current throughput quota for your account. Please contact
@@ -494,6 +641,8 @@ func (e *ReplicaNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 // increase.
 type RequestLimitExceeded struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -507,7 +656,12 @@ func (e *RequestLimitExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RequestLimitExceeded) ErrorCode() string             { return "RequestLimitExceeded" }
+func (e *RequestLimitExceeded) ErrorCode() string {
+	if e.Code == nil {
+		return "RequestLimitExceeded"
+	}
+	return *e.Code
+}
 func (e *RequestLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation conflicts with the resource's availability. For example, you
@@ -515,6 +669,8 @@ func (e *RequestLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // the CREATING state.
 type ResourceInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -528,13 +684,20 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceInUseException"
+	}
+	return *e.Code
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation tried to access a nonexistent table or index. The resource might
 // not be specified correctly, or its status might not be ACTIVE.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -548,12 +711,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A target table with the specified name already exists.
 type TableAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -567,12 +737,19 @@ func (e *TableAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TableAlreadyExistsException) ErrorCode() string             { return "TableAlreadyExistsException" }
+func (e *TableAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TableAlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *TableAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A target table with the specified name is either being created or deleted.
 type TableInUseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -586,7 +763,12 @@ func (e *TableInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TableInUseException) ErrorCode() string             { return "TableInUseException" }
+func (e *TableInUseException) ErrorCode() string {
+	if e.Code == nil {
+		return "TableInUseException"
+	}
+	return *e.Code
+}
 func (e *TableInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A source table with the name TableName does not currently exist within the
@@ -594,6 +776,8 @@ func (e *TableInUseException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Services Region.
 type TableNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -607,7 +791,12 @@ func (e *TableNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TableNotFoundException) ErrorCode() string             { return "TableNotFoundException" }
+func (e *TableNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "TableNotFoundException"
+	}
+	return *e.Code
+}
 func (e *TableNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The entire transaction request was canceled. DynamoDB cancels a
@@ -761,6 +950,8 @@ func (e *TableNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.
 type TransactionCanceledException struct {
 	Message *string
 
+	Code *string
+
 	CancellationReasons []CancellationReason
 
 	noSmithyDocumentSerde
@@ -775,12 +966,19 @@ func (e *TransactionCanceledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TransactionCanceledException) ErrorCode() string             { return "TransactionCanceledException" }
+func (e *TransactionCanceledException) ErrorCode() string {
+	if e.Code == nil {
+		return "TransactionCanceledException"
+	}
+	return *e.Code
+}
 func (e *TransactionCanceledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Operation was rejected because there is an ongoing transaction for the item.
 type TransactionConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -794,12 +992,19 @@ func (e *TransactionConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TransactionConflictException) ErrorCode() string             { return "TransactionConflictException" }
+func (e *TransactionConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "TransactionConflictException"
+	}
+	return *e.Code
+}
 func (e *TransactionConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The transaction with the given request token is already in progress.
 type TransactionInProgressException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -813,5 +1018,10 @@ func (e *TransactionInProgressException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TransactionInProgressException) ErrorCode() string             { return "TransactionInProgressException" }
+func (e *TransactionInProgressException) ErrorCode() string {
+	if e.Code == nil {
+		return "TransactionInProgressException"
+	}
+	return *e.Code
+}
 func (e *TransactionInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

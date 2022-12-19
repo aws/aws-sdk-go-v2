@@ -13,6 +13,8 @@ import (
 type CertificateConflictException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,12 +27,19 @@ func (e *CertificateConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CertificateConflictException) ErrorCode() string             { return "CertificateConflictException" }
+func (e *CertificateConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "CertificateConflictException"
+	}
+	return *e.Code
+}
 func (e *CertificateConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The certificate operation is not allowed.
 type CertificateStateException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -44,12 +53,19 @@ func (e *CertificateStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CertificateStateException) ErrorCode() string             { return "CertificateStateException" }
+func (e *CertificateStateException) ErrorCode() string {
+	if e.Code == nil {
+		return "CertificateStateException"
+	}
+	return *e.Code
+}
 func (e *CertificateStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The certificate is invalid.
 type CertificateValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -63,12 +79,19 @@ func (e *CertificateValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CertificateValidationException) ErrorCode() string             { return "CertificateValidationException" }
+func (e *CertificateValidationException) ErrorCode() string {
+	if e.Code == nil {
+		return "CertificateValidationException"
+	}
+	return *e.Code
+}
 func (e *CertificateValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource with the same name already exists.
 type ConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -82,13 +105,20 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A conflicting resource update exception. This exception is thrown when two
 // pending updates cause a conflict.
 type ConflictingResourceUpdateException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -103,7 +133,10 @@ func (e *ConflictingResourceUpdateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictingResourceUpdateException) ErrorCode() string {
-	return "ConflictingResourceUpdateException"
+	if e.Code == nil {
+		return "ConflictingResourceUpdateException"
+	}
+	return *e.Code
 }
 func (e *ConflictingResourceUpdateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -112,6 +145,8 @@ func (e *ConflictingResourceUpdateException) ErrorFault() smithy.ErrorFault {
 // You can't delete the resource because it is attached to one or more resources.
 type DeleteConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -125,12 +160,19 @@ func (e *DeleteConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DeleteConflictException) ErrorCode() string             { return "DeleteConflictException" }
+func (e *DeleteConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "DeleteConflictException"
+	}
+	return *e.Code
+}
 func (e *DeleteConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The index is not ready.
 type IndexNotReadyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -144,12 +186,19 @@ func (e *IndexNotReadyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IndexNotReadyException) ErrorCode() string             { return "IndexNotReadyException" }
+func (e *IndexNotReadyException) ErrorCode() string {
+	if e.Code == nil {
+		return "IndexNotReadyException"
+	}
+	return *e.Code
+}
 func (e *IndexNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An unexpected error has occurred.
 type InternalException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -163,12 +212,19 @@ func (e *InternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalException) ErrorCode() string             { return "InternalException" }
+func (e *InternalException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalException"
+	}
+	return *e.Code
+}
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // An unexpected error has occurred.
 type InternalFailureException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -182,13 +238,20 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalFailureException"
+	}
+	return *e.Code
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Internal error from the service that indicates an unexpected error or that the
 // service is unavailable.
 type InternalServerException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -202,12 +265,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerException"
+	}
+	return *e.Code
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The aggregation is invalid.
 type InvalidAggregationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -221,12 +291,19 @@ func (e *InvalidAggregationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidAggregationException) ErrorCode() string             { return "InvalidAggregationException" }
+func (e *InvalidAggregationException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidAggregationException"
+	}
+	return *e.Code
+}
 func (e *InvalidAggregationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The query is invalid.
 type InvalidQueryException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -240,12 +317,19 @@ func (e *InvalidQueryException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidQueryException) ErrorCode() string             { return "InvalidQueryException" }
+func (e *InvalidQueryException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidQueryException"
+	}
+	return *e.Code
+}
 func (e *InvalidQueryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request is not valid.
 type InvalidRequestException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -259,12 +343,19 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The response is invalid.
 type InvalidResponseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -278,13 +369,20 @@ func (e *InvalidResponseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidResponseException) ErrorCode() string             { return "InvalidResponseException" }
+func (e *InvalidResponseException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidResponseException"
+	}
+	return *e.Code
+}
 func (e *InvalidResponseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An attempt was made to change to an invalid state, for example by deleting a job
 // or a job execution which is "IN_PROGRESS" without setting the force parameter.
 type InvalidStateTransitionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -299,13 +397,18 @@ func (e *InvalidStateTransitionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateTransitionException) ErrorCode() string {
-	return "InvalidStateTransitionException"
+	if e.Code == nil {
+		return "InvalidStateTransitionException"
+	}
+	return *e.Code
 }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A limit has been exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -319,12 +422,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The policy documentation is not valid.
 type MalformedPolicyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -338,12 +448,19 @@ func (e *MalformedPolicyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MalformedPolicyException) ErrorCode() string             { return "MalformedPolicyException" }
+func (e *MalformedPolicyException) ErrorCode() string {
+	if e.Code == nil {
+		return "MalformedPolicyException"
+	}
+	return *e.Code
+}
 func (e *MalformedPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource is not configured.
 type NotConfiguredException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -357,12 +474,19 @@ func (e *NotConfiguredException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotConfiguredException) ErrorCode() string             { return "NotConfiguredException" }
+func (e *NotConfiguredException) ErrorCode() string {
+	if e.Code == nil {
+		return "NotConfiguredException"
+	}
+	return *e.Code
+}
 func (e *NotConfiguredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The registration code is invalid.
 type RegistrationCodeValidationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -377,7 +501,10 @@ func (e *RegistrationCodeValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RegistrationCodeValidationException) ErrorCode() string {
-	return "RegistrationCodeValidationException"
+	if e.Code == nil {
+		return "RegistrationCodeValidationException"
+	}
+	return *e.Code
 }
 func (e *RegistrationCodeValidationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -386,6 +513,8 @@ func (e *RegistrationCodeValidationException) ErrorFault() smithy.ErrorFault {
 // The resource already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	ResourceId  *string
 	ResourceArn *string
@@ -402,12 +531,19 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
+func (e *ResourceAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceAlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -421,12 +557,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource registration failed.
 type ResourceRegistrationFailureException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -441,7 +584,10 @@ func (e *ResourceRegistrationFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceRegistrationFailureException) ErrorCode() string {
-	return "ResourceRegistrationFailureException"
+	if e.Code == nil {
+		return "ResourceRegistrationFailureException"
+	}
+	return *e.Code
 }
 func (e *ResourceRegistrationFailureException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -450,6 +596,8 @@ func (e *ResourceRegistrationFailureException) ErrorFault() smithy.ErrorFault {
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -463,12 +611,19 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The Rule-SQL expression can't be parsed correctly.
 type SqlParseException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -482,13 +637,20 @@ func (e *SqlParseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SqlParseException) ErrorCode() string             { return "SqlParseException" }
+func (e *SqlParseException) ErrorCode() string {
+	if e.Code == nil {
+		return "SqlParseException"
+	}
+	return *e.Code
+}
 func (e *SqlParseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception occurs if you attempt to start a task with the same task-id as an
 // existing task but with a different clientRequestToken.
 type TaskAlreadyExistsException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -502,12 +664,19 @@ func (e *TaskAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TaskAlreadyExistsException) ErrorCode() string             { return "TaskAlreadyExistsException" }
+func (e *TaskAlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "TaskAlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *TaskAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The rate exceeds the limit.
 type ThrottlingException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -521,13 +690,20 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottlingException"
+	}
+	return *e.Code
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't revert the certificate transfer because the transfer is already
 // complete.
 type TransferAlreadyCompletedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -542,7 +718,10 @@ func (e *TransferAlreadyCompletedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransferAlreadyCompletedException) ErrorCode() string {
-	return "TransferAlreadyCompletedException"
+	if e.Code == nil {
+		return "TransferAlreadyCompletedException"
+	}
+	return *e.Code
 }
 func (e *TransferAlreadyCompletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -550,6 +729,8 @@ func (e *TransferAlreadyCompletedException) ErrorFault() smithy.ErrorFault { ret
 // attached.
 type TransferConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -563,12 +744,19 @@ func (e *TransferConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TransferConflictException) ErrorCode() string             { return "TransferConflictException" }
+func (e *TransferConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "TransferConflictException"
+	}
+	return *e.Code
+}
 func (e *TransferConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You are not authorized to perform this operation.
 type UnauthorizedException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -582,13 +770,20 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
+func (e *UnauthorizedException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnauthorizedException"
+	}
+	return *e.Code
+}
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception thrown when the version of an entity specified with the
 // expectedVersion parameter does not match the latest version in the system.
 type VersionConflictException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -602,12 +797,19 @@ func (e *VersionConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *VersionConflictException) ErrorCode() string             { return "VersionConflictException" }
+func (e *VersionConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "VersionConflictException"
+	}
+	return *e.Code
+}
 func (e *VersionConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of policy versions exceeds the limit.
 type VersionsLimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -621,5 +823,10 @@ func (e *VersionsLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *VersionsLimitExceededException) ErrorCode() string             { return "VersionsLimitExceededException" }
+func (e *VersionsLimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "VersionsLimitExceededException"
+	}
+	return *e.Code
+}
 func (e *VersionsLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

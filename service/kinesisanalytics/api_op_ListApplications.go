@@ -41,6 +41,7 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 	return out, nil
 }
 
+//
 type ListApplicationsInput struct {
 
 	// Name of the application to start the list with. When using pagination to
@@ -55,6 +56,7 @@ type ListApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type ListApplicationsOutput struct {
 
 	// List of ApplicationSummary objects.

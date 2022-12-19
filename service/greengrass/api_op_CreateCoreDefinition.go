@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a core definition. You may provide the initial version of the core
-// definition now or use ”CreateCoreDefinitionVersion” at a later time.
+// definition now or use ''CreateCoreDefinitionVersion'' at a later time.
 // Greengrass groups must each contain exactly one Greengrass core.
 func (c *Client) CreateCoreDefinition(ctx context.Context, params *CreateCoreDefinitionInput, optFns ...func(*Options)) (*CreateCoreDefinitionOutput, error) {
 	if params == nil {

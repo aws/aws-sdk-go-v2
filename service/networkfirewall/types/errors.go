@@ -12,6 +12,8 @@ import (
 type InsufficientCapacityException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,13 +26,20 @@ func (e *InsufficientCapacityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InsufficientCapacityException) ErrorCode() string             { return "InsufficientCapacityException" }
+func (e *InsufficientCapacityException) ErrorCode() string {
+	if e.Code == nil {
+		return "InsufficientCapacityException"
+	}
+	return *e.Code
+}
 func (e *InsufficientCapacityException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Your request is valid, but Network Firewall couldn’t perform the operation
 // because of a system problem. Retry your request.
 type InternalServerError struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -44,13 +53,20 @@ func (e *InternalServerError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
+func (e *InternalServerError) ErrorCode() string {
+	if e.Code == nil {
+		return "InternalServerError"
+	}
+	return *e.Code
+}
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The operation failed because it's not valid. For example, you might have tried
 // to delete a rule group or firewall policy that's in use.
 type InvalidOperationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -64,7 +80,12 @@ func (e *InvalidOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
+func (e *InvalidOperationException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidOperationException"
+	}
+	return *e.Code
+}
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because of a problem with your request. Examples
@@ -81,6 +102,8 @@ func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smit
 type InvalidRequestException struct {
 	Message *string
 
+	Code *string
+
 	noSmithyDocumentSerde
 }
 
@@ -93,12 +116,19 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The policy statement failed validation.
 type InvalidResourcePolicyException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -112,12 +142,19 @@ func (e *InvalidResourcePolicyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidResourcePolicyException) ErrorCode() string             { return "InvalidResourcePolicyException" }
+func (e *InvalidResourcePolicyException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidResourcePolicyException"
+	}
+	return *e.Code
+}
 func (e *InvalidResourcePolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The token you provided is stale or isn't valid for the operation.
 type InvalidTokenException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -131,12 +168,19 @@ func (e *InvalidTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTokenException) ErrorCode() string             { return "InvalidTokenException" }
+func (e *InvalidTokenException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidTokenException"
+	}
+	return *e.Code
+}
 func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Unable to perform the operation because doing so would violate a limit setting.
 type LimitExceededException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -150,12 +194,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Unable to send logs to a configured logging destination.
 type LogDestinationPermissionException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -170,13 +221,18 @@ func (e *LogDestinationPermissionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LogDestinationPermissionException) ErrorCode() string {
-	return "LogDestinationPermissionException"
+	if e.Code == nil {
+		return "LogDestinationPermissionException"
+	}
+	return *e.Code
 }
 func (e *LogDestinationPermissionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Unable to locate a resource using the parameters that you provided.
 type ResourceNotFoundException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -190,12 +246,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Unable to change the resource because your account doesn't own it.
 type ResourceOwnerCheckException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -209,12 +272,19 @@ func (e *ResourceOwnerCheckException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceOwnerCheckException) ErrorCode() string             { return "ResourceOwnerCheckException" }
+func (e *ResourceOwnerCheckException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceOwnerCheckException"
+	}
+	return *e.Code
+}
 func (e *ResourceOwnerCheckException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Unable to process the request due to throttling limitations.
 type ThrottlingException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -228,12 +298,19 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.Code == nil {
+		return "ThrottlingException"
+	}
+	return *e.Code
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation you requested isn't supported by Network Firewall.
 type UnsupportedOperationException struct {
 	Message *string
+
+	Code *string
 
 	noSmithyDocumentSerde
 }
@@ -247,5 +324,10 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
+func (e *UnsupportedOperationException) ErrorCode() string {
+	if e.Code == nil {
+		return "UnsupportedOperationException"
+	}
+	return *e.Code
+}
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

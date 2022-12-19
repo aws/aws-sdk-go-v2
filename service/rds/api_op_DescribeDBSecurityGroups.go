@@ -39,6 +39,7 @@ func (c *Client) DescribeDBSecurityGroups(ctx context.Context, params *DescribeD
 	return out, nil
 }
 
+//
 type DescribeDBSecurityGroupsInput struct {
 
 	// The name of the DB security group to return details for.

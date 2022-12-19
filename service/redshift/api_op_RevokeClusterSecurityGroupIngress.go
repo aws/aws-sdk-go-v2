@@ -32,6 +32,7 @@ func (c *Client) RevokeClusterSecurityGroupIngress(ctx context.Context, params *
 	return out, nil
 }
 
+//
 type RevokeClusterSecurityGroupIngressInput struct {
 
 	// The name of the security Group from which to revoke the ingress rule.

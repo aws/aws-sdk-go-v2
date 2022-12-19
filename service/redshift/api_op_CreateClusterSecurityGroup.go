@@ -31,6 +31,7 @@ func (c *Client) CreateClusterSecurityGroup(ctx context.Context, params *CreateC
 	return out, nil
 }
 
+//
 type CreateClusterSecurityGroupInput struct {
 
 	// The name for the security group. Amazon Redshift stores the value as a lowercase

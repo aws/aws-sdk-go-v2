@@ -31,6 +31,7 @@ func (c *Client) DescribeConfigRuleEvaluationStatus(ctx context.Context, params 
 	return out, nil
 }
 
+//
 type DescribeConfigRuleEvaluationStatusInput struct {
 
 	// The name of the Config managed rules for which you want status information. If
@@ -52,6 +53,7 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+//
 type DescribeConfigRuleEvaluationStatusOutput struct {
 
 	// Status information about your Config managed rules.

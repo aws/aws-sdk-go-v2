@@ -16,17 +16,16 @@ type ComplexNestedErrorData struct {
 // A union with a representative set of types for members.
 //
 // The following types satisfy this interface:
-//
-//	MyUnionMemberBlobValue
-//	MyUnionMemberBooleanValue
-//	MyUnionMemberEnumValue
-//	MyUnionMemberListValue
-//	MyUnionMemberMapValue
-//	MyUnionMemberNumberValue
-//	MyUnionMemberRenamedStructureValue
-//	MyUnionMemberStringValue
-//	MyUnionMemberStructureValue
-//	MyUnionMemberTimestampValue
+//  MyUnionMemberBlobValue
+//  MyUnionMemberBooleanValue
+//  MyUnionMemberEnumValue
+//  MyUnionMemberListValue
+//  MyUnionMemberMapValue
+//  MyUnionMemberNumberValue
+//  MyUnionMemberRenamedStructureValue
+//  MyUnionMemberStringValue
+//  MyUnionMemberStructureValue
+//  MyUnionMemberTimestampValue
 type MyUnion interface {
 	isMyUnion()
 }
@@ -126,8 +125,7 @@ type PayloadConfig struct {
 }
 
 // The following types satisfy this interface:
-//
-//	PlayerActionMemberQuit
+//  PlayerActionMemberQuit
 type PlayerAction interface {
 	isPlayerAction()
 }
@@ -158,9 +156,8 @@ type RecursiveShapesInputOutputNested2 struct {
 }
 
 // The following types satisfy this interface:
-//
-//	SimpleUnionMemberInt
-//	SimpleUnionMemberString
+//  SimpleUnionMemberInt
+//  SimpleUnionMemberString
 type SimpleUnion interface {
 	isSimpleUnion()
 }
@@ -196,10 +193,9 @@ type TestConfig struct {
 }
 
 // The following types satisfy this interface:
-//
-//	UnionWithJsonNameMemberBar
-//	UnionWithJsonNameMemberBaz
-//	UnionWithJsonNameMemberFoo
+//  UnionWithJsonNameMemberBar
+//  UnionWithJsonNameMemberBaz
+//  UnionWithJsonNameMemberFoo
 type UnionWithJsonName interface {
 	isUnionWithJsonName()
 }

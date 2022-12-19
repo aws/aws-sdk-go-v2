@@ -21,7 +21,7 @@
 //
 // * Handle error responses
 //
-// # Additional information
+// Additional information
 //
 // * Amazon SQS Product
 // Page (http://aws.amazon.com/sqs/)

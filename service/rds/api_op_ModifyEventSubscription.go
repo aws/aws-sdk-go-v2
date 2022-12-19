@@ -33,6 +33,7 @@ func (c *Client) ModifyEventSubscription(ctx context.Context, params *ModifyEven
 	return out, nil
 }
 
+//
 type ModifyEventSubscriptionInput struct {
 
 	// The name of the RDS event notification subscription.

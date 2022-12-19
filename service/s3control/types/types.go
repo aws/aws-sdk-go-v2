@@ -543,8 +543,7 @@ type JobManifest struct {
 // Configures the type of the job's ManifestGenerator.
 //
 // The following types satisfy this interface:
-//
-//	JobManifestGeneratorMemberS3JobManifestGenerator
+//  JobManifestGeneratorMemberS3JobManifestGenerator
 type JobManifestGenerator interface {
 	isJobManifestGenerator()
 }
@@ -1077,8 +1076,7 @@ type ObjectLambdaConfiguration struct {
 // A container for AwsLambdaTransformation.
 //
 // The following types satisfy this interface:
-//
-//	ObjectLambdaContentTransformationMemberAwsLambda
+//  ObjectLambdaContentTransformationMemberAwsLambda
 type ObjectLambdaContentTransformation interface {
 	isObjectLambdaContentTransformation()
 }
@@ -1281,6 +1279,7 @@ type RegionReport struct {
 	noSmithyDocumentSerde
 }
 
+//
 type S3AccessControlList struct {
 
 	//
@@ -1294,6 +1293,7 @@ type S3AccessControlList struct {
 	noSmithyDocumentSerde
 }
 
+//
 type S3AccessControlPolicy struct {
 
 	//
@@ -1440,6 +1440,7 @@ type S3GeneratedManifestDescriptor struct {
 	noSmithyDocumentSerde
 }
 
+//
 type S3Grant struct {
 
 	//
@@ -1451,6 +1452,7 @@ type S3Grant struct {
 	noSmithyDocumentSerde
 }
 
+//
 type S3Grantee struct {
 
 	//
@@ -1560,6 +1562,7 @@ type S3ObjectLockLegalHold struct {
 	noSmithyDocumentSerde
 }
 
+//
 type S3ObjectMetadata struct {
 
 	//
@@ -1598,6 +1601,7 @@ type S3ObjectMetadata struct {
 	noSmithyDocumentSerde
 }
 
+//
 type S3ObjectOwner struct {
 
 	//
@@ -1716,6 +1720,7 @@ type S3Tag struct {
 	noSmithyDocumentSerde
 }
 
+//
 type SelectionCriteria struct {
 
 	// A container for the delimiter of the selection criteria being used.
@@ -1731,6 +1736,7 @@ type SelectionCriteria struct {
 	noSmithyDocumentSerde
 }
 
+//
 type SSEKMS struct {
 
 	// A container for the ARN of the SSE-KMS encryption. This property is read-only
@@ -1756,6 +1762,7 @@ type SSEKMSEncryption struct {
 	noSmithyDocumentSerde
 }
 
+//
 type SSES3 struct {
 	noSmithyDocumentSerde
 }
@@ -1849,6 +1856,7 @@ type StorageLensDataExportEncryption struct {
 	noSmithyDocumentSerde
 }
 
+//
 type StorageLensTag struct {
 
 	//
@@ -1864,6 +1872,7 @@ type StorageLensTag struct {
 	noSmithyDocumentSerde
 }
 
+//
 type Tagging struct {
 
 	// A collection for a set of tags.

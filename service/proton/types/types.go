@@ -1581,8 +1581,7 @@ type TemplateSyncConfig struct {
 // Template version source data.
 //
 // The following types satisfy this interface:
-//
-//	TemplateVersionSourceInputMemberS3
+//  TemplateVersionSourceInputMemberS3
 type TemplateVersionSourceInput interface {
 	isTemplateVersionSourceInput()
 }

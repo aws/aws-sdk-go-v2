@@ -11,7 +11,8 @@ import (
 type AlreadyExistsException struct {
 	Message *string
 
-	Code             *string
+	Code *string
+
 	CreatorRequestId *string
 	Arn              *string
 	Type             *string
@@ -29,7 +30,12 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
+func (e *AlreadyExistsException) ErrorCode() string {
+	if e.Code == nil {
+		return "AlreadyExistsException"
+	}
+	return *e.Code
+}
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Backup can't perform the action that you requested until it finishes performing
@@ -37,7 +43,8 @@ func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.
 type ConflictException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Type    *string
 	Context *string
 
@@ -53,7 +60,12 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.Code == nil {
+		return "ConflictException"
+	}
+	return *e.Code
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A dependent Amazon Web Services service or resource returned an error to the
@@ -61,7 +73,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type DependencyFailureException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Type    *string
 	Context *string
 
@@ -77,7 +90,12 @@ func (e *DependencyFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DependencyFailureException) ErrorCode() string             { return "DependencyFailureException" }
+func (e *DependencyFailureException) ErrorCode() string {
+	if e.Code == nil {
+		return "DependencyFailureException"
+	}
+	return *e.Code
+}
 func (e *DependencyFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Indicates that something is wrong with a parameter's value. For example, the
@@ -85,7 +103,8 @@ func (e *DependencyFailureException) ErrorFault() smithy.ErrorFault { return smi
 type InvalidParameterValueException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Type    *string
 	Context *string
 
@@ -101,7 +120,12 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
+func (e *InvalidParameterValueException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidParameterValueException"
+	}
+	return *e.Code
+}
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that something is wrong with the input to the request. For example, a
@@ -109,7 +133,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 type InvalidRequestException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Type    *string
 	Context *string
 
@@ -125,7 +150,12 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidRequestException"
+	}
+	return *e.Code
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Backup is already performing an action on this recovery point. It can't perform
@@ -133,7 +163,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 type InvalidResourceStateException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Type    *string
 	Context *string
 
@@ -149,7 +180,12 @@ func (e *InvalidResourceStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidResourceStateException) ErrorCode() string             { return "InvalidResourceStateException" }
+func (e *InvalidResourceStateException) ErrorCode() string {
+	if e.Code == nil {
+		return "InvalidResourceStateException"
+	}
+	return *e.Code
+}
 func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A limit in the request has been exceeded; for example, a maximum number of items
@@ -157,7 +193,8 @@ func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return 
 type LimitExceededException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Type    *string
 	Context *string
 
@@ -173,14 +210,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.Code == nil {
+		return "LimitExceededException"
+	}
+	return *e.Code
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a required parameter is missing.
 type MissingParameterValueException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Type    *string
 	Context *string
 
@@ -196,14 +239,20 @@ func (e *MissingParameterValueException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MissingParameterValueException) ErrorCode() string             { return "MissingParameterValueException" }
+func (e *MissingParameterValueException) ErrorCode() string {
+	if e.Code == nil {
+		return "MissingParameterValueException"
+	}
+	return *e.Code
+}
 func (e *MissingParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource that is required for the action doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Type    *string
 	Context *string
 
@@ -219,14 +268,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.Code == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.Code
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed due to a temporary failure of the server.
 type ServiceUnavailableException struct {
 	Message *string
 
-	Code    *string
+	Code *string
+
 	Type    *string
 	Context *string
 
@@ -242,5 +297,10 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.Code == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.Code
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
