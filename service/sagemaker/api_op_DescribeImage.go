@@ -58,7 +58,7 @@ type DescribeImageOutput struct {
 	// When a create, update, or delete operation fails, the reason for the failure.
 	FailureReason *string
 
-	// The Amazon Resource Name (ARN) of the image.
+	// The ARN of the image.
 	ImageArn *string
 
 	// The name of the image.
@@ -70,8 +70,8 @@ type DescribeImageOutput struct {
 	// When the image was last modified.
 	LastModifiedTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the IAM role that enables Amazon SageMaker to
-	// perform tasks on your behalf.
+	// The ARN of the IAM role that enables Amazon SageMaker to perform tasks on your
+	// behalf.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,19 +12,19 @@ import (
 	"time"
 )
 
-// An asynchronous API that updates a stream’s existing edge configuration. If this
-// API is invoked for the first time, a new edge configuration will be created for
-// the stream, and the sync status will be set to SYNCING. The Kinesis Video Stream
-// will sync the stream’s edge configuration with the Edge Agent IoT Greengrass
-// component that runs on an IoT Hub Device setup at your premise. The time to sync
-// can vary and depends on the connectivity of the Hub Device. The SyncStatus will
-// be updated as the edge configuration is acknowledged, and synced with the Edge
-// Agent. You will have to wait for the sync status to reach a terminal state such
-// as: IN_SYNC and SYNC_FAILED, before using this API again. If you invoke this API
-// during the syncing process, a ResourceInUseException will be thrown. The
-// connectivity of the stream's edge configuration and the Edge Agent will be
-// retried for 15 minutes. After 15 minutes, the status will transition into the
-// SYNC_FAILED state.
+// An asynchronous API that updates a stream’s existing edge configuration. The
+// Kinesis Video Stream will sync the stream’s edge configuration with the Edge
+// Agent IoT Greengrass component that runs on an IoT Hub Device, setup at your
+// premise. The time to sync can vary and depends on the connectivity of the Hub
+// Device. The SyncStatus will be updated as the edge configuration is
+// acknowledged, and synced with the Edge Agent. If this API is invoked for the
+// first time, a new edge configuration will be created for the stream, and the
+// sync status will be set to SYNCING. You will have to wait for the sync status to
+// reach a terminal state such as: IN_SYNC, or SYNC_FAILED, before using this API
+// again. If you invoke this API during the syncing process, a
+// ResourceInUseException will be thrown. The connectivity of the stream’s edge
+// configuration and the Edge Agent will be retried for 15 minutes. After 15
+// minutes, the status will transition into the SYNC_FAILED state.
 func (c *Client) StartEdgeConfigurationUpdate(ctx context.Context, params *StartEdgeConfigurationUpdateInput, optFns ...func(*Options)) (*StartEdgeConfigurationUpdateOutput, error) {
 	if params == nil {
 		params = &StartEdgeConfigurationUpdateInput{}

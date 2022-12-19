@@ -9422,6 +9422,61 @@ func (m *awsAwsjson11_serializeOpListAlgorithms) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListAliases struct {
+}
+
+func (*awsAwsjson11_serializeOpListAliases) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListAliases) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListAliasesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.ListAliases")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListAliasesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListAppImageConfigs struct {
 }
 
@@ -15457,6 +15512,61 @@ func (m *awsAwsjson11_serializeOpUpdateImage) HandleSerialize(ctx context.Contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentUpdateImageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateImageVersion struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateImageVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateImageVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateImageVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.UpdateImageVersion")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateImageVersionInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -23725,6 +23835,17 @@ func awsAwsjson11_serializeDocumentS3StorageConfig(v *types.S3StorageConfig, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSageMakerImageVersionAliases(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentScheduleConfig(v *types.ScheduleConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26066,6 +26187,13 @@ func awsAwsjson11_serializeOpDocumentCreateImageVersionInput(v *CreateImageVersi
 	object := value.Object()
 	defer object.Close()
 
+	if v.Aliases != nil {
+		ok := object.Key("Aliases")
+		if err := awsAwsjson11_serializeDocumentSageMakerImageVersionAliases(v.Aliases, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BaseImage != nil {
 		ok := object.Key("BaseImage")
 		ok.String(*v.BaseImage)
@@ -26076,9 +26204,44 @@ func awsAwsjson11_serializeOpDocumentCreateImageVersionInput(v *CreateImageVersi
 		ok.String(*v.ClientToken)
 	}
 
+	if v.Horovod {
+		ok := object.Key("Horovod")
+		ok.Boolean(v.Horovod)
+	}
+
 	if v.ImageName != nil {
 		ok := object.Key("ImageName")
 		ok.String(*v.ImageName)
+	}
+
+	if len(v.JobType) > 0 {
+		ok := object.Key("JobType")
+		ok.String(string(v.JobType))
+	}
+
+	if v.MLFramework != nil {
+		ok := object.Key("MLFramework")
+		ok.String(*v.MLFramework)
+	}
+
+	if len(v.Processor) > 0 {
+		ok := object.Key("Processor")
+		ok.String(string(v.Processor))
+	}
+
+	if v.ProgrammingLang != nil {
+		ok := object.Key("ProgrammingLang")
+		ok.String(*v.ProgrammingLang)
+	}
+
+	if v.ReleaseNotes != nil {
+		ok := object.Key("ReleaseNotes")
+		ok.String(*v.ReleaseNotes)
+	}
+
+	if len(v.VendorGuidance) > 0 {
+		ok := object.Key("VendorGuidance")
+		ok.String(string(v.VendorGuidance))
 	}
 
 	return nil
@@ -27996,6 +28159,11 @@ func awsAwsjson11_serializeOpDocumentDeleteImageVersionInput(v *DeleteImageVersi
 	object := value.Object()
 	defer object.Close()
 
+	if v.Alias != nil {
+		ok := object.Key("Alias")
+		ok.String(*v.Alias)
+	}
+
 	if v.ImageName != nil {
 		ok := object.Key("ImageName")
 		ok.String(*v.ImageName)
@@ -28695,6 +28863,11 @@ func awsAwsjson11_serializeOpDocumentDescribeImageVersionInput(v *DescribeImageV
 	object := value.Object()
 	defer object.Close()
 
+	if v.Alias != nil {
+		ok := object.Key("Alias")
+		ok.String(*v.Alias)
+	}
+
 	if v.ImageName != nil {
 		ok := object.Key("ImageName")
 		ok.String(*v.ImageName)
@@ -29326,6 +29499,38 @@ func awsAwsjson11_serializeOpDocumentListAlgorithmsInput(v *ListAlgorithmsInput,
 	if len(v.SortOrder) > 0 {
 		ok := object.Key("SortOrder")
 		ok.String(string(v.SortOrder))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListAliasesInput(v *ListAliasesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Alias != nil {
+		ok := object.Key("Alias")
+		ok.String(*v.Alias)
+	}
+
+	if v.ImageName != nil {
+		ok := object.Key("ImageName")
+		ok.String(*v.ImageName)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.Version != nil {
+		ok := object.Key("Version")
+		ok.Integer(*v.Version)
 	}
 
 	return nil
@@ -33441,6 +33646,77 @@ func awsAwsjson11_serializeOpDocumentUpdateImageInput(v *UpdateImageInput, value
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateImageVersionInput(v *UpdateImageVersionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Alias != nil {
+		ok := object.Key("Alias")
+		ok.String(*v.Alias)
+	}
+
+	if v.AliasesToAdd != nil {
+		ok := object.Key("AliasesToAdd")
+		if err := awsAwsjson11_serializeDocumentSageMakerImageVersionAliases(v.AliasesToAdd, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AliasesToDelete != nil {
+		ok := object.Key("AliasesToDelete")
+		if err := awsAwsjson11_serializeDocumentSageMakerImageVersionAliases(v.AliasesToDelete, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Horovod {
+		ok := object.Key("Horovod")
+		ok.Boolean(v.Horovod)
+	}
+
+	if v.ImageName != nil {
+		ok := object.Key("ImageName")
+		ok.String(*v.ImageName)
+	}
+
+	if len(v.JobType) > 0 {
+		ok := object.Key("JobType")
+		ok.String(string(v.JobType))
+	}
+
+	if v.MLFramework != nil {
+		ok := object.Key("MLFramework")
+		ok.String(*v.MLFramework)
+	}
+
+	if len(v.Processor) > 0 {
+		ok := object.Key("Processor")
+		ok.String(string(v.Processor))
+	}
+
+	if v.ProgrammingLang != nil {
+		ok := object.Key("ProgrammingLang")
+		ok.String(*v.ProgrammingLang)
+	}
+
+	if v.ReleaseNotes != nil {
+		ok := object.Key("ReleaseNotes")
+		ok.String(*v.ReleaseNotes)
+	}
+
+	if len(v.VendorGuidance) > 0 {
+		ok := object.Key("VendorGuidance")
+		ok.String(string(v.VendorGuidance))
+	}
+
+	if v.Version != nil {
+		ok := object.Key("Version")
+		ok.Integer(*v.Version)
 	}
 
 	return nil

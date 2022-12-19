@@ -94,9 +94,9 @@ type EdgeConfig struct {
 	// that are used to make the deletion.
 	DeletionConfig *DeletionConfig
 
-	// The uploader configuration contains the ScheduleExpression details that are
-	// used, to schedule upload jobs for the recorded media files from the Edge Agent,
-	// to a Kinesis Video Stream.
+	// The uploader configuration contains the ScheduleExpression details that are used
+	// to schedule upload jobs for the recorded media files from the Edge Agent to a
+	// Kinesis Video Stream.
 	UploaderConfig *UploaderConfig
 
 	noSmithyDocumentSerde
@@ -200,6 +200,20 @@ type LocalSizeConfig struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that encapsulates, or contains, the media storage configuration
+// properties.
+type MappedResourceConfigurationListItem struct {
+
+	// The Amazon Resource Name (ARN) of the Kinesis Video Stream resource, associated
+	// with the stream.
+	ARN *string
+
+	// The type of the associated resource for the kinesis video stream.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details that consist of the credentials required
 // (MediaUriSecretArn and MediaUriType) to access the media files that are streamed
 // to the camera.
@@ -211,11 +225,27 @@ type MediaSourceConfig struct {
 	// This member is required.
 	MediaUriSecretArn *string
 
-	// The Uniform Resource Identifier (Uri) type. The FILE_URI value can be used to
-	// stream local media files.
+	// The Uniform Resource Identifier (URI) type. The FILE_URI value can be used to
+	// stream local media files. Preview only supports the RTSP_URI media source URI
+	// format .
 	//
 	// This member is required.
 	MediaUriType MediaUriType
+
+	noSmithyDocumentSerde
+}
+
+// A structure that encapsulates, or contains, the media storage configuration
+// properties.
+type MediaStorageConfiguration struct {
+
+	// The status of the media storage configuration.
+	//
+	// This member is required.
+	Status MediaStorageConfigurationStatus
+
+	// The Amazon Resource Name (ARN) of the stream
+	StreamARN *string
 
 	noSmithyDocumentSerde
 }
@@ -409,9 +439,10 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration that consists of the ScheduleConfig attribute that's required,
-// to schedule the jobs to upload the recorded media files onto the Edge Agent in a
-// Kinesis Video Stream.
+// The configuration that consists of the ScheduleExpression and the
+// DurationInMinutesdetails, that specify the scheduling to record from a camera,
+// or local media file, onto the Edge Agent. If the ScheduleExpression is not
+// provided, then the Edge Agent will always be in upload mode.
 type UploaderConfig struct {
 
 	// The configuration that consists of the ScheduleExpression and the

@@ -44,8 +44,8 @@ type UpdateImageInput struct {
 	// The new display name for the image.
 	DisplayName *string
 
-	// The new Amazon Resource Name (ARN) for the IAM role that enables Amazon
-	// SageMaker to perform tasks on your behalf.
+	// The new ARN for the IAM role that enables Amazon SageMaker to perform tasks on
+	// your behalf.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -53,7 +53,7 @@ type UpdateImageInput struct {
 
 type UpdateImageOutput struct {
 
-	// The Amazon Resource Name (ARN) of the image.
+	// The ARN of the image.
 	ImageArn *string
 
 	// Metadata pertaining to the operation's result.

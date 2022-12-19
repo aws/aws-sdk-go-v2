@@ -1,0 +1,8 @@
+{
+    "id": "3b3dc260-6314-42ae-b7c8-b49652772a3b",
+    "type": "feature",
+    "description": "AWS Sagemaker - Sagemaker Images now supports Aliases as secondary identifiers for ImageVersions. SageMaker Images now supports additional metadata for ImageVersions for better images management.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

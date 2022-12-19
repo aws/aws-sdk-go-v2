@@ -290,6 +290,26 @@ func (m *validateOpUpdateImageGenerationConfiguration) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMediaStorageConfiguration struct {
+}
+
+func (*validateOpUpdateMediaStorageConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMediaStorageConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMediaStorageConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMediaStorageConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateNotificationConfiguration struct {
 }
 
@@ -406,6 +426,10 @@ func addOpUpdateImageGenerationConfigurationValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpUpdateImageGenerationConfiguration{}, middleware.After)
 }
 
+func addOpUpdateMediaStorageConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMediaStorageConfiguration{}, middleware.After)
+}
+
 func addOpUpdateNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNotificationConfiguration{}, middleware.After)
 }
@@ -504,6 +528,21 @@ func validateMediaSourceConfig(v *types.MediaSourceConfig) error {
 	}
 	if len(v.MediaUriType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MediaUriType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaStorageConfiguration(v *types.MediaStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaStorageConfiguration"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -890,6 +929,28 @@ func validateOpUpdateImageGenerationConfigurationInput(v *UpdateImageGenerationC
 	if v.ImageGenerationConfiguration != nil {
 		if err := validateImageGenerationConfiguration(v.ImageGenerationConfiguration); err != nil {
 			invalidParams.AddNested("ImageGenerationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMediaStorageConfigurationInput(v *UpdateMediaStorageConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMediaStorageConfigurationInput"}
+	if v.ChannelARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
+	}
+	if v.MediaStorageConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaStorageConfiguration"))
+	} else if v.MediaStorageConfiguration != nil {
+		if err := validateMediaStorageConfiguration(v.MediaStorageConfiguration); err != nil {
+			invalidParams.AddNested("MediaStorageConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

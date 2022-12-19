@@ -37,8 +37,8 @@ type CreateImageInput struct {
 	// This member is required.
 	ImageName *string
 
-	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to
-	// perform tasks on your behalf.
+	// The ARN of an IAM role that enables Amazon SageMaker to perform tasks on your
+	// behalf.
 	//
 	// This member is required.
 	RoleArn *string
@@ -57,7 +57,7 @@ type CreateImageInput struct {
 
 type CreateImageOutput struct {
 
-	// The Amazon Resource Name (ARN) of the image.
+	// The ARN of the image.
 	ImageArn *string
 
 	// Metadata pertaining to the operation's result.

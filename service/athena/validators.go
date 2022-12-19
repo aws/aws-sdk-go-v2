@@ -2323,6 +2323,12 @@ func validateOpUpdateNotebookInput(v *UpdateNotebookInput) error {
 	if v.NotebookId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NotebookId"))
 	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

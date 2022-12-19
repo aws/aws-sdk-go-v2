@@ -163,14 +163,18 @@ type ModifyDBInstanceInput struct {
 	// The new compute and memory capacity of the DB instance, for example db.m4.large.
 	// Not all DB instance classes are available in all Amazon Web Services Regions, or
 	// for all database engines. For the full list of DB instance classes, and
-	// availability for your engine, see DB instance classes
+	// availability for your engine, see DB Instance Class
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html)
 	// in the Amazon RDS User Guide or Aurora DB instance classes
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html)
-	// in the Amazon Aurora User Guide. If you modify the DB instance class, an outage
-	// occurs during the change. The change is applied during the next maintenance
-	// window, unless ApplyImmediately is enabled for this request. This setting
-	// doesn't apply to RDS Custom for Oracle. Default: Uses existing setting
+	// in the Amazon Aurora User Guide. For RDS Custom, see DB instance class support
+	// for RDS Custom for Oracle
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.instances)
+	// and  DB instance class support for RDS Custom for SQL Server
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html#custom-reqs-limits.instancesMS).
+	// If you modify the DB instance class, an outage occurs during the change. The
+	// change is applied during the next maintenance window, unless you specify
+	// ApplyImmediately in your request. Default: Uses existing setting
 	DBInstanceClass *string
 
 	// The name of the DB parameter group to apply to the DB instance. Changing this
@@ -247,7 +251,7 @@ type ModifyDBInstanceInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
 	// the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned
 	// IP addresses
-	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing)
+	// (https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing)
 	// in the Amazon Web Services Outposts User Guide.
 	EnableCustomerOwnedIp *bool
 

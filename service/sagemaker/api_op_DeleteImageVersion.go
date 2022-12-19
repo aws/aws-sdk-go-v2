@@ -29,14 +29,15 @@ func (c *Client) DeleteImageVersion(ctx context.Context, params *DeleteImageVers
 
 type DeleteImageVersionInput struct {
 
-	// The name of the image.
+	// The name of the image to delete.
 	//
 	// This member is required.
 	ImageName *string
 
+	// The alias of the image to delete.
+	Alias *string
+
 	// The version to delete.
-	//
-	// This member is required.
 	Version *int32
 
 	noSmithyDocumentSerde

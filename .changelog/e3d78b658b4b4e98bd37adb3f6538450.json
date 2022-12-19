@@ -1,0 +1,8 @@
+{
+    "id": "e3d78b65-8b4b-4e98-bd37-adb3f6538450",
+    "type": "feature",
+    "description": "Add support for --enable-customer-owned-ip to RDS create-db-instance-read-replica API for RDS on Outposts.",
+    "modules": [
+        "service/rds"
+    ]
+}

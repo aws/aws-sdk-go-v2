@@ -3731,6 +3731,30 @@ func awsAwsjson11_serializeDocumentContainerStateChanges(v []types.ContainerStat
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDeploymentAlarms(v *types.DeploymentAlarms, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AlarmNames != nil {
+		ok := object.Key("alarmNames")
+		if err := awsAwsjson11_serializeDocumentStringList(v.AlarmNames, ok); err != nil {
+			return err
+		}
+	}
+
+	{
+		ok := object.Key("enable")
+		ok.Boolean(v.Enable)
+	}
+
+	{
+		ok := object.Key("rollback")
+		ok.Boolean(v.Rollback)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDeploymentCircuitBreaker(v *types.DeploymentCircuitBreaker, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3751,6 +3775,13 @@ func awsAwsjson11_serializeDocumentDeploymentCircuitBreaker(v *types.DeploymentC
 func awsAwsjson11_serializeDocumentDeploymentConfiguration(v *types.DeploymentConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Alarms != nil {
+		ok := object.Key("alarms")
+		if err := awsAwsjson11_serializeDocumentDeploymentAlarms(v.Alarms, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DeploymentCircuitBreaker != nil {
 		ok := object.Key("deploymentCircuitBreaker")

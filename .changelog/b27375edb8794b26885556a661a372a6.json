@@ -1,0 +1,8 @@
+{
+    "id": "b27375ed-b879-4b26-8855-56a661a372a6",
+    "type": "feature",
+    "description": "Add missed InvalidRequestException in GetCalculationExecutionCode,StopCalculationExecution APIs. Correct required parameters (Payload and Type) in UpdateNotebook API. Change Notebook size from 15 Mb to 10 Mb.",
+    "modules": [
+        "service/athena"
+    ]
+}

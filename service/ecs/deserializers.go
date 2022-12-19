@@ -10121,6 +10121,60 @@ func awsAwsjson11_deserializeDocumentDeployment(v **types.Deployment, value inte
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDeploymentAlarms(v **types.DeploymentAlarms, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeploymentAlarms
+	if *v == nil {
+		sv = &types.DeploymentAlarms{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "alarmNames":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.AlarmNames, value); err != nil {
+				return err
+			}
+
+		case "enable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enable = jtv
+			}
+
+		case "rollback":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Rollback = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDeploymentCircuitBreaker(v **types.DeploymentCircuitBreaker, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10192,6 +10246,11 @@ func awsAwsjson11_deserializeDocumentDeploymentConfiguration(v **types.Deploymen
 
 	for key, value := range shape {
 		switch key {
+		case "alarms":
+			if err := awsAwsjson11_deserializeDocumentDeploymentAlarms(&sv.Alarms, value); err != nil {
+				return err
+			}
+
 		case "deploymentCircuitBreaker":
 			if err := awsAwsjson11_deserializeDocumentDeploymentCircuitBreaker(&sv.DeploymentCircuitBreaker, value); err != nil {
 				return err

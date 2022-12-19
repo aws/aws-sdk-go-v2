@@ -2392,6 +2392,26 @@ func (InstanceType) Values() []InstanceType {
 	}
 }
 
+type JobType string
+
+// Enum values for JobType
+const (
+	JobTypeTraining       JobType = "TRAINING"
+	JobTypeInference      JobType = "INFERENCE"
+	JobTypeNotebookKernel JobType = "NOTEBOOK_KERNEL"
+)
+
+// Values returns all known values for JobType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobType) Values() []JobType {
+	return []JobType{
+		"TRAINING",
+		"INFERENCE",
+		"NOTEBOOK_KERNEL",
+	}
+}
+
 type JoinSource string
 
 // Enum values for JoinSource
@@ -3738,6 +3758,24 @@ func (ProcessingS3UploadMode) Values() []ProcessingS3UploadMode {
 	return []ProcessingS3UploadMode{
 		"Continuous",
 		"EndOfJob",
+	}
+}
+
+type Processor string
+
+// Enum values for Processor
+const (
+	ProcessorCpu Processor = "CPU"
+	ProcessorGpu Processor = "GPU"
+)
+
+// Values returns all known values for Processor. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Processor) Values() []Processor {
+	return []Processor{
+		"CPU",
+		"GPU",
 	}
 }
 
@@ -5584,6 +5622,28 @@ func (VariantStatus) Values() []VariantStatus {
 		"Deleting",
 		"ActivatingTraffic",
 		"Baking",
+	}
+}
+
+type VendorGuidance string
+
+// Enum values for VendorGuidance
+const (
+	VendorGuidanceNotProvided  VendorGuidance = "NOT_PROVIDED"
+	VendorGuidanceStable       VendorGuidance = "STABLE"
+	VendorGuidanceToBeArchived VendorGuidance = "TO_BE_ARCHIVED"
+	VendorGuidanceArchived     VendorGuidance = "ARCHIVED"
+)
+
+// Values returns all known values for VendorGuidance. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VendorGuidance) Values() []VendorGuidance {
+	return []VendorGuidance{
+		"NOT_PROVIDED",
+		"STABLE",
+		"TO_BE_ARCHIVED",
+		"ARCHIVED",
 	}
 }
 

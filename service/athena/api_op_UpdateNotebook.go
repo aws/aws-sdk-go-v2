@@ -34,6 +34,16 @@ type UpdateNotebookInput struct {
 	// This member is required.
 	NotebookId *string
 
+	// The updated content for the notebook.
+	//
+	// This member is required.
+	Payload *string
+
+	// The notebook content type. Currently, the only valid type is IPYNB.
+	//
+	// This member is required.
+	Type types.NotebookType
+
 	// A unique case-sensitive string used to ensure the request to create the notebook
 	// is idempotent (executes only once). This token is listed as not required because
 	// Amazon Web Services SDKs (for example the Amazon Web Services SDK for Java)
@@ -42,14 +52,8 @@ type UpdateNotebookInput struct {
 	// will fail.
 	ClientRequestToken *string
 
-	// The updated content for the notebook.
-	Payload *string
-
 	// The ID of the session in which the notebook will be updated.
 	SessionId *string
-
-	// The notebook content type. Currently, the only valid type is IPYNB.
-	Type types.NotebookType
 
 	noSmithyDocumentSerde
 }

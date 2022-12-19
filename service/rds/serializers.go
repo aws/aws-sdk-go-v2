@@ -10848,6 +10848,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 		}
 	}
 
+	if v.EnableCustomerOwnedIp != nil {
+		objectKey := object.Key("EnableCustomerOwnedIp")
+		objectKey.Boolean(*v.EnableCustomerOwnedIp)
+	}
+
 	if v.EnableIAMDatabaseAuthentication != nil {
 		objectKey := object.Key("EnableIAMDatabaseAuthentication")
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)

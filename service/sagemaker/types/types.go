@@ -7169,7 +7169,7 @@ type Image struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the image.
+	// The ARN of the image.
 	//
 	// This member is required.
 	ImageArn *string
@@ -7235,7 +7235,7 @@ type ImageVersion struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the image the version is based on.
+	// The ARN of the image the version is based on.
 	//
 	// This member is required.
 	ImageArn *string

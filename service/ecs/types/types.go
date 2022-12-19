@@ -1536,6 +1536,38 @@ type Deployment struct {
 	noSmithyDocumentSerde
 }
 
+// One of the methods which provide a way for you to quickly identify when a
+// deployment has failed, and then to optionally roll back the failure to the last
+// working deployment. When the alarms are generated, Amazon ECS sets the service
+// deployment to failed. Set the rollback parameter to have Amazon ECS to roll back
+// your service to the last completed deployment after a failure. You can only use
+// the DeploymentAlarms method to detect failures when the DeploymentController is
+// set to ECS (rolling update). For more information, see Rolling update
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
+// in the Amazon Elastic Container Service Developer Guide .
+type DeploymentAlarms struct {
+
+	// One or more CloudWatch alarm names. Use a "," to separate the alarms.
+	//
+	// This member is required.
+	AlarmNames []string
+
+	// Determines whether to use the CloudWatch alarm option in the service deployment
+	// process.
+	//
+	// This member is required.
+	Enable bool
+
+	// Determines whether to configure Amazon ECS to roll back the service if a service
+	// deployment fails. If rollback is used, when a service deployment fails, the
+	// service is rolled back to the last deployment that completed successfully.
+	//
+	// This member is required.
+	Rollback bool
+
+	noSmithyDocumentSerde
+}
+
 // The deployment circuit breaker can only be used for services using the rolling
 // update (ECS) deployment type that aren't behind a Classic Load Balancer. The
 // deployment circuit breaker determines whether a service deployment will fail if
@@ -1553,7 +1585,7 @@ type DeploymentCircuitBreaker struct {
 	Enable bool
 
 	// Determines whether to configure Amazon ECS to roll back the service if a service
-	// deployment fails. If rollback is enabled, when a service deployment fails, the
+	// deployment fails. If rollback is on, when a service deployment fails, the
 	// service is rolled back to the last deployment that completed successfully.
 	//
 	// This member is required.
@@ -1565,6 +1597,9 @@ type DeploymentCircuitBreaker struct {
 // Optional deployment parameters that control how many tasks run during a
 // deployment and the ordering of stopping and starting tasks.
 type DeploymentConfiguration struct {
+
+	// Information about the CloudWatch alarms.
+	Alarms *DeploymentAlarms
 
 	// The deployment circuit breaker can only be used for services using the rolling
 	// update (ECS) deployment type. The deployment circuit breaker determines whether

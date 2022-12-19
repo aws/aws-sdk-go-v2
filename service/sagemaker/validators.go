@@ -3330,6 +3330,26 @@ func (m *validateOpImportHubContent) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAliases struct {
+}
+
+func (*validateOpListAliases) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAliases) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAliasesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAliasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListCandidatesForAutoMLJob struct {
 }
 
@@ -4450,6 +4470,26 @@ func (m *validateOpUpdateImage) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateImageVersion struct {
+}
+
+func (*validateOpUpdateImageVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateImageVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateImageVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateImageVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateInferenceExperiment struct {
 }
 
@@ -5454,6 +5494,10 @@ func addOpImportHubContentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportHubContent{}, middleware.After)
 }
 
+func addOpListAliasesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAliases{}, middleware.After)
+}
+
 func addOpListCandidatesForAutoMLJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListCandidatesForAutoMLJob{}, middleware.After)
 }
@@ -5676,6 +5720,10 @@ func addOpUpdateHubValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateImage{}, middleware.After)
+}
+
+func addOpUpdateImageVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateImageVersion{}, middleware.After)
 }
 
 func addOpUpdateInferenceExperimentValidationMiddleware(stack *middleware.Stack) error {
@@ -13107,9 +13155,6 @@ func validateOpDeleteImageVersionInput(v *DeleteImageVersionInput) error {
 	if v.ImageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
 	}
-	if v.Version == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Version"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -14471,6 +14516,21 @@ func validateOpImportHubContentInput(v *ImportHubContentInput) error {
 	}
 }
 
+func validateOpListAliasesInput(v *ListAliasesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAliasesInput"}
+	if v.ImageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListCandidatesForAutoMLJobInput(v *ListCandidatesForAutoMLJobInput) error {
 	if v == nil {
 		return nil
@@ -15447,6 +15507,21 @@ func validateOpUpdateImageInput(v *UpdateImageInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateImageInput"}
+	if v.ImageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateImageVersionInput(v *UpdateImageVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateImageVersionInput"}
 	if v.ImageName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageName"))
 	}

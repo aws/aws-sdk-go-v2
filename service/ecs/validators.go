@@ -1368,6 +1368,21 @@ func validateContainerOverrides(v []types.ContainerOverride) error {
 	}
 }
 
+func validateDeploymentAlarms(v *types.DeploymentAlarms) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeploymentAlarms"}
+	if v.AlarmNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeploymentCircuitBreaker(v *types.DeploymentCircuitBreaker) error {
 	if v == nil {
 		return nil
@@ -1388,6 +1403,11 @@ func validateDeploymentConfiguration(v *types.DeploymentConfiguration) error {
 	if v.DeploymentCircuitBreaker != nil {
 		if err := validateDeploymentCircuitBreaker(v.DeploymentCircuitBreaker); err != nil {
 			invalidParams.AddNested("DeploymentCircuitBreaker", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Alarms != nil {
+		if err := validateDeploymentAlarms(v.Alarms); err != nil {
+			invalidParams.AddNested("Alarms", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
