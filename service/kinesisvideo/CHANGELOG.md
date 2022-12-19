@@ -1,3 +1,7 @@
+# v1.14.0 (2022-12-19)
+
+* **Feature**: Amazon Kinesis Video Streams offers capabilities to stream video and audio in real-time via WebRTC to the cloud for storage, playback, and analytical processing. Customers can use our enhanced WebRTC SDK and cloud APIs to enable real-time streaming, as well as media ingestion to the cloud.
+
 # v1.13.1 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

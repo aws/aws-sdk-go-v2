@@ -1,3 +1,23 @@
+# Release (2022-12-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.21.0](service/athena/CHANGELOG.md#v1210-2022-12-19)
+  * **Feature**: Add missed InvalidRequestException in GetCalculationExecutionCode,StopCalculationExecution APIs. Correct required parameters (Payload and Type) in UpdateNotebook API. Change Notebook size from 15 Mb to 10 Mb.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.22.0](service/ecs/CHANGELOG.md#v1220-2022-12-19)
+  * **Feature**: This release adds support for alarm-based rollbacks in ECS, a new feature that allows customers to add automated safeguards for Amazon ECS service rolling updates.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.14.0](service/kinesisvideo/CHANGELOG.md#v1140-2022-12-19)
+  * **Feature**: Amazon Kinesis Video Streams offers capabilities to stream video and audio in real-time via WebRTC to the cloud for storage, playback, and analytical processing. Customers can use our enhanced WebRTC SDK and cloud APIs to enable real-time streaming, as well as media ingestion to the cloud.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.0.0](service/kinesisvideowebrtcstorage/CHANGELOG.md#v100-2022-12-19)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Kinesis Video Streams offers capabilities to stream video and audio in real-time via WebRTC to the cloud for storage, playback, and analytical processing. Customers can use our enhanced WebRTC SDK and cloud APIs to enable real-time streaming, as well as media ingestion to the cloud.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.36.0](service/rds/CHANGELOG.md#v1360-2022-12-19)
+  * **Feature**: Add support for --enable-customer-owned-ip to RDS create-db-instance-read-replica API for RDS on Outposts.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.59.0](service/sagemaker/CHANGELOG.md#v1590-2022-12-19)
+  * **Feature**: AWS Sagemaker - Sagemaker Images now supports Aliases as secondary identifiers for ImageVersions. SageMaker Images now supports additional metadata for ImageVersions for better images management.
+
 # Release (2022-12-16)
 
 ## Module Highlights

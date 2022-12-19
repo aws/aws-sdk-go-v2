@@ -1,3 +1,7 @@
+# v1.22.0 (2022-12-19)
+
+* **Feature**: This release adds support for alarm-based rollbacks in ECS, a new feature that allows customers to add automated safeguards for Amazon ECS service rolling updates.
+
 # v1.21.0 (2022-12-15)
 
 * **Feature**: This release adds support for container port ranges in ECS, a new capability that allows customers to provide container port ranges to simplify use cases where multiple ports are in use in a container. This release updates TaskDefinition mutation APIs and the Task description APIs.

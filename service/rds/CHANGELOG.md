@@ -1,3 +1,7 @@
+# v1.36.0 (2022-12-19)
+
+* **Feature**: Add support for --enable-customer-owned-ip to RDS create-db-instance-read-replica API for RDS on Outposts.
+
 # v1.35.1 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions
