@@ -4426,9 +4426,6 @@
                         "smithy.api#documentation": "<p>Tags to assign to the blue/green deployment.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#CreateBlueGreenDeploymentResponse": {
@@ -4437,9 +4434,6 @@
                 "BlueGreenDeployment": {
                     "target": "com.amazonaws.rds#BlueGreenDeployment"
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateCustomDBEngineVersion": {
@@ -5454,7 +5448,7 @@
                 "EnableCustomerOwnedIp": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS\n            on Outposts DB instance.</p>\n         <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS\n            on Outposts DB instance.</p>\n         <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
                     }
                 },
                 "CustomIamInstanceProfile": {
@@ -5771,6 +5765,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the storage throughput value for the read replica.</p>\n         <p>This setting doesn't apply to RDS Custom or Amazon Aurora.</p>"
                     }
+                },
+                "EnableCustomerOwnedIp": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS\n            on Outposts read replica.</p>\n         <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the read replica from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
+                    }
                 }
             }
         },
@@ -5944,9 +5944,6 @@
                 "Tags": {
                     "target": "com.amazonaws.rds#TagList"
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#CreateDBProxyEndpointResponse": {
@@ -5958,9 +5955,6 @@
                         "smithy.api#documentation": "<p>The <code>DBProxyEndpoint</code> object that is created by the API operation.\n        The DB proxy endpoint that you create might provide capabilities such as read/write\n        or read-only operations, or using a different VPC than the proxy's default VPC.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateDBProxyRequest": {
@@ -6033,9 +6027,6 @@
                         "smithy.api#documentation": "<p>An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#CreateDBProxyResponse": {
@@ -6047,9 +6038,6 @@
                         "smithy.api#documentation": "<p>The <code>DBProxy</code> structure corresponding to the new proxy.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#CreateDBSecurityGroup": {
@@ -8508,7 +8496,7 @@
                 "CustomerOwnedIpEnabled": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on Outposts DB instance.</p>\n         <p>A <i>CoIP </i>provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether a customer-owned IP address (CoIP) is enabled for an RDS on Outposts DB instance.</p>\n         <p>A <i>CoIP </i>provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
                     }
                 },
                 "AwsBackupRecoveryPointArn": {
@@ -10590,9 +10578,6 @@
                         "smithy.api#documentation": "<p>A value that indicates whether to delete the resources in the green environment.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#DeleteBlueGreenDeploymentResponse": {
@@ -10601,9 +10586,6 @@
                 "BlueGreenDeployment": {
                     "target": "com.amazonaws.rds#BlueGreenDeployment"
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeleteCustomDBEngineVersion": {
@@ -11030,9 +11012,6 @@
                         "smithy.api#required": {}
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#DeleteDBProxyEndpointResponse": {
@@ -11044,9 +11023,6 @@
                         "smithy.api#documentation": "<p>The data structure representing the details of the DB proxy endpoint that you delete.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeleteDBProxyRequest": {
@@ -11059,9 +11035,6 @@
                         "smithy.api#required": {}
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#DeleteDBProxyResponse": {
@@ -11073,9 +11046,6 @@
                         "smithy.api#documentation": "<p>The data structure representing the details of the DB proxy that you delete.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DeleteDBSecurityGroup": {
@@ -11366,17 +11336,11 @@
                         "smithy.api#documentation": "<p>One or more DB cluster identifiers.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#DeregisterDBProxyTargetsResponse": {
             "type": "structure",
-            "members": {},
-            "traits": {
-                "smithy.api#output": {}
-            }
+            "members": {}
         },
         "com.amazonaws.rds#DescribeAccountAttributes": {
             "type": "operation",
@@ -11447,9 +11411,6 @@
                         "smithy.api#documentation": "<p>The maximum number of records to include in the response.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a pagination token called a marker is included in the response so you can retrieve the remaining results.</p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 100.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#DescribeBlueGreenDeploymentsResponse": {
@@ -11467,9 +11428,6 @@
                         "smithy.api#documentation": "<p>A pagination token that can be used in a later DescribeBlueGreenDeployments request.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DescribeCertificates": {
@@ -12673,8 +12631,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The response from a call to <code>DescribeDBLogFiles</code>.</p>",
-                "smithy.api#output": {}
+                "smithy.api#documentation": "<p>The response from a call to <code>DescribeDBLogFiles</code>.</p>"
             }
         },
         "com.amazonaws.rds#DescribeDBParameterGroups": {
@@ -12841,9 +12798,6 @@
                         "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist\n          than the specified <code>MaxRecords</code> value, a pagination token called a marker is\n          included in the response so that the remaining results can be retrieved.</p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 100.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#DescribeDBProxiesResponse": {
@@ -12861,9 +12815,6 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous request.\n        If this parameter is specified, the response includes only records beyond the marker,\n        up to the value specified by <code>MaxRecords</code>.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DescribeDBProxyEndpoints": {
@@ -12925,9 +12876,6 @@
                         "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist\n          than the specified <code>MaxRecords</code> value, a pagination token called a marker is\n          included in the response so that the remaining results can be retrieved.</p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 100.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#DescribeDBProxyEndpointsResponse": {
@@ -12945,9 +12893,6 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous request.\n        If this parameter is specified, the response includes only records beyond the marker,\n        up to the value specified by <code>MaxRecords</code>.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DescribeDBProxyTargetGroups": {
@@ -13013,9 +12958,6 @@
                         "smithy.api#documentation": "<p>The maximum number of records to include in the response.\n        If more records exist than the specified <code>MaxRecords</code> value,\n        a pagination token called a marker is included in the response so that the remaining\n        results can be retrieved.</p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 100.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#DescribeDBProxyTargetGroupsResponse": {
@@ -13033,9 +12975,6 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous request.\n        If this parameter is specified, the response includes only records beyond the marker,\n        up to the value specified by <code>MaxRecords</code>.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DescribeDBProxyTargets": {
@@ -13104,9 +13043,6 @@
                         "smithy.api#documentation": "<p>The maximum number of records to include in the response.\n        If more records exist than the specified <code>MaxRecords</code> value,\n        a pagination token called a marker is included in the response so that the remaining\n        results can be retrieved.</p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 100.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#DescribeDBProxyTargetsResponse": {
@@ -13124,9 +13060,6 @@
                         "smithy.api#documentation": "<p>An optional pagination token provided by a previous request.\n        If this parameter is specified, the response includes only records beyond the marker,\n        up to the value specified by <code>MaxRecords</code>.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#DescribeDBSecurityGroups": {
@@ -16373,9 +16306,6 @@
                         "smithy.api#documentation": "<p>The audit policy state. When a policy is unlocked, it is read/write. When it is locked, it is\n            read-only. You can edit your audit policy only when the activity stream is unlocked or stopped.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#ModifyActivityStreamResponse": {
@@ -16417,9 +16347,6 @@
                         "smithy.api#documentation": "<p>The status of the modification to the policy state of the database activity stream.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyCertificates": {
@@ -17109,7 +17036,7 @@
                 "DBInstanceClass": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new compute and memory capacity of the DB instance, for example db.m4.large. Not all DB instance classes are available in all\n            Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and \n            availability for your engine, see\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB instance \n                classes</a> in the <i>Amazon RDS User Guide</i> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html\">Aurora \n                DB instance classes</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>If you modify the DB instance class, an outage occurs during the change. The change is applied during the next maintenance window,\n            unless <code>ApplyImmediately</code> is enabled for this request.</p>\n         <p>This setting doesn't apply to RDS Custom for Oracle.</p>\n         <p>Default: Uses existing setting</p>"
+                        "smithy.api#documentation": "<p>The new compute and memory capacity of the DB instance, for example db.m4.large. Not all DB instance classes are available in all\n            Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the \n            <i>Amazon RDS User Guide</i> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html\">Aurora\n                DB instance classes</a> in the <i>Amazon Aurora User Guide</i>. For RDS Custom, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.instances\">DB instance class support for RDS Custom for Oracle</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html#custom-reqs-limits.instancesMS\">\n                        DB instance class support for RDS Custom for SQL Server</a>.</p>\n         <p>If you modify the DB instance class, an outage occurs during the change. The change is\n            applied during the next maintenance window, unless you specify\n            <code>ApplyImmediately</code> in your request.</p>\n         <p>Default: Uses existing setting</p>"
                     }
                 },
                 "DBSubnetGroupName": {
@@ -17357,7 +17284,7 @@
                 "EnableCustomerOwnedIp": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>\n         <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>\n         <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
                     }
                 },
                 "AwsBackupRecoveryPointArn": {
@@ -17516,9 +17443,6 @@
                         "smithy.api#documentation": "<p>The VPC security group IDs for the DB proxy endpoint. When the DB proxy endpoint\n        uses a different VPC than the original proxy, you also specify a different\n        set of security group IDs than for the original proxy.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#ModifyDBProxyEndpointResponse": {
@@ -17530,9 +17454,6 @@
                         "smithy.api#documentation": "<p>The <code>DBProxyEndpoint</code> object representing the new settings for the DB proxy endpoint.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyDBProxyRequest": {
@@ -17587,9 +17508,6 @@
                         "smithy.api#documentation": "<p>The new list of security groups for the <code>DBProxy</code>.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#ModifyDBProxyResponse": {
@@ -17601,9 +17519,6 @@
                         "smithy.api#documentation": "<p>The <code>DBProxy</code> object representing the new settings for the proxy.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyDBProxyTargetGroup": {
@@ -17658,9 +17573,6 @@
                         "smithy.api#documentation": "<p>The new name for the modified <code>DBProxyTarget</code>. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#ModifyDBProxyTargetGroupResponse": {
@@ -17672,9 +17584,6 @@
                         "smithy.api#documentation": "<p>The settings of the modified <code>DBProxyTarget</code>.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#ModifyDBSnapshot": {
@@ -19802,9 +19711,6 @@
                         "smithy.api#documentation": "<p>One or more DB cluster identifiers.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#RegisterDBProxyTargetsResponse": {
@@ -19816,9 +19722,6 @@
                         "smithy.api#documentation": "<p>One or more <code>DBProxyTarget</code> objects that are created when you register targets with a target group.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#RemoveFromGlobalCluster": {
@@ -21543,7 +21446,7 @@
                 "EnableCustomerOwnedIp": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>\n         <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>\n         <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
                     }
                 },
                 "CustomIamInstanceProfile": {
@@ -22239,7 +22142,7 @@
                 "EnableCustomerOwnedIp": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>\n         <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A value that indicates whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.</p>\n         <p>A <i>CoIP</i> provides local or external connectivity to resources in\n            your Outpost subnets through your on-premises network. For some use cases, a CoIP can\n            provide lower latency for connections to the DB instance from outside of its virtual\n            private cloud (VPC) on your local network.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>For more information about RDS on Outposts, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html\">Working with Amazon RDS on Amazon Web Services Outposts</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n         <p>For more information about CoIPs, see <a href=\"https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing\">Customer-owned IP addresses</a> \n            in the <i>Amazon Web Services Outposts User Guide</i>.</p>"
                     }
                 },
                 "CustomIamInstanceProfile": {
@@ -22831,9 +22734,6 @@
                         "smithy.api#documentation": "<p>Specifies whether the database activity stream includes engine-native audit fields. This option only applies\n        to an Oracle DB instance. By default, no engine-native audit fields are included.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#StartActivityStreamResponse": {
@@ -22876,9 +22776,6 @@
                         "smithy.api#documentation": "<p>Indicates whether engine-native audit fields are included in the database activity stream.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#StartDBCluster": {
@@ -23199,9 +23096,6 @@
                         "smithy.api#documentation": "<p>Specifies whether or not the database activity stream is to stop as soon as possible, \n            regardless of the maintenance window for the database.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#StopActivityStreamResponse": {
@@ -23225,9 +23119,6 @@
                         "smithy.api#documentation": "<p>The status of the database activity stream.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#StopDBCluster": {
@@ -23590,9 +23481,6 @@
                         "smithy.api#documentation": "<p>The amount of time, in seconds, for the switchover to complete. The default is 300.</p>\n         <p>If the switchover takes longer than the specified duration, then any changes are rolled back, \n           and no changes are made to the environments.</p>"
                     }
                 }
-            },
-            "traits": {
-                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#SwitchoverBlueGreenDeploymentResponse": {
@@ -23601,9 +23489,6 @@
                 "BlueGreenDeployment": {
                     "target": "com.amazonaws.rds#BlueGreenDeployment"
                 }
-            },
-            "traits": {
-                "smithy.api#output": {}
             }
         },
         "com.amazonaws.rds#SwitchoverDetail": {

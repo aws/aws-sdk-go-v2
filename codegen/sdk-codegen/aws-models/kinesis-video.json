@@ -221,6 +221,12 @@
                     "traits": {
                         "smithy.api#enumValue": "HTTPS"
                     }
+                },
+                "WEBRTC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEBRTC"
+                    }
                 }
             }
         },
@@ -793,6 +799,148 @@
                 }
             }
         },
+        "com.amazonaws.kinesisvideo#DescribeMappedResourceConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#DescribeMappedResourceConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#DescribeMappedResourceConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the most current information about the stream. Either streamName or streamARN should be provided in the input.</p>\n         <p>Returns the most current information about the stream. The <code>streamName</code>\n            or <code>streamARN</code> should be provided in the input.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describeMappedResourceConfiguration",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "MappedResourceConfigurationList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeMappedResourceConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "StreamName": {
+                    "target": "com.amazonaws.kinesisvideo#StreamName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stream.</p>"
+                    }
+                },
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.kinesisvideo#MappedResourceConfigurationListLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kinesisvideo#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to provide in your next request, to get another batch of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeMappedResourceConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "MappedResourceConfigurationList": {
+                    "target": "com.amazonaws.kinesisvideo#MappedResourceConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that encapsulates, or contains, the media storage configuration properties.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kinesisvideo#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that was used in the <code>NextToken</code>request to fetch the next set of results. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeMediaStorageConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#DescribeMediaStorageConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#DescribeMediaStorageConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the most current information about the channel. Specify the <code>ChannelName</code>\n            or <code>ChannelARN</code> in the input.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describeMediaStorageConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeMediaStorageConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "ChannelName": {
+                    "target": "com.amazonaws.kinesisvideo#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the channel.</p>"
+                    }
+                },
+                "ChannelARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the channel.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#DescribeMediaStorageConfigurationOutput": {
+            "type": "structure",
+            "members": {
+                "MediaStorageConfiguration": {
+                    "target": "com.amazonaws.kinesisvideo#MediaStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that encapsulates, or contains, the media storage configuration properties.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.kinesisvideo#DescribeNotificationConfiguration": {
             "type": "operation",
             "input": {
@@ -1042,7 +1190,7 @@
                 "UploaderConfig": {
                     "target": "com.amazonaws.kinesisvideo#UploaderConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The uploader configuration contains the <code>ScheduleExpression</code> details that are used, to\n            schedule upload jobs for the recorded media files from the Edge Agent, to a Kinesis Video Stream.</p>"
+                        "smithy.api#documentation": "<p>The uploader configuration contains the <code>ScheduleExpression</code> details that are used to\n            schedule upload jobs for the recorded media files from the Edge Agent to a Kinesis Video Stream.</p>"
                     }
                 },
                 "DeletionConfig": {
@@ -1434,6 +1582,12 @@
                     "target": "com.amazonaws.kinesisvideo#DescribeImageGenerationConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.kinesisvideo#DescribeMappedResourceConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#DescribeMediaStorageConfiguration"
+                },
+                {
                     "target": "com.amazonaws.kinesisvideo#DescribeNotificationConfiguration"
                 },
                 {
@@ -1480,6 +1634,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesisvideo#UpdateImageGenerationConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#UpdateMediaStorageConfiguration"
                 },
                 {
                     "target": "com.amazonaws.kinesisvideo#UpdateNotificationConfiguration"
@@ -1825,8 +1982,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1838,8 +1995,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1851,8 +2008,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1864,8 +2021,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1877,8 +2034,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1890,8 +2047,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1903,8 +2060,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1916,8 +2073,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1929,8 +2086,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1942,8 +2099,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1955,8 +2112,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1968,8 +2125,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1981,8 +2138,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1994,8 +2151,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2007,8 +2164,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2020,8 +2177,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2031,8 +2188,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2044,8 +2201,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2055,8 +2212,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2068,8 +2225,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2081,8 +2238,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2094,8 +2251,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2107,8 +2264,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2120,8 +2277,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2133,8 +2290,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2146,8 +2303,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2159,8 +2316,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2172,60 +2329,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "af-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://kinesisvideo-fips.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://kinesisvideo-fips.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://kinesisvideo.eu-north-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-north-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://kinesisvideo.eu-north-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2237,8 +2342,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2250,8 +2355,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2263,8 +2368,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2276,8 +2381,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2289,8 +2394,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2302,8 +2407,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2315,8 +2420,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2328,8 +2433,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2341,8 +2446,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2354,8 +2459,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2367,8 +2472,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2380,8 +2485,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2393,8 +2498,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2406,8 +2511,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2419,8 +2524,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2432,8 +2537,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2445,8 +2550,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2458,8 +2563,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2471,8 +2576,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2484,60 +2589,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://kinesisvideo-fips.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "me-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://kinesisvideo-fips.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "me-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://kinesisvideo.me-south-1.api.aws"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "me-south-1"
-                            }
-                        },
-                        {
-                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
-                            "expect": {
-                                "endpoint": {
-                                    "url": "https://kinesisvideo.me-south-1.amazonaws.com"
-                                }
-                            },
-                            "params": {
-                                "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2549,8 +2602,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2562,8 +2615,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2575,8 +2628,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2588,8 +2641,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2601,8 +2654,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2614,8 +2667,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2627,8 +2680,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2640,8 +2693,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2653,8 +2706,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2666,8 +2719,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2679,8 +2732,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2692,8 +2745,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2705,8 +2758,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2718,8 +2771,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2731,8 +2784,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2744,8 +2797,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2757,8 +2810,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2770,8 +2823,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2783,8 +2836,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2796,8 +2849,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2809,8 +2862,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2822,8 +2875,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2835,8 +2888,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2848,8 +2901,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2859,8 +2912,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2872,8 +2925,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2883,8 +2936,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2896,8 +2949,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2909,8 +2962,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2922,8 +2975,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2935,8 +2988,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2948,8 +3001,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2961,8 +3014,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2974,8 +3027,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2987,8 +3040,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3000,8 +3053,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3011,8 +3064,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3024,8 +3077,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3035,8 +3088,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -3048,8 +3101,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -3061,8 +3114,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3073,8 +3126,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -3085,8 +3138,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -3431,6 +3484,47 @@
                 "smithy.api#documentation": "<p>The configuration details that include the maximum size of the media \n            (<code>MaxLocalMediaSizeInMB</code>) that you want to\n            store for a stream on the Edge Agent, as well as the strategy that should be used (<code>StrategyOnFullSize</code>) when a stream's\n            maximum size has been reached.</p>"
             }
         },
+        "com.amazonaws.kinesisvideo#MappedResourceConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kinesisvideo#MappedResourceConfigurationListItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#MappedResourceConfigurationListItem": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.kinesisvideo#Type",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the associated resource for the kinesis video stream.</p>"
+                    }
+                },
+                "ARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Kinesis Video Stream resource, associated with the stream.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that encapsulates, or contains, the media storage configuration properties.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#MappedResourceConfigurationListLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.kinesisvideo#MaxLocalMediaSizeInMB": {
             "type": "integer",
             "traits": {
@@ -3453,13 +3547,51 @@
                 "MediaUriType": {
                     "target": "com.amazonaws.kinesisvideo#MediaUriType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Uniform Resource Identifier (Uri) type. The <code>FILE_URI</code> value can be used to stream \n        local media files.</p>",
+                        "smithy.api#documentation": "<p>The Uniform Resource Identifier (URI) type. The <code>FILE_URI</code> value can be used to stream \n            local media files.</p>\n         <note>\n            <p>Preview only supports the <code>RTSP_URI</code> media source URI format .</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration details that consist of the credentials required \n            (<code>MediaUriSecretArn</code> and <code>MediaUriType</code>) to access the media files that are \n            streamed to the camera.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#MediaStorageConfiguration": {
+            "type": "structure",
+            "members": {
+                "StreamARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the stream </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.kinesisvideo#MediaStorageConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the media storage configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that encapsulates, or contains, the media storage configuration properties.</p>"
+            }
+        },
+        "com.amazonaws.kinesisvideo#MediaStorageConfigurationStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
             }
         },
         "com.amazonaws.kinesisvideo#MediaType": {
@@ -3650,7 +3782,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The resource is currently not available for this operation. New resources cannot be\n            created with the same name as existing resources. Also, resources cannot be updated or\n            deleted unless they are in an <code>ACTIVE</code> state.</p>\n         <p>If this exception is returned, do not use it to determine whether the requested\n            resource already exists. Instead, it is recommended you use the resource-specific\n            describe API, for example, <code>DescribeStream</code> for video streams.</p>",
+                "smithy.api#documentation": "<p>When the input <code>StreamARN</code> or <code>ChannelARN</code>\n            in <code>CLOUD_STORAGE_MODE</code> is already mapped to a different\n            Kinesis Video Stream resource, or if the provided input <code>StreamARN</code>\n            or <code>ChannelARN</code> is not in Active status, try one of the following : </p>\n         <ol>\n            <li>\n               <p>The <code>DescribeMediaStorageConfiguration</code> API to determine what the stream given channel is mapped to. \n            </p>\n            </li>\n            <li>\n               <p>The <code>DescribeMappedResourceConfiguration</code> API to determine the channel that the given stream is mapped to. \n            </p>\n            </li>\n            <li>\n               <p>The <code>DescribeStream</code> or <code>DescribeSignalingChannel</code> API to determine the status of the resource.\n            </p>\n            </li>\n         </ol>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3787,7 +3919,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>An asynchronous API that updates a stream’s existing edge configuration. If this API is invoked for the\n            first time, a new edge configuration will be created for the stream, and the sync status will be set to \n            <code>SYNCING</code>. </p>\n         <p>The Kinesis Video Stream will sync the stream’s edge configuration with the Edge Agent \n            IoT Greengrass component that runs on an IoT Hub Device setup at your premise. \n            The time to sync can vary and depends on the connectivity of the Hub Device. \n            The <code>SyncStatus</code> will be updated as the edge configuration is acknowledged, \n            and synced with the Edge Agent. You will have to wait for the sync status to reach a terminal state such as:\n            <code>IN_SYNC</code> and <code>SYNC_FAILED</code>, before using this API again.</p>\n         <p>If you invoke this API during the syncing process, \n            a <code>ResourceInUseException</code> will be thrown. The connectivity of the stream's edge configuration\n            and the Edge Agent will be retried  \n            for 15 minutes. After 15 minutes, the status will transition into the <code>SYNC_FAILED</code> state.\n        </p>",
+                "smithy.api#documentation": "<p>An asynchronous API that updates a stream’s existing edge configuration. \n            The Kinesis Video Stream will sync the stream’s edge configuration with the Edge Agent IoT Greengrass \n            component that runs on an IoT Hub Device, setup at your premise. The time to sync can vary\n            and depends on the connectivity of the Hub Device. \n            The <code>SyncStatus</code> will be updated as the edge configuration is acknowledged, \n            and synced with the Edge Agent. </p>\n         <p>If this API is invoked for the first time, a new edge configuration will be created for the stream,\n            and the sync status will be set to <code>SYNCING</code>. You will have to wait for the sync status\n            to reach a terminal state such as: <code>IN_SYNC</code>, or <code>SYNC_FAILED</code>, before using this API again. \n            If you invoke this API during the syncing process, a <code>ResourceInUseException</code> will be thrown. \n            The connectivity of the stream’s edge configuration and the Edge Agent will be retried for 15 minutes. After 15 minutes,\n            the status will transition into the <code>SYNC_FAILED</code> state.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/startEdgeConfigurationUpdate",
@@ -4280,6 +4412,9 @@
         "com.amazonaws.kinesisvideo#Timestamp": {
             "type": "timestamp"
         },
+        "com.amazonaws.kinesisvideo#Type": {
+            "type": "string"
+        },
         "com.amazonaws.kinesisvideo#UntagResource": {
             "type": "operation",
             "input": {
@@ -4556,6 +4691,66 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.kinesisvideo#UpdateMediaStorageConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisvideo#UpdateMediaStorageConfigurationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisvideo#UpdateMediaStorageConfigurationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisvideo#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ClientLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#NoDataRetentionException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisvideo#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a <code>SignalingChannel</code> to a stream to store the media. There are two signaling modes that \n            can specified :</p>\n         <ul>\n            <li>\n               <p>If the <code>StorageStatus</code> is disabled, no data will be stored,\n                and the <code>StreamARN</code> parameter will not be needed. </p>\n            </li>\n            <li>\n               <p>If the <code>StorageStatus</code> is enabled, the data will be stored in the \n                <code>StreamARN</code> provided. </p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateMediaStorageConfiguration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#UpdateMediaStorageConfigurationInput": {
+            "type": "structure",
+            "members": {
+                "ChannelARN": {
+                    "target": "com.amazonaws.kinesisvideo#ResourceARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MediaStorageConfiguration": {
+                    "target": "com.amazonaws.kinesisvideo#MediaStorageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that encapsulates, or contains, the media storage configuration properties.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisvideo#UpdateMediaStorageConfigurationOutput": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.kinesisvideo#UpdateNotificationConfiguration": {
             "type": "operation",
             "input": {
@@ -4775,7 +4970,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that consists of the <code>ScheduleConfig</code> attribute that's required, to schedule the jobs \n            to upload the recorded media files onto the Edge Agent in a Kinesis Video Stream.\n        </p>"
+                "smithy.api#documentation": "<p>The configuration that consists of the <code>ScheduleExpression</code>\n            and the <code>DurationInMinutesdetails</code>, that specify the scheduling to record from a camera,\n            or local media file, onto the Edge Agent. If the <code>ScheduleExpression</code>\n            is not provided, then the Edge Agent will always be in upload mode.\n        </p>"
             }
         },
         "com.amazonaws.kinesisvideo#Version": {

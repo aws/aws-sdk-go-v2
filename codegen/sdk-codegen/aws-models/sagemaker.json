@@ -7496,7 +7496,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.</p>",
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that enables Amazon SageMaker to perform tasks on your behalf.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7514,7 +7514,7 @@
                 "ImageArn": {
                     "target": "com.amazonaws.sagemaker#ImageArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the image.</p>"
                     }
                 }
             }
@@ -7566,6 +7566,55 @@
                         "smithy.api#documentation": "<p>The <code>ImageName</code> of the <code>Image</code> to create a version of.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Aliases": {
+                    "target": "com.amazonaws.sagemaker#SageMakerImageVersionAliases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of aliases created with the image version.</p>"
+                    }
+                },
+                "VendorGuidance": {
+                    "target": "com.amazonaws.sagemaker#VendorGuidance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stability of the image version, specified by the maintainer.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOT_PROVIDED</code>: The maintainers did not provide a status for image version stability.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STABLE</code>: The image version is stable.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TO_BE_ARCHIVED</code>: The image version is set to be archived. Custom image versions that are set to be archived are automatically archived after three months.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ARCHIVED</code>: The image version is archived. Archived image versions are not searchable and are no longer actively supported. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "JobType": {
+                    "target": "com.amazonaws.sagemaker#JobType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates SageMaker job type compatibility.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TRAINING</code>: The image version is compatible with SageMaker training jobs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INFERENCE</code>: The image version is compatible with SageMaker inference jobs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK_KERNEL</code>: The image version is compatible with SageMaker notebook kernels.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MLFramework": {
+                    "target": "com.amazonaws.sagemaker#MLFramework",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning framework vended in the image version.</p>"
+                    }
+                },
+                "ProgrammingLang": {
+                    "target": "com.amazonaws.sagemaker#ProgrammingLang",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported programming language and its version.</p>"
+                    }
+                },
+                "Processor": {
+                    "target": "com.amazonaws.sagemaker#Processor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates CPU or GPU compatibility.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CPU</code>: The image version is compatible with CPU.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GPU</code>: The image version is compatible with GPU.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Horovod": {
+                    "target": "com.amazonaws.sagemaker#Horovod",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates Horovod compatibility.</p>"
+                    }
+                },
+                "ReleaseNotes": {
+                    "target": "com.amazonaws.sagemaker#ReleaseNotes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintainer description of the image version.</p>"
+                    }
                 }
             }
         },
@@ -7575,7 +7624,7 @@
                 "ImageVersionArn": {
                     "target": "com.amazonaws.sagemaker#ImageVersionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image version.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the image version.</p>"
                     }
                 }
             }
@@ -11428,15 +11477,20 @@
                 "ImageName": {
                     "target": "com.amazonaws.sagemaker#ImageName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the image.</p>",
+                        "smithy.api#documentation": "<p>The name of the image to delete.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Version": {
                     "target": "com.amazonaws.sagemaker#ImageVersionNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version to delete.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The version to delete.</p>"
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.sagemaker#SageMakerImageVersionAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the image to delete.</p>"
                     }
                 }
             }
@@ -15336,7 +15390,7 @@
                 "ImageArn": {
                     "target": "com.amazonaws.sagemaker#ImageArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the image.</p>"
                     }
                 },
                 "ImageName": {
@@ -15360,7 +15414,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that enables Amazon SageMaker to perform tasks on your behalf.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that enables Amazon SageMaker to perform tasks on your behalf.</p>"
                     }
                 }
             }
@@ -15460,6 +15514,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the image. If not specified, the latest version is described.</p>"
                     }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.sagemaker#SageMakerImageVersionAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the image version.</p>"
+                    }
                 }
             }
         },
@@ -15493,7 +15553,7 @@
                 "ImageArn": {
                     "target": "com.amazonaws.sagemaker#ImageArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image the version is based on.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the image the version is based on.</p>"
                     }
                 },
                 "ImageVersionArn": {
@@ -15518,6 +15578,49 @@
                     "target": "com.amazonaws.sagemaker#ImageVersionNumber",
                     "traits": {
                         "smithy.api#documentation": "<p>The version number.</p>"
+                    }
+                },
+                "VendorGuidance": {
+                    "target": "com.amazonaws.sagemaker#VendorGuidance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stability of the image version specified by the maintainer.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOT_PROVIDED</code>: The maintainers did not provide a status for image version stability.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STABLE</code>: The image version is stable.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TO_BE_ARCHIVED</code>: The image version is set to be archived. Custom image versions that are set to be archived are automatically archived after three months.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ARCHIVED</code>: The image version is archived. Archived image versions are not searchable and are no longer actively supported. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "JobType": {
+                    "target": "com.amazonaws.sagemaker#JobType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates SageMaker job type compatibility.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TRAINING</code>: The image version is compatible with SageMaker training jobs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INFERENCE</code>: The image version is compatible with SageMaker inference jobs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK_KERNEL</code>: The image version is compatible with SageMaker notebook kernels.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MLFramework": {
+                    "target": "com.amazonaws.sagemaker#MLFramework",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning framework vended in the image version.</p>"
+                    }
+                },
+                "ProgrammingLang": {
+                    "target": "com.amazonaws.sagemaker#ProgrammingLang",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported programming language and its version.</p>"
+                    }
+                },
+                "Processor": {
+                    "target": "com.amazonaws.sagemaker#Processor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates CPU or GPU compatibility.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CPU</code>: The image version is compatible with CPU.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GPU</code>: The image version is compatible with GPU.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Horovod": {
+                    "target": "com.amazonaws.sagemaker#Horovod",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates Horovod compatibility.</p>"
+                    }
+                },
+                "ReleaseNotes": {
+                    "target": "com.amazonaws.sagemaker#ReleaseNotes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintainer description of the image version.</p>"
                     }
                 }
             }
@@ -22974,6 +23077,12 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#Horovod": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.sagemaker#HubArn": {
             "type": "string",
             "traits": {
@@ -24721,7 +24830,7 @@
                 "ImageArn": {
                     "target": "com.amazonaws.sagemaker#ImageArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the image.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -24989,7 +25098,7 @@
                 "ImageArn": {
                     "target": "com.amazonaws.sagemaker#ImageArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image the version is based on.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the image the version is based on.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -26494,6 +26603,29 @@
                 "smithy.api#pattern": "^.+$"
             }
         },
+        "com.amazonaws.sagemaker#JobType": {
+            "type": "enum",
+            "members": {
+                "TRAINING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TRAINING"
+                    }
+                },
+                "INFERENCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INFERENCE"
+                    }
+                },
+                "NOTEBOOK_KERNEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOTEBOOK_KERNEL"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#JoinSource": {
             "type": "enum",
             "members": {
@@ -27564,6 +27696,82 @@
                     "target": "com.amazonaws.sagemaker#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>If the response is truncated, SageMaker returns this token. To retrieve the next set of\n            algorithms, use it in the subsequent request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListAliases": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#ListAliasesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#ListAliasesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the aliases of a specified image or image version.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "SageMakerImageVersionAliases",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListAliasesRequest": {
+            "type": "structure",
+            "members": {
+                "ImageName": {
+                    "target": "com.amazonaws.sagemaker#ImageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.sagemaker#SageMakerImageVersionAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the image version.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.sagemaker#ImageVersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the image. If image version is not specified, the aliases of all versions of the image are listed.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sagemaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of aliases to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous call to <code>ListAliases</code> didn't return the full set of\n         aliases, the call returns a token for retrieving the next set of aliases.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#ListAliasesResponse": {
+            "type": "structure",
+            "members": {
+                "SageMakerImageVersionAliases": {
+                    "target": "com.amazonaws.sagemaker#SageMakerImageVersionAliases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of SageMaker image version aliases.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sagemaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token for getting the next set of aliases, if more aliases exist.</p>"
                     }
                 }
             }
@@ -33861,6 +34069,16 @@
             "type": "long",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.sagemaker#MLFramework": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$"
             }
         },
         "com.amazonaws.sagemaker#MaxAutoMLJobRuntimeInSeconds": {
@@ -41041,6 +41259,23 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#Processor": {
+            "type": "enum",
+            "members": {
+                "CPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CPU"
+                    }
+                },
+                "GPU": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GPU"
+                    }
+                }
+            }
+        },
         "com.amazonaws.sagemaker#ProductId": {
             "type": "string",
             "traits": {
@@ -42428,6 +42663,16 @@
                         "smithy.api#enumValue": "Disabled"
                     }
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#ProgrammingLang": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$"
             }
         },
         "com.amazonaws.sagemaker#Project": {
@@ -43963,6 +44208,16 @@
                 "smithy.api#documentation": "<p>Metadata for a register model job step.</p>"
             }
         },
+        "com.amazonaws.sagemaker#ReleaseNotes": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
         "com.amazonaws.sagemaker#RenderUiTemplate": {
             "type": "operation",
             "input": {
@@ -45300,6 +45555,9 @@
                     "target": "com.amazonaws.sagemaker#ListAlgorithms"
                 },
                 {
+                    "target": "com.amazonaws.sagemaker#ListAliases"
+                },
+                {
                     "target": "com.amazonaws.sagemaker#ListAppImageConfigs"
                 },
                 {
@@ -45628,6 +45886,9 @@
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateImage"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#UpdateImageVersion"
                 },
                 {
                     "target": "com.amazonaws.sagemaker#UpdateInferenceExperiment"
@@ -47616,6 +47877,22 @@
                     ],
                     "version": "1.0"
                 }
+            }
+        },
+        "com.amazonaws.sagemaker#SageMakerImageVersionAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!^[.-])^([a-zA-Z0-9-_.]+)$"
+            }
+        },
+        "com.amazonaws.sagemaker#SageMakerImageVersionAliases": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sagemaker#SageMakerImageVersionAlias"
             }
         },
         "com.amazonaws.sagemaker#SagemakerServicecatalogStatus": {
@@ -54068,7 +54345,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new Amazon Resource Name (ARN) for the IAM role that enables Amazon SageMaker to perform tasks on your behalf.</p>"
+                        "smithy.api#documentation": "<p>The new ARN for the IAM role that enables Amazon SageMaker to perform tasks on your behalf.</p>"
                     }
                 }
             }
@@ -54079,7 +54356,117 @@
                 "ImageArn": {
                     "target": "com.amazonaws.sagemaker#ImageArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the image.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateImageVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemaker#UpdateImageVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemaker#UpdateImageVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceInUse"
+                },
+                {
+                    "target": "com.amazonaws.sagemaker#ResourceNotFound"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the properties of a SageMaker image version.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateImageVersionRequest": {
+            "type": "structure",
+            "members": {
+                "ImageName": {
+                    "target": "com.amazonaws.sagemaker#ImageName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the image.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.sagemaker#SageMakerImageVersionAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the image version.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.sagemaker#ImageVersionNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the image.</p>"
+                    }
+                },
+                "AliasesToAdd": {
+                    "target": "com.amazonaws.sagemaker#SageMakerImageVersionAliases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of aliases to add.</p>"
+                    }
+                },
+                "AliasesToDelete": {
+                    "target": "com.amazonaws.sagemaker#SageMakerImageVersionAliases",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of aliases to delete.</p>"
+                    }
+                },
+                "VendorGuidance": {
+                    "target": "com.amazonaws.sagemaker#VendorGuidance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The availability of the image version specified by the maintainer.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOT_PROVIDED</code>: The maintainers did not provide a status for image version stability.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STABLE</code>: The image version is stable.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TO_BE_ARCHIVED</code>: The image version is set to be archived. Custom image versions that are set to be archived are automatically archived after three months.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ARCHIVED</code>: The image version is archived. Archived image versions are not searchable and are no longer actively supported. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "JobType": {
+                    "target": "com.amazonaws.sagemaker#JobType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates SageMaker job type compatibility.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TRAINING</code>: The image version is compatible with SageMaker training jobs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INFERENCE</code>: The image version is compatible with SageMaker inference jobs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NOTEBOOK_KERNEL</code>: The image version is compatible with SageMaker notebook kernels.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MLFramework": {
+                    "target": "com.amazonaws.sagemaker#MLFramework",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The machine learning framework vended in the image version.</p>"
+                    }
+                },
+                "ProgrammingLang": {
+                    "target": "com.amazonaws.sagemaker#ProgrammingLang",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported programming language and its version.</p>"
+                    }
+                },
+                "Processor": {
+                    "target": "com.amazonaws.sagemaker#Processor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates CPU or GPU compatibility.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CPU</code>: The image version is compatible with CPU.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GPU</code>: The image version is compatible with GPU.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Horovod": {
+                    "target": "com.amazonaws.sagemaker#Horovod",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Indicates Horovod compatibility.</p>"
+                    }
+                },
+                "ReleaseNotes": {
+                    "target": "com.amazonaws.sagemaker#ReleaseNotes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maintainer description of the image version.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#UpdateImageVersionResponse": {
+            "type": "structure",
+            "members": {
+                "ImageVersionArn": {
+                    "target": "com.amazonaws.sagemaker#ImageVersionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the image version.</p>"
                     }
                 }
             }
@@ -55544,6 +55931,35 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0
+                }
+            }
+        },
+        "com.amazonaws.sagemaker#VendorGuidance": {
+            "type": "enum",
+            "members": {
+                "NOT_PROVIDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_PROVIDED"
+                    }
+                },
+                "STABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STABLE"
+                    }
+                },
+                "TO_BE_ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TO_BE_ARCHIVED"
+                    }
+                },
+                "ARCHIVED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARCHIVED"
+                    }
                 }
             }
         },

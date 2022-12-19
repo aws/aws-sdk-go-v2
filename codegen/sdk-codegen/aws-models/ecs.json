@@ -586,8 +586,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -599,8 +599,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -612,8 +612,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -625,8 +625,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -638,8 +638,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -651,8 +651,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -664,8 +664,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -677,8 +677,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -690,8 +690,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -703,8 +703,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -716,8 +716,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -729,8 +729,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -742,8 +742,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -755,8 +755,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -768,8 +768,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -781,8 +781,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -794,8 +794,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -807,8 +807,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -820,8 +820,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -833,8 +833,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -846,8 +846,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -859,8 +859,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -872,8 +872,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -885,8 +885,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -898,8 +898,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -911,8 +911,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -924,8 +924,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -937,8 +937,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -950,8 +950,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -963,8 +963,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -976,8 +976,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -989,8 +989,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1000,8 +1000,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1013,8 +1013,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1024,8 +1024,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1037,8 +1037,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1050,8 +1050,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1063,8 +1063,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1076,8 +1076,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1089,8 +1089,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1102,8 +1102,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1115,8 +1115,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1128,8 +1128,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1141,8 +1141,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1154,8 +1154,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1167,8 +1167,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1180,8 +1180,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1193,8 +1193,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1206,8 +1206,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1219,8 +1219,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1232,8 +1232,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1245,8 +1245,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1258,8 +1258,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1271,8 +1271,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1284,8 +1284,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1297,8 +1297,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1310,8 +1310,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1323,8 +1323,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1336,8 +1336,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1349,8 +1349,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1362,8 +1362,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1375,8 +1375,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1388,8 +1388,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1401,8 +1401,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1414,8 +1414,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1427,8 +1427,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1440,8 +1440,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1453,8 +1453,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1466,8 +1466,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1479,8 +1479,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1492,8 +1492,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1505,8 +1505,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1518,8 +1518,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1531,8 +1531,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1544,8 +1544,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1557,8 +1557,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1570,8 +1570,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1583,8 +1583,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1596,8 +1596,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1609,8 +1609,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1622,8 +1622,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1635,8 +1635,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1648,8 +1648,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1661,8 +1661,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1674,8 +1674,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1687,8 +1687,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1700,8 +1700,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1713,8 +1713,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1726,8 +1726,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1739,8 +1739,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1752,8 +1752,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1765,8 +1765,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1778,8 +1778,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1791,8 +1791,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1804,8 +1804,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1817,8 +1817,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1830,8 +1830,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1843,8 +1843,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1856,8 +1856,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1869,8 +1869,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1882,8 +1882,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1895,8 +1895,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1908,8 +1908,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1921,8 +1921,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1934,8 +1934,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1947,8 +1947,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1960,8 +1960,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1973,8 +1973,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1984,8 +1984,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1997,8 +1997,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2008,8 +2008,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2021,8 +2021,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2034,8 +2034,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2047,8 +2047,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2060,8 +2060,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2073,8 +2073,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2086,8 +2086,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2099,8 +2099,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2112,8 +2112,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2125,8 +2125,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2138,8 +2138,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2151,8 +2151,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2164,8 +2164,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2177,8 +2177,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2190,8 +2190,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2203,8 +2203,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2216,8 +2216,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2229,8 +2229,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2242,8 +2242,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2255,8 +2255,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2268,8 +2268,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2281,8 +2281,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2292,8 +2292,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2305,8 +2305,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2316,8 +2316,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2329,8 +2329,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2342,8 +2342,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2354,8 +2354,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2366,8 +2366,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -4892,6 +4892,37 @@
                 "smithy.api#documentation": "<p>The details of an Amazon ECS service deployment. This is used only when a service uses the\n\t\t\t\t<code>ECS</code> deployment controller type.</p>"
             }
         },
+        "com.amazonaws.ecs#DeploymentAlarms": {
+            "type": "structure",
+            "members": {
+                "alarmNames": {
+                    "target": "com.amazonaws.ecs#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more CloudWatch alarm names. Use a \",\" to separate the alarms.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enable": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines whether to use the CloudWatch alarm option in the service deployment process.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "rollback": {
+                    "target": "com.amazonaws.ecs#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Determines whether to configure Amazon ECS to roll back the service if a service deployment\n\t\t\tfails. If rollback is used, when a service deployment fails, the service is rolled back\n\t\t\tto the last deployment that completed successfully.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One of the methods which provide a way for you to quickly identify when a deployment\n\t\t\thas failed, and then to optionally roll back the failure to the last working\n\t\t\tdeployment.</p>\n         <p>When the alarms are generated, Amazon ECS sets the service deployment to failed. Set the rollback\n\t\t\tparameter  to have Amazon ECS to roll back your service to the last completed deployment\n\t\t\tafter a failure.</p>\n         <p>You can only use the <code>DeploymentAlarms</code> method to detect failures when the\n\t\t\t\t<code>DeploymentController</code> is set to <code>ECS</code> (rolling\n\t\t\tupdate).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html\">Rolling\n\t\t\t\tupdate</a> in the <i>\n               <i>Amazon Elastic Container Service Developer Guide</i>\n            </i>.</p>"
+            }
+        },
         "com.amazonaws.ecs#DeploymentCircuitBreaker": {
             "type": "structure",
             "members": {
@@ -4907,7 +4938,7 @@
                     "target": "com.amazonaws.ecs#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Determines whether to configure Amazon ECS to roll back the service if a service deployment\n\t\t\tfails. If rollback is enabled, when a service deployment fails, the service is rolled\n\t\t\tback to the last deployment that completed successfully.</p>",
+                        "smithy.api#documentation": "<p>Determines whether to configure Amazon ECS to roll back the service if a service deployment\n\t\t\tfails. If rollback is on, when a service deployment fails, the service is rolled back to\n\t\t\tthe last deployment that completed successfully.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4935,6 +4966,12 @@
                     "target": "com.amazonaws.ecs#BoxedInteger",
                     "traits": {
                         "smithy.api#documentation": "<p>If a service is using the rolling update (<code>ECS</code>) deployment type, the\n\t\t\t\t<code>minimumHealthyPercent</code> represents a lower limit on the number of your\n\t\t\tservice's tasks that must remain in the <code>RUNNING</code> state during a deployment,\n\t\t\tas a percentage of the <code>desiredCount</code> (rounded up to the nearest integer).\n\t\t\tThis parameter enables you to deploy without using additional cluster capacity. For\n\t\t\texample, if your service has a <code>desiredCount</code> of four tasks and a\n\t\t\t\t<code>minimumHealthyPercent</code> of 50%, the service scheduler may stop two\n\t\t\texisting tasks to free up cluster capacity before starting two new tasks. </p>\n         <p>For services that <i>do not</i> use a load balancer, the following\n\t\t\tshould be noted:</p>\n         <ul>\n            <li>\n               <p>A service is considered healthy if all essential containers within the tasks\n\t\t\t\t\tin the service pass their health checks.</p>\n            </li>\n            <li>\n               <p>If a task has no essential containers with a health check defined, the service\n\t\t\t\t\tscheduler will wait for 40 seconds after a task reaches a <code>RUNNING</code>\n\t\t\t\t\tstate before the task is counted towards the minimum healthy percent\n\t\t\t\t\ttotal.</p>\n            </li>\n            <li>\n               <p>If a task has one or more essential containers with a health check defined,\n\t\t\t\t\tthe service scheduler will wait for the task to reach a healthy status before\n\t\t\t\t\tcounting it towards the minimum healthy percent total. A task is considered\n\t\t\t\t\thealthy when all essential containers within the task have passed their health\n\t\t\t\t\tchecks. The amount of time the service scheduler can wait for is determined by\n\t\t\t\t\tthe container health check settings. </p>\n            </li>\n         </ul>\n         <p>For services are that <i>do</i> use a load balancer, the following\n\t\t\tshould be noted:</p>\n         <ul>\n            <li>\n               <p>If a task has no essential containers with a health check defined, the service\n\t\t\t\t\tscheduler will wait for the load balancer target group health check to return a\n\t\t\t\t\thealthy status before counting the task towards the minimum healthy percent\n\t\t\t\t\ttotal.</p>\n            </li>\n            <li>\n               <p>If a task has an essential container with a health check defined, the service\n\t\t\t\t\tscheduler will wait for both the task to reach a healthy status and the load\n\t\t\t\t\tbalancer target group health check to return a healthy status before counting\n\t\t\t\t\tthe task towards the minimum healthy percent total.</p>\n            </li>\n         </ul>\n         <p>If a service is using either the blue/green (<code>CODE_DEPLOY</code>) or\n\t\t\t\t<code>EXTERNAL</code> deployment types and is running tasks that use the\n\t\t\tEC2 launch type, the <b>minimum healthy\n\t\t\t\tpercent</b> value is set to the default value and is used to define the lower\n\t\t\tlimit on the number of the tasks in the service that remain in the <code>RUNNING</code>\n\t\t\tstate while the container instances are in the <code>DRAINING</code> state. If a service\n\t\t\tis using either the blue/green (<code>CODE_DEPLOY</code>) or <code>EXTERNAL</code>\n\t\t\tdeployment types and is running tasks that use the Fargate launch type,\n\t\t\tthe minimum healthy percent value is not used, although it is returned when describing\n\t\t\tyour service.</p>"
+                    }
+                },
+                "alarms": {
+                    "target": "com.amazonaws.ecs#DeploymentAlarms",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the CloudWatch alarms.</p>"
                     }
                 }
             },
