@@ -11,6 +11,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,7 +25,12 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BadRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request contains a client token that was used for a previous update resource
@@ -31,6 +38,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // token.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -44,12 +53,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You don't have permissions to perform this action.
 type ForbiddenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -63,13 +79,20 @@ func (e *ForbiddenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ForbiddenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request processing has failed because of an unknown error, exception, or
 // failure.
 type InternalServerErrorException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -83,7 +106,12 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
+func (e *InternalServerErrorException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerErrorException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // You have exceeded a service limit for your account. For more information, see
@@ -92,6 +120,8 @@ func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return s
 // the App Mesh User Guide.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -105,12 +135,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource doesn't exist. Check your request syntax and try again.
 type NotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -124,13 +161,20 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't delete the specified resource because it's in use or required by
 // another resource.
 type ResourceInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -144,12 +188,19 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request has failed due to a temporary failure of the service.
 type ServiceUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -163,7 +214,12 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The maximum request rate permitted by the App Mesh APIs has been exceeded for
@@ -171,6 +227,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // between requests.
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -184,7 +242,12 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request exceeds the maximum allowed number of tags allowed per resource. The
@@ -192,6 +255,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // in the request. None of the tags in this request were applied.
 type TooManyTagsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -205,5 +270,10 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -12,6 +12,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	Code *string
 
 	noSmithyDocumentSerde
@@ -26,13 +28,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Textract isn't able to read the document. For more information on the
 // document limits in Amazon Textract, see limits.
 type BadDocumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -48,7 +57,12 @@ func (e *BadDocumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadDocumentException) ErrorCode() string             { return "BadDocumentException" }
+func (e *BadDocumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BadDocumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BadDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The document can't be processed because it's too large. The maximum document
@@ -56,6 +70,8 @@ func (e *BadDocumentException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // asynchronous operations is 500 MB for PDF files.
 type DocumentTooLargeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -71,13 +87,20 @@ func (e *DocumentTooLargeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DocumentTooLargeException) ErrorCode() string             { return "DocumentTooLargeException" }
+func (e *DocumentTooLargeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DocumentTooLargeException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DocumentTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates you have exceeded the maximum number of active human in the loop
 // workflows available
 type HumanLoopQuotaExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 	QuotaCode    *string
@@ -97,7 +120,10 @@ func (e *HumanLoopQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HumanLoopQuotaExceededException) ErrorCode() string {
-	return "HumanLoopQuotaExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "HumanLoopQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -106,6 +132,8 @@ func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { retur
 // operation.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -122,7 +150,10 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	return "IdempotentParameterMismatchException"
+	if e.ErrorCodeOverride == nil {
+		return "IdempotentParameterMismatchException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -131,6 +162,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // Amazon Textract experienced a service issue. Try your call again.
 type InternalServerError struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -146,12 +179,19 @@ func (e *InternalServerError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
+func (e *InternalServerError) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerError"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // An invalid job identifier was passed to an asynchronous analysis operation.
 type InvalidJobIdException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -167,13 +207,20 @@ func (e *InvalidJobIdException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidJobIdException) ErrorCode() string             { return "InvalidJobIdException" }
+func (e *InvalidJobIdException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidJobIdException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidJobIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates you do not have decrypt permissions with the KMS key entered, or the
 // KMS key was entered incorrectly.
 type InvalidKMSKeyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -189,7 +236,12 @@ func (e *InvalidKMSKeyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidKMSKeyException) ErrorCode() string             { return "InvalidKMSKeyException" }
+func (e *InvalidKMSKeyException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidKMSKeyException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidKMSKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An input parameter violated a constraint. For example, in synchronous
@@ -198,6 +250,8 @@ func (e *InvalidKMSKeyException) ErrorFault() smithy.ErrorFault { return smithy.
 // Validate your parameter before calling the API operation again.
 type InvalidParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -213,7 +267,12 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Textract is unable to access the S3 object that's specified in the
@@ -223,6 +282,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html)
 type InvalidS3ObjectException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -238,7 +299,12 @@ func (e *InvalidS3ObjectException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidS3ObjectException) ErrorCode() string             { return "InvalidS3ObjectException" }
+func (e *InvalidS3ObjectException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidS3ObjectException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An Amazon Textract service limit was exceeded. For example, if you start too
@@ -248,6 +314,8 @@ func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smith
 // is below the Amazon Textract service limit.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -263,13 +331,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of requests exceeded your throughput limit. If you want to increase
 // this limit, contact Amazon Textract.
 type ProvisionedThroughputExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -286,7 +361,10 @@ func (e *ProvisionedThroughputExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProvisionedThroughputExceededException) ErrorCode() string {
-	return "ProvisionedThroughputExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "ProvisionedThroughputExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -296,6 +374,8 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 // again.
 type ThrottlingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -311,13 +391,20 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The format of the input document isn't supported. Documents for operations can
 // be in PNG, JPEG, PDF, or TIFF format.
 type UnsupportedDocumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -333,5 +420,10 @@ func (e *UnsupportedDocumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedDocumentException) ErrorCode() string             { return "UnsupportedDocumentException" }
+func (e *UnsupportedDocumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedDocumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnsupportedDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

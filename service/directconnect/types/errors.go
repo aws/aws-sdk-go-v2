@@ -11,6 +11,8 @@ import (
 type DirectConnectClientException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *DirectConnectClientException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DirectConnectClientException) ErrorCode() string             { return "DirectConnectClientException" }
+func (e *DirectConnectClientException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DirectConnectClientException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DirectConnectClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A server-side error occurred.
 type DirectConnectServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *DirectConnectServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DirectConnectServerException) ErrorCode() string             { return "DirectConnectServerException" }
+func (e *DirectConnectServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DirectConnectServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DirectConnectServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +77,19 @@ func (e *DuplicateTagKeysException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateTagKeysException) ErrorCode() string             { return "DuplicateTagKeysException" }
+func (e *DuplicateTagKeysException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DuplicateTagKeysException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have reached the limit on the number of tags that can be assigned.
 type TooManyTagsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -80,5 +103,10 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

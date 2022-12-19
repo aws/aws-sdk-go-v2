@@ -12,6 +12,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	Code *string
 
 	noSmithyDocumentSerde
@@ -26,12 +28,19 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BadRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned when the request exceeds the processing capacity of the ledger.
 type CapacityExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -45,12 +54,19 @@ func (e *CapacityExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CapacityExceededException) ErrorCode() string             { return "CapacityExceededException" }
+func (e *CapacityExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CapacityExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CapacityExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Returned if the session doesn't exist anymore because it timed out or expired.
 type InvalidSessionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -66,12 +82,19 @@ func (e *InvalidSessionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSessionException) ErrorCode() string             { return "InvalidSessionException" }
+func (e *InvalidSessionException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidSessionException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidSessionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if a resource limit such as number of active sessions is exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -85,13 +108,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned when a transaction cannot be written to the journal due to a failure in
 // the verification phase of optimistic concurrency control (OCC).
 type OccConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -105,12 +135,19 @@ func (e *OccConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OccConflictException) ErrorCode() string             { return "OccConflictException" }
+func (e *OccConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OccConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OccConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned when the rate of requests exceeds the allowed throughput.
 type RateExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -124,5 +161,10 @@ func (e *RateExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RateExceededException) ErrorCode() string             { return "RateExceededException" }
+func (e *RateExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "RateExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *RateExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

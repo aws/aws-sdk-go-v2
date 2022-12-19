@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,11 +25,18 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type IncompatibleVersionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -41,13 +50,20 @@ func (e *IncompatibleVersionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IncompatibleVersionException) ErrorCode() string             { return "IncompatibleVersionException" }
+func (e *IncompatibleVersionException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IncompatibleVersionException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *IncompatibleVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Elastic Transcoder encountered an unexpected exception while trying to fulfill
 // the request.
 type InternalServiceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -61,13 +77,20 @@ func (e *InternalServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
+func (e *InternalServiceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServiceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Too many operations for a given AWS account. For example, the number of
 // pipelines exceeds the maximum allowed.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -81,13 +104,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource you are attempting to change is in use. For example, you are
 // attempting to delete a pipeline that is currently in use.
 type ResourceInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -101,7 +131,12 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested resource does not exist or is not available. For example, the
@@ -109,6 +144,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // created.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -122,12 +159,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more required parameter values were not provided in the request.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -141,5 +185,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

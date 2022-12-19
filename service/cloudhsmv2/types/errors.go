@@ -12,6 +12,8 @@ import (
 type CloudHsmAccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,13 +26,20 @@ func (e *CloudHsmAccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CloudHsmAccessDeniedException) ErrorCode() string             { return "CloudHsmAccessDeniedException" }
+func (e *CloudHsmAccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CloudHsmAccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CloudHsmAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because of an AWS CloudHSM internal failure. The
 // request can be retried.
 type CloudHsmInternalFailureException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -45,13 +54,18 @@ func (e *CloudHsmInternalFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmInternalFailureException) ErrorCode() string {
-	return "CloudHsmInternalFailureException"
+	if e.ErrorCodeOverride == nil {
+		return "CloudHsmInternalFailureException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmInternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request was rejected because it is not a valid request.
 type CloudHsmInvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -66,13 +80,18 @@ func (e *CloudHsmInvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmInvalidRequestException) ErrorCode() string {
-	return "CloudHsmInvalidRequestException"
+	if e.ErrorCodeOverride == nil {
+		return "CloudHsmInvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmInvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it refers to a resource that cannot be found.
 type CloudHsmResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -87,13 +106,18 @@ func (e *CloudHsmResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmResourceNotFoundException) ErrorCode() string {
-	return "CloudHsmResourceNotFoundException"
+	if e.ErrorCodeOverride == nil {
+		return "CloudHsmResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CloudHsmResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because an error occurred.
 type CloudHsmServiceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -107,13 +131,20 @@ func (e *CloudHsmServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CloudHsmServiceException) ErrorCode() string             { return "CloudHsmServiceException" }
+func (e *CloudHsmServiceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CloudHsmServiceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because of a tagging failure. Verify the tag conditions
 // in all applicable policies, and then retry the request.
 type CloudHsmTagException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -127,5 +158,10 @@ func (e *CloudHsmTagException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CloudHsmTagException) ErrorCode() string             { return "CloudHsmTagException" }
+func (e *CloudHsmTagException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CloudHsmTagException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CloudHsmTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

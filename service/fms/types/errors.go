@@ -12,6 +12,8 @@ import (
 type InternalErrorException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *InternalErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
+func (e *InternalErrorException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalErrorException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The parameters of the request were invalid.
 type InvalidInputException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -43,7 +52,12 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInputException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because there was nothing to do or the operation wasn't
@@ -54,6 +68,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // Organizations before you can access it.
 type InvalidOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -67,12 +83,19 @@ func (e *InvalidOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidOperationException) ErrorCode() string             { return "InvalidOperationException" }
+func (e *InvalidOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value of the Type parameter is invalid.
 type InvalidTypeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -86,7 +109,12 @@ func (e *InvalidTypeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTypeException) ErrorCode() string             { return "InvalidTypeException" }
+func (e *InvalidTypeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidTypeException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation exceeds a resource limit, for example, the maximum number of
@@ -96,6 +124,8 @@ func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // WAF Developer Guide.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -109,12 +139,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -128,5 +165,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -13,6 +13,8 @@ import (
 type IdempotentParameterMismatchException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -26,7 +28,10 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	return "IdempotentParameterMismatchException"
+	if e.ErrorCodeOverride == nil {
+		return "IdempotentParameterMismatchException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -35,6 +40,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // The client token is not valid.
 type InvalidClientTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -48,12 +55,19 @@ func (e *InvalidClientTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidClientTokenException) ErrorCode() string             { return "InvalidClientTokenException" }
+func (e *InvalidClientTokenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidClientTokenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidClientTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified value for MaxResults is not valid.
 type InvalidMaxResultsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -67,12 +81,19 @@ func (e *InvalidMaxResultsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidMaxResultsException) ErrorCode() string             { return "InvalidMaxResultsException" }
+func (e *InvalidMaxResultsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidMaxResultsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified value for NextToken is not valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -86,12 +107,19 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A parameter is not valid.
 type InvalidParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -105,12 +133,19 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource type is not valid.
 type InvalidResourceTypeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -124,12 +159,19 @@ func (e *InvalidResourceTypeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidResourceTypeException) ErrorCode() string             { return "InvalidResourceTypeException" }
+func (e *InvalidResourceTypeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidResourceTypeException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidResourceTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested state transition is not valid.
 type InvalidStateTransitionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -144,13 +186,18 @@ func (e *InvalidStateTransitionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidStateTransitionException) ErrorCode() string {
-	return "InvalidStateTransitionException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidStateTransitionException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The format of an Amazon Resource Name (ARN) is not valid.
 type MalformedArnException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -164,12 +211,19 @@ func (e *MalformedArnException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MalformedArnException) ErrorCode() string             { return "MalformedArnException" }
+func (e *MalformedArnException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MalformedArnException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MalformedArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A required input parameter is missing.
 type MissingRequiredParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -184,13 +238,18 @@ func (e *MissingRequiredParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingRequiredParameterException) ErrorCode() string {
-	return "MissingRequiredParameterException"
+	if e.ErrorCodeOverride == nil {
+		return "MissingRequiredParameterException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation is not permitted.
 type OperationNotPermittedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -204,12 +263,19 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
+func (e *OperationNotPermittedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OperationNotPermittedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified Amazon Resource Name (ARN) was not found.
 type ResourceArnNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -223,12 +289,19 @@ func (e *ResourceArnNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceArnNotFoundException) ErrorCode() string             { return "ResourceArnNotFoundException" }
+func (e *ResourceArnNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceArnNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceArnNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified invitation was already accepted.
 type ResourceShareInvitationAlreadyAcceptedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -243,7 +316,10 @@ func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorMessage() string 
 	return *e.Message
 }
 func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorCode() string {
-	return "ResourceShareInvitationAlreadyAcceptedException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourceShareInvitationAlreadyAcceptedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -252,6 +328,8 @@ func (e *ResourceShareInvitationAlreadyAcceptedException) ErrorFault() smithy.Er
 // The specified invitation was already rejected.
 type ResourceShareInvitationAlreadyRejectedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -266,7 +344,10 @@ func (e *ResourceShareInvitationAlreadyRejectedException) ErrorMessage() string 
 	return *e.Message
 }
 func (e *ResourceShareInvitationAlreadyRejectedException) ErrorCode() string {
-	return "ResourceShareInvitationAlreadyRejectedException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourceShareInvitationAlreadyRejectedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourceShareInvitationAlreadyRejectedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -275,6 +356,8 @@ func (e *ResourceShareInvitationAlreadyRejectedException) ErrorFault() smithy.Er
 // The specified Amazon Resource Name (ARN) for an invitation was not found.
 type ResourceShareInvitationArnNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -289,7 +372,10 @@ func (e *ResourceShareInvitationArnNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceShareInvitationArnNotFoundException) ErrorCode() string {
-	return "ResourceShareInvitationArnNotFoundException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourceShareInvitationArnNotFoundException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourceShareInvitationArnNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -298,6 +384,8 @@ func (e *ResourceShareInvitationArnNotFoundException) ErrorFault() smithy.ErrorF
 // The specified invitation is expired.
 type ResourceShareInvitationExpiredException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -312,7 +400,10 @@ func (e *ResourceShareInvitationExpiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceShareInvitationExpiredException) ErrorCode() string {
-	return "ResourceShareInvitationExpiredException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourceShareInvitationExpiredException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourceShareInvitationExpiredException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -321,6 +412,8 @@ func (e *ResourceShareInvitationExpiredException) ErrorFault() smithy.ErrorFault
 // This request would exceed the limit for resource shares for your account.
 type ResourceShareLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -335,7 +428,10 @@ func (e *ResourceShareLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceShareLimitExceededException) ErrorCode() string {
-	return "ResourceShareLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourceShareLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourceShareLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -344,6 +440,8 @@ func (e *ResourceShareLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The service could not respond to the request due to an internal problem.
 type ServerInternalException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -357,12 +455,19 @@ func (e *ServerInternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServerInternalException) ErrorCode() string             { return "ServerInternalException" }
+func (e *ServerInternalException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServerInternalException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServerInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The service is not available.
 type ServiceUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -376,12 +481,19 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // This request would exceed the limit for tags for your account.
 type TagLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -395,12 +507,19 @@ func (e *TagLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagLimitExceededException) ErrorCode() string             { return "TagLimitExceededException" }
+func (e *TagLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TagLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified tag key is a reserved word and can't be used.
 type TagPolicyViolationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -414,13 +533,20 @@ func (e *TagPolicyViolationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagPolicyViolationException) ErrorCode() string             { return "TagPolicyViolationException" }
+func (e *TagPolicyViolationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TagPolicyViolationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TagPolicyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You exceeded the rate at which you are allowed to perform this operation. Please
 // try again later.
 type ThrottlingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -434,12 +560,19 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A specified resource was not found.
 type UnknownResourceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -453,5 +586,10 @@ func (e *UnknownResourceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnknownResourceException) ErrorCode() string             { return "UnknownResourceException" }
+func (e *UnknownResourceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnknownResourceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -13,6 +13,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,13 +27,20 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BadRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource already exists with this name. Resource names must be unique within
 // an Amazon Web Services account.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -45,13 +54,20 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was an internal error. Check the error message, correct the issue, and try
 // your request again.
 type InternalFailureException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -65,13 +81,20 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalFailureException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // You've either sent too many requests or your input file is too long. Wait before
 // retrying your request, or use a smaller file and try your request again.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -85,13 +108,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // We can't find the requested resource. Check that the specified name is correct
 // and try your request again.
 type NotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -105,5 +135,10 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

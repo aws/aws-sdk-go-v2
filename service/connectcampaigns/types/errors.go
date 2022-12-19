@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	XAmzErrorType *string
 
 	noSmithyDocumentSerde
@@ -25,13 +27,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request could not be processed because of conflict in the current state of
 // the resource.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	XAmzErrorType *string
 
@@ -47,12 +56,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request processing failed because of an error or failure with the service.
 type InternalServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	XAmzErrorType *string
 
@@ -68,13 +84,20 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request could not be processed because of conflict in the current state of
 // the campaign.
 type InvalidCampaignStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	State         CampaignState
 	XAmzErrorType *string
@@ -91,12 +114,19 @@ func (e *InvalidCampaignStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidCampaignStateException) ErrorCode() string             { return "InvalidCampaignStateException" }
+func (e *InvalidCampaignStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidCampaignStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidCampaignStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request could not be processed because of conflict in the current state.
 type InvalidStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	XAmzErrorType *string
 
@@ -112,12 +142,19 @@ func (e *InvalidStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidStateException) ErrorCode() string             { return "InvalidStateException" }
+func (e *InvalidStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	XAmzErrorType *string
 
@@ -133,12 +170,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request would cause a service quota to be exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	XAmzErrorType *string
 
@@ -154,12 +198,19 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	XAmzErrorType *string
 
@@ -175,12 +226,19 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The input fails to satisfy the constraints specified by an AWS service.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	XAmzErrorType *string
 
@@ -196,5 +254,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

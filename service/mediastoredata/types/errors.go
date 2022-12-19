@@ -11,6 +11,8 @@ import (
 type ContainerNotFoundException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *ContainerNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ContainerNotFoundException) ErrorCode() string             { return "ContainerNotFoundException" }
+func (e *ContainerNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ContainerNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ContainerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is temporarily unavailable.
 type InternalServerError struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *InternalServerError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
+func (e *InternalServerError) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerError"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Could not perform an operation on an object that does not exist.
 type ObjectNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +77,19 @@ func (e *ObjectNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ObjectNotFoundException) ErrorCode() string             { return "ObjectNotFoundException" }
+func (e *ObjectNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ObjectNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested content range is not valid.
 type RequestedRangeNotSatisfiableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -81,7 +104,10 @@ func (e *RequestedRangeNotSatisfiableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestedRangeNotSatisfiableException) ErrorCode() string {
-	return "RequestedRangeNotSatisfiableException"
+	if e.ErrorCodeOverride == nil {
+		return "RequestedRangeNotSatisfiableException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *RequestedRangeNotSatisfiableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

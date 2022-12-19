@@ -11,6 +11,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	ErrorCode_ *string
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BadRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource already exists.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ *string
 
@@ -46,12 +55,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The client is not authenticated.
 type ForbiddenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ *string
 
@@ -67,12 +83,19 @@ func (e *ForbiddenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ForbiddenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The AWS Serverless Application Repository service encountered an internal error.
 type InternalServerErrorException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ *string
 
@@ -88,13 +111,20 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
+func (e *InternalServerErrorException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerErrorException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The resource (for example, an access policy statement) specified in the request
 // doesn't exist.
 type NotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ *string
 
@@ -110,12 +140,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The client is sending more than the allowed number of requests per unit of time.
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ *string
 
@@ -131,5 +168,10 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

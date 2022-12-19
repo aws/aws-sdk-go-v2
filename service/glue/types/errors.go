@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource to be created or added already exists.
 type AlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
+func (e *AlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Two processes are trying to modify a resource simultaneously.
 type ConcurrentModificationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -62,13 +78,18 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Too many jobs are being run concurrently.
 type ConcurrentRunsExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -83,13 +104,18 @@ func (e *ConcurrentRunsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentRunsExceededException) ErrorCode() string {
-	return "ConcurrentRunsExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentRunsExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentRunsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A specified condition was not satisfied.
 type ConditionCheckFailureException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -103,12 +129,19 @@ func (e *ConditionCheckFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConditionCheckFailureException) ErrorCode() string             { return "ConditionCheckFailureException" }
+func (e *ConditionCheckFailureException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConditionCheckFailureException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConditionCheckFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The CreatePartitions API was called on a table that has indexes enabled.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -122,12 +155,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified crawler is not running.
 type CrawlerNotRunningException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -141,12 +181,19 @@ func (e *CrawlerNotRunningException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CrawlerNotRunningException) ErrorCode() string             { return "CrawlerNotRunningException" }
+func (e *CrawlerNotRunningException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CrawlerNotRunningException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CrawlerNotRunningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation cannot be performed because the crawler is already running.
 type CrawlerRunningException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -160,12 +207,19 @@ func (e *CrawlerRunningException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CrawlerRunningException) ErrorCode() string             { return "CrawlerRunningException" }
+func (e *CrawlerRunningException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CrawlerRunningException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CrawlerRunningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified crawler is stopping.
 type CrawlerStoppingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -179,12 +233,19 @@ func (e *CrawlerStoppingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CrawlerStoppingException) ErrorCode() string             { return "CrawlerStoppingException" }
+func (e *CrawlerStoppingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CrawlerStoppingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CrawlerStoppingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A specified entity does not exist
 type EntityNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -198,12 +259,19 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntityNotFoundException) ErrorCode() string             { return "EntityNotFoundException" }
+func (e *EntityNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EntityNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An encryption operation failed.
 type GlueEncryptionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -217,12 +285,19 @@ func (e *GlueEncryptionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *GlueEncryptionException) ErrorCode() string             { return "GlueEncryptionException" }
+func (e *GlueEncryptionException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "GlueEncryptionException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *GlueEncryptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The same unique identifier was associated with two different records.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -237,7 +312,10 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	return "IdempotentParameterMismatchException"
+	if e.ErrorCodeOverride == nil {
+		return "IdempotentParameterMismatchException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -246,6 +324,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // The blueprint is in an invalid state to perform a requested operation.
 type IllegalBlueprintStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -259,12 +339,19 @@ func (e *IllegalBlueprintStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IllegalBlueprintStateException) ErrorCode() string             { return "IllegalBlueprintStateException" }
+func (e *IllegalBlueprintStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IllegalBlueprintStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *IllegalBlueprintStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The session is in an invalid state to perform a requested operation.
 type IllegalSessionStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -278,12 +365,19 @@ func (e *IllegalSessionStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IllegalSessionStateException) ErrorCode() string             { return "IllegalSessionStateException" }
+func (e *IllegalSessionStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IllegalSessionStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *IllegalSessionStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The workflow is in an invalid state to perform a requested operation.
 type IllegalWorkflowStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -297,12 +391,19 @@ func (e *IllegalWorkflowStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IllegalWorkflowStateException) ErrorCode() string             { return "IllegalWorkflowStateException" }
+func (e *IllegalWorkflowStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IllegalWorkflowStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *IllegalWorkflowStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal service error occurred.
 type InternalServiceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -316,12 +417,19 @@ func (e *InternalServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
+func (e *InternalServiceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServiceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The input provided was not valid.
 type InvalidInputException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -335,12 +443,19 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInputException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error that indicates your data is in an invalid state.
 type InvalidStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -354,12 +469,19 @@ func (e *InvalidStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidStateException) ErrorCode() string             { return "InvalidStateException" }
+func (e *InvalidStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The machine learning transform is not ready to run.
 type MLTransformNotReadyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -373,12 +495,19 @@ func (e *MLTransformNotReadyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MLTransformNotReadyException) ErrorCode() string             { return "MLTransformNotReadyException" }
+func (e *MLTransformNotReadyException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MLTransformNotReadyException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MLTransformNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There is no applicable schedule.
 type NoScheduleException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -392,12 +521,19 @@ func (e *NoScheduleException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoScheduleException) ErrorCode() string             { return "NoScheduleException" }
+func (e *NoScheduleException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoScheduleException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoScheduleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation timed out.
 type OperationTimeoutException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -411,11 +547,18 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationTimeoutException) ErrorCode() string             { return "OperationTimeoutException" }
+func (e *OperationTimeoutException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OperationTimeoutException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type PermissionTypeMismatchException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -430,13 +573,18 @@ func (e *PermissionTypeMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PermissionTypeMismatchException) ErrorCode() string {
-	return "PermissionTypeMismatchException"
+	if e.ErrorCodeOverride == nil {
+		return "PermissionTypeMismatchException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *PermissionTypeMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource was not ready for a transaction.
 type ResourceNotReadyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -450,12 +598,19 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
+func (e *ResourceNotReadyException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotReadyException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource numerical limit was exceeded.
 type ResourceNumberLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -470,7 +625,10 @@ func (e *ResourceNumberLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNumberLimitExceededException) ErrorCode() string {
-	return "ResourceNumberLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNumberLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourceNumberLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -479,6 +637,8 @@ func (e *ResourceNumberLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The specified scheduler is not running.
 type SchedulerNotRunningException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -492,12 +652,19 @@ func (e *SchedulerNotRunningException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SchedulerNotRunningException) ErrorCode() string             { return "SchedulerNotRunningException" }
+func (e *SchedulerNotRunningException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "SchedulerNotRunningException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *SchedulerNotRunningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified scheduler is already running.
 type SchedulerRunningException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -511,12 +678,19 @@ func (e *SchedulerRunningException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SchedulerRunningException) ErrorCode() string             { return "SchedulerRunningException" }
+func (e *SchedulerRunningException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "SchedulerRunningException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *SchedulerRunningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified scheduler is transitioning.
 type SchedulerTransitioningException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -531,13 +705,18 @@ func (e *SchedulerTransitioningException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SchedulerTransitioningException) ErrorCode() string {
-	return "SchedulerTransitioningException"
+	if e.ErrorCodeOverride == nil {
+		return "SchedulerTransitioningException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *SchedulerTransitioningException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A value could not be validated.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -551,12 +730,19 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a version conflict.
 type VersionMismatchException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -570,5 +756,10 @@ func (e *VersionMismatchException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *VersionMismatchException) ErrorCode() string             { return "VersionMismatchException" }
+func (e *VersionMismatchException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "VersionMismatchException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *VersionMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

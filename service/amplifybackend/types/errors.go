@@ -11,6 +11,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BadRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error returned if there's a temporary issue with the service.
 type GatewayTimeoutException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *GatewayTimeoutException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *GatewayTimeoutException) ErrorCode() string             { return "GatewayTimeoutException" }
+func (e *GatewayTimeoutException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "GatewayTimeoutException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *GatewayTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // An error returned when a specific resource type is not found.
 type NotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 
@@ -63,12 +79,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error that is returned when a limit of a specific type has been exceeded.
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	LimitType *string
 
@@ -84,5 +107,10 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

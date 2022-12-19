@@ -12,6 +12,8 @@ import (
 type DirectoryInUseException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *DirectoryInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DirectoryInUseException) ErrorCode() string             { return "DirectoryInUseException" }
+func (e *DirectoryInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DirectoryInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DirectoryInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The directory service doesn't recognize the credentials supplied by WorkMail.
 type DirectoryServiceAuthenticationFailedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -44,7 +53,10 @@ func (e *DirectoryServiceAuthenticationFailedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectoryServiceAuthenticationFailedException) ErrorCode() string {
-	return "DirectoryServiceAuthenticationFailedException"
+	if e.ErrorCodeOverride == nil {
+		return "DirectoryServiceAuthenticationFailedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *DirectoryServiceAuthenticationFailedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -53,6 +65,8 @@ func (e *DirectoryServiceAuthenticationFailedException) ErrorFault() smithy.Erro
 // The directory is unavailable. It might be located in another Region or deleted.
 type DirectoryUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -66,13 +80,20 @@ func (e *DirectoryUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DirectoryUnavailableException) ErrorCode() string             { return "DirectoryUnavailableException" }
+func (e *DirectoryUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DirectoryUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DirectoryUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The email address that you're trying to assign is already created for a
 // different user, group, or resource.
 type EmailAddressInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -86,13 +107,20 @@ func (e *EmailAddressInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EmailAddressInUseException) ErrorCode() string             { return "EmailAddressInUseException" }
+func (e *EmailAddressInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EmailAddressInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EmailAddressInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user, group, or resource that you're trying to register is already
 // registered.
 type EntityAlreadyRegisteredException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -107,7 +135,10 @@ func (e *EntityAlreadyRegisteredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityAlreadyRegisteredException) ErrorCode() string {
-	return "EntityAlreadyRegisteredException"
+	if e.ErrorCodeOverride == nil {
+		return "EntityAlreadyRegisteredException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *EntityAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -115,6 +146,8 @@ func (e *EntityAlreadyRegisteredException) ErrorFault() smithy.ErrorFault { retu
 // organization.
 type EntityNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -128,13 +161,20 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntityNotFoundException) ErrorCode() string             { return "EntityNotFoundException" }
+func (e *EntityNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EntityNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You are performing an operation on a user, group, or resource that isn't in the
 // expected state, such as trying to delete an active user.
 type EntityStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -148,7 +188,12 @@ func (e *EntityStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntityStateException) ErrorCode() string             { return "EntityStateException" }
+func (e *EntityStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EntityStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EntityStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The configuration for a resource isn't valid. A resource must either be able to
@@ -156,6 +201,8 @@ func (e *EntityStateException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // on its behalf.
 type InvalidConfigurationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -169,7 +216,12 @@ func (e *InvalidConfigurationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidConfigurationException) ErrorCode() string             { return "InvalidConfigurationException" }
+func (e *InvalidConfigurationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidConfigurationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You SES configuration has customizations that WorkMail cannot save. The error
@@ -178,6 +230,8 @@ func (e *InvalidConfigurationException) ErrorFault() smithy.ErrorFault { return 
 // (https://docs.aws.amazon.com/ses/latest/APIReference/API_CreateReceiptRule.html).
 type InvalidCustomSesConfigurationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -192,7 +246,10 @@ func (e *InvalidCustomSesConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCustomSesConfigurationException) ErrorCode() string {
-	return "InvalidCustomSesConfigurationException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidCustomSesConfigurationException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidCustomSesConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -201,6 +258,8 @@ func (e *InvalidCustomSesConfigurationException) ErrorFault() smithy.ErrorFault 
 // One or more of the input parameters don't match the service's restrictions.
 type InvalidParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -214,13 +273,20 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The supplied password doesn't match the minimum security constraints, such as
 // length or use of special characters.
 type InvalidPasswordException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -234,12 +300,19 @@ func (e *InvalidPasswordException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPasswordException) ErrorCode() string             { return "InvalidPasswordException" }
+func (e *InvalidPasswordException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidPasswordException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidPasswordException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request exceeds the limit of the resource.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -253,13 +326,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The domain you're trying to change is in use by another user or organization in
 // your account. See the error message for details.
 type MailDomainInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -273,12 +353,19 @@ func (e *MailDomainInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MailDomainInUseException) ErrorCode() string             { return "MailDomainInUseException" }
+func (e *MailDomainInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MailDomainInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MailDomainInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The domain specified is not found in your organization.
 type MailDomainNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -292,13 +379,20 @@ func (e *MailDomainNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MailDomainNotFoundException) ErrorCode() string             { return "MailDomainNotFoundException" }
+func (e *MailDomainNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MailDomainNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MailDomainNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // After a domain has been added to the organization, it must be verified. The
 // domain is not yet verified.
 type MailDomainStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -312,12 +406,19 @@ func (e *MailDomainStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MailDomainStateException) ErrorCode() string             { return "MailDomainStateException" }
+func (e *MailDomainStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MailDomainStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MailDomainStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user, group, or resource name isn't unique in WorkMail.
 type NameAvailabilityException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -331,13 +432,20 @@ func (e *NameAvailabilityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NameAvailabilityException) ErrorCode() string             { return "NameAvailabilityException" }
+func (e *NameAvailabilityException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NameAvailabilityException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NameAvailabilityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An operation received a valid organization identifier that either doesn't belong
 // or exist in the system.
 type OrganizationNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -351,13 +459,20 @@ func (e *OrganizationNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OrganizationNotFoundException) ErrorCode() string             { return "OrganizationNotFoundException" }
+func (e *OrganizationNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OrganizationNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OrganizationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The organization must have a valid state to perform certain operations on the
 // organization or its members.
 type OrganizationStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -371,12 +486,19 @@ func (e *OrganizationStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OrganizationStateException) ErrorCode() string             { return "OrganizationStateException" }
+func (e *OrganizationStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OrganizationStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OrganizationStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This user, group, or resource name is not allowed in WorkMail.
 type ReservedNameException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -390,12 +512,19 @@ func (e *ReservedNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReservedNameException) ErrorCode() string             { return "ReservedNameException" }
+func (e *ReservedNameException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ReservedNameException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ReservedNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -409,12 +538,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource can have up to 50 user-applied tags.
 type TooManyTagsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -428,12 +564,19 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't perform a write operation against a read-only directory.
 type UnsupportedOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -447,5 +590,10 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
+func (e *UnsupportedOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
