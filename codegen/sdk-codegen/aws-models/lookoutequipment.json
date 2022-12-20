@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -31,21 +31,6 @@
     "shapes": {
         "com.amazonaws.lookoutequipment#AWSLookoutEquipmentFrontendService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "LookoutEquipment",
-                    "arnNamespace": "lookoutequipment",
-                    "cloudFormationName": "LookoutEquipment",
-                    "cloudTrailEventSource": "lookoutequipment.amazonaws.com",
-                    "endpointPrefix": "lookoutequipment"
-                },
-                "aws.auth#sigv4": {
-                    "name": "lookoutequipment"
-                },
-                "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Amazon Lookout for Equipment is a machine learning service that uses advanced analytics to identify\n         anomalies in machines from sensor data for use in predictive maintenance. </p>",
-                "smithy.api#title": "Amazon Lookout for Equipment"
-            },
             "version": "2020-12-15",
             "operations": [
                 {
@@ -147,7 +132,527 @@
                 {
                     "target": "com.amazonaws.lookoutequipment#UpdateLabelGroup"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "LookoutEquipment",
+                    "arnNamespace": "lookoutequipment",
+                    "cloudFormationName": "LookoutEquipment",
+                    "cloudTrailEventSource": "lookoutequipment.amazonaws.com",
+                    "endpointPrefix": "lookoutequipment"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lookoutequipment"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Amazon Lookout for Equipment is a machine learning service that uses advanced analytics to identify\n         anomalies in machines from sensor data for use in predictive maintenance. </p>",
+                "smithy.api#title": "Amazon Lookout for Equipment",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://lookoutequipment-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://lookoutequipment-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://lookoutequipment.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://lookoutequipment.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://lookoutequipment.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.lookoutequipment#AccessDeniedException": {
             "type": "structure",
@@ -175,7 +680,10 @@
             }
         },
         "com.amazonaws.lookoutequipment#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.lookoutequipment#BoundedLengthString": {
             "type": "string",
@@ -267,6 +775,7 @@
                 "Percentage": {
                     "target": "com.amazonaws.lookoutequipment#Float",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p> Indicates the percentage of occurances of the given statistic. </p>",
                         "smithy.api#required": {}
                     }
@@ -834,7 +1343,6 @@
         "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
                     "max": 60
@@ -945,37 +1453,44 @@
         "com.amazonaws.lookoutequipment#DataSizeInBytes": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
             }
         },
         "com.amazonaws.lookoutequipment#DataUploadFrequency": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PT5M",
-                        "name": "PT5M"
-                    },
-                    {
-                        "value": "PT10M",
-                        "name": "PT10M"
-                    },
-                    {
-                        "value": "PT15M",
-                        "name": "PT15M"
-                    },
-                    {
-                        "value": "PT30M",
-                        "name": "PT30M"
-                    },
-                    {
-                        "value": "PT1H",
-                        "name": "PT1H"
+            "type": "enum",
+            "members": {
+                "PT5M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT5M"
                     }
-                ]
+                },
+                "PT10M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT10M"
+                    }
+                },
+                "PT15M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT15M"
+                    }
+                },
+                "PT30M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT30M"
+                    }
+                },
+                "PT1H": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT1H"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#DatasetArn": {
@@ -1023,22 +1538,26 @@
             }
         },
         "com.amazonaws.lookoutequipment#DatasetStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATED",
-                        "name": "CREATED"
-                    },
-                    {
-                        "value": "INGESTION_IN_PROGRESS",
-                        "name": "INGESTION_IN_PROGRESS"
-                    },
-                    {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
                     }
-                ]
+                },
+                "INGESTION_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INGESTION_IN_PROGRESS"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#DatasetSummaries": {
@@ -1102,6 +1621,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
                 }
             ],
             "traits": {
@@ -1187,6 +1709,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
                 }
             ],
             "traits": {
@@ -1216,6 +1741,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
                 }
             ],
             "traits": {
@@ -1276,6 +1804,9 @@
                 },
                 {
                     "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
                 }
             ],
             "traits": {
@@ -2058,7 +2589,6 @@
         "com.amazonaws.lookoutequipment#EventDurationInSeconds": {
             "type": "long",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0
                 }
@@ -2093,7 +2623,10 @@
             }
         },
         "com.amazonaws.lookoutequipment#Float": {
-            "type": "float"
+            "type": "float",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.lookoutequipment#IamRoleArn": {
             "type": "string",
@@ -2166,22 +2699,26 @@
             }
         },
         "com.amazonaws.lookoutequipment#InferenceExecutionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#InferenceExecutionSummaries": {
@@ -2410,26 +2947,32 @@
             }
         },
         "com.amazonaws.lookoutequipment#InferenceSchedulerStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "RUNNING",
-                        "name": "RUNNING"
-                    },
-                    {
-                        "value": "STOPPING",
-                        "name": "STOPPING"
-                    },
-                    {
-                        "value": "STOPPED",
-                        "name": "STOPPED"
+            "type": "enum",
+            "members": {
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
-                ]
+                },
+                "RUNNING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RUNNING"
+                    }
+                },
+                "STOPPING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPING"
+                    }
+                },
+                "STOPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STOPPED"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#InferenceSchedulerSummaries": {
@@ -2548,22 +3091,26 @@
             }
         },
         "com.amazonaws.lookoutequipment#IngestionJobStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#IngestionS3InputConfiguration": {
@@ -2616,10 +3163,7 @@
             }
         },
         "com.amazonaws.lookoutequipment#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.lookoutequipment#InternalServerException": {
             "type": "structure",
@@ -2747,22 +3291,26 @@
             }
         },
         "com.amazonaws.lookoutequipment#LabelRating": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ANOMALY",
-                        "name": "ANOMALY"
-                    },
-                    {
-                        "value": "NO_ANOMALY",
-                        "name": "NO_ANOMALY"
-                    },
-                    {
-                        "value": "NEUTRAL",
-                        "name": "NEUTRAL"
+            "type": "enum",
+            "members": {
+                "ANOMALY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANOMALY"
                     }
-                ]
+                },
+                "NO_ANOMALY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_ANOMALY"
+                    }
+                },
+                "NEUTRAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NEUTRAL"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#LabelSummaries": {
@@ -2902,18 +3450,20 @@
             }
         },
         "com.amazonaws.lookoutequipment#LatestInferenceResult": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ANOMALOUS",
-                        "name": "ANOMALOUS"
-                    },
-                    {
-                        "value": "NORMAL",
-                        "name": "NORMAL"
+            "type": "enum",
+            "members": {
+                "ANOMALOUS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANOMALOUS"
                     }
-                ]
+                },
+                "NORMAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NORMAL"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#ListDataIngestionJobs": {
@@ -3302,6 +3852,12 @@
                     "target": "com.amazonaws.lookoutequipment#ModelName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the ML model used by the inference scheduler to be listed. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the current status of the inference schedulers to list.</p>"
                     }
                 }
             }
@@ -3720,7 +4276,6 @@
         "com.amazonaws.lookoutequipment#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 500
@@ -3794,22 +4349,26 @@
             }
         },
         "com.amazonaws.lookoutequipment#ModelStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
-                    },
-                    {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
                     }
-                ]
+                },
+                "SUCCESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#ModelSummaries": {
@@ -3884,22 +4443,26 @@
             }
         },
         "com.amazonaws.lookoutequipment#Monotonicity": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DECREASING",
-                        "name": "DECREASING"
-                    },
-                    {
-                        "value": "INCREASING",
-                        "name": "INCREASING"
-                    },
-                    {
-                        "value": "STATIC",
-                        "name": "STATIC"
+            "type": "enum",
+            "members": {
+                "DECREASING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DECREASING"
                     }
-                ]
+                },
+                "INCREASING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INCREASING"
+                    }
+                },
+                "STATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STATIC"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#MultipleOperatingModes": {
@@ -4048,6 +4611,7 @@
                 "DataExists": {
                     "target": "com.amazonaws.lookoutequipment#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p> Parameter that indicates whether data exists for the sensor that the statistics belong\n         to. </p>"
                     }
                 },
@@ -4313,18 +4877,20 @@
             }
         },
         "com.amazonaws.lookoutequipment#StatisticalIssueStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "POTENTIAL_ISSUE_DETECTED",
-                        "name": "POTENTIAL_ISSUE_DETECTED"
-                    },
-                    {
-                        "value": "NO_ISSUE_DETECTED",
-                        "name": "NO_ISSUE_DETECTED"
+            "type": "enum",
+            "members": {
+                "POTENTIAL_ISSUE_DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POTENTIAL_ISSUE_DETECTED"
                     }
-                ]
+                },
+                "NO_ISSUE_DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_ISSUE_DETECTED"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#StopInferenceScheduler": {
@@ -4548,54 +5114,74 @@
             }
         },
         "com.amazonaws.lookoutequipment#TargetSamplingRate": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "PT1S",
-                        "name": "PT1S"
-                    },
-                    {
-                        "value": "PT5S",
-                        "name": "PT5S"
-                    },
-                    {
-                        "value": "PT10S",
-                        "name": "PT10S"
-                    },
-                    {
-                        "value": "PT15S",
-                        "name": "PT15S"
-                    },
-                    {
-                        "value": "PT30S",
-                        "name": "PT30S"
-                    },
-                    {
-                        "value": "PT1M",
-                        "name": "PT1M"
-                    },
-                    {
-                        "value": "PT5M",
-                        "name": "PT5M"
-                    },
-                    {
-                        "value": "PT10M",
-                        "name": "PT10M"
-                    },
-                    {
-                        "value": "PT15M",
-                        "name": "PT15M"
-                    },
-                    {
-                        "value": "PT30M",
-                        "name": "PT30M"
-                    },
-                    {
-                        "value": "PT1H",
-                        "name": "PT1H"
+            "type": "enum",
+            "members": {
+                "PT1S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT1S"
                     }
-                ]
+                },
+                "PT5S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT5S"
+                    }
+                },
+                "PT10S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT10S"
+                    }
+                },
+                "PT15S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT15S"
+                    }
+                },
+                "PT30S": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT30S"
+                    }
+                },
+                "PT1M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT1M"
+                    }
+                },
+                "PT5M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT5M"
+                    }
+                },
+                "PT10M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT10M"
+                    }
+                },
+                "PT15M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT15M"
+                    }
+                },
+                "PT30M": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT30M"
+                    }
+                },
+                "PT1H": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PT1H"
+                    }
+                }
             }
         },
         "com.amazonaws.lookoutequipment#ThrottlingException": {

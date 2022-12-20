@@ -956,6 +956,22 @@
                 "smithy.api#documentation": "Audio Description Language Code Control"
             }
         },
+        "com.amazonaws.medialive#AudioDolbyEDecode": {
+            "type": "structure",
+            "members": {
+                "ProgramSelection": {
+                    "target": "com.amazonaws.medialive#DolbyEProgramSelection",
+                    "traits": {
+                        "smithy.api#documentation": "Applies only to Dolby E. Enter the program ID (according to the metadata in the audio) of the Dolby E program to extract from the specified track. One program extracted per audio selector. To select multiple programs, create multiple selectors with the same Track and different Program numbers. “All channels” means to ignore the program IDs and include all the channels in this selector; useful if metadata is known to be incorrect.",
+                        "smithy.api#jsonName": "programSelection",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Audio Dolby EDecode"
+            }
+        },
         "com.amazonaws.medialive#AudioHlsRenditionSelection": {
             "type": "structure",
             "members": {
@@ -1297,6 +1313,13 @@
                         "smithy.api#documentation": "Selects one or more unique audio tracks from within a source.",
                         "smithy.api#jsonName": "tracks",
                         "smithy.api#required": {}
+                    }
+                },
+                "DolbyEDecode": {
+                    "target": "com.amazonaws.medialive#AudioDolbyEDecode",
+                    "traits": {
+                        "smithy.api#documentation": "Configure decoding options for Dolby E streams - these should be Dolby E frames carried in PCM streams tagged with SMPTE-337",
+                        "smithy.api#jsonName": "dolbyEDecode"
                     }
                 }
             },
@@ -6750,11 +6773,73 @@
                 "smithy.api#documentation": "The status of software on the input device."
             }
         },
+        "com.amazonaws.medialive#DolbyEProgramSelection": {
+            "type": "enum",
+            "members": {
+                "ALL_CHANNELS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALL_CHANNELS"
+                    }
+                },
+                "PROGRAM_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROGRAM_1"
+                    }
+                },
+                "PROGRAM_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROGRAM_2"
+                    }
+                },
+                "PROGRAM_3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROGRAM_3"
+                    }
+                },
+                "PROGRAM_4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROGRAM_4"
+                    }
+                },
+                "PROGRAM_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROGRAM_5"
+                    }
+                },
+                "PROGRAM_6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROGRAM_6"
+                    }
+                },
+                "PROGRAM_7": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROGRAM_7"
+                    }
+                },
+                "PROGRAM_8": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROGRAM_8"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dolby EProgram Selection"
+            }
+        },
         "com.amazonaws.medialive#DolbyVision81Settings": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "Dolby Vision Profile 8.1 Settings"
+                "smithy.api#documentation": "Dolby Vision81 Settings"
             }
         },
         "com.amazonaws.medialive#DvbNitSettings": {
@@ -8252,7 +8337,7 @@
                 "PasswordParam": {
                     "target": "com.amazonaws.medialive#__string",
                     "traits": {
-                        "smithy.api#documentation": "Password if credentials are required to access the POIS endpoint.  This is a reference to an AWS parameter store name from which the password can be retrieved.  AWS Parameter store format: \"ssm://<parameter name>\"",
+                        "smithy.api#documentation": "Documentation update needed",
                         "smithy.api#jsonName": "passwordParam"
                     }
                 },
@@ -8267,7 +8352,7 @@
                 "Username": {
                     "target": "com.amazonaws.medialive#__string",
                     "traits": {
-                        "smithy.api#documentation": "Username if credentials are required to access the POIS endpoint.  This can be either a plaintext username, or a reference to an AWS parameter store name from which the username can be retrieved.  AWS Parameter store format: \"ssm://<parameter name>\"",
+                        "smithy.api#documentation": "Documentation update needed",
                         "smithy.api#jsonName": "username"
                     }
                 },
@@ -8280,7 +8365,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Settings for the Esam"
+                "smithy.api#documentation": "Esam"
             }
         },
         "com.amazonaws.medialive#FailoverCondition": {
@@ -8742,6 +8827,13 @@
                     "traits": {
                         "smithy.api#documentation": "Unit for the frame capture interval.",
                         "smithy.api#jsonName": "captureIntervalUnits"
+                    }
+                },
+                "TimecodeBurninSettings": {
+                    "target": "com.amazonaws.medialive#TimecodeBurninSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Timecode burn-in settings",
+                        "smithy.api#jsonName": "timecodeBurninSettings"
                     }
                 }
             },
@@ -9723,6 +9815,13 @@
                         "smithy.api#documentation": "Determines how timecodes should be inserted into the video elementary stream.\n- 'disabled': Do not include timecodes\n- 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config",
                         "smithy.api#jsonName": "timecodeInsertion"
                     }
+                },
+                "TimecodeBurninSettings": {
+                    "target": "com.amazonaws.medialive#TimecodeBurninSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Timecode burn-in settings",
+                        "smithy.api#jsonName": "timecodeBurninSettings"
+                    }
                 }
             },
             "traits": {
@@ -10434,6 +10533,13 @@
                         "smithy.api#documentation": "Determines how timecodes should be inserted into the video elementary stream.\n- 'disabled': Do not include timecodes\n- 'picTimingSei': Pass through picture timing SEI messages from the source specified in Timecode Config",
                         "smithy.api#jsonName": "timecodeInsertion"
                     }
+                },
+                "TimecodeBurninSettings": {
+                    "target": "com.amazonaws.medialive#TimecodeBurninSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Timecode burn-in settings",
+                        "smithy.api#jsonName": "timecodeBurninSettings"
+                    }
                 }
             },
             "traits": {
@@ -11021,7 +11127,7 @@
                     "target": "com.amazonaws.medialive#__integerMin0",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "When set, minimumSegmentLength is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.",
+                        "smithy.api#documentation": "Minimum length of MPEG-2 Transport Stream segments in seconds. When set, minimum segment length is enforced by looking ahead and back within the specified range for a nearby avail and extending the segment size if needed.",
                         "smithy.api#jsonName": "minSegmentLength"
                     }
                 },
@@ -11072,7 +11178,7 @@
                     "target": "com.amazonaws.medialive#__integerMin1",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.",
+                        "smithy.api#documentation": "Length of MPEG-2 Transport Stream segments to create in seconds. Note that segments will end on the next keyframe after this duration, so actual segment length may be longer.",
                         "smithy.api#jsonName": "segmentLength"
                     }
                 },
@@ -16250,8 +16356,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -16263,8 +16369,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -16274,8 +16380,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -16287,8 +16393,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -16298,8 +16404,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -16311,8 +16417,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -16322,8 +16428,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -16335,8 +16441,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -16348,8 +16454,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -16360,8 +16466,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -16372,8 +16478,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -16843,6 +16949,13 @@
                     "traits": {
                         "smithy.api#documentation": "Determines how MediaLive inserts timecodes in the output video. For detailed information about setting up the input and the output for a timecode, see the section on \\\"MediaLive Features - Timecode configuration\\\" in the MediaLive User Guide.\nDISABLED: do not include timecodes.\nGOP_TIMECODE: Include timecode metadata in the GOP header.",
                         "smithy.api#jsonName": "timecodeInsertion"
+                    }
+                },
+                "TimecodeBurninSettings": {
+                    "target": "com.amazonaws.medialive#TimecodeBurninSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Timecode burn-in settings",
+                        "smithy.api#jsonName": "timecodeBurninSettings"
                     }
                 }
             },
@@ -19978,7 +20091,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Settings to let you create a clip of the file input, in order to set up the input to ingest only a portion of the file."
+                "smithy.api#documentation": "Whether the SCTE-35 input should be the active input or a fixed input."
             }
         },
         "com.amazonaws.medialive#Scte35InputScheduleActionSettings": {
@@ -20001,7 +20114,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Settings for the \"scte35 input\" action"
+                "smithy.api#documentation": "Scte35Input Schedule Action Settings"
             }
         },
         "com.amazonaws.medialive#Scte35NoRegionalBlackoutFlag": {
@@ -21635,6 +21748,131 @@
             },
             "traits": {
                 "smithy.api#documentation": "Temporal Filter Strength"
+            }
+        },
+        "com.amazonaws.medialive#TimecodeBurninFontSize": {
+            "type": "enum",
+            "members": {
+                "EXTRA_SMALL_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXTRA_SMALL_10"
+                    }
+                },
+                "LARGE_48": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LARGE_48"
+                    }
+                },
+                "MEDIUM_32": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MEDIUM_32"
+                    }
+                },
+                "SMALL_16": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMALL_16"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Timecode Burnin Font Size"
+            }
+        },
+        "com.amazonaws.medialive#TimecodeBurninPosition": {
+            "type": "enum",
+            "members": {
+                "BOTTOM_CENTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTTOM_CENTER"
+                    }
+                },
+                "BOTTOM_LEFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTTOM_LEFT"
+                    }
+                },
+                "BOTTOM_RIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BOTTOM_RIGHT"
+                    }
+                },
+                "MIDDLE_CENTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MIDDLE_CENTER"
+                    }
+                },
+                "MIDDLE_LEFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MIDDLE_LEFT"
+                    }
+                },
+                "MIDDLE_RIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MIDDLE_RIGHT"
+                    }
+                },
+                "TOP_CENTER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOP_CENTER"
+                    }
+                },
+                "TOP_LEFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOP_LEFT"
+                    }
+                },
+                "TOP_RIGHT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOP_RIGHT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Timecode Burnin Position"
+            }
+        },
+        "com.amazonaws.medialive#TimecodeBurninSettings": {
+            "type": "structure",
+            "members": {
+                "FontSize": {
+                    "target": "com.amazonaws.medialive#TimecodeBurninFontSize",
+                    "traits": {
+                        "smithy.api#documentation": "Choose a timecode burn-in font size",
+                        "smithy.api#jsonName": "fontSize",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Position": {
+                    "target": "com.amazonaws.medialive#TimecodeBurninPosition",
+                    "traits": {
+                        "smithy.api#documentation": "Choose a timecode burn-in output position",
+                        "smithy.api#jsonName": "position",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.medialive#__stringMax255",
+                    "traits": {
+                        "smithy.api#documentation": "Create a timecode burn-in prefix (optional)",
+                        "smithy.api#jsonName": "prefix"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Timecode Burnin Settings"
             }
         },
         "com.amazonaws.medialive#TimecodeConfig": {
