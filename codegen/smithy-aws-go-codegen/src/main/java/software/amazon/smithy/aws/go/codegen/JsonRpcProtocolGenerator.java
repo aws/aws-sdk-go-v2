@@ -79,9 +79,9 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     protected void serializeInputDocument(GenerationContext context, OperationShape operation) {
         GoWriter writer = context.getWriter().get();
 
-        // Stub synthetic clone inputs mean there never was an input modeled, always serialize empty JSON object
+        // Stub synthetic inputs mean there never was an input modeled, always serialize empty JSON object
         // as place holder.
-        if (CodegenUtils.isStubSyntheticClone(ProtocolUtils.expectInput(context.getModel(), operation))) {
+        if (CodegenUtils.isStubSynthetic(ProtocolUtils.expectInput(context.getModel(), operation))) {
             writer.addUseImports(SmithyGoDependency.STRINGS);
             writer.openBlock("if request, err = request.SetStream(strings.NewReader(`{}`)); err != nil {",
                     "}", () -> {
