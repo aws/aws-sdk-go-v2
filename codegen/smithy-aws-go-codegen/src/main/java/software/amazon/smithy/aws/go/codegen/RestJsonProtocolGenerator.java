@@ -33,7 +33,7 @@ import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
-import software.amazon.smithy.go.codegen.SyntheticClone;
+import software.amazon.smithy.go.codegen.Synthetic;
 import software.amazon.smithy.go.codegen.integration.HttpBindingProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
@@ -119,7 +119,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
         Shape payloadShape = model.expectShape(memberShape.getTarget());
 
         String functionName;
-        if (payloadShape.hasTrait(SyntheticClone.class)) {
+        if (payloadShape.hasTrait(Synthetic.class)) {
             functionName = ProtocolGenerator.getDocumentSerializerFunctionName(
                     payloadShape, context.getService(), context.getProtocolName());
         } else {
