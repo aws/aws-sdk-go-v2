@@ -1,8 +1,0 @@
-{
-    "id": "ac069c25-30fd-4fa0-b4bf-e16f50cc33d1",
-    "type": "feature",
-    "description": "Adds isCancelled and isTerminated to DescribeJobs response.",
-    "modules": [
-        "service/batch"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.77.0 (2022-12-20)
+
+* **Feature**: Adds support for pagination in the EC2 DescribeImages API.
+
 # v1.76.1 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.60.0 (2022-12-20)
+
+* **Feature**: Amazon SageMaker Autopilot adds support for new objective metrics in CreateAutoMLJob API.
+
 # v1.59.0 (2022-12-19)
 
 * **Feature**: AWS Sagemaker - Sagemaker Images now supports Aliases as secondary identifiers for ImageVersions. SageMaker Images now supports additional metadata for ImageVersions for better images management.

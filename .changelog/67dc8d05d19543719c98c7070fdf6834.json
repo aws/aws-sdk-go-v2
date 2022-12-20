@@ -1,8 +1,0 @@
-{
-    "id": "67dc8d05-d195-4371-9c98-c7070fdf6834",
-    "type": "feature",
-    "description": "Enable our batch transcription jobs for Swedish and Vietnamese.",
-    "modules": [
-        "service/transcribe"
-    ]
-}

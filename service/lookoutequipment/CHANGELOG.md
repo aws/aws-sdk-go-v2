@@ -1,3 +1,7 @@
+# v1.16.0 (2022-12-20)
+
+* **Feature**: This release adds support for listing inference schedulers by status.
+
 # v1.15.8 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

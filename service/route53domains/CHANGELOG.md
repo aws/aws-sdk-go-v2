@@ -1,3 +1,7 @@
+# v1.13.0 (2022-12-20)
+
+* **Feature**: Use Route 53 domain APIs to change owner, create/delete DS record, modify IPS tag, resend authorization. New: AssociateDelegationSignerToDomain, DisassociateDelegationSignerFromDomain, PushDomain, ResendOperationAuthorization. Updated: UpdateDomainContact, ListOperations, CheckDomainTransferability.
+
 # v1.12.21 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.27.0 (2022-12-20)
+
+* **Feature**: This release adds support for two new features to AWS Elemental MediaLive. First, you can now burn-in timecodes to your MediaLive outputs. Second, we now now support the ability to decode Dolby E audio when it comes in on an input.
+
 # v1.26.1 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

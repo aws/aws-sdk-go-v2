@@ -1,3 +1,7 @@
+# v1.20.0 (2022-12-20)
+
+* **Feature**: Adds isCancelled and isTerminated to DescribeJobs response.
+
 # v1.19.3 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

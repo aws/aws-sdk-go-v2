@@ -1,3 +1,7 @@
+# v1.1.0 (2022-12-20)
+
+* **Feature**: Documentation updates for AWS Resource Explorer.
+
 # v1.0.4 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,7 @@
+# v1.24.0 (2022-12-20)
+
+* **Feature**: Enable our batch transcription jobs for Swedish and Vietnamese.
+
 # v1.23.1 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

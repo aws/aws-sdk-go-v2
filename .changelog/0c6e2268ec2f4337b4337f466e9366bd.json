@@ -1,8 +1,0 @@
-{
-    "id": "0c6e2268-ec2f-4337-b433-7f466e9366bd",
-    "type": "feature",
-    "description": "Amazon SageMaker Autopilot adds support for new objective metrics in CreateAutoMLJob API.",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

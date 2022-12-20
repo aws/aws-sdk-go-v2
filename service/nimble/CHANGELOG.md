@@ -1,3 +1,7 @@
+# v1.15.0 (2022-12-20)
+
+* **Feature**: Amazon Nimble Studio now supports configuring session storage volumes and persistence, as well as backup and restore sessions through launch profiles.
+
 # v1.14.4 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

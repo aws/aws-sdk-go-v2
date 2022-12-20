@@ -1,3 +1,28 @@
+# Release (2022-12-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.20.0](service/batch/CHANGELOG.md#v1200-2022-12-20)
+  * **Feature**: Adds isCancelled and isTerminated to DescribeJobs response.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.77.0](service/ec2/CHANGELOG.md#v1770-2022-12-20)
+  * **Feature**: Adds support for pagination in the EC2 DescribeImages API.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.16.0](service/lookoutequipment/CHANGELOG.md#v1160-2022-12-20)
+  * **Feature**: This release adds support for listing inference schedulers by status.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.27.0](service/medialive/CHANGELOG.md#v1270-2022-12-20)
+  * **Feature**: This release adds support for two new features to AWS Elemental MediaLive. First, you can now burn-in timecodes to your MediaLive outputs. Second, we now now support the ability to decode Dolby E audio when it comes in on an input.
+* `github.com/aws/aws-sdk-go-v2/service/nimble`: [v1.15.0](service/nimble/CHANGELOG.md#v1150-2022-12-20)
+  * **Feature**: Amazon Nimble Studio now supports configuring session storage volumes and persistence, as well as backup and restore sessions through launch profiles.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.1.0](service/resourceexplorer2/CHANGELOG.md#v110-2022-12-20)
+  * **Feature**: Documentation updates for AWS Resource Explorer.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.13.0](service/route53domains/CHANGELOG.md#v1130-2022-12-20)
+  * **Feature**: Use Route 53 domain APIs to change owner, create/delete DS record, modify IPS tag, resend authorization. New: AssociateDelegationSignerToDomain, DisassociateDelegationSignerFromDomain, PushDomain, ResendOperationAuthorization. Updated: UpdateDomainContact, ListOperations, CheckDomainTransferability.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.60.0](service/sagemaker/CHANGELOG.md#v1600-2022-12-20)
+  * **Feature**: Amazon SageMaker Autopilot adds support for new objective metrics in CreateAutoMLJob API.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.24.0](service/transcribe/CHANGELOG.md#v1240-2022-12-20)
+  * **Feature**: Enable our batch transcription jobs for Swedish and Vietnamese.
+
 # Release (2022-12-19)
 
 ## General Highlights
