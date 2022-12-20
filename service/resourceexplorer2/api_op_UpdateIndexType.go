@@ -16,11 +16,11 @@ import (
 // more information about indexes and the role they perform in Amazon Web Services
 // Resource Explorer, see Turning on cross-Region search by creating an aggregator
 // index
-// (https://docs.aws.amazon.com/arexug/mainline/manage-aggregator-region.html) in
-// the Amazon Web Services Resource Explorer User Guide.
+// (https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html)
+// in the Amazon Web Services Resource Explorer User Guide.
 //
-// * AGGREGATOR index type
-// The index contains information about resources from all Amazon Web Services
+// * AGGREGATOR index
+// type The index contains information about resources from all Amazon Web Services
 // Regions in the Amazon Web Services account in which you've created a Resource
 // Explorer index. Resource information from all other Regions is replicated to
 // this Region's index. When you change the index type to AGGREGATOR, Resource

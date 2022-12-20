@@ -606,6 +606,7 @@ const (
 	ExtraParamNameUkContactType                 ExtraParamName = "UK_CONTACT_TYPE"
 	ExtraParamNameUkCompanyNumber               ExtraParamName = "UK_COMPANY_NUMBER"
 	ExtraParamNameEuCountryOfCitizenship        ExtraParamName = "EU_COUNTRY_OF_CITIZENSHIP"
+	ExtraParamNameAuPriorityToken               ExtraParamName = "AU_PRIORITY_TOKEN"
 )
 
 // Values returns all known values for ExtraParamName. Note that this can be
@@ -643,6 +644,7 @@ func (ExtraParamName) Values() []ExtraParamName {
 		"UK_CONTACT_TYPE",
 		"UK_COMPANY_NUMBER",
 		"EU_COUNTRY_OF_CITIZENSHIP",
+		"AU_PRIORITY_TOKEN",
 	}
 }
 
@@ -661,6 +663,23 @@ func (ListDomainsAttributeName) Values() []ListDomainsAttributeName {
 	return []ListDomainsAttributeName{
 		"DomainName",
 		"Expiry",
+	}
+}
+
+type ListOperationsSortAttributeName string
+
+// Enum values for ListOperationsSortAttributeName
+const (
+	ListOperationsSortAttributeNameSubmittedDate ListOperationsSortAttributeName = "SubmittedDate"
+)
+
+// Values returns all known values for ListOperationsSortAttributeName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ListOperationsSortAttributeName) Values() []ListOperationsSortAttributeName {
+	return []ListOperationsSortAttributeName{
+		"SubmittedDate",
 	}
 }
 
@@ -796,13 +815,40 @@ func (SortOrder) Values() []SortOrder {
 	}
 }
 
+type StatusFlag string
+
+// Enum values for StatusFlag
+const (
+	StatusFlagPendingAcceptance          StatusFlag = "PENDING_ACCEPTANCE"
+	StatusFlagPendingCustomerAction      StatusFlag = "PENDING_CUSTOMER_ACTION"
+	StatusFlagPendingAuthorization       StatusFlag = "PENDING_AUTHORIZATION"
+	StatusFlagPendingPaymentVerification StatusFlag = "PENDING_PAYMENT_VERIFICATION"
+	StatusFlagPendingSupportCase         StatusFlag = "PENDING_SUPPORT_CASE"
+)
+
+// Values returns all known values for StatusFlag. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StatusFlag) Values() []StatusFlag {
+	return []StatusFlag{
+		"PENDING_ACCEPTANCE",
+		"PENDING_CUSTOMER_ACTION",
+		"PENDING_AUTHORIZATION",
+		"PENDING_PAYMENT_VERIFICATION",
+		"PENDING_SUPPORT_CASE",
+	}
+}
+
 type Transferable string
 
 // Enum values for Transferable
 const (
-	TransferableTransferable   Transferable = "TRANSFERABLE"
-	TransferableUntransferable Transferable = "UNTRANSFERABLE"
-	TransferableDontKnow       Transferable = "DONT_KNOW"
+	TransferableTransferable           Transferable = "TRANSFERABLE"
+	TransferableUntransferable         Transferable = "UNTRANSFERABLE"
+	TransferableDontKnow               Transferable = "DONT_KNOW"
+	TransferableDomainInOwnAccount     Transferable = "DOMAIN_IN_OWN_ACCOUNT"
+	TransferableDomainInAnotherAccount Transferable = "DOMAIN_IN_ANOTHER_ACCOUNT"
+	TransferablePremiumDomain          Transferable = "PREMIUM_DOMAIN"
 )
 
 // Values returns all known values for Transferable. Note that this can be expanded
@@ -813,5 +859,8 @@ func (Transferable) Values() []Transferable {
 		"TRANSFERABLE",
 		"UNTRANSFERABLE",
 		"DONT_KNOW",
+		"DOMAIN_IN_OWN_ACCOUNT",
+		"DOMAIN_IN_ANOTHER_ACCOUNT",
+		"PREMIUM_DOMAIN",
 	}
 }

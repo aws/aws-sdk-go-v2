@@ -410,6 +410,26 @@ func (m *validateOpGetStreamingImage) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetStreamingSessionBackup struct {
+}
+
+func (*validateOpGetStreamingSessionBackup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetStreamingSessionBackup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetStreamingSessionBackupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetStreamingSessionBackupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetStreamingSession struct {
 }
 
@@ -585,6 +605,26 @@ func (m *validateOpListStreamingImages) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListStreamingImagesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListStreamingSessionBackups struct {
+}
+
+func (*validateOpListStreamingSessionBackups) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStreamingSessionBackups) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStreamingSessionBackupsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStreamingSessionBackupsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -990,6 +1030,10 @@ func addOpGetStreamingImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStreamingImage{}, middleware.After)
 }
 
+func addOpGetStreamingSessionBackupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetStreamingSessionBackup{}, middleware.After)
+}
+
 func addOpGetStreamingSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStreamingSession{}, middleware.After)
 }
@@ -1024,6 +1068,10 @@ func addOpListLaunchProfilesValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListStreamingImagesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListStreamingImages{}, middleware.After)
+}
+
+func addOpListStreamingSessionBackupsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStreamingSessionBackups{}, middleware.After)
 }
 
 func addOpListStreamingSessionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1291,6 +1339,9 @@ func validateOpCreateStreamingSessionInput(v *CreateStreamingSessionInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStreamingSessionInput"}
+	if v.LaunchProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchProfileId"))
+	}
 	if v.StudioId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
 	}
@@ -1612,6 +1663,24 @@ func validateOpGetStreamingImageInput(v *GetStreamingImageInput) error {
 	}
 }
 
+func validateOpGetStreamingSessionBackupInput(v *GetStreamingSessionBackupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetStreamingSessionBackupInput"}
+	if v.BackupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupId"))
+	}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetStreamingSessionInput(v *GetStreamingSessionInput) error {
 	if v == nil {
 		return nil
@@ -1755,6 +1824,21 @@ func validateOpListStreamingImagesInput(v *ListStreamingImagesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListStreamingImagesInput"}
+	if v.StudioId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListStreamingSessionBackupsInput(v *ListStreamingSessionBackupsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStreamingSessionBackupsInput"}
 	if v.StudioId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StudioId"))
 	}

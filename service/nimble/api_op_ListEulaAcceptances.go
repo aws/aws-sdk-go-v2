@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List Eula Acceptances.
+// List EULA acceptances.
 func (c *Client) ListEulaAcceptances(ctx context.Context, params *ListEulaAcceptancesInput, optFns ...func(*Options)) (*ListEulaAcceptancesOutput, error) {
 	if params == nil {
 		params = &ListEulaAcceptancesInput{}
@@ -38,7 +38,7 @@ type ListEulaAcceptancesInput struct {
 	// The list of EULA IDs that have been previously accepted.
 	EulaIds []string
 
-	// The token to request the next page of results.
+	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	noSmithyDocumentSerde

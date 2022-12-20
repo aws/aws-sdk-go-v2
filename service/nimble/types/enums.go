@@ -2,6 +2,24 @@
 
 package types
 
+type AutomaticTerminationMode string
+
+// Enum values for AutomaticTerminationMode
+const (
+	AutomaticTerminationModeDeactivated AutomaticTerminationMode = "DEACTIVATED"
+	AutomaticTerminationModeActivated   AutomaticTerminationMode = "ACTIVATED"
+)
+
+// Values returns all known values for AutomaticTerminationMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutomaticTerminationMode) Values() []AutomaticTerminationMode {
+	return []AutomaticTerminationMode{
+		"DEACTIVATED",
+		"ACTIVATED",
+	}
+}
+
 type LaunchProfilePersona string
 
 // Enum values for LaunchProfilePersona
@@ -186,6 +204,42 @@ func (LaunchProfileValidationType) Values() []LaunchProfileValidationType {
 		"VALIDATE_SUBNET_ASSOCIATION",
 		"VALIDATE_NETWORK_ACL_ASSOCIATION",
 		"VALIDATE_SECURITY_GROUP_ASSOCIATION",
+	}
+}
+
+type SessionBackupMode string
+
+// Enum values for SessionBackupMode
+const (
+	SessionBackupModeAutomatic   SessionBackupMode = "AUTOMATIC"
+	SessionBackupModeDeactivated SessionBackupMode = "DEACTIVATED"
+)
+
+// Values returns all known values for SessionBackupMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SessionBackupMode) Values() []SessionBackupMode {
+	return []SessionBackupMode{
+		"AUTOMATIC",
+		"DEACTIVATED",
+	}
+}
+
+type SessionPersistenceMode string
+
+// Enum values for SessionPersistenceMode
+const (
+	SessionPersistenceModeDeactivated SessionPersistenceMode = "DEACTIVATED"
+	SessionPersistenceModeActivated   SessionPersistenceMode = "ACTIVATED"
+)
+
+// Values returns all known values for SessionPersistenceMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SessionPersistenceMode) Values() []SessionPersistenceMode {
+	return []SessionPersistenceMode{
+		"DEACTIVATED",
+		"ACTIVATED",
 	}
 }
 
@@ -689,6 +743,7 @@ const (
 	StudioStatusCodeEncryptionKeyAccessDenied            StudioStatusCode = "ENCRYPTION_KEY_ACCESS_DENIED"
 	StudioStatusCodeAwsSsoConfigurationRepaired          StudioStatusCode = "AWS_SSO_CONFIGURATION_REPAIRED"
 	StudioStatusCodeAwsSsoConfigurationRepairInProgress  StudioStatusCode = "AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS"
+	StudioStatusCodeAwsStsRegionDisabled                 StudioStatusCode = "AWS_STS_REGION_DISABLED"
 )
 
 // Values returns all known values for StudioStatusCode. Note that this can be
@@ -714,5 +769,24 @@ func (StudioStatusCode) Values() []StudioStatusCode {
 		"ENCRYPTION_KEY_ACCESS_DENIED",
 		"AWS_SSO_CONFIGURATION_REPAIRED",
 		"AWS_SSO_CONFIGURATION_REPAIR_IN_PROGRESS",
+		"AWS_STS_REGION_DISABLED",
+	}
+}
+
+type VolumeRetentionMode string
+
+// Enum values for VolumeRetentionMode
+const (
+	VolumeRetentionModeRetain VolumeRetentionMode = "RETAIN"
+	VolumeRetentionModeDelete VolumeRetentionMode = "DELETE"
+)
+
+// Values returns all known values for VolumeRetentionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VolumeRetentionMode) Values() []VolumeRetentionMode {
+	return []VolumeRetentionMode{
+		"RETAIN",
+		"DELETE",
 	}
 }

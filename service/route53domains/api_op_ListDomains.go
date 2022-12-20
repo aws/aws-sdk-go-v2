@@ -60,8 +60,6 @@ type ListDomainsInput struct {
 type ListDomainsOutput struct {
 
 	// A list of domains.
-	//
-	// This member is required.
 	Domains []types.DomainSummary
 
 	// If there are more domains than you specified for MaxItems in the request, submit

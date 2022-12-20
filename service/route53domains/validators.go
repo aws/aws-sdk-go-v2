@@ -30,6 +30,26 @@ func (m *validateOpAcceptDomainTransferFromAnotherAwsAccount) HandleInitialize(c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateDelegationSignerToDomain struct {
+}
+
+func (*validateOpAssociateDelegationSignerToDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateDelegationSignerToDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateDelegationSignerToDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateDelegationSignerToDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelDomainTransferToAnotherAwsAccount struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpDisableDomainTransferLock) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisableDomainTransferLockInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateDelegationSignerFromDomain struct {
+}
+
+func (*validateOpDisassociateDelegationSignerFromDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateDelegationSignerFromDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateDelegationSignerFromDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateDelegationSignerFromDomainInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +350,26 @@ func (m *validateOpListTagsForDomain) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPushDomain struct {
+}
+
+func (*validateOpPushDomain) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPushDomain) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PushDomainInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPushDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRegisterDomain struct {
 }
 
@@ -365,6 +425,26 @@ func (m *validateOpRenewDomain) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRenewDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResendOperationAuthorization struct {
+}
+
+func (*validateOpResendOperationAuthorization) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResendOperationAuthorization) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResendOperationAuthorizationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResendOperationAuthorizationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -514,6 +594,10 @@ func addOpAcceptDomainTransferFromAnotherAwsAccountValidationMiddleware(stack *m
 	return stack.Initialize.Add(&validateOpAcceptDomainTransferFromAnotherAwsAccount{}, middleware.After)
 }
 
+func addOpAssociateDelegationSignerToDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateDelegationSignerToDomain{}, middleware.After)
+}
+
 func addOpCancelDomainTransferToAnotherAwsAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelDomainTransferToAnotherAwsAccount{}, middleware.After)
 }
@@ -540,6 +624,10 @@ func addOpDisableDomainAutoRenewValidationMiddleware(stack *middleware.Stack) er
 
 func addOpDisableDomainTransferLockValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableDomainTransferLock{}, middleware.After)
+}
+
+func addOpDisassociateDelegationSignerFromDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateDelegationSignerFromDomain{}, middleware.After)
 }
 
 func addOpEnableDomainAutoRenewValidationMiddleware(stack *middleware.Stack) error {
@@ -570,6 +658,10 @@ func addOpListTagsForDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForDomain{}, middleware.After)
 }
 
+func addOpPushDomainValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPushDomain{}, middleware.After)
+}
+
 func addOpRegisterDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterDomain{}, middleware.After)
 }
@@ -580,6 +672,10 @@ func addOpRejectDomainTransferFromAnotherAwsAccountValidationMiddleware(stack *m
 
 func addOpRenewDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRenewDomain{}, middleware.After)
+}
+
+func addOpResendOperationAuthorizationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResendOperationAuthorization{}, middleware.After)
 }
 
 func addOpRetrieveDomainAuthCodeValidationMiddleware(stack *middleware.Stack) error {
@@ -608,6 +704,21 @@ func addOpUpdateDomainNameserversValidationMiddleware(stack *middleware.Stack) e
 
 func addOpUpdateTagsForDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateTagsForDomain{}, middleware.After)
+}
+
+func validateConsent(v *types.Consent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Consent"}
+	if v.Currency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Currency"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateContactDetail(v *types.ContactDetail) error {
@@ -768,6 +879,24 @@ func validateOpAcceptDomainTransferFromAnotherAwsAccountInput(v *AcceptDomainTra
 	}
 }
 
+func validateOpAssociateDelegationSignerToDomainInput(v *AssociateDelegationSignerToDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateDelegationSignerToDomainInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.SigningAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SigningAttributes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelDomainTransferToAnotherAwsAccountInput(v *CancelDomainTransferToAnotherAwsAccountInput) error {
 	if v == nil {
 		return nil
@@ -868,6 +997,24 @@ func validateOpDisableDomainTransferLockInput(v *DisableDomainTransferLockInput)
 	invalidParams := smithy.InvalidParamsError{Context: "DisableDomainTransferLockInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateDelegationSignerFromDomainInput(v *DisassociateDelegationSignerFromDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateDelegationSignerFromDomainInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -991,6 +1138,24 @@ func validateOpListTagsForDomainInput(v *ListTagsForDomainInput) error {
 	}
 }
 
+func validateOpPushDomainInput(v *PushDomainInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PushDomainInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRegisterDomainInput(v *RegisterDomainInput) error {
 	if v == nil {
 		return nil
@@ -1052,6 +1217,21 @@ func validateOpRenewDomainInput(v *RenewDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RenewDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResendOperationAuthorizationInput(v *ResendOperationAuthorizationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResendOperationAuthorizationInput"}
+	if v.OperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1158,6 +1338,11 @@ func validateOpUpdateDomainContactInput(v *UpdateDomainContactInput) error {
 	if v.TechContact != nil {
 		if err := validateContactDetail(v.TechContact); err != nil {
 			invalidParams.AddNested("TechContact", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Consent != nil {
+		if err := validateConsent(v.Consent); err != nil {
+			invalidParams.AddNested("Consent", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

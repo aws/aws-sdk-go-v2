@@ -89,8 +89,6 @@ type UpdateDomainContactPrivacyOutput struct {
 
 	// Identifier for tracking the progress of the request. To use this ID to query the
 	// operation status, use GetOperationDetail.
-	//
-	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

@@ -13,7 +13,7 @@ import (
 )
 
 // Creates a streaming session in a studio. After invoking this operation, you must
-// poll GetStreamingSession until the streaming session is in state READY.
+// poll GetStreamingSession until the streaming session is in the READY state.
 func (c *Client) CreateStreamingSession(ctx context.Context, params *CreateStreamingSessionInput, optFns ...func(*Options)) (*CreateStreamingSessionOutput, error) {
 	if params == nil {
 		params = &CreateStreamingSessionInput{}
@@ -31,21 +31,24 @@ func (c *Client) CreateStreamingSession(ctx context.Context, params *CreateStrea
 
 type CreateStreamingSessionInput struct {
 
+	// The ID of the launch profile used to control access from the streaming session.
+	//
+	// This member is required.
+	LaunchProfileId *string
+
 	// The studio ID.
 	//
 	// This member is required.
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don’t specify a client token, the AWS SDK automatically
-	// generates a client token and uses it for the request to ensure idempotency.
+	// the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// automatically generates a client token and uses it for the request to ensure
+	// idempotency.
 	ClientToken *string
 
 	// The EC2 Instance type used for the streaming session.
 	Ec2InstanceType types.StreamingInstanceType
-
-	// The launch profile ID.
-	LaunchProfileId *string
 
 	// The user ID of the user that owns the streaming session. The user that owns the
 	// session will be logging into the session and interacting with the virtual
@@ -55,7 +58,7 @@ type CreateStreamingSessionInput struct {
 	// The ID of the streaming image.
 	StreamingImageId *string
 
-	// A collection of labels, in the form of key:value pairs, that apply to this
+	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
 	Tags map[string]string
 

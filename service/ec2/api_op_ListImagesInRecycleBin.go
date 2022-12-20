@@ -15,7 +15,7 @@ import (
 // Lists one or more AMIs that are currently in the Recycle Bin. For more
 // information, see Recycle Bin
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/recycle-bin.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// Amazon EC2 User Guide.
 func (c *Client) ListImagesInRecycleBin(ctx context.Context, params *ListImagesInRecycleBinInput, optFns ...func(*Options)) (*ListImagesInRecycleBinOutput, error) {
 	if params == nil {
 		params = &ListImagesInRecycleBinInput{}

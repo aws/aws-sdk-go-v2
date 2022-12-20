@@ -28,10 +28,10 @@ import (
 // support unencrypted snapshots. For more information,  Amazon EBS local snapshots
 // on Outposts
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami)
-// in the Amazon Elastic Compute Cloud User Guide. For more information about the
-// prerequisites and limits when copying an AMI, see Copy an AMI
+// in the Amazon EC2 User Guide. For more information about the prerequisites and
+// limits when copying an AMI, see Copy an AMI
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// Amazon EC2 User Guide.
 func (c *Client) CopyImage(ctx context.Context, params *CopyImageInput, optFns ...func(*Options)) (*CopyImageOutput, error) {
 	if params == nil {
 		params = &CopyImageInput{}
@@ -93,7 +93,7 @@ type CopyImageInput struct {
 	// the same Outpost. For more information, see  Copy AMIs from an Amazon Web
 	// Services Region to an Outpost
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// in the Amazon EC2 User Guide.
 	DestinationOutpostArn *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -108,7 +108,7 @@ type CopyImageInput struct {
 	// Amazon EBS is used unless you specify a non-default Key Management Service (KMS)
 	// KMS key using KmsKeyId. For more information, see Amazon EBS encryption
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
+	// Amazon EC2 User Guide.
 	Encrypted *bool
 
 	// The identifier of the symmetric Key Management Service (KMS) KMS key to use when

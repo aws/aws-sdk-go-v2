@@ -231,7 +231,17 @@ type ComputeResource struct {
 	// within the same VPC. Fargate compute resources can contain up to 16 subnets. For
 	// more information, see VPCs and subnets
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html) in the
-	// Amazon VPC User Guide.
+	// Amazon VPC User Guide. Batch on Amazon EC2 and Batch on Amazon EKS support Local
+	// Zones. For more information, see  Local Zones
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-local-zones)
+	// in the Amazon EC2 User Guide for Linux Instances, Amazon EKS and Amazon Web
+	// Services Local Zones
+	// (https://docs.aws.amazon.com/eks/latest/userguide/local-zones.html) in the
+	// Amazon EKS User Guide and  Amazon ECS clusters in Local Zones, Wavelength Zones,
+	// and Amazon Web Services Outposts
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-regions-zones.html#clusters-local-zones)
+	// in the Amazon ECS Developer Guide. Batch on Fargate doesn't currently support
+	// Local Zones.
 	//
 	// This member is required.
 	Subnets []string
@@ -290,8 +300,8 @@ type ComputeResource struct {
 	// than 20% of the current On-Demand price for that Amazon EC2 instance. You always
 	// pay the lowest (market) price and never more than your maximum percentage. If
 	// you leave this field empty, the default value is 100% of the On-Demand price.
-	// This parameter isn't applicable to jobs that are running on Fargate resources.
-	// Don't specify it.
+	// For most use cases, we recommend leaving this field empty. This parameter isn't
+	// applicable to jobs that are running on Fargate resources. Don't specify it.
 	BidPercentage *int32
 
 	// The desired number of Amazon EC2 vCPUS in the compute environment. Batch
@@ -458,10 +468,10 @@ type ComputeResourceUpdate struct {
 	// On-Demand price for that instance type before instances are launched. For
 	// example, if your maximum percentage is 20%, the Spot price must be less than 20%
 	// of the current On-Demand price for that Amazon EC2 instance. You always pay the
-	// lowest (market) price and never more than your maximum percentage. When updating
-	// a compute environment, changing the bid percentage requires an infrastructure
-	// update of the compute environment. For more information, see Updating compute
-	// environments
+	// lowest (market) price and never more than your maximum percentage. For most use
+	// cases, we recommend leaving this field empty. When updating a compute
+	// environment, changing the bid percentage requires an infrastructure update of
+	// the compute environment. For more information, see Updating compute environments
 	// (https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html)
 	// in the Batch User Guide. This parameter isn't applicable to jobs that are
 	// running on Fargate resources. Don't specify it.
@@ -619,7 +629,17 @@ type ComputeResourceUpdate struct {
 	// subnets requires an infrastructure update of the compute environment. For more
 	// information, see Updating compute environments
 	// (https://docs.aws.amazon.com/batch/latest/userguide/updating-compute-environments.html)
-	// in the Batch User Guide.
+	// in the Batch User Guide. Batch on Amazon EC2 and Batch on Amazon EKS support
+	// Local Zones. For more information, see  Local Zones
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html#concepts-local-zones)
+	// in the Amazon EC2 User Guide for Linux Instances, Amazon EKS and Amazon Web
+	// Services Local Zones
+	// (https://docs.aws.amazon.com/eks/latest/userguide/local-zones.html) in the
+	// Amazon EKS User Guide and  Amazon ECS clusters in Local Zones, Wavelength Zones,
+	// and Amazon Web Services Outposts
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-regions-zones.html#clusters-local-zones)
+	// in the Amazon ECS Developer Guide. Batch on Fargate doesn't currently support
+	// Local Zones.
 	Subnets []string
 
 	// Key-value pair tags to be applied to EC2 resources that are launched in the
@@ -2143,6 +2163,12 @@ type JobDetail struct {
 	// Only one of container, eksProperties, or nodeDetails is specified.
 	EksProperties *EksPropertiesDetail
 
+	// Indicates whether the job is canceled.
+	IsCancelled *bool
+
+	// Indicates whether the job is terminated.
+	IsTerminated *bool
+
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
 
@@ -2319,7 +2345,10 @@ type JobTimeout struct {
 
 	// The job timeout time (in seconds) that's measured from the job attempt's
 	// startedAt timestamp. After this time passes, Batch terminates your jobs if they
-	// aren't finished. The minimum value for the timeout is 60 seconds.
+	// aren't finished. The minimum value for the timeout is 60 seconds. For array
+	// jobs, the timeout applies to the child jobs, not to the parent array job. For
+	// multi-node parallel (MNP) jobs, the timeout applies to the whole job, not to the
+	// individual nodes.
 	AttemptDurationSeconds *int32
 
 	noSmithyDocumentSerde

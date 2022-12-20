@@ -1,0 +1,8 @@
+{
+    "id": "0d9c2367-d8e7-4d33-a6f2-35c46d4de325",
+    "type": "feature",
+    "description": "Documentation updates for AWS Resource Explorer.",
+    "modules": [
+        "service/resourceexplorer2"
+    ]
+}

@@ -83,8 +83,6 @@ type CheckDomainAvailabilityOutput struct {
 	// name has been reserved for another person or organization. UNAVAILABLE The
 	// domain name is not available. UNAVAILABLE_PREMIUM The domain name is not
 	// available. UNAVAILABLE_RESTRICTED The domain name is forbidden.
-	//
-	// This member is required.
 	Availability types.DomainAvailability
 
 	// Metadata pertaining to the operation's result.

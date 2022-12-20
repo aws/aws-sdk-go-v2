@@ -14,8 +14,9 @@ import (
 // This operation updates the contact information for a particular domain. You must
 // specify information for at least one contact: registrant, administrator, or
 // technical. If the update is successful, this method returns an operation ID that
-// you can use to track the progress and completion of the action. If the request
-// is not completed successfully, the domain registrant will be notified by email.
+// you can use to track the progress and completion of the operation. If the
+// request is not completed successfully, the domain registrant will be notified by
+// email.
 func (c *Client) UpdateDomainContact(ctx context.Context, params *UpdateDomainContactInput, optFns ...func(*Options)) (*UpdateDomainContactOutput, error) {
 	if params == nil {
 		params = &UpdateDomainContactInput{}
@@ -42,6 +43,9 @@ type UpdateDomainContactInput struct {
 	// Provides detailed contact information.
 	AdminContact *types.ContactDetail
 
+	// Customer's consent for the owner change request.
+	Consent *types.Consent
+
 	// Provides detailed contact information.
 	RegistrantContact *types.ContactDetail
 
@@ -57,8 +61,6 @@ type UpdateDomainContactOutput struct {
 	// Identifier for tracking the progress of the request. To query the operation
 	// status, use GetOperationDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
-	//
-	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

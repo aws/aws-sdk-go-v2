@@ -22,7 +22,7 @@ import (
 // updates your domain registration with the names of these name servers.
 //
 // *
-// Enables autorenew, so your domain registration will renew automatically each
+// Enables auto renew, so your domain registration will renew automatically each
 // year. We'll notify you in advance of the renewal date so you can choose whether
 // to renew the registration.
 //
@@ -121,7 +121,7 @@ type RegisterDomainInput struct {
 	TechContact *types.ContactDetail
 
 	// Indicates whether the domain will be automatically renewed (true) or not
-	// (false). Autorenewal only takes effect after the account is charged. Default:
+	// (false). Auto renewal only takes effect after the account is charged. Default:
 	// true
 	AutoRenew *bool
 
@@ -164,8 +164,6 @@ type RegisterDomainOutput struct {
 	// Identifier for tracking the progress of the request. To query the operation
 	// status, use GetOperationDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
-	//
-	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

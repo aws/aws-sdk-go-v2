@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation returns the AuthCode for the domain. To transfer a domain to
-// another registrar, you provide this value to the new registrar.
+// This operation returns the authorization code for the domain. To transfer a
+// domain to another registrar, you provide this value to the new registrar.
 func (c *Client) RetrieveDomainAuthCode(ctx context.Context, params *RetrieveDomainAuthCodeInput, optFns ...func(*Options)) (*RetrieveDomainAuthCodeOutput, error) {
 	if params == nil {
 		params = &RetrieveDomainAuthCodeInput{}
@@ -43,8 +43,6 @@ type RetrieveDomainAuthCodeInput struct {
 type RetrieveDomainAuthCodeOutput struct {
 
 	// The authorization code for the domain.
-	//
-	// This member is required.
 	AuthCode *string
 
 	// Metadata pertaining to the operation's result.

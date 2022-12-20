@@ -554,11 +554,19 @@ type AutoMLMetricEnum string
 
 // Enum values for AutoMLMetricEnum
 const (
-	AutoMLMetricEnumAccuracy AutoMLMetricEnum = "Accuracy"
-	AutoMLMetricEnumMse      AutoMLMetricEnum = "MSE"
-	AutoMLMetricEnumF1       AutoMLMetricEnum = "F1"
-	AutoMLMetricEnumF1Macro  AutoMLMetricEnum = "F1macro"
-	AutoMLMetricEnumAuc      AutoMLMetricEnum = "AUC"
+	AutoMLMetricEnumAccuracy         AutoMLMetricEnum = "Accuracy"
+	AutoMLMetricEnumMse              AutoMLMetricEnum = "MSE"
+	AutoMLMetricEnumF1               AutoMLMetricEnum = "F1"
+	AutoMLMetricEnumF1Macro          AutoMLMetricEnum = "F1macro"
+	AutoMLMetricEnumAuc              AutoMLMetricEnum = "AUC"
+	AutoMLMetricEnumRmse             AutoMLMetricEnum = "RMSE"
+	AutoMLMetricEnumMae              AutoMLMetricEnum = "MAE"
+	AutoMLMetricEnumR2               AutoMLMetricEnum = "R2"
+	AutoMLMetricEnumBalancedAccuracy AutoMLMetricEnum = "BalancedAccuracy"
+	AutoMLMetricEnumPrecision        AutoMLMetricEnum = "Precision"
+	AutoMLMetricEnumPrecisionMacro   AutoMLMetricEnum = "PrecisionMacro"
+	AutoMLMetricEnumRecall           AutoMLMetricEnum = "Recall"
+	AutoMLMetricEnumRecallMacro      AutoMLMetricEnum = "RecallMacro"
 )
 
 // Values returns all known values for AutoMLMetricEnum. Note that this can be
@@ -571,6 +579,14 @@ func (AutoMLMetricEnum) Values() []AutoMLMetricEnum {
 		"F1",
 		"F1macro",
 		"AUC",
+		"RMSE",
+		"MAE",
+		"R2",
+		"BalancedAccuracy",
+		"Precision",
+		"PrecisionMacro",
+		"Recall",
+		"RecallMacro",
 	}
 }
 

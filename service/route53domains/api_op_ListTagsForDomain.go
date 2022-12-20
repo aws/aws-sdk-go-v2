@@ -44,8 +44,6 @@ type ListTagsForDomainInput struct {
 type ListTagsForDomainOutput struct {
 
 	// A list of the tags that are associated with the specified domain.
-	//
-	// This member is required.
 	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.

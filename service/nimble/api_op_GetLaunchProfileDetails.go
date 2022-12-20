@@ -33,7 +33,7 @@ func (c *Client) GetLaunchProfileDetails(ctx context.Context, params *GetLaunchP
 
 type GetLaunchProfileDetailsInput struct {
 
-	// The Launch Profile ID.
+	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
 	LaunchProfileId *string

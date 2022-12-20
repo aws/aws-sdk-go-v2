@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get Eula.
+// Get EULA.
 func (c *Client) GetEula(ctx context.Context, params *GetEulaInput, optFns ...func(*Options)) (*GetEulaOutput, error) {
 	if params == nil {
 		params = &GetEulaInput{}

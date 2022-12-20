@@ -30,7 +30,7 @@ func (c *Client) ListLaunchProfileMembers(ctx context.Context, params *ListLaunc
 
 type ListLaunchProfileMembersInput struct {
 
-	// The Launch Profile ID.
+	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
 	LaunchProfileId *string
@@ -41,9 +41,9 @@ type ListLaunchProfileMembersInput struct {
 	StudioId *string
 
 	// The max number of results to return in the response.
-	MaxResults int32
+	MaxResults *int32
 
-	// The token to request the next page of results.
+	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -162,8 +162,8 @@ func NewListLaunchProfileMembersPaginator(client ListLaunchProfileMembersAPIClie
 	}
 
 	options := ListLaunchProfileMembersPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -193,7 +193,11 @@ func (p *ListLaunchProfileMembersPaginator) NextPage(ctx context.Context, optFns
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListLaunchProfileMembers(ctx, &params, optFns...)
 	if err != nil {

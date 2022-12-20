@@ -64,16 +64,14 @@ type ListPricesInput struct {
 
 type ListPricesOutput struct {
 
-	// A complex type that includes all the pricing information. If you specify a TLD,
-	// this array contains only the pricing for that TLD.
-	//
-	// This member is required.
-	Prices []types.DomainPrice
-
 	// If there are more prices than you specified for MaxItems in the request, submit
 	// another request and include the value of NextPageMarker in the value of Marker.
 	// Used only for all TLDs. If you specify a TLD, don't specify a NextPageMarker.
 	NextPageMarker *string
+
+	// A complex type that includes all the pricing information. If you specify a TLD,
+	// this array contains only the pricing for that TLD.
+	Prices []types.DomainPrice
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

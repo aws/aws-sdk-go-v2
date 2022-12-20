@@ -1,0 +1,8 @@
+{
+    "id": "982bf10c-4466-48db-979f-737b52af9337",
+    "type": "feature",
+    "description": "This release adds support for listing inference schedulers by status.",
+    "modules": [
+        "service/lookoutequipment"
+    ]
+}

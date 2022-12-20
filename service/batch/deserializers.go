@@ -6871,6 +6871,24 @@ func awsRestjson1_deserializeDocumentJobDetail(v **types.JobDetail, value interf
 				return err
 			}
 
+		case "isCancelled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsCancelled = ptr.Bool(jtv)
+			}
+
+		case "isTerminated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsTerminated = ptr.Bool(jtv)
+			}
+
 		case "jobArn":
 			if value != nil {
 				jtv, ok := value.(string)

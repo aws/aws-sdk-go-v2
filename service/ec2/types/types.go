@@ -4948,7 +4948,7 @@ type Image struct {
 
 	// The boot mode of the image. For more information, see Boot modes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
+	// Amazon EC2 User Guide.
 	BootMode BootModeValues
 
 	// The date and time the image was created.
@@ -4987,7 +4987,7 @@ type Image struct {
 	// metadata. In addition, HttpPutResponseHopLimit is set to 2. For more
 	// information, see Configure the AMI
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// in the Amazon EC2 User Guide.
 	ImdsSupport ImdsSupportValues
 
 	// The kernel associated with the image, if any. Only applicable for machine
@@ -5006,7 +5006,7 @@ type Image struct {
 	// The platform details associated with the billing code of the AMI. For more
 	// information, see Understand AMI billing information
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html) in
-	// the Amazon Elastic Compute Cloud User Guide.
+	// the Amazon EC2 User Guide.
 	PlatformDetails *string
 
 	// Any product codes associated with the AMI.
@@ -5045,7 +5045,7 @@ type Image struct {
 	// If the image is configured for NitroTPM support, the value is v2.0. For more
 	// information, see NitroTPM
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
+	// Amazon EC2 User Guide.
 	TpmSupport TpmSupportValues
 
 	// The operation of the Amazon EC2 instance and the billing code that is associated

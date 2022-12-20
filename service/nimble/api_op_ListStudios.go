@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List studios in your Amazon Web Services account in the requested Amazon Web
+// List studios in your Amazon Web Services accounts in the requested Amazon Web
 // Services Region.
 func (c *Client) ListStudios(ctx context.Context, params *ListStudiosInput, optFns ...func(*Options)) (*ListStudiosOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) ListStudios(ctx context.Context, params *ListStudiosInput, optF
 
 type ListStudiosInput struct {
 
-	// The token to request the next page of results.
+	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	noSmithyDocumentSerde

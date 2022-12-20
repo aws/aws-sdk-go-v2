@@ -1,0 +1,8 @@
+{
+    "id": "2bcc056c-89db-44b0-adc4-ded51dc2d378",
+    "type": "feature",
+    "description": "Adds support for pagination in the EC2 DescribeImages API.",
+    "modules": [
+        "service/ec2"
+    ]
+}

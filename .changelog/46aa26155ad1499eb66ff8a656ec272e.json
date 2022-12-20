@@ -1,0 +1,8 @@
+{
+    "id": "46aa2615-5ad1-499e-b66f-f8a656ec272e",
+    "type": "feature",
+    "description": "Amazon Nimble Studio now supports configuring session storage volumes and persistence, as well as backup and restore sessions through launch profiles.",
+    "modules": [
+        "service/nimble"
+    ]
+}

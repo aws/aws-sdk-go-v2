@@ -12,8 +12,8 @@ import (
 
 // Removes your Amazon Web Services account from the launch permissions for the
 // specified AMI. For more information, see Cancel having an AMI shared with your
-// Amazon Web Services account (https://docs.aws.amazon.com/) in the Amazon Elastic
-// Compute Cloud User Guide.
+// Amazon Web Services account (https://docs.aws.amazon.com/) in the Amazon EC2
+// User Guide.
 func (c *Client) CancelImageLaunchPermission(ctx context.Context, params *CancelImageLaunchPermissionInput, optFns ...func(*Options)) (*CancelImageLaunchPermissionOutput, error) {
 	if params == nil {
 		params = &CancelImageLaunchPermissionInput{}

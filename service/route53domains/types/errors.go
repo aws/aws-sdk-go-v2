@@ -7,6 +7,27 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// This error is returned if you call AssociateDelegationSignerToDomain when the
+// specified domain has reached the maximum number of DS records. You can't add any
+// additional DS records unless you delete an existing one first.
+type DnssecLimitExceeded struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *DnssecLimitExceeded) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DnssecLimitExceeded) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DnssecLimitExceeded) ErrorCode() string             { return "DnssecLimitExceeded" }
+func (e *DnssecLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The number of domains has exceeded the allowed threshold for the account.
 type DomainLimitExceeded struct {
 	Message *string

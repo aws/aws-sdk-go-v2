@@ -113,7 +113,7 @@ type TransferDomainInput struct {
 	AuthCode *string
 
 	// Indicates whether the domain will be automatically renewed (true) or not
-	// (false). Autorenewal only takes effect after the account is charged. Default:
+	// (false). Auto renewal only takes effect after the account is charged. Default:
 	// true
 	AutoRenew *bool
 
@@ -159,8 +159,6 @@ type TransferDomainOutput struct {
 	// Identifier for tracking the progress of the request. To query the operation
 	// status, use GetOperationDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
-	//
-	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

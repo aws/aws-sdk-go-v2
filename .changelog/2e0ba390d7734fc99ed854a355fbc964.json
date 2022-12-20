@@ -1,0 +1,8 @@
+{
+    "id": "2e0ba390-d773-4fc9-9ed8-54a355fbc964",
+    "type": "feature",
+    "description": "Use Route 53 domain APIs to change owner, create/delete DS record, modify IPS tag, resend authorization. New: AssociateDelegationSignerToDomain, DisassociateDelegationSignerFromDomain, PushDomain, ResendOperationAuthorization. Updated: UpdateDomainContact, ListOperations, CheckDomainTransferability.",
+    "modules": [
+        "service/route53domains"
+    ]
+}

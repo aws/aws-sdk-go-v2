@@ -13,7 +13,7 @@ import (
 // Cancels the deprecation of the specified AMI. For more information, see
 // Deprecate an AMI
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-deprecate.html) in the
-// Amazon Elastic Compute Cloud User Guide.
+// Amazon EC2 User Guide.
 func (c *Client) DisableImageDeprecation(ctx context.Context, params *DisableImageDeprecationInput, optFns ...func(*Options)) (*DisableImageDeprecationOutput, error) {
 	if params == nil {
 		params = &DisableImageDeprecationInput{}

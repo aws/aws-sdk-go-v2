@@ -13,6 +13,7 @@ import (
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"math"
 	"path"
 )
 
@@ -56,6 +57,61 @@ func (m *awsAwsjson11_serializeOpAcceptDomainTransferFromAnotherAwsAccount) Hand
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentAcceptDomainTransferFromAnotherAwsAccountInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpAssociateDelegationSignerToDomain struct {
+}
+
+func (*awsAwsjson11_serializeOpAssociateDelegationSignerToDomain) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpAssociateDelegationSignerToDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateDelegationSignerToDomainInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.AssociateDelegationSignerToDomain")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentAssociateDelegationSignerToDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -441,6 +497,61 @@ func (m *awsAwsjson11_serializeOpDisableDomainTransferLock) HandleSerialize(ctx 
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDisableDomainTransferLockInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDisassociateDelegationSignerFromDomain struct {
+}
+
+func (*awsAwsjson11_serializeOpDisassociateDelegationSignerFromDomain) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDisassociateDelegationSignerFromDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateDelegationSignerFromDomainInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.DisassociateDelegationSignerFromDomain")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDisassociateDelegationSignerFromDomainInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1006,6 +1117,61 @@ func (m *awsAwsjson11_serializeOpListTagsForDomain) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpPushDomain struct {
+}
+
+func (*awsAwsjson11_serializeOpPushDomain) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpPushDomain) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PushDomainInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.PushDomain")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentPushDomainInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpRegisterDomain struct {
 }
 
@@ -1211,6 +1377,61 @@ func (m *awsAwsjson11_serializeOpResendContactReachabilityEmail) HandleSerialize
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentResendContactReachabilityEmailInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpResendOperationAuthorization struct {
+}
+
+func (*awsAwsjson11_serializeOpResendOperationAuthorization) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpResendOperationAuthorization) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ResendOperationAuthorizationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("Route53Domains_v20140515.ResendOperationAuthorization")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentResendOperationAuthorizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1665,6 +1886,36 @@ func (m *awsAwsjson11_serializeOpViewBilling) HandleSerialize(ctx context.Contex
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentConsent(v *types.Consent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Currency != nil {
+		ok := object.Key("Currency")
+		ok.String(*v.Currency)
+	}
+
+	{
+		ok := object.Key("MaxPrice")
+		switch {
+		case math.IsNaN(v.MaxPrice):
+			ok.String("NaN")
+
+		case math.IsInf(v.MaxPrice, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MaxPrice, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MaxPrice)
+
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentContactDetail(v *types.ContactDetail, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1739,6 +1990,28 @@ func awsAwsjson11_serializeDocumentContactDetail(v *types.ContactDetail, value s
 	if v.ZipCode != nil {
 		ok := object.Key("ZipCode")
 		ok.String(*v.ZipCode)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDnssecSigningAttributes(v *types.DnssecSigningAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Algorithm != nil {
+		ok := object.Key("Algorithm")
+		ok.Integer(*v.Algorithm)
+	}
+
+	if v.Flags != nil {
+		ok := object.Key("Flags")
+		ok.Integer(*v.Flags)
+	}
+
+	if v.PublicKey != nil {
+		ok := object.Key("PublicKey")
+		ok.String(*v.PublicKey)
 	}
 
 	return nil
@@ -1854,6 +2127,28 @@ func awsAwsjson11_serializeDocumentNameserverList(v []types.Nameserver, value sm
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOperationStatusList(v []types.OperationStatus, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentOperationTypeList(v []types.OperationType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSortCondition(v *types.SortCondition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1935,6 +2230,25 @@ func awsAwsjson11_serializeOpDocumentAcceptDomainTransferFromAnotherAwsAccountIn
 	if v.Password != nil {
 		ok := object.Key("Password")
 		ok.String(*v.Password)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentAssociateDelegationSignerToDomainInput(v *AssociateDelegationSignerToDomainInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.SigningAttributes != nil {
+		ok := object.Key("SigningAttributes")
+		if err := awsAwsjson11_serializeDocumentDnssecSigningAttributes(v.SigningAttributes, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2036,6 +2350,23 @@ func awsAwsjson11_serializeOpDocumentDisableDomainTransferLockInput(v *DisableDo
 	if v.DomainName != nil {
 		ok := object.Key("DomainName")
 		ok.String(*v.DomainName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDisassociateDelegationSignerFromDomainInput(v *DisassociateDelegationSignerFromDomainInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
 	}
 
 	return nil
@@ -2168,9 +2499,33 @@ func awsAwsjson11_serializeOpDocumentListOperationsInput(v *ListOperationsInput,
 		ok.Integer(*v.MaxItems)
 	}
 
+	if len(v.SortBy) > 0 {
+		ok := object.Key("SortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("SortOrder")
+		ok.String(string(v.SortOrder))
+	}
+
+	if v.Status != nil {
+		ok := object.Key("Status")
+		if err := awsAwsjson11_serializeDocumentOperationStatusList(v.Status, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SubmittedSince != nil {
 		ok := object.Key("SubmittedSince")
 		ok.Double(smithytime.FormatEpochSeconds(*v.SubmittedSince))
+	}
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		if err := awsAwsjson11_serializeDocumentOperationTypeList(v.Type, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2205,6 +2560,23 @@ func awsAwsjson11_serializeOpDocumentListTagsForDomainInput(v *ListTagsForDomain
 	if v.DomainName != nil {
 		ok := object.Key("DomainName")
 		ok.String(*v.DomainName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentPushDomainInput(v *PushDomainInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DomainName != nil {
+		ok := object.Key("DomainName")
+		ok.String(*v.DomainName)
+	}
+
+	if v.Target != nil {
+		ok := object.Key("Target")
+		ok.String(*v.Target)
 	}
 
 	return nil
@@ -2314,6 +2686,18 @@ func awsAwsjson11_serializeOpDocumentResendContactReachabilityEmailInput(v *Rese
 	if v.DomainName != nil {
 		ok := object.Key("domainName")
 		ok.String(*v.DomainName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentResendOperationAuthorizationInput(v *ResendOperationAuthorizationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.OperationId != nil {
+		ok := object.Key("OperationId")
+		ok.String(*v.OperationId)
 	}
 
 	return nil
@@ -2430,6 +2814,13 @@ func awsAwsjson11_serializeOpDocumentUpdateDomainContactInput(v *UpdateDomainCon
 	if v.AdminContact != nil {
 		ok := object.Key("AdminContact")
 		if err := awsAwsjson11_serializeDocumentContactDetail(v.AdminContact, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Consent != nil {
+		ok := object.Key("Consent")
+		if err := awsAwsjson11_serializeDocumentConsent(v.Consent, ok); err != nil {
 			return err
 		}
 	}

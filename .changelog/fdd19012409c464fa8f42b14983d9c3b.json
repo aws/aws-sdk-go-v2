@@ -1,0 +1,8 @@
+{
+    "id": "fdd19012-409c-464f-a8f4-2b14983d9c3b",
+    "type": "feature",
+    "description": "This release adds support for two new features to AWS Elemental MediaLive. First, you can now burn-in timecodes to your MediaLive outputs. Second, we now now support the ability to decode Dolby E audio when it comes in on an input.",
+    "modules": [
+        "service/medialive"
+    ]
+}

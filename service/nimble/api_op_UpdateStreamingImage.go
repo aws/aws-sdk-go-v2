@@ -41,8 +41,9 @@ type UpdateStreamingImageInput struct {
 	StudioId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don’t specify a client token, the AWS SDK automatically
-	// generates a client token and uses it for the request to ensure idempotency.
+	// the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// automatically generates a client token and uses it for the request to ensure
+	// idempotency.
 	ClientToken *string
 
 	// The description.
@@ -60,8 +61,8 @@ type UpdateStreamingImageOutput struct {
 	// to select which operating system and software they want to use in a Nimble
 	// Studio streaming session. Amazon provides a number of streaming images that
 	// include popular 3rd-party software. You can create your own streaming images
-	// using an Amazon Elastic Compute Cloud (Amazon EC2) machine image that you create
-	// for this purpose. You can also include software that your users require.
+	// using an Amazon EC2 machine image that you create for this purpose. You can also
+	// include software that your users require.
 	StreamingImage *types.StreamingImage
 
 	// Metadata pertaining to the operation's result.

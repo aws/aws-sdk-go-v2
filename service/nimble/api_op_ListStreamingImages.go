@@ -37,7 +37,7 @@ type ListStreamingImagesInput struct {
 	// This member is required.
 	StudioId *string
 
-	// The token to request the next page of results.
+	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	// Filter this request to streaming images with the given owner
