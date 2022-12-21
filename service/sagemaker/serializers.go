@@ -18826,6 +18826,13 @@ func awsAwsjson11_serializeDocumentDomainSettingsForUpdate(v *types.DomainSettin
 		}
 	}
 
+	if v.SecurityGroupIds != nil {
+		ok := object.Key("SecurityGroupIds")
+		if err := awsAwsjson11_serializeDocumentDomainSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -23761,6 +23768,16 @@ func awsAwsjson11_serializeDocumentRStudioServerProDomainSettingsForUpdate(v *ty
 	if v.DomainExecutionRoleArn != nil {
 		ok := object.Key("DomainExecutionRoleArn")
 		ok.String(*v.DomainExecutionRoleArn)
+	}
+
+	if v.RStudioConnectUrl != nil {
+		ok := object.Key("RStudioConnectUrl")
+		ok.String(*v.RStudioConnectUrl)
+	}
+
+	if v.RStudioPackageManagerUrl != nil {
+		ok := object.Key("RStudioPackageManagerUrl")
+		ok.String(*v.RStudioPackageManagerUrl)
 	}
 
 	return nil
@@ -33421,6 +33438,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDevicesInput(v *UpdateDevicesInput, v
 func awsAwsjson11_serializeOpDocumentUpdateDomainInput(v *UpdateDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AppSecurityGroupManagement) > 0 {
+		ok := object.Key("AppSecurityGroupManagement")
+		ok.String(string(v.AppSecurityGroupManagement))
+	}
 
 	if v.DefaultSpaceSettings != nil {
 		ok := object.Key("DefaultSpaceSettings")

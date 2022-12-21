@@ -1258,6 +1258,24 @@ func addOpUpdateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUser{}, middleware.After)
 }
 
+func validateDecryptStepDetails(v *types.DecryptStepDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DecryptStepDetails"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.DestinationFileLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationFileLocation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHomeDirectoryMapEntry(v *types.HomeDirectoryMapEntry) error {
 	if v == nil {
 		return nil
@@ -1480,6 +1498,11 @@ func validateWorkflowStep(v *types.WorkflowStep) error {
 	if v.TagStepDetails != nil {
 		if err := validateTagStepDetails(v.TagStepDetails); err != nil {
 			invalidParams.AddNested("TagStepDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DecryptStepDetails != nil {
+		if err := validateDecryptStepDetails(v.DecryptStepDetails); err != nil {
+			invalidParams.AddNested("DecryptStepDetails", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

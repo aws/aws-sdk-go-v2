@@ -3752,6 +3752,10 @@ type DomainSettingsForUpdate struct {
 	// A collection of RStudioServerPro Domain-level app settings to update.
 	RStudioServerProDomainSettingsForUpdate *RStudioServerProDomainSettingsForUpdate
 
+	// The security groups for the Amazon Virtual Private Cloud that the Domain uses
+	// for communication between Domain-level apps and user apps.
+	SecurityGroupIds []string
+
 	noSmithyDocumentSerde
 }
 
@@ -6835,7 +6839,7 @@ type HyperParameterTuningInstanceConfig struct {
 	// The number of instances of the type specified by InstanceType. Choose an
 	// instance count larger than 1 for distributed training algorithms. See SageMaker
 	// distributed training jobs
-	// (https://docs.aws.amazon.com/data-parallel-use-api.html) for more information.
+	// (https://docs.aws.amazon.com/data-parallel-use-api.html) for more informcration.
 	//
 	// This member is required.
 	InstanceCount int32
@@ -13187,6 +13191,12 @@ type RStudioServerProDomainSettingsForUpdate struct {
 	// Specifies the ARN's of a SageMaker image and SageMaker image version, and the
 	// instance type that the version runs on.
 	DefaultResourceSpec *ResourceSpec
+
+	// A URL pointing to an RStudio Connect server.
+	RStudioConnectUrl *string
+
+	// A URL pointing to an RStudio Package Manager server.
+	RStudioPackageManagerUrl *string
 
 	noSmithyDocumentSerde
 }

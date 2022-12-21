@@ -13,23 +13,30 @@ import (
 
 // Returns information about all available Trusted Advisor checks, including the
 // name, ID, category, description, and metadata. You must specify a language code.
-// The Amazon Web Services Support API currently supports English ("en") and
-// Japanese ("ja"). The response contains a TrustedAdvisorCheckDescription object
-// for each check. You must set the Amazon Web Services Region to us-east-1.
+// The response contains a TrustedAdvisorCheckDescription object for each check.
+// You must set the Amazon Web Services Region to us-east-1.
 //
-// * You
-// must have a Business, Enterprise On-Ramp, or Enterprise Support plan to use the
-// Amazon Web Services Support API.
+// * You must have a
+// Business, Enterprise On-Ramp, or Enterprise Support plan to use the Amazon Web
+// Services Support API.
 //
-// * If you call the Amazon Web Services Support
-// API from an account that does not have a Business, Enterprise On-Ramp, or
-// Enterprise Support plan, the SubscriptionRequiredException error message
-// appears. For information about changing your support plan, see Amazon Web
-// Services Support (http://aws.amazon.com/premiumsupport/).
+// * If you call the Amazon Web Services Support API from an
+// account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
+// plan, the SubscriptionRequiredException error message appears. For information
+// about changing your support plan, see Amazon Web Services Support
+// (http://aws.amazon.com/premiumsupport/).
 //
-// * The names and
-// descriptions for Trusted Advisor checks are subject to change. We recommend that
-// you specify the check ID in your code to uniquely identify a check.
+// * The names and descriptions for
+// Trusted Advisor checks are subject to change. We recommend that you specify the
+// check ID in your code to uniquely identify a check.
+//
+// To call the Trusted Advisor
+// operations in the Amazon Web Services Support API, you must use the US East (N.
+// Virginia) endpoint. Currently, the US West (Oregon) and Europe (Ireland)
+// endpoints don't support the Trusted Advisor operations. For more information,
+// see About the Amazon Web Services Support API
+// (https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint)
+// in the Amazon Web Services Support User Guide.
 func (c *Client) DescribeTrustedAdvisorChecks(ctx context.Context, params *DescribeTrustedAdvisorChecksInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorChecksOutput, error) {
 	if params == nil {
 		params = &DescribeTrustedAdvisorChecksInput{}
@@ -47,10 +54,33 @@ func (c *Client) DescribeTrustedAdvisorChecks(ctx context.Context, params *Descr
 
 type DescribeTrustedAdvisorChecksInput struct {
 
-	// The ISO 639-1 code for the language in which Amazon Web Services provides
-	// support. Amazon Web Services Support currently supports English ("en") and
-	// Japanese ("ja"). Language parameters must be passed explicitly for operations
-	// that take them.
+	// The ISO 639-1 code for the language that you want your checks to appear in. The
+	// Amazon Web Services Support API currently supports the following languages for
+	// Trusted Advisor:
+	//
+	// * Chinese, Simplified - zh
+	//
+	// * Chinese, Traditional - zh_TW
+	//
+	// *
+	// English - en
+	//
+	// * French - fr
+	//
+	// * German - de
+	//
+	// * Indonesian - id
+	//
+	// * Italian - it
+	//
+	// *
+	// Japanese - ja
+	//
+	// * Korean - ko
+	//
+	// * Portuguese, Brazilian - pt_BR
+	//
+	// * Spanish - es
 	//
 	// This member is required.
 	Language *string

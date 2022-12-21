@@ -941,6 +941,8 @@ const (
 	StorageClassDeepArchive        StorageClass = "DEEP_ARCHIVE"
 	StorageClassOnezoneIa          StorageClass = "ONEZONE_IA"
 	StorageClassGlacier            StorageClass = "GLACIER"
+	StorageClassGlacierIr          StorageClass = "GLACIER_IR"
+	StorageClassOutposts           StorageClass = "OUTPOSTS"
 )
 
 // Values returns all known values for StorageClass. Note that this can be expanded
@@ -955,6 +957,8 @@ func (StorageClass) Values() []StorageClass {
 		"DEEP_ARCHIVE",
 		"ONEZONE_IA",
 		"GLACIER",
+		"GLACIER_IR",
+		"OUTPOSTS",
 	}
 }
 

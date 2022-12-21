@@ -1,0 +1,8 @@
+{
+    "id": "46934085-dfce-4947-8bf2-9053436fc668",
+    "type": "feature",
+    "description": "This release adds support for analyzing Amazon S3 objects that use the S3 Glacier Instant Retrieval (Glacier_IR) storage class.",
+    "modules": [
+        "service/macie2"
+    ]
+}

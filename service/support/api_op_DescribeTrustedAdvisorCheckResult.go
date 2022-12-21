@@ -39,11 +39,19 @@ import (
 // Support plan to use the Amazon Web Services Support API.
 //
 // * If you call the
-// Amazon Web Services Support API from an account that does not have a Business,
+// Amazon Web Services Support API from an account that doesn't have a Business,
 // Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about
 // changing your support plan, see Amazon Web Services Support
 // (http://aws.amazon.com/premiumsupport/).
+//
+// To call the Trusted Advisor operations
+// in the Amazon Web Services Support API, you must use the US East (N. Virginia)
+// endpoint. Currently, the US West (Oregon) and Europe (Ireland) endpoints don't
+// support the Trusted Advisor operations. For more information, see About the
+// Amazon Web Services Support API
+// (https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint)
+// in the Amazon Web Services Support User Guide.
 func (c *Client) DescribeTrustedAdvisorCheckResult(ctx context.Context, params *DescribeTrustedAdvisorCheckResultInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorCheckResultOutput, error) {
 	if params == nil {
 		params = &DescribeTrustedAdvisorCheckResultInput{}
@@ -66,10 +74,34 @@ type DescribeTrustedAdvisorCheckResultInput struct {
 	// This member is required.
 	CheckId *string
 
-	// The ISO 639-1 code for the language in which Amazon Web Services provides
-	// support. Amazon Web Services Support currently supports English ("en") and
-	// Japanese ("ja"). Language parameters must be passed explicitly for operations
-	// that take them.
+	// The ISO 639-1 code for the language that you want your check results to appear
+	// in. The Amazon Web Services Support API currently supports the following
+	// languages for Trusted Advisor:
+	//
+	// * Chinese, Simplified - zh
+	//
+	// * Chinese,
+	// Traditional - zh_TW
+	//
+	// * English - en
+	//
+	// * French - fr
+	//
+	// * German - de
+	//
+	// * Indonesian
+	// - id
+	//
+	// * Italian - it
+	//
+	// * Japanese - ja
+	//
+	// * Korean - ko
+	//
+	// * Portuguese, Brazilian -
+	// pt_BR
+	//
+	// * Spanish - es
 	Language *string
 
 	noSmithyDocumentSerde

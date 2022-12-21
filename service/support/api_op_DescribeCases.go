@@ -33,7 +33,7 @@ import (
 // or Enterprise Support plan to use the Amazon Web Services Support API.
 //
 // * If you
-// call the Amazon Web Services Support API from an account that does not have a
+// call the Amazon Web Services Support API from an account that doesn't have a
 // Business, Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about
 // changing your support plan, see Amazon Web Services Support
@@ -79,10 +79,10 @@ type DescribeCasesInput struct {
 	// response. By default, resolved cases aren't included.
 	IncludeResolvedCases bool
 
-	// The ISO 639-1 code for the language in which Amazon Web Services provides
-	// support. Amazon Web Services Support currently supports English ("en") and
-	// Japanese ("ja"). Language parameters must be passed explicitly for operations
-	// that take them.
+	// The language in which Amazon Web Services Support handles the case. Amazon Web
+	// Services Support currently supports English ("en") and Japanese ("ja"). You must
+	// specify the ISO 639-1 code for the language parameter if you want support in
+	// that language.
 	Language *string
 
 	// The maximum number of results to return before paginating.

@@ -20,7 +20,7 @@ import (
 // API.
 //
 // * If you call the Amazon Web Services Support API from an account that
-// does not have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
+// doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about
 // changing your support plan, see Amazon Web Services Support
 // (http://aws.amazon.com/premiumsupport/).
@@ -41,10 +41,10 @@ func (c *Client) DescribeSeverityLevels(ctx context.Context, params *DescribeSev
 
 type DescribeSeverityLevelsInput struct {
 
-	// The ISO 639-1 code for the language in which Amazon Web Services provides
-	// support. Amazon Web Services Support currently supports English ("en") and
-	// Japanese ("ja"). Language parameters must be passed explicitly for operations
-	// that take them.
+	// The language in which Amazon Web Services Support handles the case. Amazon Web
+	// Services Support currently supports English ("en") and Japanese ("ja"). You must
+	// specify the ISO 639-1 code for the language parameter if you want support in
+	// that language.
 	Language *string
 
 	noSmithyDocumentSerde

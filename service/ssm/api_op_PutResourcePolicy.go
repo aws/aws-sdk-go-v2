@@ -38,13 +38,14 @@ type PutResourcePolicyInput struct {
 	// This member is required.
 	Policy *string
 
-	// Amazon Resource Name (ARN) of the resource to which the policies are attached.
+	// Amazon Resource Name (ARN) of the resource to which you want to attach a policy.
 	//
 	// This member is required.
 	ResourceArn *string
 
 	// ID of the current policy version. The hash helps to prevent a situation where
-	// multiple users attempt to overwrite a policy.
+	// multiple users attempt to overwrite a policy. You must provide this hash when
+	// updating or deleting a policy.
 	PolicyHash *string
 
 	// The policy ID.
@@ -55,9 +56,7 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	// ID of the current policy version. The hash helps to prevent a situation where
-	// multiple users attempt to overwrite a policy. You must provide this hash when
-	// updating or deleting a policy.
+	// ID of the current policy version.
 	PolicyHash *string
 
 	// The policy ID. To update a policy, you must specify PolicyId and PolicyHash.

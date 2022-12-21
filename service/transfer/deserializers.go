@@ -256,9 +256,6 @@ func awsAwsjson11_deserializeOpErrorCreateAgreement(response *smithyhttp.Respons
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
 
-	case strings.EqualFold("ThrottlingException", errorCode):
-		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
-
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -382,9 +379,6 @@ func awsAwsjson11_deserializeOpErrorCreateConnector(response *smithyhttp.Respons
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
 
-	case strings.EqualFold("ThrottlingException", errorCode):
-		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
-
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -504,9 +498,6 @@ func awsAwsjson11_deserializeOpErrorCreateProfile(response *smithyhttp.Response,
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
-
-	case strings.EqualFold("ThrottlingException", errorCode):
-		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5924,9 +5915,6 @@ func awsAwsjson11_deserializeOpErrorUpdateAccess(response *smithyhttp.Response, 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
 
-	case strings.EqualFold("ThrottlingException", errorCode):
-		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
-
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6050,9 +6038,6 @@ func awsAwsjson11_deserializeOpErrorUpdateAgreement(response *smithyhttp.Respons
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
 
-	case strings.EqualFold("ThrottlingException", errorCode):
-		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
-
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6172,9 +6157,6 @@ func awsAwsjson11_deserializeOpErrorUpdateCertificate(response *smithyhttp.Respo
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
-
-	case strings.EqualFold("ThrottlingException", errorCode):
-		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -6298,9 +6280,6 @@ func awsAwsjson11_deserializeOpErrorUpdateConnector(response *smithyhttp.Respons
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
-
-	case strings.EqualFold("ThrottlingException", errorCode):
-		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -6544,9 +6523,6 @@ func awsAwsjson11_deserializeOpErrorUpdateProfile(response *smithyhttp.Response,
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsAwsjson11_deserializeErrorServiceUnavailableException(response, errorBody)
-
-	case strings.EqualFold("ThrottlingException", errorCode):
-		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -7542,6 +7518,78 @@ func awsAwsjson11_deserializeDocumentCustomStepDetails(v **types.CustomStepDetai
 					return err
 				}
 				sv.TimeoutSeconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDecryptStepDetails(v **types.DecryptStepDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DecryptStepDetails
+	if *v == nil {
+		sv = &types.DecryptStepDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DestinationFileLocation":
+			if err := awsAwsjson11_deserializeDocumentInputFileLocation(&sv.DestinationFileLocation, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkflowStepName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OverwriteExisting":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OverwriteExisting to be of type string, got %T instead", value)
+				}
+				sv.OverwriteExisting = types.OverwriteExisting(jtv)
+			}
+
+		case "SourceFileLocation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceFileLocation to be of type string, got %T instead", value)
+				}
+				sv.SourceFileLocation = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.EncryptionType(jtv)
 			}
 
 		default:
@@ -11855,6 +11903,11 @@ func awsAwsjson11_deserializeDocumentWorkflowStep(v **types.WorkflowStep, value 
 
 		case "CustomStepDetails":
 			if err := awsAwsjson11_deserializeDocumentCustomStepDetails(&sv.CustomStepDetails, value); err != nil {
+				return err
+			}
+
+		case "DecryptStepDetails":
+			if err := awsAwsjson11_deserializeDocumentDecryptStepDetails(&sv.DecryptStepDetails, value); err != nil {
 				return err
 			}
 
