@@ -1,3 +1,7 @@
+# v1.25.0 (2022-12-21)
+
+* **Feature**: This release adds support for analyzing Amazon S3 objects that use the S3 Glacier Instant Retrieval (Glacier_IR) storage class.
+
 # v1.24.2 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

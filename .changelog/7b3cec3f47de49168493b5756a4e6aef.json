@@ -1,8 +1,0 @@
-{
-    "id": "7b3cec3f-47de-4916-8493-b5756a4e6aef",
-    "type": "feature",
-    "description": "This release adds support for Decrypt as a workflow step type.",
-    "modules": [
-        "service/transfer"
-    ]
-}

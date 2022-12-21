@@ -1,8 +1,0 @@
-{
-    "id": "35af14c2-da90-4300-8e44-1334154eceb0",
-    "type": "documentation",
-    "description": "Documentation updates for the AWS Support API",
-    "modules": [
-        "service/support"
-    ]
-}

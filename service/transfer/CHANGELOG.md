@@ -1,3 +1,7 @@
+# v1.26.0 (2022-12-21)
+
+* **Feature**: This release adds support for Decrypt as a workflow step type.
+
 # v1.25.2 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

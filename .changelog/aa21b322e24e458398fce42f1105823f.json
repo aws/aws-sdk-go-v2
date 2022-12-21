@@ -1,8 +1,0 @@
-{
-    "id": "aa21b322-e24e-4583-98fc-e42f1105823f",
-    "type": "documentation",
-    "description": "Doc-only updates for December 2022.",
-    "modules": [
-        "service/ssm"
-    ]
-}

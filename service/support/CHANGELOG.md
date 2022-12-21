@@ -1,3 +1,7 @@
+# v1.13.22 (2022-12-21)
+
+* **Documentation**: Documentation updates for the AWS Support API
+
 # v1.13.21 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

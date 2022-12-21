@@ -1,3 +1,20 @@
+# Release (2022-12-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.0.0](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v100-2022-12-21)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS License Manager now offers cross-region, cross-account tracking of commercial Linux subscriptions on AWS. This includes subscriptions purchased as part of EC2 subscription-included AMIs, on the AWS Marketplace, or brought to AWS via Red Hat Cloud Access Program.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.25.0](service/macie2/CHANGELOG.md#v1250-2022-12-21)
+  * **Feature**: This release adds support for analyzing Amazon S3 objects that use the S3 Glacier Instant Retrieval (Glacier_IR) storage class.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.61.0](service/sagemaker/CHANGELOG.md#v1610-2022-12-21)
+  * **Feature**: This release enables adding RStudio Workbench support to an existing Amazon SageMaker Studio domain. It allows setting your RStudio on SageMaker environment configuration parameters and also updating the RStudioConnectUrl and RStudioPackageManagerUrl parameters for existing domains
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.33.4](service/ssm/CHANGELOG.md#v1334-2022-12-21)
+  * **Documentation**: Doc-only updates for December 2022.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.13.22](service/support/CHANGELOG.md#v11322-2022-12-21)
+  * **Documentation**: Documentation updates for the AWS Support API
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.26.0](service/transfer/CHANGELOG.md#v1260-2022-12-21)
+  * **Feature**: This release adds support for Decrypt as a workflow step type.
+
 # Release (2022-12-20)
 
 ## General Highlights

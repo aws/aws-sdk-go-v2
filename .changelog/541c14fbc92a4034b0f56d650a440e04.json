@@ -1,8 +1,0 @@
-{
-    "id": "541c14fb-c92a-4034-b0f5-6d650a440e04",
-    "type": "feature",
-    "description": "Amazon Connect Chat now allows for JSON (application/json) message types to be sent as part of the initial message in the StartChatContact API.",
-    "modules": [
-        "service/connect"
-    ]
-}
