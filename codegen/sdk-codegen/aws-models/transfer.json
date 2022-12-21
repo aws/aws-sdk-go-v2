@@ -122,7 +122,7 @@
                 "EncryptionAlgorithm": {
                     "target": "com.amazonaws.transfer#EncryptionAlg",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm that is used to encrypt the file.</p>\n         <note>\n            <p>You can only specify <code>NONE</code> if the URL for your connector uses HTTPS. This ensures that\n        no traffic is sent in clear text.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The algorithm that is used to encrypt the file.</p>"
                     }
                 },
                 "SigningAlgorithm": {
@@ -134,7 +134,7 @@
                 "MdnSigningAlgorithm": {
                     "target": "com.amazonaws.transfer#MdnSigningAlg",
                     "traits": {
-                        "smithy.api#documentation": "<p>The signing algorithm for the MDN response.</p>\n         <note>\n            <p>If set to DEFAULT (or not set at all), the value for <code>SigningAlgorithm</code> is used.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The signing algorithm for the MDN response.</p>\n         <note>\n            <p>If set to DEFAULT (or not set at all), the value for <code>SigningAlogorithm</code> is used.</p>\n         </note>"
                     }
                 },
                 "MdnResponse": {
@@ -507,9 +507,6 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ServiceUnavailableException"
-                },
-                {
-                    "target": "com.amazonaws.transfer#ThrottlingException"
                 }
             ],
             "traits": {
@@ -609,9 +606,6 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ServiceUnavailableException"
-                },
-                {
-                    "target": "com.amazonaws.transfer#ThrottlingException"
                 }
             ],
             "traits": {
@@ -688,9 +682,6 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ServiceUnavailableException"
-                },
-                {
-                    "target": "com.amazonaws.transfer#ThrottlingException"
                 }
             ],
             "traits": {
@@ -865,7 +856,7 @@
                 "WorkflowDetails": {
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In additon to a workflow to execute when a file is uploaded completely, <code>WorkflowDeatails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
                     }
                 }
             }
@@ -961,7 +952,7 @@
                 "SshPublicKeyBody": {
                     "target": "com.amazonaws.transfer#SshPublicKeyBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public portion of the Secure Shell (SSH) key used to authenticate the user to the\n      server.</p>\n         <p>The three standard SSH public key format elements are <code><key type></code>,\n        <code><body base64></code>, and  an optional <code><comment></code>, with spaces\n      between each element.</p>\n         <p>Transfer Family accepts RSA, ECDSA, and ED25519 keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the key type  is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ED25519 keys, the key type is <code>ssh-ed25519</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the key type is either <code>ecdsa-sha2-nistp256</code>,\n            <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the\n          size of the key you generated.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The public portion of the Secure Shell (SSH) key used to authenticate the user to the\n      server.</p>\n         <p>Transfer Family accepts RSA, ECDSA, and ED25519 keys.</p>"
                     }
                 },
                 "Tags": {
@@ -1142,6 +1133,32 @@
         },
         "com.amazonaws.transfer#DateImported": {
             "type": "timestamp"
+        },
+        "com.amazonaws.transfer#DecryptStepDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.transfer#WorkflowStepName"
+                },
+                "Type": {
+                    "target": "com.amazonaws.transfer#EncryptionType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceFileLocation": {
+                    "target": "com.amazonaws.transfer#SourceFileLocation"
+                },
+                "OverwriteExisting": {
+                    "target": "com.amazonaws.transfer#OverwriteExisting"
+                },
+                "DestinationFileLocation": {
+                    "target": "com.amazonaws.transfer#InputFileLocation",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
         },
         "com.amazonaws.transfer#DeleteAccess": {
             "type": "operation",
@@ -2824,7 +2841,7 @@
                 "WorkflowDetails": {
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In additon to a workflow to execute when a file is uploaded completely, <code>WorkflowDeatails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
                     }
                 }
             },
@@ -3048,6 +3065,17 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NONE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#EncryptionType": {
+            "type": "enum",
+            "members": {
+                "PGP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PGP"
                     }
                 }
             }
@@ -6813,7 +6841,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -8588,9 +8616,6 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ServiceUnavailableException"
-                },
-                {
-                    "target": "com.amazonaws.transfer#ThrottlingException"
                 }
             ],
             "traits": {
@@ -8691,9 +8716,6 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ServiceUnavailableException"
-                },
-                {
-                    "target": "com.amazonaws.transfer#ThrottlingException"
                 }
             ],
             "traits": {
@@ -8787,9 +8809,6 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ServiceUnavailableException"
-                },
-                {
-                    "target": "com.amazonaws.transfer#ThrottlingException"
                 }
             ],
             "traits": {
@@ -8861,9 +8880,6 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ServiceUnavailableException"
-                },
-                {
-                    "target": "com.amazonaws.transfer#ThrottlingException"
                 }
             ],
             "traits": {
@@ -9012,9 +9028,6 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ServiceUnavailableException"
-                },
-                {
-                    "target": "com.amazonaws.transfer#ThrottlingException"
                 }
             ],
             "traits": {
@@ -9168,7 +9181,7 @@
                 "WorkflowDetails": {
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In additon to a workflow to execute when a file is uploaded completely, <code>WorkflowDeatails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>"
                     }
                 }
             }
@@ -9393,7 +9406,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
+                "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In additon to a workflow to execute when a file is uploaded completely, <code>WorkflowDeatails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
             }
         },
         "com.amazonaws.transfer#WorkflowDetails": {
@@ -9458,6 +9471,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details for a step that creates one or more tags.</p>\n         <p>You specify one or more tags: each tag contains a key/value pair.</p>"
                     }
+                },
+                "DecryptStepDetails": {
+                    "target": "com.amazonaws.transfer#DecryptStepDetails"
                 }
             },
             "traits": {
@@ -9499,6 +9515,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETE"
+                    }
+                },
+                "DECRYPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DECRYPT"
                     }
                 }
             }

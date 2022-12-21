@@ -19945,6 +19945,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for attaching a SageMaker user profile name to the execution role as a\n                <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_monitor.html\">sts:SourceIdentity key</a>. This configuration can only be modified if there\n            are no apps in the <code>InService</code> or <code>Pending</code> state.</p>"
                     }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.sagemaker#DomainSecurityGroupIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security groups for the Amazon Virtual Private Cloud that the <code>Domain</code> uses for\n            communication between Domain-level apps and user apps.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24272,7 +24278,7 @@
                     "target": "com.amazonaws.sagemaker#TrainingInstanceCount",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The number of instances of the type specified by <code>InstanceType</code>. Choose an\n            instance count larger than 1 for distributed training algorithms. See <a href=\"https://docs.aws.amazon.com/data-parallel-use-api.html\">SageMaker distributed training\n                jobs</a> for more information.</p>",
+                        "smithy.api#documentation": "<p>The number of instances of the type specified by <code>InstanceType</code>. Choose an\n            instance count larger than 1 for distributed training algorithms. See <a href=\"https://docs.aws.amazon.com/data-parallel-use-api.html\">SageMaker distributed training\n                jobs</a> for more informcration.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -43508,6 +43514,18 @@
                 },
                 "DefaultResourceSpec": {
                     "target": "com.amazonaws.sagemaker#ResourceSpec"
+                },
+                "RStudioConnectUrl": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL pointing to an RStudio Connect server.</p>"
+                    }
+                },
+                "RStudioPackageManagerUrl": {
+                    "target": "com.amazonaws.sagemaker#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A URL pointing to an RStudio Package Manager server.</p>"
+                    }
                 }
             },
             "traits": {
@@ -53990,6 +54008,12 @@
                     "target": "com.amazonaws.sagemaker#DefaultSpaceSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The default settings used to create a space within the Domain.</p>"
+                    }
+                },
+                "AppSecurityGroupManagement": {
+                    "target": "com.amazonaws.sagemaker#AppSecurityGroupManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity that creates and manages the required security groups for inter-app\n            communication in <code>VPCOnly</code> mode. Required when\n            <code>CreateDomain.AppNetworkAccessType</code> is <code>VPCOnly</code> and\n            <code>DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn</code> is\n            provided.</p>"
                     }
                 }
             }

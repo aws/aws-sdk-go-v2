@@ -1,0 +1,1298 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.licensemanagerlinuxsubscriptions#BoxInteger": {
+            "type": "integer"
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#BoxLong": {
+            "type": "long"
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#Filter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of name to filter by.</p>"
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more values for the name to filter by.</p>"
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Operator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An operator for filtering results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter object that is used to return more specific results from a describe operation.\n      Filters can be used to match a set of resources by specific criteria.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#FilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Filter"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#GetServiceSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#GetServiceSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#GetServiceSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the Linux subscriptions service settings.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/subscription/GetServiceSettings"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#GetServiceSettingsRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#GetServiceSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "LinuxSubscriptionsDiscovery": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#LinuxSubscriptionsDiscovery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists if discovery has been enabled for Linux subscriptions.</p>"
+                    }
+                },
+                "LinuxSubscriptionsDiscoverySettings": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#LinuxSubscriptionsDiscoverySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists the settings defined for Linux subscriptions discovery. The settings include if\n      Organizations integration has been enabled, and which Regions data will be aggregated from.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of Linux subscriptions settings being applied.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message which details the Linux subscriptions service settings current status.</p>"
+                    }
+                },
+                "HomeRegions": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region in which License Manager displays the aggregated data for Linux\n      subscriptions.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#Instance": {
+            "type": "structure",
+            "members": {
+                "AmiId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AMI ID used to launch the instance.</p>"
+                    }
+                },
+                "InstanceID": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance ID of the resource.</p>"
+                    }
+                },
+                "InstanceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type of the resource.</p>"
+                    }
+                },
+                "AccountID": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID which owns the instance.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the instance.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region the instance is running in.</p>"
+                    }
+                },
+                "UsageOperation": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The usage operation of the instance. For more information, see For more information, see\n        <a href=\"https://docs.aws.amazon.com/license-manager/latest/userguide/linux-subscriptions-usage-operation.html\">Usage\n        operation values</a> in the <i>License Manager User Guide</i>.</p>"
+                    }
+                },
+                "ProductCode": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ProductCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The product code for the instance. For more information, see <a href=\"https://docs.aws.amazon.com/license-manager/latest/userguide/linux-subscriptions-usage-operation.html\">Usage\n        operation values</a> in the <i>License Manager User Guide</i> .</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time in which the last discovery updated the instance details.</p>"
+                    }
+                },
+                "SubscriptionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the subscription being used by the instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details discovered information about a running instance using Linux subscriptions.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#InstanceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Instance"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An exception occurred with the service.</p>",
+                "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#LicenseManagerLinuxSubscriptions": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#GetServiceSettings"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionInstances"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptions"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#UpdateServiceSettings"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "License Manager Linux Subscriptions",
+                    "arnNamespace": "license-manager-linux-subscriptions",
+                    "cloudTrailEventSource": "license-manager-linux-subscriptions.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "license-manager-linux-subscriptions"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "x-amzn-platform-id",
+                        "x-amzn-trace-id",
+                        "content-length",
+                        "x-api-key",
+                        "authorization",
+                        "x-amz-date",
+                        "x-amz-security-token",
+                        "Access-Control-Allow-Headers",
+                        "Access-Control-Allow-Methods",
+                        "Access-Control-Allow-Origin"
+                    ],
+                    "additionalExposedHeaders": [
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-trace-id"
+                    ]
+                },
+                "smithy.api#documentation": "<p>With License Manager, you can discover and track your commercial Linux subscriptions on running\n      Amazon EC2 instances.</p>",
+                "smithy.api#title": "AWS License Manager Linux Subscriptions",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://license-manager-linux-subscriptions-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://license-manager-linux-subscriptions-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://license-manager-linux-subscriptions.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://license-manager-linux-subscriptions.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://license-manager-linux-subscriptions.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#LinuxSubscriptionsDiscovery": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "Enabled",
+                        "value": "Enabled",
+                        "documentation": "Enabled LinuxSubscriptionsDiscovery"
+                    },
+                    {
+                        "name": "Disabled",
+                        "value": "Disabled",
+                        "documentation": "Disabled LinuxSubscriptionsDiscovery"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#LinuxSubscriptionsDiscoverySettings": {
+            "type": "structure",
+            "members": {
+                "SourceRegions": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Regions in which to discover data for Linux subscriptions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OrganizationIntegration": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#OrganizationIntegration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details if you have enabled resource discovery across your accounts in Organizations.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the settings defined for discovering Linux subscriptions.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionInstances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionInstancesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionInstancesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the running Amazon EC2 instances that were discovered with commercial Linux\n      subscriptions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/subscription/ListLinuxSubscriptionInstances"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Instances"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionInstancesRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or\n      more sets of key-value pairs that you specify. For example, you can filter by the name of\n        <code>AmiID</code> with an optional operator to see subscriptions that match, partially\n      match, or don't match a certain Amazon Machine Image (AMI) ID.</p>\n         <p>The valid names for this filter are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AmiID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InstanceID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AccountID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsageOperation</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ProductCode</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InstanceType</code>\n               </p>\n            </li>\n         </ul>\n         <p>The valid Operators for this filter are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>contains</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>equals</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Notequal</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#BoxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 16384
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "NextToken length limit is half of ddb accepted limit.\nIncrease this limit if parameters in request increases."
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionInstancesResponse": {
+            "type": "structure",
+            "members": {
+                "Instances": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InstanceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains instance objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the Linux subscriptions that have been discovered. If you have linked your\n      organization, the returned results will include data aggregated across your accounts in\n      Organizations.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/subscription/ListLinuxSubscriptions"
+                },
+                "smithy.api#idempotent": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Subscriptions"
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionsRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that you can use to filter the results to those that match one or\n      more sets of key-value pairs that you specify. For example, you can filter by the name of\n        <code>Subscription</code> with an optional operator to see subscriptions that match,\n      partially match, or don't match a certain subscription's name.</p>\n         <p>The valid names for this filter are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Subscription</code>\n               </p>\n            </li>\n         </ul>\n         <p>The valid Operators for this filter are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>contains</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>equals</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Notequal</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#BoxInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 16384
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "NextToken length limit is half of ddb accepted limit.\nIncrease this limit if parameters in request increases."
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ListLinuxSubscriptionsResponse": {
+            "type": "structure",
+            "members": {
+                "Subscriptions": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains subscription objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#Operator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "EQUAL",
+                        "value": "Equal",
+                        "documentation": "Equal operator"
+                    },
+                    {
+                        "name": "NOT_EQUAL",
+                        "value": "NotEqual",
+                        "documentation": "Not equal operator"
+                    },
+                    {
+                        "name": "CONTAINS",
+                        "value": "Contains",
+                        "documentation": "Contains operator"
+                    }
+                ],
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#OrganizationIntegration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "Enabled",
+                        "value": "Enabled",
+                        "documentation": "Enabled OrganizationIntegration"
+                    },
+                    {
+                        "name": "Disabled",
+                        "value": "Disabled",
+                        "documentation": "Disabled OrganizationIntegration"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ProductCodeList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#Status": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "InProgress",
+                        "value": "InProgress",
+                        "documentation": "InProgress status"
+                    },
+                    {
+                        "name": "Completed",
+                        "value": "Completed",
+                        "documentation": "Completed status"
+                    },
+                    {
+                        "name": "Successful",
+                        "value": "Successful",
+                        "documentation": "Successful status"
+                    },
+                    {
+                        "name": "Failed",
+                        "value": "Failed",
+                        "documentation": "Failed status"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#StringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 100
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#StringMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#Subscription": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the subscription.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of subscription. The type can be subscription-included with Amazon EC2, Bring Your Own\n      Subscription model (BYOS), or from the Amazon Web Services Marketplace. Certain subscriptions may use licensing from the\n      Amazon Web Services Marketplace as well as OS licensing from Amazon EC2 or BYOS.</p>"
+                    }
+                },
+                "InstanceCount": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#BoxLong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total amount of running instances using this subscription.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object which details a discovered Linux subscription.</p>"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#SubscriptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Subscription"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#UpdateServiceSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#UpdateServiceSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanagerlinuxsubscriptions#UpdateServiceSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the service settings for Linux subscriptions.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/subscription/UpdateServiceSettings"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#UpdateServiceSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "LinuxSubscriptionsDiscovery": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#LinuxSubscriptionsDiscovery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes if the discovery of Linux subscriptions is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LinuxSubscriptionsDiscoverySettings": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#LinuxSubscriptionsDiscoverySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings defined for Linux subscriptions discovery. The settings include if Organizations\n      integration has been enabled, and which Regions data will be aggregated from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AllowUpdate": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes if updates are allowed to the service settings for Linux subscriptions. If you\n      allow updates, you can aggregate Linux subscription data in more than one home Region.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#UpdateServiceSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "LinuxSubscriptionsDiscovery": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#LinuxSubscriptionsDiscovery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lists if discovery has been enabled for Linux subscriptions.</p>"
+                    }
+                },
+                "LinuxSubscriptionsDiscoverySettings": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#LinuxSubscriptionsDiscoverySettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings defined for Linux subscriptions discovery. The settings include if Organizations\n      integration has been enabled, and which Regions data will be aggregated from.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of Linux subscriptions settings being applied.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message which details the Linux subscriptions service settings current status.</p>"
+                    }
+                },
+                "HomeRegions": {
+                    "target": "com.amazonaws.licensemanagerlinuxsubscriptions#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region in which License Manager displays the aggregated data for Linux\n      subscriptions.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanagerlinuxsubscriptions#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The provided input is not valid. Try your request again.</p>",
+                "smithy.api#error": "client"
+            }
+        }
+    }
+}
