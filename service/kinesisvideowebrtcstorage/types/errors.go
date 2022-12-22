@@ -7,11 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// * You do not have required permissions to perform this operation
-//
-// * The
-// AccessDeniedException can be thrown for operation access as well as tokens or
-// resource access
+// You do not have required permissions to perform this operation.
 type AccessDeniedException struct {
 	Message *string
 
@@ -50,10 +46,7 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 func (e *ClientLimitExceededException) ErrorCode() string             { return "ClientLimitExceededException" }
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// * The value for this input parameter is invalid.
-//
-// * Additional details may notbe
-// returned.
+// The value for this input parameter is invalid.
 type InvalidArgumentException struct {
 	Message *string
 
@@ -72,10 +65,7 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// * The specified resource is not found
-//
-// * You have not specified a channel in
-// this API call.
+// The specified resource is not found.
 type ResourceNotFoundException struct {
 	Message *string
 

@@ -648,6 +648,40 @@ func (NotificationDeliveryType) Values() []NotificationDeliveryType {
 	}
 }
 
+type ParticipantTimerAction string
+
+// Enum values for ParticipantTimerAction
+const (
+	ParticipantTimerActionUnset ParticipantTimerAction = "Unset"
+)
+
+// Values returns all known values for ParticipantTimerAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantTimerAction) Values() []ParticipantTimerAction {
+	return []ParticipantTimerAction{
+		"Unset",
+	}
+}
+
+type ParticipantTimerType string
+
+// Enum values for ParticipantTimerType
+const (
+	ParticipantTimerTypeIdle                  ParticipantTimerType = "IDLE"
+	ParticipantTimerTypeDisconnectNoncustomer ParticipantTimerType = "DISCONNECT_NONCUSTOMER"
+)
+
+// Values returns all known values for ParticipantTimerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantTimerType) Values() []ParticipantTimerType {
+	return []ParticipantTimerType{
+		"IDLE",
+		"DISCONNECT_NONCUSTOMER",
+	}
+}
+
 type PhoneNumberCountryCode string
 
 // Enum values for PhoneNumberCountryCode
@@ -1514,6 +1548,25 @@ func (TaskTemplateStatus) Values() []TaskTemplateStatus {
 	return []TaskTemplateStatus{
 		"ACTIVE",
 		"INACTIVE",
+	}
+}
+
+type TimerEligibleParticipantRoles string
+
+// Enum values for TimerEligibleParticipantRoles
+const (
+	TimerEligibleParticipantRolesCustomer TimerEligibleParticipantRoles = "CUSTOMER"
+	TimerEligibleParticipantRolesAgent    TimerEligibleParticipantRoles = "AGENT"
+)
+
+// Values returns all known values for TimerEligibleParticipantRoles. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TimerEligibleParticipantRoles) Values() []TimerEligibleParticipantRoles {
+	return []TimerEligibleParticipantRoles{
+		"CUSTOMER",
+		"AGENT",
 	}
 }
 

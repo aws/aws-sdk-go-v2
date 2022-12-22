@@ -191,13 +191,32 @@ type ChatMessage struct {
 
 	// The content of the chat message.
 	//
+	// * For text/plain and text/markdown, the Length
+	// Constraints are Minimum of 1, Maximum of 1024.
+	//
+	// * For application/json, the
+	// Length Constraints are Minimum of 1, Maximum of 12000.
+	//
 	// This member is required.
 	Content *string
 
-	// The type of the content. Supported types are text/plain.
+	// The type of the content. Supported types are text/plain, text/markdown, and
+	// application/json.
 	//
 	// This member is required.
 	ContentType *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information for the chat participant role.
+type ChatParticipantRoleConfig struct {
+
+	// A list of participant timers. You can specify any unique combination of role and
+	// timer type. Duplicate entries error out the request with a 400.
+	//
+	// This member is required.
+	ParticipantTimerConfigList []ParticipantTimerConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1279,6 +1298,67 @@ type ParticipantDetails struct {
 
 	noSmithyDocumentSerde
 }
+
+// Configuration information for the timer. After the timer configuration is set,
+// it persists for the duration of the chat. It persists across new contacts in the
+// chain, for example, transfer contacts. For more information about how chat
+// timeouts work, see Set up chat timeouts for human participants
+// (https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html).
+type ParticipantTimerConfiguration struct {
+
+	// The role of the participant in the chat conversation.
+	//
+	// This member is required.
+	ParticipantRole TimerEligibleParticipantRoles
+
+	// The type of timer. IDLE indicates the timer applies for considering a human chat
+	// participant as idle. DISCONNECT_NONCUSTOMER indicates the timer applies to
+	// automatically disconnecting a chat participant due to idleness.
+	//
+	// This member is required.
+	TimerType ParticipantTimerType
+
+	// The value of the timer. Either the timer action (Unset to delete the timer), or
+	// the duration of the timer in minutes. Only one value can be set.
+	//
+	// This member is required.
+	TimerValue ParticipantTimerValue
+
+	noSmithyDocumentSerde
+}
+
+// The value of the timer. Either the timer action (Unset to delete the timer), or
+// the duration of the timer in minutes. Only one value can be set. For more
+// information about how chat timeouts work, see Set up chat timeouts for human
+// participants
+// (https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html).
+//
+// The following types satisfy this interface:
+//
+//	ParticipantTimerValueMemberParticipantTimerAction
+//	ParticipantTimerValueMemberParticipantTimerDurationInMinutes
+type ParticipantTimerValue interface {
+	isParticipantTimerValue()
+}
+
+// The timer action. Currently only one value is allowed: Unset. It deletes a
+// timer.
+type ParticipantTimerValueMemberParticipantTimerAction struct {
+	Value ParticipantTimerAction
+
+	noSmithyDocumentSerde
+}
+
+func (*ParticipantTimerValueMemberParticipantTimerAction) isParticipantTimerValue() {}
+
+// The duration of a timer, in minutes.
+type ParticipantTimerValueMemberParticipantTimerDurationInMinutes struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*ParticipantTimerValueMemberParticipantTimerDurationInMinutes) isParticipantTimerValue() {}
 
 // Contains information about a phone number for a quick connect.
 type PhoneNumberQuickConnectConfig struct {
@@ -2514,6 +2594,24 @@ type TrafficDistributionGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information for the chat participant role.
+//
+// The following types satisfy this interface:
+//
+//	UpdateParticipantRoleConfigChannelInfoMemberChat
+type UpdateParticipantRoleConfigChannelInfo interface {
+	isUpdateParticipantRoleConfigChannelInfo()
+}
+
+// Configuration information for the chat participant role.
+type UpdateParticipantRoleConfigChannelInfoMemberChat struct {
+	Value ChatParticipantRoleConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateParticipantRoleConfigChannelInfoMemberChat) isUpdateParticipantRoleConfigChannelInfo() {}
+
 // The URL reference.
 type UrlReference struct {
 
@@ -2920,4 +3018,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isReferenceSummary() {}
+func (*UnknownUnionMember) isParticipantTimerValue()                  {}
+func (*UnknownUnionMember) isReferenceSummary()                       {}
+func (*UnknownUnionMember) isUpdateParticipantRoleConfigChannelInfo() {}

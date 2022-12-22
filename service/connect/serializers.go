@@ -11706,6 +11706,98 @@ func awsRestjson1_serializeOpDocumentUpdateInstanceStorageConfigInput(v *UpdateI
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateParticipantRoleConfig struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateParticipantRoleConfig) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateParticipantRoleConfig) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateParticipantRoleConfigInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/contact/participant-role-config/{InstanceId}/{ContactId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateParticipantRoleConfigInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateParticipantRoleConfigInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateParticipantRoleConfigInput(v *UpdateParticipantRoleConfigInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ContactId == nil || len(*v.ContactId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ContactId must not be empty")}
+	}
+	if v.ContactId != nil {
+		if err := encoder.SetURI("ContactId").String(*v.ContactId); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceId == nil || len(*v.InstanceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member InstanceId must not be empty")}
+	}
+	if v.InstanceId != nil {
+		if err := encoder.SetURI("InstanceId").String(*v.InstanceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateParticipantRoleConfigInput(v *UpdateParticipantRoleConfigInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelConfiguration != nil {
+		ok := object.Key("ChannelConfiguration")
+		if err := awsRestjson1_serializeDocumentUpdateParticipantRoleConfigChannelInfo(v.ChannelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdatePhoneNumber struct {
 }
 
@@ -13946,6 +14038,20 @@ func awsRestjson1_serializeDocumentChatMessage(v *types.ChatMessage, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentChatParticipantRoleConfig(v *types.ChatParticipantRoleConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ParticipantTimerConfigList != nil {
+		ok := object.Key("ParticipantTimerConfigList")
+		if err := awsRestjson1_serializeDocumentParticipantTimerConfigList(v.ParticipantTimerConfigList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChatStreamingConfiguration(v *types.ChatStreamingConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14546,6 +14652,63 @@ func awsRestjson1_serializeDocumentParticipantDetails(v *types.ParticipantDetail
 		ok.String(*v.DisplayName)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParticipantTimerConfigList(v []types.ParticipantTimerConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentParticipantTimerConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParticipantTimerConfiguration(v *types.ParticipantTimerConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ParticipantRole) > 0 {
+		ok := object.Key("ParticipantRole")
+		ok.String(string(v.ParticipantRole))
+	}
+
+	if len(v.TimerType) > 0 {
+		ok := object.Key("TimerType")
+		ok.String(string(v.TimerType))
+	}
+
+	if v.TimerValue != nil {
+		ok := object.Key("TimerValue")
+		if err := awsRestjson1_serializeDocumentParticipantTimerValue(v.TimerValue, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParticipantTimerValue(v types.ParticipantTimerValue, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ParticipantTimerValueMemberParticipantTimerAction:
+		av := object.Key("ParticipantTimerAction")
+		av.String(string(uv.Value))
+
+	case *types.ParticipantTimerValueMemberParticipantTimerDurationInMinutes:
+		av := object.Key("ParticipantTimerDurationInMinutes")
+		av.Integer(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 
@@ -15425,6 +15588,24 @@ func awsRestjson1_serializeDocumentThreshold(v *types.Threshold, value smithyjso
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateParticipantRoleConfigChannelInfo(v types.UpdateParticipantRoleConfigChannelInfo, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.UpdateParticipantRoleConfigChannelInfoMemberChat:
+		av := object.Key("Chat")
+		if err := awsRestjson1_serializeDocumentChatParticipantRoleConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

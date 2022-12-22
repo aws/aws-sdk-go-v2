@@ -89,6 +89,26 @@ func (m *validateOpExportEC2InstanceRecommendations) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExportECSServiceRecommendations struct {
+}
+
+func (*validateOpExportECSServiceRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportECSServiceRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportECSServiceRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportECSServiceRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpExportLambdaFunctionRecommendations struct {
 }
 
@@ -124,6 +144,26 @@ func (m *validateOpGetEC2RecommendationProjectedMetrics) HandleInitialize(ctx co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEC2RecommendationProjectedMetricsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetECSServiceRecommendationProjectedMetrics struct {
+}
+
+func (*validateOpGetECSServiceRecommendationProjectedMetrics) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetECSServiceRecommendationProjectedMetrics) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetECSServiceRecommendationProjectedMetricsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetECSServiceRecommendationProjectedMetricsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -225,12 +265,20 @@ func addOpExportEC2InstanceRecommendationsValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpExportEC2InstanceRecommendations{}, middleware.After)
 }
 
+func addOpExportECSServiceRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportECSServiceRecommendations{}, middleware.After)
+}
+
 func addOpExportLambdaFunctionRecommendationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportLambdaFunctionRecommendations{}, middleware.After)
 }
 
 func addOpGetEC2RecommendationProjectedMetricsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEC2RecommendationProjectedMetrics{}, middleware.After)
+}
+
+func addOpGetECSServiceRecommendationProjectedMetricsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetECSServiceRecommendationProjectedMetrics{}, middleware.After)
 }
 
 func addOpGetEffectiveRecommendationPreferencesValidationMiddleware(stack *middleware.Stack) error {
@@ -312,6 +360,21 @@ func validateOpExportEC2InstanceRecommendationsInput(v *ExportEC2InstanceRecomme
 	}
 }
 
+func validateOpExportECSServiceRecommendationsInput(v *ExportECSServiceRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportECSServiceRecommendationsInput"}
+	if v.S3DestinationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DestinationConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpExportLambdaFunctionRecommendationsInput(v *ExportLambdaFunctionRecommendationsInput) error {
 	if v == nil {
 		return nil
@@ -334,6 +397,30 @@ func validateOpGetEC2RecommendationProjectedMetricsInput(v *GetEC2Recommendation
 	invalidParams := smithy.InvalidParamsError{Context: "GetEC2RecommendationProjectedMetricsInput"}
 	if v.InstanceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceArn"))
+	}
+	if len(v.Stat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Stat"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetECSServiceRecommendationProjectedMetricsInput(v *GetECSServiceRecommendationProjectedMetricsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetECSServiceRecommendationProjectedMetricsInput"}
+	if v.ServiceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceArn"))
 	}
 	if len(v.Stat) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Stat"))

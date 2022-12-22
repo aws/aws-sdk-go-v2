@@ -2,6 +2,24 @@
 
 package types
 
+type AutoScalingConfiguration string
+
+// Enum values for AutoScalingConfiguration
+const (
+	AutoScalingConfigurationTargetTrackingScalingCpu    AutoScalingConfiguration = "TargetTrackingScalingCpu"
+	AutoScalingConfigurationTargetTrackingScalingMemory AutoScalingConfiguration = "TargetTrackingScalingMemory"
+)
+
+// Values returns all known values for AutoScalingConfiguration. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoScalingConfiguration) Values() []AutoScalingConfiguration {
+	return []AutoScalingConfiguration{
+		"TargetTrackingScalingCpu",
+		"TargetTrackingScalingMemory",
+	}
+}
+
 type CpuVendorArchitecture string
 
 // Enum values for CpuVendorArchitecture
@@ -113,6 +131,123 @@ func (EBSMetricName) Values() []EBSMetricName {
 		"VolumeWriteOpsPerSecond",
 		"VolumeReadBytesPerSecond",
 		"VolumeWriteBytesPerSecond",
+	}
+}
+
+type ECSServiceLaunchType string
+
+// Enum values for ECSServiceLaunchType
+const (
+	ECSServiceLaunchTypeEc2     ECSServiceLaunchType = "EC2"
+	ECSServiceLaunchTypeFargate ECSServiceLaunchType = "Fargate"
+)
+
+// Values returns all known values for ECSServiceLaunchType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ECSServiceLaunchType) Values() []ECSServiceLaunchType {
+	return []ECSServiceLaunchType{
+		"EC2",
+		"Fargate",
+	}
+}
+
+type ECSServiceMetricName string
+
+// Enum values for ECSServiceMetricName
+const (
+	ECSServiceMetricNameCpu    ECSServiceMetricName = "Cpu"
+	ECSServiceMetricNameMemory ECSServiceMetricName = "Memory"
+)
+
+// Values returns all known values for ECSServiceMetricName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ECSServiceMetricName) Values() []ECSServiceMetricName {
+	return []ECSServiceMetricName{
+		"Cpu",
+		"Memory",
+	}
+}
+
+type ECSServiceMetricStatistic string
+
+// Enum values for ECSServiceMetricStatistic
+const (
+	ECSServiceMetricStatisticMaximum ECSServiceMetricStatistic = "Maximum"
+	ECSServiceMetricStatisticAverage ECSServiceMetricStatistic = "Average"
+)
+
+// Values returns all known values for ECSServiceMetricStatistic. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ECSServiceMetricStatistic) Values() []ECSServiceMetricStatistic {
+	return []ECSServiceMetricStatistic{
+		"Maximum",
+		"Average",
+	}
+}
+
+type ECSServiceRecommendationFilterName string
+
+// Enum values for ECSServiceRecommendationFilterName
+const (
+	ECSServiceRecommendationFilterNameFinding           ECSServiceRecommendationFilterName = "Finding"
+	ECSServiceRecommendationFilterNameFindingReasonCode ECSServiceRecommendationFilterName = "FindingReasonCode"
+)
+
+// Values returns all known values for ECSServiceRecommendationFilterName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ECSServiceRecommendationFilterName) Values() []ECSServiceRecommendationFilterName {
+	return []ECSServiceRecommendationFilterName{
+		"Finding",
+		"FindingReasonCode",
+	}
+}
+
+type ECSServiceRecommendationFinding string
+
+// Enum values for ECSServiceRecommendationFinding
+const (
+	ECSServiceRecommendationFindingOptimized        ECSServiceRecommendationFinding = "Optimized"
+	ECSServiceRecommendationFindingUnderProvisioned ECSServiceRecommendationFinding = "Underprovisioned"
+	ECSServiceRecommendationFindingOverProvisioned  ECSServiceRecommendationFinding = "Overprovisioned"
+)
+
+// Values returns all known values for ECSServiceRecommendationFinding. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ECSServiceRecommendationFinding) Values() []ECSServiceRecommendationFinding {
+	return []ECSServiceRecommendationFinding{
+		"Optimized",
+		"Underprovisioned",
+		"Overprovisioned",
+	}
+}
+
+type ECSServiceRecommendationFindingReasonCode string
+
+// Enum values for ECSServiceRecommendationFindingReasonCode
+const (
+	ECSServiceRecommendationFindingReasonCodeMemoryOverProvisioned  ECSServiceRecommendationFindingReasonCode = "MemoryOverprovisioned"
+	ECSServiceRecommendationFindingReasonCodeMemoryUnderProvisioned ECSServiceRecommendationFindingReasonCode = "MemoryUnderprovisioned"
+	ECSServiceRecommendationFindingReasonCodeCpuOverProvisioned     ECSServiceRecommendationFindingReasonCode = "CPUOverprovisioned"
+	ECSServiceRecommendationFindingReasonCodeCpuUnderProvisioned    ECSServiceRecommendationFindingReasonCode = "CPUUnderprovisioned"
+)
+
+// Values returns all known values for ECSServiceRecommendationFindingReasonCode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ECSServiceRecommendationFindingReasonCode) Values() []ECSServiceRecommendationFindingReasonCode {
+	return []ECSServiceRecommendationFindingReasonCode{
+		"MemoryOverprovisioned",
+		"MemoryUnderprovisioned",
+		"CPUOverprovisioned",
+		"CPUUnderprovisioned",
 	}
 }
 
@@ -271,6 +406,66 @@ func (ExportableAutoScalingGroupField) Values() []ExportableAutoScalingGroupFiel
 		"EffectiveRecommendationPreferencesInferredWorkloadTypes",
 		"InferredWorkloadTypes",
 		"RecommendationOptionsMigrationEffort",
+	}
+}
+
+type ExportableECSServiceField string
+
+// Enum values for ExportableECSServiceField
+const (
+	ExportableECSServiceFieldAccountId                                                     ExportableECSServiceField = "AccountId"
+	ExportableECSServiceFieldServiceArn                                                    ExportableECSServiceField = "ServiceArn"
+	ExportableECSServiceFieldLookbackPeriodInDays                                          ExportableECSServiceField = "LookbackPeriodInDays"
+	ExportableECSServiceFieldLastRefreshTimestamp                                          ExportableECSServiceField = "LastRefreshTimestamp"
+	ExportableECSServiceFieldLaunchType                                                    ExportableECSServiceField = "LaunchType"
+	ExportableECSServiceFieldCurrentPerformanceRisk                                        ExportableECSServiceField = "CurrentPerformanceRisk"
+	ExportableECSServiceFieldCurrentServiceConfigurationMemory                             ExportableECSServiceField = "CurrentServiceConfigurationMemory"
+	ExportableECSServiceFieldCurrentServiceConfigurationCpu                                ExportableECSServiceField = "CurrentServiceConfigurationCpu"
+	ExportableECSServiceFieldCurrentServiceConfigurationTaskDefinitionArn                  ExportableECSServiceField = "CurrentServiceConfigurationTaskDefinitionArn"
+	ExportableECSServiceFieldCurrentServiceConfigurationAutoScalingConfiguration           ExportableECSServiceField = "CurrentServiceConfigurationAutoScalingConfiguration"
+	ExportableECSServiceFieldCurrentServiceContainerConfigurations                         ExportableECSServiceField = "CurrentServiceContainerConfigurations"
+	ExportableECSServiceFieldUtilizationMetricsCpuMaximum                                  ExportableECSServiceField = "UtilizationMetricsCpuMaximum"
+	ExportableECSServiceFieldUtilizationMetricsMemoryMaximum                               ExportableECSServiceField = "UtilizationMetricsMemoryMaximum"
+	ExportableECSServiceFieldFinding                                                       ExportableECSServiceField = "Finding"
+	ExportableECSServiceFieldFindingReasonCodes                                            ExportableECSServiceField = "FindingReasonCodes"
+	ExportableECSServiceFieldRecommendationOptionsMemory                                   ExportableECSServiceField = "RecommendationOptionsMemory"
+	ExportableECSServiceFieldRecommendationOptionsCpu                                      ExportableECSServiceField = "RecommendationOptionsCpu"
+	ExportableECSServiceFieldRecommendationOptionsSavingsOpportunityPercentage             ExportableECSServiceField = "RecommendationOptionsSavingsOpportunityPercentage"
+	ExportableECSServiceFieldRecommendationOptionsEstimatedMonthlySavingsCurrency          ExportableECSServiceField = "RecommendationOptionsEstimatedMonthlySavingsCurrency"
+	ExportableECSServiceFieldRecommendationOptionsEstimatedMonthlySavingsValue             ExportableECSServiceField = "RecommendationOptionsEstimatedMonthlySavingsValue"
+	ExportableECSServiceFieldRecommendationOptionsContainerRecommendations                 ExportableECSServiceField = "RecommendationOptionsContainerRecommendations"
+	ExportableECSServiceFieldRecommendationOptionsProjectedUtilizationMetricsCpuMaximum    ExportableECSServiceField = "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"
+	ExportableECSServiceFieldRecommendationOptionsProjectedUtilizationMetricsMemoryMaximum ExportableECSServiceField = "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"
+)
+
+// Values returns all known values for ExportableECSServiceField. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExportableECSServiceField) Values() []ExportableECSServiceField {
+	return []ExportableECSServiceField{
+		"AccountId",
+		"ServiceArn",
+		"LookbackPeriodInDays",
+		"LastRefreshTimestamp",
+		"LaunchType",
+		"CurrentPerformanceRisk",
+		"CurrentServiceConfigurationMemory",
+		"CurrentServiceConfigurationCpu",
+		"CurrentServiceConfigurationTaskDefinitionArn",
+		"CurrentServiceConfigurationAutoScalingConfiguration",
+		"CurrentServiceContainerConfigurations",
+		"UtilizationMetricsCpuMaximum",
+		"UtilizationMetricsMemoryMaximum",
+		"Finding",
+		"FindingReasonCodes",
+		"RecommendationOptionsMemory",
+		"RecommendationOptionsCpu",
+		"RecommendationOptionsSavingsOpportunityPercentage",
+		"RecommendationOptionsEstimatedMonthlySavingsCurrency",
+		"RecommendationOptionsEstimatedMonthlySavingsValue",
+		"RecommendationOptionsContainerRecommendations",
+		"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
+		"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
 	}
 }
 
@@ -1037,6 +1232,7 @@ const (
 	RecommendationSourceTypeAutoScalingGroup RecommendationSourceType = "AutoScalingGroup"
 	RecommendationSourceTypeEbsVolume        RecommendationSourceType = "EbsVolume"
 	RecommendationSourceTypeLambdaFunction   RecommendationSourceType = "LambdaFunction"
+	RecommendationSourceTypeEcsService       RecommendationSourceType = "EcsService"
 )
 
 // Values returns all known values for RecommendationSourceType. Note that this can
@@ -1048,6 +1244,7 @@ func (RecommendationSourceType) Values() []RecommendationSourceType {
 		"AutoScalingGroup",
 		"EbsVolume",
 		"LambdaFunction",
+		"EcsService",
 	}
 }
 
@@ -1060,6 +1257,7 @@ const (
 	ResourceTypeEbsVolume        ResourceType = "EbsVolume"
 	ResourceTypeLambdaFunction   ResourceType = "LambdaFunction"
 	ResourceTypeNotApplicable    ResourceType = "NotApplicable"
+	ResourceTypeEcsService       ResourceType = "EcsService"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -1072,6 +1270,7 @@ func (ResourceType) Values() []ResourceType {
 		"EbsVolume",
 		"LambdaFunction",
 		"NotApplicable",
+		"EcsService",
 	}
 }
 

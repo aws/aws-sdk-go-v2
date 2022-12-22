@@ -10336,6 +10336,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.String(*v.KmsKeyId)
 	}
 
+	if v.ManageMasterUserPassword != nil {
+		objectKey := object.Key("ManageMasterUserPassword")
+		objectKey.Boolean(*v.ManageMasterUserPassword)
+	}
+
 	if v.MasterUsername != nil {
 		objectKey := object.Key("MasterUsername")
 		objectKey.String(*v.MasterUsername)
@@ -10344,6 +10349,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 	if v.MasterUserPassword != nil {
 		objectKey := object.Key("MasterUserPassword")
 		objectKey.String(*v.MasterUserPassword)
+	}
+
+	if v.MasterUserSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterUserSecretKmsKeyId")
+		objectKey.String(*v.MasterUserSecretKmsKeyId)
 	}
 
 	if v.MonitoringInterval != nil {
@@ -10643,6 +10653,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.LicenseModel)
 	}
 
+	if v.ManageMasterUserPassword != nil {
+		objectKey := object.Key("ManageMasterUserPassword")
+		objectKey.Boolean(*v.ManageMasterUserPassword)
+	}
+
 	if v.MasterUsername != nil {
 		objectKey := object.Key("MasterUsername")
 		objectKey.String(*v.MasterUsername)
@@ -10651,6 +10666,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 	if v.MasterUserPassword != nil {
 		objectKey := object.Key("MasterUserPassword")
 		objectKey.String(*v.MasterUserPassword)
+	}
+
+	if v.MasterUserSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterUserSecretKmsKeyId")
+		objectKey.String(*v.MasterUserSecretKmsKeyId)
 	}
 
 	if v.MaxAllocatedStorage != nil {
@@ -13227,9 +13247,19 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.Integer(*v.Iops)
 	}
 
+	if v.ManageMasterUserPassword != nil {
+		objectKey := object.Key("ManageMasterUserPassword")
+		objectKey.Boolean(*v.ManageMasterUserPassword)
+	}
+
 	if v.MasterUserPassword != nil {
 		objectKey := object.Key("MasterUserPassword")
 		objectKey.String(*v.MasterUserPassword)
+	}
+
+	if v.MasterUserSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterUserSecretKmsKeyId")
+		objectKey.String(*v.MasterUserSecretKmsKeyId)
 	}
 
 	if v.MonitoringInterval != nil {
@@ -13280,6 +13310,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 	if v.PreferredMaintenanceWindow != nil {
 		objectKey := object.Key("PreferredMaintenanceWindow")
 		objectKey.String(*v.PreferredMaintenanceWindow)
+	}
+
+	if v.RotateMasterUserPassword != nil {
+		objectKey := object.Key("RotateMasterUserPassword")
+		objectKey.Boolean(*v.RotateMasterUserPassword)
 	}
 
 	if v.ScalingConfiguration != nil {
@@ -13499,9 +13534,19 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 		objectKey.String(*v.LicenseModel)
 	}
 
+	if v.ManageMasterUserPassword != nil {
+		objectKey := object.Key("ManageMasterUserPassword")
+		objectKey.Boolean(*v.ManageMasterUserPassword)
+	}
+
 	if v.MasterUserPassword != nil {
 		objectKey := object.Key("MasterUserPassword")
 		objectKey.String(*v.MasterUserPassword)
+	}
+
+	if v.MasterUserSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterUserSecretKmsKeyId")
+		objectKey.String(*v.MasterUserSecretKmsKeyId)
 	}
 
 	if v.MaxAllocatedStorage != nil {
@@ -13584,6 +13629,11 @@ func awsAwsquery_serializeOpDocumentModifyDBInstanceInput(v *ModifyDBInstanceInp
 	if v.ResumeFullAutomationModeMinutes != nil {
 		objectKey := object.Key("ResumeFullAutomationModeMinutes")
 		objectKey.Integer(*v.ResumeFullAutomationModeMinutes)
+	}
+
+	if v.RotateMasterUserPassword != nil {
+		objectKey := object.Key("RotateMasterUserPassword")
+		objectKey.Boolean(*v.RotateMasterUserPassword)
 	}
 
 	if v.StorageThroughput != nil {
@@ -14279,6 +14329,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromS3Input(v *RestoreDBClus
 		objectKey.String(*v.KmsKeyId)
 	}
 
+	if v.ManageMasterUserPassword != nil {
+		objectKey := object.Key("ManageMasterUserPassword")
+		objectKey.Boolean(*v.ManageMasterUserPassword)
+	}
+
 	if v.MasterUsername != nil {
 		objectKey := object.Key("MasterUsername")
 		objectKey.String(*v.MasterUsername)
@@ -14287,6 +14342,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromS3Input(v *RestoreDBClus
 	if v.MasterUserPassword != nil {
 		objectKey := object.Key("MasterUserPassword")
 		objectKey.String(*v.MasterUserPassword)
+	}
+
+	if v.MasterUserSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterUserSecretKmsKeyId")
+		objectKey.String(*v.MasterUserSecretKmsKeyId)
 	}
 
 	if v.NetworkType != nil {
@@ -14972,6 +15032,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 		objectKey.String(*v.LicenseModel)
 	}
 
+	if v.ManageMasterUserPassword != nil {
+		objectKey := object.Key("ManageMasterUserPassword")
+		objectKey.Boolean(*v.ManageMasterUserPassword)
+	}
+
 	if v.MasterUsername != nil {
 		objectKey := object.Key("MasterUsername")
 		objectKey.String(*v.MasterUsername)
@@ -14980,6 +15045,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 	if v.MasterUserPassword != nil {
 		objectKey := object.Key("MasterUserPassword")
 		objectKey.String(*v.MasterUserPassword)
+	}
+
+	if v.MasterUserSecretKmsKeyId != nil {
+		objectKey := object.Key("MasterUserSecretKmsKeyId")
+		objectKey.String(*v.MasterUserSecretKmsKeyId)
 	}
 
 	if v.MaxAllocatedStorage != nil {

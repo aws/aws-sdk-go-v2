@@ -1,0 +1,8 @@
+{
+    "id": "cedbd88b-8dd4-4a58-ba3c-4d9a5b47a613",
+    "type": "feature",
+    "description": "This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for ecs services running on Fargate.",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

@@ -31,7 +31,8 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the IoT Device Advisor resource.
+	// The resource ARN of the IoT Device Advisor resource. This can be SuiteDefinition
+	// ARN or SuiteRun ARN.
 	//
 	// This member is required.
 	ResourceArn *string

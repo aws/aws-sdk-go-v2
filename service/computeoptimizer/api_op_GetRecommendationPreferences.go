@@ -4,6 +4,7 @@ package computeoptimizer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
@@ -141,6 +142,101 @@ func (c *Client) addOperationGetRecommendationPreferencesMiddlewares(stack *midd
 		return err
 	}
 	return nil
+}
+
+// GetRecommendationPreferencesAPIClient is a client that implements the
+// GetRecommendationPreferences operation.
+type GetRecommendationPreferencesAPIClient interface {
+	GetRecommendationPreferences(context.Context, *GetRecommendationPreferencesInput, ...func(*Options)) (*GetRecommendationPreferencesOutput, error)
+}
+
+var _ GetRecommendationPreferencesAPIClient = (*Client)(nil)
+
+// GetRecommendationPreferencesPaginatorOptions is the paginator options for
+// GetRecommendationPreferences
+type GetRecommendationPreferencesPaginatorOptions struct {
+	// The maximum number of recommendation preferences to return with a single
+	// request. To retrieve the remaining results, make another request with the
+	// returned nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetRecommendationPreferencesPaginator is a paginator for
+// GetRecommendationPreferences
+type GetRecommendationPreferencesPaginator struct {
+	options   GetRecommendationPreferencesPaginatorOptions
+	client    GetRecommendationPreferencesAPIClient
+	params    *GetRecommendationPreferencesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetRecommendationPreferencesPaginator returns a new
+// GetRecommendationPreferencesPaginator
+func NewGetRecommendationPreferencesPaginator(client GetRecommendationPreferencesAPIClient, params *GetRecommendationPreferencesInput, optFns ...func(*GetRecommendationPreferencesPaginatorOptions)) *GetRecommendationPreferencesPaginator {
+	if params == nil {
+		params = &GetRecommendationPreferencesInput{}
+	}
+
+	options := GetRecommendationPreferencesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetRecommendationPreferencesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetRecommendationPreferencesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetRecommendationPreferences page.
+func (p *GetRecommendationPreferencesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetRecommendationPreferencesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetRecommendationPreferences(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetRecommendationPreferences(region string) *awsmiddleware.RegisterServiceMetadata {

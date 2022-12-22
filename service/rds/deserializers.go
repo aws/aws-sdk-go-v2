@@ -24289,6 +24289,12 @@ func awsAwsquery_deserializeDocumentDBCluster(v **types.DBCluster, decoder smith
 				sv.MasterUsername = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("MasterUserSecret", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentMasterUserSecret(&sv.MasterUserSecret, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("MonitoringInterval", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -27926,6 +27932,12 @@ func awsAwsquery_deserializeDocumentDBInstance(v **types.DBInstance, decoder smi
 			{
 				xtv := string(val)
 				sv.MasterUsername = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("MasterUserSecret", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentMasterUserSecret(&sv.MasterUserSecret, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("MaxAllocatedStorage", t.Name.Local):
@@ -37757,6 +37769,81 @@ func awsAwsquery_deserializeDocumentLogTypeListUnwrapped(v *[]string, decoder sm
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentMasterUserSecret(v **types.MasterUserSecret, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.MasterUserSecret
+	if *v == nil {
+		sv = &types.MasterUserSecret{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("KmsKeyId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.KmsKeyId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("SecretArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SecretArn = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("SecretStatus", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SecretStatus = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentMinimumEngineVersionPerAllowedValue(v **types.MinimumEngineVersionPerAllowedValue, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)

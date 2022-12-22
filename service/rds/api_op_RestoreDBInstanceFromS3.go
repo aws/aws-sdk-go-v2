@@ -191,10 +191,40 @@ type RestoreDBInstanceFromS3Input struct {
 	// The license model for this DB instance. Use general-public-license.
 	LicenseModel *string
 
+	// A value that indicates whether to manage the master user password with Amazon
+	// Web Services Secrets Manager. For more information, see Password management with
+	// Amazon Web Services Secrets Manager
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// in the Amazon RDS User Guide. Constraints:
+	//
+	// * Can't manage the master user
+	// password with Amazon Web Services Secrets Manager if MasterUserPassword is
+	// specified.
+	ManageMasterUserPassword *bool
+
 	// The password for the master user. The password can include any printable ASCII
-	// character except "/", """, or "@". Constraints: Must contain from 8 to 41
-	// characters.
+	// character except "/", """, or "@". Constraints: Can't be specified if
+	// ManageMasterUserPassword is turned on. MariaDB Constraints: Must contain from 8
+	// to 41 characters. Microsoft SQL Server Constraints: Must contain from 8 to 128
+	// characters. MySQL Constraints: Must contain from 8 to 41 characters. Oracle
+	// Constraints: Must contain from 8 to 30 characters. PostgreSQL Constraints: Must
+	// contain from 8 to 128 characters.
 	MasterUserPassword *string
+
+	// The Amazon Web Services KMS key identifier to encrypt a secret that is
+	// automatically generated and managed in Amazon Web Services Secrets Manager. This
+	// setting is valid only if the master user password is managed by RDS in Amazon
+	// Web Services Secrets Manager for the DB instance. The Amazon Web Services KMS
+	// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
+	// To use a KMS key in a different Amazon Web Services account, specify the key ARN
+	// or alias ARN. If you don't specify MasterUserSecretKmsKeyId, then the
+	// aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a
+	// different Amazon Web Services account, then you can't use the aws/secretsmanager
+	// KMS key to encrypt the secret, and you must use a customer managed KMS key.
+	// There is a default KMS key for your Amazon Web Services account. Your Amazon Web
+	// Services account has a different default KMS key for each Amazon Web Services
+	// Region.
+	MasterUserSecretKmsKeyId *string
 
 	// The name for the master user. Constraints:
 	//

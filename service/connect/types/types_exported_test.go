@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 )
 
+func ExampleParticipantTimerValue_outputUsage() {
+	var union types.ParticipantTimerValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ParticipantTimerValueMemberParticipantTimerAction:
+		_ = v.Value // Value is types.ParticipantTimerAction
+
+	case *types.ParticipantTimerValueMemberParticipantTimerDurationInMinutes:
+		_ = v.Value // Value is int32
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *int32
+var _ types.ParticipantTimerAction
+
 func ExampleReferenceSummary_outputUsage() {
 	var union types.ReferenceSummary
 	// type switches can be used to check the union value
@@ -44,3 +66,21 @@ var _ *types.NumberReference
 var _ *types.StringReference
 var _ *types.DateReference
 var _ *types.EmailReference
+
+func ExampleUpdateParticipantRoleConfigChannelInfo_outputUsage() {
+	var union types.UpdateParticipantRoleConfigChannelInfo
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.UpdateParticipantRoleConfigChannelInfoMemberChat:
+		_ = v.Value // Value is types.ChatParticipantRoleConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ChatParticipantRoleConfig

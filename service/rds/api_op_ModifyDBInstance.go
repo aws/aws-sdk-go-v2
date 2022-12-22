@@ -313,6 +313,24 @@ type ModifyDBInstanceInput struct {
 	// Valid values: license-included | bring-your-own-license | general-public-license
 	LicenseModel *string
 
+	// A value that indicates whether to manage the master user password with Amazon
+	// Web Services Secrets Manager. If the DB cluster doesn't manage the master user
+	// password with Amazon Web Services Secrets Manager, you can turn on this
+	// management. In this case, you can't specify MasterUserPassword. If the DB
+	// cluster already manages the master user password with Amazon Web Services
+	// Secrets Manager, and you specify that the master user password is not managed
+	// with Amazon Web Services Secrets Manager, then you must specify
+	// MasterUserPassword. In this case, RDS deletes the secret and uses the new
+	// password for the master user specified by MasterUserPassword. For more
+	// information, see Password management with Amazon Web Services Secrets Manager
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// in the Amazon RDS User Guide. Constraints:
+	//
+	// * Can't manage the master user
+	// password with Amazon Web Services Secrets Manager if MasterUserPassword is
+	// specified.
+	ManageMasterUserPassword *bool
+
 	// The new password for the master user. The password can include any printable
 	// ASCII character except "/", """, or "@". Changing this parameter doesn't result
 	// in an outage and the change is asynchronously applied as soon as possible.
@@ -320,8 +338,9 @@ type ModifyDBInstanceInput struct {
 	// MasterUserPassword element exists in the PendingModifiedValues element of the
 	// operation response. This setting doesn't apply to RDS Custom. Amazon Aurora Not
 	// applicable. The password for the master user is managed by the DB cluster. For
-	// more information, see ModifyDBCluster. Default: Uses existing setting MariaDB
-	// Constraints: Must contain from 8 to 41 characters. Microsoft SQL Server
+	// more information, see ModifyDBCluster. Default: Uses existing setting
+	// Constraints: Can't be specified if ManageMasterUserPassword is turned on.
+	// MariaDB Constraints: Must contain from 8 to 41 characters. Microsoft SQL Server
 	// Constraints: Must contain from 8 to 128 characters. MySQL Constraints: Must
 	// contain from 8 to 41 characters. Oracle Constraints: Must contain from 8 to 30
 	// characters. PostgreSQL Constraints: Must contain from 8 to 128 characters.
@@ -329,6 +348,31 @@ type ModifyDBInstanceInput struct {
 	// way to regain access to a primary instance user if the password is lost. This
 	// includes restoring privileges that might have been accidentally revoked.
 	MasterUserPassword *string
+
+	// The Amazon Web Services KMS key identifier to encrypt a secret that is
+	// automatically generated and managed in Amazon Web Services Secrets Manager. This
+	// setting is valid only if both of the following conditions are met:
+	//
+	// * The DB
+	// instance doesn't manage the master user password in Amazon Web Services Secrets
+	// Manager. If the DB instance already manages the master user password in Amazon
+	// Web Services Secrets Manager, you can't change the KMS key used to encrypt the
+	// secret.
+	//
+	// * You are turning on ManageMasterUserPassword to manage the master user
+	// password in Amazon Web Services Secrets Manager. If you are turning on
+	// ManageMasterUserPassword and don't specify MasterUserSecretKmsKeyId, then the
+	// aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a
+	// different Amazon Web Services account, then you can't use the aws/secretsmanager
+	// KMS key to encrypt the secret, and you must use a customer managed KMS key.
+	//
+	// The
+	// Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or
+	// alias name for the KMS key. To use a KMS key in a different Amazon Web Services
+	// account, specify the key ARN or alias ARN. There is a default KMS key for your
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default KMS key for each Amazon Web Services Region.
+	MasterUserSecretKmsKeyId *string
 
 	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
 	// the storage of the DB instance. For more information about this setting,
@@ -519,6 +563,19 @@ type ModifyDBInstanceInput struct {
 	// Custom resumes full automation. The minimum value is 60 (default). The maximum
 	// value is 1,440.
 	ResumeFullAutomationModeMinutes *int32
+
+	// A value that indicates whether to rotate the secret managed by Amazon Web
+	// Services Secrets Manager for the master user password. This setting is valid
+	// only if the master user password is managed by RDS in Amazon Web Services
+	// Secrets Manager for the DB cluster. The secret value contains the updated
+	// password. For more information, see Password management with Amazon Web Services
+	// Secrets Manager
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// in the Amazon RDS User Guide. Constraints:
+	//
+	// * You must apply the change
+	// immediately when rotating the master user password.
+	RotateMasterUserPassword *bool
 
 	// Specifies the storage throughput value for the DB instance. This setting applies
 	// only to the gp3 storage type. This setting doesn't apply to RDS Custom or Amazon

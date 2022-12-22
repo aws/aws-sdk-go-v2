@@ -2830,6 +2830,26 @@ func (m *validateOpUpdateInstanceStorageConfig) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateParticipantRoleConfig struct {
+}
+
+func (*validateOpUpdateParticipantRoleConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateParticipantRoleConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateParticipantRoleConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateParticipantRoleConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePhoneNumber struct {
 }
 
@@ -3854,6 +3874,10 @@ func addOpUpdateInstanceStorageConfigValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpUpdateInstanceStorageConfig{}, middleware.After)
 }
 
+func addOpUpdateParticipantRoleConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateParticipantRoleConfig{}, middleware.After)
+}
+
 func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePhoneNumber{}, middleware.After)
 }
@@ -3956,6 +3980,25 @@ func validateChatMessage(v *types.ChatMessage) error {
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChatParticipantRoleConfig(v *types.ChatParticipantRoleConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChatParticipantRoleConfig"}
+	if v.ParticipantTimerConfigList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantTimerConfigList"))
+	} else if v.ParticipantTimerConfigList != nil {
+		if err := validateParticipantTimerConfigList(v.ParticipantTimerConfigList); err != nil {
+			invalidParams.AddNested("ParticipantTimerConfigList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4312,6 +4355,44 @@ func validateParticipantDetails(v *types.ParticipantDetails) error {
 	}
 }
 
+func validateParticipantTimerConfigList(v []types.ParticipantTimerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParticipantTimerConfigList"}
+	for i := range v {
+		if err := validateParticipantTimerConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParticipantTimerConfiguration(v *types.ParticipantTimerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParticipantTimerConfiguration"}
+	if len(v.ParticipantRole) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantRole"))
+	}
+	if len(v.TimerType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TimerType"))
+	}
+	if v.TimerValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimerValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePhoneNumberQuickConnectConfig(v *types.PhoneNumberQuickConnectConfig) error {
 	if v == nil {
 		return nil
@@ -4645,6 +4726,25 @@ func validateTelephonyConfig(v *types.TelephonyConfig) error {
 		if err := validateDistributionList(v.Distributions); err != nil {
 			invalidParams.AddNested("Distributions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateParticipantRoleConfigChannelInfo(v types.UpdateParticipantRoleConfigChannelInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateParticipantRoleConfigChannelInfo"}
+	switch uv := v.(type) {
+	case *types.UpdateParticipantRoleConfigChannelInfoMemberChat:
+		if err := validateChatParticipantRoleConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[Chat]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7367,6 +7467,31 @@ func validateOpUpdateInstanceStorageConfigInput(v *UpdateInstanceStorageConfigIn
 	} else if v.StorageConfig != nil {
 		if err := validateInstanceStorageConfig(v.StorageConfig); err != nil {
 			invalidParams.AddNested("StorageConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateParticipantRoleConfigInput(v *UpdateParticipantRoleConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateParticipantRoleConfigInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.ChannelConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelConfiguration"))
+	} else if v.ChannelConfiguration != nil {
+		if err := validateUpdateParticipantRoleConfigChannelInfo(v.ChannelConfiguration); err != nil {
+			invalidParams.AddNested("ChannelConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

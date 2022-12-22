@@ -9,7 +9,6 @@
         "api_client.go",
         "api_client_test.go",
         "api_op_JoinStorageSession.go",
-        "api_op_JoinStorageSessionAsViewer.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

@@ -31,7 +31,8 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The resource ARN of an IoT Device Advisor resource.
+	// The resource ARN of an IoT Device Advisor resource. This can be SuiteDefinition
+	// ARN or SuiteRun ARN.
 	//
 	// This member is required.
 	ResourceArn *string

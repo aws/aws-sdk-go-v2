@@ -1708,6 +1708,15 @@ func awsRestjson1_deserializeOpDocumentStartSuiteRunOutput(v **StartSuiteRunOutp
 				}
 			}
 
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Endpoint to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
+			}
+
 		case "suiteRunArn":
 			if value != nil {
 				jtv, ok := value.(string)

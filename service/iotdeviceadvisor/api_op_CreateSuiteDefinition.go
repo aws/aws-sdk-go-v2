@@ -34,6 +34,8 @@ func (c *Client) CreateSuiteDefinition(ctx context.Context, params *CreateSuiteD
 type CreateSuiteDefinitionInput struct {
 
 	// Creates a Device Advisor test suite with suite definition configuration.
+	//
+	// This member is required.
 	SuiteDefinitionConfiguration *types.SuiteDefinitionConfiguration
 
 	// The tags to be attached to the suite definition.
@@ -44,16 +46,16 @@ type CreateSuiteDefinitionInput struct {
 
 type CreateSuiteDefinitionOutput struct {
 
-	// Creates a Device Advisor test suite with TimeStamp of when it was created.
+	// The timestamp of when the test suite was created.
 	CreatedAt *time.Time
 
-	// Creates a Device Advisor test suite with Amazon Resource Name (ARN).
+	// The Amazon Resource Name (ARN) of the test suite.
 	SuiteDefinitionArn *string
 
-	// Creates a Device Advisor test suite with suite UUID.
+	// The UUID of the test suite created.
 	SuiteDefinitionId *string
 
-	// Creates a Device Advisor test suite with suite definition name.
+	// The suite definition name of the test suite. This is a required parameter.
 	SuiteDefinitionName *string
 
 	// Metadata pertaining to the operation's result.
@@ -105,6 +107,9 @@ func (c *Client) addOperationCreateSuiteDefinitionMiddlewares(stack *middleware.
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpCreateSuiteDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSuiteDefinition(options.Region), middleware.Before); err != nil {

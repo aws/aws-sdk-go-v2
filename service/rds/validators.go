@@ -5340,9 +5340,6 @@ func validateOpRestoreDBClusterFromS3Input(v *RestoreDBClusterFromS3Input) error
 	if v.MasterUsername == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MasterUsername"))
 	}
-	if v.MasterUserPassword == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MasterUserPassword"))
-	}
 	if v.SourceEngine == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceEngine"))
 	}

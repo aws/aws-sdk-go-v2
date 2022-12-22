@@ -68,7 +68,7 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	// generated set of recommendations, review the effectiveRecommendationPreferences
 	// value in the response of the GetEC2InstanceRecommendations actions. For more
 	// information, see Enhanced infrastructure metrics
-	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html)
 	// in the Compute Optimizer User Guide.
 	ExternalMetricsPreference *types.ExternalMetricsPreference
 
