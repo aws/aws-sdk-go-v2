@@ -7,9 +7,6 @@
             "operations": [
                 {
                     "target": "com.amazonaws.kinesisvideowebrtcstorage#JoinStorageSession"
-                },
-                {
-                    "target": "com.amazonaws.kinesisvideowebrtcstorage#JoinStorageSessionAsViewer"
                 }
             ],
             "traits": {
@@ -346,8 +343,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -359,8 +356,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -372,8 +369,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -385,8 +382,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-gov-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-gov-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -398,8 +395,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -411,8 +408,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": true
                             }
                         },
@@ -424,8 +421,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": true,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -437,8 +434,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "cn-north-1",
                                 "UseDualStack": false,
+                                "Region": "cn-north-1",
                                 "UseFIPS": false
                             }
                         },
@@ -448,8 +445,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -461,8 +458,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -472,8 +469,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -485,8 +482,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-iso-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-iso-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -498,8 +495,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -511,8 +508,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -524,8 +521,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -537,8 +534,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -548,8 +545,8 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -561,8 +558,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -572,8 +569,8 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -585,8 +582,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-isob-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-isob-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -598,8 +595,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -610,8 +607,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -622,8 +619,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -641,7 +638,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<ol>\n            <li>\n               <p>You do not have required permissions to perform this operation</p>\n            </li>\n         </ol>\n         <ol>\n            <li>\n               <p>The <code>AccessDeniedException</code> can be thrown for operation access as well as tokens or resource access</p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<p>You do not have required permissions to perform this operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -650,16 +647,6 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*):kinesisvideo:[a-z0-9-]+:[0-9]+:[a-z]+/[a-zA-Z0-9_.-]+/[0-9]+$"
-            }
-        },
-        "com.amazonaws.kinesisvideowebrtcstorage#ClientId": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 1,
-                    "max": 256
-                },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
             }
         },
         "com.amazonaws.kinesisvideowebrtcstorage#ClientLimitExceededException": {
@@ -683,7 +670,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<ol>\n            <li>\n               <p>The value for this input parameter is invalid.</p>\n            </li>\n         </ol>\n         <ol>\n            <li>\n               <p>Additional details may <b>not</b>be returned.</p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<p>The value for this input parameter is invalid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -719,59 +706,6 @@
                 }
             }
         },
-        "com.amazonaws.kinesisvideowebrtcstorage#JoinStorageSessionAsViewer": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.kinesisvideowebrtcstorage#JoinStorageSessionAsViewerInput"
-            },
-            "output": {
-                "target": "smithy.api#Unit"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.kinesisvideowebrtcstorage#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.kinesisvideowebrtcstorage#ClientLimitExceededException"
-                },
-                {
-                    "target": "com.amazonaws.kinesisvideowebrtcstorage#InvalidArgumentException"
-                },
-                {
-                    "target": "com.amazonaws.kinesisvideowebrtcstorage#ResourceNotFoundException"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>\n      Join the ongoing one way-video and/or multi-way audio WebRTC session as \n      a viewer for an input channel. If there’s\n      no existing session for the channel, create a new streaming session and provide\n      the Amazon Resource Name (ARN) of the signaling channel (<code>channelArn</code>)\n      and client id (<code>clientId</code>).\n    </p>\n         <p>Currently for <code>SINGLE_MASTER</code> type, a video producing device\n      is able to ingest both audio and video media into a stream, while viewers\n      can only ingest audio. Both a video producing device and viewers can join\n      a session first and wait for other participants. While participants are having peer to peer conversations through webRTC,\n      the ingested media session will be stored into the Kinesis Video Stream.\n      Multiple viewers are able to playback real-time media.\n    </p>\n         <p>Customers can also use existing Kinesis Video Streams features like\n      <code>HLS</code> or <code>DASH</code> playback, Image generation, and more \n      with ingested WebRTC media. If there’s an existing session with the same\n      <code>clientId</code> that's found in the join session request, the new request takes precedence.</p>",
-                "smithy.api#http": {
-                    "code": 200,
-                    "method": "POST",
-                    "uri": "/joinStorageSessionAsViewer"
-                }
-            }
-        },
-        "com.amazonaws.kinesisvideowebrtcstorage#JoinStorageSessionAsViewerInput": {
-            "type": "structure",
-            "members": {
-                "channelArn": {
-                    "target": "com.amazonaws.kinesisvideowebrtcstorage#ChannelArn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the signaling channel.\n    </p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "clientId": {
-                    "target": "com.amazonaws.kinesisvideowebrtcstorage#ClientId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>\n      The unique identifier for the sender client.\n    </p>",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#input": {}
-            }
-        },
         "com.amazonaws.kinesisvideowebrtcstorage#JoinStorageSessionInput": {
             "type": "structure",
             "members": {
@@ -795,7 +729,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<ol>\n            <li>\n               <p>The specified resource is not found</p>\n            </li>\n         </ol>\n         <ol>\n            <li>\n               <p>You have not specified a channel in this API call.</p>\n            </li>\n         </ol>",
+                "smithy.api#documentation": "<p>The specified resource is not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }

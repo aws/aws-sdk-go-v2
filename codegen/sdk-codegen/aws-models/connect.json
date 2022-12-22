@@ -889,6 +889,9 @@
                     "target": "com.amazonaws.connect#UpdateInstanceStorageConfig"
                 },
                 {
+                    "target": "com.amazonaws.connect#UpdateParticipantRoleConfig"
+                },
+                {
                     "target": "com.amazonaws.connect#UpdatePhoneNumber"
                 },
                 {
@@ -2866,20 +2869,35 @@
                 "ContentType": {
                     "target": "com.amazonaws.connect#ChatContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>, <code>text/markdown</code>, and <code>application/json</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connect#ChatContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the chat message.</p>",
+                        "smithy.api#documentation": "<p>The content of the chat message. </p>\n         <ul>\n            <li>\n               <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length Constraints are\n     Minimum of 1, Maximum of 1024. </p>\n            </li>\n            <li>\n               <p>For <code>application/json</code>, the Length Constraints are Minimum of 1, Maximum of\n     12000. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A chat message.</p>"
+            }
+        },
+        "com.amazonaws.connect#ChatParticipantRoleConfig": {
+            "type": "structure",
+            "members": {
+                "ParticipantTimerConfigList": {
+                    "target": "com.amazonaws.connect#ParticipantTimerConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of participant timers. You can specify any unique combination of role and timer type.\n   Duplicate entries error out the request with a 400.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for the chat participant role.</p>"
             }
         },
         "com.amazonaws.connect#ChatStreamingConfiguration": {
@@ -2935,7 +2953,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <p>For more information about how to use this operation, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html\">Claim a phone number in your\n    country</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html\">Claim phone\n    numbers to traffic distribution groups</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html\">SearchAvailablePhoneNumbers</a> API for available phone numbers that you can claim. Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <p>For more information about how to use this operation, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html\">Claim a phone number in your\n    country</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html\">Claim phone\n    numbers to traffic distribution groups</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html\">SearchAvailablePhoneNumbers</a> API for available phone numbers that you can claim. Call\n    the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/claim",
@@ -4753,7 +4771,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to code conditions for the rule.\n  </p>",
+                "smithy.api#documentation": "<p>Creates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to\n   code conditions for the rule. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/rules/{InstanceId}",
@@ -4930,7 +4948,7 @@
                 "TagRestrictedResources": {
                     "target": "com.amazonaws.connect#TagRestrictedResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code> | <code>SecurityProfile</code> | <code>Queue</code> | \n   <code>RoutingProfile</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code> |\n    <code>SecurityProfile</code> | <code>Queue</code> | <code>RoutingProfile</code>\n         </p>"
                     }
                 }
             }
@@ -8549,7 +8567,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Dismisses contacts from an agent’s CCP and returns the agent to an available state, which\n   allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a\n   <code>MISSED</code>, <code>ERROR</code>, <code>ENDED</code>, or <code>REJECTED</code> state in\n   the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">Agent\n    Event Stream</a>.</p>",
+                "smithy.api#documentation": "<p>Dismisses contacts from an agent’s CCP and returns the agent to an available state, which\n   allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a\n    <code>MISSED</code>, <code>ERROR</code>, <code>ENDED</code>, or <code>REJECTED</code> state in\n   the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">Agent\n    Event Stream</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/users/{InstanceId}/{UserId}/contact",
@@ -14139,7 +14157,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user\n   specified by <i>userId</i> will be set to silent monitoring mode on the\n   contact.</p>",
+                "smithy.api#documentation": "<p>Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user\n   specified by <i>userId</i> will be set to silent monitoring mode on the\n   contact. Supports voice and chat contacts.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/monitor",
@@ -14400,6 +14418,104 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerAction": {
+            "type": "enum",
+            "members": {
+                "Unset": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unset"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ParticipantTimerConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerConfiguration": {
+            "type": "structure",
+            "members": {
+                "ParticipantRole": {
+                    "target": "com.amazonaws.connect#TimerEligibleParticipantRoles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the participant in the chat conversation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimerType": {
+                    "target": "com.amazonaws.connect#ParticipantTimerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of timer. <code>IDLE</code> indicates the timer applies for considering a human chat participant as idle. \n    <code>DISCONNECT_NONCUSTOMER</code> indicates the timer applies to automatically disconnecting a chat participant due to\n   idleness.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimerValue": {
+                    "target": "com.amazonaws.connect#ParticipantTimerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the timer. Either the timer action (Unset to delete the timer), or the duration\n   of the timer in minutes. Only one value can be set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for the timer. After the timer configuration is set, it persists\n   for the duration of the chat. It persists across new contacts in the chain, for example, transfer\n   contacts.</p>\n         <p>For more information about how chat timeouts work, see \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html\">Set up chat timeouts for human participants</a>. </p>"
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerDurationInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2,
+                    "max": 480
+                }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerType": {
+            "type": "enum",
+            "members": {
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDLE"
+                    }
+                },
+                "DISCONNECT_NONCUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISCONNECT_NONCUSTOMER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerValue": {
+            "type": "union",
+            "members": {
+                "ParticipantTimerAction": {
+                    "target": "com.amazonaws.connect#ParticipantTimerAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timer action. Currently only one value is allowed: <code>Unset</code>. It deletes a timer.</p>"
+                    }
+                },
+                "ParticipantTimerDurationInMinutes": {
+                    "target": "com.amazonaws.connect#ParticipantTimerDurationInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of a timer, in minutes. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value of the timer. Either the timer action (<code>Unset</code> to delete the timer), or\n   the duration of the timer in minutes. Only one value can be set.</p>\n         <p>For more information about how chat timeouts work, see \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html\">Set up chat timeouts for human participants</a>. </p>"
             }
         },
         "com.amazonaws.connect#ParticipantToken": {
@@ -18996,7 +19112,7 @@
                 "SupportedMessagingContentTypes": {
                     "target": "com.amazonaws.connect#SupportedMessagingContentTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported chat message content types. Content types can be text/plain or both text/plain\n   and text/markdown.</p>"
+                        "smithy.api#documentation": "<p>The supported chat message content types. Content types must always contain <code>text/plain</code>. You\n   can then put any other supported type in the list. For example, all the following lists are valid\n   because they contain <code>text/plain</code>: <code>[text/plain, text/markdown, application/json]</code>, <code>[text/markdown,\n   text/plain]</code>, <code>[text/plain, application/json]</code>.</p>"
                     }
                 }
             }
@@ -20409,6 +20525,23 @@
         "com.amazonaws.connect#TimeZone": {
             "type": "string"
         },
+        "com.amazonaws.connect#TimerEligibleParticipantRoles": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                },
+                "AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#Timestamp": {
             "type": "timestamp"
         },
@@ -21032,7 +21165,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ContactFlowContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON string that represents flow's content. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example contact\n    flow in Amazon Connect Flow language</a>. </p>",
+                        "smithy.api#documentation": "<p>The JSON string that represents flow's content. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example\n    contact flow in Amazon Connect Flow language</a>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -21667,6 +21800,89 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.connect#UpdateParticipantRoleConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateParticipantRoleConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateParticipantRoleConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates timeouts for when human chat participants are to be considered idle, and when agents\n   are automatically disconnected from a chat due to idleness. You can set four timers:</p>\n         <ul>\n            <li>\n               <p>Customer idle timeout</p>\n            </li>\n            <li>\n               <p>Customer auto-disconnect timeout</p>\n            </li>\n            <li>\n               <p>Agent idle timeout</p>\n            </li>\n            <li>\n               <p>Agent auto-disconnect timeout</p>\n            </li>\n         </ul>\n         <p>For more information about how chat timeouts work, see \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html\">Set up chat timeouts for human participants</a>. </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/contact/participant-role-config/{InstanceId}/{ContactId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateParticipantRoleConfigChannelInfo": {
+            "type": "union",
+            "members": {
+                "Chat": {
+                    "target": "com.amazonaws.connect#ChatParticipantRoleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the chat participant role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for the chat participant role.</p>"
+            }
+        },
+        "com.amazonaws.connect#UpdateParticipantRoleConfigRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelConfiguration": {
+                    "target": "com.amazonaws.connect#UpdateParticipantRoleConfigChannelInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Connect channel you want to configure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateParticipantRoleConfigResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.connect#UpdatePhoneNumber": {
             "type": "operation",
@@ -22493,7 +22709,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to code conditions for the rule.\n  </p>",
+                "smithy.api#documentation": "<p>Updates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to\n   code conditions for the rule. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/rules/{InstanceId}/{RuleId}",

@@ -4738,7 +4738,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 8 to 41 characters.</p>\n            </li>\n            <li>\n               <p>Can't be specified if <code>ManageMasterUserPassword</code> is turned on.</p>\n            </li>\n         </ul>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "OptionGroupName": {
@@ -4940,6 +4940,18 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon Aurora User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't manage the master user password with Amazon Web Services Secrets Manager if <code>MasterUserPassword</code> \n                    is specified.</p>\n            </li>\n         </ul>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB cluster.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 }
             },
@@ -5202,7 +5214,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password for the master user. The password can include any printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>\n            <b>Amazon Aurora</b>\n         </p>\n         <p>Not applicable. The password for the master user is managed by the DB\n            cluster.</p>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>Microsoft SQL Server</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 30 characters.</p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>"
+                        "smithy.api#documentation": "<p>The password for the master user. The password can include any printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>\n            <b>Amazon Aurora</b>\n         </p>\n         <p>Not applicable. The password for the master user is managed by the DB\n            cluster.</p>\n         <p>Constraints: Can't be specified if <code>ManageMasterUserPassword</code> is turned on.</p>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>Microsoft SQL Server</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 30 characters.</p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>"
                     }
                 },
                 "DBSecurityGroups": {
@@ -5473,6 +5485,18 @@
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the storage throughput value for the DB instance.</p>\n         <p>This setting applies only to the <code>gp3</code> storage type.</p>\n         <p>This setting doesn't apply to RDS Custom or Amazon Aurora.</p>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't manage the master user password with Amazon Web Services Secrets Manager if <code>MasterUserPassword</code> \n                    is specified.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
                     }
                 }
             },
@@ -7008,6 +7032,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved for future use.</p>"
+                    }
+                },
+                "MasterUserSecret": {
+                    "target": "com.amazonaws.rds#MasterUserSecret",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the secret managed by RDS in Amazon Web Services Secrets Manager for the master user password.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon Aurora User Guide.</i>\n         </p>"
                     }
                 }
             },
@@ -8581,6 +8611,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also\n            the name of the CDB. This setting is valid for RDS Custom only.</p>"
+                    }
+                },
+                "MasterUserSecret": {
+                    "target": "com.amazonaws.rds#MasterUserSecret",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the secret managed by RDS in Amazon Web Services Secrets Manager for the master user password.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>"
                     }
                 }
             },
@@ -16230,6 +16266,32 @@
         "com.amazonaws.rds#LongOptional": {
             "type": "long"
         },
+        "com.amazonaws.rds#MasterUserSecret": {
+            "type": "structure",
+            "members": {
+                "SecretArn": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the secret.</p>"
+                    }
+                },
+                "SecretStatus": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the secret.</p>\n         <p>The possible status values include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>creating</code> - The secret is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>active</code> - The secret is available for normal use and rotation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>rotating</code> - The secret is being rotated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>impaired</code> - The secret can be used to access database credentials,\n                    but it can't be rotated. A secret might have this status if, for example,\n                    permissions are changed so that RDS can no longer access either the secret or\n                    the KMS key for the secret.</p>\n               <p>When a secret has this status, you can correct the condition that caused the\n                    status. Alternatively, modify the DB instance to turn off automatic management\n                    of database credentials, and then modify the DB instance again to turn on\n                    automatic management of database credentials.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier that is used to encrypt the secret.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the secret managed by RDS in Amazon Web Services Secrets Manager for the master user password.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon Aurora User Guide.</i>\n         </p>"
+            }
+        },
         "com.amazonaws.rds#MaxRecords": {
             "type": "integer",
             "traits": {
@@ -16654,7 +16716,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new password for the master database user. This password can contain any printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The new password for the master database user. This password can contain any printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 8 to 41 characters.</p>\n            </li>\n            <li>\n               <p>Can't be specified if <code>ManageMasterUserPassword</code> is turned on.</p>\n            </li>\n         </ul>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "OptionGroupName": {
@@ -16821,6 +16883,24 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The network type of the DB cluster.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>\n         <p>Valid for: Aurora DB clusters only</p>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>If the DB cluster doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn \n            on this management. In this case, you can't specify <code>MasterUserPassword</code>.</p>\n         <p>If the DB cluster already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the \n            master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>. \n            In this case, RDS deletes the secret and uses the new password for the master user specified by \n            <code>MasterUserPassword</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon Aurora User Guide.</i>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                    }
+                },
+                "RotateMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to rotate the secret managed by Amazon Web Services Secrets Manager for the \n            master user password.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB cluster. The secret value contains the updated password.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon Aurora User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>You must apply the change immediately when rotating the master user password.</p>\n            </li>\n         </ul>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if both of the following conditions are met:</p>\n         <ul>\n            <li>\n               <p>The DB cluster doesn't manage the master user password in Amazon Web Services Secrets Manager.</p>\n               <p>If the DB cluster already manages the master user password in Amazon Web Services Secrets\n                    Manager, you can't change the KMS key that is used to encrypt the secret.</p>\n            </li>\n            <li>\n               <p>You are turning on <code>ManageMasterUserPassword</code> to manage the master user password \n                    in Amazon Web Services Secrets Manager.</p>\n               <p>If you are turning on <code>ManageMasterUserPassword</code> and don't specify \n                    <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n                    KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n                    use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n                    managed KMS key.</p>\n            </li>\n         </ul>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 }
             },
@@ -17036,7 +17116,7 @@
                 "DBInstanceClass": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new compute and memory capacity of the DB instance, for example db.m4.large. Not all DB instance classes are available in all\n            Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the \n            <i>Amazon RDS User Guide</i> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html\">Aurora\n                DB instance classes</a> in the <i>Amazon Aurora User Guide</i>. For RDS Custom, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.instances\">DB instance class support for RDS Custom for Oracle</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html#custom-reqs-limits.instancesMS\">\n                        DB instance class support for RDS Custom for SQL Server</a>.</p>\n         <p>If you modify the DB instance class, an outage occurs during the change. The change is\n            applied during the next maintenance window, unless you specify\n            <code>ApplyImmediately</code> in your request.</p>\n         <p>Default: Uses existing setting</p>"
+                        "smithy.api#documentation": "<p>The new compute and memory capacity of the DB instance, for example db.m4.large. Not all DB instance classes are available in all\n            Amazon Web Services Regions, or for all database engines. For the full list of DB instance classes, and availability for your engine, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.DBInstanceClass.html\">DB Instance Class</a> in the \n                <i>Amazon RDS User Guide</i> or \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.DBInstanceClass.html\">Aurora\n                DB instance classes</a> in the <i>Amazon Aurora User Guide</i>. For RDS Custom, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits.html#custom-reqs-limits.instances\">DB instance class support for RDS Custom for Oracle</a> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-reqs-limits-MS.html#custom-reqs-limits.instancesMS\">\n                DB instance class support for RDS Custom for SQL Server</a>.</p>\n         <p>If you modify the DB instance class, an outage occurs during the change. The change is\n            applied during the next maintenance window, unless you specify\n                <code>ApplyImmediately</code> in your request. </p>\n         <p>Default: Uses existing setting</p>"
                     }
                 },
                 "DBSubnetGroupName": {
@@ -17067,7 +17147,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new password for the master user. The password can include any printable ASCII \n          character except \"/\", \"\"\", or \"@\".</p>\n         <p>Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. \n        Between the time of the request and the completion of the request,\n        the <code>MasterUserPassword</code> element exists in the\n          <code>PendingModifiedValues</code> element of the operation response.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>\n            <b>Amazon Aurora</b>\n         </p>\n         <p>Not applicable. The password for the master user is managed by the DB cluster. For\n            more information, see <code>ModifyDBCluster</code>.</p>\n         <p>Default: Uses existing setting</p>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>Microsoft SQL Server</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 30 characters.</p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>\n         <note>\n            <p>Amazon RDS API operations never return the password, \n              so this action provides a way to regain access to a primary instance user if the password is lost. \n              This includes restoring privileges that might have been accidentally revoked.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The new password for the master user. The password can include any printable ASCII \n          character except \"/\", \"\"\", or \"@\".</p>\n         <p>Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible. \n        Between the time of the request and the completion of the request,\n        the <code>MasterUserPassword</code> element exists in the\n          <code>PendingModifiedValues</code> element of the operation response.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>\n            <b>Amazon Aurora</b>\n         </p>\n         <p>Not applicable. The password for the master user is managed by the DB cluster. For\n            more information, see <code>ModifyDBCluster</code>.</p>\n         <p>Default: Uses existing setting</p>\n         <p>Constraints: Can't be specified if <code>ManageMasterUserPassword</code> is turned on.</p>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>Microsoft SQL Server</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 30 characters.</p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>\n         <note>\n            <p>Amazon RDS API operations never return the password, \n              so this action provides a way to regain access to a primary instance user if the password is lost. \n              This includes restoring privileges that might have been accidentally revoked.</p>\n         </note>"
                     }
                 },
                 "DBParameterGroupName": {
@@ -17315,6 +17395,24 @@
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the storage throughput value for the DB instance.</p>\n         <p>This setting applies only to the <code>gp3</code> storage type.</p>\n         <p>This setting doesn't apply to RDS Custom or Amazon Aurora.</p>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>If the DB cluster doesn't manage the master user password with Amazon Web Services Secrets Manager, you can turn \n            on this management. In this case, you can't specify <code>MasterUserPassword</code>.</p>\n         <p>If the DB cluster already manages the master user password with Amazon Web Services Secrets Manager, and you specify that the \n            master user password is not managed with Amazon Web Services Secrets Manager, then you must specify <code>MasterUserPassword</code>. \n            In this case, RDS deletes the secret and uses the new password for the master user specified by \n            <code>MasterUserPassword</code>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't manage the master user password with Amazon Web Services Secrets Manager if <code>MasterUserPassword</code> \n                    is specified.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "RotateMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to rotate the secret managed by Amazon Web Services Secrets Manager for the \n            master user password.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB cluster. The secret value contains the updated password.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>You must apply the change immediately when rotating the master user password.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if both of the following conditions are met:</p>\n         <ul>\n            <li>\n               <p>The DB instance doesn't manage the master user password in Amazon Web Services Secrets Manager.</p>\n               <p>If the DB instance already manages the master user password in Amazon Web Services Secrets Manager, \n                    you can't change the KMS key used to encrypt the secret.</p>\n            </li>\n            <li>\n               <p>You are turning on <code>ManageMasterUserPassword</code> to manage the master user password \n                    in Amazon Web Services Secrets Manager.</p>\n               <p>If you are turning on <code>ManageMasterUserPassword</code> and don't specify \n                    <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n                    KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n                    use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n                    managed KMS key.</p>\n            </li>\n         </ul>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
                     }
                 }
             },
@@ -20567,8 +20665,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The password for the master database user. This password can contain any printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 8 to 41 characters.</p>\n            </li>\n            <li>\n               <p>Can't be specified if <code>ManageMasterUserPassword</code> is turned on.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "OptionGroupName": {
@@ -20687,6 +20784,18 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The network type of the DB cluster.</p>\n         <p>Valid values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>IPV4</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DUAL</code>\n               </p>\n            </li>\n         </ul>\n         <p>The network type is determined by the <code>DBSubnetGroup</code> specified for the DB cluster. \n            A <code>DBSubnetGroup</code> can support only the IPv4 protocol or the IPv4 and the IPv6 \n            protocols (<code>DUAL</code>).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html\">\n            Working with a DB instance in a VPC</a> in the \n            <i>Amazon Aurora User Guide.</i>\n         </p>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide</i> and <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon Aurora User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't manage the master user password with Amazon Web Services Secrets Manager if <code>MasterUserPassword</code> \n                    is specified.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB cluster.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
                     }
                 }
             }
@@ -21605,7 +21714,7 @@
                 "MasterUserPassword": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password for the master user. \n            The password can include any printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>"
+                        "smithy.api#documentation": "<p>The password for the master user. \n            The password can include any printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>Constraints: Can't be specified if <code>ManageMasterUserPassword</code> is turned on.</p>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>Microsoft SQL Server</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 30 characters.</p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>"
                     }
                 },
                 "DBSecurityGroups": {
@@ -21844,6 +21953,18 @@
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the storage throughput value for the DB instance.</p>\n         <p>This setting doesn't apply to RDS Custom or Amazon Aurora.</p>"
+                    }
+                },
+                "ManageMasterUserPassword": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether to manage the master user password with Amazon Web Services Secrets Manager.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't manage the master user password with Amazon Web Services Secrets Manager if <code>MasterUserPassword</code> \n                    is specified.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MasterUserSecretKmsKeyId": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
                     }
                 }
             }
