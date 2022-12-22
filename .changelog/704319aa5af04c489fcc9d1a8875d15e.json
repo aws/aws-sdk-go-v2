@@ -1,8 +1,0 @@
-{
-    "id": "704319aa-5af0-4c48-9fcc-9d1a8875d15e",
-    "type": "feature",
-    "description": "Add support for managing master user password in AWS Secrets Manager for the DBInstance and DBCluster.",
-    "modules": [
-        "service/rds"
-    ]
-}

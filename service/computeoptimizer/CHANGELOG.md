@@ -1,3 +1,7 @@
+# v1.19.0 (2022-12-22)
+
+* **Feature**: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for ecs services running on Fargate.
+
 # v1.18.2 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

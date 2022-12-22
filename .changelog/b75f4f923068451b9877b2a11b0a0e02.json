@@ -1,8 +1,0 @@
-{
-    "id": "b75f4f92-3068-451b-9877-b2a11b0a0e02",
-    "type": "feature",
-    "description": "This release adds the following new features: 1) Documentation updates for IoT Device Advisor APIs. 2) Updated required request parameters for IoT Device Advisor APIs. 3) Added new service feature: ability to provide the test endpoint when customer executing the StartSuiteRun API.",
-    "modules": [
-        "service/iotdeviceadvisor"
-    ]
-}

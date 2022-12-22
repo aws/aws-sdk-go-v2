@@ -1,3 +1,7 @@
+# v1.37.0 (2022-12-22)
+
+* **Feature**: Add support for managing master user password in AWS Secrets Manager for the DBInstance and DBCluster.
+
 # v1.36.0 (2022-12-19)
 
 * **Feature**: Add support for --enable-customer-owned-ip to RDS create-db-instance-read-replica API for RDS on Outposts.

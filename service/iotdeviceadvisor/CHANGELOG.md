@@ -1,3 +1,7 @@
+# v1.16.0 (2022-12-22)
+
+* **Feature**: This release adds the following new features: 1) Documentation updates for IoT Device Advisor APIs. 2) Updated required request parameters for IoT Device Advisor APIs. 3) Added new service feature: ability to provide the test endpoint when customer executing the StartSuiteRun API.
+
 # v1.15.13 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

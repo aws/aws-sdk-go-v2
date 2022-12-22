@@ -1,3 +1,7 @@
+# v1.41.0 (2022-12-22)
+
+* **Feature**: Amazon Connect Chat introduces the Idle Participant/Autodisconnect feature, which allows users to set timeouts relating to the activity of chat participants, using the new UpdateParticipantRoleConfig API.
+
 # v1.40.0 (2022-12-15)
 
 * **Feature**: Added support for "English - New Zealand" and "English - South African" to be used with Amazon Connect Custom Vocabulary APIs.

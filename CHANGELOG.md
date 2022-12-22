@@ -1,3 +1,19 @@
+# Release (2022-12-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.19.0](service/computeoptimizer/CHANGELOG.md#v1190-2022-12-22)
+  * **Feature**: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for ecs services running on Fargate.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.41.0](service/connect/CHANGELOG.md#v1410-2022-12-22)
+  * **Feature**: Amazon Connect Chat introduces the Idle Participant/Autodisconnect feature, which allows users to set timeouts relating to the activity of chat participants, using the new UpdateParticipantRoleConfig API.
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.16.0](service/iotdeviceadvisor/CHANGELOG.md#v1160-2022-12-22)
+  * **Feature**: This release adds the following new features: 1) Documentation updates for IoT Device Advisor APIs. 2) Updated required request parameters for IoT Device Advisor APIs. 3) Added new service feature: ability to provide the test endpoint when customer executing the StartSuiteRun API.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.1.0](service/kinesisvideowebrtcstorage/CHANGELOG.md#v110-2022-12-22)
+  * **Feature**: Amazon Kinesis Video Streams offers capabilities to stream video and audio in real-time via WebRTC to the cloud for storage, playback, and analytical processing. Customers can use our enhanced WebRTC SDK and cloud APIs to enable real-time streaming, as well as media ingestion to the cloud.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.37.0](service/rds/CHANGELOG.md#v1370-2022-12-22)
+  * **Feature**: Add support for managing master user password in AWS Secrets Manager for the DBInstance and DBCluster.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.16.11](service/secretsmanager/CHANGELOG.md#v11611-2022-12-22)
+  * **Documentation**: Documentation updates for Secrets Manager
+
 # Release (2022-12-21)
 
 ## Module Highlights

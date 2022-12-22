@@ -1,8 +1,0 @@
-{
-    "id": "34c3ec05-8d47-48c0-a450-0b63a416ccf9",
-    "type": "feature",
-    "description": "Amazon Connect Chat introduces the Idle Participant/Autodisconnect feature, which allows users to set timeouts relating to the activity of chat participants, using the new UpdateParticipantRoleConfig API.",
-    "modules": [
-        "service/connect"
-    ]
-}
