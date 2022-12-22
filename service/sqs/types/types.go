@@ -148,7 +148,7 @@ type Message struct {
 	// in the Amazon SQS Developer Guide.
 	MessageAttributes map[string]MessageAttributeValue
 
-	// A unique identifier for the message. A MessageIdis considered unique across all
+	// A unique identifier for the message. A MessageId is considered unique across all
 	// Amazon Web Services accounts for an extended period of time.
 	MessageId *string
 
