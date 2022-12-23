@@ -1,3 +1,7 @@
+# v1.10.0 (2022-12-23)
+
+* **Feature**: Amazon Inspector adds support for scanning NodeJS 18.x and Go 1.x AWS Lambda function runtimes.
+
 # v1.9.2 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

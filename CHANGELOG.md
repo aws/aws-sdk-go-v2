@@ -1,3 +1,17 @@
+# Release (2022-12-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.42.0](service/connect/CHANGELOG.md#v1420-2022-12-23)
+  * **Feature**: Support for Routing Profile filter, SortCriteria, and grouping by Routing Profiles for GetCurrentMetricData API. Support for RoutingProfiles, UserHierarchyGroups, and Agents as filters, NextStatus and AgentStatusName for GetCurrentUserData. Adds ApproximateTotalCount to both APIs.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.13.0](service/connectparticipant/CHANGELOG.md#v1130-2022-12-23)
+  * **Feature**: Amazon Connect Chat introduces the Message Receipts feature. This feature allows agents and customers to receive message delivered and read receipts after they send a chat message.
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.17.0](service/detective/CHANGELOG.md#v1170-2022-12-23)
+  * **Feature**: This release adds a missed AccessDeniedException type to several endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.27.0](service/fsx/CHANGELOG.md#v1270-2022-12-23)
+  * **Feature**: Fix a bug where a recent release might break certain existing SDKs.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.10.0](service/inspector2/CHANGELOG.md#v1100-2022-12-23)
+  * **Feature**: Amazon Inspector adds support for scanning NodeJS 18.x and Go 1.x AWS Lambda function runtimes.
+
 # Release (2022-12-22)
 
 ## Module Highlights

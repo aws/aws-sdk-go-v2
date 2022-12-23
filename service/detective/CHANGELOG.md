@@ -1,3 +1,7 @@
+# v1.17.0 (2022-12-23)
+
+* **Feature**: This release adds a missed AccessDeniedException type to several endpoints.
+
 # v1.16.13 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "24e8d063-90cb-4543-a257-74f1cb645a88",
-    "type": "feature",
-    "description": "Amazon Inspector adds support for scanning NodeJS 18.x and Go 1.x AWS Lambda function runtimes.",
-    "modules": [
-        "service/inspector2"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "9aed92d6-db16-47ed-9ebb-d38000f3de0c",
-    "type": "feature",
-    "description": "Fix a bug where a recent release might break certain existing SDKs.",
-    "modules": [
-        "service/fsx"
-    ]
-}
