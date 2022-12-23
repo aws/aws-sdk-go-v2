@@ -86,7 +86,7 @@
                     "name": "execute-api"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage\n            a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect enables customer contacts through voice or chat.</p>\n         <p>The APIs described here are used by chat participants, such as agents and\n            customers.</p>",
+                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that makes it easy to set up and manage\n            a customer contact center. Amazon Connect enables customer contacts through voice or chat. Use\n            the Amazon Connect Participant Service to manage chat participants, such as agents and\n            customers.</p>",
                 "smithy.api#title": "Amazon Connect Participant Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1107,7 +1107,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.connectparticipant#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html\">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
                     }
                 },
                 "AttachmentId": {
@@ -1249,6 +1249,18 @@
                     "traits": {
                         "smithy.api#enumValue": "CONNECTION_ACK"
                     }
+                },
+                "MESSAGE_DELIVERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MESSAGE_DELIVERED"
+                    }
+                },
+                "MESSAGE_READ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MESSAGE_READ"
+                    }
                 }
             }
         },
@@ -1290,7 +1302,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL\n            provided in StartAttachmentUpload API. </p>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL\n            provided in StartAttachmentUpload API. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/complete-attachment-upload",
@@ -1311,7 +1323,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.connectparticipant#NonEmptyClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -1435,7 +1447,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the participant's connection.  Note that ParticipantToken is used for invoking this API instead of\n            ConnectionToken.</p>\n         <p>The participant token is valid for the lifetime of the participant –\n            until they are part of a contact.</p>\n         <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s.\n            Clients must manually connect to the returned websocket URL and subscribe to the desired\n            topic. </p>\n         <p>For chat, you need to publish the following on the established websocket\n            connection:</p>\n         <p>\n            <code>{\"topic\":\"aws/subscribe\",\"content\":{\"topics\":[\"aws/chat\"]}}</code>\n         </p>\n         <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter,\n            clients need to call this API again to obtain a new websocket URL and perform the same\n            steps as before.</p>\n         <p>\n            <b>Message streaming support</b>: This API can also be used together with the\n            <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html\">StartContactStreaming</a>\n            API to create a participant connection for chat contacts that are\n            not using a websocket. For more information about message streaming, <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html\">Enable real-time chat message streaming</a> in the <i>Amazon Connect\n                    Administrator Guide</i>.</p>\n         <p>\n            <b>Feature specifications</b>: For information about feature specifications, such as the allowed number of open\n            websocket connections per participant, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator\n                Guide</i>. </p>\n         <note>\n            <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates the participant's connection. </p>\n         <note>\n            <p>\n               <code>ParticipantToken</code> is used for invoking this API instead of\n                    <code>ConnectionToken</code>.</p>\n         </note>\n         <p>The participant token is valid for the lifetime of the participant – until they are\n            part of a contact.</p>\n         <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s.\n            Clients must manually connect to the returned websocket URL and subscribe to the desired\n            topic. </p>\n         <p>For chat, you need to publish the following on the established websocket\n            connection:</p>\n         <p>\n            <code>{\"topic\":\"aws/subscribe\",\"content\":{\"topics\":[\"aws/chat\"]}}</code>\n         </p>\n         <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter,\n            clients need to call this API again to obtain a new websocket URL and perform the same\n            steps as before.</p>\n         <p>\n            <b>Message streaming support</b>: This API can also be used\n            together with the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html\">StartContactStreaming</a> API to create a participant connection for chat\n            contacts that are not using a websocket. For more information about message streaming,\n                <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html\">Enable real-time chat\n                message streaming</a> in the <i>Amazon Connect Administrator\n            Guide</i>.</p>\n         <p>\n            <b>Feature specifications</b>: For information about feature\n            specifications, such as the allowed number of open websocket connections per\n            participant, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator\n                Guide</i>. </p>\n         <note>\n            <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/connection",
@@ -1449,8 +1461,7 @@
                 "Type": {
                     "target": "com.amazonaws.connectparticipant#ConnectionTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of connection information required.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Type of connection information required. This can be omitted if\n                <code>ConnectParticipant</code> is <code>true</code>.</p>"
                     }
                 },
                 "ParticipantToken": {
@@ -1509,7 +1520,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disconnects a participant. Note that ConnectionToken is used for invoking this API\n            instead of ParticipantToken.</p>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Disconnects a participant. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/disconnect",
@@ -1523,7 +1534,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.connectparticipant#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -1573,7 +1584,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a pre-signed URL for download of a completed attachment. This is an\n            asynchronous API for use with active contacts.</p>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Provides a pre-signed URL for download of a completed attachment. This is an\n            asynchronous API for use with active contacts.</p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/attachment",
@@ -1641,7 +1652,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a transcript of the session, including details about any attachments. Note\n            that ConnectionToken is used for invoking this API instead of ParticipantToken.</p>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a transcript of the session, including details about any attachments. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/transcript",
@@ -1811,6 +1822,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides information about the attachments.</p>"
                     }
+                },
+                "MessageMetadata": {
+                    "target": "com.amazonaws.connectparticipant#MessageMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata related to the message. Currently this supports only information related to\n            message receipts.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1829,6 +1846,26 @@
         },
         "com.amazonaws.connectparticipant#Message": {
             "type": "string"
+        },
+        "com.amazonaws.connectparticipant#MessageMetadata": {
+            "type": "structure",
+            "members": {
+                "MessageId": {
+                    "target": "com.amazonaws.connectparticipant#ChatItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the message that contains the metadata information. </p>"
+                    }
+                },
+                "Receipts": {
+                    "target": "com.amazonaws.connectparticipant#Receipts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of receipt information for a message for different recipients.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata related to a message.</p>"
+            }
         },
         "com.amazonaws.connectparticipant#MostRecent": {
             "type": "integer",
@@ -1926,6 +1963,38 @@
                 }
             }
         },
+        "com.amazonaws.connectparticipant#Receipt": {
+            "type": "structure",
+            "members": {
+                "DeliveredTimestamp": {
+                    "target": "com.amazonaws.connectparticipant#Instant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the message was delivered to the recipient.</p>"
+                    }
+                },
+                "ReadTimestamp": {
+                    "target": "com.amazonaws.connectparticipant#Instant",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the message was read by the recipient.</p>"
+                    }
+                },
+                "RecipientParticipantId": {
+                    "target": "com.amazonaws.connectparticipant#ParticipantId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the recipient of the message. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The receipt for the message delivered to the recipient.</p>"
+            }
+        },
+        "com.amazonaws.connectparticipant#Receipts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connectparticipant#Receipt"
+            }
+        },
         "com.amazonaws.connectparticipant#ScanDirection": {
             "type": "enum",
             "members": {
@@ -1966,7 +2035,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends an event. Note that ConnectionToken is used for invoking this API instead of\n            ParticipantToken.</p>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Sends an event. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/event",
@@ -1980,20 +2049,20 @@
                 "ContentType": {
                     "target": "com.amazonaws.connectparticipant#ChatContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content type of the request. Supported types are:</p>\n         <ul>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.typing</p>\n            </li>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The content type of the request. Supported types are:</p>\n         <ul>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.typing</p>\n            </li>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p>\n            </li>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.message.delivered</p>\n            </li>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.message.read</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connectparticipant#ChatContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the event to be sent (for example, message text). This is not yet\n            supported.</p>"
+                        "smithy.api#documentation": "<p>The content of the event to be sent (for example, message text). For content related\n            to message receipts, this is supported in the form of a JSON string.</p>\n         <p>Sample Content: \"{\\\"messageId\\\":\\\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\\\"}\"</p>"
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.connectparticipant#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2047,7 +2116,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a message. Note that ConnectionToken is used for invoking this API instead of\n            ParticipantToken.</p>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Sends a message.</p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/message",
@@ -2061,21 +2130,21 @@
                 "ContentType": {
                     "target": "com.amazonaws.connectparticipant#ChatContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the content. Supported types are text/plain.</p>",
+                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>,\n                <code>text/markdown</code>, and <code>application/json</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connectparticipant#ChatContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the message.</p>",
+                        "smithy.api#documentation": "<p>The content of the message. </p>\n         <ul>\n            <li>\n               <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length\n                    Constraints are Minimum of 1, Maximum of 1024. </p>\n            </li>\n            <li>\n               <p>For <code>application/json</code>, the Length Constraints are Minimum of 1,\n                    Maximum of 12000. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "ClientToken": {
                     "target": "com.amazonaws.connectparticipant#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
@@ -2165,7 +2234,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to\n            S3.</p>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to\n            S3.</p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/start-attachment-upload",
@@ -2179,7 +2248,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.connectparticipant#ContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html\">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2201,7 +2270,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.connectparticipant#NonEmptyClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique case sensitive identifier to support idempotency of request.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
