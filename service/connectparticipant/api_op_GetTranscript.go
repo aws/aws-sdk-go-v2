@@ -13,9 +13,9 @@ import (
 )
 
 // Retrieves a transcript of the session, including details about any attachments.
-// Note that ConnectionToken is used for invoking this API instead of
-// ParticipantToken. The Amazon Connect Participant Service APIs do not use
-// Signature Version 4 authentication
+// ConnectionToken is used for invoking this API instead of ParticipantToken. The
+// Amazon Connect Participant Service APIs do not use Signature Version 4
+// authentication
 // (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 func (c *Client) GetTranscript(ctx context.Context, params *GetTranscriptInput, optFns ...func(*Options)) (*GetTranscriptOutput, error) {
 	if params == nil {

@@ -1,0 +1,8 @@
+{
+    "id": "a8704e1f-f320-4495-a86d-cd2acb708271",
+    "type": "feature",
+    "description": "This release adds a missed AccessDeniedException type to several endpoints.",
+    "modules": [
+        "service/detective"
+    ]
+}

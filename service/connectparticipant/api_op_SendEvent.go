@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends an event. Note that ConnectionToken is used for invoking this API instead
-// of ParticipantToken. The Amazon Connect Participant Service APIs do not use
+// Sends an event. ConnectionToken is used for invoking this API instead of
+// ParticipantToken. The Amazon Connect Participant Service APIs do not use
 // Signature Version 4 authentication
 // (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 func (c *Client) SendEvent(ctx context.Context, params *SendEventInput, optFns ...func(*Options)) (*SendEventOutput, error) {
@@ -45,15 +45,25 @@ type SendEventInput struct {
 	// *
 	// application/vnd.amazonaws.connect.event.connection.acknowledged
 	//
+	// *
+	// application/vnd.amazonaws.connect.event.message.delivered
+	//
+	// *
+	// application/vnd.amazonaws.connect.event.message.read
+	//
 	// This member is required.
 	ContentType *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see Making retries safe with
+	// idempotent APIs
+	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
 	ClientToken *string
 
-	// The content of the event to be sent (for example, message text). This is not yet
-	// supported.
+	// The content of the event to be sent (for example, message text). For content
+	// related to message receipts, this is supported in the form of a JSON string.
+	// Sample Content: "{\"messageId\":\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\"}"
 	Content *string
 
 	noSmithyDocumentSerde

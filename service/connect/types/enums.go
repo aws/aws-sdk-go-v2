@@ -348,8 +348,9 @@ type Grouping string
 
 // Enum values for Grouping
 const (
-	GroupingQueue   Grouping = "QUEUE"
-	GroupingChannel Grouping = "CHANNEL"
+	GroupingQueue          Grouping = "QUEUE"
+	GroupingChannel        Grouping = "CHANNEL"
+	GroupingRoutingProfile Grouping = "ROUTING_PROFILE"
 )
 
 // Values returns all known values for Grouping. Note that this can be expanded in
@@ -359,6 +360,7 @@ func (Grouping) Values() []Grouping {
 	return []Grouping{
 		"QUEUE",
 		"CHANNEL",
+		"ROUTING_PROFILE",
 	}
 }
 
@@ -1412,6 +1414,24 @@ const (
 func (SearchableQueueType) Values() []SearchableQueueType {
 	return []SearchableQueueType{
 		"STANDARD",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 

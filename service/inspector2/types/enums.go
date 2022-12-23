@@ -967,6 +967,8 @@ const (
 	RuntimePython38    Runtime = "PYTHON_3_8"
 	RuntimePython39    Runtime = "PYTHON_3_9"
 	RuntimeUnsupported Runtime = "UNSUPPORTED"
+	RuntimeNodejs18X   Runtime = "NODEJS_18_X"
+	RuntimeGo1X        Runtime = "GO_1_X"
 )
 
 // Values returns all known values for Runtime. Note that this can be expanded in
@@ -985,6 +987,8 @@ func (Runtime) Values() []Runtime {
 		"PYTHON_3_8",
 		"PYTHON_3_9",
 		"UNSUPPORTED",
+		"NODEJS_18_X",
+		"GO_1_X",
 	}
 }
 

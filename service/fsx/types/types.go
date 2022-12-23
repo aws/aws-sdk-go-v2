@@ -714,10 +714,10 @@ type CreateFileSystemOpenZFSConfiguration struct {
 	//
 	// For more
 	// information, see: Deployment type availability
-	// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/available-aws-regions.html)
-	// and  File system performance
-	// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/zfs-fs-performance.html)in
-	// theAmazon FSx for OpenZFS User Guide.
+	// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions)
+	// and File system performance
+	// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance)
+	// in the Amazon FSx for OpenZFS User Guide.
 	//
 	// This member is required.
 	DeploymentType OpenZFSDeploymentType
@@ -3189,6 +3189,9 @@ type StorageVirtualMachine struct {
 
 	// The SVM's system generated unique ID.
 	StorageVirtualMachineId *string
+
+	// Describes the SVM's subtype.
+	Subtype StorageVirtualMachineSubtype
 
 	// A list of Tag values, with a maximum of 50 elements.
 	Tags []Tag

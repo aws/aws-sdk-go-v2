@@ -97,6 +97,9 @@ type AgentStatusReference struct {
 	// The Amazon Resource Name (ARN) of the agent's status.
 	StatusArn *string
 
+	// The name of the agent status.
+	StatusName *string
+
 	// The start timestamp of the agent's status.
 	StatusStartTimestamp *time.Time
 
@@ -554,6 +557,20 @@ type CurrentMetricResult struct {
 	noSmithyDocumentSerde
 }
 
+// The way to sort the resulting response based on metrics. By default resources
+// are sorted based on AGENTS_ONLINE, DESCENDING. The metric collection is sorted
+// based on the input metrics.
+type CurrentMetricSortCriteria struct {
+
+	// The current metric names.
+	SortByMetric CurrentMetricName
+
+	// The way to sort.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
 // Information about a reference when the referenceType is DATE. Otherwise, null.
 type DateReference struct {
 
@@ -603,6 +620,9 @@ type Dimensions struct {
 
 	// Information about the queue for which metrics are returned.
 	Queue *QueueReference
+
+	// Information about the routing profile assigned to the user.
+	RoutingProfile *RoutingProfileReference
 
 	noSmithyDocumentSerde
 }
@@ -673,6 +693,9 @@ type Filters struct {
 	// and can specify up to 100 queues per request. The GetCurrentMetricsData API in
 	// particular requires a queue when you include a Filter in your request.
 	Queues []string
+
+	// A list of up to 100 routing profile IDs or ARNs.
+	RoutingProfiles []string
 
 	noSmithyDocumentSerde
 }
@@ -2700,6 +2723,9 @@ type UserData struct {
 	// of the RoutingProfile assigned to the agent.
 	MaxSlotsByChannel map[string]int32
 
+	// The Next status of the agent.
+	NextStatus *string
+
 	// Information about the routing profile that is assigned to the user.
 	RoutingProfile *RoutingProfileReference
 
@@ -2717,12 +2743,21 @@ type UserData struct {
 // A filter for the user data.
 type UserDataFilters struct {
 
+	// A list of up to 100 agent IDs or ARNs.
+	Agents []string
+
 	// A filter for the user data based on the contact information that is associated
 	// to the user. It contains a list of contact states.
 	ContactFilter *ContactFilter
 
-	// Contains information about a queue resource for which metrics are returned.
+	// A list of up to 100 queues or ARNs.
 	Queues []string
+
+	// A list of up to 100 routing profile IDs or ARNs.
+	RoutingProfiles []string
+
+	// A UserHierarchyGroup ID or ARN.
+	UserHierarchyGroups []string
 
 	noSmithyDocumentSerde
 }

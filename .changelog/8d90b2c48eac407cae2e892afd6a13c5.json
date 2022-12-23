@@ -1,0 +1,8 @@
+{
+    "id": "8d90b2c4-8eac-407c-ae2e-892afd6a13c5",
+    "type": "feature",
+    "description": "Amazon Connect Chat introduces the Message Receipts feature. This feature allows agents and customers to receive message delivered and read receipts after they send a chat message.",
+    "modules": [
+        "service/connectparticipant"
+    ]
+}

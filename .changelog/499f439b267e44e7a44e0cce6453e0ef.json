@@ -1,0 +1,8 @@
+{
+    "id": "499f439b-267e-44e7-a44e-0cce6453e0ef",
+    "type": "feature",
+    "description": "Support for Routing Profile filter, SortCriteria, and grouping by Routing Profiles for GetCurrentMetricData API. Support for RoutingProfiles, UserHierarchyGroups, and Agents as filters, NextStatus and AgentStatusName for GetCurrentUserData. Adds ApproximateTotalCount to both APIs.",
+    "modules": [
+        "service/connect"
+    ]
+}

@@ -227,9 +227,6 @@ func validateOpCreateParticipantConnectionInput(v *CreateParticipantConnectionIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateParticipantConnectionInput"}
-	if v.Type == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
 	if v.ParticipantToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParticipantToken"))
 	}

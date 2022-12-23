@@ -7,6 +7,31 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// The request issuer does not have permission to access this resource or perform
+// this operation.
+type AccessDeniedException struct {
+	Message *string
+
+	ErrorCode_         ErrorCode
+	ErrorCodeReason    *string
+	SubErrorCode       ErrorCode
+	SubErrorCodeReason *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request attempted an invalid action.
 type ConflictException struct {
 	Message *string

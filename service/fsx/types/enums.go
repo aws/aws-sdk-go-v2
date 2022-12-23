@@ -984,6 +984,28 @@ func (StorageVirtualMachineRootVolumeSecurityStyle) Values() []StorageVirtualMac
 	}
 }
 
+type StorageVirtualMachineSubtype string
+
+// Enum values for StorageVirtualMachineSubtype
+const (
+	StorageVirtualMachineSubtypeDefault         StorageVirtualMachineSubtype = "DEFAULT"
+	StorageVirtualMachineSubtypeDpDestination   StorageVirtualMachineSubtype = "DP_DESTINATION"
+	StorageVirtualMachineSubtypeSyncDestination StorageVirtualMachineSubtype = "SYNC_DESTINATION"
+	StorageVirtualMachineSubtypeSyncSource      StorageVirtualMachineSubtype = "SYNC_SOURCE"
+)
+
+// Values returns all known values for StorageVirtualMachineSubtype. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageVirtualMachineSubtype) Values() []StorageVirtualMachineSubtype {
+	return []StorageVirtualMachineSubtype{
+		"DEFAULT",
+		"DP_DESTINATION",
+		"SYNC_DESTINATION",
+		"SYNC_SOURCE",
+	}
+}
+
 type TieringPolicyName string
 
 // Enum values for TieringPolicyName

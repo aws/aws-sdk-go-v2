@@ -12,8 +12,9 @@ import (
 )
 
 // Allows you to confirm that the attachment has been uploaded using the pre-signed
-// URL provided in StartAttachmentUpload API. The Amazon Connect Participant
-// Service APIs do not use Signature Version 4 authentication
+// URL provided in StartAttachmentUpload API. ConnectionToken is used for invoking
+// this API instead of ParticipantToken. The Amazon Connect Participant Service
+// APIs do not use Signature Version 4 authentication
 // (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 func (c *Client) CompleteAttachmentUpload(ctx context.Context, params *CompleteAttachmentUploadInput, optFns ...func(*Options)) (*CompleteAttachmentUploadOutput, error) {
 	if params == nil {
@@ -38,7 +39,10 @@ type CompleteAttachmentUploadInput struct {
 	AttachmentIds []string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see Making retries safe with
+	// idempotent APIs
+	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
 	//
 	// This member is required.
 	ClientToken *string

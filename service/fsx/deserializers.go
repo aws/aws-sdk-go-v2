@@ -12117,6 +12117,15 @@ func awsAwsjson11_deserializeDocumentStorageVirtualMachine(v **types.StorageVirt
 				sv.StorageVirtualMachineId = ptr.String(jtv)
 			}
 
+		case "Subtype":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageVirtualMachineSubtype to be of type string, got %T instead", value)
+				}
+				sv.Subtype = types.StorageVirtualMachineSubtype(jtv)
+			}
+
 		case "Tags":
 			if err := awsAwsjson11_deserializeDocumentTags(&sv.Tags, value); err != nil {
 				return err

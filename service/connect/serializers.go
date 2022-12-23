@@ -5867,6 +5867,13 @@ func awsRestjson1_serializeOpDocumentGetCurrentMetricDataInput(v *GetCurrentMetr
 		ok.String(*v.NextToken)
 	}
 
+	if v.SortCriteria != nil {
+		ok := object.Key("SortCriteria")
+		if err := awsRestjson1_serializeDocumentCurrentMetricSortCriteriaMaxOne(v.SortCriteria, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -13953,6 +13960,17 @@ func awsRestjson1_serializeOpDocumentUpdateUserSecurityProfilesInput(v *UpdateUs
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAgentsMinOneMaxHundred(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAllowedAccessControlTags(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14161,6 +14179,36 @@ func awsRestjson1_serializeDocumentCurrentMetrics(v []types.CurrentMetric, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCurrentMetricSortCriteria(v *types.CurrentMetricSortCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SortByMetric) > 0 {
+		ok := object.Key("SortByMetric")
+		ok.String(string(v.SortByMetric))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("SortOrder")
+		ok.String(string(v.SortOrder))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCurrentMetricSortCriteriaMaxOne(v []types.CurrentMetricSortCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCurrentMetricSortCriteria(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDistribution(v *types.Distribution, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -14234,6 +14282,13 @@ func awsRestjson1_serializeDocumentFilters(v *types.Filters, value smithyjson.Va
 	if v.Queues != nil {
 		ok := object.Key("Queues")
 		if err := awsRestjson1_serializeDocumentQueues(v.Queues, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoutingProfiles != nil {
+		ok := object.Key("RoutingProfiles")
+		if err := awsRestjson1_serializeDocumentRoutingProfiles(v.RoutingProfiles, ok); err != nil {
 			return err
 		}
 	}
@@ -15027,6 +15082,17 @@ func awsRestjson1_serializeDocumentRoutingProfileQueueReferenceList(v []types.Ro
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRoutingProfiles(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRoutingProfileSearchConditionList(v []types.RoutingProfileSearchCriteria, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -15613,6 +15679,13 @@ func awsRestjson1_serializeDocumentUserDataFilters(v *types.UserDataFilters, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.Agents != nil {
+		ok := object.Key("Agents")
+		if err := awsRestjson1_serializeDocumentAgentsMinOneMaxHundred(v.Agents, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ContactFilter != nil {
 		ok := object.Key("ContactFilter")
 		if err := awsRestjson1_serializeDocumentContactFilter(v.ContactFilter, ok); err != nil {
@@ -15627,6 +15700,31 @@ func awsRestjson1_serializeDocumentUserDataFilters(v *types.UserDataFilters, val
 		}
 	}
 
+	if v.RoutingProfiles != nil {
+		ok := object.Key("RoutingProfiles")
+		if err := awsRestjson1_serializeDocumentRoutingProfiles(v.RoutingProfiles, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UserHierarchyGroups != nil {
+		ok := object.Key("UserHierarchyGroups")
+		if err := awsRestjson1_serializeDocumentUserDataHierarchyGroups(v.UserHierarchyGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUserDataHierarchyGroups(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

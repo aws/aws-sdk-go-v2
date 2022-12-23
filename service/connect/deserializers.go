@@ -10194,6 +10194,19 @@ func awsRestjson1_deserializeOpDocumentGetCurrentMetricDataOutput(v **GetCurrent
 
 	for key, value := range shape {
 		switch key {
+		case "ApproximateTotalCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ApproximateTotalCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ApproximateTotalCount = ptr.Int64(i64)
+			}
+
 		case "DataSnapshotTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10378,6 +10391,19 @@ func awsRestjson1_deserializeOpDocumentGetCurrentUserDataOutput(v **GetCurrentUs
 
 	for key, value := range shape {
 		switch key {
+		case "ApproximateTotalCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ApproximateTotalCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ApproximateTotalCount = ptr.Int64(i64)
+			}
+
 		case "NextToken":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24856,6 +24882,15 @@ func awsRestjson1_deserializeDocumentAgentStatusReference(v **types.AgentStatusR
 				sv.StatusArn = ptr.String(jtv)
 			}
 
+		case "StatusName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentStatusName to be of type string, got %T instead", value)
+				}
+				sv.StatusName = ptr.String(jtv)
+			}
+
 		case "StatusStartTimestamp":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -26695,6 +26730,11 @@ func awsRestjson1_deserializeDocumentDimensions(v **types.Dimensions, value inte
 
 		case "Queue":
 			if err := awsRestjson1_deserializeDocumentQueueReference(&sv.Queue, value); err != nil {
+				return err
+			}
+
+		case "RoutingProfile":
+			if err := awsRestjson1_deserializeDocumentRoutingProfileReference(&sv.RoutingProfile, value); err != nil {
 				return err
 			}
 
@@ -34076,6 +34116,15 @@ func awsRestjson1_deserializeDocumentUserData(v **types.UserData, value interfac
 		case "MaxSlotsByChannel":
 			if err := awsRestjson1_deserializeDocumentChannelToCountMap(&sv.MaxSlotsByChannel, value); err != nil {
 				return err
+			}
+
+		case "NextStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentStatusName to be of type string, got %T instead", value)
+				}
+				sv.NextStatus = ptr.String(jtv)
 			}
 
 		case "RoutingProfile":
