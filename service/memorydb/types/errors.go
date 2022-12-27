@@ -553,6 +553,86 @@ func (e *ParameterGroupQuotaExceededFault) ErrorCode() string {
 }
 func (e *ParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You already have a reservation with the given identifier.
+type ReservedNodeAlreadyExistsFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReservedNodeAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReservedNodeAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReservedNodeAlreadyExistsFault) ErrorCode() string             { return "ReservedNodeAlreadyExistsFault" }
+func (e *ReservedNodeAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The requested node does not exist.
+type ReservedNodeNotFoundFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReservedNodeNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReservedNodeNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReservedNodeNotFoundFault) ErrorCode() string             { return "ReservedNodeNotFoundFault" }
+func (e *ReservedNodeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request cannot be processed because it would exceed the user's node quota.
+type ReservedNodeQuotaExceededFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReservedNodeQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReservedNodeQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReservedNodeQuotaExceededFault) ErrorCode() string             { return "ReservedNodeQuotaExceededFault" }
+func (e *ReservedNodeQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The requested node offering does not exist.
+type ReservedNodesOfferingNotFoundFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ReservedNodesOfferingNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ReservedNodesOfferingNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ReservedNodesOfferingNotFoundFault) ErrorCode() string {
+	return "ReservedNodesOfferingNotFoundFault"
+}
+func (e *ReservedNodesOfferingNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 type ServiceLinkedRoleNotFoundFault struct {
 	Message *string
 

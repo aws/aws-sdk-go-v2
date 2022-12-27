@@ -4,6 +4,7 @@ package memorydb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
@@ -131,6 +132,99 @@ func (c *Client) addOperationDescribeEngineVersionsMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+// DescribeEngineVersionsAPIClient is a client that implements the
+// DescribeEngineVersions operation.
+type DescribeEngineVersionsAPIClient interface {
+	DescribeEngineVersions(context.Context, *DescribeEngineVersionsInput, ...func(*Options)) (*DescribeEngineVersionsOutput, error)
+}
+
+var _ DescribeEngineVersionsAPIClient = (*Client)(nil)
+
+// DescribeEngineVersionsPaginatorOptions is the paginator options for
+// DescribeEngineVersions
+type DescribeEngineVersionsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEngineVersionsPaginator is a paginator for DescribeEngineVersions
+type DescribeEngineVersionsPaginator struct {
+	options   DescribeEngineVersionsPaginatorOptions
+	client    DescribeEngineVersionsAPIClient
+	params    *DescribeEngineVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEngineVersionsPaginator returns a new DescribeEngineVersionsPaginator
+func NewDescribeEngineVersionsPaginator(client DescribeEngineVersionsAPIClient, params *DescribeEngineVersionsInput, optFns ...func(*DescribeEngineVersionsPaginatorOptions)) *DescribeEngineVersionsPaginator {
+	if params == nil {
+		params = &DescribeEngineVersionsInput{}
+	}
+
+	options := DescribeEngineVersionsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeEngineVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEngineVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeEngineVersions page.
+func (p *DescribeEngineVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEngineVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeEngineVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeEngineVersions(region string) *awsmiddleware.RegisterServiceMetadata {
