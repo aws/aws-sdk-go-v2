@@ -11,7 +11,7 @@ import (
 type RequestError struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	TurkErrorCode *string
 
@@ -28,10 +28,10 @@ func (e *RequestError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RequestError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "RequestError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *RequestError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -40,7 +40,7 @@ func (e *RequestError) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 type ServiceFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	TurkErrorCode *string
 
@@ -57,9 +57,9 @@ func (e *ServiceFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServiceFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServiceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }

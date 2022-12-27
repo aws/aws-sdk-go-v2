@@ -13,7 +13,7 @@ import (
 type EngineNotSupportedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -28,10 +28,10 @@ func (e *EngineNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EngineNotSupportedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "EngineNotSupportedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *EngineNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -40,7 +40,7 @@ func (e *EngineNotSupportedException) ErrorFault() smithy.ErrorFault { return sm
 type InvalidLexiconException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -55,10 +55,10 @@ func (e *InvalidLexiconException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLexiconException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidLexiconException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidLexiconException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -67,7 +67,7 @@ func (e *InvalidLexiconException) ErrorFault() smithy.ErrorFault { return smithy
 type InvalidNextTokenException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -82,10 +82,10 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidNextTokenException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidNextTokenException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -94,7 +94,7 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 type InvalidS3BucketException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -109,10 +109,10 @@ func (e *InvalidS3BucketException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3BucketException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidS3BucketException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidS3BucketException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -121,7 +121,7 @@ func (e *InvalidS3BucketException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidS3KeyException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -136,10 +136,10 @@ func (e *InvalidS3KeyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3KeyException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidS3KeyException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidS3KeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -147,7 +147,7 @@ func (e *InvalidS3KeyException) ErrorFault() smithy.ErrorFault { return smithy.F
 type InvalidSampleRateException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -162,10 +162,10 @@ func (e *InvalidSampleRateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSampleRateException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidSampleRateException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidSampleRateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -174,7 +174,7 @@ func (e *InvalidSampleRateException) ErrorFault() smithy.ErrorFault { return smi
 type InvalidSnsTopicArnException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -189,10 +189,10 @@ func (e *InvalidSnsTopicArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSnsTopicArnException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidSnsTopicArnException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidSnsTopicArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -201,7 +201,7 @@ func (e *InvalidSnsTopicArnException) ErrorFault() smithy.ErrorFault { return sm
 type InvalidSsmlException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -216,10 +216,10 @@ func (e *InvalidSsmlException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSsmlException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidSsmlException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidSsmlException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -227,7 +227,7 @@ func (e *InvalidSsmlException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 type InvalidTaskIdException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -242,10 +242,10 @@ func (e *InvalidTaskIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTaskIdException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidTaskIdException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidTaskIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -254,7 +254,7 @@ func (e *InvalidTaskIdException) ErrorFault() smithy.ErrorFault { return smithy.
 type LanguageNotSupportedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -269,10 +269,10 @@ func (e *LanguageNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LanguageNotSupportedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LanguageNotSupportedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LanguageNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -284,7 +284,7 @@ func (e *LanguageNotSupportedException) ErrorFault() smithy.ErrorFault { return 
 type LexiconNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -299,10 +299,10 @@ func (e *LexiconNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LexiconNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LexiconNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LexiconNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -310,7 +310,7 @@ func (e *LexiconNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 type LexiconSizeExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -325,10 +325,10 @@ func (e *LexiconSizeExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LexiconSizeExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LexiconSizeExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LexiconSizeExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -337,7 +337,7 @@ func (e *LexiconSizeExceededException) ErrorFault() smithy.ErrorFault { return s
 type MarksNotSupportedForFormatException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -352,10 +352,10 @@ func (e *MarksNotSupportedForFormatException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MarksNotSupportedForFormatException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MarksNotSupportedForFormatException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MarksNotSupportedForFormatException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -365,7 +365,7 @@ func (e *MarksNotSupportedForFormatException) ErrorFault() smithy.ErrorFault {
 type MaxLexemeLengthExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -380,10 +380,10 @@ func (e *MaxLexemeLengthExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxLexemeLengthExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MaxLexemeLengthExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MaxLexemeLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -391,7 +391,7 @@ func (e *MaxLexemeLengthExceededException) ErrorFault() smithy.ErrorFault { retu
 type MaxLexiconsNumberExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -406,10 +406,10 @@ func (e *MaxLexiconsNumberExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaxLexiconsNumberExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MaxLexiconsNumberExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MaxLexiconsNumberExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -419,7 +419,7 @@ func (e *MaxLexiconsNumberExceededException) ErrorFault() smithy.ErrorFault {
 type ServiceFailureException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -434,10 +434,10 @@ func (e *ServiceFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceFailureException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServiceFailureException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -445,7 +445,7 @@ func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy
 type SsmlMarksNotSupportedForTextTypeException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -460,10 +460,10 @@ func (e *SsmlMarksNotSupportedForTextTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SsmlMarksNotSupportedForTextTypeException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SsmlMarksNotSupportedForTextTypeException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SsmlMarksNotSupportedForTextTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -473,7 +473,7 @@ func (e *SsmlMarksNotSupportedForTextTypeException) ErrorFault() smithy.ErrorFau
 type SynthesisTaskNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -488,10 +488,10 @@ func (e *SynthesisTaskNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SynthesisTaskNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SynthesisTaskNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SynthesisTaskNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -504,7 +504,7 @@ func (e *SynthesisTaskNotFoundException) ErrorFault() smithy.ErrorFault { return
 type TextLengthExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -519,10 +519,10 @@ func (e *TextLengthExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TextLengthExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "TextLengthExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TextLengthExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -531,7 +531,7 @@ func (e *TextLengthExceededException) ErrorFault() smithy.ErrorFault { return sm
 type UnsupportedPlsAlphabetException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -546,10 +546,10 @@ func (e *UnsupportedPlsAlphabetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedPlsAlphabetException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnsupportedPlsAlphabetException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedPlsAlphabetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -559,7 +559,7 @@ func (e *UnsupportedPlsAlphabetException) ErrorFault() smithy.ErrorFault { retur
 type UnsupportedPlsLanguageException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -574,9 +574,9 @@ func (e *UnsupportedPlsLanguageException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedPlsLanguageException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnsupportedPlsLanguageException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedPlsLanguageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

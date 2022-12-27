@@ -11,8 +11,9 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -28,10 +29,10 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AccessDeniedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -40,11 +41,12 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type HumanLoopQuotaExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ResourceType *string
 	QuotaCode    *string
 	ServiceCode  *string
+	Code         *string
 	Logref       *string
 
 	noSmithyDocumentSerde
@@ -60,10 +62,10 @@ func (e *HumanLoopQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HumanLoopQuotaExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "HumanLoopQuotaExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -73,8 +75,9 @@ func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { retur
 type IdempotentParameterMismatchException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -90,10 +93,10 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "IdempotentParameterMismatchException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -106,8 +109,9 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 type ImageTooLargeException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -123,10 +127,10 @@ func (e *ImageTooLargeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ImageTooLargeException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ImageTooLargeException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ImageTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -134,8 +138,9 @@ func (e *ImageTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.
 type InternalServerError struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -151,10 +156,10 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalServerError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -162,8 +167,9 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type InvalidImageFormatException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -179,10 +185,10 @@ func (e *InvalidImageFormatException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidImageFormatException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidImageFormatException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidImageFormatException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -190,8 +196,9 @@ func (e *InvalidImageFormatException) ErrorFault() smithy.ErrorFault { return sm
 type InvalidPaginationTokenException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -207,10 +214,10 @@ func (e *InvalidPaginationTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPaginationTokenException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidPaginationTokenException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -219,8 +226,9 @@ func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { retur
 type InvalidParameterException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -236,10 +244,10 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidParameterException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -247,8 +255,9 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 type InvalidPolicyRevisionIdException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -264,10 +273,10 @@ func (e *InvalidPolicyRevisionIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPolicyRevisionIdException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidPolicyRevisionIdException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidPolicyRevisionIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -275,8 +284,9 @@ func (e *InvalidPolicyRevisionIdException) ErrorFault() smithy.ErrorFault { retu
 type InvalidS3ObjectException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -292,10 +302,10 @@ func (e *InvalidS3ObjectException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3ObjectException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidS3ObjectException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -307,8 +317,9 @@ func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smith
 type LimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -324,10 +335,10 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -336,8 +347,9 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type MalformedPolicyDocumentException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -353,10 +365,10 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedPolicyDocumentException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MalformedPolicyDocumentException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -365,8 +377,9 @@ func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { retu
 type ProvisionedThroughputExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -382,10 +395,10 @@ func (e *ProvisionedThroughputExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProvisionedThroughputExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ProvisionedThroughputExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -395,8 +408,9 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 type ResourceAlreadyExistsException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -412,10 +426,10 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceAlreadyExistsException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -423,8 +437,9 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 type ResourceInUseException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -440,10 +455,10 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceInUseException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -451,8 +466,9 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -468,10 +484,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -480,8 +496,9 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ResourceNotReadyException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -497,10 +514,10 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotReadyException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotReadyException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -510,8 +527,9 @@ func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smit
 type ServiceQuotaExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -527,10 +545,10 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceQuotaExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServiceQuotaExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -539,8 +557,9 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 type ThrottlingException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -556,10 +575,10 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ThrottlingException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -568,8 +587,9 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type VideoTooLargeException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code   *string
 	Logref *string
 
 	noSmithyDocumentSerde
@@ -585,9 +605,9 @@ func (e *VideoTooLargeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *VideoTooLargeException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "VideoTooLargeException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *VideoTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

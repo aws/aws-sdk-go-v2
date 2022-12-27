@@ -11,6 +11,8 @@ import (
 type BaseException struct {
 	Message *string
 
+	DynamicErrorCode *string
+
 	Code *string
 
 	noSmithyDocumentSerde
@@ -26,16 +28,18 @@ func (e *BaseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BaseException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "BaseException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *BaseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted an operation which is not enabled.
 type DisabledOperationException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -52,10 +56,10 @@ func (e *DisabledOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DisabledOperationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DisabledAction"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -64,6 +68,8 @@ func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smi
 // (http://status.aws.amazon.com/).
 type InternalException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -80,16 +86,18 @@ func (e *InternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request was rejected because it specified an invalid type definition.
 type InvalidTypeException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -106,16 +114,18 @@ func (e *InvalidTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTypeException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidType"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because a resource limit has already been met.
 type LimitExceededException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -132,10 +142,10 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LimitExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -143,6 +153,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -159,10 +171,10 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceAlreadyExistsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -170,6 +182,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -186,16 +200,18 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it has invalid parameters.
 type ValidationException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -212,9 +228,9 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ValidationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -11,7 +11,7 @@ import (
 type DependencyException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ParameterName *string
 
@@ -28,10 +28,10 @@ func (e *DependencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DependencyException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DependencyException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -39,7 +39,7 @@ func (e *DependencyException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type InvalidParameterException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ParameterName *string
 
@@ -56,10 +56,10 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidParameterException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -67,7 +67,7 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 type ResourceLimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ParameterName *string
 
@@ -84,10 +84,10 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceLimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceLimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -95,7 +95,7 @@ func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -110,9 +110,9 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

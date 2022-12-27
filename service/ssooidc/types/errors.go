@@ -11,7 +11,7 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -29,10 +29,10 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AccessDeniedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -41,7 +41,7 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type AuthorizationPendingException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -59,10 +59,10 @@ func (e *AuthorizationPendingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AuthorizationPendingException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AuthorizationPendingException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AuthorizationPendingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -71,7 +71,7 @@ func (e *AuthorizationPendingException) ErrorFault() smithy.ErrorFault { return 
 type ExpiredTokenException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -89,10 +89,10 @@ func (e *ExpiredTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExpiredTokenException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ExpiredTokenException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -101,7 +101,7 @@ func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.F
 type InternalServerException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -119,10 +119,10 @@ func (e *InternalServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalServerException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -132,7 +132,7 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 type InvalidClientException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -150,10 +150,10 @@ func (e *InvalidClientException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClientException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidClientException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -162,7 +162,7 @@ func (e *InvalidClientException) ErrorFault() smithy.ErrorFault { return smithy.
 type InvalidClientMetadataException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -180,10 +180,10 @@ func (e *InvalidClientMetadataException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidClientMetadataException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidClientMetadataException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidClientMetadataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -192,7 +192,7 @@ func (e *InvalidClientMetadataException) ErrorFault() smithy.ErrorFault { return
 type InvalidGrantException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -210,10 +210,10 @@ func (e *InvalidGrantException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGrantException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidGrantException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidGrantException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -222,7 +222,7 @@ func (e *InvalidGrantException) ErrorFault() smithy.ErrorFault { return smithy.F
 type InvalidRequestException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -240,10 +240,10 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidRequestException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -251,7 +251,7 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 type InvalidScopeException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -269,10 +269,10 @@ func (e *InvalidScopeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidScopeException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidScopeException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidScopeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -281,7 +281,7 @@ func (e *InvalidScopeException) ErrorFault() smithy.ErrorFault { return smithy.F
 type SlowDownException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -299,10 +299,10 @@ func (e *SlowDownException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SlowDownException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SlowDownException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SlowDownException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -311,7 +311,7 @@ func (e *SlowDownException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type UnauthorizedClientException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -329,10 +329,10 @@ func (e *UnauthorizedClientException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedClientException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnauthorizedClientException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnauthorizedClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -340,7 +340,7 @@ func (e *UnauthorizedClientException) ErrorFault() smithy.ErrorFault { return sm
 type UnsupportedGrantTypeException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_            *string
 	Error_description *string
@@ -358,9 +358,9 @@ func (e *UnsupportedGrantTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedGrantTypeException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnsupportedGrantTypeException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedGrantTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

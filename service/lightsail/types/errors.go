@@ -12,8 +12,9 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code *string
 	Docs *string
 	Tip  *string
 
@@ -30,10 +31,10 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AccessDeniedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -42,8 +43,9 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type AccountSetupInProgressException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code *string
 	Docs *string
 	Tip  *string
 
@@ -60,10 +62,10 @@ func (e *AccountSetupInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountSetupInProgressException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AccountSetupInProgressException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AccountSetupInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -75,8 +77,9 @@ func (e *AccountSetupInProgressException) ErrorFault() smithy.ErrorFault { retur
 type InvalidInputException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code *string
 	Docs *string
 	Tip  *string
 
@@ -93,10 +96,10 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidInputException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -104,8 +107,9 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 type NotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code *string
 	Docs *string
 	Tip  *string
 
@@ -122,10 +126,10 @@ func (e *NotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -133,8 +137,9 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type OperationFailureException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code *string
 	Docs *string
 	Tip  *string
 
@@ -151,10 +156,10 @@ func (e *OperationFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationFailureException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "OperationFailureException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *OperationFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -162,8 +167,9 @@ func (e *OperationFailureException) ErrorFault() smithy.ErrorFault { return smit
 type ServiceException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code *string
 	Docs *string
 	Tip  *string
 
@@ -180,10 +186,10 @@ func (e *ServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServiceException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -191,8 +197,9 @@ func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultS
 type UnauthenticatedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
+	Code *string
 	Docs *string
 	Tip  *string
 
@@ -209,9 +216,9 @@ func (e *UnauthenticatedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthenticatedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnauthenticatedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnauthenticatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

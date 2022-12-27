@@ -11,7 +11,7 @@ import (
 type CloudHsmInternalException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Retryable bool
 
@@ -28,10 +28,10 @@ func (e *CloudHsmInternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmInternalException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CloudHsmInternalException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CloudHsmInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -39,7 +39,7 @@ func (e *CloudHsmInternalException) ErrorFault() smithy.ErrorFault { return smit
 type CloudHsmServiceException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Retryable bool
 
@@ -56,10 +56,10 @@ func (e *CloudHsmServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmServiceException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CloudHsmServiceException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -67,7 +67,7 @@ func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidRequestException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Retryable bool
 
@@ -84,9 +84,9 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRequestException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidRequestException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

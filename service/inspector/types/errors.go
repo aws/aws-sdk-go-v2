@@ -11,7 +11,7 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ErrorCode_ AccessDeniedErrorCode
 	CanRetry   *bool
@@ -29,10 +29,10 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AccessDeniedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -41,7 +41,7 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type AgentsAlreadyRunningAssessmentException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Agents          []AgentAlreadyRunningAssessment
 	AgentsTruncated *bool
@@ -60,10 +60,10 @@ func (e *AgentsAlreadyRunningAssessmentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AgentsAlreadyRunningAssessmentException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AgentsAlreadyRunningAssessmentException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AgentsAlreadyRunningAssessmentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -74,7 +74,7 @@ func (e *AgentsAlreadyRunningAssessmentException) ErrorFault() smithy.ErrorFault
 type AssessmentRunInProgressException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	AssessmentRunArns          []string
 	AssessmentRunArnsTruncated *bool
@@ -93,10 +93,10 @@ func (e *AssessmentRunInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AssessmentRunInProgressException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AssessmentRunInProgressException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AssessmentRunInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -104,7 +104,7 @@ func (e *AssessmentRunInProgressException) ErrorFault() smithy.ErrorFault { retu
 type InternalException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	CanRetry *bool
 
@@ -121,10 +121,10 @@ func (e *InternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -133,7 +133,7 @@ func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type InvalidCrossAccountRoleException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ErrorCode_ InvalidCrossAccountRoleErrorCode
 	CanRetry   *bool
@@ -151,10 +151,10 @@ func (e *InvalidCrossAccountRoleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCrossAccountRoleException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidCrossAccountRoleException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidCrossAccountRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -163,7 +163,7 @@ func (e *InvalidCrossAccountRoleException) ErrorFault() smithy.ErrorFault { retu
 type InvalidInputException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ErrorCode_ InvalidInputErrorCode
 	CanRetry   *bool
@@ -181,10 +181,10 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidInputException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -193,7 +193,7 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 type LimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ErrorCode_ LimitExceededErrorCode
 	CanRetry   *bool
@@ -211,10 +211,10 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -223,7 +223,7 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type NoSuchEntityException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ErrorCode_ NoSuchEntityErrorCode
 	CanRetry   *bool
@@ -241,10 +241,10 @@ func (e *NoSuchEntityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchEntityException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NoSuchEntityException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NoSuchEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -253,7 +253,7 @@ func (e *NoSuchEntityException) ErrorFault() smithy.ErrorFault { return smithy.F
 type PreviewGenerationInProgressException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -268,10 +268,10 @@ func (e *PreviewGenerationInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PreviewGenerationInProgressException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "PreviewGenerationInProgressException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *PreviewGenerationInProgressException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -281,7 +281,7 @@ func (e *PreviewGenerationInProgressException) ErrorFault() smithy.ErrorFault {
 type ServiceTemporarilyUnavailableException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	CanRetry *bool
 
@@ -298,10 +298,10 @@ func (e *ServiceTemporarilyUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceTemporarilyUnavailableException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServiceTemporarilyUnavailableException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServiceTemporarilyUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
@@ -315,7 +315,7 @@ func (e *ServiceTemporarilyUnavailableException) ErrorFault() smithy.ErrorFault 
 type UnsupportedFeatureException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	CanRetry *bool
 
@@ -332,9 +332,9 @@ func (e *UnsupportedFeatureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedFeatureException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnsupportedFeatureException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

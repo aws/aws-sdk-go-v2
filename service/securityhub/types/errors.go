@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	DynamicErrorCode *string
+
 	Code *string
 
 	noSmithyDocumentSerde
@@ -26,16 +28,18 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AccessDeniedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Internal server error.
 type InternalException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -52,16 +56,18 @@ func (e *InternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The account doesn't have permission to perform this action.
 type InvalidAccessException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -78,10 +84,10 @@ func (e *InvalidAccessException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidAccessException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidAccessException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -89,6 +95,8 @@ func (e *InvalidAccessException) ErrorFault() smithy.ErrorFault { return smithy.
 // for an input parameter.
 type InvalidInputException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -105,10 +113,10 @@ func (e *InvalidInputException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInputException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidInputException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -117,6 +125,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // describes the limit exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -133,16 +143,18 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource specified in the request conflicts with an existing resource.
 type ResourceConflictException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -159,16 +171,18 @@ func (e *ResourceConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceConflictException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceConflictException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because we can't find the specified resource.
 type ResourceNotFoundException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -185,9 +199,9 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -11,7 +11,7 @@ import (
 type DirectConnectClientException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -26,10 +26,10 @@ func (e *DirectConnectClientException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectConnectClientException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DirectConnectClientException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DirectConnectClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -37,7 +37,7 @@ func (e *DirectConnectClientException) ErrorFault() smithy.ErrorFault { return s
 type DirectConnectServerException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -52,10 +52,10 @@ func (e *DirectConnectServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectConnectServerException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DirectConnectServerException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DirectConnectServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -63,7 +63,7 @@ func (e *DirectConnectServerException) ErrorFault() smithy.ErrorFault { return s
 type DuplicateTagKeysException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -78,10 +78,10 @@ func (e *DuplicateTagKeysException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateTagKeysException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DuplicateTagKeysException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -89,7 +89,7 @@ func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smit
 type TooManyTagsException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -104,9 +104,9 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyTagsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "TooManyTagsException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

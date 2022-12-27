@@ -13,7 +13,7 @@ import (
 type AccountSendingPausedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -28,10 +28,10 @@ func (e *AccountSendingPausedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountSendingPausedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AccountSendingPausedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AccountSendingPausedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -39,7 +39,7 @@ func (e *AccountSendingPausedException) ErrorFault() smithy.ErrorFault { return 
 type AlreadyExistsException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Name *string
 
@@ -56,10 +56,10 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AlreadyExistsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -67,7 +67,7 @@ func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.
 type CannotDeleteException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Name *string
 
@@ -84,10 +84,10 @@ func (e *CannotDeleteException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CannotDeleteException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CannotDelete"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CannotDeleteException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -96,7 +96,7 @@ func (e *CannotDeleteException) ErrorFault() smithy.ErrorFault { return smithy.F
 type ConfigurationSetAlreadyExistsException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ConfigurationSetName *string
 
@@ -113,10 +113,10 @@ func (e *ConfigurationSetAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetAlreadyExistsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ConfigurationSetAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ConfigurationSetAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -126,7 +126,7 @@ func (e *ConfigurationSetAlreadyExistsException) ErrorFault() smithy.ErrorFault 
 type ConfigurationSetDoesNotExistException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ConfigurationSetName *string
 
@@ -143,10 +143,10 @@ func (e *ConfigurationSetDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetDoesNotExistException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ConfigurationSetDoesNotExist"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ConfigurationSetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -158,7 +158,7 @@ func (e *ConfigurationSetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 type ConfigurationSetSendingPausedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ConfigurationSetName *string
 
@@ -175,10 +175,10 @@ func (e *ConfigurationSetSendingPausedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConfigurationSetSendingPausedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ConfigurationSetSendingPausedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ConfigurationSetSendingPausedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -188,7 +188,7 @@ func (e *ConfigurationSetSendingPausedException) ErrorFault() smithy.ErrorFault 
 type CustomVerificationEmailInvalidContentException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -203,10 +203,10 @@ func (e *CustomVerificationEmailInvalidContentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CustomVerificationEmailInvalidContentException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CustomVerificationEmailInvalidContent"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CustomVerificationEmailInvalidContentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -217,7 +217,7 @@ func (e *CustomVerificationEmailInvalidContentException) ErrorFault() smithy.Err
 type CustomVerificationEmailTemplateAlreadyExistsException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	CustomVerificationEmailTemplateName *string
 
@@ -234,10 +234,10 @@ func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorMessage() s
 	return *e.Message
 }
 func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CustomVerificationEmailTemplateAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -248,7 +248,7 @@ func (e *CustomVerificationEmailTemplateAlreadyExistsException) ErrorFault() smi
 type CustomVerificationEmailTemplateDoesNotExistException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	CustomVerificationEmailTemplateName *string
 
@@ -265,10 +265,10 @@ func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorMessage() st
 	return *e.Message
 }
 func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CustomVerificationEmailTemplateDoesNotExist"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -279,7 +279,7 @@ func (e *CustomVerificationEmailTemplateDoesNotExistException) ErrorFault() smit
 type EventDestinationAlreadyExistsException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ConfigurationSetName *string
 	EventDestinationName *string
@@ -297,10 +297,10 @@ func (e *EventDestinationAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDestinationAlreadyExistsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "EventDestinationAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *EventDestinationAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -310,7 +310,7 @@ func (e *EventDestinationAlreadyExistsException) ErrorFault() smithy.ErrorFault 
 type EventDestinationDoesNotExistException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ConfigurationSetName *string
 	EventDestinationName *string
@@ -328,10 +328,10 @@ func (e *EventDestinationDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDestinationDoesNotExistException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "EventDestinationDoesNotExist"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *EventDestinationDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -343,7 +343,7 @@ func (e *EventDestinationDoesNotExistException) ErrorFault() smithy.ErrorFault {
 type FromEmailAddressNotVerifiedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	FromEmailAddress *string
 
@@ -360,10 +360,10 @@ func (e *FromEmailAddressNotVerifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FromEmailAddressNotVerifiedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "FromEmailAddressNotVerified"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *FromEmailAddressNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -374,7 +374,7 @@ func (e *FromEmailAddressNotVerifiedException) ErrorFault() smithy.ErrorFault {
 type InvalidCloudWatchDestinationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ConfigurationSetName *string
 	EventDestinationName *string
@@ -392,10 +392,10 @@ func (e *InvalidCloudWatchDestinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCloudWatchDestinationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidCloudWatchDestination"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidCloudWatchDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -406,7 +406,7 @@ func (e *InvalidCloudWatchDestinationException) ErrorFault() smithy.ErrorFault {
 type InvalidConfigurationSetException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -421,10 +421,10 @@ func (e *InvalidConfigurationSetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConfigurationSetException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidConfigurationSet"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidConfigurationSetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -432,7 +432,7 @@ func (e *InvalidConfigurationSetException) ErrorFault() smithy.ErrorFault { retu
 type InvalidDeliveryOptionsException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -447,10 +447,10 @@ func (e *InvalidDeliveryOptionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDeliveryOptionsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidDeliveryOptions"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidDeliveryOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -459,7 +459,7 @@ func (e *InvalidDeliveryOptionsException) ErrorFault() smithy.ErrorFault { retur
 type InvalidFirehoseDestinationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ConfigurationSetName *string
 	EventDestinationName *string
@@ -477,10 +477,10 @@ func (e *InvalidFirehoseDestinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidFirehoseDestinationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidFirehoseDestination"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidFirehoseDestinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -493,7 +493,7 @@ func (e *InvalidFirehoseDestinationException) ErrorFault() smithy.ErrorFault {
 type InvalidLambdaFunctionException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	FunctionArn *string
 
@@ -510,10 +510,10 @@ func (e *InvalidLambdaFunctionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLambdaFunctionException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidLambdaFunction"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidLambdaFunctionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -522,7 +522,7 @@ func (e *InvalidLambdaFunctionException) ErrorFault() smithy.ErrorFault { return
 type InvalidPolicyException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -537,10 +537,10 @@ func (e *InvalidPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPolicyException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidPolicy"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -549,7 +549,7 @@ func (e *InvalidPolicyException) ErrorFault() smithy.ErrorFault { return smithy.
 type InvalidRenderingParameterException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	TemplateName *string
 
@@ -566,10 +566,10 @@ func (e *InvalidRenderingParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRenderingParameterException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidRenderingParameter"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidRenderingParameterException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -583,7 +583,7 @@ func (e *InvalidRenderingParameterException) ErrorFault() smithy.ErrorFault {
 type InvalidS3ConfigurationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Bucket *string
 
@@ -600,10 +600,10 @@ func (e *InvalidS3ConfigurationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3ConfigurationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidS3Configuration"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidS3ConfigurationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -612,7 +612,7 @@ func (e *InvalidS3ConfigurationException) ErrorFault() smithy.ErrorFault { retur
 type InvalidSNSDestinationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ConfigurationSetName *string
 	EventDestinationName *string
@@ -630,10 +630,10 @@ func (e *InvalidSNSDestinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSNSDestinationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidSNSDestination"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidSNSDestinationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -644,7 +644,7 @@ func (e *InvalidSNSDestinationException) ErrorFault() smithy.ErrorFault { return
 type InvalidSnsTopicException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Topic *string
 
@@ -661,10 +661,10 @@ func (e *InvalidSnsTopicException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSnsTopicException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidSnsTopic"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidSnsTopicException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -673,7 +673,7 @@ func (e *InvalidSnsTopicException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidTemplateException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	TemplateName *string
 
@@ -690,10 +690,10 @@ func (e *InvalidTemplateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTemplateException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidTemplate"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -709,7 +709,7 @@ func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidTrackingOptionsException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -724,10 +724,10 @@ func (e *InvalidTrackingOptionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidTrackingOptionsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidTrackingOptions"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -737,7 +737,7 @@ func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { retur
 type LimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -752,10 +752,10 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LimitExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -767,7 +767,7 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type MailFromDomainNotVerifiedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -782,10 +782,10 @@ func (e *MailFromDomainNotVerifiedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MailFromDomainNotVerifiedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MailFromDomainNotVerifiedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MailFromDomainNotVerifiedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -796,7 +796,7 @@ func (e *MailFromDomainNotVerifiedException) ErrorFault() smithy.ErrorFault {
 type MessageRejected struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -811,10 +811,10 @@ func (e *MessageRejected) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MessageRejected) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MessageRejected"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -824,7 +824,7 @@ func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 type MissingRenderingAttributeException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	TemplateName *string
 
@@ -841,10 +841,10 @@ func (e *MissingRenderingAttributeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingRenderingAttributeException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MissingRenderingAttribute"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MissingRenderingAttributeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -854,7 +854,7 @@ func (e *MissingRenderingAttributeException) ErrorFault() smithy.ErrorFault {
 type ProductionAccessNotGrantedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -869,10 +869,10 @@ func (e *ProductionAccessNotGrantedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProductionAccessNotGrantedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ProductionAccessNotGranted"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ProductionAccessNotGrantedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -882,7 +882,7 @@ func (e *ProductionAccessNotGrantedException) ErrorFault() smithy.ErrorFault {
 type RuleDoesNotExistException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Name *string
 
@@ -899,10 +899,10 @@ func (e *RuleDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RuleDoesNotExistException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "RuleDoesNotExist"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *RuleDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -910,7 +910,7 @@ func (e *RuleDoesNotExistException) ErrorFault() smithy.ErrorFault { return smit
 type RuleSetDoesNotExistException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Name *string
 
@@ -927,10 +927,10 @@ func (e *RuleSetDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RuleSetDoesNotExistException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "RuleSetDoesNotExist"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *RuleSetDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -939,7 +939,7 @@ func (e *RuleSetDoesNotExistException) ErrorFault() smithy.ErrorFault { return s
 type TemplateDoesNotExistException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	TemplateName *string
 
@@ -956,10 +956,10 @@ func (e *TemplateDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TemplateDoesNotExistException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "TemplateDoesNotExist"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TemplateDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -968,7 +968,7 @@ func (e *TemplateDoesNotExistException) ErrorFault() smithy.ErrorFault { return 
 type TrackingOptionsAlreadyExistsException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ConfigurationSetName *string
 
@@ -985,10 +985,10 @@ func (e *TrackingOptionsAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrackingOptionsAlreadyExistsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "TrackingOptionsAlreadyExistsException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TrackingOptionsAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -998,7 +998,7 @@ func (e *TrackingOptionsAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 type TrackingOptionsDoesNotExistException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ConfigurationSetName *string
 
@@ -1015,10 +1015,10 @@ func (e *TrackingOptionsDoesNotExistException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TrackingOptionsDoesNotExistException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "TrackingOptionsDoesNotExistException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TrackingOptionsDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

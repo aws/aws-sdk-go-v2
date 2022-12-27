@@ -11,7 +11,7 @@ import (
 type BatchEntryIdsNotDistinct struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -26,10 +26,10 @@ func (e *BatchEntryIdsNotDistinct) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchEntryIdsNotDistinct) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AWS.SimpleQueueService.BatchEntryIdsNotDistinct"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *BatchEntryIdsNotDistinct) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -37,7 +37,7 @@ func (e *BatchEntryIdsNotDistinct) ErrorFault() smithy.ErrorFault { return smith
 type BatchRequestTooLong struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -52,10 +52,10 @@ func (e *BatchRequestTooLong) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchRequestTooLong) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AWS.SimpleQueueService.BatchRequestTooLong"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *BatchRequestTooLong) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -63,7 +63,7 @@ func (e *BatchRequestTooLong) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type EmptyBatchRequest struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -78,10 +78,10 @@ func (e *EmptyBatchRequest) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EmptyBatchRequest) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AWS.SimpleQueueService.EmptyBatchRequest"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *EmptyBatchRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -89,7 +89,7 @@ func (e *EmptyBatchRequest) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type InvalidAttributeName struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -104,10 +104,10 @@ func (e *InvalidAttributeName) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidAttributeName) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidAttributeName"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidAttributeName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -115,7 +115,7 @@ func (e *InvalidAttributeName) ErrorFault() smithy.ErrorFault { return smithy.Fa
 type InvalidBatchEntryId struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -130,10 +130,10 @@ func (e *InvalidBatchEntryId) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidBatchEntryId) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AWS.SimpleQueueService.InvalidBatchEntryId"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidBatchEntryId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -141,7 +141,7 @@ func (e *InvalidBatchEntryId) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type InvalidIdFormat struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -156,10 +156,10 @@ func (e *InvalidIdFormat) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidIdFormat) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidIdFormat"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidIdFormat) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -167,7 +167,7 @@ func (e *InvalidIdFormat) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 type InvalidMessageContents struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -182,10 +182,10 @@ func (e *InvalidMessageContents) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMessageContents) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidMessageContents"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidMessageContents) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -193,7 +193,7 @@ func (e *InvalidMessageContents) ErrorFault() smithy.ErrorFault { return smithy.
 type MessageNotInflight struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -208,10 +208,10 @@ func (e *MessageNotInflight) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MessageNotInflight) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AWS.SimpleQueueService.MessageNotInflight"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MessageNotInflight) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -222,7 +222,7 @@ func (e *MessageNotInflight) ErrorFault() smithy.ErrorFault { return smithy.Faul
 type OverLimit struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -237,10 +237,10 @@ func (e *OverLimit) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OverLimit) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "OverLimit"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *OverLimit) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -250,7 +250,7 @@ func (e *OverLimit) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 type PurgeQueueInProgress struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -265,10 +265,10 @@ func (e *PurgeQueueInProgress) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PurgeQueueInProgress) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AWS.SimpleQueueService.PurgeQueueInProgress"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *PurgeQueueInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -277,7 +277,7 @@ func (e *PurgeQueueInProgress) ErrorFault() smithy.ErrorFault { return smithy.Fa
 type QueueDeletedRecently struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -292,10 +292,10 @@ func (e *QueueDeletedRecently) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueueDeletedRecently) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AWS.SimpleQueueService.QueueDeletedRecently"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *QueueDeletedRecently) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -303,7 +303,7 @@ func (e *QueueDeletedRecently) ErrorFault() smithy.ErrorFault { return smithy.Fa
 type QueueDoesNotExist struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -318,10 +318,10 @@ func (e *QueueDoesNotExist) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueueDoesNotExist) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AWS.SimpleQueueService.NonExistentQueue"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *QueueDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -331,7 +331,7 @@ func (e *QueueDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type QueueNameExists struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -346,10 +346,10 @@ func (e *QueueNameExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueueNameExists) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "QueueAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *QueueNameExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -357,7 +357,7 @@ func (e *QueueNameExists) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 type ReceiptHandleIsInvalid struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -372,10 +372,10 @@ func (e *ReceiptHandleIsInvalid) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReceiptHandleIsInvalid) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ReceiptHandleIsInvalid"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ReceiptHandleIsInvalid) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -383,7 +383,7 @@ func (e *ReceiptHandleIsInvalid) ErrorFault() smithy.ErrorFault { return smithy.
 type TooManyEntriesInBatchRequest struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -398,10 +398,10 @@ func (e *TooManyEntriesInBatchRequest) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyEntriesInBatchRequest) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AWS.SimpleQueueService.TooManyEntriesInBatchRequest"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TooManyEntriesInBatchRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -409,7 +409,7 @@ func (e *TooManyEntriesInBatchRequest) ErrorFault() smithy.ErrorFault { return s
 type UnsupportedOperation struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -424,9 +424,9 @@ func (e *UnsupportedOperation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedOperation) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AWS.SimpleQueueService.UnsupportedOperation"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

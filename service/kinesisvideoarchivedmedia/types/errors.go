@@ -14,7 +14,7 @@ import (
 type ClientLimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -29,10 +29,10 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientLimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ClientLimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -41,7 +41,7 @@ func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return s
 type InvalidArgumentException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -56,10 +56,10 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidArgumentException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidArgumentException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -68,7 +68,7 @@ func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidCodecPrivateDataException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -83,10 +83,10 @@ func (e *InvalidCodecPrivateDataException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCodecPrivateDataException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidCodecPrivateDataException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidCodecPrivateDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -95,7 +95,7 @@ func (e *InvalidCodecPrivateDataException) ErrorFault() smithy.ErrorFault { retu
 type InvalidMediaFrameException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -110,10 +110,10 @@ func (e *InvalidMediaFrameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidMediaFrameException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidMediaFrameException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidMediaFrameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -121,7 +121,7 @@ func (e *InvalidMediaFrameException) ErrorFault() smithy.ErrorFault { return smi
 type MissingCodecPrivateDataException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -136,10 +136,10 @@ func (e *MissingCodecPrivateDataException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingCodecPrivateDataException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MissingCodecPrivateDataException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MissingCodecPrivateDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -148,7 +148,7 @@ func (e *MissingCodecPrivateDataException) ErrorFault() smithy.ErrorFault { retu
 type NoDataRetentionException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -163,10 +163,10 @@ func (e *NoDataRetentionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoDataRetentionException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NoDataRetentionException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NoDataRetentionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -175,7 +175,7 @@ func (e *NoDataRetentionException) ErrorFault() smithy.ErrorFault { return smith
 type NotAuthorizedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -190,10 +190,10 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotAuthorizedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NotAuthorizedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -206,7 +206,7 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -221,10 +221,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -235,7 +235,7 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type UnsupportedStreamMediaTypeException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -250,10 +250,10 @@ func (e *UnsupportedStreamMediaTypeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedStreamMediaTypeException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnsupportedStreamMediaTypeException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedStreamMediaTypeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

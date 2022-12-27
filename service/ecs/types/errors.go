@@ -11,7 +11,7 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -26,10 +26,10 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AccessDeniedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -39,7 +39,7 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type AttributeLimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -54,10 +54,10 @@ func (e *AttributeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttributeLimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AttributeLimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AttributeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -66,7 +66,7 @@ func (e *AttributeLimitExceededException) ErrorFault() smithy.ErrorFault { retur
 type BlockedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -81,10 +81,10 @@ func (e *BlockedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BlockedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "BlockedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *BlockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -95,7 +95,7 @@ func (e *BlockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 type ClientException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -110,10 +110,10 @@ func (e *ClientException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClientException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ClientException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -123,7 +123,7 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 type ClusterContainsContainerInstancesException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -138,10 +138,10 @@ func (e *ClusterContainsContainerInstancesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterContainsContainerInstancesException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ClusterContainsContainerInstancesException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -153,7 +153,7 @@ func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFa
 type ClusterContainsServicesException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -168,10 +168,10 @@ func (e *ClusterContainsServicesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterContainsServicesException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ClusterContainsServicesException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ClusterContainsServicesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -179,7 +179,7 @@ func (e *ClusterContainsServicesException) ErrorFault() smithy.ErrorFault { retu
 type ClusterContainsTasksException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -194,10 +194,10 @@ func (e *ClusterContainsTasksException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterContainsTasksException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ClusterContainsTasksException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ClusterContainsTasksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -206,7 +206,7 @@ func (e *ClusterContainsTasksException) ErrorFault() smithy.ErrorFault { return 
 type ClusterNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -221,10 +221,10 @@ func (e *ClusterNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ClusterNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -233,7 +233,7 @@ func (e *ClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidParameterException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -248,10 +248,10 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidParameterException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -259,7 +259,7 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 type LimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -274,10 +274,10 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -288,7 +288,7 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type MissingVersionException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -303,10 +303,10 @@ func (e *MissingVersionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingVersionException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MissingVersionException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MissingVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -314,7 +314,7 @@ func (e *MissingVersionException) ErrorFault() smithy.ErrorFault { return smithy
 type NamespaceNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -329,10 +329,10 @@ func (e *NamespaceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NamespaceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NamespaceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NamespaceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -342,7 +342,7 @@ func (e *NamespaceNotFoundException) ErrorFault() smithy.ErrorFault { return smi
 type NoUpdateAvailableException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -357,10 +357,10 @@ func (e *NoUpdateAvailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoUpdateAvailableException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NoUpdateAvailableException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NoUpdateAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -369,7 +369,7 @@ func (e *NoUpdateAvailableException) ErrorFault() smithy.ErrorFault { return smi
 type PlatformTaskDefinitionIncompatibilityException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -384,10 +384,10 @@ func (e *PlatformTaskDefinitionIncompatibilityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PlatformTaskDefinitionIncompatibilityException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "PlatformTaskDefinitionIncompatibilityException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *PlatformTaskDefinitionIncompatibilityException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -397,7 +397,7 @@ func (e *PlatformTaskDefinitionIncompatibilityException) ErrorFault() smithy.Err
 type PlatformUnknownException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -412,10 +412,10 @@ func (e *PlatformUnknownException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PlatformUnknownException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "PlatformUnknownException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *PlatformUnknownException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -423,7 +423,7 @@ func (e *PlatformUnknownException) ErrorFault() smithy.ErrorFault { return smith
 type ResourceInUseException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -438,10 +438,10 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceInUseException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceInUseException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -449,7 +449,7 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -464,10 +464,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -475,7 +475,7 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ServerException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -490,10 +490,10 @@ func (e *ServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServerException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServerException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -503,7 +503,7 @@ func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultSe
 type ServiceNotActiveException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -518,10 +518,10 @@ func (e *ServiceNotActiveException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceNotActiveException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServiceNotActiveException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServiceNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -530,7 +530,7 @@ func (e *ServiceNotActiveException) ErrorFault() smithy.ErrorFault { return smit
 type ServiceNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -545,10 +545,10 @@ func (e *ServiceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServiceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -571,7 +571,7 @@ func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 type TargetNotConnectedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -586,10 +586,10 @@ func (e *TargetNotConnectedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TargetNotConnectedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "TargetNotConnectedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TargetNotConnectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -599,7 +599,7 @@ func (e *TargetNotConnectedException) ErrorFault() smithy.ErrorFault { return sm
 type TargetNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -614,10 +614,10 @@ func (e *TargetNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TargetNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "TargetNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -626,7 +626,7 @@ func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 type TaskSetNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -641,10 +641,10 @@ func (e *TaskSetNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TaskSetNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "TaskSetNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TaskSetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -652,7 +652,7 @@ func (e *TaskSetNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 type UnsupportedFeatureException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -667,10 +667,10 @@ func (e *UnsupportedFeatureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedFeatureException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnsupportedFeatureException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -682,7 +682,7 @@ func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return sm
 type UpdateInProgressException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -697,9 +697,9 @@ func (e *UpdateInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UpdateInProgressException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UpdateInProgressException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UpdateInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -25,7 +25,7 @@ import (
 type InvalidContentLocation struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -40,10 +40,10 @@ func (e *InvalidContentLocation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidContentLocation) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidContentLocation"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidContentLocation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -52,7 +52,7 @@ func (e *InvalidContentLocation) ErrorFault() smithy.ErrorFault { return smithy.
 type MessageFrozen struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -67,10 +67,10 @@ func (e *MessageFrozen) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MessageFrozen) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MessageFrozen"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MessageFrozen) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -79,7 +79,7 @@ func (e *MessageFrozen) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 type MessageRejected struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -94,10 +94,10 @@ func (e *MessageRejected) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MessageRejected) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MessageRejected"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -105,7 +105,7 @@ func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -120,9 +120,9 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

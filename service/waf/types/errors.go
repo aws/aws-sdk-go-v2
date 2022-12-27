@@ -11,7 +11,7 @@ import (
 type WAFBadRequestException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -26,10 +26,10 @@ func (e *WAFBadRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFBadRequestException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFBadRequestException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFBadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -37,7 +37,7 @@ func (e *WAFBadRequestException) ErrorFault() smithy.ErrorFault { return smithy.
 type WAFDisallowedNameException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -52,10 +52,10 @@ func (e *WAFDisallowedNameException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFDisallowedNameException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFDisallowedNameException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFDisallowedNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -87,7 +87,7 @@ func (e *WAFDisallowedNameException) ErrorFault() smithy.ErrorFault { return smi
 type WAFEntityMigrationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	MigrationErrorType   MigrationErrorType
 	MigrationErrorReason *string
@@ -105,10 +105,10 @@ func (e *WAFEntityMigrationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFEntityMigrationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFEntityMigrationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFEntityMigrationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -117,7 +117,7 @@ func (e *WAFEntityMigrationException) ErrorFault() smithy.ErrorFault { return sm
 type WAFInternalErrorException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -132,10 +132,10 @@ func (e *WAFInternalErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInternalErrorException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFInternalErrorException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFInternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -144,7 +144,7 @@ func (e *WAFInternalErrorException) ErrorFault() smithy.ErrorFault { return smit
 type WAFInvalidAccountException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -159,10 +159,10 @@ func (e *WAFInvalidAccountException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidAccountException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFInvalidAccountException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFInvalidAccountException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -187,7 +187,7 @@ func (e *WAFInvalidAccountException) ErrorFault() smithy.ErrorFault { return smi
 type WAFInvalidOperationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -202,10 +202,10 @@ func (e *WAFInvalidOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidOperationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFInvalidOperationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -242,7 +242,7 @@ func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return s
 type WAFInvalidParameterException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Field     ParameterExceptionField
 	Parameter *string
@@ -261,10 +261,10 @@ func (e *WAFInvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidParameterException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFInvalidParameterException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -297,7 +297,7 @@ func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return s
 type WAFInvalidPermissionPolicyException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -312,10 +312,10 @@ func (e *WAFInvalidPermissionPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidPermissionPolicyException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFInvalidPermissionPolicyException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -325,7 +325,7 @@ func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 type WAFInvalidRegexPatternException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -340,10 +340,10 @@ func (e *WAFInvalidRegexPatternException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFInvalidRegexPatternException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFInvalidRegexPatternException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFInvalidRegexPatternException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -354,7 +354,7 @@ func (e *WAFInvalidRegexPatternException) ErrorFault() smithy.ErrorFault { retur
 type WAFLimitsExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -369,10 +369,10 @@ func (e *WAFLimitsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFLimitsExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFLimitsExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -393,7 +393,7 @@ func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smi
 type WAFNonEmptyEntityException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -408,10 +408,10 @@ func (e *WAFNonEmptyEntityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFNonEmptyEntityException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFNonEmptyEntityException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFNonEmptyEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -433,7 +433,7 @@ func (e *WAFNonEmptyEntityException) ErrorFault() smithy.ErrorFault { return smi
 type WAFNonexistentContainerException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -448,10 +448,10 @@ func (e *WAFNonexistentContainerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFNonexistentContainerException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFNonexistentContainerException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFNonexistentContainerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -459,7 +459,7 @@ func (e *WAFNonexistentContainerException) ErrorFault() smithy.ErrorFault { retu
 type WAFNonexistentItemException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -474,10 +474,10 @@ func (e *WAFNonexistentItemException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFNonexistentItemException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFNonexistentItemException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -491,7 +491,7 @@ func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return sm
 type WAFReferencedItemException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -506,10 +506,10 @@ func (e *WAFReferencedItemException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFReferencedItemException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFReferencedItemException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFReferencedItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -524,7 +524,7 @@ func (e *WAFReferencedItemException) ErrorFault() smithy.ErrorFault { return smi
 type WAFServiceLinkedRoleErrorException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -539,10 +539,10 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFServiceLinkedRoleErrorException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFServiceLinkedRoleErrorException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -553,7 +553,7 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 type WAFStaleDataException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -568,10 +568,10 @@ func (e *WAFStaleDataException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFStaleDataException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFStaleDataException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFStaleDataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -579,7 +579,7 @@ func (e *WAFStaleDataException) ErrorFault() smithy.ErrorFault { return smithy.F
 type WAFSubscriptionNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -594,10 +594,10 @@ func (e *WAFSubscriptionNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFSubscriptionNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFSubscriptionNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFSubscriptionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -605,7 +605,7 @@ func (e *WAFSubscriptionNotFoundException) ErrorFault() smithy.ErrorFault { retu
 type WAFTagOperationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -620,10 +620,10 @@ func (e *WAFTagOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFTagOperationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFTagOperationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -631,7 +631,7 @@ func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smith
 type WAFTagOperationInternalErrorException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -646,10 +646,10 @@ func (e *WAFTagOperationInternalErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WAFTagOperationInternalErrorException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "WAFTagOperationInternalErrorException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *WAFTagOperationInternalErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer

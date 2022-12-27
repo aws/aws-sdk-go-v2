@@ -12,7 +12,7 @@ import (
 type ConcurrentModificationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -27,10 +27,10 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ConcurrentModificationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -54,7 +54,7 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 type ConstraintViolationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -69,10 +69,10 @@ func (e *ConstraintViolationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConstraintViolationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ConstraintViolationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ConstraintViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -81,7 +81,7 @@ func (e *ConstraintViolationException) ErrorFault() smithy.ErrorFault { return s
 type InternalServiceException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -96,10 +96,10 @@ func (e *InternalServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServiceException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalServiceException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -124,7 +124,7 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 type InvalidParameterException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -139,10 +139,10 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidParameterException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -151,7 +151,7 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 type PaginationTokenExpiredException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -166,10 +166,10 @@ func (e *PaginationTokenExpiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PaginationTokenExpiredException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "PaginationTokenExpiredException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *PaginationTokenExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -177,7 +177,7 @@ func (e *PaginationTokenExpiredException) ErrorFault() smithy.ErrorFault { retur
 type ThrottledException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -192,9 +192,9 @@ func (e *ThrottledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottledException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ThrottledException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -12,7 +12,7 @@ import (
 type CloudHsmAccessDeniedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -27,10 +27,10 @@ func (e *CloudHsmAccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmAccessDeniedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CloudHsmAccessDeniedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CloudHsmAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -39,7 +39,7 @@ func (e *CloudHsmAccessDeniedException) ErrorFault() smithy.ErrorFault { return 
 type CloudHsmInternalFailureException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -54,10 +54,10 @@ func (e *CloudHsmInternalFailureException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmInternalFailureException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CloudHsmInternalFailureException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CloudHsmInternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -65,7 +65,7 @@ func (e *CloudHsmInternalFailureException) ErrorFault() smithy.ErrorFault { retu
 type CloudHsmInvalidRequestException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -80,10 +80,10 @@ func (e *CloudHsmInvalidRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmInvalidRequestException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CloudHsmInvalidRequestException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CloudHsmInvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -91,7 +91,7 @@ func (e *CloudHsmInvalidRequestException) ErrorFault() smithy.ErrorFault { retur
 type CloudHsmResourceNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -106,10 +106,10 @@ func (e *CloudHsmResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmResourceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CloudHsmResourceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CloudHsmResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -117,7 +117,7 @@ func (e *CloudHsmResourceNotFoundException) ErrorFault() smithy.ErrorFault { ret
 type CloudHsmServiceException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -132,10 +132,10 @@ func (e *CloudHsmServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmServiceException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CloudHsmServiceException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -144,7 +144,7 @@ func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smith
 type CloudHsmTagException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -159,9 +159,9 @@ func (e *CloudHsmTagException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudHsmTagException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CloudHsmTagException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CloudHsmTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

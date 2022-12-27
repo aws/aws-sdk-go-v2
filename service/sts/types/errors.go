@@ -12,7 +12,7 @@ import (
 type ExpiredTokenException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -27,10 +27,10 @@ func (e *ExpiredTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExpiredTokenException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ExpiredTokenException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -42,7 +42,7 @@ func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.F
 type IDPCommunicationErrorException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -57,10 +57,10 @@ func (e *IDPCommunicationErrorException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IDPCommunicationErrorException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "IDPCommunicationError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *IDPCommunicationErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -71,7 +71,7 @@ func (e *IDPCommunicationErrorException) ErrorFault() smithy.ErrorFault { return
 type IDPRejectedClaimException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -86,10 +86,10 @@ func (e *IDPRejectedClaimException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IDPRejectedClaimException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "IDPRejectedClaim"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *IDPRejectedClaimException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -99,7 +99,7 @@ func (e *IDPRejectedClaimException) ErrorFault() smithy.ErrorFault { return smit
 type InvalidAuthorizationMessageException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -114,10 +114,10 @@ func (e *InvalidAuthorizationMessageException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidAuthorizationMessageException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidAuthorizationMessageException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidAuthorizationMessageException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -129,7 +129,7 @@ func (e *InvalidAuthorizationMessageException) ErrorFault() smithy.ErrorFault {
 type InvalidIdentityTokenException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -144,10 +144,10 @@ func (e *InvalidIdentityTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidIdentityTokenException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidIdentityToken"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidIdentityTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -156,7 +156,7 @@ func (e *InvalidIdentityTokenException) ErrorFault() smithy.ErrorFault { return 
 type MalformedPolicyDocumentException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -171,10 +171,10 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MalformedPolicyDocumentException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MalformedPolicyDocument"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -193,7 +193,7 @@ func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { retu
 type PackedPolicyTooLargeException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -208,10 +208,10 @@ func (e *PackedPolicyTooLargeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PackedPolicyTooLargeException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "PackedPolicyTooLarge"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *PackedPolicyTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -224,7 +224,7 @@ func (e *PackedPolicyTooLargeException) ErrorFault() smithy.ErrorFault { return 
 type RegionDisabledException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -239,9 +239,9 @@ func (e *RegionDisabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RegionDisabledException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "RegionDisabledException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *RegionDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

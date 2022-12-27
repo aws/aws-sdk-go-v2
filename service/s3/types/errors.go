@@ -12,7 +12,7 @@ import (
 type BucketAlreadyExists struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -27,10 +27,10 @@ func (e *BucketAlreadyExists) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BucketAlreadyExists) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "BucketAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *BucketAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -42,7 +42,7 @@ func (e *BucketAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type BucketAlreadyOwnedByYou struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -57,10 +57,10 @@ func (e *BucketAlreadyOwnedByYou) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BucketAlreadyOwnedByYou) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "BucketAlreadyOwnedByYou"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *BucketAlreadyOwnedByYou) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -68,7 +68,7 @@ func (e *BucketAlreadyOwnedByYou) ErrorFault() smithy.ErrorFault { return smithy
 type InvalidObjectState struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	StorageClass StorageClass
 	AccessTier   IntelligentTieringAccessTier
@@ -86,10 +86,10 @@ func (e *InvalidObjectState) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidObjectState) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidObjectState"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidObjectState) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -97,7 +97,7 @@ func (e *InvalidObjectState) ErrorFault() smithy.ErrorFault { return smithy.Faul
 type NoSuchBucket struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -112,10 +112,10 @@ func (e *NoSuchBucket) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchBucket) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NoSuchBucket"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NoSuchBucket) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -123,7 +123,7 @@ func (e *NoSuchBucket) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 type NoSuchKey struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -138,10 +138,10 @@ func (e *NoSuchKey) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchKey) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NoSuchKey"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NoSuchKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -149,7 +149,7 @@ func (e *NoSuchKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 type NoSuchUpload struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -164,10 +164,10 @@ func (e *NoSuchUpload) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoSuchUpload) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NoSuchUpload"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NoSuchUpload) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -175,7 +175,7 @@ func (e *NoSuchUpload) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 type NotFound struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -190,10 +190,10 @@ func (e *NotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotFound) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -201,7 +201,7 @@ func (e *NotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 type ObjectAlreadyInActiveTierError struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -216,10 +216,10 @@ func (e *ObjectAlreadyInActiveTierError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ObjectAlreadyInActiveTierError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ObjectAlreadyInActiveTierError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ObjectAlreadyInActiveTierError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -228,7 +228,7 @@ func (e *ObjectAlreadyInActiveTierError) ErrorFault() smithy.ErrorFault { return
 type ObjectNotInActiveTierError struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -243,9 +243,9 @@ func (e *ObjectNotInActiveTierError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ObjectNotInActiveTierError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ObjectNotInActiveTierError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ObjectNotInActiveTierError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

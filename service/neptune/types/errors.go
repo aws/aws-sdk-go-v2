@@ -13,7 +13,7 @@ import (
 type AuthorizationNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -28,10 +28,10 @@ func (e *AuthorizationNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AuthorizationNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AuthorizationNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -39,7 +39,7 @@ func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smi
 type CertificateNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -54,10 +54,10 @@ func (e *CertificateNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CertificateNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CertificateNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CertificateNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -65,7 +65,7 @@ func (e *CertificateNotFoundFault) ErrorFault() smithy.ErrorFault { return smith
 type DBClusterAlreadyExistsFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -80,10 +80,10 @@ func (e *DBClusterAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterAlreadyExistsFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterAlreadyExistsFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -91,7 +91,7 @@ func (e *DBClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return sm
 type DBClusterEndpointAlreadyExistsFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -106,10 +106,10 @@ func (e *DBClusterEndpointAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterEndpointAlreadyExistsFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterEndpointAlreadyExistsFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterEndpointAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -119,7 +119,7 @@ func (e *DBClusterEndpointAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 type DBClusterEndpointNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -134,10 +134,10 @@ func (e *DBClusterEndpointNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterEndpointNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterEndpointNotFoundFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterEndpointNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -145,7 +145,7 @@ func (e *DBClusterEndpointNotFoundFault) ErrorFault() smithy.ErrorFault { return
 type DBClusterEndpointQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -160,10 +160,10 @@ func (e *DBClusterEndpointQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterEndpointQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterEndpointQuotaExceededFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterEndpointQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -173,7 +173,7 @@ func (e *DBClusterEndpointQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 type DBClusterNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -188,10 +188,10 @@ func (e *DBClusterNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterNotFoundFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -200,7 +200,7 @@ func (e *DBClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.
 type DBClusterParameterGroupNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -215,10 +215,10 @@ func (e *DBClusterParameterGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterParameterGroupNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterParameterGroupNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -229,7 +229,7 @@ func (e *DBClusterParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 type DBClusterQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -244,10 +244,10 @@ func (e *DBClusterQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterQuotaExceededFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -256,7 +256,7 @@ func (e *DBClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault { return sm
 type DBClusterRoleAlreadyExistsFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -271,10 +271,10 @@ func (e *DBClusterRoleAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterRoleAlreadyExistsFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterRoleAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterRoleAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -283,7 +283,7 @@ func (e *DBClusterRoleAlreadyExistsFault) ErrorFault() smithy.ErrorFault { retur
 type DBClusterRoleNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -298,10 +298,10 @@ func (e *DBClusterRoleNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterRoleNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterRoleNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -310,7 +310,7 @@ func (e *DBClusterRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smi
 type DBClusterRoleQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -325,10 +325,10 @@ func (e *DBClusterRoleQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterRoleQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterRoleQuotaExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterRoleQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -336,7 +336,7 @@ func (e *DBClusterRoleQuotaExceededFault) ErrorFault() smithy.ErrorFault { retur
 type DBClusterSnapshotAlreadyExistsFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -351,10 +351,10 @@ func (e *DBClusterSnapshotAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterSnapshotAlreadyExistsFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterSnapshotAlreadyExistsFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -364,7 +364,7 @@ func (e *DBClusterSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 type DBClusterSnapshotNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -379,10 +379,10 @@ func (e *DBClusterSnapshotNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBClusterSnapshotNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBClusterSnapshotNotFoundFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBClusterSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -390,7 +390,7 @@ func (e *DBClusterSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return
 type DBInstanceAlreadyExistsFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -405,10 +405,10 @@ func (e *DBInstanceAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBInstanceAlreadyExistsFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBInstanceAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBInstanceAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -416,7 +416,7 @@ func (e *DBInstanceAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return s
 type DBInstanceNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -431,10 +431,10 @@ func (e *DBInstanceNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBInstanceNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBInstanceNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBInstanceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -442,7 +442,7 @@ func (e *DBInstanceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy
 type DBParameterGroupAlreadyExistsFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -457,10 +457,10 @@ func (e *DBParameterGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBParameterGroupAlreadyExistsFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBParameterGroupAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -470,7 +470,7 @@ func (e *DBParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 type DBParameterGroupNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -485,10 +485,10 @@ func (e *DBParameterGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBParameterGroupNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBParameterGroupNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -497,7 +497,7 @@ func (e *DBParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return 
 type DBParameterGroupQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -512,10 +512,10 @@ func (e *DBParameterGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBParameterGroupQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBParameterGroupQuotaExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -525,7 +525,7 @@ func (e *DBParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 type DBSecurityGroupNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -540,10 +540,10 @@ func (e *DBSecurityGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBSecurityGroupNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBSecurityGroupNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -551,7 +551,7 @@ func (e *DBSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return s
 type DBSnapshotAlreadyExistsFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -566,10 +566,10 @@ func (e *DBSnapshotAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBSnapshotAlreadyExistsFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBSnapshotAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -577,7 +577,7 @@ func (e *DBSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return s
 type DBSnapshotNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -592,10 +592,10 @@ func (e *DBSnapshotNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBSnapshotNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBSnapshotNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -603,7 +603,7 @@ func (e *DBSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy
 type DBSubnetGroupAlreadyExistsFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -618,10 +618,10 @@ func (e *DBSubnetGroupAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBSubnetGroupAlreadyExistsFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBSubnetGroupAlreadyExists"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -630,7 +630,7 @@ func (e *DBSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { retur
 type DBSubnetGroupDoesNotCoverEnoughAZs struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -645,10 +645,10 @@ func (e *DBSubnetGroupDoesNotCoverEnoughAZs) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBSubnetGroupDoesNotCoverEnoughAZs) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBSubnetGroupDoesNotCoverEnoughAZs"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBSubnetGroupDoesNotCoverEnoughAZs) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -658,7 +658,7 @@ func (e *DBSubnetGroupDoesNotCoverEnoughAZs) ErrorFault() smithy.ErrorFault {
 type DBSubnetGroupNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -673,10 +673,10 @@ func (e *DBSubnetGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBSubnetGroupNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBSubnetGroupNotFoundFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBSubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -684,7 +684,7 @@ func (e *DBSubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smi
 type DBSubnetGroupQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -699,10 +699,10 @@ func (e *DBSubnetGroupQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBSubnetGroupQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBSubnetGroupQuotaExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -711,7 +711,7 @@ func (e *DBSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { retur
 type DBSubnetQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -726,10 +726,10 @@ func (e *DBSubnetQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBSubnetQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBSubnetQuotaExceededFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBSubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -738,7 +738,7 @@ func (e *DBSubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smi
 type DBUpgradeDependencyFailureFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -753,10 +753,10 @@ func (e *DBUpgradeDependencyFailureFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DBUpgradeDependencyFailureFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DBUpgradeDependencyFailure"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DBUpgradeDependencyFailureFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -764,7 +764,7 @@ func (e *DBUpgradeDependencyFailureFault) ErrorFault() smithy.ErrorFault { retur
 type DomainNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -779,10 +779,10 @@ func (e *DomainNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DomainNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DomainNotFoundFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DomainNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -790,7 +790,7 @@ func (e *DomainNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type EventSubscriptionQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -805,10 +805,10 @@ func (e *EventSubscriptionQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventSubscriptionQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "EventSubscriptionQuotaExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *EventSubscriptionQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -819,7 +819,7 @@ func (e *EventSubscriptionQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 type GlobalClusterAlreadyExistsFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -834,10 +834,10 @@ func (e *GlobalClusterAlreadyExistsFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GlobalClusterAlreadyExistsFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "GlobalClusterAlreadyExistsFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *GlobalClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -846,7 +846,7 @@ func (e *GlobalClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { retur
 type GlobalClusterNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -861,10 +861,10 @@ func (e *GlobalClusterNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GlobalClusterNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "GlobalClusterNotFoundFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *GlobalClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -873,7 +873,7 @@ func (e *GlobalClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smi
 type GlobalClusterQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -888,10 +888,10 @@ func (e *GlobalClusterQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *GlobalClusterQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "GlobalClusterQuotaExceededFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *GlobalClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -899,7 +899,7 @@ func (e *GlobalClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault { retur
 type InstanceQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -914,10 +914,10 @@ func (e *InstanceQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InstanceQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InstanceQuotaExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InstanceQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -925,7 +925,7 @@ func (e *InstanceQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smi
 type InsufficientDBClusterCapacityFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -940,10 +940,10 @@ func (e *InsufficientDBClusterCapacityFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientDBClusterCapacityFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InsufficientDBClusterCapacityFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InsufficientDBClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -953,7 +953,7 @@ func (e *InsufficientDBClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 type InsufficientDBInstanceCapacityFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -968,10 +968,10 @@ func (e *InsufficientDBInstanceCapacityFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientDBInstanceCapacityFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InsufficientDBInstanceCapacity"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InsufficientDBInstanceCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -983,7 +983,7 @@ func (e *InsufficientDBInstanceCapacityFault) ErrorFault() smithy.ErrorFault {
 type InsufficientStorageClusterCapacityFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -998,10 +998,10 @@ func (e *InsufficientStorageClusterCapacityFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientStorageClusterCapacityFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InsufficientStorageClusterCapacity"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InsufficientStorageClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1012,7 +1012,7 @@ func (e *InsufficientStorageClusterCapacityFault) ErrorFault() smithy.ErrorFault
 type InvalidDBClusterEndpointStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1027,10 +1027,10 @@ func (e *InvalidDBClusterEndpointStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDBClusterEndpointStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidDBClusterEndpointStateFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidDBClusterEndpointStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1040,7 +1040,7 @@ func (e *InvalidDBClusterEndpointStateFault) ErrorFault() smithy.ErrorFault {
 type InvalidDBClusterSnapshotStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1055,10 +1055,10 @@ func (e *InvalidDBClusterSnapshotStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDBClusterSnapshotStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidDBClusterSnapshotStateFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidDBClusterSnapshotStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1068,7 +1068,7 @@ func (e *InvalidDBClusterSnapshotStateFault) ErrorFault() smithy.ErrorFault {
 type InvalidDBClusterStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1083,10 +1083,10 @@ func (e *InvalidDBClusterStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDBClusterStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidDBClusterStateFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidDBClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1094,7 +1094,7 @@ func (e *InvalidDBClusterStateFault) ErrorFault() smithy.ErrorFault { return smi
 type InvalidDBInstanceStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1109,10 +1109,10 @@ func (e *InvalidDBInstanceStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDBInstanceStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidDBInstanceState"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidDBInstanceStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1122,7 +1122,7 @@ func (e *InvalidDBInstanceStateFault) ErrorFault() smithy.ErrorFault { return sm
 type InvalidDBParameterGroupStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1137,10 +1137,10 @@ func (e *InvalidDBParameterGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDBParameterGroupStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidDBParameterGroupState"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidDBParameterGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1148,7 +1148,7 @@ func (e *InvalidDBParameterGroupStateFault) ErrorFault() smithy.ErrorFault { ret
 type InvalidDBSecurityGroupStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1163,10 +1163,10 @@ func (e *InvalidDBSecurityGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDBSecurityGroupStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidDBSecurityGroupState"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidDBSecurityGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1174,7 +1174,7 @@ func (e *InvalidDBSecurityGroupStateFault) ErrorFault() smithy.ErrorFault { retu
 type InvalidDBSnapshotStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1189,10 +1189,10 @@ func (e *InvalidDBSnapshotStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDBSnapshotStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidDBSnapshotState"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidDBSnapshotStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1200,7 +1200,7 @@ func (e *InvalidDBSnapshotStateFault) ErrorFault() smithy.ErrorFault { return sm
 type InvalidDBSubnetGroupStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1215,10 +1215,10 @@ func (e *InvalidDBSubnetGroupStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDBSubnetGroupStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidDBSubnetGroupStateFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidDBSubnetGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1226,7 +1226,7 @@ func (e *InvalidDBSubnetGroupStateFault) ErrorFault() smithy.ErrorFault { return
 type InvalidDBSubnetStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1241,10 +1241,10 @@ func (e *InvalidDBSubnetStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidDBSubnetStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidDBSubnetStateFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidDBSubnetStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1252,7 +1252,7 @@ func (e *InvalidDBSubnetStateFault) ErrorFault() smithy.ErrorFault { return smit
 type InvalidEventSubscriptionStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1267,10 +1267,10 @@ func (e *InvalidEventSubscriptionStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEventSubscriptionStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidEventSubscriptionState"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidEventSubscriptionStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1281,7 +1281,7 @@ func (e *InvalidEventSubscriptionStateFault) ErrorFault() smithy.ErrorFault {
 type InvalidGlobalClusterStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1296,10 +1296,10 @@ func (e *InvalidGlobalClusterStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGlobalClusterStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidGlobalClusterStateFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidGlobalClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1307,7 +1307,7 @@ func (e *InvalidGlobalClusterStateFault) ErrorFault() smithy.ErrorFault { return
 type InvalidRestoreFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1322,10 +1322,10 @@ func (e *InvalidRestoreFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidRestoreFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidRestoreFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidRestoreFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1334,7 +1334,7 @@ func (e *InvalidRestoreFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type InvalidSubnet struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1349,10 +1349,10 @@ func (e *InvalidSubnet) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSubnet) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidSubnet"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1361,7 +1361,7 @@ func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 type InvalidVPCNetworkStateFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1376,10 +1376,10 @@ func (e *InvalidVPCNetworkStateFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidVPCNetworkStateFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidVPCNetworkStateFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1387,7 +1387,7 @@ func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return sm
 type KMSKeyNotAccessibleFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1402,10 +1402,10 @@ func (e *KMSKeyNotAccessibleFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *KMSKeyNotAccessibleFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "KMSKeyNotAccessibleFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1413,7 +1413,7 @@ func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smith
 type OptionGroupNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1428,10 +1428,10 @@ func (e *OptionGroupNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OptionGroupNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "OptionGroupNotFoundFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *OptionGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1439,7 +1439,7 @@ func (e *OptionGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smith
 type ProvisionedIopsNotAvailableInAZFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1454,10 +1454,10 @@ func (e *ProvisionedIopsNotAvailableInAZFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProvisionedIopsNotAvailableInAZFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ProvisionedIopsNotAvailableInAZFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ProvisionedIopsNotAvailableInAZFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1467,7 +1467,7 @@ func (e *ProvisionedIopsNotAvailableInAZFault) ErrorFault() smithy.ErrorFault {
 type ResourceNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1482,10 +1482,10 @@ func (e *ResourceNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotFoundFault"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1494,7 +1494,7 @@ func (e *ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.F
 type SharedSnapshotQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1509,10 +1509,10 @@ func (e *SharedSnapshotQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SharedSnapshotQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SharedSnapshotQuotaExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SharedSnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1520,7 +1520,7 @@ func (e *SharedSnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { retu
 type SnapshotQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1535,10 +1535,10 @@ func (e *SnapshotQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SnapshotQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SnapshotQuotaExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1546,7 +1546,7 @@ func (e *SnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smi
 type SNSInvalidTopicFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1561,10 +1561,10 @@ func (e *SNSInvalidTopicFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SNSInvalidTopicFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SNSInvalidTopic"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SNSInvalidTopicFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1572,7 +1572,7 @@ func (e *SNSInvalidTopicFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 type SNSNoAuthorizationFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1587,10 +1587,10 @@ func (e *SNSNoAuthorizationFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SNSNoAuthorizationFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SNSNoAuthorization"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SNSNoAuthorizationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1598,7 +1598,7 @@ func (e *SNSNoAuthorizationFault) ErrorFault() smithy.ErrorFault { return smithy
 type SNSTopicArnNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1613,10 +1613,10 @@ func (e *SNSTopicArnNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SNSTopicArnNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SNSTopicArnNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SNSTopicArnNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1624,7 +1624,7 @@ func (e *SNSTopicArnNotFoundFault) ErrorFault() smithy.ErrorFault { return smith
 type SourceNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1639,10 +1639,10 @@ func (e *SourceNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SourceNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SourceNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1651,7 +1651,7 @@ func (e *SourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type StorageQuotaExceededFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1666,10 +1666,10 @@ func (e *StorageQuotaExceededFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StorageQuotaExceededFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "StorageQuotaExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *StorageQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1677,7 +1677,7 @@ func (e *StorageQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smit
 type StorageTypeNotSupportedFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1692,10 +1692,10 @@ func (e *StorageTypeNotSupportedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *StorageTypeNotSupportedFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "StorageTypeNotSupported"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *StorageTypeNotSupportedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1703,7 +1703,7 @@ func (e *StorageTypeNotSupportedFault) ErrorFault() smithy.ErrorFault { return s
 type SubnetAlreadyInUse struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1718,10 +1718,10 @@ func (e *SubnetAlreadyInUse) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubnetAlreadyInUse) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SubnetAlreadyInUse"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SubnetAlreadyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1729,7 +1729,7 @@ func (e *SubnetAlreadyInUse) ErrorFault() smithy.ErrorFault { return smithy.Faul
 type SubscriptionAlreadyExistFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1744,10 +1744,10 @@ func (e *SubscriptionAlreadyExistFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubscriptionAlreadyExistFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SubscriptionAlreadyExist"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SubscriptionAlreadyExistFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1755,7 +1755,7 @@ func (e *SubscriptionAlreadyExistFault) ErrorFault() smithy.ErrorFault { return 
 type SubscriptionCategoryNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1770,10 +1770,10 @@ func (e *SubscriptionCategoryNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubscriptionCategoryNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SubscriptionCategoryNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SubscriptionCategoryNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -1781,7 +1781,7 @@ func (e *SubscriptionCategoryNotFoundFault) ErrorFault() smithy.ErrorFault { ret
 type SubscriptionNotFoundFault struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -1796,9 +1796,9 @@ func (e *SubscriptionNotFoundFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SubscriptionNotFoundFault) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SubscriptionNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SubscriptionNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

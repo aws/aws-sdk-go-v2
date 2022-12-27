@@ -11,7 +11,7 @@ import (
 type DomainLimitExceeded struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -26,10 +26,10 @@ func (e *DomainLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DomainLimitExceeded) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DomainLimitExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DomainLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -37,7 +37,7 @@ func (e *DomainLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type DuplicateRequest struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -52,10 +52,10 @@ func (e *DuplicateRequest) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DuplicateRequest) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DuplicateRequest"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -66,7 +66,7 @@ func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 type InvalidInput struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -81,10 +81,10 @@ func (e *InvalidInput) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInput) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidInput"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -93,7 +93,7 @@ func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 type OperationLimitExceeded struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -108,10 +108,10 @@ func (e *OperationLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationLimitExceeded) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "OperationLimitExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *OperationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -119,7 +119,7 @@ func (e *OperationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.
 type TLDRulesViolation struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -134,10 +134,10 @@ func (e *TLDRulesViolation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TLDRulesViolation) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "TLDRulesViolation"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TLDRulesViolation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -145,7 +145,7 @@ func (e *TLDRulesViolation) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type UnsupportedTLD struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -160,9 +160,9 @@ func (e *UnsupportedTLD) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedTLD) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnsupportedTLD"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedTLD) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

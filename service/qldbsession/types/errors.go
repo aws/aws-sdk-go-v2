@@ -12,6 +12,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
+	DynamicErrorCode *string
+
 	Code *string
 
 	noSmithyDocumentSerde
@@ -27,10 +29,10 @@ func (e *BadRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadRequestException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "BadRequestException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -38,7 +40,7 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type CapacityExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -53,16 +55,18 @@ func (e *CapacityExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CapacityExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CapacityExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CapacityExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Returned if the session doesn't exist anymore because it timed out or expired.
 type InvalidSessionException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -79,10 +83,10 @@ func (e *InvalidSessionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidSessionException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidSessionException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidSessionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -90,7 +94,7 @@ func (e *InvalidSessionException) ErrorFault() smithy.ErrorFault { return smithy
 type LimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -105,10 +109,10 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -117,7 +121,7 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 type OccConflictException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -132,10 +136,10 @@ func (e *OccConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OccConflictException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "OccConflictException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *OccConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -143,7 +147,7 @@ func (e *OccConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 type RateExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -158,9 +162,9 @@ func (e *RateExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RateExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "RateExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *RateExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

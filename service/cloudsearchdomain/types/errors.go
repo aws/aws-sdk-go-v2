@@ -11,7 +11,7 @@ import (
 type DocumentServiceException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Status *string
 
@@ -28,10 +28,10 @@ func (e *DocumentServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DocumentServiceException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DocumentServiceException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DocumentServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -39,7 +39,7 @@ func (e *DocumentServiceException) ErrorFault() smithy.ErrorFault { return smith
 type SearchException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -54,9 +54,9 @@ func (e *SearchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *SearchException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "SearchException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *SearchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

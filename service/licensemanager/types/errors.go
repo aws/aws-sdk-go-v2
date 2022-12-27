@@ -11,7 +11,7 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -26,10 +26,10 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AccessDeniedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -38,7 +38,7 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 type AuthorizationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -53,10 +53,10 @@ func (e *AuthorizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AuthorizationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AuthorizationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AuthorizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -64,7 +64,7 @@ func (e *AuthorizationException) ErrorFault() smithy.ErrorFault { return smithy.
 type ConflictException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -79,10 +79,10 @@ func (e *ConflictException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConflictException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ConflictException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -90,7 +90,7 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type EntitlementNotAllowedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -105,10 +105,10 @@ func (e *EntitlementNotAllowedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntitlementNotAllowedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "EntitlementNotAllowedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *EntitlementNotAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -116,7 +116,7 @@ func (e *EntitlementNotAllowedException) ErrorFault() smithy.ErrorFault { return
 type FailedDependencyException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ErrorCode_ *string
 
@@ -133,10 +133,10 @@ func (e *FailedDependencyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FailedDependencyException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "FailedDependencyException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *FailedDependencyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -144,7 +144,7 @@ func (e *FailedDependencyException) ErrorFault() smithy.ErrorFault { return smit
 type FilterLimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -159,10 +159,10 @@ func (e *FilterLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FilterLimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "FilterLimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *FilterLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -170,7 +170,7 @@ func (e *FilterLimitExceededException) ErrorFault() smithy.ErrorFault { return s
 type InvalidParameterValueException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -185,10 +185,10 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterValueException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidParameterValueException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -198,7 +198,7 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 type InvalidResourceStateException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -213,10 +213,10 @@ func (e *InvalidResourceStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidResourceStateException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidResourceStateException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -224,7 +224,7 @@ func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return 
 type LicenseUsageException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -239,10 +239,10 @@ func (e *LicenseUsageException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LicenseUsageException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LicenseUsageException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LicenseUsageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -251,7 +251,7 @@ func (e *LicenseUsageException) ErrorFault() smithy.ErrorFault { return smithy.F
 type NoEntitlementsAllowedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -266,10 +266,10 @@ func (e *NoEntitlementsAllowedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoEntitlementsAllowedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NoEntitlementsAllowedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NoEntitlementsAllowedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -277,7 +277,7 @@ func (e *NoEntitlementsAllowedException) ErrorFault() smithy.ErrorFault { return
 type RateLimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -292,10 +292,10 @@ func (e *RateLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RateLimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "RateLimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *RateLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -303,7 +303,7 @@ func (e *RateLimitExceededException) ErrorFault() smithy.ErrorFault { return smi
 type RedirectException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Location *string
 
@@ -320,10 +320,10 @@ func (e *RedirectException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *RedirectException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "RedirectException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *RedirectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -331,7 +331,7 @@ func (e *RedirectException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 type ResourceLimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -346,10 +346,10 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceLimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceLimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -357,7 +357,7 @@ func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -372,10 +372,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -383,7 +383,7 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ServerInternalException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -398,10 +398,10 @@ func (e *ServerInternalException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServerInternalException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServerInternalException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServerInternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -409,7 +409,7 @@ func (e *ServerInternalException) ErrorFault() smithy.ErrorFault { return smithy
 type UnsupportedDigitalSignatureMethodException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -424,10 +424,10 @@ func (e *UnsupportedDigitalSignatureMethodException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedDigitalSignatureMethodException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnsupportedDigitalSignatureMethodException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedDigitalSignatureMethodException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -437,7 +437,7 @@ func (e *UnsupportedDigitalSignatureMethodException) ErrorFault() smithy.ErrorFa
 type ValidationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -452,9 +452,9 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ValidationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

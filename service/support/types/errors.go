@@ -11,7 +11,7 @@ import (
 type AttachmentIdNotFound struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -26,10 +26,10 @@ func (e *AttachmentIdNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttachmentIdNotFound) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AttachmentIdNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AttachmentIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -38,7 +38,7 @@ func (e *AttachmentIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.Fa
 type AttachmentLimitExceeded struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -53,10 +53,10 @@ func (e *AttachmentLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttachmentLimitExceeded) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AttachmentLimitExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -65,7 +65,7 @@ func (e *AttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy
 type AttachmentSetExpired struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -80,10 +80,10 @@ func (e *AttachmentSetExpired) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttachmentSetExpired) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AttachmentSetExpired"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AttachmentSetExpired) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -91,7 +91,7 @@ func (e *AttachmentSetExpired) ErrorFault() smithy.ErrorFault { return smithy.Fa
 type AttachmentSetIdNotFound struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -106,10 +106,10 @@ func (e *AttachmentSetIdNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttachmentSetIdNotFound) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AttachmentSetIdNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AttachmentSetIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -118,7 +118,7 @@ func (e *AttachmentSetIdNotFound) ErrorFault() smithy.ErrorFault { return smithy
 type AttachmentSetSizeLimitExceeded struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -133,10 +133,10 @@ func (e *AttachmentSetSizeLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttachmentSetSizeLimitExceeded) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AttachmentSetSizeLimitExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AttachmentSetSizeLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -144,7 +144,7 @@ func (e *AttachmentSetSizeLimitExceeded) ErrorFault() smithy.ErrorFault { return
 type CaseCreationLimitExceeded struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -159,10 +159,10 @@ func (e *CaseCreationLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CaseCreationLimitExceeded) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CaseCreationLimitExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CaseCreationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -170,7 +170,7 @@ func (e *CaseCreationLimitExceeded) ErrorFault() smithy.ErrorFault { return smit
 type CaseIdNotFound struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -185,10 +185,10 @@ func (e *CaseIdNotFound) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CaseIdNotFound) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "CaseIdNotFound"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *CaseIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -197,7 +197,7 @@ func (e *CaseIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 type DescribeAttachmentLimitExceeded struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -212,10 +212,10 @@ func (e *DescribeAttachmentLimitExceeded) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DescribeAttachmentLimitExceeded) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DescribeAttachmentLimitExceeded"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DescribeAttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -223,7 +223,7 @@ func (e *DescribeAttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { retur
 type InternalServerError struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -238,9 +238,9 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalServerError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }

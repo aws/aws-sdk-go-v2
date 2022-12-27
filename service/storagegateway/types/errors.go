@@ -12,7 +12,7 @@ import (
 type InternalServerError struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_ *StorageGatewayError
 
@@ -29,10 +29,10 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalServerError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -41,7 +41,7 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 type InvalidGatewayRequestException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_ *StorageGatewayError
 
@@ -58,10 +58,10 @@ func (e *InvalidGatewayRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGatewayRequestException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidGatewayRequestException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidGatewayRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -70,7 +70,7 @@ func (e *InvalidGatewayRequestException) ErrorFault() smithy.ErrorFault { return
 type ServiceUnavailableError struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	Error_ *StorageGatewayError
 
@@ -87,9 +87,9 @@ func (e *ServiceUnavailableError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceUnavailableError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServiceUnavailableError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }

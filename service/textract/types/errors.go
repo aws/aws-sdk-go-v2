@@ -12,6 +12,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	DynamicErrorCode *string
+
 	Code *string
 
 	noSmithyDocumentSerde
@@ -27,10 +29,10 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccessDeniedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "AccessDeniedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -38,6 +40,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // document limits in Amazon Textract, see limits.
 type BadDocumentException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -54,10 +58,10 @@ func (e *BadDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BadDocumentException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "BadDocumentException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *BadDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -66,6 +70,8 @@ func (e *BadDocumentException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // asynchronous operations is 500 MB for PDF files.
 type DocumentTooLargeException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -82,10 +88,10 @@ func (e *DocumentTooLargeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DocumentTooLargeException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DocumentTooLargeException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DocumentTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -94,11 +100,12 @@ func (e *DocumentTooLargeException) ErrorFault() smithy.ErrorFault { return smit
 type HumanLoopQuotaExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ResourceType *string
 	QuotaCode    *string
 	ServiceCode  *string
+	Code         *string
 
 	noSmithyDocumentSerde
 }
@@ -113,10 +120,10 @@ func (e *HumanLoopQuotaExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *HumanLoopQuotaExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "HumanLoopQuotaExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -125,6 +132,8 @@ func (e *HumanLoopQuotaExceededException) ErrorFault() smithy.ErrorFault { retur
 // operation.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -141,10 +150,10 @@ func (e *IdempotentParameterMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *IdempotentParameterMismatchException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "IdempotentParameterMismatchException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -153,6 +162,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // Amazon Textract experienced a service issue. Try your call again.
 type InternalServerError struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -169,16 +180,18 @@ func (e *InternalServerError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalServerError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // An invalid job identifier was passed to an asynchronous analysis operation.
 type InvalidJobIdException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -195,10 +208,10 @@ func (e *InvalidJobIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidJobIdException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidJobIdException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidJobIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -206,6 +219,8 @@ func (e *InvalidJobIdException) ErrorFault() smithy.ErrorFault { return smithy.F
 // KMS key was entered incorrectly.
 type InvalidKMSKeyException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -222,10 +237,10 @@ func (e *InvalidKMSKeyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidKMSKeyException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidKMSKeyException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidKMSKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -235,6 +250,8 @@ func (e *InvalidKMSKeyException) ErrorFault() smithy.ErrorFault { return smithy.
 // Validate your parameter before calling the API operation again.
 type InvalidParameterException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -251,10 +268,10 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidParameterException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -265,6 +282,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/troubleshooting.html)
 type InvalidS3ObjectException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -281,10 +300,10 @@ func (e *InvalidS3ObjectException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidS3ObjectException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidS3ObjectException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -295,6 +314,8 @@ func (e *InvalidS3ObjectException) ErrorFault() smithy.ErrorFault { return smith
 // is below the Amazon Textract service limit.
 type LimitExceededException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -311,10 +332,10 @@ func (e *LimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "LimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -322,6 +343,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // this limit, contact Amazon Textract.
 type ProvisionedThroughputExceededException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -338,10 +361,10 @@ func (e *ProvisionedThroughputExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ProvisionedThroughputExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ProvisionedThroughputExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -351,6 +374,8 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 // again.
 type ThrottlingException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -367,10 +392,10 @@ func (e *ThrottlingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ThrottlingException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ThrottlingException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -378,6 +403,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // be in PNG, JPEG, PDF, or TIFF format.
 type UnsupportedDocumentException struct {
 	Message *string
+
+	DynamicErrorCode *string
 
 	Code *string
 
@@ -394,9 +421,9 @@ func (e *UnsupportedDocumentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedDocumentException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnsupportedDocumentException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

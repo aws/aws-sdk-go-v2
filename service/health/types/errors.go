@@ -16,7 +16,7 @@ import (
 type ConcurrentModificationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -31,10 +31,10 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ConcurrentModificationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -42,7 +42,7 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 type InvalidPaginationToken struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -57,10 +57,10 @@ func (e *InvalidPaginationToken) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPaginationToken) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidPaginationToken"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -68,7 +68,7 @@ func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.
 type UnsupportedLocale struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -83,9 +83,9 @@ func (e *UnsupportedLocale) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedLocale) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnsupportedLocale"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnsupportedLocale) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

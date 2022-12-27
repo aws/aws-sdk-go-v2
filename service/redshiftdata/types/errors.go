@@ -11,7 +11,7 @@ import (
 type ActiveStatementsExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -26,10 +26,10 @@ func (e *ActiveStatementsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ActiveStatementsExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ActiveStatementsExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ActiveStatementsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -37,7 +37,7 @@ func (e *ActiveStatementsExceededException) ErrorFault() smithy.ErrorFault { ret
 type BatchExecuteStatementException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	StatementId *string
 
@@ -54,10 +54,10 @@ func (e *BatchExecuteStatementException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchExecuteStatementException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "BatchExecuteStatementException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *BatchExecuteStatementException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -65,7 +65,7 @@ func (e *BatchExecuteStatementException) ErrorFault() smithy.ErrorFault { return
 type DatabaseConnectionException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -80,10 +80,10 @@ func (e *DatabaseConnectionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DatabaseConnectionException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DatabaseConnectionException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DatabaseConnectionException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -91,7 +91,7 @@ func (e *DatabaseConnectionException) ErrorFault() smithy.ErrorFault { return sm
 type ExecuteStatementException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	StatementId *string
 
@@ -108,10 +108,10 @@ func (e *ExecuteStatementException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ExecuteStatementException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ExecuteStatementException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ExecuteStatementException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -119,7 +119,7 @@ func (e *ExecuteStatementException) ErrorFault() smithy.ErrorFault { return smit
 type InternalServerException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -134,10 +134,10 @@ func (e *InternalServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalServerException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalServerException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -145,7 +145,7 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 type ResourceNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	ResourceId *string
 
@@ -162,10 +162,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ResourceNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -173,7 +173,7 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 type ValidationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -188,9 +188,9 @@ func (e *ValidationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ValidationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ValidationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

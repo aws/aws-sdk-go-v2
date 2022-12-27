@@ -11,7 +11,7 @@ import (
 type ComplexError struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	TopLevel *string
 	Nested   *ComplexNestedErrorData
@@ -29,10 +29,10 @@ func (e *ComplexError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ComplexError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ComplexError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -41,7 +41,7 @@ func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 type FooError struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -56,10 +56,10 @@ func (e *FooError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *FooError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "FooError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *FooError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -67,7 +67,7 @@ func (e *FooError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 type InvalidGreeting struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -82,9 +82,9 @@ func (e *InvalidGreeting) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidGreeting) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidGreeting"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

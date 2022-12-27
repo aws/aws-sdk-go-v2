@@ -12,7 +12,7 @@ import (
 type DryRunOperationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -27,10 +27,10 @@ func (e *DryRunOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DryRunOperationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "DryRunOperationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *DryRunOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -38,7 +38,7 @@ func (e *DryRunOperationException) ErrorFault() smithy.ErrorFault { return smith
 type InternalError struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -53,10 +53,10 @@ func (e *InternalError) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InternalError) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InternalError"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InternalError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -64,7 +64,7 @@ func (e *InternalError) ErrorFault() smithy.ErrorFault { return smithy.FaultServ
 type InvalidParameterException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -79,10 +79,10 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "InvalidParameterException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -90,7 +90,7 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 type MissingRequiredParameterException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -105,10 +105,10 @@ func (e *MissingRequiredParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingRequiredParameterException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "MissingRequiredParameterException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -116,7 +116,7 @@ func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { ret
 type NoConnectorsAvailableException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -131,10 +131,10 @@ func (e *NoConnectorsAvailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoConnectorsAvailableException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "NoConnectorsAvailableException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *NoConnectorsAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -142,7 +142,7 @@ func (e *NoConnectorsAvailableException) ErrorFault() smithy.ErrorFault { return
 type OperationNotPermittedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -157,10 +157,10 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OperationNotPermittedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "OperationNotPermittedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -168,7 +168,7 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 type ReplicationJobAlreadyExistsException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -183,10 +183,10 @@ func (e *ReplicationJobAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationJobAlreadyExistsException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ReplicationJobAlreadyExistsException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ReplicationJobAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -196,7 +196,7 @@ func (e *ReplicationJobAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 type ReplicationJobNotFoundException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -211,10 +211,10 @@ func (e *ReplicationJobNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationJobNotFoundException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ReplicationJobNotFoundException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ReplicationJobNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -223,7 +223,7 @@ func (e *ReplicationJobNotFoundException) ErrorFault() smithy.ErrorFault { retur
 type ReplicationRunLimitExceededException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -238,10 +238,10 @@ func (e *ReplicationRunLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationRunLimitExceededException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ReplicationRunLimitExceededException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ReplicationRunLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -251,7 +251,7 @@ func (e *ReplicationRunLimitExceededException) ErrorFault() smithy.ErrorFault {
 type ServerCannotBeReplicatedException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -266,10 +266,10 @@ func (e *ServerCannotBeReplicatedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServerCannotBeReplicatedException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "ServerCannotBeReplicatedException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *ServerCannotBeReplicatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -277,7 +277,7 @@ func (e *ServerCannotBeReplicatedException) ErrorFault() smithy.ErrorFault { ret
 type TemporarilyUnavailableException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -292,10 +292,10 @@ func (e *TemporarilyUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TemporarilyUnavailableException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "TemporarilyUnavailableException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *TemporarilyUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -304,7 +304,7 @@ func (e *TemporarilyUnavailableException) ErrorFault() smithy.ErrorFault { retur
 type UnauthorizedOperationException struct {
 	Message *string
 
-	Code *string
+	DynamicErrorCode *string
 
 	noSmithyDocumentSerde
 }
@@ -319,9 +319,9 @@ func (e *UnauthorizedOperationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnauthorizedOperationException) ErrorCode() string {
-	if e.Code == nil {
+	if e.DynamicErrorCode == nil {
 		return "UnauthorizedOperationException"
 	}
-	return *e.Code
+	return *e.DynamicErrorCode
 }
 func (e *UnauthorizedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
