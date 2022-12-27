@@ -1,3 +1,7 @@
+# v1.27.0 (2022-12-27)
+
+* **Feature**: Add additional operations to throw ThrottlingExceptions
+
 # v1.26.0 (2022-12-21)
 
 * **Feature**: This release adds support for Decrypt as a workflow step type.

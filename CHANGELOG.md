@@ -1,3 +1,11 @@
+# Release (2022-12-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.11.0](service/memorydb/CHANGELOG.md#v1110-2022-12-27)
+  * **Feature**: This release adds support for MemoryDB Reserved nodes which provides a significant discount compared to on-demand node pricing. Reserved nodes are not physical nodes, but rather a billing discount applied to the use of on-demand nodes in your account.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.27.0](service/transfer/CHANGELOG.md#v1270-2022-12-27)
+  * **Feature**: Add additional operations to throw ThrottlingExceptions
+
 # Release (2022-12-23)
 
 ## Module Highlights
