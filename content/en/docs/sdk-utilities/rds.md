@@ -11,7 +11,7 @@ The [auth]({{< apiref "feature/rds/auth" >}}) package provides utilities for gen
 connecting to {{% alias service="RDS" %}} MySQL and PostgreSQL database instances. Using the [BuildAuthToken]({{<
 apiref "feature/rds/auth#BuildAuthToken" >}}) method, you generate a database authorization token by providing the
 database endpoint, AWS Region, username, and a [aws.CredentialProvider]({{< apiref "aws#CredentialsProvider" >}})
-implantation that returns IAM credentials with permission connect to the database using {{< alias service="IAM" >}}
+implementation that returns IAM credentials with permission to connect to the database using {{< alias service="IAM" >}}
 database authentication. To learn more about configuring {{< alias service="RDS" >}} with {{< alias service="IAM" >}}
 authentication see the following {{< alias service="RDS" >}} Developer Guide resources:
 
