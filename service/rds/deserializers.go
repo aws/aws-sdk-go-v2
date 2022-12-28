@@ -1666,6 +1666,9 @@ func awsAwsquery_deserializeOpErrorCreateCustomDBEngineVersion(response *smithyh
 	case strings.EqualFold("CustomDBEngineVersionQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorCustomDBEngineVersionQuotaExceededFault(response, errorBody)
 
+	case strings.EqualFold("Ec2ImagePropertiesNotSupportedFault", errorCode):
+		return awsAwsquery_deserializeErrorEc2ImagePropertiesNotSupportedFault(response, errorBody)
+
 	case strings.EqualFold("KMSKeyNotAccessibleFault", errorCode):
 		return awsAwsquery_deserializeErrorKMSKeyNotAccessibleFault(response, errorBody)
 
@@ -18687,6 +18690,50 @@ func awsAwsquery_deserializeErrorDomainNotFoundFault(response *smithyhttp.Respon
 	return output
 }
 
+func awsAwsquery_deserializeErrorEc2ImagePropertiesNotSupportedFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.Ec2ImagePropertiesNotSupportedFault{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsAwsquery_deserializeDocumentEc2ImagePropertiesNotSupportedFault(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsAwsquery_deserializeErrorEventSubscriptionQuotaExceededFault(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.EventSubscriptionQuotaExceededFault{}
 	var buff [1024]byte
@@ -23542,6 +23589,68 @@ func awsAwsquery_deserializeDocumentCustomDBEngineVersionAlreadyExistsFault(v **
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentCustomDBEngineVersionAMI(v **types.CustomDBEngineVersionAMI, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.CustomDBEngineVersionAMI
+	if *v == nil {
+		sv = &types.CustomDBEngineVersionAMI{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ImageId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ImageId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentCustomDBEngineVersionNotFoundFault(v **types.CustomDBEngineVersionNotFoundFault, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26985,6 +27094,19 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 				sv.DBEngineDescription = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DBEngineMediaType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBEngineMediaType = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("DBEngineVersionArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -27059,6 +27181,12 @@ func awsAwsquery_deserializeDocumentDBEngineVersion(v **types.DBEngineVersion, d
 		case strings.EqualFold("ExportableLogTypes", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.ExportableLogTypes, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Image", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentCustomDBEngineVersionAMI(&sv.Image, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -33740,6 +33868,55 @@ func awsAwsquery_deserializeDocumentDoubleRangeListUnwrapped(v *[]types.DoubleRa
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentEc2ImagePropertiesNotSupportedFault(v **types.Ec2ImagePropertiesNotSupportedFault, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.Ec2ImagePropertiesNotSupportedFault
+	if *v == nil {
+		sv = &types.Ec2ImagePropertiesNotSupportedFault{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentEC2SecurityGroup(v **types.EC2SecurityGroup, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46713,6 +46890,19 @@ func awsAwsquery_deserializeOpDocumentCreateCustomDBEngineVersionOutput(v **Crea
 				sv.DBEngineDescription = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DBEngineMediaType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBEngineMediaType = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("DBEngineVersionArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -46787,6 +46977,12 @@ func awsAwsquery_deserializeOpDocumentCreateCustomDBEngineVersionOutput(v **Crea
 		case strings.EqualFold("ExportableLogTypes", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.ExportableLogTypes, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Image", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentCustomDBEngineVersionAMI(&sv.Image, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -47838,6 +48034,19 @@ func awsAwsquery_deserializeOpDocumentDeleteCustomDBEngineVersionOutput(v **Dele
 				sv.DBEngineDescription = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DBEngineMediaType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBEngineMediaType = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("DBEngineVersionArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -47912,6 +48121,12 @@ func awsAwsquery_deserializeOpDocumentDeleteCustomDBEngineVersionOutput(v **Dele
 		case strings.EqualFold("ExportableLogTypes", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.ExportableLogTypes, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Image", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentCustomDBEngineVersionAMI(&sv.Image, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -51277,6 +51492,19 @@ func awsAwsquery_deserializeOpDocumentModifyCustomDBEngineVersionOutput(v **Modi
 				sv.DBEngineDescription = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("DBEngineMediaType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DBEngineMediaType = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("DBEngineVersionArn", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -51351,6 +51579,12 @@ func awsAwsquery_deserializeOpDocumentModifyCustomDBEngineVersionOutput(v **Modi
 		case strings.EqualFold("ExportableLogTypes", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentLogTypeList(&sv.ExportableLogTypes, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Image", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentCustomDBEngineVersionAMI(&sv.Image, nodeDecoder); err != nil {
 				return err
 			}
 

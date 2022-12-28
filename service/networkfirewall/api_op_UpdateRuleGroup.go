@@ -57,7 +57,7 @@ type UpdateRuleGroupInput struct {
 	// your resources. This option allows you to make sure that you have the required
 	// permissions to run the request and that your request parameters are valid. If
 	// set to FALSE, Network Firewall makes the requested changes to your resources.
-	DryRun *bool
+	DryRun bool
 
 	// A complex type that contains settings for encryption of your rule group
 	// resources.

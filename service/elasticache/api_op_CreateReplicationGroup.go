@@ -219,7 +219,7 @@ type CreateReplicationGroupInput struct {
 	DataTieringEnabled *bool
 
 	// The name of the cache engine to be used for the clusters in this replication
-	// group. Must be Redis.
+	// group. The value must be set to Redis.
 	Engine *string
 
 	// The version number of the cache engine to be used for the clusters in this
@@ -375,17 +375,26 @@ type CreateReplicationGroupInput struct {
 	// Tags on replication groups will be replicated to all nodes.
 	Tags []types.Tag
 
-	// A flag that enables in-transit encryption when set to true. You cannot modify
-	// the value of TransitEncryptionEnabled after the cluster is created. To enable
-	// in-transit encryption on a cluster you must set TransitEncryptionEnabled to true
-	// when you create a cluster. This parameter is valid only if the Engine parameter
-	// is redis, the EngineVersion parameter is 3.2.6, 4.x or later, and the cluster is
-	// being created in an Amazon VPC. If you enable in-transit encryption, you must
-	// also specify a value for CacheSubnetGroup. Required: Only available when
-	// creating a replication group in an Amazon VPC using redis version 3.2.6, 4.x or
-	// later. Default: false For HIPAA compliance, you must specify
-	// TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup.
+	// A flag that enables in-transit encryption when set to true. This parameter is
+	// valid only if the Engine parameter is redis, the EngineVersion parameter is
+	// 3.2.6, 4.x or later, and the cluster is being created in an Amazon VPC. If you
+	// enable in-transit encryption, you must also specify a value for
+	// CacheSubnetGroup. Required: Only available when creating a replication group in
+	// an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false For HIPAA
+	// compliance, you must specify TransitEncryptionEnabled as true, an AuthToken, and
+	// a CacheSubnetGroup.
 	TransitEncryptionEnabled *bool
+
+	// A setting that allows you to migrate your clients to use in-transit encryption,
+	// with no downtime. When setting TransitEncryptionEnabled to true, you can set
+	// your TransitEncryptionMode to preferred in the same request, to allow both
+	// encrypted and unencrypted connections at the same time. Once you migrate all
+	// your Redis clients to use encrypted connections you can modify the value to
+	// required to allow encrypted connections only. Setting TransitEncryptionMode to
+	// required is a two-step process that requires you to first set the
+	// TransitEncryptionMode to preferred first, after that you can set
+	// TransitEncryptionMode to required.
+	TransitEncryptionMode types.TransitEncryptionMode
 
 	// The user group to associate with the replication group.
 	UserGroupIds []string

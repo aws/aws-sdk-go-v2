@@ -1514,9 +1514,6 @@ func validateOpUpdateFirewallDeleteProtectionInput(v *UpdateFirewallDeleteProtec
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFirewallDeleteProtectionInput"}
-	if v.DeleteProtection == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DeleteProtection"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1546,9 +1543,6 @@ func validateOpUpdateFirewallPolicyChangeProtectionInput(v *UpdateFirewallPolicy
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFirewallPolicyChangeProtectionInput"}
-	if v.FirewallPolicyChangeProtection == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FirewallPolicyChangeProtection"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1630,9 +1624,6 @@ func validateOpUpdateSubnetChangeProtectionInput(v *UpdateSubnetChangeProtection
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSubnetChangeProtectionInput"}
-	if v.SubnetChangeProtection == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubnetChangeProtection"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

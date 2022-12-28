@@ -61,8 +61,17 @@ type Attachment struct {
 	// that are reported in the Config settings. When this value is READY, the endpoint
 	// is available and configured properly to handle network traffic. When the
 	// endpoint isn't available for traffic, this value will reflect its state, for
-	// example CREATING, DELETING, or FAILED.
+	// example CREATING or DELETING.
 	Status AttachmentStatus
+
+	// If Network Firewall fails to create or delete the firewall endpoint in the
+	// subnet, it populates this with the reason for the failure and how to resolve it.
+	// Depending on the error, it can take as many as 15 minutes to populate this
+	// field. For more information about the errors and solutions available for this
+	// field, see Troubleshooting firewall endpoint failures
+	// (https://docs.aws.amazon.com/network-firewall/latest/developerguide/firewall-troubleshooting-endpoint-failures.html)
+	// in the Network Firewall Developer Guide.
+	StatusMessage *string
 
 	// The unique identifier of the subnet that you've specified to be used for a
 	// firewall endpoint.
@@ -216,7 +225,7 @@ type Firewall struct {
 	// TRUE indicates that the firewall is protected against deletion. Use this setting
 	// to protect against accidentally deleting a firewall that is in use. When you
 	// create a firewall, the operation initializes this flag to TRUE.
-	DeleteProtection *bool
+	DeleteProtection bool
 
 	// A description of the firewall.
 	Description *string
@@ -236,13 +245,13 @@ type Firewall struct {
 	// firewall policy association. Use this setting to protect against accidentally
 	// modifying the firewall policy for a firewall that is in use. When you create a
 	// firewall, the operation initializes this setting to TRUE.
-	FirewallPolicyChangeProtection *bool
+	FirewallPolicyChangeProtection bool
 
 	// A setting indicating whether the firewall is protected against changes to the
 	// subnet associations. Use this setting to protect against accidentally modifying
 	// the subnet associations for a firewall that is in use. When you create a
 	// firewall, the operation initializes this setting to TRUE.
-	SubnetChangeProtection *bool
+	SubnetChangeProtection bool
 
 	//
 	Tags []Tag

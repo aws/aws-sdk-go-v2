@@ -2831,9 +2831,9 @@ func awsAwsjson10_serializeOpDocumentCreateFirewallInput(v *CreateFirewallInput,
 	object := value.Object()
 	defer object.Close()
 
-	if v.DeleteProtection != nil {
+	if v.DeleteProtection {
 		ok := object.Key("DeleteProtection")
-		ok.Boolean(*v.DeleteProtection)
+		ok.Boolean(v.DeleteProtection)
 	}
 
 	if v.Description != nil {
@@ -2858,14 +2858,14 @@ func awsAwsjson10_serializeOpDocumentCreateFirewallInput(v *CreateFirewallInput,
 		ok.String(*v.FirewallPolicyArn)
 	}
 
-	if v.FirewallPolicyChangeProtection != nil {
+	if v.FirewallPolicyChangeProtection {
 		ok := object.Key("FirewallPolicyChangeProtection")
-		ok.Boolean(*v.FirewallPolicyChangeProtection)
+		ok.Boolean(v.FirewallPolicyChangeProtection)
 	}
 
-	if v.SubnetChangeProtection != nil {
+	if v.SubnetChangeProtection {
 		ok := object.Key("SubnetChangeProtection")
-		ok.Boolean(*v.SubnetChangeProtection)
+		ok.Boolean(v.SubnetChangeProtection)
 	}
 
 	if v.SubnetMappings != nil {
@@ -2899,9 +2899,9 @@ func awsAwsjson10_serializeOpDocumentCreateFirewallPolicyInput(v *CreateFirewall
 		ok.String(*v.Description)
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.EncryptionConfiguration != nil {
@@ -2947,9 +2947,9 @@ func awsAwsjson10_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 		ok.String(*v.Description)
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.EncryptionConfiguration != nil {
@@ -3356,9 +3356,9 @@ func awsAwsjson10_serializeOpDocumentUpdateFirewallDeleteProtectionInput(v *Upda
 	object := value.Object()
 	defer object.Close()
 
-	if v.DeleteProtection != nil {
+	{
 		ok := object.Key("DeleteProtection")
-		ok.Boolean(*v.DeleteProtection)
+		ok.Boolean(v.DeleteProtection)
 	}
 
 	if v.FirewallArn != nil {
@@ -3449,9 +3449,9 @@ func awsAwsjson10_serializeOpDocumentUpdateFirewallPolicyChangeProtectionInput(v
 		ok.String(*v.FirewallName)
 	}
 
-	if v.FirewallPolicyChangeProtection != nil {
+	{
 		ok := object.Key("FirewallPolicyChangeProtection")
-		ok.Boolean(*v.FirewallPolicyChangeProtection)
+		ok.Boolean(v.FirewallPolicyChangeProtection)
 	}
 
 	if v.UpdateToken != nil {
@@ -3471,9 +3471,9 @@ func awsAwsjson10_serializeOpDocumentUpdateFirewallPolicyInput(v *UpdateFirewall
 		ok.String(*v.Description)
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.EncryptionConfiguration != nil {
@@ -3541,9 +3541,9 @@ func awsAwsjson10_serializeOpDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInpu
 		ok.String(*v.Description)
 	}
 
-	if v.DryRun != nil {
+	if v.DryRun {
 		ok := object.Key("DryRun")
-		ok.Boolean(*v.DryRun)
+		ok.Boolean(v.DryRun)
 	}
 
 	if v.EncryptionConfiguration != nil {
@@ -3609,9 +3609,9 @@ func awsAwsjson10_serializeOpDocumentUpdateSubnetChangeProtectionInput(v *Update
 		ok.String(*v.FirewallName)
 	}
 
-	if v.SubnetChangeProtection != nil {
+	{
 		ok := object.Key("SubnetChangeProtection")
-		ok.Boolean(*v.SubnetChangeProtection)
+		ok.Boolean(v.SubnetChangeProtection)
 	}
 
 	if v.UpdateToken != nil {

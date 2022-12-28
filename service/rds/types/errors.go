@@ -1211,6 +1211,29 @@ func (e *DomainNotFoundFault) ErrorMessage() string {
 func (e *DomainNotFoundFault) ErrorCode() string             { return "DomainNotFoundFault" }
 func (e *DomainNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The AMI configuration prerequisite has not been met.
+type Ec2ImagePropertiesNotSupportedFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *Ec2ImagePropertiesNotSupportedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *Ec2ImagePropertiesNotSupportedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *Ec2ImagePropertiesNotSupportedFault) ErrorCode() string {
+	return "Ec2ImagePropertiesNotSupportedFault"
+}
+func (e *Ec2ImagePropertiesNotSupportedFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // You have reached the maximum number of event subscriptions.
 type EventSubscriptionQuotaExceededFault struct {
 	Message *string

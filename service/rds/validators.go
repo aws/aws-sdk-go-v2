@@ -3565,15 +3565,6 @@ func validateOpCreateCustomDBEngineVersionInput(v *CreateCustomDBEngineVersionIn
 	if v.EngineVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
 	}
-	if v.DatabaseInstallationFilesS3BucketName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseInstallationFilesS3BucketName"))
-	}
-	if v.KMSKeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KMSKeyId"))
-	}
-	if v.Manifest == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

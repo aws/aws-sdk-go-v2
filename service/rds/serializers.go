@@ -10125,6 +10125,11 @@ func awsAwsquery_serializeOpDocumentCreateCustomDBEngineVersionInput(v *CreateCu
 		objectKey.String(*v.EngineVersion)
 	}
 
+	if v.ImageId != nil {
+		objectKey := object.Key("ImageId")
+		objectKey.String(*v.ImageId)
+	}
+
 	if v.KMSKeyId != nil {
 		objectKey := object.Key("KMSKeyId")
 		objectKey.String(*v.KMSKeyId)

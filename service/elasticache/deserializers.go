@@ -11520,6 +11520,19 @@ func awsAwsquery_deserializeDocumentCacheCluster(v **types.CacheCluster, decoder
 				sv.TransitEncryptionEnabled = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("TransitEncryptionMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TransitEncryptionMode = types.TransitEncryptionMode(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -18496,6 +18509,35 @@ func awsAwsquery_deserializeDocumentPendingModifiedValues(v **types.PendingModif
 				sv.NumCacheNodes = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("TransitEncryptionEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.TransitEncryptionEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("TransitEncryptionMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TransitEncryptionMode = types.TransitEncryptionMode(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -19164,6 +19206,19 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 				sv.TransitEncryptionEnabled = ptr.Bool(xtv)
 			}
 
+		case strings.EqualFold("TransitEncryptionMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TransitEncryptionMode = types.TransitEncryptionMode(xtv)
+			}
+
 		case strings.EqualFold("UserGroupIds", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentUserGroupIdList(&sv.UserGroupIds, nodeDecoder); err != nil {
@@ -19599,6 +19654,35 @@ func awsAwsquery_deserializeDocumentReplicationGroupPendingModifiedValues(v **ty
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentReshardingStatus(&sv.Resharding, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("TransitEncryptionEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected BooleanOptional to be of type *bool, got %T instead", val)
+				}
+				sv.TransitEncryptionEnabled = ptr.Bool(xtv)
+			}
+
+		case strings.EqualFold("TransitEncryptionMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.TransitEncryptionMode = types.TransitEncryptionMode(xtv)
 			}
 
 		case strings.EqualFold("UserGroups", t.Name.Local):

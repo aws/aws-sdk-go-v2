@@ -478,6 +478,24 @@ func (SourceType) Values() []SourceType {
 	}
 }
 
+type TransitEncryptionMode string
+
+// Enum values for TransitEncryptionMode
+const (
+	TransitEncryptionModePreferred TransitEncryptionMode = "preferred"
+	TransitEncryptionModeRequired  TransitEncryptionMode = "required"
+)
+
+// Values returns all known values for TransitEncryptionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TransitEncryptionMode) Values() []TransitEncryptionMode {
+	return []TransitEncryptionMode{
+		"preferred",
+		"required",
+	}
+}
+
 type UpdateActionStatus string
 
 // Enum values for UpdateActionStatus

@@ -88,6 +88,10 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// The description of the database engine.
 	DBEngineDescription *string
 
+	// A value that indicates the source media provider of the AMI based on the usage
+	// operation. Applicable for RDS Custom for SQL Server.
+	DBEngineMediaType *string
+
 	// The ARN of the custom engine version.
 	DBEngineVersionArn *string
 
@@ -117,6 +121,9 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// The types of logs that the database engine has available for export to
 	// CloudWatch Logs.
 	ExportableLogTypes []string
+
+	// The EC2 image
+	Image *types.CustomDBEngineVersionAMI
 
 	// The Amazon Web Services KMS key identifier for an encrypted CEV. This parameter
 	// is required for RDS Custom, but optional for Amazon RDS.

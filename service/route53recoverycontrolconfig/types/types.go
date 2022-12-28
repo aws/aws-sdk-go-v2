@@ -9,7 +9,7 @@ import (
 // An assertion rule enforces that, when you change a routing control state, that
 // the criteria that you set in the rule configuration is met. Otherwise, the
 // change to the routing control is not accepted. For example, the criteria might
-// be that at least one routing control state is On after the transation so that
+// be that at least one routing control state is On after the transaction so that
 // traffic continues to flow to at least one cell for the application. This ensures
 // that you avoid a fail-open scenario.
 type AssertionRule struct {
@@ -36,7 +36,7 @@ type AssertionRule struct {
 	// The criteria that you set for specific assertion routing controls
 	// (AssertedControls) that designate how many routing control states must be ON as
 	// the result of a transaction. For example, if you have three assertion routing
-	// controls, you might specify atleast 2 for your rule configuration. This means
+	// controls, you might specify ATLEAST 2 for your rule configuration. This means
 	// that at least two assertion routing control states must be ON, so that at least
 	// two Amazon Web Services Regions have traffic flowing to them.
 	//
@@ -161,7 +161,7 @@ type ControlPanel struct {
 	noSmithyDocumentSerde
 }
 
-// A gating rule verifies that a gating routing control or set of gating rounting
+// A gating rule verifies that a gating routing control or set of gating routing
 // controls, evaluates as true, based on a rule configuration that you specify,
 // which allows a set of routing control state changes to complete. For example, if
 // you specify one gating routing control and you set the Type in the rule
@@ -190,8 +190,8 @@ type GatingRule struct {
 	// This member is required.
 	Name *string
 
-	// The criteria that you set for gating routing controls that designates how many
-	// of the routing control states must be ON to allow you to update target routing
+	// The criteria that you set for gating routing controls that designate how many of
+	// the routing control states must be ON to allow you to update target routing
 	// control states.
 	//
 	// This member is required.
@@ -212,7 +212,7 @@ type GatingRule struct {
 	// states can only be updated if the rule configuration that you specify evaluates
 	// to true for the gating routing control. As a simple example, if you have a
 	// single gating control, it acts as an overall "on/off" switch for a set of target
-	// routing controls. You can use this to manually override automated fail over, for
+	// routing controls. You can use this to manually override automated failover, for
 	// example.
 	//
 	// This member is required.
@@ -278,7 +278,7 @@ type NewAssertionRule struct {
 	// The criteria that you set for specific assertion controls (routing controls)
 	// that designate how many control states must be ON as the result of a
 	// transaction. For example, if you have three assertion controls, you might
-	// specify ATLEAST 2for your rule configuration. This means that at least two
+	// specify ATLEAST 2 for your rule configuration. This means that at least two
 	// assertion controls must be ON, so that at least two Amazon Web Services Regions
 	// have traffic flowing to them.
 	//
@@ -315,7 +315,7 @@ type NewGatingRule struct {
 	Name *string
 
 	// The criteria that you set for specific gating controls (routing controls) that
-	// designates how many control states must be ON to allow you to change (set or
+	// designate how many control states must be ON to allow you to change (set or
 	// unset) the target control states.
 	//
 	// This member is required.
@@ -324,7 +324,7 @@ type NewGatingRule struct {
 	// Routing controls that can only be set or unset if the specified RuleConfig
 	// evaluates to true for the specified GatingControls. For example, say you have
 	// three gating controls, one for each of three Amazon Web Services Regions. Now
-	// you specify AtLeast 2 as your RuleConfig. With these settings, you can only
+	// you specify ATLEAST 2 as your RuleConfig. With these settings, you can only
 	// change (set or unset) the routing controls that you have specified as
 	// TargetControls if that rule evaluates to true. In other words, your ability to
 	// change the routing controls that you have specified as TargetControls is gated
@@ -371,12 +371,12 @@ type Rule struct {
 	// An assertion rule enforces that, when a routing control state is changed, the
 	// criteria set by the rule configuration is met. Otherwise, the change to the
 	// routing control state is not accepted. For example, the criteria might be that
-	// at least one routing control state is On after the transation so that traffic
+	// at least one routing control state is On after the transaction so that traffic
 	// continues to flow to at least one cell for the application. This ensures that
 	// you avoid a fail-open scenario.
 	ASSERTION *AssertionRule
 
-	// A gating rule verifies that a gating routing control or set of gating rounting
+	// A gating rule verifies that a gating routing control or set of gating routing
 	// controls, evaluates as true, based on a rule configuration that you specify,
 	// which allows a set of routing control state changes to complete. For example, if
 	// you specify one gating routing control and you set the Type in the rule

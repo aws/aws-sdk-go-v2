@@ -1,0 +1,8 @@
+{
+    "id": "78e82693-95da-4f67-9663-e5186824b213",
+    "type": "feature",
+    "description": "This release adds support for Custom Engine Version (CEV) on RDS Custom SQL Server.",
+    "modules": [
+        "service/rds"
+    ]
+}

@@ -436,6 +436,18 @@ type ConnectionPoolConfigurationInfo struct {
 	noSmithyDocumentSerde
 }
 
+// A value that indicates the AMI information.
+type CustomDBEngineVersionAMI struct {
+
+	// A value that indicates the ID of the AMI.
+	ImageId *string
+
+	// A value that indicates the status of a custom engine version (CEV).
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
 // an Amazon Aurora DB cluster, this data type is used as a response element in the
 // operations CreateDBCluster, DeleteDBCluster, DescribeDBClusters,
@@ -1141,6 +1153,10 @@ type DBEngineVersion struct {
 	// The description of the database engine.
 	DBEngineDescription *string
 
+	// A value that indicates the source media provider of the AMI based on the usage
+	// operation. Applicable for RDS Custom for SQL Server.
+	DBEngineMediaType *string
+
 	// The ARN of the custom engine version.
 	DBEngineVersionArn *string
 
@@ -1170,6 +1186,9 @@ type DBEngineVersion struct {
 	// The types of logs that the database engine has available for export to
 	// CloudWatch Logs.
 	ExportableLogTypes []string
+
+	// The EC2 image
+	Image *CustomDBEngineVersionAMI
 
 	// The Amazon Web Services KMS key identifier for an encrypted CEV. This parameter
 	// is required for RDS Custom, but optional for Amazon RDS.
