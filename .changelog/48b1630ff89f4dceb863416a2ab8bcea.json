@@ -1,8 +1,0 @@
-{
-    "id": "48b1630f-f89f-4dce-b863-416a2ab8bcea",
-    "type": "feature",
-    "description": "This release allows you to modify the encryption in transit setting, for existing Redis clusters. You can now change the TLS configuration of your Redis clusters without the need to re-build or re-provision the clusters or impact application availability.",
-    "modules": [
-        "service/elasticache"
-    ]
-}

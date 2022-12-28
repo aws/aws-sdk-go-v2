@@ -1,3 +1,7 @@
+# v1.10.0 (2022-12-28)
+
+* **Feature**: Added support for Python paginators in the route53-recovery-control-config List* APIs.
+
 # v1.9.21 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "8865fc25-cfc2-46eb-88c4-74d89bf9c104",
-    "type": "feature",
-    "description": "Added support for Python paginators in the route53-recovery-control-config List* APIs.",
-    "modules": [
-        "service/route53recoverycontrolconfig"
-    ]
-}

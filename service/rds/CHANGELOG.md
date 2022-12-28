@@ -1,3 +1,7 @@
+# v1.38.0 (2022-12-28)
+
+* **Feature**: This release adds support for Custom Engine Version (CEV) on RDS Custom SQL Server.
+
 # v1.37.0 (2022-12-22)
 
 * **Feature**: Add support for managing master user password in AWS Secrets Manager for the DBInstance and DBCluster.

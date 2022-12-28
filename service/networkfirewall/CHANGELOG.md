@@ -1,3 +1,7 @@
+# v1.21.0 (2022-12-28)
+
+* **Feature**: AWS Network Firewall now provides status messages for firewalls to help you troubleshoot when your endpoint fails.
+
 # v1.20.9 (2022-12-23)
 
 * No change notes available for this release.

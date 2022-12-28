@@ -1,8 +1,0 @@
-{
-    "id": "921afd90-d473-4642-ad64-a5a1e9bcf59b",
-    "type": "feature",
-    "description": "AWS Network Firewall now provides status messages for firewalls to help you troubleshoot when your endpoint fails.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.25.0 (2022-12-28)
+
+* **Feature**: This release allows you to modify the encryption in transit setting, for existing Redis clusters. You can now change the TLS configuration of your Redis clusters without the need to re-build or re-provision the clusters or impact application availability.
+
 # v1.24.3 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions
