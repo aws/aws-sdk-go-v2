@@ -1,0 +1,8 @@
+{
+    "id": "5a924804-9927-41f1-9db1-d0abea1354c5",
+    "type": "feature",
+    "description": "This release extends Wisdom CreateContent and StartContentUpload APIs to support PDF and MicrosoftWord docx document uploading.",
+    "modules": [
+        "service/wisdom"
+    ]
+}

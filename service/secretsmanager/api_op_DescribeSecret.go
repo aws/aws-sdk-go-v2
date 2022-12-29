@@ -90,6 +90,8 @@ type DescribeSecretOutput struct {
 	// The name of the secret.
 	Name *string
 
+	NextRotationDate *time.Time
+
 	// The ID of the service that created this secret. For more information, see
 	// Secrets managed by other Amazon Web Services services
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html).

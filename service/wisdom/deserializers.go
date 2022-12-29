@@ -3908,7 +3908,7 @@ func awsRestjson1_deserializeOpDocumentStartContentUploadOutput(v **StartContent
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+					return fmt.Errorf("expected UploadId to be of type string, got %T instead", value)
 				}
 				sv.UploadId = ptr.String(jtv)
 			}

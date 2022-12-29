@@ -13,29 +13,24 @@ import (
 
 // Modifies the details of a secret, including metadata and the secret value. To
 // change the secret value, you can also use PutSecretValue. To change the rotation
-// configuration of a secret, use RotateSecret instead. To change a secret so that
-// it is managed by another service, you need to recreate the secret in that
-// service. See Secrets Manager secrets managed by other Amazon Web Services
-// services
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html).
-// We recommend you avoid calling UpdateSecret at a sustained rate of more than
-// once every 10 minutes. When you call UpdateSecret to update the secret value,
-// Secrets Manager creates a new version of the secret. Secrets Manager removes
-// outdated versions when there are more than 100, but it does not remove versions
-// created less than 24 hours ago. If you update the secret value more than once
-// every 10 minutes, you create more versions than Secrets Manager removes, and you
-// will reach the quota for secret versions. If you include SecretString or
-// SecretBinary to create a new secret version, Secrets Manager automatically moves
-// the staging label AWSCURRENT to the new version. Then it attaches the label
-// AWSPREVIOUS to the version that AWSCURRENT was removed from. If you call this
-// operation with a ClientRequestToken that matches an existing version's
-// VersionId, the operation results in an error. You can't modify an existing
-// version, you can only create a new version. To remove a version, remove all
-// staging labels from it. See UpdateSecretVersionStage. Secrets Manager generates
-// a CloudTrail log entry when you call this action. Do not include sensitive
-// information in request parameters except SecretBinary or SecretString because it
-// might be logged. For more information, see Logging Secrets Manager events with
-// CloudTrail
+// configuration of a secret, use RotateSecret instead. We recommend you avoid
+// calling UpdateSecret at a sustained rate of more than once every 10 minutes.
+// When you call UpdateSecret to update the secret value, Secrets Manager creates a
+// new version of the secret. Secrets Manager removes outdated versions when there
+// are more than 100, but it does not remove versions created less than 24 hours
+// ago. If you update the secret value more than once every 10 minutes, you create
+// more versions than Secrets Manager removes, and you will reach the quota for
+// secret versions. If you include SecretString or SecretBinary to create a new
+// secret version, Secrets Manager automatically moves the staging label AWSCURRENT
+// to the new version. Then it attaches the label AWSPREVIOUS to the version that
+// AWSCURRENT was removed from. If you call this operation with a
+// ClientRequestToken that matches an existing version's VersionId, the operation
+// results in an error. You can't modify an existing version, you can only create a
+// new version. To remove a version, remove all staging labels from it. See
+// UpdateSecretVersionStage. Secrets Manager generates a CloudTrail log entry when
+// you call this action. Do not include sensitive information in request parameters
+// except SecretBinary or SecretString because it might be logged. For more
+// information, see Logging Secrets Manager events with CloudTrail
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/retrieve-ct-entries.html).
 // Required permissions: secretsmanager:UpdateSecret. For more information, see
 // IAM policy actions for Secrets Manager

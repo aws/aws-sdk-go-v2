@@ -1,0 +1,8 @@
+{
+    "id": "af0ffbe8-042b-4290-bbdc-464be57bd335",
+    "type": "feature",
+    "description": "Added GetClusterSessionCredentials API to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters with runtime roles and AWS Lake Formation-based access control for Apache Spark, Apache Hive, and Presto queries.",
+    "modules": [
+        "service/emr"
+    ]
+}

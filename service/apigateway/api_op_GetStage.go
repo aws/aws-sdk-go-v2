@@ -54,7 +54,9 @@ type GetStageOutput struct {
 	// Specifies whether a cache cluster is enabled for the stage.
 	CacheClusterEnabled bool
 
-	// The size of the cache cluster for the stage, if enabled.
+	// The stage's cache capacity in GB. For more information about choosing a cache
+	// size, see Enabling API caching to enhance responsiveness
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html).
 	CacheClusterSize types.CacheClusterSize
 
 	// The status of the cache cluster for the stage, if enabled.

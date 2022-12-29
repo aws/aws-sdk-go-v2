@@ -29,6 +29,7 @@
         "api_op_DescribeStudio.go",
         "api_op_GetAutoTerminationPolicy.go",
         "api_op_GetBlockPublicAccessConfiguration.go",
+        "api_op_GetClusterSessionCredentials.go",
         "api_op_GetManagedScalingPolicy.go",
         "api_op_GetStudioSessionMapping.go",
         "api_op_ListBootstrapActions.go",
@@ -72,6 +73,7 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.15",

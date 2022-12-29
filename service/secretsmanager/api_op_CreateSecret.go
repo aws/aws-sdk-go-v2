@@ -18,10 +18,6 @@ import (
 // connection information to access a database or other service, which Secrets
 // Manager doesn't encrypt. A secret in Secrets Manager consists of both the
 // protected secret data and the important information needed to manage the secret.
-// For secrets that use managed rotation, you need to create the secret through the
-// managing service. For more information, see Secrets Manager secrets managed by
-// other Amazon Web Services services
-// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/service-linked-secrets.html).
 // For information about creating a secret in the console, see Create a secret
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html).
 // To create a secret, you can provide the secret value to be encrypted in either

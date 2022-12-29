@@ -170,6 +170,8 @@ type SecretListEntry struct {
 	// folder prod.
 	Name *string
 
+	NextRotationDate *time.Time
+
 	// Returns the name of the service that created the secret.
 	OwningService *string
 
