@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "metadata": {
         "suppressions": [
             {
@@ -117,6 +117,7 @@
                 "enabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the API Key can be used by callers.</p>"
                     }
                 },
@@ -170,18 +171,20 @@
             }
         },
         "com.amazonaws.apigateway#ApiKeySourceType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "HEADER",
-                        "name": "HEADER"
-                    },
-                    {
-                        "value": "AUTHORIZER",
-                        "name": "AUTHORIZER"
+            "type": "enum",
+            "members": {
+                "HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HEADER"
                     }
-                ]
+                },
+                "AUTHORIZER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHORIZER"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#ApiKeys": {
@@ -213,14 +216,14 @@
             }
         },
         "com.amazonaws.apigateway#ApiKeysFormat": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "csv",
-                        "name": "csv"
+            "type": "enum",
+            "members": {
+                "csv": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "csv"
                     }
-                ]
+                }
             }
         },
         "com.amazonaws.apigateway#ApiStage": {
@@ -318,23 +321,29 @@
             }
         },
         "com.amazonaws.apigateway#AuthorizerType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The authorizer type. Valid values are <code>TOKEN</code> for a Lambda function using a single authorization token submitted in a custom header, <code>REQUEST</code> for a Lambda function using incoming request parameters, and <code>COGNITO_USER_POOLS</code> for using an Amazon Cognito user pool.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "TOKEN",
-                        "name": "TOKEN"
-                    },
-                    {
-                        "value": "REQUEST",
-                        "name": "REQUEST"
-                    },
-                    {
-                        "value": "COGNITO_USER_POOLS",
-                        "name": "COGNITO_USER_POOLS"
+            "type": "enum",
+            "members": {
+                "TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOKEN"
                     }
-                ]
+                },
+                "REQUEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST"
+                    }
+                },
+                "COGNITO_USER_POOLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COGNITO_USER_POOLS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The authorizer type. Valid values are <code>TOKEN</code> for a Lambda function using a single authorization token submitted in a custom header, <code>REQUEST</code> for a Lambda function using incoming request parameters, and <code>COGNITO_USER_POOLS</code> for using an Amazon Cognito user pool.</p>"
             }
         },
         "com.amazonaws.apigateway#Authorizers": {
@@ -361,21 +370,6 @@
         },
         "com.amazonaws.apigateway#BackplaneControlService": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "API Gateway",
-                    "arnNamespace": "apigateway",
-                    "cloudFormationName": "ApiGateway",
-                    "cloudTrailEventSource": "apigateway.amazonaws.com",
-                    "endpointPrefix": "apigateway"
-                },
-                "aws.auth#sigv4": {
-                    "name": "apigateway"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon API Gateway</fullname>\n        <p>Amazon API Gateway helps developers deliver robust, secure, and scalable mobile and web application back ends. API Gateway allows developers to securely connect mobile and web applications to APIs that run on AWS Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>",
-                "smithy.api#title": "Amazon API Gateway"
-            },
             "version": "2015-07-09",
             "operations": [
                 {
@@ -738,7 +732,2079 @@
                 {
                     "target": "com.amazonaws.apigateway#UpdateVpcLink"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "API Gateway",
+                    "arnNamespace": "apigateway",
+                    "cloudFormationName": "ApiGateway",
+                    "cloudTrailEventSource": "apigateway.amazonaws.com",
+                    "endpointPrefix": "apigateway"
+                },
+                "aws.auth#sigv4": {
+                    "name": "apigateway"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Amazon API Gateway</fullname>\n         <p>Amazon API Gateway helps developers deliver robust, secure, and scalable mobile and web application back ends. API Gateway allows developers to securely connect mobile and web applications to APIs that run on AWS Lambda, Amazon EC2, or other publicly addressable web services that are hosted outside of AWS.</p>",
+                "smithy.api#title": "Amazon API Gateway",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://apigateway-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://apigateway-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://apigateway.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://apigateway.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-south-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.me-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.me-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-central-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-central-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "af-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "me-south-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-southeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-southeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.ap-southeast-4.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.ap-southeast-4.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-2",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://apigateway.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.apigateway#BadRequestException": {
             "type": "structure",
@@ -805,74 +2871,103 @@
             "type": "blob"
         },
         "com.amazonaws.apigateway#Boolean": {
-            "type": "boolean"
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
         },
         "com.amazonaws.apigateway#CacheClusterSize": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Returns the size of the CacheCluster.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "0.5",
-                        "name": "SIZE_0_POINT_5_GB"
-                    },
-                    {
-                        "value": "1.6",
-                        "name": "SIZE_1_POINT_6_GB"
-                    },
-                    {
-                        "value": "6.1",
-                        "name": "SIZE_6_POINT_1_GB"
-                    },
-                    {
-                        "value": "13.5",
-                        "name": "SIZE_13_POINT_5_GB"
-                    },
-                    {
-                        "value": "28.4",
-                        "name": "SIZE_28_POINT_4_GB"
-                    },
-                    {
-                        "value": "58.2",
-                        "name": "SIZE_58_POINT_2_GB"
-                    },
-                    {
-                        "value": "118",
-                        "name": "SIZE_118_GB"
-                    },
-                    {
-                        "value": "237",
-                        "name": "SIZE_237_GB"
+            "type": "enum",
+            "members": {
+                "SIZE_0_POINT_5_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "0.5"
                     }
-                ]
+                },
+                "SIZE_1_POINT_6_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "1.6"
+                    }
+                },
+                "SIZE_6_POINT_1_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "6.1"
+                    }
+                },
+                "SIZE_13_POINT_5_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "13.5"
+                    }
+                },
+                "SIZE_28_POINT_4_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "28.4"
+                    }
+                },
+                "SIZE_58_POINT_2_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "58.2"
+                    }
+                },
+                "SIZE_118_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "118"
+                    }
+                },
+                "SIZE_237_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "237"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the size of the CacheCluster.</p>"
             }
         },
         "com.amazonaws.apigateway#CacheClusterStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>Returns the status of the CacheCluster.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "CREATE_IN_PROGRESS",
-                        "name": "CREATE_IN_PROGRESS"
-                    },
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "DELETE_IN_PROGRESS",
-                        "name": "DELETE_IN_PROGRESS"
-                    },
-                    {
-                        "value": "NOT_AVAILABLE",
-                        "name": "NOT_AVAILABLE"
-                    },
-                    {
-                        "value": "FLUSH_IN_PROGRESS",
-                        "name": "FLUSH_IN_PROGRESS"
+            "type": "enum",
+            "members": {
+                "CREATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_IN_PROGRESS"
                     }
-                ]
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "NOT_AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_AVAILABLE"
+                    }
+                },
+                "FLUSH_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FLUSH_IN_PROGRESS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the status of the CacheCluster.</p>"
             }
         },
         "com.amazonaws.apigateway#CanarySettings": {
@@ -881,6 +2976,7 @@
                 "percentTraffic": {
                     "target": "com.amazonaws.apigateway#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percent (0-100) of traffic diverted to a canary deployment.</p>"
                     }
                 },
@@ -899,6 +2995,7 @@
                 "useStageCache": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean flag to indicate whether the canary deployment uses the stage cache or not.</p>"
                     }
                 }
@@ -987,33 +3084,37 @@
             }
         },
         "com.amazonaws.apigateway#ConnectionType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "INTERNET",
-                        "name": "INTERNET"
-                    },
-                    {
-                        "value": "VPC_LINK",
-                        "name": "VPC_LINK"
+            "type": "enum",
+            "members": {
+                "INTERNET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTERNET"
                     }
-                ]
+                },
+                "VPC_LINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC_LINK"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#ContentHandlingStrategy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "CONVERT_TO_BINARY",
-                        "name": "CONVERT_TO_BINARY"
-                    },
-                    {
-                        "value": "CONVERT_TO_TEXT",
-                        "name": "CONVERT_TO_TEXT"
+            "type": "enum",
+            "members": {
+                "CONVERT_TO_BINARY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONVERT_TO_BINARY"
                     }
-                ]
+                },
+                "CONVERT_TO_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONVERT_TO_TEXT"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#CreateApiKey": {
@@ -1071,12 +3172,14 @@
                 "enabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the ApiKey can be used by callers.</p>"
                     }
                 },
                 "generateDistinctId": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether (<code>true</code>) or not (<code>false</code>) the key identifier is distinct from the created API key value. This parameter is deprecated and should not be used.</p>"
                     }
                 },
@@ -1368,7 +3471,7 @@
                 "cacheClusterSize": {
                     "target": "com.amazonaws.apigateway#CacheClusterSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the cache cluster size for the Stage resource specified in the input, if a cache cluster is enabled.</p>"
+                        "smithy.api#documentation": "<p>The stage's cache capacity in GB. For more information about choosing a cache size, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html\">Enabling API caching to enhance responsiveness</a>.</p>"
                     }
                 },
                 "variables": {
@@ -1787,12 +3890,14 @@
                 "validateRequestBody": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean flag to indicate whether to validate request body according to the configured model schema for the method (<code>true</code>) or not (<code>false</code>).</p>"
                     }
                 },
                 "validateRequestParameters": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean flag to indicate whether to validate request parameters, <code>true</code>, or not <code>false</code>.</p>"
                     }
                 }
@@ -1970,6 +4075,7 @@
                 "disableExecuteApiEndpoint": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default <code>execute-api</code> endpoint.\n      By default, clients can invoke your API with the default\n      <code>https://{api_id}.execute-api.{region}.amazonaws.com</code> endpoint. To require that clients use a\n      custom domain name to invoke your API, disable the default endpoint</p>"
                     }
                 }
@@ -2049,13 +4155,14 @@
                 "cacheClusterEnabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Whether cache clustering is enabled for the stage.</p>"
                     }
                 },
                 "cacheClusterSize": {
                     "target": "com.amazonaws.apigateway#CacheClusterSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The stage's cache cluster size.</p>"
+                        "smithy.api#documentation": "<p>The stage's cache capacity in GB. For more information about choosing a cache size, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html\">Enabling API caching to enhance responsiveness</a>.</p>"
                     }
                 },
                 "variables": {
@@ -2079,6 +4186,7 @@
                 "tracingEnabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether active tracing with X-ray is enabled for the Stage.</p>"
                     }
                 },
@@ -2466,7 +4574,7 @@
                 "basePath": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The base path name of the BasePathMapping resource to delete.</p>\n        <p>To specify an empty base path, set this parameter to <code>'(none)'</code>.</p>",
+                        "smithy.api#documentation": "<p>The base path name of the BasePathMapping resource to delete.</p>\n         <p>To specify an empty base path, set this parameter to <code>'(none)'</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3569,6 +5677,7 @@
                 "percentTraffic": {
                     "target": "com.amazonaws.apigateway#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The percentage (0.0-100.0) of traffic routed to the canary deployment.</p>"
                     }
                 },
@@ -3581,6 +5690,7 @@
                 "useStageCache": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean flag to indicate whether the canary release deployment uses the stage cache or not.</p>"
                     }
                 }
@@ -3703,58 +5813,80 @@
             }
         },
         "com.amazonaws.apigateway#DocumentationPartType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "API",
-                        "name": "API"
-                    },
-                    {
-                        "value": "AUTHORIZER",
-                        "name": "AUTHORIZER"
-                    },
-                    {
-                        "value": "MODEL",
-                        "name": "MODEL"
-                    },
-                    {
-                        "value": "RESOURCE",
-                        "name": "RESOURCE"
-                    },
-                    {
-                        "value": "METHOD",
-                        "name": "METHOD"
-                    },
-                    {
-                        "value": "PATH_PARAMETER",
-                        "name": "PATH_PARAMETER"
-                    },
-                    {
-                        "value": "QUERY_PARAMETER",
-                        "name": "QUERY_PARAMETER"
-                    },
-                    {
-                        "value": "REQUEST_HEADER",
-                        "name": "REQUEST_HEADER"
-                    },
-                    {
-                        "value": "REQUEST_BODY",
-                        "name": "REQUEST_BODY"
-                    },
-                    {
-                        "value": "RESPONSE",
-                        "name": "RESPONSE"
-                    },
-                    {
-                        "value": "RESPONSE_HEADER",
-                        "name": "RESPONSE_HEADER"
-                    },
-                    {
-                        "value": "RESPONSE_BODY",
-                        "name": "RESPONSE_BODY"
+            "type": "enum",
+            "members": {
+                "API": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API"
                     }
-                ]
+                },
+                "AUTHORIZER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHORIZER"
+                    }
+                },
+                "MODEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODEL"
+                    }
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                },
+                "METHOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "METHOD"
+                    }
+                },
+                "PATH_PARAMETER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PATH_PARAMETER"
+                    }
+                },
+                "QUERY_PARAMETER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUERY_PARAMETER"
+                    }
+                },
+                "REQUEST_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST_HEADER"
+                    }
+                },
+                "REQUEST_BODY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST_BODY"
+                    }
+                },
+                "RESPONSE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESPONSE"
+                    }
+                },
+                "RESPONSE_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESPONSE_HEADER"
+                    }
+                },
+                "RESPONSE_BODY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESPONSE_BODY"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#DocumentationParts": {
@@ -3938,30 +6070,38 @@
             }
         },
         "com.amazonaws.apigateway#DomainNameStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "PENDING_CERTIFICATE_REIMPORT",
-                        "name": "PENDING_CERTIFICATE_REIMPORT"
-                    },
-                    {
-                        "value": "PENDING_OWNERSHIP_VERIFICATION",
-                        "name": "PENDING_OWNERSHIP_VERIFICATION"
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
                     }
-                ]
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "PENDING_CERTIFICATE_REIMPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_CERTIFICATE_REIMPORT"
+                    }
+                },
+                "PENDING_OWNERSHIP_VERIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_OWNERSHIP_VERIFICATION"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#DomainNames": {
@@ -3987,7 +6127,10 @@
             }
         },
         "com.amazonaws.apigateway#Double": {
-            "type": "double"
+            "type": "double",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.apigateway#EndpointConfiguration": {
             "type": "structure",
@@ -4010,23 +6153,29 @@
             }
         },
         "com.amazonaws.apigateway#EndpointType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The endpoint type. The valid values are <code>EDGE</code> for edge-optimized API setup, most suitable for mobile applications; <code>REGIONAL</code> for regional API endpoint setup, most suitable for calling from AWS Region; and <code>PRIVATE</code> for private APIs.</p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "REGIONAL",
-                        "name": "REGIONAL"
-                    },
-                    {
-                        "value": "EDGE",
-                        "name": "EDGE"
-                    },
-                    {
-                        "value": "PRIVATE",
-                        "name": "PRIVATE"
+            "type": "enum",
+            "members": {
+                "REGIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGIONAL"
                     }
-                ]
+                },
+                "EDGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EDGE"
+                    }
+                },
+                "PRIVATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PRIVATE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The endpoint type. The valid values are <code>EDGE</code> for edge-optimized API setup, most suitable for mobile applications; <code>REGIONAL</code> for regional API endpoint setup, most suitable for calling from AWS Region; and <code>PRIVATE</code> for private APIs.</p>"
             }
         },
         "com.amazonaws.apigateway#ExportResponse": {
@@ -4210,6 +6359,7 @@
                 "defaultResponse": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean flag to indicate whether this GatewayResponse is the default gateway response (<code>true</code>) or not (<code>false</code>). A default gateway response is one generated by API Gateway without any customization by an API developer. </p>"
                     }
                 }
@@ -4219,94 +6369,134 @@
             }
         },
         "com.amazonaws.apigateway#GatewayResponseType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DEFAULT_4XX",
-                        "name": "DEFAULT_4XX"
-                    },
-                    {
-                        "value": "DEFAULT_5XX",
-                        "name": "DEFAULT_5XX"
-                    },
-                    {
-                        "value": "RESOURCE_NOT_FOUND",
-                        "name": "RESOURCE_NOT_FOUND"
-                    },
-                    {
-                        "value": "UNAUTHORIZED",
-                        "name": "UNAUTHORIZED"
-                    },
-                    {
-                        "value": "INVALID_API_KEY",
-                        "name": "INVALID_API_KEY"
-                    },
-                    {
-                        "value": "ACCESS_DENIED",
-                        "name": "ACCESS_DENIED"
-                    },
-                    {
-                        "value": "AUTHORIZER_FAILURE",
-                        "name": "AUTHORIZER_FAILURE"
-                    },
-                    {
-                        "value": "AUTHORIZER_CONFIGURATION_ERROR",
-                        "name": "AUTHORIZER_CONFIGURATION_ERROR"
-                    },
-                    {
-                        "value": "INVALID_SIGNATURE",
-                        "name": "INVALID_SIGNATURE"
-                    },
-                    {
-                        "value": "EXPIRED_TOKEN",
-                        "name": "EXPIRED_TOKEN"
-                    },
-                    {
-                        "value": "MISSING_AUTHENTICATION_TOKEN",
-                        "name": "MISSING_AUTHENTICATION_TOKEN"
-                    },
-                    {
-                        "value": "INTEGRATION_FAILURE",
-                        "name": "INTEGRATION_FAILURE"
-                    },
-                    {
-                        "value": "INTEGRATION_TIMEOUT",
-                        "name": "INTEGRATION_TIMEOUT"
-                    },
-                    {
-                        "value": "API_CONFIGURATION_ERROR",
-                        "name": "API_CONFIGURATION_ERROR"
-                    },
-                    {
-                        "value": "UNSUPPORTED_MEDIA_TYPE",
-                        "name": "UNSUPPORTED_MEDIA_TYPE"
-                    },
-                    {
-                        "value": "BAD_REQUEST_PARAMETERS",
-                        "name": "BAD_REQUEST_PARAMETERS"
-                    },
-                    {
-                        "value": "BAD_REQUEST_BODY",
-                        "name": "BAD_REQUEST_BODY"
-                    },
-                    {
-                        "value": "REQUEST_TOO_LARGE",
-                        "name": "REQUEST_TOO_LARGE"
-                    },
-                    {
-                        "value": "THROTTLED",
-                        "name": "THROTTLED"
-                    },
-                    {
-                        "value": "QUOTA_EXCEEDED",
-                        "name": "QUOTA_EXCEEDED"
-                    },
-                    {
-                        "value": "WAF_FILTERED",
-                        "name": "WAF_FILTERED"
+            "type": "enum",
+            "members": {
+                "DEFAULT_4XX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT_4XX"
                     }
-                ]
+                },
+                "DEFAULT_5XX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DEFAULT_5XX"
+                    }
+                },
+                "RESOURCE_NOT_FOUND": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE_NOT_FOUND"
+                    }
+                },
+                "UNAUTHORIZED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNAUTHORIZED"
+                    }
+                },
+                "INVALID_API_KEY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_API_KEY"
+                    }
+                },
+                "ACCESS_DENIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACCESS_DENIED"
+                    }
+                },
+                "AUTHORIZER_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHORIZER_FAILURE"
+                    }
+                },
+                "AUTHORIZER_CONFIGURATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTHORIZER_CONFIGURATION_ERROR"
+                    }
+                },
+                "INVALID_SIGNATURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID_SIGNATURE"
+                    }
+                },
+                "EXPIRED_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EXPIRED_TOKEN"
+                    }
+                },
+                "MISSING_AUTHENTICATION_TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISSING_AUTHENTICATION_TOKEN"
+                    }
+                },
+                "INTEGRATION_FAILURE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGRATION_FAILURE"
+                    }
+                },
+                "INTEGRATION_TIMEOUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INTEGRATION_TIMEOUT"
+                    }
+                },
+                "API_CONFIGURATION_ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_CONFIGURATION_ERROR"
+                    }
+                },
+                "UNSUPPORTED_MEDIA_TYPE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNSUPPORTED_MEDIA_TYPE"
+                    }
+                },
+                "BAD_REQUEST_PARAMETERS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BAD_REQUEST_PARAMETERS"
+                    }
+                },
+                "BAD_REQUEST_BODY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BAD_REQUEST_BODY"
+                    }
+                },
+                "REQUEST_TOO_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUEST_TOO_LARGE"
+                    }
+                },
+                "THROTTLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THROTTLED"
+                    }
+                },
+                "QUOTA_EXCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUOTA_EXCEEDED"
+                    }
+                },
+                "WAF_FILTERED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAF_FILTERED"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#GatewayResponses": {
@@ -5466,7 +7656,7 @@
                 "parameters": {
                     "target": "com.amazonaws.apigateway#MapOfStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key-value map of query string parameters that specify properties of the export, depending on the requested <code>exportType</code>. For <code>exportType</code> \n            <code>oas30</code> and <code>swagger</code>, any combination of the following parameters are supported: <code>extensions='integrations'</code> or <code>extensions='apigateway'</code> will export the API with x-amazon-apigateway-integration extensions. <code>extensions='authorizers'</code> will export the API with  x-amazon-apigateway-authorizer extensions. <code>postman</code> will export the API with Postman extensions, allowing for import to the Postman tool</p>",
+                        "smithy.api#documentation": "<p>A key-value map of query string parameters that specify properties of the export, depending on the requested <code>exportType</code>. For <code>exportType</code>\n            <code>oas30</code> and <code>swagger</code>, any combination of the following parameters are supported: <code>extensions='integrations'</code> or <code>extensions='apigateway'</code> will export the API with x-amazon-apigateway-integration extensions. <code>extensions='authorizers'</code> will export the API with  x-amazon-apigateway-authorizer extensions. <code>postman</code> will export the API with Postman extensions, allowing for import to the Postman tool</p>",
                         "smithy.api#httpQueryParams": {}
                     }
                 },
@@ -5913,6 +8103,7 @@
                 "flatten": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A query parameter of a Boolean value to resolve (<code>true</code>) all external model references and returns a flattened model schema or not (<code>false</code>) The default is <code>false</code>.</p>",
                         "smithy.api#httpQuery": "flatten"
                     }
@@ -7254,6 +9445,7 @@
                 "failOnWarnings": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A query parameter to indicate whether to rollback ApiKey importation (<code>true</code>) or not (<code>false</code>) when error is encountered.</p>",
                         "smithy.api#httpQuery": "failonwarnings"
                     }
@@ -7321,6 +9513,7 @@
                 "failOnWarnings": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A query parameter to specify whether to rollback the documentation importation (<code>true</code>) or not (<code>false</code>) when a warning is encountered. The default value is <code>false</code>.</p>",
                         "smithy.api#httpQuery": "failonwarnings"
                     }
@@ -7381,6 +9574,7 @@
                 "failOnWarnings": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A query parameter to indicate whether to rollback the API creation (<code>true</code>) or not (<code>false</code>)\n            when a warning is encountered. The default value is <code>false</code>.</p>",
                         "smithy.api#httpQuery": "failonwarnings"
                     }
@@ -7388,7 +9582,7 @@
                 "parameters": {
                     "target": "com.amazonaws.apigateway#MapOfStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.</p>\n        <p> To exclude DocumentationParts from the import, set <code>parameters</code> as <code>ignore=documentation</code>.</p>\n         <p> To configure the endpoint type, set <code>parameters</code> as <code>endpointConfigurationTypes=EDGE</code>, <code>endpointConfigurationTypes=REGIONAL</code>, or <code>endpointConfigurationTypes=PRIVATE</code>. The default endpoint type is <code>EDGE</code>.</p>\n        <p> To handle imported <code>basepath</code>, set <code>parameters</code> as <code>basepath=ignore</code>, <code>basepath=prepend</code> or <code>basepath=split</code>.</p>\n        <p>For example, the AWS CLI command to exclude documentation from the imported API is:</p> \n        <p>The AWS CLI command to set the regional endpoint on the imported API is:</p>",
+                        "smithy.api#documentation": "<p>A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.</p>\n         <p> To exclude DocumentationParts from the import, set <code>parameters</code> as <code>ignore=documentation</code>.</p>\n         <p> To configure the endpoint type, set <code>parameters</code> as <code>endpointConfigurationTypes=EDGE</code>, <code>endpointConfigurationTypes=REGIONAL</code>, or <code>endpointConfigurationTypes=PRIVATE</code>. The default endpoint type is <code>EDGE</code>.</p>\n         <p> To handle imported <code>basepath</code>, set <code>parameters</code> as <code>basepath=ignore</code>, <code>basepath=prepend</code> or <code>basepath=split</code>.</p>\n         <p>For example, the AWS CLI command to exclude documentation from the imported API is:</p>\n         <p>The AWS CLI command to set the regional endpoint on the imported API is:</p>",
                         "smithy.api#httpQueryParams": {}
                     }
                 },
@@ -7406,7 +9600,10 @@
             }
         },
         "com.amazonaws.apigateway#Integer": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.apigateway#Integration": {
             "type": "structure",
@@ -7414,7 +9611,7 @@
                 "type": {
                     "target": "com.amazonaws.apigateway#IntegrationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an API method integration type. The valid value is one of the following:</p>\n       \n        <p>For the HTTP and HTTP proxy integrations, each integration can specify a protocol (<code>http/https</code>), port and path. Standard 80 and 443 ports are supported as well as custom ports above 1024. An HTTP or HTTP proxy integration with a <code>connectionType</code> of <code>VPC_LINK</code> is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.</p>"
+                        "smithy.api#documentation": "<p>Specifies an API method integration type. The valid value is one of the following:</p>\n         <p>For the HTTP and HTTP proxy integrations, each integration can specify a protocol (<code>http/https</code>), port and path. Standard 80 and 443 ports are supported as well as custom ports above 1024. An HTTP or HTTP proxy integration with a <code>connectionType</code> of <code>VPC_LINK</code> is referred to as a private integration and uses a VpcLink to connect API Gateway to a network load balancer of a VPC.</p>"
                     }
                 },
                 "httpMethod": {
@@ -7468,12 +9665,13 @@
                 "contentHandling": {
                     "target": "com.amazonaws.apigateway#ContentHandlingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p>\n     \n         <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehavior</code> is configured to support payload pass-through.</p>"
+                        "smithy.api#documentation": "<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p>\n         <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehavior</code> is configured to support payload pass-through.</p>"
                     }
                 },
                 "timeoutInMillis": {
                     "target": "com.amazonaws.apigateway#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Custom timeout between 50 and 29,000 milliseconds. The default value is 29,000 milliseconds or 29 seconds.</p>"
                     }
                 },
@@ -7536,7 +9734,7 @@
                 "contentHandling": {
                     "target": "com.amazonaws.apigateway#ContentHandlingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how to handle response payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p>\n    \n         <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>"
+                        "smithy.api#documentation": "<p>Specifies how to handle response payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p>\n         <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>"
                     }
                 }
             },
@@ -7545,31 +9743,41 @@
             }
         },
         "com.amazonaws.apigateway#IntegrationType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "<p>The integration type. The valid value is <code>HTTP</code> for integrating an API method with an HTTP backend; <code>AWS</code> with any AWS service endpoints; <code>MOCK</code> for testing without actually invoking the backend; <code>HTTP_PROXY</code> for integrating with the HTTP proxy integration; <code>AWS_PROXY</code> for integrating with the Lambda proxy integration. </p>",
-                "smithy.api#enum": [
-                    {
-                        "value": "HTTP",
-                        "name": "HTTP"
-                    },
-                    {
-                        "value": "AWS",
-                        "name": "AWS"
-                    },
-                    {
-                        "value": "MOCK",
-                        "name": "MOCK"
-                    },
-                    {
-                        "value": "HTTP_PROXY",
-                        "name": "HTTP_PROXY"
-                    },
-                    {
-                        "value": "AWS_PROXY",
-                        "name": "AWS_PROXY"
+            "type": "enum",
+            "members": {
+                "HTTP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP"
                     }
-                ]
+                },
+                "AWS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS"
+                    }
+                },
+                "MOCK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MOCK"
+                    }
+                },
+                "HTTP_PROXY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "HTTP_PROXY"
+                    }
+                },
+                "AWS_PROXY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_PROXY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The integration type. The valid value is <code>HTTP</code> for integrating an API method with an HTTP backend; <code>AWS</code> with any AWS service endpoints; <code>MOCK</code> for testing without actually invoking the backend; <code>HTTP_PROXY</code> for integrating with the HTTP proxy integration; <code>AWS_PROXY</code> for integrating with the Lambda proxy integration. </p>"
             }
         },
         "com.amazonaws.apigateway#LimitExceededException": {
@@ -7757,22 +9965,27 @@
             }
         },
         "com.amazonaws.apigateway#LocationStatusType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DOCUMENTED",
-                        "name": "DOCUMENTED"
-                    },
-                    {
-                        "value": "UNDOCUMENTED",
-                        "name": "UNDOCUMENTED"
+            "type": "enum",
+            "members": {
+                "DOCUMENTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DOCUMENTED"
                     }
-                ]
+                },
+                "UNDOCUMENTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNDOCUMENTED"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#Long": {
-            "type": "long"
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.apigateway#MapOfApiStageThrottleSettings": {
             "type": "map",
@@ -7970,6 +10183,7 @@
                 "metricsEnabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether Amazon CloudWatch metrics are enabled for this method. The PATCH path for this setting is <code>/{method_setting_key}/metrics/enabled</code>, and the value is a Boolean.</p>"
                     }
                 },
@@ -7982,42 +10196,49 @@
                 "dataTraceEnabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether data trace logging is enabled for this method, which affects the log entries pushed to Amazon CloudWatch Logs. The PATCH path for this setting is <code>/{method_setting_key}/logging/dataTrace</code>, and the value is a Boolean.</p>"
                     }
                 },
                 "throttlingBurstLimit": {
                     "target": "com.amazonaws.apigateway#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the throttling burst limit. The PATCH path for this setting is <code>/{method_setting_key}/throttling/burstLimit</code>, and the value is an integer.</p>"
                     }
                 },
                 "throttlingRateLimit": {
                     "target": "com.amazonaws.apigateway#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the throttling rate limit. The PATCH path for this setting is <code>/{method_setting_key}/throttling/rateLimit</code>, and the value is a double.</p>"
                     }
                 },
                 "cachingEnabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether responses should be cached and returned for requests. A cache cluster must be enabled on the stage for responses to be cached. The PATCH path for this setting is <code>/{method_setting_key}/caching/enabled</code>, and the value is a Boolean.</p>"
                     }
                 },
                 "cacheTtlInSeconds": {
                     "target": "com.amazonaws.apigateway#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>Specifies the time to live (TTL), in seconds, for cached responses. The higher the TTL, the longer the response will be cached. The PATCH path for this setting is <code>/{method_setting_key}/caching/ttlInSeconds</code>, and the value is an integer.</p>"
                     }
                 },
                 "cacheDataEncrypted": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the cached responses are encrypted. The PATCH path for this setting is <code>/{method_setting_key}/caching/dataEncrypted</code>, and the value is a Boolean.</p>"
                     }
                 },
                 "requireAuthorizationForCacheControl": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether authorization is required for a cache invalidation request. The PATCH path for this setting is <code>/{method_setting_key}/caching/requireAuthorizationForCacheControl</code>, and the value is a Boolean.</p>"
                     }
                 },
@@ -8044,6 +10265,7 @@
                 "apiKeyRequired": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the method requires a valid ApiKey.</p>"
                     }
                 }
@@ -8172,46 +10394,50 @@
             }
         },
         "com.amazonaws.apigateway#NullableBoolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.apigateway#NullableInteger": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.apigateway#Op": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "add",
-                        "name": "add"
-                    },
-                    {
-                        "value": "remove",
-                        "name": "remove"
-                    },
-                    {
-                        "value": "replace",
-                        "name": "replace"
-                    },
-                    {
-                        "value": "move",
-                        "name": "move"
-                    },
-                    {
-                        "value": "copy",
-                        "name": "copy"
-                    },
-                    {
-                        "value": "test",
-                        "name": "test"
+            "type": "enum",
+            "members": {
+                "add": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "add"
                     }
-                ]
+                },
+                "remove": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "remove"
+                    }
+                },
+                "replace": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "replace"
+                    }
+                },
+                "move": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "move"
+                    }
+                },
+                "copy": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "copy"
+                    }
+                },
+                "test": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "test"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#PatchOperation": {
@@ -8473,7 +10699,7 @@
                 "contentHandling": {
                     "target": "com.amazonaws.apigateway#ContentHandlingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p>\n  \n         <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehavior</code> is configured to support payload pass-through.</p>"
+                        "smithy.api#documentation": "<p>Specifies how to handle request payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p>\n         <p>If this property is not defined, the request payload will be passed through from the method request to integration request without modification, provided that the <code>passthroughBehavior</code> is configured to support payload pass-through.</p>"
                     }
                 },
                 "timeoutInMillis": {
@@ -8583,7 +10809,7 @@
                 "contentHandling": {
                     "target": "com.amazonaws.apigateway#ContentHandlingStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how to handle response payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p>\n    \n         <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>"
+                        "smithy.api#documentation": "<p>Specifies how to handle response payload content type conversions. Supported values are <code>CONVERT_TO_BINARY</code> and <code>CONVERT_TO_TEXT</code>, with the following behaviors:</p>\n         <p>If this property is not defined, the response payload will be passed through from the integration response to the method response without modification.</p>"
                     }
                 }
             },
@@ -8671,6 +10897,7 @@
                 "apiKeyRequired": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether the method required a valid ApiKey.</p>"
                     }
                 },
@@ -8799,18 +11026,20 @@
             }
         },
         "com.amazonaws.apigateway#PutMode": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "merge",
-                        "name": "Merge"
-                    },
-                    {
-                        "value": "overwrite",
-                        "name": "Overwrite"
+            "type": "enum",
+            "members": {
+                "Merge": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "merge"
                     }
-                ]
+                },
+                "Overwrite": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "overwrite"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#PutRestApi": {
@@ -8871,6 +11100,7 @@
                 "failOnWarnings": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A query parameter to indicate whether to rollback the API update (<code>true</code>) or not (<code>false</code>)\n            when a warning is encountered. The default value is <code>false</code>.</p>",
                         "smithy.api#httpQuery": "failonwarnings"
                     }
@@ -8896,22 +11126,26 @@
             }
         },
         "com.amazonaws.apigateway#QuotaPeriodType": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "DAY",
-                        "name": "DAY"
-                    },
-                    {
-                        "value": "WEEK",
-                        "name": "WEEK"
-                    },
-                    {
-                        "value": "MONTH",
-                        "name": "MONTH"
+            "type": "enum",
+            "members": {
+                "DAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DAY"
                     }
-                ]
+                },
+                "WEEK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WEEK"
+                    }
+                },
+                "MONTH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONTH"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#QuotaSettings": {
@@ -8920,12 +11154,14 @@
                 "limit": {
                     "target": "com.amazonaws.apigateway#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The target maximum number of requests that can be made in a given time period.</p>"
                     }
                 },
                 "offset": {
                     "target": "com.amazonaws.apigateway#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of requests subtracted from the given limit in the initial time period.</p>"
                     }
                 },
@@ -8958,12 +11194,14 @@
                 "validateRequestBody": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean flag to indicate whether to validate a request body according to the configured Model schema.</p>"
                     }
                 },
                 "validateRequestParameters": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A Boolean flag to indicate whether to validate request parameters (<code>true</code>) or not (<code>false</code>).</p>"
                     }
                 }
@@ -9132,6 +11370,7 @@
                 "disableExecuteApiEndpoint": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether clients can invoke your API by using the default <code>execute-api</code> endpoint.\n      By default, clients can invoke your API with the default\n      <code>https://{api_id}.execute-api.{region}.amazonaws.com</code> endpoint. To require that clients use a\n      custom domain name to invoke your API, disable the default endpoint.</p>"
                     }
                 }
@@ -9186,6 +11425,7 @@
                 "required": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>A boolean flag of an SdkType configuration property to indicate if the associated SDK configuration property is required (<code>true</code>) or not (<code>false</code>).</p>"
                     }
                 },
@@ -9277,18 +11517,20 @@
             }
         },
         "com.amazonaws.apigateway#SecurityPolicy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "TLS_1_0",
-                        "name": "TLS_1_0"
-                    },
-                    {
-                        "value": "TLS_1_2",
-                        "name": "TLS_1_2"
+            "type": "enum",
+            "members": {
+                "TLS_1_0": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_1_0"
                     }
-                ]
+                },
+                "TLS_1_2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS_1_2"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#ServiceUnavailableException": {
@@ -9340,13 +11582,14 @@
                 "cacheClusterEnabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether a cache cluster is enabled for the stage.</p>"
                     }
                 },
                 "cacheClusterSize": {
                     "target": "com.amazonaws.apigateway#CacheClusterSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the cache cluster for the stage, if enabled.</p>"
+                        "smithy.api#documentation": "<p>The stage's cache capacity in GB. For more information about choosing a cache size, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html\">Enabling API caching to enhance responsiveness</a>.</p>"
                     }
                 },
                 "cacheClusterStatus": {
@@ -9388,6 +11631,7 @@
                 "tracingEnabled": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether active tracing with X-ray is enabled for the Stage.</p>"
                     }
                 },
@@ -9649,6 +11893,7 @@
                 "clientStatus": {
                     "target": "com.amazonaws.apigateway#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status code that the client would have received. Value is 0 if the authorizer succeeded.</p>"
                     }
                 },
@@ -9661,6 +11906,7 @@
                 "latency": {
                     "target": "com.amazonaws.apigateway#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The execution latency of the test authorizer request.</p>"
                     }
                 },
@@ -9798,6 +12044,7 @@
                 "status": {
                     "target": "com.amazonaws.apigateway#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status code.</p>"
                     }
                 },
@@ -9828,6 +12075,7 @@
                 "latency": {
                     "target": "com.amazonaws.apigateway#Long",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The execution latency of the test invoke request.</p>"
                     }
                 }
@@ -9842,12 +12090,14 @@
                 "burstLimit": {
                     "target": "com.amazonaws.apigateway#Integer",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The API target request burst rate limit. This allows more requests through for a period of time than the target rate limit.</p>"
                     }
                 },
                 "rateLimit": {
                     "target": "com.amazonaws.apigateway#Double",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The API target request rate limit.</p>"
                     }
                 }
@@ -9865,6 +12115,7 @@
                 "insecureSkipVerification": {
                     "target": "com.amazonaws.apigateway#Boolean",
                     "traits": {
+                        "smithy.api#default": false,
                         "smithy.api#documentation": "<p>Specifies whether or not API Gateway skips verification that the certificate for an integration endpoint is\n            issued by a supported certificate authority. This isn’t recommended, but it enables you to\n            use certificates that are signed by private certificate authorities, or certificates\n            that are self-signed. If enabled, API Gateway still performs basic certificate\n            validation, which includes checking the certificate's expiration date, hostname, and\n            presence of a root certificate authority. Supported only for <code>HTTP</code> and\n            <code>HTTP_PROXY</code> integrations.</p>\n         <important>\n            <p>Enabling <code>insecureSkipVerification</code> isn't recommended, especially for integrations with public\n          HTTPS endpoints. If you enable <code>insecureSkipVerification</code>, you increase the risk of man-in-the-middle attacks.</p>\n         </important>"
                     }
                 }
@@ -9893,22 +12144,26 @@
             }
         },
         "com.amazonaws.apigateway#UnauthorizedCacheControlHeaderStrategy": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "FAIL_WITH_403",
-                        "name": "FAIL_WITH_403"
-                    },
-                    {
-                        "value": "SUCCEED_WITH_RESPONSE_HEADER",
-                        "name": "SUCCEED_WITH_RESPONSE_HEADER"
-                    },
-                    {
-                        "value": "SUCCEED_WITHOUT_RESPONSE_HEADER",
-                        "name": "SUCCEED_WITHOUT_RESPONSE_HEADER"
+            "type": "enum",
+            "members": {
+                "FAIL_WITH_403": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAIL_WITH_403"
                     }
-                ]
+                },
+                "SUCCEED_WITH_RESPONSE_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEED_WITH_RESPONSE_HEADER"
+                    }
+                },
+                "SUCCEED_WITHOUT_RESPONSE_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEED_WITHOUT_RESPONSE_HEADER"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#UnauthorizedException": {
@@ -10213,7 +12468,7 @@
                 "basePath": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The base path of the BasePathMapping resource to change.</p>\n        <p>To specify an empty base path, set this parameter to <code>'(none)'</code>.</p>",
+                        "smithy.api#documentation": "<p>The base path of the BasePathMapping resource to change.</p>\n         <p>To specify an empty base path, set this parameter to <code>'(none)'</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -11663,26 +13918,32 @@
             }
         },
         "com.amazonaws.apigateway#VpcLinkStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "AVAILABLE",
-                        "name": "AVAILABLE"
-                    },
-                    {
-                        "value": "PENDING",
-                        "name": "PENDING"
-                    },
-                    {
-                        "value": "DELETING",
-                        "name": "DELETING"
-                    },
-                    {
-                        "value": "FAILED",
-                        "name": "FAILED"
+            "type": "enum",
+            "members": {
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
                     }
-                ]
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.apigateway#VpcLinks": {
