@@ -1,3 +1,7 @@
+# v1.17.0 (2022-12-29)
+
+* **Feature**: Added owning service filter, include planned deletion flag, and next rotation date response parameter in ListSecrets.
+
 # v1.16.11 (2022-12-22)
 
 * **Documentation**: Documentation updates for Secrets Manager

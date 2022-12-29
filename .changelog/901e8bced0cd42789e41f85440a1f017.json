@@ -1,8 +1,0 @@
-{
-    "id": "901e8bce-d0cd-4278-9e41-f85440a1f017",
-    "type": "feature",
-    "description": "Added owning service filter, include planned deletion flag, and next rotation date response parameter in ListSecrets.",
-    "modules": [
-        "service/secretsmanager"
-    ]
-}

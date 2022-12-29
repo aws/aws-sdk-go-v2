@@ -1,3 +1,7 @@
+# v1.11.0 (2022-12-29)
+
+* **Feature**: This release extends Wisdom CreateContent and StartContentUpload APIs to support PDF and MicrosoftWord docx document uploading.
+
 # v1.10.5 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

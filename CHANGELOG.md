@@ -1,3 +1,15 @@
+# Release (2022-12-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.15.28](service/apigateway/CHANGELOG.md#v11528-2022-12-29)
+  * **Documentation**: Documentation updates for Amazon API Gateway
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.21.0](service/emr/CHANGELOG.md#v1210-2022-12-29)
+  * **Feature**: Added GetClusterSessionCredentials API to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters with runtime roles and AWS Lake Formation-based access control for Apache Spark, Apache Hive, and Presto queries.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.17.0](service/secretsmanager/CHANGELOG.md#v1170-2022-12-29)
+  * **Feature**: Added owning service filter, include planned deletion flag, and next rotation date response parameter in ListSecrets.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.11.0](service/wisdom/CHANGELOG.md#v1110-2022-12-29)
+  * **Feature**: This release extends Wisdom CreateContent and StartContentUpload APIs to support PDF and MicrosoftWord docx document uploading.
+
 # Release (2022-12-28)
 
 ## Module Highlights

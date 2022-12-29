@@ -1,3 +1,7 @@
+# v1.21.0 (2022-12-29)
+
+* **Feature**: Added GetClusterSessionCredentials API to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters with runtime roles and AWS Lake Formation-based access control for Apache Spark, Apache Hive, and Presto queries.
+
 # v1.20.18 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions
