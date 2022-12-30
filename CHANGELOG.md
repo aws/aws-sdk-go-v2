@@ -1,3 +1,11 @@
+# Release (2022-12-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.23.0](service/cloudfront/CHANGELOG.md#v1230-2022-12-30)
+  * **Feature**: Extend response headers policy to support removing headers from viewer responses
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.2.1](service/iotfleetwise/CHANGELOG.md#v121-2022-12-30)
+  * **Documentation**: Update documentation - correct the epoch constant value of default value for expiryTime field in CreateCampaign request.
+
 # Release (2022-12-29)
 
 ## Module Highlights

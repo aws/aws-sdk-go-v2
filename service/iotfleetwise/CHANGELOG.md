@@ -1,3 +1,7 @@
+# v1.2.1 (2022-12-30)
+
+* **Documentation**: Update documentation - correct the epoch constant value of default value for expiryTime field in CreateCampaign request.
+
 # v1.2.0 (2022-12-16)
 
 * **Feature**: Updated error handling for empty resource names in "UpdateSignalCatalog" and "GetModelManifest" operations.

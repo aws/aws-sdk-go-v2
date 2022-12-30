@@ -1,8 +1,0 @@
-{
-    "id": "412ff80c-bc67-4252-b1f0-e1f4e3d11e6e",
-    "type": "feature",
-    "description": "Extend response headers policy to support removing headers from viewer responses",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

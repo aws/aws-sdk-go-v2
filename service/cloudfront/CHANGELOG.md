@@ -1,3 +1,7 @@
+# v1.23.0 (2022-12-30)
+
+* **Feature**: Extend response headers policy to support removing headers from viewer responses
+
 # v1.22.2 (2022-12-16)
 
 * **Documentation**: Updated documentation for CloudFront
