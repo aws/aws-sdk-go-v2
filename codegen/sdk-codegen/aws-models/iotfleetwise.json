@@ -814,7 +814,7 @@
                 "expiryTime": {
                     "target": "com.amazonaws.iotfleetwise#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Optional) The time the campaign expires, in seconds since epoch (January 1, 1970 at\n            midnight UTC time). Vehicle data won't be collected after the campaign expires. </p>\n        <p>Default: 253402243200 (December 31, 9999, 00:00:00 UTC)</p>"
+                        "smithy.api#documentation": "<p> (Optional) The time the campaign expires, in seconds since epoch (January 1, 1970 at\n            midnight UTC time). Vehicle data won't be collected after the campaign expires. </p>\n        <p>Default: 253402214400 (December 31, 9999, 00:00:00 UTC)</p>"
                     }
                 },
                 "postTriggerCollectionDuration": {
@@ -3830,8 +3830,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": true,
+                                "Region": "eu-central-1",
                                 "UseFIPS": true
                             }
                         },
@@ -3843,8 +3843,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": true
                             }
                         },
@@ -3856,8 +3856,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": true,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false
                             }
                         },
@@ -3869,8 +3869,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "eu-central-1",
                                 "UseDualStack": false,
+                                "Region": "eu-central-1",
                                 "UseFIPS": false
                             }
                         },
@@ -3882,8 +3882,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -3895,8 +3895,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true
                             }
                         },
@@ -3908,8 +3908,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -3921,8 +3921,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false
                             }
                         },
@@ -3934,8 +3934,8 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
@@ -3946,8 +3946,8 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
@@ -3958,8 +3958,8 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
