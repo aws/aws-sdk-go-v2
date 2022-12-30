@@ -11100,6 +11100,19 @@ func awsRestxml_serializeDocumentResponseHeadersPolicyConfig(v *types.ResponseHe
 		el := value.MemberElement(root)
 		el.String(*v.Name)
 	}
+	if v.RemoveHeadersConfig != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "RemoveHeadersConfig",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentResponseHeadersPolicyRemoveHeadersConfig(v.RemoveHeadersConfig, el); err != nil {
+			return err
+		}
+	}
 	if v.SecurityHeadersConfig != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{
@@ -11401,6 +11414,73 @@ func awsRestxml_serializeDocumentResponseHeadersPolicyReferrerPolicy(v *types.Re
 		}
 		el := value.MemberElement(root)
 		el.String(string(v.ReferrerPolicy))
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentResponseHeadersPolicyRemoveHeader(v *types.ResponseHeadersPolicyRemoveHeader, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Header != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Header",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.String(*v.Header)
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentResponseHeadersPolicyRemoveHeaderList(v []types.ResponseHeadersPolicyRemoveHeader, value smithyxml.Value) error {
+	var array *smithyxml.Array
+	if !value.IsFlattened() {
+		defer value.Close()
+	}
+	customMemberNameAttr := []smithyxml.Attr{}
+	customMemberName := smithyxml.StartElement{
+		Name: smithyxml.Name{
+			Local: "ResponseHeadersPolicyRemoveHeader",
+		},
+		Attr: customMemberNameAttr,
+	}
+	array = value.ArrayWithCustomName(customMemberName)
+	for i := range v {
+		am := array.Member()
+		if err := awsRestxml_serializeDocumentResponseHeadersPolicyRemoveHeader(&v[i], am); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestxml_serializeDocumentResponseHeadersPolicyRemoveHeadersConfig(v *types.ResponseHeadersPolicyRemoveHeadersConfig, value smithyxml.Value) error {
+	defer value.Close()
+	if v.Items != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Items",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		if err := awsRestxml_serializeDocumentResponseHeadersPolicyRemoveHeaderList(v.Items, el); err != nil {
+			return err
+		}
+	}
+	if v.Quantity != nil {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "Quantity",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Integer(*v.Quantity)
 	}
 	return nil
 }

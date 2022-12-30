@@ -2892,6 +2892,32 @@ func (e *TooManyRealtimeLogConfigs) ErrorMessage() string {
 func (e *TooManyRealtimeLogConfigs) ErrorCode() string             { return "TooManyRealtimeLogConfigs" }
 func (e *TooManyRealtimeLogConfigs) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The number of headers in RemoveHeadersConfig in the response headers policy
+// exceeds the maximum. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyRemoveHeadersInResponseHeadersPolicy struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TooManyRemoveHeadersInResponseHeadersPolicy) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyRemoveHeadersInResponseHeadersPolicy) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyRemoveHeadersInResponseHeadersPolicy) ErrorCode() string {
+	return "TooManyRemoveHeadersInResponseHeadersPolicy"
+}
+func (e *TooManyRemoveHeadersInResponseHeadersPolicy) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // You have reached the maximum number of response headers policies for this Amazon
 // Web Services account. For more information, see Quotas
 // (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)

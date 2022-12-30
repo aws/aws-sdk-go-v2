@@ -1,0 +1,8 @@
+{
+    "id": "d736706a-13a0-4af7-8f4d-507499d14dbb",
+    "type": "documentation",
+    "description": "Update documentation - correct the epoch constant value of default value for expiryTime field in CreateCampaign request.",
+    "modules": [
+        "service/iotfleetwise"
+    ]
+}

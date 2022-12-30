@@ -3952,6 +3952,11 @@ func validateResponseHeadersPolicyConfig(v *types.ResponseHeadersPolicyConfig) e
 			invalidParams.AddNested("CustomHeadersConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RemoveHeadersConfig != nil {
+		if err := validateResponseHeadersPolicyRemoveHeadersConfig(v.RemoveHeadersConfig); err != nil {
+			invalidParams.AddNested("RemoveHeadersConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4122,6 +4127,58 @@ func validateResponseHeadersPolicyReferrerPolicy(v *types.ResponseHeadersPolicyR
 	}
 	if len(v.ReferrerPolicy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ReferrerPolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyRemoveHeader(v *types.ResponseHeadersPolicyRemoveHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyRemoveHeader"}
+	if v.Header == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Header"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyRemoveHeaderList(v []types.ResponseHeadersPolicyRemoveHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyRemoveHeaderList"}
+	for i := range v {
+		if err := validateResponseHeadersPolicyRemoveHeader(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyRemoveHeadersConfig(v *types.ResponseHeadersPolicyRemoveHeadersConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyRemoveHeadersConfig"}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if v.Items != nil {
+		if err := validateResponseHeadersPolicyRemoveHeaderList(v.Items); err != nil {
+			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

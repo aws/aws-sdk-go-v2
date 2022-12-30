@@ -3965,13 +3965,14 @@ type RealtimeMetricsSubscriptionConfig struct {
 }
 
 // A response headers policy. A response headers policy contains information about
-// a set of HTTP response headers and their values. After you create a response
-// headers policy, you can use its ID to attach it to one or more cache behaviors
-// in a CloudFront distribution. When it's attached to a cache behavior, CloudFront
-// adds the headers in the policy to HTTP responses that it sends for requests that
-// match the cache behavior. For more information, see Adding HTTP headers to
-// CloudFront responses
-// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/adding-response-headers.html)
+// a set of HTTP response headers. After you create a response headers policy, you
+// can use its ID to attach it to one or more cache behaviors in a CloudFront
+// distribution. When it's attached to a cache behavior, the response headers
+// policy affects the HTTP headers that CloudFront includes in HTTP responses to
+// requests that match the cache behavior. CloudFront adds or removes response
+// headers according to the configuration of the response headers policy. For more
+// information, see Adding or removing HTTP headers in CloudFront responses
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/modifying-response-headers.html)
 // in the Amazon CloudFront Developer Guide.
 type ResponseHeadersPolicy struct {
 
@@ -3985,10 +3986,7 @@ type ResponseHeadersPolicy struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// A response headers policy configuration. A response headers policy contains
-	// information about a set of HTTP response headers and their values. CloudFront
-	// adds the headers in the policy to HTTP responses that it sends for requests that
-	// match a cache behavior that's associated with the policy.
+	// A response headers policy configuration.
 	//
 	// This member is required.
 	ResponseHeadersPolicyConfig *ResponseHeadersPolicyConfig
@@ -4100,9 +4098,7 @@ type ResponseHeadersPolicyAccessControlExposeHeaders struct {
 
 // A response headers policy configuration. A response headers policy configuration
 // contains metadata about the response headers policy, and configurations for sets
-// of HTTP response headers and their values. CloudFront adds the headers in the
-// policy to HTTP responses that it sends for requests that match a cache behavior
-// associated with the policy.
+// of HTTP response headers.
 type ResponseHeadersPolicyConfig struct {
 
 	// A name to identify the response headers policy. The name must be unique for
@@ -4121,6 +4117,9 @@ type ResponseHeadersPolicyConfig struct {
 
 	// A configuration for a set of custom HTTP response headers.
 	CustomHeadersConfig *ResponseHeadersPolicyCustomHeadersConfig
+
+	// A configuration for a set of HTTP headers to remove from the HTTP response.
+	RemoveHeadersConfig *ResponseHeadersPolicyRemoveHeadersConfig
 
 	// A configuration for a set of security-related HTTP response headers.
 	SecurityHeadersConfig *ResponseHeadersPolicySecurityHeadersConfig
@@ -4377,6 +4376,35 @@ type ResponseHeadersPolicyReferrerPolicy struct {
 	//
 	// This member is required.
 	ReferrerPolicy ReferrerPolicyList
+
+	noSmithyDocumentSerde
+}
+
+// The name of an HTTP header that CloudFront removes from HTTP responses to
+// requests that match the cache behavior that this response headers policy is
+// attached to.
+type ResponseHeadersPolicyRemoveHeader struct {
+
+	// The HTTP header name.
+	//
+	// This member is required.
+	Header *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of HTTP header names that CloudFront removes from HTTP responses to
+// requests that match the cache behavior that this response headers policy is
+// attached to.
+type ResponseHeadersPolicyRemoveHeadersConfig struct {
+
+	// The number of HTTP header names in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// The list of HTTP header names.
+	Items []ResponseHeadersPolicyRemoveHeader
 
 	noSmithyDocumentSerde
 }

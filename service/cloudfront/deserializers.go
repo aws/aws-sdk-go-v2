@@ -3455,6 +3455,9 @@ func awsRestxml_deserializeOpErrorCreateResponseHeadersPolicy(response *smithyht
 	case strings.EqualFold("TooManyCustomHeadersInResponseHeadersPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyCustomHeadersInResponseHeadersPolicy(response, errorBody)
 
+	case strings.EqualFold("TooManyRemoveHeadersInResponseHeadersPolicy", errorCode):
+		return awsRestxml_deserializeErrorTooManyRemoveHeadersInResponseHeadersPolicy(response, errorBody)
+
 	case strings.EqualFold("TooManyResponseHeadersPolicies", errorCode):
 		return awsRestxml_deserializeErrorTooManyResponseHeadersPolicies(response, errorBody)
 
@@ -16054,6 +16057,9 @@ func awsRestxml_deserializeOpErrorUpdateResponseHeadersPolicy(response *smithyht
 	case strings.EqualFold("TooManyCustomHeadersInResponseHeadersPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyCustomHeadersInResponseHeadersPolicy(response, errorBody)
 
+	case strings.EqualFold("TooManyRemoveHeadersInResponseHeadersPolicy", errorCode):
+		return awsRestxml_deserializeErrorTooManyRemoveHeadersInResponseHeadersPolicy(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -22283,6 +22289,50 @@ func awsRestxml_deserializeErrorTooManyRealtimeLogConfigs(response *smithyhttp.R
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyRealtimeLogConfigs(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsRestxml_deserializeErrorTooManyRemoveHeadersInResponseHeadersPolicy(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.TooManyRemoveHeadersInResponseHeadersPolicy{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentTooManyRemoveHeadersInResponseHeadersPolicy(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -39512,6 +39562,12 @@ func awsRestxml_deserializeDocumentResponseHeadersPolicyConfig(v **types.Respons
 				sv.Name = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("RemoveHeadersConfig", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentResponseHeadersPolicyRemoveHeadersConfig(&sv.RemoveHeadersConfig, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("SecurityHeadersConfig", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentResponseHeadersPolicySecurityHeadersConfig(&sv.SecurityHeadersConfig, nodeDecoder); err != nil {
@@ -40221,6 +40277,182 @@ func awsRestxml_deserializeDocumentResponseHeadersPolicyReferrerPolicy(v **types
 			{
 				xtv := string(val)
 				sv.ReferrerPolicy = types.ReferrerPolicyList(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentResponseHeadersPolicyRemoveHeader(v **types.ResponseHeadersPolicyRemoveHeader, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ResponseHeadersPolicyRemoveHeader
+	if *v == nil {
+		sv = &types.ResponseHeadersPolicyRemoveHeader{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Header", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Header = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentResponseHeadersPolicyRemoveHeaderList(v *[]types.ResponseHeadersPolicyRemoveHeader, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.ResponseHeadersPolicyRemoveHeader
+	if *v == nil {
+		sv = make([]types.ResponseHeadersPolicyRemoveHeader, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("ResponseHeadersPolicyRemoveHeader", t.Name.Local):
+			var col types.ResponseHeadersPolicyRemoveHeader
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsRestxml_deserializeDocumentResponseHeadersPolicyRemoveHeader(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentResponseHeadersPolicyRemoveHeaderListUnwrapped(v *[]types.ResponseHeadersPolicyRemoveHeader, decoder smithyxml.NodeDecoder) error {
+	var sv []types.ResponseHeadersPolicyRemoveHeader
+	if *v == nil {
+		sv = make([]types.ResponseHeadersPolicyRemoveHeader, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.ResponseHeadersPolicyRemoveHeader
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentResponseHeadersPolicyRemoveHeader(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsRestxml_deserializeDocumentResponseHeadersPolicyRemoveHeadersConfig(v **types.ResponseHeadersPolicyRemoveHeadersConfig, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.ResponseHeadersPolicyRemoveHeadersConfig
+	if *v == nil {
+		sv = &types.ResponseHeadersPolicyRemoveHeadersConfig{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Items", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentResponseHeadersPolicyRemoveHeaderList(&sv.Items, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Quantity", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Quantity = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -44788,6 +45020,55 @@ func awsRestxml_deserializeDocumentTooManyRealtimeLogConfigs(v **types.TooManyRe
 	var sv *types.TooManyRealtimeLogConfigs
 	if *v == nil {
 		sv = &types.TooManyRealtimeLogConfigs{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentTooManyRemoveHeadersInResponseHeadersPolicy(v **types.TooManyRemoveHeadersInResponseHeadersPolicy, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.TooManyRemoveHeadersInResponseHeadersPolicy
+	if *v == nil {
+		sv = &types.TooManyRemoveHeadersInResponseHeadersPolicy{}
 	} else {
 		sv = *v
 	}
