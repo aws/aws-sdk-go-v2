@@ -11,10 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon Security Lake allows you to specify where to store your security data and
-// for how long. You can specify a rollup Region to consolidate data from multiple
-// regions. You can update the properties of a Region or source. Input can either
-// be directly specified to the API.
+// Specifies where to store your security data and for how long. You can add a
+// rollup Region to consolidate data from multiple Amazon Web Services Regions.
 func (c *Client) UpdateDatalake(ctx context.Context, params *UpdateDatalakeInput, optFns ...func(*Options)) (*UpdateDatalakeOutput, error) {
 	if params == nil {
 		params = &UpdateDatalakeInput{}
@@ -32,7 +30,7 @@ func (c *Client) UpdateDatalake(ctx context.Context, params *UpdateDatalakeInput
 
 type UpdateDatalakeInput struct {
 
-	// The configuration object
+	// Specify the Region or Regions that will contribute data to the rollup region.
 	//
 	// This member is required.
 	Configurations map[string]types.LakeConfigurationRequest

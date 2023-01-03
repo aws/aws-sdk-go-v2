@@ -12,7 +12,8 @@ import (
 )
 
 // Creates a subscription permission for accounts that are already enabled in
-// Security Lake.
+// Amazon Security Lake. You can create a subscriber with access to data in the
+// current Amazon Web Services Region.
 func (c *Client) CreateSubscriber(ctx context.Context, params *CreateSubscriberInput, optFns ...func(*Options)) (*CreateSubscriberOutput, error) {
 	if params == nil {
 		params = &CreateSubscriberInput{}
@@ -30,27 +31,27 @@ func (c *Client) CreateSubscriber(ctx context.Context, params *CreateSubscriberI
 
 type CreateSubscriberInput struct {
 
-	// The third party Amazon Web Services account ID used to access your data.
+	// The Amazon Web Services account ID used to access your data.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The external ID of the subscriber. External ID allows the user that is assuming
-	// the role to assert the circumstances in which they are operating. It also
-	// provides a way for the account owner to permit the role to be assumed only under
-	// specific circumstances.
+	// The external ID of the subscriber. This lets the user that is assuming the role
+	// assert the circumstances in which they are operating. It also provides a way for
+	// the account owner to permit the role to be assumed only under specific
+	// circumstances.
 	//
 	// This member is required.
 	ExternalId *string
 
-	// The supported Amazon Web Services services from which logs and events are
-	// collected. Amazon Security Lake supports logs and events collection for
-	// natively-supported Amazon Web Services services.
+	// The supported Amazon Web Services from which logs and events are collected.
+	// Security Lake supports log and event collection for natively supported Amazon
+	// Web Services.
 	//
 	// This member is required.
 	SourceTypes []types.SourceType
 
-	// The name of your Amazon Security Lake subscriber account.
+	// The name of your Security Lake subscriber account.
 	//
 	// This member is required.
 	SubscriberName *string
@@ -58,7 +59,7 @@ type CreateSubscriberInput struct {
 	// The Amazon S3 or Lake Formation access type.
 	AccessTypes []types.AccessType
 
-	// The subscriber descriptions for the subscriber account in Amazon Security Lake.
+	// The description for your subscriber account in Security Lake.
 	SubscriberDescription *string
 
 	noSmithyDocumentSerde
@@ -66,20 +67,21 @@ type CreateSubscriberInput struct {
 
 type CreateSubscriberOutput struct {
 
-	// The subscriptionId that was created by the CreateSubscriber API call.
+	// The subscriptionId created by the CreateSubscriber API call.
 	//
 	// This member is required.
 	SubscriptionId *string
 
-	// The Amazon Resource Name (ARN) created by the user to provide to the subscriber.
-	// For more information about ARNs and how to use them in policies, see IAM
-	// identifiers in the IAM User Guide.
+	// The Amazon Resource Name (ARN) created by you to provide to the subscriber. For
+	// more information about ARNs and how to use them in policies, see IAM identifiers
+	// in the Identity and Access Management (IAM) User Guide
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html). .
 	RoleArn *string
 
-	// The Amazon Resource Name (ARN) for the Amazon S3 bucket.
+	// The ARN for the Amazon S3 bucket.
 	S3BucketArn *string
 
-	// The Amazon Resource Name (ARN) for the Amazon Simple Notification Service.
+	// The ARN for the Amazon Simple Notification Service.
 	SnsArn *string
 
 	// Metadata pertaining to the operation's result.

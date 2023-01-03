@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the specified notification subscription in Security Lake. Creates the
-// specified subscription notifications in the specified organization.
+// Creates the specified notification subscription in Amazon Security Lake for the
+// organization you specify.
 func (c *Client) CreateDatalakeExceptionsSubscription(ctx context.Context, params *CreateDatalakeExceptionsSubscriptionInput, optFns ...func(*Options)) (*CreateDatalakeExceptionsSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateDatalakeExceptionsSubscriptionInput{}
@@ -30,12 +30,13 @@ func (c *Client) CreateDatalakeExceptionsSubscription(ctx context.Context, param
 
 type CreateDatalakeExceptionsSubscriptionInput struct {
 
-	// The account in which the exception notifications subscription is created.
+	// The Amazon Web Services account where you want to receive exception
+	// notifications.
 	//
 	// This member is required.
 	NotificationEndpoint *string
 
-	// The subscription protocol to which exception messages are posted.
+	// The subscription protocol to which exception notifications are posted.
 	//
 	// This member is required.
 	SubscriptionProtocol types.SubscriptionProtocolType

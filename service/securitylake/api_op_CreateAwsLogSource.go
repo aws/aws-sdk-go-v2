@@ -11,20 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a natively-supported Amazon Web Services service as a Security Lake source.
-// Enables source types for member accounts in required Regions, based on specified
-// parameters. You can choose any source type in any Region for accounts that are
-// either part of a trusted organization or standalone accounts. At least one of
-// the three dimensions is a mandatory input to this API. However, any combination
-// of the three dimensions can be supplied to this API. By default, dimension
-// refers to the entire set. When you don't provide a dimension, Security Lake
-// assumes that the missing dimension refers to the entire set. This is overridden
-// when you supply any one of the inputs. For instance, when members is not
-// specified, the API disables all Security Lake member accounts for sources.
-// Similarly, when Regions are not specified, Security Lake is disabled for all the
-// Regions where Security Lake is available as a service. You can use this API only
-// to enable a natively-supported Amazon Web Services services as a source. Use
-// CreateCustomLogSource to enable data collection from a custom source.
+// Adds a natively supported Amazon Web Service as an Amazon Security Lake source.
+// Enables source types for member accounts in required Amazon Web Services
+// Regions, based on the parameters you specify. You can choose any source type in
+// any Region for either accounts that are part of a trusted organization or
+// standalone accounts. At least one of the three dimensions is a mandatory input
+// to this API. However, you can supply any combination of the three dimensions to
+// this API. By default, a dimension refers to the entire set. When you don't
+// provide a dimension, Security Lake assumes that the missing dimension refers to
+// the entire set. This is overridden when you supply any one of the inputs. For
+// instance, when you do not specify members, the API enables all Security Lake
+// member accounts for all sources. Similarly, when you do not specify Regions,
+// Security Lake is enabled for all the Regions where Security Lake is available as
+// a service. You can use this API only to enable natively supported Amazon Web
+// Services as a source. Use CreateCustomLogSource to enable data collection from a
+// custom source.
 func (c *Client) CreateAwsLogSource(ctx context.Context, params *CreateAwsLogSourceInput, optFns ...func(*Options)) (*CreateAwsLogSourceOutput, error) {
 	if params == nil {
 		params = &CreateAwsLogSourceInput{}
@@ -42,19 +43,22 @@ func (c *Client) CreateAwsLogSource(ctx context.Context, params *CreateAwsLogSou
 
 type CreateAwsLogSourceInput struct {
 
-	// Specifies the input order to enable dimensions in Security Lake, namely region,
+	// Specifies the input order to enable dimensions in Security Lake, namely Region,
 	// source type, and member account.
 	//
 	// This member is required.
 	InputOrder []types.Dimension
 
-	// Enables specific sources in all Regions and source types.
+	// Enables data collection from specific Amazon Web Services sources in all
+	// specific accounts and specific Regions.
 	EnableAllDimensions map[string]map[string][]string
 
-	// Enables all sources in specific accounts or Regions.
+	// Enables data collection from all Amazon Web Services sources in specific
+	// accounts or Regions.
 	EnableSingleDimension []string
 
-	// Enables specific service sources in specific accounts or Regions.
+	// Enables data collection from specific Amazon Web Services sources in specific
+	// accounts or Regions.
 	EnableTwoDimensions map[string][]string
 
 	noSmithyDocumentSerde
@@ -62,13 +66,13 @@ type CreateAwsLogSourceInput struct {
 
 type CreateAwsLogSourceOutput struct {
 
-	// List of all accounts in which enabling a natively-supported Amazon Web Services
-	// service as a Security Lake failed. The failure occurred as these accounts are
-	// not part of an organization.
+	// Lists all accounts in which enabling a natively supported Amazon Web Service as
+	// a Security Lake source failed. The failure occurred as these accounts are not
+	// part of an organization.
 	Failed []string
 
-	// List of all accounts which are in the process of enabling a natively-supported
-	// Amazon Web Services service as a Security Lake.
+	// Lists the accounts that are in the process of enabling a natively supported
+	// Amazon Web Service as a Security Lake source.
 	Processing []string
 
 	// Metadata pertaining to the operation's result.

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the log sources in the current region.
+// Retrieves the log sources in the current Amazon Web Services Region.
 func (c *Client) ListLogSources(ctx context.Context, params *ListLogSourcesInput, optFns ...func(*Options)) (*ListLogSourcesOutput, error) {
 	if params == nil {
 		params = &ListLogSourcesInput{}
@@ -34,23 +34,24 @@ type ListLogSourcesInput struct {
 	// account.
 	InputOrder []types.Dimension
 
-	// List the view of log sources for enabled Security Lake accounts in all Regions
-	// and source types.
+	// List the view of log sources for enabled Amazon Security Lake accounts for
+	// specific Amazon Web Services sources from specific accounts and specific
+	// Regions.
 	ListAllDimensions map[string]map[string][]string
 
-	// List the view of log sources for enabled Security Lake accounts for the entire
-	// region.
+	// List the view of log sources for enabled Security Lake accounts for all Amazon
+	// Web Services sources from specific accounts or specific Regions.
 	ListSingleDimension []string
 
-	// Lists the log sources for the specified source types in enabled Security Lake
-	// accounts for the entire Region, for selected member accounts.
+	// Lists the view of log sources for enabled Security Lake accounts for specific
+	// Amazon Web Services sources from specific accounts or specific Regions.
 	ListTwoDimensions map[string][]string
 
-	// The maximum number of accounts for which the configuration is displayed.
+	// The maximum number of accounts for which the log sources are displayed.
 	MaxResults *int32
 
-	// If nextToken is returned, there are more results available. You can make the
-	// call again using the returned token to retrieve the next page.
+	// If nextToken is returned, there are more results available. You can repeat the
+	// call using the returned token to retrieve the next page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -58,13 +59,13 @@ type ListLogSourcesInput struct {
 
 type ListLogSourcesOutput struct {
 
-	// Lists the log sources in the Regions for enabled Security Lake accounts.
+	// Lists the log sources by Regions for enabled Security Lake accounts.
 	//
 	// This member is required.
 	RegionSourceTypesAccountsList []map[string]map[string][]string
 
-	// If nextToken is returned, there are more results available. You can make the
-	// call again using the returned token to retrieve the next page.
+	// If nextToken is returned, there are more results available. You can repeat the
+	// call using the returned token to retrieve the next page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,7 +144,7 @@ var _ ListLogSourcesAPIClient = (*Client)(nil)
 
 // ListLogSourcesPaginatorOptions is the paginator options for ListLogSources
 type ListLogSourcesPaginatorOptions struct {
-	// The maximum number of accounts for which the configuration is displayed.
+	// The maximum number of accounts for which the log sources are displayed.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

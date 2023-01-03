@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the Amazon Security Lake exceptions that you can use to find the source of
+// Lists the Amazon Security Lake exceptions that you can use to find the source of
 // problems and fix them.
 func (c *Client) ListDatalakeExceptions(ctx context.Context, params *ListDatalakeExceptionsInput, optFns ...func(*Options)) (*ListDatalakeExceptionsOutput, error) {
 	if params == nil {
@@ -34,11 +34,14 @@ type ListDatalakeExceptionsInput struct {
 	// List the maximum number of failures in Security Lake.
 	MaxFailures *int32
 
-	// List if there are more results available. if nextToken is returned, You can make
-	// the call again using the returned token to retrieve the next page
+	// List if there are more results available. The value of nextToken is a unique
+	// pagination token for each page. Repeat the call using the returned token to
+	// retrieve the next page. Keep all other arguments unchanged. Each pagination
+	// token expires after 24 hours. Using an expired pagination token will return an
+	// HTTP 400 InvalidToken error.
 	NextToken *string
 
-	// List the regions from which exceptions are retrieved.
+	// List the Amazon Web Services Regions from which exceptions are retrieved.
 	RegionSet []types.Region
 
 	noSmithyDocumentSerde
@@ -46,13 +49,16 @@ type ListDatalakeExceptionsInput struct {
 
 type ListDatalakeExceptionsOutput struct {
 
-	// Lists the non-retryable failures in the current region.
+	// Lists the failures that cannot be retried in the current Region.
 	//
 	// This member is required.
 	NonRetryableFailures []types.FailuresResponse
 
-	// List if there are more results available. if nextToken is returned, You can make
-	// the call again using the returned token to retrieve the next page
+	// List if there are more results available. The value of nextToken is a unique
+	// pagination token for each page. Repeat the call using the returned token to
+	// retrieve the next page. Keep all other arguments unchanged. Each pagination
+	// token expires after 24 hours. Using an expired pagination token will return an
+	// HTTP 400 InvalidToken error.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the specified notification subscription in Security Lake. Creates the
-// specified subscription notifications from the specified organization.
+// Notifies the subscriber when new data is written to the data lake for the
+// sources that the subscriber consumes in Security Lake.
 func (c *Client) CreateSubscriptionNotificationConfiguration(ctx context.Context, params *CreateSubscriptionNotificationConfigurationInput, optFns ...func(*Options)) (*CreateSubscriptionNotificationConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateSubscriptionNotificationConfigurationInput{}
@@ -30,28 +30,29 @@ func (c *Client) CreateSubscriptionNotificationConfiguration(ctx context.Context
 
 type CreateSubscriptionNotificationConfigurationInput struct {
 
-	// The subscription ID for which the subscription notification is specified.
+	// The subscription ID for the notification subscription/
 	//
 	// This member is required.
 	SubscriptionId *string
 
-	// Create a new subscription notification for the specified subscription ID in
-	// Security Lake.
+	// Create an Amazon Simple Queue Service queue.
 	CreateSqs *bool
 
-	// The key name for the subscription notification.
+	// The key name for the notification subscription.
 	HttpsApiKeyName *string
 
-	// The key value for the subscription notification.
+	// The key value for the notification subscription.
 	HttpsApiKeyValue *string
 
-	// The HTTPS method used for the subscription notification.
+	// The HTTPS method used for the notification subscription.
 	HttpsMethod types.HttpsMethod
 
-	// The Amazon Resource Name (ARN) specifying the role of the subscriber.
+	// The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role that
+	// you created.
 	RoleArn *string
 
-	// The subscription endpoint in Security Lake.
+	// The subscription endpoint in Security Lake. If you prefer notification with an
+	// HTTPs endpoint, populate this field.
 	SubscriptionEndpoint *string
 
 	noSmithyDocumentSerde
@@ -59,7 +60,7 @@ type CreateSubscriptionNotificationConfigurationInput struct {
 
 type CreateSubscriptionNotificationConfigurationOutput struct {
 
-	// Returns the Amazon resource name (ARN) of the queue.
+	// Returns the Amazon Resource Name (ARN) of the queue.
 	QueueArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -31,7 +31,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon Security Lake can't find an Amazon Web Services account with the
+// Amazon Security Lake cannot find an Amazon Web Services account with the
 // accountID that you specified, or the account whose credentials you used to make
 // this request isn't a member of an organization.
 type AccountNotFoundException struct {
@@ -197,8 +197,8 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request was rejected because an invalid or out-of-range value was supplied
-// for an input parameter.
+// The request was rejected because a value that's not valid or is out of range was
+// supplied for an input parameter.
 type InvalidInputException struct {
 	Message *string
 
@@ -241,9 +241,9 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 
 // Provides an extension of the AmazonServiceException for errors reported by
 // Amazon S3 while processing a request. In particular, this class provides access
-// to Amazon S3's extended request ID. This ID is required debugging information in
-// the case the user needs to contact Amazon about an issue where Amazon S3 is
-// incorrectly handling a request.
+// to the Amazon S3 extended request ID. If Amazon S3 is incorrectly handling a
+// request and you need to contact Amazon, this extended request ID may provide
+// useful debugging information.
 type S3Exception struct {
 	Message *string
 

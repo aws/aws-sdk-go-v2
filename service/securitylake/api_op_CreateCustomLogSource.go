@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a third-party custom source in Amazon Security Lake, from the Region where
-// you want to create a custom source. Security Lake can collect logs and events
-// from third-party custom sources. After creating the appropriate API roles, use
-// this API to add a custom source name in Security Lake. This operation creates a
-// partition in the Security Lake S3 bucket as the target location for log files
-// from the custom source, an associated Glue table, and an Glue crawler.
+// Adds a third-party custom source in Amazon Security Lake, from the Amazon Web
+// Services Region where you want to create a custom source. Security Lake can
+// collect logs and events from third-party custom sources. After creating the
+// appropriate IAM role to invoke Glue crawler, use this API to add a custom source
+// name in Security Lake. This operation creates a partition in the Amazon S3
+// bucket for Security Lake as the target location for log files from the custom
+// source in addition to an associated Glue table and an Glue crawler.
 func (c *Client) CreateCustomLogSource(ctx context.Context, params *CreateCustomLogSourceInput, optFns ...func(*Options)) (*CreateCustomLogSourceOutput, error) {
 	if params == nil {
 		params = &CreateCustomLogSourceInput{}
@@ -34,28 +35,32 @@ func (c *Client) CreateCustomLogSource(ctx context.Context, params *CreateCustom
 
 type CreateCustomLogSourceInput struct {
 
-	// The custom source name for a third-party custom source.
+	// The name for a third-party custom source. This must be a Regionally unique
+	// value.
 	//
 	// This member is required.
 	CustomSourceName *string
 
-	// The Open Cybersecurity Schema Framework (OCSF) event class.
+	// The Open Cybersecurity Schema Framework (OCSF) event class which describes the
+	// type of data that the custom source will send to Security Lake.
 	//
 	// This member is required.
 	EventClass types.OcsfEventClass
 
-	// The IAM Role ARN to be used by the Glue Crawler. The recommended IAM policies
-	// are:
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// to be used by the Glue crawler. The recommended IAM policies are:
 	//
-	// * The managed policy AWSGlueServiceRole
+	// * The managed
+	// policy AWSGlueServiceRole
 	//
-	// * A custom policy granting access
-	// to your S3 Data Lake
+	// * A custom policy granting access to your Amazon S3
+	// Data Lake
 	//
 	// This member is required.
 	GlueInvocationRoleArn *string
 
-	// The Account ID that will assume the above Role to put logs into the Data Lake.
+	// The Amazon Web Services account ID of the custom source that will write logs and
+	// events into the Amazon S3 Data Lake.
 	//
 	// This member is required.
 	LogProviderAccountId *string
@@ -65,7 +70,7 @@ type CreateCustomLogSourceInput struct {
 
 type CreateCustomLogSourceOutput struct {
 
-	// The location of the partition in the Security Lake S3 bucket.
+	// The location of the partition in the Amazon S3 bucket for Security Lake.
 	//
 	// This member is required.
 	CustomDataLocation *string
@@ -86,11 +91,11 @@ type CreateCustomLogSourceOutput struct {
 	// This member is required.
 	GlueTableName *string
 
-	// IAM Role ARN to be used by the entity putting logs into your Custom Source
-	// partition. Security Lake will apply the correct access policies to this Role,
-	// but this Role must have the trust policy created manually. This Role's name must
-	// start with the text 'Security Lake'. It must trust the logProviderAccountId to
-	// assume it.
+	// The ARN of the IAM role to be used by the entity putting logs into your custom
+	// source partition. Security Lake will apply the correct access policies to this
+	// role, but you must first manually create the trust policy for this role. The IAM
+	// role name must start with the text 'Security Lake'. The IAM role must trust the
+	// logProviderAccountId to assume the role.
 	//
 	// This member is required.
 	LogProviderAccessRoleArn *string

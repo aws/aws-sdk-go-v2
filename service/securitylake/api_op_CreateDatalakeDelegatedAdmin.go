@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Designates the Security Lake administrator account for the organization. This
-// API can only be called by the organization management account. The organization
-// management account cannot be the delegated administrator account.
+// Designates the Amazon Security Lake delegated administrator account for the
+// organization. This API can only be called by the organization management
+// account. The organization management account cannot be the delegated
+// administrator account.
 func (c *Client) CreateDatalakeDelegatedAdmin(ctx context.Context, params *CreateDatalakeDelegatedAdminInput, optFns ...func(*Options)) (*CreateDatalakeDelegatedAdminOutput, error) {
 	if params == nil {
 		params = &CreateDatalakeDelegatedAdminInput{}
@@ -30,7 +31,7 @@ func (c *Client) CreateDatalakeDelegatedAdmin(ctx context.Context, params *Creat
 
 type CreateDatalakeDelegatedAdminInput struct {
 
-	// Account ID of the Security Lake delegated administrator.
+	// The Amazon Web Services account ID of the Security Lake delegated administrator.
 	//
 	// This member is required.
 	Account *string

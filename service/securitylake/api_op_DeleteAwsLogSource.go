@@ -11,24 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a natively-supported Amazon Web Services service as a Amazon Security
-// Lake source. When you remove the source, Security Lake stops collecting data
-// from that source, and subscribers can no longer consume new data from the
-// source. Subscribers can still consume data that Amazon Security Lake collected
-// from the source before disablement. You can choose any source type in any Region
-// for accounts that are either part of a trusted organization or standalone
+// Removes a natively supported Amazon Web Service as an Amazon Security Lake
+// source. When you remove the source, Security Lake stops collecting data from
+// that source, and subscribers can no longer consume new data from the source.
+// Subscribers can still consume data that Security Lake collected from the source
+// before disablement. You can choose any source type in any Amazon Web Services
+// Region for either accounts that are part of a trusted organization or standalone
 // accounts. At least one of the three dimensions is a mandatory input to this API.
-// However, any combination of the three dimensions can be supplied to this API. By
-// default, dimension refers to the entire set. This is overridden when you supply
-// any one of the inputs. For instance, when members is not specified, the API
-// disables all Security Lake member accounts for sources. Similarly, when Regions
-// are not specified, Security Lake is disabled for all the Regions where Security
-// Lake is available as a service. You can use this API to remove a
-// natively-supported Amazon Web Services service as a source. Use
-// DeregisterCustomData to remove a custom source. When you don't provide a
-// dimension, Security Lake assumes that the missing dimension refers to the entire
-// set. For example, if you don't provide specific accounts, the API applies to the
-// entire set of accounts in your organization.
+// However, you can supply any combination of the three dimensions to this API. By
+// default, a dimension refers to the entire set. This is overridden when you
+// supply any one of the inputs. For instance, when you do not specify members, the
+// API disables all Security Lake member accounts for sources. Similarly, when you
+// do not specify Regions, Security Lake is disabled for all the Regions where
+// Security Lake is available as a service. When you don't provide a dimension,
+// Security Lake assumes that the missing dimension refers to the entire set. For
+// example, if you don't provide specific accounts, the API applies to the entire
+// set of accounts in your organization.
 func (c *Client) DeleteAwsLogSource(ctx context.Context, params *DeleteAwsLogSourceInput, optFns ...func(*Options)) (*DeleteAwsLogSourceOutput, error) {
 	if params == nil {
 		params = &DeleteAwsLogSourceInput{}
@@ -46,14 +44,15 @@ func (c *Client) DeleteAwsLogSource(ctx context.Context, params *DeleteAwsLogSou
 
 type DeleteAwsLogSourceInput struct {
 
-	// This is a mandatory input. Specifies the input order to disable dimensions in
-	// Security Lake, namely Region, source type, and member.
+	// This is a mandatory input. Specify the input order to disable dimensions in
+	// Security Lake, namely Region (Amazon Web Services Region code, source type, and
+	// member (account ID of a specific Amazon Web Services account).
 	//
 	// This member is required.
 	InputOrder []types.Dimension
 
-	// Removes the specific Amazon Web Services sources from all Regions and source
-	// types.
+	// Removes the specific Amazon Web Services sources from specific accounts and
+	// specific Regions.
 	DisableAllDimensions map[string]map[string][]string
 
 	// Removes all Amazon Web Services sources from specific accounts or Regions.
@@ -71,7 +70,7 @@ type DeleteAwsLogSourceOutput struct {
 	// of the organization.
 	Failed []string
 
-	// Deletion of the Amazon Web Services sources is in-progress.
+	// Deletion of the Amazon Web Services sources is in progress.
 	Processing []string
 
 	// Metadata pertaining to the operation's result.

@@ -12,8 +12,8 @@ import (
 
 // Update the expiration period for the exception message to your preferred time,
 // and control the time-to-live (TTL) for the exception message to remain.
-// Exceptions are stored by default, for a 2 week period of time from when a record
-// was created in Security Lake.
+// Exceptions are stored by default for 2 weeks from when a record was created in
+// Amazon Security Lake.
 func (c *Client) UpdateDatalakeExceptionsExpiry(ctx context.Context, params *UpdateDatalakeExceptionsExpiryInput, optFns ...func(*Options)) (*UpdateDatalakeExceptionsExpiryOutput, error) {
 	if params == nil {
 		params = &UpdateDatalakeExceptionsExpiryInput{}
