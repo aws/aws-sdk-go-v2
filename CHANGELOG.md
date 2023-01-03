@@ -1,3 +1,9 @@
+# Release (2023-01-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.1.0](service/securitylake/CHANGELOG.md#v110-2023-01-03)
+  * **Feature**: Allow CreateSubscriber API to take string input that allows setting more descriptive SubscriberDescription field. Make souceTypes field required in model level for UpdateSubscriberRequest as it is required for every API call on the backend. Allow ListSubscribers take any String as nextToken param.
+
 # Release (2022-12-30)
 
 ## Module Highlights

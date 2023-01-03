@@ -1,8 +1,0 @@
-{
-    "id": "b6438003-a817-43bd-94cc-81a64d5125fd",
-    "type": "feature",
-    "description": "Allow CreateSubscriber API to take string input that allows setting more descriptive SubscriberDescription field. Make souceTypes field required in model level for UpdateSubscriberRequest as it is required for every API call on the backend. Allow ListSubscribers take any String as nextToken param.",
-    "modules": [
-        "service/securitylake"
-    ]
-}
