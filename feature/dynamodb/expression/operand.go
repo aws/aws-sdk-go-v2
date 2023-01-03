@@ -241,7 +241,7 @@ func Value(value interface{}) ValueBuilder {
 //
 // The ValueBuilderOptions functional options parameter allows you to specify
 // how the value will be encoded. Including options like AttributeValue
-// encoding struct tag. If value is already an DynamoDB AttributeValue,
+// encoding struct tag. If value is already a DynamoDB AttributeValue,
 // encoding options will have not effect.
 //
 // Empty slices and maps will be encoded as their respective empty types.AttributeValue

@@ -490,7 +490,7 @@ func (e Expression) returnExpression(expressionType expressionType) *string {
 }
 
 // exprNode are the generic nodes that represents both Operands and
-// Conditions. The purpose of exprNode is to be able to call an generic
+// Conditions. The purpose of exprNode is to be able to call a generic
 // recursive function on the top level exprNode to be able to determine a root
 // node in order to deduplicate name aliases.
 // fmtExpr is a string that has escaped characters to refer to
