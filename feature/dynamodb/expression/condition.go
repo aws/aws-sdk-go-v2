@@ -49,7 +49,7 @@ const (
 // DynamoDBAttributeType specifies the type of a DynamoDB item attribute. This
 // enum is used in the AttributeType() function in order to be explicit about
 // the DynamoDB type that is being checked and ensure compile time checks.
-// More Informatin at http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.OperatorsAndFunctions.html#Expressions.OperatorsAndFunctions.Functions
+// More Information at http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Expressions.OperatorsAndFunctions.html#Expressions.OperatorsAndFunctions.Functions
 type DynamoDBAttributeType string
 
 const (
