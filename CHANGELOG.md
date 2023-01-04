@@ -1,3 +1,13 @@
+# Release (2023-01-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.16.0](service/applicationautoscaling/CHANGELOG.md#v1160-2023-01-04)
+  * **Feature**: Customers can now use the existing DescribeScalingActivities API to also see the detailed and machine-readable reasons for Application Auto Scaling not scaling their resources and, if needed, take the necessary corrective actions.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.17.4](service/cloudwatchlogs/CHANGELOG.md#v1174-2023-01-04)
+  * **Documentation**: Update to remove sequenceToken as a required field in PutLogEvents calls.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.34.0](service/ssm/CHANGELOG.md#v1340-2023-01-04)
+  * **Feature**: Adding support for QuickSetup Document Type in Systems Manager
+
 # Release (2023-01-03)
 
 ## Module Highlights

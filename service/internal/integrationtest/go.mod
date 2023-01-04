@@ -5,7 +5,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.18.7
 	github.com/aws/aws-sdk-go-v2/service/acm v1.16.5
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.15.28
-	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.15.25
+	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.16.0
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.14.13
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.18.3
 	github.com/aws/aws-sdk-go-v2/service/athena v1.21.0
@@ -77,7 +77,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.16.4
 	github.com/aws/aws-sdk-go-v2/service/sns v1.18.8
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.19.17
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.33.4
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.34.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.17.7
 	github.com/aws/aws-sdk-go-v2/service/support v1.13.22
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.14.8

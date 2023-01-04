@@ -1,3 +1,7 @@
+# v1.16.0 (2023-01-04)
+
+* **Feature**: Customers can now use the existing DescribeScalingActivities API to also see the detailed and machine-readable reasons for Application Auto Scaling not scaling their resources and, if needed, take the necessary corrective actions.
+
 # v1.15.25 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

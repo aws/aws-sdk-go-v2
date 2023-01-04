@@ -1,3 +1,7 @@
+# v1.34.0 (2023-01-04)
+
+* **Feature**: Adding support for QuickSetup Document Type in Systems Manager
+
 # v1.33.4 (2022-12-21)
 
 * **Documentation**: Doc-only updates for December 2022.

@@ -1,8 +1,0 @@
-{
-    "id": "a11cacfc-5ec2-4c7b-92c1-d5fb8745814f",
-    "type": "feature",
-    "description": "Customers can now use the existing DescribeScalingActivities API to also see the detailed and machine-readable reasons for Application Auto Scaling not scaling their resources and, if needed, take the necessary corrective actions.",
-    "modules": [
-        "service/applicationautoscaling"
-    ]
-}
