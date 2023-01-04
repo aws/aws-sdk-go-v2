@@ -95,7 +95,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Associates the specified KMS key with the specified log\n      group.</p> \n         <p>Associating a KMS key with a log group overrides any existing\n      associations between the log group and a KMS key. After a KMS key is associated with a log group, all newly ingested data for the log group is encrypted\n      using the KMS key. This association is stored as long as the data encrypted\n      with the KMS keyis still within CloudWatch Logs. This enables CloudWatch Logs to decrypt this data whenever it is requested.</p>\n         <important>\n            <p>CloudWatch Logs supports only symmetric KMS keys. Do not use an associate\n        an asymmetric KMS key with your log group. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using\n          Symmetric and Asymmetric Keys</a>.</p>\n         </important>\n         <p>It can take up to 5 minutes for this operation to take effect.</p>\n         <p>If you attempt to associate a KMS key with a log group but the KMS key does not exist or the KMS key is disabled, you receive an\n        <code>InvalidParameterException</code> error. </p>"
+                "smithy.api#documentation": "<p>Associates the specified KMS key with the specified log\n      group.</p>\n         <p>Associating a KMS key with a log group overrides any existing\n      associations between the log group and a KMS key. After a KMS key is associated with a log group, all newly ingested data for the log group is encrypted\n      using the KMS key. This association is stored as long as the data encrypted\n      with the KMS keyis still within CloudWatch Logs. This enables CloudWatch Logs to decrypt this data whenever it is requested.</p>\n         <important>\n            <p>CloudWatch Logs supports only symmetric KMS keys. Do not use an associate\n        an asymmetric KMS key with your log group. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using\n          Symmetric and Asymmetric Keys</a>.</p>\n         </important>\n         <p>It can take up to 5 minutes for this operation to take effect.</p>\n         <p>If you attempt to associate a KMS key with a log group but the KMS key does not exist or the KMS key is disabled, you receive an\n        <code>InvalidParameterException</code> error. </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#AssociateKmsKeyRequest": {
@@ -140,7 +140,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels the specified export task.</p> \n         <p>The task must be in the <code>PENDING</code> or <code>RUNNING</code> state.</p>"
+                "smithy.api#documentation": "<p>Cancels the specified export task.</p>\n         <p>The task must be in the <code>PENDING</code> or <code>RUNNING</code> state.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#CancelExportTaskRequest": {
@@ -184,7 +184,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an export task so that you can efficiently export data from a log group to an\n      Amazon S3 bucket. When you perform a <code>CreateExportTask</code> operation, you must use\n      credentials that have permission to write to the S3 bucket that you specify as the\n      destination.</p>\n         <p>Exporting log data to S3 buckets that are encrypted by KMS is supported.\n      Exporting log data to Amazon S3 buckets that have S3 Object Lock enabled with a\n      retention period is also supported.</p>\n         <p>Exporting to S3 buckets that are encrypted with AES-256 is supported. </p>\n         <p>This is an asynchronous call. If all the required information is provided, this \n      operation initiates an export task and responds with the ID of the task. After the task has started,\n      you can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html\">DescribeExportTasks</a> to get the status of the export task. Each account can\n      only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time.\n      To cancel an export task, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html\">CancelExportTask</a>.</p>\n         <p>You can export logs from multiple log groups or multiple time ranges to the same S3\n      bucket. To separate log data for each export task, specify a prefix to be used as the Amazon\n      S3 key prefix for all exported objects.</p>\n    \n         <note>\n            <p>Time-based sorting on chunks of log data inside an exported file is not guaranteed. You can\n        sort the exported log field data by using Linux utilities.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates an export task so that you can efficiently export data from a log group to an\n      Amazon S3 bucket. When you perform a <code>CreateExportTask</code> operation, you must use\n      credentials that have permission to write to the S3 bucket that you specify as the\n      destination.</p>\n         <p>Exporting log data to S3 buckets that are encrypted by KMS is supported.\n      Exporting log data to Amazon S3 buckets that have S3 Object Lock enabled with a\n      retention period is also supported.</p>\n         <p>Exporting to S3 buckets that are encrypted with AES-256 is supported. </p>\n         <p>This is an asynchronous call. If all the required information is provided, this \n      operation initiates an export task and responds with the ID of the task. After the task has started,\n      you can use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeExportTasks.html\">DescribeExportTasks</a> to get the status of the export task. Each account can\n      only have one active (<code>RUNNING</code> or <code>PENDING</code>) export task at a time.\n      To cancel an export task, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_CancelExportTask.html\">CancelExportTask</a>.</p>\n         <p>You can export logs from multiple log groups or multiple time ranges to the same S3\n      bucket. To separate log data for each export task, specify a prefix to be used as the Amazon\n      S3 key prefix for all exported objects.</p>\n         <note>\n            <p>Time-based sorting on chunks of log data inside an exported file is not guaranteed. You can\n        sort the exported log field data by using Linux utilities.</p>\n         </note>"
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateExportTaskRequest": {
@@ -325,7 +325,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a log stream for the specified log group. A log stream is a sequence of log events\n      that originate from a single source, such as an application instance or a resource that is \n      being monitored.</p> \n         <p>There is no limit on the number of log streams that you can create for a log group. There is a limit \n    of 50 TPS on <code>CreateLogStream</code> operations, after which transactions are throttled.</p>\n         <p>You must use the following guidelines when naming a log stream:</p>\n         <ul>\n            <li>\n               <p>Log stream names must be unique within the log group.</p>\n            </li>\n            <li>\n               <p>Log stream names can be between 1 and 512 characters long.</p>\n            </li>\n            <li>\n               <p>Don't use ':' (colon) or '*' (asterisk) characters.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Creates a log stream for the specified log group. A log stream is a sequence of log events\n      that originate from a single source, such as an application instance or a resource that is \n      being monitored.</p>\n         <p>There is no limit on the number of log streams that you can create for a log group. There is a limit \n    of 50 TPS on <code>CreateLogStream</code> operations, after which transactions are throttled.</p>\n         <p>You must use the following guidelines when naming a log stream:</p>\n         <ul>\n            <li>\n               <p>Log stream names must be unique within the log group.</p>\n            </li>\n            <li>\n               <p>Log stream names can be between 1 and 512 characters long.</p>\n            </li>\n            <li>\n               <p>Don't use ':' (colon) or '*' (asterisk) characters.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.cloudwatchlogs#CreateLogStreamRequest": {
@@ -358,7 +358,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The event was already logged.</p>",
+                "smithy.api#documentation": "<p>The event was already logged.</p>\n         <important>\n            <p>\n               <code>PutLogEvents</code>\n      actions are now always accepted and never return\n      <code>DataAlreadyAcceptedException</code> regardless of whether a given batch of log events\n      has already been accepted. </p>\n         </important>",
                 "smithy.api#error": "client"
             }
         },
@@ -711,7 +711,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified retention policy.</p> \n         <p>Log events do not expire if they belong to log groups without a retention policy.</p>"
+                "smithy.api#documentation": "<p>Deletes the specified retention policy.</p>\n         <p>Log events do not expire if they belong to log groups without a retention policy.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DeleteRetentionPolicyRequest": {
@@ -953,7 +953,7 @@
                 "logGroupNamePattern": {
                     "target": "com.amazonaws.cloudwatchlogs#LogGroupNamePattern",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you specify a string for this parameter, the operation returns only log groups that have names\nthat match the string based on a case-sensitive substring search. For example, if you specify <code>Foo</code>, log groups\nnamed <code>FooBar</code>, <code>aws/Foo</code>, and <code>GroupFoo</code> would match, but <code>foo</code>, \n<code>F/o/o</code> and <code>Froo</code> would not match.</p>\n    \n    \n    \n         <note>\n            <p>\n               <code>logGroupNamePattern</code> and <code>logGroupNamePrefix</code> are mutually exclusive. \n        Only one \n        of these parameters can be passed.\n      </p>\n         </note>"
+                        "smithy.api#documentation": "<p>If you specify a string for this parameter, the operation returns only log groups that have names\nthat match the string based on a case-sensitive substring search. For example, if you specify <code>Foo</code>, log groups\nnamed <code>FooBar</code>, <code>aws/Foo</code>, and <code>GroupFoo</code> would match, but <code>foo</code>, \n<code>F/o/o</code> and <code>Froo</code> would not match.</p>\n         <note>\n            <p>\n               <code>logGroupNamePattern</code> and <code>logGroupNamePrefix</code> are mutually exclusive. \n        Only one \n        of these parameters can be passed.\n      </p>\n         </note>"
                     }
                 },
                 "nextToken": {
@@ -971,7 +971,7 @@
                 "includeLinkedAccounts": {
                     "target": "com.amazonaws.cloudwatchlogs#IncludeLinkedAccounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you are using a monitoring account, set this to <code>True</code> to have the operation\n      return log groups in \n      the accounts listed in <code>accountIdentifiers</code>.</p>\n\n    \n         <p>If this parameter is set to <code>true</code> and <code>accountIdentifiers</code>\n\n      contains a null value, the operation returns all log groups in the monitoring account\n      and all log groups in all source accounts that are linked to the monitoring account. </p>\n         <note>\n            <p> If you specify <code>includeLinkedAccounts</code> in your request, then\n        <code>metricFilterCount</code>, <code>retentionInDays</code>, and <code>storedBytes</code>\n        are not included in the response. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>If you are using a monitoring account, set this to <code>True</code> to have the operation\n      return log groups in \n      the accounts listed in <code>accountIdentifiers</code>.</p>\n         <p>If this parameter is set to <code>true</code> and <code>accountIdentifiers</code>\n\n      contains a null value, the operation returns all log groups in the monitoring account\n      and all log groups in all source accounts that are linked to the monitoring account. </p>\n         <note>\n            <p> If you specify <code>includeLinkedAccounts</code> in your request, then\n        <code>metricFilterCount</code>, <code>retentionInDays</code>, and <code>storedBytes</code>\n        are not included in the response. </p>\n         </note>"
                     }
                 }
             }
@@ -1038,7 +1038,7 @@
                 "logStreamNamePrefix": {
                     "target": "com.amazonaws.cloudwatchlogs#LogStreamName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prefix to match.</p> \n         <p>If <code>orderBy</code> is <code>LastEventTime</code>, you cannot specify this\n      parameter.</p>"
+                        "smithy.api#documentation": "<p>The prefix to match.</p>\n         <p>If <code>orderBy</code> is <code>LastEventTime</code>, you cannot specify this\n      parameter.</p>"
                     }
                 },
                 "orderBy": {
@@ -1530,7 +1530,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates the associated KMS key from the specified log\n      group.</p> \n         <p>After the KMS key is disassociated from the log group, CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data\n      remains encrypted, and CloudWatch Logs requires permissions for the KMS key\n      whenever the encrypted data is requested.</p>\n         <p>Note that it can take up to 5 minutes for this operation to take effect.</p>"
+                "smithy.api#documentation": "<p>Disassociates the associated KMS key from the specified log\n      group.</p>\n         <p>After the KMS key is disassociated from the log group, CloudWatch Logs stops encrypting newly ingested data for the log group. All previously ingested data\n      remains encrypted, and CloudWatch Logs requires permissions for the KMS key\n      whenever the encrypted data is requested.</p>\n         <p>Note that it can take up to 5 minutes for this operation to take effect.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#DisassociateKmsKeyRequest": {
@@ -1808,7 +1808,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists log events from the specified log group. You can list all the log events or filter the results\n      using a filter pattern, a time range, and the name of the log stream.</p>\n         <p>You must have the <code>logs;FilterLogEvents</code> permission to perform this operation.</p>\n    \n         <p>By default, this operation returns as many log events as can fit in 1 MB (up to 10,000\n      log events) or all the events found within the specified time range. If the results include a\n      token, that means there are more log events available. You can get additional results by\n      specifying the token in a subsequent call. This operation can return empty results while there\n      are more log events available through the token.</p>\n         <p>The returned log events are sorted by event timestamp, the timestamp when the event was ingested\n    by CloudWatch Logs, and the ID of the <code>PutLogEvents</code> request.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n      view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>",
+                "smithy.api#documentation": "<p>Lists log events from the specified log group. You can list all the log events or filter the results\n      using a filter pattern, a time range, and the name of the log stream.</p>\n         <p>You must have the <code>logs;FilterLogEvents</code> permission to perform this operation.</p>\n         <p>By default, this operation returns as many log events as can fit in 1 MB (up to 10,000\n      log events) or all the events found within the specified time range. If the results include a\n      token, that means there are more log events available. You can get additional results by\n      specifying the token in a subsequent call. This operation can return empty results while there\n      are more log events available through the token.</p>\n         <p>The returned log events are sorted by event timestamp, the timestamp when the event was ingested\n    by CloudWatch Logs, and the ID of the <code>PutLogEvents</code> request.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n      view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -2063,7 +2063,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists log events from the specified log stream. You can list all of the log events or\n      filter using a time range.</p>\n\n         <p>By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). \n      You can get additional log events by specifying one of the tokens in a subsequent call.\n      This operation can return empty results while there are more log events available through the token.</p>\n    \n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n      view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>",
+                "smithy.api#documentation": "<p>Lists log events from the specified log stream. You can list all of the log events or\n      filter using a time range.</p>\n         <p>By default, this operation returns as many log events as can fit in a response size of 1MB (up to 10,000 log events). \n      You can get additional log events by specifying one of the tokens in a subsequent call.\n      This operation can return empty results while there are more log events available through the token.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a monitoring account and \n      view data from the linked source accounts. For more information, see \n      <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch cross-account observability</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextForwardToken",
@@ -2419,7 +2419,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The sequence token is not valid. You can get the correct sequence token in \n      the <code>expectedSequenceToken</code> field in the <code>InvalidSequenceTokenException</code>\n    message. </p>",
+                "smithy.api#documentation": "<p>The sequence token is not valid. You can get the correct sequence token in \n      the <code>expectedSequenceToken</code> field in the <code>InvalidSequenceTokenException</code>\n    message. </p>\n         <important>\n            <p>\n               <code>PutLogEvents</code>\n      actions are now always accepted and never return\n      <code>InvalidSequenceTokenException</code> regardless of receiving an invalid sequence token. </p>\n         </important>",
                 "smithy.api#error": "client"
             }
         },
@@ -2719,13 +2719,13 @@
                 "lastIngestionTime": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ingestion time, expressed as the number of milliseconds after <code>Jan 1, 1970\n        00:00:00 UTC</code>.</p>"
+                        "smithy.api#documentation": "<p>The ingestion time, expressed as the number of milliseconds after <code>Jan 1, 1970\n      00:00:00 UTC</code> The <code>lastIngestionTime</code> value updates on an eventual consistency basis. It \n      typically updates in less than an hour after ingestion, but in rare situations might take longer.</p>"
                     }
                 },
                 "uploadSequenceToken": {
                     "target": "com.amazonaws.cloudwatchlogs#SequenceToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sequence token.</p>"
+                        "smithy.api#documentation": "<p>The sequence token.</p>\n         <important>\n            <p>The sequence token is now ignored in \n      <code>PutLogEvents</code>\n      actions. <code>PutLogEvents</code> actions are always accepted regardless of receiving an invalid sequence token. \n    You don't need to obtain <code>uploadSequenceToken</code> to use a <code>PutLogEvents</code> action.</p>\n         </important>"
                     }
                 },
                 "arn": {
@@ -2928,7 +2928,7 @@
                     "name": "logs"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from\n      EC2 instances, CloudTrail, and other sources. You can then retrieve the associated\n      log data from CloudWatch Logs using the CloudWatch console. Alternatively, you can use\n      CloudWatch Logs commands in the Amazon Web Services CLI, CloudWatch Logs API, or CloudWatch\n      Logs SDK.</p> \n         <p>You can use CloudWatch Logs to:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Monitor logs from EC2 instances in real time</b>: You\n          can use CloudWatch Logs to monitor applications and systems using log data. For example,\n          CloudWatch Logs can track the number of errors that occur in your application logs. Then,\n          it can send you a notification whenever the rate of errors exceeds a threshold that you\n          specify. CloudWatch Logs uses your log data for monitoring so no code changes are\n          required. For example, you can monitor application logs for specific literal terms (such\n          as \"NullReferenceException\"). You can also count the number of occurrences of a literal\n          term at a particular position in log data (such as \"404\" status codes in an Apache access\n          log). When the term you are searching for is found, CloudWatch Logs reports the data to a\n          CloudWatch metric that you specify.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Monitor CloudTrail logged events</b>: You can\n          create alarms in CloudWatch and receive notifications of particular API activity as\n          captured by CloudTrail. You can use the notification to perform troubleshooting.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Archive log data</b>: You can use CloudWatch Logs to\n          store your log data in highly durable storage. You can change the log retention setting so\n          that any log events earlier than this setting are automatically deleted. The CloudWatch\n          Logs agent helps to quickly send both rotated and non-rotated log data off of a host and\n          into the log service. You can then access the raw log data when you need it.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from\n      EC2 instances, CloudTrail, and other sources. You can then retrieve the associated\n      log data from CloudWatch Logs using the CloudWatch console. Alternatively, you can use\n      CloudWatch Logs commands in the Amazon Web Services CLI, CloudWatch Logs API, or CloudWatch\n      Logs SDK.</p>\n         <p>You can use CloudWatch Logs to:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Monitor logs from EC2 instances in real time</b>: You\n          can use CloudWatch Logs to monitor applications and systems using log data. For example,\n          CloudWatch Logs can track the number of errors that occur in your application logs. Then,\n          it can send you a notification whenever the rate of errors exceeds a threshold that you\n          specify. CloudWatch Logs uses your log data for monitoring so no code changes are\n          required. For example, you can monitor application logs for specific literal terms (such\n          as \"NullReferenceException\"). You can also count the number of occurrences of a literal\n          term at a particular position in log data (such as \"404\" status codes in an Apache access\n          log). When the term you are searching for is found, CloudWatch Logs reports the data to a\n          CloudWatch metric that you specify.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Monitor CloudTrail logged events</b>: You can\n          create alarms in CloudWatch and receive notifications of particular API activity as\n          captured by CloudTrail. You can use the notification to perform troubleshooting.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Archive log data</b>: You can use CloudWatch Logs to\n          store your log data in highly durable storage. You can change the log retention setting so\n          that any log events earlier than this setting are automatically deleted. The CloudWatch\n          Logs agent helps to quickly send both rotated and non-rotated log data off of a host and\n          into the log service. You can then access the raw log data when you need it.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon CloudWatch Logs",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://monitoring.amazonaws.com/doc/2014-03-28/"
@@ -3287,9 +3287,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3300,9 +3300,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3313,9 +3313,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3326,9 +3326,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3339,9 +3339,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3352,9 +3352,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3365,9 +3365,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3378,9 +3378,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3391,9 +3391,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3404,9 +3404,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3417,9 +3417,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3430,9 +3430,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3443,9 +3443,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3456,9 +3456,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3469,9 +3469,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3482,9 +3482,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3495,9 +3495,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3508,9 +3508,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3521,9 +3521,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3534,9 +3534,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3547,9 +3547,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3560,9 +3560,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3573,9 +3573,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3586,9 +3586,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3599,9 +3599,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3612,9 +3612,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3625,9 +3625,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3638,9 +3638,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3651,9 +3651,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3664,9 +3664,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3677,9 +3677,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3690,9 +3690,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3701,9 +3701,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3714,9 +3714,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3725,9 +3725,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3738,9 +3738,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3751,9 +3751,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3764,9 +3764,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3777,9 +3777,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3790,9 +3790,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3803,9 +3803,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3816,9 +3816,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3829,9 +3829,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3842,9 +3842,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3855,9 +3855,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3868,9 +3868,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3881,9 +3881,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3894,9 +3894,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3907,9 +3907,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3920,9 +3920,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3933,9 +3933,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3946,9 +3946,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3959,9 +3959,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3972,9 +3972,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -3985,9 +3985,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -3998,9 +3998,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4011,9 +4011,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4024,9 +4024,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4037,9 +4037,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4050,9 +4050,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4063,9 +4063,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4076,9 +4076,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4089,9 +4089,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4102,9 +4102,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4115,9 +4115,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4128,9 +4128,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4141,9 +4141,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4154,9 +4154,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4167,9 +4167,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4180,9 +4180,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4193,9 +4193,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4206,9 +4206,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4219,9 +4219,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4232,9 +4232,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4245,9 +4245,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4258,9 +4258,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4271,9 +4271,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4284,9 +4284,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4297,9 +4297,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4310,9 +4310,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4323,9 +4323,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4336,9 +4336,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4349,9 +4349,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4362,9 +4362,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4375,9 +4375,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4388,9 +4388,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4401,9 +4401,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4414,9 +4414,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4427,9 +4427,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4440,9 +4440,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4453,9 +4453,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4466,9 +4466,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4479,9 +4479,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4492,9 +4492,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4505,9 +4505,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4518,9 +4518,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4531,9 +4531,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4544,9 +4544,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4557,9 +4557,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4570,9 +4570,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4583,9 +4583,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4596,9 +4596,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4609,9 +4609,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4622,9 +4622,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4635,9 +4635,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4648,9 +4648,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4661,9 +4661,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4674,9 +4674,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4685,9 +4685,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4698,9 +4698,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4709,9 +4709,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4722,9 +4722,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4735,9 +4735,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4748,9 +4748,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4761,9 +4761,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4774,9 +4774,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4787,9 +4787,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4800,9 +4800,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4813,9 +4813,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4826,9 +4826,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4839,9 +4839,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4852,9 +4852,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4865,9 +4865,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4878,9 +4878,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4891,9 +4891,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4904,9 +4904,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4917,9 +4917,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4930,9 +4930,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4943,9 +4943,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4956,9 +4956,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -4969,9 +4969,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4982,9 +4982,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -4993,9 +4993,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -5006,9 +5006,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -5017,9 +5017,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -5030,9 +5030,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -5043,9 +5043,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5055,9 +5055,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
                                 "UseDualStack": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -5067,9 +5067,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
                                 "UseDualStack": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -5466,7 +5466,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an access policy associated with an existing\n      destination. An access policy is an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html\">IAM policy document</a> that is used\n      to authorize claims to register a subscription filter against a given destination.</p>\n         <p>If multiple Amazon Web Services accounts are sending logs to this destination, each sender account must be \n    listed separately in the policy. The policy does not support specifying <code>*</code>\n    as the Principal or the use of the <code>aws:PrincipalOrgId</code> global key.</p>"
+                "smithy.api#documentation": "<p>Creates or updates an access policy associated with an existing\n      destination. An access policy is an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html\">IAM policy document</a> that is used\n      to authorize claims to register a subscription filter against a given destination.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutDestinationPolicyRequest": {
@@ -5566,7 +5566,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads a batch of log events to the specified log stream.</p>\n         <p>You must include the sequence token obtained from the response of the previous call. An\n      upload in a newly created log stream does not require a sequence token. You can also get the\n      sequence token in the <code>expectedSequenceToken</code> field from\n        <code>InvalidSequenceTokenException</code>. If you call <code>PutLogEvents</code> twice\n      within a narrow time period using the same value for <code>sequenceToken</code>, both calls\n      might be successful or one might be rejected.</p>\n         <p>The batch of events must satisfy the following constraints:</p>\n         <ul>\n            <li>\n               <p>The maximum batch size is 1,048,576 bytes. This size is calculated as the sum of\n          all event messages in UTF-8, plus 26 bytes for each log event.</p>\n            </li>\n            <li>\n               <p>None of the log events in the batch can be more than 2 hours in the future.</p>\n            </li>\n            <li>\n               <p>None of the log events in the batch can be more than 14 days in the past. Also,\n          none of the log events can be from earlier than the retention period of the log\n          group.</p>\n            </li>\n            <li>\n               <p>The log events in the batch must be in chronological order by their timestamp. The\n          timestamp is the time that the event occurred, expressed as the number of milliseconds\n          after <code>Jan 1, 1970 00:00:00 UTC</code>. (In Amazon Web Services Tools for PowerShell\n          and the Amazon Web Services SDK for .NET, the timestamp is specified in .NET format:\n            <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2017-09-15T13:45:30</code>.) </p>\n            </li>\n            <li>\n               <p>A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.</p>\n            </li>\n            <li>\n               <p>The maximum number of log events in a batch is 10,000.</p>\n            </li>\n            <li>\n               <p>There is a quota of five requests per second per log stream. Additional requests\n          are throttled. This quota can't be changed.</p>\n            </li>\n         </ul> \n         <p>If a call to <code>PutLogEvents</code> returns \"UnrecognizedClientException\" the most\n      likely cause is a non-valid Amazon Web Services access key ID or secret key. </p>"
+                "smithy.api#documentation": "<p>Uploads a batch of log events to the specified log stream.</p>\n         <important>\n            <p>The sequence token is now ignored in <code>PutLogEvents</code>\n      actions. <code>PutLogEvents</code>\n      actions are always accepted and never return <code>InvalidSequenceTokenException</code> or\n      <code>DataAlreadyAcceptedException</code> even if the sequence token is not valid. You can use\n      parallel <code>PutLogEvents</code> actions on the same log stream. </p>\n         </important>\n         <p>The batch of events must satisfy the following constraints:</p>\n         <ul>\n            <li>\n               <p>The maximum batch size is 1,048,576 bytes. This size is calculated as the sum of\n          all event messages in UTF-8, plus 26 bytes for each log event.</p>\n            </li>\n            <li>\n               <p>None of the log events in the batch can be more than 2 hours in the future.</p>\n            </li>\n            <li>\n               <p>None of the log events in the batch can be more than 14 days in the past. Also,\n          none of the log events can be from earlier than the retention period of the log\n          group.</p>\n            </li>\n            <li>\n               <p>The log events in the batch must be in chronological order by their timestamp. The\n          timestamp is the time that the event occurred, expressed as the number of milliseconds\n          after <code>Jan 1, 1970 00:00:00 UTC</code>. (In Amazon Web Services Tools for PowerShell\n          and the Amazon Web Services SDK for .NET, the timestamp is specified in .NET format:\n            <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2017-09-15T13:45:30</code>.) </p>\n            </li>\n            <li>\n               <p>A batch of log events in a single request cannot span more than 24 hours. Otherwise, the operation fails.</p>\n            </li>\n            <li>\n               <p>The maximum number of log events in a batch is 10,000.</p>\n            </li>\n            <li>\n               <important>\n                  <p>The quota of five requests per second per log stream\n          has been removed. Instead, <code>PutLogEvents</code> actions are throttled based on a \n        per-second per-account quota. You can request an increase to the per-second throttling\n        quota by using the Service Quotas service.</p>\n               </important>\n            </li>\n         </ul>\n         <p>If a call to <code>PutLogEvents</code> returns \"UnrecognizedClientException\" the most\n      likely cause is a non-valid Amazon Web Services access key ID or secret key. </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutLogEventsRequest": {
@@ -5596,7 +5596,7 @@
                 "sequenceToken": {
                     "target": "com.amazonaws.cloudwatchlogs#SequenceToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sequence token obtained from the response of the previous <code>PutLogEvents</code>\n      call. An upload in a newly created log stream does not require a sequence token. You can also\n      get the sequence token using <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogStreams.html\">DescribeLogStreams</a>. If you call <code>PutLogEvents</code> twice within a narrow\n      time period using the same value for <code>sequenceToken</code>, both calls might be\n      successful or one might be rejected.</p>"
+                        "smithy.api#documentation": "<p>The sequence token obtained from the response of the previous <code>PutLogEvents</code>\n      call.</p>\n         <important>\n            <p>The <code>sequenceToken</code> parameter is now ignored in <code>PutLogEvents</code>\n      actions. <code>PutLogEvents</code>\n      actions are now accepted and never return <code>InvalidSequenceTokenException</code> or\n      <code>DataAlreadyAcceptedException</code> even if the sequence token is not valid.</p>\n         </important>"
                     }
                 }
             }
@@ -5607,7 +5607,7 @@
                 "nextSequenceToken": {
                     "target": "com.amazonaws.cloudwatchlogs#SequenceToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The next sequence token.</p>"
+                        "smithy.api#documentation": "<p>The next sequence token.</p>\n         <important>\n            <p>This field has been deprecated.</p>\n            <p>The sequence token is now ignored in <code>PutLogEvents</code>\n        actions. <code>PutLogEvents</code>\n        actions are always accepted even if the sequence token is not valid. You can use\n        parallel <code>PutLogEvents</code> actions on the same log stream and you do not need\n      to wait for the response of a previous <code>PutLogEvents</code> action to obtain \n      the <code>nextSequenceToken</code> value.</p>\n         </important>"
                     }
                 },
                 "rejectedLogEventsInfo": {
@@ -5703,7 +5703,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a query definition for CloudWatch Logs Insights. For \n      more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html\">Analyzing Log Data with CloudWatch Logs Insights</a>.</p>\n    \n         <p>To update a query definition, specify its <code>queryDefinitionId</code> in your request.\n      The values of <code>name</code>, <code>queryString</code>, and <code>logGroupNames</code> are\n      changed to the values that you specify in your update operation. No current values are\n      retained from the current query definition. For example, imagine updating a current query\n      definition that includes log groups. If you don't specify the <code>logGroupNames</code>\n      parameter in your update operation, the query definition changes to contain no log\n      groups.</p>\n         <p>You must have the <code>logs:PutQueryDefinition</code> permission to be able to perform\n    this operation.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a query definition for CloudWatch Logs Insights. For \n      more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html\">Analyzing Log Data with CloudWatch Logs Insights</a>.</p>\n         <p>To update a query definition, specify its <code>queryDefinitionId</code> in your request.\n      The values of <code>name</code>, <code>queryString</code>, and <code>logGroupNames</code> are\n      changed to the values that you specify in your update operation. No current values are\n      retained from the current query definition. For example, imagine updating a current query\n      definition that includes log groups. If you don't specify the <code>logGroupNames</code>\n      parameter in your update operation, the query definition changes to contain no log\n      groups.</p>\n         <p>You must have the <code>logs:PutQueryDefinition</code> permission to be able to perform\n    this operation.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutQueryDefinitionRequest": {
@@ -5783,7 +5783,7 @@
                 "policyDocument": {
                     "target": "com.amazonaws.cloudwatchlogs#PolicyDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string.\n    This parameter is required.</p>\n         <p>The following example creates a resource policy enabling the Route 53 service to put\n      DNS query logs in to the specified log group. Replace <code>\"logArn\"</code> with the ARN of \n      your CloudWatch Logs resource, such as a log group or log stream.</p>\n         <p>CloudWatch Logs also supports <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a>\n      and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount\">aws:SourceAccount</a>\ncondition context keys.</p>\n         <p>In the example resource policy, you would replace the value of <code>SourceArn</code> with\n      the resource making the call from Route 53 to CloudWatch Logs. You would also\n      replace the value of <code>SourceAccount</code> with the Amazon Web Services account ID making\n      that call.</p>\n         <p></p>\n         <p>\n            <code>{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n           \"Sid\": \"Route53LogsToCloudWatchLogs\",\n           \"Effect\": \"Allow\",\n           \"Principal\": {\n               \"Service\": [\n                   \"route53.amazonaws.com\"\n                ]\n            },\n           \"Action\": \"logs:PutLogEvents\",\n           \"Resource\": \"logArn\",\n           \"Condition\": {\n               \"ArnLike\": {\n                   \"aws:SourceArn\": \"myRoute53ResourceArn\"\n                },\n               \"StringEquals\": {\n                   \"aws:SourceAccount\": \"myAwsAccountId\"\n               }\n            }\n        }\n      ]\n}</code>\n \n         </p>"
+                        "smithy.api#documentation": "<p>Details of the new policy, including the identity of the principal that is enabled to put logs to this account. This is formatted as a JSON string.\n    This parameter is required.</p>\n         <p>The following example creates a resource policy enabling the Route 53 service to put\n      DNS query logs in to the specified log group. Replace <code>\"logArn\"</code> with the ARN of \n      your CloudWatch Logs resource, such as a log group or log stream.</p>\n         <p>CloudWatch Logs also supports <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourcearn\">aws:SourceArn</a>\n      and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-sourceaccount\">aws:SourceAccount</a>\ncondition context keys.</p>\n         <p>In the example resource policy, you would replace the value of <code>SourceArn</code> with\n      the resource making the call from Route 53 to CloudWatch Logs. You would also\n      replace the value of <code>SourceAccount</code> with the Amazon Web Services account ID making\n      that call.</p>\n         <p></p>\n         <p>\n            <code>{\n    \"Version\": \"2012-10-17\",\n    \"Statement\": [\n        {\n           \"Sid\": \"Route53LogsToCloudWatchLogs\",\n           \"Effect\": \"Allow\",\n           \"Principal\": {\n               \"Service\": [\n                   \"route53.amazonaws.com\"\n                ]\n            },\n           \"Action\": \"logs:PutLogEvents\",\n           \"Resource\": \"logArn\",\n           \"Condition\": {\n               \"ArnLike\": {\n                   \"aws:SourceArn\": \"myRoute53ResourceArn\"\n                },\n               \"StringEquals\": {\n                   \"aws:SourceAccount\": \"myAwsAccountId\"\n               }\n            }\n        }\n      ]\n}</code>\n         </p>"
                     }
                 }
             }
@@ -5869,7 +5869,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a subscription filter and associates it with the specified log\n      group. With subscription filters, you can subscribe to a real-time stream of log events\n      ingested through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html\">PutLogEvents</a>\n      and have them delivered to a specific destination. When log events are sent to the receiving\n      service, they are Base64 encoded and compressed with the GZIP format.</p>\n         <p>The following destinations are supported for subscription filters:</p>\n         <ul>\n            <li>\n               <p>An Amazon Kinesis data stream belonging to the same account as the subscription\n          filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination that belongs to a different account, for cross-account delivery.</p>\n            </li>\n            <li>\n               <p>An Amazon Kinesis Data Firehose delivery stream that belongs to the same account as\n          the subscription filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>An Lambda function that belongs to the same account as the\n          subscription filter, for same-account delivery.</p>\n            </li>\n         </ul> \n         <p>Each log group can have up to two subscription filters associated with it. If you are\n      updating an existing filter, you must specify the correct name in <code>filterName</code>.\n      </p>\n         <p>To perform a <code>PutSubscriptionFilter</code> operation, you must also have the \n      <code>iam:PassRole</code> permission.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a subscription filter and associates it with the specified log\n      group. With subscription filters, you can subscribe to a real-time stream of log events\n      ingested through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html\">PutLogEvents</a>\n      and have them delivered to a specific destination. When log events are sent to the receiving\n      service, they are Base64 encoded and compressed with the GZIP format.</p>\n         <p>The following destinations are supported for subscription filters:</p>\n         <ul>\n            <li>\n               <p>An Amazon Kinesis data stream belonging to the same account as the subscription\n          filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination that belongs to a different account, for cross-account delivery.</p>\n            </li>\n            <li>\n               <p>An Amazon Kinesis Data Firehose delivery stream that belongs to the same account as\n          the subscription filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>An Lambda function that belongs to the same account as the\n          subscription filter, for same-account delivery.</p>\n            </li>\n         </ul>\n         <p>Each log group can have up to two subscription filters associated with it. If you are\n      updating an existing filter, you must specify the correct name in <code>filterName</code>.\n      </p>\n         <p>To perform a <code>PutSubscriptionFilter</code> operation, you must also have the \n      <code>iam:PassRole</code> permission.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutSubscriptionFilterRequest": {
@@ -6534,7 +6534,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group\n      and time range to query and the query string to use.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html\">CloudWatch Logs Insights Query Syntax</a>.</p>\n    \n         <p>Queries time out after 15 minutes of runtime. If your queries are timing out, reduce the\n      time range being searched or partition your query into a number of queries.</p>\n    \n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a\n      monitoring account to start a query in a linked source account. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch\n        cross-account observability</a>. For a cross-account <code>StartQuery</code> operation,\n      the query definition must be defined in the monitoring account.</p>\n    \n         <p>You can have up to 20 concurrent CloudWatch Logs insights queries, including queries\n      that have been added to dashboards. </p>"
+                "smithy.api#documentation": "<p>Schedules a query of a log group using CloudWatch Logs Insights. You specify the log group\n      and time range to query and the query string to use.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html\">CloudWatch Logs Insights Query Syntax</a>.</p>\n         <p>Queries time out after 15 minutes of runtime. If your queries are timing out, reduce the\n      time range being searched or partition your query into a number of queries.</p>\n         <p>If you are using CloudWatch cross-account observability, you can use this operation in a\n      monitoring account to start a query in a linked source account. For more information, see\n        <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html\">CloudWatch\n        cross-account observability</a>. For a cross-account <code>StartQuery</code> operation,\n      the query definition must be defined in the monitoring account.</p>\n         <p>You can have up to 20 concurrent CloudWatch Logs insights queries, including queries\n      that have been added to dashboards. </p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#StartQueryRequest": {
