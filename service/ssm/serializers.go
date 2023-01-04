@@ -8435,9 +8435,19 @@ func awsAwsjson11_serializeDocumentDocumentRequires(v *types.DocumentRequires, v
 		ok.String(*v.Name)
 	}
 
+	if v.RequireType != nil {
+		ok := object.Key("RequireType")
+		ok.String(*v.RequireType)
+	}
+
 	if v.Version != nil {
 		ok := object.Key("Version")
 		ok.String(*v.Version)
+	}
+
+	if v.VersionName != nil {
+		ok := object.Key("VersionName")
+		ok.String(*v.VersionName)
 	}
 
 	return nil

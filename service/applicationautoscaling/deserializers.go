@@ -1915,6 +1915,119 @@ func awsAwsjson11_deserializeDocumentMetricDimensions(v *[]types.MetricDimension
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentNotScaledReason(v **types.NotScaledReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NotScaledReason
+	if *v == nil {
+		sv = &types.NotScaledReason{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+				}
+				sv.Code = ptr.String(jtv)
+			}
+
+		case "CurrentCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ResourceCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CurrentCapacity = ptr.Int32(int32(i64))
+			}
+
+		case "MaxCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ResourceCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxCapacity = ptr.Int32(int32(i64))
+			}
+
+		case "MinCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ResourceCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinCapacity = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNotScaledReasons(v *[]types.NotScaledReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.NotScaledReason
+	if *v == nil {
+		cv = []types.NotScaledReason{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.NotScaledReason
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentNotScaledReason(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentObjectNotFoundException(v **types.ObjectNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2315,6 +2428,11 @@ func awsAwsjson11_deserializeDocumentScalingActivity(v **types.ScalingActivity, 
 					return fmt.Errorf("expected TimestampType to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "NotScaledReasons":
+			if err := awsAwsjson11_deserializeDocumentNotScaledReasons(&sv.NotScaledReasons, value); err != nil {
+				return err
 			}
 
 		case "ResourceId":

@@ -757,6 +757,7 @@ const (
 	DocumentTypeProblemAnalysisTemplate        DocumentType = "ProblemAnalysisTemplate"
 	DocumentTypeCloudFormation                 DocumentType = "CloudFormation"
 	DocumentTypeConformancePackTemplate        DocumentType = "ConformancePackTemplate"
+	DocumentTypeQuickSetup                     DocumentType = "QuickSetup"
 )
 
 // Values returns all known values for DocumentType. Note that this can be expanded
@@ -778,6 +779,7 @@ func (DocumentType) Values() []DocumentType {
 		"ProblemAnalysisTemplate",
 		"CloudFormation",
 		"ConformancePackTemplate",
+		"QuickSetup",
 	}
 }
 

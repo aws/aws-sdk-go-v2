@@ -1,0 +1,8 @@
+{
+    "id": "58bc4bc0-8fdc-4715-ae6b-115784cd43b3",
+    "type": "documentation",
+    "description": "Update to remove sequenceToken as a required field in PutLogEvents calls.",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

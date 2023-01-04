@@ -2004,8 +2004,16 @@ type DocumentRequires struct {
 	// This member is required.
 	Name *string
 
+	// The document type of the required SSM document.
+	RequireType *string
+
 	// The document version required by the current document.
 	Version *string
+
+	// An optional field specifying the version of the artifact associated with the
+	// document. For example, "Release 12, Update 6". This value is unique across all
+	// versions of a document, and can't be changed.
+	VersionName *string
 
 	noSmithyDocumentSerde
 }

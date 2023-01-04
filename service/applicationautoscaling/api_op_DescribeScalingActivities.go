@@ -14,7 +14,10 @@ import (
 
 // Provides descriptive information about the scaling activities in the specified
 // namespace from the previous six weeks. You can filter the results using
-// ResourceId and ScalableDimension.
+// ResourceId and ScalableDimension. For information about viewing scaling
+// activities using the Amazon Web Services CLI, see Scaling activities for
+// Application Auto Scaling
+// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scaling-activities.html).
 func (c *Client) DescribeScalingActivities(ctx context.Context, params *DescribeScalingActivitiesInput, optFns ...func(*Options)) (*DescribeScalingActivitiesOutput, error) {
 	if params == nil {
 		params = &DescribeScalingActivitiesInput{}
@@ -38,6 +41,14 @@ type DescribeScalingActivitiesInput struct {
 	//
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace
+
+	// Specifies whether to include activities that aren't scaled (not scaled
+	// activities) in the response. Not scaled activities are activities that aren't
+	// completed or started for various reasons, such as preventing infinite scaling
+	// loops. For help interpreting the not scaled reason details in the response, see
+	// Scaling activities for Application Auto Scaling
+	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scaling-activities.html).
+	IncludeNotScaledActivities *bool
 
 	// The maximum number of scalable targets. This value can be between 1 and 50. The
 	// default value is 50. If this parameter is used, the operation returns up to
@@ -161,7 +172,7 @@ type DescribeScalingActivitiesInput struct {
 	// edition and Aurora PostgreSQL-compatible edition.
 	//
 	// *
-	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
+	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for a
 	// SageMaker model endpoint variant.
 	//
 	// * custom-resource:ResourceType:Property - The

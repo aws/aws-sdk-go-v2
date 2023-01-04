@@ -1,0 +1,8 @@
+{
+    "id": "84209f3f-6712-4597-8af1-6b4293d1621e",
+    "type": "feature",
+    "description": "Adding support for QuickSetup Document Type in Systems Manager",
+    "modules": [
+        "service/ssm"
+    ]
+}

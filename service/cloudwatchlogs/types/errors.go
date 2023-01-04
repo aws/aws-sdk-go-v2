@@ -7,7 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The event was already logged.
+// The event was already logged. PutLogEvents actions are now always accepted and
+// never return DataAlreadyAcceptedException regardless of whether a given batch of
+// log events has already been accepted.
 type DataAlreadyAcceptedException struct {
 	Message *string
 
@@ -68,6 +70,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 
 // The sequence token is not valid. You can get the correct sequence token in the
 // expectedSequenceToken field in the InvalidSequenceTokenException message.
+// PutLogEvents actions are now always accepted and never return
+// InvalidSequenceTokenException regardless of receiving an invalid sequence token.
 type InvalidSequenceTokenException struct {
 	Message *string
 
