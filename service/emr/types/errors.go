@@ -12,6 +12,8 @@ import (
 type InternalServerError struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,13 +26,20 @@ func (e *InternalServerError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
+func (e *InternalServerError) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerError"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // This exception occurs when there is an internal failure in the Amazon EMR
 // service.
 type InternalServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -44,12 +53,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // This exception occurs when there is something wrong with user input.
 type InvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ *string
 
@@ -65,5 +81,10 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -11,6 +11,8 @@ import (
 type ForbiddenException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *ForbiddenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ForbiddenException) ErrorCode() string             { return "ForbiddenException" }
+func (e *ForbiddenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ForbiddenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An unexpected error occurred.
 type InternalServerErrorException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *InternalServerErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerErrorException) ErrorCode() string             { return "InternalServerErrorException" }
+func (e *InternalServerErrorException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerErrorException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The requested resource does not exist.
 type NotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +77,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An unexpected error occurred.
 type ServiceUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -80,12 +103,19 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The client has exceeded their resource or throttling limits.
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -99,12 +129,19 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The parameters sent in the request are not valid.
 type UnprocessableEntityException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -118,5 +155,10 @@ func (e *UnprocessableEntityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnprocessableEntityException) ErrorCode() string             { return "UnprocessableEntityException" }
+func (e *UnprocessableEntityException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnprocessableEntityException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnprocessableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

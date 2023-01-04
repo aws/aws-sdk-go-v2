@@ -12,6 +12,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -26,12 +28,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // (Discontinued) Internal server error.
 type InternalException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ *string
 
@@ -47,13 +56,20 @@ func (e *InternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalException) ErrorCode() string             { return "InternalException" }
+func (e *InternalException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // (Discontinued) The request was rejected because an invalid or out-of-range value
 // was supplied for an input parameter.
 type InvalidInputException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ *string
 	FieldName  *string
@@ -70,7 +86,12 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInputException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // (Discontinued) The request was rejected because it attempted to create resources
@@ -78,6 +99,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // the quota exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_   *string
 	ResourceType *string
@@ -94,5 +117,10 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

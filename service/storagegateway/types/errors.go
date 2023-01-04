@@ -12,6 +12,8 @@ import (
 type InternalServerError struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	Error_ *StorageGatewayError
 
 	noSmithyDocumentSerde
@@ -26,13 +28,20 @@ func (e *InternalServerError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
+func (e *InternalServerError) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerError"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // An exception occurred because an invalid gateway request was issued to the
 // service. For more information, see the error and message fields.
 type InvalidGatewayRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Error_ *StorageGatewayError
 
@@ -48,13 +57,20 @@ func (e *InvalidGatewayRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidGatewayRequestException) ErrorCode() string             { return "InvalidGatewayRequestException" }
+func (e *InvalidGatewayRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidGatewayRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidGatewayRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal server error has occurred because the service is unavailable. For
 // more information, see the error and message fields.
 type ServiceUnavailableError struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Error_ *StorageGatewayError
 
@@ -70,5 +86,10 @@ func (e *ServiceUnavailableError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceUnavailableError) ErrorCode() string             { return "ServiceUnavailableError" }
+func (e *ServiceUnavailableError) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableError"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceUnavailableError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }

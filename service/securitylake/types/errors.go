@@ -16,6 +16,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -28,7 +30,12 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Security Lake cannot find an Amazon Web Services account with the
@@ -36,6 +43,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // this request isn't a member of an organization.
 type AccountNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -49,13 +58,20 @@ func (e *AccountNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccountNotFoundException) ErrorCode() string             { return "AccountNotFoundException" }
+func (e *AccountNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccountNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccountNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Security Lake generally returns 404 errors if the requested object is
 // missing from the bucket.
 type BucketNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -69,12 +85,19 @@ func (e *BucketNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BucketNotFoundException) ErrorCode() string             { return "BucketNotFoundException" }
+func (e *BucketNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BucketNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BucketNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // More than one process tried to modify a resource at the same time.
 type ConcurrentModificationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -89,7 +112,10 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -99,6 +125,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // the recommended response to this exception.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -115,12 +143,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a conflict when you attempted to modify a Security Lake source name.
 type ConflictSourceNamesException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -134,12 +169,19 @@ func (e *ConflictSourceNamesException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictSourceNamesException) ErrorCode() string             { return "ConflictSourceNamesException" }
+func (e *ConflictSourceNamesException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictSourceNamesException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictSourceNamesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A conflicting subscription exception operation is in progress.
 type ConflictSubscriptionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -153,12 +195,19 @@ func (e *ConflictSubscriptionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictSubscriptionException) ErrorCode() string             { return "ConflictSubscriptionException" }
+func (e *ConflictSubscriptionException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictSubscriptionException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictSubscriptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Represents an error interacting with the Amazon EventBridge service.
 type EventBridgeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -172,13 +221,20 @@ func (e *EventBridgeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EventBridgeException) ErrorCode() string             { return "EventBridgeException" }
+func (e *EventBridgeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EventBridgeException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EventBridgeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Internal service exceptions are sometimes caused by transient issues. Before you
 // start troubleshooting, perform the operation again.
 type InternalServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RetryAfterSeconds *int32
 
@@ -194,13 +250,20 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request was rejected because a value that's not valid or is out of range was
 // supplied for an input parameter.
 type InvalidInputException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -214,12 +277,19 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInputException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource could not be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -236,7 +306,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Provides an extension of the AmazonServiceException for errors reported by
@@ -246,6 +321,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // useful debugging information.
 type S3Exception struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -259,7 +336,12 @@ func (e *S3Exception) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *S3Exception) ErrorCode() string             { return "S3Exception" }
+func (e *S3Exception) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "S3Exception"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *S3Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have exceeded your service quota. To perform the requested action, remove
@@ -267,6 +349,8 @@ func (e *S3Exception) ErrorFault() smithy.ErrorFault { return smithy.FaultClient
 // increase.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -285,12 +369,19 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The limit on the number of requests per second was exceeded.
 type ThrottlingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ServiceCode       *string
 	QuotaCode         *string
@@ -308,12 +399,19 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your signing certificate could not be validated.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Reason    ValidationExceptionReason
 	FieldList []ValidationExceptionField
@@ -330,5 +428,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

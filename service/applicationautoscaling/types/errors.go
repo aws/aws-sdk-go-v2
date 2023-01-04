@@ -12,6 +12,8 @@ import (
 type ConcurrentUpdateException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,7 +26,12 @@ func (e *ConcurrentUpdateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConcurrentUpdateException) ErrorCode() string             { return "ConcurrentUpdateException" }
+func (e *ConcurrentUpdateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentUpdateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConcurrentUpdateException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Failed access to resources caused an exception. This exception is thrown when
@@ -35,6 +42,8 @@ func (e *ConcurrentUpdateException) ErrorFault() smithy.ErrorFault { return smit
 // on your behalf.
 type FailedResourceAccessException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -48,12 +57,19 @@ func (e *FailedResourceAccessException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *FailedResourceAccessException) ErrorCode() string             { return "FailedResourceAccessException" }
+func (e *FailedResourceAccessException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "FailedResourceAccessException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *FailedResourceAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service encountered an internal error.
 type InternalServiceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -67,12 +83,19 @@ func (e *InternalServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
+func (e *InternalServiceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServiceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The next token supplied was invalid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -86,7 +109,12 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A per-account resource limit is exceeded. For more information, see Application
@@ -94,6 +122,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-limits.html).
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -107,7 +137,12 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified object could not be found. For any operation that depends on the
@@ -117,6 +152,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // exception is thrown if the resource cannot be found.
 type ObjectNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -130,13 +167,20 @@ func (e *ObjectNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ObjectNotFoundException) ErrorCode() string             { return "ObjectNotFoundException" }
+func (e *ObjectNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ObjectNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception was thrown for a validation issue. Review the available parameters
 // for the API request.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -150,5 +194,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

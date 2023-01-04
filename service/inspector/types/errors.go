@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	ErrorCode_ AccessDeniedErrorCode
 	CanRetry   *bool
 
@@ -26,13 +28,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You started an assessment run, but one of the instances is already participating
 // in another assessment run.
 type AgentsAlreadyRunningAssessmentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Agents          []AgentAlreadyRunningAssessment
 	AgentsTruncated *bool
@@ -51,7 +60,10 @@ func (e *AgentsAlreadyRunningAssessmentException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AgentsAlreadyRunningAssessmentException) ErrorCode() string {
-	return "AgentsAlreadyRunningAssessmentException"
+	if e.ErrorCodeOverride == nil {
+		return "AgentsAlreadyRunningAssessmentException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *AgentsAlreadyRunningAssessmentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -61,6 +73,8 @@ func (e *AgentsAlreadyRunningAssessmentException) ErrorFault() smithy.ErrorFault
 // progress.
 type AssessmentRunInProgressException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	AssessmentRunArns          []string
 	AssessmentRunArnsTruncated *bool
@@ -79,13 +93,18 @@ func (e *AssessmentRunInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AssessmentRunInProgressException) ErrorCode() string {
-	return "AssessmentRunInProgressException"
+	if e.ErrorCodeOverride == nil {
+		return "AssessmentRunInProgressException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *AssessmentRunInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Internal server error.
 type InternalException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	CanRetry *bool
 
@@ -101,13 +120,20 @@ func (e *InternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalException) ErrorCode() string             { return "InternalException" }
+func (e *InternalException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Amazon Inspector cannot assume the cross-account role that it needs to list your
 // EC2 instances during the assessment run.
 type InvalidCrossAccountRoleException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ InvalidCrossAccountRoleErrorCode
 	CanRetry   *bool
@@ -125,7 +151,10 @@ func (e *InvalidCrossAccountRoleException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCrossAccountRoleException) ErrorCode() string {
-	return "InvalidCrossAccountRoleException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidCrossAccountRoleException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidCrossAccountRoleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -133,6 +162,8 @@ func (e *InvalidCrossAccountRoleException) ErrorFault() smithy.ErrorFault { retu
 // for an input parameter.
 type InvalidInputException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ InvalidInputErrorCode
 	CanRetry   *bool
@@ -149,13 +180,20 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInputException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create resources beyond the
 // current AWS account limits. The error code describes the limit exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ LimitExceededErrorCode
 	CanRetry   *bool
@@ -172,13 +210,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it referenced an entity that does not exist.
 // The error code describes the entity.
 type NoSuchEntityException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ErrorCode_ NoSuchEntityErrorCode
 	CanRetry   *bool
@@ -195,13 +240,20 @@ func (e *NoSuchEntityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchEntityException) ErrorCode() string             { return "NoSuchEntityException" }
+func (e *NoSuchEntityException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchEntityException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request is rejected. The specified assessment template is currently
 // generating an exclusions preview.
 type PreviewGenerationInProgressException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -216,7 +268,10 @@ func (e *PreviewGenerationInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PreviewGenerationInProgressException) ErrorCode() string {
-	return "PreviewGenerationInProgressException"
+	if e.ErrorCodeOverride == nil {
+		return "PreviewGenerationInProgressException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *PreviewGenerationInProgressException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -225,6 +280,8 @@ func (e *PreviewGenerationInProgressException) ErrorFault() smithy.ErrorFault {
 // The serice is temporary unavailable.
 type ServiceTemporarilyUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	CanRetry *bool
 
@@ -241,7 +298,10 @@ func (e *ServiceTemporarilyUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceTemporarilyUnavailableException) ErrorCode() string {
-	return "ServiceTemporarilyUnavailableException"
+	if e.ErrorCodeOverride == nil {
+		return "ServiceTemporarilyUnavailableException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ServiceTemporarilyUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
@@ -254,6 +314,8 @@ func (e *ServiceTemporarilyUnavailableException) ErrorFault() smithy.ErrorFault 
 // became available.
 type UnsupportedFeatureException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	CanRetry *bool
 
@@ -269,5 +331,10 @@ func (e *UnsupportedFeatureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedFeatureException) ErrorCode() string             { return "UnsupportedFeatureException" }
+func (e *UnsupportedFeatureException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedFeatureException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -11,6 +11,8 @@ import (
 type ComplexError struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	TopLevel *string
 	Nested   *ComplexNestedErrorData
 
@@ -26,12 +28,19 @@ func (e *ComplexError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ComplexError) ErrorCode() string             { return "ComplexError" }
+func (e *ComplexError) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ComplexError"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This error is thrown when an invalid greeting value is provided.
 type InvalidGreeting struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -45,5 +54,10 @@ func (e *InvalidGreeting) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidGreeting) ErrorCode() string             { return "InvalidGreeting" }
+func (e *InvalidGreeting) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidGreeting"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidGreeting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

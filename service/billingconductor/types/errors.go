@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can cause an inconsistent state by updating or deleting a resource.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -46,12 +55,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An unexpected error occurred while processing a request.
 type InternalServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RetryAfterSeconds int32
 
@@ -67,12 +83,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request references a resource that doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -89,12 +112,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would cause a service limit to exceed.
 type ServiceLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -113,12 +143,19 @@ func (e *ServiceLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceLimitExceededException) ErrorCode() string             { return "ServiceLimitExceededException" }
+func (e *ServiceLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RetryAfterSeconds int32
 
@@ -134,13 +171,20 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The input doesn't match with the constraints specified by Amazon Web Services
 // services.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Reason ValidationExceptionReason
 	Fields []ValidationExceptionField
@@ -157,5 +201,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

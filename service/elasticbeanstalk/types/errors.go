@@ -11,6 +11,8 @@ import (
 type CodeBuildNotInServiceRegionException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,7 +26,10 @@ func (e *CodeBuildNotInServiceRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CodeBuildNotInServiceRegionException) ErrorCode() string {
-	return "CodeBuildNotInServiceRegionException"
+	if e.ErrorCodeOverride == nil {
+		return "CodeBuildNotInServiceRegionException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CodeBuildNotInServiceRegionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -33,6 +38,8 @@ func (e *CodeBuildNotInServiceRegionException) ErrorFault() smithy.ErrorFault {
 // A generic service exception has occurred.
 type ElasticBeanstalkServiceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -47,7 +54,10 @@ func (e *ElasticBeanstalkServiceException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ElasticBeanstalkServiceException) ErrorCode() string {
-	return "ElasticBeanstalkServiceException"
+	if e.ErrorCodeOverride == nil {
+		return "ElasticBeanstalkServiceException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ElasticBeanstalkServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -55,6 +65,8 @@ func (e *ElasticBeanstalkServiceException) ErrorFault() smithy.ErrorFault { retu
 // services.
 type InsufficientPrivilegesException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -69,7 +81,10 @@ func (e *InsufficientPrivilegesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientPrivilegesException) ErrorCode() string {
-	return "InsufficientPrivilegesException"
+	if e.ErrorCodeOverride == nil {
+		return "InsufficientPrivilegesException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InsufficientPrivilegesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -77,6 +92,8 @@ func (e *InsufficientPrivilegesException) ErrorFault() smithy.ErrorFault { retur
 // and try the operation again.
 type InvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -90,12 +107,19 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Cannot modify the managed action in its current state.
 type ManagedActionInvalidStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -110,7 +134,10 @@ func (e *ManagedActionInvalidStateException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ManagedActionInvalidStateException) ErrorCode() string {
-	return "ManagedActionInvalidStateException"
+	if e.ErrorCodeOverride == nil {
+		return "ManagedActionInvalidStateException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ManagedActionInvalidStateException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -120,6 +147,8 @@ func (e *ManagedActionInvalidStateException) ErrorFault() smithy.ErrorFault {
 // an element in this activity is already in progress.
 type OperationInProgressException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -133,13 +162,20 @@ func (e *OperationInProgressException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationInProgressException) ErrorCode() string             { return "OperationInProgressFailure" }
+func (e *OperationInProgressException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OperationInProgressFailure"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OperationInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You cannot delete the platform version because there are still environments
 // running on it.
 type PlatformVersionStillReferencedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -154,7 +190,10 @@ func (e *PlatformVersionStillReferencedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PlatformVersionStillReferencedException) ErrorCode() string {
-	return "PlatformVersionStillReferencedException"
+	if e.ErrorCodeOverride == nil {
+		return "PlatformVersionStillReferencedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *PlatformVersionStillReferencedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -163,6 +202,8 @@ func (e *PlatformVersionStillReferencedException) ErrorFault() smithy.ErrorFault
 // A resource doesn't exist for the specified Amazon Resource Name (ARN).
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -176,13 +217,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The type of the specified Amazon Resource Name (ARN) isn't supported for this
 // operation.
 type ResourceTypeNotSupportedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -197,7 +245,10 @@ func (e *ResourceTypeNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceTypeNotSupportedException) ErrorCode() string {
-	return "ResourceTypeNotSupportedException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourceTypeNotSupportedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -213,6 +264,8 @@ func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { ret
 type S3LocationNotInServiceRegionException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -226,7 +279,10 @@ func (e *S3LocationNotInServiceRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *S3LocationNotInServiceRegionException) ErrorCode() string {
-	return "S3LocationNotInServiceRegionException"
+	if e.ErrorCodeOverride == nil {
+		return "S3LocationNotInServiceRegionException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *S3LocationNotInServiceRegionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -235,6 +291,8 @@ func (e *S3LocationNotInServiceRegionException) ErrorFault() smithy.ErrorFault {
 // The specified account does not have a subscription to Amazon S3.
 type S3SubscriptionRequiredException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -249,7 +307,10 @@ func (e *S3SubscriptionRequiredException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *S3SubscriptionRequiredException) ErrorCode() string {
-	return "S3SubscriptionRequiredException"
+	if e.ErrorCodeOverride == nil {
+		return "S3SubscriptionRequiredException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *S3SubscriptionRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -257,6 +318,8 @@ func (e *S3SubscriptionRequiredException) ErrorFault() smithy.ErrorFault { retur
 // version. The application version was deleted successfully.
 type SourceBundleDeletionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -270,12 +333,19 @@ func (e *SourceBundleDeletionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SourceBundleDeletionException) ErrorCode() string             { return "SourceBundleDeletionFailure" }
+func (e *SourceBundleDeletionException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "SourceBundleDeletionFailure"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *SourceBundleDeletionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified account has reached its limit of applications.
 type TooManyApplicationsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -289,12 +359,19 @@ func (e *TooManyApplicationsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyApplicationsException) ErrorCode() string             { return "TooManyApplicationsException" }
+func (e *TooManyApplicationsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyApplicationsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyApplicationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified account has reached its limit of application versions.
 type TooManyApplicationVersionsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -309,7 +386,10 @@ func (e *TooManyApplicationVersionsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyApplicationVersionsException) ErrorCode() string {
-	return "TooManyApplicationVersionsException"
+	if e.ErrorCodeOverride == nil {
+		return "TooManyApplicationVersionsException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *TooManyApplicationVersionsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -318,6 +398,8 @@ func (e *TooManyApplicationVersionsException) ErrorFault() smithy.ErrorFault {
 // The specified account has reached its limit of Amazon S3 buckets.
 type TooManyBucketsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -331,12 +413,19 @@ func (e *TooManyBucketsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyBucketsException) ErrorCode() string             { return "TooManyBucketsException" }
+func (e *TooManyBucketsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyBucketsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyBucketsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified account has reached its limit of configuration templates.
 type TooManyConfigurationTemplatesException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -351,7 +440,10 @@ func (e *TooManyConfigurationTemplatesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyConfigurationTemplatesException) ErrorCode() string {
-	return "TooManyConfigurationTemplatesException"
+	if e.ErrorCodeOverride == nil {
+		return "TooManyConfigurationTemplatesException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *TooManyConfigurationTemplatesException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -360,6 +452,8 @@ func (e *TooManyConfigurationTemplatesException) ErrorFault() smithy.ErrorFault 
 // The specified account has reached its limit of environments.
 type TooManyEnvironmentsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -373,13 +467,20 @@ func (e *TooManyEnvironmentsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyEnvironmentsException) ErrorCode() string             { return "TooManyEnvironmentsException" }
+func (e *TooManyEnvironmentsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyEnvironmentsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyEnvironmentsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have exceeded the maximum number of allowed platforms associated with the
 // account.
 type TooManyPlatformsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -393,7 +494,12 @@ func (e *TooManyPlatformsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyPlatformsException) ErrorCode() string             { return "TooManyPlatformsException" }
+func (e *TooManyPlatformsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyPlatformsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyPlatformsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of tags in the resource would exceed the number of tags that each
@@ -402,6 +508,8 @@ func (e *TooManyPlatformsException) ErrorFault() smithy.ErrorFault { return smit
 // succeeded.
 type TooManyTagsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -415,5 +523,10 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

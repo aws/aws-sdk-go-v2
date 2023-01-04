@@ -11,6 +11,8 @@ import (
 type InternalServerException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // An invalid or out-of-range value was supplied for the input parameter.
 type InvalidParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource specified in the request conflicts with an existing resource.
 type ResourceConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +77,19 @@ func (e *ResourceConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
+func (e *ResourceConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested resource does not exist, or access was denied.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -80,7 +103,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You exceeded your service quota. Service quotas, also referred to as limits, are
@@ -88,6 +116,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // Services account.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -101,12 +131,19 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You don't have permission to perform this operation.
 type UnauthorizedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -120,5 +157,10 @@ func (e *UnauthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthorizedException) ErrorCode() string             { return "UnauthorizedException" }
+func (e *UnauthorizedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnauthorizedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

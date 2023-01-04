@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Kinesis Video Streams has throttled the request because you have exceeded the
 // limit of allowed client calls. Try making the call later.
 type ClientLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClientLimitExceededException) ErrorCode() string             { return "ClientLimitExceededException" }
+func (e *ClientLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ClientLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -62,12 +78,19 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
+func (e *InvalidArgumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidArgumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource is not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -81,5 +104,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

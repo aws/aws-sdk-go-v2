@@ -11,6 +11,8 @@ import (
 type BadRequestException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *BadRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BadRequestException) ErrorCode() string             { return "BadRequestException" }
+func (e *BadRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BadRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A conflicting operation is already in progress.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal failure occurred. Try the operation again.
 type InternalFailureException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -61,12 +77,19 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalFailureException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // An unknown internal error occurred.
 type InternalServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -80,12 +103,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The specified resource was not found.
 type NotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -99,12 +129,19 @@ func (e *NotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotFoundException) ErrorCode() string             { return "NotFoundException" }
+func (e *NotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One of the input resources is larger than is allowed.
 type RequestEntityTooLargeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -118,12 +155,19 @@ func (e *RequestEntityTooLargeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *RequestEntityTooLargeException) ErrorCode() string             { return "RequestEntityTooLargeException" }
+func (e *RequestEntityTooLargeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "RequestEntityTooLargeException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *RequestEntityTooLargeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One of the specified resources was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -137,12 +181,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request exceeded a service quota value.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -156,12 +207,19 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There were too many simultaneous requests. Try the operation again.
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -175,12 +233,19 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A parameter could not be validated.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -194,5 +259,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

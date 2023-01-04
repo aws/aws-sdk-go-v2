@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The target resource is in use.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId     *string
 	ResourceType   *string
@@ -47,12 +56,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal error occurred.
 type InternalServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RetryAfterSeconds int32
 
@@ -68,12 +84,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The target resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -90,12 +113,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request would cause a limit to be exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -114,12 +144,19 @@ func (e *ServiceQuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request contains an invalid parameter value.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Reason         ValidationExceptionReason
 	ErrorId        *string
@@ -138,5 +175,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

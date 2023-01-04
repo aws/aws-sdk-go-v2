@@ -11,6 +11,8 @@ import (
 type InternalServerException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // Indicates that something is wrong with the input to the request. For example, a
 // required parameter may be missing or out of range.
 type InvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	AthenaErrorCode *string
 
@@ -45,7 +54,12 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception that Athena received when it called a custom metastore. Occurs if
@@ -55,6 +69,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // MetadataException.
 type MetadataException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -68,12 +84,19 @@ func (e *MetadataException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MetadataException) ErrorCode() string             { return "MetadataException" }
+func (e *MetadataException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MetadataException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MetadataException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource, such as a workgroup, was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceName *string
 
@@ -89,12 +112,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified session already exists.
 type SessionAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -108,12 +138,19 @@ func (e *SessionAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SessionAlreadyExistsException) ErrorCode() string             { return "SessionAlreadyExistsException" }
+func (e *SessionAlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "SessionAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *SessionAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the request was throttled.
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Reason ThrottleReason
 
@@ -129,5 +166,10 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
