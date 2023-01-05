@@ -3633,6 +3633,12 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.rds#CACertificateIdentifiersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rds#String"
+            }
+        },
         "com.amazonaws.rds#CancelExportTask": {
             "type": "operation",
             "input": {
@@ -3718,7 +3724,27 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A CA certificate for an Amazon Web Services account.</p>"
+                "smithy.api#documentation": "<p>A CA certificate for an Amazon Web Services account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n            Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.rds#CertificateDetails": {
+            "type": "structure",
+            "members": {
+                "CAIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA identifier of the CA certificate used for the DB instance's server certificate.</p>"
+                    }
+                },
+                "ValidTill": {
+                    "target": "com.amazonaws.rds#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration date of the DB instance’s server certificate.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of the DB instance’s server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n            Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
             }
         },
         "com.amazonaws.rds#CertificateList": {
@@ -5117,6 +5143,9 @@
                     "target": "com.amazonaws.rds#BackupPolicyNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.rds#CertificateNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.rds#DBClusterNotFoundFault"
                 },
                 {
@@ -5503,6 +5532,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services KMS key identifier to encrypt a secret that is automatically generated and \n            managed in Amazon Web Services Secrets Manager.</p>\n         <p>This setting is valid only if the master user password is managed by RDS in Amazon Web Services Secrets \n            Manager for the DB instance.</p>\n         <p>The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.\n            To use a KMS key in a different Amazon Web Services account, specify the key ARN or alias ARN.</p>\n         <p>If you don't specify <code>MasterUserSecretKmsKeyId</code>, then the <code>aws/secretsmanager</code> \n            KMS key is used to encrypt the secret. If the secret is in a different Amazon Web Services account, then you can't \n            use the <code>aws/secretsmanager</code> KMS key to encrypt the secret, and you must use a customer \n            managed KMS key.</p>\n         <p>There is a default KMS key for your Amazon Web Services account. Your Amazon Web Services account\n            has a different default KMS key for each Amazon Web Services Region.</p>"
+                    }
+                },
+                "CACertificateIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the CA certificate identifier to use for the DB instance’s server certificate.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n            Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
                     }
                 }
             },
@@ -8138,6 +8173,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>JSON string that lists the installation files and parameters that RDS Custom uses to create a custom engine version (CEV). \n          RDS Custom applies the patches in the order in which they're listed in the manifest. You can set the Oracle home, Oracle base, \n          and UNIX/Linux user and group using the installation parameters. For more information, \n          see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields\">JSON fields in the CEV manifest</a> in the <i>Amazon RDS User Guide</i>.\n      </p>"
                     }
+                },
+                "SupportsCertificateRotationWithoutRestart": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates whether the engine version supports rotating the server certificate without \n              rebooting the DB instance.</p>"
+                    }
+                },
+                "SupportedCACertificateIdentifiers": {
+                    "target": "com.amazonaws.rds#CACertificateIdentifiersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the supported CA certificate identifiers.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n            Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8438,7 +8485,7 @@
                 "CACertificateIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the CA certificate for this DB instance.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the CA certificate for this DB instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n            Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
                     }
                 },
                 "DomainMemberships": {
@@ -8655,6 +8702,12 @@
                     "target": "com.amazonaws.rds#MasterUserSecret",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the secret managed by RDS in Amazon Web Services Secrets Manager for the master user password.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html\">Password management with Amazon Web Services Secrets Manager</a> \n            in the <i>Amazon RDS User Guide.</i>\n         </p>"
+                    }
+                },
+                "CertificateDetails": {
+                    "target": "com.amazonaws.rds#CertificateDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the DB instance's server certificate.</p>"
                     }
                 }
             },
@@ -11518,7 +11571,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the set of CA certificates provided by Amazon RDS for this Amazon Web Services account.</p>",
+                "smithy.api#documentation": "<p>Lists the set of CA certificates provided by Amazon RDS for this Amazon Web Services account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n            Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -16734,7 +16787,7 @@
                 "NewDBClusterIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new DB cluster identifier for the DB cluster when renaming a DB cluster. This value is stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens</p>\n            </li>\n            <li>\n               <p>The first character must be a letter</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster2</code>\n         </p>\n         <p>Valid for: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The new DB cluster identifier for the DB cluster when renaming a DB cluster. This value is stored as a lowercase string.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens</p>\n            </li>\n            <li>\n               <p>The first character must be a letter</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster2</code>\n         </p>\n         <p>Valid for: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "ApplyImmediately": {
@@ -17299,7 +17352,7 @@
                 "CACertificateIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the certificate to associate with the DB instance.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>"
+                        "smithy.api#documentation": "<p>Specifies the CA certificate identifier to use for the DB instance’s server certificate.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n            Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
                     }
                 },
                 "Domain": {
@@ -19334,7 +19387,7 @@
                 "CACertificateIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the CA certificate for the DB instance.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the CA certificate for the DB instance.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n            Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n            User Guide</i>.</p>"
                     }
                 },
                 "DBSubnetGroupName": {
@@ -23209,7 +23262,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services KMS key to use to encrypt the snapshot exported to Amazon S3. The Amazon Web Services KMS \n            key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. \n            The caller of this operation must be authorized to execute the following operations. \n            These can be set in the Amazon Web Services KMS key policy:</p>\n         <ul>\n            <li>\n               <p>GrantOperation.Encrypt</p>\n            </li>\n            <li>\n               <p>GrantOperation.Decrypt</p>\n            </li>\n            <li>\n               <p>GrantOperation.GenerateDataKey</p>\n            </li>\n            <li>\n               <p>GrantOperation.GenerateDataKeyWithoutPlaintext</p>\n            </li>\n            <li>\n               <p>GrantOperation.ReEncryptFrom</p>\n            </li>\n            <li>\n               <p>GrantOperation.ReEncryptTo</p>\n            </li>\n            <li>\n               <p>GrantOperation.CreateGrant</p>\n            </li>\n            <li>\n               <p>GrantOperation.DescribeKey</p>\n            </li>\n            <li>\n               <p>GrantOperation.RetireGrant</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services KMS key to use to encrypt the snapshot exported to Amazon S3. The Amazon Web Services KMS \n            key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key. \n            The caller of this operation must be authorized to run the following operations. \n            These can be set in the Amazon Web Services KMS key policy:</p>\n         <ul>\n            <li>\n               <p>kms:Encrypt</p>\n            </li>\n            <li>\n               <p>kms:Decrypt</p>\n            </li>\n            <li>\n               <p>kms:GenerateDataKey</p>\n            </li>\n            <li>\n               <p>kms:GenerateDataKeyWithoutPlaintext</p>\n            </li>\n            <li>\n               <p>kms:ReEncryptFrom</p>\n            </li>\n            <li>\n               <p>kms:ReEncryptTo</p>\n            </li>\n            <li>\n               <p>kms:CreateGrant</p>\n            </li>\n            <li>\n               <p>kms:DescribeKey</p>\n            </li>\n            <li>\n               <p>kms:RetireGrant</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
