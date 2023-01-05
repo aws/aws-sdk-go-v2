@@ -249,6 +249,16 @@ type CreateDBInstanceInput struct {
 	// the Amazon RDS User Guide.
 	BackupTarget *string
 
+	// Specifies the CA certificate identifier to use for the DB instance’s server
+	// certificate. This setting doesn't apply to RDS Custom. For more information, see
+	// Using SSL/TLS to encrypt a connection to a DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+	// cluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
+	CACertificateIdentifier *string
+
 	// For supported engines, this value indicates that the DB instance should be
 	// associated with the specified CharacterSet. This setting doesn't apply to RDS
 	// Custom. However, if you need to change the character set, you can change it on

@@ -243,7 +243,13 @@ type BlueGreenDeploymentTask struct {
 	noSmithyDocumentSerde
 }
 
-// A CA certificate for an Amazon Web Services account.
+// A CA certificate for an Amazon Web Services account. For more information, see
+// Using SSL/TLS to encrypt a connection to a DB instance
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+// cluster
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+// in the Amazon Aurora User Guide.
 type Certificate struct {
 
 	// The Amazon Resource Name (ARN) for the certificate.
@@ -269,6 +275,25 @@ type Certificate struct {
 	ValidFrom *time.Time
 
 	// The final date that the certificate continues to be valid.
+	ValidTill *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Returns the details of the DB instance’s server certificate. For more
+// information, see Using SSL/TLS to encrypt a connection to a DB instance
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+// cluster
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+// in the Amazon Aurora User Guide.
+type CertificateDetails struct {
+
+	// The CA identifier of the CA certificate used for the DB instance's server
+	// certificate.
+	CAIdentifier *string
+
+	// The expiration date of the DB instance’s server certificate.
 	ValidTill *time.Time
 
 	noSmithyDocumentSerde
@@ -1200,6 +1225,15 @@ type DBEngineVersion struct {
 	// The status of the DB engine version, either available or deprecated.
 	Status *string
 
+	// A list of the supported CA certificate identifiers. For more information, see
+	// Using SSL/TLS to encrypt a connection to a DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+	// cluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
+	SupportedCACertificateIdentifiers []string
+
 	// A list of the character sets supported by this engine for the CharacterSetName
 	// parameter of the CreateDBInstance operation.
 	SupportedCharacterSets []CharacterSet
@@ -1228,6 +1262,10 @@ type DBEngineVersion struct {
 	// A value that indicates whether the engine version supports Babelfish for Aurora
 	// PostgreSQL.
 	SupportsBabelfish bool
+
+	// A value that indicates whether the engine version supports rotating the server
+	// certificate without rebooting the DB instance.
+	SupportsCertificateRotationWithoutRestart *bool
 
 	// A value that indicates whether you can use Aurora global databases with a
 	// specific DB engine version.
@@ -1320,8 +1358,17 @@ type DBInstance struct {
 	// Services Outposts or the Amazon Web Services Region.
 	BackupTarget *string
 
-	// The identifier of the CA certificate for this DB instance.
+	// The identifier of the CA certificate for this DB instance. For more information,
+	// see Using SSL/TLS to encrypt a connection to a DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+	// cluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
 	CACertificateIdentifier *string
+
+	// The details of the DB instance's server certificate.
+	CertificateDetails *CertificateDetails
 
 	// If present, specifies the name of the character set that this instance is
 	// associated with.
@@ -3364,7 +3411,13 @@ type PendingModifiedValues struct {
 	// The number of days for which automated backups are retained.
 	BackupRetentionPeriod *int32
 
-	// The identifier of the CA certificate for the DB instance.
+	// The identifier of the CA certificate for the DB instance. For more information,
+	// see Using SSL/TLS to encrypt a connection to a DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+	// cluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
 	CACertificateIdentifier *string
 
 	// The name of the compute and memory capacity class for the DB instance.

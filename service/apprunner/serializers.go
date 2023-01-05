@@ -1994,6 +1994,13 @@ func awsAwsjson10_serializeDocumentCodeConfigurationValues(v *types.CodeConfigur
 		ok.String(string(v.Runtime))
 	}
 
+	if v.RuntimeEnvironmentSecrets != nil {
+		ok := object.Key("RuntimeEnvironmentSecrets")
+		if err := awsAwsjson10_serializeDocumentRuntimeEnvironmentSecrets(v.RuntimeEnvironmentSecrets, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RuntimeEnvironmentVariables != nil {
 		ok := object.Key("RuntimeEnvironmentVariables")
 		if err := awsAwsjson10_serializeDocumentRuntimeEnvironmentVariables(v.RuntimeEnvironmentVariables, ok); err != nil {
@@ -2108,6 +2115,13 @@ func awsAwsjson10_serializeDocumentImageConfiguration(v *types.ImageConfiguratio
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.String(*v.Port)
+	}
+
+	if v.RuntimeEnvironmentSecrets != nil {
+		ok := object.Key("RuntimeEnvironmentSecrets")
+		if err := awsAwsjson10_serializeDocumentRuntimeEnvironmentSecrets(v.RuntimeEnvironmentSecrets, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.RuntimeEnvironmentVariables != nil {
@@ -2235,6 +2249,17 @@ func awsAwsjson10_serializeDocumentNetworkConfiguration(v *types.NetworkConfigur
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentRuntimeEnvironmentSecrets(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

@@ -1,0 +1,8 @@
+{
+    "id": "ff7214d7-a8f2-451d-8c4f-9e3019c7d0ba",
+    "type": "feature",
+    "description": "This release adds support of securely referencing secrets and configuration data that are stored in Secrets Manager and SSM Parameter Store by adding them as environment secrets in your App Runner service.",
+    "modules": [
+        "service/apprunner"
+    ]
+}

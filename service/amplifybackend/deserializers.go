@@ -3111,6 +3111,15 @@ func awsRestjson1_deserializeOpDocumentGetBackendAPIModelsOutput(v **GetBackendA
 
 	for key, value := range shape {
 		switch key {
+		case "modelIntrospectionSchema":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ModelIntrospectionSchema = ptr.String(jtv)
+			}
+
 		case "models":
 			if value != nil {
 				jtv, ok := value.(string)

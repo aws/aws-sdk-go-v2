@@ -290,6 +290,9 @@ func awsRestjson1_deserializeOpErrorCreateApplication(response *smithyhttp.Respo
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
 
@@ -2329,6 +2332,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				}
 			}
 
+		case "imageConfiguration":
+			if err := awsRestjson1_deserializeDocumentImageConfiguration(&sv.ImageConfiguration, value); err != nil {
+				return err
+			}
+
 		case "initialCapacity":
 			if err := awsRestjson1_deserializeDocumentInitialCapacityConfigMap(&sv.InitialCapacity, value); err != nil {
 				return err
@@ -2408,6 +2416,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "workerTypeSpecifications":
+			if err := awsRestjson1_deserializeDocumentWorkerTypeSpecificationMap(&sv.WorkerTypeSpecifications, value); err != nil {
+				return err
 			}
 
 		default:
@@ -2929,6 +2942,55 @@ func awsRestjson1_deserializeDocumentHive(v **types.Hive, value interface{}) err
 					return fmt.Errorf("expected Query to be of type string, got %T instead", value)
 				}
 				sv.Query = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentImageConfiguration(v **types.ImageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImageConfiguration
+	if *v == nil {
+		sv = &types.ImageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "imageUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageUri to be of type string, got %T instead", value)
+				}
+				sv.ImageUri = ptr.String(jtv)
+			}
+
+		case "resolvedImageDigest":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageDigest to be of type string, got %T instead", value)
+				}
+				sv.ResolvedImageDigest = ptr.String(jtv)
 			}
 
 		default:
@@ -4227,5 +4289,76 @@ func awsRestjson1_deserializeDocumentWorkerResourceConfig(v **types.WorkerResour
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWorkerTypeSpecification(v **types.WorkerTypeSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WorkerTypeSpecification
+	if *v == nil {
+		sv = &types.WorkerTypeSpecification{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "imageConfiguration":
+			if err := awsRestjson1_deserializeDocumentImageConfiguration(&sv.ImageConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWorkerTypeSpecificationMap(v *map[string]types.WorkerTypeSpecification, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.WorkerTypeSpecification
+	if *v == nil {
+		mv = map[string]types.WorkerTypeSpecification{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.WorkerTypeSpecification
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentWorkerTypeSpecification(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }

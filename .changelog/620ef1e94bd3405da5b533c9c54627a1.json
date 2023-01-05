@@ -1,0 +1,8 @@
+{
+    "id": "620ef1e9-4bd3-405d-a5b5-33c9c54627a1",
+    "type": "feature",
+    "description": "Documentation update for a new Initiation Method value in DescribeContact API",
+    "modules": [
+        "service/connect"
+    ]
+}

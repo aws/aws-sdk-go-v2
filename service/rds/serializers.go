@@ -10544,6 +10544,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.BackupTarget)
 	}
 
+	if v.CACertificateIdentifier != nil {
+		objectKey := object.Key("CACertificateIdentifier")
+		objectKey.String(*v.CACertificateIdentifier)
+	}
+
 	if v.CharacterSetName != nil {
 		objectKey := object.Key("CharacterSetName")
 		objectKey.String(*v.CharacterSetName)

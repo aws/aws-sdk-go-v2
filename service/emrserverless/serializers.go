@@ -166,6 +166,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 		ok.String(*v.ClientToken)
 	}
 
+	if v.ImageConfiguration != nil {
+		ok := object.Key("imageConfiguration")
+		if err := awsRestjson1_serializeDocumentImageConfigurationInput(v.ImageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InitialCapacity != nil {
 		ok := object.Key("initialCapacity")
 		if err := awsRestjson1_serializeDocumentInitialCapacityConfigMap(v.InitialCapacity, ok); err != nil {
@@ -207,6 +214,13 @@ func awsRestjson1_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 	if v.Type != nil {
 		ok := object.Key("type")
 		ok.String(*v.Type)
+	}
+
+	if v.WorkerTypeSpecifications != nil {
+		ok := object.Key("workerTypeSpecifications")
+		if err := awsRestjson1_serializeDocumentWorkerTypeSpecificationInputMap(v.WorkerTypeSpecifications, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1140,6 +1154,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		ok.String(*v.ClientToken)
 	}
 
+	if v.ImageConfiguration != nil {
+		ok := object.Key("imageConfiguration")
+		if err := awsRestjson1_serializeDocumentImageConfigurationInput(v.ImageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InitialCapacity != nil {
 		ok := object.Key("initialCapacity")
 		if err := awsRestjson1_serializeDocumentInitialCapacityConfigMap(v.InitialCapacity, ok); err != nil {
@@ -1157,6 +1178,13 @@ func awsRestjson1_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 	if v.NetworkConfiguration != nil {
 		ok := object.Key("networkConfiguration")
 		if err := awsRestjson1_serializeDocumentNetworkConfiguration(v.NetworkConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkerTypeSpecifications != nil {
+		ok := object.Key("workerTypeSpecifications")
+		if err := awsRestjson1_serializeDocumentWorkerTypeSpecificationInputMap(v.WorkerTypeSpecifications, ok); err != nil {
 			return err
 		}
 	}
@@ -1281,6 +1309,18 @@ func awsRestjson1_serializeDocumentHive(v *types.Hive, value smithyjson.Value) e
 	if v.Query != nil {
 		ok := object.Key("query")
 		ok.String(*v.Query)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImageConfigurationInput(v *types.ImageConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImageUri != nil {
+		ok := object.Key("imageUri")
+		ok.String(*v.ImageUri)
 	}
 
 	return nil
@@ -1528,5 +1568,33 @@ func awsRestjson1_serializeDocumentWorkerResourceConfig(v *types.WorkerResourceC
 		ok.String(*v.Memory)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkerTypeSpecificationInput(v *types.WorkerTypeSpecificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImageConfiguration != nil {
+		ok := object.Key("imageConfiguration")
+		if err := awsRestjson1_serializeDocumentImageConfigurationInput(v.ImageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkerTypeSpecificationInputMap(v map[string]types.WorkerTypeSpecificationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentWorkerTypeSpecificationInput(&mapVar, om); err != nil {
+			return err
+		}
+	}
 	return nil
 }

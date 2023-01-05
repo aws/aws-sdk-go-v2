@@ -39,7 +39,7 @@ type DeleteDiskInput struct {
 	// This member is required.
 	DiskName *string
 
-	// A Boolean value to indicate whether to delete the enabled add-ons for the disk.
+	// A Boolean value to indicate whether to delete all add-ons for the disk.
 	ForceDeleteAddOns *bool
 
 	noSmithyDocumentSerde

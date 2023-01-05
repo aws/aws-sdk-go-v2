@@ -1,0 +1,8 @@
+{
+    "id": "75b4c9a2-734b-4e4a-a0c4-666f3a902a25",
+    "type": "feature",
+    "description": "This release adds support for specifying which certificate authority (CA) to use for a DB instance's server certificate during DB instance creation, as well as other CA enhancements.",
+    "modules": [
+        "service/rds"
+    ]
+}
