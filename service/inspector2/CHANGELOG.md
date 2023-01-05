@@ -1,3 +1,7 @@
+# v1.11.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.10.0 (2022-12-23)
 
 * **Feature**: Amazon Inspector adds support for scanning NodeJS 18.x and Go 1.x AWS Lambda function runtimes.

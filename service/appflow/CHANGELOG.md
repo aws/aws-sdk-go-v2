@@ -1,3 +1,7 @@
+# v1.23.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.22.0 (2022-12-16)
 
 * **Feature**: This release updates the ListConnectorEntities API action so that it returns paginated responses that customers can retrieve with next tokens.

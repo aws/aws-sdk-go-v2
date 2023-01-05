@@ -1,8 +1,0 @@
-{
-    "id": "73a832a5-40c3-4492-a4cc-b1462067e7df",
-    "type": "documentation",
-    "description": "MWAA supports Apache Airflow version 2.4.3.",
-    "modules": [
-        "service/mwaa"
-    ]
-}

@@ -1,3 +1,8 @@
+# v1.14.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* **Feature**: Updated GetBackendAPIModels response to include ModelIntrospectionSchema json string
+
 # v1.13.22 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

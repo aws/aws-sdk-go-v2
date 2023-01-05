@@ -1,3 +1,8 @@
+# v1.43.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* **Feature**: Documentation update for a new Initiation Method value in DescribeContact API
+
 # v1.42.0 (2022-12-23)
 
 * **Feature**: Support for Routing Profile filter, SortCriteria, and grouping by Routing Profiles for GetCurrentMetricData API. Support for RoutingProfiles, UserHierarchyGroups, and Agents as filters, NextStatus and AgentStatusName for GetCurrentUserData. Adds ApproximateTotalCount to both APIs.

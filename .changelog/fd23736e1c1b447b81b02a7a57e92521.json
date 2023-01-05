@@ -1,8 +1,0 @@
-{
-    "id": "fd23736e-1c1b-447b-81b0-2a7a57e92521",
-    "type": "feature",
-    "description": "Adds support for customized images. You can now provide runtime images when creating or updating EMR Serverless Applications.",
-    "modules": [
-        "service/emrserverless"
-    ]
-}

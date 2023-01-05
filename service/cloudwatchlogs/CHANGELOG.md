@@ -1,3 +1,7 @@
+# v1.18.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.17.4 (2023-01-04)
 
 * **Documentation**: Update to remove sequenceToken as a required field in PutLogEvents calls.

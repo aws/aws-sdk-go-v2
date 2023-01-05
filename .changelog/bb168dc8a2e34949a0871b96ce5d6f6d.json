@@ -1,8 +1,0 @@
-{
-    "id": "bb168dc8-a2e3-4949-a087-1b96ce5d6f6d",
-    "type": "feature",
-    "description": "Updated GetBackendAPIModels response to include ModelIntrospectionSchema json string",
-    "modules": [
-        "service/amplifybackend"
-    ]
-}

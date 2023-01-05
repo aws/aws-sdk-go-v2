@@ -1,3 +1,7 @@
+# v1.18.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.17.0 (2022-12-29)
 
 * **Feature**: Added owning service filter, include planned deletion flag, and next rotation date response parameter in ListSecrets.

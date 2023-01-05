@@ -1,3 +1,7 @@
+# v1.35.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.34.0 (2023-01-04)
 
 * **Feature**: Adding support for QuickSetup Document Type in Systems Manager

@@ -1,3 +1,8 @@
+# v1.16.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* **Feature**: This release adds support of securely referencing secrets and configuration data that are stored in Secrets Manager and SSM Parameter Store by adding them as environment secrets in your App Runner service.
+
 # v1.15.2 (2022-12-15)
 
 * **Dependency Update**: Updated to the latest SDK module versions

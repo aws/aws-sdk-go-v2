@@ -1,3 +1,7 @@
+# v1.20.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
 # v1.19.0 (2022-12-22)
 
 * **Feature**: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for ecs services running on Fargate.

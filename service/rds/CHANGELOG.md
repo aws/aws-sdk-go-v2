@@ -1,3 +1,8 @@
+# v1.39.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* **Feature**: This release adds support for specifying which certificate authority (CA) to use for a DB instance's server certificate during DB instance creation, as well as other CA enhancements.
+
 # v1.38.0 (2022-12-28)
 
 * **Feature**: This release adds support for Custom Engine Version (CEV) on RDS Custom SQL Server.
