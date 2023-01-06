@@ -1,3 +1,11 @@
+# Release (2023-01-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.21.0](service/acmpca/CHANGELOG.md#v1210-2023-01-06)
+  * **Feature**: Added revocation parameter validation: bucket names must match S3 bucket naming rules and CNAMEs conform to RFC2396 restrictions on the use of special characters in URIs.
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.23.0](service/auditmanager/CHANGELOG.md#v1230-2023-01-06)
+  * **Feature**: This release introduces a new data retention option in your Audit Manager settings. You can now use the DeregistrationPolicy parameter to specify if you want to delete your data when you deregister Audit Manager.
+
 # Release (2023-01-05)
 
 ## General Highlights

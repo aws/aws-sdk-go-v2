@@ -1,8 +1,0 @@
-{
-    "id": "e11f20fb-03ab-46c4-9bae-02afe05f0d98",
-    "type": "feature",
-    "description": "Added revocation parameter validation: bucket names must match S3 bucket naming rules and CNAMEs conform to RFC2396 restrictions on the use of special characters in URIs.",
-    "modules": [
-        "service/acmpca"
-    ]
-}

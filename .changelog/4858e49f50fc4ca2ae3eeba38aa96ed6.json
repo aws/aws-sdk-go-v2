@@ -1,8 +1,0 @@
-{
-    "id": "4858e49f-50fc-4ca2-ae3e-eba38aa96ed6",
-    "type": "feature",
-    "description": "This release introduces a new data retention option in your Audit Manager settings. You can now use the DeregistrationPolicy parameter to specify if you want to delete your data when you deregister Audit Manager.",
-    "modules": [
-        "service/auditmanager"
-    ]
-}
