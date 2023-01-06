@@ -51,7 +51,7 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
         if (isAwsQueryCompatibleTraitFound(context)) {
             return HttpProtocolGeneratorUtils.generateErrorDispatcher(
                 context, operation, responseType, this::writeErrorMessageCodeDeserializer,
-                this::getOperationErrors, (writer) -> AwsJsonRpc1_0.defaultBlock(writer));
+                this::getOperationErrors, (writer) -> AwsJsonRpc1_0.awsQueryCompatibleDefaultBlockWriter(writer));
         } else {
             return HttpProtocolGeneratorUtils.generateErrorDispatcher(
                 context, operation, responseType, this::writeErrorMessageCodeDeserializer,
@@ -59,10 +59,10 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
         }
     }
 
-    private static void defaultBlock(GoWriter writer) {
+    private static void awsQueryCompatibleDefaultBlockWriter(GoWriter writer) {
         writer.openBlock("default:", "", () -> {
             writer.openBlock("genericError := &smithy.GenericAPIError{", "}", () -> {
-                    writer.write("Code: getAwsQueryErrorCode(response),");
+                writer.write("Code: getAwsQueryErrorCode(response),");
                 writer.write("Message: errorMessage,");
             });
             writer.write("return genericError");
