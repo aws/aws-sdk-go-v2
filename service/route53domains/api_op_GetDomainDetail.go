@@ -44,31 +44,6 @@ type GetDomainDetailInput struct {
 // The GetDomainDetail response includes the following elements.
 type GetDomainDetailOutput struct {
 
-	// Provides details about the domain administrative contact.
-	//
-	// This member is required.
-	AdminContact *types.ContactDetail
-
-	// The name of a domain.
-	//
-	// This member is required.
-	DomainName *string
-
-	// The name of the domain.
-	//
-	// This member is required.
-	Nameservers []types.Nameserver
-
-	// Provides details about the domain registrant.
-	//
-	// This member is required.
-	RegistrantContact *types.ContactDetail
-
-	// Provides details about the domain technical contact.
-	//
-	// This member is required.
-	TechContact *types.ContactDetail
-
 	// Email address to contact to report incorrect contact information for a domain,
 	// to report that the domain is being used to send spam, to report that someone is
 	// cybersquatting on a domain name, or report some other type of abuse.
@@ -76,6 +51,9 @@ type GetDomainDetailOutput struct {
 
 	// Phone number for reporting abuse.
 	AbuseContactPhone *string
+
+	// Provides details about the domain administrative contact.
+	AdminContact *types.ContactDetail
 
 	// Specifies whether contact information is concealed from WHOIS queries. If the
 	// value is true, WHOIS ("who is") queries return contact information either for
@@ -94,9 +72,21 @@ type GetDomainDetailOutput struct {
 	// Deprecated.
 	DnsSec *string
 
+	// A complex type that contains information about the DNSSEC configuration.
+	DnssecKeys []types.DnssecKey
+
+	// The name of a domain.
+	DomainName *string
+
 	// The date when the registration for the domain is set to expire. The date and
 	// time is in Unix time format and Coordinated Universal time (UTC).
 	ExpirationDate *time.Time
+
+	// The name servers of the domain.
+	Nameservers []types.Nameserver
+
+	// Provides details about the domain registrant.
+	RegistrantContact *types.ContactDetail
 
 	// Specifies whether contact information is concealed from WHOIS queries. If the
 	// value is true, WHOIS ("who is") queries return contact information either for
@@ -133,6 +123,9 @@ type GetDomainDetailOutput struct {
 	// (https://www.icann.org/) and search for epp status codes. (Search on the ICANN
 	// website; web searches sometimes return an old version of the document.)
 	StatusList []string
+
+	// Provides details about the domain technical contact.
+	TechContact *types.ContactDetail
 
 	// Specifies whether contact information is concealed from WHOIS queries. If the
 	// value is true, WHOIS ("who is") queries return contact information either for

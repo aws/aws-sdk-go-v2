@@ -54,8 +54,8 @@ type CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput struct {
 
 type CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput struct {
 
-	// Describes an association between a local gateway route table and a virtual
-	// interface group.
+	// Information about the local gateway route table virtual interface group
+	// association.
 	LocalGatewayRouteTableVirtualInterfaceGroupAssociation *types.LocalGatewayRouteTableVirtualInterfaceGroupAssociation
 
 	// Metadata pertaining to the operation's result.

@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a CloudFront function. You can update a function’s code or the comment
-// that describes the function. You cannot update a function’s name. To update a
-// function, you provide the function’s name and version (ETag value) along with
+// Updates a CloudFront function. You can update a function's code or the comment
+// that describes the function. You cannot update a function's name. To update a
+// function, you provide the function's name and version (ETag value) along with
 // the updated function code. To get the name and version, you can use
 // ListFunctions and DescribeFunction.
 func (c *Client) UpdateFunction(ctx context.Context, params *UpdateFunctionInput, optFns ...func(*Options)) (*UpdateFunctionOutput, error) {

@@ -18,12 +18,7 @@ import (
 // Instead, you must configure configure an Amazon Simple Notification Service
 // (SNS) topic to receive notifications from FlexMatch or queues. Continuously
 // polling with DescribeGameSessionPlacement should only be used for games in
-// development with low game session usage. If successful, a GameSessionPlacement
-// object is returned. Related actions CreateGameSession | DescribeGameSessions |
-// DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |
-// GetGameSessionLogUrl | StartGameSessionPlacement | DescribeGameSessionPlacement
-// | StopGameSessionPlacement | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// development with low game session usage.
 func (c *Client) DescribeGameSessionPlacement(ctx context.Context, params *DescribeGameSessionPlacementInput, optFns ...func(*Options)) (*DescribeGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionPlacementInput{}
@@ -39,7 +34,6 @@ func (c *Client) DescribeGameSessionPlacement(ctx context.Context, params *Descr
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeGameSessionPlacementInput struct {
 
 	// A unique identifier for a game session placement to retrieve.
@@ -50,7 +44,6 @@ type DescribeGameSessionPlacementInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeGameSessionPlacementOutput struct {
 
 	// Object that describes the requested game session placement.

@@ -1,3 +1,19 @@
+# v1.9.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.8.2 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.8.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.8.0 (2022-11-28)
+
+* **Feature**: This release adds support for real-time (streaming) and post-call Call Analytics within Amazon Transcribe.
+
 # v1.7.0 (2022-11-09)
 
 * **Feature**: This will release hi-IN and th-TH

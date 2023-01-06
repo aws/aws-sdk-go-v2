@@ -13,6 +13,12 @@ import (
 )
 
 // List position configurations for a given resource, such as positioning solvers.
+// This action is no longer supported. Calls to retrieve position information
+// should use the GetResourcePosition
+// (https://docs.aws.amazon.com/iot-wireless/2020-11-22/apireference/API_GetResourcePosition.html)
+// API operation instead.
+//
+// Deprecated: This operation is no longer supported.
 func (c *Client) ListPositionConfigurations(ctx context.Context, params *ListPositionConfigurationsInput, optFns ...func(*Options)) (*ListPositionConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListPositionConfigurationsInput{}

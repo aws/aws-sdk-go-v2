@@ -39,6 +39,9 @@ type GetAssessmentInput struct {
 
 type GetAssessmentOutput struct {
 
+	// List of criteria for assessment.
+	AssessmentTargets []types.AssessmentTarget
+
 	// Detailed information about the assessment.
 	DataCollectionDetails *types.DataCollectionDetails
 

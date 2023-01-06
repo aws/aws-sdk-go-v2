@@ -188,6 +188,24 @@ func (ExtensionStatus) Values() []ExtensionStatus {
 	}
 }
 
+type FailbackLaunchType string
+
+// Enum values for FailbackLaunchType
+const (
+	FailbackLaunchTypeRecovery FailbackLaunchType = "RECOVERY"
+	FailbackLaunchTypeDrill    FailbackLaunchType = "DRILL"
+)
+
+// Values returns all known values for FailbackLaunchType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FailbackLaunchType) Values() []FailbackLaunchType {
+	return []FailbackLaunchType{
+		"RECOVERY",
+		"DRILL",
+	}
+}
+
 type FailbackReplicationError string
 
 // Enum values for FailbackReplicationError
@@ -201,6 +219,18 @@ const (
 	FailbackReplicationErrorFailedToConfigureReplicationSoftware                  FailbackReplicationError = "FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE"
 	FailbackReplicationErrorFailedToPairAgentWithReplicationSoftware              FailbackReplicationError = "FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE"
 	FailbackReplicationErrorFailedToEstablishAgentReplicatorSoftwareCommunication FailbackReplicationError = "FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"
+	FailbackReplicationErrorFailedGettingReplicationState                         FailbackReplicationError = "FAILED_GETTING_REPLICATION_STATE"
+	FailbackReplicationErrorSnapshotsFailure                                      FailbackReplicationError = "SNAPSHOTS_FAILURE"
+	FailbackReplicationErrorFailedToCreateSecurityGroup                           FailbackReplicationError = "FAILED_TO_CREATE_SECURITY_GROUP"
+	FailbackReplicationErrorFailedToLaunchReplicationServer                       FailbackReplicationError = "FAILED_TO_LAUNCH_REPLICATION_SERVER"
+	FailbackReplicationErrorFailedToBootReplicationServer                         FailbackReplicationError = "FAILED_TO_BOOT_REPLICATION_SERVER"
+	FailbackReplicationErrorFailedToAuthenticateWithService                       FailbackReplicationError = "FAILED_TO_AUTHENTICATE_WITH_SERVICE"
+	FailbackReplicationErrorFailedToDownloadReplicationSoftware                   FailbackReplicationError = "FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE"
+	FailbackReplicationErrorFailedToCreateStagingDisks                            FailbackReplicationError = "FAILED_TO_CREATE_STAGING_DISKS"
+	FailbackReplicationErrorFailedToAttachStagingDisks                            FailbackReplicationError = "FAILED_TO_ATTACH_STAGING_DISKS"
+	FailbackReplicationErrorFailedToPairReplicationServerWithAgent                FailbackReplicationError = "FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT"
+	FailbackReplicationErrorFailedToConnectAgentToReplicationServer               FailbackReplicationError = "FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER"
+	FailbackReplicationErrorFailedToStartDataTransfer                             FailbackReplicationError = "FAILED_TO_START_DATA_TRANSFER"
 )
 
 // Values returns all known values for FailbackReplicationError. Note that this can
@@ -217,6 +247,18 @@ func (FailbackReplicationError) Values() []FailbackReplicationError {
 		"FAILED_TO_CONFIGURE_REPLICATION_SOFTWARE",
 		"FAILED_TO_PAIR_AGENT_WITH_REPLICATION_SOFTWARE",
 		"FAILED_TO_ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION",
+		"FAILED_GETTING_REPLICATION_STATE",
+		"SNAPSHOTS_FAILURE",
+		"FAILED_TO_CREATE_SECURITY_GROUP",
+		"FAILED_TO_LAUNCH_REPLICATION_SERVER",
+		"FAILED_TO_BOOT_REPLICATION_SERVER",
+		"FAILED_TO_AUTHENTICATE_WITH_SERVICE",
+		"FAILED_TO_DOWNLOAD_REPLICATION_SOFTWARE",
+		"FAILED_TO_CREATE_STAGING_DISKS",
+		"FAILED_TO_ATTACH_STAGING_DISKS",
+		"FAILED_TO_PAIR_REPLICATION_SERVER_WITH_AGENT",
+		"FAILED_TO_CONNECT_AGENT_TO_REPLICATION_SERVER",
+		"FAILED_TO_START_DATA_TRANSFER",
 	}
 }
 
@@ -224,11 +266,13 @@ type FailbackState string
 
 // Enum values for FailbackState
 const (
-	FailbackStateFailbackNotStarted     FailbackState = "FAILBACK_NOT_STARTED"
-	FailbackStateFailbackInProgress     FailbackState = "FAILBACK_IN_PROGRESS"
-	FailbackStateFailbackReadyForLaunch FailbackState = "FAILBACK_READY_FOR_LAUNCH"
-	FailbackStateFailbackCompleted      FailbackState = "FAILBACK_COMPLETED"
-	FailbackStateFailbackError          FailbackState = "FAILBACK_ERROR"
+	FailbackStateFailbackNotStarted              FailbackState = "FAILBACK_NOT_STARTED"
+	FailbackStateFailbackInProgress              FailbackState = "FAILBACK_IN_PROGRESS"
+	FailbackStateFailbackReadyForLaunch          FailbackState = "FAILBACK_READY_FOR_LAUNCH"
+	FailbackStateFailbackCompleted               FailbackState = "FAILBACK_COMPLETED"
+	FailbackStateFailbackError                   FailbackState = "FAILBACK_ERROR"
+	FailbackStateFailbackNotReadyForLaunch       FailbackState = "FAILBACK_NOT_READY_FOR_LAUNCH"
+	FailbackStateFailbackLaunchStateNotAvailable FailbackState = "FAILBACK_LAUNCH_STATE_NOT_AVAILABLE"
 )
 
 // Values returns all known values for FailbackState. Note that this can be
@@ -241,6 +285,8 @@ func (FailbackState) Values() []FailbackState {
 		"FAILBACK_READY_FOR_LAUNCH",
 		"FAILBACK_COMPLETED",
 		"FAILBACK_ERROR",
+		"FAILBACK_NOT_READY_FOR_LAUNCH",
+		"FAILBACK_LAUNCH_STATE_NOT_AVAILABLE",
 	}
 }
 
@@ -440,6 +486,24 @@ func (LaunchStatus) Values() []LaunchStatus {
 	}
 }
 
+type OriginEnvironment string
+
+// Enum values for OriginEnvironment
+const (
+	OriginEnvironmentOnPremises OriginEnvironment = "ON_PREMISES"
+	OriginEnvironmentAws        OriginEnvironment = "AWS"
+)
+
+// Values returns all known values for OriginEnvironment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OriginEnvironment) Values() []OriginEnvironment {
+	return []OriginEnvironment{
+		"ON_PREMISES",
+		"AWS",
+	}
+}
+
 type PITPolicyRuleUnits string
 
 // Enum values for PITPolicyRuleUnits
@@ -471,6 +535,17 @@ const (
 	RecoveryInstanceDataReplicationInitiationStepNameConfigureReplicationSoftware                  RecoveryInstanceDataReplicationInitiationStepName = "CONFIGURE_REPLICATION_SOFTWARE"
 	RecoveryInstanceDataReplicationInitiationStepNamePairAgentWithReplicationSoftware              RecoveryInstanceDataReplicationInitiationStepName = "PAIR_AGENT_WITH_REPLICATION_SOFTWARE"
 	RecoveryInstanceDataReplicationInitiationStepNameEstablishAgentReplicatorSoftwareCommunication RecoveryInstanceDataReplicationInitiationStepName = "ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION"
+	RecoveryInstanceDataReplicationInitiationStepNameWait                                          RecoveryInstanceDataReplicationInitiationStepName = "WAIT"
+	RecoveryInstanceDataReplicationInitiationStepNameCreateSecurityGroup                           RecoveryInstanceDataReplicationInitiationStepName = "CREATE_SECURITY_GROUP"
+	RecoveryInstanceDataReplicationInitiationStepNameLaunchReplicationServer                       RecoveryInstanceDataReplicationInitiationStepName = "LAUNCH_REPLICATION_SERVER"
+	RecoveryInstanceDataReplicationInitiationStepNameBootReplicationServer                         RecoveryInstanceDataReplicationInitiationStepName = "BOOT_REPLICATION_SERVER"
+	RecoveryInstanceDataReplicationInitiationStepNameAuthenticateWithService                       RecoveryInstanceDataReplicationInitiationStepName = "AUTHENTICATE_WITH_SERVICE"
+	RecoveryInstanceDataReplicationInitiationStepNameDownloadReplicationSoftware                   RecoveryInstanceDataReplicationInitiationStepName = "DOWNLOAD_REPLICATION_SOFTWARE"
+	RecoveryInstanceDataReplicationInitiationStepNameCreateStagingDisks                            RecoveryInstanceDataReplicationInitiationStepName = "CREATE_STAGING_DISKS"
+	RecoveryInstanceDataReplicationInitiationStepNameAttachStagingDisks                            RecoveryInstanceDataReplicationInitiationStepName = "ATTACH_STAGING_DISKS"
+	RecoveryInstanceDataReplicationInitiationStepNamePairReplicationServerWithAgent                RecoveryInstanceDataReplicationInitiationStepName = "PAIR_REPLICATION_SERVER_WITH_AGENT"
+	RecoveryInstanceDataReplicationInitiationStepNameConnectAgentToReplicationServer               RecoveryInstanceDataReplicationInitiationStepName = "CONNECT_AGENT_TO_REPLICATION_SERVER"
+	RecoveryInstanceDataReplicationInitiationStepNameStartDataTransfer                             RecoveryInstanceDataReplicationInitiationStepName = "START_DATA_TRANSFER"
 )
 
 // Values returns all known values for
@@ -486,6 +561,17 @@ func (RecoveryInstanceDataReplicationInitiationStepName) Values() []RecoveryInst
 		"CONFIGURE_REPLICATION_SOFTWARE",
 		"PAIR_AGENT_WITH_REPLICATION_SOFTWARE",
 		"ESTABLISH_AGENT_REPLICATOR_SOFTWARE_COMMUNICATION",
+		"WAIT",
+		"CREATE_SECURITY_GROUP",
+		"LAUNCH_REPLICATION_SERVER",
+		"BOOT_REPLICATION_SERVER",
+		"AUTHENTICATE_WITH_SERVICE",
+		"DOWNLOAD_REPLICATION_SOFTWARE",
+		"CREATE_STAGING_DISKS",
+		"ATTACH_STAGING_DISKS",
+		"PAIR_REPLICATION_SERVER_WITH_AGENT",
+		"CONNECT_AGENT_TO_REPLICATION_SERVER",
+		"START_DATA_TRANSFER",
 	}
 }
 
@@ -518,16 +604,18 @@ type RecoveryInstanceDataReplicationState string
 
 // Enum values for RecoveryInstanceDataReplicationState
 const (
-	RecoveryInstanceDataReplicationStateStopped          RecoveryInstanceDataReplicationState = "STOPPED"
-	RecoveryInstanceDataReplicationStateInitiating       RecoveryInstanceDataReplicationState = "INITIATING"
-	RecoveryInstanceDataReplicationStateInitialSync      RecoveryInstanceDataReplicationState = "INITIAL_SYNC"
-	RecoveryInstanceDataReplicationStateBacklog          RecoveryInstanceDataReplicationState = "BACKLOG"
-	RecoveryInstanceDataReplicationStateCreatingSnapshot RecoveryInstanceDataReplicationState = "CREATING_SNAPSHOT"
-	RecoveryInstanceDataReplicationStateContinuous       RecoveryInstanceDataReplicationState = "CONTINUOUS"
-	RecoveryInstanceDataReplicationStatePaused           RecoveryInstanceDataReplicationState = "PAUSED"
-	RecoveryInstanceDataReplicationStateRescan           RecoveryInstanceDataReplicationState = "RESCAN"
-	RecoveryInstanceDataReplicationStateStalled          RecoveryInstanceDataReplicationState = "STALLED"
-	RecoveryInstanceDataReplicationStateDisconnected     RecoveryInstanceDataReplicationState = "DISCONNECTED"
+	RecoveryInstanceDataReplicationStateStopped                      RecoveryInstanceDataReplicationState = "STOPPED"
+	RecoveryInstanceDataReplicationStateInitiating                   RecoveryInstanceDataReplicationState = "INITIATING"
+	RecoveryInstanceDataReplicationStateInitialSync                  RecoveryInstanceDataReplicationState = "INITIAL_SYNC"
+	RecoveryInstanceDataReplicationStateBacklog                      RecoveryInstanceDataReplicationState = "BACKLOG"
+	RecoveryInstanceDataReplicationStateCreatingSnapshot             RecoveryInstanceDataReplicationState = "CREATING_SNAPSHOT"
+	RecoveryInstanceDataReplicationStateContinuous                   RecoveryInstanceDataReplicationState = "CONTINUOUS"
+	RecoveryInstanceDataReplicationStatePaused                       RecoveryInstanceDataReplicationState = "PAUSED"
+	RecoveryInstanceDataReplicationStateRescan                       RecoveryInstanceDataReplicationState = "RESCAN"
+	RecoveryInstanceDataReplicationStateStalled                      RecoveryInstanceDataReplicationState = "STALLED"
+	RecoveryInstanceDataReplicationStateDisconnected                 RecoveryInstanceDataReplicationState = "DISCONNECTED"
+	RecoveryInstanceDataReplicationStateReplicationStateNotAvailable RecoveryInstanceDataReplicationState = "REPLICATION_STATE_NOT_AVAILABLE"
+	RecoveryInstanceDataReplicationStateNotStarted                   RecoveryInstanceDataReplicationState = "NOT_STARTED"
 )
 
 // Values returns all known values for RecoveryInstanceDataReplicationState. Note
@@ -546,6 +634,8 @@ func (RecoveryInstanceDataReplicationState) Values() []RecoveryInstanceDataRepli
 		"RESCAN",
 		"STALLED",
 		"DISCONNECTED",
+		"REPLICATION_STATE_NOT_AVAILABLE",
+		"NOT_STARTED",
 	}
 }
 
@@ -654,6 +744,24 @@ func (ReplicationConfigurationReplicatedDiskStagingDiskType) Values() []Replicat
 		"SC1",
 		"ST1",
 		"STANDARD",
+	}
+}
+
+type ReplicationDirection string
+
+// Enum values for ReplicationDirection
+const (
+	ReplicationDirectionFailover ReplicationDirection = "FAILOVER"
+	ReplicationDirectionFailback ReplicationDirection = "FAILBACK"
+)
+
+// Values returns all known values for ReplicationDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReplicationDirection) Values() []ReplicationDirection {
+	return []ReplicationDirection{
+		"FAILOVER",
+		"FAILBACK",
 	}
 }
 

@@ -1336,9 +1336,11 @@ type LabelSummary struct {
 //
 // * Create your logging destination. You can
 // use an Amazon CloudWatch Logs log group, an Amazon Simple Storage Service
-// (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. For information about
-// configuring logging destinations and the permissions that are required for each,
-// see Logging web ACL traffic information
+// (Amazon S3) bucket, or an Amazon Kinesis Data Firehose. The name that you give
+// the destination must start with aws-waf-logs-. Depending on the type of
+// destination, you might need to configure additional settings or permissions. For
+// configuration requirements and pricing information for each destination type,
+// see Logging web ACL traffic
 // (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html) in the WAF
 // Developer Guide.
 //

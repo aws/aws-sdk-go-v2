@@ -36,6 +36,8 @@ const (
 	ChatItemTypeEvent             ChatItemType = "EVENT"
 	ChatItemTypeAttachment        ChatItemType = "ATTACHMENT"
 	ChatItemTypeConnectionAck     ChatItemType = "CONNECTION_ACK"
+	ChatItemTypeMessageDelivered  ChatItemType = "MESSAGE_DELIVERED"
+	ChatItemTypeMessageRead       ChatItemType = "MESSAGE_READ"
 )
 
 // Values returns all known values for ChatItemType. Note that this can be expanded
@@ -53,6 +55,8 @@ func (ChatItemType) Values() []ChatItemType {
 		"EVENT",
 		"ATTACHMENT",
 		"CONNECTION_ACK",
+		"MESSAGE_DELIVERED",
+		"MESSAGE_READ",
 	}
 }
 

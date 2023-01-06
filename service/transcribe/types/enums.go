@@ -51,6 +51,8 @@ const (
 	CLMLanguageCodeEsUs CLMLanguageCode = "es-US"
 	CLMLanguageCodeEnGb CLMLanguageCode = "en-GB"
 	CLMLanguageCodeEnAu CLMLanguageCode = "en-AU"
+	CLMLanguageCodeDeDe CLMLanguageCode = "de-DE"
+	CLMLanguageCodeJaJp CLMLanguageCode = "ja-JP"
 )
 
 // Values returns all known values for CLMLanguageCode. Note that this can be
@@ -63,6 +65,26 @@ func (CLMLanguageCode) Values() []CLMLanguageCode {
 		"es-US",
 		"en-GB",
 		"en-AU",
+		"de-DE",
+		"ja-JP",
+	}
+}
+
+type InputType string
+
+// Enum values for InputType
+const (
+	InputTypeRealTime InputType = "REAL_TIME"
+	InputTypePostCall InputType = "POST_CALL"
+)
+
+// Values returns all known values for InputType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (InputType) Values() []InputType {
+	return []InputType{
+		"REAL_TIME",
+		"POST_CALL",
 	}
 }
 
@@ -107,6 +129,8 @@ const (
 	LanguageCodeThTh LanguageCode = "th-TH"
 	LanguageCodeEnZa LanguageCode = "en-ZA"
 	LanguageCodeEnNz LanguageCode = "en-NZ"
+	LanguageCodeViVn LanguageCode = "vi-VN"
+	LanguageCodeSvSe LanguageCode = "sv-SE"
 )
 
 // Values returns all known values for LanguageCode. Note that this can be expanded
@@ -151,6 +175,8 @@ func (LanguageCode) Values() []LanguageCode {
 		"th-TH",
 		"en-ZA",
 		"en-NZ",
+		"vi-VN",
+		"sv-SE",
 	}
 }
 

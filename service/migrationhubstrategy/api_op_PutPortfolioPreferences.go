@@ -29,6 +29,9 @@ func (c *Client) PutPortfolioPreferences(ctx context.Context, params *PutPortfol
 
 type PutPortfolioPreferencesInput struct {
 
+	// The classification for application component types.
+	ApplicationMode types.ApplicationMode
+
 	// The transformation preferences for non-database applications.
 	ApplicationPreferences *types.ApplicationPreferences
 

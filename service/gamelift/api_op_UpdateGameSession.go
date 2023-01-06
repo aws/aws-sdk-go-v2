@@ -13,10 +13,7 @@ import (
 
 // Updates the mutable properties of a game session. To update a game session,
 // specify the game session ID and the values you want to change. If successful,
-// the updated GameSession object is returned. Related actions CreateGameSession |
-// DescribeGameSessions | DescribeGameSessionDetails | SearchGameSessions |
-// UpdateGameSession | GetGameSessionLogUrl | StartGameSessionPlacement |
-// DescribeGameSessionPlacement | StopGameSessionPlacement | All APIs by task
+// the updated GameSession object is returned. All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateGameSession(ctx context.Context, params *UpdateGameSessionInput, optFns ...func(*Options)) (*UpdateGameSessionOutput, error) {
 	if params == nil {
@@ -33,7 +30,6 @@ func (c *Client) UpdateGameSession(ctx context.Context, params *UpdateGameSessio
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type UpdateGameSessionInput struct {
 
 	// A unique identifier for the game session to update.
@@ -65,7 +61,6 @@ type UpdateGameSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type UpdateGameSessionOutput struct {
 
 	// The updated game session properties.

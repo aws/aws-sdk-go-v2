@@ -1303,6 +1303,11 @@ func awsRestjson1_serializeOpDocumentCreateWirelessDeviceInput(v *CreateWireless
 		ok.String(*v.Name)
 	}
 
+	if len(v.Positioning) > 0 {
+		ok := object.Key("Positioning")
+		ok.String(string(v.Positioning))
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -3290,6 +3295,102 @@ func awsRestjson1_serializeOpHttpBindingsGetPositionConfigurationInput(v *GetPos
 	return nil
 }
 
+type awsRestjson1_serializeOpGetPositionEstimate struct {
+}
+
+func (*awsRestjson1_serializeOpGetPositionEstimate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetPositionEstimate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPositionEstimateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/position-estimate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetPositionEstimateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetPositionEstimateInput(v *GetPositionEstimateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetPositionEstimateInput(v *GetPositionEstimateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CellTowers != nil {
+		ok := object.Key("CellTowers")
+		if err := awsRestjson1_serializeDocumentCellTowers(v.CellTowers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Gnss != nil {
+		ok := object.Key("Gnss")
+		if err := awsRestjson1_serializeDocumentGnss(v.Gnss, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Ip != nil {
+		ok := object.Key("Ip")
+		if err := awsRestjson1_serializeDocumentIp(v.Ip, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Timestamp != nil {
+		ok := object.Key("Timestamp")
+		ok.Double(smithytime.FormatEpochSeconds(*v.Timestamp))
+	}
+
+	if v.WiFiAccessPoints != nil {
+		ok := object.Key("WiFiAccessPoints")
+		if err := awsRestjson1_serializeDocumentWiFiAccessPoints(v.WiFiAccessPoints, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetResourceEventConfiguration struct {
 }
 
@@ -3413,6 +3514,68 @@ func awsRestjson1_serializeOpHttpBindingsGetResourceLogLevelInput(v *GetResource
 
 	if v.ResourceType != nil {
 		encoder.SetQuery("resourceType").String(*v.ResourceType)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetResourcePosition struct {
+}
+
+func (*awsRestjson1_serializeOpGetResourcePosition) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetResourcePosition) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetResourcePositionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/resource-positions/{ResourceIdentifier}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetResourcePositionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetResourcePositionInput(v *GetResourcePositionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ResourceIdentifier == nil || len(*v.ResourceIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceIdentifier must not be empty")}
+	}
+	if v.ResourceIdentifier != nil {
+		if err := encoder.SetURI("ResourceIdentifier").String(*v.ResourceIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ResourceType) > 0 {
+		encoder.SetQuery("resourceType").String(string(v.ResourceType))
 	}
 
 	return nil
@@ -6793,6 +6956,80 @@ func awsRestjson1_serializeOpDocumentUpdateResourceEventConfigurationInput(v *Up
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateResourcePosition struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateResourcePosition) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateResourcePosition) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateResourcePositionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/resource-positions/{ResourceIdentifier}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateResourcePositionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if !restEncoder.HasHeader("Content-Type") {
+		ctx = smithyhttp.SetIsContentTypeDefaultValue(ctx, true)
+		restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+	}
+
+	if input.GeoJsonPayload != nil {
+		payload := bytes.NewReader(input.GeoJsonPayload)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateResourcePositionInput(v *UpdateResourcePositionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ResourceIdentifier == nil || len(*v.ResourceIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ResourceIdentifier must not be empty")}
+	}
+	if v.ResourceIdentifier != nil {
+		if err := encoder.SetURI("ResourceIdentifier").String(*v.ResourceIdentifier); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ResourceType) > 0 {
+		encoder.SetQuery("resourceType").String(string(v.ResourceType))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateWirelessDevice struct {
 }
 
@@ -6886,6 +7123,11 @@ func awsRestjson1_serializeOpDocumentUpdateWirelessDeviceInput(v *UpdateWireless
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.Positioning) > 0 {
+		ok := object.Key("Positioning")
+		ok.String(string(v.Positioning))
 	}
 
 	return nil
@@ -7039,6 +7281,65 @@ func awsRestjson1_serializeDocumentAbpV1_1(v *types.AbpV1_1, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentApplicationConfig(v *types.ApplicationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationName != nil {
+		ok := object.Key("DestinationName")
+		ok.String(*v.DestinationName)
+	}
+
+	if v.FPort != nil {
+		ok := object.Key("FPort")
+		ok.Integer(*v.FPort)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentApplications(v []types.ApplicationConfig, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentApplicationConfig(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAssistPosition(v []float32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		switch {
+		case math.IsNaN(float64(v[i])):
+			av.String("NaN")
+
+		case math.IsInf(float64(v[i]), 1):
+			av.String("Infinity")
+
+		case math.IsInf(float64(v[i]), -1):
+			av.String("-Infinity")
+
+		default:
+			av.Float(v[i])
+
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentBeaconing(v *types.Beaconing, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7066,6 +7367,200 @@ func awsRestjson1_serializeDocumentBeaconingFrequencies(v []int32, value smithyj
 		av := array.Value()
 		av.Integer(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCdmaList(v []types.CdmaObj, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCdmaObj(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCdmaLocalId(v *types.CdmaLocalId, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CdmaChannel != nil {
+		ok := object.Key("CdmaChannel")
+		ok.Integer(*v.CdmaChannel)
+	}
+
+	if v.PnOffset != nil {
+		ok := object.Key("PnOffset")
+		ok.Integer(*v.PnOffset)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCdmaNmrList(v []types.CdmaNmrObj, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCdmaNmrObj(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCdmaNmrObj(v *types.CdmaNmrObj, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BaseStationId != nil {
+		ok := object.Key("BaseStationId")
+		ok.Integer(*v.BaseStationId)
+	}
+
+	if v.CdmaChannel != nil {
+		ok := object.Key("CdmaChannel")
+		ok.Integer(*v.CdmaChannel)
+	}
+
+	if v.PilotPower != nil {
+		ok := object.Key("PilotPower")
+		ok.Integer(*v.PilotPower)
+	}
+
+	if v.PnOffset != nil {
+		ok := object.Key("PnOffset")
+		ok.Integer(*v.PnOffset)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCdmaObj(v *types.CdmaObj, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BaseLat != nil {
+		ok := object.Key("BaseLat")
+		switch {
+		case math.IsNaN(float64(*v.BaseLat)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.BaseLat), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.BaseLat), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.BaseLat)
+
+		}
+	}
+
+	if v.BaseLng != nil {
+		ok := object.Key("BaseLng")
+		switch {
+		case math.IsNaN(float64(*v.BaseLng)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.BaseLng), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.BaseLng), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.BaseLng)
+
+		}
+	}
+
+	if v.BaseStationId != nil {
+		ok := object.Key("BaseStationId")
+		ok.Integer(*v.BaseStationId)
+	}
+
+	if v.CdmaLocalId != nil {
+		ok := object.Key("CdmaLocalId")
+		if err := awsRestjson1_serializeDocumentCdmaLocalId(v.CdmaLocalId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CdmaNmr != nil {
+		ok := object.Key("CdmaNmr")
+		if err := awsRestjson1_serializeDocumentCdmaNmrList(v.CdmaNmr, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkId != nil {
+		ok := object.Key("NetworkId")
+		ok.Integer(*v.NetworkId)
+	}
+
+	if v.PilotPower != nil {
+		ok := object.Key("PilotPower")
+		ok.Integer(*v.PilotPower)
+	}
+
+	if v.RegistrationZone != nil {
+		ok := object.Key("RegistrationZone")
+		ok.Integer(*v.RegistrationZone)
+	}
+
+	if v.SystemId != nil {
+		ok := object.Key("SystemId")
+		ok.Integer(*v.SystemId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCellTowers(v *types.CellTowers, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Cdma != nil {
+		ok := object.Key("Cdma")
+		if err := awsRestjson1_serializeDocumentCdmaList(v.Cdma, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Gsm != nil {
+		ok := object.Key("Gsm")
+		if err := awsRestjson1_serializeDocumentGsmList(v.Gsm, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Lte != nil {
+		ok := object.Key("Lte")
+		if err := awsRestjson1_serializeDocumentLteList(v.Lte, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tdscdma != nil {
+		ok := object.Key("Tdscdma")
+		if err := awsRestjson1_serializeDocumentTdscdmaList(v.Tdscdma, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Wcdma != nil {
+		ok := object.Key("Wcdma")
+		if err := awsRestjson1_serializeDocumentWcdmaList(v.Wcdma, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7150,6 +7645,13 @@ func awsRestjson1_serializeDocumentFPorts(v *types.FPorts, value smithyjson.Valu
 	object := value.Object()
 	defer object.Close()
 
+	if v.Applications != nil {
+		ok := object.Key("Applications")
+		if err := awsRestjson1_serializeDocumentApplications(v.Applications, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ClockSync != nil {
 		ok := object.Key("ClockSync")
 		ok.Integer(*v.ClockSync)
@@ -7200,6 +7702,236 @@ func awsRestjson1_serializeDocumentGatewayListItem(v *types.GatewayListItem, val
 	if v.GatewayId != nil {
 		ok := object.Key("GatewayId")
 		ok.String(*v.GatewayId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGlobalIdentity(v *types.GlobalIdentity, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GeranCid != nil {
+		ok := object.Key("GeranCid")
+		ok.Integer(*v.GeranCid)
+	}
+
+	if v.Lac != nil {
+		ok := object.Key("Lac")
+		ok.Integer(*v.Lac)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGnss(v *types.Gnss, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssistAltitude != nil {
+		ok := object.Key("AssistAltitude")
+		switch {
+		case math.IsNaN(float64(*v.AssistAltitude)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.AssistAltitude), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.AssistAltitude), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.AssistAltitude)
+
+		}
+	}
+
+	if v.AssistPosition != nil {
+		ok := object.Key("AssistPosition")
+		if err := awsRestjson1_serializeDocumentAssistPosition(v.AssistPosition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CaptureTime != nil {
+		ok := object.Key("CaptureTime")
+		switch {
+		case math.IsNaN(float64(*v.CaptureTime)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.CaptureTime), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.CaptureTime), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.CaptureTime)
+
+		}
+	}
+
+	if v.CaptureTimeAccuracy != nil {
+		ok := object.Key("CaptureTimeAccuracy")
+		switch {
+		case math.IsNaN(float64(*v.CaptureTimeAccuracy)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.CaptureTimeAccuracy), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.CaptureTimeAccuracy), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.CaptureTimeAccuracy)
+
+		}
+	}
+
+	if v.Payload != nil {
+		ok := object.Key("Payload")
+		ok.String(*v.Payload)
+	}
+
+	if v.Use2DSolver {
+		ok := object.Key("Use2DSolver")
+		ok.Boolean(v.Use2DSolver)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGsmList(v []types.GsmObj, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGsmObj(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGsmLocalId(v *types.GsmLocalId, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bcch != nil {
+		ok := object.Key("Bcch")
+		ok.Integer(*v.Bcch)
+	}
+
+	if v.Bsic != nil {
+		ok := object.Key("Bsic")
+		ok.Integer(*v.Bsic)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGsmNmrList(v []types.GsmNmrObj, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentGsmNmrObj(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGsmNmrObj(v *types.GsmNmrObj, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bcch != nil {
+		ok := object.Key("Bcch")
+		ok.Integer(*v.Bcch)
+	}
+
+	if v.Bsic != nil {
+		ok := object.Key("Bsic")
+		ok.Integer(*v.Bsic)
+	}
+
+	if v.GlobalIdentity != nil {
+		ok := object.Key("GlobalIdentity")
+		if err := awsRestjson1_serializeDocumentGlobalIdentity(v.GlobalIdentity, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RxLevel != nil {
+		ok := object.Key("RxLevel")
+		ok.Integer(*v.RxLevel)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGsmObj(v *types.GsmObj, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GeranCid != nil {
+		ok := object.Key("GeranCid")
+		ok.Integer(*v.GeranCid)
+	}
+
+	if v.GsmLocalId != nil {
+		ok := object.Key("GsmLocalId")
+		if err := awsRestjson1_serializeDocumentGsmLocalId(v.GsmLocalId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GsmNmr != nil {
+		ok := object.Key("GsmNmr")
+		if err := awsRestjson1_serializeDocumentGsmNmrList(v.GsmNmr, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GsmTimingAdvance != nil {
+		ok := object.Key("GsmTimingAdvance")
+		ok.Integer(*v.GsmTimingAdvance)
+	}
+
+	if v.Lac != nil {
+		ok := object.Key("Lac")
+		ok.Integer(*v.Lac)
+	}
+
+	if v.Mcc != nil {
+		ok := object.Key("Mcc")
+		ok.Integer(*v.Mcc)
+	}
+
+	if v.Mnc != nil {
+		ok := object.Key("Mnc")
+		ok.Integer(*v.Mnc)
+	}
+
+	if v.RxLevel != nil {
+		ok := object.Key("RxLevel")
+		ok.Integer(*v.RxLevel)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIp(v *types.Ip, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IpAddress != nil {
+		ok := object.Key("IpAddress")
+		ok.String(*v.IpAddress)
 	}
 
 	return nil
@@ -7731,6 +8463,168 @@ func awsRestjson1_serializeDocumentLoRaWANUpdateGatewayTaskCreate(v *types.LoRaW
 	return nil
 }
 
+func awsRestjson1_serializeDocumentLteList(v []types.LteObj, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLteObj(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLteLocalId(v *types.LteLocalId, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Earfcn != nil {
+		ok := object.Key("Earfcn")
+		ok.Integer(*v.Earfcn)
+	}
+
+	if v.Pci != nil {
+		ok := object.Key("Pci")
+		ok.Integer(*v.Pci)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLteNmrList(v []types.LteNmrObj, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLteNmrObj(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLteNmrObj(v *types.LteNmrObj, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Earfcn != nil {
+		ok := object.Key("Earfcn")
+		ok.Integer(*v.Earfcn)
+	}
+
+	if v.EutranCid != nil {
+		ok := object.Key("EutranCid")
+		ok.Integer(*v.EutranCid)
+	}
+
+	if v.Pci != nil {
+		ok := object.Key("Pci")
+		ok.Integer(*v.Pci)
+	}
+
+	if v.Rsrp != nil {
+		ok := object.Key("Rsrp")
+		ok.Integer(*v.Rsrp)
+	}
+
+	if v.Rsrq != nil {
+		ok := object.Key("Rsrq")
+		switch {
+		case math.IsNaN(float64(*v.Rsrq)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Rsrq), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Rsrq), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Rsrq)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLteObj(v *types.LteObj, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EutranCid != nil {
+		ok := object.Key("EutranCid")
+		ok.Integer(*v.EutranCid)
+	}
+
+	if v.LteLocalId != nil {
+		ok := object.Key("LteLocalId")
+		if err := awsRestjson1_serializeDocumentLteLocalId(v.LteLocalId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LteNmr != nil {
+		ok := object.Key("LteNmr")
+		if err := awsRestjson1_serializeDocumentLteNmrList(v.LteNmr, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LteTimingAdvance != nil {
+		ok := object.Key("LteTimingAdvance")
+		ok.Integer(*v.LteTimingAdvance)
+	}
+
+	if v.Mcc != nil {
+		ok := object.Key("Mcc")
+		ok.Integer(*v.Mcc)
+	}
+
+	if v.Mnc != nil {
+		ok := object.Key("Mnc")
+		ok.Integer(*v.Mnc)
+	}
+
+	if v.NrCapable {
+		ok := object.Key("NrCapable")
+		ok.Boolean(v.NrCapable)
+	}
+
+	if v.Rsrp != nil {
+		ok := object.Key("Rsrp")
+		ok.Integer(*v.Rsrp)
+	}
+
+	if v.Rsrq != nil {
+		ok := object.Key("Rsrq")
+		switch {
+		case math.IsNaN(float64(*v.Rsrq)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Rsrq), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Rsrq), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Rsrq)
+
+		}
+	}
+
+	if v.Tac != nil {
+		ok := object.Key("Tac")
+		ok.Integer(*v.Tac)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMessageDeliveryStatusEventConfiguration(v *types.MessageDeliveryStatusEventConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8127,6 +9021,137 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTdscdmaList(v []types.TdscdmaObj, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTdscdmaObj(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTdscdmaLocalId(v *types.TdscdmaLocalId, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CellParams != nil {
+		ok := object.Key("CellParams")
+		ok.Integer(*v.CellParams)
+	}
+
+	if v.Uarfcn != nil {
+		ok := object.Key("Uarfcn")
+		ok.Integer(*v.Uarfcn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTdscdmaNmrList(v []types.TdscdmaNmrObj, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTdscdmaNmrObj(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTdscdmaNmrObj(v *types.TdscdmaNmrObj, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CellParams != nil {
+		ok := object.Key("CellParams")
+		ok.Integer(*v.CellParams)
+	}
+
+	if v.PathLoss != nil {
+		ok := object.Key("PathLoss")
+		ok.Integer(*v.PathLoss)
+	}
+
+	if v.Rscp != nil {
+		ok := object.Key("Rscp")
+		ok.Integer(*v.Rscp)
+	}
+
+	if v.Uarfcn != nil {
+		ok := object.Key("Uarfcn")
+		ok.Integer(*v.Uarfcn)
+	}
+
+	if v.UtranCid != nil {
+		ok := object.Key("UtranCid")
+		ok.Integer(*v.UtranCid)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTdscdmaObj(v *types.TdscdmaObj, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Lac != nil {
+		ok := object.Key("Lac")
+		ok.Integer(*v.Lac)
+	}
+
+	if v.Mcc != nil {
+		ok := object.Key("Mcc")
+		ok.Integer(*v.Mcc)
+	}
+
+	if v.Mnc != nil {
+		ok := object.Key("Mnc")
+		ok.Integer(*v.Mnc)
+	}
+
+	if v.PathLoss != nil {
+		ok := object.Key("PathLoss")
+		ok.Integer(*v.PathLoss)
+	}
+
+	if v.Rscp != nil {
+		ok := object.Key("Rscp")
+		ok.Integer(*v.Rscp)
+	}
+
+	if v.TdscdmaLocalId != nil {
+		ok := object.Key("TdscdmaLocalId")
+		if err := awsRestjson1_serializeDocumentTdscdmaLocalId(v.TdscdmaLocalId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TdscdmaNmr != nil {
+		ok := object.Key("TdscdmaNmr")
+		if err := awsRestjson1_serializeDocumentTdscdmaNmrList(v.TdscdmaNmr, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TdscdmaTimingAdvance != nil {
+		ok := object.Key("TdscdmaTimingAdvance")
+		ok.Integer(*v.TdscdmaTimingAdvance)
+	}
+
+	if v.UtranCid != nil {
+		ok := object.Key("UtranCid")
+		ok.Integer(*v.UtranCid)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentTraceContent(v *types.TraceContent, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8172,6 +9197,13 @@ func awsRestjson1_serializeDocumentUpdateFPorts(v *types.UpdateFPorts, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.Applications != nil {
+		ok := object.Key("Applications")
+		if err := awsRestjson1_serializeDocumentApplications(v.Applications, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Positioning != nil {
 		ok := object.Key("Positioning")
 		if err := awsRestjson1_serializeDocumentPositioning(v.Positioning, ok); err != nil {
@@ -8203,6 +9235,162 @@ func awsRestjson1_serializeDocumentUpdateWirelessGatewayTaskCreate(v *types.Upda
 		ok.String(*v.UpdateDataSource)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWcdmaList(v []types.WcdmaObj, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWcdmaObj(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWcdmaLocalId(v *types.WcdmaLocalId, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Psc != nil {
+		ok := object.Key("Psc")
+		ok.Integer(*v.Psc)
+	}
+
+	if v.Uarfcndl != nil {
+		ok := object.Key("Uarfcndl")
+		ok.Integer(*v.Uarfcndl)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWcdmaNmrList(v []types.WcdmaNmrObj, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWcdmaNmrObj(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWcdmaNmrObj(v *types.WcdmaNmrObj, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PathLoss != nil {
+		ok := object.Key("PathLoss")
+		ok.Integer(*v.PathLoss)
+	}
+
+	if v.Psc != nil {
+		ok := object.Key("Psc")
+		ok.Integer(*v.Psc)
+	}
+
+	if v.Rscp != nil {
+		ok := object.Key("Rscp")
+		ok.Integer(*v.Rscp)
+	}
+
+	if v.Uarfcndl != nil {
+		ok := object.Key("Uarfcndl")
+		ok.Integer(*v.Uarfcndl)
+	}
+
+	if v.UtranCid != nil {
+		ok := object.Key("UtranCid")
+		ok.Integer(*v.UtranCid)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWcdmaObj(v *types.WcdmaObj, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Lac != nil {
+		ok := object.Key("Lac")
+		ok.Integer(*v.Lac)
+	}
+
+	if v.Mcc != nil {
+		ok := object.Key("Mcc")
+		ok.Integer(*v.Mcc)
+	}
+
+	if v.Mnc != nil {
+		ok := object.Key("Mnc")
+		ok.Integer(*v.Mnc)
+	}
+
+	if v.PathLoss != nil {
+		ok := object.Key("PathLoss")
+		ok.Integer(*v.PathLoss)
+	}
+
+	if v.Rscp != nil {
+		ok := object.Key("Rscp")
+		ok.Integer(*v.Rscp)
+	}
+
+	if v.UtranCid != nil {
+		ok := object.Key("UtranCid")
+		ok.Integer(*v.UtranCid)
+	}
+
+	if v.WcdmaLocalId != nil {
+		ok := object.Key("WcdmaLocalId")
+		if err := awsRestjson1_serializeDocumentWcdmaLocalId(v.WcdmaLocalId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WcdmaNmr != nil {
+		ok := object.Key("WcdmaNmr")
+		if err := awsRestjson1_serializeDocumentWcdmaNmrList(v.WcdmaNmr, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWiFiAccessPoint(v *types.WiFiAccessPoint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MacAddress != nil {
+		ok := object.Key("MacAddress")
+		ok.String(*v.MacAddress)
+	}
+
+	if v.Rss != nil {
+		ok := object.Key("Rss")
+		ok.Integer(*v.Rss)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWiFiAccessPoints(v []types.WiFiAccessPoint, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWiFiAccessPoint(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

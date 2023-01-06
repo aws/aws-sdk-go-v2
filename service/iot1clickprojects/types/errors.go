@@ -10,6 +10,8 @@ import (
 type InternalFailureException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	Code *string
 
 	noSmithyDocumentSerde
@@ -24,11 +26,18 @@ func (e *InternalFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalFailureException) ErrorCode() string             { return "InternalFailureException" }
+func (e *InternalFailureException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalFailureException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 type InvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -44,11 +53,18 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type ResourceConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -64,11 +80,18 @@ func (e *ResourceConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
+func (e *ResourceConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -84,11 +107,18 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -104,5 +134,10 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

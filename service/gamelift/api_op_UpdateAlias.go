@@ -14,8 +14,7 @@ import (
 // Updates properties for an alias. To update properties, specify the alias ID to
 // be updated and provide the information to be changed. To reassign an alias to
 // another fleet, provide an updated routing strategy. If successful, the updated
-// alias record is returned. Related actions CreateAlias | ListAliases |
-// DescribeAlias | UpdateAlias | DeleteAlias | ResolveAlias | All APIs by task
+// alias record is returned. Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optFns ...func(*Options)) (*UpdateAliasOutput, error) {
 	if params == nil {
@@ -32,7 +31,6 @@ func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optF
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type UpdateAliasInput struct {
 
 	// A unique identifier for the alias that you want to update. You can use either
@@ -55,7 +53,6 @@ type UpdateAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type UpdateAliasOutput struct {
 
 	// The updated alias resource.

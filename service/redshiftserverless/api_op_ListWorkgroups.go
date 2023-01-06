@@ -31,11 +31,11 @@ func (c *Client) ListWorkgroups(ctx context.Context, params *ListWorkgroupsInput
 type ListWorkgroupsInput struct {
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken to display the next page of results.
 	MaxResults *int32
 
 	// If your initial ListWorkgroups operation returns a nextToken, you can include
-	// the returned nextToken in subsequent ListNamespaces operations, which returns
+	// the returned nextToken in following ListNamespaces operations, which returns
 	// results in the next page.
 	NextToken *string
 
@@ -131,7 +131,7 @@ var _ ListWorkgroupsAPIClient = (*Client)(nil)
 // ListWorkgroupsPaginatorOptions is the paginator options for ListWorkgroups
 type ListWorkgroupsPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken to display the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

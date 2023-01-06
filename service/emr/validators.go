@@ -350,6 +350,26 @@ func (m *validateOpGetAutoTerminationPolicy) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetClusterSessionCredentials struct {
+}
+
+func (*validateOpGetClusterSessionCredentials) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetClusterSessionCredentials) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetClusterSessionCredentialsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetClusterSessionCredentialsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetManagedScalingPolicy struct {
 }
 
@@ -936,6 +956,10 @@ func addOpDescribeStudioValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetAutoTerminationPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAutoTerminationPolicy{}, middleware.After)
+}
+
+func addOpGetClusterSessionCredentialsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetClusterSessionCredentials{}, middleware.After)
 }
 
 func addOpGetManagedScalingPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -2101,6 +2125,24 @@ func validateOpGetAutoTerminationPolicyInput(v *GetAutoTerminationPolicyInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "GetAutoTerminationPolicyInput"}
 	if v.ClusterId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetClusterSessionCredentialsInput(v *GetClusterSessionCredentialsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetClusterSessionCredentialsInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

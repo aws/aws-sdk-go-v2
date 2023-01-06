@@ -520,9 +520,7 @@ func validateConnectorProfileConfig(v *types.ConnectorProfileConfig) error {
 			invalidParams.AddNested("ConnectorProfileProperties", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ConnectorProfileCredentials == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ConnectorProfileCredentials"))
-	} else if v.ConnectorProfileCredentials != nil {
+	if v.ConnectorProfileCredentials != nil {
 		if err := validateConnectorProfileCredentials(v.ConnectorProfileCredentials); err != nil {
 			invalidParams.AddNested("ConnectorProfileCredentials", err.(smithy.InvalidParamsError))
 		}
@@ -567,11 +565,6 @@ func validateConnectorProfileCredentials(v *types.ConnectorProfileCredentials) e
 	if v.Marketo != nil {
 		if err := validateMarketoConnectorProfileCredentials(v.Marketo); err != nil {
 			invalidParams.AddNested("Marketo", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Redshift != nil {
-		if err := validateRedshiftConnectorProfileCredentials(v.Redshift); err != nil {
-			invalidParams.AddNested("Redshift", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ServiceNow != nil {
@@ -1316,32 +1309,11 @@ func validateOAuthProperties(v *types.OAuthProperties) error {
 	}
 }
 
-func validateRedshiftConnectorProfileCredentials(v *types.RedshiftConnectorProfileCredentials) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RedshiftConnectorProfileCredentials"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
-	if v.Password == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Password"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateRedshiftConnectorProfileProperties(v *types.RedshiftConnectorProfileProperties) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedshiftConnectorProfileProperties"}
-	if v.DatabaseUrl == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseUrl"))
-	}
 	if v.BucketName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
 	}

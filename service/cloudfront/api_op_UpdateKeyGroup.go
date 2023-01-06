@@ -23,7 +23,7 @@ import (
 //
 // * Call
 // UpdateKeyGroup with the entire key group object, including the fields that you
-// modified and those that you didn’t.
+// modified and those that you didn't.
 func (c *Client) UpdateKeyGroup(ctx context.Context, params *UpdateKeyGroupInput, optFns ...func(*Options)) (*UpdateKeyGroupOutput, error) {
 	if params == nil {
 		params = &UpdateKeyGroupInput{}
@@ -52,7 +52,7 @@ type UpdateKeyGroupInput struct {
 	KeyGroupConfig *types.KeyGroupConfig
 
 	// The version of the key group that you are updating. The version is the key
-	// group’s ETag value.
+	// group's ETag value.
 	IfMatch *string
 
 	noSmithyDocumentSerde

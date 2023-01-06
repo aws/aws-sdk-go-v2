@@ -36,8 +36,8 @@ type ListContinuousDeploymentPoliciesInput struct {
 
 	// Use this field when paginating results to indicate where to begin in your list
 	// of continuous deployment policies. The response includes policies in the list
-	// that occur after the marker. To get the next page of the list, set this field’s
-	// value to the value of NextMarker from the current page’s response.
+	// that occur after the marker. To get the next page of the list, set this field's
+	// value to the value of NextMarker from the current page's response.
 	Marker *string
 
 	// The maximum number of continuous deployment policies that you want returned in

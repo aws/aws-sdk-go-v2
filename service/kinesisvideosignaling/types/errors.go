@@ -12,6 +12,8 @@ import (
 type ClientLimitExceededException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *ClientLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClientLimitExceededException) ErrorCode() string             { return "ClientLimitExceededException" }
+func (e *ClientLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ClientLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ClientLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The value for this input parameter is invalid.
 type InvalidArgumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
+func (e *InvalidArgumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidArgumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified client is invalid.
 type InvalidClientException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -62,12 +78,19 @@ func (e *InvalidClientException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidClientException) ErrorCode() string             { return "InvalidClientException" }
+func (e *InvalidClientException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidClientException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The caller is not authorized to perform this operation.
 type NotAuthorizedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -81,12 +104,19 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
+func (e *NotAuthorizedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotAuthorizedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource is not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -100,7 +130,12 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // If the client session is expired. Once the client is connected, the session is
@@ -108,6 +143,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // sending/receiving messages.
 type SessionExpiredException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -121,5 +158,10 @@ func (e *SessionExpiredException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SessionExpiredException) ErrorCode() string             { return "SessionExpiredException" }
+func (e *SessionExpiredException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "SessionExpiredException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *SessionExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

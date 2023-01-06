@@ -947,14 +947,8 @@ func validateCreateOntapVolumeConfiguration(v *types.CreateOntapVolumeConfigurat
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateOntapVolumeConfiguration"}
-	if v.JunctionPath == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("JunctionPath"))
-	}
 	if v.SizeInMegabytes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SizeInMegabytes"))
-	}
-	if v.StorageEfficiencyEnabled == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StorageEfficiencyEnabled"))
 	}
 	if v.StorageVirtualMachineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachineId"))

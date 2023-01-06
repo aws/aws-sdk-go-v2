@@ -20,13 +20,6 @@ import (
 //
 // * Build a rule set
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
-//
-// Related
-// actions CreateMatchmakingConfiguration | DescribeMatchmakingConfigurations |
-// UpdateMatchmakingConfiguration | DeleteMatchmakingConfiguration |
-// CreateMatchmakingRuleSet | DescribeMatchmakingRuleSets |
-// ValidateMatchmakingRuleSet | DeleteMatchmakingRuleSet | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeMatchmakingRuleSets(ctx context.Context, params *DescribeMatchmakingRuleSetsInput, optFns ...func(*Options)) (*DescribeMatchmakingRuleSetsOutput, error) {
 	if params == nil {
 		params = &DescribeMatchmakingRuleSetsInput{}
@@ -42,7 +35,6 @@ func (c *Client) DescribeMatchmakingRuleSets(ctx context.Context, params *Descri
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeMatchmakingRuleSetsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -62,7 +54,6 @@ type DescribeMatchmakingRuleSetsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeMatchmakingRuleSetsOutput struct {
 
 	// A collection of requested matchmaking rule set objects.

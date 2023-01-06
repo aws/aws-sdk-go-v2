@@ -58,6 +58,9 @@ type ListBackupJobsInput struct {
 	// Returns only backup jobs that were created before the specified date.
 	ByCreatedBefore *time.Time
 
+	// This is a filter to list child (nested) jobs based on parent job ID.
+	ByParentJobId *string
+
 	// Returns only backup jobs that match the specified resource Amazon Resource Name
 	// (ARN).
 	ByResourceArn *string

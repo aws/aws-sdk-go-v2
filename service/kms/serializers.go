@@ -2860,6 +2860,23 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentXksProxyAuthenticationCredentialType(v *types.XksProxyAuthenticationCredentialType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessKeyId != nil {
+		ok := object.Key("AccessKeyId")
+		ok.String(*v.AccessKeyId)
+	}
+
+	if v.RawSecretAccessKey != nil {
+		ok := object.Key("RawSecretAccessKey")
+		ok.String(*v.RawSecretAccessKey)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCancelKeyDeletionInput(v *CancelKeyDeletionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2915,6 +2932,11 @@ func awsAwsjson11_serializeOpDocumentCreateCustomKeyStoreInput(v *CreateCustomKe
 		ok.String(*v.CustomKeyStoreName)
 	}
 
+	if len(v.CustomKeyStoreType) > 0 {
+		ok := object.Key("CustomKeyStoreType")
+		ok.String(string(v.CustomKeyStoreType))
+	}
+
 	if v.KeyStorePassword != nil {
 		ok := object.Key("KeyStorePassword")
 		ok.String(*v.KeyStorePassword)
@@ -2923,6 +2945,33 @@ func awsAwsjson11_serializeOpDocumentCreateCustomKeyStoreInput(v *CreateCustomKe
 	if v.TrustAnchorCertificate != nil {
 		ok := object.Key("TrustAnchorCertificate")
 		ok.String(*v.TrustAnchorCertificate)
+	}
+
+	if v.XksProxyAuthenticationCredential != nil {
+		ok := object.Key("XksProxyAuthenticationCredential")
+		if err := awsAwsjson11_serializeDocumentXksProxyAuthenticationCredentialType(v.XksProxyAuthenticationCredential, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.XksProxyConnectivity) > 0 {
+		ok := object.Key("XksProxyConnectivity")
+		ok.String(string(v.XksProxyConnectivity))
+	}
+
+	if v.XksProxyUriEndpoint != nil {
+		ok := object.Key("XksProxyUriEndpoint")
+		ok.String(*v.XksProxyUriEndpoint)
+	}
+
+	if v.XksProxyUriPath != nil {
+		ok := object.Key("XksProxyUriPath")
+		ok.String(*v.XksProxyUriPath)
+	}
+
+	if v.XksProxyVpcEndpointServiceName != nil {
+		ok := object.Key("XksProxyVpcEndpointServiceName")
+		ok.String(*v.XksProxyVpcEndpointServiceName)
 	}
 
 	return nil
@@ -3030,6 +3079,11 @@ func awsAwsjson11_serializeOpDocumentCreateKeyInput(v *CreateKeyInput, value smi
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.XksKeyId != nil {
+		ok := object.Key("XksKeyId")
+		ok.String(*v.XksKeyId)
 	}
 
 	return nil
@@ -3954,6 +4008,33 @@ func awsAwsjson11_serializeOpDocumentUpdateCustomKeyStoreInput(v *UpdateCustomKe
 	if v.NewCustomKeyStoreName != nil {
 		ok := object.Key("NewCustomKeyStoreName")
 		ok.String(*v.NewCustomKeyStoreName)
+	}
+
+	if v.XksProxyAuthenticationCredential != nil {
+		ok := object.Key("XksProxyAuthenticationCredential")
+		if err := awsAwsjson11_serializeDocumentXksProxyAuthenticationCredentialType(v.XksProxyAuthenticationCredential, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.XksProxyConnectivity) > 0 {
+		ok := object.Key("XksProxyConnectivity")
+		ok.String(string(v.XksProxyConnectivity))
+	}
+
+	if v.XksProxyUriEndpoint != nil {
+		ok := object.Key("XksProxyUriEndpoint")
+		ok.String(*v.XksProxyUriEndpoint)
+	}
+
+	if v.XksProxyUriPath != nil {
+		ok := object.Key("XksProxyUriPath")
+		ok.String(*v.XksProxyUriPath)
+	}
+
+	if v.XksProxyVpcEndpointServiceName != nil {
+		ok := object.Key("XksProxyVpcEndpointServiceName")
+		ok.String(*v.XksProxyVpcEndpointServiceName)
 	}
 
 	return nil

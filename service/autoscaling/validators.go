@@ -70,6 +70,26 @@ func (m *validateOpAttachLoadBalancerTargetGroups) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAttachTrafficSources struct {
+}
+
+func (*validateOpAttachTrafficSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAttachTrafficSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AttachTrafficSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAttachTrafficSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteScheduledAction struct {
 }
 
@@ -450,6 +470,26 @@ func (m *validateOpDescribeLoadBalancerTargetGroups) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeTrafficSources struct {
+}
+
+func (*validateOpDescribeTrafficSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeTrafficSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeTrafficSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeTrafficSourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeWarmPool struct {
 }
 
@@ -525,6 +565,26 @@ func (m *validateOpDetachLoadBalancerTargetGroups) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDetachLoadBalancerTargetGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDetachTrafficSources struct {
+}
+
+func (*validateOpDetachTrafficSources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDetachTrafficSources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DetachTrafficSourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDetachTrafficSourcesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -942,6 +1002,10 @@ func addOpAttachLoadBalancerTargetGroupsValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpAttachLoadBalancerTargetGroups{}, middleware.After)
 }
 
+func addOpAttachTrafficSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAttachTrafficSources{}, middleware.After)
+}
+
 func addOpBatchDeleteScheduledActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteScheduledAction{}, middleware.After)
 }
@@ -1018,6 +1082,10 @@ func addOpDescribeLoadBalancerTargetGroupsValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpDescribeLoadBalancerTargetGroups{}, middleware.After)
 }
 
+func addOpDescribeTrafficSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeTrafficSources{}, middleware.After)
+}
+
 func addOpDescribeWarmPoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeWarmPool{}, middleware.After)
 }
@@ -1032,6 +1100,10 @@ func addOpDetachLoadBalancersValidationMiddleware(stack *middleware.Stack) error
 
 func addOpDetachLoadBalancerTargetGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetachLoadBalancerTargetGroups{}, middleware.After)
+}
+
+func addOpDetachTrafficSourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDetachTrafficSources{}, middleware.After)
 }
 
 func addOpDisableMetricsCollectionValidationMiddleware(stack *middleware.Stack) error {
@@ -1151,19 +1223,15 @@ func validateCustomizedMetricSpecification(v *types.CustomizedMetricSpecificatio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CustomizedMetricSpecification"}
-	if v.MetricName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
-	}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
-	}
 	if v.Dimensions != nil {
 		if err := validateMetricDimensions(v.Dimensions); err != nil {
 			invalidParams.AddNested("Dimensions", err.(smithy.InvalidParamsError))
 		}
 	}
-	if len(v.Statistic) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
+	if v.Metrics != nil {
+		if err := validateTargetTrackingMetricDataQueries(v.Metrics); err != nil {
+			invalidParams.AddNested("Metrics", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1769,6 +1837,65 @@ func validateTargetTrackingConfiguration(v *types.TargetTrackingConfiguration) e
 	}
 }
 
+func validateTargetTrackingMetricDataQueries(v []types.TargetTrackingMetricDataQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricDataQueries"}
+	for i := range v {
+		if err := validateTargetTrackingMetricDataQuery(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricDataQuery(v *types.TargetTrackingMetricDataQuery) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricDataQuery"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.MetricStat != nil {
+		if err := validateTargetTrackingMetricStat(v.MetricStat); err != nil {
+			invalidParams.AddNested("MetricStat", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTargetTrackingMetricStat(v *types.TargetTrackingMetricStat) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TargetTrackingMetricStat"}
+	if v.Metric == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Metric"))
+	} else if v.Metric != nil {
+		if err := validateMetric(v.Metric); err != nil {
+			invalidParams.AddNested("Metric", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Stat == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Stat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVCpuCountRequest(v *types.VCpuCountRequest) error {
 	if v == nil {
 		return nil
@@ -1827,6 +1954,24 @@ func validateOpAttachLoadBalancerTargetGroupsInput(v *AttachLoadBalancerTargetGr
 	}
 	if v.TargetGroupARNs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetGroupARNs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAttachTrafficSourcesInput(v *AttachTrafficSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AttachTrafficSourcesInput"}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.TrafficSources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficSources"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2179,6 +2324,24 @@ func validateOpDescribeLoadBalancerTargetGroupsInput(v *DescribeLoadBalancerTarg
 	}
 }
 
+func validateOpDescribeTrafficSourcesInput(v *DescribeTrafficSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeTrafficSourcesInput"}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.TrafficSourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficSourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeWarmPoolInput(v *DescribeWarmPoolInput) error {
 	if v == nil {
 		return nil
@@ -2240,6 +2403,24 @@ func validateOpDetachLoadBalancerTargetGroupsInput(v *DetachLoadBalancerTargetGr
 	}
 	if v.TargetGroupARNs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetGroupARNs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDetachTrafficSourcesInput(v *DetachTrafficSourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DetachTrafficSourcesInput"}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.TrafficSources == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficSources"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

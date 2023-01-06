@@ -4,6 +4,7 @@ package computeoptimizer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
@@ -25,6 +26,9 @@ import (
 //
 // * Lambda functions in an account that are NotOptimized, or
 // Optimized.
+//
+// * Amazon ECS services in an account that are Underprovisioned,
+// Overprovisioned, or Optimized.
 func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetRecommendationSummariesInput, optFns ...func(*Options)) (*GetRecommendationSummariesOutput, error) {
 	if params == nil {
 		params = &GetRecommendationSummariesInput{}
@@ -133,6 +137,101 @@ func (c *Client) addOperationGetRecommendationSummariesMiddlewares(stack *middle
 		return err
 	}
 	return nil
+}
+
+// GetRecommendationSummariesAPIClient is a client that implements the
+// GetRecommendationSummaries operation.
+type GetRecommendationSummariesAPIClient interface {
+	GetRecommendationSummaries(context.Context, *GetRecommendationSummariesInput, ...func(*Options)) (*GetRecommendationSummariesOutput, error)
+}
+
+var _ GetRecommendationSummariesAPIClient = (*Client)(nil)
+
+// GetRecommendationSummariesPaginatorOptions is the paginator options for
+// GetRecommendationSummaries
+type GetRecommendationSummariesPaginatorOptions struct {
+	// The maximum number of recommendation summaries to return with a single request.
+	// To retrieve the remaining results, make another request with the returned
+	// nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetRecommendationSummariesPaginator is a paginator for
+// GetRecommendationSummaries
+type GetRecommendationSummariesPaginator struct {
+	options   GetRecommendationSummariesPaginatorOptions
+	client    GetRecommendationSummariesAPIClient
+	params    *GetRecommendationSummariesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetRecommendationSummariesPaginator returns a new
+// GetRecommendationSummariesPaginator
+func NewGetRecommendationSummariesPaginator(client GetRecommendationSummariesAPIClient, params *GetRecommendationSummariesInput, optFns ...func(*GetRecommendationSummariesPaginatorOptions)) *GetRecommendationSummariesPaginator {
+	if params == nil {
+		params = &GetRecommendationSummariesInput{}
+	}
+
+	options := GetRecommendationSummariesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetRecommendationSummariesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetRecommendationSummariesPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetRecommendationSummaries page.
+func (p *GetRecommendationSummariesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetRecommendationSummariesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetRecommendationSummaries(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetRecommendationSummaries(region string) *awsmiddleware.RegisterServiceMetadata {

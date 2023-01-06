@@ -54,6 +54,9 @@ type ListCopyJobsInput struct {
 	// arn:aws:backup:us-east-1:123456789012:vault:aBackupVault.
 	ByDestinationVaultArn *string
 
+	// This is a filter to list child (nested) jobs based on parent job ID.
+	ByParentJobId *string
+
 	// Returns only copy jobs that match the specified resource Amazon Resource Name
 	// (ARN).
 	ByResourceArn *string

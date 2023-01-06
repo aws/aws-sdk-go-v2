@@ -1,3 +1,27 @@
+# v1.24.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.23.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.0 (2022-12-14)
+
+* **Feature**: Adding support for Metrics Insights Alarms
+
+# v1.22.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.0 (2022-11-28)
+
+* **Feature**: Adds cross-account support to the GetMetricData API. Adds cross-account support to the ListMetrics API through the usage of the IncludeLinkedAccounts flag and the new OwningAccounts field.
+
+# v1.21.11 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.21.10 (2022-11-16)
 
 * No change notes available for this release.

@@ -1788,6 +1788,15 @@ func awsRestjson1_deserializeOpDocumentListConnectorEntitiesOutput(v **ListConne
 				return err
 			}
 
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9256,6 +9265,33 @@ func awsRestjson1_deserializeDocumentRedshiftConnectorProfileProperties(v **type
 				sv.BucketPrefix = ptr.String(jtv)
 			}
 
+		case "clusterIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterIdentifier to be of type string, got %T instead", value)
+				}
+				sv.ClusterIdentifier = ptr.String(jtv)
+			}
+
+		case "dataApiRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataApiRoleArn to be of type string, got %T instead", value)
+				}
+				sv.DataApiRoleArn = ptr.String(jtv)
+			}
+
+		case "databaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseName to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
 		case "databaseUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9265,6 +9301,15 @@ func awsRestjson1_deserializeDocumentRedshiftConnectorProfileProperties(v **type
 				sv.DatabaseUrl = ptr.String(jtv)
 			}
 
+		case "isRedshiftServerless":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IsRedshiftServerless = jtv
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9272,6 +9317,15 @@ func awsRestjson1_deserializeDocumentRedshiftConnectorProfileProperties(v **type
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "workgroupName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkgroupName to be of type string, got %T instead", value)
+				}
+				sv.WorkgroupName = ptr.String(jtv)
 			}
 
 		default:

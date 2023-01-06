@@ -146,14 +146,15 @@ type CreateTrainingJobInput struct {
 	// checkpoint data.
 	CheckpointConfig *types.CheckpointConfig
 
-	// Configuration information for the Debugger hook parameters, metric and tensor
-	// collections, and storage paths. To learn more about how to configure the
-	// DebugHookConfig parameter, see Use the SageMaker and Debugger Configuration API
-	// Operations to Create, Update, and Debug Your Training Job
+	// Configuration information for the Amazon SageMaker Debugger hook parameters,
+	// metric and tensor collections, and storage paths. To learn more about how to
+	// configure the DebugHookConfig parameter, see Use the SageMaker and Debugger
+	// Configuration API Operations to Create, Update, and Debug Your Training Job
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
 	DebugHookConfig *types.DebugHookConfig
 
-	// Configuration information for Debugger rules for debugging output tensors.
+	// Configuration information for Amazon SageMaker Debugger rules for debugging
+	// output tensors.
 	DebugRuleConfigurations []types.DebugRuleConfiguration
 
 	// To encrypt all communications between ML compute instances in distributed
@@ -223,12 +224,12 @@ type CreateTrainingJobInput struct {
 	// be downloaded.
 	InputDataConfig []types.Channel
 
-	// Configuration information for Debugger system monitoring, framework profiling,
-	// and storage paths.
+	// Configuration information for Amazon SageMaker Debugger system monitoring,
+	// framework profiling, and storage paths.
 	ProfilerConfig *types.ProfilerConfig
 
-	// Configuration information for Debugger rules for profiling system and framework
-	// metrics.
+	// Configuration information for Amazon SageMaker Debugger rules for profiling
+	// system and framework metrics.
 	ProfilerRuleConfigurations []types.ProfilerRuleConfiguration
 
 	// The number of times to retry the job when the job fails due to an
@@ -241,7 +242,8 @@ type CreateTrainingJobInput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
 
-	// Configuration of storage locations for the Debugger TensorBoard output data.
+	// Configuration of storage locations for the Amazon SageMaker Debugger TensorBoard
+	// output data.
 	TensorBoardOutputConfig *types.TensorBoardOutputConfig
 
 	// A VpcConfig object that specifies the VPC that you want your training job to

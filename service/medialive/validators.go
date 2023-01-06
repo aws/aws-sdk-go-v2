@@ -1508,6 +1508,21 @@ func validateAudioDescription(v *types.AudioDescription) error {
 	}
 }
 
+func validateAudioDolbyEDecode(v *types.AudioDolbyEDecode) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AudioDolbyEDecode"}
+	if len(v.ProgramSelection) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProgramSelection"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAudioHlsRenditionSelection(v *types.AudioHlsRenditionSelection) error {
 	if v == nil {
 		return nil
@@ -1659,6 +1674,11 @@ func validateAudioTrackSelection(v *types.AudioTrackSelection) error {
 	} else if v.Tracks != nil {
 		if err := validate__listOfAudioTrack(v.Tracks); err != nil {
 			invalidParams.AddNested("Tracks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DolbyEDecode != nil {
+		if err := validateAudioDolbyEDecode(v.DolbyEDecode); err != nil {
+			invalidParams.AddNested("DolbyEDecode", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2143,6 +2163,23 @@ func validateFrameCaptureGroupSettings(v *types.FrameCaptureGroupSettings) error
 	}
 }
 
+func validateFrameCaptureSettings(v *types.FrameCaptureSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FrameCaptureSettings"}
+	if v.TimecodeBurninSettings != nil {
+		if err := validateTimecodeBurninSettings(v.TimecodeBurninSettings); err != nil {
+			invalidParams.AddNested("TimecodeBurninSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGlobalConfiguration(v *types.GlobalConfiguration) error {
 	if v == nil {
 		return nil
@@ -2160,11 +2197,33 @@ func validateGlobalConfiguration(v *types.GlobalConfiguration) error {
 	}
 }
 
+func validateH264Settings(v *types.H264Settings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "H264Settings"}
+	if v.TimecodeBurninSettings != nil {
+		if err := validateTimecodeBurninSettings(v.TimecodeBurninSettings); err != nil {
+			invalidParams.AddNested("TimecodeBurninSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateH265Settings(v *types.H265Settings) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "H265Settings"}
+	if v.TimecodeBurninSettings != nil {
+		if err := validateTimecodeBurninSettings(v.TimecodeBurninSettings); err != nil {
+			invalidParams.AddNested("TimecodeBurninSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2492,6 +2551,11 @@ func validateMpeg2Settings(v *types.Mpeg2Settings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Mpeg2Settings"}
+	if v.TimecodeBurninSettings != nil {
+		if err := validateTimecodeBurninSettings(v.TimecodeBurninSettings); err != nil {
+			invalidParams.AddNested("TimecodeBurninSettings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3143,6 +3207,24 @@ func validateTeletextSourceSettings(v *types.TeletextSourceSettings) error {
 	}
 }
 
+func validateTimecodeBurninSettings(v *types.TimecodeBurninSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimecodeBurninSettings"}
+	if len(v.FontSize) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FontSize"))
+	}
+	if len(v.Position) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Position"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTimecodeConfig(v *types.TimecodeConfig) error {
 	if v == nil {
 		return nil
@@ -3202,6 +3284,16 @@ func validateVideoCodecSettings(v *types.VideoCodecSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VideoCodecSettings"}
+	if v.FrameCaptureSettings != nil {
+		if err := validateFrameCaptureSettings(v.FrameCaptureSettings); err != nil {
+			invalidParams.AddNested("FrameCaptureSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.H264Settings != nil {
+		if err := validateH264Settings(v.H264Settings); err != nil {
+			invalidParams.AddNested("H264Settings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.H265Settings != nil {
 		if err := validateH265Settings(v.H265Settings); err != nil {
 			invalidParams.AddNested("H265Settings", err.(smithy.InvalidParamsError))

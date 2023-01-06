@@ -38,11 +38,13 @@ type StartSuiteRunInput struct {
 	// This member is required.
 	SuiteDefinitionId *string
 
+	// Suite run configuration.
+	//
+	// This member is required.
+	SuiteRunConfiguration *types.SuiteRunConfiguration
+
 	// Suite definition version of the test suite.
 	SuiteDefinitionVersion *string
-
-	// Suite run configuration.
-	SuiteRunConfiguration *types.SuiteRunConfiguration
 
 	// The tags to be attached to the suite run.
 	Tags map[string]string
@@ -54,6 +56,9 @@ type StartSuiteRunOutput struct {
 
 	// Starts a Device Advisor test suite run based on suite create time.
 	CreatedAt *time.Time
+
+	// The response of an Device Advisor test endpoint.
+	Endpoint *string
 
 	// Amazon Resource Name (ARN) of the started suite run.
 	SuiteRunArn *string

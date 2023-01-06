@@ -159,6 +159,100 @@ type BatchItemError struct {
 	noSmithyDocumentSerde
 }
 
+// Information about each word or line of text in the input document. For
+// additional information, see Block
+// (https://docs.aws.amazon.com/textract/latest/dg/API_Block.html) in the Amazon
+// Textract API reference.
+type Block struct {
+
+	// The block represents a line of text or one word of text.
+	//
+	// * WORD - A word that's
+	// detected on a document page. A word is one or more ISO basic Latin script
+	// characters that aren't separated by spaces.
+	//
+	// * LINE - A string of tab-delimited,
+	// contiguous words that are detected on a document page
+	BlockType BlockType
+
+	// Co-ordinates of the rectangle or polygon that contains the text.
+	Geometry *Geometry
+
+	// Unique identifier for the block.
+	Id *string
+
+	// Page number where the block appears.
+	Page *int32
+
+	// A list of child blocks of the current block. For example, a LINE object has
+	// child blocks for each WORD block that's part of the line of text.
+	Relationships []RelationshipsListItem
+
+	// The word or line of text extracted from the block.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// A reference to a block.
+type BlockReference struct {
+
+	// Offset of the start of the block within its parent block.
+	BeginOffset *int32
+
+	// Unique identifier for the block.
+	BlockId *string
+
+	// List of child blocks within this block.
+	ChildBlocks []ChildBlock
+
+	// Offset of the end of the block within its parent block.
+	EndOffset *int32
+
+	noSmithyDocumentSerde
+}
+
+// The bounding box around the detected page or around an element on a document
+// page. The left (x-coordinate) and top (y-coordinate) are coordinates that
+// represent the top and left sides of the bounding box. Note that the upper-left
+// corner of the image is the origin (0,0). For additional information, see
+// BoundingBox
+// (https://docs.aws.amazon.com/textract/latest/dg/API_BoundingBox.html) in the
+// Amazon Textract API reference.
+type BoundingBox struct {
+
+	// The height of the bounding box as a ratio of the overall document page height.
+	Height *float32
+
+	// The left coordinate of the bounding box as a ratio of overall document page
+	// width.
+	Left *float32
+
+	// The top coordinate of the bounding box as a ratio of overall document page
+	// height.
+	Top *float32
+
+	// The width of the bounding box as a ratio of the overall document page width.
+	Width *float32
+
+	noSmithyDocumentSerde
+}
+
+// Nested block contained within a block.
+type ChildBlock struct {
+
+	// Offset of the start of the child block within its parent block.
+	BeginOffset *int32
+
+	// Unique identifier for the child block.
+	ChildBlockId *string
+
+	// Offset of the end of the child block within its parent block.
+	EndOffset *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes the result metrics for the test data associated with an documentation
 // classifier.
 type ClassifierEvaluationMetrics struct {
@@ -239,6 +333,10 @@ type DocumentClass struct {
 
 	// The name of the class.
 	Name *string
+
+	// Page number in the input document. This field is present in the response only if
+	// your request includes the Byte parameter.
+	Page *int32
 
 	// The confidence score that Amazon Comprehend has this class correctly attributed.
 	Score *float32
@@ -573,39 +671,95 @@ type DocumentLabel struct {
 	// The name of the label.
 	Name *string
 
+	// Page number where the label occurs. This field is present in the response only
+	// if your request includes the Byte parameter.
+	Page *int32
+
 	// The confidence score that Amazon Comprehend has this label correctly attributed.
 	Score *float32
 
 	noSmithyDocumentSerde
 }
 
-// The input properties for a topic detection job.
+// Information about the document, discovered during text extraction.
+type DocumentMetadata struct {
+
+	// List of pages in the document, with the number of characters extracted from each
+	// page.
+	ExtractedCharacters []ExtractedCharactersListItem
+
+	// Number of pages in the document.
+	Pages *int32
+
+	noSmithyDocumentSerde
+}
+
+// Provides configuration parameters to override the default actions for extracting
+// text from PDF documents and image files. By default, Amazon Comprehend performs
+// the following actions to extract text from files, based on the input file
+// type:
+//
+// * Word files - Amazon Comprehend parser extracts the text.
+//
+// * Digital PDF
+// files - Amazon Comprehend parser extracts the text.
+//
+// * Image files and scanned
+// PDF files - Amazon Comprehend uses the Amazon Textract DetectDocumentText API to
+// extract the text.
+//
+// DocumentReaderConfig does not apply to plain text files or
+// Word files. For image files and PDF documents, you can override these default
+// actions using the fields listed below. For more information, see  Setting text
+// extraction options
+// (https://docs.aws.amazon.com/comprehend/latest/dg/detecting-cer.html#detecting-cer-pdf).
 type DocumentReaderConfig struct {
 
-	// This enum field will start with two values which will apply to PDFs:
+	// This field defines the Amazon Textract API operation that Amazon Comprehend uses
+	// to extract text from PDF files and image files. Enter one of the following
+	// values:
 	//
-	// *
-	// TEXTRACT_DETECT_DOCUMENT_TEXT - The service calls DetectDocumentText for PDF
-	// documents per page.
+	// * TEXTRACT_DETECT_DOCUMENT_TEXT - The Amazon Comprehend service uses
+	// the DetectDocumentText API operation.
 	//
-	// * TEXTRACT_ANALYZE_DOCUMENT - The service calls
-	// AnalyzeDocument for PDF documents per page.
+	// * TEXTRACT_ANALYZE_DOCUMENT - The Amazon
+	// Comprehend service uses the AnalyzeDocument API operation.
 	//
 	// This member is required.
 	DocumentReadAction DocumentReadAction
 
-	// This enum field provides two values:
+	// Determines the text extraction actions for PDF files. Enter one of the following
+	// values:
 	//
-	// * SERVICE_DEFAULT - use service defaults
-	// for Document reading. For Digital PDF it would mean using an internal parser
-	// instead of Textract APIs
+	// * SERVICE_DEFAULT - use the Amazon Comprehend service defaults for PDF
+	// files.
 	//
-	// * FORCE_DOCUMENT_READ_ACTION - Always use specified
-	// action for DocumentReadAction, including Digital PDF.
+	// * FORCE_DOCUMENT_READ_ACTION - Amazon Comprehend uses the Textract API
+	// specified by DocumentReadAction for all PDF files, including digital PDF files.
 	DocumentReadMode DocumentReadMode
 
-	// Specifies how the text in an input file should be processed:
+	// Specifies the type of Amazon Textract features to apply. If you chose
+	// TEXTRACT_ANALYZE_DOCUMENT as the read action, you must specify one or both of
+	// the following values:
+	//
+	// * TABLES - Returns information about any tables that are
+	// detected in the input document.
+	//
+	// * FORMS - Returns information and the data from
+	// any forms that are detected in the input document.
 	FeatureTypes []DocumentReadFeatureTypes
+
+	noSmithyDocumentSerde
+}
+
+// Document type for each page in the document.
+type DocumentTypeListItem struct {
+
+	// Page number.
+	Page *int32
+
+	// Document type.
+	Type DocumentType
 
 	noSmithyDocumentSerde
 }
@@ -879,11 +1033,15 @@ type EntitiesDetectionJobProperties struct {
 type Entity struct {
 
 	// The zero-based offset from the beginning of the source text to the first
-	// character in the entity.
+	// character in the entity. This field is empty for non-text input.
 	BeginOffset *int32
 
+	// A reference to each block for this entity. This field is empty for plain-text
+	// input.
+	BlockReferences []BlockReference
+
 	// The zero-based offset from the beginning of the source text to the last
-	// character in the entity.
+	// character in the entity. This field is empty for non-text input.
 	EndOffset *int32
 
 	// The level of confidence that Amazon Comprehend has in the accuracy of the
@@ -893,7 +1051,10 @@ type Entity struct {
 	// The text of the entity.
 	Text *string
 
-	// The entity's type.
+	// The entity type. For entity detection using the built-in model, this field
+	// contains one of the standard entity types listed below. For custom entity
+	// detection, this field contains one of the entity types that you specified when
+	// you trained your custom model.
 	Type EntityType
 
 	noSmithyDocumentSerde
@@ -1246,6 +1407,43 @@ type EntityTypesListItem struct {
 	noSmithyDocumentSerde
 }
 
+// Text extraction encountered one or more page-level errors in the input document.
+// The ErrorCode contains one of the following values:
+//
+// * TEXTRACT_BAD_PAGE -
+// Amazon Textract cannot read the page. For more information about page limits in
+// Amazon Textract, see  Page Quotas in Amazon Textract
+// (https://docs.aws.amazon.com/textract/latest/dg/limits-document.html).
+//
+// *
+// TEXTRACT_PROVISIONED_THROUGHPUT_EXCEEDED - The number of requests exceeded your
+// throughput limit. For more information about throughput quotas in Amazon
+// Textract, see  Default quotas in Amazon Textract
+// (https://docs.aws.amazon.com/textract/latest/dg/limits-quotas-explained.html).
+//
+// *
+// PAGE_CHARACTERS_EXCEEDED - Too many text characters on the page (10,000
+// characters maximum).
+//
+// * PAGE_SIZE_EXCEEDED - The maximum page size is 10 MB.
+//
+// *
+// INTERNAL_SERVER_ERROR - The request encountered a service issue. Try the API
+// request again.
+type ErrorsListItem struct {
+
+	// Error code for the cause of the error.
+	ErrorCode PageBasedErrorCode
+
+	// Text message explaining the reason for the error.
+	ErrorMessage *string
+
+	// Page number where the error occurred.
+	Page *int32
+
+	noSmithyDocumentSerde
+}
+
 // Provides information for filtering a list of event detection jobs.
 type EventsDetectionJobFilter struct {
 
@@ -1318,7 +1516,36 @@ type EventsDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
-// The input properties for an inference job.
+// Array of the number of characters extracted from each page.
+type ExtractedCharactersListItem struct {
+
+	// Number of characters extracted from each page.
+	Count *int32
+
+	// Page number.
+	Page *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about the location of items on a document page. For additional
+// information, see Geometry
+// (https://docs.aws.amazon.com/textract/latest/dg/API_Geometry.html) in the Amazon
+// Textract API reference.
+type Geometry struct {
+
+	// An axis-aligned coarse representation of the location of the recognized item on
+	// the document page.
+	BoundingBox *BoundingBox
+
+	// Within the bounding box, a fine-grained polygon around the recognized item.
+	Polygon []Point
+
+	noSmithyDocumentSerde
+}
+
+// The input properties for an inference job. The document reader config field
+// applies only to non-text inputs for custom analysis.
 type InputDataConfig struct {
 
 	// The Amazon S3 URI for the input data. The URI must be in same region as the API
@@ -1331,10 +1558,8 @@ type InputDataConfig struct {
 	// This member is required.
 	S3Uri *string
 
-	// The document reader config field applies only for InputDataConfig of
-	// StartEntitiesDetectionJob. Use DocumentReaderConfig to provide specifications
-	// about how you want your inference documents read. Currently it applies for PDF
-	// documents in StartEntitiesDetectionJob custom inference.
+	// Provides configuration parameters to override the default actions for extracting
+	// text from PDF documents and image files.
 	DocumentReaderConfig *DocumentReaderConfig
 
 	// Specifies how the text in an input file should be processed:
@@ -1347,6 +1572,28 @@ type InputDataConfig struct {
 	// ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use
 	// this option when you are processing many short documents, such as text messages.
 	InputFormat InputFormat
+
+	noSmithyDocumentSerde
+}
+
+// Provides additional detail about why the request failed:
+//
+// * Document size is too
+// large - Check the size of your file and resubmit the request.
+//
+// * Document type
+// is not supported - Check the file type and resubmit the request.
+//
+// * Too many
+// pages in the document - Check the number of pages in your file and resubmit the
+// request.
+//
+// * Access denied to Amazon Textract - Verify that your account has
+// permission to use Amazon Textract API operations and resubmit the request.
+type InvalidRequestDetail struct {
+
+	// Reason code is INVALID_DOCUMENT.
+	Reason InvalidRequestDetailReason
 
 	noSmithyDocumentSerde
 }
@@ -1650,6 +1897,21 @@ type PiiOutputDataConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The X and Y coordinates of a point on a document page. For additional
+// information, see Point
+// (https://docs.aws.amazon.com/textract/latest/dg/API_Point.html) in the Amazon
+// Textract API reference.
+type Point struct {
+
+	// The value of the X coordinate for a point on a polygon
+	X *float32
+
+	// The value of the Y coordinate for a point on a polygon
+	Y *float32
+
+	noSmithyDocumentSerde
+}
+
 // Provides configuration parameters for PII entity redaction.
 type RedactionConfig struct {
 
@@ -1663,6 +1925,18 @@ type RedactionConfig struct {
 	// An array of the types of PII entities that Amazon Comprehend detects in the
 	// input text for your request.
 	PiiEntityTypes []PiiEntityType
+
+	noSmithyDocumentSerde
+}
+
+// List of child blocks for the current block.
+type RelationshipsListItem struct {
+
+	// Identifers of the child blocks.
+	Ids []string
+
+	// Only supported relationship is a child relationship.
+	Type RelationshipType
 
 	noSmithyDocumentSerde
 }
@@ -1863,7 +2137,8 @@ type TargetedSentimentDetectionJobProperties struct {
 	// The time that the targeted sentiment detection job ended.
 	EndTime *time.Time
 
-	// The input properties for an inference job.
+	// The input properties for an inference job. The document reader config field
+	// applies only to non-text inputs for custom analysis.
 	InputDataConfig *InputDataConfig
 
 	// The Amazon Resource Name (ARN) of the targeted sentiment detection job. It is a

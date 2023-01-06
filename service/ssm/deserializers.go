@@ -26343,6 +26343,15 @@ func awsAwsjson11_deserializeDocumentDocumentRequires(v **types.DocumentRequires
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "RequireType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RequireType to be of type string, got %T instead", value)
+				}
+				sv.RequireType = ptr.String(jtv)
+			}
+
 		case "Version":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26350,6 +26359,15 @@ func awsAwsjson11_deserializeDocumentDocumentRequires(v **types.DocumentRequires
 					return fmt.Errorf("expected DocumentVersion to be of type string, got %T instead", value)
 				}
 				sv.Version = ptr.String(jtv)
+			}
+
+		case "VersionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentVersionName to be of type string, got %T instead", value)
+				}
+				sv.VersionName = ptr.String(jtv)
 			}
 
 		default:

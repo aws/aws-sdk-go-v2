@@ -201,6 +201,22 @@ type ModifyReplicationGroupInput struct {
 	// groups.
 	SnapshottingClusterId *string
 
+	// A flag that enables in-transit encryption when set to true. If you are enabling
+	// in-transit encryption for an existing cluster, you must also set
+	// TransitEncryptionMode to preferred.
+	TransitEncryptionEnabled *bool
+
+	// A setting that allows you to migrate your clients to use in-transit encryption,
+	// with no downtime. You must set TransitEncryptionEnabled to true, for your
+	// existing cluster, and set TransitEncryptionMode to preferred in the same request
+	// to allow both encrypted and unencrypted connections at the same time. Once you
+	// migrate all your Redis clients to use encrypted connections you can set the
+	// value to required to allow encrypted connections only. Setting
+	// TransitEncryptionMode to required is a two-step process that requires you to
+	// first set the TransitEncryptionMode to preferred first, after that you can set
+	// TransitEncryptionMode to required.
+	TransitEncryptionMode types.TransitEncryptionMode
+
 	// The ID of the user group you are associating with the replication group.
 	UserGroupIdsToAdd []string
 

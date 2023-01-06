@@ -46,8 +46,11 @@ type ErrorCode string
 
 // Enum values for ErrorCode
 const (
-	ErrorCodeValidationError ErrorCode = "VALIDATION_ERROR"
-	ErrorCodeInternalFailure ErrorCode = "INTERNAL_FAILURE"
+	ErrorCodeValidationError       ErrorCode = "VALIDATION_ERROR"
+	ErrorCodeInternalFailure       ErrorCode = "INTERNAL_FAILURE"
+	ErrorCodeSyncInitializingError ErrorCode = "SYNC_INITIALIZING_ERROR"
+	ErrorCodeSyncCreatingError     ErrorCode = "SYNC_CREATING_ERROR"
+	ErrorCodeSyncProcessingError   ErrorCode = "SYNC_PROCESSING_ERROR"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -57,6 +60,9 @@ func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"VALIDATION_ERROR",
 		"INTERNAL_FAILURE",
+		"SYNC_INITIALIZING_ERROR",
+		"SYNC_CREATING_ERROR",
+		"SYNC_PROCESSING_ERROR",
 	}
 }
 
@@ -267,6 +273,72 @@ func (State) Values() []State {
 		"DELETING",
 		"ACTIVE",
 		"ERROR",
+	}
+}
+
+type SyncJobState string
+
+// Enum values for SyncJobState
+const (
+	SyncJobStateCreating     SyncJobState = "CREATING"
+	SyncJobStateInitializing SyncJobState = "INITIALIZING"
+	SyncJobStateActive       SyncJobState = "ACTIVE"
+	SyncJobStateDeleting     SyncJobState = "DELETING"
+	SyncJobStateError        SyncJobState = "ERROR"
+)
+
+// Values returns all known values for SyncJobState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SyncJobState) Values() []SyncJobState {
+	return []SyncJobState{
+		"CREATING",
+		"INITIALIZING",
+		"ACTIVE",
+		"DELETING",
+		"ERROR",
+	}
+}
+
+type SyncResourceState string
+
+// Enum values for SyncResourceState
+const (
+	SyncResourceStateInitializing SyncResourceState = "INITIALIZING"
+	SyncResourceStateProcessing   SyncResourceState = "PROCESSING"
+	SyncResourceStateDeleted      SyncResourceState = "DELETED"
+	SyncResourceStateInSync       SyncResourceState = "IN_SYNC"
+	SyncResourceStateError        SyncResourceState = "ERROR"
+)
+
+// Values returns all known values for SyncResourceState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SyncResourceState) Values() []SyncResourceState {
+	return []SyncResourceState{
+		"INITIALIZING",
+		"PROCESSING",
+		"DELETED",
+		"IN_SYNC",
+		"ERROR",
+	}
+}
+
+type SyncResourceType string
+
+// Enum values for SyncResourceType
+const (
+	SyncResourceTypeEntity        SyncResourceType = "ENTITY"
+	SyncResourceTypeComponentType SyncResourceType = "COMPONENT_TYPE"
+)
+
+// Values returns all known values for SyncResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SyncResourceType) Values() []SyncResourceType {
+	return []SyncResourceType{
+		"ENTITY",
+		"COMPONENT_TYPE",
 	}
 }
 

@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	Code *string
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Internal server error.
 type InternalException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -46,14 +55,19 @@ func (e *InternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalException) ErrorCode() string             { return "InternalException" }
+func (e *InternalException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// There is an issue with the account used to make the request. Either Security Hub
-// is not enabled for the account, or the account does not have permission to
-// perform this action.
+// The account doesn't have permission to perform this action.
 type InvalidAccessException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -69,13 +83,20 @@ func (e *InvalidAccessException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidAccessException) ErrorCode() string             { return "InvalidAccessException" }
+func (e *InvalidAccessException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidAccessException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidAccessException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because you supplied an invalid or out-of-range value
 // for an input parameter.
 type InvalidInputException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -91,7 +112,12 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInputException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create resources beyond the
@@ -99,6 +125,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // describes the limit exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -114,12 +142,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource specified in the request conflicts with an existing resource.
 type ResourceConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -135,12 +170,19 @@ func (e *ResourceConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceConflictException) ErrorCode() string             { return "ResourceConflictException" }
+func (e *ResourceConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because we can't find the specified resource.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Code *string
 
@@ -156,5 +198,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

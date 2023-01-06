@@ -61,7 +61,7 @@ type GetFindingStatisticsInput struct {
 
 type GetFindingStatisticsOutput struct {
 
-	// An array of objects, one for each group of findings that meet the filter
+	// An array of objects, one for each group of findings that matches the filter
 	// criteria specified in the request.
 	CountsByGroup []types.GroupCount
 

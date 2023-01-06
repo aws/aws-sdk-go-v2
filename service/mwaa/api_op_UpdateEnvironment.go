@@ -42,7 +42,7 @@ type UpdateEnvironmentInput struct {
 	AirflowConfigurationOptions map[string]string
 
 	// The Apache Airflow version for your environment. If no value is specified,
-	// defaults to the latest version. Valid values: 1.10.12, 2.0.2, and 2.2.2.
+	// defaults to the latest version. Valid values: 1.10.12, 2.0.2, 2.2.2, and 2.4.3.
 	AirflowVersion *string
 
 	// The relative path to the DAGs folder on your Amazon S3 bucket. For example,

@@ -146,7 +146,12 @@ type LogGroup struct {
 	// after Jan 1, 1970 00:00:00 UTC.
 	CreationTime *int64
 
-	// The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
+	// Displays whether this log group has a protection policy, or whether it had one
+	// in the past. For more information, see PutDataProtectionPolicy
+	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDataProtectionPolicy.html).
+	DataProtectionStatus DataProtectionStatus
+
+	// The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
 	KmsKeyId *string
 
 	// The name of the log group.
@@ -157,8 +162,8 @@ type LogGroup struct {
 
 	// The number of days to retain the log events in the specified log group. Possible
 	// values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827,
-	// 2192, 2557, 2922, 3288, and 3653. To set a log group to never have log events
-	// expire, use DeleteRetentionPolicy
+	// 2192, 2557, 2922, 3288, and 3653. To set a log group so that its log events do
+	// not expire, use DeleteRetentionPolicy
 	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html).
 	RetentionInDays *int32
 
@@ -204,22 +209,28 @@ type LogStream struct {
 	LastEventTimestamp *int64
 
 	// The ingestion time, expressed as the number of milliseconds after Jan 1, 1970
-	// 00:00:00 UTC.
+	// 00:00:00 UTC The lastIngestionTime value updates on an eventual consistency
+	// basis. It typically updates in less than an hour after ingestion, but in rare
+	// situations might take longer.
 	LastIngestionTime *int64
 
 	// The name of the log stream.
 	LogStreamName *string
 
-	// The number of bytes stored. Important: On June 17, 2019, this parameter was
-	// deprecated for log streams, and is always reported as zero. This change applies
-	// only to log streams. The storedBytes parameter for log groups is not affected.
+	// The number of bytes stored. Important: As of June 17, 2019, this parameter is no
+	// longer supported for log streams, and is always reported as zero. This change
+	// applies only to log streams. The storedBytes parameter for log groups is not
+	// affected.
 	//
 	// Deprecated: Starting on June 17, 2019, this parameter will be deprecated for log
 	// streams, and will be reported as zero. This change applies only to log streams.
 	// The storedBytes parameter for log groups is not affected.
 	StoredBytes *int64
 
-	// The sequence token.
+	// The sequence token. The sequence token is now ignored in PutLogEvents actions.
+	// PutLogEvents actions are always accepted regardless of receiving an invalid
+	// sequence token. You don't need to obtain uploadSequenceToken to use a
+	// PutLogEvents action.
 	UploadSequenceToken *string
 
 	noSmithyDocumentSerde
@@ -298,10 +309,10 @@ type MetricTransformation struct {
 	// custom metrics. To prevent unexpected high charges, do not specify
 	// high-cardinality fields such as IPAddress or requestID as dimensions. Each
 	// different value found for a dimension is treated as a separate metric and
-	// accrues charges as a separate custom metric. To help prevent accidental high
-	// charges, Amazon disables a metric filter if it generates 1000 different
-	// name/value pairs for the dimensions that you have specified within a certain
-	// amount of time. You can also set up a billing alarm to alert you if your charges
+	// accrues charges as a separate custom metric. CloudWatch Logs disables a metric
+	// filter if it generates 1000 different name/value pairs for your specified
+	// dimensions within a certain amount of time. This helps to prevent accidental
+	// high charges. You can also set up a billing alarm to alert you if your charges
 	// are higher than expected. For more information, see  Creating a Billing Alarm to
 	// Monitor Your Estimated Amazon Web Services Charges
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).
@@ -428,7 +439,7 @@ type RejectedLogEventsInfo struct {
 	// The log events that are too new.
 	TooNewLogEventStartIndex *int32
 
-	// The log events that are too old.
+	// The log events that are dated too far in the past.
 	TooOldLogEventEndIndex *int32
 
 	noSmithyDocumentSerde

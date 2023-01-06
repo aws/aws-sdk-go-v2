@@ -13,12 +13,9 @@ import (
 // Deletes a fleet scaling policy. Once deleted, the policy is no longer in force
 // and GameLift removes all record of it. To delete a scaling policy, specify both
 // the scaling policy name and the fleet ID it is associated with. To temporarily
-// suspend scaling policies, call StopFleetActions. This operation suspends all
-// policies for the fleet. Related actions DescribeFleetCapacity |
-// UpdateFleetCapacity | DescribeEC2InstanceLimits | PutScalingPolicy |
-// DescribeScalingPolicies | DeleteScalingPolicy | StopFleetActions |
-// StartFleetActions | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// suspend scaling policies, use StopFleetActions
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StopFleetActions.html).
+// This operation suspends all policies for the fleet.
 func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingPolicyInput, optFns ...func(*Options)) (*DeleteScalingPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteScalingPolicyInput{}
@@ -34,7 +31,6 @@ func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingP
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DeleteScalingPolicyInput struct {
 
 	// A unique identifier for the fleet to be deleted. You can use either the fleet ID

@@ -5527,7 +5527,7 @@ func awsAwsjson11_deserializeOpDocumentTranslateTextOutput(v **TranslateTextOutp
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected TranslatedTextString to be of type string, got %T instead", value)
 				}
 				sv.TranslatedText = ptr.String(jtv)
 			}

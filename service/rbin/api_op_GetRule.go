@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/rbin/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Gets information about a Recycle Bin retention rule.
@@ -44,6 +45,32 @@ type GetRuleOutput struct {
 
 	// The unique ID of the retention rule.
 	Identifier *string
+
+	// Information about the retention rule lock configuration.
+	LockConfiguration *types.LockConfiguration
+
+	// The date and time at which the unlock delay is set to expire. Only returned for
+	// retention rules that have been unlocked and that are still within the unlock
+	// delay period.
+	LockEndTime *time.Time
+
+	// The lock state for the retention rule.
+	//
+	// * locked - The retention rule is locked
+	// and can't be modified or deleted.
+	//
+	// * pending_unlock - The retention rule has
+	// been unlocked but it is still within the unlock delay period. The retention rule
+	// can be modified or deleted only after the unlock delay period has expired.
+	//
+	// *
+	// unlocked - The retention rule is unlocked and it can be modified or deleted by
+	// any user with the required permissions.
+	//
+	// * null - The retention rule has never
+	// been locked. Once a retention rule has been locked, it can transition between
+	// the locked and unlocked states only; it can never transition back to null.
+	LockState types.LockState
 
 	// Information about the resource tags used to identify resources that are retained
 	// by the retention rule.

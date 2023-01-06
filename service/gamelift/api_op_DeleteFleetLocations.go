@@ -19,11 +19,6 @@ import (
 // instances in each location being deleted. When completed, the location status
 // changes to TERMINATED. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions CreateFleetLocations | DescribeFleetLocationAttributes |
-// DescribeFleetLocationCapacity | DescribeFleetLocationUtilization |
-// DescribeFleetAttributes | DescribeFleetCapacity | DescribeFleetUtilization |
-// UpdateFleetCapacity | StopFleetActions | DeleteFleetLocations | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteFleetLocations(ctx context.Context, params *DeleteFleetLocationsInput, optFns ...func(*Options)) (*DeleteFleetLocationsOutput, error) {
 	if params == nil {
 		params = &DeleteFleetLocationsInput{}
@@ -39,7 +34,6 @@ func (c *Client) DeleteFleetLocations(ctx context.Context, params *DeleteFleetLo
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DeleteFleetLocationsInput struct {
 
 	// A unique identifier for the fleet to delete locations for. You can use either
@@ -57,7 +51,6 @@ type DeleteFleetLocationsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DeleteFleetLocationsOutput struct {
 
 	// The Amazon Resource Name (ARN

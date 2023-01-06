@@ -110,7 +110,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -1341,6 +1341,9 @@
                     "target": "com.amazonaws.ivschat#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.ivschat#PendingVerification"
+                },
+                {
                     "target": "com.amazonaws.ivschat#ResourceNotFoundException"
                 },
                 {
@@ -1453,19 +1456,19 @@
                 "s3": {
                     "target": "com.amazonaws.ivschat#S3DestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the Amazon S3 bucket where chat activity will be logged.</p>"
+                        "smithy.api#documentation": "<p>An Amazon S3 destination configuration where chat activity will be logged.</p>"
                     }
                 },
                 "cloudWatchLogs": {
                     "target": "com.amazonaws.ivschat#CloudWatchLogsDestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the Amazon CloudWatch Logs destination where chat activity will be logged.</p>"
+                        "smithy.api#documentation": "<p>An Amazon CloudWatch Logs destination configuration where chat activity will be\n      logged.</p>"
                     }
                 },
                 "firehose": {
                     "target": "com.amazonaws.ivschat#FirehoseDestinationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the Amazon Kinesis Data Firehose destination where chat activity will be\n      logged</p>"
+                        "smithy.api#documentation": "<p>An Amazon Kinesis Data Firehose destination configuration where chat activity will be\n      logged.</p>"
                     }
                 }
             },
@@ -1484,6 +1487,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#PendingVerification"
                 },
                 {
                     "target": "com.amazonaws.ivschat#ResourceNotFoundException"
@@ -2479,6 +2485,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.ivschat#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivschat#PendingVerification"
                 },
                 {
                     "target": "com.amazonaws.ivschat#ResourceNotFoundException"

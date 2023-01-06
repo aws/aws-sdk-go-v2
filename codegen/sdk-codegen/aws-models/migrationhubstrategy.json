@@ -1,23 +1,8 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.migrationhubstrategy#AWSMigrationHubStrategyRecommendation": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "MigrationHubStrategy",
-                    "arnNamespace": "awsmigrationhubstrategyrecommendation",
-                    "cloudFormationName": "AWSMigrationHubStrategyRecommendation",
-                    "cloudTrailEventSource": "migrationhub-strategy.amazonaws.com",
-                    "endpointPrefix": "migrationhub-strategy"
-                },
-                "aws.auth#sigv4": {
-                    "name": "migrationhub-strategy"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Migration Hub Strategy Recommendations</fullname>\n\n         <p>This API reference provides descriptions, syntax, and other details about each of the\n      actions and data types for Migration Hub Strategy Recommendations (Strategy Recommendations). The topic for each action shows the API\n      request parameters and the response. Alternatively, you can use one of the AWS SDKs to access\n      an API that is tailored to the programming language or platform that you're using. For more\n      information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>.</p>",
-                "smithy.api#title": "Migration Hub Strategy Recommendations"
-            },
             "version": "2020-02-19",
             "operations": [
                 {
@@ -31,6 +16,9 @@
                 },
                 {
                     "target": "com.amazonaws.migrationhubstrategy#GetImportFileTask"
+                },
+                {
+                    "target": "com.amazonaws.migrationhubstrategy#GetLatestAssessmentId"
                 },
                 {
                     "target": "com.amazonaws.migrationhubstrategy#GetPortfolioPreferences"
@@ -80,7 +68,733 @@
                 {
                     "target": "com.amazonaws.migrationhubstrategy#UpdateServerConfig"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "MigrationHubStrategy",
+                    "endpointPrefix": "migrationhub-strategy",
+                    "cloudTrailEventSource": "migrationhub-strategy.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "migrationhub-strategy"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<fullname>Migration Hub Strategy Recommendations</fullname>\n\n         <p>This API reference provides descriptions, syntax, and other details about each of the\n      actions and data types for Migration Hub Strategy Recommendations (Strategy Recommendations). The topic for each action shows the API\n      request parameters and the response. Alternatively, you can use one of the AWS SDKs to\n      access an API that is tailored to the programming language or platform that you're using. For\n      more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>.</p>",
+                "smithy.api#title": "Migration Hub Strategy Recommendations",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://migrationhub-strategy-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://migrationhub-strategy-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://migrationhub-strategy.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://migrationhub-strategy.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://migrationhub-strategy.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.migrationhubstrategy#AccessDeniedException": {
             "type": "structure",
@@ -103,16 +817,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     },
                     {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
                     },
                     {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
+                        "name": "SUCCESS",
+                        "value": "SUCCESS"
                     }
                 ]
             }
@@ -123,18 +837,18 @@
                 "severity": {
                     "target": "com.amazonaws.migrationhubstrategy#Severity",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Contains the severity of anti-patterns.\n    </p>"
+                        "smithy.api#documentation": "<p> Contains the severity of anti-patterns. </p>"
                     }
                 },
                 "count": {
                     "target": "com.amazonaws.migrationhubstrategy#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Contains the count of anti-patterns.\n    </p>"
+                        "smithy.api#documentation": "<p> Contains the count of anti-patterns. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Contains the summary of anti-patterns and their severity.\n    </p>"
+                "smithy.api#documentation": "<p> Contains the summary of anti-patterns and their severity. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#AppType": {
@@ -164,6 +878,111 @@
                     {
                         "value": "Other",
                         "name": "other"
+                    },
+                    {
+                        "value": "Tomcat",
+                        "name": "tomcat"
+                    },
+                    {
+                        "value": "JBoss",
+                        "name": "jboss"
+                    },
+                    {
+                        "value": "Spring",
+                        "name": "spring"
+                    },
+                    {
+                        "value": "Mongo DB",
+                        "name": "mongodb"
+                    },
+                    {
+                        "value": "DB2",
+                        "name": "db2"
+                    },
+                    {
+                        "value": "Maria DB",
+                        "name": "mariadb"
+                    },
+                    {
+                        "value": "MySQL",
+                        "name": "mysql"
+                    },
+                    {
+                        "value": "Sybase",
+                        "name": "sybase"
+                    },
+                    {
+                        "value": "PostgreSQLServer",
+                        "name": "postgresqlserver"
+                    },
+                    {
+                        "value": "Cassandra",
+                        "name": "cassandra"
+                    },
+                    {
+                        "value": "IBM WebSphere",
+                        "name": "websphere"
+                    },
+                    {
+                        "value": "Oracle WebLogic",
+                        "name": "weblogic"
+                    },
+                    {
+                        "value": "Visual Basic",
+                        "name": "visualbasic"
+                    },
+                    {
+                        "value": "Unknown",
+                        "name": "unknown"
+                    },
+                    {
+                        "value": "DotnetCore",
+                        "name": "dotnetcore"
+                    },
+                    {
+                        "value": "Dotnet",
+                        "name": "dotnet"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AppUnitError": {
+            "type": "structure",
+            "members": {
+                "appUnitErrorCategory": {
+                    "target": "com.amazonaws.migrationhubstrategy#AppUnitErrorCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error in the analysis of the application unit.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AppUnitErrorCategory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CREDENTIAL_ERROR",
+                        "value": "CREDENTIAL_ERROR"
+                    },
+                    {
+                        "name": "CONNECTIVITY_ERROR",
+                        "value": "CONNECTIVITY_ERROR"
+                    },
+                    {
+                        "name": "PERMISSION_ERROR",
+                        "value": "PERMISSION_ERROR"
+                    },
+                    {
+                        "name": "UNSUPPORTED_ERROR",
+                        "value": "UNSUPPORTED_ERROR"
+                    },
+                    {
+                        "name": "OTHER_ERROR",
+                        "value": "OTHER_ERROR"
                     }
                 ]
             }
@@ -195,6 +1014,14 @@
                     {
                         "value": "DESTINATION",
                         "name": "DESTINATION"
+                    },
+                    {
+                        "value": "ANALYSIS_STATUS",
+                        "name": "ANALYSIS_STATUS"
+                    },
+                    {
+                        "value": "ERROR_CATEGORY",
+                        "name": "ERROR_CATEGORY"
                     }
                 ]
             }
@@ -315,6 +1142,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Set to true if the application component is running on multiple servers.</p>"
                     }
+                },
+                "runtimeStatus": {
+                    "target": "com.amazonaws.migrationhubstrategy#RuntimeAnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the application unit.</p>"
+                    }
+                },
+                "runtimeStatusMessage": {
+                    "target": "com.amazonaws.migrationhubstrategy#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message for the application unit.</p>"
+                    }
+                },
+                "appUnitError": {
+                    "target": "com.amazonaws.migrationhubstrategy#AppUnitError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error in the analysis of the source code or database.</p>"
+                    }
                 }
             },
             "traits": {
@@ -334,6 +1179,26 @@
                     "max": 44
                 },
                 "smithy.api#pattern": "[0-9a-zA-Z-]+"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ApplicationComponentStatusSummary": {
+            "type": "structure",
+            "members": {
+                "srcCodeOrDbAnalysisStatus": {
+                    "target": "com.amazonaws.migrationhubstrategy#SrcCodeOrDbAnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of database analysis.</p>"
+                    }
+                },
+                "count": {
+                    "target": "com.amazonaws.migrationhubstrategy#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of application components successfully analyzed, partially successful or failed\n      analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of the analysis status of the application component.</p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#ApplicationComponentStrategies": {
@@ -374,18 +1239,37 @@
                 "appType": {
                     "target": "com.amazonaws.migrationhubstrategy#AppType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Contains the name of application types.\n    </p>"
+                        "smithy.api#documentation": "<p> Contains the name of application types. </p>"
                     }
                 },
                 "count": {
                     "target": "com.amazonaws.migrationhubstrategy#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Contains the count of application type.\n    </p>"
+                        "smithy.api#documentation": "<p> Contains the count of application type. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Contains the summary of application components.\n    </p>"
+                "smithy.api#documentation": "<p> Contains the summary of application components. </p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ApplicationMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ALL",
+                        "value": "ALL"
+                    },
+                    {
+                        "name": "KNOWN",
+                        "value": "KNOWN"
+                    },
+                    {
+                        "name": "UNKNOWN",
+                        "value": "UNKNOWN"
+                    }
+                ]
             }
         },
         "com.amazonaws.migrationhubstrategy#ApplicationPreferences": {
@@ -394,12 +1278,12 @@
                 "managementPreference": {
                     "target": "com.amazonaws.migrationhubstrategy#ManagementPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Application preferences that you specify to prefer managed environment.\n    </p>"
+                        "smithy.api#documentation": "<p> Application preferences that you specify to prefer managed environment. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Application preferences that you specify.\n    </p>"
+                "smithy.api#documentation": "<p> Application preferences that you specify. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#AssessmentStatus": {
@@ -425,66 +1309,135 @@
                 ]
             }
         },
+        "com.amazonaws.migrationhubstrategy#AssessmentStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
         "com.amazonaws.migrationhubstrategy#AssessmentSummary": {
             "type": "structure",
             "members": {
                 "listServerStrategySummary": {
                     "target": "com.amazonaws.migrationhubstrategy#ListStrategySummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      List of ServerStrategySummary.\n    </p>"
+                        "smithy.api#documentation": "<p> List of ServerStrategySummary. </p>"
                     }
                 },
                 "listApplicationComponentStrategySummary": {
                     "target": "com.amazonaws.migrationhubstrategy#ListStrategySummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      List of ApplicationComponentStrategySummary.\n    </p>"
+                        "smithy.api#documentation": "<p> List of ApplicationComponentStrategySummary. </p>"
                     }
                 },
                 "listAntipatternSeveritySummary": {
                     "target": "com.amazonaws.migrationhubstrategy#ListAntipatternSeveritySummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      List of AntipatternSeveritySummary.\n    </p>"
+                        "smithy.api#documentation": "<p> List of AntipatternSeveritySummary. </p>"
                     }
                 },
                 "listApplicationComponentSummary": {
                     "target": "com.amazonaws.migrationhubstrategy#ListApplicationComponentSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      List of ApplicationComponentSummary.\n    </p>"
+                        "smithy.api#documentation": "<p> List of ApplicationComponentSummary. </p>"
                     }
                 },
                 "listServerSummary": {
                     "target": "com.amazonaws.migrationhubstrategy#ListServerSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      List of ServerSummary.\n    </p>"
+                        "smithy.api#documentation": "<p> List of ServerSummary. </p>"
                     }
                 },
                 "antipatternReportS3Object": {
                     "target": "com.amazonaws.migrationhubstrategy#S3Object",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon S3 object containing the anti-pattern report.\n    </p>"
+                        "smithy.api#documentation": "<p> The Amazon S3 object containing the anti-pattern report. </p>"
                     }
                 },
                 "antipatternReportStatus": {
                     "target": "com.amazonaws.migrationhubstrategy#AntipatternReportStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The status of the anti-pattern report.\n    </p>"
+                        "smithy.api#documentation": "<p> The status of the anti-pattern report. </p>"
                     }
                 },
                 "antipatternReportStatusMessage": {
                     "target": "com.amazonaws.migrationhubstrategy#StatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The status message of the anti-pattern report.\n    </p>"
+                        "smithy.api#documentation": "<p> The status message of the anti-pattern report. </p>"
                     }
                 },
                 "lastAnalyzedTimestamp": {
                     "target": "com.amazonaws.migrationhubstrategy#TimeStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The time the assessment was performed.\n    </p>"
+                        "smithy.api#documentation": "<p> The time the assessment was performed. </p>"
+                    }
+                },
+                "listApplicationComponentStatusSummary": {
+                    "target": "com.amazonaws.migrationhubstrategy#ListApplicationComponentStatusSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of status summaries of the analyzed application components.</p>"
+                    }
+                },
+                "listServerStatusSummary": {
+                    "target": "com.amazonaws.migrationhubstrategy#ListServerStatusSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of status summaries of the analyzed servers.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Contains the summary of the assessment results.\n    </p>"
+                "smithy.api#documentation": "<p> Contains the summary of the assessment results. </p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AssessmentTarget": {
+            "type": "structure",
+            "members": {
+                "condition": {
+                    "target": "com.amazonaws.migrationhubstrategy#Condition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Condition of an assessment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of an assessment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.migrationhubstrategy#AssessmentTargetValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Values of an assessment.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the criteria of assessment.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AssessmentTargetValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#String"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#AssessmentTargets": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#AssessmentTarget"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.migrationhubstrategy#AssociatedApplication": {
@@ -493,18 +1446,18 @@
                 "name": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Name of the application as defined in Application Discovery Service.\n    </p>"
+                        "smithy.api#documentation": "<p> Name of the application as defined in Application Discovery Service. </p>"
                     }
                 },
                 "id": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      ID of the application as defined in Application Discovery Service.\n    </p>"
+                        "smithy.api#documentation": "<p> ID of the application as defined in Application Discovery Service. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Object containing details about applications as defined in Application Discovery Service.\n    </p>"
+                "smithy.api#documentation": "<p> Object containing details about applications as defined in Application Discovery Service. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#AssociatedApplications": {
@@ -529,19 +1482,38 @@
                 "smithy.api#pattern": "[0-9a-z-:]+"
             }
         },
+        "com.amazonaws.migrationhubstrategy#AuthType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NTLM",
+                        "name": "NTLM"
+                    },
+                    {
+                        "value": "SSH",
+                        "name": "SSH"
+                    },
+                    {
+                        "value": "CERT",
+                        "name": "CERT"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.migrationhubstrategy#AwsManagedResources": {
             "type": "structure",
             "members": {
                 "targetDestination": {
                     "target": "com.amazonaws.migrationhubstrategy#AwsManagedTargetDestinations",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The choice of application destination that you specify.\n    </p>",
+                        "smithy.api#documentation": "<p> The choice of application destination that you specify. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Object containing the choice of application destination that you specify.\n    </p>"
+                "smithy.api#documentation": "<p> Object containing the choice of application destination that you specify. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#AwsManagedTargetDestination": {
@@ -576,10 +1548,7 @@
             }
         },
         "com.amazonaws.migrationhubstrategy#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.migrationhubstrategy#BusinessGoals": {
             "type": "structure",
@@ -587,36 +1556,35 @@
                 "speedOfMigration": {
                     "target": "com.amazonaws.migrationhubstrategy#BusinessGoalsInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Business goal to achieve migration at a fast pace.\n    </p>"
+                        "smithy.api#documentation": "<p> Business goal to achieve migration at a fast pace. </p>"
                     }
                 },
                 "reduceOperationalOverheadWithManagedServices": {
                     "target": "com.amazonaws.migrationhubstrategy#BusinessGoalsInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Business goal to reduce the operational overhead on the team by moving into managed services.\n    </p>"
+                        "smithy.api#documentation": "<p> Business goal to reduce the operational overhead on the team by moving into managed\n      services. </p>"
                     }
                 },
                 "modernizeInfrastructureWithCloudNativeTechnologies": {
                     "target": "com.amazonaws.migrationhubstrategy#BusinessGoalsInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Business goal to modernize infrastructure by moving to cloud native technologies.\n    </p>"
+                        "smithy.api#documentation": "<p> Business goal to modernize infrastructure by moving to cloud native technologies. </p>"
                     }
                 },
                 "licenseCostReduction": {
                     "target": "com.amazonaws.migrationhubstrategy#BusinessGoalsInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Business goal to reduce license costs.\n    </p>"
+                        "smithy.api#documentation": "<p> Business goal to reduce license costs. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Business goals that you specify.\n    </p>"
+                "smithy.api#documentation": "<p> Business goals that you specify. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#BusinessGoalsInteger": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 5
@@ -629,48 +1597,54 @@
                 "collectorId": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID of the collector.\n    </p>"
+                        "smithy.api#documentation": "<p> The ID of the collector. </p>"
                     }
                 },
                 "ipAddress": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      IP address of the server that is hosting the collector.\n    </p>"
+                        "smithy.api#documentation": "<p> IP address of the server that is hosting the collector. </p>"
                     }
                 },
                 "hostName": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Hostname of the server that is hosting the collector.\n    </p>"
+                        "smithy.api#documentation": "<p> Hostname of the server that is hosting the collector. </p>"
                     }
                 },
                 "collectorHealth": {
                     "target": "com.amazonaws.migrationhubstrategy#CollectorHealth",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Indicates the health of a collector.\n    </p>"
+                        "smithy.api#documentation": "<p> Indicates the health of a collector. </p>"
                     }
                 },
                 "collectorVersion": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Current version of the collector that is running in the environment that you specify.\n    </p>"
+                        "smithy.api#documentation": "<p> Current version of the collector that is running in the environment that you specify.\n    </p>"
                     }
                 },
                 "registeredTimeStamp": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Time when the collector registered with the service.\n    </p>"
+                        "smithy.api#documentation": "<p> Time when the collector registered with the service. </p>"
                     }
                 },
                 "lastActivityTimeStamp": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Time when the collector last pinged the service.\n    </p>"
+                        "smithy.api#documentation": "<p> Time when the collector last pinged the service. </p>"
+                    }
+                },
+                "configurationSummary": {
+                    "target": "com.amazonaws.migrationhubstrategy#ConfigurationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary of the collector configuration.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Process data collector that runs in the environment that you specify.\n    </p>"
+                "smithy.api#documentation": "<p> Process data collector that runs in the environment that you specify. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#CollectorHealth": {
@@ -694,6 +1668,67 @@
                 "target": "com.amazonaws.migrationhubstrategy#Collector"
             }
         },
+        "com.amazonaws.migrationhubstrategy#Condition": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EQUALS",
+                        "name": "EQUALS"
+                    },
+                    {
+                        "value": "NOT_EQUALS",
+                        "name": "NOT_EQUALS"
+                    },
+                    {
+                        "value": "CONTAINS",
+                        "name": "CONTAINS"
+                    },
+                    {
+                        "value": "NOT_CONTAINS",
+                        "name": "NOT_CONTAINS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ConfigurationSummary": {
+            "type": "structure",
+            "members": {
+                "vcenterBasedRemoteInfoList": {
+                    "target": "com.amazonaws.migrationhubstrategy#VcenterBasedRemoteInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of vCenter configurations.</p>"
+                    }
+                },
+                "ipAddressBasedRemoteInfoList": {
+                    "target": "com.amazonaws.migrationhubstrategy#IPAddressBasedRemoteInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>IP address based configurations.</p>"
+                    }
+                },
+                "versionControlInfoList": {
+                    "target": "com.amazonaws.migrationhubstrategy#VersionControlInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of the version control configurations.</p>"
+                    }
+                },
+                "pipelineInfoList": {
+                    "target": "com.amazonaws.migrationhubstrategy#PipelineInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of pipeline info configurations.</p>"
+                    }
+                },
+                "remoteSourceCodeAnalysisServerInfo": {
+                    "target": "com.amazonaws.migrationhubstrategy#RemoteSourceCodeAnalysisServerInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Info about the remote server source code configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of the collector configuration.</p>"
+            }
+        },
         "com.amazonaws.migrationhubstrategy#ConflictException": {
             "type": "structure",
             "members": {
@@ -705,7 +1740,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Exception to indicate that there is an ongoing task when a new task is created. \n      Return when once the existing tasks are complete.\n    </p>",
+                "smithy.api#documentation": "<p> Exception to indicate that there is an ongoing task when a new task is created. Return\n      when once the existing tasks are complete. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -754,6 +1789,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The time the assessment completes. </p>"
                     }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.migrationhubstrategy#AssessmentStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message of the assessment.</p>"
+                    }
                 }
             },
             "traits": {
@@ -781,12 +1822,12 @@
                 "secretName": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      AWS Secrets Manager key that holds the credentials that you use to connect to a database.\n    </p>"
+                        "smithy.api#documentation": "<p> AWS Secrets Manager key that holds the credentials that you use to connect to a database.\n    </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Configuration information used for assessing databases.\n    </p>"
+                "smithy.api#documentation": "<p> Configuration information used for assessing databases. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#DatabaseManagementPreference": {
@@ -826,12 +1867,12 @@
                 "noPreference": {
                     "target": "com.amazonaws.migrationhubstrategy#NoDatabaseMigrationPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Indicated that you do not prefer heterogeneous or homogeneous.\n    </p>"
+                        "smithy.api#documentation": "<p> Indicated that you do not prefer heterogeneous or homogeneous. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Preferences for migrating a database to AWS.\n    </p>"
+                "smithy.api#documentation": "<p> Preferences for migrating a database to AWS. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#DatabasePreferences": {
@@ -846,12 +1887,25 @@
                 "databaseMigrationPreference": {
                     "target": "com.amazonaws.migrationhubstrategy#DatabaseMigrationPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Specifies your preferred migration path.\n    </p>"
+                        "smithy.api#documentation": "<p> Specifies your preferred migration path. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Preferences on managing your databases on AWS.\n    </p>"
+                "smithy.api#documentation": "<p> Preferences on managing your databases on AWS. </p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#DependencyException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.migrationhubstrategy#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Dependency encountered an error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
             }
         },
         "com.amazonaws.migrationhubstrategy#GetApplicationComponentDetails": {
@@ -947,9 +2001,9 @@
             "traits": {
                 "smithy.api#documentation": "<p> Retrieves a list of all the recommended strategies and tools for an application component\n      running on a server. </p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/get-applicationcomponent-strategies/{applicationComponentId}",
-                    "code": 200
+                    "uri": "/get-applicationcomponent-strategies/{applicationComponentId}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1037,6 +2091,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Detailed information about the assessment. </p>"
                     }
+                },
+                "assessmentTargets": {
+                    "target": "com.amazonaws.migrationhubstrategy#AssessmentTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of criteria for assessment.</p>"
+                    }
                 }
             }
         },
@@ -1081,7 +2141,7 @@
                 "id": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ID of the import file task. This ID is returned in the response of\n      <a>StartImportFileTask</a>. </p>",
+                        "smithy.api#documentation": "<p> The ID of the import file task. This ID is returned in the response of <a>StartImportFileTask</a>. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1159,6 +2219,53 @@
                 }
             }
         },
+        "com.amazonaws.migrationhubstrategy#GetLatestAssessmentId": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhubstrategy#GetLatestAssessmentIdRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhubstrategy#GetLatestAssessmentIdResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhubstrategy#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhubstrategy#DependencyException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhubstrategy#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhubstrategy#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve the latest ID of a specific assessment task.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/get-latest-assessment-id",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#GetLatestAssessmentIdRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.migrationhubstrategy#GetLatestAssessmentIdResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhubstrategy#AsyncTaskId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The latest ID for the specific assessment task.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.migrationhubstrategy#GetPortfolioPreferences": {
             "type": "operation",
             "input": {
@@ -1214,6 +2321,12 @@
                     "target": "com.amazonaws.migrationhubstrategy#DatabasePreferences",
                     "traits": {
                         "smithy.api#documentation": "<p> The transformation preferences for database applications. </p>"
+                    }
+                },
+                "applicationMode": {
+                    "target": "com.amazonaws.migrationhubstrategy#ApplicationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The classification for application component types.</p>"
                     }
                 }
             }
@@ -1303,7 +2416,7 @@
                 "id": {
                     "target": "com.amazonaws.migrationhubstrategy#RecommendationTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p> The recommendation report generation task <code>id</code> returned by \n      <a>StartRecommendationReportGeneration</a>. </p>",
+                        "smithy.api#documentation": "<p> The recommendation report generation task <code>id</code> returned by <a>StartRecommendationReportGeneration</a>. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1362,8 +2475,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "associatedApplications",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "associatedApplications"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1446,9 +2559,9 @@
             "traits": {
                 "smithy.api#documentation": "<p> Retrieves recommended strategies and tools for the specified server. </p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "GET",
-                    "uri": "/get-server-strategies/{serverId}",
-                    "code": 200
+                    "uri": "/get-server-strategies/{serverId}"
                 },
                 "smithy.api#readonly": {}
             }
@@ -1483,18 +2596,18 @@
                 "name": {
                     "target": "com.amazonaws.migrationhubstrategy#GroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The key of the specific import group.\n    </p>"
+                        "smithy.api#documentation": "<p> The key of the specific import group. </p>"
                     }
                 },
                 "value": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The value of the specific import group.\n    </p>"
+                        "smithy.api#documentation": "<p> The value of the specific import group. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      The object containing information about distinct imports or groups for Strategy Recommendations.\n    </p>"
+                "smithy.api#documentation": "<p> The object containing information about distinct imports or groups for Strategy Recommendations. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#GroupIds": {
@@ -1520,13 +2633,13 @@
                 "targetDatabaseEngine": {
                     "target": "com.amazonaws.migrationhubstrategy#HeterogeneousTargetDatabaseEngines",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The target database engine for heterogeneous database migration preference.\n    </p>",
+                        "smithy.api#documentation": "<p> The target database engine for heterogeneous database migration preference. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      The object containing details about heterogeneous database preferences.\n    </p>"
+                "smithy.api#documentation": "<p> The object containing details about heterogeneous database preferences. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#HeterogeneousTargetDatabaseEngine": {
@@ -1594,12 +2707,12 @@
                 "targetDatabaseEngine": {
                     "target": "com.amazonaws.migrationhubstrategy#HomogeneousTargetDatabaseEngines",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The target database engine for homogeneous database migration preferences.\n    </p>"
+                        "smithy.api#documentation": "<p> The target database engine for homogeneous database migration preferences. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      The object containing details about homogeneous database preferences.\n    </p>"
+                "smithy.api#documentation": "<p> The object containing details about homogeneous database preferences. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#HomogeneousTargetDatabaseEngine": {
@@ -1633,6 +2746,38 @@
                     "max": 15
                 },
                 "smithy.api#pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#IPAddressBasedRemoteInfo": {
+            "type": "structure",
+            "members": {
+                "ipAddressConfigurationTimeStamp": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of the configuration.</p>"
+                    }
+                },
+                "authType": {
+                    "target": "com.amazonaws.migrationhubstrategy#AuthType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authorization.</p>"
+                    }
+                },
+                "osType": {
+                    "target": "com.amazonaws.migrationhubstrategy#OSType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the operating system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>IP address based configurations.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#IPAddressBasedRemoteInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#IPAddressBasedRemoteInfo"
             }
         },
         "com.amazonaws.migrationhubstrategy#ImportFileTaskInformation": {
@@ -1677,7 +2822,7 @@
                 "statusReportS3Key": {
                     "target": "com.amazonaws.migrationhubstrategy#importS3Key",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon S3 key name for status report of import task. The report contains  details about\n      whether each record imported successfully or why it did not. </p>"
+                        "smithy.api#documentation": "<p> The Amazon S3 key name for status report of import task. The report contains details about\n      whether each record imported successfully or why it did not. </p>"
                     }
                 },
                 "completionTime": {
@@ -1753,21 +2898,18 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "excludeFromAssessment",
-                        "name": "EXCLUDE_FROM_RECOMMENDATION"
+                        "name": "EXCLUDE_FROM_RECOMMENDATION",
+                        "value": "excludeFromAssessment"
                     },
                     {
-                        "value": "includeInAssessment",
-                        "name": "INCLUDE_IN_RECOMMENDATION"
+                        "name": "INCLUDE_IN_RECOMMENDATION",
+                        "value": "includeInAssessment"
                     }
                 ]
             }
         },
         "com.amazonaws.migrationhubstrategy#Integer": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.migrationhubstrategy#InterfaceName": {
             "type": "string",
@@ -1796,6 +2938,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.migrationhubstrategy#AntipatternSeveritySummary"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ListApplicationComponentStatusSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#ApplicationComponentStatusSummary"
             }
         },
         "com.amazonaws.migrationhubstrategy#ListApplicationComponentSummary": {
@@ -1836,8 +2984,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "applicationComponentInfos",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "applicationComponentInfos"
                 }
             }
         },
@@ -1862,7 +3010,7 @@
                 "sort": {
                     "target": "com.amazonaws.migrationhubstrategy#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies whether to sort by ascending (<code>ASC</code>) or descending\n      (<code>DESC</code>) order. </p>"
+                        "smithy.api#documentation": "<p> Specifies whether to sort by ascending (<code>ASC</code>) or descending\n        (<code>DESC</code>) order. </p>"
                     }
                 },
                 "groupIdFilter": {
@@ -1934,8 +3082,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "Collectors",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "Collectors"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2008,8 +3156,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "taskInfos",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "taskInfos"
                 },
                 "smithy.api#readonly": {}
             }
@@ -2056,6 +3204,12 @@
                 }
             }
         },
+        "com.amazonaws.migrationhubstrategy#ListServerStatusSummary": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#ServerStatusSummary"
+            }
+        },
         "com.amazonaws.migrationhubstrategy#ListServerSummary": {
             "type": "list",
             "member": {
@@ -2094,8 +3248,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "serverInfos",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "serverInfos"
                 }
             }
         },
@@ -2117,7 +3271,7 @@
                 "sort": {
                     "target": "com.amazonaws.migrationhubstrategy#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies whether to sort by ascending (<code>ASC</code>) or descending\n      (<code>DESC</code>) order. </p>"
+                        "smithy.api#documentation": "<p> Specifies whether to sort by ascending (<code>ASC</code>) or descending\n        (<code>DESC</code>) order. </p>"
                     }
                 },
                 "groupIdFilter": {
@@ -2189,31 +3343,28 @@
                 "awsManagedResources": {
                     "target": "com.amazonaws.migrationhubstrategy#AwsManagedResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Indicates interest in solutions that are managed by AWS.\n    </p>"
+                        "smithy.api#documentation": "<p> Indicates interest in solutions that are managed by AWS. </p>"
                     }
                 },
                 "selfManageResources": {
                     "target": "com.amazonaws.migrationhubstrategy#SelfManageResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Indicates interest in managing your own resources on AWS.\n    </p>"
+                        "smithy.api#documentation": "<p> Indicates interest in managing your own resources on AWS. </p>"
                     }
                 },
                 "noPreference": {
                     "target": "com.amazonaws.migrationhubstrategy#NoManagementPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      No specific preference.\n    </p>"
+                        "smithy.api#documentation": "<p> No specific preference. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Preferences for migrating an application to AWS.\n    </p>"
+                "smithy.api#documentation": "<p> Preferences for migrating an application to AWS. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#MaxResult": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "integer"
         },
         "com.amazonaws.migrationhubstrategy#NetMask": {
             "type": "string",
@@ -2231,34 +3382,34 @@
                 "interfaceName": {
                     "target": "com.amazonaws.migrationhubstrategy#InterfaceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Information about the name of the interface of the server for which the assessment was run.\n    </p>",
+                        "smithy.api#documentation": "<p> Information about the name of the interface of the server for which the assessment was\n      run. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ipAddress": {
                     "target": "com.amazonaws.migrationhubstrategy#IPAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Information about the IP address of the server for which the assessment was run.\n    </p>",
+                        "smithy.api#documentation": "<p> Information about the IP address of the server for which the assessment was run. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "macAddress": {
                     "target": "com.amazonaws.migrationhubstrategy#MacAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Information about the MAC address of the server for which the assessment was run.\n    </p>",
+                        "smithy.api#documentation": "<p> Information about the MAC address of the server for which the assessment was run. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "netMask": {
                     "target": "com.amazonaws.migrationhubstrategy#NetMask",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Information about the subnet mask of the server for which the assessment was run.\n    </p>",
+                        "smithy.api#documentation": "<p> Information about the subnet mask of the server for which the assessment was run. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Information about the server's network for which the assessment was run.\n    </p>"
+                "smithy.api#documentation": "<p> Information about the server's network for which the assessment was run. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#NetworkInfoList": {
@@ -2283,7 +3434,7 @@
                 "targetDatabaseEngine": {
                     "target": "com.amazonaws.migrationhubstrategy#TargetDatabaseEngines",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The target database engine for database migration preference that you specify.\n    </p>",
+                        "smithy.api#documentation": "<p> The target database engine for database migration preference that you specify. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2298,13 +3449,13 @@
                 "targetDestination": {
                     "target": "com.amazonaws.migrationhubstrategy#NoPreferenceTargetDestinations",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The choice of application destination that you specify.\n    </p>",
+                        "smithy.api#documentation": "<p> The choice of application destination that you specify. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Object containing the choice of application destination that you specify.\n    </p>"
+                "smithy.api#documentation": "<p> Object containing the choice of application destination that you specify. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#NoPreferenceTargetDestination": {
@@ -2356,18 +3507,18 @@
                 "type": {
                     "target": "com.amazonaws.migrationhubstrategy#OSType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Information about the type of operating system.\n    </p>"
+                        "smithy.api#documentation": "<p> Information about the type of operating system. </p>"
                     }
                 },
                 "version": {
                     "target": "com.amazonaws.migrationhubstrategy#OSVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Information about the version of operating system.\n    </p>"
+                        "smithy.api#documentation": "<p> Information about the version of operating system. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Information about the operating system.\n    </p>"
+                "smithy.api#documentation": "<p> Information about the operating system. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#OSType": {
@@ -2410,18 +3561,65 @@
                 ]
             }
         },
+        "com.amazonaws.migrationhubstrategy#PipelineInfo": {
+            "type": "structure",
+            "members": {
+                "pipelineType": {
+                    "target": "com.amazonaws.migrationhubstrategy#PipelineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of pipeline.</p>"
+                    }
+                },
+                "pipelineConfigurationTimeStamp": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the pipeline info was configured.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information of the pipeline.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#PipelineInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#PipelineInfo"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#PipelineType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AZURE_DEVOPS",
+                        "name": "AZURE_DEVOPS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.migrationhubstrategy#PrioritizeBusinessGoals": {
             "type": "structure",
             "members": {
                 "businessGoals": {
                     "target": "com.amazonaws.migrationhubstrategy#BusinessGoals",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Rank of business goals based on priority.\n    </p>"
+                        "smithy.api#documentation": "<p> Rank of business goals based on priority. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Rank of business goals based on priority.\n    </p>"
+                "smithy.api#documentation": "<p> Rank of business goals based on priority. </p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ProjectName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": ".*\\S.*"
             }
         },
         "com.amazonaws.migrationhubstrategy#PutPortfolioPreferences": {
@@ -2478,6 +3676,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The transformation preferences for database applications. </p>"
                     }
+                },
+                "applicationMode": {
+                    "target": "com.amazonaws.migrationhubstrategy#ApplicationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The classification for application component types.</p>"
+                    }
                 }
             }
         },
@@ -2491,42 +3695,42 @@
                 "status": {
                     "target": "com.amazonaws.migrationhubstrategy#RecommendationReportStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The status of the recommendation report generation task.\n    </p>"
+                        "smithy.api#documentation": "<p> The status of the recommendation report generation task. </p>"
                     }
                 },
                 "statusMessage": {
                     "target": "com.amazonaws.migrationhubstrategy#RecommendationReportStatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The status message for recommendation report generation.\n    </p>"
+                        "smithy.api#documentation": "<p> The status message for recommendation report generation. </p>"
                     }
                 },
                 "startTime": {
                     "target": "com.amazonaws.migrationhubstrategy#RecommendationReportTimeStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The time that the recommendation report generation task starts.\n    </p>"
+                        "smithy.api#documentation": "<p> The time that the recommendation report generation task starts. </p>"
                     }
                 },
                 "completionTime": {
                     "target": "com.amazonaws.migrationhubstrategy#RecommendationReportTimeStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The time that the recommendation report generation task completes.\n    </p>"
+                        "smithy.api#documentation": "<p> The time that the recommendation report generation task completes. </p>"
                     }
                 },
                 "s3Bucket": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The S3 bucket where the report file is located.\n    </p>"
+                        "smithy.api#documentation": "<p> The S3 bucket where the report file is located. </p>"
                     }
                 },
                 "s3Keys": {
                     "target": "com.amazonaws.migrationhubstrategy#S3Keys",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon S3 key name of the report file.\n    </p>"
+                        "smithy.api#documentation": "<p> The Amazon S3 key name of the report file. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n     Contains detailed information about a recommendation report.\n    </p>"
+                "smithy.api#documentation": "<p> Contains detailed information about a recommendation report. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#RecommendationReportStatus": {
@@ -2534,16 +3738,16 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     },
                     {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
                     },
                     {
-                        "value": "SUCCESS",
-                        "name": "SUCCESS"
+                        "name": "SUCCESS",
+                        "value": "SUCCESS"
                     }
                 ]
             }
@@ -2567,24 +3771,24 @@
                 "transformationTool": {
                     "target": "com.amazonaws.migrationhubstrategy#TransformationTool",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The target destination for the recommendation set.\n    </p>"
+                        "smithy.api#documentation": "<p> The target destination for the recommendation set. </p>"
                     }
                 },
                 "targetDestination": {
                     "target": "com.amazonaws.migrationhubstrategy#TargetDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The recommended target destination.\n    </p>"
+                        "smithy.api#documentation": "<p> The recommended target destination. </p>"
                     }
                 },
                 "strategy": {
                     "target": "com.amazonaws.migrationhubstrategy#Strategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The recommended strategy.\n    </p>"
+                        "smithy.api#documentation": "<p> The recommended strategy. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Contains a recommendation set.\n    </p>"
+                "smithy.api#documentation": "<p> Contains a recommendation set. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#RecommendationTaskId": {
@@ -2595,6 +3799,20 @@
                     "max": 52
                 },
                 "smithy.api#pattern": "[0-9a-z-:]+"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#RemoteSourceCodeAnalysisServerInfo": {
+            "type": "structure",
+            "members": {
+                "remoteSourceCodeAnalysisServerConfigurationTimestamp": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the remote source code server was configured.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the server configured for source code analysis.</p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#ResourceId": {
@@ -2647,32 +3865,55 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "dataCollectionTaskToBeScheduled",
-                        "name": "DC_TO_BE_SCHEDULED"
+                        "name": "DC_TO_BE_SCHEDULED",
+                        "value": "dataCollectionTaskToBeScheduled"
                     },
                     {
-                        "value": "dataCollectionTaskScheduled",
-                        "name": "DC_REQ_SENT"
+                        "name": "DC_REQ_SENT",
+                        "value": "dataCollectionTaskScheduled"
                     },
                     {
-                        "value": "dataCollectionTaskStarted",
-                        "name": "DC_STARTED"
+                        "name": "DC_STARTED",
+                        "value": "dataCollectionTaskStarted"
                     },
                     {
-                        "value": "dataCollectionTaskStopped",
-                        "name": "DC_STOPPED"
+                        "name": "DC_STOPPED",
+                        "value": "dataCollectionTaskStopped"
                     },
                     {
-                        "value": "dataCollectionTaskSuccess",
-                        "name": "DC_SUCCESS"
+                        "name": "DC_SUCCESS",
+                        "value": "dataCollectionTaskSuccess"
                     },
                     {
-                        "value": "dataCollectionTaskFailed",
-                        "name": "DC_FAILED"
+                        "name": "DC_FAILED",
+                        "value": "dataCollectionTaskFailed"
                     },
                     {
-                        "value": "dataCollectionTaskPartialSuccess",
-                        "name": "DC_PARTIAL_SUCCESS"
+                        "name": "DC_PARTIAL_SUCCESS",
+                        "value": "dataCollectionTaskPartialSuccess"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#RuntimeAnalysisStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ANALYSIS_TO_BE_SCHEDULED",
+                        "value": "ANALYSIS_TO_BE_SCHEDULED"
+                    },
+                    {
+                        "name": "ANALYSIS_STARTED",
+                        "value": "ANALYSIS_STARTED"
+                    },
+                    {
+                        "name": "ANALYSIS_SUCCESS",
+                        "value": "ANALYSIS_SUCCESS"
+                    },
+                    {
+                        "name": "ANALYSIS_FAILED",
+                        "value": "ANALYSIS_FAILED"
                     }
                 ]
             }
@@ -2807,6 +4048,14 @@
                     {
                         "value": "SERVER_ID",
                         "name": "SERVER_ID"
+                    },
+                    {
+                        "value": "ANALYSIS_STATUS",
+                        "name": "ANALYSIS_STATUS"
+                    },
+                    {
+                        "value": "ERROR_CATEGORY",
+                        "name": "ERROR_CATEGORY"
                     }
                 ]
             }
@@ -2891,6 +4140,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The timestamp of when the server was assessed. </p>"
                     }
+                },
+                "serverError": {
+                    "target": "com.amazonaws.migrationhubstrategy#ServerError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error in server analysis.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2901,6 +4156,47 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.migrationhubstrategy#ServerDetail"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ServerError": {
+            "type": "structure",
+            "members": {
+                "serverErrorCategory": {
+                    "target": "com.amazonaws.migrationhubstrategy#ServerErrorCategory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error category of server analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The error in server analysis.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ServerErrorCategory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CONNECTIVITY_ERROR",
+                        "value": "CONNECTIVITY_ERROR"
+                    },
+                    {
+                        "name": "CREDENTIAL_ERROR",
+                        "value": "CREDENTIAL_ERROR"
+                    },
+                    {
+                        "name": "PERMISSION_ERROR",
+                        "value": "PERMISSION_ERROR"
+                    },
+                    {
+                        "name": "ARCHITECTURE_ERROR",
+                        "value": "ARCHITECTURE_ERROR"
+                    },
+                    {
+                        "name": "OTHER_ERROR",
+                        "value": "OTHER_ERROR"
+                    }
+                ]
             }
         },
         "com.amazonaws.migrationhubstrategy#ServerId": {
@@ -2938,6 +4234,26 @@
                         "name": "other"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#ServerStatusSummary": {
+            "type": "structure",
+            "members": {
+                "runTimeAssessmentStatus": {
+                    "target": "com.amazonaws.migrationhubstrategy#RunTimeAssessmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the run time.</p>"
+                    }
+                },
+                "count": {
+                    "target": "com.amazonaws.migrationhubstrategy#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of servers successfully analyzed, partially successful or failed\n      analysis.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status summary of the server analysis.</p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#ServerStrategies": {
@@ -2984,18 +4300,18 @@
                 "ServerOsType": {
                     "target": "com.amazonaws.migrationhubstrategy#ServerOsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Type of operating system for the servers.\n    </p>"
+                        "smithy.api#documentation": "<p> Type of operating system for the servers. </p>"
                     }
                 },
                 "count": {
                     "target": "com.amazonaws.migrationhubstrategy#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Number of servers.\n    </p>"
+                        "smithy.api#documentation": "<p> Number of servers. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Object containing details about the servers imported by Application Discovery Service\n    </p>"
+                "smithy.api#documentation": "<p> Object containing details about the servers imported by Application Discovery Service </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#ServiceLinkedRoleLockClientException": {
@@ -3006,7 +4322,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Exception to indicate that the service-linked role (SLR) is locked.\n    </p>",
+                "smithy.api#documentation": "<p> Exception to indicate that the service-linked role (SLR) is locked. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3067,24 +4383,30 @@
                 "versionControl": {
                     "target": "com.amazonaws.migrationhubstrategy#VersionControl",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The type of repository to use for the source code.\n    </p>"
+                        "smithy.api#documentation": "<p> The type of repository to use for the source code. </p>"
                     }
                 },
                 "sourceVersion": {
                     "target": "com.amazonaws.migrationhubstrategy#SourceVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The branch of the source code.\n    </p>"
+                        "smithy.api#documentation": "<p> The branch of the source code. </p>"
                     }
                 },
                 "location": {
                     "target": "com.amazonaws.migrationhubstrategy#Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The repository name for the source code.\n    </p>"
+                        "smithy.api#documentation": "<p> The repository name for the source code. </p>"
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.migrationhubstrategy#ProjectName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Object containing source code information that is linked to an application component.\n    </p>"
+                "smithy.api#documentation": "<p> Object containing source code information that is linked to an application component.\n    </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#SourceCodeList": {
@@ -3105,24 +4427,30 @@
                 "repository": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The repository name for the source code.\n    </p>"
+                        "smithy.api#documentation": "<p> The repository name for the source code. </p>"
                     }
                 },
                 "branch": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The branch of the source code.\n    </p>"
+                        "smithy.api#documentation": "<p> The branch of the source code. </p>"
                     }
                 },
                 "versionControlType": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The type of repository to use for the source code.\n    </p>"
+                        "smithy.api#documentation": "<p> The type of repository to use for the source code. </p>"
+                    }
+                },
+                "projectName": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the project.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Object containing source code information that is linked to an application component.\n    </p>"
+                "smithy.api#documentation": "<p> Object containing source code information that is linked to an application component.\n    </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#SourceVersion": {
@@ -3140,20 +4468,32 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ANALYSIS_TO_BE_SCHEDULED",
-                        "name": "ANALYSIS_TO_BE_SCHEDULED"
+                        "name": "ANALYSIS_TO_BE_SCHEDULED",
+                        "value": "ANALYSIS_TO_BE_SCHEDULED"
                     },
                     {
-                        "value": "ANALYSIS_STARTED",
-                        "name": "ANALYSIS_STARTED"
+                        "name": "ANALYSIS_STARTED",
+                        "value": "ANALYSIS_STARTED"
                     },
                     {
-                        "value": "ANALYSIS_SUCCESS",
-                        "name": "ANALYSIS_SUCCESS"
+                        "name": "ANALYSIS_SUCCESS",
+                        "value": "ANALYSIS_SUCCESS"
                     },
                     {
-                        "value": "ANALYSIS_FAILED",
-                        "name": "ANALYSIS_FAILED"
+                        "name": "ANALYSIS_FAILED",
+                        "value": "ANALYSIS_FAILED"
+                    },
+                    {
+                        "name": "ANALYSIS_PARTIAL_SUCCESS",
+                        "value": "ANALYSIS_PARTIAL_SUCCESS"
+                    },
+                    {
+                        "name": "UNCONFIGURED",
+                        "value": "UNCONFIGURED"
+                    },
+                    {
+                        "name": "CONFIGURED",
+                        "value": "CONFIGURED"
                     }
                 ]
             }
@@ -3195,7 +4535,7 @@
                 "s3bucketForAnalysisData": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The S3 bucket used by the collectors to send analysis data to the service.\n      The bucket name must begin with <code>migrationhub-strategy-</code>.\n    </p>",
+                        "smithy.api#documentation": "<p> The S3 bucket used by the collectors to send analysis data to the service. The bucket\n      name must begin with <code>migrationhub-strategy-</code>. </p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 63
@@ -3206,12 +4546,18 @@
                 "s3bucketForReportData": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The S3 bucket where all the reports generated by the service are stored.\n      The bucket name must begin with <code>migrationhub-strategy-</code>.\n    </p>",
+                        "smithy.api#documentation": "<p> The S3 bucket where all the reports generated by the service are stored. The bucket name\n      must begin with <code>migrationhub-strategy-</code>. </p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 63
                         },
                         "smithy.api#pattern": "[0-9a-z]+[0-9a-z\\.\\-]*[0-9a-z]+"
+                    }
+                },
+                "assessmentTargets": {
+                    "target": "com.amazonaws.migrationhubstrategy#AssessmentTargets",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of criteria for assessment.</p>"
                     }
                 }
             }
@@ -3222,7 +4568,7 @@
                 "assessmentId": {
                     "target": "com.amazonaws.migrationhubstrategy#AsyncTaskId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID of the assessment.\n    </p>"
+                        "smithy.api#documentation": "<p> The ID of the assessment. </p>"
                     }
                 }
             }
@@ -3366,7 +4712,7 @@
                 "outputFormat": {
                     "target": "com.amazonaws.migrationhubstrategy#OutputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p> The output format for the recommendation report file. The default format is Microsoft Excel. </p>"
+                        "smithy.api#documentation": "<p> The output format for the recommendation report file. The default format is Microsoft\n      Excel. </p>"
                     }
                 },
                 "groupIdFilter": {
@@ -3486,30 +4832,30 @@
                 "strategy": {
                     "target": "com.amazonaws.migrationhubstrategy#Strategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Type of transformation. For example, Rehost, Replatform, and so on.\n    </p>"
+                        "smithy.api#documentation": "<p> Type of transformation. For example, Rehost, Replatform, and so on. </p>"
                     }
                 },
                 "toolName": {
                     "target": "com.amazonaws.migrationhubstrategy#TransformationToolName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The name of the tool that can be used to transform an application component using this strategy.\n    </p>"
+                        "smithy.api#documentation": "<p> The name of the tool that can be used to transform an application component using this\n      strategy. </p>"
                     }
                 },
                 "targetDestination": {
                     "target": "com.amazonaws.migrationhubstrategy#TargetDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Destination information about where the application component can migrate to. For example, <code>EC2</code>, <code>ECS</code>, and so on.\n    </p>"
+                        "smithy.api#documentation": "<p> Destination information about where the application component can migrate to. For\n      example, <code>EC2</code>, <code>ECS</code>, and so on. </p>"
                     }
                 },
                 "isPreferred": {
                     "target": "com.amazonaws.migrationhubstrategy#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Indicates if a specific strategy is preferred for the application component.\n    </p>"
+                        "smithy.api#documentation": "<p> Indicates if a specific strategy is preferred for the application component. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Information about all the available strategy options for migrating and modernizing an application component.\n    </p>"
+                "smithy.api#documentation": "<p> Information about all the available strategy options for migrating and modernizing an\n      application component. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#StrategyRecommendation": {
@@ -3517,16 +4863,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "recommended",
-                        "name": "RECOMMENDED"
+                        "name": "RECOMMENDED",
+                        "value": "recommended"
                     },
                     {
-                        "value": "viableOption",
-                        "name": "VIABLE_OPTION"
+                        "name": "VIABLE_OPTION",
+                        "value": "viableOption"
                     },
                     {
-                        "value": "notRecommended",
-                        "name": "NOT_RECOMMENDED"
+                        "name": "NOT_RECOMMENDED",
+                        "value": "notRecommended"
+                    },
+                    {
+                        "name": "POTENTIAL",
+                        "value": "potential"
                     }
                 ]
             }
@@ -3537,18 +4887,18 @@
                 "strategy": {
                     "target": "com.amazonaws.migrationhubstrategy#Strategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The name of recommended strategy.\n    </p>"
+                        "smithy.api#documentation": "<p> The name of recommended strategy. </p>"
                     }
                 },
                 "count": {
                     "target": "com.amazonaws.migrationhubstrategy#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The count of recommendations per strategy.\n    </p>"
+                        "smithy.api#documentation": "<p> The count of recommendations per strategy. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Object containing the summary of the strategy recommendations.\n    </p>"
+                "smithy.api#documentation": "<p> Object containing the summary of the strategy recommendations. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#String": {
@@ -3567,30 +4917,30 @@
                 "osInfo": {
                     "target": "com.amazonaws.migrationhubstrategy#OSInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Operating system corresponding to a server.\n    </p>"
+                        "smithy.api#documentation": "<p> Operating system corresponding to a server. </p>"
                     }
                 },
                 "fileSystemType": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      File system type for the server.\n    </p>"
+                        "smithy.api#documentation": "<p> File system type for the server. </p>"
                     }
                 },
                 "networkInfoList": {
                     "target": "com.amazonaws.migrationhubstrategy#NetworkInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Networking information related to a server.\n    </p>"
+                        "smithy.api#documentation": "<p> Networking information related to a server. </p>"
                     }
                 },
                 "cpuArchitecture": {
                     "target": "com.amazonaws.migrationhubstrategy#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      CPU architecture type for the server.\n    </p>"
+                        "smithy.api#documentation": "<p> CPU architecture type for the server. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Information about the server that hosts application components.\n    </p>"
+                "smithy.api#documentation": "<p> Information about the server that hosts application components. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#TargetDatabaseEngine": {
@@ -3707,6 +5057,10 @@
                     {
                         "value": "Amazon Relational Database Service",
                         "name": "AMAZON_RDS"
+                    },
+                    {
+                        "value": "Babelfish for Aurora PostgreSQL",
+                        "name": "BABELFISH_AURORA_POSTGRESQL"
                     }
                 ]
             }
@@ -3753,24 +5107,24 @@
                 "name": {
                     "target": "com.amazonaws.migrationhubstrategy#TransformationToolName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Name of the tool. \n    </p>"
+                        "smithy.api#documentation": "<p> Name of the tool. </p>"
                     }
                 },
                 "description": {
                     "target": "com.amazonaws.migrationhubstrategy#TranformationToolDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Description of the tool.\n    </p>"
+                        "smithy.api#documentation": "<p> Description of the tool. </p>"
                     }
                 },
                 "tranformationToolInstallationLink": {
                     "target": "com.amazonaws.migrationhubstrategy#TranformationToolInstallationLink",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      URL for installing the tool.\n    </p>"
+                        "smithy.api#documentation": "<p> URL for installing the tool. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Information of the transformation tool that can be used to migrate and modernize the application.\n    </p>"
+                "smithy.api#documentation": "<p> Information of the transformation tool that can be used to migrate and modernize the\n      application. </p>"
             }
         },
         "com.amazonaws.migrationhubstrategy#TransformationToolName": {
@@ -3845,9 +5199,9 @@
             "traits": {
                 "smithy.api#documentation": "<p> Updates the configuration of an application component. </p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/update-applicationcomponent-config/",
-                    "code": 200
+                    "uri": "/update-applicationcomponent-config/"
                 }
             }
         },
@@ -3884,6 +5238,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Database credentials. </p>"
                     }
+                },
+                "configureOnly": {
+                    "target": "com.amazonaws.migrationhubstrategy#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Update the configuration request of an application component. If it is set to true, the\n      source code and/or database credentials are updated. If it is set to false, the source code\n      and/or database credentials are updated and an analysis is initiated.</p>"
+                    }
+                },
+                "appType": {
+                    "target": "com.amazonaws.migrationhubstrategy#AppType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of known component.</p>"
+                    }
                 }
             }
         },
@@ -3916,9 +5282,9 @@
             "traits": {
                 "smithy.api#documentation": "<p> Updates the configuration of the specified server. </p>",
                 "smithy.api#http": {
+                    "code": 200,
                     "method": "POST",
-                    "uri": "/update-server-config/",
-                    "code": 200
+                    "uri": "/update-server-config/"
                 }
             }
         },
@@ -3957,6 +5323,32 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.migrationhubstrategy#VcenterBasedRemoteInfo": {
+            "type": "structure",
+            "members": {
+                "vcenterConfigurationTimeStamp": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the remote server based on vCenter was last configured.</p>"
+                    }
+                },
+                "osType": {
+                    "target": "com.amazonaws.migrationhubstrategy#OSType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the operating system.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the server in vCenter.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#VcenterBasedRemoteInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#VcenterBasedRemoteInfo"
+            }
+        },
         "com.amazonaws.migrationhubstrategy#VersionControl": {
             "type": "string",
             "traits": {
@@ -3968,6 +5360,55 @@
                     {
                         "value": "GITHUB_ENTERPRISE",
                         "name": "GITHUB_ENTERPRISE"
+                    },
+                    {
+                        "value": "AZURE_DEVOPS_GIT",
+                        "name": "AZURE_DEVOPS_GIT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#VersionControlInfo": {
+            "type": "structure",
+            "members": {
+                "versionControlType": {
+                    "target": "com.amazonaws.migrationhubstrategy#VersionControlType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of version control.</p>"
+                    }
+                },
+                "versionControlConfigurationTimeStamp": {
+                    "target": "com.amazonaws.migrationhubstrategy#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the version control system was last configured.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the version control configuration.</p>"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#VersionControlInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhubstrategy#VersionControlInfo"
+            }
+        },
+        "com.amazonaws.migrationhubstrategy#VersionControlType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GITHUB",
+                        "name": "GITHUB"
+                    },
+                    {
+                        "value": "GITHUB_ENTERPRISE",
+                        "name": "GITHUB_ENTERPRISE"
+                    },
+                    {
+                        "value": "AZURE_DEVOPS_GIT",
+                        "name": "AZURE_DEVOPS_GIT"
                     }
                 ]
             }

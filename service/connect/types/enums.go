@@ -2,6 +2,28 @@
 
 package types
 
+type ActionType string
+
+// Enum values for ActionType
+const (
+	ActionTypeCreateTask               ActionType = "CREATE_TASK"
+	ActionTypeAssignContactCategory    ActionType = "ASSIGN_CONTACT_CATEGORY"
+	ActionTypeGenerateEventbridgeEvent ActionType = "GENERATE_EVENTBRIDGE_EVENT"
+	ActionTypeSendNotification         ActionType = "SEND_NOTIFICATION"
+)
+
+// Values returns all known values for ActionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionType) Values() []ActionType {
+	return []ActionType{
+		"CREATE_TASK",
+		"ASSIGN_CONTACT_CATEGORY",
+		"GENERATE_EVENTBRIDGE_EVENT",
+		"SEND_NOTIFICATION",
+	}
+}
+
 type AgentStatusState string
 
 // Enum values for AgentStatusState
@@ -172,6 +194,8 @@ const (
 	ContactInitiationMethodQueueTransfer ContactInitiationMethod = "QUEUE_TRANSFER"
 	ContactInitiationMethodCallback      ContactInitiationMethod = "CALLBACK"
 	ContactInitiationMethodApi           ContactInitiationMethod = "API"
+	ContactInitiationMethodDisconnect    ContactInitiationMethod = "DISCONNECT"
+	ContactInitiationMethodMonitor       ContactInitiationMethod = "MONITOR"
 )
 
 // Values returns all known values for ContactInitiationMethod. Note that this can
@@ -185,6 +209,8 @@ func (ContactInitiationMethod) Values() []ContactInitiationMethod {
 		"QUEUE_TRANSFER",
 		"CALLBACK",
 		"API",
+		"DISCONNECT",
+		"MONITOR",
 	}
 }
 
@@ -296,12 +322,39 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type EventSourceName string
+
+// Enum values for EventSourceName
+const (
+	EventSourceNameOnPostCallAnalysisAvailable     EventSourceName = "OnPostCallAnalysisAvailable"
+	EventSourceNameOnRealTimeCallAnalysisAvailable EventSourceName = "OnRealTimeCallAnalysisAvailable"
+	EventSourceNameOnPostChatAnalysisAvailable     EventSourceName = "OnPostChatAnalysisAvailable"
+	EventSourceNameOnZendeskTicketCreate           EventSourceName = "OnZendeskTicketCreate"
+	EventSourceNameOnZendeskTicketStatusUpdate     EventSourceName = "OnZendeskTicketStatusUpdate"
+	EventSourceNameOnSalesforceCaseCreate          EventSourceName = "OnSalesforceCaseCreate"
+)
+
+// Values returns all known values for EventSourceName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EventSourceName) Values() []EventSourceName {
+	return []EventSourceName{
+		"OnPostCallAnalysisAvailable",
+		"OnRealTimeCallAnalysisAvailable",
+		"OnPostChatAnalysisAvailable",
+		"OnZendeskTicketCreate",
+		"OnZendeskTicketStatusUpdate",
+		"OnSalesforceCaseCreate",
+	}
+}
+
 type Grouping string
 
 // Enum values for Grouping
 const (
-	GroupingQueue   Grouping = "QUEUE"
-	GroupingChannel Grouping = "CHANNEL"
+	GroupingQueue          Grouping = "QUEUE"
+	GroupingChannel        Grouping = "CHANNEL"
+	GroupingRoutingProfile Grouping = "ROUTING_PROFILE"
 )
 
 // Values returns all known values for Grouping. Note that this can be expanded in
@@ -311,6 +364,7 @@ func (Grouping) Values() []Grouping {
 	return []Grouping{
 		"QUEUE",
 		"CHANNEL",
+		"ROUTING_PROFILE",
 	}
 }
 
@@ -565,6 +619,72 @@ func (MonitorCapability) Values() []MonitorCapability {
 	return []MonitorCapability{
 		"SILENT_MONITOR",
 		"BARGE",
+	}
+}
+
+type NotificationContentType string
+
+// Enum values for NotificationContentType
+const (
+	NotificationContentTypePlainText NotificationContentType = "PLAIN_TEXT"
+)
+
+// Values returns all known values for NotificationContentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationContentType) Values() []NotificationContentType {
+	return []NotificationContentType{
+		"PLAIN_TEXT",
+	}
+}
+
+type NotificationDeliveryType string
+
+// Enum values for NotificationDeliveryType
+const (
+	NotificationDeliveryTypeEmail NotificationDeliveryType = "EMAIL"
+)
+
+// Values returns all known values for NotificationDeliveryType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NotificationDeliveryType) Values() []NotificationDeliveryType {
+	return []NotificationDeliveryType{
+		"EMAIL",
+	}
+}
+
+type ParticipantTimerAction string
+
+// Enum values for ParticipantTimerAction
+const (
+	ParticipantTimerActionUnset ParticipantTimerAction = "Unset"
+)
+
+// Values returns all known values for ParticipantTimerAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantTimerAction) Values() []ParticipantTimerAction {
+	return []ParticipantTimerAction{
+		"Unset",
+	}
+}
+
+type ParticipantTimerType string
+
+// Enum values for ParticipantTimerType
+const (
+	ParticipantTimerTypeIdle                  ParticipantTimerType = "IDLE"
+	ParticipantTimerTypeDisconnectNoncustomer ParticipantTimerType = "DISCONNECT_NONCUSTOMER"
+)
+
+// Values returns all known values for ParticipantTimerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantTimerType) Values() []ParticipantTimerType {
+	return []ParticipantTimerType{
+		"IDLE",
+		"DISCONNECT_NONCUSTOMER",
 	}
 }
 
@@ -1267,6 +1387,24 @@ func (ResourceType) Values() []ResourceType {
 	}
 }
 
+type RulePublishStatus string
+
+// Enum values for RulePublishStatus
+const (
+	RulePublishStatusDraft     RulePublishStatus = "DRAFT"
+	RulePublishStatusPublished RulePublishStatus = "PUBLISHED"
+)
+
+// Values returns all known values for RulePublishStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RulePublishStatus) Values() []RulePublishStatus {
+	return []RulePublishStatus{
+		"DRAFT",
+		"PUBLISHED",
+	}
+}
+
 type SearchableQueueType string
 
 // Enum values for SearchableQueueType
@@ -1280,6 +1418,24 @@ const (
 func (SearchableQueueType) Values() []SearchableQueueType {
 	return []SearchableQueueType{
 		"STANDARD",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 
@@ -1419,6 +1575,25 @@ func (TaskTemplateStatus) Values() []TaskTemplateStatus {
 	}
 }
 
+type TimerEligibleParticipantRoles string
+
+// Enum values for TimerEligibleParticipantRoles
+const (
+	TimerEligibleParticipantRolesCustomer TimerEligibleParticipantRoles = "CUSTOMER"
+	TimerEligibleParticipantRolesAgent    TimerEligibleParticipantRoles = "AGENT"
+)
+
+// Values returns all known values for TimerEligibleParticipantRoles. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TimerEligibleParticipantRoles) Values() []TimerEligibleParticipantRoles {
+	return []TimerEligibleParticipantRoles{
+		"CUSTOMER",
+		"AGENT",
+	}
+}
+
 type TrafficDistributionGroupStatus string
 
 // Enum values for TrafficDistributionGroupStatus
@@ -1527,6 +1702,8 @@ const (
 	VocabularyLanguageCodePtBr VocabularyLanguageCode = "pt-BR"
 	VocabularyLanguageCodePtPt VocabularyLanguageCode = "pt-PT"
 	VocabularyLanguageCodeZhCn VocabularyLanguageCode = "zh-CN"
+	VocabularyLanguageCodeEnNz VocabularyLanguageCode = "en-NZ"
+	VocabularyLanguageCodeEnZa VocabularyLanguageCode = "en-ZA"
 )
 
 // Values returns all known values for VocabularyLanguageCode. Note that this can
@@ -1555,6 +1732,8 @@ func (VocabularyLanguageCode) Values() []VocabularyLanguageCode {
 		"pt-BR",
 		"pt-PT",
 		"zh-CN",
+		"en-NZ",
+		"en-ZA",
 	}
 }
 

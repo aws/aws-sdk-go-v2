@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables enhanced monitoring.
+// Disables enhanced monitoring. When invoking this API, it is recommended you use
+// the StreamARN input parameter rather than the StreamName input parameter.
 func (c *Client) DisableEnhancedMonitoring(ctx context.Context, params *DisableEnhancedMonitoringInput, optFns ...func(*Options)) (*DisableEnhancedMonitoringOutput, error) {
 	if params == nil {
 		params = &DisableEnhancedMonitoringInput{}
@@ -60,9 +61,10 @@ type DisableEnhancedMonitoringInput struct {
 	// This member is required.
 	ShardLevelMetrics []types.MetricsName
 
+	// The ARN of the stream.
+	StreamARN *string
+
 	// The name of the Kinesis data stream for which to disable enhanced monitoring.
-	//
-	// This member is required.
 	StreamName *string
 
 	noSmithyDocumentSerde
@@ -79,6 +81,9 @@ type DisableEnhancedMonitoringOutput struct {
 	// Represents the list of all the metrics that would be in the enhanced state after
 	// the operation.
 	DesiredShardLevelMetrics []types.MetricsName
+
+	// The ARN of the stream.
+	StreamARN *string
 
 	// The name of the Kinesis data stream.
 	StreamName *string

@@ -48,6 +48,9 @@ type CreateRuleInput struct {
 	// The retention rule description.
 	Description *string
 
+	// Information about the retention rule lock configuration.
+	LockConfiguration *types.LockConfiguration
+
 	// Specifies the resource tags to use to identify resources that are to be retained
 	// by a tag-level retention rule. For tag-level retention rules, only deleted
 	// resources, of the specified resource type, that have one or more of the
@@ -74,6 +77,27 @@ type CreateRuleOutput struct {
 
 	// The unique ID of the retention rule.
 	Identifier *string
+
+	// Information about the retention rule lock configuration.
+	LockConfiguration *types.LockConfiguration
+
+	// The lock state for the retention rule.
+	//
+	// * locked - The retention rule is locked
+	// and can't be modified or deleted.
+	//
+	// * pending_unlock - The retention rule has
+	// been unlocked but it is still within the unlock delay period. The retention rule
+	// can be modified or deleted only after the unlock delay period has expired.
+	//
+	// *
+	// unlocked - The retention rule is unlocked and it can be modified or deleted by
+	// any user with the required permissions.
+	//
+	// * null - The retention rule has never
+	// been locked. Once a retention rule has been locked, it can transition between
+	// the locked and unlocked states only; it can never transition back to null.
+	LockState types.LockState
 
 	// Information about the resource tags used to identify resources that are retained
 	// by the retention rule.

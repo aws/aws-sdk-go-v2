@@ -21,18 +21,20 @@ import (
 // of the key material. It includes fields, like KeySpec, that help you distinguish
 // different types of KMS keys. It also displays the key usage (encryption,
 // signing, or generating and verifying MACs) and the algorithms that the KMS key
-// supports. For KMS keys in custom key stores, it includes information about the
-// custom key store, such as the key store ID and the CloudHSM cluster ID. For
-// multi-Region keys, it displays the primary key and all related replica keys.
-// DescribeKey does not return the following information:
+// supports. For multi-Region keys, DescribeKey displays the primary key and all
+// related replica keys. For KMS keys in CloudHSM key stores, it includes
+// information about the key store, such as the key store ID and the CloudHSM
+// cluster ID. For KMS keys in external key stores, it includes the custom key
+// store ID and the ID of the external key. DescribeKey does not return the
+// following information:
 //
-// * Aliases associated
-// with the KMS key. To get this information, use ListAliases.
+// * Aliases associated with the KMS key. To get this
+// information, use ListAliases.
 //
-// * Whether automatic
-// key rotation is enabled on the KMS key. To get this information, use
-// GetKeyRotationStatus. Also, some key states prevent a KMS key from being
-// automatically rotated. For details, see How Automatic Key Rotation Works
+// * Whether automatic key rotation is enabled on
+// the KMS key. To get this information, use GetKeyRotationStatus. Also, some key
+// states prevent a KMS key from being automatically rotated. For details, see How
+// Automatic Key Rotation Works
 // (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html#rotate-keys-how-it-works)
 // in the Key Management Service Developer Guide.
 //

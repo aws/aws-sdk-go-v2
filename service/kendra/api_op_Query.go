@@ -45,7 +45,7 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 
 type QueryInput struct {
 
-	// The unique identifier of the index to search. The identifier is returned in the
+	// The identifier of the index to search. The identifier is returned in the
 	// response from the CreateIndex API.
 	//
 	// This member is required.
@@ -87,7 +87,9 @@ type QueryInput struct {
 	// Sets the type of query. Only results for the specified query type are returned.
 	QueryResultTypeFilter types.QueryResultType
 
-	// The text to search for.
+	// The input query text for the search. Amazon Kendra truncates queries at 30 token
+	// words, which excludes punctuation and stop words. Truncation still applies if
+	// you use Boolean or more advanced, complex queries.
 	QueryText *string
 
 	// An array of document attributes to include in the response. You can limit the
@@ -123,8 +125,8 @@ type QueryOutput struct {
 	// key that was specified in the Facets input parameter.
 	FacetResults []types.FacetResult
 
-	// The unique identifier for the search. You use QueryId to identify the search
-	// when using the feedback API.
+	// The identifier for the search. You use QueryId to identify the search when using
+	// the feedback API.
 	QueryId *string
 
 	// The results of the search.

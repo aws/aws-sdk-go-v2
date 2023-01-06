@@ -1,3 +1,24 @@
+# v1.27.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.26.0 (2022-12-15)
+
+* **Feature**: Add support for Windows managed nodes groups.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.0 (2022-12-07)
+
+* **Feature**: Adds support for EKS add-ons configurationValues fields and DescribeAddonConfiguration function
+
+# v1.24.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.24.0 (2022-11-29)
+
+* **Feature**: Adds support for additional EKS add-ons metadata and filtering fields
+
 # v1.23.0 (2022-11-16)
 
 * **Feature**: Adds support for customer-provided placement groups for Kubernetes control plane instances when creating local EKS clusters on Outposts

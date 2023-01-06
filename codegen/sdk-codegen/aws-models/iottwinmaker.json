@@ -18,6 +18,9 @@
                     "target": "com.amazonaws.iottwinmaker#CreateScene"
                 },
                 {
+                    "target": "com.amazonaws.iottwinmaker#CreateSyncJob"
+                },
+                {
                     "target": "com.amazonaws.iottwinmaker#CreateWorkspace"
                 },
                 {
@@ -28,6 +31,9 @@
                 },
                 {
                     "target": "com.amazonaws.iottwinmaker#DeleteScene"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#DeleteSyncJob"
                 },
                 {
                     "target": "com.amazonaws.iottwinmaker#DeleteWorkspace"
@@ -54,6 +60,9 @@
                     "target": "com.amazonaws.iottwinmaker#GetScene"
                 },
                 {
+                    "target": "com.amazonaws.iottwinmaker#GetSyncJob"
+                },
+                {
                     "target": "com.amazonaws.iottwinmaker#GetWorkspace"
                 },
                 {
@@ -64,6 +73,12 @@
                 },
                 {
                     "target": "com.amazonaws.iottwinmaker#ListScenes"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ListSyncJobs"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ListSyncResources"
                 },
                 {
                     "target": "com.amazonaws.iottwinmaker#ListTagsForResource"
@@ -109,7 +124,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -158,15 +173,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -430,8 +436,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -443,8 +449,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -456,8 +462,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -469,8 +475,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -482,8 +488,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -495,8 +501,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -508,8 +514,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -521,8 +527,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -534,8 +540,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -547,8 +553,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -560,8 +566,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -573,8 +579,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -586,8 +592,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -599,8 +605,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -612,8 +618,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -625,8 +631,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -638,8 +644,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -651,8 +657,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -664,8 +670,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -677,8 +683,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -690,8 +696,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -703,8 +709,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -716,8 +722,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -729,8 +735,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -742,8 +748,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -754,8 +760,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -766,8 +772,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1133,6 +1139,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The property groups.</p>"
                     }
+                },
+                "syncSource": {
+                    "target": "com.amazonaws.iottwinmaker#SyncSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The syncSource of the sync job, if this entity was created by a sync job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1147,6 +1159,16 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^[a-zA-Z_\\.\\-0-9:]+$"
+            }
+        },
+        "com.amazonaws.iottwinmaker#ComponentTypeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[^\\u0000-\\u001F\\u007F]*"
             }
         },
         "com.amazonaws.iottwinmaker#ComponentTypeSummaries": {
@@ -1196,6 +1218,12 @@
                     "target": "com.amazonaws.iottwinmaker#Status",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the component type.</p>"
+                    }
+                },
+                "componentTypeName": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component type name.</p>"
                     }
                 }
             },
@@ -1434,6 +1462,12 @@
                     "target": "com.amazonaws.iottwinmaker#PropertyGroupsRequest",
                     "traits": {
                         "smithy.api#documentation": "<p/>"
+                    }
+                },
+                "componentTypeName": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A friendly name for the component type.</p>"
                     }
                 }
             }
@@ -1686,6 +1720,106 @@
                     "target": "com.amazonaws.iottwinmaker#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the scene was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#CreateSyncJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#CreateSyncJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#CreateSyncJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This action creates a SyncJob.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workspaces/{workspaceId}/sync-jobs/{syncSource}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#CreateSyncJobRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workspace Id.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "syncSource": {
+                    "target": "com.amazonaws.iottwinmaker#SyncSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync source.</p>\n         <note>\n            <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p>\n         </note>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "syncRole": {
+                    "target": "com.amazonaws.iottwinmaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SyncJob IAM role. This IAM role is used by the sync job to read from the syncSource, and create, \n         update or delete the corresponding resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iottwinmaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SyncJob tags.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#CreateSyncJobResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.iottwinmaker#TwinMakerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SyncJob ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time for the SyncJob creation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.iottwinmaker#SyncJobState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SyncJob response state.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2146,6 +2280,79 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.iottwinmaker#DeleteSyncJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#DeleteSyncJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#DeleteSyncJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete the SyncJob.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/workspaces/{workspaceId}/sync-jobs/{syncSource}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#DeleteSyncJobRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workspace Id.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "syncSource": {
+                    "target": "com.amazonaws.iottwinmaker#SyncSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync source.</p>\n         <note>\n            <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p>\n         </note>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#DeleteSyncJobResponse": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.iottwinmaker#SyncJobState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SyncJob response state.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.iottwinmaker#DeleteWorkspace": {
             "type": "operation",
             "input": {
@@ -2205,7 +2412,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 512
+                    "max": 2048
                 },
                 "smithy.api#pattern": ".*"
             }
@@ -2230,7 +2437,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z_0-9-.][a-zA-Z_0-9-. ]*[a-zA-Z0-9]+$"
+                "smithy.api#pattern": "^[^\\u0000-\\u001F\\u007F]+$"
             }
         },
         "com.amazonaws.iottwinmaker#EntityPropertyReference": {
@@ -2363,6 +2570,18 @@
                     {
                         "name": "INTERNAL_FAILURE",
                         "value": "INTERNAL_FAILURE"
+                    },
+                    {
+                        "name": "SYNC_INITIALIZING_ERROR",
+                        "value": "SYNC_INITIALIZING_ERROR"
+                    },
+                    {
+                        "name": "SYNC_CREATING_ERROR",
+                        "value": "SYNC_CREATING_ERROR"
+                    },
+                    {
+                        "name": "SYNC_PROCESSING_ERROR",
+                        "value": "SYNC_PROCESSING_ERROR"
                     }
                 ]
             }
@@ -2772,6 +2991,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 25.</p>\n         <p>Valid Range: Minimum value of 1. Maximum value of 250.</p>"
                     }
+                },
+                "syncSource": {
+                    "target": "com.amazonaws.iottwinmaker#SyncSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The syncSource of the sync job, if this entity was created by a sync job.</p>"
+                    }
+                },
+                "componentTypeName": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component type name.</p>"
+                    }
                 }
             }
         },
@@ -2909,6 +3140,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the entity was last updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "syncSource": {
+                    "target": "com.amazonaws.iottwinmaker#SyncSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The syncSource of the sync job, if this entity was created by a sync job.</p>"
                     }
                 }
             }
@@ -3380,6 +3617,121 @@
                     "target": "com.amazonaws.iottwinmaker#SceneCapabilities",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of capabilities that the scene uses to render.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#GetSyncJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#GetSyncJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#GetSyncJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the SyncJob.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/sync-jobs/{syncSource}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.iottwinmaker#GetSyncJobRequest": {
+            "type": "structure",
+            "members": {
+                "syncSource": {
+                    "target": "com.amazonaws.iottwinmaker#SyncSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync soucre.</p>\n         <note>\n            <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p>\n         </note>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workspace Id.</p>",
+                        "smithy.api#httpQuery": "workspace"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#GetSyncJobResponse": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.iottwinmaker#TwinMakerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync job ARN.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace that contains the sync job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "syncSource": {
+                    "target": "com.amazonaws.iottwinmaker#SyncSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync soucre.</p>\n         <note>\n            <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "syncRole": {
+                    "target": "com.amazonaws.iottwinmaker#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync IAM role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iottwinmaker#SyncJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SyncJob response status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updateDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The update date and time.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -3926,6 +4278,188 @@
                 }
             }
         },
+        "com.amazonaws.iottwinmaker#ListSyncJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#ListSyncJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#ListSyncJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all SyncJobs.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workspaces/{workspaceId}/sync-jobs-list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListSyncJobsRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace that contains the sync job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iottwinmaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 50.</p> \n         <p>Valid Range: Minimum value of 0. Maximum value of 200.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iottwinmaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListSyncJobsResponse": {
+            "type": "structure",
+            "members": {
+                "syncJobSummaries": {
+                    "target": "com.amazonaws.iottwinmaker#SyncJobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The listed SyncJob summaries.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iottwinmaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListSyncResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iottwinmaker#ListSyncResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iottwinmaker#ListSyncResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iottwinmaker#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iottwinmaker#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the sync resources.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "api."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/workspaces/{workspaceId}/sync-jobs/{syncSource}/resources-list",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListSyncResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "workspaceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace that contains the sync job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "syncSource": {
+                    "target": "com.amazonaws.iottwinmaker#SyncSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync soucre.</p>\n         <note>\n            <p>Currently the only supported syncSoucre is <code>SITEWISE </code>.</p>\n         </note>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.iottwinmaker#SyncResourceFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects that filter the request.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iottwinmaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return at one time. The default is 50.</p> \n         <p>Valid Range: Minimum value of 0. Maximum value of 200.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iottwinmaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iottwinmaker#ListSyncResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "syncResources": {
+                    "target": "com.amazonaws.iottwinmaker#SyncResourceSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync resources.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iottwinmaker#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string that specifies the next page of results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iottwinmaker#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -4355,6 +4889,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A mapping that specifies configuration information about the property. Use this field to\n         specify information that you read from and write to an external source.</p>"
                     }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.iottwinmaker#PropertyDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A friendly name for the property.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4431,6 +4971,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A mapping that specifies configuration information about the property.</p>"
                     }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.iottwinmaker#PropertyDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A friendly name for the property.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4453,6 +4999,16 @@
             },
             "value": {
                 "target": "com.amazonaws.iottwinmaker#PropertyDefinitionResponse"
+            }
+        },
+        "com.amazonaws.iottwinmaker#PropertyDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[^\\u0000-\\u001F\\u007F]*"
             }
         },
         "com.amazonaws.iottwinmaker#PropertyFilter": {
@@ -5128,6 +5684,253 @@
                 "smithy.api#pattern": ".*"
             }
         },
+        "com.amazonaws.iottwinmaker#SyncJobState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CREATING",
+                        "value": "CREATING"
+                    },
+                    {
+                        "name": "INITIALIZING",
+                        "value": "INITIALIZING"
+                    },
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE"
+                    },
+                    {
+                        "name": "DELETING",
+                        "value": "DELETING"
+                    },
+                    {
+                        "name": "ERROR",
+                        "value": "ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncJobStatus": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.iottwinmaker#SyncJobState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SyncJob status state.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.iottwinmaker#ErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SyncJob error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SyncJob status.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncJobSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#SyncJobSummary"
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncJobSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.iottwinmaker#TwinMakerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SyncJob summary ARN.</p>"
+                    }
+                },
+                "workspaceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workspace that contains the sync job.</p>"
+                    }
+                },
+                "syncSource": {
+                    "target": "com.amazonaws.iottwinmaker#SyncSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync source.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iottwinmaker#SyncJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SyncJob summaries status.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time.</p>"
+                    }
+                },
+                "updateDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The update date and time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SyncJob summary.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncResourceFilter": {
+            "type": "union",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.iottwinmaker#SyncResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync resource filter's state.</p>"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.iottwinmaker#SyncResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync resource filter resoucre type</p>"
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync resource filter resource Id.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external Id.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sync resource filter.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncResourceFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#SyncResourceFilter"
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncResourceState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "INITIALIZING",
+                        "value": "INITIALIZING"
+                    },
+                    {
+                        "name": "PROCESSING",
+                        "value": "PROCESSING"
+                    },
+                    {
+                        "name": "DELETED",
+                        "value": "DELETED"
+                    },
+                    {
+                        "name": "IN_SYNC",
+                        "value": "IN_SYNC"
+                    },
+                    {
+                        "name": "ERROR",
+                        "value": "ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncResourceStatus": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.iottwinmaker#SyncResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync resource status state.</p>"
+                    }
+                },
+                "error": {
+                    "target": "com.amazonaws.iottwinmaker#ErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sync resource status.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncResourceSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iottwinmaker#SyncResourceSummary"
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncResourceSummary": {
+            "type": "structure",
+            "members": {
+                "resourceType": {
+                    "target": "com.amazonaws.iottwinmaker#SyncResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>"
+                    }
+                },
+                "externalId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external Id.</p>"
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.iottwinmaker#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource Id.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iottwinmaker#SyncResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sync resource summary status.</p>"
+                    }
+                },
+                "updateDateTime": {
+                    "target": "com.amazonaws.iottwinmaker#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The update date and time.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The sync resource summary.</p>"
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "ENTITY",
+                        "value": "ENTITY"
+                    },
+                    {
+                        "name": "COMPONENT_TYPE",
+                        "value": "COMPONENT_TYPE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iottwinmaker#SyncSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z_0-9]+$"
+            }
+        },
         "com.amazonaws.iottwinmaker#TabularConditions": {
             "type": "structure",
             "members": {
@@ -5451,7 +6254,7 @@
                 "workspaceId": {
                     "target": "com.amazonaws.iottwinmaker#Id",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the workspace that contains the component type.</p>",
+                        "smithy.api#documentation": "<p>The ID of the workspace.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5498,6 +6301,12 @@
                     "target": "com.amazonaws.iottwinmaker#PropertyGroupsRequest",
                     "traits": {
                         "smithy.api#documentation": "<p>The property groups</p>"
+                    }
+                },
+                "componentTypeName": {
+                    "target": "com.amazonaws.iottwinmaker#ComponentTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The component type name.</p>"
                     }
                 }
             }

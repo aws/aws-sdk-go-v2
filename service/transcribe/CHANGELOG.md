@@ -1,3 +1,27 @@
+# v1.25.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.24.0 (2022-12-20)
+
+* **Feature**: Enable our batch transcription jobs for Swedish and Vietnamese.
+
+# v1.23.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.23.0 (2022-12-05)
+
+* **Feature**: Amazon Transcribe now supports creating custom language models in the following languages: Japanese (ja-JP) and German (de-DE).
+
+# v1.22.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.0 (2022-11-28)
+
+* **Feature**: This release adds support for 'inputType' for post-call and real-time (streaming) Call Analytics within Amazon Transcribe.
+
 # v1.21.11 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

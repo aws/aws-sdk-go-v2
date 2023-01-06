@@ -30,16 +30,19 @@ import (
 // * s3:GetBucketLocation
 //
 // *
-// greengrass:CreateComponentVersion
+// kms:GenerateDataKey
 //
-// * greengrass:DescribeComponent
+// * greengrass:CreateComponentVersion
 //
-// * (Optional)
-// greengrass:TagResource. Only required if you want to tag the component.
+// *
+// greengrass:DescribeComponent
 //
-// For
-// more information, see Using your Amazon Lookout for Vision model on an edge
-// device in the Amazon Lookout for Vision Developer Guide.
+// * (Optional) greengrass:TagResource. Only required
+// if you want to tag the component.
+//
+// For more information, see Using your Amazon
+// Lookout for Vision model on an edge device in the Amazon Lookout for Vision
+// Developer Guide.
 func (c *Client) StartModelPackagingJob(ctx context.Context, params *StartModelPackagingJobInput, optFns ...func(*Options)) (*StartModelPackagingJobOutput, error) {
 	if params == nil {
 		params = &StartModelPackagingJobInput{}

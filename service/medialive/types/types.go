@@ -276,6 +276,22 @@ type AudioDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Audio Dolby EDecode
+type AudioDolbyEDecode struct {
+
+	// Applies only to Dolby E. Enter the program ID (according to the metadata in the
+	// audio) of the Dolby E program to extract from the specified track. One program
+	// extracted per audio selector. To select multiple programs, create multiple
+	// selectors with the same Track and different Program numbers. “All channels”
+	// means to ignore the program IDs and include all the channels in this selector;
+	// useful if metadata is known to be incorrect.
+	//
+	// This member is required.
+	ProgramSelection DolbyEProgramSelection
+
+	noSmithyDocumentSerde
+}
+
 // Audio Hls Rendition Selection
 type AudioHlsRenditionSelection struct {
 
@@ -445,6 +461,10 @@ type AudioTrackSelection struct {
 	// This member is required.
 	Tracks []AudioTrack
 
+	// Configure decoding options for Dolby E streams - these should be Dolby E frames
+	// carried in PCM streams tagged with SMPTE-337
+	DolbyEDecode *AudioDolbyEDecode
+
 	noSmithyDocumentSerde
 }
 
@@ -509,7 +529,7 @@ type AvailConfiguration struct {
 // Avail Settings
 type AvailSettings struct {
 
-	// Settings for the Esam
+	// Esam
 	Esam *Esam
 
 	// Scte35 Splice Insert
@@ -1072,7 +1092,7 @@ type ColorSpacePassthroughSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Dolby Vision Profile 8.1 Settings
+// Dolby Vision81 Settings
 type DolbyVision81Settings struct {
 	noSmithyDocumentSerde
 }
@@ -1499,7 +1519,7 @@ type EncoderSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for the Esam
+// Esam
 type Esam struct {
 
 	// Sent as acquisitionPointIdentity to identify the MediaLive channel to the POIS.
@@ -1519,14 +1539,10 @@ type Esam struct {
 	// OOB messages.
 	AdAvailOffset int32
 
-	// Password if credentials are required to access the POIS endpoint. This is a
-	// reference to an AWS parameter store name from which the password can be
-	// retrieved. AWS Parameter store format: "ssm://"
+	// Documentation update needed
 	PasswordParam *string
 
-	// Username if credentials are required to access the POIS endpoint. This can be
-	// either a plaintext username, or a reference to an AWS parameter store name from
-	// which the username can be retrieved. AWS Parameter store format: "ssm://"
+	// Documentation update needed
 	Username *string
 
 	// Optional data sent as zoneIdentity to identify the MediaLive channel to the
@@ -1712,6 +1728,9 @@ type FrameCaptureSettings struct {
 
 	// Unit for the frame capture interval.
 	CaptureIntervalUnits FrameCaptureIntervalUnit
+
+	// Timecode burn-in settings
+	TimecodeBurninSettings *TimecodeBurninSettings
 
 	noSmithyDocumentSerde
 }
@@ -2013,6 +2032,9 @@ type H264Settings struct {
 	// and doesn't apply temporal AQ.
 	TemporalAq H264TemporalAq
 
+	// Timecode burn-in settings
+	TimecodeBurninSettings *TimecodeBurninSettings
+
 	// Determines how timecodes should be inserted into the video elementary stream.
 	//
 	// *
@@ -2031,7 +2053,7 @@ type H265ColorSpaceSettings struct {
 	// Passthrough applies no color space conversion to the output
 	ColorSpacePassthroughSettings *ColorSpacePassthroughSettings
 
-	// Dolby Vision Profile 8.1 Settings
+	// Dolby Vision81 Settings
 	DolbyVision81Settings *DolbyVision81Settings
 
 	// Hdr10 Settings
@@ -2189,6 +2211,9 @@ type H265Settings struct {
 
 	// H.265 Tier.
 	Tier H265Tier
+
+	// Timecode burn-in settings
+	TimecodeBurninSettings *TimecodeBurninSettings
 
 	// Determines how timecodes should be inserted into the video elementary stream.
 	//
@@ -2440,8 +2465,9 @@ type HlsGroupSettings struct {
 	// values for segment duration.
 	ManifestDurationFormat HlsManifestDurationFormat
 
-	// When set, minimumSegmentLength is enforced by looking ahead and back within the
-	// specified range for a nearby avail and extending the segment size if needed.
+	// Minimum length of MPEG-2 Transport Stream segments in seconds. When set, minimum
+	// segment length is enforced by looking ahead and back within the specified range
+	// for a nearby avail and extending the segment size if needed.
 	MinSegmentLength int32
 
 	// If "vod", all segments are indexed and kept permanently in the destination and
@@ -2487,9 +2513,9 @@ type HlsGroupSettings struct {
 	// manifest from MediaLive is irrelevant.
 	RedundantManifest HlsRedundantManifest
 
-	// Length of MPEG-2 Transport Stream segments to create (in seconds). Note that
-	// segments will end on the next keyframe after this number of seconds, so actual
-	// segment length may be longer.
+	// Length of MPEG-2 Transport Stream segments to create in seconds. Note that
+	// segments will end on the next keyframe after this duration, so actual segment
+	// length may be longer.
 	SegmentLength int32
 
 	// useInputSegmentation has been deprecated. The configured segment size is always
@@ -2858,6 +2884,9 @@ type InputDeviceConfigurableSettings struct {
 	// you want to use a specific source, specify the source.
 	ConfiguredInput InputDeviceConfiguredInput
 
+	// The Link device's buffer size (latency) in milliseconds (ms).
+	LatencyMs int32
+
 	// The maximum bitrate in bits per second. Set a value here to throttle the bitrate
 	// of the source video.
 	MaxBitrate int32
@@ -2885,6 +2914,10 @@ type InputDeviceHdSettings struct {
 
 	// The height of the video source, in pixels.
 	Height int32
+
+	// The Link device's buffer size (latency) in milliseconds (ms). You can specify
+	// this value.
+	LatencyMs int32
 
 	// The current maximum bitrate for ingesting this source, in bits per second. You
 	// can specify this maximum.
@@ -3005,6 +3038,10 @@ type InputDeviceUhdSettings struct {
 
 	// The height of the video source, in pixels.
 	Height int32
+
+	// The Link device's buffer size (latency) in milliseconds (ms). You can specify
+	// this value.
+	LatencyMs int32
 
 	// The current maximum bitrate for ingesting this source, in bits per second. You
 	// can specify this maximum.
@@ -3861,6 +3898,9 @@ type Mpeg2Settings struct {
 	// DYNAMIC: Let MediaLive optimize the number of B-frames in each sub-GOP, to
 	// improve visual quality.
 	SubgopLength Mpeg2SubGopLength
+
+	// Timecode burn-in settings
+	TimecodeBurninSettings *TimecodeBurninSettings
 
 	// Determines how MediaLive inserts timecodes in the output video. For detailed
 	// information about setting up the input and the output for a timecode, see the
@@ -5040,7 +5080,7 @@ type Scte35DescriptorSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Settings for the "scte35 input" action
+// Scte35Input Schedule Action Settings
 type Scte35InputScheduleActionSettings struct {
 
 	// Whether the SCTE-35 input should be the active input or a fixed input.
@@ -5361,6 +5401,25 @@ type TemporalFilterSettings struct {
 	// Choose a filter strength. We recommend a strength of 1 or 2. A higher strength
 	// might take out good information, resulting in an image that is overly soft.
 	Strength TemporalFilterStrength
+
+	noSmithyDocumentSerde
+}
+
+// Timecode Burnin Settings
+type TimecodeBurninSettings struct {
+
+	// Choose a timecode burn-in font size
+	//
+	// This member is required.
+	FontSize TimecodeBurninFontSize
+
+	// Choose a timecode burn-in output position
+	//
+	// This member is required.
+	Position TimecodeBurninPosition
+
+	// Create a timecode burn-in prefix (optional)
+	Prefix *string
 
 	noSmithyDocumentSerde
 }

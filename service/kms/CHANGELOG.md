@@ -1,3 +1,31 @@
+# v1.20.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.19.4 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.3 (2022-12-14)
+
+* No change notes available for this release.
+
+# v1.19.2 (2022-12-07)
+
+* **Documentation**: Updated examples and exceptions for External Key Store (XKS).
+
+# v1.19.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.0 (2022-11-29.2)
+
+* **Feature**: AWS KMS introduces the External Key Store (XKS), a new feature for customers who want to protect their data with encryption keys stored in an external key management system under their control.
+
+# v1.18.18 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.18.17 (2022-11-16)
 
 * No change notes available for this release.

@@ -81,7 +81,7 @@ type CreateCampaignInput struct {
 
 	// (Optional) The time the campaign expires, in seconds since epoch (January 1,
 	// 1970 at midnight UTC time). Vehicle data won't be collected after the campaign
-	// expires. Default: 253402243200 (December 31, 9999, 00:00:00 UTC)
+	// expires. Default: 253402214400 (December 31, 9999, 00:00:00 UTC)
 	ExpiryTime *time.Time
 
 	// (Optional) How long (in milliseconds) to collect raw data after a triggering

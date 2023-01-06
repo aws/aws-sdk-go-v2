@@ -775,7 +775,7 @@ type Face struct {
 // which attributes to return, use the FaceAttributes input parameter for
 // StartFaceDetection. The following Amazon Rekognition Video operations return
 // only the default attributes. The corresponding Start operations don't have a
-// FaceAttributes input parameter.
+// FaceAttributes input parameter:
 //
 // * GetCelebrityRecognition
 //
@@ -1195,13 +1195,37 @@ type LabelCategory struct {
 // label was detected in the video.
 type LabelDetection struct {
 
+	// The time duration of a segment in milliseconds, I.e. time elapsed from
+	// StartTimestampMillis to EndTimestampMillis.
+	DurationMillis *int64
+
+	// The time in milliseconds defining the end of the timeline segment containing a
+	// continuously detected label.
+	EndTimestampMillis *int64
+
 	// Details about the detected label.
 	Label *Label
+
+	// The time in milliseconds defining the start of the timeline segment containing a
+	// continuously detected label.
+	StartTimestampMillis *int64
 
 	// Time, in milliseconds from the start of the video, that the label was detected.
 	// Note that Timestamp is not guaranteed to be accurate to the individual frame
 	// where the label first appears.
 	Timestamp int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains the specified filters that should be applied to a list of returned
+// GENERAL_LABELS.
+type LabelDetectionSettings struct {
+
+	// Contains filters for the object labels returned by DetectLabels. Filters can be
+	// inclusive, exclusive, or a combination of both and can be applied to individual
+	// l abels or entire label categories.
+	GeneralLabels *GeneralLabelsSettings
 
 	noSmithyDocumentSerde
 }

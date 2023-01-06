@@ -49,6 +49,59 @@ type ChannelNameCondition struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration details required to delete the connection of the stream from
+// the Edge Agent.
+type DeletionConfig struct {
+
+	// The boolean value used to indicate whether or not you want to mark the media for
+	// deletion, once it has been uploaded to the Kinesis Video Stream cloud. The media
+	// files can be deleted if any of the deletion configuration values are set to
+	// true, such as when the limit for the EdgeRetentionInHours, or the
+	// MaxLocalMediaSizeInMB, has been reached. Since the default value is set to true,
+	// configure the uploader schedule such that the media files are not being deleted
+	// before they are initially uploaded to AWS cloud.
+	DeleteAfterUpload *bool
+
+	// The number of hours that you want to retain the data in the stream on the Edge
+	// Agent. The default value of the retention time is 720 hours, which translates to
+	// 30 days.
+	EdgeRetentionInHours *int32
+
+	// The value of the local size required in order to delete the edge configuration.
+	LocalSizeConfig *LocalSizeConfig
+
+	noSmithyDocumentSerde
+}
+
+// A description of the stream's edge configuration that will be used to sync with
+// the Edge Agent IoT Greengrass component. The Edge Agent component will run on an
+// IoT Hub Device setup at your premise.
+type EdgeConfig struct {
+
+	// The "Internet of Things (IoT) Thing" Arn of the stream.
+	//
+	// This member is required.
+	HubDeviceArn *string
+
+	// The recorder configuration consists of the local MediaSourceConfig details, that
+	// are used as credentials to access the local media files streamed on the camera.
+	//
+	// This member is required.
+	RecorderConfig *RecorderConfig
+
+	// The deletion configuration is made up of the retention time
+	// (EdgeRetentionInHours) and local size configuration (LocalSizeConfig) details
+	// that are used to make the deletion.
+	DeletionConfig *DeletionConfig
+
+	// The uploader configuration contains the ScheduleExpression details that are used
+	// to schedule upload jobs for the recorded media files from the Edge Agent to a
+	// Kinesis Video Stream.
+	UploaderConfig *UploaderConfig
+
+	noSmithyDocumentSerde
+}
+
 // The structure that contains the information required for the KVS images
 // delivery. If null, the configuration will be deleted from the stream.
 type ImageGenerationConfiguration struct {
@@ -122,11 +175,77 @@ type ImageGenerationDestinationConfig struct {
 	// This member is required.
 	DestinationRegion *string
 
-	// The Uniform Resource Idenifier (URI) that identifies where the images will be
+	// The Uniform Resource Identifier (URI) that identifies where the images will be
 	// delivered.
 	//
 	// This member is required.
 	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details that include the maximum size of the media
+// (MaxLocalMediaSizeInMB) that you want to store for a stream on the Edge Agent,
+// as well as the strategy that should be used (StrategyOnFullSize) when a stream's
+// maximum size has been reached.
+type LocalSizeConfig struct {
+
+	// The overall maximum size of the media that you want to store for a stream on the
+	// Edge Agent.
+	MaxLocalMediaSizeInMB *int32
+
+	// The strategy to perform when a stream’s MaxLocalMediaSizeInMB limit is reached.
+	StrategyOnFullSize StrategyOnFullSize
+
+	noSmithyDocumentSerde
+}
+
+// A structure that encapsulates, or contains, the media storage configuration
+// properties.
+type MappedResourceConfigurationListItem struct {
+
+	// The Amazon Resource Name (ARN) of the Kinesis Video Stream resource, associated
+	// with the stream.
+	ARN *string
+
+	// The type of the associated resource for the kinesis video stream.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details that consist of the credentials required
+// (MediaUriSecretArn and MediaUriType) to access the media files that are streamed
+// to the camera.
+type MediaSourceConfig struct {
+
+	// The AWS Secrets Manager ARN for the username and password of the camera, or a
+	// local media file location.
+	//
+	// This member is required.
+	MediaUriSecretArn *string
+
+	// The Uniform Resource Identifier (URI) type. The FILE_URI value can be used to
+	// stream local media files. Preview only supports the RTSP_URI media source URI
+	// format .
+	//
+	// This member is required.
+	MediaUriType MediaUriType
+
+	noSmithyDocumentSerde
+}
+
+// A structure that encapsulates, or contains, the media storage configuration
+// properties.
+type MediaStorageConfiguration struct {
+
+	// The status of the media storage configuration.
+	//
+	// This member is required.
+	Status MediaStorageConfigurationStatus
+
+	// The Amazon Resource Name (ARN) of the stream
+	StreamARN *string
 
 	noSmithyDocumentSerde
 }
@@ -153,11 +272,31 @@ type NotificationConfiguration struct {
 // to a customer.
 type NotificationDestinationConfig struct {
 
-	// The Uniform Resource Idenifier (URI) that identifies where the images will be
+	// The Uniform Resource Identifier (URI) that identifies where the images will be
 	// delivered.
 	//
 	// This member is required.
 	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// The recorder configuration consists of the local MediaSourceConfig details that
+// are used as credentials to accesss the local media files streamed on the camera.
+type RecorderConfig struct {
+
+	// The configuration details that consist of the credentials required
+	// (MediaUriSecretArn and MediaUriType) to access the media files streamed to the
+	// camera.
+	//
+	// This member is required.
+	MediaSourceConfig *MediaSourceConfig
+
+	// The configuration that consists of the ScheduleExpression and the
+	// DurationInMinutes details that specify the scheduling to record from a camera,
+	// or local media file, onto the Edge Agent. If the ScheduleExpression attribute is
+	// not provided, then the Edge Agent will always be set to recording mode.
+	ScheduleConfig *ScheduleConfig
 
 	noSmithyDocumentSerde
 }
@@ -173,6 +312,33 @@ type ResourceEndpointListItem struct {
 	// The endpoint of the signaling channel returned by the
 	// GetSignalingChannelEndpoint API.
 	ResourceEndpoint *string
+
+	noSmithyDocumentSerde
+}
+
+// This API enables you to specify the duration that the camera, or local media
+// file, should record onto the Edge Agent. The ScheduleConfig consists of the
+// ScheduleExpression and the DurationInMinutes attributes. If the
+// ScheduleExpression is not provided, then the Edge Agent will always be set to
+// recording mode.
+type ScheduleConfig struct {
+
+	// The total duration to record the media. If the ScheduleExpression attribute is
+	// provided, then the DurationInSeconds attribute should also be specified.
+	//
+	// This member is required.
+	DurationInSeconds *int32
+
+	// The Quartz cron expression that takes care of scheduling jobs to record from the
+	// camera, or local media file, onto the Edge Agent. If the ScheduleExpression is
+	// not provided for the RecorderConfig, then the Edge Agent will always be set to
+	// recording mode. For more information about Quartz, refer to the  Cron Trigger
+	// Tutorial
+	// (http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html)
+	// page to understand the valid expressions and its use.
+	//
+	// This member is required.
+	ScheduleExpression *string
 
 	noSmithyDocumentSerde
 }
@@ -269,6 +435,23 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that consists of the ScheduleExpression and the
+// DurationInMinutesdetails, that specify the scheduling to record from a camera,
+// or local media file, onto the Edge Agent. If the ScheduleExpression is not
+// provided, then the Edge Agent will always be in upload mode.
+type UploaderConfig struct {
+
+	// The configuration that consists of the ScheduleExpression and the
+	// DurationInMinutesdetails that specify the scheduling to record from a camera, or
+	// local media file, onto the Edge Agent. If the ScheduleExpression is not
+	// provided, then the Edge Agent will always be in recording mode.
+	//
+	// This member is required.
+	ScheduleConfig *ScheduleConfig
 
 	noSmithyDocumentSerde
 }

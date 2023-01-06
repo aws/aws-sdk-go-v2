@@ -51,16 +51,22 @@ type GetLaunchConfigurationOutput struct {
 	// Launch configuration EC2 Launch template ID.
 	Ec2LaunchTemplateID *string
 
+	// Enable map auto tagging.
+	EnableMapAutoTagging *bool
+
 	// Launch disposition for launch configuration.
 	LaunchDisposition types.LaunchDisposition
 
 	// Launch configuration OS licensing.
 	Licensing *types.Licensing
 
+	// Map auto tagging MPE ID.
+	MapAutoTaggingMpeID *string
+
 	// Launch configuration name.
 	Name *string
 
-	// Server participating in Job.
+	// Post Launch Actions to executed on the Test or Cutover instance.
 	PostLaunchActions *types.PostLaunchActions
 
 	// Launch configuration Source Server ID.

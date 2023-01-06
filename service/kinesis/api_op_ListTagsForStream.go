@@ -12,7 +12,9 @@ import (
 )
 
 // Lists the tags for the specified Kinesis data stream. This operation has a limit
-// of five transactions per second per account.
+// of five transactions per second per account. When invoking this API, it is
+// recommended you use the StreamARN input parameter rather than the StreamName
+// input parameter.
 func (c *Client) ListTagsForStream(ctx context.Context, params *ListTagsForStreamInput, optFns ...func(*Options)) (*ListTagsForStreamOutput, error) {
 	if params == nil {
 		params = &ListTagsForStreamInput{}
@@ -31,11 +33,6 @@ func (c *Client) ListTagsForStream(ctx context.Context, params *ListTagsForStrea
 // Represents the input for ListTagsForStream.
 type ListTagsForStreamInput struct {
 
-	// The name of the stream.
-	//
-	// This member is required.
-	StreamName *string
-
 	// The key to use as the starting point for the list of tags. If this parameter is
 	// set, ListTagsForStream gets all tags that occur after ExclusiveStartTagKey.
 	ExclusiveStartTagKey *string
@@ -44,6 +41,12 @@ type ListTagsForStreamInput struct {
 	// tags associated with the stream, HasMoreTags is set to true. To list additional
 	// tags, set ExclusiveStartTagKey to the last key in the response.
 	Limit *int32
+
+	// The ARN of the stream.
+	StreamARN *string
+
+	// The name of the stream.
+	StreamName *string
 
 	noSmithyDocumentSerde
 }
@@ -112,9 +115,6 @@ func (c *Client) addOperationListTagsForStreamMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpListTagsForStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForStream(options.Region), middleware.Before); err != nil {

@@ -226,6 +226,17 @@ type ExecutionListItem struct {
 	// This member is required.
 	Status ExecutionStatus
 
+	// The total number of items processed in a child workflow execution. This field is
+	// returned only if mapRunArn was specified in the ListExecutions API action. If
+	// stateMachineArn was specified in ListExecutions, the itemCount field isn't
+	// returned.
+	ItemCount *int32
+
+	// The Amazon Resource Name (ARN) of a Map Run. This field is returned only if
+	// mapRunArn was specified in the ListExecutions API action. If stateMachineArn was
+	// specified in ListExecutions, the mapRunArn isn't returned.
+	MapRunArn *string
+
 	// If the execution already ended, the date the execution stopped.
 	StopDate *time.Time
 
@@ -359,6 +370,13 @@ type HistoryEvent struct {
 
 	// Contains details about an iteration of a Map state that succeeded.
 	MapIterationSucceededEventDetails *MapIterationEventDetails
+
+	// Contains error and cause details about a Map Run that failed.
+	MapRunFailedEventDetails *MapRunFailedEventDetails
+
+	// Contains details, such as mapRunArn, and the start date and time of a Map Run.
+	// mapRunArn is the Amazon Resource Name (ARN) of the Map Run that was started.
+	MapRunStartedEventDetails *MapRunStartedEventDetails
 
 	// Contains details about Map state that was started.
 	MapStateStartedEventDetails *MapStateStartedEventDetails
@@ -534,6 +552,172 @@ type MapIterationEventDetails struct {
 
 	// The name of the iteration’s parent Map state.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about all of the child workflow executions started by a Map
+// Run.
+type MapRunExecutionCounts struct {
+
+	// The total number of child workflow executions that were started by a Map Run and
+	// were running, but were either stopped by the user or by Step Functions because
+	// the Map Run failed.
+	//
+	// This member is required.
+	Aborted int64
+
+	// The total number of child workflow executions that were started by a Map Run,
+	// but have failed.
+	//
+	// This member is required.
+	Failed int64
+
+	// The total number of child workflow executions that were started by a Map Run,
+	// but haven't started executing yet.
+	//
+	// This member is required.
+	Pending int64
+
+	// Returns the count of child workflow executions whose results were written by
+	// ResultWriter. For more information, see ResultWriter
+	// (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html)
+	// in the Step Functions Developer Guide.
+	//
+	// This member is required.
+	ResultsWritten int64
+
+	// The total number of child workflow executions that were started by a Map Run and
+	// are currently in-progress.
+	//
+	// This member is required.
+	Running int64
+
+	// The total number of child workflow executions that were started by a Map Run and
+	// have completed successfully.
+	//
+	// This member is required.
+	Succeeded int64
+
+	// The total number of child workflow executions that were started by a Map Run and
+	// have timed out.
+	//
+	// This member is required.
+	TimedOut int64
+
+	// The total number of child workflow executions that were started by a Map Run.
+	//
+	// This member is required.
+	Total int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a Map Run failure event that occurred during a state
+// machine execution.
+type MapRunFailedEventDetails struct {
+
+	// A more detailed explanation of the cause of the failure.
+	Cause *string
+
+	// The error code of the Map Run failure.
+	Error *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about items that were processed in all of the child workflow
+// executions that were started by a Map Run.
+type MapRunItemCounts struct {
+
+	// The total number of items processed in child workflow executions that were
+	// either stopped by the user or by Step Functions, because the Map Run failed.
+	//
+	// This member is required.
+	Aborted int64
+
+	// The total number of items processed in child workflow executions that have
+	// failed.
+	//
+	// This member is required.
+	Failed int64
+
+	// The total number of items to process in child workflow executions that haven't
+	// started running yet.
+	//
+	// This member is required.
+	Pending int64
+
+	// Returns the count of items whose results were written by ResultWriter. For more
+	// information, see ResultWriter
+	// (https://docs.aws.amazon.com/step-functions/latest/dg/input-output-resultwriter.html)
+	// in the Step Functions Developer Guide.
+	//
+	// This member is required.
+	ResultsWritten int64
+
+	// The total number of items being processed in child workflow executions that are
+	// currently in-progress.
+	//
+	// This member is required.
+	Running int64
+
+	// The total number of items processed in child workflow executions that have
+	// completed successfully.
+	//
+	// This member is required.
+	Succeeded int64
+
+	// The total number of items processed in child workflow executions that have timed
+	// out.
+	//
+	// This member is required.
+	TimedOut int64
+
+	// The total number of items processed in all the child workflow executions started
+	// by a Map Run.
+	//
+	// This member is required.
+	Total int64
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a specific Map Run.
+type MapRunListItem struct {
+
+	// The executionArn of the execution from which the Map Run was started.
+	//
+	// This member is required.
+	ExecutionArn *string
+
+	// The Amazon Resource Name (ARN) of the Map Run.
+	//
+	// This member is required.
+	MapRunArn *string
+
+	// The date on which the Map Run started.
+	//
+	// This member is required.
+	StartDate *time.Time
+
+	// The Amazon Resource Name (ARN) of the executed state machine.
+	//
+	// This member is required.
+	StateMachineArn *string
+
+	// The date on which the Map Run stopped.
+	StopDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a Map Run that was started during a state machine
+// execution.
+type MapRunStartedEventDetails struct {
+
+	// The Amazon Resource Name (ARN) of a Map Run that was started.
+	MapRunArn *string
 
 	noSmithyDocumentSerde
 }

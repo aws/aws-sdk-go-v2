@@ -12,7 +12,7 @@ import (
 )
 
 // Creates an origin request policy. After you create an origin request policy, you
-// can attach it to one or more cache behaviors. When it’s attached to a cache
+// can attach it to one or more cache behaviors. When it's attached to a cache
 // behavior, the origin request policy determines the values that CloudFront
 // includes in requests that it sends to the origin. Each request that CloudFront
 // sends to the origin includes the following:
@@ -29,7 +29,7 @@ import (
 // include items from the viewer request and, in the case of headers, additional
 // ones that are added by CloudFront.
 //
-// CloudFront sends a request when it can’t
+// CloudFront sends a request when it can't
 // find a valid object in its cache that matches the request. If you want to send
 // values to the origin and also include them in the cache key, use CachePolicy.
 // For more information about origin request policies, see Controlling origin

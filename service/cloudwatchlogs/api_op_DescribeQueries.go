@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of CloudWatch Logs Insights queries that are scheduled,
-// executing, or have been executed recently in this account. You can request all
-// queries or limit it to queries of a specific log group or queries with a certain
-// status.
+// Returns a list of CloudWatch Logs Insights queries that are scheduled, running,
+// or have been run recently in this account. You can request all queries or limit
+// it to queries of a specific log group or queries with a certain status.
 func (c *Client) DescribeQueries(ctx context.Context, params *DescribeQueriesInput, optFns ...func(*Options)) (*DescribeQueriesOutput, error) {
 	if params == nil {
 		params = &DescribeQueriesInput{}

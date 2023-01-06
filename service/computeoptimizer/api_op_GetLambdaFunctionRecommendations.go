@@ -4,6 +4,7 @@ package computeoptimizer
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
@@ -139,6 +140,101 @@ func (c *Client) addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *
 		return err
 	}
 	return nil
+}
+
+// GetLambdaFunctionRecommendationsAPIClient is a client that implements the
+// GetLambdaFunctionRecommendations operation.
+type GetLambdaFunctionRecommendationsAPIClient interface {
+	GetLambdaFunctionRecommendations(context.Context, *GetLambdaFunctionRecommendationsInput, ...func(*Options)) (*GetLambdaFunctionRecommendationsOutput, error)
+}
+
+var _ GetLambdaFunctionRecommendationsAPIClient = (*Client)(nil)
+
+// GetLambdaFunctionRecommendationsPaginatorOptions is the paginator options for
+// GetLambdaFunctionRecommendations
+type GetLambdaFunctionRecommendationsPaginatorOptions struct {
+	// The maximum number of function recommendations to return with a single request.
+	// To retrieve the remaining results, make another request with the returned
+	// nextToken value.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetLambdaFunctionRecommendationsPaginator is a paginator for
+// GetLambdaFunctionRecommendations
+type GetLambdaFunctionRecommendationsPaginator struct {
+	options   GetLambdaFunctionRecommendationsPaginatorOptions
+	client    GetLambdaFunctionRecommendationsAPIClient
+	params    *GetLambdaFunctionRecommendationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetLambdaFunctionRecommendationsPaginator returns a new
+// GetLambdaFunctionRecommendationsPaginator
+func NewGetLambdaFunctionRecommendationsPaginator(client GetLambdaFunctionRecommendationsAPIClient, params *GetLambdaFunctionRecommendationsInput, optFns ...func(*GetLambdaFunctionRecommendationsPaginatorOptions)) *GetLambdaFunctionRecommendationsPaginator {
+	if params == nil {
+		params = &GetLambdaFunctionRecommendationsInput{}
+	}
+
+	options := GetLambdaFunctionRecommendationsPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetLambdaFunctionRecommendationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetLambdaFunctionRecommendationsPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next GetLambdaFunctionRecommendations page.
+func (p *GetLambdaFunctionRecommendationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetLambdaFunctionRecommendationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.GetLambdaFunctionRecommendations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetLambdaFunctionRecommendations(region string) *awsmiddleware.RegisterServiceMetadata {

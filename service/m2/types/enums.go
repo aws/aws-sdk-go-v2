@@ -25,16 +25,17 @@ type ApplicationLifecycle string
 
 // Enum values for ApplicationLifecycle
 const (
-	ApplicationLifecycleCreating  ApplicationLifecycle = "Creating"
-	ApplicationLifecycleCreated   ApplicationLifecycle = "Created"
-	ApplicationLifecycleAvailable ApplicationLifecycle = "Available"
-	ApplicationLifecycleReady     ApplicationLifecycle = "Ready"
-	ApplicationLifecycleStarting  ApplicationLifecycle = "Starting"
-	ApplicationLifecycleRunning   ApplicationLifecycle = "Running"
-	ApplicationLifecycleStopping  ApplicationLifecycle = "Stopping"
-	ApplicationLifecycleStopped   ApplicationLifecycle = "Stopped"
-	ApplicationLifecycleFailed    ApplicationLifecycle = "Failed"
-	ApplicationLifecycleDeleting  ApplicationLifecycle = "Deleting"
+	ApplicationLifecycleCreating                ApplicationLifecycle = "Creating"
+	ApplicationLifecycleCreated                 ApplicationLifecycle = "Created"
+	ApplicationLifecycleAvailable               ApplicationLifecycle = "Available"
+	ApplicationLifecycleReady                   ApplicationLifecycle = "Ready"
+	ApplicationLifecycleStarting                ApplicationLifecycle = "Starting"
+	ApplicationLifecycleRunning                 ApplicationLifecycle = "Running"
+	ApplicationLifecycleStopping                ApplicationLifecycle = "Stopping"
+	ApplicationLifecycleStopped                 ApplicationLifecycle = "Stopped"
+	ApplicationLifecycleFailed                  ApplicationLifecycle = "Failed"
+	ApplicationLifecycleDeleting                ApplicationLifecycle = "Deleting"
+	ApplicationLifecycleDeletingFromEnvironment ApplicationLifecycle = "Deleting From Environment"
 )
 
 // Values returns all known values for ApplicationLifecycle. Note that this can be
@@ -52,6 +53,7 @@ func (ApplicationLifecycle) Values() []ApplicationLifecycle {
 		"Stopped",
 		"Failed",
 		"Deleting",
+		"Deleting From Environment",
 	}
 }
 
@@ -193,6 +195,7 @@ const (
 	EnvironmentLifecycleAvailable EnvironmentLifecycle = "Available"
 	EnvironmentLifecycleDeleting  EnvironmentLifecycle = "Deleting"
 	EnvironmentLifecycleFailed    EnvironmentLifecycle = "Failed"
+	EnvironmentLifecycleUpdating  EnvironmentLifecycle = "Updating"
 )
 
 // Values returns all known values for EnvironmentLifecycle. Note that this can be
@@ -204,6 +207,7 @@ func (EnvironmentLifecycle) Values() []EnvironmentLifecycle {
 		"Available",
 		"Deleting",
 		"Failed",
+		"Updating",
 	}
 }
 

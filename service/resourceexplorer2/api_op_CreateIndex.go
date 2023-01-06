@@ -31,7 +31,7 @@ import (
 // in the Amazon Web Services Resource Explorer User Guide. If this is the first
 // Amazon Web Services Region in which you've created an index for Resource
 // Explorer, then this operation also creates a service-linked role
-// (https://docs.aws.amazon.com/arexug/mainline/security_iam_service-linked-roles.html)
+// (https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html)
 // in your Amazon Web Services account that allows Resource Explorer to enumerate
 // your resources to populate the index.
 //

@@ -36,8 +36,7 @@ type CreateApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or
-	// FLINK-1_11).
+	// The runtime environment for the application.
 	//
 	// This member is required.
 	RuntimeEnvironment types.RuntimeEnvironment
@@ -54,8 +53,8 @@ type CreateApplicationInput struct {
 	// A summary description of the application.
 	ApplicationDescription *string
 
-	// Use the STREAMING mode to create a Kinesis Data Analytics Studio notebook. To
-	// create a Kinesis Data Analytics Studio notebook, use the INTERACTIVE mode.
+	// Use the STREAMING mode to create a Kinesis Data Analytics For Flink application.
+	// To create a Kinesis Data Analytics Studio notebook, use the INTERACTIVE mode.
 	ApplicationMode types.ApplicationMode
 
 	// Use this parameter to configure an Amazon CloudWatch log stream to monitor

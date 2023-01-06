@@ -35,7 +35,10 @@ type UpdateUsageLimitInput struct {
 	// This member is required.
 	UsageLimitId *string
 
-	// The new limit amount. For more information about this parameter.
+	// The new limit amount. If time-based, this amount is in Redshift Processing Units
+	// (RPU) consumed per hour. If data-based, this amount is in terabytes (TB) of data
+	// transferred between Regions in cross-account sharing. The value must be a
+	// positive number.
 	Amount *int64
 
 	// The new action that Amazon Redshift Serverless takes when the limit is reached.

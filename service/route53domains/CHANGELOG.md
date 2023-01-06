@@ -1,3 +1,19 @@
+# v1.14.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.13.0 (2022-12-20)
+
+* **Feature**: Use Route 53 domain APIs to change owner, create/delete DS record, modify IPS tag, resend authorization. New: AssociateDelegationSignerToDomain, DisassociateDelegationSignerFromDomain, PushDomain, ResendOperationAuthorization. Updated: UpdateDomainContact, ListOperations, CheckDomainTransferability.
+
+# v1.12.21 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.20 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.19 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

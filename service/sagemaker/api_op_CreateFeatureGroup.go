@@ -109,8 +109,12 @@ type CreateFeatureGroupInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-key.html) for SSE,
 	// you can reduce Amazon Web Services KMS requests costs by up to 99 percent.
 	//
-	// To
-	// learn more about this parameter, see OfflineStoreConfig.
+	// *
+	// Format for the offline store table. Supported formats are Glue (Default) and
+	// Apache Iceberg (https://iceberg.apache.org/).
+	//
+	// To learn more about this
+	// parameter, see OfflineStoreConfig.
 	OfflineStoreConfig *types.OfflineStoreConfig
 
 	// You can turn the OnlineStore on or off by specifying True for the

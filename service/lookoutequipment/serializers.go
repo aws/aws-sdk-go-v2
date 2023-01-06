@@ -2620,6 +2620,11 @@ func awsAwsjson10_serializeOpDocumentListInferenceSchedulersInput(v *ListInferen
 		ok.String(*v.NextToken)
 	}
 
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
 	return nil
 }
 

@@ -14259,6 +14259,15 @@ func awsAwsjson11_deserializeDocumentQueryResultItem(v **types.QueryResultItem, 
 				sv.FeedbackToken = ptr.String(jtv)
 			}
 
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueryResultFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = types.QueryResultFormat(jtv)
+			}
+
 		case "Id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14270,6 +14279,11 @@ func awsAwsjson11_deserializeDocumentQueryResultItem(v **types.QueryResultItem, 
 
 		case "ScoreAttributes":
 			if err := awsAwsjson11_deserializeDocumentScoreAttributes(&sv.ScoreAttributes, value); err != nil {
+				return err
+			}
+
+		case "TableExcerpt":
+			if err := awsAwsjson11_deserializeDocumentTableExcerpt(&sv.TableExcerpt, value); err != nil {
 				return err
 			}
 
@@ -17118,6 +17132,226 @@ func awsAwsjson11_deserializeDocumentSuggestionValue(v **types.SuggestionValue, 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTableCell(v **types.TableCell, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TableCell
+	if *v == nil {
+		sv = &types.TableCell{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Header":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Header = jtv
+			}
+
+		case "Highlighted":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Highlighted = jtv
+			}
+
+		case "TopAnswer":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.TopAnswer = jtv
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTableCellList(v *[]types.TableCell, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TableCell
+	if *v == nil {
+		cv = []types.TableCell{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TableCell
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTableCell(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTableExcerpt(v **types.TableExcerpt, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TableExcerpt
+	if *v == nil {
+		sv = &types.TableExcerpt{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Rows":
+			if err := awsAwsjson11_deserializeDocumentTableRowList(&sv.Rows, value); err != nil {
+				return err
+			}
+
+		case "TotalNumberOfRows":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TotalNumberOfRows = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTableRow(v **types.TableRow, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TableRow
+	if *v == nil {
+		sv = &types.TableRow{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Cells":
+			if err := awsAwsjson11_deserializeDocumentTableCellList(&sv.Cells, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTableRowList(v *[]types.TableRow, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TableRow
+	if *v == nil {
+		cv = []types.TableRow{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TableRow
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentTableRow(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

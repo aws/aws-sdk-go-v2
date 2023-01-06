@@ -260,7 +260,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Turns on Amazon Web Services Resource Explorer in the Amazon Web Services Region in which you called this operation by creating\n            an index. Resource Explorer begins discovering the resources in this Region and stores the details\n            about the resources in the index so that they can be queried by using the <a>Search</a> operation. You can create only one index in a Region.</p>\n         <note>\n            <p>This operation creates only a <i>local</i> index. To promote the\n                local index in one Amazon Web Services Region into the aggregator index for the Amazon Web Services account, use the\n                    <a>UpdateIndexType</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region search by creating an aggregator index</a> in the\n                    <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         </note>\n         <p>For more details about what happens when you turn on Resource Explorer in an Amazon Web Services Region, see\n                <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-service-activate.html\">Turn\n                on Resource Explorer to index your resources in an Amazon Web Services Region</a> in the\n                <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <p>If this is the first Amazon Web Services Region in which you've created an index for Resource Explorer, then\n            this operation also <a href=\"https://docs.aws.amazon.com/arexug/mainline/security_iam_service-linked-roles.html\">creates a\n                service-linked role</a> in your Amazon Web Services account that allows Resource Explorer to enumerate\n            your resources to populate the index.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Action</b>:\n                        <code>resource-explorer-2:CreateIndex</code>\n               </p>\n               <p>\n                  <b>Resource</b>: The ARN of the index (as it will\n                    exist after the operation completes) in the Amazon Web Services Region and account in which\n                    you're trying to create the index. Use the wildcard character (<code>*</code>)\n                    at the end of the string to match the eventual UUID. For example, the following\n                        <code>Resource</code> element restricts the role or user to creating an\n                    index in only the <code>us-east-2</code> Region of the specified account.</p>\n               <p>\n                  <code>\"Resource\":\n                            \"arn:aws:resource-explorer-2:us-west-2:<i>&lt;account-id&gt;</i>:index/*\"</code>\n               </p>\n               <p>Alternatively, you can use <code>\"Resource\": \"*\"</code> to allow the role or\n                    user to create an index in any Region.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Action</b>:\n                        <code>iam:CreateServiceLinkedRole</code>\n               </p>\n               <p>\n                  <b>Resource</b>: No specific resource (*). </p>\n               <p>This permission is required only the first time you create an index to turn on\n                    Resource Explorer in the account. Resource Explorer uses this to create the <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html\">service-linked\n                        role needed to index the resources in your account</a>. Resource Explorer uses the\n                    same service-linked role for all additional indexes you create\n                    afterwards.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Turns on Amazon Web Services Resource Explorer in the Amazon Web Services Region in which you called this operation by creating\n            an index. Resource Explorer begins discovering the resources in this Region and stores the details\n            about the resources in the index so that they can be queried by using the <a>Search</a> operation. You can create only one index in a Region.</p>\n         <note>\n            <p>This operation creates only a <i>local</i> index. To promote the\n                local index in one Amazon Web Services Region into the aggregator index for the Amazon Web Services account, use the\n                    <a>UpdateIndexType</a> operation. For more information, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region search by creating an aggregator index</a> in the\n                    <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         </note>\n         <p>For more details about what happens when you turn on Resource Explorer in an Amazon Web Services Region, see\n                <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-service-activate.html\">Turn\n                on Resource Explorer to index your resources in an Amazon Web Services Region</a> in the\n                <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <p>If this is the first Amazon Web Services Region in which you've created an index for Resource Explorer, then\n            this operation also <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html\">creates a\n                service-linked role</a> in your Amazon Web Services account that allows Resource Explorer to enumerate\n            your resources to populate the index.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Action</b>:\n                        <code>resource-explorer-2:CreateIndex</code>\n               </p>\n               <p>\n                  <b>Resource</b>: The ARN of the index (as it will\n                    exist after the operation completes) in the Amazon Web Services Region and account in which\n                    you're trying to create the index. Use the wildcard character (<code>*</code>)\n                    at the end of the string to match the eventual UUID. For example, the following\n                        <code>Resource</code> element restricts the role or user to creating an\n                    index in only the <code>us-east-2</code> Region of the specified account.</p>\n               <p>\n                  <code>\"Resource\":\n                            \"arn:aws:resource-explorer-2:us-west-2:<i>&lt;account-id&gt;</i>:index/*\"</code>\n               </p>\n               <p>Alternatively, you can use <code>\"Resource\": \"*\"</code> to allow the role or\n                    user to create an index in any Region.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Action</b>:\n                        <code>iam:CreateServiceLinkedRole</code>\n               </p>\n               <p>\n                  <b>Resource</b>: No specific resource (*). </p>\n               <p>This permission is required only the first time you create an index to turn on\n                    Resource Explorer in the account. Resource Explorer uses this to create the <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/security_iam_service-linked-roles.html\">service-linked\n                        role needed to index the resources in your account</a>. Resource Explorer uses the\n                    same service-linked role for all additional indexes you create\n                    afterwards.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/CreateIndex"
@@ -344,7 +344,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a view that users can query by using the <a>Search</a> operation.\n            Results from queries that you make using this view include only resources that match the\n            view's <code>Filters</code>. For more information about Amazon Web Services Resource Explorer views, see <a href=\"https://docs.aws.amazon.com/arexug/mainline/manage-views.html\">Managing views</a>\n            in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <p>Only the principals with an IAM identity-based policy that grants <code>Allow</code>\n            to the <code>Search</code> action on a <code>Resource</code> with the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of\n            this view can <a>Search</a> using views you create with this\n            operation.</p>",
+                "smithy.api#documentation": "<p>Creates a view that users can query by using the <a>Search</a> operation.\n            Results from queries that you make using this view include only resources that match the\n            view's <code>Filters</code>. For more information about Amazon Web Services Resource Explorer views, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-views.html\">Managing views</a>\n            in the <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <p>Only the principals with an IAM identity-based policy that grants <code>Allow</code>\n            to the <code>Search</code> action on a <code>Resource</code> with the <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon resource name (ARN)</a> of\n            this view can <a>Search</a> using views you create with this\n            operation.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/CreateView"
@@ -445,7 +445,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region.\n            When you delete an index, Resource Explorer stops discovering and indexing resources in that\n            Region. Resource Explorer also deletes all views in that Region. These actions occur as\n            asynchronous background tasks. You can check to see when the actions are complete by\n            using the <a>GetIndex</a> operation and checking the <code>Status</code>\n            response value.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified index and turns off Amazon Web Services Resource Explorer in the specified Amazon Web Services Region.\n            When you delete an index, Resource Explorer stops discovering and indexing resources in that\n            Region. Resource Explorer also deletes all views in that Region. These actions occur as\n            asynchronous background tasks. You can check to see when the actions are complete by\n            using the <a>GetIndex</a> operation and checking the <code>Status</code>\n            response value.</p>\n         <note>\n            <p>If the index you delete is the aggregator index for the Amazon Web Services account, you must\n                wait 24 hours before you can promote another local index to be the\n                aggregator index for the account. Users can't perform account-wide searches using\n                Resource Explorer until another aggregator index is configured.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteIndex"
@@ -674,25 +674,25 @@
                 "Type": {
                     "target": "com.amazonaws.resourceexplorer2#IndexType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of the index in this Region. For information about the aggregator\n            index and how it differs from a local index, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region search\n                by creating an aggregator index</a>.</p>"
+                        "smithy.api#documentation": "<p>The type of the index in this Region. For information about the aggregator index and\n            how it differs from a local index, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on cross-Region search\n                by creating an aggregator index</a>.</p>"
                     }
                 },
                 "State": {
                     "target": "com.amazonaws.resourceexplorer2#IndexState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the current state of the index in this Amazon Web Services Region.</p>"
+                        "smithy.api#documentation": "<p>The current state of the index in this Amazon Web Services Region.</p>"
                     }
                 },
                 "ReplicatingFrom": {
                     "target": "com.amazonaws.resourceexplorer2#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this index is <code>Type=AGGREGATOR</code>, then this response value contains a\n            list of the Amazon Web Services Regions that replicate their content to the index in this Region. Not\n            present for a local index.</p>"
+                        "smithy.api#documentation": "<p>This response value is present only if this index is\n            <code>Type=AGGREGATOR</code>.</p>\n         <p>A list of the Amazon Web Services Regions that replicate their content to the index in this\n            Region.</p>"
                     }
                 },
                 "ReplicatingTo": {
                     "target": "com.amazonaws.resourceexplorer2#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the Amazon Web Services Region that has an index set to <code>Type=AGGREGATOR</code>, if\n            one exists. If it does, then the Region you called this operation in replicates its\n            index information to the Region specified in this response value. Not present if there\n            isn't an aggregator index in the account.</p>"
+                        "smithy.api#documentation": "<p>This response value is present only if this index is <code>Type=LOCAL</code>.</p>\n         <p>The Amazon Web Services Region that contains the aggregator index, if one exists. If an aggregator index\n            does exist then the Region in which you called this operation replicates its index\n            information to the Region specified in this response value. </p>"
                     }
                 },
                 "CreatedAt": {
@@ -1364,14 +1364,14 @@
                         "x-amz-source-account"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon Web Services Resource Explorer is a resource search and discovery service. By using Resource Explorer, you can\n            explore your resources using an internet search engine-like experience. Examples of\n            resources include Amazon Relational Database Service (Amazon RDS) instances, Amazon Simple Storage Service (Amazon S3) buckets, or Amazon DynamoDB\n            tables. You can search for your resources using resource metadata like names, tags, and\n            IDs. Resource Explorer can search across all of the Amazon Web Services Regions in your account in which you turn\n            the service on, to simplify your cross-Region workloads.</p>\n         <p>Resource Explorer scans the resources in each of the Amazon Web Services Regions in your Amazon Web Services account in which\n            you turn on Resource Explorer. Resource Explorer <a href=\"https://docs.aws.amazon.com/arexug/mainline/getting-started-terms-and-concepts.html#term-index\">creates and\n                maintains an index</a> in each Region, with the details of that Region's\n            resources.</p>\n         <p>You can <a href=\"https://docs.aws.amazon.com/arexug/mainline/manage-aggregator-region.html\">search across all of the indexed\n                Regions in your account</a> by designating one of your Amazon Web Services Regions to contain\n            the aggregator index for the account. When you <a href=\"https://docs.aws.amazon.com/arexug/mainline/manage-aggregator-region-turn-on.html\">promote a local index in\n                a Region to become the aggregator index for the account</a>, Resource Explorer automatically\n            replicates the index information from all local indexes in the other Regions to the\n            aggregator index. Therefore, the Region with the aggregator index has a copy of all resource\n            information for all Regions in the account where you turned on Resource Explorer. As a result,\n            views in the aggregator index Region include resources from all of the indexed Regions in your\n            account.</p>\n         <p>For more information about Amazon Web Services Resource Explorer, including how to enable and configure the\n            service, see the <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/\">Amazon Web Services Resource Explorer User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services Resource Explorer is a resource search and discovery service. By using Resource Explorer, you can\n            explore your resources using an internet search engine-like experience. Examples of\n            resources include Amazon Relational Database Service (Amazon RDS) instances, Amazon Simple Storage Service (Amazon S3) buckets, or Amazon DynamoDB\n            tables. You can search for your resources using resource metadata like names, tags, and\n            IDs. Resource Explorer can search across all of the Amazon Web Services Regions in your account in which you turn\n            the service on, to simplify your cross-Region workloads.</p>\n         <p>Resource Explorer scans the resources in each of the Amazon Web Services Regions in your Amazon Web Services account in which\n            you turn on Resource Explorer. Resource Explorer <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/getting-started-terms-and-concepts.html#term-index\">creates\n                and maintains an index</a> in each Region, with the details of that Region's\n            resources.</p>\n         <p>You can <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">search across all of the\n                indexed Regions in your account</a> by designating one of your Amazon Web Services Regions to\n            contain the aggregator index for the account. When you <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region-turn-on.html\">promote a local index\n                in a Region to become the aggregator index for the account</a>, Resource Explorer automatically\n            replicates the index information from all local indexes in the other Regions to the\n            aggregator index. Therefore, the Region with the aggregator index has a copy of all resource\n            information for all Regions in the account where you turned on Resource Explorer. As a result,\n            views in the aggregator index Region include resources from all of the indexed Regions in your\n            account.</p>\n         <p>For more information about Amazon Web Services Resource Explorer, including how to enable and configure the\n            service, see the <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/\">Amazon Web Services Resource Explorer User Guide</a>.</p>",
                 "smithy.api#title": "AWS Resource Explorer",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -1413,15 +1413,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -1617,6 +1608,58 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-2",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-2",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ap-south-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-south-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
                             "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
@@ -1624,9 +1667,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1637,9 +1680,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1650,9 +1693,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1663,9 +1706,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1676,9 +1719,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-south-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1689,9 +1732,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-south-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1702,9 +1745,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1715,9 +1758,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1728,9 +1771,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-2",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-south-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1741,9 +1784,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-south-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1754,9 +1797,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-2",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-south-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1767,9 +1810,61 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-south-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-south-2"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1780,9 +1875,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-central-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "me-central-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1793,9 +1888,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "me-central-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1806,9 +1901,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-central-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "me-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1819,9 +1914,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "me-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1832,9 +1927,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1845,9 +1940,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1858,9 +1953,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1871,9 +1966,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ca-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1884,9 +1979,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1897,9 +1992,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1910,9 +2005,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1923,9 +2018,61 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-central-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-2",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-2",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-2",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.eu-central-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "eu-central-2",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1936,9 +2083,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1949,9 +2096,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1962,9 +2109,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1975,9 +2122,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1988,9 +2135,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2001,9 +2148,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2014,9 +2161,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2027,9 +2174,61 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "af-south-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2040,9 +2239,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-north-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2053,9 +2252,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-north-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2066,9 +2265,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-north-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2079,9 +2278,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-north-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2092,9 +2291,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-3",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-3"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2105,9 +2304,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-3",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-3"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2118,9 +2317,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-3",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2131,9 +2330,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2144,9 +2343,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-2",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2157,9 +2356,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2170,9 +2369,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-2",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2183,9 +2382,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2196,9 +2395,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2209,9 +2408,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2222,9 +2421,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2235,9 +2434,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "eu-west-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2248,9 +2447,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-3",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-3"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2261,9 +2460,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-3"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2274,9 +2473,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-3",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2287,9 +2486,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2300,9 +2499,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2313,9 +2512,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2326,9 +2525,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2339,9 +2538,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2352,9 +2551,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2365,9 +2564,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2378,9 +2577,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2391,9 +2590,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-northeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2404,9 +2603,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-south-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "me-south-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2417,9 +2616,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "me-south-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2430,9 +2629,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-south-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2443,9 +2642,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "me-south-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2456,9 +2655,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "sa-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "sa-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2469,9 +2668,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "sa-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "sa-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2482,9 +2681,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "sa-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2495,9 +2694,217 @@
                                 }
                             },
                             "params": {
+                                "Region": "sa-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-east-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ca-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-west-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ca-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ca-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-west-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ca-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ca-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2508,9 +2915,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2521,9 +2928,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2534,9 +2941,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2547,9 +2954,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2560,9 +2967,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2573,9 +2980,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2586,9 +2993,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2599,9 +3006,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2612,9 +3019,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-3",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-3"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2625,9 +3032,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-3"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2638,9 +3045,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-3",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2651,9 +3058,113 @@
                                 }
                             },
                             "params": {
+                                "Region": "ap-southeast-3",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-4 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ap-southeast-4.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-5 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ap-southeast-5.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-5",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-5 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ap-southeast-5.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-5",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-5 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ap-southeast-5.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-5",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-5 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ap-southeast-5.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-5",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2664,9 +3175,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2677,9 +3188,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2690,9 +3201,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2703,9 +3214,61 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-6 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ap-southeast-6.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-6",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-6 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.ap-southeast-6.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-6",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-6 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ap-southeast-6.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-6",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-6 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.ap-southeast-6.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "ap-southeast-6",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2716,9 +3279,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2729,9 +3292,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -2742,9 +3305,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2755,9 +3318,61 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-2",
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false,
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true,
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://resource-explorer-2.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false,
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -2768,9 +3383,9 @@
                                 }
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2780,9 +3395,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
+                                "Region": "us-east-1",
                                 "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -3235,7 +3850,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the type of the index from one of the following types to the other. For more\n            information about indexes and the role they perform in Amazon Web Services Resource Explorer, see <a href=\"https://docs.aws.amazon.com/arexug/mainline/manage-aggregator-region.html\">Turning on\n                cross-Region search by creating an aggregator index</a> in the\n                <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>AGGREGATOR</code> index type</b>\n               </p>\n               <p>The index contains information about resources from all Amazon Web Services Regions in the\n                    Amazon Web Services account in which you've created a Resource Explorer index. Resource information from\n                    all other Regions is replicated to this Region's index.</p>\n               <p>When you change the index type to <code>AGGREGATOR</code>, Resource Explorer turns on\n                    replication of all discovered resource information from the other Amazon Web Services Regions\n                    in your account to this index. You can then, from this Region only, perform\n                    resource search queries that span all Amazon Web Services Regions in the Amazon Web Services account.\n                    Turning on replication from all other Regions is performed by asynchronous\n                    background tasks. You can check the status of the asynchronous tasks by using\n                    the <a>GetIndex</a> operation. When the asynchronous tasks complete,\n                    the <code>Status</code> response of that operation changes from\n                        <code>UPDATING</code> to <code>ACTIVE</code>. After that, you can start to\n                    see results from other Amazon Web Services Regions in query results. However, it can take\n                    several hours for replication from all other Regions to complete.</p>\n               <important>\n                  <p>You can have only one aggregator index per Amazon Web Services account. Before you can\n                        promote a different index to be the aggregator index for the account, you must\n                        first demote the existing aggregator index to type <code>LOCAL</code>.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>LOCAL</code> index type</b>\n               </p>\n               <p>The index contains information about resources in only the Amazon Web Services Region in\n                    which the index exists. If an aggregator index in another Region exists, then\n                    information in this local index is replicated to the aggregator index.</p>\n               <p>When you change the index type to <code>LOCAL</code>, Resource Explorer turns off the\n                    replication of resource information from all other Amazon Web Services Regions in the\n                    Amazon Web Services account to this Region. The aggregator index remains in the\n                        <code>UPDATING</code> state until all replication with other Regions\n                    successfully stops. You can check the status of the asynchronous task by using\n                    the <a>GetIndex</a> operation. When Resource Explorer successfully stops all\n                    replication with other Regions, the <code>Status</code> response of that\n                    operation changes from <code>UPDATING</code> to <code>ACTIVE</code>. Separately,\n                    the resource information from other Regions that was previously stored in the\n                    index is deleted within 30 days by another background task. Until that\n                    asynchronous task completes, some results from other Regions can continue to\n                    appear in search results.</p>\n               <important>\n                  <p>After you demote an aggregator index to a local index, you must wait\n                        24 hours before you can promote another index to be the new\n                        aggregator index for the account.</p>\n               </important>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Changes the type of the index from one of the following types to the other. For more\n            information about indexes and the role they perform in Amazon Web Services Resource Explorer, see <a href=\"https://docs.aws.amazon.com/resource-explorer/latest/userguide/manage-aggregator-region.html\">Turning on\n                cross-Region search by creating an aggregator index</a> in the\n                <i>Amazon Web Services Resource Explorer User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>AGGREGATOR</code> index type</b>\n               </p>\n               <p>The index contains information about resources from all Amazon Web Services Regions in the\n                    Amazon Web Services account in which you've created a Resource Explorer index. Resource information from\n                    all other Regions is replicated to this Region's index.</p>\n               <p>When you change the index type to <code>AGGREGATOR</code>, Resource Explorer turns on\n                    replication of all discovered resource information from the other Amazon Web Services Regions\n                    in your account to this index. You can then, from this Region only, perform\n                    resource search queries that span all Amazon Web Services Regions in the Amazon Web Services account.\n                    Turning on replication from all other Regions is performed by asynchronous\n                    background tasks. You can check the status of the asynchronous tasks by using\n                    the <a>GetIndex</a> operation. When the asynchronous tasks complete,\n                    the <code>Status</code> response of that operation changes from\n                        <code>UPDATING</code> to <code>ACTIVE</code>. After that, you can start to\n                    see results from other Amazon Web Services Regions in query results. However, it can take\n                    several hours for replication from all other Regions to complete.</p>\n               <important>\n                  <p>You can have only one aggregator index per Amazon Web Services account. Before you can\n                        promote a different index to be the aggregator index for the account, you must\n                        first demote the existing aggregator index to type <code>LOCAL</code>.</p>\n               </important>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>LOCAL</code> index type</b>\n               </p>\n               <p>The index contains information about resources in only the Amazon Web Services Region in\n                    which the index exists. If an aggregator index in another Region exists, then\n                    information in this local index is replicated to the aggregator index.</p>\n               <p>When you change the index type to <code>LOCAL</code>, Resource Explorer turns off the\n                    replication of resource information from all other Amazon Web Services Regions in the\n                    Amazon Web Services account to this Region. The aggregator index remains in the\n                        <code>UPDATING</code> state until all replication with other Regions\n                    successfully stops. You can check the status of the asynchronous task by using\n                    the <a>GetIndex</a> operation. When Resource Explorer successfully stops all\n                    replication with other Regions, the <code>Status</code> response of that\n                    operation changes from <code>UPDATING</code> to <code>ACTIVE</code>. Separately,\n                    the resource information from other Regions that was previously stored in the\n                    index is deleted within 30 days by another background task. Until that\n                    asynchronous task completes, some results from other Regions can continue to\n                    appear in search results.</p>\n               <important>\n                  <p>After you demote an aggregator index to a local index, you must wait\n                        24 hours before you can promote another index to be the new\n                        aggregator index for the account.</p>\n               </important>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/UpdateIndexType"

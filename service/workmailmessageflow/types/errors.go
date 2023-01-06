@@ -25,6 +25,8 @@ import (
 type InvalidContentLocation struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -37,13 +39,20 @@ func (e *InvalidContentLocation) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidContentLocation) ErrorCode() string             { return "InvalidContentLocation" }
+func (e *InvalidContentLocation) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidContentLocation"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidContentLocation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested email is not eligible for update. This is usually the case for a
 // redirected email.
 type MessageFrozen struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -57,13 +66,20 @@ func (e *MessageFrozen) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MessageFrozen) ErrorCode() string             { return "MessageFrozen" }
+func (e *MessageFrozen) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MessageFrozen"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MessageFrozen) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested email could not be updated due to an error in the MIME content.
 // Check the error message for more information about what caused the error.
 type MessageRejected struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -77,12 +93,19 @@ func (e *MessageRejected) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MessageRejected) ErrorCode() string             { return "MessageRejected" }
+func (e *MessageRejected) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MessageRejected"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MessageRejected) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested email message is not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -96,5 +119,10 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

@@ -25,26 +25,24 @@ import (
 // connection information is returned. A claimed game server's utilization status
 // remains AVAILABLE while the claim status is set to CLAIMED for up to 60 seconds.
 // This time period gives the game server time to update its status to UTILIZED
-// (using UpdateGameServer) once players join. If the game server's status is not
-// updated within 60 seconds, the game server reverts to unclaimed status and is
-// available to be claimed by another request. The claim time period is a fixed
-// value and is not configurable. If you try to claim a specific game server, this
-// request will fail in the following cases:
+// after players join. If the game server's status is not updated within 60
+// seconds, the game server reverts to unclaimed status and is available to be
+// claimed by another request. The claim time period is a fixed value and is not
+// configurable. If you try to claim a specific game server, this request will fail
+// in the following cases:
 //
-// * If the game server utilization
-// status is UTILIZED.
+// * If the game server utilization status is UTILIZED.
 //
-// * If the game server claim status is CLAIMED.
+// *
+// If the game server claim status is CLAIMED.
 //
-// When
-// claiming a specific game server, this request will succeed even if the game
-// server is running on an instance in DRAINING status. To avoid this, first check
-// the instance status by calling DescribeGameServerInstances. Learn more GameLift
-// FleetIQ Guide
+// When claiming a specific game
+// server, this request will succeed even if the game server is running on an
+// instance in DRAINING status. To avoid this, first check the instance status by
+// calling DescribeGameServerInstances
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameServerInstances.html)
+// . Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related actions RegisterGameServer | ListGameServers | ClaimGameServer |
-// DescribeGameServer | UpdateGameServer | DeregisterGameServer | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) ClaimGameServer(ctx context.Context, params *ClaimGameServerInput, optFns ...func(*Options)) (*ClaimGameServerOutput, error) {
 	if params == nil {
 		params = &ClaimGameServerInput{}
@@ -63,16 +61,15 @@ func (c *Client) ClaimGameServer(ctx context.Context, params *ClaimGameServerInp
 type ClaimGameServerInput struct {
 
 	// A unique identifier for the game server group where the game server is running.
-	// Use either the GameServerGroup name or ARN value. If you are not specifying a
-	// game server to claim, this value identifies where you want GameLift FleetIQ to
-	// look for an available game server to claim.
+	// If you are not specifying a game server to claim, this value identifies where
+	// you want GameLift FleetIQ to look for an available game server to claim.
 	//
 	// This member is required.
 	GameServerGroupName *string
 
 	// A set of custom game server properties, formatted as a single string value. This
 	// data is passed to a game client or service when it requests information on game
-	// servers using ListGameServers or ClaimGameServer.
+	// servers.
 	GameServerData *string
 
 	// A custom string that uniquely identifies the game server to claim. If this

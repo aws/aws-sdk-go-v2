@@ -11,16 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers or updates a scalable target. A scalable target is a resource that
-// Application Auto Scaling can scale out and scale in. Scalable targets are
-// uniquely identified by the combination of resource ID, scalable dimension, and
-// namespace. When you register a new scalable target, you must specify values for
-// minimum and maximum capacity. Current capacity will be adjusted within the
-// specified range when scaling starts. Application Auto Scaling scaling policies
-// will not scale capacity to values that are outside of this range. After you
-// register a scalable target, you do not need to register it again to use other
-// Application Auto Scaling operations. To see which resources have been
-// registered, use DescribeScalableTargets
+// Registers or updates a scalable target, the resource that you want to scale.
+// Scalable targets are uniquely identified by the combination of resource ID,
+// scalable dimension, and namespace, which represents some capacity dimension of
+// the underlying service. When you register a new scalable target, you must
+// specify values for the minimum and maximum capacity. If the specified resource
+// is not active in the target service, this operation does not change the
+// resource's current capacity. Otherwise, it changes the resource's current
+// capacity to a value that is inside of this range. If you choose to add a scaling
+// policy, current capacity is adjustable within the specified range when scaling
+// starts. Application Auto Scaling scaling policies will not scale capacity to
+// values that are outside of the minimum and maximum range. After you register a
+// scalable target, you do not need to register it again to use other Application
+// Auto Scaling operations. To see which resources have been registered, use
+// DescribeScalableTargets
 // (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalableTargets.html).
 // You can also view the scaling policies for a service namespace by using
 // DescribeScalableTargets
@@ -167,7 +171,7 @@ type RegisterScalableTargetInput struct {
 	// PostgreSQL-compatible edition.
 	//
 	// * sagemaker:variant:DesiredInstanceCount - The
-	// number of EC2 instances for an SageMaker model endpoint variant.
+	// number of EC2 instances for a SageMaker model endpoint variant.
 	//
 	// *
 	// custom-resource:ResourceType:Property - The scalable dimension for a custom
@@ -223,7 +227,7 @@ type RegisterScalableTargetInput struct {
 	// own default quotas for the maximum capacity of the resource. If you want to
 	// specify a higher limit, you can request an increase. For more information,
 	// consult the documentation for that service. For information about the default
-	// quotas for each service, see Service Endpoints and Quotas
+	// quotas for each service, see Service endpoints and quotas
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html) in
 	// the Amazon Web Services General Reference.
 	MaxCapacity *int32
@@ -231,10 +235,35 @@ type RegisterScalableTargetInput struct {
 	// The minimum value that you plan to scale in to. When a scaling policy is in
 	// effect, Application Auto Scaling can scale in (contract) as needed to the
 	// minimum capacity limit in response to changing demand. This property is required
-	// when registering a new scalable target. For certain resources, the minimum value
-	// allowed is 0. This includes Lambda provisioned concurrency, Spot Fleet, ECS
-	// services, Aurora DB clusters, EMR clusters, and custom resources. For all other
-	// resources, the minimum value allowed is 1.
+	// when registering a new scalable target. For the following resources, the minimum
+	// value allowed is 0.
+	//
+	// * AppStream 2.0 fleets
+	//
+	// * Aurora DB clusters
+	//
+	// * ECS
+	// services
+	//
+	// * EMR clusters
+	//
+	// * Lambda provisioned concurrency
+	//
+	// * SageMaker endpoint
+	// variants
+	//
+	// * Spot Fleets
+	//
+	// * custom resources
+	//
+	// It's strongly recommended that you
+	// specify a value greater than 0. A value greater than 0 means that data points
+	// are continuously reported to CloudWatch that scaling policies can use to scale
+	// on a metric like average CPU utilization. For all other resources, the minimum
+	// allowed value depends on the type of resource that you are using. If you provide
+	// a value that is lower than what a resource can accept, an error occurs. In which
+	// case, the error message will provide the minimum value that the resource can
+	// accept.
 	MinCapacity *int32
 
 	// This parameter is required for services that do not support service-linked roles

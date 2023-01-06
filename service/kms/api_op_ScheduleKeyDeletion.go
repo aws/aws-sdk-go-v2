@@ -23,15 +23,7 @@ import (
 // is a destructive and potentially dangerous operation. When a KMS key is deleted,
 // all data that was encrypted under the KMS key is unrecoverable. (The only
 // exception is a multi-Region replica key.) To prevent the use of a KMS key
-// without deleting it, use DisableKey. If you schedule deletion of a KMS key from
-// a custom key store
-// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html),
-// when the waiting period expires, ScheduleKeyDeletion deletes the KMS key from
-// KMS. Then KMS makes a best effort to delete the key material from the associated
-// CloudHSM cluster. However, you might need to manually delete the orphaned key
-// material
-// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key)
-// from the cluster and its backups. You can schedule the deletion of a
+// without deleting it, use DisableKey. You can schedule the deletion of a
 // multi-Region primary key and its replica keys at any time. However, KMS will not
 // delete a multi-Region primary key with existing replica keys. If you schedule
 // the deletion of a primary key with replicas, its key state changes to
@@ -41,7 +33,20 @@ import (
 // to PendingDeletion and its waiting period (PendingWindowInDays) begins. For
 // details, see Deleting multi-Region keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-delete.html)
-// in the Key Management Service Developer Guide. For more information about
+// in the Key Management Service Developer Guide. When KMS deletes a KMS key from
+// an CloudHSM key store
+// (https://docs.aws.amazon.com/kms/latest/developerguide/delete-cmk-keystore.html),
+// it makes a best effort to delete the associated key material from the associated
+// CloudHSM cluster. However, you might need to manually delete the orphaned key
+// material
+// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-orphaned-key)
+// from the cluster and its backups. Deleting a KMS key from an external key store
+// (https://docs.aws.amazon.com/kms/latest/developerguide/delete-xks-key.html) has
+// no effect on the associated external key. However, for both types of custom key
+// stores, deleting a KMS key is destructive and irreversible. You cannot decrypt
+// ciphertext encrypted under the KMS key by using only its associated external key
+// or CloudHSM key. Also, you cannot recreate a KMS key in an external key store by
+// creating a new KMS key with the same key material. For more information about
 // scheduling a KMS key for deletion, see Deleting KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html) in
 // the Key Management Service Developer Guide. The KMS key that you use for this

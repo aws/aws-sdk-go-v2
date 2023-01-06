@@ -16,13 +16,6 @@ import (
 //
 // * Build a rule set
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
-//
-// Related
-// actions CreateMatchmakingConfiguration | DescribeMatchmakingConfigurations |
-// UpdateMatchmakingConfiguration | DeleteMatchmakingConfiguration |
-// CreateMatchmakingRuleSet | DescribeMatchmakingRuleSets |
-// ValidateMatchmakingRuleSet | DeleteMatchmakingRuleSet | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMatchmakingRuleSetInput, optFns ...func(*Options)) (*DeleteMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &DeleteMatchmakingRuleSetInput{}
@@ -38,7 +31,6 @@ func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMat
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DeleteMatchmakingRuleSetInput struct {
 
 	// A unique identifier for the matchmaking rule set to be deleted. (Note: The rule
@@ -51,7 +43,6 @@ type DeleteMatchmakingRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DeleteMatchmakingRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

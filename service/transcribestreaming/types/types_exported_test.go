@@ -14,6 +14,9 @@ func ExampleAudioStream_outputUsage() {
 	case *types.AudioStreamMemberAudioEvent:
 		_ = v.Value // Value is types.AudioEvent
 
+	case *types.AudioStreamMemberConfigurationEvent:
+		_ = v.Value // Value is types.ConfigurationEvent
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -23,7 +26,30 @@ func ExampleAudioStream_outputUsage() {
 	}
 }
 
+var _ *types.ConfigurationEvent
 var _ *types.AudioEvent
+
+func ExampleCallAnalyticsTranscriptResultStream_outputUsage() {
+	var union types.CallAnalyticsTranscriptResultStream
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CallAnalyticsTranscriptResultStreamMemberCategoryEvent:
+		_ = v.Value // Value is types.CategoryEvent
+
+	case *types.CallAnalyticsTranscriptResultStreamMemberUtteranceEvent:
+		_ = v.Value // Value is types.UtteranceEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CategoryEvent
+var _ *types.UtteranceEvent
 
 func ExampleMedicalTranscriptResultStream_outputUsage() {
 	var union types.MedicalTranscriptResultStream

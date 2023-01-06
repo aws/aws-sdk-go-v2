@@ -38,7 +38,7 @@ import (
 // Support plan to use the Amazon Web Services Support API.
 //
 // * If you call the
-// Amazon Web Services Support API from an account that does not have a Business,
+// Amazon Web Services Support API from an account that doesn't have a Business,
 // Enterprise On-Ramp, or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about
 // changing your support plan, see Amazon Web Services Support
@@ -93,9 +93,10 @@ type CreateCaseInput struct {
 	// If you don't specify a value, the default is technical.
 	IssueType *string
 
-	// The language in which Amazon Web Services Support handles the case. You must
+	// The language in which Amazon Web Services Support handles the case. Amazon Web
+	// Services Support currently supports English ("en") and Japanese ("ja"). You must
 	// specify the ISO 639-1 code for the language parameter if you want support in
-	// that language. Currently, English ("en") and Japanese ("ja") are supported.
+	// that language.
 	Language *string
 
 	// The code for the Amazon Web Services service. You can use the DescribeServices

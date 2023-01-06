@@ -80,6 +80,10 @@ type DescribeTrialComponentOutput struct {
 	// The Amazon Resource Name (ARN) of the source and, optionally, the job type.
 	Source *types.TrialComponentSource
 
+	// A list of ARNs and, if applicable, job types for multiple sources of an
+	// experiment run.
+	Sources []types.TrialComponentSource
+
 	// When the component started.
 	StartTime *time.Time
 

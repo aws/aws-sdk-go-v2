@@ -1,3 +1,20 @@
+# v1.19.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.18.8 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.18.7 (2022-12-02)
+
+* **Documentation**: This release adds the message payload-filtering feature to the SNS Subscribe, SetSubscriptionAttributes, and GetSubscriptionAttributes API actions
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.18.6 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.18.5 (2022-11-16)
 
 * No change notes available for this release.

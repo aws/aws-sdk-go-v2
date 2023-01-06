@@ -24,10 +24,10 @@ import (
 //
 // * Call this API
 // (UpdateRealtimeLogConfig) by providing the entire real-time log configuration,
-// including the parameters that you modified and those that you didn’t.
+// including the parameters that you modified and those that you didn't.
 //
 // You
-// cannot update a real-time log configuration’s Name or ARN.
+// cannot update a real-time log configuration's Name or ARN.
 func (c *Client) UpdateRealtimeLogConfig(ctx context.Context, params *UpdateRealtimeLogConfigInput, optFns ...func(*Options)) (*UpdateRealtimeLogConfigOutput, error) {
 	if params == nil {
 		params = &UpdateRealtimeLogConfigInput{}

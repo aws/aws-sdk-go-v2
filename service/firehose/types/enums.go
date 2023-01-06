@@ -2,6 +2,25 @@
 
 package types
 
+type AmazonOpenSearchServerlessS3BackupMode string
+
+// Enum values for AmazonOpenSearchServerlessS3BackupMode
+const (
+	AmazonOpenSearchServerlessS3BackupModeFailedDocumentsOnly AmazonOpenSearchServerlessS3BackupMode = "FailedDocumentsOnly"
+	AmazonOpenSearchServerlessS3BackupModeAllDocuments        AmazonOpenSearchServerlessS3BackupMode = "AllDocuments"
+)
+
+// Values returns all known values for AmazonOpenSearchServerlessS3BackupMode. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AmazonOpenSearchServerlessS3BackupMode) Values() []AmazonOpenSearchServerlessS3BackupMode {
+	return []AmazonOpenSearchServerlessS3BackupMode{
+		"FailedDocumentsOnly",
+		"AllDocuments",
+	}
+}
+
 type AmazonopensearchserviceIndexRotationPeriod string
 
 // Enum values for AmazonopensearchserviceIndexRotationPeriod

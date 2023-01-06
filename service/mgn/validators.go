@@ -10,6 +10,86 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpArchiveApplication struct {
+}
+
+func (*validateOpArchiveApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpArchiveApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ArchiveApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpArchiveApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpArchiveWave struct {
+}
+
+func (*validateOpArchiveWave) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpArchiveWave) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ArchiveWaveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpArchiveWaveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateApplications struct {
+}
+
+func (*validateOpAssociateApplications) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateApplications) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateApplicationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateApplicationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAssociateSourceServers struct {
+}
+
+func (*validateOpAssociateSourceServers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateSourceServers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateSourceServersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateSourceServersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpChangeServerLifeCycleState struct {
 }
 
@@ -25,6 +105,26 @@ func (m *validateOpChangeServerLifeCycleState) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpChangeServerLifeCycleStateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateApplication struct {
+}
+
+func (*validateOpCreateApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -65,6 +165,46 @@ func (m *validateOpCreateReplicationConfigurationTemplate) HandleInitialize(ctx 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateReplicationConfigurationTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateWave struct {
+}
+
+func (*validateOpCreateWave) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWave) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWaveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWaveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteApplication struct {
+}
+
+func (*validateOpDeleteApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,6 +310,26 @@ func (m *validateOpDeleteVcenterClient) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteWave struct {
+}
+
+func (*validateOpDeleteWave) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWave) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWaveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWaveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeJobLogItems struct {
 }
 
@@ -185,6 +345,46 @@ func (m *validateOpDescribeJobLogItems) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeJobLogItemsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateApplications struct {
+}
+
+func (*validateOpDisassociateApplications) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateApplications) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateApplicationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateApplicationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateSourceServers struct {
+}
+
+func (*validateOpDisassociateSourceServers) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateSourceServers) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateSourceServersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateSourceServersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +470,26 @@ func (m *validateOpGetReplicationConfiguration) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSourceServerActions struct {
+}
+
+func (*validateOpListSourceServerActions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSourceServerActions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSourceServerActionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSourceServerActionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -290,6 +510,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTemplateActions struct {
+}
+
+func (*validateOpListTemplateActions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTemplateActions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTemplateActionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTemplateActionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpMarkAsArchived struct {
 }
 
@@ -305,6 +545,86 @@ func (m *validateOpMarkAsArchived) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpMarkAsArchivedInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutSourceServerAction struct {
+}
+
+func (*validateOpPutSourceServerAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutSourceServerAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutSourceServerActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutSourceServerActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutTemplateAction struct {
+}
+
+func (*validateOpPutTemplateAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutTemplateAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutTemplateActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutTemplateActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveSourceServerAction struct {
+}
+
+func (*validateOpRemoveSourceServerAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveSourceServerAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveSourceServerActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveSourceServerActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveTemplateAction struct {
+}
+
+func (*validateOpRemoveTemplateAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveTemplateAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveTemplateActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveTemplateActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +750,46 @@ func (m *validateOpTerminateTargetInstances) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUnarchiveApplication struct {
+}
+
+func (*validateOpUnarchiveApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUnarchiveApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UnarchiveApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUnarchiveApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUnarchiveWave struct {
+}
+
+func (*validateOpUnarchiveWave) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUnarchiveWave) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UnarchiveWaveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUnarchiveWaveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUntagResource struct {
 }
 
@@ -445,6 +805,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateApplication struct {
+}
+
+func (*validateOpUpdateApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,8 +930,48 @@ func (m *validateOpUpdateSourceServerReplicationType) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateWave struct {
+}
+
+func (*validateOpUpdateWave) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateWave) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateWaveInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateWaveInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpArchiveApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpArchiveApplication{}, middleware.After)
+}
+
+func addOpArchiveWaveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpArchiveWave{}, middleware.After)
+}
+
+func addOpAssociateApplicationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateApplications{}, middleware.After)
+}
+
+func addOpAssociateSourceServersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateSourceServers{}, middleware.After)
+}
+
 func addOpChangeServerLifeCycleStateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpChangeServerLifeCycleState{}, middleware.After)
+}
+
+func addOpCreateApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateApplication{}, middleware.After)
 }
 
 func addOpCreateLaunchConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -560,6 +980,14 @@ func addOpCreateLaunchConfigurationTemplateValidationMiddleware(stack *middlewar
 
 func addOpCreateReplicationConfigurationTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReplicationConfigurationTemplate{}, middleware.After)
+}
+
+func addOpCreateWaveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWave{}, middleware.After)
+}
+
+func addOpDeleteApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteApplication{}, middleware.After)
 }
 
 func addOpDeleteJobValidationMiddleware(stack *middleware.Stack) error {
@@ -582,8 +1010,20 @@ func addOpDeleteVcenterClientValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDeleteVcenterClient{}, middleware.After)
 }
 
+func addOpDeleteWaveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWave{}, middleware.After)
+}
+
 func addOpDescribeJobLogItemsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJobLogItems{}, middleware.After)
+}
+
+func addOpDisassociateApplicationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateApplications{}, middleware.After)
+}
+
+func addOpDisassociateSourceServersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateSourceServers{}, middleware.After)
 }
 
 func addOpDisconnectFromServiceValidationMiddleware(stack *middleware.Stack) error {
@@ -602,12 +1042,36 @@ func addOpGetReplicationConfigurationValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpGetReplicationConfiguration{}, middleware.After)
 }
 
+func addOpListSourceServerActionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSourceServerActions{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListTemplateActionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTemplateActions{}, middleware.After)
+}
+
 func addOpMarkAsArchivedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpMarkAsArchived{}, middleware.After)
+}
+
+func addOpPutSourceServerActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutSourceServerAction{}, middleware.After)
+}
+
+func addOpPutTemplateActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutTemplateAction{}, middleware.After)
+}
+
+func addOpRemoveSourceServerActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveSourceServerAction{}, middleware.After)
+}
+
+func addOpRemoveTemplateActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveTemplateAction{}, middleware.After)
 }
 
 func addOpRetryDataReplicationValidationMiddleware(stack *middleware.Stack) error {
@@ -634,8 +1098,20 @@ func addOpTerminateTargetInstancesValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpTerminateTargetInstances{}, middleware.After)
 }
 
+func addOpUnarchiveApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUnarchiveApplication{}, middleware.After)
+}
+
+func addOpUnarchiveWaveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUnarchiveWave{}, middleware.After)
+}
+
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
 }
 
 func addOpUpdateLaunchConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -656,6 +1132,10 @@ func addOpUpdateReplicationConfigurationTemplateValidationMiddleware(stack *midd
 
 func addOpUpdateSourceServerReplicationTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSourceServerReplicationType{}, middleware.After)
+}
+
+func addOpUpdateWaveValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateWave{}, middleware.After)
 }
 
 func validateChangeServerLifeCycleStateSourceServerLifecycle(v *types.ChangeServerLifeCycleStateSourceServerLifecycle) error {
@@ -782,6 +1262,72 @@ func validateSsmParameterStoreParameters(v []types.SsmParameterStoreParameter) e
 	}
 }
 
+func validateOpArchiveApplicationInput(v *ArchiveApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArchiveApplicationInput"}
+	if v.ApplicationID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpArchiveWaveInput(v *ArchiveWaveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ArchiveWaveInput"}
+	if v.WaveID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaveID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateApplicationsInput(v *AssociateApplicationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateApplicationsInput"}
+	if v.WaveID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaveID"))
+	}
+	if v.ApplicationIDs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIDs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateSourceServersInput(v *AssociateSourceServersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateSourceServersInput"}
+	if v.ApplicationID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationID"))
+	}
+	if v.SourceServerIDs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerIDs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpChangeServerLifeCycleStateInput(v *ChangeServerLifeCycleStateInput) error {
 	if v == nil {
 		return nil
@@ -796,6 +1342,21 @@ func validateOpChangeServerLifeCycleStateInput(v *ChangeServerLifeCycleStateInpu
 		if err := validateChangeServerLifeCycleStateSourceServerLifecycle(v.LifeCycle); err != nil {
 			invalidParams.AddNested("LifeCycle", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateApplicationInput(v *CreateApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateApplicationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -855,6 +1416,36 @@ func validateOpCreateReplicationConfigurationTemplateInput(v *CreateReplicationC
 	}
 	if v.StagingAreaTags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StagingAreaTags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWaveInput(v *CreateWaveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWaveInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteApplicationInput(v *DeleteApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationInput"}
+	if v.ApplicationID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -938,6 +1529,21 @@ func validateOpDeleteVcenterClientInput(v *DeleteVcenterClientInput) error {
 	}
 }
 
+func validateOpDeleteWaveInput(v *DeleteWaveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWaveInput"}
+	if v.WaveID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaveID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeJobLogItemsInput(v *DescribeJobLogItemsInput) error {
 	if v == nil {
 		return nil
@@ -945,6 +1551,42 @@ func validateOpDescribeJobLogItemsInput(v *DescribeJobLogItemsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobLogItemsInput"}
 	if v.JobID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateApplicationsInput(v *DisassociateApplicationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateApplicationsInput"}
+	if v.WaveID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaveID"))
+	}
+	if v.ApplicationIDs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationIDs"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateSourceServersInput(v *DisassociateSourceServersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateSourceServersInput"}
+	if v.ApplicationID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationID"))
+	}
+	if v.SourceServerIDs == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerIDs"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1013,6 +1655,21 @@ func validateOpGetReplicationConfigurationInput(v *GetReplicationConfigurationIn
 	}
 }
 
+func validateOpListSourceServerActionsInput(v *ListSourceServerActionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSourceServerActionsInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -1028,6 +1685,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListTemplateActionsInput(v *ListTemplateActionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTemplateActionsInput"}
+	if v.LaunchConfigurationTemplateID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchConfigurationTemplateID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpMarkAsArchivedInput(v *MarkAsArchivedInput) error {
 	if v == nil {
 		return nil
@@ -1035,6 +1707,100 @@ func validateOpMarkAsArchivedInput(v *MarkAsArchivedInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MarkAsArchivedInput"}
 	if v.SourceServerID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutSourceServerActionInput(v *PutSourceServerActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutSourceServerActionInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
+	}
+	if v.DocumentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentIdentifier"))
+	}
+	if v.ActionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionID"))
+	}
+	if v.Parameters != nil {
+		if err := validateSsmDocumentParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutTemplateActionInput(v *PutTemplateActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutTemplateActionInput"}
+	if v.LaunchConfigurationTemplateID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchConfigurationTemplateID"))
+	}
+	if v.ActionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionName"))
+	}
+	if v.DocumentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentIdentifier"))
+	}
+	if v.ActionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionID"))
+	}
+	if v.Parameters != nil {
+		if err := validateSsmDocumentParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveSourceServerActionInput(v *RemoveSourceServerActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveSourceServerActionInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if v.ActionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveTemplateActionInput(v *RemoveTemplateActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveTemplateActionInput"}
+	if v.LaunchConfigurationTemplateID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchConfigurationTemplateID"))
+	}
+	if v.ActionID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1136,6 +1902,36 @@ func validateOpTerminateTargetInstancesInput(v *TerminateTargetInstancesInput) e
 	}
 }
 
+func validateOpUnarchiveApplicationInput(v *UnarchiveApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UnarchiveApplicationInput"}
+	if v.ApplicationID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUnarchiveWaveInput(v *UnarchiveWaveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UnarchiveWaveInput"}
+	if v.WaveID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaveID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	if v == nil {
 		return nil
@@ -1146,6 +1942,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationInput"}
+	if v.ApplicationID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1234,6 +2045,21 @@ func validateOpUpdateSourceServerReplicationTypeInput(v *UpdateSourceServerRepli
 	}
 	if len(v.ReplicationType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateWaveInput(v *UpdateWaveInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateWaveInput"}
+	if v.WaveID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WaveID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

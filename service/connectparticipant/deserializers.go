@@ -1776,6 +1776,11 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "MessageMetadata":
+			if err := awsRestjson1_deserializeDocumentMessageMetadata(&sv.MessageMetadata, value); err != nil {
+				return err
+			}
+
 		case "ParticipantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1809,6 +1814,143 @@ func awsRestjson1_deserializeDocumentItem(v **types.Item, value interface{}) err
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMessageMetadata(v **types.MessageMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MessageMetadata
+	if *v == nil {
+		sv = &types.MessageMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MessageId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChatItemId to be of type string, got %T instead", value)
+				}
+				sv.MessageId = ptr.String(jtv)
+			}
+
+		case "Receipts":
+			if err := awsRestjson1_deserializeDocumentReceipts(&sv.Receipts, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReceipt(v **types.Receipt, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Receipt
+	if *v == nil {
+		sv = &types.Receipt{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeliveredTimestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Instant to be of type string, got %T instead", value)
+				}
+				sv.DeliveredTimestamp = ptr.String(jtv)
+			}
+
+		case "ReadTimestamp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Instant to be of type string, got %T instead", value)
+				}
+				sv.ReadTimestamp = ptr.String(jtv)
+			}
+
+		case "RecipientParticipantId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantId to be of type string, got %T instead", value)
+				}
+				sv.RecipientParticipantId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReceipts(v *[]types.Receipt, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Receipt
+	if *v == nil {
+		cv = []types.Receipt{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Receipt
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentReceipt(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

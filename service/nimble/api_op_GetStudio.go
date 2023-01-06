@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// Get a Studio resource.
+// Get a studio resource.
 func (c *Client) GetStudio(ctx context.Context, params *GetStudioInput, optFns ...func(*Options)) (*GetStudioOutput, error) {
 	if params == nil {
 		params = &GetStudioInput{}

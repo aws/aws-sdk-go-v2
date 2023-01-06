@@ -47,16 +47,18 @@ type UpdateAnalysisInput struct {
 	// This member is required.
 	Name *string
 
-	// A source entity to use for the analysis that you're updating. This metadata
-	// structure contains details that describe a source template and one or more
-	// datasets.
-	//
-	// This member is required.
-	SourceEntity *types.AnalysisSourceEntity
+	// The definition of an analysis. A definition is the data model of all features in
+	// a Dashboard, Template, or Analysis.
+	Definition *types.AnalysisDefinition
 
 	// The parameter names and override values that you want to use. An analysis can
 	// have any parameter type, and some parameters might accept multiple values.
 	Parameters *types.Parameters
+
+	// A source entity to use for the analysis that you're updating. This metadata
+	// structure contains details that describe a source template and one or more
+	// datasets.
+	SourceEntity *types.AnalysisSourceEntity
 
 	// The Amazon Resource Name (ARN) for the theme to apply to the analysis that
 	// you're creating. To see the theme in the Amazon QuickSight console, make sure

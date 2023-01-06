@@ -1,3 +1,19 @@
+# v1.4.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.3.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.0 (2022-12-06)
+
+* **Feature**: This release adds the Tiering Pricing Rule feature.
+
+# v1.2.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.0 (2022-11-16)
 
 * **Feature**: This release adds a new feature BillingEntity pricing rule.

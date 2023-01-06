@@ -15,9 +15,7 @@ type As2ConnectorConfig struct {
 	// Specifies whether the AS2 file is compressed.
 	Compression CompressionEnum
 
-	// The algorithm that is used to encrypt the file. You can only specify NONE if the
-	// URL for your connector uses HTTPS. This ensures that no traffic is sent in clear
-	// text.
+	// The algorithm that is used to encrypt the file.
 	EncryptionAlgorithm EncryptionAlg
 
 	// A unique identifier for the AS2 local profile.
@@ -35,7 +33,7 @@ type As2ConnectorConfig struct {
 	MdnResponse MdnResponse
 
 	// The signing algorithm for the MDN response. If set to DEFAULT (or not set at
-	// all), the value for SigningAlgorithm is used.
+	// all), the value for SigningAlogorithm is used.
 	MdnSigningAlgorithm MdnSigningAlg
 
 	// Used as the Subject HTTP header attribute in AS2 messages that are being sent
@@ -104,6 +102,26 @@ type CustomStepDetails struct {
 
 	// Timeout, in seconds, for the step.
 	TimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+type DecryptStepDetails struct {
+
+	// Specifies the location for the file being copied. Only applicable for the Copy
+	// type of workflow steps.
+	//
+	// This member is required.
+	DestinationFileLocation *InputFileLocation
+
+	// This member is required.
+	Type EncryptionType
+
+	Name *string
+
+	OverwriteExisting OverwriteExisting
+
+	SourceFileLocation *string
 
 	noSmithyDocumentSerde
 }
@@ -640,9 +658,9 @@ type DescribedServer struct {
 	UserCount *int32
 
 	// Specifies the workflow ID for the workflow to assign and the execution role
-	// that's used for executing the workflow. In addition to a workflow to execute
-	// when a file is uploaded completely, WorkflowDetails can also contain a workflow
-	// ID (and execution role) for a workflow to execute on partial upload. A partial
+	// that's used for executing the workflow. In additon to a workflow to execute when
+	// a file is uploaded completely, WorkflowDeatails can also contain a workflow ID
+	// (and execution role) for a workflow to execute on partial upload. A partial
 	// upload occurs when a file is open when the session disconnects.
 	WorkflowDetails *WorkflowDetails
 
@@ -1559,9 +1577,9 @@ type UserDetails struct {
 }
 
 // Specifies the workflow ID for the workflow to assign and the execution role
-// that's used for executing the workflow. In addition to a workflow to execute
-// when a file is uploaded completely, WorkflowDetails can also contain a workflow
-// ID (and execution role) for a workflow to execute on partial upload. A partial
+// that's used for executing the workflow. In additon to a workflow to execute when
+// a file is uploaded completely, WorkflowDeatails can also contain a workflow ID
+// (and execution role) for a workflow to execute on partial upload. A partial
 // upload occurs when a file is open when the session disconnects.
 type WorkflowDetail struct {
 
@@ -1616,6 +1634,8 @@ type WorkflowStep struct {
 	// Details for a step that invokes a lambda function. Consists of the lambda
 	// function name, target, and timeout (in seconds).
 	CustomStepDetails *CustomStepDetails
+
+	DecryptStepDetails *DecryptStepDetails
 
 	// Details for a step that deletes the file.
 	DeleteStepDetails *DeleteStepDetails

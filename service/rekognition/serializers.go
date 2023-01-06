@@ -4118,6 +4118,31 @@ func awsAwsjson11_serializeDocumentKinesisVideoStreamStartSelector(v *types.Kine
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLabelDetectionFeatureList(v []types.LabelDetectionFeatureName, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLabelDetectionSettings(v *types.LabelDetectionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GeneralLabels != nil {
+		ok := object.Key("GeneralLabels")
+		if err := awsAwsjson11_serializeDocumentGeneralLabelsSettings(v.GeneralLabels, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNotificationChannel(v *types.NotificationChannel, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5440,6 +5465,11 @@ func awsAwsjson11_serializeOpDocumentGetLabelDetectionInput(v *GetLabelDetection
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AggregateBy) > 0 {
+		ok := object.Key("AggregateBy")
+		ok.String(string(v.AggregateBy))
+	}
+
 	if v.JobId != nil {
 		ok := object.Key("JobId")
 		ok.String(*v.JobId)
@@ -6038,6 +6068,13 @@ func awsAwsjson11_serializeOpDocumentStartLabelDetectionInput(v *StartLabelDetec
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.Features != nil {
+		ok := object.Key("Features")
+		if err := awsAwsjson11_serializeDocumentLabelDetectionFeatureList(v.Features, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JobTag != nil {
 		ok := object.Key("JobTag")
 		ok.String(*v.JobTag)
@@ -6064,6 +6101,13 @@ func awsAwsjson11_serializeOpDocumentStartLabelDetectionInput(v *StartLabelDetec
 	if v.NotificationChannel != nil {
 		ok := object.Key("NotificationChannel")
 		if err := awsAwsjson11_serializeDocumentNotificationChannel(v.NotificationChannel, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentLabelDetectionSettings(v.Settings, ok); err != nil {
 			return err
 		}
 	}

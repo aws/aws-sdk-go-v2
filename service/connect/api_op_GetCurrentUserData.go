@@ -30,9 +30,24 @@ func (c *Client) GetCurrentUserData(ctx context.Context, params *GetCurrentUserD
 
 type GetCurrentUserDataInput struct {
 
-	// Filters up to 100 Queues, or up to 9 ContactStates. The user data is retrieved
-	// only for those users who are associated with the queues and have contacts that
-	// are in the specified ContactState.
+	// The filters to apply to returned user data. You can filter up to the following
+	// limits:
+	//
+	// * Queues: 100
+	//
+	// * Routing profiles: 100
+	//
+	// * Agents: 100
+	//
+	// * Contact
+	// states: 9
+	//
+	// * User hierarchy groups: 1
+	//
+	// The user data is retrieved for only the
+	// specified values/resources in the filter. A maximum of one filter can be passed
+	// from queues, routing profiles, agents, and user hierarchy groups. Currently
+	// tagging is only supported on the resources that are passed in the filter.
 	//
 	// This member is required.
 	Filters *types.UserDataFilters
@@ -54,6 +69,9 @@ type GetCurrentUserDataInput struct {
 }
 
 type GetCurrentUserDataOutput struct {
+
+	// The total count of the result, regardless of the current page size.
+	ApproximateTotalCount *int64
 
 	// If there are additional results, this is the token for the next set of results.
 	NextToken *string

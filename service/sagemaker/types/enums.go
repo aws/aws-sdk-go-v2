@@ -554,11 +554,19 @@ type AutoMLMetricEnum string
 
 // Enum values for AutoMLMetricEnum
 const (
-	AutoMLMetricEnumAccuracy AutoMLMetricEnum = "Accuracy"
-	AutoMLMetricEnumMse      AutoMLMetricEnum = "MSE"
-	AutoMLMetricEnumF1       AutoMLMetricEnum = "F1"
-	AutoMLMetricEnumF1Macro  AutoMLMetricEnum = "F1macro"
-	AutoMLMetricEnumAuc      AutoMLMetricEnum = "AUC"
+	AutoMLMetricEnumAccuracy         AutoMLMetricEnum = "Accuracy"
+	AutoMLMetricEnumMse              AutoMLMetricEnum = "MSE"
+	AutoMLMetricEnumF1               AutoMLMetricEnum = "F1"
+	AutoMLMetricEnumF1Macro          AutoMLMetricEnum = "F1macro"
+	AutoMLMetricEnumAuc              AutoMLMetricEnum = "AUC"
+	AutoMLMetricEnumRmse             AutoMLMetricEnum = "RMSE"
+	AutoMLMetricEnumMae              AutoMLMetricEnum = "MAE"
+	AutoMLMetricEnumR2               AutoMLMetricEnum = "R2"
+	AutoMLMetricEnumBalancedAccuracy AutoMLMetricEnum = "BalancedAccuracy"
+	AutoMLMetricEnumPrecision        AutoMLMetricEnum = "Precision"
+	AutoMLMetricEnumPrecisionMacro   AutoMLMetricEnum = "PrecisionMacro"
+	AutoMLMetricEnumRecall           AutoMLMetricEnum = "Recall"
+	AutoMLMetricEnumRecallMacro      AutoMLMetricEnum = "RecallMacro"
 )
 
 // Values returns all known values for AutoMLMetricEnum. Note that this can be
@@ -571,6 +579,14 @@ func (AutoMLMetricEnum) Values() []AutoMLMetricEnum {
 		"F1",
 		"F1macro",
 		"AUC",
+		"RMSE",
+		"MAE",
+		"R2",
+		"BalancedAccuracy",
+		"Precision",
+		"PrecisionMacro",
+		"Recall",
+		"RecallMacro",
 	}
 }
 
@@ -1735,6 +1751,118 @@ func (Framework) Values() []Framework {
 	}
 }
 
+type HubContentSortBy string
+
+// Enum values for HubContentSortBy
+const (
+	HubContentSortByHubContentName   HubContentSortBy = "HubContentName"
+	HubContentSortByCreationTime     HubContentSortBy = "CreationTime"
+	HubContentSortByHubContentStatus HubContentSortBy = "HubContentStatus"
+)
+
+// Values returns all known values for HubContentSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HubContentSortBy) Values() []HubContentSortBy {
+	return []HubContentSortBy{
+		"HubContentName",
+		"CreationTime",
+		"HubContentStatus",
+	}
+}
+
+type HubContentStatus string
+
+// Enum values for HubContentStatus
+const (
+	HubContentStatusAvailable    HubContentStatus = "Available"
+	HubContentStatusImporting    HubContentStatus = "Importing"
+	HubContentStatusDeleting     HubContentStatus = "Deleting"
+	HubContentStatusImportFailed HubContentStatus = "ImportFailed"
+	HubContentStatusDeleteFailed HubContentStatus = "DeleteFailed"
+)
+
+// Values returns all known values for HubContentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HubContentStatus) Values() []HubContentStatus {
+	return []HubContentStatus{
+		"Available",
+		"Importing",
+		"Deleting",
+		"ImportFailed",
+		"DeleteFailed",
+	}
+}
+
+type HubContentType string
+
+// Enum values for HubContentType
+const (
+	HubContentTypeModel    HubContentType = "Model"
+	HubContentTypeNotebook HubContentType = "Notebook"
+)
+
+// Values returns all known values for HubContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HubContentType) Values() []HubContentType {
+	return []HubContentType{
+		"Model",
+		"Notebook",
+	}
+}
+
+type HubSortBy string
+
+// Enum values for HubSortBy
+const (
+	HubSortByHubName        HubSortBy = "HubName"
+	HubSortByCreationTime   HubSortBy = "CreationTime"
+	HubSortByHubStatus      HubSortBy = "HubStatus"
+	HubSortByAccountIdOwner HubSortBy = "AccountIdOwner"
+)
+
+// Values returns all known values for HubSortBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (HubSortBy) Values() []HubSortBy {
+	return []HubSortBy{
+		"HubName",
+		"CreationTime",
+		"HubStatus",
+		"AccountIdOwner",
+	}
+}
+
+type HubStatus string
+
+// Enum values for HubStatus
+const (
+	HubStatusInService    HubStatus = "InService"
+	HubStatusCreating     HubStatus = "Creating"
+	HubStatusUpdating     HubStatus = "Updating"
+	HubStatusDeleting     HubStatus = "Deleting"
+	HubStatusCreateFailed HubStatus = "CreateFailed"
+	HubStatusUpdateFailed HubStatus = "UpdateFailed"
+	HubStatusDeleteFailed HubStatus = "DeleteFailed"
+)
+
+// Values returns all known values for HubStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (HubStatus) Values() []HubStatus {
+	return []HubStatus{
+		"InService",
+		"Creating",
+		"Updating",
+		"Deleting",
+		"CreateFailed",
+		"UpdateFailed",
+		"DeleteFailed",
+	}
+}
+
 type HumanTaskUiStatus string
 
 // Enum values for HumanTaskUiStatus
@@ -2045,6 +2173,71 @@ func (InferenceExecutionMode) Values() []InferenceExecutionMode {
 	}
 }
 
+type InferenceExperimentStatus string
+
+// Enum values for InferenceExperimentStatus
+const (
+	InferenceExperimentStatusCreating  InferenceExperimentStatus = "Creating"
+	InferenceExperimentStatusCreated   InferenceExperimentStatus = "Created"
+	InferenceExperimentStatusUpdating  InferenceExperimentStatus = "Updating"
+	InferenceExperimentStatusRunning   InferenceExperimentStatus = "Running"
+	InferenceExperimentStatusStarting  InferenceExperimentStatus = "Starting"
+	InferenceExperimentStatusStopping  InferenceExperimentStatus = "Stopping"
+	InferenceExperimentStatusCompleted InferenceExperimentStatus = "Completed"
+	InferenceExperimentStatusCancelled InferenceExperimentStatus = "Cancelled"
+)
+
+// Values returns all known values for InferenceExperimentStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceExperimentStatus) Values() []InferenceExperimentStatus {
+	return []InferenceExperimentStatus{
+		"Creating",
+		"Created",
+		"Updating",
+		"Running",
+		"Starting",
+		"Stopping",
+		"Completed",
+		"Cancelled",
+	}
+}
+
+type InferenceExperimentStopDesiredState string
+
+// Enum values for InferenceExperimentStopDesiredState
+const (
+	InferenceExperimentStopDesiredStateCompleted InferenceExperimentStopDesiredState = "Completed"
+	InferenceExperimentStopDesiredStateCancelled InferenceExperimentStopDesiredState = "Cancelled"
+)
+
+// Values returns all known values for InferenceExperimentStopDesiredState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InferenceExperimentStopDesiredState) Values() []InferenceExperimentStopDesiredState {
+	return []InferenceExperimentStopDesiredState{
+		"Completed",
+		"Cancelled",
+	}
+}
+
+type InferenceExperimentType string
+
+// Enum values for InferenceExperimentType
+const (
+	InferenceExperimentTypeShadowMode InferenceExperimentType = "ShadowMode"
+)
+
+// Values returns all known values for InferenceExperimentType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InferenceExperimentType) Values() []InferenceExperimentType {
+	return []InferenceExperimentType{
+		"ShadowMode",
+	}
+}
+
 type InputMode string
 
 // Enum values for InputMode
@@ -2212,6 +2405,26 @@ func (InstanceType) Values() []InstanceType {
 		"ml.g5.12xlarge",
 		"ml.g5.24xlarge",
 		"ml.g5.48xlarge",
+	}
+}
+
+type JobType string
+
+// Enum values for JobType
+const (
+	JobTypeTraining       JobType = "TRAINING"
+	JobTypeInference      JobType = "INFERENCE"
+	JobTypeNotebookKernel JobType = "NOTEBOOK_KERNEL"
+)
+
+// Values returns all known values for JobType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobType) Values() []JobType {
+	return []JobType{
+		"TRAINING",
+		"INFERENCE",
+		"NOTEBOOK_KERNEL",
 	}
 }
 
@@ -2520,6 +2733,180 @@ func (ModelCacheSetting) Values() []ModelCacheSetting {
 	}
 }
 
+type ModelCardExportJobSortBy string
+
+// Enum values for ModelCardExportJobSortBy
+const (
+	ModelCardExportJobSortByName         ModelCardExportJobSortBy = "Name"
+	ModelCardExportJobSortByCreationTime ModelCardExportJobSortBy = "CreationTime"
+	ModelCardExportJobSortByStatus       ModelCardExportJobSortBy = "Status"
+)
+
+// Values returns all known values for ModelCardExportJobSortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCardExportJobSortBy) Values() []ModelCardExportJobSortBy {
+	return []ModelCardExportJobSortBy{
+		"Name",
+		"CreationTime",
+		"Status",
+	}
+}
+
+type ModelCardExportJobSortOrder string
+
+// Enum values for ModelCardExportJobSortOrder
+const (
+	ModelCardExportJobSortOrderAscending  ModelCardExportJobSortOrder = "Ascending"
+	ModelCardExportJobSortOrderDescending ModelCardExportJobSortOrder = "Descending"
+)
+
+// Values returns all known values for ModelCardExportJobSortOrder. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCardExportJobSortOrder) Values() []ModelCardExportJobSortOrder {
+	return []ModelCardExportJobSortOrder{
+		"Ascending",
+		"Descending",
+	}
+}
+
+type ModelCardExportJobStatus string
+
+// Enum values for ModelCardExportJobStatus
+const (
+	ModelCardExportJobStatusInProgress ModelCardExportJobStatus = "InProgress"
+	ModelCardExportJobStatusCompleted  ModelCardExportJobStatus = "Completed"
+	ModelCardExportJobStatusFailed     ModelCardExportJobStatus = "Failed"
+)
+
+// Values returns all known values for ModelCardExportJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCardExportJobStatus) Values() []ModelCardExportJobStatus {
+	return []ModelCardExportJobStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+	}
+}
+
+type ModelCardProcessingStatus string
+
+// Enum values for ModelCardProcessingStatus
+const (
+	ModelCardProcessingStatusDeleteInprogress  ModelCardProcessingStatus = "DeleteInProgress"
+	ModelCardProcessingStatusDeletePending     ModelCardProcessingStatus = "DeletePending"
+	ModelCardProcessingStatusContentDeleted    ModelCardProcessingStatus = "ContentDeleted"
+	ModelCardProcessingStatusExportjobsDeleted ModelCardProcessingStatus = "ExportJobsDeleted"
+	ModelCardProcessingStatusDeleteCompleted   ModelCardProcessingStatus = "DeleteCompleted"
+	ModelCardProcessingStatusDeleteFailed      ModelCardProcessingStatus = "DeleteFailed"
+)
+
+// Values returns all known values for ModelCardProcessingStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCardProcessingStatus) Values() []ModelCardProcessingStatus {
+	return []ModelCardProcessingStatus{
+		"DeleteInProgress",
+		"DeletePending",
+		"ContentDeleted",
+		"ExportJobsDeleted",
+		"DeleteCompleted",
+		"DeleteFailed",
+	}
+}
+
+type ModelCardSortBy string
+
+// Enum values for ModelCardSortBy
+const (
+	ModelCardSortByName         ModelCardSortBy = "Name"
+	ModelCardSortByCreationTime ModelCardSortBy = "CreationTime"
+)
+
+// Values returns all known values for ModelCardSortBy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCardSortBy) Values() []ModelCardSortBy {
+	return []ModelCardSortBy{
+		"Name",
+		"CreationTime",
+	}
+}
+
+type ModelCardSortOrder string
+
+// Enum values for ModelCardSortOrder
+const (
+	ModelCardSortOrderAscending  ModelCardSortOrder = "Ascending"
+	ModelCardSortOrderDescending ModelCardSortOrder = "Descending"
+)
+
+// Values returns all known values for ModelCardSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCardSortOrder) Values() []ModelCardSortOrder {
+	return []ModelCardSortOrder{
+		"Ascending",
+		"Descending",
+	}
+}
+
+type ModelCardStatus string
+
+// Enum values for ModelCardStatus
+const (
+	ModelCardStatusDraft         ModelCardStatus = "Draft"
+	ModelCardStatusPendingreview ModelCardStatus = "PendingReview"
+	ModelCardStatusApproved      ModelCardStatus = "Approved"
+	ModelCardStatusArchived      ModelCardStatus = "Archived"
+)
+
+// Values returns all known values for ModelCardStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCardStatus) Values() []ModelCardStatus {
+	return []ModelCardStatus{
+		"Draft",
+		"PendingReview",
+		"Approved",
+		"Archived",
+	}
+}
+
+type ModelCardVersionSortBy string
+
+// Enum values for ModelCardVersionSortBy
+const (
+	ModelCardVersionSortByVersion ModelCardVersionSortBy = "Version"
+)
+
+// Values returns all known values for ModelCardVersionSortBy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelCardVersionSortBy) Values() []ModelCardVersionSortBy {
+	return []ModelCardVersionSortBy{
+		"Version",
+	}
+}
+
+type ModelInfrastructureType string
+
+// Enum values for ModelInfrastructureType
+const (
+	ModelInfrastructureTypeRealTimeInference ModelInfrastructureType = "RealTimeInference"
+)
+
+// Values returns all known values for ModelInfrastructureType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelInfrastructureType) Values() []ModelInfrastructureType {
+	return []ModelInfrastructureType{
+		"RealTimeInference",
+	}
+}
+
 type ModelMetadataFilterType string
 
 // Enum values for ModelMetadataFilterType
@@ -2663,6 +3050,87 @@ func (ModelSortKey) Values() []ModelSortKey {
 	return []ModelSortKey{
 		"Name",
 		"CreationTime",
+	}
+}
+
+type ModelVariantAction string
+
+// Enum values for ModelVariantAction
+const (
+	ModelVariantActionRetain  ModelVariantAction = "Retain"
+	ModelVariantActionRemove  ModelVariantAction = "Remove"
+	ModelVariantActionPromote ModelVariantAction = "Promote"
+)
+
+// Values returns all known values for ModelVariantAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelVariantAction) Values() []ModelVariantAction {
+	return []ModelVariantAction{
+		"Retain",
+		"Remove",
+		"Promote",
+	}
+}
+
+type ModelVariantStatus string
+
+// Enum values for ModelVariantStatus
+const (
+	ModelVariantStatusCreating  ModelVariantStatus = "Creating"
+	ModelVariantStatusUpdating  ModelVariantStatus = "Updating"
+	ModelVariantStatusInService ModelVariantStatus = "InService"
+	ModelVariantStatusDeleting  ModelVariantStatus = "Deleting"
+	ModelVariantStatusDeleted   ModelVariantStatus = "Deleted"
+)
+
+// Values returns all known values for ModelVariantStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ModelVariantStatus) Values() []ModelVariantStatus {
+	return []ModelVariantStatus{
+		"Creating",
+		"Updating",
+		"InService",
+		"Deleting",
+		"Deleted",
+	}
+}
+
+type MonitoringAlertHistorySortKey string
+
+// Enum values for MonitoringAlertHistorySortKey
+const (
+	MonitoringAlertHistorySortKeyCreationTime MonitoringAlertHistorySortKey = "CreationTime"
+	MonitoringAlertHistorySortKeyStatus       MonitoringAlertHistorySortKey = "Status"
+)
+
+// Values returns all known values for MonitoringAlertHistorySortKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MonitoringAlertHistorySortKey) Values() []MonitoringAlertHistorySortKey {
+	return []MonitoringAlertHistorySortKey{
+		"CreationTime",
+		"Status",
+	}
+}
+
+type MonitoringAlertStatus string
+
+// Enum values for MonitoringAlertStatus
+const (
+	MonitoringAlertStatusInAlert MonitoringAlertStatus = "InAlert"
+	MonitoringAlertStatusOk      MonitoringAlertStatus = "OK"
+)
+
+// Values returns all known values for MonitoringAlertStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MonitoringAlertStatus) Values() []MonitoringAlertStatus {
+	return []MonitoringAlertStatus{
+		"InAlert",
+		"OK",
 	}
 }
 
@@ -3309,6 +3777,24 @@ func (ProcessingS3UploadMode) Values() []ProcessingS3UploadMode {
 	}
 }
 
+type Processor string
+
+// Enum values for Processor
+const (
+	ProcessorCpu Processor = "CPU"
+	ProcessorGpu Processor = "GPU"
+)
+
+// Values returns all known values for Processor. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Processor) Values() []Processor {
+	return []Processor{
+		"CPU",
+		"GPU",
+	}
+}
+
 type ProductionVariantAcceleratorType string
 
 // Enum values for ProductionVariantAcceleratorType
@@ -3875,6 +4361,8 @@ const (
 	ResourceTypeProject                  ResourceType = "Project"
 	ResourceTypeFeatureMetadata          ResourceType = "FeatureMetadata"
 	ResourceTypeHyperParameterTuningJob  ResourceType = "HyperParameterTuningJob"
+	ResourceTypeModelCard                ResourceType = "ModelCard"
+	ResourceTypeModel                    ResourceType = "Model"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -3895,6 +4383,8 @@ func (ResourceType) Values() []ResourceType {
 		"Project",
 		"FeatureMetadata",
 		"HyperParameterTuningJob",
+		"ModelCard",
+		"Model",
 	}
 }
 
@@ -4253,6 +4743,26 @@ func (SortExperimentsBy) Values() []SortExperimentsBy {
 	}
 }
 
+type SortInferenceExperimentsBy string
+
+// Enum values for SortInferenceExperimentsBy
+const (
+	SortInferenceExperimentsByName         SortInferenceExperimentsBy = "Name"
+	SortInferenceExperimentsByCreationTime SortInferenceExperimentsBy = "CreationTime"
+	SortInferenceExperimentsByStatus       SortInferenceExperimentsBy = "Status"
+)
+
+// Values returns all known values for SortInferenceExperimentsBy. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortInferenceExperimentsBy) Values() []SortInferenceExperimentsBy {
+	return []SortInferenceExperimentsBy{
+		"Name",
+		"CreationTime",
+		"Status",
+	}
+}
+
 type SortLineageGroupsBy string
 
 // Enum values for SortLineageGroupsBy
@@ -4358,6 +4868,52 @@ func (SortTrialsBy) Values() []SortTrialsBy {
 	return []SortTrialsBy{
 		"Name",
 		"CreationTime",
+	}
+}
+
+type SpaceSortKey string
+
+// Enum values for SpaceSortKey
+const (
+	SpaceSortKeyCreationTime     SpaceSortKey = "CreationTime"
+	SpaceSortKeyLastModifiedTime SpaceSortKey = "LastModifiedTime"
+)
+
+// Values returns all known values for SpaceSortKey. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SpaceSortKey) Values() []SpaceSortKey {
+	return []SpaceSortKey{
+		"CreationTime",
+		"LastModifiedTime",
+	}
+}
+
+type SpaceStatus string
+
+// Enum values for SpaceStatus
+const (
+	SpaceStatusDeleting     SpaceStatus = "Deleting"
+	SpaceStatusFailed       SpaceStatus = "Failed"
+	SpaceStatusInService    SpaceStatus = "InService"
+	SpaceStatusPending      SpaceStatus = "Pending"
+	SpaceStatusUpdating     SpaceStatus = "Updating"
+	SpaceStatusUpdateFailed SpaceStatus = "Update_Failed"
+	SpaceStatusDeleteFailed SpaceStatus = "Delete_Failed"
+)
+
+// Values returns all known values for SpaceStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SpaceStatus) Values() []SpaceStatus {
+	return []SpaceStatus{
+		"Deleting",
+		"Failed",
+		"InService",
+		"Pending",
+		"Updating",
+		"Update_Failed",
+		"Delete_Failed",
 	}
 }
 
@@ -4474,6 +5030,24 @@ func (StudioLifecycleConfigSortKey) Values() []StudioLifecycleConfigSortKey {
 		"CreationTime",
 		"LastModifiedTime",
 		"Name",
+	}
+}
+
+type TableFormat string
+
+// Enum values for TableFormat
+const (
+	TableFormatGlue    TableFormat = "Glue"
+	TableFormatIceberg TableFormat = "Iceberg"
+)
+
+// Values returns all known values for TableFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TableFormat) Values() []TableFormat {
+	return []TableFormat{
+		"Glue",
+		"Iceberg",
 	}
 }
 
@@ -5064,6 +5638,28 @@ func (VariantStatus) Values() []VariantStatus {
 		"Deleting",
 		"ActivatingTraffic",
 		"Baking",
+	}
+}
+
+type VendorGuidance string
+
+// Enum values for VendorGuidance
+const (
+	VendorGuidanceNotProvided  VendorGuidance = "NOT_PROVIDED"
+	VendorGuidanceStable       VendorGuidance = "STABLE"
+	VendorGuidanceToBeArchived VendorGuidance = "TO_BE_ARCHIVED"
+	VendorGuidanceArchived     VendorGuidance = "ARCHIVED"
+)
+
+// Values returns all known values for VendorGuidance. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VendorGuidance) Values() []VendorGuidance {
+	return []VendorGuidance{
+		"NOT_PROVIDED",
+		"STABLE",
+		"TO_BE_ARCHIVED",
+		"ARCHIVED",
 	}
 }
 

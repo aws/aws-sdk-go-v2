@@ -1,3 +1,19 @@
+# v1.18.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.17.0 (2022-12-23)
+
+* **Feature**: This release adds a missed AccessDeniedException type to several endpoints.
+
+# v1.16.13 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.12 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.16.11 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

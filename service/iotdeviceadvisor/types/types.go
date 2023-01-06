@@ -34,11 +34,23 @@ type GroupResult struct {
 	noSmithyDocumentSerde
 }
 
-// Gets Suite Definition Configuration.
+// Gets the suite definition configuration.
 type SuiteDefinitionConfiguration struct {
 
-	// Gets the device permission ARN.
+	// Gets the device permission ARN. This is a required parameter.
+	//
+	// This member is required.
 	DevicePermissionRoleArn *string
+
+	// Gets the test suite root group. This is a required parameter.
+	//
+	// This member is required.
+	RootGroup *string
+
+	// Gets the suite definition name. This is a required parameter.
+	//
+	// This member is required.
+	SuiteDefinitionName *string
 
 	// Gets the devices configured.
 	Devices []DeviceUnderTest
@@ -49,14 +61,8 @@ type SuiteDefinitionConfiguration struct {
 	// Verifies if the test suite is a long duration test.
 	IsLongDurationTest bool
 
-	// Gets the MQTT protocol that is configured in the suite definition.
+	// Sets the MQTT protocol that is configured in the suite definition.
 	Protocol Protocol
-
-	// Gets test suite root group.
-	RootGroup *string
-
-	// Gets Suite Definition Configuration name.
-	SuiteDefinitionName *string
 
 	noSmithyDocumentSerde
 }
@@ -91,13 +97,16 @@ type SuiteDefinitionInformation struct {
 // Gets suite run configuration.
 type SuiteRunConfiguration struct {
 
+	// Sets the primary device for the test suite run. This requires a thing ARN or a
+	// certificate ARN.
+	//
+	// This member is required.
+	PrimaryDevice *DeviceUnderTest
+
 	// TRUE if multiple test suites run in parallel.
 	ParallelRun bool
 
-	// Gets the primary device for suite run.
-	PrimaryDevice *DeviceUnderTest
-
-	// Gets test case list.
+	// Sets test case list.
 	SelectedTestList []string
 
 	noSmithyDocumentSerde

@@ -48,8 +48,6 @@ type DisableDomainTransferLockOutput struct {
 	// Identifier for tracking the progress of the request. To query the operation
 	// status, use GetOperationDetail
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html).
-	//
-	// This member is required.
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.

@@ -11,6 +11,8 @@ import (
 type AccessPointNotFoundException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,7 +25,12 @@ func (e *AccessPointNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessPointNotFoundException) ErrorCode() string             { return "LoadBalancerNotFound" }
+func (e *AccessPointNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LoadBalancerNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessPointNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified ARN does not refer to a valid SSL certificate in AWS Identity and
@@ -32,6 +39,8 @@ func (e *AccessPointNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // certificate is not fully available yet.
 type CertificateNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -45,13 +54,20 @@ func (e *CertificateNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CertificateNotFoundException) ErrorCode() string             { return "CertificateNotFound" }
+func (e *CertificateNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CertificateNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CertificateNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A request made by Elastic Load Balancing to another service exceeds the maximum
 // request rate permitted for your account.
 type DependencyThrottleException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -65,12 +81,19 @@ func (e *DependencyThrottleException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DependencyThrottleException) ErrorCode() string             { return "DependencyThrottle" }
+func (e *DependencyThrottleException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DependencyThrottle"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DependencyThrottleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified load balancer name already exists for this account.
 type DuplicateAccessPointNameException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -84,13 +107,20 @@ func (e *DuplicateAccessPointNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateAccessPointNameException) ErrorCode() string             { return "DuplicateLoadBalancerName" }
+func (e *DuplicateAccessPointNameException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DuplicateLoadBalancerName"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DuplicateAccessPointNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A listener already exists for the specified load balancer name and port, but
 // with a different instance port, protocol, or SSL certificate.
 type DuplicateListenerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -104,12 +134,19 @@ func (e *DuplicateListenerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateListenerException) ErrorCode() string             { return "DuplicateListener" }
+func (e *DuplicateListenerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DuplicateListener"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DuplicateListenerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A policy with the specified name already exists for this load balancer.
 type DuplicatePolicyNameException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -123,12 +160,19 @@ func (e *DuplicatePolicyNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicatePolicyNameException) ErrorCode() string             { return "DuplicatePolicyName" }
+func (e *DuplicatePolicyNameException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DuplicatePolicyName"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DuplicatePolicyNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -142,12 +186,19 @@ func (e *DuplicateTagKeysException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateTagKeysException) ErrorCode() string             { return "DuplicateTagKeys" }
+func (e *DuplicateTagKeysException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DuplicateTagKeys"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested configuration change is not valid.
 type InvalidConfigurationRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -162,7 +213,10 @@ func (e *InvalidConfigurationRequestException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidConfigurationRequestException) ErrorCode() string {
-	return "InvalidConfigurationRequest"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidConfigurationRequest"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidConfigurationRequestException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -171,6 +225,8 @@ func (e *InvalidConfigurationRequestException) ErrorFault() smithy.ErrorFault {
 // The specified endpoint is not valid.
 type InvalidEndPointException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -184,13 +240,20 @@ func (e *InvalidEndPointException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidEndPointException) ErrorCode() string             { return "InvalidInstance" }
+func (e *InvalidEndPointException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInstance"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidEndPointException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified value for the schema is not valid. You can only specify a scheme
 // for load balancers in a VPC.
 type InvalidSchemeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -204,12 +267,19 @@ func (e *InvalidSchemeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSchemeException) ErrorCode() string             { return "InvalidScheme" }
+func (e *InvalidSchemeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidScheme"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidSchemeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the specified security groups do not exist.
 type InvalidSecurityGroupException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -223,12 +293,19 @@ func (e *InvalidSecurityGroupException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSecurityGroupException) ErrorCode() string             { return "InvalidSecurityGroup" }
+func (e *InvalidSecurityGroupException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidSecurityGroup"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidSecurityGroupException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified VPC has no associated Internet gateway.
 type InvalidSubnetException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -242,12 +319,19 @@ func (e *InvalidSubnetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSubnetException) ErrorCode() string             { return "InvalidSubnet" }
+func (e *InvalidSubnetException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidSubnet"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidSubnetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The load balancer does not have a listener configured at the specified port.
 type ListenerNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -261,12 +345,19 @@ func (e *ListenerNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ListenerNotFoundException) ErrorCode() string             { return "ListenerNotFound" }
+func (e *ListenerNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ListenerNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified load balancer attribute does not exist.
 type LoadBalancerAttributeNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -281,7 +372,10 @@ func (e *LoadBalancerAttributeNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *LoadBalancerAttributeNotFoundException) ErrorCode() string {
-	return "LoadBalancerAttributeNotFound"
+	if e.ErrorCodeOverride == nil {
+		return "LoadBalancerAttributeNotFound"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *LoadBalancerAttributeNotFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -290,6 +384,8 @@ func (e *LoadBalancerAttributeNotFoundException) ErrorFault() smithy.ErrorFault 
 // This operation is not allowed.
 type OperationNotPermittedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -303,12 +399,19 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermitted" }
+func (e *OperationNotPermittedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OperationNotPermitted"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the specified policies do not exist.
 type PolicyNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -322,12 +425,19 @@ func (e *PolicyNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyNotFoundException) ErrorCode() string             { return "PolicyNotFound" }
+func (e *PolicyNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "PolicyNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the specified policy types do not exist.
 type PolicyTypeNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -341,12 +451,19 @@ func (e *PolicyTypeNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyTypeNotFoundException) ErrorCode() string             { return "PolicyTypeNotFound" }
+func (e *PolicyTypeNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "PolicyTypeNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *PolicyTypeNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more of the specified subnets do not exist.
 type SubnetNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -360,12 +477,19 @@ func (e *SubnetNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *SubnetNotFoundException) ErrorCode() string             { return "SubnetNotFound" }
+func (e *SubnetNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "SubnetNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *SubnetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for the number of load balancers has been reached.
 type TooManyAccessPointsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -379,12 +503,19 @@ func (e *TooManyAccessPointsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyAccessPointsException) ErrorCode() string             { return "TooManyLoadBalancers" }
+func (e *TooManyAccessPointsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyLoadBalancers"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyAccessPointsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for the number of policies for this load balancer has been reached.
 type TooManyPoliciesException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -398,13 +529,20 @@ func (e *TooManyPoliciesException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyPoliciesException) ErrorCode() string             { return "TooManyPolicies" }
+func (e *TooManyPoliciesException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyPolicies"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyPoliciesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The quota for the number of tags that can be assigned to a load balancer has
 // been reached.
 type TooManyTagsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -418,12 +556,19 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTags" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTags"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified protocol or signature version is not supported.
 type UnsupportedProtocolException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -437,5 +582,10 @@ func (e *UnsupportedProtocolException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedProtocolException) ErrorCode() string             { return "UnsupportedProtocol" }
+func (e *UnsupportedProtocolException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedProtocol"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnsupportedProtocolException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

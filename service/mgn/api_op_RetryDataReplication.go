@@ -42,6 +42,9 @@ type RetryDataReplicationInput struct {
 
 type RetryDataReplicationOutput struct {
 
+	// Source server application ID.
+	ApplicationID *string
+
 	// Source server ARN.
 	Arn *string
 

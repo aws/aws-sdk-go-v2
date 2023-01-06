@@ -36,7 +36,7 @@ type Environment struct {
 	AirflowConfigurationOptions map[string]string
 
 	// The Apache Airflow version on your environment. Valid values: 1.10.12, 2.0.2,
-	// and 2.2.2.
+	// 2.2.2, and 2.4.3.
 	AirflowVersion *string
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment.

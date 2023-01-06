@@ -229,6 +229,24 @@ func (DeliveryStatus) Values() []DeliveryStatus {
 	}
 }
 
+type EvaluationMode string
+
+// Enum values for EvaluationMode
+const (
+	EvaluationModeDetective EvaluationMode = "DETECTIVE"
+	EvaluationModeProactive EvaluationMode = "PROACTIVE"
+)
+
+// Values returns all known values for EvaluationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationMode) Values() []EvaluationMode {
+	return []EvaluationMode{
+		"DETECTIVE",
+		"PROACTIVE",
+	}
+}
+
 type EventSource string
 
 // Enum values for EventSource
@@ -559,6 +577,23 @@ func (RemediationTargetType) Values() []RemediationTargetType {
 	}
 }
 
+type ResourceConfigurationSchemaType string
+
+// Enum values for ResourceConfigurationSchemaType
+const (
+	ResourceConfigurationSchemaTypeCfnResourceSchema ResourceConfigurationSchemaType = "CFN_RESOURCE_SCHEMA"
+)
+
+// Values returns all known values for ResourceConfigurationSchemaType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ResourceConfigurationSchemaType) Values() []ResourceConfigurationSchemaType {
+	return []ResourceConfigurationSchemaType{
+		"CFN_RESOURCE_SCHEMA",
+	}
+}
+
 type ResourceCountGroupKey string
 
 // Enum values for ResourceCountGroupKey
@@ -576,6 +611,26 @@ func (ResourceCountGroupKey) Values() []ResourceCountGroupKey {
 		"RESOURCE_TYPE",
 		"ACCOUNT_ID",
 		"AWS_REGION",
+	}
+}
+
+type ResourceEvaluationStatus string
+
+// Enum values for ResourceEvaluationStatus
+const (
+	ResourceEvaluationStatusInProgress ResourceEvaluationStatus = "IN_PROGRESS"
+	ResourceEvaluationStatusFailed     ResourceEvaluationStatus = "FAILED"
+	ResourceEvaluationStatusSucceeded  ResourceEvaluationStatus = "SUCCEEDED"
+)
+
+// Values returns all known values for ResourceEvaluationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceEvaluationStatus) Values() []ResourceEvaluationStatus {
+	return []ResourceEvaluationStatus{
+		"IN_PROGRESS",
+		"FAILED",
+		"SUCCEEDED",
 	}
 }
 

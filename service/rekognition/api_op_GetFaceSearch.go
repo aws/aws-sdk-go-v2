@@ -28,9 +28,7 @@ import (
 // about the matching faces in the input collection, person information (facial
 // attributes, bounding boxes, and person identifer) for the matched person, and
 // the time the person was matched in the video. GetFaceSearch only returns the
-// default
-//
-// facial attributes (BoundingBox, Confidence, Landmarks, Pose, and
+// default facial attributes (BoundingBox, Confidence, Landmarks, Pose, and
 // Quality). The other facial attributes listed in the Face object of the following
 // response syntax are not returned. For more information, see FaceDetail in the
 // Amazon Rekognition Developer Guide. By default, the Persons array is sorted by

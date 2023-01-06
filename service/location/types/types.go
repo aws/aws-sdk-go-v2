@@ -910,6 +910,20 @@ type MapConfiguration struct {
 	// more tiles are retrieved than when using either vector or raster tiles alone.
 	// Your charges will include all tiles retrieved.
 	//
+	// Valid Open Data (Preview) map
+	// styles
+	// (https://docs.aws.amazon.com/location/latest/developerguide/open-data.html):
+	//
+	// *
+	// VectorOpenDataStandardLight – The Open Data Standard Light (preview) map style
+	// provides a detailed basemap for the world suitable for website and mobile
+	// application use. The map includes highways major roads, minor roads, railways,
+	// water features, cities, parks, landmarks, building footprints, and
+	// administrative boundaries. Open Data maps is in preview. We may add, change, or
+	// remove features before announcing general availability. For more information,
+	// see Open Data is in preview release
+	// (https://docs.aws.amazon.com/location/latest/developerguide/open-data.html#open-data-preview).
+	//
 	// This member is required.
 	Style *string
 

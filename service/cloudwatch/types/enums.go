@@ -106,6 +106,22 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 	}
 }
 
+type EvaluationState string
+
+// Enum values for EvaluationState
+const (
+	EvaluationStatePartialData EvaluationState = "PARTIAL_DATA"
+)
+
+// Values returns all known values for EvaluationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EvaluationState) Values() []EvaluationState {
+	return []EvaluationState{
+		"PARTIAL_DATA",
+	}
+}
+
 type HistoryItemType string
 
 // Enum values for HistoryItemType
@@ -297,6 +313,7 @@ const (
 	StatusCodeComplete      StatusCode = "Complete"
 	StatusCodeInternalError StatusCode = "InternalError"
 	StatusCodePartialData   StatusCode = "PartialData"
+	StatusCodeForbidden     StatusCode = "Forbidden"
 )
 
 // Values returns all known values for StatusCode. Note that this can be expanded
@@ -307,5 +324,6 @@ func (StatusCode) Values() []StatusCode {
 		"Complete",
 		"InternalError",
 		"PartialData",
+		"Forbidden",
 	}
 }

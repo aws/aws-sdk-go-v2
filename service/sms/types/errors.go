@@ -12,6 +12,8 @@ import (
 type DryRunOperationException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *DryRunOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DryRunOperationException) ErrorCode() string             { return "DryRunOperationException" }
+func (e *DryRunOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DryRunOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DryRunOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal error occurred.
 type InternalError struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -43,12 +52,19 @@ func (e *InternalError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalError) ErrorCode() string             { return "InternalError" }
+func (e *InternalError) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalError"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // A specified parameter is not valid.
 type InvalidParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -62,12 +78,19 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A required parameter is missing.
 type MissingRequiredParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -82,13 +105,18 @@ func (e *MissingRequiredParameterException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MissingRequiredParameterException) ErrorCode() string {
-	return "MissingRequiredParameterException"
+	if e.ErrorCodeOverride == nil {
+		return "MissingRequiredParameterException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There are no connectors available.
 type NoConnectorsAvailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -102,12 +130,19 @@ func (e *NoConnectorsAvailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoConnectorsAvailableException) ErrorCode() string             { return "NoConnectorsAvailableException" }
+func (e *NoConnectorsAvailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoConnectorsAvailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoConnectorsAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This operation is not allowed.
 type OperationNotPermittedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -121,12 +156,19 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
+func (e *OperationNotPermittedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OperationNotPermittedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified replication job already exists.
 type ReplicationJobAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -141,7 +183,10 @@ func (e *ReplicationJobAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationJobAlreadyExistsException) ErrorCode() string {
-	return "ReplicationJobAlreadyExistsException"
+	if e.ErrorCodeOverride == nil {
+		return "ReplicationJobAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ReplicationJobAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -150,6 +195,8 @@ func (e *ReplicationJobAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 // The specified replication job does not exist.
 type ReplicationJobNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -164,7 +211,10 @@ func (e *ReplicationJobNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationJobNotFoundException) ErrorCode() string {
-	return "ReplicationJobNotFoundException"
+	if e.ErrorCodeOverride == nil {
+		return "ReplicationJobNotFoundException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ReplicationJobNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -172,6 +222,8 @@ func (e *ReplicationJobNotFoundException) ErrorFault() smithy.ErrorFault { retur
 // 24-hour period.
 type ReplicationRunLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -186,7 +238,10 @@ func (e *ReplicationRunLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReplicationRunLimitExceededException) ErrorCode() string {
-	return "ReplicationRunLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "ReplicationRunLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ReplicationRunLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -195,6 +250,8 @@ func (e *ReplicationRunLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The specified server cannot be replicated.
 type ServerCannotBeReplicatedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -209,13 +266,18 @@ func (e *ServerCannotBeReplicatedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServerCannotBeReplicatedException) ErrorCode() string {
-	return "ServerCannotBeReplicatedException"
+	if e.ErrorCodeOverride == nil {
+		return "ServerCannotBeReplicatedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ServerCannotBeReplicatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The service is temporarily unavailable.
 type TemporarilyUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -230,7 +292,10 @@ func (e *TemporarilyUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TemporarilyUnavailableException) ErrorCode() string {
-	return "TemporarilyUnavailableException"
+	if e.ErrorCodeOverride == nil {
+		return "TemporarilyUnavailableException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *TemporarilyUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
@@ -238,6 +303,8 @@ func (e *TemporarilyUnavailableException) ErrorFault() smithy.ErrorFault { retur
 // and ensure that you are using the correct access keys.
 type UnauthorizedOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -251,5 +318,10 @@ func (e *UnauthorizedOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnauthorizedOperationException) ErrorCode() string             { return "UnauthorizedOperationException" }
+func (e *UnauthorizedOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnauthorizedOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnauthorizedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

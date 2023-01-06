@@ -72,6 +72,11 @@ type UpdateDestinationInput struct {
 	// This member is required.
 	DestinationId *string
 
+	// Describes an update for a destination in the Serverless offering for Amazon
+	// OpenSearch Service.
+	AmazonOpenSearchServerlessDestinationUpdate *types.AmazonOpenSearchServerlessDestinationUpdate
+
+	// Describes an update for a destination in Amazon OpenSearch Service.
 	AmazonopensearchserviceDestinationUpdate *types.AmazonopensearchserviceDestinationUpdate
 
 	// Describes an update for a destination in Amazon ES.

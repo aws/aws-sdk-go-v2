@@ -5,9 +5,30 @@ package iotdeviceadvisor
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
+
+type validateOpCreateSuiteDefinition struct {
+}
+
+func (*validateOpCreateSuiteDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSuiteDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSuiteDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSuiteDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
 
 type validateOpDeleteSuiteDefinition struct {
 }
@@ -209,6 +230,10 @@ func (m *validateOpUpdateSuiteDefinition) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateSuiteDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSuiteDefinition{}, middleware.After)
+}
+
 func addOpDeleteSuiteDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteSuiteDefinition{}, middleware.After)
 }
@@ -247,6 +272,61 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateSuiteDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSuiteDefinition{}, middleware.After)
+}
+
+func validateSuiteDefinitionConfiguration(v *types.SuiteDefinitionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SuiteDefinitionConfiguration"}
+	if v.SuiteDefinitionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuiteDefinitionName"))
+	}
+	if v.RootGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RootGroup"))
+	}
+	if v.DevicePermissionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DevicePermissionRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSuiteRunConfiguration(v *types.SuiteRunConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SuiteRunConfiguration"}
+	if v.PrimaryDevice == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryDevice"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSuiteDefinitionInput(v *CreateSuiteDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSuiteDefinitionInput"}
+	if v.SuiteDefinitionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuiteDefinitionConfiguration"))
+	} else if v.SuiteDefinitionConfiguration != nil {
+		if err := validateSuiteDefinitionConfiguration(v.SuiteDefinitionConfiguration); err != nil {
+			invalidParams.AddNested("SuiteDefinitionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpDeleteSuiteDefinitionInput(v *DeleteSuiteDefinitionInput) error {
@@ -338,6 +418,13 @@ func validateOpStartSuiteRunInput(v *StartSuiteRunInput) error {
 	if v.SuiteDefinitionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SuiteDefinitionId"))
 	}
+	if v.SuiteRunConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuiteRunConfiguration"))
+	} else if v.SuiteRunConfiguration != nil {
+		if err := validateSuiteRunConfiguration(v.SuiteRunConfiguration); err != nil {
+			invalidParams.AddNested("SuiteRunConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -406,6 +493,13 @@ func validateOpUpdateSuiteDefinitionInput(v *UpdateSuiteDefinitionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateSuiteDefinitionInput"}
 	if v.SuiteDefinitionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SuiteDefinitionId"))
+	}
+	if v.SuiteDefinitionConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuiteDefinitionConfiguration"))
+	} else if v.SuiteDefinitionConfiguration != nil {
+		if err := validateSuiteDefinitionConfiguration(v.SuiteDefinitionConfiguration); err != nil {
+			invalidParams.AddNested("SuiteDefinitionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

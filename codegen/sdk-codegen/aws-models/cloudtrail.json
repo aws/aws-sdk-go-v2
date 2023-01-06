@@ -235,7 +235,7 @@
                 "Field": {
                     "target": "com.amazonaws.cloudtrail#SelectorField",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A field in an event record on which to filter events to be logged. Supported fields include <code>readOnly</code>, <code>eventCategory</code>, \n         <code>eventSource</code> (for management events), <code>eventName</code>, <code>resources.type</code>, and <code>resources.ARN</code>.\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>readOnly</code>\n                  </b> - Optional. Can be set to <code>Equals</code> a value of <code>true</code>\n            or <code>false</code>. If you do not add this field, CloudTrail logs both <code>read</code> and\n            <code>write</code> events. A value of <code>true</code> logs only <code>read</code> events. A value of <code>false</code> \n            logs only <code>write</code> events.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventSource</code>\n                  </b> - For filtering management events only. \n            This can be set only to <code>NotEquals</code> \n                  <code>kms.amazonaws.com</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventName</code>\n                  </b> - Can use any operator. You can use it to ﬁlter in\n            or ﬁlter out any data event logged to CloudTrail, such as <code>PutBucket</code> or <code>GetSnapshotBlock</code>. You can have multiple values\n            for this ﬁeld, separated by commas.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventCategory</code>\n                  </b> - This is required. It must be set to <code>Equals</code>, and \n            the value must be <code>Management</code> or <code>Data</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.type</code>\n                  </b> - This ﬁeld is required.\n                  <code>resources.type</code> can only use the <code>Equals</code> operator, and the\n            value can be one of the following:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AWS::S3::Object</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::Lambda::Function</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::DynamoDB::Table</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3Outposts::Object</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::ManagedBlockchain::Node</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3ObjectLambda::AccessPoint</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::EC2::Snapshot</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3::AccessPoint</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::DynamoDB::Stream</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::Glue::Table</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>\n               You can have only one <code>resources.type</code> ﬁeld per selector. To log data\n               events on more than one resource type, add another selector.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.ARN</code>\n                  </b> - You can use any operator with\n               <code>resources.ARN</code>, but if you use <code>Equals</code> or <code>NotEquals</code>, the\n               value must exactly match the ARN of a valid resource of the type you've speciﬁed in\n               the template as the value of resources.type. For example, if resources.type equals\n                  <code>AWS::S3::Object</code>, the ARN must be in one of the following formats. To\n               log all data events for all objects in a specific S3 bucket, use the\n                  <code>StartsWith</code> operator, and include only the bucket ARN as the matching value.</p>\n               <p>The trailing slash is intentional; do not exclude it. Replace the text between\n               less than and greater than symbols (<>) with resource-specific information. </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:::<bucket_name>/</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:::<bucket_name>/<object_path>/</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3::AccessPoint</code>, and the\n               operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in\n               one of the following formats. To log events on all objects in an S3 access point, we\n               recommend that you use only the access point ARN, don’t include the object path, and\n               use the <code>StartsWith</code> or <code>NotStartsWith</code> operators.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name></code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>/object/<object_path></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::Lambda::Function</code>, and the operator is set\n            to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:lambda:<region>:<account_ID>:function:<function_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::DynamoDB::Table</code>, and the operator is\n               set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the\n               following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3Outposts::Object</code>, and the operator \n               is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::ManagedBlockchain::Node</code>,\n               and the operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN\n               must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:managedblockchain:<region>:<account_ID>:nodes/<node_ID></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals\n                  <code>AWS::S3ObjectLambda::AccessPoint</code>, and the operator is set to\n                  <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following\n               format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3-object-lambda:<region>:<account_ID>:accesspoint/<access_point_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::EC2::Snapshot</code>, and the\n               operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in\n               the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:ec2:<region>::snapshot/<snapshot_ID></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::DynamoDB::Stream</code>, and the operator is set to\n               <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name>/stream/<date_time></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::Glue::Table</code>, and the operator is set to\n               <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:glue:<region>:<account_ID>:table/<database_name>/<table_name></code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n         A field in an event record on which to filter events to be logged. Supported fields include <code>readOnly</code>, <code>eventCategory</code>, \n         <code>eventSource</code> (for management events), <code>eventName</code>, <code>resources.type</code>, and <code>resources.ARN</code>.\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>readOnly</code>\n                  </b> - Optional. Can be set to <code>Equals</code> a value of <code>true</code>\n            or <code>false</code>. If you do not add this field, CloudTrail logs both <code>read</code> and\n            <code>write</code> events. A value of <code>true</code> logs only <code>read</code> events. A value of <code>false</code> \n            logs only <code>write</code> events.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventSource</code>\n                  </b> - For filtering management events only. \n            This can be set only to <code>NotEquals</code>\n                  <code>kms.amazonaws.com</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventName</code>\n                  </b> - Can use any operator. You can use it to ﬁlter in\n            or ﬁlter out any data event logged to CloudTrail, such as <code>PutBucket</code> or <code>GetSnapshotBlock</code>. You can have multiple values\n            for this ﬁeld, separated by commas.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventCategory</code>\n                  </b> - This is required. It must be set to <code>Equals</code>, and \n            the value must be <code>Management</code> or <code>Data</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.type</code>\n                  </b> - This ﬁeld is required.\n                  <code>resources.type</code> can only use the <code>Equals</code> operator, and the\n            value can be one of the following:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>AWS::S3::Object</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::Lambda::Function</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::DynamoDB::Table</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3Outposts::Object</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::ManagedBlockchain::Node</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3ObjectLambda::AccessPoint</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::EC2::Snapshot</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::S3::AccessPoint</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::DynamoDB::Stream</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>AWS::Glue::Table</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>\n               You can have only one <code>resources.type</code> ﬁeld per selector. To log data\n               events on more than one resource type, add another selector.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.ARN</code>\n                  </b> - You can use any operator with\n               <code>resources.ARN</code>, but if you use <code>Equals</code> or <code>NotEquals</code>, the\n               value must exactly match the ARN of a valid resource of the type you've speciﬁed in\n               the template as the value of resources.type. For example, if resources.type equals\n                  <code>AWS::S3::Object</code>, the ARN must be in one of the following formats. To\n               log all data events for all objects in a specific S3 bucket, use the\n                  <code>StartsWith</code> operator, and include only the bucket ARN as the matching value.</p>\n               <p>The trailing slash is intentional; do not exclude it. Replace the text between\n               less than and greater than symbols (<>) with resource-specific information. </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:::<bucket_name>/</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:::<bucket_name>/<object_path>/</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3::AccessPoint</code>, and the\n               operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in\n               one of the following formats. To log events on all objects in an S3 access point, we\n               recommend that you use only the access point ARN, don’t include the object path, and\n               use the <code>StartsWith</code> or <code>NotStartsWith</code> operators.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name></code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>/object/<object_path></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::Lambda::Function</code>, and the operator is set\n            to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:lambda:<region>:<account_ID>:function:<function_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::DynamoDB::Table</code>, and the operator is\n               set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the\n               following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3Outposts::Object</code>, and the operator \n               is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::ManagedBlockchain::Node</code>,\n               and the operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN\n               must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:managedblockchain:<region>:<account_ID>:nodes/<node_ID></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals\n                  <code>AWS::S3ObjectLambda::AccessPoint</code>, and the operator is set to\n                  <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following\n               format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3-object-lambda:<region>:<account_ID>:accesspoint/<access_point_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::EC2::Snapshot</code>, and the\n               operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in\n               the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:ec2:<region>::snapshot/<snapshot_ID></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::DynamoDB::Stream</code>, and the operator is set to\n               <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:dynamodb:<region>:<account_ID>:table/<table_name>/stream/<date_time></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::Glue::Table</code>, and the operator is set to\n               <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:glue:<region>:<account_ID>:table/<database_name>/<table_name></code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -679,7 +679,7 @@
                     "name": "cloudtrail"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>CloudTrail</fullname>\n         <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p>\n         <p>CloudTrail is a web service that records Amazon Web Services API calls for your Amazon Web Services account and delivers log files to an Amazon S3 bucket. \n         The recorded information includes the identity of the user, the start time of the Amazon Web Services API call, the source IP address, the request parameters, and the response elements returned by the service.</p> \n      \n         <note>\n            <p>As an alternative to the API,\n            you can use one of the Amazon Web Services SDKs, which consist of libraries and sample code for various\n         programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs\n         provide programmatic access to CloudTrail. For example, the SDKs\n         handle cryptographically signing requests, managing errors, and retrying requests\n         automatically. For more information about the Amazon Web Services SDKs, including how to download and install\n            them, see <a href=\"http://aws.amazon.com/tools/\">Tools to Build on Amazon Web Services</a>.</p> \n         </note> \n         <p>See the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html\">CloudTrail User \n         Guide</a> for information about the data that is included with each Amazon Web Services API call listed in the log files.</p>",
+                "smithy.api#documentation": "<fullname>CloudTrail</fullname>\n         <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p>\n         <p>CloudTrail is a web service that records Amazon Web Services API calls for your Amazon Web Services account and delivers log files to an Amazon S3 bucket. \n         The recorded information includes the identity of the user, the start time of the Amazon Web Services API call, the source IP address, the request parameters, and the response elements returned by the service.</p>\n         <note>\n            <p>As an alternative to the API,\n            you can use one of the Amazon Web Services SDKs, which consist of libraries and sample code for various\n         programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs\n         provide programmatic access to CloudTrail. For example, the SDKs\n         handle cryptographically signing requests, managing errors, and retrying requests\n         automatically. For more information about the Amazon Web Services SDKs, including how to download and install\n            them, see <a href=\"http://aws.amazon.com/tools/\">Tools to Build on Amazon Web Services</a>.</p>\n         </note>\n         <p>See the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html\">CloudTrail User \n         Guide</a> for information about the data that is included with each Amazon Web Services API call listed in the log files.</p>",
                 "smithy.api#title": "AWS CloudTrail",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://cloudtrail.amazonaws.com/doc/2013-11-01/"
@@ -689,7 +689,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -738,15 +738,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -922,12 +913,12 @@
                                                                         {
                                                                             "ref": "Region"
                                                                         },
-                                                                        "us-gov-west-1"
+                                                                        "us-gov-east-1"
                                                                     ]
                                                                 }
                                                             ],
                                                             "endpoint": {
-                                                                "url": "https://cloudtrail.us-gov-west-1.amazonaws.com",
+                                                                "url": "https://cloudtrail.us-gov-east-1.amazonaws.com",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -941,12 +932,12 @@
                                                                         {
                                                                             "ref": "Region"
                                                                         },
-                                                                        "us-gov-east-1"
+                                                                        "us-gov-west-1"
                                                                     ]
                                                                 }
                                                             ],
                                                             "endpoint": {
-                                                                "url": "https://cloudtrail.us-gov-east-1.amazonaws.com",
+                                                                "url": "https://cloudtrail.us-gov-west-1.amazonaws.com",
                                                                 "properties": {},
                                                                 "headers": {}
                                                             },
@@ -1048,8 +1039,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-south-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-south-2"
                             }
                         },
                         {
@@ -1061,8 +1052,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-south-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-south-2"
                             }
                         },
                         {
@@ -1074,8 +1065,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-south-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-south-2"
                             }
                         },
                         {
@@ -1087,8 +1078,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-south-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-south-2"
                             }
                         },
                         {
@@ -1100,8 +1091,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1113,8 +1104,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1126,8 +1117,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1139,8 +1130,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -1152,8 +1143,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -1165,8 +1156,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -1178,8 +1169,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -1191,8 +1182,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-south-1"
                             }
                         },
                         {
@@ -1204,8 +1195,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-south-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-south-2"
                             }
                         },
                         {
@@ -1217,8 +1208,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-south-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-south-2"
                             }
                         },
                         {
@@ -1230,8 +1221,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-south-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-south-2"
                             }
                         },
                         {
@@ -1243,8 +1234,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-south-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-south-2"
                             }
                         },
                         {
@@ -1256,8 +1247,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1269,8 +1260,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1282,8 +1273,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1295,8 +1286,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
                             }
                         },
                         {
@@ -1308,8 +1299,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "me-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -1321,8 +1312,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "me-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -1334,8 +1325,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "me-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -1347,8 +1338,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "me-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "me-central-1"
                             }
                         },
                         {
@@ -1360,8 +1351,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1373,8 +1364,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1386,8 +1377,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1399,8 +1390,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -1412,8 +1403,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1425,8 +1416,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1438,8 +1429,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1451,8 +1442,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -1462,8 +1453,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-iso-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-iso-west-1"
                             }
                         },
                         {
@@ -1475,8 +1466,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-iso-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-iso-west-1"
                             }
                         },
                         {
@@ -1486,8 +1477,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-iso-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-iso-west-1"
                             }
                         },
                         {
@@ -1499,8 +1490,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-iso-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-iso-west-1"
                             }
                         },
                         {
@@ -1512,8 +1503,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-2"
                             }
                         },
                         {
@@ -1525,8 +1516,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-2"
                             }
                         },
                         {
@@ -1538,8 +1529,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-2"
                             }
                         },
                         {
@@ -1551,8 +1542,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-2"
                             }
                         },
                         {
@@ -1564,8 +1555,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1577,8 +1568,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1590,8 +1581,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1603,8 +1594,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
                             }
                         },
                         {
@@ -1616,8 +1607,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1629,8 +1620,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1642,8 +1633,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1655,8 +1646,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -1668,8 +1659,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1681,8 +1672,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1694,8 +1685,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1707,8 +1698,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "af-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
                             }
                         },
                         {
@@ -1720,8 +1711,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1733,8 +1724,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1746,8 +1737,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1759,8 +1750,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-north-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
                             }
                         },
                         {
@@ -1772,8 +1763,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1785,8 +1776,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1798,8 +1789,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1811,8 +1802,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
                             }
                         },
                         {
@@ -1824,8 +1815,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1837,8 +1828,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1850,8 +1841,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1863,8 +1854,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -1876,8 +1867,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1889,8 +1880,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1902,8 +1893,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1915,8 +1906,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -1928,8 +1919,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1941,8 +1932,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1954,8 +1945,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1967,8 +1958,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-3"
                             }
                         },
                         {
@@ -1980,8 +1971,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -1993,8 +1984,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -2006,8 +1997,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -2019,8 +2010,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -2032,8 +2023,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -2045,8 +2036,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -2058,8 +2049,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -2071,8 +2062,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -2084,8 +2075,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -2097,8 +2088,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -2110,8 +2101,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -2123,8 +2114,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "me-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "me-south-1"
                             }
                         },
                         {
@@ -2136,8 +2127,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -2149,8 +2140,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -2162,8 +2153,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -2175,8 +2166,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "sa-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "sa-east-1"
                             }
                         },
                         {
@@ -2188,8 +2179,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -2201,8 +2192,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -2214,8 +2205,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -2227,8 +2218,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
                             }
                         },
                         {
@@ -2240,8 +2231,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -2253,8 +2244,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -2266,8 +2257,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -2279,8 +2270,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "cn-north-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "cn-north-1"
                             }
                         },
                         {
@@ -2292,8 +2283,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -2305,8 +2296,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -2318,8 +2309,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -2331,8 +2322,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
                             }
                         },
                         {
@@ -2344,8 +2335,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2357,8 +2348,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2370,8 +2361,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2383,8 +2374,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -2396,8 +2387,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2409,8 +2400,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2422,8 +2413,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2435,8 +2426,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -2446,8 +2437,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2459,8 +2450,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2470,8 +2461,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2483,8 +2474,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1"
                             }
                         },
                         {
@@ -2496,8 +2487,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -2509,8 +2500,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -2522,8 +2513,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -2535,8 +2526,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-3"
                             }
                         },
                         {
@@ -2548,8 +2539,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-4",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-4"
                             }
                         },
                         {
@@ -2561,8 +2552,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-4",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-4"
                             }
                         },
                         {
@@ -2574,8 +2565,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-4",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-4"
                             }
                         },
                         {
@@ -2587,8 +2578,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-4",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-4"
                             }
                         },
                         {
@@ -2600,8 +2591,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2613,8 +2604,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2626,8 +2617,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2639,8 +2630,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -2652,8 +2643,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2665,8 +2656,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2678,8 +2669,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2691,8 +2682,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
                             }
                         },
                         {
@@ -2704,8 +2695,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -2717,8 +2708,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -2730,8 +2721,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -2743,8 +2734,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "cn-northwest-1"
                             }
                         },
                         {
@@ -2754,8 +2745,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -2767,8 +2758,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -2778,8 +2769,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -2791,8 +2782,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1"
                             }
                         },
                         {
@@ -2804,8 +2795,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2816,8 +2807,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2828,8 +2819,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2904,6 +2895,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InsufficientEncryptionPolicyException"
+                },
+                {
+                    "target": "com.amazonaws.cloudtrail#InvalidEventSelectorsException"
                 },
                 {
                     "target": "com.amazonaws.cloudtrail#InvalidKmsKeyIdException"
@@ -3159,6 +3153,9 @@
                     "target": "com.amazonaws.cloudtrail#S3BucketDoesNotExistException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#TagsLimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#TrailAlreadyExistsException"
                 },
                 {
@@ -3345,13 +3342,13 @@
                 "Type": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type in which you want to log data events. You can specify\n         the following <i>basic</i> event selector resource types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS::S3::Object</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::Lambda::Function</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::DynamoDB::Table</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>The following resource types are also available through <i>advanced</i> event selectors.\n         Basic event selector resource types are valid in advanced event selectors, but\n         advanced event selector resource types are not valid in basic event selectors.\n         For more information, see <a>AdvancedFieldSelector$Field</a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS::S3Outposts::Object</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::ManagedBlockchain::Node</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::S3ObjectLambda::AccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::EC2::Snapshot</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::S3::AccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::DynamoDB::Stream</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::Glue::Table</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The resource type in which you want to log data events. You can specify\n         the following <i>basic</i> event selector resource types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS::S3::Object</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::Lambda::Function</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::DynamoDB::Table</code>\n               </p>\n            </li>\n         </ul>\n         <p>The following resource types are also available through <i>advanced</i> event selectors.\n         Basic event selector resource types are valid in advanced event selectors, but\n         advanced event selector resource types are not valid in basic event selectors.\n         For more information, see <a>AdvancedFieldSelector$Field</a>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS::S3Outposts::Object</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::ManagedBlockchain::Node</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::S3ObjectLambda::AccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::EC2::Snapshot</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::S3::AccessPoint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::DynamoDB::Stream</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AWS::Glue::Table</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Values": {
                     "target": "com.amazonaws.cloudtrail#DataResourceValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.</p>\n         <ul>\n            <li>\n               <p>To log data events for all objects in all S3 buckets in your Amazon Web Services account, specify the \n         prefix as <code>arn:aws:s3</code>.</p>\n               <note>\n                  <p>This also enables logging of data event activity performed by any user or role in your Amazon Web Services account, \n         even if that activity is performed on a bucket that belongs to another Amazon Web Services account.</p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for all objects in an S3 bucket, specify the bucket and an empty\n         object prefix such as <code>arn:aws:s3:::bucket-1/</code>. The trail logs data events for\n         all objects in this S3 bucket.</p>\n            </li>\n            <li>\n               <p>To log data events for specific objects, specify the S3 bucket and object prefix such\n         as <code>arn:aws:s3:::bucket-1/example-images</code>. The trail logs data events for\n         objects in this S3 bucket that match the prefix.</p>\n            </li>\n            <li>\n               <p>To log data events for all Lambda functions in your Amazon Web Services account, specify the prefix as\n                  <code>arn:aws:lambda</code>.</p>\n               <note>\n                  <p>This also enables logging of <code>Invoke</code> activity performed by any user or role in your Amazon Web Services account, \n         even if that activity is performed on a function that belongs to another Amazon Web Services account. </p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for a specific Lambda function, specify the function ARN.</p>\n               <note>\n                  <p>Lambda function ARNs are exact. For example, if you specify a \n            function ARN <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>, data events will\n            only be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>. They will\n            not be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld2</i>.</p>\n               </note> \n            </li>\n            <li>\n               <p>To log data events for all DynamoDB tables in your Amazon Web Services account, specify the prefix\n               as <code>arn:aws:dynamodb</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.</p>\n         <ul>\n            <li>\n               <p>To log data events for all objects in all S3 buckets in your Amazon Web Services account, specify the \n         prefix as <code>arn:aws:s3</code>.</p>\n               <note>\n                  <p>This also enables logging of data event activity performed by any user or role in your Amazon Web Services account, \n         even if that activity is performed on a bucket that belongs to another Amazon Web Services account.</p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for all objects in an S3 bucket, specify the bucket and an empty\n         object prefix such as <code>arn:aws:s3:::bucket-1/</code>. The trail logs data events for\n         all objects in this S3 bucket.</p>\n            </li>\n            <li>\n               <p>To log data events for specific objects, specify the S3 bucket and object prefix such\n         as <code>arn:aws:s3:::bucket-1/example-images</code>. The trail logs data events for\n         objects in this S3 bucket that match the prefix.</p>\n            </li>\n            <li>\n               <p>To log data events for all Lambda functions in your Amazon Web Services account, specify the prefix as\n                  <code>arn:aws:lambda</code>.</p>\n               <note>\n                  <p>This also enables logging of <code>Invoke</code> activity performed by any user or role in your Amazon Web Services account, \n         even if that activity is performed on a function that belongs to another Amazon Web Services account. </p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for a specific Lambda function, specify the function ARN.</p>\n               <note>\n                  <p>Lambda function ARNs are exact. For example, if you specify a \n            function ARN <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>, data events will\n            only be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>. They will\n            not be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld2</i>.</p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for all DynamoDB tables in your Amazon Web Services account, specify the prefix\n               as <code>arn:aws:dynamodb</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3416,6 +3413,9 @@
                     "target": "com.amazonaws.cloudtrail#EventDataStoreTerminationProtectedException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#InactiveEventDataStoreException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
                 },
                 {
@@ -3463,6 +3463,9 @@
                 "target": "com.amazonaws.cloudtrail#DeleteTrailResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
                 {
                     "target": "com.amazonaws.cloudtrail#ConflictException"
                 },
@@ -3794,7 +3797,7 @@
                 "trailNameList": {
                     "target": "com.amazonaws.cloudtrail#TrailNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p> \n      \n         <p>If an empty list is specified, information for the trail in the current region is returned.</p>\n         <ul>\n            <li>\n               <p>If an empty list is specified and <code>IncludeShadowTrails</code> is false, then\n            information for all trails in the current region is returned.</p>\n            </li>\n            <li>\n               <p>If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region. To return information about a trail in another region, you must specify its trail ARN.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies a list of trail names, trail ARNs, or both, of the trails to describe. The format of a trail ARN is:</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>\n         <p>If an empty list is specified, information for the trail in the current region is returned.</p>\n         <ul>\n            <li>\n               <p>If an empty list is specified and <code>IncludeShadowTrails</code> is false, then\n            information for all trails in the current region is returned.</p>\n            </li>\n            <li>\n               <p>If an empty list is specified and IncludeShadowTrails is null or true, then information for all trails in the current region and any associated shadow trails in other regions is returned.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If one or more trail names are specified, information is returned only if the names match the names of trails belonging only to the current region. To return information about a trail in another region, you must specify its trail ARN.</p>\n         </note>"
                     }
                 },
                 "includeShadowTrails": {
@@ -4239,7 +4242,7 @@
                 "IncludeManagementEvents": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify if you want your event selector to include management events for your trail.</p>\n         <p>\n         For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Management Events</a> in the <i>CloudTrail User Guide</i>.</p> \n      \n         <p>By default, the value is <code>true</code>.</p>\n         <p>The first copy of management events is free. You are charged for additional copies of management \n         events that you are logging on any subsequent trail in the same region. For more information about \n         CloudTrail pricing, see <a href=\"http://aws.amazon.com/cloudtrail/pricing/\">CloudTrail Pricing</a>.</p>"
+                        "smithy.api#documentation": "<p>Specify if you want your event selector to include management events for your trail.</p>\n         <p>\n         For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Management Events</a> in the <i>CloudTrail User Guide</i>.</p>\n         <p>By default, the value is <code>true</code>.</p>\n         <p>The first copy of management events is free. You are charged for additional copies of management \n         events that you are logging on any subsequent trail in the same region. For more information about \n         CloudTrail pricing, see <a href=\"http://aws.amazon.com/cloudtrail/pricing/\">CloudTrail Pricing</a>.</p>"
                     }
                 },
                 "DataResources": {
@@ -4477,6 +4480,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
                 },
                 {
@@ -4493,7 +4499,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the settings for the event selectors that you configured for your trail.\n         The information returned for your event selectors includes the following:</p>\n         <ul>\n            <li>\n               <p>If your event selector includes read-only events, write-only events, or\n            all events. This applies to both management events and data events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes management events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes data events, the resources on which you are logging data\n               events.</p>\n            </li>\n         </ul>\n         <p>For more information about logging management and data events, see the following topics in the <i>CloudTrail User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Logging management events for trails\n            </a> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging data events for trails\n            </a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Describes the settings for the event selectors that you configured for your trail.\n         The information returned for your event selectors includes the following:</p>\n         <ul>\n            <li>\n               <p>If your event selector includes read-only events, write-only events, or\n            all events. This applies to both management events and data events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes management events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes data events, the resources on which you are logging data\n               events.</p>\n            </li>\n         </ul>\n         <p>For more information about logging management and data events, see the following topics in the <i>CloudTrail User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-events-with-cloudtrail.html\">Logging management events for trails\n            </a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging data events for trails\n            </a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4638,6 +4644,9 @@
                 "target": "com.amazonaws.cloudtrail#GetInsightSelectorsResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
                 {
                     "target": "com.amazonaws.cloudtrail#InsightNotEnabledException"
                 },
@@ -4820,6 +4829,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
                 },
                 {
@@ -4867,6 +4879,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InvalidTrailNameException"
                 },
                 {
@@ -4890,7 +4905,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a \n         shadow trail (a replication of the trail in another region), you must specify its ARN. The following is the format of a trail ARN.</p>\n          <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a \n         shadow trail (a replication of the trail in another region), you must specify its ARN. The following is the format of a trail ARN.</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6670,7 +6685,7 @@
                     }
                 },
                 "AttributeValue": {
-                    "target": "com.amazonaws.cloudtrail#String",
+                    "target": "com.amazonaws.cloudtrail#LookupAttributeValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a value for the specified AttributeKey.</p>",
                         "smithy.api#required": {}
@@ -6731,6 +6746,15 @@
                     "traits": {
                         "smithy.api#enumValue": "AccessKeyId"
                     }
+                }
+            }
+        },
+        "com.amazonaws.cloudtrail#LookupAttributeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
                 }
             }
         },
@@ -7106,6 +7130,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
                 },
                 {
@@ -7194,6 +7221,9 @@
                 "target": "com.amazonaws.cloudtrail#PutInsightSelectorsResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
                 {
                     "target": "com.amazonaws.cloudtrail#InsufficientEncryptionPolicyException"
                 },
@@ -8129,6 +8159,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
                 },
                 {
@@ -8164,7 +8197,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs Amazon Web Services API calls. \n         The following is the format of a trail ARN.</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs Amazon Web Services API calls. \n         The following is the format of a trail ARN.</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8373,6 +8406,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InsufficientDependencyServiceAccessPermissionException"
                 },
                 {
@@ -8408,7 +8444,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging Amazon Web Services \n         API calls. The following is the format of a trail ARN.</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging Amazon Web Services \n         API calls. The following is the format of a trail ARN.</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8533,7 +8569,7 @@
                 "SnsTopicARN": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications\n         when log files are delivered. The following is the format of a topic ARN.</p> \n         <p>\n            <code>arn:aws:sns:us-east-2:123456789012:MyTopic</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications\n         when log files are delivered. The following is the format of a topic ARN.</p>\n         <p>\n            <code>arn:aws:sns:us-east-2:123456789012:MyTopic</code>\n         </p>"
                     }
                 },
                 "IncludeGlobalServiceEvents": {
@@ -8772,6 +8808,9 @@
                     "target": "com.amazonaws.cloudtrail#InsufficientEncryptionPolicyException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#InvalidEventSelectorsException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#InvalidKmsKeyIdException"
                 },
                 {
@@ -8945,6 +8984,9 @@
                     "target": "com.amazonaws.cloudtrail#CloudTrailAccessNotEnabledException"
                 },
                 {
+                    "target": "com.amazonaws.cloudtrail#CloudTrailARNInvalidException"
+                },
+                {
                     "target": "com.amazonaws.cloudtrail#CloudTrailInvalidClientTokenIdException"
                 },
                 {
@@ -9043,7 +9085,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the trail or trail ARN. If <code>Name</code> is a trail name, the\n         string must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p>\n            </li>\n            <li>\n               <p>Start with a letter or number, and end with a letter or number</p>\n            </li>\n            <li>\n               <p>Be between 3 and 128 characters</p>\n            </li>\n            <li>\n               <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code>\n            and <code>my--namespace</code> are not valid.</p>\n            </li>\n            <li>\n               <p>Not be in IP address format (for example, 192.168.5.4)</p>\n            </li>\n         </ul>\n         <p>If <code>Name</code> is a trail ARN, it must be in the following format.</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name of the trail or trail ARN. If <code>Name</code> is a trail name, the\n         string must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p>\n            </li>\n            <li>\n               <p>Start with a letter or number, and end with a letter or number</p>\n            </li>\n            <li>\n               <p>Be between 3 and 128 characters</p>\n            </li>\n            <li>\n               <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code>\n            and <code>my--namespace</code> are not valid.</p>\n            </li>\n            <li>\n               <p>Not be in IP address format (for example, 192.168.5.4)</p>\n            </li>\n         </ul>\n         <p>If <code>Name</code> is a trail ARN, it must be in the following format.</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9185,7 +9227,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.</p>\n      \n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
                     }
                 },
                 "IsOrganizationTrail": {

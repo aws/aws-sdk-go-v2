@@ -20,11 +20,6 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)Running
 // multiple processes on a fleet
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
-// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
-// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
-// | DescribeFleetPortSettings | DescribeFleetUtilization |
-// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *DescribeRuntimeConfigurationInput, optFns ...func(*Options)) (*DescribeRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeRuntimeConfigurationInput{}
@@ -40,7 +35,6 @@ func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *Descr
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeRuntimeConfigurationInput struct {
 
 	// A unique identifier for the fleet to get the runtime configuration for. You can
@@ -52,7 +46,6 @@ type DescribeRuntimeConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeRuntimeConfigurationOutput struct {
 
 	// Instructions that describe how server processes should be launched and

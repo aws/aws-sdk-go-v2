@@ -122,7 +122,7 @@
                 "EncryptionAlgorithm": {
                     "target": "com.amazonaws.transfer#EncryptionAlg",
                     "traits": {
-                        "smithy.api#documentation": "<p>The algorithm that is used to encrypt the file.</p>\n         <note>\n            <p>You can only specify <code>NONE</code> if the URL for your connector uses HTTPS. This ensures that\n        no traffic is sent in clear text.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The algorithm that is used to encrypt the file.</p>"
                     }
                 },
                 "SigningAlgorithm": {
@@ -134,7 +134,7 @@
                 "MdnSigningAlgorithm": {
                     "target": "com.amazonaws.transfer#MdnSigningAlg",
                     "traits": {
-                        "smithy.api#documentation": "<p>The signing algorithm for the MDN response.</p>\n         <note>\n            <p>If set to DEFAULT (or not set at all), the value for <code>SigningAlgorithm</code> is used.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The signing algorithm for the MDN response.</p>\n         <note>\n            <p>If set to DEFAULT (or not set at all), the value for <code>SigningAlogorithm</code> is used.</p>\n         </note>"
                     }
                 },
                 "MdnResponse": {
@@ -436,7 +436,7 @@
                 "Policy": {
                     "target": "com.amazonaws.transfer#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same Identity and Access Management (IAM) role across multiple users. This policy scopes down a user's\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n    \n         <note>\n            <p>This policy applies only when the domain of <code>ServerId</code> is Amazon S3. Amazon EFS does not use session policies.</p>\n            <p>For session policies, Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>      \n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html\">Example\n          session policy</a>.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Security Token Service API\n          Reference</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same Identity and Access Management (IAM) role across multiple users. This policy scopes down a user's\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n         <note>\n            <p>This policy applies only when the domain of <code>ServerId</code> is Amazon S3. Amazon EFS does not use session policies.</p>\n            <p>For session policies, Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html\">Example\n          session policy</a>.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Security Token Service API\n          Reference</i>.</p>\n         </note>"
                     }
                 },
                 "PosixProfile": {
@@ -459,7 +459,7 @@
                 "ExternalId": {
                     "target": "com.amazonaws.transfer#ExternalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n  \n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>",
+                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -781,13 +781,13 @@
                 "Certificate": {
                     "target": "com.amazonaws.transfer#Certificate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Certificate Manager (ACM) certificate. Required\n      when <code>Protocols</code> is set to <code>FTPS</code>.</p>\n\n         <p>To request a new public certificate, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html\">Request a public certificate</a>\n      in the <i>Certificate Manager User Guide</i>.</p>\n\n         <p>To import an existing certificate into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into ACM</a>\n      in the <i>Certificate Manager User Guide</i>.</p>\n\n         <p>To request a private certificate to use FTPS through private IP addresses, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html\">Request a\n        private certificate</a> in the <i>Certificate Manager User\n      Guide</i>.</p>\n\n         <p>Certificates with the following cryptographic algorithms and key sizes are\n      supported:</p>\n\n         <ul>\n            <li>\n               <p>2048-bit RSA (RSA_2048)</p>\n            </li>\n            <li>\n               <p>4096-bit RSA (RSA_4096)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 256 bit (EC_prime256v1)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 384 bit (EC_secp384r1)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 521 bit (EC_secp521r1)</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The certificate must be a valid SSL/TLS X.509 version 3 certificate with FQDN or IP\n        address specified and information about the issuer.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Certificate Manager (ACM) certificate. Required\n      when <code>Protocols</code> is set to <code>FTPS</code>.</p>\n         <p>To request a new public certificate, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html\">Request a public certificate</a>\n      in the <i>Certificate Manager User Guide</i>.</p>\n         <p>To import an existing certificate into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into ACM</a>\n      in the <i>Certificate Manager User Guide</i>.</p>\n         <p>To request a private certificate to use FTPS through private IP addresses, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html\">Request a\n        private certificate</a> in the <i>Certificate Manager User\n      Guide</i>.</p>\n         <p>Certificates with the following cryptographic algorithms and key sizes are\n      supported:</p>\n         <ul>\n            <li>\n               <p>2048-bit RSA (RSA_2048)</p>\n            </li>\n            <li>\n               <p>4096-bit RSA (RSA_4096)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 256 bit (EC_prime256v1)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 384 bit (EC_secp384r1)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 521 bit (EC_secp521r1)</p>\n            </li>\n         </ul>\n         <note>\n            <p>The certificate must be a valid SSL/TLS X.509 version 3 certificate with FQDN or IP\n        address specified and information about the issuer.</p>\n         </note>"
                     }
                 },
                 "Domain": {
                     "target": "com.amazonaws.transfer#Domain",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain of the storage system that is used for file transfers. There are two domains\n      available: Amazon Simple Storage Service (Amazon S3) and Amazon Elastic File System (Amazon EFS). The\n      default value is S3.</p>\n\n         <note>\n            <p>After the server is created, the domain cannot be changed.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The domain of the storage system that is used for file transfers. There are two domains\n      available: Amazon Simple Storage Service (Amazon S3) and Amazon Elastic File System (Amazon EFS). The\n      default value is S3.</p>\n         <note>\n            <p>After the server is created, the domain cannot be changed.</p>\n         </note>"
                     }
                 },
                 "EndpointDetails": {
@@ -799,13 +799,13 @@
                 "EndpointType": {
                     "target": "com.amazonaws.transfer#EndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of endpoint that you want your server to use. You can choose to make your server's endpoint publicly accessible (PUBLIC)\n      or host it inside your VPC. With an endpoint that is hosted in a VPC, you can restrict access to your server and \n      resources only within your VPC or choose to make it internet facing by attaching Elastic IP addresses directly to it.</p>\n         <note>\n            <p> After May 19, 2021, you won't be able to create a server using\n          <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Services account if your account hasn't already\n      done so before May 19, 2021. If you have already created servers with\n      <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Services account on or before May 19, 2021,\n        you will not be affected. After this date, use\n        <code>EndpointType</code>=<code>VPC</code>.</p> \n      \n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n            <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With\n        this endpoint type, you have the option to directly associate up to three Elastic IPv4\n        addresses (BYO IP included) with your server's endpoint and use VPC security groups to\n        restrict traffic by the client's public IP address. This is not possible with\n          <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The type of endpoint that you want your server to use. You can choose to make your server's endpoint publicly accessible (PUBLIC)\n      or host it inside your VPC. With an endpoint that is hosted in a VPC, you can restrict access to your server and \n      resources only within your VPC or choose to make it internet facing by attaching Elastic IP addresses directly to it.</p>\n         <note>\n            <p> After May 19, 2021, you won't be able to create a server using\n          <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Services account if your account hasn't already\n      done so before May 19, 2021. If you have already created servers with\n      <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Services account on or before May 19, 2021,\n        you will not be affected. After this date, use\n        <code>EndpointType</code>=<code>VPC</code>.</p>\n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n            <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With\n        this endpoint type, you have the option to directly associate up to three Elastic IPv4\n        addresses (BYO IP included) with your server's endpoint and use VPC security groups to\n        restrict traffic by the client's public IP address. This is not possible with\n          <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p>\n         </note>"
                     }
                 },
                 "HostKey": {
                     "target": "com.amazonaws.transfer#HostKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled server. You can add multiple host keys, in case you want\n     to rotate keys, or have a set of active keys that use different algorithms.</p>\n    \n         <p>Use the following command to generate an RSA 2048 bit key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t rsa -b 2048 -N \"\" -m PEM -f my-new-server-key</code>.</p>\n         <p>Use a minimum value of 2048 for the <code>-b</code> option. You can create a stronger key by using 3072 or 4096.</p>\n    \n         <p>Use the following command to generate an ECDSA 256 bit key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t ecdsa -b 256 -N \"\" -m PEM -f my-new-server-key</code>.</p>\n         <p>Valid values for the <code>-b</code> option for ECDSA are 256, 384, and 521.</p>\n    \n         <p>Use the following command to generate an ED25519 key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t ed25519 -N \"\" -f my-new-server-key</code>.</p>\n    \n         <p>For all of these commands, you can replace <i>my-new-server-key</i> with a string of your choice.</p>\n\n         <important>\n            <p>If you aren't planning to migrate existing users from an existing SFTP-enabled\n        server to a new server, don't update the host key. Accidentally changing a\n        server's host key can be disruptive.</p>\n         </important>\n\n    \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key\">Update host keys for your SFTP-enabled server</a> in the <i>Transfer Family User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled server. You can add multiple host keys, in case you want\n     to rotate keys, or have a set of active keys that use different algorithms.</p>\n         <p>Use the following command to generate an RSA 2048 bit key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t rsa -b 2048 -N \"\" -m PEM -f my-new-server-key</code>.</p>\n         <p>Use a minimum value of 2048 for the <code>-b</code> option. You can create a stronger key by using 3072 or 4096.</p>\n         <p>Use the following command to generate an ECDSA 256 bit key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t ecdsa -b 256 -N \"\" -m PEM -f my-new-server-key</code>.</p>\n         <p>Valid values for the <code>-b</code> option for ECDSA are 256, 384, and 521.</p>\n         <p>Use the following command to generate an ED25519 key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t ed25519 -N \"\" -f my-new-server-key</code>.</p>\n         <p>For all of these commands, you can replace <i>my-new-server-key</i> with a string of your choice.</p>\n         <important>\n            <p>If you aren't planning to migrate existing users from an existing SFTP-enabled\n        server to a new server, don't update the host key. Accidentally changing a\n        server's host key can be disruptive.</p>\n         </important>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key\">Update host keys for your SFTP-enabled server</a> in the <i>Transfer Family User Guide</i>.</p>"
                     }
                 },
                 "IdentityProviderDetails": {
@@ -835,13 +835,13 @@
                 "PreAuthenticationLoginBanner": {
                     "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a string to display when users connect to a server. This string is displayed before the user authenticates.\n    For example, the following banner displays details about using the system:</p>\n    \n         <p>\n            <code>This system is for the use of authorized users only. Individuals using this computer system without authority,\n    or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by\n    system personnel.</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies a string to display when users connect to a server. This string is displayed before the user authenticates.\n    For example, the following banner displays details about using the system:</p>\n         <p>\n            <code>This system is for the use of authorized users only. Individuals using this computer system without authority,\n    or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by\n    system personnel.</code>\n         </p>"
                     }
                 },
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n            <li>\n               <p>\n                  <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p>\n            </li>\n         </ul>\n\n         <note>\n            <ul>\n               <li>\n                  <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) \n            which is used to identify your server when clients connect to it over\n            FTPS.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n            <code>EndpointType</code> must be <code>VPC</code> and the\n            <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n            can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n            <code>SERVICE_MANAGED</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>AS2</code>, then the\n              <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n            <li>\n               <p>\n                  <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p>\n            </li>\n         </ul>\n         <note>\n            <ul>\n               <li>\n                  <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) \n            which is used to identify your server when clients connect to it over\n            FTPS.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n            <code>EndpointType</code> must be <code>VPC</code> and the\n            <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n            can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n            <code>SERVICE_MANAGED</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>AS2</code>, then the\n              <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "ProtocolDetails": {
@@ -865,7 +865,7 @@
                 "WorkflowDetails": {
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In additon to a workflow to execute when a file is uploaded completely, <code>WorkflowDeatails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
                     }
                 }
             }
@@ -929,13 +929,13 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) \n      role provides access to paths in <code>Target</code>. This value\n      can be set only when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\":\n        \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n\n         <p>In most cases, you can use this value instead of the session policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) \n      role provides access to paths in <code>Target</code>. This value\n      can be set only when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\":\n        \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the session policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
                     }
                 },
                 "Policy": {
                     "target": "com.amazonaws.transfer#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same Identity and Access Management (IAM) role across multiple users. This policy scopes down a user's\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n\n         <note>\n            <p>This policy applies only when the domain of <code>ServerId</code> is Amazon S3. Amazon EFS does not use session policies.</p>\n            <p>For session policies, Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n\n      \n\n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html\">Example session\n        policy</a>.</p>\n\n      \n\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web Services\n          Security Token Service API Reference</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same Identity and Access Management (IAM) role across multiple users. This policy scopes down a user's\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n         <note>\n            <p>This policy applies only when the domain of <code>ServerId</code> is Amazon S3. Amazon EFS does not use session policies.</p>\n            <p>For session policies, Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html\">Example session\n        policy</a>.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web Services\n          Security Token Service API Reference</i>.</p>\n         </note>"
                     }
                 },
                 "PosixProfile": {
@@ -961,7 +961,7 @@
                 "SshPublicKeyBody": {
                     "target": "com.amazonaws.transfer#SshPublicKeyBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public portion of the Secure Shell (SSH) key used to authenticate the user to the\n      server.</p>\n         <p>The three standard SSH public key format elements are <code><key type></code>,\n        <code><body base64></code>, and  an optional <code><comment></code>, with spaces\n      between each element.</p>\n         <p>Transfer Family accepts RSA, ECDSA, and ED25519 keys.</p>\n         <ul>\n            <li>\n               <p>For RSA keys, the key type  is <code>ssh-rsa</code>.</p>\n            </li>\n            <li>\n               <p>For ED25519 keys, the key type is <code>ssh-ed25519</code>.</p>\n            </li>\n            <li>\n               <p>For ECDSA keys, the key type is either <code>ecdsa-sha2-nistp256</code>,\n            <code>ecdsa-sha2-nistp384</code>, or <code>ecdsa-sha2-nistp521</code>, depending on the\n          size of the key you generated.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The public portion of the Secure Shell (SSH) key used to authenticate the user to the\n      server.</p>\n         <p>Transfer Family accepts RSA, ECDSA, and ED25519 keys.</p>"
                     }
                 },
                 "Tags": {
@@ -1143,6 +1143,32 @@
         "com.amazonaws.transfer#DateImported": {
             "type": "timestamp"
         },
+        "com.amazonaws.transfer#DecryptStepDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.transfer#WorkflowStepName"
+                },
+                "Type": {
+                    "target": "com.amazonaws.transfer#EncryptionType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceFileLocation": {
+                    "target": "com.amazonaws.transfer#SourceFileLocation"
+                },
+                "OverwriteExisting": {
+                    "target": "com.amazonaws.transfer#OverwriteExisting"
+                },
+                "DestinationFileLocation": {
+                    "target": "com.amazonaws.transfer#InputFileLocation",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.transfer#DeleteAccess": {
             "type": "operation",
             "input": {
@@ -1182,7 +1208,7 @@
                 "ExternalId": {
                     "target": "com.amazonaws.transfer#ExternalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n  \n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>",
+                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1421,7 +1447,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the file transfer protocol-enabled server that you specify.</p>\n\n         <p>No response returns from this operation.</p>"
+                "smithy.api#documentation": "<p>Deletes the file transfer protocol-enabled server that you specify.</p>\n         <p>No response returns from this operation.</p>"
             }
         },
         "com.amazonaws.transfer#DeleteServerRequest": {
@@ -1534,7 +1560,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the user belonging to a file transfer protocol-enabled server you specify.</p>\n\n         <p>No response returns from this operation.</p>\n\n         <note>\n            <p>When you delete a user from a server, the user's information is lost.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Deletes the user belonging to a file transfer protocol-enabled server you specify.</p>\n         <p>No response returns from this operation.</p>\n         <note>\n            <p>When you delete a user from a server, the user's information is lost.</p>\n         </note>"
             }
         },
         "com.amazonaws.transfer#DeleteUserRequest": {
@@ -1620,7 +1646,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the access that is assigned to the specific file transfer protocol-enabled\n      server, as identified by its <code>ServerId</code> property and its\n      <code>ExternalId</code>.</p>\n    \n         <p>The response from this call returns the properties of the access that is associated with\n      the <code>ServerId</code> value that was specified.</p>"
+                "smithy.api#documentation": "<p>Describes the access that is assigned to the specific file transfer protocol-enabled\n      server, as identified by its <code>ServerId</code> property and its\n      <code>ExternalId</code>.</p>\n         <p>The response from this call returns the properties of the access that is associated with\n      the <code>ServerId</code> value that was specified.</p>"
             }
         },
         "com.amazonaws.transfer#DescribeAccessRequest": {
@@ -1636,7 +1662,7 @@
                 "ExternalId": {
                     "target": "com.amazonaws.transfer#ExternalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n  \n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>",
+                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2062,7 +2088,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a file transfer protocol-enabled server that you specify by passing the\n        <code>ServerId</code> parameter.</p>\n\n         <p>The response contains a description of a server's properties. When you set\n        <code>EndpointType</code> to VPC, the response will contain the\n      <code>EndpointDetails</code>.</p>",
+                "smithy.api#documentation": "<p>Describes a file transfer protocol-enabled server that you specify by passing the\n        <code>ServerId</code> parameter.</p>\n         <p>The response contains a description of a server's properties. When you set\n        <code>EndpointType</code> to VPC, the response will contain the\n      <code>EndpointDetails</code>.</p>",
                 "smithy.waiters#waitable": {
                     "ServerOffline": {
                         "acceptors": [
@@ -2164,7 +2190,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the user assigned to the specific file transfer protocol-enabled server, as\n      identified by its <code>ServerId</code> property.</p>\n\n         <p>The response from this call returns the properties of the user associated with the\n        <code>ServerId</code> value that was specified.</p>"
+                "smithy.api#documentation": "<p>Describes the user assigned to the specific file transfer protocol-enabled server, as\n      identified by its <code>ServerId</code> property.</p>\n         <p>The response from this call returns the properties of the user associated with the\n        <code>ServerId</code> value that was specified.</p>"
             }
         },
         "com.amazonaws.transfer#DescribeUserRequest": {
@@ -2267,7 +2293,7 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) \n      role provides access to paths in <code>Target</code>. This value\n      can be set only when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n    \n         <p>In most cases, you can use this value instead of the session policy to lock down the\n      associated access to the designated home directory (\"<code>chroot</code>\"). To do this, you\n      can set <code>Entry</code> to '/' and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) \n      role provides access to paths in <code>Target</code>. This value\n      can be set only when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>In most cases, you can use this value instead of the session policy to lock down the\n      associated access to the designated home directory (\"<code>chroot</code>\"). To do this, you\n      can set <code>Entry</code> to '/' and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>"
                     }
                 },
                 "HomeDirectoryType": {
@@ -2294,7 +2320,7 @@
                 "ExternalId": {
                     "target": "com.amazonaws.transfer#ExternalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n  \n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>"
+                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>"
                     }
                 }
             },
@@ -2782,13 +2808,13 @@
                 "PreAuthenticationLoginBanner": {
                     "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a string to display when users connect to a server. This string is displayed before the user authenticates.\n    For example, the following banner displays details about using the system:</p>\n    \n         <p>\n            <code>This system is for the use of authorized users only. Individuals using this computer system without authority,\n    or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by\n    system personnel.</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies a string to display when users connect to a server. This string is displayed before the user authenticates.\n    For example, the following banner displays details about using the system:</p>\n         <p>\n            <code>This system is for the use of authorized users only. Individuals using this computer system without authority,\n    or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by\n    system personnel.</code>\n         </p>"
                     }
                 },
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n            <li>\n               <p>\n                  <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p>\n            </li>\n         </ul>\n\n         <note>\n            <ul>\n               <li>\n                  <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) \n            which is used to identify your server when clients connect to it over\n            FTPS.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n            <code>EndpointType</code> must be <code>VPC</code> and the\n            <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n            can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n            <code>SERVICE_MANAGED</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>AS2</code>, then the\n              <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n            <li>\n               <p>\n                  <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p>\n            </li>\n         </ul>\n         <note>\n            <ul>\n               <li>\n                  <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) \n            which is used to identify your server when clients connect to it over\n            FTPS.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n            <code>EndpointType</code> must be <code>VPC</code> and the\n            <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n            can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n            <code>SERVICE_MANAGED</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>AS2</code>, then the\n              <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "SecurityPolicyName": {
@@ -2806,7 +2832,7 @@
                 "State": {
                     "target": "com.amazonaws.transfer#State",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition of the server that was described. A value of\n        <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A\n        <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file\n      transfer operations.</p>\n\n         <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicate that the server is\n      in an intermediate state, either not fully able to respond, or not fully offline. The values\n      of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error\n      condition.</p>"
+                        "smithy.api#documentation": "<p>The condition of the server that was described. A value of\n        <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A\n        <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file\n      transfer operations.</p>\n         <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicate that the server is\n      in an intermediate state, either not fully able to respond, or not fully offline. The values\n      of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error\n      condition.</p>"
                     }
                 },
                 "Tags": {
@@ -2824,7 +2850,7 @@
                 "WorkflowDetails": {
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In additon to a workflow to execute when a file is uploaded completely, <code>WorkflowDeatails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
                     }
                 }
             },
@@ -2851,7 +2877,7 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) \n      role provides access to paths in <code>Target</code>. This value\n      can be set only when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>In most cases, you can use this value instead of the session policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) \n      role provides access to paths in <code>Target</code>. This value\n      can be set only when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>In most cases, you can use this value instead of the session policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>"
                     }
                 },
                 "HomeDirectoryType": {
@@ -3000,7 +3026,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Reserved for future use.</p>\n         <p>\n      \n    </p>"
+                "smithy.api#documentation": "<p>Reserved for future use.</p>\n         <p>\n    </p>"
             }
         },
         "com.amazonaws.transfer#EfsFileSystemId": {
@@ -3052,42 +3078,53 @@
                 }
             }
         },
+        "com.amazonaws.transfer#EncryptionType": {
+            "type": "enum",
+            "members": {
+                "PGP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PGP"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transfer#EndpointDetails": {
             "type": "structure",
             "members": {
                 "AddressAllocationIds": {
                     "target": "com.amazonaws.transfer#AddressAllocationIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of address allocation IDs that are required to attach an Elastic IP address to your\n      server's endpoint.</p>\n\n         <note>\n\n            <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>\n        and it is only valid in the <code>UpdateServer</code> API.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A list of address allocation IDs that are required to attach an Elastic IP address to your\n      server's endpoint.</p>\n         <note>\n            <p>This property can only be set when <code>EndpointType</code> is set to <code>VPC</code>\n        and it is only valid in the <code>UpdateServer</code> API.</p>\n         </note>"
                     }
                 },
                 "SubnetIds": {
                     "target": "com.amazonaws.transfer#SubnetIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of subnet IDs that are required to host your server endpoint in your VPC.</p>\n\n         <note>\n            <p>This property can only be set when <code>EndpointType</code> is set to\n        <code>VPC</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A list of subnet IDs that are required to host your server endpoint in your VPC.</p>\n         <note>\n            <p>This property can only be set when <code>EndpointType</code> is set to\n        <code>VPC</code>.</p>\n         </note>"
                     }
                 },
                 "VpcEndpointId": {
                     "target": "com.amazonaws.transfer#VpcEndpointId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the VPC endpoint.</p>\n\n         <note>\n            <p>This property can only be set when <code>EndpointType</code> is set to\n          <code>VPC_ENDPOINT</code>.</p>\n      \n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The identifier of the VPC endpoint.</p>\n         <note>\n            <p>This property can only be set when <code>EndpointType</code> is set to\n          <code>VPC_ENDPOINT</code>.</p>\n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n         </note>"
                     }
                 },
                 "VpcId": {
                     "target": "com.amazonaws.transfer#VpcId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The VPC identifier of the VPC in which a server's endpoint will be hosted.</p>\n\n         <note>\n            <p>This property can only be set when <code>EndpointType</code> is set to\n        <code>VPC</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The VPC identifier of the VPC in which a server's endpoint will be hosted.</p>\n         <note>\n            <p>This property can only be set when <code>EndpointType</code> is set to\n        <code>VPC</code>.</p>\n         </note>"
                     }
                 },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.transfer#SecurityGroupIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of security groups IDs that are available to attach to your server's\n      endpoint.</p>\n\n         <note>\n            <p>This property can only be set when <code>EndpointType</code> is set to\n        <code>VPC</code>.</p>\n\n            <p>You can edit the <code>SecurityGroupIds</code> property in the <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateServer.html\">UpdateServer</a> API only if you are changing the <code>EndpointType</code> from\n          <code>PUBLIC</code> or <code>VPC_ENDPOINT</code> to <code>VPC</code>. To change security\n        groups associated with your server's VPC endpoint after creation, use the Amazon EC2\n          <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcEndpoint.html\">ModifyVpcEndpoint</a> API.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A list of security groups IDs that are available to attach to your server's\n      endpoint.</p>\n         <note>\n            <p>This property can only be set when <code>EndpointType</code> is set to\n        <code>VPC</code>.</p>\n            <p>You can edit the <code>SecurityGroupIds</code> property in the <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateServer.html\">UpdateServer</a> API only if you are changing the <code>EndpointType</code> from\n          <code>PUBLIC</code> or <code>VPC_ENDPOINT</code> to <code>VPC</code>. To change security\n        groups associated with your server's VPC endpoint after creation, use the Amazon EC2\n          <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcEndpoint.html\">ModifyVpcEndpoint</a> API.</p>\n         </note>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The virtual private cloud (VPC) endpoint settings that are configured for your file\n      transfer protocol-enabled server. With a VPC endpoint, you can restrict access to your server\n      and resources only within your VPC. To control incoming internet traffic, invoke the\n        <code>UpdateServer</code> API and attach an Elastic IP address to your server's\n      endpoint.</p>\n         <note>\n            <p> After May 19, 2021, you won't be able to create a server using\n          <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount if your account hasn't already\n      done so before May 19, 2021. If you have already created servers with\n      <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount on or before May 19, 2021,\n        you will not be affected. After this date, use\n        <code>EndpointType</code>=<code>VPC</code>.</p> \n      \n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The virtual private cloud (VPC) endpoint settings that are configured for your file\n      transfer protocol-enabled server. With a VPC endpoint, you can restrict access to your server\n      and resources only within your VPC. To control incoming internet traffic, invoke the\n        <code>UpdateServer</code> API and attach an Elastic IP address to your server's\n      endpoint.</p>\n         <note>\n            <p> After May 19, 2021, you won't be able to create a server using\n          <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount if your account hasn't already\n      done so before May 19, 2021. If you have already created servers with\n      <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount on or before May 19, 2021,\n        you will not be affected. After this date, use\n        <code>EndpointType</code>=<code>VPC</code>.</p>\n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n         </note>"
             }
         },
         "com.amazonaws.transfer#EndpointType": {
@@ -3718,7 +3755,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a Secure Shell (SSH) public key to a user account identified by a\n        <code>UserName</code> value assigned to the specific file transfer protocol-enabled server,\n      identified by <code>ServerId</code>.</p>\n\n         <p>The response returns the <code>UserName</code> value, the <code>ServerId</code> value, and\n      the name of the <code>SshPublicKeyId</code>.</p>"
+                "smithy.api#documentation": "<p>Adds a Secure Shell (SSH) public key to a user account identified by a\n        <code>UserName</code> value assigned to the specific file transfer protocol-enabled server,\n      identified by <code>ServerId</code>.</p>\n         <p>The response returns the <code>UserName</code> value, the <code>ServerId</code> value, and\n      the name of the <code>SshPublicKeyId</code>.</p>"
             }
         },
         "com.amazonaws.transfer#ImportSshPublicKeyRequest": {
@@ -4771,7 +4808,7 @@
                 "ExternalId": {
                     "target": "com.amazonaws.transfer#ExternalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n  \n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>"
+                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>"
                     }
                 }
             },
@@ -5105,7 +5142,7 @@
                 "State": {
                     "target": "com.amazonaws.transfer#State",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition of the server that was described. A value of\n        <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A\n        <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file\n      transfer operations.</p>\n\n         <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicate that the server is\n      in an intermediate state, either not fully able to respond, or not fully offline. The values\n      of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error\n      condition.</p>"
+                        "smithy.api#documentation": "<p>The condition of the server that was described. A value of\n        <code>ONLINE</code> indicates that the server can accept jobs and transfer files. A\n        <code>State</code> value of <code>OFFLINE</code> means that the server cannot perform file\n      transfer operations.</p>\n         <p>The states of <code>STARTING</code> and <code>STOPPING</code> indicate that the server is\n      in an intermediate state, either not fully able to respond, or not fully offline. The values\n      of <code>START_FAILED</code> or <code>STOP_FAILED</code> can indicate an error\n      condition.</p>"
                     }
                 },
                 "UserCount": {
@@ -5150,7 +5187,7 @@
                 "Role": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that controls your users' access to your Amazon S3 \n      bucket or Amazon EFS file system. The policies attached to this role determine the level of access that you want to provide your users \n      when transferring files into and out of your Amazon S3 bucket or Amazon EFS file system. The IAM role should also contain a trust \n      relationship that allows the server to access your resources when servicing your users' transfer requests.</p>\n         <note>\n\n            <p>The IAM role that controls your users' access to your Amazon S3 bucket for servers with <code>Domain=S3</code>, or your EFS file system for servers with <code>Domain=EFS</code>. \n        </p>\n            <p>The policies attached to this role determine the level of access you want to provide your users when \n        transferring files into and out of your S3 buckets or EFS file systems.</p>\n\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that controls your users' access to your Amazon S3 \n      bucket or Amazon EFS file system. The policies attached to this role determine the level of access that you want to provide your users \n      when transferring files into and out of your Amazon S3 bucket or Amazon EFS file system. The IAM role should also contain a trust \n      relationship that allows the server to access your resources when servicing your users' transfer requests.</p>\n         <note>\n            <p>The IAM role that controls your users' access to your Amazon S3 bucket for servers with <code>Domain=S3</code>, or your EFS file system for servers with <code>Domain=EFS</code>. \n        </p>\n            <p>The policies attached to this role determine the level of access you want to provide your users when \n        transferring files into and out of your S3 buckets or EFS file systems.</p>\n         </note>"
                     }
                 },
                 "SshPublicKeyCount": {
@@ -5546,7 +5583,7 @@
                 "PassiveIp": {
                     "target": "com.amazonaws.transfer#PassiveIp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Indicates passive mode, for FTP and FTPS protocols.\n      Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.\n      For example:\n    </p>\n         <p>\n            <code>aws transfer update-server --protocol-details PassiveIp=0.0.0.0</code>\n         </p>\n         <p>Replace <code>0.0.0.0</code> in the example above with the actual IP address you want to use.</p>\n         <note>\n            <p>\n        If you change the <code>PassiveIp</code> value, you must stop and then restart your Transfer Family server for the change to take effect. For details on using passive mode (PASV) in a NAT environment, see <a href=\"http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/\">Configuring your FTPS server behind a firewall or NAT with Transfer Family</a>.\n      </p>\n         </note>\n         <p>\n            <i>Special values</i>\n         </p>\n    \n         <p>The <code>AUTO</code> and <code>0.0.0.0</code> are special values for the <code>PassiveIp</code> parameter. The value <code>PassiveIp=AUTO</code>\n      is assigned by default to FTP and FTPS type servers. In this case, the server automatically responds with one of the endpoint IPs within the PASV response.\n      <code>PassiveIp=0.0.0.0</code> has a more unique application for its usage. For example, if you have a High Availability (HA) Network Load Balancer (NLB) environment,\n      where you have 3 subnets, you can only specify a single IP address using the <code>PassiveIp</code> parameter. This reduces the effectiveness of having High Availability.\n      In this case, you can specify <code>PassiveIp=0.0.0.0</code>. This tells the client to use the same IP address as the Control connection and utilize all AZs for their\n      connections. Note, however, that not all FTP clients support the <code>PassiveIp=0.0.0.0</code> response. FileZilla and WinSCP do support it. If you are using other\n      clients, check to see if your client supports the <code>PassiveIp=0.0.0.0</code> response.</p>"
+                        "smithy.api#documentation": "<p>\n      Indicates passive mode, for FTP and FTPS protocols.\n      Enter a single IPv4 address, such as the public IP address of a firewall, router, or load balancer.\n      For example:\n    </p>\n         <p>\n            <code>aws transfer update-server --protocol-details PassiveIp=0.0.0.0</code>\n         </p>\n         <p>Replace <code>0.0.0.0</code> in the example above with the actual IP address you want to use.</p>\n         <note>\n            <p>\n        If you change the <code>PassiveIp</code> value, you must stop and then restart your Transfer Family server for the change to take effect. For details on using passive mode (PASV) in a NAT environment, see <a href=\"http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/\">Configuring your FTPS server behind a firewall or NAT with Transfer Family</a>.\n      </p>\n         </note>\n         <p>\n            <i>Special values</i>\n         </p>\n         <p>The <code>AUTO</code> and <code>0.0.0.0</code> are special values for the <code>PassiveIp</code> parameter. The value <code>PassiveIp=AUTO</code>\n      is assigned by default to FTP and FTPS type servers. In this case, the server automatically responds with one of the endpoint IPs within the PASV response.\n      <code>PassiveIp=0.0.0.0</code> has a more unique application for its usage. For example, if you have a High Availability (HA) Network Load Balancer (NLB) environment,\n      where you have 3 subnets, you can only specify a single IP address using the <code>PassiveIp</code> parameter. This reduces the effectiveness of having High Availability.\n      In this case, you can specify <code>PassiveIp=0.0.0.0</code>. This tells the client to use the same IP address as the Control connection and utilize all AZs for their\n      connections. Note, however, that not all FTP clients support the <code>PassiveIp=0.0.0.0</code> response. FileZilla and WinSCP do support it. If you are using other\n      clients, check to see if your client supports the <code>PassiveIp=0.0.0.0</code> response.</p>"
                     }
                 },
                 "TlsSessionResumptionMode": {
@@ -5558,7 +5595,7 @@
                 "SetStatOption": {
                     "target": "com.amazonaws.transfer#SetStatOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use the <code>SetStatOption</code> to ignore the error that is generated when the client attempts to use <code>SETSTAT</code> on a file you are uploading to an S3 bucket.</p>\n         <p>Some SFTP file transfer clients can attempt to change the attributes of remote files, including timestamp and permissions, using commands, such as <code>SETSTAT</code> when uploading the file.\n        However, these commands are not compatible with object storage systems, such as Amazon S3. Due to this incompatibility, file uploads from these clients can result in errors even when \n        the file is otherwise successfully uploaded.</p>\n         <p>Set the value to <code>ENABLE_NO_OP</code> to have the Transfer Family server ignore the <code>SETSTAT</code> command, and upload files without needing to make any changes to your SFTP client.\n        While the <code>SetStatOption</code> \n            <code>ENABLE_NO_OP</code> setting ignores the error, it does generate a log entry in Amazon CloudWatch Logs, so you can determine when the client is making a <code>SETSTAT</code> call.</p>\n         <note>\n            <p>If you want to preserve the original timestamp for your file, and modify other file attributes using <code>SETSTAT</code>, you can use Amazon EFS as backend storage with Transfer Family.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Use the <code>SetStatOption</code> to ignore the error that is generated when the client attempts to use <code>SETSTAT</code> on a file you are uploading to an S3 bucket.</p>\n         <p>Some SFTP file transfer clients can attempt to change the attributes of remote files, including timestamp and permissions, using commands, such as <code>SETSTAT</code> when uploading the file.\n        However, these commands are not compatible with object storage systems, such as Amazon S3. Due to this incompatibility, file uploads from these clients can result in errors even when \n        the file is otherwise successfully uploaded.</p>\n         <p>Set the value to <code>ENABLE_NO_OP</code> to have the Transfer Family server ignore the <code>SETSTAT</code> command, and upload files without needing to make any changes to your SFTP client.\n        While the <code>SetStatOption</code>\n            <code>ENABLE_NO_OP</code> setting ignores the error, it does generate a log entry in Amazon CloudWatch Logs, so you can determine when the client is making a <code>SETSTAT</code> call.</p>\n         <note>\n            <p>If you want to preserve the original timestamp for your file, and modify other file attributes using <code>SETSTAT</code>, you can use Amazon EFS as backend storage with Transfer Family.</p>\n         </note>"
                     }
                 },
                 "As2Transports": {
@@ -6212,7 +6249,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the state of a file transfer protocol-enabled server from <code>OFFLINE</code> to\n        <code>ONLINE</code>. It has no impact on a server that is already <code>ONLINE</code>. An\n        <code>ONLINE</code> server can accept and process file transfer jobs.</p>\n\n         <p>The state of <code>STARTING</code> indicates that the server is in an intermediate state,\n      either not fully able to respond, or not fully online. The values of <code>START_FAILED</code>\n      can indicate an error condition.</p>\n\n         <p>No response is returned from this call.</p>"
+                "smithy.api#documentation": "<p>Changes the state of a file transfer protocol-enabled server from <code>OFFLINE</code> to\n        <code>ONLINE</code>. It has no impact on a server that is already <code>ONLINE</code>. An\n        <code>ONLINE</code> server can accept and process file transfer jobs.</p>\n         <p>The state of <code>STARTING</code> indicates that the server is in an intermediate state,\n      either not fully able to respond, or not fully online. The values of <code>START_FAILED</code>\n      can indicate an error condition.</p>\n         <p>No response is returned from this call.</p>"
             }
         },
         "com.amazonaws.transfer#StartServerRequest": {
@@ -6268,7 +6305,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the condition of a file transfer protocol-enabled server with respect to its\n      ability to perform file operations. There are six possible states: <code>OFFLINE</code>,\n        <code>ONLINE</code>, <code>STARTING</code>, <code>STOPPING</code>,\n      <code>START_FAILED</code>, and <code>STOP_FAILED</code>.</p>\n\n         <p>\n            <code>OFFLINE</code> indicates that the server exists, but that it is not available for\n      file operations. <code>ONLINE</code> indicates that the server is available to perform file\n      operations. <code>STARTING</code> indicates that the server's was instantiated, but the\n      server is not yet available to perform file operations. Under normal conditions, it can take a\n      couple of minutes for the server to be completely operational. Both <code>START_FAILED</code>\n      and <code>STOP_FAILED</code> are error conditions.</p>"
+                "smithy.api#documentation": "<p>Describes the condition of a file transfer protocol-enabled server with respect to its\n      ability to perform file operations. There are six possible states: <code>OFFLINE</code>,\n        <code>ONLINE</code>, <code>STARTING</code>, <code>STOPPING</code>,\n      <code>START_FAILED</code>, and <code>STOP_FAILED</code>.</p>\n         <p>\n            <code>OFFLINE</code> indicates that the server exists, but that it is not available for\n      file operations. <code>ONLINE</code> indicates that the server is available to perform file\n      operations. <code>STARTING</code> indicates that the server's was instantiated, but the\n      server is not yet available to perform file operations. Under normal conditions, it can take a\n      couple of minutes for the server to be completely operational. Both <code>START_FAILED</code>\n      and <code>STOP_FAILED</code> are error conditions.</p>"
             }
         },
         "com.amazonaws.transfer#StatusCode": {
@@ -6312,7 +6349,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Changes the state of a file transfer protocol-enabled server from <code>ONLINE</code> to\n        <code>OFFLINE</code>. An <code>OFFLINE</code> server cannot accept and process file transfer\n      jobs. Information tied to your server, such as server and user properties, are not affected by\n      stopping your server.</p>\n\n         <note>\n            <p>Stopping the server does not reduce or impact your file transfer protocol endpoint\n        billing; you must delete the server to stop being billed.</p>\n         </note>\n\n         <p>The state of <code>STOPPING</code> indicates that the server is in an intermediate state,\n      either not fully able to respond, or not fully offline. The values of <code>STOP_FAILED</code>\n      can indicate an error condition.</p>\n\n         <p>No response is returned from this call.</p>"
+                "smithy.api#documentation": "<p>Changes the state of a file transfer protocol-enabled server from <code>ONLINE</code> to\n        <code>OFFLINE</code>. An <code>OFFLINE</code> server cannot accept and process file transfer\n      jobs. Information tied to your server, such as server and user properties, are not affected by\n      stopping your server.</p>\n         <note>\n            <p>Stopping the server does not reduce or impact your file transfer protocol endpoint\n        billing; you must delete the server to stop being billed.</p>\n         </note>\n         <p>The state of <code>STOPPING</code> indicates that the server is in an intermediate state,\n      either not fully able to respond, or not fully offline. The values of <code>STOP_FAILED</code>\n      can indicate an error condition.</p>\n         <p>No response is returned from this call.</p>"
             }
         },
         "com.amazonaws.transfer#StopServerRequest": {
@@ -6402,7 +6439,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN).\n      Resources are users, servers, roles, and other entities.</p>\n\n         <p>There is no response returned from this call.</p>"
+                "smithy.api#documentation": "<p>Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN).\n      Resources are users, servers, roles, and other entities.</p>\n         <p>There is no response returned from this call.</p>"
             }
         },
         "com.amazonaws.transfer#TagResourceRequest": {
@@ -6510,7 +6547,7 @@
                 "ServerProtocol": {
                     "target": "com.amazonaws.transfer#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of file transfer protocol to be tested.</p>\n\n         <p>The available protocols are:</p>\n\n         <ul>\n            <li>\n               <p>Secure Shell (SSH) File Transfer Protocol (SFTP)</p>\n            </li>\n            <li>\n               <p>File Transfer Protocol Secure (FTPS)</p>\n            </li>\n            <li>\n               <p>File Transfer Protocol (FTP)</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of file transfer protocol to be tested.</p>\n         <p>The available protocols are:</p>\n         <ul>\n            <li>\n               <p>Secure Shell (SSH) File Transfer Protocol (SFTP)</p>\n            </li>\n            <li>\n               <p>File Transfer Protocol Secure (FTPS)</p>\n            </li>\n            <li>\n               <p>File Transfer Protocol (FTP)</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SourceIp": {
@@ -6813,7 +6850,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -6862,15 +6899,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -7133,9 +7161,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7146,9 +7174,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7159,9 +7187,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7172,9 +7200,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7185,9 +7213,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7198,9 +7226,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7211,9 +7239,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7224,9 +7252,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7237,9 +7265,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7250,9 +7278,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7263,9 +7291,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7276,9 +7304,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7289,9 +7317,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7302,9 +7330,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7315,9 +7343,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7328,9 +7356,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7341,9 +7369,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7354,9 +7382,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7367,9 +7395,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7380,9 +7408,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7393,9 +7421,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7406,9 +7434,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7419,9 +7447,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7432,9 +7460,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7445,9 +7473,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7458,9 +7486,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7471,9 +7499,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7484,9 +7512,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7497,9 +7525,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7510,9 +7538,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7523,9 +7551,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7536,9 +7564,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7549,9 +7577,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7562,9 +7590,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7575,9 +7603,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7588,9 +7616,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7601,9 +7629,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7614,9 +7642,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7627,9 +7655,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7640,9 +7668,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7653,9 +7681,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7666,9 +7694,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7679,9 +7707,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7692,9 +7720,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7705,9 +7733,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7718,9 +7746,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7731,9 +7759,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7744,9 +7772,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7757,9 +7785,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7770,9 +7798,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7783,9 +7811,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7796,9 +7824,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7809,9 +7837,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7822,9 +7850,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7835,9 +7863,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7848,9 +7876,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7861,9 +7889,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7874,9 +7902,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7887,9 +7915,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7900,9 +7928,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7913,9 +7941,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7926,9 +7954,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7939,9 +7967,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7952,9 +7980,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7965,9 +7993,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -7978,9 +8006,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -7991,9 +8019,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8004,9 +8032,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8017,9 +8045,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8030,9 +8058,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8043,9 +8071,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8056,9 +8084,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8069,9 +8097,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8082,9 +8110,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8095,9 +8123,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8108,9 +8136,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8121,9 +8149,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8134,9 +8162,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8147,9 +8175,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8160,9 +8188,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8173,9 +8201,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8186,9 +8214,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8199,9 +8227,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8212,9 +8240,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8225,9 +8253,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8238,9 +8266,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8251,9 +8279,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8264,9 +8292,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8277,9 +8305,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8290,9 +8318,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8303,9 +8331,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8316,9 +8344,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8329,9 +8357,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8342,9 +8370,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8355,9 +8383,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8368,9 +8396,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8381,9 +8409,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8394,9 +8422,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8407,9 +8435,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8420,9 +8448,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8433,9 +8461,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8446,9 +8474,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8459,9 +8487,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -8472,9 +8500,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -8485,9 +8513,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8497,9 +8525,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -8509,9 +8537,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -8543,7 +8571,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detaches a key-value pair from a resource, as identified by its Amazon Resource Name\n      (ARN). Resources are users, servers, roles, and other entities.</p>\n\n         <p>No response is returned from this call.</p>"
+                "smithy.api#documentation": "<p>Detaches a key-value pair from a resource, as identified by its Amazon Resource Name\n      (ARN). Resources are users, servers, roles, and other entities.</p>\n         <p>No response is returned from this call.</p>"
             }
         },
         "com.amazonaws.transfer#UntagResourceRequest": {
@@ -8621,7 +8649,7 @@
                 "Policy": {
                     "target": "com.amazonaws.transfer#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same Identity and Access Management (IAM) role across multiple users. This policy scopes down a user's\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n    \n         <note>\n            <p>This policy applies only when the domain of <code>ServerId</code> is Amazon S3. Amazon EFS does not use session policies.</p>\n            <p>For session policies, Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html\">Example\n        session policy</a>.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web ServicesSecurity Token Service API\n          Reference</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same Identity and Access Management (IAM) role across multiple users. This policy scopes down a user's\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n         <note>\n            <p>This policy applies only when the domain of <code>ServerId</code> is Amazon S3. Amazon EFS does not use session policies.</p>\n            <p>For session policies, Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html\">Example\n        session policy</a>.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web ServicesSecurity Token Service API\n          Reference</i>.</p>\n         </note>"
                     }
                 },
                 "PosixProfile": {
@@ -8643,7 +8671,7 @@
                 "ExternalId": {
                     "target": "com.amazonaws.transfer#ExternalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n  \n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>",
+                        "smithy.api#documentation": "<p>A unique identifier that is required to identify specific groups within your directory.\n    The users of the group that you associate have access to your Amazon S3 or Amazon EFS\n    resources over the enabled protocols using Transfer Family. If you know the group name,\n    you can view the SID values by running the following command using Windows PowerShell.</p>\n         <p>\n            <code>Get-ADGroup -Filter {samAccountName -like \"<i>YourGroupName</i>*\"} -Properties * | Select SamAccountName,ObjectSid</code>\n         </p>\n         <p>In that command, replace <i>YourGroupName</i> with the name of your Active Directory group.</p>\n         <p>The regular expression used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces.\n    You can also include underscores or any of the following characters: =,.@:/-</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9086,7 +9114,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the file transfer protocol-enabled server's properties after that server has\n      been created.</p>\n\n         <p>The <code>UpdateServer</code> call returns the <code>ServerId</code> of the server you\n      updated.</p>"
+                "smithy.api#documentation": "<p>Updates the file transfer protocol-enabled server's properties after that server has\n      been created.</p>\n         <p>The <code>UpdateServer</code> call returns the <code>ServerId</code> of the server you\n      updated.</p>"
             }
         },
         "com.amazonaws.transfer#UpdateServerRequest": {
@@ -9095,7 +9123,7 @@
                 "Certificate": {
                     "target": "com.amazonaws.transfer#Certificate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web ServicesCertificate Manager (ACM) certificate. Required\n      when <code>Protocols</code> is set to <code>FTPS</code>.</p>\n\n         <p>To request a new public certificate, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html\">Request a public certificate</a>\n      in the <i> Amazon Web ServicesCertificate Manager User Guide</i>.</p>\n\n         <p>To import an existing certificate into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into ACM</a>\n      in the <i> Amazon Web ServicesCertificate Manager User Guide</i>.</p>\n\n         <p>To request a private certificate to use FTPS through private IP addresses, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html\">Request a\n        private certificate</a> in the <i> Amazon Web ServicesCertificate Manager User\n      Guide</i>.</p>\n\n         <p>Certificates with the following cryptographic algorithms and key sizes are\n      supported:</p>\n\n         <ul>\n            <li>\n               <p>2048-bit RSA (RSA_2048)</p>\n            </li>\n            <li>\n               <p>4096-bit RSA (RSA_4096)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 256 bit (EC_prime256v1)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 384 bit (EC_secp384r1)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 521 bit (EC_secp521r1)</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The certificate must be a valid SSL/TLS X.509 version 3 certificate with FQDN or IP\n        address specified and information about the issuer.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web ServicesCertificate Manager (ACM) certificate. Required\n      when <code>Protocols</code> is set to <code>FTPS</code>.</p>\n         <p>To request a new public certificate, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html\">Request a public certificate</a>\n      in the <i> Amazon Web ServicesCertificate Manager User Guide</i>.</p>\n         <p>To import an existing certificate into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into ACM</a>\n      in the <i> Amazon Web ServicesCertificate Manager User Guide</i>.</p>\n         <p>To request a private certificate to use FTPS through private IP addresses, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html\">Request a\n        private certificate</a> in the <i> Amazon Web ServicesCertificate Manager User\n      Guide</i>.</p>\n         <p>Certificates with the following cryptographic algorithms and key sizes are\n      supported:</p>\n         <ul>\n            <li>\n               <p>2048-bit RSA (RSA_2048)</p>\n            </li>\n            <li>\n               <p>4096-bit RSA (RSA_4096)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 256 bit (EC_prime256v1)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 384 bit (EC_secp384r1)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 521 bit (EC_secp521r1)</p>\n            </li>\n         </ul>\n         <note>\n            <p>The certificate must be a valid SSL/TLS X.509 version 3 certificate with FQDN or IP\n        address specified and information about the issuer.</p>\n         </note>"
                     }
                 },
                 "ProtocolDetails": {
@@ -9113,13 +9141,13 @@
                 "EndpointType": {
                     "target": "com.amazonaws.transfer#EndpointType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of endpoint that you want your server to use. You can choose to make your server's endpoint publicly accessible (PUBLIC)\n      or host it inside your VPC. With an endpoint that is hosted in a VPC, you can restrict access to your server and \n      resources only within your VPC or choose to make it internet facing by attaching Elastic IP addresses directly to it.</p>\n         <note>\n            <p> After May 19, 2021, you won't be able to create a server using\n          <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount if your account hasn't already\n      done so before May 19, 2021. If you have already created servers with\n      <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount on or before May 19, 2021,\n        you will not be affected. After this date, use\n        <code>EndpointType</code>=<code>VPC</code>.</p> \n      \n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n            <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With\n        this endpoint type, you have the option to directly associate up to three Elastic IPv4\n        addresses (BYO IP included) with your server's endpoint and use VPC security groups to\n        restrict traffic by the client's public IP address. This is not possible with\n          <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The type of endpoint that you want your server to use. You can choose to make your server's endpoint publicly accessible (PUBLIC)\n      or host it inside your VPC. With an endpoint that is hosted in a VPC, you can restrict access to your server and \n      resources only within your VPC or choose to make it internet facing by attaching Elastic IP addresses directly to it.</p>\n         <note>\n            <p> After May 19, 2021, you won't be able to create a server using\n          <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount if your account hasn't already\n      done so before May 19, 2021. If you have already created servers with\n      <code>EndpointType=VPC_ENDPOINT</code> in your Amazon Web Servicesaccount on or before May 19, 2021,\n        you will not be affected. After this date, use\n        <code>EndpointType</code>=<code>VPC</code>.</p>\n            <p>For more information, see\n        https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.</p>\n            <p>It is recommended that you use <code>VPC</code> as the <code>EndpointType</code>. With\n        this endpoint type, you have the option to directly associate up to three Elastic IPv4\n        addresses (BYO IP included) with your server's endpoint and use VPC security groups to\n        restrict traffic by the client's public IP address. This is not possible with\n          <code>EndpointType</code> set to <code>VPC_ENDPOINT</code>.</p>\n         </note>"
                     }
                 },
                 "HostKey": {
                     "target": "com.amazonaws.transfer#HostKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled server. You can add multiple host keys, in case you want\n     to rotate keys, or have a set of active keys that use different algorithms.</p>\n    \n         <p>Use the following command to generate an RSA 2048 bit key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t rsa -b 2048 -N \"\" -m PEM -f my-new-server-key</code>.</p>\n         <p>Use a minimum value of 2048 for the <code>-b</code> option. You can create a stronger key by using 3072 or 4096.</p>\n    \n         <p>Use the following command to generate an ECDSA 256 bit key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t ecdsa -b 256 -N \"\" -m PEM -f my-new-server-key</code>.</p>\n         <p>Valid values for the <code>-b</code> option for ECDSA are 256, 384, and 521.</p>\n    \n         <p>Use the following command to generate an ED25519 key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t ed25519 -N \"\" -f my-new-server-key</code>.</p>\n    \n         <p>For all of these commands, you can replace <i>my-new-server-key</i> with a string of your choice.</p>\n\n         <important>\n            <p>If you aren't planning to migrate existing users from an existing SFTP-enabled\n        server to a new server, don't update the host key. Accidentally changing a\n        server's host key can be disruptive.</p>\n         </important>\n\n    \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key\">Update host keys for your SFTP-enabled server</a> in the <i>Transfer Family User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled server. You can add multiple host keys, in case you want\n     to rotate keys, or have a set of active keys that use different algorithms.</p>\n         <p>Use the following command to generate an RSA 2048 bit key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t rsa -b 2048 -N \"\" -m PEM -f my-new-server-key</code>.</p>\n         <p>Use a minimum value of 2048 for the <code>-b</code> option. You can create a stronger key by using 3072 or 4096.</p>\n         <p>Use the following command to generate an ECDSA 256 bit key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t ecdsa -b 256 -N \"\" -m PEM -f my-new-server-key</code>.</p>\n         <p>Valid values for the <code>-b</code> option for ECDSA are 256, 384, and 521.</p>\n         <p>Use the following command to generate an ED25519 key with no passphrase:</p>\n         <p>\n            <code>ssh-keygen -t ed25519 -N \"\" -f my-new-server-key</code>.</p>\n         <p>For all of these commands, you can replace <i>my-new-server-key</i> with a string of your choice.</p>\n         <important>\n            <p>If you aren't planning to migrate existing users from an existing SFTP-enabled\n        server to a new server, don't update the host key. Accidentally changing a\n        server's host key can be disruptive.</p>\n         </important>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/edit-server-config.html#configuring-servers-change-host-key\">Update host keys for your SFTP-enabled server</a> in the <i>Transfer Family User Guide</i>.</p>"
                     }
                 },
                 "IdentityProviderDetails": {
@@ -9143,13 +9171,13 @@
                 "PreAuthenticationLoginBanner": {
                     "target": "com.amazonaws.transfer#PreAuthenticationLoginBanner",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a string to display when users connect to a server. This string is displayed before the user authenticates.\n    For example, the following banner displays details about using the system:</p>\n    \n         <p>\n            <code>This system is for the use of authorized users only. Individuals using this computer system without authority,\n    or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by\n    system personnel.</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies a string to display when users connect to a server. This string is displayed before the user authenticates.\n    For example, the following banner displays details about using the system:</p>\n         <p>\n            <code>This system is for the use of authorized users only. Individuals using this computer system without authority,\n    or in excess of their authority, are subject to having all of their activities on this system monitored and recorded by\n    system personnel.</code>\n         </p>"
                     }
                 },
                 "Protocols": {
                     "target": "com.amazonaws.transfer#Protocols",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n            <li>\n               <p>\n                  <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p>\n            </li>\n         </ul>\n\n         <note>\n            <ul>\n               <li>\n                  <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) \n            which is used to identify your server when clients connect to it over\n            FTPS.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n            <code>EndpointType</code> must be <code>VPC</code> and the\n            <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n            can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n            <code>SERVICE_MANAGED</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>AS2</code>, then the\n              <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies the file transfer protocol or protocols over which your file transfer protocol\n      client can connect to your server's endpoint. The available protocols are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SFTP</code> (Secure Shell (SSH) File Transfer Protocol): File transfer over\n          SSH</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTPS</code> (File Transfer Protocol Secure): File transfer with TLS\n          encryption</p>\n            </li>\n            <li>\n               <p>\n                  <code>FTP</code> (File Transfer Protocol): Unencrypted file transfer</p>\n            </li>\n            <li>\n               <p>\n                  <code>AS2</code> (Applicability Statement 2): used for transporting structured business-to-business data</p>\n            </li>\n         </ul>\n         <note>\n            <ul>\n               <li>\n                  <p>If you select <code>FTPS</code>, you must choose a certificate stored in Certificate Manager (ACM) \n            which is used to identify your server when clients connect to it over\n            FTPS.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes either <code>FTP</code> or <code>FTPS</code>, then the\n            <code>EndpointType</code> must be <code>VPC</code> and the\n            <code>IdentityProviderType</code> must be <code>AWS_DIRECTORY_SERVICE</code> or <code>API_GATEWAY</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>FTP</code>, then\n          <code>AddressAllocationIds</code> cannot be associated.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> is set only to <code>SFTP</code>, the <code>EndpointType</code>\n            can be set to <code>PUBLIC</code> and the <code>IdentityProviderType</code> can be set to\n            <code>SERVICE_MANAGED</code>.</p>\n               </li>\n               <li>\n                  <p>If <code>Protocol</code> includes <code>AS2</code>, then the\n              <code>EndpointType</code> must be <code>VPC</code>, and domain must be Amazon S3.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "SecurityPolicyName": {
@@ -9168,7 +9196,7 @@
                 "WorkflowDetails": {
                     "target": "com.amazonaws.transfer#WorkflowDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In additon to a workflow to execute when a file is uploaded completely, <code>WorkflowDeatails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>\n         <p>To remove an associated workflow from a server, you can provide an empty <code>OnUpload</code> object, as in the following example.</p>\n         <p>\n            <code>aws transfer update-server --server-id s-01234567890abcdef --workflow-details '{\"OnUpload\":[]}'</code>\n         </p>"
                     }
                 }
             }
@@ -9211,7 +9239,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns new properties to a user. Parameters you pass modify any or all of the following:\n      the home directory, role, and policy for the <code>UserName</code> and <code>ServerId</code>\n      you specify.</p>\n\n         <p>The response returns the <code>ServerId</code> and the <code>UserName</code> for the\n      updated user.</p>"
+                "smithy.api#documentation": "<p>Assigns new properties to a user. Parameters you pass modify any or all of the following:\n      the home directory, role, and policy for the <code>UserName</code> and <code>ServerId</code>\n      you specify.</p>\n         <p>The response returns the <code>ServerId</code> and the <code>UserName</code> for the\n      updated user.</p>"
             }
         },
         "com.amazonaws.transfer#UpdateUserRequest": {
@@ -9232,13 +9260,13 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) \n      role provides access to paths in <code>Target</code>. This value\n      can be set only when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n      user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Identity and Access Management (IAM) \n      role provides access to paths in <code>Target</code>. This value\n      can be set only when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"/directory1\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n      user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>"
                     }
                 },
                 "Policy": {
                     "target": "com.amazonaws.transfer#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same Identity and Access Management (IAM) role across multiple users. This policy scopes down a user's\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n    \n         <note>\n            <p>This policy applies only when the domain of <code>ServerId</code> is Amazon S3. Amazon EFS does not use session policies.</p>\n            <p>For session policies, Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n      \n      \n\n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy\">Creating a session\n          policy</a>.</p>\n\n      \n\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web Services\n          Security Token Service API Reference</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same Identity and Access Management (IAM) role across multiple users. This policy scopes down a user's\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n         <note>\n            <p>This policy applies only when the domain of <code>ServerId</code> is Amazon S3. Amazon EFS does not use session policies.</p>\n            <p>For session policies, Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy\">Creating a session\n          policy</a>.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web Services\n          Security Token Service API Reference</i>.</p>\n         </note>"
                     }
                 },
                 "PosixProfile": {
@@ -9393,7 +9421,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In addition to a workflow to execute when a file is uploaded completely, <code>WorkflowDetails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
+                "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role that's used for executing the workflow.</p>\n         <p>In additon to a workflow to execute when a file is uploaded completely, <code>WorkflowDeatails</code> can also contain a\n    workflow ID (and execution role) for a workflow to execute on partial upload. A partial upload occurs when a file is open when\n    the session disconnects.</p>"
             }
         },
         "com.amazonaws.transfer#WorkflowDetails": {
@@ -9458,6 +9486,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details for a step that creates one or more tags.</p>\n         <p>You specify one or more tags: each tag contains a key/value pair.</p>"
                     }
+                },
+                "DecryptStepDetails": {
+                    "target": "com.amazonaws.transfer#DecryptStepDetails"
                 }
             },
             "traits": {
@@ -9499,6 +9530,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "DELETE"
+                    }
+                },
+                "DECRYPT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DECRYPT"
                     }
                 }
             }

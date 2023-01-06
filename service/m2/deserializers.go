@@ -1309,6 +1309,15 @@ func awsRestjson1_deserializeOpDocumentGetApplicationOutput(v **GetApplicationOu
 				sv.EnvironmentId = ptr.String(jtv)
 			}
 
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
 		case "lastStartTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2775,6 +2784,15 @@ func awsRestjson1_deserializeOpDocumentGetEnvironmentOutput(v **GetEnvironmentOu
 				sv.InstanceType = ptr.String(jtv)
 			}
 
+		case "kmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
 		case "loadBalancerArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2802,7 +2820,7 @@ func awsRestjson1_deserializeOpDocumentGetEnvironmentOutput(v **GetEnvironmentOu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+					return fmt.Errorf("expected String50 to be of type string, got %T instead", value)
 				}
 				sv.PreferredMaintenanceWindow = ptr.String(jtv)
 			}

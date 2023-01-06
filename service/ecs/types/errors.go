@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,7 +25,12 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can apply up to 10 custom attributes for each resource. You can view the
@@ -31,6 +38,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // on a resource with DeleteAttributes.
 type AttributeLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -45,7 +54,10 @@ func (e *AttributeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AttributeLimitExceededException) ErrorCode() string {
-	return "AttributeLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "AttributeLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *AttributeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -53,6 +65,8 @@ func (e *AttributeLimitExceededException) ErrorFault() smithy.ErrorFault { retur
 // Amazon Web Services Support (http://aws.amazon.com/contact-us/).
 type BlockedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -66,7 +80,12 @@ func (e *BlockedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BlockedException) ErrorCode() string             { return "BlockedException" }
+func (e *BlockedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BlockedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BlockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // These errors are usually caused by a client action. This client action might be
@@ -75,6 +94,8 @@ func (e *BlockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // valid.
 type ClientException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -88,7 +109,12 @@ func (e *ClientException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClientException) ErrorCode() string             { return "ClientException" }
+func (e *ClientException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ClientException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't delete a cluster that has registered container instances. First,
@@ -96,6 +122,8 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // information, see DeregisterContainerInstance.
 type ClusterContainsContainerInstancesException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -110,7 +138,10 @@ func (e *ClusterContainsContainerInstancesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterContainsContainerInstancesException) ErrorCode() string {
-	return "ClusterContainsContainerInstancesException"
+	if e.ErrorCodeOverride == nil {
+		return "ClusterContainsContainerInstancesException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -121,6 +152,8 @@ func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFa
 // information, see UpdateService and DeleteService.
 type ClusterContainsServicesException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -135,13 +168,18 @@ func (e *ClusterContainsServicesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ClusterContainsServicesException) ErrorCode() string {
-	return "ClusterContainsServicesException"
+	if e.ErrorCodeOverride == nil {
+		return "ClusterContainsServicesException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ClusterContainsServicesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't delete a cluster that has active tasks.
 type ClusterContainsTasksException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -155,13 +193,20 @@ func (e *ClusterContainsTasksException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterContainsTasksException) ErrorCode() string             { return "ClusterContainsTasksException" }
+func (e *ClusterContainsTasksException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ClusterContainsTasksException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ClusterContainsTasksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified cluster wasn't found. You can view your available clusters with
 // ListClusters. Amazon ECS clusters are Region specific.
 type ClusterNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -175,13 +220,20 @@ func (e *ClusterNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ClusterNotFoundException) ErrorCode() string             { return "ClusterNotFoundException" }
+func (e *ClusterNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ClusterNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified parameter isn't valid. Review the available parameters for the API
 // request.
 type InvalidParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -195,12 +247,19 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The limit for the resource was exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -214,7 +273,12 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon ECS can't determine the current version of the Amazon ECS container agent
@@ -223,6 +287,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // previous or custom version that doesn't use our version information.
 type MissingVersionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -236,14 +302,47 @@ func (e *MissingVersionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MissingVersionException) ErrorCode() string             { return "MissingVersionException" }
+func (e *MissingVersionException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MissingVersionException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MissingVersionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The specified namespace wasn't found.
+type NamespaceNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *NamespaceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NamespaceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NamespaceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NamespaceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *NamespaceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There's no update available for this Amazon ECS container agent. This might be
 // because the agent is already running the latest version or because it's so old
 // that there's no update path to the current version.
 type NoUpdateAvailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -257,13 +356,20 @@ func (e *NoUpdateAvailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoUpdateAvailableException) ErrorCode() string             { return "NoUpdateAvailableException" }
+func (e *NoUpdateAvailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoUpdateAvailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoUpdateAvailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified platform version doesn't satisfy the required capabilities of the
 // task definition.
 type PlatformTaskDefinitionIncompatibilityException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -278,7 +384,10 @@ func (e *PlatformTaskDefinitionIncompatibilityException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PlatformTaskDefinitionIncompatibilityException) ErrorCode() string {
-	return "PlatformTaskDefinitionIncompatibilityException"
+	if e.ErrorCodeOverride == nil {
+		return "PlatformTaskDefinitionIncompatibilityException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *PlatformTaskDefinitionIncompatibilityException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -287,6 +396,8 @@ func (e *PlatformTaskDefinitionIncompatibilityException) ErrorFault() smithy.Err
 // The specified platform version doesn't exist.
 type PlatformUnknownException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -300,12 +411,19 @@ func (e *PlatformUnknownException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PlatformUnknownException) ErrorCode() string             { return "PlatformUnknownException" }
+func (e *PlatformUnknownException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "PlatformUnknownException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *PlatformUnknownException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource is in-use and can't be removed.
 type ResourceInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -319,12 +437,19 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource wasn't found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -338,12 +463,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // These errors are usually caused by a server issue.
 type ServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -357,7 +489,12 @@ func (e *ServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServerException) ErrorCode() string             { return "ServerException" }
+func (e *ServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The specified service isn't active. You can't update a service that's inactive.
@@ -365,6 +502,8 @@ func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultSe
 // CreateService.
 type ServiceNotActiveException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -378,13 +517,20 @@ func (e *ServiceNotActiveException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceNotActiveException) ErrorCode() string             { return "ServiceNotActiveException" }
+func (e *ServiceNotActiveException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceNotActiveException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified service wasn't found. You can view your available services with
 // ListServices. Amazon ECS services are cluster specific and Region specific.
 type ServiceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -398,7 +544,12 @@ func (e *ServiceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceNotFoundException) ErrorCode() string             { return "ServiceNotFoundException" }
+func (e *ServiceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The execute command cannot run. This error can be caused by any of the following
@@ -420,6 +571,8 @@ func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 type TargetNotConnectedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -432,7 +585,12 @@ func (e *TargetNotConnectedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TargetNotConnectedException) ErrorCode() string             { return "TargetNotConnectedException" }
+func (e *TargetNotConnectedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TargetNotConnectedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TargetNotConnectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified target wasn't found. You can view your available container
@@ -440,6 +598,8 @@ func (e *TargetNotConnectedException) ErrorFault() smithy.ErrorFault { return sm
 // cluster-specific and Region-specific.
 type TargetNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -453,13 +613,20 @@ func (e *TargetNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TargetNotFoundException) ErrorCode() string             { return "TargetNotFoundException" }
+func (e *TargetNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TargetNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified task set wasn't found. You can view your available task sets with
 // DescribeTaskSets. Task sets are specific to each cluster, service and Region.
 type TaskSetNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -473,12 +640,19 @@ func (e *TaskSetNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TaskSetNotFoundException) ErrorCode() string             { return "TaskSetNotFoundException" }
+func (e *TaskSetNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TaskSetNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TaskSetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified task isn't supported in this Region.
 type UnsupportedFeatureException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -492,7 +666,12 @@ func (e *UnsupportedFeatureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedFeatureException) ErrorCode() string             { return "UnsupportedFeatureException" }
+func (e *UnsupportedFeatureException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedFeatureException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There's already a current Amazon ECS container agent update in progress on the
@@ -502,6 +681,8 @@ func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return sm
 // resumes where it stopped previously.
 type UpdateInProgressException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -515,5 +696,10 @@ func (e *UpdateInProgressException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UpdateInProgressException) ErrorCode() string             { return "UpdateInProgressException" }
+func (e *UpdateInProgressException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UpdateInProgressException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UpdateInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

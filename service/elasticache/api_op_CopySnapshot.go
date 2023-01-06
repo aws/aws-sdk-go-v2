@@ -12,9 +12,7 @@ import (
 )
 
 // Makes a copy of an existing snapshot. This operation is valid for Redis only.
-// Users or groups that have permissions to use the CopySnapshot operation
-//
-// can
+// Users or groups that have permissions to use the CopySnapshot operation can
 // create their own Amazon S3 buckets and copy snapshots to it. To control access
 // to your snapshots, use an IAM policy to control who has the ability to use the
 // CopySnapshot operation. For more information about using IAM to control the use

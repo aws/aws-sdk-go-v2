@@ -11,8 +11,7 @@ import (
 )
 
 // Retrieves the fleet ID that an alias is currently pointing to. Related actions
-// CreateAlias | ListAliases | DescribeAlias | UpdateAlias | DeleteAlias |
-// ResolveAlias | All APIs by task
+// All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ResolveAlias(ctx context.Context, params *ResolveAliasInput, optFns ...func(*Options)) (*ResolveAliasOutput, error) {
 	if params == nil {
@@ -29,7 +28,6 @@ func (c *Client) ResolveAlias(ctx context.Context, params *ResolveAliasInput, op
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type ResolveAliasInput struct {
 
 	// The unique identifier of the alias that you want to retrieve a fleet ID for. You
@@ -41,7 +39,6 @@ type ResolveAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type ResolveAliasOutput struct {
 
 	// The Amazon Resource Name (ARN

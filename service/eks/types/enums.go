@@ -74,6 +74,10 @@ const (
 	AMITypesBottlerocketX8664       AMITypes = "BOTTLEROCKET_x86_64"
 	AMITypesBottlerocketArm64Nvidia AMITypes = "BOTTLEROCKET_ARM_64_NVIDIA"
 	AMITypesBottlerocketX8664Nvidia AMITypes = "BOTTLEROCKET_x86_64_NVIDIA"
+	AMITypesWindowsCore2019X8664    AMITypes = "WINDOWS_CORE_2019_x86_64"
+	AMITypesWindowsFull2019X8664    AMITypes = "WINDOWS_FULL_2019_x86_64"
+	AMITypesWindowsCore2022X8664    AMITypes = "WINDOWS_CORE_2022_x86_64"
+	AMITypesWindowsFull2022X8664    AMITypes = "WINDOWS_FULL_2022_x86_64"
 )
 
 // Values returns all known values for AMITypes. Note that this can be expanded in
@@ -89,6 +93,10 @@ func (AMITypes) Values() []AMITypes {
 		"BOTTLEROCKET_x86_64",
 		"BOTTLEROCKET_ARM_64_NVIDIA",
 		"BOTTLEROCKET_x86_64_NVIDIA",
+		"WINDOWS_CORE_2019_x86_64",
+		"WINDOWS_FULL_2019_x86_64",
+		"WINDOWS_CORE_2022_x86_64",
+		"WINDOWS_FULL_2022_x86_64",
 	}
 }
 

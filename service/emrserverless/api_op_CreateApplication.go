@@ -36,7 +36,7 @@ type CreateApplicationInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The EMR release version associated with the application.
+	// The EMR release associated with the application.
 	//
 	// This member is required.
 	ReleaseLabel *string
@@ -56,6 +56,10 @@ type CreateApplicationInput struct {
 	// amount of time being idle.
 	AutoStopConfiguration *types.AutoStopConfig
 
+	// The image configuration for all worker types. You can either set this parameter
+	// or imageConfiguration for each worker type in workerTypeSpecifications.
+	ImageConfiguration *types.ImageConfigurationInput
+
 	// The capacity to initialize when the application is created.
 	InitialCapacity map[string]types.InitialCapacityConfig
 
@@ -73,6 +77,14 @@ type CreateApplicationInput struct {
 
 	// The tags assigned to the application.
 	Tags map[string]string
+
+	// The key-value pairs that specify worker type to WorkerTypeSpecificationInput.
+	// This parameter must contain all valid worker types for a Spark or Hive
+	// application. Valid worker types include Driver and Executor for Spark
+	// applications and HiveDriver and TezTask for Hive applications. You can either
+	// set image details in this parameter for each worker type, or in
+	// imageConfiguration for all worker types.
+	WorkerTypeSpecifications map[string]types.WorkerTypeSpecificationInput
 
 	noSmithyDocumentSerde
 }

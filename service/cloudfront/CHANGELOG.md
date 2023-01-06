@@ -1,3 +1,27 @@
+# v1.24.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.23.0 (2022-12-30)
+
+* **Feature**: Extend response headers policy to support removing headers from viewer responses
+
+# v1.22.2 (2022-12-16)
+
+* **Documentation**: Updated documentation for CloudFront
+
+# v1.22.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.22.0 (2022-12-07)
+
+* **Feature**: Introducing UpdateDistributionWithStagingConfig that can be used to promote the staging configuration to the production.
+
+# v1.21.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.0 (2022-11-18)
 
 * **Feature**: CloudFront API support for staging distributions and associated traffic management policies.

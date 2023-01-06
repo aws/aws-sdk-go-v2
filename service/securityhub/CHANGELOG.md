@@ -1,3 +1,20 @@
+# v1.27.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.26.0 (2022-12-15)
+
+* **Feature**: Added new resource details objects to ASFF, including resources for AwsEc2LaunchTemplate, AwsSageMakerNotebookInstance, AwsWafv2WebAcl and AwsWafv2RuleGroup.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.0 (2022-11-29)
+
+* **Feature**: Adding StandardsManagedBy field to DescribeStandards API response
+
 # v1.24.0 (2022-11-17)
 
 * **Feature**: Added SourceLayerArn and SourceLayerHash field for security findings.  Updated AwsLambdaFunction Resource detail

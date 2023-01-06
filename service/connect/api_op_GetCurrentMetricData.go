@@ -75,10 +75,21 @@ type GetCurrentMetricDataInput struct {
 	// This member is required.
 	CurrentMetrics []types.CurrentMetric
 
-	// The queues, up to 100, or channels, to use to filter the metrics returned.
-	// Metric data is retrieved only for the resources associated with the queues or
-	// channels included in the filter. You can include both queue IDs and queue ARNs
-	// in the same request. VOICE, CHAT, and TASK channels are supported.
+	// The filters to apply to returned metrics. You can filter up to the following
+	// limits:
+	//
+	// * Queues: 100
+	//
+	// * Routing profiles: 100
+	//
+	// * Channels: 3 (VOICE, CHAT, and
+	// TASK channels are supported.)
+	//
+	// Metric data is retrieved only for the resources
+	// associated with the queues or routing profiles, and by any channels included in
+	// the filter. (You cannot filter by both queue AND routing profile.) You can
+	// include both resource IDs and resource ARNs in the same request. Currently
+	// tagging is only supported on the resources that are passed in the filter.
 	//
 	// This member is required.
 	Filters *types.Filters
@@ -97,10 +108,12 @@ type GetCurrentMetricDataInput struct {
 	// CHAT, and TASK channels are supported.
 	//
 	// * If you group by ROUTING_PROFILE, you
-	// must include either a queue or routing profile filter.
+	// must include either a queue or routing profile filter. In addition, a routing
+	// profile filter is required for metrics CONTACTS_SCHEDULED, CONTACTS_IN_QUEUE,
+	// and  OLDEST_CONTACT_AGE.
 	//
-	// * If no Grouping is
-	// included in the request, a summary of metrics is returned.
+	// * If no Grouping is included in the request, a summary
+	// of metrics is returned.
 	Groupings []types.Grouping
 
 	// The maximum number of results to return per page.
@@ -113,10 +126,21 @@ type GetCurrentMetricDataInput struct {
 	// the token.
 	NextToken *string
 
+	// The way to sort the resulting response based on metrics. You can enter one sort
+	// criteria. By default resources are sorted based on AGENTS_ONLINE, DESCENDING.
+	// The metric collection is sorted based on the input metrics. Note the
+	// following:
+	//
+	// * Sorting on SLOTS_ACTIVE and SLOTS_AVAILABLE is not supported.
+	SortCriteria []types.CurrentMetricSortCriteria
+
 	noSmithyDocumentSerde
 }
 
 type GetCurrentMetricDataOutput struct {
+
+	// The total count of the result, regardless of the current page size.
+	ApproximateTotalCount *int64
 
 	// The time at which the metrics were retrieved and cached for pagination.
 	DataSnapshotTime *time.Time

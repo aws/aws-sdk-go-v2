@@ -249,6 +249,16 @@ type CreateDBInstanceInput struct {
 	// the Amazon RDS User Guide.
 	BackupTarget *string
 
+	// Specifies the CA certificate identifier to use for the DB instance’s server
+	// certificate. This setting doesn't apply to RDS Custom. For more information, see
+	// Using SSL/TLS to encrypt a connection to a DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+	// cluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
+	CACertificateIdentifier *string
+
 	// For supported engines, this value indicates that the DB instance should be
 	// associated with the specified CharacterSet. This setting doesn't apply to RDS
 	// Custom. However, if you need to change the character set, you can change it on
@@ -442,7 +452,7 @@ type CreateDBInstanceInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
 	// the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned
 	// IP addresses
-	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing)
+	// (https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing)
 	// in the Amazon Web Services Outposts User Guide.
 	EnableCustomerOwnedIp *bool
 
@@ -470,8 +480,8 @@ type CreateDBInstanceInput struct {
 	// number of the database engine to be used by the DB instance is managed by the DB
 	// cluster. Amazon RDS Custom for Oracle A custom engine version (CEV) that you
 	// have previously created. This setting is required for RDS Custom for Oracle. The
-	// CEV name has the following format: 19.customized_string . An example identifier
-	// is 19.my_cev1. For more information, see  Creating an RDS Custom for Oracle DB
+	// CEV name has the following format: 19.customized_string. A valid CEV name is
+	// 19.my_cev1. For more information, see  Creating an RDS Custom for Oracle DB
 	// instance
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-creating.html#custom-creating.create)
 	// in the Amazon RDS User Guide. Amazon RDS Custom for SQL Server See RDS Custom
@@ -527,14 +537,41 @@ type CreateDBInstanceInput struct {
 	// RDS Custom. Amazon Aurora Not applicable.
 	LicenseModel *string
 
+	// A value that indicates whether to manage the master user password with Amazon
+	// Web Services Secrets Manager. For more information, see Password management with
+	// Amazon Web Services Secrets Manager
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// in the Amazon RDS User Guide. Constraints:
+	//
+	// * Can't manage the master user
+	// password with Amazon Web Services Secrets Manager if MasterUserPassword is
+	// specified.
+	ManageMasterUserPassword *bool
+
 	// The password for the master user. The password can include any printable ASCII
 	// character except "/", """, or "@". Amazon Aurora Not applicable. The password
-	// for the master user is managed by the DB cluster. MariaDB Constraints: Must
+	// for the master user is managed by the DB cluster. Constraints: Can't be
+	// specified if ManageMasterUserPassword is turned on. MariaDB Constraints: Must
 	// contain from 8 to 41 characters. Microsoft SQL Server Constraints: Must contain
 	// from 8 to 128 characters. MySQL Constraints: Must contain from 8 to 41
 	// characters. Oracle Constraints: Must contain from 8 to 30 characters. PostgreSQL
 	// Constraints: Must contain from 8 to 128 characters.
 	MasterUserPassword *string
+
+	// The Amazon Web Services KMS key identifier to encrypt a secret that is
+	// automatically generated and managed in Amazon Web Services Secrets Manager. This
+	// setting is valid only if the master user password is managed by RDS in Amazon
+	// Web Services Secrets Manager for the DB instance. The Amazon Web Services KMS
+	// key identifier is the key ARN, key ID, alias ARN, or alias name for the KMS key.
+	// To use a KMS key in a different Amazon Web Services account, specify the key ARN
+	// or alias ARN. If you don't specify MasterUserSecretKmsKeyId, then the
+	// aws/secretsmanager KMS key is used to encrypt the secret. If the secret is in a
+	// different Amazon Web Services account, then you can't use the aws/secretsmanager
+	// KMS key to encrypt the secret, and you must use a customer managed KMS key.
+	// There is a default KMS key for your Amazon Web Services account. Your Amazon Web
+	// Services account has a different default KMS key for each Amazon Web Services
+	// Region.
+	MasterUserSecretKmsKeyId *string
 
 	// The name for the master user. Amazon Aurora Not applicable. The name for the
 	// master user is managed by the DB cluster. Amazon RDS Constraints:

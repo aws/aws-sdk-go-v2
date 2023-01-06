@@ -370,6 +370,26 @@ func (m *validateOpGetAllowList) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetClassificationScope struct {
+}
+
+func (*validateOpGetClassificationScope) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetClassificationScope) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetClassificationScopeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetClassificationScopeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCustomDataIdentifier struct {
 }
 
@@ -470,6 +490,26 @@ func (m *validateOpGetMember) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourceProfile struct {
+}
+
+func (*validateOpGetResourceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetSensitiveDataOccurrencesAvailability struct {
 }
 
@@ -505,6 +545,66 @@ func (m *validateOpGetSensitiveDataOccurrences) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSensitiveDataOccurrencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSensitivityInspectionTemplate struct {
+}
+
+func (*validateOpGetSensitivityInspectionTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSensitivityInspectionTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSensitivityInspectionTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSensitivityInspectionTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListResourceProfileArtifacts struct {
+}
+
+func (*validateOpListResourceProfileArtifacts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResourceProfileArtifacts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourceProfileArtifactsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourceProfileArtifactsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListResourceProfileDetections struct {
+}
+
+func (*validateOpListResourceProfileDetections) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListResourceProfileDetections) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListResourceProfileDetectionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListResourceProfileDetectionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +750,26 @@ func (m *validateOpUpdateAllowList) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAutomatedDiscoveryConfiguration struct {
+}
+
+func (*validateOpUpdateAutomatedDiscoveryConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAutomatedDiscoveryConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAutomatedDiscoveryConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAutomatedDiscoveryConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateClassificationJob struct {
 }
 
@@ -665,6 +785,26 @@ func (m *validateOpUpdateClassificationJob) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateClassificationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateClassificationScope struct {
+}
+
+func (*validateOpUpdateClassificationScope) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateClassificationScope) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateClassificationScopeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateClassificationScopeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -730,6 +870,46 @@ func (m *validateOpUpdateOrganizationConfiguration) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateResourceProfileDetections struct {
+}
+
+func (*validateOpUpdateResourceProfileDetections) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResourceProfileDetections) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResourceProfileDetectionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResourceProfileDetectionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateResourceProfile struct {
+}
+
+func (*validateOpUpdateResourceProfile) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResourceProfile) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResourceProfileInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResourceProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRevealConfiguration struct {
 }
 
@@ -745,6 +925,26 @@ func (m *validateOpUpdateRevealConfiguration) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateRevealConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSensitivityInspectionTemplate struct {
+}
+
+func (*validateOpUpdateSensitivityInspectionTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSensitivityInspectionTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSensitivityInspectionTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSensitivityInspectionTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -822,6 +1022,10 @@ func addOpGetAllowListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAllowList{}, middleware.After)
 }
 
+func addOpGetClassificationScopeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetClassificationScope{}, middleware.After)
+}
+
 func addOpGetCustomDataIdentifierValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCustomDataIdentifier{}, middleware.After)
 }
@@ -842,12 +1046,28 @@ func addOpGetMemberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMember{}, middleware.After)
 }
 
+func addOpGetResourceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceProfile{}, middleware.After)
+}
+
 func addOpGetSensitiveDataOccurrencesAvailabilityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSensitiveDataOccurrencesAvailability{}, middleware.After)
 }
 
 func addOpGetSensitiveDataOccurrencesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSensitiveDataOccurrences{}, middleware.After)
+}
+
+func addOpGetSensitivityInspectionTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSensitivityInspectionTemplate{}, middleware.After)
+}
+
+func addOpListResourceProfileArtifactsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResourceProfileArtifacts{}, middleware.After)
+}
+
+func addOpListResourceProfileDetectionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListResourceProfileDetections{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -878,8 +1098,16 @@ func addOpUpdateAllowListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAllowList{}, middleware.After)
 }
 
+func addOpUpdateAutomatedDiscoveryConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAutomatedDiscoveryConfiguration{}, middleware.After)
+}
+
 func addOpUpdateClassificationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateClassificationJob{}, middleware.After)
+}
+
+func addOpUpdateClassificationScopeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateClassificationScope{}, middleware.After)
 }
 
 func addOpUpdateFindingsFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -894,8 +1122,20 @@ func addOpUpdateOrganizationConfigurationValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpUpdateOrganizationConfiguration{}, middleware.After)
 }
 
+func addOpUpdateResourceProfileDetectionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResourceProfileDetections{}, middleware.After)
+}
+
+func addOpUpdateResourceProfileValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResourceProfile{}, middleware.After)
+}
+
 func addOpUpdateRevealConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRevealConfiguration{}, middleware.After)
+}
+
+func addOpUpdateSensitivityInspectionTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSensitivityInspectionTemplate{}, middleware.After)
 }
 
 func validate__listOfS3BucketDefinitionForJob(v []types.S3BucketDefinitionForJob) error {
@@ -992,6 +1232,43 @@ func validateS3BucketDefinitionForJob(v *types.S3BucketDefinitionForJob) error {
 	}
 	if v.Buckets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Buckets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ClassificationScopeExclusionUpdate(v *types.S3ClassificationScopeExclusionUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ClassificationScopeExclusionUpdate"}
+	if v.BucketNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketNames"))
+	}
+	if len(v.Operation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ClassificationScopeUpdate(v *types.S3ClassificationScopeUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ClassificationScopeUpdate"}
+	if v.Excludes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Excludes"))
+	} else if v.Excludes != nil {
+		if err := validateS3ClassificationScopeExclusionUpdate(v.Excludes); err != nil {
+			invalidParams.AddNested("Excludes", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1408,6 +1685,21 @@ func validateOpGetAllowListInput(v *GetAllowListInput) error {
 	}
 }
 
+func validateOpGetClassificationScopeInput(v *GetClassificationScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetClassificationScopeInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCustomDataIdentifierInput(v *GetCustomDataIdentifierInput) error {
 	if v == nil {
 		return nil
@@ -1483,6 +1775,21 @@ func validateOpGetMemberInput(v *GetMemberInput) error {
 	}
 }
 
+func validateOpGetResourceProfileInput(v *GetResourceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceProfileInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetSensitiveDataOccurrencesAvailabilityInput(v *GetSensitiveDataOccurrencesAvailabilityInput) error {
 	if v == nil {
 		return nil
@@ -1505,6 +1812,51 @@ func validateOpGetSensitiveDataOccurrencesInput(v *GetSensitiveDataOccurrencesIn
 	invalidParams := smithy.InvalidParamsError{Context: "GetSensitiveDataOccurrencesInput"}
 	if v.FindingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FindingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSensitivityInspectionTemplateInput(v *GetSensitivityInspectionTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSensitivityInspectionTemplateInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResourceProfileArtifactsInput(v *ListResourceProfileArtifactsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourceProfileArtifactsInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListResourceProfileDetectionsInput(v *ListResourceProfileDetectionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListResourceProfileDetectionsInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1643,6 +1995,21 @@ func validateOpUpdateAllowListInput(v *UpdateAllowListInput) error {
 	}
 }
 
+func validateOpUpdateAutomatedDiscoveryConfigurationInput(v *UpdateAutomatedDiscoveryConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAutomatedDiscoveryConfigurationInput"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateClassificationJobInput(v *UpdateClassificationJobInput) error {
 	if v == nil {
 		return nil
@@ -1653,6 +2020,26 @@ func validateOpUpdateClassificationJobInput(v *UpdateClassificationJobInput) err
 	}
 	if len(v.JobStatus) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("JobStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateClassificationScopeInput(v *UpdateClassificationScopeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateClassificationScopeInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.S3 != nil {
+		if err := validateS3ClassificationScopeUpdate(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1706,6 +2093,36 @@ func validateOpUpdateOrganizationConfigurationInput(v *UpdateOrganizationConfigu
 	}
 }
 
+func validateOpUpdateResourceProfileDetectionsInput(v *UpdateResourceProfileDetectionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceProfileDetectionsInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateResourceProfileInput(v *UpdateResourceProfileInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourceProfileInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateRevealConfigurationInput(v *UpdateRevealConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -1717,6 +2134,21 @@ func validateOpUpdateRevealConfigurationInput(v *UpdateRevealConfigurationInput)
 		if err := validateRevealConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSensitivityInspectionTemplateInput(v *UpdateSensitivityInspectionTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSensitivityInspectionTemplateInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -7,6 +7,17 @@ import (
 	"time"
 )
 
+// Information about an action.
+type ActionSummary struct {
+
+	// The action type.
+	//
+	// This member is required.
+	ActionType ActionType
+
+	noSmithyDocumentSerde
+}
+
 // Information about the contact
 // (https://docs.aws.amazon.com/connect/latest/APIReference/API_Contact.html)
 // associated to the user.
@@ -86,6 +97,9 @@ type AgentStatusReference struct {
 	// The Amazon Resource Name (ARN) of the agent's status.
 	StatusArn *string
 
+	// The name of the agent status.
+	StatusName *string
+
 	// The start timestamp of the agent's status.
 	StatusStartTimestamp *time.Time
 
@@ -120,6 +134,14 @@ type AnswerMachineDetectionConfig struct {
 	// for a voice call. If set to true, TrafficType must be set as CAMPAIGN.
 	EnableAnswerMachineDetection bool
 
+	noSmithyDocumentSerde
+}
+
+// This action must be set if TriggerEventSource is one of the following values:
+// OnPostCallAnalysisAvailable | OnRealTimeCallAnalysisAvailable |
+// OnPostChatAnalysisAvailable. Contact is categorized using the rule name.
+// RuleName is used as ContactCategory.
+type AssignContactCategoryActionDefinition struct {
 	noSmithyDocumentSerde
 }
 
@@ -172,13 +194,32 @@ type ChatMessage struct {
 
 	// The content of the chat message.
 	//
+	// * For text/plain and text/markdown, the Length
+	// Constraints are Minimum of 1, Maximum of 1024.
+	//
+	// * For application/json, the
+	// Length Constraints are Minimum of 1, Maximum of 12000.
+	//
 	// This member is required.
 	Content *string
 
-	// The type of the content. Supported types are text/plain.
+	// The type of the content. Supported types are text/plain, text/markdown, and
+	// application/json.
 	//
 	// This member is required.
 	ContentType *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information for the chat participant role.
+type ChatParticipantRoleConfig struct {
+
+	// A list of participant timers. You can specify any unique combination of role and
+	// timer type. Duplicate entries error out the request with a 400.
+	//
+	// This member is required.
+	ParticipantTimerConfigList []ParticipantTimerConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -415,7 +456,7 @@ type ContactFlowModuleSummary struct {
 
 // Contains summary information about a flow. You can also create and update flows
 // using the Amazon Connect Flow language
-// (https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html).
+// (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html).
 type ContactFlowSummary struct {
 
 	// The Amazon Resource Name (ARN) of the flow.
@@ -516,6 +557,20 @@ type CurrentMetricResult struct {
 	noSmithyDocumentSerde
 }
 
+// The way to sort the resulting response based on metrics. By default resources
+// are sorted based on AGENTS_ONLINE, DESCENDING. The metric collection is sorted
+// based on the input metrics.
+type CurrentMetricSortCriteria struct {
+
+	// The current metric names.
+	SortByMetric CurrentMetricName
+
+	// The way to sort.
+	SortOrder SortOrder
+
+	noSmithyDocumentSerde
+}
+
 // Information about a reference when the referenceType is DATE. Otherwise, null.
 type DateReference struct {
 
@@ -566,6 +621,9 @@ type Dimensions struct {
 	// Information about the queue for which metrics are returned.
 	Queue *QueueReference
 
+	// Information about the routing profile assigned to the user.
+	RoutingProfile *RoutingProfileReference
+
 	noSmithyDocumentSerde
 }
 
@@ -614,6 +672,17 @@ type EncryptionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The EventBridge action definition.
+type EventBridgeActionDefinition struct {
+
+	// The name.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the filter to apply when retrieving metrics.
 type Filters struct {
 
@@ -624,6 +693,9 @@ type Filters struct {
 	// and can specify up to 100 queues per request. The GetCurrentMetricsData API in
 	// particular requires a queue when you include a Filter in your request.
 	Queues []string
+
+	// A list of up to 100 routing profile IDs or ARNs.
+	RoutingProfiles []string
 
 	noSmithyDocumentSerde
 }
@@ -1198,6 +1270,20 @@ type MediaConcurrency struct {
 	noSmithyDocumentSerde
 }
 
+// The type of notification recipient.
+type NotificationRecipientType struct {
+
+	// A list of user IDs.
+	UserIds []string
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users
+	// with the specified tags will be notified.
+	UserTags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Information about a reference when the referenceType is NUMBER. Otherwise, null.
 type NumberReference struct {
 
@@ -1235,6 +1321,67 @@ type ParticipantDetails struct {
 
 	noSmithyDocumentSerde
 }
+
+// Configuration information for the timer. After the timer configuration is set,
+// it persists for the duration of the chat. It persists across new contacts in the
+// chain, for example, transfer contacts. For more information about how chat
+// timeouts work, see Set up chat timeouts for human participants
+// (https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html).
+type ParticipantTimerConfiguration struct {
+
+	// The role of the participant in the chat conversation.
+	//
+	// This member is required.
+	ParticipantRole TimerEligibleParticipantRoles
+
+	// The type of timer. IDLE indicates the timer applies for considering a human chat
+	// participant as idle. DISCONNECT_NONCUSTOMER indicates the timer applies to
+	// automatically disconnecting a chat participant due to idleness.
+	//
+	// This member is required.
+	TimerType ParticipantTimerType
+
+	// The value of the timer. Either the timer action (Unset to delete the timer), or
+	// the duration of the timer in minutes. Only one value can be set.
+	//
+	// This member is required.
+	TimerValue ParticipantTimerValue
+
+	noSmithyDocumentSerde
+}
+
+// The value of the timer. Either the timer action (Unset to delete the timer), or
+// the duration of the timer in minutes. Only one value can be set. For more
+// information about how chat timeouts work, see Set up chat timeouts for human
+// participants
+// (https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html).
+//
+// The following types satisfy this interface:
+//
+//	ParticipantTimerValueMemberParticipantTimerAction
+//	ParticipantTimerValueMemberParticipantTimerDurationInMinutes
+type ParticipantTimerValue interface {
+	isParticipantTimerValue()
+}
+
+// The timer action. Currently only one value is allowed: Unset. It deletes a
+// timer.
+type ParticipantTimerValueMemberParticipantTimerAction struct {
+	Value ParticipantTimerAction
+
+	noSmithyDocumentSerde
+}
+
+func (*ParticipantTimerValueMemberParticipantTimerAction) isParticipantTimerValue() {}
+
+// The duration of a timer, in minutes.
+type ParticipantTimerValueMemberParticipantTimerDurationInMinutes struct {
+	Value int32
+
+	noSmithyDocumentSerde
+}
+
+func (*ParticipantTimerValueMemberParticipantTimerDurationInMinutes) isParticipantTimerValue() {}
 
 // Contains information about a phone number for a quick connect.
 type PhoneNumberQuickConnectConfig struct {
@@ -1845,6 +1992,153 @@ type RoutingProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information about a rule.
+type Rule struct {
+
+	// A list of actions to be run when the rule is triggered.
+	//
+	// This member is required.
+	Actions []RuleAction
+
+	// The timestamp for when the rule was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The conditions of the rule.
+	//
+	// This member is required.
+	Function *string
+
+	// The Amazon Resource Name (ARN) of the user who last updated the rule.
+	//
+	// This member is required.
+	LastUpdatedBy *string
+
+	// The timestamp for the when the rule was last updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the rule.
+	//
+	// This member is required.
+	Name *string
+
+	// The publish status of the rule.
+	//
+	// This member is required.
+	PublishStatus RulePublishStatus
+
+	// The Amazon Resource Name (ARN) of the rule.
+	//
+	// This member is required.
+	RuleArn *string
+
+	// A unique identifier for the rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The event source to trigger the rule.
+	//
+	// This member is required.
+	TriggerEventSource *RuleTriggerEventSource
+
+	// The tags used to organize, track, or control access for this resource. For
+	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the action to be performed when a rule is triggered.
+type RuleAction struct {
+
+	// The type of action that creates a rule.
+	//
+	// This member is required.
+	ActionType ActionType
+
+	// Information about the contact category action.
+	AssignContactCategoryAction *AssignContactCategoryActionDefinition
+
+	// Information about the EventBridge action.
+	EventBridgeAction *EventBridgeActionDefinition
+
+	// Information about the send notification action.
+	SendNotificationAction *SendNotificationActionDefinition
+
+	// Information about the task action. This field is required if TriggerEventSource
+	// is one of the following values: OnZendeskTicketCreate |
+	// OnZendeskTicketStatusUpdate | OnSalesforceCaseCreate
+	TaskAction *TaskActionDefinition
+
+	noSmithyDocumentSerde
+}
+
+// A list of ActionTypes associated with a rule.
+type RuleSummary struct {
+
+	// A list of ActionTypes associated with a rule.
+	//
+	// This member is required.
+	ActionSummaries []ActionSummary
+
+	// The timestamp for when the rule was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The name of the event source.
+	//
+	// This member is required.
+	EventSourceName EventSourceName
+
+	// The timestamp for when the rule was last updated.
+	//
+	// This member is required.
+	LastUpdatedTime *time.Time
+
+	// The name of the rule.
+	//
+	// This member is required.
+	Name *string
+
+	// The publish status of the rule.
+	//
+	// This member is required.
+	PublishStatus RulePublishStatus
+
+	// The Amazon Resource Name (ARN) of the rule.
+	//
+	// This member is required.
+	RuleArn *string
+
+	// A unique identifier for the rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// The name of the event source. This field is required if TriggerEventSource is
+// one of the following values: OnZendeskTicketCreate | OnZendeskTicketStatusUpdate
+// | OnSalesforceCaseCreate
+type RuleTriggerEventSource struct {
+
+	// The name of the event source.
+	//
+	// This member is required.
+	EventSourceName EventSourceName
+
+	// The identifier for the integration association.
+	IntegrationAssociationId *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the Amazon Simple Storage Service (Amazon S3) storage type.
 type S3Config struct {
 
@@ -1988,6 +2282,41 @@ type SecurityProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the send notification action.
+type SendNotificationActionDefinition struct {
+
+	// Notification content. Supports variable injection. For more information, see
+	// JSONPath reference
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html)
+	// in the Amazon Connect Administrators Guide.
+	//
+	// This member is required.
+	Content *string
+
+	// Content type format.
+	//
+	// This member is required.
+	ContentType NotificationContentType
+
+	// Notification delivery method.
+	//
+	// This member is required.
+	DeliveryMethod NotificationDeliveryType
+
+	// Notification recipient.
+	//
+	// This member is required.
+	Recipient *NotificationRecipientType
+
+	// The subject of the email if the delivery method is EMAIL. Supports variable
+	// injection. For more information, see JSONPath reference
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html)
+	// in the Amazon Connect Administrators Guide.
+	Subject *string
+
+	noSmithyDocumentSerde
+}
+
 // A leaf node condition which can be used to specify a string condition. The
 // currently supported value for FieldName: name
 type StringCondition struct {
@@ -2025,6 +2354,35 @@ type TagCondition struct {
 
 	// The tag value in the tag condition.
 	TagValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the task action.
+type TaskActionDefinition struct {
+
+	// The identifier of the flow.
+	//
+	// This member is required.
+	ContactFlowId *string
+
+	// The name. Supports variable injection. For more information, see JSONPath
+	// reference
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html)
+	// in the Amazon Connect Administrators Guide.
+	//
+	// This member is required.
+	Name *string
+
+	// The description. Supports variable injection. For more information, see JSONPath
+	// reference
+	// (https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html)
+	// in the Amazon Connect Administrators Guide.
+	Description *string
+
+	// Information about the reference when the referenceType is URL. Otherwise, null.
+	// (Supports variable injection in the Value field.)
+	References map[string]Reference
 
 	noSmithyDocumentSerde
 }
@@ -2259,6 +2617,24 @@ type TrafficDistributionGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration information for the chat participant role.
+//
+// The following types satisfy this interface:
+//
+//	UpdateParticipantRoleConfigChannelInfoMemberChat
+type UpdateParticipantRoleConfigChannelInfo interface {
+	isUpdateParticipantRoleConfigChannelInfo()
+}
+
+// Configuration information for the chat participant role.
+type UpdateParticipantRoleConfigChannelInfoMemberChat struct {
+	Value ChatParticipantRoleConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateParticipantRoleConfigChannelInfoMemberChat) isUpdateParticipantRoleConfigChannelInfo() {}
+
 // The URL reference.
 type UrlReference struct {
 
@@ -2347,6 +2723,9 @@ type UserData struct {
 	// of the RoutingProfile assigned to the agent.
 	MaxSlotsByChannel map[string]int32
 
+	// The Next status of the agent.
+	NextStatus *string
+
 	// Information about the routing profile that is assigned to the user.
 	RoutingProfile *RoutingProfileReference
 
@@ -2364,12 +2743,21 @@ type UserData struct {
 // A filter for the user data.
 type UserDataFilters struct {
 
+	// A list of up to 100 agent IDs or ARNs.
+	Agents []string
+
 	// A filter for the user data based on the contact information that is associated
 	// to the user. It contains a list of contact states.
 	ContactFilter *ContactFilter
 
-	// Contains information about a queue resource for which metrics are returned.
+	// A list of up to 100 queues or ARNs.
 	Queues []string
+
+	// A list of up to 100 routing profile IDs or ARNs.
+	RoutingProfiles []string
+
+	// A UserHierarchyGroup ID or ARN.
+	UserHierarchyGroups []string
 
 	noSmithyDocumentSerde
 }
@@ -2665,4 +3053,6 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isReferenceSummary() {}
+func (*UnknownUnionMember) isParticipantTimerValue()                  {}
+func (*UnknownUnionMember) isReferenceSummary()                       {}
+func (*UnknownUnionMember) isUpdateParticipantRoleConfigChannelInfo() {}

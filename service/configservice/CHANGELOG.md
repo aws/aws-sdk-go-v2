@@ -1,3 +1,23 @@
+# v1.29.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.28.2 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.0 (2022-11-29)
+
+* **Feature**: With this release, you can use AWS Config to evaluate your resources for compliance with Config rules before they are created or updated. Using Config rules in proactive mode enables you to test and build compliant resource templates or check resource configurations at the time they are provisioned.
+
+# v1.27.5 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.27.4 (2022-11-16)
 
 * No change notes available for this release.

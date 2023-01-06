@@ -19,16 +19,12 @@ import (
 // servers and enables game clients and services to claim a game server for a new
 // game session. To register a game server, identify the game server group and
 // instance where the game server is running, and provide a unique identifier for
-// the game server. You can also include connection and game server data. When a
-// game client or service requests a game server by calling ClaimGameServer, this
-// information is returned in the response. Once a game server is successfully
-// registered, it is put in status AVAILABLE. A request to register a game server
-// may fail if the instance it is running on is in the process of shutting down as
-// part of instance balancing or scale-down activity. Learn more GameLift FleetIQ
-// Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related actions RegisterGameServer | ListGameServers | ClaimGameServer |
-// DescribeGameServer | UpdateGameServer | DeregisterGameServer | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
+// the game server. You can also include connection and game server data. Once a
+// game server is successfully registered, it is put in status AVAILABLE. A request
+// to register a game server may fail if the instance it is running on is in the
+// process of shutting down as part of instance balancing or scale-down activity.
+// Learn more GameLift FleetIQ Guide
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
 func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameServerInput, optFns ...func(*Options)) (*RegisterGameServerOutput, error) {
 	if params == nil {
 		params = &RegisterGameServerInput{}
@@ -47,7 +43,6 @@ func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameSer
 type RegisterGameServerInput struct {
 
 	// A unique identifier for the game server group where the game server is running.
-	// Use either the GameServerGroup name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string
@@ -73,7 +68,7 @@ type RegisterGameServerInput struct {
 
 	// A set of custom game server properties, formatted as a single string value. This
 	// data is passed to a game client or service when it requests information on game
-	// servers using ListGameServers or ClaimGameServer.
+	// servers.
 	GameServerData *string
 
 	noSmithyDocumentSerde

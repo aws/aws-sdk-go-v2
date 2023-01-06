@@ -12,8 +12,7 @@ import (
 )
 
 // Creates and returns a URL that you can use to connect to an application's
-// extension. Currently, the only available extension is the Apache Flink
-// dashboard. The IAM role or user used to call this API defines the permissions to
+// extension. The IAM role or user used to call this API defines the permissions to
 // access the extension. After the presigned URL is created, no additional
 // permission is required to access this URL. IAM authorization policies for this
 // API are also enforced for every HTTP request that attempts to connect to the

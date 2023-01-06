@@ -7,6 +7,7 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,12 +51,64 @@ type CreateImageVersionInput struct {
 	// This member is required.
 	ImageName *string
 
+	// A list of aliases created with the image version.
+	Aliases []string
+
+	// Indicates Horovod compatibility.
+	Horovod bool
+
+	// Indicates SageMaker job type compatibility.
+	//
+	// * TRAINING: The image version is
+	// compatible with SageMaker training jobs.
+	//
+	// * INFERENCE: The image version is
+	// compatible with SageMaker inference jobs.
+	//
+	// * NOTEBOOK_KERNEL: The image version
+	// is compatible with SageMaker notebook kernels.
+	JobType types.JobType
+
+	// The machine learning framework vended in the image version.
+	MLFramework *string
+
+	// Indicates CPU or GPU compatibility.
+	//
+	// * CPU: The image version is compatible with
+	// CPU.
+	//
+	// * GPU: The image version is compatible with GPU.
+	Processor types.Processor
+
+	// The supported programming language and its version.
+	ProgrammingLang *string
+
+	// The maintainer description of the image version.
+	ReleaseNotes *string
+
+	// The stability of the image version, specified by the maintainer.
+	//
+	// *
+	// NOT_PROVIDED: The maintainers did not provide a status for image version
+	// stability.
+	//
+	// * STABLE: The image version is stable.
+	//
+	// * TO_BE_ARCHIVED: The image
+	// version is set to be archived. Custom image versions that are set to be archived
+	// are automatically archived after three months.
+	//
+	// * ARCHIVED: The image version is
+	// archived. Archived image versions are not searchable and are no longer actively
+	// supported.
+	VendorGuidance types.VendorGuidance
+
 	noSmithyDocumentSerde
 }
 
 type CreateImageVersionOutput struct {
 
-	// The Amazon Resource Name (ARN) of the image version.
+	// The ARN of the image version.
 	ImageVersionArn *string
 
 	// Metadata pertaining to the operation's result.

@@ -1570,6 +1570,26 @@ func (m *validateOpUpdateDistribution) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDistributionWithStagingConfig struct {
+}
+
+func (*validateOpUpdateDistributionWithStagingConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDistributionWithStagingConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDistributionWithStagingConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDistributionWithStagingConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFieldLevelEncryptionConfig struct {
 }
 
@@ -2080,6 +2100,10 @@ func addOpUpdateContinuousDeploymentPolicyValidationMiddleware(stack *middleware
 
 func addOpUpdateDistributionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDistribution{}, middleware.After)
+}
+
+func addOpUpdateDistributionWithStagingConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDistributionWithStagingConfig{}, middleware.After)
 }
 
 func addOpUpdateFieldLevelEncryptionConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -3928,6 +3952,11 @@ func validateResponseHeadersPolicyConfig(v *types.ResponseHeadersPolicyConfig) e
 			invalidParams.AddNested("CustomHeadersConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RemoveHeadersConfig != nil {
+		if err := validateResponseHeadersPolicyRemoveHeadersConfig(v.RemoveHeadersConfig); err != nil {
+			invalidParams.AddNested("RemoveHeadersConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4098,6 +4127,58 @@ func validateResponseHeadersPolicyReferrerPolicy(v *types.ResponseHeadersPolicyR
 	}
 	if len(v.ReferrerPolicy) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ReferrerPolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyRemoveHeader(v *types.ResponseHeadersPolicyRemoveHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyRemoveHeader"}
+	if v.Header == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Header"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyRemoveHeaderList(v []types.ResponseHeadersPolicyRemoveHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyRemoveHeaderList"}
+	for i := range v {
+		if err := validateResponseHeadersPolicyRemoveHeader(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResponseHeadersPolicyRemoveHeadersConfig(v *types.ResponseHeadersPolicyRemoveHeadersConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResponseHeadersPolicyRemoveHeadersConfig"}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if v.Items != nil {
+		if err := validateResponseHeadersPolicyRemoveHeaderList(v.Items); err != nil {
+			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5819,6 +5900,21 @@ func validateOpUpdateDistributionInput(v *UpdateDistributionInput) error {
 			invalidParams.AddNested("DistributionConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDistributionWithStagingConfigInput(v *UpdateDistributionWithStagingConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDistributionWithStagingConfigInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}

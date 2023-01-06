@@ -20,7 +20,7 @@ type ActiveDirectoryComputerAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for a Microsoft Active Directory (Microsoft AD) studio
+// The configuration for a Directory Service for Microsoft Active Directory studio
 // resource.
 type ActiveDirectoryConfiguration struct {
 
@@ -58,7 +58,7 @@ type Eula struct {
 	// The EULA content.
 	Content *string
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The ISO timestamp in seconds for when the resource was created.
 	CreatedAt *time.Time
 
 	// The EULA ID.
@@ -67,7 +67,7 @@ type Eula struct {
 	// The name for the EULA.
 	Name *string
 
-	// The Unix epoch timestamp in seconds for when the resource was updated.
+	// The ISO timestamp in seconds for when the resource was updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -76,7 +76,7 @@ type Eula struct {
 // The acceptance of a EULA, required to use Amazon-provided streaming images.
 type EulaAcceptance struct {
 
-	// The Unix epoch timestamp in seconds for when the EULA was accepted.
+	// The ISO timestamp in seconds for when the EULA was accepted.
 	AcceptedAt *time.Time
 
 	// The ID of the person who accepted the EULA.
@@ -103,10 +103,11 @@ type EulaAcceptance struct {
 // streaming session. By default, studio admins can use all launch profiles.
 type LaunchProfile struct {
 
-	// The ARN of the resource.
+	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
+	// uniquely identifies it. ARNs are unique across all Regions.
 	Arn *string
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The ISO timestamp in seconds for when the resource was created.
 	CreatedAt *time.Time
 
 	// The user ID of the user that created the launch profile.
@@ -118,7 +119,7 @@ type LaunchProfile struct {
 	// Unique identifiers for a collection of EC2 subnets.
 	Ec2SubnetIds []string
 
-	// The launch profile ID.
+	// The ID of the launch profile used to control access from the streaming session.
 	LaunchProfileId *string
 
 	// The version number of the protocol that is used by the launch profile. The only
@@ -144,11 +145,11 @@ type LaunchProfile struct {
 	// this launch profile.
 	StudioComponentIds []string
 
-	// A collection of labels, in the form of key:value pairs, that apply to this
+	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
 	Tags map[string]string
 
-	// The Unix epoch timestamp in seconds for when the resource was updated.
+	// The ISO timestamp in seconds for when the resource was updated.
 	UpdatedAt *time.Time
 
 	// The user ID of the user that most recently updated the resource.
@@ -160,7 +161,7 @@ type LaunchProfile struct {
 	noSmithyDocumentSerde
 }
 
-// A Launch Profile Initialization contains information required for a workstation
+// A launch profile initialization contains information required for a workstation
 // or server to connect to a launch profile. This includes scripts, endpoints,
 // security groups, subnets, and other configuration.
 type LaunchProfileInitialization struct {
@@ -171,7 +172,7 @@ type LaunchProfileInitialization struct {
 	// The EC2 security groups that control access to the studio component.
 	Ec2SecurityGroupIds []string
 
-	// The launch profile ID.
+	// The ID of the launch profile used to control access from the streaming session.
 	LaunchProfileId *string
 
 	// The version number of the protocol that is used by the launch profile. The only
@@ -184,7 +185,7 @@ type LaunchProfileInitialization struct {
 	// The name for the launch profile.
 	Name *string
 
-	// The platform of the launch platform, either WINDOWS or LINUX.
+	// The platform of the launch platform, either Windows or Linux.
 	Platform LaunchProfilePlatform
 
 	// The system initializtion scripts.
@@ -196,7 +197,7 @@ type LaunchProfileInitialization struct {
 	noSmithyDocumentSerde
 }
 
-// The Launch Profile Initialization Active Directory contains information required
+// The launch profile initialization Active Directory contains information required
 // for the launch profile to connect to the Active Directory.
 type LaunchProfileInitializationActiveDirectory struct {
 
@@ -225,20 +226,21 @@ type LaunchProfileInitializationActiveDirectory struct {
 	noSmithyDocumentSerde
 }
 
-// The Launch Profile Initialization Script is used when start streaming session
+// The launch profile initialization script is used when start streaming session
 // runs.
 type LaunchProfileInitializationScript struct {
 
 	// An IAM role attached to a Studio Component that gives the studio component
-	// access to AWS resources at anytime while the instance is running.
+	// access to Amazon Web Services resources at anytime while the instance is
+	// running.
 	RuntimeRoleArn *string
 
 	// The initialization script.
 	Script *string
 
 	// An IAM role attached to Studio Component when the system initialization script
-	// runs which give the studio component access to AWS resources when the system
-	// initialization script runs.
+	// runs which give the studio component access to Amazon Web Services resources
+	// when the system initialization script runs.
 	SecureInitializationRoleArn *string
 
 	// The unique identifier for a studio component resource.
@@ -250,26 +252,26 @@ type LaunchProfileInitializationScript struct {
 	noSmithyDocumentSerde
 }
 
-// Launch profile membership enables your studio admins to delegate launch profile
-// access to other studio users in the Nimble Studio portal without needing to
-// write or maintain complex IAM policies. A launch profile member is a user
-// association from your studio identity source who is granted permissions to a
-// launch profile. A launch profile member (type USER) provides the following
-// permissions to that launch profile:
+// Studio admins can use launch profile membership to delegate launch profile
+// access to studio users in the Nimble Studio portal without writing or
+// maintaining complex IAM policies. A launch profile member is a user association
+// from your studio identity source who is granted permissions to a launch profile.
+// A launch profile member (type USER) provides the following permissions to that
+// launch profile:
 //
 // * GetLaunchProfile
 //
-// *
-// GetLaunchProfileInitialization
-//
-// * GetLaunchProfileMembers
+// * GetLaunchProfileInitialization
 //
 // *
-// GetLaunchProfileMember
+// GetLaunchProfileMembers
+//
+// * GetLaunchProfileMember
 //
 // * CreateStreamingSession
 //
-// * GetLaunchProfileDetails
+// *
+// GetLaunchProfileDetails
 type LaunchProfileMembership struct {
 
 	// The ID of the identity store.
@@ -330,7 +332,7 @@ type NewStudioMember struct {
 	noSmithyDocumentSerde
 }
 
-// A parameter for a studio component script, in the form of a key:value pair.
+// A parameter for a studio component script, in the form of a key-value pair.
 type ScriptParameterKeyValue struct {
 
 	// A script parameter key.
@@ -368,8 +370,8 @@ type SharedFileSystemConfiguration struct {
 // A configuration for a streaming session.
 type StreamConfiguration struct {
 
-	// Enable or disable the use of the system clipboard to copy and paste between the
-	// streaming session and streaming client.
+	// Allows or deactivates the use of the system clipboard to copy and paste between
+	// the streaming session and streaming client.
 	//
 	// This member is required.
 	ClipboardMode StreamingClipboardMode
@@ -386,26 +388,57 @@ type StreamConfiguration struct {
 	// This member is required.
 	StreamingImageIds []string
 
+	// Indicates if a streaming session created from this launch profile should be
+	// terminated automatically or retained without termination after being in a
+	// STOPPED state.
+	//
+	// * When ACTIVATED, the streaming session is scheduled for
+	// termination after being in the STOPPED state for the time specified in
+	// maxStoppedSessionLengthInMinutes.
+	//
+	// * When DEACTIVATED, the streaming session can
+	// remain in the STOPPED state indefinitely.
+	//
+	// This parameter is only allowed when
+	// sessionPersistenceMode is ACTIVATED. When allowed, the default value for this
+	// parameter is DEACTIVATED.
+	AutomaticTerminationMode AutomaticTerminationMode
+
 	// The length of time, in minutes, that a streaming session can be active before it
 	// is stopped or terminated. After this point, Nimble Studio automatically
 	// terminates or stops the session. The default length of time is 690 minutes, and
 	// the maximum length of time is 30 days.
-	MaxSessionLengthInMinutes int32
+	MaxSessionLengthInMinutes *int32
 
 	// Integer that determines if you can start and stop your sessions and how long a
 	// session can stay in the STOPPED state. The default value is 0. The maximum value
-	// is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If
-	// you then call StopStreamingSession, the session fails. If the time that a
-	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
-	// the session will automatically be terminated (instead of stopped). If the value
-	// is set to a positive number, the session can be stopped. You can call
-	// StopStreamingSession to stop sessions in the READY state. If the time that a
-	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
-	// the session will automatically be stopped (instead of terminated).
+	// is 5760. This field is allowed only when sessionPersistenceMode is ACTIVATED and
+	// automaticTerminationMode is ACTIVATED. If the value is set to 0, your sessions
+	// can’t be STOPPED. If you then call StopStreamingSession, the session fails. If
+	// the time that a session stays in the READY state exceeds the
+	// maxSessionLengthInMinutes value, the session will automatically be terminated
+	// (instead of STOPPED). If the value is set to a positive number, the session can
+	// be stopped. You can call StopStreamingSession to stop sessions in the READY
+	// state. If the time that a session stays in the READY state exceeds the
+	// maxSessionLengthInMinutes value, the session will automatically be stopped
+	// (instead of terminated).
 	MaxStoppedSessionLengthInMinutes int32
 
-	// (Optional) The upload storage for a streaming session.
+	// Information about the streaming session backup.
+	SessionBackup *StreamConfigurationSessionBackup
+
+	// Determine if a streaming session created from this launch profile can configure
+	// persistent storage. This means that volumeConfiguration and
+	// automaticTerminationMode are configured.
+	SessionPersistenceMode SessionPersistenceMode
+
+	// The upload storage for a streaming session.
 	SessionStorage *StreamConfigurationSessionStorage
+
+	// Custom volume configuration for the root volumes that are attached to streaming
+	// sessions. This parameter is only allowed when sessionPersistenceMode is
+	// ACTIVATED.
+	VolumeConfiguration *VolumeConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -413,8 +446,8 @@ type StreamConfiguration struct {
 // Configuration for streaming workstations created using this launch profile.
 type StreamConfigurationCreate struct {
 
-	// Enable or disable the use of the system clipboard to copy and paste between the
-	// streaming session and streaming client.
+	// Allows or deactivates the use of the system clipboard to copy and paste between
+	// the streaming session and streaming client.
 	//
 	// This member is required.
 	ClipboardMode StreamingClipboardMode
@@ -431,27 +464,76 @@ type StreamConfigurationCreate struct {
 	// This member is required.
 	StreamingImageIds []string
 
+	// Indicates if a streaming session created from this launch profile should be
+	// terminated automatically or retained without termination after being in a
+	// STOPPED state.
+	//
+	// * When ACTIVATED, the streaming session is scheduled for
+	// termination after being in the STOPPED state for the time specified in
+	// maxStoppedSessionLengthInMinutes.
+	//
+	// * When DEACTIVATED, the streaming session can
+	// remain in the STOPPED state indefinitely.
+	//
+	// This parameter is only allowed when
+	// sessionPersistenceMode is ACTIVATED. When allowed, the default value for this
+	// parameter is DEACTIVATED.
+	AutomaticTerminationMode AutomaticTerminationMode
+
 	// The length of time, in minutes, that a streaming session can be active before it
 	// is stopped or terminated. After this point, Nimble Studio automatically
 	// terminates or stops the session. The default length of time is 690 minutes, and
 	// the maximum length of time is 30 days.
-	MaxSessionLengthInMinutes int32
+	MaxSessionLengthInMinutes *int32
 
 	// Integer that determines if you can start and stop your sessions and how long a
 	// session can stay in the STOPPED state. The default value is 0. The maximum value
-	// is 5760. If the value is missing or set to 0, your sessions can’t be stopped. If
-	// you then call StopStreamingSession, the session fails. If the time that a
-	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
-	// the session will automatically be terminated (instead of stopped). If the value
-	// is set to a positive number, the session can be stopped. You can call
-	// StopStreamingSession to stop sessions in the READY state. If the time that a
-	// session stays in the READY state exceeds the maxSessionLengthInMinutes value,
-	// the session will automatically be stopped (instead of terminated).
+	// is 5760. This field is allowed only when sessionPersistenceMode is ACTIVATED and
+	// automaticTerminationMode is ACTIVATED. If the value is set to 0, your sessions
+	// can’t be STOPPED. If you then call StopStreamingSession, the session fails. If
+	// the time that a session stays in the READY state exceeds the
+	// maxSessionLengthInMinutes value, the session will automatically be terminated
+	// (instead of STOPPED). If the value is set to a positive number, the session can
+	// be stopped. You can call StopStreamingSession to stop sessions in the READY
+	// state. If the time that a session stays in the READY state exceeds the
+	// maxSessionLengthInMinutes value, the session will automatically be stopped
+	// (instead of terminated).
 	MaxStoppedSessionLengthInMinutes int32
 
-	// (Optional) The upload storage for a streaming workstation that is created using
-	// this launch profile.
+	// Configures how streaming sessions are backed up when launched from this launch
+	// profile.
+	SessionBackup *StreamConfigurationSessionBackup
+
+	// Determine if a streaming session created from this launch profile can configure
+	// persistent storage. This means that volumeConfiguration and
+	// automaticTerminationMode are configured.
+	SessionPersistenceMode SessionPersistenceMode
+
+	// The upload storage for a streaming workstation that is created using this launch
+	// profile.
 	SessionStorage *StreamConfigurationSessionStorage
+
+	// Custom volume configuration for the root volumes that are attached to streaming
+	// sessions. This parameter is only allowed when sessionPersistenceMode is
+	// ACTIVATED.
+	VolumeConfiguration *VolumeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configures how streaming sessions are backed up when launched from this launch
+// profile.
+type StreamConfigurationSessionBackup struct {
+
+	// The maximum number of backups that each streaming session created from this
+	// launch profile can have.
+	MaxBackupsToRetain int32
+
+	// Specifies how artists sessions are backed up. Configures backups for streaming
+	// sessions launched with this launch profile. The default value is DEACTIVATED,
+	// which means that backups are deactivated. To allow backups, set this value to
+	// AUTOMATIC.
+	Mode SessionBackupMode
 
 	noSmithyDocumentSerde
 }
@@ -475,11 +557,12 @@ type StreamConfigurationSessionStorage struct {
 // to select which operating system and software they want to use in a Nimble
 // Studio streaming session. Amazon provides a number of streaming images that
 // include popular 3rd-party software. You can create your own streaming images
-// using an Amazon Elastic Compute Cloud (Amazon EC2) machine image that you create
-// for this purpose. You can also include software that your users require.
+// using an Amazon EC2 machine image that you create for this purpose. You can also
+// include software that your users require.
 type StreamingImage struct {
 
-	// The ARN of the resource.
+	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
+	// uniquely identifies it. ARNs are unique across all Regions.
 	Arn *string
 
 	// A human-readable description of the streaming image.
@@ -499,11 +582,10 @@ type StreamingImage struct {
 	Name *string
 
 	// The owner of the streaming image, either the studioId that contains the
-	// streaming image, or 'amazon' for images that are provided by Amazon Nimble
-	// Studio.
+	// streaming image, or amazon for images that are provided by Amazon Nimble Studio.
 	Owner *string
 
-	// The platform of the streaming image, either WINDOWS or LINUX.
+	// The platform of the streaming image, either Windows or Linux.
 	Platform *string
 
 	// The current state.
@@ -518,7 +600,7 @@ type StreamingImage struct {
 	// The ID of the streaming image.
 	StreamingImageId *string
 
-	// A collection of labels, in the form of key:value pairs, that apply to this
+	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
 	Tags map[string]string
 
@@ -543,10 +625,30 @@ type StreamingImageEncryptionConfiguration struct {
 // profile.
 type StreamingSession struct {
 
-	// The ARN of the resource.
+	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
+	// uniquely identifies it. ARNs are unique across all Regions.
 	Arn *string
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// Indicates if a streaming session created from this launch profile should be
+	// terminated automatically or retained without termination after being in a
+	// STOPPED state.
+	//
+	// * When ACTIVATED, the streaming session is scheduled for
+	// termination after being in the STOPPED state for the time specified in
+	// maxStoppedSessionLengthInMinutes.
+	//
+	// * When DEACTIVATED, the streaming session can
+	// remain in the STOPPED state indefinitely.
+	//
+	// This parameter is only allowed when
+	// sessionPersistenceMode is ACTIVATED. When allowed, the default value for this
+	// parameter is DEACTIVATED.
+	AutomaticTerminationMode AutomaticTerminationMode
+
+	// Shows the current backup setting of the session.
+	BackupMode SessionBackupMode
+
+	// The ISO timestamp in seconds for when the resource was created.
 	CreatedAt *time.Time
 
 	// The user ID of the user that created the streaming session.
@@ -558,6 +660,10 @@ type StreamingSession struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	LaunchProfileId *string
 
+	// The maximum number of backups of a streaming session that you can have. When the
+	// maximum number of backups is reached, the oldest backup is deleted.
+	MaxBackupsToRetain int32
+
 	// The user ID of the user that owns the streaming session. The user that owns the
 	// session will be logging into the session and interacting with the virtual
 	// workstation.
@@ -566,11 +672,19 @@ type StreamingSession struct {
 	// The session ID.
 	SessionId *string
 
+	// Determine if a streaming session created from this launch profile can configure
+	// persistent storage. This means that volumeConfiguration and
+	// automaticTerminationMode are configured.
+	SessionPersistenceMode SessionPersistenceMode
+
 	// The time the session entered START_IN_PROGRESS state.
 	StartedAt *time.Time
 
 	// The user ID of the user that started the streaming session.
 	StartedBy *string
+
+	// The backup ID used to restore a streaming session.
+	StartedFromBackupId *string
 
 	// The current state.
 	State StreamingSessionState
@@ -594,7 +708,7 @@ type StreamingSession struct {
 	// The ID of the streaming image.
 	StreamingImageId *string
 
-	// A collection of labels, in the form of key:value pairs, that apply to this
+	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
 	Tags map[string]string
 
@@ -602,11 +716,59 @@ type StreamingSession struct {
 	// the user.
 	TerminateAt *time.Time
 
-	// The Unix epoch timestamp in seconds for when the resource was updated.
+	// The ISO timestamp in seconds for when the resource was updated.
 	UpdatedAt *time.Time
 
 	// The user ID of the user that most recently updated the resource.
 	UpdatedBy *string
+
+	// Custom volume configuration for the root volumes that are attached to streaming
+	// sessions. This parameter is only allowed when sessionPersistenceMode is
+	// ACTIVATED.
+	VolumeConfiguration *VolumeConfiguration
+
+	// Determine if an EBS volume created from this streaming session will be backed
+	// up.
+	VolumeRetentionMode VolumeRetentionMode
+
+	noSmithyDocumentSerde
+}
+
+// Information about the streaming session backup.
+type StreamingSessionBackup struct {
+
+	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
+	// uniquely identifies it. ARNs are unique across all Regions.
+	Arn *string
+
+	// The ID of the backup.
+	BackupId *string
+
+	// The ISO timestamp in for when the resource was created.
+	CreatedAt *time.Time
+
+	// The ID of the launch profile which allowed the backups for the streaming
+	// session.
+	LaunchProfileId *string
+
+	// The user ID of the user that owns the streaming session.
+	OwnedBy *string
+
+	// The streaming session ID for the StreamingSessionBackup.
+	SessionId *string
+
+	// The streaming session state.
+	State StreamingSessionState
+
+	// The status code.
+	StatusCode StreamingSessionStatusCode
+
+	// The status message for the streaming session backup.
+	StatusMessage *string
+
+	// A collection of labels, in the form of key-value pairs, that apply to this
+	// resource.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -630,13 +792,13 @@ type StreamingSessionStorageRoot struct {
 // Studio portal, or the NICE DCV desktop client.
 type StreamingSessionStream struct {
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The ISO timestamp in seconds for when the resource was created.
 	CreatedAt *time.Time
 
 	// The user ID of the user that created the streaming session stream.
 	CreatedBy *string
 
-	// The Unix epoch timestamp in seconds for when the resource expires.
+	// The ISO timestamp in seconds for when the resource expires.
 	ExpiresAt *time.Time
 
 	// The user ID of the user that owns the streaming session. The user that owns the
@@ -680,7 +842,7 @@ type Studio struct {
 	// uniquely identifies it. ARNs are unique across all Regions.
 	Arn *string
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The ISO timestamp in seconds for when the resource was created.
 	CreatedAt *time.Time
 
 	// A friendly name for the studio.
@@ -690,8 +852,8 @@ type Studio struct {
 	HomeRegion *string
 
 	// The IAM Identity Center application client ID used to integrate with IAM
-	// Identity Center to enable IAM Identity Center users to log in to Nimble Studio
-	// portal.
+	// Identity Center. This ID allows IAM Identity Center users to log in to Nimble
+	// Studio portal.
 	SsoClientId *string
 
 	// The current state of the studio resource.
@@ -717,11 +879,11 @@ type Studio struct {
 	// The address of the web page for the studio.
 	StudioUrl *string
 
-	// A collection of labels, in the form of key:value pairs, that apply to this
+	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
 	Tags map[string]string
 
-	// The Unix epoch timestamp in seconds for when the resource was updated.
+	// The ISO timestamp in seconds for when the resource was updated.
 	UpdatedAt *time.Time
 
 	// The IAM role that studio users assume when logging in to the Nimble Studio
@@ -742,13 +904,14 @@ type Studio struct {
 // a streaming session.
 type StudioComponent struct {
 
-	// The ARN of the resource.
+	// The Amazon Resource Name (ARN) that is assigned to a studio resource and
+	// uniquely identifies it. ARNs are unique across all Regions.
 	Arn *string
 
 	// The configuration of the studio component, based on component type.
 	Configuration *StudioComponentConfiguration
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The ISO timestamp in seconds for when the resource was created.
 	CreatedAt *time.Time
 
 	// The user ID of the user that created the studio component.
@@ -767,15 +930,16 @@ type StudioComponent struct {
 	Name *string
 
 	// An IAM role attached to a Studio Component that gives the studio component
-	// access to AWS resources at anytime while the instance is running.
+	// access to Amazon Web Services resources at anytime while the instance is
+	// running.
 	RuntimeRoleArn *string
 
 	// Parameters for the studio component scripts.
 	ScriptParameters []ScriptParameterKeyValue
 
 	// An IAM role attached to Studio Component when the system initialization script
-	// runs which give the studio component access to AWS resources when the system
-	// initialization script runs.
+	// runs which give the studio component access to Amazon Web Services resources
+	// when the system initialization script runs.
 	SecureInitializationRoleArn *string
 
 	// The current state.
@@ -793,14 +957,14 @@ type StudioComponent struct {
 	// The specific subtype of a studio component.
 	Subtype StudioComponentSubtype
 
-	// A collection of labels, in the form of key:value pairs, that apply to this
+	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
 	Tags map[string]string
 
 	// The type of the studio component.
 	Type StudioComponentType
 
-	// The Unix epoch timestamp in seconds for when the resource was updated.
+	// The ISO timestamp in seconds for when the resource was updated.
 	UpdatedAt *time.Time
 
 	// The user ID of the user that most recently updated the resource.
@@ -812,7 +976,7 @@ type StudioComponent struct {
 // The configuration of the studio component, based on component type.
 type StudioComponentConfiguration struct {
 
-	// The configuration for a Microsoft Active Directory (Microsoft AD) studio
+	// The configuration for a Directory Service for Microsoft Active Directory studio
 	// resource.
 	ActiveDirectoryConfiguration *ActiveDirectoryConfiguration
 
@@ -837,7 +1001,7 @@ type StudioComponentInitializationScript struct {
 	// valid version is "2021-03-31".
 	LaunchProfileProtocolVersion *string
 
-	// The platform of the initialization script, either WINDOWS or LINUX.
+	// The platform of the initialization script, either Windows or Linux.
 	Platform LaunchProfilePlatform
 
 	// The method to use when running the initialization script.
@@ -852,7 +1016,7 @@ type StudioComponentInitializationScript struct {
 // The studio component's summary.
 type StudioComponentSummary struct {
 
-	// The Unix epoch timestamp in seconds for when the resource was created.
+	// The ISO timestamp in seconds for when the resource was created.
 	CreatedAt *time.Time
 
 	// The user ID of the user that created the studio component.
@@ -873,7 +1037,7 @@ type StudioComponentSummary struct {
 	// The type of the studio component.
 	Type StudioComponentType
 
-	// The Unix epoch timestamp in seconds for when the resource was updated.
+	// The ISO timestamp in seconds for when the resource was updated.
 	UpdatedAt *time.Time
 
 	// The user ID of the user that most recently updated the resource.
@@ -903,7 +1067,7 @@ type StudioEncryptionConfiguration struct {
 // Nimble Studio portal. These users have the permissions provided by the studio's
 // user IAM role and do not appear in the studio membership collection. Only studio
 // admins appear in studio membership. When you add a user to studio membership
-// with the persona ADMIN, upon logging in to the Nimble Studio portal, they are
+// with the ADMIN persona, upon logging in to the Nimble Studio portal, they are
 // granted permissions specified by the Studio's Admin IAM role.
 type StudioMembership struct {
 
@@ -945,6 +1109,26 @@ type ValidationResult struct {
 	//
 	// This member is required.
 	Type LaunchProfileValidationType
+
+	noSmithyDocumentSerde
+}
+
+// Custom volume configuration for the root volumes that are attached to streaming
+// sessions. This parameter is only allowed when sessionPersistenceMode is
+// ACTIVATED.
+type VolumeConfiguration struct {
+
+	// The number of I/O operations per second for the root volume that is attached to
+	// streaming session.
+	Iops *int32
+
+	// The size of the root volume that is attached to the streaming session. The root
+	// volume size is measured in GiBs.
+	Size *int32
+
+	// The throughput to provision for the root volume that is attached to the
+	// streaming session. The throughput is measured in MiB/s.
+	Throughput *int32
 
 	noSmithyDocumentSerde
 }

@@ -134,6 +134,11 @@ type DescribeEndpointOutput struct {
 	// this endpoint.
 	ProductionVariants []types.ProductionVariantSummary
 
+	// An array of ProductionVariantSummary objects, one for each model that you want
+	// to host at this endpoint in shadow mode with production traffic replicated from
+	// the model specified on ProductionVariants.
+	ShadowProductionVariants []types.ProductionVariantSummary
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -13565,6 +13565,46 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioDolbyEDecode(v **types.AudioDolbyEDecode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioDolbyEDecode
+	if *v == nil {
+		sv = &types.AudioDolbyEDecode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "programSelection":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DolbyEProgramSelection to be of type string, got %T instead", value)
+				}
+				sv.ProgramSelection = types.DolbyEProgramSelection(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioHlsRenditionSelection(v **types.AudioHlsRenditionSelection, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14068,6 +14108,11 @@ func awsRestjson1_deserializeDocumentAudioTrackSelection(v **types.AudioTrackSel
 
 	for key, value := range shape {
 		switch key {
+		case "dolbyEDecode":
+			if err := awsRestjson1_deserializeDocumentAudioDolbyEDecode(&sv.DolbyEDecode, value); err != nil {
+				return err
+			}
+
 		case "tracks":
 			if err := awsRestjson1_deserializeDocument__listOfAudioTrack(&sv.Tracks, value); err != nil {
 				return err
@@ -17200,7 +17245,7 @@ func awsRestjson1_deserializeDocumentEsam(v **types.Esam, value interface{}) err
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMax2048 to be of type string, got %T instead", value)
 				}
 				sv.PoisEndpoint = ptr.String(jtv)
 			}
@@ -17837,6 +17882,11 @@ func awsRestjson1_deserializeDocumentFrameCaptureSettings(v **types.FrameCapture
 					return fmt.Errorf("expected FrameCaptureIntervalUnit to be of type string, got %T instead", value)
 				}
 				sv.CaptureIntervalUnits = types.FrameCaptureIntervalUnit(jtv)
+			}
+
+		case "timecodeBurninSettings":
+			if err := awsRestjson1_deserializeDocumentTimecodeBurninSettings(&sv.TimecodeBurninSettings, value); err != nil {
+				return err
 			}
 
 		default:
@@ -18514,6 +18564,11 @@ func awsRestjson1_deserializeDocumentH264Settings(v **types.H264Settings, value 
 				sv.TemporalAq = types.H264TemporalAq(jtv)
 			}
 
+		case "timecodeBurninSettings":
+			if err := awsRestjson1_deserializeDocumentTimecodeBurninSettings(&sv.TimecodeBurninSettings, value); err != nil {
+				return err
+			}
+
 		case "timecodeInsertion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -18957,6 +19012,11 @@ func awsRestjson1_deserializeDocumentH265Settings(v **types.H265Settings, value 
 					return fmt.Errorf("expected H265Tier to be of type string, got %T instead", value)
 				}
 				sv.Tier = types.H265Tier(jtv)
+			}
+
+		case "timecodeBurninSettings":
+			if err := awsRestjson1_deserializeDocumentTimecodeBurninSettings(&sv.TimecodeBurninSettings, value); err != nil {
+				return err
 			}
 
 		case "timecodeInsertion":
@@ -20802,6 +20862,19 @@ func awsRestjson1_deserializeDocumentInputDeviceHdSettings(v **types.InputDevice
 				sv.Height = int32(i64)
 			}
 
+		case "latencyMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LatencyMs = int32(i64)
+			}
+
 		case "maxBitrate":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -21179,6 +21252,19 @@ func awsRestjson1_deserializeDocumentInputDeviceUhdSettings(v **types.InputDevic
 					return err
 				}
 				sv.Height = int32(i64)
+			}
+
+		case "latencyMs":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.LatencyMs = int32(i64)
 			}
 
 		case "maxBitrate":
@@ -23424,6 +23510,11 @@ func awsRestjson1_deserializeDocumentMpeg2Settings(v **types.Mpeg2Settings, valu
 					return fmt.Errorf("expected Mpeg2SubGopLength to be of type string, got %T instead", value)
 				}
 				sv.SubgopLength = types.Mpeg2SubGopLength(jtv)
+			}
+
+		case "timecodeBurninSettings":
+			if err := awsRestjson1_deserializeDocumentTimecodeBurninSettings(&sv.TimecodeBurninSettings, value); err != nil {
+				return err
 			}
 
 		case "timecodeInsertion":
@@ -28209,6 +28300,64 @@ func awsRestjson1_deserializeDocumentTemporalFilterSettings(v **types.TemporalFi
 					return fmt.Errorf("expected TemporalFilterStrength to be of type string, got %T instead", value)
 				}
 				sv.Strength = types.TemporalFilterStrength(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTimecodeBurninSettings(v **types.TimecodeBurninSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TimecodeBurninSettings
+	if *v == nil {
+		sv = &types.TimecodeBurninSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fontSize":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimecodeBurninFontSize to be of type string, got %T instead", value)
+				}
+				sv.FontSize = types.TimecodeBurninFontSize(jtv)
+			}
+
+		case "position":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimecodeBurninPosition to be of type string, got %T instead", value)
+				}
+				sv.Position = types.TimecodeBurninPosition(jtv)
+			}
+
+		case "prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMax255 to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
 			}
 
 		default:

@@ -84,7 +84,8 @@ type ListTasksInput struct {
 	ServiceName *string
 
 	// The startedBy value to filter the task results with. Specifying a startedBy
-	// value limits the results to tasks that were started with that value.
+	// value limits the results to tasks that were started with that value. When you
+	// specify startedBy as the filter, it must be the only filter that you use.
 	StartedBy *string
 
 	noSmithyDocumentSerde

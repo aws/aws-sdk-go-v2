@@ -40,7 +40,7 @@ type BatchGetRecordInput struct {
 
 type BatchGetRecordOutput struct {
 
-	// A list of errors that have occured when retrieving a batch of Records.
+	// A list of errors that have occurred when retrieving a batch of Records.
 	//
 	// This member is required.
 	Errors []types.BatchGetRecordError

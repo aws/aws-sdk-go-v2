@@ -18,7 +18,7 @@ import (
 // rules: assertion rules and gating rules. Assertion rule: An assertion rule
 // enforces that, when you change a routing control state, that a certain criteria
 // is met. For example, the criteria might be that at least one routing control
-// state is On after the transation so that traffic continues to flow to at least
+// state is On after the transaction so that traffic continues to flow to at least
 // one cell for the application. This ensures that you avoid a fail-open scenario.
 // Gating rule: A gating rule lets you configure a gating routing control as an
 // overall "on/off" switch for a group of routing controls. Or, you can configure

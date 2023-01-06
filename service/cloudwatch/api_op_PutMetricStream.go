@@ -12,10 +12,10 @@ import (
 )
 
 // Creates or updates a metric stream. Metric streams can automatically stream
-// CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and
+// CloudWatch metrics to Amazon Web Services destinations, including Amazon S3, and
 // to many third-party solutions. For more information, see  Using Metric Streams
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Metric-Streams.html).
-// To create a metric stream, you must be logged on to an account that has the
+// To create a metric stream, you must be signed in to an account that has the
 // iam:PassRole permission and either the CloudWatchFullAccess policy or the
 // cloudwatch:PutMetricStream permission. When you create or update a metric
 // stream, you choose one of the following:
@@ -32,9 +32,9 @@ import (
 // By
 // default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT
 // statistics for each metric that is streamed. You can use the
-// StatisticsConfigurations parameter to have the metric stream also send
-// additional statistics in the stream. Streaming additional statistics incurs
-// additional costs. For more information, see Amazon CloudWatch Pricing
+// StatisticsConfigurations parameter to have the metric stream send additional
+// statistics in the stream. Streaming additional statistics incurs additional
+// costs. For more information, see Amazon CloudWatch Pricing
 // (https://aws.amazon.com/cloudwatch/pricing/). When you use PutMetricStream to
 // create a new metric stream, the stream is created in the running state. If you
 // use it to update an existing stream, the state of the stream is not changed.
@@ -55,9 +55,9 @@ func (c *Client) PutMetricStream(ctx context.Context, params *PutMetricStreamInp
 
 type PutMetricStreamInput struct {
 
-	// The ARN of the Amazon Kinesis Firehose delivery stream to use for this metric
-	// stream. This Amazon Kinesis Firehose delivery stream must already exist and must
-	// be in the same account as the metric stream.
+	// The ARN of the Amazon Kinesis Data Firehose delivery stream to use for this
+	// metric stream. This Amazon Kinesis Data Firehose delivery stream must already
+	// exist and must be in the same account as the metric stream.
 	//
 	// This member is required.
 	FirehoseArn *string
@@ -79,8 +79,8 @@ type PutMetricStreamInput struct {
 	OutputFormat types.MetricStreamOutputFormat
 
 	// The ARN of an IAM role that this metric stream will use to access Amazon Kinesis
-	// Firehose resources. This IAM role must already exist and must be in the same
-	// account as the metric stream. This IAM role must include the following
+	// Data Firehose resources. This IAM role must already exist and must be in the
+	// same account as the metric stream. This IAM role must include the following
 	// permissions:
 	//
 	// * firehose:PutRecord
@@ -110,7 +110,7 @@ type PutMetricStreamInput struct {
 	// supported by CloudWatch, listed in  CloudWatch statistics definitions
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Statistics-definitions.html.html).
 	// If the OutputFormat is opentelemetry0.7, you can stream percentile statistics
-	// such as p95, p99.9 and so on.
+	// such as p95, p99.9, and so on.
 	StatisticsConfigurations []types.MetricStreamStatisticsConfiguration
 
 	// A list of key-value pairs to associate with the metric stream. You can associate

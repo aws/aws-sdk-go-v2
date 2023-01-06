@@ -14,7 +14,7 @@ import (
 // groups per account. You must use the following guidelines when naming a log
 // group:
 //
-// * Log group names must be unique within a region for an Amazon Web
+// * Log group names must be unique within a Region for an Amazon Web
 // Services account.
 //
 // * Log group names can be between 1 and 512 characters
@@ -25,17 +25,17 @@ import (
 // sign)
 //
 // When you create a log group, by default the log events in the log group
-// never expire. To set a retention policy so that events expire and are deleted
+// do not expire. To set a retention policy so that events expire and are deleted
 // after a specified time, use PutRetentionPolicy
 // (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutRetentionPolicy.html).
-// If you associate a Key Management Service customer master key (CMK) with the log
-// group, ingested data is encrypted using the CMK. This association is stored as
-// long as the data encrypted with the CMK is still within CloudWatch Logs. This
-// enables CloudWatch Logs to decrypt this data whenever it is requested. If you
-// attempt to associate a CMK with the log group but the CMK does not exist or the
-// CMK is disabled, you receive an InvalidParameterException error. CloudWatch Logs
-// supports only symmetric CMKs. Do not associate an asymmetric CMK with your log
-// group. For more information, see Using Symmetric and Asymmetric Keys
+// If you associate an KMS key with the log group, ingested data is encrypted using
+// the KMS key. This association is stored as long as the data encrypted with the
+// KMS key is still within CloudWatch Logs. This enables CloudWatch Logs to decrypt
+// this data whenever it is requested. If you attempt to associate a KMS key with
+// the log group but the KMS keydoes not exist or the KMS key is disabled, you
+// receive an InvalidParameterException error. CloudWatch Logs supports only
+// symmetric KMS keys. Do not associate an asymmetric KMS key with your log group.
+// For more information, see Using Symmetric and Asymmetric Keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html).
 func (c *Client) CreateLogGroup(ctx context.Context, params *CreateLogGroupInput, optFns ...func(*Options)) (*CreateLogGroupOutput, error) {
 	if params == nil {
@@ -59,16 +59,20 @@ type CreateLogGroupInput struct {
 	// This member is required.
 	LogGroupName *string
 
-	// The Amazon Resource Name (ARN) of the CMK to use when encrypting log data. For
-	// more information, see Amazon Resource Names - Key Management Service
+	// The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
+	// For more information, see Amazon Resource Names
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms).
 	KmsKeyId *string
 
-	// The key-value pairs to use for the tags. CloudWatch Logs doesn’t support IAM
-	// policies that prevent users from assigning specified tags to log groups using
-	// the aws:Resource/key-name  or aws:TagKeys condition keys. For more information
-	// about using tags to control access, see Controlling access to Amazon Web
-	// Services resources using tags
+	// The key-value pairs to use for the tags. You can grant users access to certain
+	// log groups while preventing them from accessing other log groups. To do so, tag
+	// your groups and use IAM policies that refer to those tags. To assign tags when
+	// you create a log group, you must have either the logs:TagResource or
+	// logs:TagLogGroup permission. For more information about tagging, see Tagging
+	// Amazon Web Services resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html). For more
+	// information about using tags to control access, see Controlling access to Amazon
+	// Web Services resources using tags
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html).
 	Tags map[string]string
 

@@ -45,6 +45,9 @@ type UpdateSourceServerReplicationTypeInput struct {
 
 type UpdateSourceServerReplicationTypeOutput struct {
 
+	// Source server application ID.
+	ApplicationID *string
+
 	// Source server ARN.
 	Arn *string
 

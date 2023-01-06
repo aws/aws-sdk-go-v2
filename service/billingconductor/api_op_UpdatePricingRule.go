@@ -43,6 +43,9 @@ type UpdatePricingRuleInput struct {
 	// The new name of the pricing rule. The name must be unique to each pricing rule.
 	Name *string
 
+	// The set of tiering configurations for the pricing rule.
+	Tiering *types.UpdateTieringInput
+
 	// The new pricing rule type.
 	Type types.PricingRuleType
 
@@ -80,6 +83,9 @@ type UpdatePricingRuleOutput struct {
 	// If the Scope attribute is set to SERVICE, the attribute indicates which service
 	// the PricingRule is applicable for.
 	Service *string
+
+	// The set of tiering configurations for the pricing rule.
+	Tiering *types.UpdateTieringInput
 
 	// The new pricing rule type.
 	Type types.PricingRuleType

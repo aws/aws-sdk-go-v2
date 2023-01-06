@@ -14,7 +14,9 @@ import (
 // you detach a target group, it enters the Removing state while deregistering the
 // instances in the group. When all instances are deregistered, then you can no
 // longer describe the target group using the DescribeLoadBalancerTargetGroups API
-// call. The instances remain running.
+// call. The instances remain running. You can use this operation to detach target
+// groups that were attached by using AttachLoadBalancerTargetGroups, but not for
+// target groups that were attached by using AttachTrafficSources.
 func (c *Client) DetachLoadBalancerTargetGroups(ctx context.Context, params *DetachLoadBalancerTargetGroupsInput, optFns ...func(*Options)) (*DetachLoadBalancerTargetGroupsOutput, error) {
 	if params == nil {
 		params = &DetachLoadBalancerTargetGroupsInput{}

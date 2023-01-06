@@ -52,6 +52,10 @@ type PutRecordInput struct {
 	// This member is required.
 	Record []types.FeatureValue
 
+	// A list of stores to which you're adding the record. By default, Feature Store
+	// adds the record to all of the stores that you're using for the FeatureGroup.
+	TargetStores []types.TargetStore
+
 	noSmithyDocumentSerde
 }
 

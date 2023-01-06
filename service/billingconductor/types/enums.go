@@ -148,6 +148,7 @@ type PricingRuleType string
 const (
 	PricingRuleTypeMarkup   PricingRuleType = "MARKUP"
 	PricingRuleTypeDiscount PricingRuleType = "DISCOUNT"
+	PricingRuleTypeTiering  PricingRuleType = "TIERING"
 )
 
 // Values returns all known values for PricingRuleType. Note that this can be
@@ -157,6 +158,7 @@ func (PricingRuleType) Values() []PricingRuleType {
 	return []PricingRuleType{
 		"MARKUP",
 		"DISCOUNT",
+		"TIERING",
 	}
 }
 
@@ -214,6 +216,9 @@ const (
 	ValidationExceptionReasonInvalidBillingPeriodForOperation  ValidationExceptionReason = "INVALID_BILLING_PERIOD_FOR_OPERATION"
 	ValidationExceptionReasonIllegalBillingEntity              ValidationExceptionReason = "ILLEGAL_BILLING_ENTITY"
 	ValidationExceptionReasonIllegalModifierPercentage         ValidationExceptionReason = "ILLEGAL_MODIFIER_PERCENTAGE"
+	ValidationExceptionReasonIllegalType                       ValidationExceptionReason = "ILLEGAL_TYPE"
+	ValidationExceptionReasonIllegalEndedBillinggroup          ValidationExceptionReason = "ILLEGAL_ENDED_BILLINGGROUP"
+	ValidationExceptionReasonIllegalTieringInput               ValidationExceptionReason = "ILLEGAL_TIERING_INPUT"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -271,5 +276,8 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"INVALID_BILLING_PERIOD_FOR_OPERATION",
 		"ILLEGAL_BILLING_ENTITY",
 		"ILLEGAL_MODIFIER_PERCENTAGE",
+		"ILLEGAL_TYPE",
+		"ILLEGAL_ENDED_BILLINGGROUP",
+		"ILLEGAL_TIERING_INPUT",
 	}
 }

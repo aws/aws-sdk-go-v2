@@ -546,6 +546,10 @@ type ConfigRule struct {
 	// The description that you provide for the Config rule.
 	Description *string
 
+	// The modes the Config rule can be evaluated in. The valid values are distinct
+	// objects. By default, the value is Detective evaluation mode only.
+	EvaluationModes []EvaluationModeConfiguration
+
 	// A string, in JSON format, that is passed to the Config rule Lambda function.
 	InputParameters *string
 
@@ -1261,6 +1265,16 @@ type DeliveryChannelStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Returns a filtered list of Detective or Proactive Config rules. By default, if
+// the filter is not defined, this API returns an unfiltered list.
+type DescribeConfigRulesFilters struct {
+
+	// The mode of an evaluation. The valid values are Detective or Proactive.
+	EvaluationMode EvaluationMode
+
+	noSmithyDocumentSerde
+}
+
 // Identifies an Amazon Web Services resource and indicates whether it complies
 // with the Config rule that it was evaluated against.
 type Evaluation struct {
@@ -1297,6 +1311,27 @@ type Evaluation struct {
 
 	// Supplementary information about how the evaluation determined the compliance.
 	Annotation *string
+
+	noSmithyDocumentSerde
+}
+
+// Use EvaluationContext to group independently initiated proactive resource
+// evaluations. For example, CFN Stack. If you want to check just a resource
+// definition, you do not need to provide evaluation context.
+type EvaluationContext struct {
+
+	// A unique EvaluationContextIdentifier ID for an EvaluationContext.
+	EvaluationContextIdentifier *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration object for Config rule evaluation mode. The Supported valid
+// values are Detective or Proactive.
+type EvaluationModeConfiguration struct {
+
+	// The mode of an evaluation. The valid values are Detective or Proactive.
+	Mode EvaluationMode
 
 	noSmithyDocumentSerde
 }
@@ -1345,6 +1380,9 @@ type EvaluationResultIdentifier struct {
 	// snapshot, depending on which event triggered the evaluation.
 	OrderingTimestamp *time.Time
 
+	// A Unique ID for an evaluation result.
+	ResourceEvaluationId *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1355,11 +1393,29 @@ type EvaluationResultQualifier struct {
 	// The name of the Config rule that was used in the evaluation.
 	ConfigRuleName *string
 
+	// The mode of an evaluation. The valid values are Detective or Proactive.
+	EvaluationMode EvaluationMode
+
 	// The ID of the evaluated Amazon Web Services resource.
 	ResourceId *string
 
 	// The type of Amazon Web Services resource that was evaluated.
 	ResourceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Returns status details of an evaluation.
+type EvaluationStatus struct {
+
+	// The status of an execution. The valid values are In_Progress, Succeeded or
+	// Failed.
+	//
+	// This member is required.
+	Status ResourceEvaluationStatus
+
+	// An explanation for failed execution status.
+	FailureReason *string
 
 	noSmithyDocumentSerde
 }
@@ -2139,27 +2195,34 @@ type QueryInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the types of Amazon Web Services resource for which Config records
-// configuration changes. In the recording group, you specify whether all supported
-// types or specific types of resources are recorded. By default, Config records
-// configuration changes for all supported types of regional resources that Config
-// discovers in the region in which it is running. Regional resources are tied to a
-// region and can be used only in that region. Examples of regional resources are
-// EC2 instances and EBS volumes. You can also have Config record configuration
-// changes for supported types of global resources (for example, IAM resources).
-// Global resources are not tied to an individual region and can be used in all
-// regions. The configuration details for any global resource are the same in all
-// regions. If you customize Config in multiple regions to record global resources,
-// it will create multiple configuration items each time a global resource changes:
-// one configuration item for each region. These configuration items will contain
-// identical data. To prevent duplicate configuration items, you should consider
-// customizing Config in only one region to record global resources, unless you
-// want the configuration items to be available in multiple regions. If you don't
-// want Config to record all resources, you can specify which types of resources it
-// will record with the resourceTypes parameter. For a list of supported resource
-// types, see Supported Resource Types
+// Specifies which Amazon Web Services resource types Config records for
+// configuration changes. In the recording group, you specify whether you want to
+// record all supported resource types or only specific types of resources. By
+// default, Config records the configuration changes for all supported types of
+// regional resources that Config discovers in the region in which it is running.
+// Regional resources are tied to a region and can be used only in that region.
+// Examples of regional resources are EC2 instances and EBS volumes. You can also
+// have Config record supported types of global resources. Global resources are not
+// tied to a specific region and can be used in all regions. The global resource
+// types that Config supports include IAM users, groups, roles, and customer
+// managed policies. Global resource types onboarded to Config recording after
+// February 2022 will only be recorded in the service's home region for the
+// commercial partition and Amazon Web Services GovCloud (US) West for the GovCloud
+// partition. You can view the Configuration Items for these new global resource
+// types only in their home region and Amazon Web Services GovCloud (US) West.
+// Supported global resource types onboarded before February 2022 such as
+// AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User remain
+// unchanged, and they will continue to deliver Configuration Items in all
+// supported regions in Config. The change will only affect new global resource
+// types onboarded after February 2022. To record global resource types onboarded
+// after February 2022, enable All Supported Resource Types in the home region of
+// the global resource type you want to record. If you don't want Config to record
+// all resources, you can specify which types of resources it will record with the
+// resourceTypes parameter. For a list of supported resource types, see Supported
+// Resource Types
 // (https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources).
-// For more information, see Selecting Which Resources Config Records
+// For more information and a table of the Home Regions for Global Resource Types
+// Onboarded after February 2022, see Selecting Which Resources Config Records
 // (https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html).
 type RecordingGroup struct {
 
@@ -2392,6 +2455,63 @@ type ResourceCountFilters struct {
 
 	// The type of the Amazon Web Services resource.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
+}
+
+// Returns information about the resource being evaluated.
+type ResourceDetails struct {
+
+	// The resource definition to be evaluated as per the resource configuration schema
+	// type.
+	//
+	// This member is required.
+	ResourceConfiguration *string
+
+	// A unique resource ID for an evaluation.
+	//
+	// This member is required.
+	ResourceId *string
+
+	// The type of resource being evaluated.
+	//
+	// This member is required.
+	ResourceType *string
+
+	// The schema type of the resource configuration.
+	ResourceConfigurationSchemaType ResourceConfigurationSchemaType
+
+	noSmithyDocumentSerde
+}
+
+// Returns details of a resource evaluation.
+type ResourceEvaluation struct {
+
+	// The mode of an evaluation. The valid values are Detective or Proactive.
+	EvaluationMode EvaluationMode
+
+	// The starting time of an execution.
+	EvaluationStartTimestamp *time.Time
+
+	// The ResourceEvaluationId of a evaluation.
+	ResourceEvaluationId *string
+
+	noSmithyDocumentSerde
+}
+
+// Returns details of a resource evaluation based on the selected filter.
+type ResourceEvaluationFilters struct {
+
+	// Filters evaluations for a given infrastructure deployment. For example: CFN
+	// Stack.
+	EvaluationContextIdentifier *string
+
+	// Filters all resource evaluations results based on an evaluation mode. the valid
+	// value for this API is Proactive.
+	EvaluationMode EvaluationMode
+
+	// Returns a TimeWindow object.
+	TimeWindow *TimeWindow
 
 	noSmithyDocumentSerde
 }
@@ -2770,6 +2890,18 @@ type TemplateSSMDocumentDetails struct {
 	// The version of the SSM document to use to create a conformance pack. By default,
 	// Config uses the latest version. This field is optional.
 	DocumentVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Filters evaluation results based on start and end times.
+type TimeWindow struct {
+
+	// The end time of an execution. The end time must be after the start date.
+	EndTime *time.Time
+
+	// The start time of an execution.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }

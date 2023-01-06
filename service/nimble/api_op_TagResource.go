@@ -33,7 +33,7 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// A collection of labels, in the form of key:value pairs, that apply to this
+	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
 	Tags map[string]string
 

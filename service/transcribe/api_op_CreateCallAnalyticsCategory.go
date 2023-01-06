@@ -12,24 +12,21 @@ import (
 )
 
 // Creates a new Call Analytics category. All categories are automatically applied
-// to your Call Analytics jobs. Note that in order to apply your categories to your
-// jobs, you must create them before submitting your job request, as categories
-// cannot be applied retroactively. Call Analytics categories are composed of
-// rules. For each category, you must create between 1 and 20 rules. Rules can
-// include these parameters: , , , and . To update an existing category, see . To
-// learn more about:
-//
-// * Call Analytics categories, see Creating categories
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html)
-//
-// *
-// Using rules, see Rule criteria
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics-create-categories.html#call-analytics-create-categories-rules)
-// and refer to the data type
-//
-// * Call Analytics, see Analyzing call center audio
-// with Call Analytics
-// (https://docs.aws.amazon.com/transcribe/latest/dg/call-analytics.html)
+// to your Call Analytics transcriptions. Note that in order to apply categories to
+// your transcriptions, you must create them before submitting your transcription
+// request, as categories cannot be applied retroactively. When creating a new
+// category, you can use the InputType parameter to label the category as a batch
+// category (POST_CALL) or a streaming category (REAL_TIME). Batch categories can
+// only be applied to batch transcriptions and streaming categories can only be
+// applied to streaming transcriptions. If you do not include InputType, your
+// category is created as a batch category by default. Call Analytics categories
+// are composed of rules. For each category, you must create between 1 and 20
+// rules. Rules can include these parameters: , , , and . To update an existing
+// category, see . To learn more about Call Analytics categories, see Creating
+// categories for batch transcriptions
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-batch.html) and
+// Creating categories for streaming transcriptions
+// (https://docs.aws.amazon.com/transcribe/latest/dg/tca-categories-stream.html).
 func (c *Client) CreateCallAnalyticsCategory(ctx context.Context, params *CreateCallAnalyticsCategoryInput, optFns ...func(*Options)) (*CreateCallAnalyticsCategoryOutput, error) {
 	if params == nil {
 		params = &CreateCallAnalyticsCategoryInput{}
@@ -55,14 +52,23 @@ type CreateCallAnalyticsCategoryInput struct {
 	// This member is required.
 	CategoryName *string
 
-	// Rules define a Call Analytics category. When creating a new Call Analytics
-	// category, you must create between 1 and 20 rules for that category. For each
-	// rule, you specify a filter you want applied to the attributes of a call. For
-	// example, you can choose a sentiment filter that detects if a customer's
-	// sentiment was positive during the last 30 seconds of the call.
+	// Rules define a Call Analytics category. When creating a new category, you must
+	// create between 1 and 20 rules for that category. For each rule, you specify a
+	// filter you want applied to the attributes of a call. For example, you can choose
+	// a sentiment filter that detects if a customer's sentiment was positive during
+	// the last 30 seconds of the call.
 	//
 	// This member is required.
 	Rules []types.Rule
+
+	// Choose whether you want to create a streaming or a batch category for your Call
+	// Analytics transcription. Specifying POST_CALL assigns your category to batch
+	// transcriptions; categories with this input type cannot be applied to streaming
+	// (real-time) transcriptions. Specifying REAL_TIME assigns your category to
+	// streaming transcriptions; categories with this input type cannot be applied to
+	// batch (post-call) transcriptions. If you do not include InputType, your category
+	// is created as a batch category by default.
+	InputType types.InputType
 
 	noSmithyDocumentSerde
 }

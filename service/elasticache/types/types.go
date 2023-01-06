@@ -257,12 +257,14 @@ type CacheCluster struct {
 	// snapshot of your cluster. Example: 05:00-09:00
 	SnapshotWindow *string
 
-	// A flag that enables in-transit encryption when set to true. You cannot modify
-	// the value of TransitEncryptionEnabled after the cluster is created. To enable
-	// in-transit encryption on a cluster you must set TransitEncryptionEnabled to true
-	// when you create a cluster. Required: Only available when creating a replication
-	// group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false
+	// A flag that enables in-transit encryption when set to true. Required: Only
+	// available when creating a replication group in an Amazon VPC using redis version
+	// 3.2.6, 4.x or later. Default: false
 	TransitEncryptionEnabled *bool
+
+	// A setting that allows you to migrate your clients to use in-transit encryption,
+	// with no downtime.
+	TransitEncryptionMode TransitEncryptionMode
 
 	noSmithyDocumentSerde
 }
@@ -822,11 +824,9 @@ type GlobalReplicationGroup struct {
 	// The status of the Global datastore
 	Status *string
 
-	// A flag that enables in-transit encryption when set to true. You cannot modify
-	// the value of TransitEncryptionEnabled after the cluster is created. To enable
-	// in-transit encryption on a cluster you must set TransitEncryptionEnabled to true
-	// when you create a cluster. Required: Only available when creating a replication
-	// group in an Amazon VPC using redis version 3.2.6, 4.x or later.
+	// A flag that enables in-transit encryption when set to true. Required: Only
+	// available when creating a replication group in an Amazon VPC using redis version
+	// 3.2.6, 4.x or later.
 	TransitEncryptionEnabled *bool
 
 	noSmithyDocumentSerde
@@ -1203,6 +1203,13 @@ type PendingModifiedValues struct {
 	// and 40.
 	NumCacheNodes *int32
 
+	// A flag that enables in-transit encryption when set to true.
+	TransitEncryptionEnabled *bool
+
+	// A setting that allows you to migrate your clients to use in-transit encryption,
+	// with no downtime.
+	TransitEncryptionMode TransitEncryptionMode
+
 	noSmithyDocumentSerde
 }
 
@@ -1377,12 +1384,14 @@ type ReplicationGroup struct {
 	// deleting, create-failed, snapshotting.
 	Status *string
 
-	// A flag that enables in-transit encryption when set to true. You cannot modify
-	// the value of TransitEncryptionEnabled after the cluster is created. To enable
-	// in-transit encryption on a cluster you must set TransitEncryptionEnabled to true
-	// when you create a cluster. Required: Only available when creating a replication
-	// group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false
+	// A flag that enables in-transit encryption when set to true. Required: Only
+	// available when creating a replication group in an Amazon VPC using redis version
+	// 3.2.6, 4.x or later. Default: false
 	TransitEncryptionEnabled *bool
+
+	// A setting that allows you to migrate your clients to use in-transit encryption,
+	// with no downtime.
+	TransitEncryptionMode TransitEncryptionMode
 
 	// The ID of the user group associated to the replication group.
 	UserGroupIds []string
@@ -1409,6 +1418,13 @@ type ReplicationGroupPendingModifiedValues struct {
 
 	// The status of an online resharding operation.
 	Resharding *ReshardingStatus
+
+	// A flag that enables in-transit encryption when set to true.
+	TransitEncryptionEnabled *bool
+
+	// A setting that allows you to migrate your clients to use in-transit encryption,
+	// with no downtime.
+	TransitEncryptionMode TransitEncryptionMode
 
 	// The user group being modified.
 	UserGroups *UserGroupsUpdateStatus

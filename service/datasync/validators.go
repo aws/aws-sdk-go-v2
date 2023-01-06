@@ -1903,6 +1903,11 @@ func validateOpStartTaskExecutionInput(v *StartTaskExecutionInput) error {
 	if v.TaskArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskArn"))
 	}
+	if v.Tags != nil {
+		if err := validateInputTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

@@ -148,6 +148,21 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "voice-chime-fips.ca-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "ca-central-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "voice-chime-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -163,12 +178,12 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-east-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "fips.voice-chime.us-east-1.amazonaws.com",
+				Hostname: "voice-chime-fips.us-east-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-1-fips",
 			}: endpoints.Endpoint{
-				Hostname: "fips.voice-chime.us-east-1.amazonaws.com",
+				Hostname: "voice-chime-fips.us-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-east-1",
 				},
@@ -181,12 +196,12 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-west-2",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "fips.voice-chime.us-west-2.amazonaws.com",
+				Hostname: "voice-chime-fips.us-west-2.amazonaws.com",
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-2-fips",
 			}: endpoints.Endpoint{
-				Hostname: "fips.voice-chime.us-west-2.amazonaws.com",
+				Hostname: "voice-chime-fips.us-west-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-west-2",
 				},

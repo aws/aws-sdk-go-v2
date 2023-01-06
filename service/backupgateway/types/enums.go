@@ -39,3 +39,27 @@ func (HypervisorState) Values() []HypervisorState {
 		"ERROR",
 	}
 }
+
+type SyncMetadataStatus string
+
+// Enum values for SyncMetadataStatus
+const (
+	SyncMetadataStatusCreated         SyncMetadataStatus = "CREATED"
+	SyncMetadataStatusRunning         SyncMetadataStatus = "RUNNING"
+	SyncMetadataStatusFailed          SyncMetadataStatus = "FAILED"
+	SyncMetadataStatusPartiallyFailed SyncMetadataStatus = "PARTIALLY_FAILED"
+	SyncMetadataStatusSucceeded       SyncMetadataStatus = "SUCCEEDED"
+)
+
+// Values returns all known values for SyncMetadataStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SyncMetadataStatus) Values() []SyncMetadataStatus {
+	return []SyncMetadataStatus{
+		"CREATED",
+		"RUNNING",
+		"FAILED",
+		"PARTIALLY_FAILED",
+		"SUCCEEDED",
+	}
+}

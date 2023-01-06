@@ -22,7 +22,7 @@ import (
 // Amazon Web Services Support API.
 //
 // * If you call the Amazon Web Services Support
-// API from an account that does not have a Business, Enterprise On-Ramp, or
+// API from an account that doesn't have a Business, Enterprise On-Ramp, or
 // Enterprise Support plan, the SubscriptionRequiredException error message
 // appears. For information about changing your support plan, see Amazon Web
 // Services Support (http://aws.amazon.com/premiumsupport/).

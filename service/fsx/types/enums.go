@@ -35,6 +35,7 @@ const (
 	AdministrativeActionTypeVolumeUpdate                  AdministrativeActionType = "VOLUME_UPDATE"
 	AdministrativeActionTypeSnapshotUpdate                AdministrativeActionType = "SNAPSHOT_UPDATE"
 	AdministrativeActionTypeReleaseNfsV3Locks             AdministrativeActionType = "RELEASE_NFS_V3_LOCKS"
+	AdministrativeActionTypeVolumeRestore                 AdministrativeActionType = "VOLUME_RESTORE"
 )
 
 // Values returns all known values for AdministrativeActionType. Note that this can
@@ -49,6 +50,7 @@ func (AdministrativeActionType) Values() []AdministrativeActionType {
 		"VOLUME_UPDATE",
 		"SNAPSHOT_UPDATE",
 		"RELEASE_NFS_V3_LOCKS",
+		"VOLUME_RESTORE",
 	}
 }
 
@@ -523,6 +525,24 @@ func (FlexCacheEndpointType) Values() []FlexCacheEndpointType {
 	}
 }
 
+type InputOntapVolumeType string
+
+// Enum values for InputOntapVolumeType
+const (
+	InputOntapVolumeTypeRw InputOntapVolumeType = "RW"
+	InputOntapVolumeTypeDp InputOntapVolumeType = "DP"
+)
+
+// Values returns all known values for InputOntapVolumeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputOntapVolumeType) Values() []InputOntapVolumeType {
+	return []InputOntapVolumeType{
+		"RW",
+		"DP",
+	}
+}
+
 type LustreAccessAuditLogLevel string
 
 // Enum values for LustreAccessAuditLogLevel
@@ -664,6 +684,7 @@ type OpenZFSDeploymentType string
 // Enum values for OpenZFSDeploymentType
 const (
 	OpenZFSDeploymentTypeSingleAz1 OpenZFSDeploymentType = "SINGLE_AZ_1"
+	OpenZFSDeploymentTypeSingleAz2 OpenZFSDeploymentType = "SINGLE_AZ_2"
 )
 
 // Values returns all known values for OpenZFSDeploymentType. Note that this can be
@@ -672,6 +693,7 @@ const (
 func (OpenZFSDeploymentType) Values() []OpenZFSDeploymentType {
 	return []OpenZFSDeploymentType{
 		"SINGLE_AZ_1",
+		"SINGLE_AZ_2",
 	}
 }
 

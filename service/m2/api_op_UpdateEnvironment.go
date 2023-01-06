@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration details for a specific environment.
+// Updates the configuration details for a specific runtime environment.
 func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmentInput, optFns ...func(*Options)) (*UpdateEnvironmentOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentInput{}
@@ -33,24 +33,25 @@ type UpdateEnvironmentInput struct {
 	// This member is required.
 	EnvironmentId *string
 
-	// Indicates whether to update the environment during the maintenance window. The
-	// default is false. Currently, Amazon Web Services Mainframe Modernization accepts
-	// the engineVersion parameter only if applyDuringMaintenanceWindow is true. If any
-	// parameter other than engineVersion is provided in UpdateEnvironmentRequest, it
-	// will fail if applyDuringMaintenanceWindow is set to true.
+	// Indicates whether to update the runtime environment during the maintenance
+	// window. The default is false. Currently, Amazon Web Services Mainframe
+	// Modernization accepts the engineVersion parameter only if
+	// applyDuringMaintenanceWindow is true. If any parameter other than engineVersion
+	// is provided in UpdateEnvironmentRequest, it will fail if
+	// applyDuringMaintenanceWindow is set to true.
 	ApplyDuringMaintenanceWindow bool
 
-	// The desired capacity for the environment to update.
+	// The desired capacity for the runtime environment to update.
 	DesiredCapacity *int32
 
-	// The version of the runtime engine for the environment.
+	// The version of the runtime engine for the runtime environment.
 	EngineVersion *string
 
-	// The instance type for the environment to update.
+	// The instance type for the runtime environment to update.
 	InstanceType *string
 
-	// Configures a desired maintenance window for the environment. If you do not
-	// provide a value, a random system-generated value will be assigned.
+	// Configures the maintenance window you want for the runtime environment. If you
+	// do not provide a value, a random system-generated value will be assigned.
 	PreferredMaintenanceWindow *string
 
 	noSmithyDocumentSerde

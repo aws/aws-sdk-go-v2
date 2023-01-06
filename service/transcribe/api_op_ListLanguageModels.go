@@ -13,8 +13,8 @@ import (
 )
 
 // Provides a list of custom language models that match the specified criteria. If
-// no criteria are specified, all language models are returned. To get detailed
-// information about a specific custom language model, use the operation.
+// no criteria are specified, all custom language models are returned. To get
+// detailed information about a specific custom language model, use the operation.
 func (c *Client) ListLanguageModels(ctx context.Context, params *ListLanguageModelsInput, optFns ...func(*Options)) (*ListLanguageModelsOutput, error) {
 	if params == nil {
 		params = &ListLanguageModelsInput{}
@@ -33,8 +33,8 @@ func (c *Client) ListLanguageModels(ctx context.Context, params *ListLanguageMod
 type ListLanguageModelsInput struct {
 
 	// The maximum number of custom language models to return in each page of results.
-	// If there are fewer results than the value you specify, only the actual results
-	// are returned. If you don't specify a value, a default of 5 is used.
+	// If there are fewer results than the value that you specify, only the actual
+	// results are returned. If you don't specify a value, a default of 5 is used.
 	MaxResults *int32
 
 	// Returns only the custom language models that contain the specified string. The
@@ -147,8 +147,8 @@ var _ ListLanguageModelsAPIClient = (*Client)(nil)
 // ListLanguageModels
 type ListLanguageModelsPaginatorOptions struct {
 	// The maximum number of custom language models to return in each page of results.
-	// If there are fewer results than the value you specify, only the actual results
-	// are returned. If you don't specify a value, a default of 5 is used.
+	// If there are fewer results than the value that you specify, only the actual
+	// results are returned. If you don't specify a value, a default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

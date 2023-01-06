@@ -478,6 +478,26 @@ func (DataFormat) Values() []DataFormat {
 	}
 }
 
+type DataQualityRuleResultStatus string
+
+// Enum values for DataQualityRuleResultStatus
+const (
+	DataQualityRuleResultStatusPass  DataQualityRuleResultStatus = "PASS"
+	DataQualityRuleResultStatusFail  DataQualityRuleResultStatus = "FAIL"
+	DataQualityRuleResultStatusError DataQualityRuleResultStatus = "ERROR"
+)
+
+// Values returns all known values for DataQualityRuleResultStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataQualityRuleResultStatus) Values() []DataQualityRuleResultStatus {
+	return []DataQualityRuleResultStatus{
+		"PASS",
+		"FAIL",
+		"ERROR",
+	}
+}
+
 type DeleteBehavior string
 
 // Enum values for DeleteBehavior
@@ -495,6 +515,42 @@ func (DeleteBehavior) Values() []DeleteBehavior {
 		"LOG",
 		"DELETE_FROM_DATABASE",
 		"DEPRECATE_IN_DATABASE",
+	}
+}
+
+type DQStopJobOnFailureTiming string
+
+// Enum values for DQStopJobOnFailureTiming
+const (
+	DQStopJobOnFailureTimingImmediate     DQStopJobOnFailureTiming = "Immediate"
+	DQStopJobOnFailureTimingAfterDataLoad DQStopJobOnFailureTiming = "AfterDataLoad"
+)
+
+// Values returns all known values for DQStopJobOnFailureTiming. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DQStopJobOnFailureTiming) Values() []DQStopJobOnFailureTiming {
+	return []DQStopJobOnFailureTiming{
+		"Immediate",
+		"AfterDataLoad",
+	}
+}
+
+type DQTransformOutput string
+
+// Enum values for DQTransformOutput
+const (
+	DQTransformOutputPrimaryInput      DQTransformOutput = "PrimaryInput"
+	DQTransformOutputEvaluationResults DQTransformOutput = "EvaluationResults"
+)
+
+// Values returns all known values for DQTransformOutput. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DQTransformOutput) Values() []DQTransformOutput {
+	return []DQTransformOutput{
+		"PrimaryInput",
+		"EvaluationResults",
 	}
 }
 
@@ -996,6 +1052,34 @@ func (NodeType) Values() []NodeType {
 		"CRAWLER",
 		"JOB",
 		"TRIGGER",
+	}
+}
+
+type ParamType string
+
+// Enum values for ParamType
+const (
+	ParamTypeStr     ParamType = "str"
+	ParamTypeInt     ParamType = "int"
+	ParamTypeFloat   ParamType = "float"
+	ParamTypeComplex ParamType = "complex"
+	ParamTypeBool    ParamType = "bool"
+	ParamTypeList    ParamType = "list"
+	ParamTypeNull    ParamType = "null"
+)
+
+// Values returns all known values for ParamType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ParamType) Values() []ParamType {
+	return []ParamType{
+		"str",
+		"int",
+		"float",
+		"complex",
+		"bool",
+		"list",
+		"null",
 	}
 }
 

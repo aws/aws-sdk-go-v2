@@ -730,6 +730,26 @@ func (m *validateOpGetMultiRegionAccessPointPolicyStatus) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMultiRegionAccessPointRoutes struct {
+}
+
+func (*validateOpGetMultiRegionAccessPointRoutes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMultiRegionAccessPointRoutes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMultiRegionAccessPointRoutesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMultiRegionAccessPointRoutesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPublicAccessBlock struct {
 }
 
@@ -1150,6 +1170,26 @@ func (m *validateOpPutStorageLensConfigurationTagging) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSubmitMultiRegionAccessPointRoutes struct {
+}
+
+func (*validateOpSubmitMultiRegionAccessPointRoutes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSubmitMultiRegionAccessPointRoutes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SubmitMultiRegionAccessPointRoutesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSubmitMultiRegionAccessPointRoutesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateJobPriority struct {
 }
 
@@ -1334,6 +1374,10 @@ func addOpGetMultiRegionAccessPointPolicyStatusValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpGetMultiRegionAccessPointPolicyStatus{}, middleware.After)
 }
 
+func addOpGetMultiRegionAccessPointRoutesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMultiRegionAccessPointRoutes{}, middleware.After)
+}
+
 func addOpGetPublicAccessBlockValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPublicAccessBlock{}, middleware.After)
 }
@@ -1416,6 +1460,10 @@ func addOpPutStorageLensConfigurationValidationMiddleware(stack *middleware.Stac
 
 func addOpPutStorageLensConfigurationTaggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutStorageLensConfigurationTagging{}, middleware.After)
+}
+
+func addOpSubmitMultiRegionAccessPointRoutesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSubmitMultiRegionAccessPointRoutes{}, middleware.After)
 }
 
 func addOpUpdateJobPriorityValidationMiddleware(stack *middleware.Stack) error {
@@ -1763,6 +1811,21 @@ func validateLifecycleRules(v []types.LifecycleRule) error {
 	}
 }
 
+func validateMultiRegionAccessPointRoute(v *types.MultiRegionAccessPointRoute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MultiRegionAccessPointRoute"}
+	if v.TrafficDialPercentage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrafficDialPercentage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateObjectLambdaConfiguration(v *types.ObjectLambdaConfiguration) error {
 	if v == nil {
 		return nil
@@ -1898,6 +1961,23 @@ func validateRegionCreationList(v []types.Region) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RegionCreationList"}
 	for i := range v {
 		if err := validateRegion(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRouteList(v []types.MultiRegionAccessPointRoute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RouteList"}
+	for i := range v {
+		if err := validateMultiRegionAccessPointRoute(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3038,6 +3118,24 @@ func validateOpGetMultiRegionAccessPointPolicyStatusInput(v *GetMultiRegionAcces
 	}
 }
 
+func validateOpGetMultiRegionAccessPointRoutesInput(v *GetMultiRegionAccessPointRoutesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMultiRegionAccessPointRoutesInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Mrap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mrap"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPublicAccessBlockInput(v *GetPublicAccessBlockInput) error {
 	if v == nil {
 		return nil
@@ -3450,6 +3548,31 @@ func validateOpPutStorageLensConfigurationTaggingInput(v *PutStorageLensConfigur
 	} else if v.Tags != nil {
 		if err := validateStorageLensTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSubmitMultiRegionAccessPointRoutesInput(v *SubmitMultiRegionAccessPointRoutesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubmitMultiRegionAccessPointRoutesInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Mrap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mrap"))
+	}
+	if v.RouteUpdates == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RouteUpdates"))
+	} else if v.RouteUpdates != nil {
+		if err := validateRouteList(v.RouteUpdates); err != nil {
+			invalidParams.AddNested("RouteUpdates", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -50,6 +50,9 @@ type DisconnectFromServiceInput struct {
 
 type DisconnectFromServiceOutput struct {
 
+	// Source server application ID.
+	ApplicationID *string
+
 	// Source server ARN.
 	Arn *string
 

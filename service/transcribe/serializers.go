@@ -2860,6 +2860,11 @@ func awsAwsjson11_serializeOpDocumentCreateCallAnalyticsCategoryInput(v *CreateC
 		ok.String(*v.CategoryName)
 	}
 
+	if len(v.InputType) > 0 {
+		ok := object.Key("InputType")
+		ok.String(string(v.InputType))
+	}
+
 	if v.Rules != nil {
 		ok := object.Key("Rules")
 		if err := awsAwsjson11_serializeDocumentRuleList(v.Rules, ok); err != nil {
@@ -3712,6 +3717,11 @@ func awsAwsjson11_serializeOpDocumentUpdateCallAnalyticsCategoryInput(v *UpdateC
 	if v.CategoryName != nil {
 		ok := object.Key("CategoryName")
 		ok.String(*v.CategoryName)
+	}
+
+	if len(v.InputType) > 0 {
+		ok := object.Key("InputType")
+		ok.String(string(v.InputType))
 	}
 
 	if v.Rules != nil {

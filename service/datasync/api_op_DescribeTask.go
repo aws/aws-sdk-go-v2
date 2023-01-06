@@ -50,15 +50,16 @@ type DescribeTaskOutput struct {
 	// The time that the task was created.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the task execution that is syncing files.
+	// The Amazon Resource Name (ARN) of the task execution that is transferring files.
 	CurrentTaskExecutionArn *string
 
 	// The Amazon Resource Name (ARN) of the Amazon Web Services storage resource's
 	// location.
 	DestinationLocationArn *string
 
-	// The Amazon Resource Names (ARNs) of the destination elastic network interfaces
-	// (ENIs) that were created for your subnet.
+	// The Amazon Resource Names (ARNs) of the network interfaces created for your
+	// destination location. For more information, see Network interface requirements
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces).
 	DestinationNetworkInterfaceArns []string
 
 	// Errors that DataSync encountered during execution of the task. You can use this
@@ -69,29 +70,24 @@ type DescribeTaskOutput struct {
 	// You can use this information to help troubleshoot issues.
 	ErrorDetail *string
 
-	// A list of filter rules that determines which files to exclude from a task. The
-	// list should contain a single filter string that consists of the patterns to
-	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
-	// "/folder1|/folder2".
+	// A list of filter rules that exclude specific data during your transfer. For more
+	// information and examples, see Filtering data transferred by DataSync
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
 	Excludes []types.FilterRule
 
-	// A list of filter rules that determines which files to include when running a
-	// task. The pattern contains a single filter string that consists of the patterns
-	// to include. The patterns are delimited by "|" (that is, a pipe), for example,
-	// "/folder1|/folder2".
+	// A list of filter rules that include specific data during your transfer. For more
+	// information and examples, see Filtering data transferred by DataSync
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html).
 	Includes []types.FilterRule
 
 	// The name of the task that was described.
 	Name *string
 
-	// The set of configuration options that control the behavior of a single execution
-	// of the task that occurs when you call StartTaskExecution. You can configure
-	// these options to preserve metadata such as user ID (UID) and group (GID), file
-	// permissions, data integrity verification, and so on. For each individual task
-	// execution, you can override these options by specifying the overriding
-	// OverrideOptions value to StartTaskExecution
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
-	// operation.
+	// The configuration options that control the behavior of the StartTaskExecution
+	// operation. Some options include preserving file or object metadata and verifying
+	// data integrity. You can override these options for each task execution. For more
+	// information, see StartTaskExecution
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html).
 	Options *types.Options
 
 	// The schedule used to periodically transfer files from a source to a destination
@@ -101,8 +97,9 @@ type DescribeTaskOutput struct {
 	// The Amazon Resource Name (ARN) of the source file system's location.
 	SourceLocationArn *string
 
-	// The Amazon Resource Names (ARNs) of the source elastic network interfaces (ENIs)
-	// that were created for your subnet.
+	// The Amazon Resource Names (ARNs) of the network interfaces created for your
+	// source location. For more information, see Network interface requirements
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces).
 	SourceNetworkInterfaceArns []string
 
 	// The status of the task that was described. For detailed information about task

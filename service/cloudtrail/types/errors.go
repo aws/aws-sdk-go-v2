@@ -12,6 +12,8 @@ import (
 type AccountHasOngoingImportException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,7 +27,10 @@ func (e *AccountHasOngoingImportException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AccountHasOngoingImportException) ErrorCode() string {
-	return "AccountHasOngoingImportException"
+	if e.ErrorCodeOverride == nil {
+		return "AccountHasOngoingImportException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *AccountHasOngoingImportException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -33,6 +38,8 @@ func (e *AccountHasOngoingImportException) ErrorFault() smithy.ErrorFault { retu
 // part of an organization.
 type AccountNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -46,13 +53,20 @@ func (e *AccountNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccountNotFoundException) ErrorCode() string             { return "AccountNotFoundException" }
+func (e *AccountNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccountNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccountNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified account is not registered as the
 // CloudTrail delegated administrator.
 type AccountNotRegisteredException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -66,13 +80,20 @@ func (e *AccountNotRegisteredException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccountNotRegisteredException) ErrorCode() string             { return "AccountNotRegisteredException" }
+func (e *AccountNotRegisteredException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccountNotRegisteredException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccountNotRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the account is already registered as the
 // CloudTrail delegated administrator.
 type AccountRegisteredException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -86,13 +107,20 @@ func (e *AccountRegisteredException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccountRegisteredException) ErrorCode() string             { return "AccountRegisteredException" }
+func (e *AccountRegisteredException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccountRegisteredException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccountRegisteredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the management account of an organization is
 // registered as the CloudTrail delegated administrator.
 type CannotDelegateManagementAccountException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -107,7 +135,10 @@ func (e *CannotDelegateManagementAccountException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CannotDelegateManagementAccountException) ErrorCode() string {
-	return "CannotDelegateManagementAccountException"
+	if e.ErrorCodeOverride == nil {
+		return "CannotDelegateManagementAccountException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CannotDelegateManagementAccountException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -116,6 +147,8 @@ func (e *CannotDelegateManagementAccountException) ErrorFault() smithy.ErrorFaul
 // This exception is thrown when the specified value of ChannelARN is not valid.
 type ChannelARNInvalidException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -129,12 +162,19 @@ func (e *ChannelARNInvalidException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ChannelARNInvalidException) ErrorCode() string             { return "ChannelARNInvalidException" }
+func (e *ChannelARNInvalidException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ChannelARNInvalidException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ChannelARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified channel was not found.
 type ChannelNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -148,7 +188,12 @@ func (e *ChannelNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ChannelNotFoundException) ErrorCode() string             { return "ChannelNotFoundException" }
+func (e *ChannelNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ChannelNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ChannelNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when trusted access has not been enabled between
@@ -159,6 +204,8 @@ func (e *ChannelNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html).
 type CloudTrailAccessNotEnabledException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -173,7 +220,10 @@ func (e *CloudTrailAccessNotEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudTrailAccessNotEnabledException) ErrorCode() string {
-	return "CloudTrailAccessNotEnabledException"
+	if e.ErrorCodeOverride == nil {
+		return "CloudTrailAccessNotEnabledException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CloudTrailAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -184,6 +234,8 @@ func (e *CloudTrailAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 // arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 type CloudTrailARNInvalidException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -197,7 +249,12 @@ func (e *CloudTrailARNInvalidException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CloudTrailARNInvalidException) ErrorCode() string             { return "CloudTrailARNInvalidException" }
+func (e *CloudTrailARNInvalidException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "CloudTrailARNInvalidException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CloudTrailARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when a call results in the InvalidClientTokenId error
@@ -206,6 +263,8 @@ func (e *CloudTrailARNInvalidException) ErrorFault() smithy.ErrorFault { return 
 // account.
 type CloudTrailInvalidClientTokenIdException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -220,7 +279,10 @@ func (e *CloudTrailInvalidClientTokenIdException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudTrailInvalidClientTokenIdException) ErrorCode() string {
-	return "CloudTrailInvalidClientTokenIdException"
+	if e.ErrorCodeOverride == nil {
+		return "CloudTrailInvalidClientTokenIdException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CloudTrailInvalidClientTokenIdException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -229,6 +291,8 @@ func (e *CloudTrailInvalidClientTokenIdException) ErrorFault() smithy.ErrorFault
 // Cannot set a CloudWatch Logs delivery for this region.
 type CloudWatchLogsDeliveryUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -243,7 +307,10 @@ func (e *CloudWatchLogsDeliveryUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *CloudWatchLogsDeliveryUnavailableException) ErrorCode() string {
-	return "CloudWatchLogsDeliveryUnavailableException"
+	if e.ErrorCodeOverride == nil {
+		return "CloudWatchLogsDeliveryUnavailableException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *CloudWatchLogsDeliveryUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -255,6 +322,8 @@ func (e *CloudWatchLogsDeliveryUnavailableException) ErrorFault() smithy.ErrorFa
 // few minutes, and then try the operation again.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -268,13 +337,20 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the maximum number of CloudTrail delegated
 // administrators is reached.
 type DelegatedAdminAccountLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -289,7 +365,10 @@ func (e *DelegatedAdminAccountLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DelegatedAdminAccountLimitExceededException) ErrorCode() string {
-	return "DelegatedAdminAccountLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "DelegatedAdminAccountLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *DelegatedAdminAccountLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -298,6 +377,8 @@ func (e *DelegatedAdminAccountLimitExceededException) ErrorFault() smithy.ErrorF
 // An event data store with that name already exists.
 type EventDataStoreAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -312,7 +393,10 @@ func (e *EventDataStoreAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreAlreadyExistsException) ErrorCode() string {
-	return "EventDataStoreAlreadyExistsException"
+	if e.ErrorCodeOverride == nil {
+		return "EventDataStoreAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *EventDataStoreAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -322,6 +406,8 @@ func (e *EventDataStoreAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 // store in your account.
 type EventDataStoreARNInvalidException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -336,7 +422,10 @@ func (e *EventDataStoreARNInvalidException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreARNInvalidException) ErrorCode() string {
-	return "EventDataStoreARNInvalidException"
+	if e.ErrorCodeOverride == nil {
+		return "EventDataStoreARNInvalidException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *EventDataStoreARNInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -344,6 +433,8 @@ func (e *EventDataStoreARNInvalidException) ErrorFault() smithy.ErrorFault { ret
 // that currently has an import in progress.
 type EventDataStoreHasOngoingImportException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -358,7 +449,10 @@ func (e *EventDataStoreHasOngoingImportException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreHasOngoingImportException) ErrorCode() string {
-	return "EventDataStoreHasOngoingImportException"
+	if e.ErrorCodeOverride == nil {
+		return "EventDataStoreHasOngoingImportException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *EventDataStoreHasOngoingImportException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -367,6 +461,8 @@ func (e *EventDataStoreHasOngoingImportException) ErrorFault() smithy.ErrorFault
 // Your account has used the maximum number of event data stores.
 type EventDataStoreMaxLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -381,7 +477,10 @@ func (e *EventDataStoreMaxLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreMaxLimitExceededException) ErrorCode() string {
-	return "EventDataStoreMaxLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "EventDataStoreMaxLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *EventDataStoreMaxLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -390,6 +489,8 @@ func (e *EventDataStoreMaxLimitExceededException) ErrorFault() smithy.ErrorFault
 // The specified event data store was not found.
 type EventDataStoreNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -404,7 +505,10 @@ func (e *EventDataStoreNotFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreNotFoundException) ErrorCode() string {
-	return "EventDataStoreNotFoundException"
+	if e.ErrorCodeOverride == nil {
+		return "EventDataStoreNotFoundException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *EventDataStoreNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -412,6 +516,8 @@ func (e *EventDataStoreNotFoundException) ErrorFault() smithy.ErrorFault { retur
 // for it.
 type EventDataStoreTerminationProtectedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -426,7 +532,10 @@ func (e *EventDataStoreTerminationProtectedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EventDataStoreTerminationProtectedException) ErrorCode() string {
-	return "EventDataStoreTerminationProtectedException"
+	if e.ErrorCodeOverride == nil {
+		return "EventDataStoreTerminationProtectedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *EventDataStoreTerminationProtectedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -435,6 +544,8 @@ func (e *EventDataStoreTerminationProtectedException) ErrorFault() smithy.ErrorF
 // The specified import was not found.
 type ImportNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -448,12 +559,19 @@ func (e *ImportNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ImportNotFoundException) ErrorCode() string             { return "ImportNotFoundException" }
+func (e *ImportNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ImportNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ImportNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The event data store is inactive.
 type InactiveEventDataStoreException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -468,7 +586,10 @@ func (e *InactiveEventDataStoreException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InactiveEventDataStoreException) ErrorCode() string {
-	return "InactiveEventDataStoreException"
+	if e.ErrorCodeOverride == nil {
+		return "InactiveEventDataStoreException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InactiveEventDataStoreException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -476,6 +597,8 @@ func (e *InactiveEventDataStoreException) ErrorFault() smithy.ErrorFault { retur
 // TIMED_OUT, or CANCELLED state.
 type InactiveQueryException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -489,13 +612,20 @@ func (e *InactiveQueryException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InactiveQueryException) ErrorCode() string             { return "InactiveQueryException" }
+func (e *InactiveQueryException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InactiveQueryException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InactiveQueryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // If you run GetInsightSelectors on a trail that does not have Insights events
 // enabled, the operation throws the exception InsightNotEnabledException.
 type InsightNotEnabledException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -509,7 +639,12 @@ func (e *InsightNotEnabledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InsightNotEnabledException) ErrorCode() string             { return "InsightNotEnabledException" }
+func (e *InsightNotEnabledException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InsightNotEnabledException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InsightNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the IAM user or role that is used to create the
@@ -517,6 +652,8 @@ func (e *InsightNotEnabledException) ErrorFault() smithy.ErrorFault { return smi
 // organization resource in a required service.
 type InsufficientDependencyServiceAccessPermissionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -531,7 +668,10 @@ func (e *InsufficientDependencyServiceAccessPermissionException) ErrorMessage() 
 	return *e.Message
 }
 func (e *InsufficientDependencyServiceAccessPermissionException) ErrorCode() string {
-	return "InsufficientDependencyServiceAccessPermissionException"
+	if e.ErrorCodeOverride == nil {
+		return "InsufficientDependencyServiceAccessPermissionException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InsufficientDependencyServiceAccessPermissionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -541,6 +681,8 @@ func (e *InsufficientDependencyServiceAccessPermissionException) ErrorFault() sm
 // have sufficient permissions for the operation.
 type InsufficientEncryptionPolicyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -555,7 +697,10 @@ func (e *InsufficientEncryptionPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientEncryptionPolicyException) ErrorCode() string {
-	return "InsufficientEncryptionPolicyException"
+	if e.ErrorCodeOverride == nil {
+		return "InsufficientEncryptionPolicyException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InsufficientEncryptionPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -564,6 +709,8 @@ func (e *InsufficientEncryptionPolicyException) ErrorFault() smithy.ErrorFault {
 // This exception is thrown when the policy on the S3 bucket is not sufficient.
 type InsufficientS3BucketPolicyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -578,7 +725,10 @@ func (e *InsufficientS3BucketPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientS3BucketPolicyException) ErrorCode() string {
-	return "InsufficientS3BucketPolicyException"
+	if e.ErrorCodeOverride == nil {
+		return "InsufficientS3BucketPolicyException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InsufficientS3BucketPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -588,6 +738,8 @@ func (e *InsufficientS3BucketPolicyException) ErrorFault() smithy.ErrorFault {
 // sufficient.
 type InsufficientSnsTopicPolicyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -602,7 +754,10 @@ func (e *InsufficientSnsTopicPolicyException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InsufficientSnsTopicPolicyException) ErrorCode() string {
-	return "InsufficientSnsTopicPolicyException"
+	if e.ErrorCodeOverride == nil {
+		return "InsufficientSnsTopicPolicyException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InsufficientSnsTopicPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -612,6 +767,8 @@ func (e *InsufficientSnsTopicPolicyException) ErrorFault() smithy.ErrorFault {
 // valid.
 type InvalidCloudWatchLogsLogGroupArnException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -626,7 +783,10 @@ func (e *InvalidCloudWatchLogsLogGroupArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCloudWatchLogsLogGroupArnException) ErrorCode() string {
-	return "InvalidCloudWatchLogsLogGroupArnException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidCloudWatchLogsLogGroupArnException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidCloudWatchLogsLogGroupArnException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -635,6 +795,8 @@ func (e *InvalidCloudWatchLogsLogGroupArnException) ErrorFault() smithy.ErrorFau
 // This exception is thrown when the provided role is not valid.
 type InvalidCloudWatchLogsRoleArnException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -649,7 +811,10 @@ func (e *InvalidCloudWatchLogsRoleArnException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidCloudWatchLogsRoleArnException) ErrorCode() string {
-	return "InvalidCloudWatchLogsRoleArnException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidCloudWatchLogsRoleArnException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidCloudWatchLogsRoleArnException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -663,6 +828,8 @@ func (e *InvalidCloudWatchLogsRoleArnException) ErrorFault() smithy.ErrorFault {
 type InvalidDateRangeException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -675,13 +842,20 @@ func (e *InvalidDateRangeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDateRangeException) ErrorCode() string             { return "InvalidDateRangeException" }
+func (e *InvalidDateRangeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidDateRangeException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidDateRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Occurs if an event category that is not valid is specified as a value of
 // EventCategory.
 type InvalidEventCategoryException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -695,13 +869,20 @@ func (e *InvalidEventCategoryException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidEventCategoryException) ErrorCode() string             { return "InvalidEventCategoryException" }
+func (e *InvalidEventCategoryException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidEventCategoryException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidEventCategoryException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when event categories of specified event data stores
 // are not valid.
 type InvalidEventDataStoreCategoryException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -716,7 +897,10 @@ func (e *InvalidEventDataStoreCategoryException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEventDataStoreCategoryException) ErrorCode() string {
-	return "InvalidEventDataStoreCategoryException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidEventDataStoreCategoryException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidEventDataStoreCategoryException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -725,6 +909,8 @@ func (e *InvalidEventDataStoreCategoryException) ErrorFault() smithy.ErrorFault 
 // The event data store is not in a status that supports the operation.
 type InvalidEventDataStoreStatusException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -739,7 +925,10 @@ func (e *InvalidEventDataStoreStatusException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidEventDataStoreStatusException) ErrorCode() string {
-	return "InvalidEventDataStoreStatusException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidEventDataStoreStatusException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidEventDataStoreStatusException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -772,6 +961,8 @@ func (e *InvalidEventDataStoreStatusException) ErrorFault() smithy.ErrorFault {
 type InvalidEventSelectorsException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -784,13 +975,20 @@ func (e *InvalidEventSelectorsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidEventSelectorsException) ErrorCode() string             { return "InvalidEventSelectorsException" }
+func (e *InvalidEventSelectorsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidEventSelectorsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidEventSelectorsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when an operation is called on a trail from a region
 // other than the region in which the trail was created.
 type InvalidHomeRegionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -804,13 +1002,20 @@ func (e *InvalidHomeRegionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidHomeRegionException) ErrorCode() string             { return "InvalidHomeRegionException" }
+func (e *InvalidHomeRegionException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidHomeRegionException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidHomeRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the provided source S3 bucket is not valid for
 // import.
 type InvalidImportSourceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -824,7 +1029,12 @@ func (e *InvalidImportSourceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidImportSourceException) ErrorCode() string             { return "InvalidImportSourceException" }
+func (e *InvalidImportSourceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidImportSourceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidImportSourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The formatting or syntax of the InsightSelectors JSON statement in your
@@ -833,6 +1043,8 @@ func (e *InvalidImportSourceException) ErrorFault() smithy.ErrorFault { return s
 // type.
 type InvalidInsightSelectorsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -847,13 +1059,18 @@ func (e *InvalidInsightSelectorsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidInsightSelectorsException) ErrorCode() string {
-	return "InvalidInsightSelectorsException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInsightSelectorsException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidInsightSelectorsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the KMS key ARN is not valid.
 type InvalidKmsKeyIdException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -867,12 +1084,19 @@ func (e *InvalidKmsKeyIdException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidKmsKeyIdException) ErrorCode() string             { return "InvalidKmsKeyIdException" }
+func (e *InvalidKmsKeyIdException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidKmsKeyIdException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidKmsKeyIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Occurs when a lookup attribute is specified that is not valid.
 type InvalidLookupAttributesException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -887,13 +1111,18 @@ func (e *InvalidLookupAttributesException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidLookupAttributesException) ErrorCode() string {
-	return "InvalidLookupAttributesException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidLookupAttributesException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidLookupAttributesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown if the limit specified is not valid.
 type InvalidMaxResultsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -907,13 +1136,20 @@ func (e *InvalidMaxResultsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidMaxResultsException) ErrorCode() string             { return "InvalidMaxResultsException" }
+func (e *InvalidMaxResultsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidMaxResultsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A token that is not valid, or a token that was previously used in a request with
 // different parameters. This exception is thrown if the token is not valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -927,13 +1163,20 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the combination of parameters provided is not
 // valid.
 type InvalidParameterCombinationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -948,7 +1191,10 @@ func (e *InvalidParameterCombinationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidParameterCombinationException) ErrorCode() string {
-	return "InvalidParameterCombinationException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterCombinationException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -957,6 +1203,8 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 // The request includes a parameter that is not valid.
 type InvalidParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -970,7 +1218,12 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The query that was submitted has validation errors, or uses incorrect syntax or
@@ -980,6 +1233,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // in the CloudTrail User Guide.
 type InvalidQueryStatementException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -993,12 +1248,19 @@ func (e *InvalidQueryStatementException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidQueryStatementException) ErrorCode() string             { return "InvalidQueryStatementException" }
+func (e *InvalidQueryStatementException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidQueryStatementException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidQueryStatementException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The query status is not valid for the operation.
 type InvalidQueryStatusException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1012,12 +1274,19 @@ func (e *InvalidQueryStatusException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidQueryStatusException) ErrorCode() string             { return "InvalidQueryStatusException" }
+func (e *InvalidQueryStatusException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidQueryStatusException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidQueryStatusException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the provided S3 bucket name is not valid.
 type InvalidS3BucketNameException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1031,12 +1300,19 @@ func (e *InvalidS3BucketNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidS3BucketNameException) ErrorCode() string             { return "InvalidS3BucketNameException" }
+func (e *InvalidS3BucketNameException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidS3BucketNameException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidS3BucketNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the provided S3 prefix is not valid.
 type InvalidS3PrefixException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1050,12 +1326,19 @@ func (e *InvalidS3PrefixException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidS3PrefixException) ErrorCode() string             { return "InvalidS3PrefixException" }
+func (e *InvalidS3PrefixException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidS3PrefixException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidS3PrefixException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the provided SNS topic name is not valid.
 type InvalidSnsTopicNameException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1069,13 +1352,20 @@ func (e *InvalidSnsTopicNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidSnsTopicNameException) ErrorCode() string             { return "InvalidSnsTopicNameException" }
+func (e *InvalidSnsTopicNameException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidSnsTopicNameException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidSnsTopicNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified tag key or values are not valid. It
 // can also occur if there are duplicate tags or too many tags on the resource.
 type InvalidTagParameterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1089,13 +1379,20 @@ func (e *InvalidTagParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTagParameterException) ErrorCode() string             { return "InvalidTagParameterException" }
+func (e *InvalidTagParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidTagParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidTagParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Occurs if the timestamp values are not valid. Either the start time occurs after
 // the end time, or the time range is outside the range of possible values.
 type InvalidTimeRangeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1109,12 +1406,19 @@ func (e *InvalidTimeRangeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTimeRangeException) ErrorCode() string             { return "InvalidTimeRangeException" }
+func (e *InvalidTimeRangeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidTimeRangeException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidTimeRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Reserved for future use.
 type InvalidTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1128,7 +1432,12 @@ func (e *InvalidTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTokenException) ErrorCode() string             { return "InvalidTokenException" }
+func (e *InvalidTokenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidTokenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the provided trail name is not valid. Trail names
@@ -1151,6 +1460,8 @@ func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.F
 type InvalidTrailNameException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1163,13 +1474,20 @@ func (e *InvalidTrailNameException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTrailNameException) ErrorCode() string             { return "InvalidTrailNameException" }
+func (e *InvalidTrailNameException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidTrailNameException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidTrailNameException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when there is an issue with the specified KMS key and
 // the trail or event data store can't be updated.
 type KmsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1183,12 +1501,19 @@ func (e *KmsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KmsException) ErrorCode() string             { return "KmsException" }
+func (e *KmsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "KmsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *KmsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is no longer in use.
 type KmsKeyDisabledException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1202,7 +1527,12 @@ func (e *KmsKeyDisabledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KmsKeyDisabledException) ErrorCode() string             { return "KmsKeyDisabledException" }
+func (e *KmsKeyDisabledException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "KmsKeyDisabledException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *KmsKeyDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the KMS key does not exist, when the S3 bucket and
@@ -1210,6 +1540,8 @@ func (e *KmsKeyDisabledException) ErrorFault() smithy.ErrorFault { return smithy
 // Amazon SNS topic either does not exist or is not in the same region.
 type KmsKeyNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1223,13 +1555,20 @@ func (e *KmsKeyNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KmsKeyNotFoundException) ErrorCode() string             { return "KmsKeyNotFoundException" }
+func (e *KmsKeyNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "KmsKeyNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *KmsKeyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You are already running the maximum number of concurrent queries. Wait a minute
 // for some queries to finish, and then run the query again.
 type MaxConcurrentQueriesException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1243,12 +1582,19 @@ func (e *MaxConcurrentQueriesException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MaxConcurrentQueriesException) ErrorCode() string             { return "MaxConcurrentQueriesException" }
+func (e *MaxConcurrentQueriesException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MaxConcurrentQueriesException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MaxConcurrentQueriesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the maximum number of trails is reached.
 type MaximumNumberOfTrailsExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1263,7 +1609,10 @@ func (e *MaximumNumberOfTrailsExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *MaximumNumberOfTrailsExceededException) ErrorCode() string {
-	return "MaximumNumberOfTrailsExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "MaximumNumberOfTrailsExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *MaximumNumberOfTrailsExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1273,6 +1622,8 @@ func (e *MaximumNumberOfTrailsExceededException) ErrorFault() smithy.ErrorFault 
 // service-linked role.
 type NoManagementAccountSLRExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1287,7 +1638,10 @@ func (e *NoManagementAccountSLRExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoManagementAccountSLRExistsException) ErrorCode() string {
-	return "NoManagementAccountSLRExistsException"
+	if e.ErrorCodeOverride == nil {
+		return "NoManagementAccountSLRExistsException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *NoManagementAccountSLRExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1297,6 +1651,8 @@ func (e *NoManagementAccountSLRExistsException) ErrorFault() smithy.ErrorFault {
 // organization's management account.
 type NotOrganizationManagementAccountException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1311,7 +1667,10 @@ func (e *NotOrganizationManagementAccountException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotOrganizationManagementAccountException) ErrorCode() string {
-	return "NotOrganizationManagementAccountException"
+	if e.ErrorCodeOverride == nil {
+		return "NotOrganizationManagementAccountException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *NotOrganizationManagementAccountException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1327,6 +1686,8 @@ func (e *NotOrganizationManagementAccountException) ErrorFault() smithy.ErrorFau
 type NotOrganizationMasterAccountException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1340,7 +1701,10 @@ func (e *NotOrganizationMasterAccountException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NotOrganizationMasterAccountException) ErrorCode() string {
-	return "NotOrganizationMasterAccountException"
+	if e.ErrorCodeOverride == nil {
+		return "NotOrganizationMasterAccountException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *NotOrganizationMasterAccountException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1349,6 +1713,8 @@ func (e *NotOrganizationMasterAccountException) ErrorFault() smithy.ErrorFault {
 // This exception is thrown when the requested operation is not permitted.
 type OperationNotPermittedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1362,7 +1728,12 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
+func (e *OperationNotPermittedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OperationNotPermittedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when Organizations is not configured to support all
@@ -1370,6 +1741,8 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 // organization trail or event data store.
 type OrganizationNotInAllFeaturesModeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1384,7 +1757,10 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationNotInAllFeaturesModeException) ErrorCode() string {
-	return "OrganizationNotInAllFeaturesModeException"
+	if e.ErrorCodeOverride == nil {
+		return "OrganizationNotInAllFeaturesModeException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *OrganizationNotInAllFeaturesModeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -1395,6 +1771,8 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorFault() smithy.ErrorFau
 // using the credentials of an account that belongs to an organization.
 type OrganizationsNotInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1408,12 +1786,19 @@ func (e *OrganizationsNotInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OrganizationsNotInUseException) ErrorCode() string             { return "OrganizationsNotInUseException" }
+func (e *OrganizationsNotInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OrganizationsNotInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OrganizationsNotInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The query ID does not exist or does not map to a query.
 type QueryIdNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1427,12 +1812,19 @@ func (e *QueryIdNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *QueryIdNotFoundException) ErrorCode() string             { return "QueryIdNotFoundException" }
+func (e *QueryIdNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "QueryIdNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *QueryIdNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified resource is not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1446,13 +1838,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified resource type is not supported by
 // CloudTrail.
 type ResourceTypeNotSupportedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1467,13 +1866,18 @@ func (e *ResourceTypeNotSupportedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceTypeNotSupportedException) ErrorCode() string {
-	return "ResourceTypeNotSupportedException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourceTypeNotSupportedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified S3 bucket does not exist.
 type S3BucketDoesNotExistException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1487,13 +1891,20 @@ func (e *S3BucketDoesNotExistException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *S3BucketDoesNotExistException) ErrorCode() string             { return "S3BucketDoesNotExistException" }
+func (e *S3BucketDoesNotExistException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "S3BucketDoesNotExistException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *S3BucketDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of tags per trail has exceeded the permitted amount. Currently, the
 // limit is 50.
 type TagsLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1507,12 +1918,19 @@ func (e *TagsLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagsLimitExceededException) ErrorCode() string             { return "TagsLimitExceededException" }
+func (e *TagsLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TagsLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TagsLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the specified trail already exists.
 type TrailAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1526,12 +1944,19 @@ func (e *TrailAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TrailAlreadyExistsException) ErrorCode() string             { return "TrailAlreadyExistsException" }
+func (e *TrailAlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TrailAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TrailAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the trail with the given name is not found.
 type TrailNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1545,12 +1970,19 @@ func (e *TrailNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TrailNotFoundException) ErrorCode() string             { return "TrailNotFoundException" }
+func (e *TrailNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TrailNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TrailNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is no longer in use.
 type TrailNotProvidedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1564,12 +1996,19 @@ func (e *TrailNotProvidedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TrailNotProvidedException) ErrorCode() string             { return "TrailNotProvidedException" }
+func (e *TrailNotProvidedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TrailNotProvidedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TrailNotProvidedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the requested operation is not supported.
 type UnsupportedOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -1583,5 +2022,10 @@ func (e *UnsupportedOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedOperationException) ErrorCode() string             { return "UnsupportedOperationException" }
+func (e *UnsupportedOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnsupportedOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

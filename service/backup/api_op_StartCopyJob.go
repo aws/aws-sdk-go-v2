@@ -90,6 +90,10 @@ type StartCopyJobOutput struct {
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
 
+	// This is a returned boolean value indicating this is a parent (composite) copy
+	// job.
+	IsParent bool
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

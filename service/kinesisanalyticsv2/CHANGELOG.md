@@ -1,3 +1,19 @@
+# v1.16.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.15.2 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.15.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.15.0 (2022-11-22)
+
+* **Feature**: Support for Apache Flink 1.15 in Kinesis Data Analytics.
+
 # v1.14.20 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

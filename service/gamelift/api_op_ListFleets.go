@@ -37,11 +37,6 @@ import (
 // returned if there are more result pages to retrieve. Fleet resources are not
 // listed in a particular order. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions CreateFleet | UpdateFleetCapacity | PutScalingPolicy |
-// DescribeEC2InstanceLimits | DescribeFleetAttributes |
-// DescribeFleetLocationAttributes | UpdateFleetAttributes | StopFleetActions |
-// DeleteFleet | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns ...func(*Options)) (*ListFleetsOutput, error) {
 	if params == nil {
 		params = &ListFleetsInput{}
@@ -57,7 +52,6 @@ func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type ListFleetsInput struct {
 
 	// A unique identifier for the build to request fleets for. Use this parameter to
@@ -82,13 +76,9 @@ type ListFleetsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type ListFleetsOutput struct {
 
-	// A set of fleet IDs that match the list request. You can retrieve additional
-	// information about all returned fleets by passing this result set to a
-	// DescribeFleetAttributes, DescribeFleetCapacity, or DescribeFleetUtilization
-	// call.
+	// A set of fleet IDs that match the list request.
 	FleetIds []string
 
 	// A token that indicates where to resume retrieving results on the next call to

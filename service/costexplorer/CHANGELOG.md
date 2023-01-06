@@ -1,3 +1,27 @@
+# v1.25.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.24.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.24.0 (2022-12-14)
+
+* **Feature**: This release supports percentage-based thresholds on Cost Anomaly Detection alert subscriptions.
+
+# v1.23.0 (2022-12-07)
+
+* **Feature**: This release adds the LinkedAccountName field to the GetAnomalies API response under RootCause
+
+# v1.22.0 (2022-12-05)
+
+* **Feature**: This release introduces two new APIs that offer a 1-click experience to refresh Savings Plans recommendations. The two APIs are StartSavingsPlansPurchaseRecommendationGeneration and ListSavingsPlansPurchaseRecommendationGeneration.
+
+# v1.21.3 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.21.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

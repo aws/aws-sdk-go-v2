@@ -55,6 +55,10 @@ type CreateWirelessDeviceInput struct {
 	// The name of the new resource.
 	Name *string
 
+	// FPort values for the GNSS, stream, and ClockSync functions of the positioning
+	// information.
+	Positioning types.PositioningConfigStatus
+
 	// The tags to attach to the new wireless device. Tags are metadata that you can
 	// use to manage a resource.
 	Tags []types.Tag

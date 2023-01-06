@@ -39,6 +39,10 @@ type ListRulesInput struct {
 	// This member is required.
 	ResourceType types.ResourceType
 
+	// The lock state of the retention rules to list. Only retention rules with the
+	// specified lock state are returned.
+	LockState types.LockState
+
 	// The maximum number of results to return with a single call. To retrieve the
 	// remaining results, make another call with the returned NextToken value.
 	MaxResults *int32

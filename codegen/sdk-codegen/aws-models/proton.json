@@ -238,9 +238,6 @@
             "traits": {
                 "aws.api#service": {
                     "sdkId": "Proton",
-                    "arnNamespace": "awsproton20200720",
-                    "cloudFormationName": "AwsProton20200720",
-                    "cloudTrailEventSource": "awsproton20200720.amazonaws.com",
                     "endpointPrefix": "proton"
                 },
                 "aws.auth#sigv4": {
@@ -254,7 +251,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -574,9 +571,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -587,9 +584,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -600,9 +597,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -613,9 +610,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -626,9 +623,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -639,9 +636,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -652,9 +649,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -665,9 +662,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -678,9 +675,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -691,9 +688,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -704,9 +701,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -717,9 +714,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -730,9 +727,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -743,9 +740,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -756,9 +753,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -769,9 +766,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -782,9 +779,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -795,9 +792,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -808,9 +805,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -821,9 +818,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -834,9 +831,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -847,9 +844,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -860,9 +857,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -873,9 +870,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -886,9 +883,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -899,9 +896,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -912,9 +909,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -925,9 +922,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -938,9 +935,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -951,9 +948,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -964,9 +961,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -977,9 +974,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -990,9 +987,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1003,9 +1000,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1016,9 +1013,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1029,9 +1026,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1042,9 +1039,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1055,9 +1052,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1068,9 +1065,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1081,9 +1078,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1094,9 +1091,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": true,
                                 "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1107,9 +1104,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": true,
+                                "UseDualStack": false,
                                 "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1120,9 +1117,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": true,
                                 "Region": "us-east-2",
-                                "UseDualStack": true
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1133,9 +1130,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
+                                "UseDualStack": false,
                                 "Region": "us-east-2",
-                                "UseDualStack": false
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1146,9 +1143,9 @@
                                 }
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1158,9 +1155,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1170,9 +1167,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1691,10 +1688,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "component/{name}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "component/{name}"
                 },
                 "smithy.api#noReplace": {}
             }
@@ -2000,8 +1994,7 @@
                 "roleArn": {
                     "target": "com.amazonaws.proton#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that's created in the environment account. Proton uses this role to provision infrastructure\n      resources in the associated environment account.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that's created in the environment account. Proton uses this role to provision infrastructure\n      resources in the associated environment account.</p>"
                     }
                 },
                 "environmentName": {
@@ -3473,36 +3466,36 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
                     },
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     },
                     {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
                     },
                     {
-                        "value": "DELETE_IN_PROGRESS",
-                        "name": "DELETE_IN_PROGRESS"
+                        "name": "DELETE_IN_PROGRESS",
+                        "value": "DELETE_IN_PROGRESS"
                     },
                     {
-                        "value": "DELETE_FAILED",
-                        "name": "DELETE_FAILED"
+                        "name": "DELETE_FAILED",
+                        "value": "DELETE_FAILED"
                     },
                     {
-                        "value": "DELETE_COMPLETE",
-                        "name": "DELETE_COMPLETE"
+                        "name": "DELETE_COMPLETE",
+                        "value": "DELETE_COMPLETE"
                     },
                     {
-                        "value": "CANCELLING",
-                        "name": "CANCELLING"
+                        "name": "CANCELLING",
+                        "value": "CANCELLING"
                     },
                     {
-                        "value": "CANCELLED",
-                        "name": "CANCELLED"
+                        "name": "CANCELLED",
+                        "value": "CANCELLED"
                     }
                 ]
             }
@@ -3834,10 +3827,7 @@
             ],
             "traits": {
                 "aws.api#arn": {
-                    "template": "environment-account-connection/{id}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "environment-account-connection/{id}"
                 }
             }
         },
@@ -4009,10 +3999,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "environment/{name}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "environment/{name}"
                 },
                 "smithy.api#noReplace": {}
             }
@@ -4262,10 +4249,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "environment-template/{name}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "environment-template/{name}"
                 },
                 "smithy.api#noReplace": {}
             }
@@ -4455,10 +4439,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "environment-template/{templateName}:{majorVersion}.{minorVersion}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "environment-template/{templateName}:{majorVersion}.{minorVersion}"
                 }
             }
         },
@@ -4634,6 +4615,8 @@
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "ComponentDeployed": {
+                        "minDelay": 5,
+                        "maxDelay": 4999,
                         "documentation": "Wait until a Component is deployed. Use this after invoking CreateComponent or UpdateComponent",
                         "acceptors": [
                             {
@@ -4656,11 +4639,11 @@
                                     }
                                 }
                             }
-                        ],
-                        "minDelay": 5,
-                        "maxDelay": 4999
+                        ]
                     },
                     "ComponentDeleted": {
+                        "minDelay": 5,
+                        "maxDelay": 4999,
                         "documentation": "Wait until a Component is deleted. Use this after invoking DeleteComponent",
                         "acceptors": [
                             {
@@ -4679,9 +4662,7 @@
                                     }
                                 }
                             }
-                        ],
-                        "minDelay": 5,
-                        "maxDelay": 4999
+                        ]
                     }
                 }
             }
@@ -4746,6 +4727,8 @@
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "EnvironmentDeployed": {
+                        "minDelay": 5,
+                        "maxDelay": 4999,
                         "documentation": "Wait until an Environment is deployed. Use this after invoking CreateEnvironment or UpdateEnvironment",
                         "acceptors": [
                             {
@@ -4768,9 +4751,7 @@
                                     }
                                 }
                             }
-                        ],
-                        "minDelay": 5,
-                        "maxDelay": 4999
+                        ]
                     }
                 }
             }
@@ -4951,6 +4932,8 @@
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "EnvironmentTemplateVersionRegistered": {
+                        "minDelay": 2,
+                        "maxDelay": 300,
                         "documentation": "Wait until an EnvironmentTemplateVersion is registered. Use this after invoking CreateEnvironmentTemplateVersion",
                         "acceptors": [
                             {
@@ -4983,8 +4966,7 @@
                                     }
                                 }
                             }
-                        ],
-                        "maxDelay": 300
+                        ]
                     }
                 }
             }
@@ -5205,6 +5187,8 @@
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "ServiceCreated": {
+                        "minDelay": 5,
+                        "maxDelay": 4999,
                         "documentation": "Wait until an Service has deployed its instances and possibly pipeline. Use this after invoking CreateService",
                         "acceptors": [
                             {
@@ -5247,11 +5231,11 @@
                                     }
                                 }
                             }
-                        ],
-                        "minDelay": 5,
-                        "maxDelay": 4999
+                        ]
                     },
                     "ServiceUpdated": {
+                        "minDelay": 5,
+                        "maxDelay": 4999,
                         "documentation": "Wait until a Service, its instances, and possibly pipeline have been deployed after UpdateService is invoked",
                         "acceptors": [
                             {
@@ -5304,11 +5288,11 @@
                                     }
                                 }
                             }
-                        ],
-                        "minDelay": 5,
-                        "maxDelay": 4999
+                        ]
                     },
                     "ServiceDeleted": {
+                        "minDelay": 5,
+                        "maxDelay": 4999,
                         "documentation": "Wait until a Service, its instances, and possibly pipeline have been deleted after DeleteService is invoked",
                         "acceptors": [
                             {
@@ -5327,11 +5311,11 @@
                                     }
                                 }
                             }
-                        ],
-                        "minDelay": 5,
-                        "maxDelay": 4999
+                        ]
                     },
                     "ServicePipelineDeployed": {
+                        "minDelay": 10,
+                        "maxDelay": 3600,
                         "documentation": "Wait until an ServicePipeline is deployed. Use this after invoking CreateService or UpdateServicePipeline",
                         "acceptors": [
                             {
@@ -5354,9 +5338,7 @@
                                     }
                                 }
                             }
-                        ],
-                        "minDelay": 10,
-                        "maxDelay": 3600
+                        ]
                     }
                 }
             }
@@ -5410,6 +5392,8 @@
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "ServiceInstanceDeployed": {
+                        "minDelay": 5,
+                        "maxDelay": 4999,
                         "documentation": "Wait until a ServiceInstance is deployed. Use this after invoking CreateService or UpdateServiceInstance",
                         "acceptors": [
                             {
@@ -5432,9 +5416,7 @@
                                     }
                                 }
                             }
-                        ],
-                        "minDelay": 5,
-                        "maxDelay": 4999
+                        ]
                     }
                 }
             }
@@ -5579,6 +5561,8 @@
                 "smithy.api#readonly": {},
                 "smithy.waiters#waitable": {
                     "ServiceTemplateVersionRegistered": {
+                        "minDelay": 2,
+                        "maxDelay": 300,
                         "documentation": "Wait until a ServiceTemplateVersion is registered. Use this after invoking CreateServiceTemplateVersion",
                         "acceptors": [
                             {
@@ -5611,8 +5595,7 @@
                                     }
                                 }
                             }
-                        ],
-                        "maxDelay": 300
+                        ]
                     }
                 }
             }
@@ -5995,8 +5978,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "components",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "components"
                 },
                 "smithy.api#readonly": {}
             }
@@ -6081,8 +6064,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "environmentAccountConnections",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "environmentAccountConnections"
                 },
                 "smithy.api#readonly": {}
             }
@@ -6313,8 +6296,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "templateVersions",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "templateVersions"
                 },
                 "smithy.api#readonly": {}
             }
@@ -6394,8 +6377,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "templates",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "templates"
                 },
                 "smithy.api#readonly": {}
             }
@@ -6465,8 +6448,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "environments",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "environments"
                 },
                 "smithy.api#readonly": {}
             }
@@ -6542,8 +6525,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "repositories",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "repositories"
                 },
                 "smithy.api#readonly": {}
             }
@@ -6851,8 +6834,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "serviceInstances",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "serviceInstances"
                 },
                 "smithy.api#readonly": {}
             }
@@ -7199,8 +7182,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "templateVersions",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "templateVersions"
                 },
                 "smithy.api#readonly": {}
             }
@@ -7280,8 +7263,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "templates",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "templates"
                 },
                 "smithy.api#readonly": {}
             }
@@ -7348,8 +7331,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "services",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "services"
                 },
                 "smithy.api#readonly": {}
             }
@@ -7419,8 +7402,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
-                    "items": "tags",
-                    "pageSize": "maxResults"
+                    "pageSize": "maxResults",
+                    "items": "tags"
                 },
                 "smithy.api#readonly": {}
             }
@@ -7645,12 +7628,12 @@
                 "smithy.api#documentation": "List of provisioning engines",
                 "smithy.api#enum": [
                     {
-                        "value": "CLOUDFORMATION",
-                        "name": "CLOUDFORMATION"
+                        "name": "CLOUDFORMATION",
+                        "value": "CLOUDFORMATION"
                     },
                     {
-                        "value": "TERRAFORM",
-                        "name": "TERRAFORM"
+                        "name": "TERRAFORM",
+                        "value": "TERRAFORM"
                     }
                 ]
             }
@@ -7931,10 +7914,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "repository/{provider}:{name}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "repository/{provider}:{name}"
                 },
                 "smithy.api#noReplace": {}
             }
@@ -8124,16 +8104,16 @@
                 "smithy.api#documentation": "The state that a PR-based deployment can be updated to.",
                 "smithy.api#enum": [
                     {
-                        "value": "IN_PROGRESS",
-                        "name": "IN_PROGRESS"
+                        "name": "IN_PROGRESS",
+                        "value": "IN_PROGRESS"
                     },
                     {
-                        "value": "FAILED",
-                        "name": "FAILED"
+                        "name": "FAILED",
+                        "value": "FAILED"
                     },
                     {
-                        "value": "SUCCEEDED",
-                        "name": "SUCCEEDED"
+                        "name": "SUCCEEDED",
+                        "value": "SUCCEEDED"
                     }
                 ]
             }
@@ -8671,10 +8651,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "service/{serviceName}/service-instance/{name}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "service/{serviceName}/service-instance/{name}"
                 }
             }
         },
@@ -8935,10 +8912,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "service/{name}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "service/{name}"
                 },
                 "smithy.api#noReplace": {}
             }
@@ -8948,60 +8922,60 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "CREATE_IN_PROGRESS",
-                        "name": "CREATE_IN_PROGRESS"
+                        "name": "CREATE_IN_PROGRESS",
+                        "value": "CREATE_IN_PROGRESS"
                     },
                     {
-                        "value": "CREATE_FAILED_CLEANUP_IN_PROGRESS",
-                        "name": "CREATE_FAILED_CLEANUP_IN_PROGRESS"
+                        "name": "CREATE_FAILED_CLEANUP_IN_PROGRESS",
+                        "value": "CREATE_FAILED_CLEANUP_IN_PROGRESS"
                     },
                     {
-                        "value": "CREATE_FAILED_CLEANUP_COMPLETE",
-                        "name": "CREATE_FAILED_CLEANUP_COMPLETE"
+                        "name": "CREATE_FAILED_CLEANUP_COMPLETE",
+                        "value": "CREATE_FAILED_CLEANUP_COMPLETE"
                     },
                     {
-                        "value": "CREATE_FAILED_CLEANUP_FAILED",
-                        "name": "CREATE_FAILED_CLEANUP_FAILED"
+                        "name": "CREATE_FAILED_CLEANUP_FAILED",
+                        "value": "CREATE_FAILED_CLEANUP_FAILED"
                     },
                     {
-                        "value": "CREATE_FAILED",
-                        "name": "CREATE_FAILED"
+                        "name": "CREATE_FAILED",
+                        "value": "CREATE_FAILED"
                     },
                     {
-                        "value": "ACTIVE",
-                        "name": "ACTIVE"
+                        "name": "ACTIVE",
+                        "value": "ACTIVE"
                     },
                     {
-                        "value": "DELETE_IN_PROGRESS",
-                        "name": "DELETE_IN_PROGRESS"
+                        "name": "DELETE_IN_PROGRESS",
+                        "value": "DELETE_IN_PROGRESS"
                     },
                     {
-                        "value": "DELETE_FAILED",
-                        "name": "DELETE_FAILED"
+                        "name": "DELETE_FAILED",
+                        "value": "DELETE_FAILED"
                     },
                     {
-                        "value": "UPDATE_IN_PROGRESS",
-                        "name": "UPDATE_IN_PROGRESS"
+                        "name": "UPDATE_IN_PROGRESS",
+                        "value": "UPDATE_IN_PROGRESS"
                     },
                     {
-                        "value": "UPDATE_FAILED_CLEANUP_IN_PROGRESS",
-                        "name": "UPDATE_FAILED_CLEANUP_IN_PROGRESS"
+                        "name": "UPDATE_FAILED_CLEANUP_IN_PROGRESS",
+                        "value": "UPDATE_FAILED_CLEANUP_IN_PROGRESS"
                     },
                     {
-                        "value": "UPDATE_FAILED_CLEANUP_COMPLETE",
-                        "name": "UPDATE_FAILED_CLEANUP_COMPLETE"
+                        "name": "UPDATE_FAILED_CLEANUP_COMPLETE",
+                        "value": "UPDATE_FAILED_CLEANUP_COMPLETE"
                     },
                     {
-                        "value": "UPDATE_FAILED_CLEANUP_FAILED",
-                        "name": "UPDATE_FAILED_CLEANUP_FAILED"
+                        "name": "UPDATE_FAILED_CLEANUP_FAILED",
+                        "value": "UPDATE_FAILED_CLEANUP_FAILED"
                     },
                     {
-                        "value": "UPDATE_FAILED",
-                        "name": "UPDATE_FAILED"
+                        "name": "UPDATE_FAILED",
+                        "value": "UPDATE_FAILED"
                     },
                     {
-                        "value": "UPDATE_COMPLETE_CLEANUP_FAILED",
-                        "name": "UPDATE_COMPLETE_CLEANUP_FAILED"
+                        "name": "UPDATE_COMPLETE_CLEANUP_FAILED",
+                        "value": "UPDATE_COMPLETE_CLEANUP_FAILED"
                     }
                 ]
             }
@@ -9172,10 +9146,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "service-template/{name}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "service-template/{name}"
                 },
                 "smithy.api#noReplace": {}
             }
@@ -9395,10 +9366,7 @@
             },
             "traits": {
                 "aws.api#arn": {
-                    "template": "service-template/{templateName}:{majorVersion}.{minorVersion}",
-                    "absolute": false,
-                    "noAccount": false,
-                    "noRegion": false
+                    "template": "service-template/{templateName}:{majorVersion}.{minorVersion}"
                 }
             }
         },
@@ -9758,12 +9726,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "ENVIRONMENT",
-                        "name": "ENVIRONMENT"
+                        "name": "ENVIRONMENT",
+                        "value": "ENVIRONMENT"
                     },
                     {
-                        "value": "SERVICE",
-                        "name": "SERVICE"
+                        "name": "SERVICE",
+                        "value": "SERVICE"
                     }
                 ]
             }
@@ -9797,20 +9765,20 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "REGISTRATION_IN_PROGRESS",
-                        "name": "REGISTRATION_IN_PROGRESS"
+                        "name": "REGISTRATION_IN_PROGRESS",
+                        "value": "REGISTRATION_IN_PROGRESS"
                     },
                     {
-                        "value": "REGISTRATION_FAILED",
-                        "name": "REGISTRATION_FAILED"
+                        "name": "REGISTRATION_FAILED",
+                        "value": "REGISTRATION_FAILED"
                     },
                     {
-                        "value": "DRAFT",
-                        "name": "DRAFT"
+                        "name": "DRAFT",
+                        "value": "DRAFT"
                     },
                     {
-                        "value": "PUBLISHED",
-                        "name": "PUBLISHED"
+                        "name": "PUBLISHED",
+                        "value": "PUBLISHED"
                     }
                 ]
             }

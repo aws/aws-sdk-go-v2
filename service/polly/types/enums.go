@@ -77,6 +77,7 @@ const (
 	LanguageCodeDeAt    LanguageCode = "de-AT"
 	LanguageCodeYueCn   LanguageCode = "yue-CN"
 	LanguageCodeArAe    LanguageCode = "ar-AE"
+	LanguageCodeFiFi    LanguageCode = "fi-FI"
 )
 
 // Values returns all known values for LanguageCode. Note that this can be expanded
@@ -119,6 +120,7 @@ func (LanguageCode) Values() []LanguageCode {
 		"de-AT",
 		"yue-CN",
 		"ar-AE",
+		"fi-FI",
 	}
 }
 

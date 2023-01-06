@@ -13,7 +13,7 @@ import (
 // Deletes a key group. You cannot delete a key group that is referenced in a cache
 // behavior. First update your distributions to remove the key group from all cache
 // behaviors, then delete the key group. To delete a key group, you must provide
-// the key group’s identifier and version. To get these values, use ListKeyGroups
+// the key group's identifier and version. To get these values, use ListKeyGroups
 // followed by GetKeyGroup or GetKeyGroupConfig.
 func (c *Client) DeleteKeyGroup(ctx context.Context, params *DeleteKeyGroupInput, optFns ...func(*Options)) (*DeleteKeyGroupOutput, error) {
 	if params == nil {
@@ -39,7 +39,7 @@ type DeleteKeyGroupInput struct {
 	Id *string
 
 	// The version of the key group that you are deleting. The version is the key
-	// group’s ETag value. To get the ETag, use GetKeyGroup or GetKeyGroupConfig.
+	// group's ETag value. To get the ETag, use GetKeyGroup or GetKeyGroupConfig.
 	IfMatch *string
 
 	noSmithyDocumentSerde

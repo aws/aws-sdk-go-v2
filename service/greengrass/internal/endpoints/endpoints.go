@@ -154,22 +154,6 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
-				Region: "dataplane-ap-south-1",
-			}: endpoints.Endpoint{
-				Hostname: "greengrass-ats.iot.ap-south-1.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "ap-south-1",
-				},
-			},
-			endpoints.EndpointKey{
-				Region: "dataplane-us-east-2",
-			}: endpoints.Endpoint{
-				Hostname: "greengrass-ats.iot.us-east-2.amazonaws.com",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-east-2",
-				},
-			},
-			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -227,14 +211,6 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "cn-north-1",
 			}: endpoints.Endpoint{},
-			endpoints.EndpointKey{
-				Region: "dataplane-cn-north-1",
-			}: endpoints.Endpoint{
-				Hostname: "greengrass.ats.iot.cn-north-1.amazonaws.com.cn",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "cn-north-1",
-				},
-			},
 		},
 	},
 	{

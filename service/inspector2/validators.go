@@ -540,6 +540,16 @@ func validateAggregationRequest(v types.AggregationRequest) error {
 			invalidParams.AddNested("[imageLayerAggregation]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.AggregationRequestMemberLambdaFunctionAggregation:
+		if err := validateLambdaFunctionAggregation(&uv.Value); err != nil {
+			invalidParams.AddNested("[lambdaFunctionAggregation]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AggregationRequestMemberLambdaLayerAggregation:
+		if err := validateLambdaLayerAggregation(&uv.Value); err != nil {
+			invalidParams.AddNested("[lambdaLayerAggregation]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.AggregationRequestMemberPackageAggregation:
 		if err := validatePackageAggregation(&uv.Value); err != nil {
 			invalidParams.AddNested("[packageAggregation]", err.(smithy.InvalidParamsError))
@@ -683,6 +693,21 @@ func validateCoverageFilterCriteria(v *types.CoverageFilterCriteria) error {
 	if v.Ec2InstanceTags != nil {
 		if err := validateCoverageMapFilterList(v.Ec2InstanceTags); err != nil {
 			invalidParams.AddNested("Ec2InstanceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaFunctionName != nil {
+		if err := validateCoverageStringFilterList(v.LambdaFunctionName); err != nil {
+			invalidParams.AddNested("LambdaFunctionName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaFunctionTags != nil {
+		if err := validateCoverageMapFilterList(v.LambdaFunctionTags); err != nil {
+			invalidParams.AddNested("LambdaFunctionTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaFunctionRuntime != nil {
+		if err := validateCoverageStringFilterList(v.LambdaFunctionRuntime); err != nil {
+			invalidParams.AddNested("LambdaFunctionRuntime", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -962,6 +987,31 @@ func validateFilterCriteria(v *types.FilterCriteria) error {
 			invalidParams.AddNested("FixAvailable", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.LambdaFunctionName != nil {
+		if err := validateStringFilterList(v.LambdaFunctionName); err != nil {
+			invalidParams.AddNested("LambdaFunctionName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaFunctionLayers != nil {
+		if err := validateStringFilterList(v.LambdaFunctionLayers); err != nil {
+			invalidParams.AddNested("LambdaFunctionLayers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaFunctionRuntime != nil {
+		if err := validateStringFilterList(v.LambdaFunctionRuntime); err != nil {
+			invalidParams.AddNested("LambdaFunctionRuntime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaFunctionExecutionRoleArn != nil {
+		if err := validateStringFilterList(v.LambdaFunctionExecutionRoleArn); err != nil {
+			invalidParams.AddNested("LambdaFunctionExecutionRoleArn", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExploitAvailable != nil {
+		if err := validateStringFilterList(v.ExploitAvailable); err != nil {
+			invalidParams.AddNested("ExploitAvailable", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -987,6 +1037,65 @@ func validateImageLayerAggregation(v *types.ImageLayerAggregation) error {
 	if v.LayerHashes != nil {
 		if err := validateStringFilterList(v.LayerHashes); err != nil {
 			invalidParams.AddNested("LayerHashes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaFunctionAggregation(v *types.LambdaFunctionAggregation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaFunctionAggregation"}
+	if v.ResourceIds != nil {
+		if err := validateStringFilterList(v.ResourceIds); err != nil {
+			invalidParams.AddNested("ResourceIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FunctionNames != nil {
+		if err := validateStringFilterList(v.FunctionNames); err != nil {
+			invalidParams.AddNested("FunctionNames", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Runtimes != nil {
+		if err := validateStringFilterList(v.Runtimes); err != nil {
+			invalidParams.AddNested("Runtimes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FunctionTags != nil {
+		if err := validateMapFilterList(v.FunctionTags); err != nil {
+			invalidParams.AddNested("FunctionTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaLayerAggregation(v *types.LambdaLayerAggregation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaLayerAggregation"}
+	if v.FunctionNames != nil {
+		if err := validateStringFilterList(v.FunctionNames); err != nil {
+			invalidParams.AddNested("FunctionNames", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceIds != nil {
+		if err := validateStringFilterList(v.ResourceIds); err != nil {
+			invalidParams.AddNested("ResourceIds", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LayerArns != nil {
+		if err := validateStringFilterList(v.LayerArns); err != nil {
+			invalidParams.AddNested("LayerArns", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1076,6 +1185,11 @@ func validatePackageFilter(v *types.PackageFilter) error {
 	if v.SourceLayerHash != nil {
 		if err := validateStringFilter(v.SourceLayerHash); err != nil {
 			invalidParams.AddNested("SourceLayerHash", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SourceLambdaLayerArn != nil {
+		if err := validateStringFilter(v.SourceLambdaLayerArn); err != nil {
+			invalidParams.AddNested("SourceLambdaLayerArn", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

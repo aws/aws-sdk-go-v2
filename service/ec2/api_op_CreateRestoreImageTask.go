@@ -17,10 +17,10 @@ import (
 // To use this API, you must have the required permissions. For more information,
 // see Permissions for storing and restoring AMIs using Amazon S3
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions)
-// in the Amazon Elastic Compute Cloud User Guide. For more information, see Store
-// and restore an AMI using Amazon S3
+// in the Amazon EC2 User Guide. For more information, see Store and restore an AMI
+// using Amazon S3
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html) in
-// the Amazon Elastic Compute Cloud User Guide.
+// the Amazon EC2 User Guide.
 func (c *Client) CreateRestoreImageTask(ctx context.Context, params *CreateRestoreImageTaskInput, optFns ...func(*Options)) (*CreateRestoreImageTaskOutput, error) {
 	if params == nil {
 		params = &CreateRestoreImageTaskInput{}

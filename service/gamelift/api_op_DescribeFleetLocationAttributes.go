@@ -31,11 +31,6 @@ import (
 // information on a fleet's home Region, call DescribeFleetAttributes. Learn more
 // Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions CreateFleetLocations | DescribeFleetLocationAttributes |
-// DescribeFleetLocationCapacity | DescribeFleetLocationUtilization |
-// DescribeFleetAttributes | DescribeFleetCapacity | DescribeFleetUtilization |
-// UpdateFleetCapacity | StopFleetActions | DeleteFleetLocations | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetLocationAttributes(ctx context.Context, params *DescribeFleetLocationAttributesInput, optFns ...func(*Options)) (*DescribeFleetLocationAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeFleetLocationAttributesInput{}
@@ -51,7 +46,6 @@ func (c *Client) DescribeFleetLocationAttributes(ctx context.Context, params *De
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeFleetLocationAttributesInput struct {
 
 	// A unique identifier for the fleet to retrieve remote locations for. You can use
@@ -76,7 +70,6 @@ type DescribeFleetLocationAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeFleetLocationAttributesOutput struct {
 
 	// The Amazon Resource Name (ARN

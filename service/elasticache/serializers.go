@@ -5528,6 +5528,11 @@ func awsAwsquery_serializeOpDocumentCreateReplicationGroupInput(v *CreateReplica
 		objectKey.Boolean(*v.TransitEncryptionEnabled)
 	}
 
+	if len(v.TransitEncryptionMode) > 0 {
+		objectKey := object.Key("TransitEncryptionMode")
+		objectKey.String(string(v.TransitEncryptionMode))
+	}
+
 	if v.UserGroupIds != nil {
 		objectKey := object.Key("UserGroupIds")
 		if err := awsAwsquery_serializeDocumentUserGroupIdListInput(v.UserGroupIds, objectKey); err != nil {
@@ -6880,6 +6885,16 @@ func awsAwsquery_serializeOpDocumentModifyReplicationGroupInput(v *ModifyReplica
 	if v.SnapshotWindow != nil {
 		objectKey := object.Key("SnapshotWindow")
 		objectKey.String(*v.SnapshotWindow)
+	}
+
+	if v.TransitEncryptionEnabled != nil {
+		objectKey := object.Key("TransitEncryptionEnabled")
+		objectKey.Boolean(*v.TransitEncryptionEnabled)
+	}
+
+	if len(v.TransitEncryptionMode) > 0 {
+		objectKey := object.Key("TransitEncryptionMode")
+		objectKey.String(string(v.TransitEncryptionMode))
 	}
 
 	if v.UserGroupIdsToAdd != nil {

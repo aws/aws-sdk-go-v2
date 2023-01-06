@@ -31,7 +31,7 @@ func (c *Client) GetRecord(ctx context.Context, params *GetRecordInput, optFns .
 
 type GetRecordInput struct {
 
-	// The name of the feature group in which you want to put the records.
+	// The name of the feature group from which you want to retrieve a record.
 	//
 	// This member is required.
 	FeatureGroupName *string

@@ -1,3 +1,23 @@
+# v1.16.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.15.2 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.15.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.15.0 (2022-11-29.2)
+
+* **Feature**: Allow support for the Serverless offering for Amazon OpenSearch Service as a Kinesis Data Firehose delivery destination.
+
+# v1.14.23 (2022-11-28)
+
+* No change notes available for this release.
+
 # v1.14.22 (2022-11-07)
 
 * No change notes available for this release.

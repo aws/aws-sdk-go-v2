@@ -88,7 +88,7 @@ type ListResourceTagsOutput struct {
 
 	// A list of tags. Each tag consists of a tag key and a tag value. Tagging or
 	// untagging a KMS key can allow or deny permission to the KMS key. For details,
-	// see ABAC in KMS
+	// see ABAC for KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 	// Management Service Developer Guide.
 	Tags []types.Tag

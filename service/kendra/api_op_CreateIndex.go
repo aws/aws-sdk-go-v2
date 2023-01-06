@@ -100,8 +100,8 @@ type CreateIndexInput struct {
 
 type CreateIndexOutput struct {
 
-	// The unique identifier of the index. Use this identifier when you query an index,
-	// set up a data source, or index a document.
+	// The identifier of the index. Use this identifier when you query an index, set up
+	// a data source, or index a document.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

@@ -61,8 +61,8 @@ func TestProvider(t *testing.T) {
 		osUserHomeDur = origHomeDir
 	}()
 
-	osUserHomeDur = func() (string, error) {
-		return "testdata", nil
+	osUserHomeDur = func() string {
+		return "testdata"
 	}
 
 	restoreTime := sdk.TestingUseReferenceTime(time.Date(2021, 01, 19, 19, 50, 0, 0, time.UTC))

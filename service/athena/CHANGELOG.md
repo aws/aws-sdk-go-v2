@@ -1,3 +1,27 @@
+# v1.22.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.21.0 (2022-12-19)
+
+* **Feature**: Add missed InvalidRequestException in GetCalculationExecutionCode,StopCalculationExecution APIs. Correct required parameters (Payload and Type) in UpdateNotebook API. Change Notebook size from 15 Mb to 10 Mb.
+
+# v1.20.3 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.2 (2022-12-08)
+
+* No change notes available for this release.
+
+# v1.20.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.0 (2022-11-30)
+
+* **Feature**: This release includes support for using Apache Spark in Amazon Athena.
+
 # v1.19.1 (2022-11-08)
 
 * No change notes available for this release.

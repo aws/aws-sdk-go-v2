@@ -34,6 +34,10 @@ type DescribeConfigRulesInput struct {
 	// any names, Config returns details for all your rules.
 	ConfigRuleNames []string
 
+	// Returns a list of Detecive or Proactive Config rules. By default, this API
+	// returns an unfiltered list.
+	Filters *types.DescribeConfigRulesFilters
+
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string

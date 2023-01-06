@@ -22,11 +22,6 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)GameLift
 // metrics for fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
-// Related actions CreateFleetLocations | DescribeFleetLocationAttributes |
-// DescribeFleetLocationCapacity | DescribeFleetLocationUtilization |
-// DescribeFleetAttributes | DescribeFleetCapacity | DescribeFleetUtilization |
-// UpdateFleetCapacity | StopFleetActions | DeleteFleetLocations | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetLocationCapacity(ctx context.Context, params *DescribeFleetLocationCapacityInput, optFns ...func(*Options)) (*DescribeFleetLocationCapacityOutput, error) {
 	if params == nil {
 		params = &DescribeFleetLocationCapacityInput{}
@@ -42,7 +37,6 @@ func (c *Client) DescribeFleetLocationCapacity(ctx context.Context, params *Desc
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeFleetLocationCapacityInput struct {
 
 	// A unique identifier for the fleet to request location capacity for. You can use
@@ -60,7 +54,6 @@ type DescribeFleetLocationCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeFleetLocationCapacityOutput struct {
 
 	// Resource capacity information for the requested fleet location. Capacity objects

@@ -49,7 +49,7 @@ type ListFindingsInput struct {
 type ListFindingsOutput struct {
 
 	// An array of strings, where each string is the unique identifier for a finding
-	// that meets the filter criteria specified in the request.
+	// that matches the filter criteria specified in the request.
 	FindingIds []string
 
 	// The string to use in a subsequent request to get the next page of results in a

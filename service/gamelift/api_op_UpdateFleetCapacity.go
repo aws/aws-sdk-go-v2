@@ -23,35 +23,34 @@ import (
 // *
 // Desired capacity: Manually set the number of Amazon EC2 instances to be
 // maintained in a fleet location. Before changing a fleet's desired capacity, you
-// may want to call DescribeEC2InstanceLimits to get the maximum capacity of the
-// fleet's Amazon EC2 instance type. Alternatively, consider using automatic
-// scaling to adjust capacity based on player demand.
+// may want to call DescribeEC2InstanceLimits
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeEC2InstanceLimits.html)
+// to get the maximum capacity of the fleet's Amazon EC2 instance type.
+// Alternatively, consider using automatic scaling to adjust capacity based on
+// player demand.
 //
-// This operation can be used
-// in the following ways:
+// This operation can be used in the following ways:
 //
-// * To update capacity for a fleet's home Region, or if
-// the fleet has no remote locations, omit the Location parameter. The fleet must
-// be in ACTIVE status.
+// * To update
+// capacity for a fleet's home Region, or if the fleet has no remote locations,
+// omit the Location parameter. The fleet must be in ACTIVE status.
 //
-// * To update capacity for a fleet's remote location,
-// include the Location parameter set to the location to be updated. The location
-// must be in ACTIVE status.
+// * To update
+// capacity for a fleet's remote location, include the Location parameter set to
+// the location to be updated. The location must be in ACTIVE status.
 //
-// If successful, capacity settings are updated
-// immediately. In response a change in desired capacity, GameLift initiates steps
-// to start new instances or terminate existing instances in the requested fleet
-// location. This continues until the location's active instance count matches the
-// new desired instance count. You can track a fleet's current capacity by calling
-// DescribeFleetCapacity or DescribeFleetLocationCapacity. If the requested desired
-// instance count is higher than the instance type's limit, the LimitExceeded
-// exception occurs. Learn more Scaling fleet capacity
+// If
+// successful, capacity settings are updated immediately. In response a change in
+// desired capacity, GameLift initiates steps to start new instances or terminate
+// existing instances in the requested fleet location. This continues until the
+// location's active instance count matches the new desired instance count. You can
+// track a fleet's current capacity by calling DescribeFleetCapacity
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html)
+// or DescribeFleetLocationCapacity
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html).
+// If the requested desired instance count is higher than the instance type's
+// limit, the LimitExceeded exception occurs. Learn more Scaling fleet capacity
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-manage-capacity.html)
-// Related actions CreateFleetLocations | UpdateFleetAttributes |
-// UpdateFleetCapacity | UpdateFleetPortSettings | UpdateRuntimeConfiguration |
-// StopFleetActions | StartFleetActions | PutScalingPolicy | DeleteFleet |
-// DeleteFleetLocations | DeleteScalingPolicy | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateFleetCapacity(ctx context.Context, params *UpdateFleetCapacityInput, optFns ...func(*Options)) (*UpdateFleetCapacityOutput, error) {
 	if params == nil {
 		params = &UpdateFleetCapacityInput{}
@@ -67,7 +66,6 @@ func (c *Client) UpdateFleetCapacity(ctx context.Context, params *UpdateFleetCap
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type UpdateFleetCapacityInput struct {
 
 	// A unique identifier for the fleet to update capacity settings for. You can use
@@ -95,7 +93,6 @@ type UpdateFleetCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type UpdateFleetCapacityOutput struct {
 
 	// The Amazon Resource Name (ARN

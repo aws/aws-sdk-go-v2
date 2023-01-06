@@ -14,29 +14,36 @@ import (
 
 // Gets information about custom key stores
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
-// in the account and Region. This operation is part of the custom key store
-// feature
+// in the account and Region. This operation is part of the custom key stores
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
 // feature in KMS, which combines the convenience and extensive integration of KMS
-// with the isolation and control of a single-tenant key store. By default, this
-// operation returns information about all custom key stores in the account and
-// Region. To get only information about a particular custom key store, use either
-// the CustomKeyStoreName or CustomKeyStoreId parameter (but not both). To
-// determine whether the custom key store is connected to its CloudHSM cluster, use
-// the ConnectionState element in the response. If an attempt to connect the custom
-// key store failed, the ConnectionState value is FAILED and the
-// ConnectionErrorCode element in the response indicates the cause of the failure.
-// For help interpreting the ConnectionErrorCode, see CustomKeyStoresListEntry.
-// Custom key stores have a DISCONNECTED connection state if the key store has
-// never been connected or you use the DisconnectCustomKeyStore operation to
-// disconnect it. If your custom key store state is CONNECTED but you are having
-// trouble using it, make sure that its associated CloudHSM cluster is active and
-// contains the minimum number of HSMs required for the operation, if any. For help
-// repairing your custom key store, see the Troubleshooting Custom Key Stores
-// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) topic
-// in the Key Management Service Developer Guide. Cross-account use: No. You cannot
-// perform this operation on a custom key store in a different Amazon Web Services
-// account. Required permissions: kms:DescribeCustomKeyStores
+// with the isolation and control of a key store that you own and manage. By
+// default, this operation returns information about all custom key stores in the
+// account and Region. To get only information about a particular custom key store,
+// use either the CustomKeyStoreName or CustomKeyStoreId parameter (but not both).
+// To determine whether the custom key store is connected to its CloudHSM cluster
+// or external key store proxy, use the ConnectionState element in the response. If
+// an attempt to connect the custom key store failed, the ConnectionState value is
+// FAILED and the ConnectionErrorCode element in the response indicates the cause
+// of the failure. For help interpreting the ConnectionErrorCode, see
+// CustomKeyStoresListEntry. Custom key stores have a DISCONNECTED connection state
+// if the key store has never been connected or you used the
+// DisconnectCustomKeyStore operation to disconnect it. Otherwise, the connection
+// state is CONNECTED. If your custom key store connection state is CONNECTED but
+// you are having trouble using it, verify that the backing store is active and
+// available. For an CloudHSM key store, verify that the associated CloudHSM
+// cluster is active and contains the minimum number of HSMs required for the
+// operation, if any. For an external key store, verify that the external key store
+// proxy and its associated external key manager are reachable and enabled. For
+// help repairing your CloudHSM key store, see the Troubleshooting CloudHSM key
+// stores
+// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html). For
+// help repairing your external key store, see the Troubleshooting external key
+// stores
+// (https://docs.aws.amazon.com/kms/latest/developerguide/xks-troubleshooting.html).
+// Both topics are in the Key Management Service Developer Guide. Cross-account
+// use: No. You cannot perform this operation on a custom key store in a different
+// Amazon Web Services account. Required permissions: kms:DescribeCustomKeyStores
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) Related operations:
 //
@@ -71,14 +78,14 @@ type DescribeCustomKeyStoresInput struct {
 	// Gets only information about the specified custom key store. Enter the key store
 	// ID. By default, this operation gets information about all custom key stores in
 	// the account and Region. To limit the output to a particular custom key store,
-	// you can use either the CustomKeyStoreId or CustomKeyStoreName parameter, but not
+	// provide either the CustomKeyStoreId or CustomKeyStoreName parameter, but not
 	// both.
 	CustomKeyStoreId *string
 
 	// Gets only information about the specified custom key store. Enter the friendly
 	// name of the custom key store. By default, this operation gets information about
 	// all custom key stores in the account and Region. To limit the output to a
-	// particular custom key store, you can use either the CustomKeyStoreId or
+	// particular custom key store, provide either the CustomKeyStoreId or
 	// CustomKeyStoreName parameter, but not both.
 	CustomKeyStoreName *string
 

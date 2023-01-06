@@ -13,9 +13,7 @@ import (
 )
 
 // Gets statistics for the specified metric. The maximum number of data points
-// returned from a single call is 1,440. If
-//
-// you request more than 1,440 data
+// returned from a single call is 1,440. If you request more than 1,440 data
 // points, CloudWatch returns an error. To reduce the number of data points, you
 // can narrow the specified time range and make multiple requests across adjacent
 // time ranges, or you can increase the specified period. Data points are not

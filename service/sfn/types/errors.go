@@ -11,6 +11,8 @@ import (
 type ActivityDoesNotExist struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *ActivityDoesNotExist) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ActivityDoesNotExist) ErrorCode() string             { return "ActivityDoesNotExist" }
+func (e *ActivityDoesNotExist) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ActivityDoesNotExist"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ActivityDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum number of activities has been reached. Existing activities must be
 // deleted before a new activity can be created.
 type ActivityLimitExceeded struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -43,13 +52,20 @@ func (e *ActivityLimitExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ActivityLimitExceeded) ErrorCode() string             { return "ActivityLimitExceeded" }
+func (e *ActivityLimitExceeded) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ActivityLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ActivityLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum number of workers concurrently polling for activity tasks has been
 // reached.
 type ActivityWorkerLimitExceeded struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -63,13 +79,20 @@ func (e *ActivityWorkerLimitExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ActivityWorkerLimitExceeded) ErrorCode() string             { return "ActivityWorkerLimitExceeded" }
+func (e *ActivityWorkerLimitExceeded) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ActivityWorkerLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ActivityWorkerLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The execution has the same name as another execution (but a different input).
 // Executions with the same name and input are considered idempotent.
 type ExecutionAlreadyExists struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -83,12 +106,19 @@ func (e *ExecutionAlreadyExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExecutionAlreadyExists) ErrorCode() string             { return "ExecutionAlreadyExists" }
+func (e *ExecutionAlreadyExists) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ExecutionAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ExecutionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified execution does not exist.
 type ExecutionDoesNotExist struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -102,13 +132,20 @@ func (e *ExecutionDoesNotExist) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExecutionDoesNotExist) ErrorCode() string             { return "ExecutionDoesNotExist" }
+func (e *ExecutionDoesNotExist) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ExecutionDoesNotExist"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ExecutionDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum number of running executions has been reached. Running executions
 // must end or be stopped before a new execution can be started.
 type ExecutionLimitExceeded struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -122,12 +159,19 @@ func (e *ExecutionLimitExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExecutionLimitExceeded) ErrorCode() string             { return "ExecutionLimitExceeded" }
+func (e *ExecutionLimitExceeded) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ExecutionLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ExecutionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided Amazon Resource Name (ARN) is invalid.
+// The provided Amazon Resource Name (ARN) is not valid.
 type InvalidArn struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -141,12 +185,19 @@ func (e *InvalidArn) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArn) ErrorCode() string             { return "InvalidArn" }
+func (e *InvalidArn) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidArn"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidArn) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided Amazon States Language definition is invalid.
+// The provided Amazon States Language definition is not valid.
 type InvalidDefinition struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -160,12 +211,19 @@ func (e *InvalidDefinition) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidDefinition) ErrorCode() string             { return "InvalidDefinition" }
+func (e *InvalidDefinition) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidDefinition"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidDefinition) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided JSON input data is invalid.
+// The provided JSON input data is not valid.
 type InvalidExecutionInput struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -179,11 +237,18 @@ func (e *InvalidExecutionInput) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidExecutionInput) ErrorCode() string             { return "InvalidExecutionInput" }
+func (e *InvalidExecutionInput) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidExecutionInput"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidExecutionInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type InvalidLoggingConfiguration struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -197,12 +262,19 @@ func (e *InvalidLoggingConfiguration) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidLoggingConfiguration) ErrorCode() string             { return "InvalidLoggingConfiguration" }
+func (e *InvalidLoggingConfiguration) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidLoggingConfiguration"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidLoggingConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided name is invalid.
+// The provided name is not valid.
 type InvalidName struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -216,12 +288,19 @@ func (e *InvalidName) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidName) ErrorCode() string             { return "InvalidName" }
+func (e *InvalidName) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidName"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided JSON output data is invalid.
+// The provided JSON output data is not valid.
 type InvalidOutput struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -235,12 +314,19 @@ func (e *InvalidOutput) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidOutput) ErrorCode() string             { return "InvalidOutput" }
+func (e *InvalidOutput) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidOutput"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidOutput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The provided token is invalid.
+// The provided token is not valid.
 type InvalidToken struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -254,13 +340,20 @@ func (e *InvalidToken) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidToken) ErrorCode() string             { return "InvalidToken" }
+func (e *InvalidToken) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidToken"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your tracingConfiguration key does not match, or enabled has not been set to
 // true or false.
 type InvalidTracingConfiguration struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -274,13 +367,20 @@ func (e *InvalidTracingConfiguration) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTracingConfiguration) ErrorCode() string             { return "InvalidTracingConfiguration" }
+func (e *InvalidTracingConfiguration) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidTracingConfiguration"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidTracingConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Request is missing a required parameter. This error occurs if both definition
 // and roleArn are not specified.
 type MissingRequiredParameter struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -294,13 +394,20 @@ func (e *MissingRequiredParameter) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MissingRequiredParameter) ErrorCode() string             { return "MissingRequiredParameter" }
+func (e *MissingRequiredParameter) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MissingRequiredParameter"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MissingRequiredParameter) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Could not find the referenced resource. Only state machine and activity ARNs are
 // supported.
 type ResourceNotFound struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceName *string
 
@@ -316,13 +423,20 @@ func (e *ResourceNotFound) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFound) ErrorCode() string             { return "ResourceNotFound" }
+func (e *ResourceNotFound) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFound"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A state machine with the same name but a different definition or role ARN
 // already exists.
 type StateMachineAlreadyExists struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -336,12 +450,19 @@ func (e *StateMachineAlreadyExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StateMachineAlreadyExists) ErrorCode() string             { return "StateMachineAlreadyExists" }
+func (e *StateMachineAlreadyExists) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "StateMachineAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *StateMachineAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified state machine is being deleted.
 type StateMachineDeleting struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -355,12 +476,19 @@ func (e *StateMachineDeleting) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StateMachineDeleting) ErrorCode() string             { return "StateMachineDeleting" }
+func (e *StateMachineDeleting) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "StateMachineDeleting"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *StateMachineDeleting) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified state machine does not exist.
 type StateMachineDoesNotExist struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -374,13 +502,20 @@ func (e *StateMachineDoesNotExist) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StateMachineDoesNotExist) ErrorCode() string             { return "StateMachineDoesNotExist" }
+func (e *StateMachineDoesNotExist) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "StateMachineDoesNotExist"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *StateMachineDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum number of state machines has been reached. Existing state machines
 // must be deleted before a new state machine can be created.
 type StateMachineLimitExceeded struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -394,11 +529,18 @@ func (e *StateMachineLimitExceeded) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StateMachineLimitExceeded) ErrorCode() string             { return "StateMachineLimitExceeded" }
+func (e *StateMachineLimitExceeded) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "StateMachineLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *StateMachineLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type StateMachineTypeNotSupported struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -412,11 +554,18 @@ func (e *StateMachineTypeNotSupported) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StateMachineTypeNotSupported) ErrorCode() string             { return "StateMachineTypeNotSupported" }
+func (e *StateMachineTypeNotSupported) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "StateMachineTypeNotSupported"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *StateMachineTypeNotSupported) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type TaskDoesNotExist struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -430,11 +579,18 @@ func (e *TaskDoesNotExist) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TaskDoesNotExist) ErrorCode() string             { return "TaskDoesNotExist" }
+func (e *TaskDoesNotExist) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TaskDoesNotExist"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TaskDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 type TaskTimedOut struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -448,7 +604,12 @@ func (e *TaskTimedOut) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TaskTimedOut) ErrorCode() string             { return "TaskTimedOut" }
+func (e *TaskTimedOut) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TaskTimedOut"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TaskTimedOut) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've exceeded the number of tags allowed for a resource. See the  Limits Topic
@@ -456,6 +617,8 @@ func (e *TaskTimedOut) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // Functions Developer Guide.
 type TooManyTags struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceName *string
 
@@ -471,5 +634,39 @@ func (e *TooManyTags) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTags) ErrorCode() string             { return "TooManyTags" }
+func (e *TooManyTags) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTags"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTags) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The input does not satisfy the constraints specified by an Amazon Web Services
+// service.
+type ValidationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Reason ValidationExceptionReason
+
+	noSmithyDocumentSerde
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

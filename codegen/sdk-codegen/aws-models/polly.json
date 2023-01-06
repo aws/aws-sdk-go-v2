@@ -647,6 +647,12 @@
                     "traits": {
                         "smithy.api#enumValue": "ar-AE"
                     }
+                },
+                "fi_FI": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fi-FI"
+                    }
                 }
             }
         },
@@ -1108,7 +1114,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },

@@ -1,3 +1,52 @@
+# v1.39.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* **Feature**: This release adds support for specifying which certificate authority (CA) to use for a DB instance's server certificate during DB instance creation, as well as other CA enhancements.
+
+# v1.38.0 (2022-12-28)
+
+* **Feature**: This release adds support for Custom Engine Version (CEV) on RDS Custom SQL Server.
+
+# v1.37.0 (2022-12-22)
+
+* **Feature**: Add support for managing master user password in AWS Secrets Manager for the DBInstance and DBCluster.
+
+# v1.36.0 (2022-12-19)
+
+* **Feature**: Add support for --enable-customer-owned-ip to RDS create-db-instance-read-replica API for RDS on Outposts.
+
+# v1.35.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.35.0 (2022-12-13)
+
+* **Feature**: This deployment adds ClientPasswordAuthType field to the Auth structure of the DBProxy.
+
+# v1.34.0 (2022-12-12)
+
+* **Feature**: Update the RDS API model to support copying option groups during the CopyDBSnapshot operation
+
+# v1.33.0 (2022-12-06)
+
+* **Feature**: This release adds the BlueGreenDeploymentNotFoundFault to the AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource operations.
+
+# v1.32.0 (2022-12-05)
+
+* **Feature**: This release adds the InvalidDBInstanceStateFault to the RestoreDBClusterFromSnapshot operation.
+
+# v1.31.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.31.0 (2022-11-28)
+
+* **Feature**: This release enables new Aurora and RDS feature called Blue/Green Deployments that makes updates to databases safer, simpler and faster.
+
+# v1.30.1 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.30.0 (2022-11-16)
 
 * **Feature**: This release adds support for container databases (CDBs) to Amazon RDS Custom for Oracle. A CDB contains one PDB at creation. You can add more PDBs using Oracle SQL. You can also customize your database installation by setting the Oracle base, Oracle home, and the OS user name and group.

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an API key for a workspace.
+// Deletes a Grafana API key for the workspace.
 func (c *Client) DeleteWorkspaceApiKey(ctx context.Context, params *DeleteWorkspaceApiKeyInput, optFns ...func(*Options)) (*DeleteWorkspaceApiKeyOutput, error) {
 	if params == nil {
 		params = &DeleteWorkspaceApiKeyInput{}
@@ -43,7 +43,7 @@ type DeleteWorkspaceApiKeyInput struct {
 
 type DeleteWorkspaceApiKeyOutput struct {
 
-	// The name of the API key that was deleted.
+	// The name of the key that was deleted.
 	//
 	// This member is required.
 	KeyName *string

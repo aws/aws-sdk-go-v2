@@ -33,6 +33,9 @@ type GetPortfolioPreferencesInput struct {
 
 type GetPortfolioPreferencesOutput struct {
 
+	// The classification for application component types.
+	ApplicationMode types.ApplicationMode
+
 	// The transformation preferences for non-database applications.
 	ApplicationPreferences *types.ApplicationPreferences
 

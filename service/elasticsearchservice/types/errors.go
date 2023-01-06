@@ -12,6 +12,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,12 +26,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error occurred while processing the request.
 type BaseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -43,13 +52,20 @@ func (e *BaseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BaseException) ErrorCode() string             { return "BaseException" }
+func (e *BaseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "BaseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BaseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error occurred because the client attempts to remove a resource that is
 // currently in use. Returns HTTP status code 409.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -63,13 +79,20 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error occured because the client wanted to access a not supported operation.
 // Gives http status code of 409.
 type DisabledOperationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -83,7 +106,12 @@ func (e *DisabledOperationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DisabledOperationException) ErrorCode() string             { return "DisabledOperationException" }
+func (e *DisabledOperationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DisabledOperationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request processing has failed because of an unknown error, exception or
@@ -91,6 +119,8 @@ func (e *DisabledOperationException) ErrorFault() smithy.ErrorFault { return smi
 // 500.
 type InternalException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -104,13 +134,20 @@ func (e *InternalException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalException) ErrorCode() string             { return "InternalException" }
+func (e *InternalException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request processing has failed because of invalid pagination token provided
 // by customer. Returns an HTTP status code of 400.
 type InvalidPaginationTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -125,7 +162,10 @@ func (e *InvalidPaginationTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPaginationTokenException) ErrorCode() string {
-	return "InvalidPaginationTokenException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidPaginationTokenException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -133,6 +173,8 @@ func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { retur
 // or not supported. Gives http status code of 409.
 type InvalidTypeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -146,13 +188,20 @@ func (e *InvalidTypeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidTypeException) ErrorCode() string             { return "InvalidTypeException" }
+func (e *InvalidTypeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidTypeException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception for trying to create more than allowed resources or sub-resources.
 // Gives http status code of 409.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -166,13 +215,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception for creating a resource that already exists. Gives http status code
 // of 400.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -186,13 +242,20 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
+func (e *ResourceAlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception for accessing or deleting a resource that does not exist. Gives
 // http status code of 400.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -206,12 +269,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception for missing / invalid input fields. Gives http status code of 400.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -225,5 +295,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

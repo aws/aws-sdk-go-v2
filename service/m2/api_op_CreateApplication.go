@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new application with given parameters. Requires an existing
+// Creates a new application with given parameters. Requires an existing runtime
 // environment and application definition file.
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
@@ -57,6 +57,9 @@ type CreateApplicationInput struct {
 
 	// The description of the application.
 	Description *string
+
+	// The identifier of a customer managed key.
+	KmsKeyId *string
 
 	// A list of tags to apply to the application.
 	Tags map[string]string

@@ -11,10 +11,9 @@ import (
 )
 
 // Cancels a pending VPC peering authorization for the specified VPC. If you need
-// to delete an existing VPC peering connection, call DeleteVpcPeeringConnection.
-// Related actions CreateVpcPeeringAuthorization | DescribeVpcPeeringAuthorizations
-// | DeleteVpcPeeringAuthorization | CreateVpcPeeringConnection |
-// DescribeVpcPeeringConnections | DeleteVpcPeeringConnection | All APIs by task
+// to delete an existing VPC peering connection, use DeleteVpcPeeringConnection
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteVpcPeeringConnection.html).
+// Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteVpcPeeringAuthorization(ctx context.Context, params *DeleteVpcPeeringAuthorizationInput, optFns ...func(*Options)) (*DeleteVpcPeeringAuthorizationOutput, error) {
 	if params == nil {
@@ -31,7 +30,6 @@ func (c *Client) DeleteVpcPeeringAuthorization(ctx context.Context, params *Dele
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DeleteVpcPeeringAuthorizationInput struct {
 
 	// A unique identifier for the Amazon Web Services account that you use to manage

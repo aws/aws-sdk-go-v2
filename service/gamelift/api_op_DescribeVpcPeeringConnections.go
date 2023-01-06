@@ -18,9 +18,7 @@ import (
 // the parameter empty to retrieve all connection records. If successful, the
 // retrieved information includes both active and pending connections. Active
 // connections identify the IpV4 CIDR block that the VPC uses to connect. Related
-// actions CreateVpcPeeringAuthorization | DescribeVpcPeeringAuthorizations |
-// DeleteVpcPeeringAuthorization | CreateVpcPeeringConnection |
-// DescribeVpcPeeringConnections | DeleteVpcPeeringConnection | All APIs by task
+// actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeVpcPeeringConnections(ctx context.Context, params *DescribeVpcPeeringConnectionsInput, optFns ...func(*Options)) (*DescribeVpcPeeringConnectionsOutput, error) {
 	if params == nil {
@@ -37,7 +35,6 @@ func (c *Client) DescribeVpcPeeringConnections(ctx context.Context, params *Desc
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeVpcPeeringConnectionsInput struct {
 
 	// A unique identifier for the fleet. You can use either the fleet ID or ARN value.
@@ -46,7 +43,6 @@ type DescribeVpcPeeringConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeVpcPeeringConnectionsOutput struct {
 
 	// A collection of VPC peering connection records that match the request.

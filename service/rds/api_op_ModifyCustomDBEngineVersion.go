@@ -88,6 +88,10 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// The description of the database engine.
 	DBEngineDescription *string
 
+	// A value that indicates the source media provider of the AMI based on the usage
+	// operation. Applicable for RDS Custom for SQL Server.
+	DBEngineMediaType *string
+
 	// The ARN of the custom engine version.
 	DBEngineVersionArn *string
 
@@ -118,6 +122,9 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// CloudWatch Logs.
 	ExportableLogTypes []string
 
+	// The EC2 image
+	Image *types.CustomDBEngineVersionAMI
+
 	// The Amazon Web Services KMS key identifier for an encrypted CEV. This parameter
 	// is required for RDS Custom, but optional for Amazon RDS.
 	KMSKeyId *string
@@ -127,6 +134,15 @@ type ModifyCustomDBEngineVersionOutput struct {
 
 	// The status of the DB engine version, either available or deprecated.
 	Status *string
+
+	// A list of the supported CA certificate identifiers. For more information, see
+	// Using SSL/TLS to encrypt a connection to a DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+	// cluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
+	SupportedCACertificateIdentifiers []string
 
 	// A list of the character sets supported by this engine for the CharacterSetName
 	// parameter of the CreateDBInstance operation.
@@ -156,6 +172,10 @@ type ModifyCustomDBEngineVersionOutput struct {
 	// A value that indicates whether the engine version supports Babelfish for Aurora
 	// PostgreSQL.
 	SupportsBabelfish bool
+
+	// A value that indicates whether the engine version supports rotating the server
+	// certificate without rebooting the DB instance.
+	SupportsCertificateRotationWithoutRestart *bool
 
 	// A value that indicates whether you can use Aurora global databases with a
 	// specific DB engine version.

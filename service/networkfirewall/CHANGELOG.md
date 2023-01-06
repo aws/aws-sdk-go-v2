@@ -1,3 +1,31 @@
+# v1.22.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.21.0 (2022-12-28)
+
+* **Feature**: AWS Network Firewall now provides status messages for firewalls to help you troubleshoot when your endpoint fails.
+
+# v1.20.9 (2022-12-23)
+
+* No change notes available for this release.
+
+# v1.20.8 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.7 (2022-12-08)
+
+* No change notes available for this release.
+
+# v1.20.6 (2022-12-06)
+
+* No change notes available for this release.
+
+# v1.20.5 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.20.4 (2022-11-11)
 
 * No change notes available for this release.

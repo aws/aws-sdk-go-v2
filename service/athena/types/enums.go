@@ -2,6 +2,36 @@
 
 package types
 
+type CalculationExecutionState string
+
+// Enum values for CalculationExecutionState
+const (
+	CalculationExecutionStateCreating  CalculationExecutionState = "CREATING"
+	CalculationExecutionStateCreated   CalculationExecutionState = "CREATED"
+	CalculationExecutionStateQueued    CalculationExecutionState = "QUEUED"
+	CalculationExecutionStateRunning   CalculationExecutionState = "RUNNING"
+	CalculationExecutionStateCanceling CalculationExecutionState = "CANCELING"
+	CalculationExecutionStateCanceled  CalculationExecutionState = "CANCELED"
+	CalculationExecutionStateCompleted CalculationExecutionState = "COMPLETED"
+	CalculationExecutionStateFailed    CalculationExecutionState = "FAILED"
+)
+
+// Values returns all known values for CalculationExecutionState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CalculationExecutionState) Values() []CalculationExecutionState {
+	return []CalculationExecutionState{
+		"CREATING",
+		"CREATED",
+		"QUEUED",
+		"RUNNING",
+		"CANCELING",
+		"CANCELED",
+		"COMPLETED",
+		"FAILED",
+	}
+}
+
 type ColumnNullable string
 
 // Enum values for ColumnNullable
@@ -62,6 +92,68 @@ func (EncryptionOption) Values() []EncryptionOption {
 	}
 }
 
+type ExecutorState string
+
+// Enum values for ExecutorState
+const (
+	ExecutorStateCreating    ExecutorState = "CREATING"
+	ExecutorStateCreated     ExecutorState = "CREATED"
+	ExecutorStateRegistered  ExecutorState = "REGISTERED"
+	ExecutorStateTerminating ExecutorState = "TERMINATING"
+	ExecutorStateTerminated  ExecutorState = "TERMINATED"
+	ExecutorStateFailed      ExecutorState = "FAILED"
+)
+
+// Values returns all known values for ExecutorState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutorState) Values() []ExecutorState {
+	return []ExecutorState{
+		"CREATING",
+		"CREATED",
+		"REGISTERED",
+		"TERMINATING",
+		"TERMINATED",
+		"FAILED",
+	}
+}
+
+type ExecutorType string
+
+// Enum values for ExecutorType
+const (
+	ExecutorTypeCoordinator ExecutorType = "COORDINATOR"
+	ExecutorTypeGateway     ExecutorType = "GATEWAY"
+	ExecutorTypeWorker      ExecutorType = "WORKER"
+)
+
+// Values returns all known values for ExecutorType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ExecutorType) Values() []ExecutorType {
+	return []ExecutorType{
+		"COORDINATOR",
+		"GATEWAY",
+		"WORKER",
+	}
+}
+
+type NotebookType string
+
+// Enum values for NotebookType
+const (
+	NotebookTypeIpynb NotebookType = "IPYNB"
+)
+
+// Values returns all known values for NotebookType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (NotebookType) Values() []NotebookType {
+	return []NotebookType{
+		"IPYNB",
+	}
+}
+
 type QueryExecutionState string
 
 // Enum values for QueryExecutionState
@@ -99,6 +191,36 @@ const (
 func (S3AclOption) Values() []S3AclOption {
 	return []S3AclOption{
 		"BUCKET_OWNER_FULL_CONTROL",
+	}
+}
+
+type SessionState string
+
+// Enum values for SessionState
+const (
+	SessionStateCreating    SessionState = "CREATING"
+	SessionStateCreated     SessionState = "CREATED"
+	SessionStateIdle        SessionState = "IDLE"
+	SessionStateBusy        SessionState = "BUSY"
+	SessionStateTerminating SessionState = "TERMINATING"
+	SessionStateTerminated  SessionState = "TERMINATED"
+	SessionStateDegraded    SessionState = "DEGRADED"
+	SessionStateFailed      SessionState = "FAILED"
+)
+
+// Values returns all known values for SessionState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SessionState) Values() []SessionState {
+	return []SessionState{
+		"CREATING",
+		"CREATED",
+		"IDLE",
+		"BUSY",
+		"TERMINATING",
+		"TERMINATED",
+		"DEGRADED",
+		"FAILED",
 	}
 }
 

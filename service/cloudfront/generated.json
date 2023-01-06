@@ -104,6 +104,7 @@
         "api_op_UpdateCloudFrontOriginAccessIdentity.go",
         "api_op_UpdateContinuousDeploymentPolicy.go",
         "api_op_UpdateDistribution.go",
+        "api_op_UpdateDistributionWithStagingConfig.go",
         "api_op_UpdateFieldLevelEncryptionConfig.go",
         "api_op_UpdateFieldLevelEncryptionProfile.go",
         "api_op_UpdateFunction.go",

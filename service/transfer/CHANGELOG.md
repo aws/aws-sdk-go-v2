@@ -1,3 +1,23 @@
+# v1.28.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.27.0 (2022-12-27)
+
+* **Feature**: Add additional operations to throw ThrottlingExceptions
+
+# v1.26.0 (2022-12-21)
+
+* **Feature**: This release adds support for Decrypt as a workflow step type.
+
+# v1.25.2 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.25.0 (2022-11-18)
 
 * **Feature**: Adds a NONE encryption algorithm type to AS2 connectors, providing support for skipping encryption of the AS2 message body when a HTTPS URL is also specified.

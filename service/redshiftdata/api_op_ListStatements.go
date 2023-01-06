@@ -13,7 +13,10 @@ import (
 )
 
 // List of SQL statements. By default, only finished statements are shown. A token
-// is returned to page through the statement list.
+// is returned to page through the statement list. For more information about the
+// Amazon Redshift Data API and CLI usage examples, see Using the Amazon Redshift
+// Data API (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
+// Amazon Redshift Management Guide.
 func (c *Client) ListStatements(ctx context.Context, params *ListStatementsInput, optFns ...func(*Options)) (*ListStatementsOutput, error) {
 	if params == nil {
 		params = &ListStatementsInput{}

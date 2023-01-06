@@ -204,9 +204,9 @@ type CreateFilterInput struct {
 	// This member is required.
 	FindingCriteria *types.FindingCriteria
 
-	// The name of the filter. Minimum length of 3. Maximum length of 64. Valid
-	// characters include alphanumeric characters, dot (.), underscore (_), and dash
-	// (-). Spaces are not allowed.
+	// The name of the filter. Valid characters include period (.), underscore (_),
+	// dash (-), and alphanumeric characters. A whitespace is considered to be an
+	// invalid character.
 	//
 	// This member is required.
 	Name *string
@@ -218,7 +218,9 @@ type CreateFilterInput struct {
 	// The idempotency token for the create request.
 	ClientToken *string
 
-	// The description of the filter.
+	// The description of the filter. Valid special characters include period (.),
+	// underscore (_), dash (-), and whitespace. The new line character is considered
+	// to be an invalid input for description.
 	Description *string
 
 	// Specifies the position of the filter in the list of current filters. Also

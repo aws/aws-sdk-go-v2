@@ -12,6 +12,8 @@ import (
 type BatchSizeLimitExceededException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -25,7 +27,10 @@ func (e *BatchSizeLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchSizeLimitExceededException) ErrorCode() string {
-	return "BatchSizeLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "BatchSizeLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *BatchSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -33,6 +38,8 @@ func (e *BatchSizeLimitExceededException) ErrorFault() smithy.ErrorFault { retur
 // resource is not supported.
 type ConcurrentModificationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -47,13 +54,18 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal server error occurred. Retry your request.
 type InternalServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -67,12 +79,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The filter specified for the operation is invalid. Specify a different filter.
 type InvalidFilterException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -86,12 +105,22 @@ func (e *InvalidFilterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidFilterException) ErrorCode() string             { return "InvalidFilterException" }
+func (e *InvalidFilterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidFilterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidFilterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request is invalid.
 type InvalidRequestException struct {
 	Message *string
+
+	ErrorCodeOverride *string
+
+	Reason InvalidRequestReason
+	Detail *InvalidRequestDetail
 
 	noSmithyDocumentSerde
 }
@@ -105,12 +134,19 @@ func (e *InvalidRequestException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
+func (e *InvalidRequestException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidRequestException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified job was not found. Check the job ID and try again.
 type JobNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -124,13 +160,20 @@ func (e *JobNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *JobNotFoundException) ErrorCode() string             { return "JobNotFoundException" }
+func (e *JobNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "JobNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *JobNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The KMS customer managed key (CMK) entered cannot be validated. Verify the key
 // and re-enter it.
 type KmsKeyValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -144,13 +187,20 @@ func (e *KmsKeyValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KmsKeyValidationException) ErrorCode() string             { return "KmsKeyValidationException" }
+func (e *KmsKeyValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "KmsKeyValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *KmsKeyValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource name is already in use. Use a different name and try your
 // request again.
 type ResourceInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -164,13 +214,20 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum number of resources per account has been exceeded. Review the
 // resources, and then try your request again.
 type ResourceLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -184,13 +241,20 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
+func (e *ResourceLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource ARN was not found. Check the ARN and try your request
 // again.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -204,13 +268,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource is not available. Check the resource and try your request
 // again.
 type ResourceUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -224,12 +295,19 @@ func (e *ResourceUnavailableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceUnavailableException) ErrorCode() string             { return "ResourceUnavailableException" }
+func (e *ResourceUnavailableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The size of the input text exceeds the limit. Use a smaller document.
 type TextSizeLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -243,12 +321,19 @@ func (e *TextSizeLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TextSizeLimitExceededException) ErrorCode() string             { return "TextSizeLimitExceededException" }
+func (e *TextSizeLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TextSizeLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of requests exceeds the limit. Resubmit your request later.
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -262,13 +347,20 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request contains more tag keys than can be associated with a resource (50
 // tag keys per resource).
 type TooManyTagKeysException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -282,7 +374,12 @@ func (e *TooManyTagKeysException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagKeysException) ErrorCode() string             { return "TooManyTagKeysException" }
+func (e *TooManyTagKeysException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTagKeysException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagKeysException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request contains more tags than can be associated with a resource (50 tags
@@ -290,6 +387,8 @@ func (e *TooManyTagKeysException) ErrorFault() smithy.ErrorFault { return smithy
 // included in your current request.
 type TooManyTagsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -303,7 +402,12 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Amazon Comprehend can't process the language of the input text. For custom
@@ -313,6 +417,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // the Comprehend Developer Guide.
 type UnsupportedLanguageException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -326,5 +432,10 @@ func (e *UnsupportedLanguageException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnsupportedLanguageException) ErrorCode() string             { return "UnsupportedLanguageException" }
+func (e *UnsupportedLanguageException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnsupportedLanguageException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnsupportedLanguageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

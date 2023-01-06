@@ -33,9 +33,7 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-client.html)
 // FlexMatch events
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html)
-// (reference) Related actions StartMatchmaking | DescribeMatchmaking |
-// StopMatchmaking | AcceptMatch | StartMatchBackfill | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// (reference)
 func (c *Client) AcceptMatch(ctx context.Context, params *AcceptMatchInput, optFns ...func(*Options)) (*AcceptMatchOutput, error) {
 	if params == nil {
 		params = &AcceptMatchInput{}
@@ -51,7 +49,6 @@ func (c *Client) AcceptMatch(ctx context.Context, params *AcceptMatchInput, optF
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type AcceptMatchInput struct {
 
 	// Player response to the proposed match.

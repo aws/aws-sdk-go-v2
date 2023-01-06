@@ -110,6 +110,26 @@ func (m *validateOpCreateNamedQuery) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateNotebook struct {
+}
+
+func (*validateOpCreateNotebook) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateNotebook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateNotebookInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateNotebookInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreatePreparedStatement struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpCreatePreparedStatement) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreatePreparedStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreatePresignedNotebookUrl struct {
+}
+
+func (*validateOpCreatePresignedNotebookUrl) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePresignedNotebookUrl) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePresignedNotebookUrlInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePresignedNotebookUrlInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +230,26 @@ func (m *validateOpDeleteNamedQuery) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteNotebook struct {
+}
+
+func (*validateOpDeleteNotebook) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteNotebook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteNotebookInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteNotebookInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePreparedStatement struct {
 }
 
@@ -225,6 +285,86 @@ func (m *validateOpDeleteWorkGroup) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteWorkGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExportNotebook struct {
+}
+
+func (*validateOpExportNotebook) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportNotebook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportNotebookInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportNotebookInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCalculationExecutionCode struct {
+}
+
+func (*validateOpGetCalculationExecutionCode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCalculationExecutionCode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCalculationExecutionCodeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCalculationExecutionCodeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCalculationExecution struct {
+}
+
+func (*validateOpGetCalculationExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCalculationExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCalculationExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCalculationExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCalculationExecutionStatus struct {
+}
+
+func (*validateOpGetCalculationExecutionStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCalculationExecutionStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCalculationExecutionStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCalculationExecutionStatusInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +425,26 @@ func (m *validateOpGetNamedQuery) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetNamedQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetNotebookMetadata struct {
+}
+
+func (*validateOpGetNotebookMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNotebookMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNotebookMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNotebookMetadataInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +530,46 @@ func (m *validateOpGetQueryRuntimeStatistics) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetSession struct {
+}
+
+func (*validateOpGetSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetSessionStatus struct {
+}
+
+func (*validateOpGetSessionStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetSessionStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetSessionStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetSessionStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetTableMetadata struct {
 }
 
@@ -410,6 +610,46 @@ func (m *validateOpGetWorkGroup) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportNotebook struct {
+}
+
+func (*validateOpImportNotebook) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportNotebook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportNotebookInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportNotebookInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListCalculationExecutions struct {
+}
+
+func (*validateOpListCalculationExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListCalculationExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListCalculationExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListCalculationExecutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListDatabases struct {
 }
 
@@ -430,6 +670,66 @@ func (m *validateOpListDatabases) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListExecutors struct {
+}
+
+func (*validateOpListExecutors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExecutors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExecutorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExecutorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNotebookMetadata struct {
+}
+
+func (*validateOpListNotebookMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNotebookMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNotebookMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNotebookMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListNotebookSessions struct {
+}
+
+func (*validateOpListNotebookSessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListNotebookSessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListNotebookSessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListNotebookSessionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPreparedStatements struct {
 }
 
@@ -445,6 +745,26 @@ func (m *validateOpListPreparedStatements) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPreparedStatementsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSessions struct {
+}
+
+func (*validateOpListSessions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSessions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSessionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSessionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -490,6 +810,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCalculationExecution struct {
+}
+
+func (*validateOpStartCalculationExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCalculationExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCalculationExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCalculationExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartQueryExecution struct {
 }
 
@@ -505,6 +845,46 @@ func (m *validateOpStartQueryExecution) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartQueryExecutionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartSession struct {
+}
+
+func (*validateOpStartSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartSessionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopCalculationExecution struct {
+}
+
+func (*validateOpStopCalculationExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopCalculationExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopCalculationExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopCalculationExecutionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -545,6 +925,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTerminateSession struct {
+}
+
+func (*validateOpTerminateSession) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTerminateSession) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TerminateSessionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTerminateSessionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +1010,46 @@ func (m *validateOpUpdateNamedQuery) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateNotebook struct {
+}
+
+func (*validateOpUpdateNotebook) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateNotebook) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateNotebookInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateNotebookInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateNotebookMetadata struct {
+}
+
+func (*validateOpUpdateNotebookMetadata) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateNotebookMetadata) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateNotebookMetadataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateNotebookMetadataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePreparedStatement struct {
 }
 
@@ -670,8 +1110,16 @@ func addOpCreateNamedQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateNamedQuery{}, middleware.After)
 }
 
+func addOpCreateNotebookValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateNotebook{}, middleware.After)
+}
+
 func addOpCreatePreparedStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePreparedStatement{}, middleware.After)
+}
+
+func addOpCreatePresignedNotebookUrlValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePresignedNotebookUrl{}, middleware.After)
 }
 
 func addOpCreateWorkGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -686,12 +1134,32 @@ func addOpDeleteNamedQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNamedQuery{}, middleware.After)
 }
 
+func addOpDeleteNotebookValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteNotebook{}, middleware.After)
+}
+
 func addOpDeletePreparedStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePreparedStatement{}, middleware.After)
 }
 
 func addOpDeleteWorkGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkGroup{}, middleware.After)
+}
+
+func addOpExportNotebookValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportNotebook{}, middleware.After)
+}
+
+func addOpGetCalculationExecutionCodeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCalculationExecutionCode{}, middleware.After)
+}
+
+func addOpGetCalculationExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCalculationExecution{}, middleware.After)
+}
+
+func addOpGetCalculationExecutionStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCalculationExecutionStatus{}, middleware.After)
 }
 
 func addOpGetDatabaseValidationMiddleware(stack *middleware.Stack) error {
@@ -704,6 +1172,10 @@ func addOpGetDataCatalogValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetNamedQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetNamedQuery{}, middleware.After)
+}
+
+func addOpGetNotebookMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNotebookMetadata{}, middleware.After)
 }
 
 func addOpGetPreparedStatementValidationMiddleware(stack *middleware.Stack) error {
@@ -722,6 +1194,14 @@ func addOpGetQueryRuntimeStatisticsValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpGetQueryRuntimeStatistics{}, middleware.After)
 }
 
+func addOpGetSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSession{}, middleware.After)
+}
+
+func addOpGetSessionStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetSessionStatus{}, middleware.After)
+}
+
 func addOpGetTableMetadataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetTableMetadata{}, middleware.After)
 }
@@ -730,12 +1210,36 @@ func addOpGetWorkGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWorkGroup{}, middleware.After)
 }
 
+func addOpImportNotebookValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportNotebook{}, middleware.After)
+}
+
+func addOpListCalculationExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListCalculationExecutions{}, middleware.After)
+}
+
 func addOpListDatabasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDatabases{}, middleware.After)
 }
 
+func addOpListExecutorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExecutors{}, middleware.After)
+}
+
+func addOpListNotebookMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNotebookMetadata{}, middleware.After)
+}
+
+func addOpListNotebookSessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListNotebookSessions{}, middleware.After)
+}
+
 func addOpListPreparedStatementsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPreparedStatements{}, middleware.After)
+}
+
+func addOpListSessionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSessions{}, middleware.After)
 }
 
 func addOpListTableMetadataValidationMiddleware(stack *middleware.Stack) error {
@@ -746,8 +1250,20 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpStartCalculationExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCalculationExecution{}, middleware.After)
+}
+
 func addOpStartQueryExecutionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartQueryExecution{}, middleware.After)
+}
+
+func addOpStartSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartSession{}, middleware.After)
+}
+
+func addOpStopCalculationExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopCalculationExecution{}, middleware.After)
 }
 
 func addOpStopQueryExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -756,6 +1272,10 @@ func addOpStopQueryExecutionValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpTerminateSessionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTerminateSession{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -768,6 +1288,14 @@ func addOpUpdateDataCatalogValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateNamedQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNamedQuery{}, middleware.After)
+}
+
+func addOpUpdateNotebookValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateNotebook{}, middleware.After)
+}
+
+func addOpUpdateNotebookMetadataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateNotebookMetadata{}, middleware.After)
 }
 
 func addOpUpdatePreparedStatementValidationMiddleware(stack *middleware.Stack) error {
@@ -793,6 +1321,21 @@ func validateAclConfiguration(v *types.AclConfiguration) error {
 	}
 }
 
+func validateCustomerContentEncryptionConfiguration(v *types.CustomerContentEncryptionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomerContentEncryptionConfiguration"}
+	if v.KmsKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
 	if v == nil {
 		return nil
@@ -801,6 +1344,18 @@ func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
 	if len(v.EncryptionOption) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EncryptionOption"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEngineConfiguration(v *types.EngineConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EngineConfiguration"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -891,6 +1446,11 @@ func validateWorkGroupConfiguration(v *types.WorkGroupConfiguration) error {
 			invalidParams.AddNested("ResultConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CustomerContentEncryptionConfiguration != nil {
+		if err := validateCustomerContentEncryptionConfiguration(v.CustomerContentEncryptionConfiguration); err != nil {
+			invalidParams.AddNested("CustomerContentEncryptionConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -906,6 +1466,11 @@ func validateWorkGroupConfigurationUpdates(v *types.WorkGroupConfigurationUpdate
 	if v.ResultConfigurationUpdates != nil {
 		if err := validateResultConfigurationUpdates(v.ResultConfigurationUpdates); err != nil {
 			invalidParams.AddNested("ResultConfigurationUpdates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomerContentEncryptionConfiguration != nil {
+		if err := validateCustomerContentEncryptionConfiguration(v.CustomerContentEncryptionConfiguration); err != nil {
+			invalidParams.AddNested("CustomerContentEncryptionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1002,6 +1567,24 @@ func validateOpCreateNamedQueryInput(v *CreateNamedQueryInput) error {
 	}
 }
 
+func validateOpCreateNotebookInput(v *CreateNotebookInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateNotebookInput"}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreatePreparedStatementInput(v *CreatePreparedStatementInput) error {
 	if v == nil {
 		return nil
@@ -1015,6 +1598,21 @@ func validateOpCreatePreparedStatementInput(v *CreatePreparedStatementInput) err
 	}
 	if v.QueryStatement == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreatePresignedNotebookUrlInput(v *CreatePresignedNotebookUrlInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePresignedNotebookUrlInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1073,6 +1671,21 @@ func validateOpDeleteNamedQueryInput(v *DeleteNamedQueryInput) error {
 	}
 }
 
+func validateOpDeleteNotebookInput(v *DeleteNotebookInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteNotebookInput"}
+	if v.NotebookId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotebookId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePreparedStatementInput(v *DeletePreparedStatementInput) error {
 	if v == nil {
 		return nil
@@ -1098,6 +1711,66 @@ func validateOpDeleteWorkGroupInput(v *DeleteWorkGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkGroupInput"}
 	if v.WorkGroup == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExportNotebookInput(v *ExportNotebookInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportNotebookInput"}
+	if v.NotebookId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotebookId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCalculationExecutionCodeInput(v *GetCalculationExecutionCodeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCalculationExecutionCodeInput"}
+	if v.CalculationExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculationExecutionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCalculationExecutionInput(v *GetCalculationExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCalculationExecutionInput"}
+	if v.CalculationExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculationExecutionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCalculationExecutionStatusInput(v *GetCalculationExecutionStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCalculationExecutionStatusInput"}
+	if v.CalculationExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculationExecutionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1146,6 +1819,21 @@ func validateOpGetNamedQueryInput(v *GetNamedQueryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetNamedQueryInput"}
 	if v.NamedQueryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NamedQueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetNotebookMetadataInput(v *GetNotebookMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNotebookMetadataInput"}
+	if v.NotebookId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotebookId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1217,6 +1905,36 @@ func validateOpGetQueryRuntimeStatisticsInput(v *GetQueryRuntimeStatisticsInput)
 	}
 }
 
+func validateOpGetSessionInput(v *GetSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSessionInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetSessionStatusInput(v *GetSessionStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetSessionStatusInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetTableMetadataInput(v *GetTableMetadataInput) error {
 	if v == nil {
 		return nil
@@ -1253,6 +1971,45 @@ func validateOpGetWorkGroupInput(v *GetWorkGroupInput) error {
 	}
 }
 
+func validateOpImportNotebookInput(v *ImportNotebookInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportNotebookInput"}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListCalculationExecutionsInput(v *ListCalculationExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListCalculationExecutionsInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListDatabasesInput(v *ListDatabasesInput) error {
 	if v == nil {
 		return nil
@@ -1268,11 +2025,71 @@ func validateOpListDatabasesInput(v *ListDatabasesInput) error {
 	}
 }
 
+func validateOpListExecutorsInput(v *ListExecutorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExecutorsInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNotebookMetadataInput(v *ListNotebookMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNotebookMetadataInput"}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListNotebookSessionsInput(v *ListNotebookSessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListNotebookSessionsInput"}
+	if v.NotebookId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotebookId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListPreparedStatementsInput(v *ListPreparedStatementsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListPreparedStatementsInput"}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSessionsInput(v *ListSessionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSessionsInput"}
 	if v.WorkGroup == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
 	}
@@ -1316,6 +2133,21 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpStartCalculationExecutionInput(v *StartCalculationExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCalculationExecutionInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartQueryExecutionInput(v *StartQueryExecutionInput) error {
 	if v == nil {
 		return nil
@@ -1333,6 +2165,43 @@ func validateOpStartQueryExecutionInput(v *StartQueryExecutionInput) error {
 		if err := validateResultReuseConfiguration(v.ResultReuseConfiguration); err != nil {
 			invalidParams.AddNested("ResultReuseConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartSessionInput(v *StartSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartSessionInput"}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
+	if v.EngineConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineConfiguration"))
+	} else if v.EngineConfiguration != nil {
+		if err := validateEngineConfiguration(v.EngineConfiguration); err != nil {
+			invalidParams.AddNested("EngineConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopCalculationExecutionInput(v *StopCalculationExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopCalculationExecutionInput"}
+	if v.CalculationExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculationExecutionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1366,6 +2235,21 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 	}
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTerminateSessionInput(v *TerminateSessionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TerminateSessionInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1423,6 +2307,45 @@ func validateOpUpdateNamedQueryInput(v *UpdateNamedQueryInput) error {
 	}
 	if v.QueryString == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateNotebookInput(v *UpdateNotebookInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNotebookInput"}
+	if v.NotebookId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotebookId"))
+	}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateNotebookMetadataInput(v *UpdateNotebookMetadataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNotebookMetadataInput"}
+	if v.NotebookId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotebookId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

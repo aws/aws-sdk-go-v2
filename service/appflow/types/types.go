@@ -518,15 +518,13 @@ type ConnectorProfile struct {
 // profile.
 type ConnectorProfileConfig struct {
 
-	// The connector-specific credentials required by each connector.
-	//
-	// This member is required.
-	ConnectorProfileCredentials *ConnectorProfileCredentials
-
 	// The connector-specific properties of the profile configuration.
 	//
 	// This member is required.
 	ConnectorProfileProperties *ConnectorProfileProperties
+
+	// The connector-specific credentials required by each connector.
+	ConnectorProfileCredentials *ConnectorProfileCredentials
 
 	noSmithyDocumentSerde
 }
@@ -1748,13 +1746,9 @@ type Range struct {
 type RedshiftConnectorProfileCredentials struct {
 
 	// The password that corresponds to the user name.
-	//
-	// This member is required.
 	Password *string
 
 	// The name of the user.
-	//
-	// This member is required.
 	Username *string
 
 	noSmithyDocumentSerde
@@ -1768,12 +1762,11 @@ type RedshiftConnectorProfileProperties struct {
 	// This member is required.
 	BucketName *string
 
-	// The JDBC URL of the Amazon Redshift cluster.
-	//
-	// This member is required.
-	DatabaseUrl *string
-
-	// The Amazon Resource Name (ARN) of the IAM role.
+	// The Amazon Resource Name (ARN) of IAM role that grants Amazon Redshift read-only
+	// access to Amazon S3. For more information, and for the polices that you attach
+	// to this role, see Allow Amazon Redshift to access your Amazon AppFlow data in
+	// Amazon S3
+	// (https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#redshift-access-s3).
 	//
 	// This member is required.
 	RoleArn *string
@@ -1781,6 +1774,29 @@ type RedshiftConnectorProfileProperties struct {
 	// The object key for the destination bucket in which Amazon AppFlow places the
 	// files.
 	BucketPrefix *string
+
+	// The unique ID that's assigned to an Amazon Redshift cluster.
+	ClusterIdentifier *string
+
+	// The Amazon Resource Name (ARN) of an IAM role that permits Amazon AppFlow to
+	// access your Amazon Redshift database through the Data API. For more information,
+	// and for the polices that you attach to this role, see Allow Amazon AppFlow to
+	// access Amazon Redshift databases with the Data API
+	// (https://docs.aws.amazon.com/appflow/latest/userguide/security_iam_service-role-policies.html#access-redshift).
+	DataApiRoleArn *string
+
+	// The name of an Amazon Redshift database.
+	DatabaseName *string
+
+	// The JDBC URL of the Amazon Redshift cluster.
+	DatabaseUrl *string
+
+	// Indicates whether the connector profile defines a connection to an Amazon
+	// Redshift Serverless data warehouse.
+	IsRedshiftServerless bool
+
+	// The name of an Amazon Redshift workgroup.
+	WorkgroupName *string
 
 	noSmithyDocumentSerde
 }

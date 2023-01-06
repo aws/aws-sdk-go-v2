@@ -137,10 +137,10 @@ type AutoScalingGroup struct {
 	// This member is required.
 	DesiredCapacity *int32
 
-	// The service to use for the health checks. The valid values are EC2 and ELB. If
-	// you configure an Auto Scaling group to use ELB health checks, it considers the
-	// instance unhealthy if it fails either the EC2 status checks or the load balancer
-	// health checks.
+	// Determines whether any additional health checks are performed on the instances
+	// in this group. Amazon EC2 health checks are always on. The valid values are EC2
+	// (default), ELB, and VPC_LATTICE. The VPC_LATTICE health check type is reserved
+	// for use with VPC Lattice, which is in preview release and is subject to change.
 	//
 	// This member is required.
 	HealthCheckType *string
@@ -226,6 +226,9 @@ type AutoScalingGroup struct {
 
 	// The termination policies for the group.
 	TerminationPolicies []string
+
+	// The unique identifiers of the traffic sources.
+	TrafficSources []TrafficSourceIdentifier
 
 	// One or more subnet IDs, if applicable, separated by commas.
 	VPCZoneIdentifier *string
@@ -390,28 +393,26 @@ type CapacityForecast struct {
 // in the Amazon CloudWatch User Guide.
 type CustomizedMetricSpecification struct {
 
+	// The dimensions of the metric. Conditional: If you published your metric with
+	// dimensions, you must specify the same dimensions in your scaling policy.
+	Dimensions []MetricDimension
+
 	// The name of the metric. To get the exact metric name, namespace, and dimensions,
 	// inspect the Metric
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html)
 	// object that is returned by a call to ListMetrics
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html).
-	//
-	// This member is required.
 	MetricName *string
 
+	// The metrics to include in the target tracking scaling policy, as a metric data
+	// query. This can include both raw metric and metric math expressions.
+	Metrics []TargetTrackingMetricDataQuery
+
 	// The namespace of the metric.
-	//
-	// This member is required.
 	Namespace *string
 
 	// The statistic of the metric.
-	//
-	// This member is required.
 	Statistic MetricStatistic
-
-	// The dimensions of the metric. Conditional: If you published your metric with
-	// dimensions, you must specify the same dimensions in your scaling policy.
-	Dimensions []MetricDimension
 
 	// The unit of the metric. For a complete list of the units that CloudWatch
 	// supports, see the MetricDatum
@@ -1170,12 +1171,10 @@ type InstancesDistribution struct {
 	// property. To ensure that your desired capacity is met, you might receive Spot
 	// Instances from several pools. This is the default value, but it might lead to
 	// high interruption rates because this strategy only considers instance price and
-	// not available capacity. price-capacity-optimized (recommended) Amazon EC2 Auto
-	// Scaling identifies the pools with the highest capacity availability for the
-	// number of instances that are launching. This means that we will request Spot
-	// Instances from the pools that we believe have the lowest chance of interruption
-	// in the near term. Amazon EC2 Auto Scaling then requests Spot Instances from the
-	// lowest priced of these pools.
+	// not available capacity. price-capacity-optimized (recommended) The price and
+	// capacity optimized allocation strategy looks at both price and capacity to
+	// select the Spot Instance pools that are the least likely to be interrupted and
+	// have the lowest possible price.
 	SpotAllocationStrategy *string
 
 	// The number of Spot Instance pools across which to allocate your Spot Instances.
@@ -2668,6 +2667,81 @@ type TargetTrackingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The metric data to return. Also defines whether this call is returning data for
+// one metric only, or whether it is performing a math expression on the values of
+// returned metric statistics to create a new time series. A time series is a
+// series of data points, each of which is associated with a timestamp.
+type TargetTrackingMetricDataQuery struct {
+
+	// A short name that identifies the object's results in the response. This name
+	// must be unique among all TargetTrackingMetricDataQuery objects specified for a
+	// single scaling policy. If you are performing math expressions on this set of
+	// data, this name represents that data and can serve as a variable in the
+	// mathematical expression. The valid characters are letters, numbers, and
+	// underscores. The first character must be a lowercase letter.
+	//
+	// This member is required.
+	Id *string
+
+	// The math expression to perform on the returned data, if this object is
+	// performing a math expression. This expression can use the Id of the other
+	// metrics to refer to those metrics, and can also use the Id of other expressions
+	// to use the result of those expressions. Conditional: Within each
+	// TargetTrackingMetricDataQuery object, you must specify either Expression or
+	// MetricStat, but not both.
+	Expression *string
+
+	// A human-readable label for this metric or expression. This is especially useful
+	// if this is a math expression, so that you know what the value represents.
+	Label *string
+
+	// Information about the metric data to return. Conditional: Within each
+	// TargetTrackingMetricDataQuery object, you must specify either Expression or
+	// MetricStat, but not both.
+	MetricStat *TargetTrackingMetricStat
+
+	// Indicates whether to return the timestamps and raw data values of this metric.
+	// If you use any math expressions, specify true for this value for only the final
+	// math expression that the metric specification is based on. You must specify
+	// false for ReturnData for all the other metrics and expressions used in the
+	// metric specification. If you are only retrieving metrics and not performing any
+	// math expressions, do not specify anything for ReturnData. This sets it to its
+	// default (true).
+	ReturnData *bool
+
+	noSmithyDocumentSerde
+}
+
+// This structure defines the CloudWatch metric to return, along with the
+// statistic, period, and unit. For more information about the CloudWatch
+// terminology below, see Amazon CloudWatch concepts
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
+// in the Amazon CloudWatch User Guide.
+type TargetTrackingMetricStat struct {
+
+	// Represents a specific metric.
+	//
+	// This member is required.
+	Metric *Metric
+
+	// The statistic to return. It can include any CloudWatch statistic or extended
+	// statistic. For a list of valid values, see the table in Statistics
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic)
+	// in the Amazon CloudWatch User Guide. The most commonly used metrics for scaling
+	// is Average
+	//
+	// This member is required.
+	Stat *string
+
+	// The unit to use for the returned data points. For a complete list of the units
+	// that CloudWatch supports, see the MetricDatum
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
+	// data type in the Amazon CloudWatch API Reference.
+	Unit *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the minimum and maximum for the TotalLocalStorageGB object when you
 // specify InstanceRequirements for an Auto Scaling group.
 type TotalLocalStorageGBRequest struct {
@@ -2677,6 +2751,46 @@ type TotalLocalStorageGBRequest struct {
 
 	// The storage minimum in GB.
 	Min *float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes the identifier of a traffic source. Currently, you must specify an
+// Amazon Resource Name (ARN) for an existing VPC Lattice target group.
+type TrafficSourceIdentifier struct {
+
+	// The unique identifier of the traffic source.
+	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the state of a traffic source.
+type TrafficSourceState struct {
+
+	// The following are the possible states for a VPC Lattice target group:
+	//
+	// * Adding
+	// - The Auto Scaling instances are being registered with the target group.
+	//
+	// *
+	// Added - All Auto Scaling instances are registered with the target group.
+	//
+	// *
+	// InService - At least one Auto Scaling instance passed the VPC_LATTICE health
+	// check.
+	//
+	// * Removing - The Auto Scaling instances are being deregistered from the
+	// target group. If connection draining is enabled, VPC Lattice waits for in-flight
+	// requests to complete before deregistering the instances.
+	//
+	// * Removed - All Auto
+	// Scaling instances are deregistered from the target group.
+	State *string
+
+	// The unique identifier of the traffic source. Currently, this is the Amazon
+	// Resource Name (ARN) for a VPC Lattice target group.
+	TrafficSource *string
 
 	noSmithyDocumentSerde
 }

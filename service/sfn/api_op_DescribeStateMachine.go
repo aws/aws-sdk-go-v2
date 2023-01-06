@@ -12,8 +12,15 @@ import (
 	"time"
 )
 
-// Describes a state machine. This operation is eventually consistent. The results
-// are best effort and may not reflect very recent updates and changes.
+// Provides information about a state machine's definition, its IAM role Amazon
+// Resource Name (ARN), and configuration. If the state machine ARN is a qualified
+// state machine ARN, the response returned includes the Map state's label. A
+// qualified state machine ARN refers to a Distributed Map state defined within a
+// state machine. For example, the qualified state machine ARN
+// arn:partition:states:region:account-id:stateMachine:stateMachineName/mapStateLabel
+// refers to a Distributed Map state with a label mapStateLabel in the state
+// machine named stateMachineName. This operation is eventually consistent. The
+// results are best effort and may not reflect very recent updates and changes.
 func (c *Client) DescribeStateMachine(ctx context.Context, params *DescribeStateMachineInput, optFns ...func(*Options)) (*DescribeStateMachineOutput, error) {
 	if params == nil {
 		params = &DescribeStateMachineInput{}
@@ -90,6 +97,11 @@ type DescribeStateMachineOutput struct {
 	//
 	// This member is required.
 	Type types.StateMachineType
+
+	// A user-defined or an auto-generated string that identifies a Map state. This
+	// parameter is present only if the stateMachineArn specified in input is a
+	// qualified state machine ARN.
+	Label *string
 
 	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration

@@ -25,7 +25,7 @@ type Application struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The EMR release version associated with the application.
+	// The EMR release associated with the application.
 	//
 	// This member is required.
 	ReleaseLabel *string
@@ -55,6 +55,9 @@ type Application struct {
 	// amount of time being idle.
 	AutoStopConfiguration *AutoStopConfig
 
+	// The image configuration applied to all worker types.
+	ImageConfiguration *ImageConfiguration
+
 	// The initial capacity of the application.
 	InitialCapacity map[string]InitialCapacityConfig
 
@@ -74,6 +77,9 @@ type Application struct {
 
 	// The tags assigned to the application.
 	Tags map[string]string
+
+	// The specification applied to each worker type.
+	WorkerTypeSpecifications map[string]WorkerTypeSpecification
 
 	noSmithyDocumentSerde
 }
@@ -96,7 +102,7 @@ type ApplicationSummary struct {
 	// This member is required.
 	Id *string
 
-	// The EMR release version associated with the application.
+	// The EMR release associated with the application.
 	//
 	// This member is required.
 	ReleaseLabel *string
@@ -202,6 +208,33 @@ type Hive struct {
 	noSmithyDocumentSerde
 }
 
+// The applied image configuration.
+type ImageConfiguration struct {
+
+	// The image URI.
+	//
+	// This member is required.
+	ImageUri *string
+
+	// The SHA256 digest of the image URI. This indicates which specific image the
+	// application is configured for. The image digest doesn't exist until an
+	// application has started.
+	ResolvedImageDigest *string
+
+	noSmithyDocumentSerde
+}
+
+// The image configuration.
+type ImageConfigurationInput struct {
+
+	// The URI of an image in the Amazon ECR registry. This field is required when you
+	// create a new application. If you leave this field blank in an update, Amazon EMR
+	// will remove the image configuration.
+	ImageUri *string
+
+	noSmithyDocumentSerde
+}
+
 // The initial capacity configuration per worker.
 type InitialCapacityConfig struct {
 
@@ -283,7 +316,7 @@ type JobRun struct {
 	// This member is required.
 	JobRunId *string
 
-	// The EMR release version associated with the application your job is running on.
+	// The EMR release associated with the application your job is running on.
 	//
 	// This member is required.
 	ReleaseLabel *string
@@ -359,7 +392,7 @@ type JobRunSummary struct {
 	// This member is required.
 	Id *string
 
-	// The EMR release version associated with the application your job is running on.
+	// The EMR release associated with the application your job is running on.
 	//
 	// This member is required.
 	ReleaseLabel *string
@@ -511,6 +544,24 @@ type WorkerResourceConfig struct {
 
 	// The disk requirements for every worker instance of the worker type.
 	Disk *string
+
+	noSmithyDocumentSerde
+}
+
+// The specifications for a worker type.
+type WorkerTypeSpecification struct {
+
+	// The image configuration for a worker type.
+	ImageConfiguration *ImageConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The specifications for a worker type.
+type WorkerTypeSpecificationInput struct {
+
+	// The image configuration for a worker type.
+	ImageConfiguration *ImageConfigurationInput
 
 	noSmithyDocumentSerde
 }

@@ -45295,6 +45295,11 @@ func awsRestjson1_deserializeDocumentJob(v **types.Job, value interface{}) error
 				sv.ReasonCode = ptr.String(jtv)
 			}
 
+		case "schedulingConfig":
+			if err := awsRestjson1_deserializeDocumentSchedulingConfig(&sv.SchedulingConfig, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -47681,6 +47686,87 @@ func awsRestjson1_deserializeDocumentMitigationActionParams(v **types.Mitigation
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMqttHeaders(v **types.MqttHeaders, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MqttHeaders
+	if *v == nil {
+		sv = &types.MqttHeaders{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "contentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ContentType to be of type string, got %T instead", value)
+				}
+				sv.ContentType = ptr.String(jtv)
+			}
+
+		case "correlationData":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CorrelationData to be of type string, got %T instead", value)
+				}
+				sv.CorrelationData = ptr.String(jtv)
+			}
+
+		case "messageExpiry":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageExpiry to be of type string, got %T instead", value)
+				}
+				sv.MessageExpiry = ptr.String(jtv)
+			}
+
+		case "payloadFormatIndicator":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PayloadFormatIndicator to be of type string, got %T instead", value)
+				}
+				sv.PayloadFormatIndicator = ptr.String(jtv)
+			}
+
+		case "responseTopic":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResponseTopic to be of type string, got %T instead", value)
+				}
+				sv.ResponseTopic = ptr.String(jtv)
+			}
+
+		case "userProperties":
+			if err := awsRestjson1_deserializeDocumentUserProperties(&sv.UserProperties, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentNamedShadowNamesFilter(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -49974,6 +50060,11 @@ func awsRestjson1_deserializeDocumentRepublishAction(v **types.RepublishAction, 
 
 	for key, value := range shape {
 		switch key {
+		case "headers":
+			if err := awsRestjson1_deserializeDocumentMqttHeaders(&sv.Headers, value); err != nil {
+				return err
+			}
+
 		case "qos":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -50938,6 +51029,64 @@ func awsRestjson1_deserializeDocumentScheduledAuditMetadataList(v *[]types.Sched
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSchedulingConfig(v **types.SchedulingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SchedulingConfig
+	if *v == nil {
+		sv = &types.SchedulingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobEndBehavior to be of type string, got %T instead", value)
+				}
+				sv.EndBehavior = types.JobEndBehavior(jtv)
+			}
+
+		case "endTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringDateTime to be of type string, got %T instead", value)
+				}
+				sv.EndTime = ptr.String(jtv)
+			}
+
+		case "startTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StringDateTime to be of type string, got %T instead", value)
+				}
+				sv.StartTime = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -55042,6 +55191,89 @@ func awsRestjson1_deserializeDocumentUpdateDeviceCertificateParams(v **types.Upd
 					return fmt.Errorf("expected DeviceCertificateUpdateAction to be of type string, got %T instead", value)
 				}
 				sv.Action = types.DeviceCertificateUpdateAction(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUserProperties(v *[]types.UserProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.UserProperty
+	if *v == nil {
+		cv = []types.UserProperty{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.UserProperty
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentUserProperty(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUserProperty(v **types.UserProperty, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UserProperty
+	if *v == nil {
+		sv = &types.UserProperty{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserPropertyKey to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserPropertyValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:

@@ -798,9 +798,6 @@ func validateAnomalySubscription(v *types.AnomalySubscription) error {
 	if v.Subscribers == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subscribers"))
 	}
-	if v.Threshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Threshold"))
-	}
 	if len(v.Frequency) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Frequency"))
 	}

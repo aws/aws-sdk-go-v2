@@ -13,17 +13,19 @@ import (
 // Splits a shard into two new shards in the Kinesis data stream, to increase the
 // stream's capacity to ingest and transport data. SplitShard is called when there
 // is a need to increase the overall capacity of a stream because of an expected
-// increase in the volume of data records being ingested. You can also use
-// SplitShard when a shard appears to be approaching its maximum utilization; for
-// example, the producers sending data into the specific shard are suddenly sending
-// more than previously anticipated. You can also call SplitShard to increase
-// stream capacity, so that more Kinesis Data Streams applications can
-// simultaneously read data from the stream for real-time processing. You must
-// specify the shard to be split and the new hash key, which is the position in the
-// shard where the shard gets split in two. In many cases, the new hash key might
-// be the average of the beginning and ending hash key, but it can be any hash key
-// value in the range being mapped into the shard. For more information, see Split
-// a Shard
+// increase in the volume of data records being ingested. This API is only
+// supported for the data streams with the provisioned capacity mode. When invoking
+// this API, it is recommended you use the StreamARN input parameter rather than
+// the StreamName input parameter. You can also use SplitShard when a shard appears
+// to be approaching its maximum utilization; for example, the producers sending
+// data into the specific shard are suddenly sending more than previously
+// anticipated. You can also call SplitShard to increase stream capacity, so that
+// more Kinesis Data Streams applications can simultaneously read data from the
+// stream for real-time processing. You must specify the shard to be split and the
+// new hash key, which is the position in the shard where the shard gets split in
+// two. In many cases, the new hash key might be the average of the beginning and
+// ending hash key, but it can be any hash key value in the range being mapped into
+// the shard. For more information, see Split a Shard
 // (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-resharding-split.html)
 // in the Amazon Kinesis Data Streams Developer Guide. You can use
 // DescribeStreamSummary and the ListShards APIs to determine the shard ID and hash
@@ -81,9 +83,10 @@ type SplitShardInput struct {
 	// This member is required.
 	ShardToSplit *string
 
+	// The ARN of the stream.
+	StreamARN *string
+
 	// The name of the stream for the shard split.
-	//
-	// This member is required.
 	StreamName *string
 
 	noSmithyDocumentSerde

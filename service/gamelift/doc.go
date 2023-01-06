@@ -3,13 +3,13 @@
 // Package gamelift provides the API client, operations, and parameter types for
 // Amazon GameLift.
 //
-// GameLift Service Amazon Web Services provides solutions for hosting
-// session-based multiplayer game servers in the cloud, including tools for
-// deploying, operating, and scaling game servers. Built on Amazon Web Services
-// global computing infrastructure, GameLift helps you deliver high-performance,
-// high-reliability, low-cost game servers while dynamically scaling your resource
-// usage to meet player demand. About GameLift solutions Get more information on
-// these GameLift solutions in the GameLift Developer Guide
+// Amazon GameLift provides solutions for hosting session-based multiplayer game
+// servers in the cloud, including tools for deploying, operating, and scaling game
+// servers. Built on Amazon Web Services global computing infrastructure, GameLift
+// helps you deliver high-performance, high-reliability, low-cost game servers
+// while dynamically scaling your resource usage to meet player demand. About
+// GameLift solutions Get more information on these GameLift solutions in the
+// GameLift Developer Guide
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/).
 //
 // * GameLift
@@ -40,7 +40,7 @@
 // solution.
 //
 // About this API Reference This reference guide describes the low-level
-// service API for Amazon Web Services. With each topic in this guide, you can find
+// service API for Amazon GameLift. With each topic in this guide, you can find
 // links to language-specific SDK guides and the Amazon Web Services CLI reference.
 // Useful links:
 //

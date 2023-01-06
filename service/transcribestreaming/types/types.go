@@ -43,6 +43,7 @@ type AudioEvent struct {
 // The following types satisfy this interface:
 //
 //	AudioStreamMemberAudioEvent
+//	AudioStreamMemberConfigurationEvent
 type AudioStream interface {
 	isAudioStream()
 }
@@ -57,6 +58,187 @@ type AudioStreamMemberAudioEvent struct {
 }
 
 func (*AudioStreamMemberAudioEvent) isAudioStream() {}
+
+// Contains audio channel definitions and post-call analytics settings.
+type AudioStreamMemberConfigurationEvent struct {
+	Value ConfigurationEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*AudioStreamMemberConfigurationEvent) isAudioStream() {}
+
+// Contains entities identified as personally identifiable information (PII) in
+// your transcription output, along with various associated attributes. Examples
+// include category, confidence score, content, type, and start and end times.
+type CallAnalyticsEntity struct {
+
+	// The time, in milliseconds, from the beginning of the audio stream to the start
+	// of the identified entity.
+	BeginOffsetMillis *int64
+
+	// The category of information identified. For example, PII.
+	Category *string
+
+	// The confidence score associated with the identification of an entity in your
+	// transcript. Confidence scores are values between 0 and 1. A larger value
+	// indicates a higher probability that the identified entity correctly matches the
+	// entity spoken in your media.
+	Confidence *float64
+
+	// The word or words that represent the identified entity.
+	Content *string
+
+	// The time, in milliseconds, from the beginning of the audio stream to the end of
+	// the identified entity.
+	EndOffsetMillis *int64
+
+	// The type of PII identified. For example, NAME or CREDIT_DEBIT_NUMBER.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A word, phrase, or punctuation mark in your Call Analytics transcription output,
+// along with various associated attributes, such as confidence score, type, and
+// start and end times.
+type CallAnalyticsItem struct {
+
+	// The time, in milliseconds, from the beginning of the audio stream to the start
+	// of the identified item.
+	BeginOffsetMillis *int64
+
+	// The confidence score associated with a word or phrase in your transcript.
+	// Confidence scores are values between 0 and 1. A larger value indicates a higher
+	// probability that the identified item correctly matches the item spoken in your
+	// media.
+	Confidence *float64
+
+	// The word or punctuation that was transcribed.
+	Content *string
+
+	// The time, in milliseconds, from the beginning of the audio stream to the end of
+	// the identified item.
+	EndOffsetMillis *int64
+
+	// If partial result stabilization is enabled, Stable indicates whether the
+	// specified item is stable (true) or if it may change when the segment is complete
+	// (false).
+	Stable *bool
+
+	// The type of item identified. Options are: PRONUNCIATION (spoken words) and
+	// PUNCTUATION.
+	Type ItemType
+
+	// Indicates whether the specified item matches a word in the vocabulary filter
+	// included in your Call Analytics request. If true, there is a vocabulary filter
+	// match.
+	VocabularyFilterMatch bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about your Call Analytics streaming session. These
+// details are provided in the UtteranceEvent and CategoryEvent objects.
+//
+// The following types satisfy this interface:
+//
+//	CallAnalyticsTranscriptResultStreamMemberCategoryEvent
+//	CallAnalyticsTranscriptResultStreamMemberUtteranceEvent
+type CallAnalyticsTranscriptResultStream interface {
+	isCallAnalyticsTranscriptResultStream()
+}
+
+// Provides information on matched categories that were used to generate real-time
+// supervisor alerts.
+type CallAnalyticsTranscriptResultStreamMemberCategoryEvent struct {
+	Value CategoryEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*CallAnalyticsTranscriptResultStreamMemberCategoryEvent) isCallAnalyticsTranscriptResultStream() {
+}
+
+// Contains set of transcription results from one or more audio segments, along
+// with additional information per your request parameters. This can include
+// information relating to channel definitions, partial result stabilization,
+// sentiment, issue detection, and other transcription-related data.
+type CallAnalyticsTranscriptResultStreamMemberUtteranceEvent struct {
+	Value UtteranceEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*CallAnalyticsTranscriptResultStreamMemberUtteranceEvent) isCallAnalyticsTranscriptResultStream() {
+}
+
+// Provides information on any TranscriptFilterType categories that matched your
+// transcription output. Matches are identified for each segment upon completion of
+// that segment.
+type CategoryEvent struct {
+
+	// Lists the categories that were matched in your audio segment.
+	MatchedCategories []string
+
+	// Contains information about the matched categories, including category names and
+	// timestamps.
+	MatchedDetails map[string]PointsOfInterest
+
+	noSmithyDocumentSerde
+}
+
+// Makes it possible to specify which speaker is on which audio channel. For
+// example, if your agent is the first participant to speak, you would set
+// ChannelId to 0 (to indicate the first channel) and ParticipantRole to AGENT (to
+// indicate that it's the agent speaking).
+type ChannelDefinition struct {
+
+	// Specify the audio channel you want to define.
+	//
+	// This member is required.
+	ChannelId int32
+
+	// Specify the speaker you want to define. Omitting this parameter is equivalent to
+	// specifying both participants.
+	//
+	// This member is required.
+	ParticipantRole ParticipantRole
+
+	noSmithyDocumentSerde
+}
+
+// Provides the location, using character count, in your transcript where a match
+// is identified. For example, the location of an issue or a category match within
+// a segment.
+type CharacterOffsets struct {
+
+	// Provides the character count of the first character where a match is identified.
+	// For example, the first character associated with an issue or a category match in
+	// a segment transcript.
+	Begin *int32
+
+	// Provides the character count of the last character where a match is identified.
+	// For example, the last character associated with an issue or a category match in
+	// a segment transcript.
+	End *int32
+
+	noSmithyDocumentSerde
+}
+
+// Allows you to set audio channel definitions and post-call analytics settings.
+type ConfigurationEvent struct {
+
+	// Indicates which speaker is on which audio channel.
+	ChannelDefinitions []ChannelDefinition
+
+	// Provides additional optional settings for your Call Analytics post-call request,
+	// including encryption and output locations for your redacted and unredacted
+	// transcript.
+	PostCallAnalyticsSettings *PostCallAnalyticsSettings
+
+	noSmithyDocumentSerde
+}
 
 // Contains entities identified as personally identifiable information (PII) in
 // your transcription output, along with various associated attributes. Examples
@@ -84,6 +266,16 @@ type Entity struct {
 
 	// The type of PII identified. For example, NAME or CREDIT_DEBIT_NUMBER.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Lists the issues that were identified in your audio segment.
+type IssueDetected struct {
+
+	// Provides the timestamps that identify when in an audio segment the specified
+	// issue occurs.
+	CharacterOffsets *CharacterOffsets
 
 	noSmithyDocumentSerde
 }
@@ -302,6 +494,93 @@ type MedicalTranscriptResultStreamMemberTranscriptEvent struct {
 
 func (*MedicalTranscriptResultStreamMemberTranscriptEvent) isMedicalTranscriptResultStream() {}
 
+// Contains the timestamps of matched categories.
+type PointsOfInterest struct {
+
+	// Contains the timestamp ranges (start time through end time) of matched
+	// categories and rules.
+	TimestampRanges []TimestampRange
+
+	noSmithyDocumentSerde
+}
+
+// Allows you to specify additional settings for your streaming Call Analytics
+// post-call request, including output locations for your redacted and unredacted
+// transcript, which IAM role to use, and, optionally, which encryption key to use.
+// ContentRedactionOutput, DataAccessRoleArn, and OutputLocation are required
+// fields.
+type PostCallAnalyticsSettings struct {
+
+	// The Amazon Resource Name (ARN) of an IAM role that has permissions to access the
+	// Amazon S3 bucket that contains your input files. If the role that you specify
+	// doesn’t have the appropriate permissions to access the specified Amazon S3
+	// location, your request fails. IAM role ARNs have the format
+	// arn:partition:iam::account:role/role-name-with-path. For example:
+	// arn:aws:iam::111122223333:role/Admin. For more information, see IAM ARNs
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns).
+	//
+	// This member is required.
+	DataAccessRoleArn *string
+
+	// The Amazon S3 location where you want your Call Analytics post-call
+	// transcription output stored. You can use any of the following formats to specify
+	// the output location:
+	//
+	// * s3://DOC-EXAMPLE-BUCKET
+	//
+	// *
+	// s3://DOC-EXAMPLE-BUCKET/my-output-folder/
+	//
+	// *
+	// s3://DOC-EXAMPLE-BUCKET/my-output-folder/my-call-analytics-job.json
+	//
+	// This member is required.
+	OutputLocation *string
+
+	// Specify whether you want only a redacted transcript or both a redacted and an
+	// unredacted transcript. If you choose redacted and unredacted, two JSON files are
+	// generated and stored in the Amazon S3 output location you specify. Note that to
+	// include ContentRedactionOutput in your request, you must enable content
+	// redaction (ContentRedactionType).
+	ContentRedactionOutput ContentRedactionOutput
+
+	// The KMS key you want to use to encrypt your Call Analytics post-call output. If
+	// using a key located in the current Amazon Web Services account, you can specify
+	// your KMS key in one of four ways:
+	//
+	// * Use the KMS key ID itself. For example,
+	// 1234abcd-12ab-34cd-56ef-1234567890ab.
+	//
+	// * Use an alias for the KMS key ID. For
+	// example, alias/ExampleAlias.
+	//
+	// * Use the Amazon Resource Name (ARN) for the KMS
+	// key ID. For example,
+	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
+	//
+	// * Use
+	// the ARN for the KMS key alias. For example,
+	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
+	//
+	// If using a key located in a
+	// different Amazon Web Services account than the current Amazon Web Services
+	// account, you can specify your KMS key in one of two ways:
+	//
+	// * Use the ARN for the
+	// KMS key ID. For example,
+	// arn:aws:kms:region:account-ID:key/1234abcd-12ab-34cd-56ef-1234567890ab.
+	//
+	// * Use
+	// the ARN for the KMS key alias. For example,
+	// arn:aws:kms:region:account-ID:alias/ExampleAlias.
+	//
+	// Note that the user making the
+	// request must have permission to use the specified KMS key.
+	OutputEncryptionKMSKeyId *string
+
+	noSmithyDocumentSerde
+}
+
 // The Result associated with a . Contains a set of transcription results from one
 // or more audio segments, along with additional information per your request
 // parameters. This can include information relating to alternative transcriptions,
@@ -313,7 +592,7 @@ type Result struct {
 	// alternative may contain one or more of Items, Entities, or Transcript.
 	Alternatives []Alternative
 
-	// Indicates the channel identified for the Result.
+	// Indicates which audio channel is associated with the Result.
 	ChannelId *string
 
 	// The end time, in milliseconds, of the Result.
@@ -336,6 +615,21 @@ type Result struct {
 
 	// The start time, in milliseconds, of the Result.
 	StartTime float64
+
+	noSmithyDocumentSerde
+}
+
+// Contains the timestamp range (start time through end time) of a matched
+// category.
+type TimestampRange struct {
+
+	// The time, in milliseconds, from the beginning of the audio stream to the start
+	// of the category match.
+	BeginOffsetMillis *int64
+
+	// The time, in milliseconds, from the beginning of the audio stream to the end of
+	// the category match.
+	EndOffsetMillis *int64
 
 	noSmithyDocumentSerde
 }
@@ -390,6 +684,51 @@ type TranscriptResultStreamMemberTranscriptEvent struct {
 
 func (*TranscriptResultStreamMemberTranscriptEvent) isTranscriptResultStream() {}
 
+// Contains set of transcription results from one or more audio segments, along
+// with additional information about the parameters included in your request. For
+// example, channel definitions, partial result stabilization, sentiment, and issue
+// detection.
+type UtteranceEvent struct {
+
+	// The time, in milliseconds, from the beginning of the audio stream to the start
+	// of the UtteranceEvent.
+	BeginOffsetMillis *int64
+
+	// The time, in milliseconds, from the beginning of the audio stream to the start
+	// of the UtteranceEvent.
+	EndOffsetMillis *int64
+
+	// Contains entities identified as personally identifiable information (PII) in
+	// your transcription output.
+	Entities []CallAnalyticsEntity
+
+	// Indicates whether the segment in the UtteranceEvent is complete (FALSE) or
+	// partial (TRUE).
+	IsPartial bool
+
+	// Provides the issue that was detected in the specified segment.
+	IssuesDetected []IssueDetected
+
+	// Contains words, phrases, or punctuation marks that are associated with the
+	// specified UtteranceEvent.
+	Items []CallAnalyticsItem
+
+	// Provides the role of the speaker for each audio channel, either CUSTOMER or
+	// AGENT.
+	ParticipantRole ParticipantRole
+
+	// Provides the sentiment that was detected in the specified segment.
+	Sentiment Sentiment
+
+	// Contains transcribed text.
+	Transcript *string
+
+	// The unique identifier that is associated with the specified UtteranceEvent.
+	UtteranceId *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -401,6 +740,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAudioStream()                   {}
-func (*UnknownUnionMember) isMedicalTranscriptResultStream() {}
-func (*UnknownUnionMember) isTranscriptResultStream()        {}
+func (*UnknownUnionMember) isAudioStream()                         {}
+func (*UnknownUnionMember) isCallAnalyticsTranscriptResultStream() {}
+func (*UnknownUnionMember) isMedicalTranscriptResultStream()       {}
+func (*UnknownUnionMember) isTranscriptResultStream()              {}

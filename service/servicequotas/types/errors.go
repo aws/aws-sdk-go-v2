@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,13 +25,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The action you attempted is not allowed unless Service Access with Service
 // Quotas is enabled in your organization.
 type AWSServiceAccessNotEnabledException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -44,7 +53,10 @@ func (e *AWSServiceAccessNotEnabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AWSServiceAccessNotEnabledException) ErrorCode() string {
-	return "AWSServiceAccessNotEnabledException"
+	if e.ErrorCodeOverride == nil {
+		return "AWSServiceAccessNotEnabledException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *AWSServiceAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -53,6 +65,8 @@ func (e *AWSServiceAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 // You can't perform this action because a dependency does not have access.
 type DependencyAccessDeniedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -67,13 +81,18 @@ func (e *DependencyAccessDeniedException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DependencyAccessDeniedException) ErrorCode() string {
-	return "DependencyAccessDeniedException"
+	if e.ErrorCodeOverride == nil {
+		return "DependencyAccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *DependencyAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Invalid input was provided.
 type IllegalArgumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -87,12 +106,19 @@ func (e *IllegalArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IllegalArgumentException) ErrorCode() string             { return "IllegalArgumentException" }
+func (e *IllegalArgumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IllegalArgumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *IllegalArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Invalid input was provided.
 type InvalidPaginationTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -107,13 +133,18 @@ func (e *InvalidPaginationTokenException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *InvalidPaginationTokenException) ErrorCode() string {
-	return "InvalidPaginationTokenException"
+	if e.ErrorCodeOverride == nil {
+		return "InvalidPaginationTokenException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource is in an invalid state.
 type InvalidResourceStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -127,12 +158,19 @@ func (e *InvalidResourceStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidResourceStateException) ErrorCode() string             { return "InvalidResourceStateException" }
+func (e *InvalidResourceStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidResourceStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The account making this call is not a member of an organization.
 type NoAvailableOrganizationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -147,13 +185,18 @@ func (e *NoAvailableOrganizationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *NoAvailableOrganizationException) ErrorCode() string {
-	return "NoAvailableOrganizationException"
+	if e.ErrorCodeOverride == nil {
+		return "NoAvailableOrganizationException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *NoAvailableOrganizationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource does not exist.
 type NoSuchResourceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -167,12 +210,19 @@ func (e *NoSuchResourceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchResourceException) ErrorCode() string             { return "NoSuchResourceException" }
+func (e *NoSuchResourceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchResourceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The organization that your account belongs to is not in All Features mode.
 type OrganizationNotInAllFeaturesModeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -187,7 +237,10 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *OrganizationNotInAllFeaturesModeException) ErrorCode() string {
-	return "OrganizationNotInAllFeaturesModeException"
+	if e.ErrorCodeOverride == nil {
+		return "OrganizationNotInAllFeaturesModeException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *OrganizationNotInAllFeaturesModeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -198,6 +251,8 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorFault() smithy.ErrorFau
 // increase.
 type QuotaExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -211,12 +266,19 @@ func (e *QuotaExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *QuotaExceededException) ErrorCode() string             { return "QuotaExceededException" }
+func (e *QuotaExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "QuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *QuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -230,12 +292,19 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
+func (e *ResourceAlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Something went wrong.
 type ServiceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -249,12 +318,19 @@ func (e *ServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
+func (e *ServiceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The quota request template is not associated with your organization.
 type ServiceQuotaTemplateNotInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -269,7 +345,10 @@ func (e *ServiceQuotaTemplateNotInUseException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ServiceQuotaTemplateNotInUseException) ErrorCode() string {
-	return "ServiceQuotaTemplateNotInUseException"
+	if e.ErrorCodeOverride == nil {
+		return "ServiceQuotaTemplateNotInUseException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ServiceQuotaTemplateNotInUseException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -278,6 +357,8 @@ func (e *ServiceQuotaTemplateNotInUseException) ErrorFault() smithy.ErrorFault {
 // The specified tag is a reserved word and cannot be used.
 type TagPolicyViolationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -291,12 +372,19 @@ func (e *TagPolicyViolationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TagPolicyViolationException) ErrorCode() string             { return "TagPolicyViolationException" }
+func (e *TagPolicyViolationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TagPolicyViolationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TagPolicyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Service Quotas template is not available in this AWS Region.
 type TemplatesNotAvailableInRegionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -311,7 +399,10 @@ func (e *TemplatesNotAvailableInRegionException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TemplatesNotAvailableInRegionException) ErrorCode() string {
-	return "TemplatesNotAvailableInRegionException"
+	if e.ErrorCodeOverride == nil {
+		return "TemplatesNotAvailableInRegionException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *TemplatesNotAvailableInRegionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -321,6 +412,8 @@ func (e *TemplatesNotAvailableInRegionException) ErrorFault() smithy.ErrorFault 
 // or request an increase for this quota.
 type TooManyRequestsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -334,7 +427,12 @@ func (e *TooManyRequestsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyRequestsException) ErrorCode() string             { return "TooManyRequestsException" }
+func (e *TooManyRequestsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyRequestsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've exceeded the number of tags allowed for a resource. For more information,
@@ -343,6 +441,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // in the Service Quotas User Guide.
 type TooManyTagsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -356,5 +456,10 @@ func (e *TooManyTagsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTagsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

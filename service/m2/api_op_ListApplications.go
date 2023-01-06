@@ -13,8 +13,8 @@ import (
 )
 
 // Lists the applications associated with a specific Amazon Web Services account.
-// You can provide the unique identifier of a specific environment in a query
-// parameter to see all applications associated with that environment.
+// You can provide the unique identifier of a specific runtime environment in a
+// query parameter to see all applications associated with that environment.
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}
@@ -50,7 +50,8 @@ type ListApplicationsInput struct {
 
 type ListApplicationsOutput struct {
 
-	// Returns a list of summary details for all the applications in an environment.
+	// Returns a list of summary details for all the applications in a runtime
+	// environment.
 	//
 	// This member is required.
 	Applications []types.ApplicationSummary

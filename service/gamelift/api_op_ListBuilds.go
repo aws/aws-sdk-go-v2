@@ -17,9 +17,8 @@ import (
 // using the Status parameter. Use the pagination parameters to retrieve results in
 // a set of sequential pages. Build resources are not listed in any particular
 // order. Learn more  Upload a Custom Server Build
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
-// Related actions CreateBuild | ListBuilds | DescribeBuild | UpdateBuild |
-// DeleteBuild | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)All
+// APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ListBuilds(ctx context.Context, params *ListBuildsInput, optFns ...func(*Options)) (*ListBuildsOutput, error) {
 	if params == nil {
@@ -36,7 +35,6 @@ func (c *Client) ListBuilds(ctx context.Context, params *ListBuildsInput, optFns
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type ListBuildsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -66,7 +64,6 @@ type ListBuildsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type ListBuildsOutput struct {
 
 	// A collection of build resources that match the request.

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables enhanced Kinesis data stream monitoring for shard-level metrics.
+// Enables enhanced Kinesis data stream monitoring for shard-level metrics. When
+// invoking this API, it is recommended you use the StreamARN input parameter
+// rather than the StreamName input parameter.
 func (c *Client) EnableEnhancedMonitoring(ctx context.Context, params *EnableEnhancedMonitoringInput, optFns ...func(*Options)) (*EnableEnhancedMonitoringOutput, error) {
 	if params == nil {
 		params = &EnableEnhancedMonitoringInput{}
@@ -60,9 +62,10 @@ type EnableEnhancedMonitoringInput struct {
 	// This member is required.
 	ShardLevelMetrics []types.MetricsName
 
+	// The ARN of the stream.
+	StreamARN *string
+
 	// The name of the stream for which to enable enhanced monitoring.
-	//
-	// This member is required.
 	StreamName *string
 
 	noSmithyDocumentSerde
@@ -79,6 +82,9 @@ type EnableEnhancedMonitoringOutput struct {
 	// Represents the list of all the metrics that would be in the enhanced state after
 	// the operation.
 	DesiredShardLevelMetrics []types.MetricsName
+
+	// The ARN of the stream.
+	StreamARN *string
 
 	// The name of the Kinesis data stream.
 	StreamName *string

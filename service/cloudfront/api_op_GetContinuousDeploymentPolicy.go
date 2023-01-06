@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a continuous deployment policy, including metadata (the policy’s identifier
+// Gets a continuous deployment policy, including metadata (the policy's identifier
 // and the date and time when the policy was last modified).
 func (c *Client) GetContinuousDeploymentPolicy(ctx context.Context, params *GetContinuousDeploymentPolicyInput, optFns ...func(*Options)) (*GetContinuousDeploymentPolicyOutput, error) {
 	if params == nil {

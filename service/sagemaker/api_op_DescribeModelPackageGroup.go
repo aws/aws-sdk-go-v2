@@ -41,7 +41,7 @@ type DescribeModelPackageGroupInput struct {
 type DescribeModelPackageGroupOutput struct {
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	//
 	// This member is required.
 	CreatedBy *types.UserContext

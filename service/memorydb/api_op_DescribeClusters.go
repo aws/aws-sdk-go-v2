@@ -4,6 +4,7 @@ package memorydb
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
@@ -128,6 +129,98 @@ func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+// DescribeClustersAPIClient is a client that implements the DescribeClusters
+// operation.
+type DescribeClustersAPIClient interface {
+	DescribeClusters(context.Context, *DescribeClustersInput, ...func(*Options)) (*DescribeClustersOutput, error)
+}
+
+var _ DescribeClustersAPIClient = (*Client)(nil)
+
+// DescribeClustersPaginatorOptions is the paginator options for DescribeClusters
+type DescribeClustersPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxResults value, a token is included in the response so that
+	// the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeClustersPaginator is a paginator for DescribeClusters
+type DescribeClustersPaginator struct {
+	options   DescribeClustersPaginatorOptions
+	client    DescribeClustersAPIClient
+	params    *DescribeClustersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeClustersPaginator returns a new DescribeClustersPaginator
+func NewDescribeClustersPaginator(client DescribeClustersAPIClient, params *DescribeClustersInput, optFns ...func(*DescribeClustersPaginatorOptions)) *DescribeClustersPaginator {
+	if params == nil {
+		params = &DescribeClustersInput{}
+	}
+
+	options := DescribeClustersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeClustersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+		nextToken: params.NextToken,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeClustersPaginator) HasMorePages() bool {
+	return p.firstPage || (p.nextToken != nil && len(*p.nextToken) != 0)
+}
+
+// NextPage retrieves the next DescribeClusters page.
+func (p *DescribeClustersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeClustersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.DescribeClusters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken &&
+		prevToken != nil &&
+		p.nextToken != nil &&
+		*prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeClusters(region string) *awsmiddleware.RegisterServiceMetadata {

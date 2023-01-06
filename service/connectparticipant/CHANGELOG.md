@@ -1,3 +1,19 @@
+# v1.14.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.13.0 (2022-12-23)
+
+* **Feature**: Amazon Connect Chat introduces the Message Receipts feature. This feature allows agents and customers to receive message delivered and read receipts after they send a chat message.
+
+# v1.12.6 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.5 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.4 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

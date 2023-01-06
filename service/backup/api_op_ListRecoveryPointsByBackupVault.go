@@ -49,6 +49,10 @@ type ListRecoveryPointsByBackupVaultInput struct {
 	// Returns only recovery points that were created before the specified timestamp.
 	ByCreatedBefore *time.Time
 
+	// This returns only recovery points that match the specified parent (composite)
+	// recovery point Amazon Resource Name (ARN).
+	ByParentRecoveryPointArn *string
+
 	// Returns only recovery points that match the specified resource Amazon Resource
 	// Name (ARN).
 	ByResourceArn *string

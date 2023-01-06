@@ -1,5 +1,5 @@
 {
-    "smithy": "1.0",
+    "smithy": "2.0",
     "shapes": {
         "com.amazonaws.migrationhubrefactorspaces#AccessDeniedException": {
             "type": "structure",
@@ -345,10 +345,7 @@
             }
         },
         "com.amazonaws.migrationhubrefactorspaces#Boolean": {
-            "type": "boolean",
-            "traits": {
-                "smithy.api#box": {}
-            }
+            "type": "boolean"
         },
         "com.amazonaws.migrationhubrefactorspaces#CidrBlock": {
             "type": "string"
@@ -755,7 +752,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account owner of the service resource is always the\n      environment owner, regardless of which account creates the route. Routes target a service in\n      the application. If an application does not have any routes, then the first route must be\n      created as a <code>DEFAULT</code>\n            <code>RouteType</code>.</p>\n         <p>When created, the default route defaults to an active state so state is not a required\n      input. However, like all other state values the state of the default route can be updated\n      after creation, but only when all other routes are also inactive. Conversely, no route can be\n      active without the default route also being active.</p>\n         <p>When you create a route, Refactor Spaces configures the Amazon API Gateway to send traffic\n      to the target service as follows:</p>\n         <ul>\n            <li>\n               <p>If the service has a URL endpoint, and the endpoint resolves to a private IP address,\n          Refactor Spaces routes traffic using the API Gateway VPC link. </p>\n            </li>\n            <li>\n               <p>If the service has a URL endpoint, and the endpoint resolves to a public IP address,\n          Refactor Spaces routes traffic over the public internet.</p>\n            </li>\n            <li>\n               <p>If the service has an Lambda function endpoint, then Refactor Spaces\n          configures the Lambda function's resource policy to allow the application's\n            API Gateway to invoke the function.</p>\n            </li>\n         </ul>\n         <p>A one-time health check is performed on the service when either the route is updated from\n      inactive to active, or when it is created with an active state. If the health check fails, the\n      route transitions the route state to <code>FAILED</code>, an error code of\n        <code>SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE</code> is provided, and no traffic is sent to\n      the service.</p>\n         <p>For Lambda functions, the Lambda function state is checked. If the\n      function is not active, the function configuration is updated so that Lambda\n      resources are provisioned. If the Lambda state is <code>Failed</code>, then the\n      route creation fails. For more information, see the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html#SSS-GetFunctionConfiguration-response-State\">GetFunctionConfiguration's State response parameter</a> in the <i>Lambda Developer Guide</i>.</p>\n         <p>For Lambda endpoints, a check is performed to determine that a Lambda function with the\n      specified ARN exists. If it does not exist, the health check fails. For public URLs, a\n      connection is opened to the public endpoint. If the URL is not reachable, the health check\n      fails. </p>\n         <p>For private URLS, a target group is created on the Elastic Load Balancing and the target\n      group health check is run. The <code>HealthCheckProtocol</code>, <code>HealthCheckPort</code>,\n      and <code>HealthCheckPath</code> are the same protocol, port, and path specified in the URL or\n      health URL, if used. All other settings use the default values, as described in <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html\">Health checks\n        for your target groups</a>. The health check is considered successful if at least one\n      target within the target group transitions to a healthy state.</p>\n         <p>Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs, publicly-signed\n      certificates are supported. Private Certificate Authorities (CAs) are permitted only if the\n      CA's domain is also publicly resolvable.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Web Services Migration Hub Refactor Spaces route. The account owner of the service resource is always the\n      environment owner, regardless of which account creates the route. Routes target a service in\n      the application. If an application does not have any routes, then the first route must be\n      created as a <code>DEFAULT</code>\n            <code>RouteType</code>.</p>\n         <p>When created, the default route defaults to an active state so state is not a required\n      input. However, like all other state values the state of the default route can be updated\n      after creation, but only when all other routes are also inactive. Conversely, no route can be\n      active without the default route also being active.</p>\n         <p>When you create a route, Refactor Spaces configures the Amazon API Gateway to send traffic\n      to the target service as follows:</p>\n         <ul>\n            <li>\n               <p>If the service has a URL endpoint, and the endpoint resolves to a private IP address,\n          Refactor Spaces routes traffic using the API Gateway VPC link. </p>\n            </li>\n            <li>\n               <p>If the service has a URL endpoint, and the endpoint resolves to a public IP address,\n          Refactor Spaces routes traffic over the public internet.</p>\n            </li>\n            <li>\n               <p>If the service has an Lambda function endpoint, then Refactor Spaces\n          configures the Lambda function's resource policy to allow the application's\n            API Gateway to invoke the function.</p>\n            </li>\n         </ul>\n         <p>A one-time health check is performed on the service when either the route is updated from\n      inactive to active, or when it is created with an active state. If the health check fails, the\n      route transitions the route state to <code>FAILED</code>, an error code of\n        <code>SERVICE_ENDPOINT_HEALTH_CHECK_FAILURE</code> is provided, and no traffic is sent to\n      the service.</p>\n         <p>For Lambda functions, the Lambda function state is checked. If the\n      function is not active, the function configuration is updated so that Lambda\n      resources are provisioned. If the Lambda state is <code>Failed</code>, then the\n      route creation fails. For more information, see the <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/API_GetFunctionConfiguration.html#SSS-GetFunctionConfiguration-response-State\">GetFunctionConfiguration's State response parameter</a> in the <i>Lambda Developer Guide</i>.</p>\n         <p>For Lambda endpoints, a check is performed to determine that a Lambda function with the\n      specified ARN exists. If it does not exist, the health check fails. For public URLs, a\n      connection is opened to the public endpoint. If the URL is not reachable, the health check\n      fails. </p>\n         <p>Refactor Spaces automatically resolves the public Domain Name System (DNS) names that are set in\n        <a>CreateServiceRequest$UrlEndpoint</a> when you create a service. The DNS names\n      resolve when the DNS time-to-live (TTL) expires, or every 60 seconds for TTLs less than 60\n      seconds. This periodic DNS resolution ensures that the route configuration remains up-to-date. </p>\n         <p>For private URLS, a target group is created on the Elastic Load Balancing and the target\n      group health check is run. The <code>HealthCheckProtocol</code>, <code>HealthCheckPort</code>,\n      and <code>HealthCheckPath</code> are the same protocol, port, and path specified in the URL or\n      health URL, if used. All other settings use the default values, as described in <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/application/target-group-health-checks.html\">Health checks\n        for your target groups</a>. The health check is considered successful if at least one\n      target within the target group transitions to a healthy state.</p>\n         <p>Services can have HTTP or HTTPS URL endpoints. For HTTPS URLs, publicly-signed\n      certificates are supported. Private Certificate Authorities (CAs) are permitted only if the\n      CA's domain is also publicly resolvable.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}/routes",
@@ -799,7 +796,7 @@
                 "DefaultRoute": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#DefaultRouteInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Configuration for the default route type.\n    </p>"
+                        "smithy.api#documentation": "<p> Configuration for the default route type. </p>"
                     }
                 },
                 "UriPathRoute": {
@@ -988,7 +985,7 @@
                 "UrlEndpoint": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#UrlEndpointInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the URL endpoint type.</p>"
+                        "smithy.api#documentation": "<p>The configuration for the URL endpoint type. When creating a route to a service, Refactor Spaces\n      automatically resolves the address in the <code>UrlEndpointInput</code> object URL when the\n      Domain Name System (DNS) time-to-live (TTL) expires, or every 60 seconds for TTLs less than 60\n      seconds.</p>"
                     }
                 },
                 "LambdaEndpoint": {
@@ -1124,7 +1121,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      The configuration for the default route type.\n    </p>"
+                "smithy.api#documentation": "<p> The configuration for the default route type. </p>"
             }
         },
         "com.amazonaws.migrationhubrefactorspaces#DeleteApplication": {
@@ -2735,7 +2732,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:\n(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
             }
         },
         "com.amazonaws.migrationhubrefactorspaces#LambdaEndpointConfig": {
@@ -2758,7 +2755,7 @@
                 "Arn": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#LambdaArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda endpoint. </p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function or alias.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3288,7 +3285,6 @@
         "com.amazonaws.migrationhubrefactorspaces#MaxResults": {
             "type": "integer",
             "traits": {
-                "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1,
                     "max": 100
@@ -3448,34 +3444,6 @@
         },
         "com.amazonaws.migrationhubrefactorspaces#RefactorSpaces": {
             "type": "service",
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "Migration Hub Refactor Spaces",
-                    "arnNamespace": "refactor-spaces",
-                    "cloudFormationName": "RefactorSpaces",
-                    "cloudTrailEventSource": "refactor-spaces.amazonaws.com",
-                    "endpointPrefix": "refactor-spaces"
-                },
-                "aws.auth#sigv4": {
-                    "name": "refactor-spaces"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {
-                    "additionalAllowedHeaders": [
-                        "content-type"
-                    ],
-                    "additionalExposedHeaders": [
-                        "date",
-                        "x-amz-apigw-id",
-                        "x-amzn-trace-id",
-                        "x-amzn-errortype",
-                        "x-amzn-requestid",
-                        "x-amzn-errormessage"
-                    ]
-                },
-                "smithy.api#documentation": "<fullname>Amazon Web Services Migration Hub Refactor Spaces</fullname>\n    \n         <p>This API reference provides descriptions, syntax, and other details about each of the\n      actions and data types for Amazon Web Services Migration Hub Refactor Spaces (Refactor Spaces). The topic for each action shows the API\n      request parameters and the response. Alternatively, you can use one of the Amazon Web Services SDKs to\n      access an API that is tailored to the programming language or platform that you're using. For\n      more information, see <a href=\"https://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>To share Refactor Spaces environments with other Amazon Web Services accounts or with Organizations\n      and their OUs, use Resource Access Manager's <code>CreateResourceShare</code> API. See <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html\">CreateResourceShare</a> in the <i>Amazon Web Services RAM API Reference</i>.</p>",
-                "smithy.api#title": "AWS Migration Hub Refactor Spaces"
-            },
             "version": "2021-10-26",
             "operations": [
                 {
@@ -3550,7 +3518,387 @@
                 {
                     "target": "com.amazonaws.migrationhubrefactorspaces#UpdateRoute"
                 }
-            ]
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Migration Hub Refactor Spaces",
+                    "arnNamespace": "refactor-spaces",
+                    "cloudFormationName": "RefactorSpaces",
+                    "cloudTrailEventSource": "refactor-spaces.amazonaws.com",
+                    "endpointPrefix": "refactor-spaces"
+                },
+                "aws.auth#sigv4": {
+                    "name": "refactor-spaces"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "content-type"
+                    ],
+                    "additionalExposedHeaders": [
+                        "date",
+                        "x-amz-apigw-id",
+                        "x-amzn-trace-id",
+                        "x-amzn-errortype",
+                        "x-amzn-requestid",
+                        "x-amzn-errormessage"
+                    ]
+                },
+                "smithy.api#documentation": "<fullname>Amazon Web Services Migration Hub Refactor Spaces</fullname>\n         <p>This API reference provides descriptions, syntax, and other details about each of the\n      actions and data types for Amazon Web Services Migration Hub Refactor Spaces (Refactor Spaces). The topic for each action shows the API\n      request parameters and the response. Alternatively, you can use one of the Amazon Web Services SDKs to\n      access an API that is tailored to the programming language or platform that you're using. For\n      more information, see <a href=\"https://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p>\n         <p>To share Refactor Spaces environments with other Amazon Web Services accounts or with Organizations\n      and their OUs, use Resource Access Manager's <code>CreateResourceShare</code> API. See <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_CreateResourceShare.html\">CreateResourceShare</a> in the <i>Amazon Web Services RAM API Reference</i>.</p>",
+                "smithy.api#title": "AWS Migration Hub Refactor Spaces",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://refactor-spaces-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://refactor-spaces-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://refactor-spaces.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://refactor-spaces.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
         },
         "com.amazonaws.migrationhubrefactorspaces#ResourceArn": {
             "type": "string",
@@ -3613,7 +3961,10 @@
             }
         },
         "com.amazonaws.migrationhubrefactorspaces#RetryAfterSeconds": {
-            "type": "integer"
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.migrationhubrefactorspaces#RouteActivationState": {
             "type": "string",
@@ -4145,6 +4496,7 @@
                 "RetryAfterSeconds": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#RetryAfterSeconds",
                     "traits": {
+                        "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The number of seconds to wait before retrying. </p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
@@ -4249,7 +4601,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n    Updates an Amazon Web Services Migration Hub Refactor Spaces route.\n  </p>",
+                "smithy.api#documentation": "<p> Updates an Amazon Web Services Migration Hub Refactor Spaces route. </p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/environments/{EnvironmentIdentifier}/applications/{ApplicationIdentifier}/routes/{RouteIdentifier}",
@@ -4263,7 +4615,7 @@
                 "EnvironmentIdentifier": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#EnvironmentId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID of the environment in which the route is being updated.\n    </p>",
+                        "smithy.api#documentation": "<p> The ID of the environment in which the route is being updated. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4271,7 +4623,7 @@
                 "ApplicationIdentifier": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID of the application within which the route is being updated.\n    </p>",
+                        "smithy.api#documentation": "<p> The ID of the application within which the route is being updated. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4279,7 +4631,7 @@
                 "RouteIdentifier": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#RouteId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The unique identifier of the route to update.\n    </p>",
+                        "smithy.api#documentation": "<p> The unique identifier of the route to update. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4299,37 +4651,37 @@
                 "RouteId": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#RouteId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The unique identifier of the route.\n    </p>"
+                        "smithy.api#documentation": "<p> The unique identifier of the route. </p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#ResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Amazon Resource Name (ARN) of the route. The format for this ARN is \n<code>arn:aws:refactor-spaces:<i>region</i>:<i>account-id</i>:<i>resource-type/resource-id</i>\n            </code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>Amazon Web Services General Reference</i>.\n    </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the route. The format for this ARN is \n<code>arn:aws:refactor-spaces:<i>region</i>:<i>account-id</i>:<i>resource-type/resource-id</i>\n            </code>. For more information about ARNs, \nsee <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">\n                    Amazon Resource Names (ARNs)</a> in the \n                    <i>Amazon Web Services General Reference</i>. </p>"
                     }
                 },
                 "ServiceId": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#ServiceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID of service in which the route was created. Traffic that matches this route is forwarded to this service.\n    </p>"
+                        "smithy.api#documentation": "<p> The ID of service in which the route was created. Traffic that matches this route is\n      forwarded to this service. </p>"
                     }
                 },
                 "ApplicationId": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#ApplicationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The ID of the application in which the route is being updated.\n    </p>"
+                        "smithy.api#documentation": "<p> The ID of the application in which the route is being updated. </p>"
                     }
                 },
                 "State": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#RouteState",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The current state of the route.\n    </p>"
+                        "smithy.api#documentation": "<p> The current state of the route. </p>"
                     }
                 },
                 "LastUpdatedTime": {
                     "target": "com.amazonaws.migrationhubrefactorspaces#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      A timestamp that indicates when the route was last updated.\n    </p>"
+                        "smithy.api#documentation": "<p> A timestamp that indicates when the route was last updated. </p>"
                     }
                 }
             }

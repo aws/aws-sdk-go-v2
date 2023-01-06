@@ -11,9 +11,11 @@ import (
 )
 
 // Removes tags from the specified Kinesis data stream. Removed tags are deleted
-// and cannot be recovered after this operation successfully completes. If you
-// specify a tag that does not exist, it is ignored. RemoveTagsFromStream has a
-// limit of five transactions per second per account.
+// and cannot be recovered after this operation successfully completes. When
+// invoking this API, it is recommended you use the StreamARN input parameter
+// rather than the StreamName input parameter. If you specify a tag that does not
+// exist, it is ignored. RemoveTagsFromStream has a limit of five transactions per
+// second per account.
 func (c *Client) RemoveTagsFromStream(ctx context.Context, params *RemoveTagsFromStreamInput, optFns ...func(*Options)) (*RemoveTagsFromStreamOutput, error) {
 	if params == nil {
 		params = &RemoveTagsFromStreamInput{}
@@ -32,15 +34,16 @@ func (c *Client) RemoveTagsFromStream(ctx context.Context, params *RemoveTagsFro
 // Represents the input for RemoveTagsFromStream.
 type RemoveTagsFromStreamInput struct {
 
-	// The name of the stream.
-	//
-	// This member is required.
-	StreamName *string
-
 	// A list of tag keys. Each corresponding tag is removed from the stream.
 	//
 	// This member is required.
 	TagKeys []string
+
+	// The ARN of the stream.
+	StreamARN *string
+
+	// The name of the stream.
+	StreamName *string
 
 	noSmithyDocumentSerde
 }

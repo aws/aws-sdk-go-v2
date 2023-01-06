@@ -12,7 +12,7 @@ import (
 )
 
 // Sends a response to the originator of a handshake agreeing to the action
-// proposed by the handshake request. This operation can be called only by the
+// proposed by the handshake request. You can only call this operation by the
 // following principals when they also have the relevant IAM permissions:
 //
 // *

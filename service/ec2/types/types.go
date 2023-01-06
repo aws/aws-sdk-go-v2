@@ -594,6 +594,31 @@ type AthenaIntegration struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the ENA Express configuration for the network interface that's
+// attached to the instance.
+type AttachmentEnaSrdSpecification struct {
+
+	// Indicates whether ENA Express is enabled for the network interface that's
+	// attached to the instance.
+	EnaSrdEnabled *bool
+
+	// ENA Express configuration for UDP network traffic.
+	EnaSrdUdpSpecification *AttachmentEnaSrdUdpSpecification
+
+	noSmithyDocumentSerde
+}
+
+// Describes the ENA Express configuration for UDP traffic on the network interface
+// that's attached to the instance.
+type AttachmentEnaSrdUdpSpecification struct {
+
+	// Indicates whether UDP traffic to and from the instance uses ENA Express. To
+	// specify this setting, you must first enable ENA Express.
+	EnaSrdUdpEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Describes a value for a resource attribute that is a Boolean value.
 type AttributeBooleanValue struct {
 
@@ -2135,6 +2160,78 @@ type CreateTransitGatewayVpcAttachmentRequestOptions struct {
 	noSmithyDocumentSerde
 }
 
+// Options for a network interface-type endpoint.
+type CreateVerifiedAccessEndpointEniOptions struct {
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string
+
+	// The IP port number.
+	Port *int32
+
+	// The IP protocol.
+	Protocol VerifiedAccessEndpointProtocol
+
+	noSmithyDocumentSerde
+}
+
+// Describes a load balancer when creating an Amazon Web Services Verified Access
+// endpoint using the load-balancer type.
+type CreateVerifiedAccessEndpointLoadBalancerOptions struct {
+
+	// The ARN of the load balancer.
+	LoadBalancerArn *string
+
+	// The IP port number.
+	Port *int32
+
+	// The IP protocol.
+	Protocol VerifiedAccessEndpointProtocol
+
+	// The IDs of the subnets.
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Options for a device-identity type trust provider.
+type CreateVerifiedAccessTrustProviderDeviceOptions struct {
+
+	// The ID of the tenant application with the device-identity provider.
+	TenantId *string
+
+	noSmithyDocumentSerde
+}
+
+// Options for an OIDC-based, user-identity type trust provider.
+type CreateVerifiedAccessTrustProviderOidcOptions struct {
+
+	// The OIDC authorization endpoint.
+	AuthorizationEndpoint *string
+
+	// The client identifier.
+	ClientId *string
+
+	// The client secret.
+	ClientSecret *string
+
+	// The OIDC issuer.
+	Issuer *string
+
+	// OpenID Connect (OIDC) scopes are used by an application during authentication to
+	// authorize access to a user's details. Each scope returns a specific set of user
+	// attributes.
+	Scope *string
+
+	// The OIDC token endpoint.
+	TokenEndpoint *string
+
+	// The OIDC user info endpoint.
+	UserInfoEndpoint *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the user or group to be added or removed from the list of create
 // volume permissions for a volume.
 type CreateVolumePermission struct {
@@ -2210,6 +2307,72 @@ type CustomerGateway struct {
 
 	// The type of VPN connection the customer gateway supports (ipsec.1).
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A query used for retrieving network health data.
+type DataQuery struct {
+
+	// The Region or Availability Zone that's the target for the data query. For
+	// example, eu-north-1.
+	Destination *string
+
+	// A user-defined ID associated with a data query that's returned in the
+	// dataResponse identifying the query. For example, if you set the Id to
+	// MyQuery01in the query, the dataResponse identifies the query as MyQuery01.
+	Id *string
+
+	// The aggregation metric used for the data query. Currently only
+	// aggregation-latency is supported, indicating network latency.
+	Metric MetricType
+
+	// The aggregation period used for the data query.
+	Period PeriodType
+
+	// The Region or Availability Zone that's the source for the data query. For
+	// example, us-east-1.
+	Source *string
+
+	// Metric data aggregations over specified periods of time. The following are the
+	// supported Infrastructure Performance statistics:
+	//
+	// * p50 - The median value of
+	// the metric aggregated over a specified start and end time. For example, a metric
+	// of five_minutes is the median of all the data points gathered within those five
+	// minutes.
+	Statistic StatisticType
+
+	noSmithyDocumentSerde
+}
+
+// The response to a DataQuery.
+type DataResponse struct {
+
+	// The Region or Availability Zone that's the destination for the data query. For
+	// example, eu-west-1.
+	Destination *string
+
+	// The ID passed in the DataQuery.
+	Id *string
+
+	// The metric used for the network performance request. Currently only
+	// aggregate-latency is supported, showing network latency during a specified
+	// period.
+	Metric MetricType
+
+	// A list of MetricPoint objects.
+	MetricPoints []MetricPoint
+
+	// The period used for the network performance request.
+	Period PeriodType
+
+	// The Region or Availability Zone that's the source for the data query. For
+	// example, us-east-1.
+	Source *string
+
+	// The statistic used for the network performance request.
+	Statistic StatisticType
 
 	noSmithyDocumentSerde
 }
@@ -2481,6 +2644,16 @@ type DestinationOptionsResponse struct {
 
 	// Indicates whether to partition the flow log per hour.
 	PerHourPartition *bool
+
+	noSmithyDocumentSerde
+}
+
+// Options for an Amazon Web Services Verified Access device-identity based trust
+// provider.
+type DeviceOptions struct {
+
+	// The ID of the tenant application with the device-identity provider.
+	TenantId *string
 
 	noSmithyDocumentSerde
 }
@@ -3150,6 +3323,42 @@ type EnableFastSnapshotRestoreSuccessItem struct {
 	// * Client.UserInitiated - Lifecycle state transition - The state
 	// successfully transitioned to optimizing, enabled, or disabled.
 	StateTransitionReason *string
+
+	noSmithyDocumentSerde
+}
+
+// ENA Express uses Amazon Web Services Scalable Reliable Datagram (SRD) technology
+// to increase the maximum bandwidth used per stream and minimize tail latency of
+// network traffic between EC2 instances. With ENA Express, you can communicate
+// between two EC2 instances in the same subnet within the same account, or in
+// different accounts. Both sending and receiving instances must have ENA Express
+// enabled. To improve the reliability of network packet delivery, ENA Express
+// reorders network packets on the receiving end by default. However, some
+// UDP-based applications are designed to handle network packets that are out of
+// order to reduce the overhead for packet delivery at the network layer. When ENA
+// Express is enabled, you can specify whether UDP network traffic uses it.
+type EnaSrdSpecification struct {
+
+	// Indicates whether ENA Express is enabled for the network interface.
+	EnaSrdEnabled *bool
+
+	// Configures ENA Express for UDP network traffic.
+	EnaSrdUdpSpecification *EnaSrdUdpSpecification
+
+	noSmithyDocumentSerde
+}
+
+// ENA Express is compatible with both TCP and UDP transport protocols. When it’s
+// enabled, TCP traffic automatically uses it. However, some UDP-based applications
+// are designed to handle network packets that are out of order, without a need for
+// retransmission, such as live video broadcasting or other near-real-time
+// applications. For UDP traffic, you can specify whether to use ENA Express, based
+// on your application environment needs.
+type EnaSrdUdpSpecification struct {
+
+	// Indicates whether UDP traffic uses ENA Express. To specify this setting, you
+	// must first enable ENA Express.
+	EnaSrdUdpEnabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -4231,6 +4440,8 @@ type FpgaImage struct {
 	// The FPGA image identifier (AFI ID).
 	FpgaImageId *string
 
+	InstanceTypes []string
+
 	// The name of the AFI.
 	Name *string
 
@@ -4737,7 +4948,7 @@ type Image struct {
 
 	// The boot mode of the image. For more information, see Boot modes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
+	// Amazon EC2 User Guide.
 	BootMode BootModeValues
 
 	// The date and time the image was created.
@@ -4776,7 +4987,7 @@ type Image struct {
 	// metadata. In addition, HttpPutResponseHopLimit is set to 2. For more
 	// information, see Configure the AMI
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configuring-IMDS-new-instances.html#configure-IMDS-new-instances-ami-configuration)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// in the Amazon EC2 User Guide.
 	ImdsSupport ImdsSupportValues
 
 	// The kernel associated with the image, if any. Only applicable for machine
@@ -4795,7 +5006,7 @@ type Image struct {
 	// The platform details associated with the billing code of the AMI. For more
 	// information, see Understand AMI billing information
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html) in
-	// the Amazon Elastic Compute Cloud User Guide.
+	// the Amazon EC2 User Guide.
 	PlatformDetails *string
 
 	// Any product codes associated with the AMI.
@@ -4834,7 +5045,7 @@ type Image struct {
 	// If the image is configured for NitroTPM support, the value is v2.0. For more
 	// information, see NitroTPM
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nitrotpm.html) in the
-	// Amazon Elastic Compute Cloud User Guide.
+	// Amazon EC2 User Guide.
 	TpmSupport TpmSupportValues
 
 	// The operation of the Amazon EC2 instance and the billing code that is associated
@@ -8804,7 +9015,7 @@ type LocalGatewayRouteTable struct {
 	// The state of the local gateway route table.
 	State *string
 
-	// Describes a state change.
+	// Information about the state change.
 	StateReason *StateReason
 
 	// The tags assigned to the local gateway route table.
@@ -9037,6 +9248,28 @@ type MemoryMiBRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Indicates whether the network was healthy or unhealthy at a particular point.
+// The value is aggregated from the startDate to the endDate. Currently only
+// five_minutes is supported.
+type MetricPoint struct {
+
+	// The end date for the metric point. The ending time must be formatted as
+	// yyyy-mm-ddThh:mm:ss. For example, 2022-06-12T12:00:00.000Z.
+	EndDate *time.Time
+
+	// The start date for the metric point. The starting date for the metric point. The
+	// starting time must be formatted as yyyy-mm-ddThh:mm:ss. For example,
+	// 2022-06-10T12:00:00.000Z.
+	StartDate *time.Time
+
+	// The status of the metric point.
+	Status *string
+
+	Value *float32
+
+	noSmithyDocumentSerde
+}
+
 // The transit gateway options.
 type ModifyTransitGatewayOptions struct {
 
@@ -9093,6 +9326,45 @@ type ModifyTransitGatewayVpcAttachmentRequestOptions struct {
 
 	// Enable or disable IPv6 support. The default is enable.
 	Ipv6Support Ipv6SupportValue
+
+	noSmithyDocumentSerde
+}
+
+// Options for a network-interface type Verified Access endpoint.
+type ModifyVerifiedAccessEndpointEniOptions struct {
+
+	// The IP port number.
+	Port *int32
+
+	// The IP protocol.
+	Protocol VerifiedAccessEndpointProtocol
+
+	noSmithyDocumentSerde
+}
+
+// Describes a load balancer when creating an Amazon Web Services Verified Access
+// endpoint using the load-balancer type.
+type ModifyVerifiedAccessEndpointLoadBalancerOptions struct {
+
+	// The IP port number.
+	Port *int32
+
+	// The IP protocol.
+	Protocol VerifiedAccessEndpointProtocol
+
+	// The IDs of the subnets.
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// OpenID Connect options for an oidc-type, user-identity based trust provider.
+type ModifyVerifiedAccessTrustProviderOidcOptions struct {
+
+	// OpenID Connect (OIDC) scopes are used by an application during authentication to
+	// authorize access to a user's details. Each scope returns a specific set of user
+	// attributes.
+	Scope *string
 
 	noSmithyDocumentSerde
 }
@@ -9488,6 +9760,12 @@ type NetworkInfo struct {
 	// Indicates whether Elastic Fabric Adapter (EFA) is supported.
 	EfaSupported *bool
 
+	// Indicates whether the instance type supports ENA Express. ENA Express uses
+	// Amazon Web Services Scalable Reliable Datagram (SRD) technology to increase the
+	// maximum bandwidth used per stream and minimize tail latency of network traffic
+	// between EC2 instances.
+	EnaSrdSupported *bool
+
 	// Indicates whether Elastic Network Adapter (ENA) is supported.
 	EnaSupport EnaSupport
 
@@ -9598,6 +9876,9 @@ type NetworkInsightsAccessScopeContent struct {
 // Describes a network insights analysis.
 type NetworkInsightsAnalysis struct {
 
+	// The member accounts that contain resources that the path can traverse.
+	AdditionalAccounts []string
+
 	// Potential intermediate components.
 	AlternatePathHints []AlternatePathHint
 
@@ -9637,6 +9918,9 @@ type NetworkInsightsAnalysis struct {
 	// The status message, if the status is failed.
 	StatusMessage *string
 
+	// Potential intermediate accounts.
+	SuggestedAccounts []string
+
 	// The tags.
 	Tags []Tag
 
@@ -9654,6 +9938,9 @@ type NetworkInsightsPath struct {
 
 	// The Amazon Web Services resource that is the destination of the path.
 	Destination *string
+
+	// The Amazon Resource Name (ARN) of the destination.
+	DestinationArn *string
 
 	// The IP address of the Amazon Web Services resource that is the destination of
 	// the path.
@@ -9673,6 +9960,9 @@ type NetworkInsightsPath struct {
 
 	// The Amazon Web Services resource that is the source of the path.
 	Source *string
+
+	// The Amazon Resource Name (ARN) of the source.
+	SourceArn *string
 
 	// The IP address of the Amazon Web Services resource that is the source of the
 	// path.
@@ -9821,6 +10111,10 @@ type NetworkInterfaceAttachment struct {
 	// The device index of the network interface attachment on the instance.
 	DeviceIndex *int32
 
+	// Configures ENA Express for the network interface that this action attaches to
+	// the instance.
+	EnaSrdSpecification *AttachmentEnaSrdSpecification
+
 	// The ID of the instance.
 	InstanceId *string
 
@@ -9950,6 +10244,33 @@ type NewDhcpConfiguration struct {
 
 	// One or more values for the DHCP option.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Options for OIDC-based, user-identity type trust provider.
+type OidcOptions struct {
+
+	// The OIDC authorization endpoint.
+	AuthorizationEndpoint *string
+
+	// The client identifier.
+	ClientId *string
+
+	// The client secret.
+	ClientSecret *string
+
+	// The OIDC issuer.
+	Issuer *string
+
+	// The OpenID Connect (OIDC) scope specified.
+	Scope *string
+
+	// The OIDC token endpoint.
+	TokenEndpoint *string
+
+	// The OIDC user info endpoint.
+	UserInfoEndpoint *string
 
 	noSmithyDocumentSerde
 }
@@ -10366,54 +10687,55 @@ type Phase2IntegrityAlgorithmsRequestListValue struct {
 type Placement struct {
 
 	// The affinity setting for the instance on the Dedicated Host. This parameter is
-	// not supported for the ImportInstance
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html)
-	// command. This parameter is not supported by CreateFleet
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
+	// not supported for CreateFleet
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet) or
+	// ImportInstance
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html).
 	Affinity *string
 
 	// The Availability Zone of the instance. If not specified, an Availability Zone
 	// will be automatically chosen for you based on the load balancing criteria for
-	// the Region. This parameter is not supported by CreateFleet
+	// the Region. This parameter is not supported for CreateFleet
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
 	AvailabilityZone *string
 
-	// The Group Id of the placement group.
+	// The ID of the placement group that the instance is in. If you specify GroupId,
+	// you can't specify GroupName.
 	GroupId *string
 
-	// The name of the placement group the instance is in.
+	// The name of the placement group that the instance is in. If you specify
+	// GroupName, you can't specify GroupId.
 	GroupName *string
 
 	// The ID of the Dedicated Host on which the instance resides. This parameter is
-	// not supported for the ImportInstance
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html)
-	// command. This parameter is not supported by CreateFleet
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
+	// not supported for CreateFleet
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet) or
+	// ImportInstance
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html).
 	HostId *string
 
 	// The ARN of the host resource group in which to launch the instances. If you
-	// specify a host resource group ARN, omit the Tenancy parameter or set it to host.
-	// This parameter is not supported by CreateFleet
+	// specify this parameter, either omit the Tenancy parameter or set it to host.
+	// This parameter is not supported for CreateFleet
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
 	HostResourceGroupArn *string
 
 	// The number of the partition that the instance is in. Valid only if the placement
-	// group strategy is set to partition. This parameter is not supported by
+	// group strategy is set to partition. This parameter is not supported for
 	// CreateFleet
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
 	PartitionNumber *int32
 
-	// Reserved for future use. This parameter is not supported by CreateFleet
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
+	// Reserved for future use.
 	SpreadDomain *string
 
 	// The tenancy of the instance (if the instance is running in a VPC). An instance
-	// with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is
-	// not supported for the ImportInstance
+	// with a tenancy of dedicated runs on single-tenant hardware. This parameter is
+	// not supported for CreateFleet
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet). The
+	// host tenancy is not supported for ImportInstance
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html)
-	// command. This parameter is not supported by CreateFleet
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet). T3
-	// instances that use the unlimited CPU credit option do not support host tenancy.
+	// or for T3 instances that are configured for the unlimited CPU credit option.
 	Tenancy Tenancy
 
 	noSmithyDocumentSerde
@@ -13194,24 +13516,32 @@ type SpotFleetRequestConfigData struct {
 	// across the Spot Instance pools specified by the Spot Fleet launch configuration.
 	// For more information, see Allocation strategies for Spot Instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-fleet-allocation-strategy.html)
-	// in the Amazon EC2 User Guide. lowestPrice - Spot Fleet launches instances from
-	// the lowest-price Spot Instance pool that has available capacity. If the cheapest
-	// pool doesn't have available capacity, the Spot Instances come from the next
-	// cheapest pool that has available capacity. If a pool runs out of capacity before
-	// fulfilling your desired capacity, Spot Fleet will continue to fulfill your
-	// request by drawing from the next cheapest pool. To ensure that your desired
-	// capacity is met, you might receive Spot Instances from several pools.
-	// diversified - Spot Fleet launches instances from all of the Spot Instance pools
-	// that you specify. capacityOptimized (recommended) - Spot Fleet launches
-	// instances from Spot Instance pools with optimal capacity for the number of
-	// instances that are launching. To give certain instance types a higher chance of
-	// launching first, use capacityOptimizedPrioritized. Set a priority for each
-	// instance type by using the Priority parameter for LaunchTemplateOverrides. You
-	// can assign the same priority to different LaunchTemplateOverrides. EC2
-	// implements the priorities on a best-effort basis, but optimizes for capacity
-	// first. capacityOptimizedPrioritized is supported only if your Spot Fleet uses a
-	// launch template. Note that if the OnDemandAllocationStrategy is set to
-	// prioritized, the same priority is applied when fulfilling On-Demand capacity.
+	// in the Amazon EC2 User Guide. priceCapacityOptimized (recommended) Spot Fleet
+	// identifies the pools with the highest capacity availability for the number of
+	// instances that are launching. This means that we will request Spot Instances
+	// from the pools that we believe have the lowest chance of interruption in the
+	// near term. Spot Fleet then requests Spot Instances from the lowest priced of
+	// these pools. capacityOptimized Spot Fleet identifies the pools with the highest
+	// capacity availability for the number of instances that are launching. This means
+	// that we will request Spot Instances from the pools that we believe have the
+	// lowest chance of interruption in the near term. To give certain instance types a
+	// higher chance of launching first, use capacityOptimizedPrioritized. Set a
+	// priority for each instance type by using the Priority parameter for
+	// LaunchTemplateOverrides. You can assign the same priority to different
+	// LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis,
+	// but optimizes for capacity first. capacityOptimizedPrioritized is supported only
+	// if your Spot Fleet uses a launch template. Note that if the
+	// OnDemandAllocationStrategy is set to prioritized, the same priority is applied
+	// when fulfilling On-Demand capacity. diversified Spot Fleet requests instances
+	// from all of the Spot Instance pools that you specify. lowestPrice Spot Fleet
+	// requests instances from the lowest priced Spot Instance pool that has available
+	// capacity. If the lowest priced pool doesn't have available capacity, the Spot
+	// Instances come from the next lowest priced pool that has available capacity. If
+	// a pool runs out of capacity before fulfilling your desired capacity, Spot Fleet
+	// will continue to fulfill your request by drawing from the next lowest priced
+	// pool. To ensure that your desired capacity is met, you might receive Spot
+	// Instances from several pools. Because this strategy only considers instance
+	// price and not capacity availability, it might lead to high interruption rates.
 	// Default: lowestPrice
 	AllocationStrategy AllocationStrategy
 
@@ -13549,25 +13879,33 @@ type SpotOptions struct {
 	// across the Spot Instance pools specified by the EC2 Fleet launch configuration.
 	// For more information, see Allocation strategies for Spot Instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html)
-	// in the Amazon EC2 User Guide. lowest-price - EC2 Fleet launches instances from
-	// the lowest-price Spot Instance pool that has available capacity. If the cheapest
-	// pool doesn't have available capacity, the Spot Instances come from the next
-	// cheapest pool that has available capacity. If a pool runs out of capacity before
-	// fulfilling your desired capacity, EC2 Fleet will continue to fulfill your
-	// request by drawing from the next cheapest pool. To ensure that your desired
-	// capacity is met, you might receive Spot Instances from several pools.
-	// diversified - EC2 Fleet launches instances from all of the Spot Instance pools
-	// that you specify. capacity-optimized (recommended) - EC2 Fleet launches
-	// instances from Spot Instance pools with optimal capacity for the number of
-	// instances that are launching. To give certain instance types a higher chance of
-	// launching first, use capacity-optimized-prioritized. Set a priority for each
-	// instance type by using the Priority parameter for LaunchTemplateOverrides. You
-	// can assign the same priority to different LaunchTemplateOverrides. EC2
-	// implements the priorities on a best-effort basis, but optimizes for capacity
-	// first. capacity-optimized-prioritized is supported only if your fleet uses a
-	// launch template. Note that if the On-Demand AllocationStrategy is set to
-	// prioritized, the same priority is applied when fulfilling On-Demand capacity.
-	// Default: lowest-price
+	// in the Amazon EC2 User Guide. price-capacity-optimized (recommended) EC2 Fleet
+	// identifies the pools with the highest capacity availability for the number of
+	// instances that are launching. This means that we will request Spot Instances
+	// from the pools that we believe have the lowest chance of interruption in the
+	// near term. EC2 Fleet then requests Spot Instances from the lowest priced of
+	// these pools. capacity-optimized EC2 Fleet identifies the pools with the highest
+	// capacity availability for the number of instances that are launching. This means
+	// that we will request Spot Instances from the pools that we believe have the
+	// lowest chance of interruption in the near term. To give certain instance types a
+	// higher chance of launching first, use capacity-optimized-prioritized. Set a
+	// priority for each instance type by using the Priority parameter for
+	// LaunchTemplateOverrides. You can assign the same priority to different
+	// LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis,
+	// but optimizes for capacity first. capacity-optimized-prioritized is supported
+	// only if your EC2 Fleet uses a launch template. Note that if the On-Demand
+	// AllocationStrategy is set to prioritized, the same priority is applied when
+	// fulfilling On-Demand capacity. diversified EC2 Fleet requests instances from all
+	// of the Spot Instance pools that you specify. lowest-price EC2 Fleet requests
+	// instances from the lowest priced Spot Instance pool that has available capacity.
+	// If the lowest priced pool doesn't have available capacity, the Spot Instances
+	// come from the next lowest priced pool that has available capacity. If a pool
+	// runs out of capacity before fulfilling your desired capacity, EC2 Fleet will
+	// continue to fulfill your request by drawing from the next lowest priced pool. To
+	// ensure that your desired capacity is met, you might receive Spot Instances from
+	// several pools. Because this strategy only considers instance price and not
+	// capacity availability, it might lead to high interruption rates. Default:
+	// lowest-price
 	AllocationStrategy SpotAllocationStrategy
 
 	// The behavior when a Spot Instance is interrupted. Default: terminate
@@ -13621,25 +13959,33 @@ type SpotOptionsRequest struct {
 	// across the Spot Instance pools specified by the EC2 Fleet launch configuration.
 	// For more information, see Allocation strategies for Spot Instances
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-fleet-allocation-strategy.html)
-	// in the Amazon EC2 User Guide. lowest-price - EC2 Fleet launches instances from
-	// the lowest-price Spot Instance pool that has available capacity. If the cheapest
-	// pool doesn't have available capacity, the Spot Instances come from the next
-	// cheapest pool that has available capacity. If a pool runs out of capacity before
-	// fulfilling your desired capacity, EC2 Fleet will continue to fulfill your
-	// request by drawing from the next cheapest pool. To ensure that your desired
-	// capacity is met, you might receive Spot Instances from several pools.
-	// diversified - EC2 Fleet launches instances from all of the Spot Instance pools
-	// that you specify. capacity-optimized (recommended) - EC2 Fleet launches
-	// instances from Spot Instance pools with optimal capacity for the number of
-	// instances that are launching. To give certain instance types a higher chance of
-	// launching first, use capacity-optimized-prioritized. Set a priority for each
-	// instance type by using the Priority parameter for LaunchTemplateOverrides. You
-	// can assign the same priority to different LaunchTemplateOverrides. EC2
-	// implements the priorities on a best-effort basis, but optimizes for capacity
-	// first. capacity-optimized-prioritized is supported only if your fleet uses a
-	// launch template. Note that if the On-Demand AllocationStrategy is set to
-	// prioritized, the same priority is applied when fulfilling On-Demand capacity.
-	// Default: lowest-price
+	// in the Amazon EC2 User Guide. price-capacity-optimized (recommended) EC2 Fleet
+	// identifies the pools with the highest capacity availability for the number of
+	// instances that are launching. This means that we will request Spot Instances
+	// from the pools that we believe have the lowest chance of interruption in the
+	// near term. EC2 Fleet then requests Spot Instances from the lowest priced of
+	// these pools. capacity-optimized EC2 Fleet identifies the pools with the highest
+	// capacity availability for the number of instances that are launching. This means
+	// that we will request Spot Instances from the pools that we believe have the
+	// lowest chance of interruption in the near term. To give certain instance types a
+	// higher chance of launching first, use capacity-optimized-prioritized. Set a
+	// priority for each instance type by using the Priority parameter for
+	// LaunchTemplateOverrides. You can assign the same priority to different
+	// LaunchTemplateOverrides. EC2 implements the priorities on a best-effort basis,
+	// but optimizes for capacity first. capacity-optimized-prioritized is supported
+	// only if your EC2 Fleet uses a launch template. Note that if the On-Demand
+	// AllocationStrategy is set to prioritized, the same priority is applied when
+	// fulfilling On-Demand capacity. diversified EC2 Fleet requests instances from all
+	// of the Spot Instance pools that you specify. lowest-price EC2 Fleet requests
+	// instances from the lowest priced Spot Instance pool that has available capacity.
+	// If the lowest priced pool doesn't have available capacity, the Spot Instances
+	// come from the next lowest priced pool that has available capacity. If a pool
+	// runs out of capacity before fulfilling your desired capacity, EC2 Fleet will
+	// continue to fulfill your request by drawing from the next lowest priced pool. To
+	// ensure that your desired capacity is met, you might receive Spot Instances from
+	// several pools. Because this strategy only considers instance price and not
+	// capacity availability, it might lead to high interruption rates. Default:
+	// lowest-price
 	AllocationStrategy SpotAllocationStrategy
 
 	// The behavior when a Spot Instance is interrupted. Default: terminate
@@ -14050,6 +14396,29 @@ type SubnetIpv6CidrBlockAssociation struct {
 
 	// The state of the CIDR block.
 	Ipv6CidrBlockState *SubnetCidrBlockState
+
+	noSmithyDocumentSerde
+}
+
+// Describes an Infrastructure Performance subscription.
+type Subscription struct {
+
+	// The Region or Availability Zone that's the target for the subscription. For
+	// example, eu-west-1.
+	Destination *string
+
+	// The metric used for the subscription.
+	Metric MetricType
+
+	// The data aggregation time for the subscription.
+	Period PeriodType
+
+	// The Region or Availability Zone that's the source for the subscription. For
+	// example, us-east-1.
+	Source *string
+
+	// The statistic used for the subscription.
+	Statistic StatisticType
 
 	noSmithyDocumentSerde
 }
@@ -15739,6 +16108,390 @@ type VCpuInfo struct {
 	// The valid number of threads per core that can be configured for the instance
 	// type.
 	ValidThreadsPerCore []int32
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon Web Services Verified Access endpoint specifies the application that
+// Amazon Web Services Verified Access provides access to. It must be attached to
+// an Amazon Web Services Verified Access group. An Amazon Web Services Verified
+// Access endpoint must also have an attached access policy before you attached it
+// to a group.
+type VerifiedAccessEndpoint struct {
+
+	// The DNS name for users to reach your application.
+	ApplicationDomain *string
+
+	// The type of attachment used to provide connectivity between the Amazon Web
+	// Services Verified Access endpoint and the application.
+	AttachmentType VerifiedAccessEndpointAttachmentType
+
+	// The creation time.
+	CreationTime *string
+
+	// The deletion time.
+	DeletionTime *string
+
+	// A description for the Amazon Web Services Verified Access endpoint.
+	Description *string
+
+	// Returned if endpoint has a device trust provider attached.
+	DeviceValidationDomain *string
+
+	// The ARN of a public TLS/SSL certificate imported into or created with ACM.
+	DomainCertificateArn *string
+
+	// A DNS name that is generated for the endpoint.
+	EndpointDomain *string
+
+	// The type of Amazon Web Services Verified Access endpoint. Incoming application
+	// requests will be sent to an IP address, load balancer or a network interface
+	// depending on the endpoint type specified.
+	EndpointType VerifiedAccessEndpointType
+
+	// The last updated time.
+	LastUpdatedTime *string
+
+	// The load balancer details if creating the Amazon Web Services Verified Access
+	// endpoint as load-balancertype.
+	LoadBalancerOptions *VerifiedAccessEndpointLoadBalancerOptions
+
+	// The options for network-interface type endpoint.
+	NetworkInterfaceOptions *VerifiedAccessEndpointEniOptions
+
+	// The IDs of the security groups for the endpoint.
+	SecurityGroupIds []string
+
+	// The endpoint status.
+	Status *VerifiedAccessEndpointStatus
+
+	// The tags.
+	Tags []Tag
+
+	// The ID of the Amazon Web Services Verified Access endpoint.
+	VerifiedAccessEndpointId *string
+
+	// The ID of the Amazon Web Services Verified Access group.
+	VerifiedAccessGroupId *string
+
+	// The ID of the Amazon Web Services Verified Access instance.
+	VerifiedAccessInstanceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Options for a network-interface type endpoint.
+type VerifiedAccessEndpointEniOptions struct {
+
+	// The ID of the network interface.
+	NetworkInterfaceId *string
+
+	// The IP port number.
+	Port *int32
+
+	// The IP protocol.
+	Protocol VerifiedAccessEndpointProtocol
+
+	noSmithyDocumentSerde
+}
+
+// Describes a load balancer when creating an Amazon Web Services Verified Access
+// endpoint using the load-balancer type.
+type VerifiedAccessEndpointLoadBalancerOptions struct {
+
+	// The ARN of the load balancer.
+	LoadBalancerArn *string
+
+	// The IP port number.
+	Port *int32
+
+	// The IP protocol.
+	Protocol VerifiedAccessEndpointProtocol
+
+	// The IDs of the subnets.
+	SubnetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the status of a Verified Access endpoint.
+type VerifiedAccessEndpointStatus struct {
+
+	// The status code of the Verified Access endpoint.
+	Code VerifiedAccessEndpointStatusCode
+
+	// The status message of the Verified Access endpoint.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Verified Access group.
+type VerifiedAccessGroup struct {
+
+	// The creation time.
+	CreationTime *string
+
+	// The deletion time.
+	DeletionTime *string
+
+	// A description for the Amazon Web Services Verified Access group.
+	Description *string
+
+	// The last updated time.
+	LastUpdatedTime *string
+
+	// The Amazon Web Services account number that owns the group.
+	Owner *string
+
+	// The tags.
+	Tags []Tag
+
+	// The ARN of the Verified Access group.
+	VerifiedAccessGroupArn *string
+
+	// The ID of the Verified Access group.
+	VerifiedAccessGroupId *string
+
+	// The ID of the Amazon Web Services Verified Access instance.
+	VerifiedAccessInstanceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Verified Access instance.
+type VerifiedAccessInstance struct {
+
+	// The creation time.
+	CreationTime *string
+
+	// A description for the Amazon Web Services Verified Access instance.
+	Description *string
+
+	// The last updated time.
+	LastUpdatedTime *string
+
+	// The tags.
+	Tags []Tag
+
+	// The ID of the Amazon Web Services Verified Access instance.
+	VerifiedAccessInstanceId *string
+
+	// The IDs of the Amazon Web Services Verified Access trust providers.
+	VerifiedAccessTrustProviders []VerifiedAccessTrustProviderCondensed
+
+	noSmithyDocumentSerde
+}
+
+// Describes logging options for an Amazon Web Services Verified Access instance.
+type VerifiedAccessInstanceLoggingConfiguration struct {
+
+	// Details about the logging options.
+	AccessLogs *VerifiedAccessLogs
+
+	// The ID of the Amazon Web Services Verified Access instance.
+	VerifiedAccessInstanceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Options for CloudWatch Logs as a logging destination.
+type VerifiedAccessLogCloudWatchLogsDestination struct {
+
+	// The delivery status for access logs.
+	DeliveryStatus *VerifiedAccessLogDeliveryStatus
+
+	// Indicates whether logging is enabled.
+	Enabled *bool
+
+	// The ID of the CloudWatch Logs log group.
+	LogGroup *string
+
+	noSmithyDocumentSerde
+}
+
+// Options for CloudWatch Logs as a logging destination.
+type VerifiedAccessLogCloudWatchLogsDestinationOptions struct {
+
+	// Indicates whether logging is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The ID of the CloudWatch Logs log group.
+	LogGroup *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a log delivery status.
+type VerifiedAccessLogDeliveryStatus struct {
+
+	// The status code.
+	Code VerifiedAccessLogDeliveryStatusCode
+
+	// The status message.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Options for Kinesis as a logging destination.
+type VerifiedAccessLogKinesisDataFirehoseDestination struct {
+
+	// The delivery status.
+	DeliveryStatus *VerifiedAccessLogDeliveryStatus
+
+	// The ID of the delivery stream.
+	DeliveryStream *string
+
+	// Indicates whether logging is enabled.
+	Enabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// Describes Amazon Kinesis Data Firehose logging options.
+type VerifiedAccessLogKinesisDataFirehoseDestinationOptions struct {
+
+	// Indicates whether logging is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The ID of the delivery stream.
+	DeliveryStream *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the destinations for Verified Access logs.
+type VerifiedAccessLogOptions struct {
+
+	// Sends Verified Access logs to CloudWatch Logs.
+	CloudWatchLogs *VerifiedAccessLogCloudWatchLogsDestinationOptions
+
+	// Sends Verified Access logs to Kinesis.
+	KinesisDataFirehose *VerifiedAccessLogKinesisDataFirehoseDestinationOptions
+
+	// Sends Verified Access logs to Amazon S3.
+	S3 *VerifiedAccessLogS3DestinationOptions
+
+	noSmithyDocumentSerde
+}
+
+// Describes the destinations for Verified Access logs.
+type VerifiedAccessLogs struct {
+
+	// CloudWatch Logs logging destination.
+	CloudWatchLogs *VerifiedAccessLogCloudWatchLogsDestination
+
+	// Kinesis logging destination.
+	KinesisDataFirehose *VerifiedAccessLogKinesisDataFirehoseDestination
+
+	// Amazon S3 logging options.
+	S3 *VerifiedAccessLogS3Destination
+
+	noSmithyDocumentSerde
+}
+
+// Options for Amazon S3 as a logging destination.
+type VerifiedAccessLogS3Destination struct {
+
+	// The bucket name.
+	BucketName *string
+
+	// The Amazon Web Services account number that owns the bucket.
+	BucketOwner *string
+
+	// The delivery status.
+	DeliveryStatus *VerifiedAccessLogDeliveryStatus
+
+	// Indicates whether logging is enabled.
+	Enabled *bool
+
+	// The bucket prefix.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Options for Amazon S3 as a logging destination.
+type VerifiedAccessLogS3DestinationOptions struct {
+
+	// Indicates whether logging is enabled.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The bucket name.
+	BucketName *string
+
+	// The ID of the Amazon Web Services account that owns the Amazon S3 bucket.
+	BucketOwner *string
+
+	// The bucket prefix.
+	Prefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Verified Access trust provider.
+type VerifiedAccessTrustProvider struct {
+
+	// The creation time.
+	CreationTime *string
+
+	// A description for the Amazon Web Services Verified Access trust provider.
+	Description *string
+
+	// The options for device-identity type trust provider.
+	DeviceOptions *DeviceOptions
+
+	// The type of device-based trust provider.
+	DeviceTrustProviderType DeviceTrustProviderType
+
+	// The last updated time.
+	LastUpdatedTime *string
+
+	// The OpenID Connect details for an oidc-type, user-identity based trust provider.
+	OidcOptions *OidcOptions
+
+	// The identifier to be used when working with policy rules.
+	PolicyReferenceName *string
+
+	// The tags.
+	Tags []Tag
+
+	// The type of Verified Access trust provider.
+	TrustProviderType TrustProviderType
+
+	// The type of user-based trust provider.
+	UserTrustProviderType UserTrustProviderType
+
+	// The ID of the Amazon Web Services Verified Access trust provider.
+	VerifiedAccessTrustProviderId *string
+
+	noSmithyDocumentSerde
+}
+
+// Condensed information about a trust provider.
+type VerifiedAccessTrustProviderCondensed struct {
+
+	// The description of trust provider.
+	Description *string
+
+	// The type of device-based trust provider.
+	DeviceTrustProviderType DeviceTrustProviderType
+
+	// The type of trust provider (user- or device-based).
+	TrustProviderType TrustProviderType
+
+	// The type of user-based trust provider.
+	UserTrustProviderType UserTrustProviderType
+
+	// The ID of the trust provider.
+	VerifiedAccessTrustProviderId *string
 
 	noSmithyDocumentSerde
 }

@@ -12,7 +12,8 @@ import (
 )
 
 // Retrieves all of the cost anomalies detected on your account during the time
-// period that's specified by the DateInterval object.
+// period that's specified by the DateInterval object. Anomalies are available for
+// up to 90 days.
 func (c *Client) GetAnomalies(ctx context.Context, params *GetAnomaliesInput, optFns ...func(*Options)) (*GetAnomaliesOutput, error) {
 	if params == nil {
 		params = &GetAnomaliesInput{}

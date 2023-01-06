@@ -11,6 +11,8 @@ import (
 type InternalServiceError struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *InternalServiceError) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceError) ErrorCode() string             { return "InternalServiceError" }
+func (e *InternalServiceError) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServiceError"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // One of the arguments provided is invalid for this request.
 type InvalidArgumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
+func (e *InvalidArgumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidArgumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The user is not authorized to perform this request.
 type NotAuthorizedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -61,5 +77,10 @@ func (e *NotAuthorizedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NotAuthorizedException) ErrorCode() string             { return "NotAuthorizedException" }
+func (e *NotAuthorizedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotAuthorizedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

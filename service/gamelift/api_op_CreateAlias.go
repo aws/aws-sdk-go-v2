@@ -23,8 +23,7 @@ import (
 // and optional description. Each simple alias can point to only one fleet, but a
 // fleet can have multiple aliases. If successful, a new alias record is returned,
 // including an alias ID and an ARN. You can reassign an alias to another fleet by
-// calling UpdateAlias. Related actions CreateAlias | ListAliases | DescribeAlias |
-// UpdateAlias | DeleteAlias | ResolveAlias | All APIs by task
+// calling UpdateAlias. Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
@@ -41,7 +40,6 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type CreateAliasInput struct {
 
 	// A descriptive label that is associated with an alias. Alias names do not need to
@@ -64,16 +62,12 @@ type CreateAliasInput struct {
 	// management, access management and cost allocation. For more information, see
 	// Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference. Once the resource is created, you can use
-	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
-	// tags. The maximum tag limit may be lower than stated. See the Amazon Web
-	// Services General Reference for actual tagging limits.
+	// Web Services General Reference.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type CreateAliasOutput struct {
 
 	// The newly created alias resource.

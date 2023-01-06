@@ -39,6 +39,10 @@ type UpdateHypervisorInput struct {
 	// fully-qualified domain name (FQDN).
 	Host *string
 
+	// The Amazon Resource Name (ARN) of the group of gateways within the requested
+	// log.
+	LogGroupArn *string
+
 	// The updated name for the hypervisor
 	Name *string
 

@@ -294,7 +294,7 @@
                     "target": "com.amazonaws.ssm#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>If you specify <code>true</code> for this value, your automation or command continue to run even if we can't gather information about the state of your CloudWatch alarm. The default value is <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>If you specify <code>true</code> for this value, your automation or command continue to run\n   even if we can't gather information about the state of your CloudWatch alarm. The default\n   value is <code>false</code>.</p>"
                     }
                 },
                 "Alarms": {
@@ -306,7 +306,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The details for the CloudWatch alarm you want to apply to an automation or command.</p>"
+                "smithy.api#documentation": "<p>The details for the CloudWatch alarm you want to apply to an automation or\n   command.</p>"
             }
         },
         "com.amazonaws.ssm#AlarmList": {
@@ -821,7 +821,7 @@
                     "name": "ssm"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is a collection of capabilities to help you manage your applications and\n   infrastructure running in the Amazon Web Services Cloud;. Systems Manager simplifies application and resource management,\n   shortens the time to detect and resolve operational problems, and helps you manage your Amazon Web Services\n   resources securely at scale.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>.</p>\n         <p>To get started, verify prerequisites. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up\n    Amazon Web Services Systems Manager</a>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p>\n            </li>\n            <li>\n               <p>For information about other API operations you can perform on EC2 instances, see the\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a> and the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig API\n     Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Incident Manager User Guide</a>\n     and the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Incident Manager API\n      Reference</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon Web Services Systems Manager is the operations hub for your Amazon Web Services applications and resources and a secure\n   end-to-end management solution for hybrid cloud environments that enables safe and secure\n   operations at scale.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">Amazon Web Services Systems Manager User Guide</a>. To get started, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up Amazon Web Services Systems Manager</a>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about each of the capabilities that comprise Systems Manager, see <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/what-is-systems-manager.html#systems-manager-capabilities\">Systems Manager capabilities</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n            </li>\n            <li>\n               <p>For details about predefined runbooks for Automation, a capability of Amazon Web Services Systems Manager, see the\n       <i>\n                     <a href=\"https://docs.aws.amazon.com/systems-manager-automation-runbooks/latest/userguide/automation-runbook-reference.html\">Systems Manager Automation runbook reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about AppConfig, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AppConfig User Guide</a>\n                  </i>\n     and the <i>\n                     <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AppConfig\n       API Reference</a>\n                  </i>.</p>\n            </li>\n            <li>\n               <p>For information about Incident Manager, a capability of Systems Manager, see the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">Systems Manager Incident Manager User\n       Guide</a>\n                  </i> and the <i>\n                     <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">Systems Manager Incident Manager API\n     Reference</a>\n                  </i>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Simple Systems Manager (SSM)",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ssm.amazonaws.com/doc/2014-11-06/"
@@ -831,7 +831,7 @@
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -880,15 +880,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -1176,9 +1167,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1189,9 +1180,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1202,9 +1193,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1215,9 +1206,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-south-2"
+                                "Region": "ap-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1228,9 +1219,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1241,9 +1232,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1254,9 +1245,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1267,9 +1258,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1280,9 +1271,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1293,9 +1284,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1306,9 +1297,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1319,9 +1310,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-south-1"
+                                "Region": "eu-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1332,9 +1323,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1345,9 +1336,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1358,9 +1349,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1371,9 +1362,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-south-2"
+                                "Region": "eu-south-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1384,9 +1375,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1397,9 +1388,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1410,9 +1401,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1423,9 +1414,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-east-1"
+                                "Region": "us-gov-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1436,9 +1427,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1449,9 +1440,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1462,9 +1453,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1475,9 +1466,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "me-central-1"
+                                "Region": "me-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1488,9 +1479,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1501,9 +1492,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1514,9 +1505,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1527,9 +1518,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1540,9 +1531,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1553,9 +1544,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1566,9 +1557,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1579,9 +1570,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1590,9 +1581,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1603,9 +1594,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1614,9 +1605,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1627,9 +1618,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-west-1"
+                                "Region": "us-iso-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1640,9 +1631,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1653,9 +1644,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1666,9 +1657,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1679,9 +1670,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-central-2"
+                                "Region": "eu-central-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1692,9 +1683,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1705,9 +1696,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1718,9 +1709,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1731,9 +1722,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-1"
+                                "Region": "us-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1744,9 +1735,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1757,9 +1748,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1770,9 +1761,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1783,9 +1774,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1796,9 +1787,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1809,9 +1800,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1822,9 +1813,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1835,9 +1826,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1848,9 +1839,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1861,9 +1852,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1874,9 +1865,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1887,9 +1878,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-north-1"
+                                "Region": "eu-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1900,9 +1891,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1913,9 +1904,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1926,9 +1917,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1939,9 +1930,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-3"
+                                "Region": "eu-west-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1952,9 +1943,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1965,9 +1956,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -1978,9 +1969,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -1991,9 +1982,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2004,9 +1995,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2017,9 +2008,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2030,9 +2021,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2043,9 +2034,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "eu-west-1"
+                                "Region": "eu-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2056,9 +2047,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2069,9 +2060,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2082,9 +2073,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2095,9 +2086,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-3"
+                                "Region": "ap-northeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2108,9 +2099,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2121,9 +2112,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2134,9 +2125,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2147,9 +2138,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2160,9 +2151,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2173,9 +2164,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2186,9 +2177,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2199,9 +2190,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2212,9 +2203,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2225,9 +2216,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2238,9 +2229,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2251,9 +2242,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "me-south-1"
+                                "Region": "me-south-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2264,9 +2255,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2277,9 +2268,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2290,9 +2281,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2303,9 +2294,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "sa-east-1"
+                                "Region": "sa-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2316,9 +2307,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2329,9 +2320,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2342,9 +2333,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2355,9 +2346,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-east-1"
+                                "Region": "ap-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2368,9 +2359,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2381,9 +2372,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2394,9 +2385,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2407,9 +2398,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-north-1"
+                                "Region": "cn-north-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2420,9 +2411,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2433,9 +2424,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2446,9 +2437,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2459,9 +2450,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2472,9 +2463,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2485,9 +2476,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2498,9 +2489,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2511,9 +2502,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2524,9 +2515,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2537,9 +2528,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2550,9 +2541,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2563,9 +2554,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2574,9 +2565,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2587,9 +2578,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2598,9 +2589,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2611,9 +2602,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-iso-east-1"
+                                "Region": "us-iso-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2624,9 +2615,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2637,9 +2628,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2650,9 +2641,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2663,9 +2654,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-3"
+                                "Region": "ap-southeast-3",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2676,9 +2667,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2689,9 +2680,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2702,9 +2693,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2715,9 +2706,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-4"
+                                "Region": "ap-southeast-4",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2728,9 +2719,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2741,9 +2732,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2754,9 +2745,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2767,9 +2758,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2780,9 +2771,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2793,9 +2784,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2806,9 +2797,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2819,9 +2810,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-east-2"
+                                "Region": "us-east-2",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2832,9 +2823,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2845,9 +2836,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2858,9 +2849,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2871,9 +2862,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "cn-northwest-1"
+                                "Region": "cn-northwest-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2882,9 +2873,9 @@
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2895,9 +2886,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2906,9 +2897,9 @@
                                 "error": "DualStack is enabled but this partition does not support DualStack"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": true
                             }
                         },
                         {
@@ -2919,9 +2910,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
-                                "Region": "us-isob-east-1"
+                                "Region": "us-isob-east-1",
+                                "UseDualStack": false
                             }
                         },
                         {
@@ -2932,9 +2923,9 @@
                                 }
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2944,9 +2935,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": false,
                                 "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseDualStack": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -2956,9 +2947,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "UseDualStack": true,
                                 "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseDualStack": true,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -3098,7 +3089,7 @@
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the document used in the association. If you change a document version for a\n   State Manager association, Systems Manager immediately runs the association unless you previously specifed\n   the <code>apply-only-at-cron-interval</code> parameter.</p>\n\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if\n    that document is shared from another account. State Manager always runs the <code>default</code>\n    version of a document if shared from another account, even though the Systems Manager console shows that a\n    new version was processed. If you want to run an association using a new version of a document\n    shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The version of the document used in the association. If you change a document version for a\n   State Manager association, Systems Manager immediately runs the association unless you previously specifed\n   the <code>apply-only-at-cron-interval</code> parameter.</p>\n         <important>\n            <p>State Manager doesn't support running associations that use a new version of a document if\n    that document is shared from another account. State Manager always runs the <code>default</code>\n    version of a document if shared from another account, even though the Systems Manager console shows that a\n    new version was processed. If you want to run an association using a new version of a document\n    shared form another account, you must set the document version to <code>default</code>.</p>\n         </important>"
                     }
                 },
                 "Targets": {
@@ -6723,7 +6714,7 @@
                 "IamRole": {
                     "target": "com.amazonaws.ssm#IamRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Identity and Access Management (IAM) role that you want to assign to\n   the managed node. This IAM role must provide AssumeRole permissions for the\n   Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html\">Create an\n     IAM service role for a hybrid environment</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>You can't specify an IAM service-linked role for this parameter. You must create a unique role.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The name of the Identity and Access Management (IAM) role that you want to assign to\n   the managed node. This IAM role must provide AssumeRole permissions for the\n   Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html\">Create an\n     IAM service role for a hybrid environment</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>You can't specify an IAM service-linked role for this parameter. You must\n    create a unique role.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7156,7 +7147,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds or overwrites one or more tags for a State Manager association. <i>Tags</i>\n   are metadata that you can assign to your Amazon Web Services resources. Tags enable you to categorize your\n   resources in different ways, for example, by purpose, owner, or environment. Each tag consists of\n   a key and an optional value, both of which you define. </p>"
+                        "smithy.api#documentation": "<p>Adds or overwrites one or more tags for a State Manager association.\n    <i>Tags</i> are metadata that you can assign to your Amazon Web Services resources. Tags enable\n   you to categorize your resources in different ways, for example, by purpose, owner, or\n   environment. Each tag consists of a key and an optional value, both of which you define. </p>"
                     }
                 },
                 "AlarmConfiguration": {
@@ -9147,7 +9138,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ssm#PatchOrchestratorFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each element in the array is a structure containing a key-value pair.</p>\n         <p>\n            <b>Windows Server</b>\n         </p>\n         <p>Supported keys for Windows Server managed node patches include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>PATCH_SET</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>OS</code> | <code>APPLICATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>WindowsServer2012</code> | <code>Office 2010</code> |\n      <code>MicrosoftDefenderAntivirus</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT_FAMILY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Windows</code> | <code>Office</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MSRC_SEVERITY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ServicePacks</code> | <code>Important</code> | <code>Moderate</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CLASSIFICATION</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ServicePacks</code> | <code>SecurityUpdates</code> |\n      <code>DefinitionUpdates</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PATCH_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>KB123456</code> | <code>KB4516046</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>\n            <b>Linux</b>\n         </p>\n         <important>\n            <p>When specifying filters for Linux patches, you must specify a key-pair for\n     <code>PRODUCT</code>. For example, using the Command Line Interface (CLI), the\n    following command fails:</p>\n            <p>\n               <code>aws ssm describe-available-patches --filters Key=CVE_ID,Values=CVE-2018-3615</code>\n            </p>\n            <p>However, the following command succeeds:</p>\n            <p>\n               <code>aws ssm describe-available-patches --filters Key=PRODUCT,Values=AmazonLinux2018.03\n     Key=CVE_ID,Values=CVE-2018-3615</code>\n            </p>\n         </important>\n         <p>Supported keys for Linux managed node patches include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>AmazonLinux2018.03</code> | <code>AmazonLinux2.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NAME</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>kernel-headers</code> | <code>samba-python</code> | <code>php</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>SEVERITY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Critical</code> | <code>Important</code> | <code>Medium</code> |\n      <code>Low</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EPOCH</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>0</code> | <code>1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>VERSION</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>78.6.1</code> | <code>4.10.16</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>RELEASE</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>9.56.amzn1</code> | <code>1.amzn2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ARCH</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>i686</code> | <code>x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>REPOSITORY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Core</code> | <code>Updates</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ADVISORY_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ALAS-2018-1058</code> | <code>ALAS2-2021-1594</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CVE_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>CVE-2018-3615</code> | <code>CVE-2020-1472</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BUGZILLA_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>1463241</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Each element in the array is a structure containing a key-value pair.</p>\n         <p>\n            <b>Windows Server</b>\n         </p>\n         <p>Supported keys for Windows Server managed node patches include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>PATCH_SET</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>OS</code> | <code>APPLICATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>WindowsServer2012</code> | <code>Office 2010</code> |\n      <code>MicrosoftDefenderAntivirus</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT_FAMILY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Windows</code> | <code>Office</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>MSRC_SEVERITY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ServicePacks</code> | <code>Important</code> | <code>Moderate</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CLASSIFICATION</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ServicePacks</code> | <code>SecurityUpdates</code> |\n      <code>DefinitionUpdates</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>PATCH_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>KB123456</code> | <code>KB4516046</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <b>Linux</b>\n         </p>\n         <important>\n            <p>When specifying filters for Linux patches, you must specify a key-pair for\n     <code>PRODUCT</code>. For example, using the Command Line Interface (CLI), the\n    following command fails:</p>\n            <p>\n               <code>aws ssm describe-available-patches --filters Key=CVE_ID,Values=CVE-2018-3615</code>\n            </p>\n            <p>However, the following command succeeds:</p>\n            <p>\n               <code>aws ssm describe-available-patches --filters Key=PRODUCT,Values=AmazonLinux2018.03\n     Key=CVE_ID,Values=CVE-2018-3615</code>\n            </p>\n         </important>\n         <p>Supported keys for Linux managed node patches include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>PRODUCT</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>AmazonLinux2018.03</code> | <code>AmazonLinux2.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>NAME</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>kernel-headers</code> | <code>samba-python</code> | <code>php</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>SEVERITY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Critical</code> | <code>Important</code> | <code>Medium</code> |\n      <code>Low</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>EPOCH</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>0</code> | <code>1</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>VERSION</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>78.6.1</code> | <code>4.10.16</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>RELEASE</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>9.56.amzn1</code> | <code>1.amzn2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ARCH</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>i686</code> | <code>x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>REPOSITORY</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>Core</code> | <code>Updates</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ADVISORY_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>ALAS-2018-1058</code> | <code>ALAS2-2021-1594</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>CVE_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>CVE-2018-3615</code> | <code>CVE-2020-1472</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>BUGZILLA_ID</code>\n                  </b>\n               </p>\n               <p>Sample values: <code>1463241</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxResults": {
@@ -11783,7 +11774,7 @@
                     "code": "DocumentPermissionLimit",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The document can't be shared with more Amazon Web Services user accounts. You can specify a maximum of 20 accounts per API operation to share a private document.</p>\n\n         <p>By default, you can share a private document with a maximum of 1,000 accounts and publicly share up to five documents.</p>\n   \n         <p>If you need to increase the quota for privately or publicly shared Systems Manager documents, contact Amazon Web Services Support.</p>",
+                "smithy.api#documentation": "<p>The document can't be shared with more Amazon Web Services user accounts. You can specify a maximum of\n   20 accounts per API operation to share a private document.</p>\n         <p>By default, you can share a private document with a maximum of 1,000 accounts and publicly\n   share up to five documents.</p>\n         <p>If you need to increase the quota for privately or publicly shared Systems Manager documents, contact\n   Amazon Web Services Support.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -11822,6 +11813,18 @@
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
                         "smithy.api#documentation": "<p>The document version required by the current document.</p>"
+                    }
+                },
+                "RequireType": {
+                    "target": "com.amazonaws.ssm#RequireType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The document type of the required SSM document.</p>"
+                    }
+                },
+                "VersionName": {
+                    "target": "com.amazonaws.ssm#DocumentVersionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional field specifying the version of the artifact associated with the document. For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and can't be changed.</p>"
                     }
                 }
             },
@@ -12122,6 +12125,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ConformancePackTemplate"
+                    }
+                },
+                "QuickSetup": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QuickSetup"
                     }
                 }
             }
@@ -13692,7 +13701,7 @@
                 "AlarmConfiguration": {
                     "target": "com.amazonaws.ssm#AlarmConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details for the CloudWatch alarm you applied to your maintenance window task.</p>"
+                        "smithy.api#documentation": "<p>The details for the CloudWatch alarm you applied to your maintenance window\n   task.</p>"
                     }
                 },
                 "TriggeredAlarms": {
@@ -13951,7 +13960,7 @@
                 "AlarmConfiguration": {
                     "target": "com.amazonaws.ssm#AlarmConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details for the CloudWatch alarm you applied to your maintenance window task.</p>"
+                        "smithy.api#documentation": "<p>The details for the CloudWatch alarm you applied to your maintenance window\n   task.</p>"
                     }
                 }
             }
@@ -15584,21 +15593,21 @@
                     "target": "com.amazonaws.ssm#PatchCriticalNonCompliantCount",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of patches per node that are specified as <code>Critical</code> for\n   compliance reporting in the patch baseline aren't installed. These patches might be missing, have\n   failed installation, were rejected, or were installed but awaiting a required managed node\n   reboot. The status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of patches per node that are specified as <code>Critical</code> for compliance\n   reporting in the patch baseline aren't installed. These patches might be missing, have failed\n   installation, were rejected, or were installed but awaiting a required managed node reboot. The\n   status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 },
                 "SecurityNonCompliantCount": {
                     "target": "com.amazonaws.ssm#PatchSecurityNonCompliantCount",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of patches per node that are specified as <code>Security</code> in a\n   patch advisory aren't installed. These patches might be missing, have failed installation, were\n   rejected, or were installed but awaiting a required managed node reboot. The status of these\n   managed nodes is <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of patches per node that are specified as <code>Security</code> in a patch\n   advisory aren't installed. These patches might be missing, have failed installation, were\n   rejected, or were installed but awaiting a required managed node reboot. The status of these\n   managed nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 },
                 "OtherNonCompliantCount": {
                     "target": "com.amazonaws.ssm#PatchOtherNonCompliantCount",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The number of patches per node that are specified as other than\n    <code>Critical</code> or <code>Security</code> but aren't compliant with the patch baseline. The\n   status of these managed nodes is <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of patches per node that are specified as other than <code>Critical</code> or\n    <code>Security</code> but aren't compliant with the patch baseline. The status of these managed\n   nodes is <code>NON_COMPLIANT</code>.</p>"
                     }
                 }
             },
@@ -18698,7 +18707,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.ssm#AutomationParameterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters for the <code>AUTOMATION</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For <code>AUTOMATION</code> task types, Amazon Web Services Systems Manager ignores any values specified for these\n    parameters.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parameters for the <code>AUTOMATION</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For <code>AUTOMATION</code> task types, Amazon Web Services Systems Manager ignores any values specified for these\n    parameters.</p>\n         </note>"
                     }
                 }
             },
@@ -19267,7 +19276,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a <code>LAMBDA</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and\n    LoggingInfo.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a <code>LAMBDA</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and\n    LoggingInfo.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowLambdaPayload": {
@@ -19405,7 +19414,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a <code>RUN_COMMAND</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For <code>RUN_COMMAND</code> tasks, Systems Manager uses specified values for\n     <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for\n     <code>TaskInvocationParameters</code>. </p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a <code>RUN_COMMAND</code> task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For <code>RUN_COMMAND</code> tasks, Systems Manager uses specified values for\n     <code>TaskParameters</code> and <code>LoggingInfo</code> only if no values are specified for\n     <code>TaskInvocationParameters</code>. </p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowSchedule": {
@@ -19462,7 +19471,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a <code>STEP_FUNCTIONS</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Step Functions tasks, Systems Manager ignores any values specified for\n     <code>TaskParameters</code> and <code>LoggingInfo</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a <code>STEP_FUNCTIONS</code> task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an Amazon Simple Storage Service (Amazon S3) bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Amazon Web Services Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Step Functions tasks, Systems Manager ignores any values specified for\n     <code>TaskParameters</code> and <code>LoggingInfo</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowStringDateTime": {
@@ -24473,7 +24482,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.ssm#ResourceArnString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the resource to which the policies are attached.</p>",
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the resource to which you want to attach a policy.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -24493,7 +24502,7 @@
                 "PolicyHash": {
                     "target": "com.amazonaws.ssm#PolicyHash",
                     "traits": {
-                        "smithy.api#documentation": "<p>ID of the current policy version. The hash helps to prevent a situation where multiple users\n   attempt to overwrite a policy.</p>"
+                        "smithy.api#documentation": "<p>ID of the current policy version. The hash helps to prevent a situation where multiple users\n   attempt to overwrite a policy. You must provide this hash when updating or deleting a\n   policy.</p>"
                     }
                 }
             }
@@ -24504,13 +24513,13 @@
                 "PolicyId": {
                     "target": "com.amazonaws.ssm#PolicyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The policy ID. To update a policy, you must specify <code>PolicyId</code> and <code>PolicyHash</code>.</p>"
+                        "smithy.api#documentation": "<p>The policy ID. To update a policy, you must specify <code>PolicyId</code> and\n    <code>PolicyHash</code>.</p>"
                     }
                 },
                 "PolicyHash": {
                     "target": "com.amazonaws.ssm#PolicyHash",
                     "traits": {
-                        "smithy.api#documentation": "<p>ID of the current policy version. The hash helps to prevent a situation where multiple users\n   attempt to overwrite a policy. You must provide this hash when updating or deleting a\n   policy.</p>"
+                        "smithy.api#documentation": "<p>ID of the current policy version.</p>"
                     }
                 }
             }
@@ -24704,7 +24713,7 @@
                 "Targets": {
                     "target": "com.amazonaws.ssm#Targets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The targets to register with the maintenance window. In other words, the managed nodes to\n   run commands on when the maintenance window runs.</p>\n         <note>\n            <p>If a single maintenance window task is registered with multiple targets, its task\n    invocations occur sequentially and not in parallel. If your task must run on multiple targets at\n    the same time, register a task for each target individually and assign each task the same\n    priority level.</p>\n         </note>\n         <p>You can specify targets using managed node IDs, resource group names, or tags that have been\n   applied to managed nodes.</p>\n         <p>\n            <b>Example 1</b>: Specify managed node IDs</p>\n         <p>\n            <code>Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>,<instance-id-3></code>\n         </p>\n         <p>\n            <b>Example 2</b>: Use tag key-pairs applied to managed\n   nodes</p>\n         <p>\n            <code>Key=tag:<my-tag-key>,Values=<my-tag-value-1>,<my-tag-value-2></code>\n         </p>\n         <p>\n            <b>Example 3</b>: Use tag-keys applied to managed nodes</p>\n         <p>\n            <code>Key=tag-key,Values=<my-tag-key-1>,<my-tag-key-2></code>\n         </p>\n  \n         <p>\n            <b>Example 4</b>: Use resource group names</p>\n         <p>\n            <code>Key=resource-groups:Name,Values=<resource-group-name></code>\n         </p>\n         <p>\n            <b>Example 5</b>: Use filters for resource group types</p>\n         <p>\n            <code>Key=resource-groups:ResourceTypeFilters,Values=<resource-type-1>,<resource-type-2></code>\n         </p>\n         <note>\n            <p>For <code>Key=resource-groups:ResourceTypeFilters</code>, specify resource types in the\n    following format</p>\n            <p>\n               <code>Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC</code>\n            </p>\n         </note>\n  \n         <p>For more information about these examples formats, including the best use case for each one,\n   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html\">Examples: Register\n    targets with a maintenance window</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The targets to register with the maintenance window. In other words, the managed nodes to\n   run commands on when the maintenance window runs.</p>\n         <note>\n            <p>If a single maintenance window task is registered with multiple targets, its task\n    invocations occur sequentially and not in parallel. If your task must run on multiple targets at\n    the same time, register a task for each target individually and assign each task the same\n    priority level.</p>\n         </note>\n         <p>You can specify targets using managed node IDs, resource group names, or tags that have been\n   applied to managed nodes.</p>\n         <p>\n            <b>Example 1</b>: Specify managed node IDs</p>\n         <p>\n            <code>Key=InstanceIds,Values=<instance-id-1>,<instance-id-2>,<instance-id-3></code>\n         </p>\n         <p>\n            <b>Example 2</b>: Use tag key-pairs applied to managed\n   nodes</p>\n         <p>\n            <code>Key=tag:<my-tag-key>,Values=<my-tag-value-1>,<my-tag-value-2></code>\n         </p>\n         <p>\n            <b>Example 3</b>: Use tag-keys applied to managed nodes</p>\n         <p>\n            <code>Key=tag-key,Values=<my-tag-key-1>,<my-tag-key-2></code>\n         </p>\n         <p>\n            <b>Example 4</b>: Use resource group names</p>\n         <p>\n            <code>Key=resource-groups:Name,Values=<resource-group-name></code>\n         </p>\n         <p>\n            <b>Example 5</b>: Use filters for resource group types</p>\n         <p>\n            <code>Key=resource-groups:ResourceTypeFilters,Values=<resource-type-1>,<resource-type-2></code>\n         </p>\n         <note>\n            <p>For <code>Key=resource-groups:ResourceTypeFilters</code>, specify resource types in the\n    following format</p>\n            <p>\n               <code>Key=resource-groups:ResourceTypeFilters,Values=AWS::EC2::INSTANCE,AWS::EC2::VPC</code>\n            </p>\n         </note>\n         <p>For more information about these examples formats, including the best use case for each one,\n   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/mw-cli-tutorial-targets-examples.html\">Examples: Register\n    targets with a maintenance window</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -24801,7 +24810,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a \n  maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's \n  service-linked role.  If no service-linked role for Systems Manager exists in your account, it is created when you run \n  <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>For more information, see the following topics in the in the <i>Amazon Web Services Systems Manager User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions\">Using \n    service-linked roles for Systems Manager</a> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role\">Should I use a service-linked role or a custom service role to run maintenance window tasks?\n   </a>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a \n  maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's \n  service-linked role.  If no service-linked role for Systems Manager exists in your account, it is created when you run \n  <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>For more information, see the following topics in the in the <i>Amazon Web Services Systems Manager User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions\">Using \n    service-linked roles for Systems Manager</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role\">Should I use a service-linked role or a custom service role to run maintenance window tasks?\n   </a>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "TaskType": {
@@ -25042,6 +25051,16 @@
         "com.amazonaws.ssm#RemoveTagsFromResourceResult": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.ssm#RequireType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-.]{1,128}$"
+            }
         },
         "com.amazonaws.ssm#ResetServiceSetting": {
             "type": "operation",
@@ -25791,7 +25810,7 @@
                     "code": "ResourcePolicyLimitExceededException",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The <a>PutResourcePolicy</a> API action enforces two limits. A policy can't be\n   greater than 1024 bytes in size. And only one policy can be attached to <code>OpsItemGroup</code>. Verify these limits and try again.</p>",
+                "smithy.api#documentation": "<p>The <a>PutResourcePolicy</a> API action enforces two limits. A policy can't be\n   greater than 1024 bytes in size. And only one policy can be attached to\n   <code>OpsItemGroup</code>. Verify these limits and try again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -27873,7 +27892,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 256
                 },
                 "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
@@ -28450,7 +28469,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an association. You can update the association name and version, the document\n   version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you\n   call <code>UpdateAssociation</code>, the system removes all optional parameters from the request\n   and overwrites the association with null values for those parameters. This is by design. You must\n   specify all optional parameters in the call, even if you are not changing the parameters. This\n   includes the <code>Name</code> parameter. Before calling this API action, we recommend that you\n   call the <a>DescribeAssociation</a> API operation and make a note of all optional\n   parameters required for your <code>UpdateAssociation</code> call.</p>\n\n         <p>In order to call this API operation, your Identity and Access Management (IAM) user\n   account, group, or role must be configured with permission to call the <a>DescribeAssociation</a> API operation. If you don't have permission to call\n    <code>DescribeAssociation</code>, then you receive the following error: <code>An error occurred\n    (AccessDeniedException) when calling the UpdateAssociation operation: User: <user_arn>\n    isn't authorized to perform: ssm:DescribeAssociation on resource:\n   <resource_arn></code>\n         </p>\n         <important>\n            <p>When you update an association, the association immediately runs against the specified\n    targets. You can add the <code>ApplyOnlyAtCronInterval</code> parameter to run the association\n    during the next schedule run.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Updates an association. You can update the association name and version, the document\n   version, schedule, parameters, and Amazon Simple Storage Service (Amazon S3) output. When you\n   call <code>UpdateAssociation</code>, the system removes all optional parameters from the request\n   and overwrites the association with null values for those parameters. This is by design. You must\n   specify all optional parameters in the call, even if you are not changing the parameters. This\n   includes the <code>Name</code> parameter. Before calling this API action, we recommend that you\n   call the <a>DescribeAssociation</a> API operation and make a note of all optional\n   parameters required for your <code>UpdateAssociation</code> call.</p>\n         <p>In order to call this API operation, your Identity and Access Management (IAM) user\n   account, group, or role must be configured with permission to call the <a>DescribeAssociation</a> API operation. If you don't have permission to call\n    <code>DescribeAssociation</code>, then you receive the following error: <code>An error occurred\n    (AccessDeniedException) when calling the UpdateAssociation operation: User: <user_arn>\n    isn't authorized to perform: ssm:DescribeAssociation on resource:\n   <resource_arn></code>\n         </p>\n         <important>\n            <p>When you update an association, the association immediately runs against the specified\n    targets. You can add the <code>ApplyOnlyAtCronInterval</code> parameter to run the association\n    during the next schedule run.</p>\n         </important>"
             }
         },
         "com.amazonaws.ssm#UpdateAssociationRequest": {
@@ -28545,7 +28564,7 @@
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>By default, when you update an association, the system runs it immediately after it is\n   updated and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you update it. This parameter isn't supported for rate\n   expressions.</p>\n\n         <p>If you chose this option when you created an association and later you edit that association\n   or you make changes to the SSM document on which that association is based (by using the\n   Documents page in the console), State Manager applies the association at the next specified cron\n   interval. For example, if you chose the <code>Latest</code> version of an SSM document when you\n   created an association and you edit the association by choosing a different document version on\n   the Documents page, State Manager applies the association at the next specified cron interval if\n   you previously selected this option. If this option wasn't selected, State Manager immediately\n   runs the association.</p>\n         <p>You can reset this option. To do so, specify the <code>no-apply-only-at-cron-interval</code>\n   parameter when you update the association from the command line. This parameter forces the\n   association to run immediately after updating it and according to the interval specified.</p>"
+                        "smithy.api#documentation": "<p>By default, when you update an association, the system runs it immediately after it is\n   updated and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you update it. This parameter isn't supported for rate\n   expressions.</p>\n         <p>If you chose this option when you created an association and later you edit that association\n   or you make changes to the SSM document on which that association is based (by using the\n   Documents page in the console), State Manager applies the association at the next specified cron\n   interval. For example, if you chose the <code>Latest</code> version of an SSM document when you\n   created an association and you edit the association by choosing a different document version on\n   the Documents page, State Manager applies the association at the next specified cron interval if\n   you previously selected this option. If this option wasn't selected, State Manager immediately\n   runs the association.</p>\n         <p>You can reset this option. To do so, specify the <code>no-apply-only-at-cron-interval</code>\n   parameter when you update the association from the command line. This parameter forces the\n   association to run immediately after updating it and according to the interval specified.</p>"
                     }
                 },
                 "CalendarNames": {
@@ -29088,7 +29107,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the target of an existing maintenance window. You\n   can change the following:</p>\n  \n         <ul>\n            <li>\n               <p>Name</p>\n            </li>\n            <li>\n               <p>Description</p>\n            </li>\n            <li>\n               <p>Owner</p>\n            </li>\n            <li>\n               <p>IDs for an ID target</p>\n            </li>\n            <li>\n               <p>Tags for a Tag target</p>\n            </li>\n            <li>\n               <p>From any supported tag type to another. The three supported tag types are ID target, Tag\n     target, and resource group. For more information, see <a>Target</a>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If a parameter is null, then the corresponding field isn't modified.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Modifies the target of an existing maintenance window. You\n   can change the following:</p>\n         <ul>\n            <li>\n               <p>Name</p>\n            </li>\n            <li>\n               <p>Description</p>\n            </li>\n            <li>\n               <p>Owner</p>\n            </li>\n            <li>\n               <p>IDs for an ID target</p>\n            </li>\n            <li>\n               <p>Tags for a Tag target</p>\n            </li>\n            <li>\n               <p>From any supported tag type to another. The three supported tag types are ID target, Tag\n     target, and resource group. For more information, see <a>Target</a>.</p>\n            </li>\n         </ul>\n         <note>\n            <p>If a parameter is null, then the corresponding field isn't modified.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#UpdateMaintenanceWindowTargetRequest": {
@@ -29234,7 +29253,7 @@
                 "ServiceRoleArn": {
                     "target": "com.amazonaws.ssm#ServiceRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a \n  maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's \n  service-linked role.  If no service-linked role for Systems Manager exists in your account, it is created when you run \n  <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>For more information, see the following topics in the in the <i>Amazon Web Services Systems Manager User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions\">Using \n    service-linked roles for Systems Manager</a> \n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role\">Should I use a service-linked role or a custom service role to run maintenance window tasks?\n   </a>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a \n  maintenance window task. If you do not specify a service role ARN, Systems Manager uses your account's \n  service-linked role.  If no service-linked role for Systems Manager exists in your account, it is created when you run \n  <code>RegisterTaskWithMaintenanceWindow</code>.</p>\n         <p>For more information, see the following topics in the in the <i>Amazon Web Services Systems Manager User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/using-service-linked-roles.html#slr-permissions\">Using \n    service-linked roles for Systems Manager</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-maintenance-permissions.html#maintenance-window-tasks-service-role\">Should I use a service-linked role or a custom service role to run maintenance window tasks?\n   </a>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "TaskParameters": {
@@ -29398,7 +29417,7 @@
                 "AlarmConfiguration": {
                     "target": "com.amazonaws.ssm#AlarmConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details for the CloudWatch alarm you applied to your maintenance window task.</p>"
+                        "smithy.api#documentation": "<p>The details for the CloudWatch alarm you applied to your maintenance window\n   task.</p>"
                     }
                 }
             }
@@ -29436,7 +29455,7 @@
                 "IamRole": {
                     "target": "com.amazonaws.ssm#IamRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Identity and Access Management (IAM) role that you want to assign to\n   the managed node. This IAM role must provide AssumeRole permissions for the\n   Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html\">Create an\n    IAM service role for a hybrid environment</a> in the\n   <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>You can't specify an IAM service-linked role for this parameter. You must create a unique role.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The name of the Identity and Access Management (IAM) role that you want to assign to\n   the managed node. This IAM role must provide AssumeRole permissions for the\n   Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html\">Create an\n     IAM service role for a hybrid environment</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>You can't specify an IAM service-linked role for this parameter. You must\n    create a unique role.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }

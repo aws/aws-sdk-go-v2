@@ -41,6 +41,9 @@ type CreateComponentTypeInput struct {
 	// This member is required.
 	WorkspaceId *string
 
+	// A friendly name for the component type.
+	ComponentTypeName *string
+
 	// The description of the component type.
 	Description *string
 

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a task.
+// Deletes an DataSync task.
 func (c *Client) DeleteTask(ctx context.Context, params *DeleteTaskInput, optFns ...func(*Options)) (*DeleteTaskOutput, error) {
 	if params == nil {
 		params = &DeleteTaskInput{}
@@ -29,7 +29,7 @@ func (c *Client) DeleteTask(ctx context.Context, params *DeleteTaskInput, optFns
 // DeleteTask
 type DeleteTaskInput struct {
 
-	// The Amazon Resource Name (ARN) of the task to delete.
+	// Specifies the Amazon Resource Name (ARN) of the task that you want to delete.
 	//
 	// This member is required.
 	TaskArn *string

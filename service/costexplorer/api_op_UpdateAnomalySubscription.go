@@ -46,8 +46,43 @@ type UpdateAnomalySubscriptionInput struct {
 	// The new name of the subscription.
 	SubscriptionName *string
 
-	// The update to the threshold value for receiving notifications.
+	// (deprecated) The update to the threshold value for receiving notifications. This
+	// field has been deprecated. To update a threshold, use ThresholdExpression.
+	// Continued use of Threshold will be treated as shorthand syntax for a
+	// ThresholdExpression.
+	//
+	// Deprecated: Threshold has been deprecated in favor of ThresholdExpression
 	Threshold *float64
+
+	// The update to the Expression
+	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
+	// object used to specify the anomalies that you want to generate alerts for. This
+	// supports dimensions and nested expressions. The supported dimensions are
+	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE. The supported
+	// nested expression types are AND and OR. The match option GREATER_THAN_OR_EQUAL
+	// is required. Values must be numbers between 0 and 10,000,000,000. The following
+	// are examples of valid ThresholdExpressions:
+	//
+	// * Absolute threshold: {
+	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [
+	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }
+	//
+	// * Percentage threshold: {
+	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
+	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }
+	//
+	// * AND two thresholds
+	// together: { "And": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE",
+	// "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, {
+	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
+	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }
+	//
+	// * OR two thresholds
+	// together: { "Or": [ { "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_ABSOLUTE",
+	// "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } }, {
+	// "Dimensions": { "Key": "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [
+	// "GREATER_THAN_OR_EQUAL" ], "Values": [ "100" ] } } ] }
+	ThresholdExpression *types.Expression
 
 	noSmithyDocumentSerde
 }

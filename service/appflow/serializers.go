@@ -928,6 +928,16 @@ func awsRestjson1_serializeOpDocumentListConnectorEntitiesInput(v *ListConnector
 		ok.String(*v.EntitiesPath)
 	}
 
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
 	return nil
 }
 
@@ -3300,14 +3310,39 @@ func awsRestjson1_serializeDocumentRedshiftConnectorProfileProperties(v *types.R
 		ok.String(*v.BucketPrefix)
 	}
 
+	if v.ClusterIdentifier != nil {
+		ok := object.Key("clusterIdentifier")
+		ok.String(*v.ClusterIdentifier)
+	}
+
+	if v.DataApiRoleArn != nil {
+		ok := object.Key("dataApiRoleArn")
+		ok.String(*v.DataApiRoleArn)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("databaseName")
+		ok.String(*v.DatabaseName)
+	}
+
 	if v.DatabaseUrl != nil {
 		ok := object.Key("databaseUrl")
 		ok.String(*v.DatabaseUrl)
 	}
 
+	if v.IsRedshiftServerless {
+		ok := object.Key("isRedshiftServerless")
+		ok.Boolean(v.IsRedshiftServerless)
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	if v.WorkgroupName != nil {
+		ok := object.Key("workgroupName")
+		ok.String(*v.WorkgroupName)
 	}
 
 	return nil

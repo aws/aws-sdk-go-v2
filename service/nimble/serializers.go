@@ -526,9 +526,9 @@ func awsRestjson1_serializeOpDocumentCreateStreamingSessionStreamInput(v *Create
 	object := value.Object()
 	defer object.Close()
 
-	if v.ExpirationInSeconds != 0 {
+	if v.ExpirationInSeconds != nil {
 		ok := object.Key("expirationInSeconds")
-		ok.Integer(v.ExpirationInSeconds)
+		ok.Integer(*v.ExpirationInSeconds)
 	}
 
 	return nil
@@ -1773,6 +1773,73 @@ func awsRestjson1_serializeOpHttpBindingsGetStreamingSessionInput(v *GetStreamin
 	return nil
 }
 
+type awsRestjson1_serializeOpGetStreamingSessionBackup struct {
+}
+
+func (*awsRestjson1_serializeOpGetStreamingSessionBackup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetStreamingSessionBackup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetStreamingSessionBackupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-08-01/studios/{studioId}/streaming-session-backups/{backupId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetStreamingSessionBackupInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetStreamingSessionBackupInput(v *GetStreamingSessionBackupInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BackupId == nil || len(*v.BackupId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member backupId must not be empty")}
+	}
+	if v.BackupId != nil {
+		if err := encoder.SetURI("backupId").String(*v.BackupId); err != nil {
+			return err
+		}
+	}
+
+	if v.StudioId == nil || len(*v.StudioId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member studioId must not be empty")}
+	}
+	if v.StudioId != nil {
+		if err := encoder.SetURI("studioId").String(*v.StudioId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetStreamingSessionStream struct {
 }
 
@@ -2223,8 +2290,8 @@ func awsRestjson1_serializeOpHttpBindingsListLaunchProfileMembersInput(v *ListLa
 		}
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2289,8 +2356,8 @@ func awsRestjson1_serializeOpHttpBindingsListLaunchProfilesInput(v *ListLaunchPr
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2371,6 +2438,72 @@ func awsRestjson1_serializeOpHttpBindingsListStreamingImagesInput(v *ListStreami
 
 	if v.Owner != nil {
 		encoder.SetQuery("owner").String(*v.Owner)
+	}
+
+	if v.StudioId == nil || len(*v.StudioId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member studioId must not be empty")}
+	}
+	if v.StudioId != nil {
+		if err := encoder.SetURI("studioId").String(*v.StudioId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListStreamingSessionBackups struct {
+}
+
+func (*awsRestjson1_serializeOpListStreamingSessionBackups) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListStreamingSessionBackups) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListStreamingSessionBackupsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2020-08-01/studios/{studioId}/streaming-session-backups")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListStreamingSessionBackupsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListStreamingSessionBackupsInput(v *ListStreamingSessionBackupsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.OwnedBy != nil {
+		encoder.SetQuery("ownedBy").String(*v.OwnedBy)
 	}
 
 	if v.StudioId == nil || len(*v.StudioId) == 0 {
@@ -2505,8 +2638,8 @@ func awsRestjson1_serializeOpHttpBindingsListStudioComponentsInput(v *ListStudio
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2583,8 +2716,8 @@ func awsRestjson1_serializeOpHttpBindingsListStudioMembersInput(v *ListStudioMem
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -2943,6 +3076,17 @@ func (m *awsRestjson1_serializeOpStartStreamingSession) HandleSerialize(ctx cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartStreamingSessionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2976,6 +3120,18 @@ func awsRestjson1_serializeOpHttpBindingsStartStreamingSessionInput(v *StartStre
 		if err := encoder.SetURI("studioId").String(*v.StudioId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartStreamingSessionInput(v *StartStreamingSessionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackupId != nil {
+		ok := object.Key("backupId")
+		ok.String(*v.BackupId)
 	}
 
 	return nil
@@ -3078,6 +3234,17 @@ func (m *awsRestjson1_serializeOpStopStreamingSession) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStopStreamingSessionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -3111,6 +3278,18 @@ func awsRestjson1_serializeOpHttpBindingsStopStreamingSessionInput(v *StopStream
 		if err := encoder.SetURI("studioId").String(*v.StudioId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStopStreamingSessionInput(v *StopStreamingSessionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.VolumeRetentionMode) > 0 {
+		ok := object.Key("volumeRetentionMode")
+		ok.String(string(v.VolumeRetentionMode))
 	}
 
 	return nil
@@ -4072,6 +4251,11 @@ func awsRestjson1_serializeDocumentStreamConfigurationCreate(v *types.StreamConf
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AutomaticTerminationMode) > 0 {
+		ok := object.Key("automaticTerminationMode")
+		ok.String(string(v.AutomaticTerminationMode))
+	}
+
 	if len(v.ClipboardMode) > 0 {
 		ok := object.Key("clipboardMode")
 		ok.String(string(v.ClipboardMode))
@@ -4084,14 +4268,26 @@ func awsRestjson1_serializeDocumentStreamConfigurationCreate(v *types.StreamConf
 		}
 	}
 
-	if v.MaxSessionLengthInMinutes != 0 {
+	if v.MaxSessionLengthInMinutes != nil {
 		ok := object.Key("maxSessionLengthInMinutes")
-		ok.Integer(v.MaxSessionLengthInMinutes)
+		ok.Integer(*v.MaxSessionLengthInMinutes)
 	}
 
 	if v.MaxStoppedSessionLengthInMinutes != 0 {
 		ok := object.Key("maxStoppedSessionLengthInMinutes")
 		ok.Integer(v.MaxStoppedSessionLengthInMinutes)
+	}
+
+	if v.SessionBackup != nil {
+		ok := object.Key("sessionBackup")
+		if err := awsRestjson1_serializeDocumentStreamConfigurationSessionBackup(v.SessionBackup, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.SessionPersistenceMode) > 0 {
+		ok := object.Key("sessionPersistenceMode")
+		ok.String(string(v.SessionPersistenceMode))
 	}
 
 	if v.SessionStorage != nil {
@@ -4106,6 +4302,30 @@ func awsRestjson1_serializeDocumentStreamConfigurationCreate(v *types.StreamConf
 		if err := awsRestjson1_serializeDocumentStreamingImageIdList(v.StreamingImageIds, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VolumeConfiguration != nil {
+		ok := object.Key("volumeConfiguration")
+		if err := awsRestjson1_serializeDocumentVolumeConfiguration(v.VolumeConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentStreamConfigurationSessionBackup(v *types.StreamConfigurationSessionBackup, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxBackupsToRetain != 0 {
+		ok := object.Key("maxBackupsToRetain")
+		ok.Integer(v.MaxBackupsToRetain)
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("mode")
+		ok.String(string(v.Mode))
 	}
 
 	return nil
@@ -4306,5 +4526,27 @@ func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Va
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVolumeConfiguration(v *types.VolumeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Iops != nil {
+		ok := object.Key("iops")
+		ok.Integer(*v.Iops)
+	}
+
+	if v.Size != nil {
+		ok := object.Key("size")
+		ok.Integer(*v.Size)
+	}
+
+	if v.Throughput != nil {
+		ok := object.Key("throughput")
+		ok.Integer(*v.Throughput)
+	}
+
 	return nil
 }

@@ -15,6 +15,72 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpCancelLegalHold struct {
+}
+
+func (*awsRestjson1_serializeOpCancelLegalHold) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCancelLegalHold) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CancelLegalHoldInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/legal-holds/{LegalHoldId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCancelLegalHoldInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCancelLegalHoldInput(v *CancelLegalHoldInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CancelDescription != nil {
+		encoder.SetQuery("cancelDescription").String(*v.CancelDescription)
+	}
+
+	if v.LegalHoldId == nil || len(*v.LegalHoldId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LegalHoldId must not be empty")}
+	}
+	if v.LegalHoldId != nil {
+		if err := encoder.SetURI("LegalHoldId").String(*v.LegalHoldId); err != nil {
+			return err
+		}
+	}
+
+	if v.RetainRecordInDays != nil {
+		encoder.SetQuery("retainRecordInDays").Long(*v.RetainRecordInDays)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateBackupPlan struct {
 }
 
@@ -365,6 +431,98 @@ func awsRestjson1_serializeOpDocumentCreateFrameworkInput(v *CreateFrameworkInpu
 	if v.IdempotencyToken != nil {
 		ok := object.Key("IdempotencyToken")
 		ok.String(*v.IdempotencyToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateLegalHold struct {
+}
+
+func (*awsRestjson1_serializeOpCreateLegalHold) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateLegalHold) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLegalHoldInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/legal-holds")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateLegalHoldInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateLegalHoldInput(v *CreateLegalHoldInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateLegalHoldInput(v *CreateLegalHoldInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.IdempotencyToken != nil {
+		ok := object.Key("IdempotencyToken")
+		ok.String(*v.IdempotencyToken)
+	}
+
+	if v.RecoveryPointSelection != nil {
+		ok := object.Key("RecoveryPointSelection")
+		if err := awsRestjson1_serializeDocumentRecoveryPointSelection(v.RecoveryPointSelection, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Title != nil {
+		ok := object.Key("Title")
+		ok.String(*v.Title)
 	}
 
 	return nil
@@ -1697,6 +1855,73 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateRecoveryPointInput(v *Disas
 	return nil
 }
 
+type awsRestjson1_serializeOpDisassociateRecoveryPointFromParent struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociateRecoveryPointFromParent) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociateRecoveryPointFromParent) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateRecoveryPointFromParentInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/backup-vaults/{BackupVaultName}/recovery-points/{RecoveryPointArn}/parentAssociation")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociateRecoveryPointFromParentInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociateRecoveryPointFromParentInput(v *DisassociateRecoveryPointFromParentInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.BackupVaultName == nil || len(*v.BackupVaultName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member BackupVaultName must not be empty")}
+	}
+	if v.BackupVaultName != nil {
+		if err := encoder.SetURI("BackupVaultName").String(*v.BackupVaultName); err != nil {
+			return err
+		}
+	}
+
+	if v.RecoveryPointArn == nil || len(*v.RecoveryPointArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RecoveryPointArn must not be empty")}
+	}
+	if v.RecoveryPointArn != nil {
+		if err := encoder.SetURI("RecoveryPointArn").String(*v.RecoveryPointArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpExportBackupPlanTemplate struct {
 }
 
@@ -2126,6 +2351,64 @@ func awsRestjson1_serializeOpHttpBindingsGetBackupVaultNotificationsInput(v *Get
 	return nil
 }
 
+type awsRestjson1_serializeOpGetLegalHold struct {
+}
+
+func (*awsRestjson1_serializeOpGetLegalHold) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetLegalHold) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetLegalHoldInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/legal-holds/{LegalHoldId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetLegalHoldInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetLegalHoldInput(v *GetLegalHoldInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LegalHoldId == nil || len(*v.LegalHoldId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LegalHoldId must not be empty")}
+	}
+	if v.LegalHoldId != nil {
+		if err := encoder.SetURI("LegalHoldId").String(*v.LegalHoldId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetRecoveryPointRestoreMetadata struct {
 }
 
@@ -2306,6 +2589,10 @@ func awsRestjson1_serializeOpHttpBindingsListBackupJobsInput(v *ListBackupJobsIn
 
 	if v.ByCreatedBefore != nil {
 		encoder.SetQuery("createdBefore").String(smithytime.FormatDateTime(*v.ByCreatedBefore))
+	}
+
+	if v.ByParentJobId != nil {
+		encoder.SetQuery("parentJobId").String(*v.ByParentJobId)
 	}
 
 	if v.ByResourceArn != nil {
@@ -2708,6 +2995,10 @@ func awsRestjson1_serializeOpHttpBindingsListCopyJobsInput(v *ListCopyJobsInput,
 		encoder.SetQuery("destinationVaultArn").String(*v.ByDestinationVaultArn)
 	}
 
+	if v.ByParentJobId != nil {
+		encoder.SetQuery("parentJobId").String(*v.ByParentJobId)
+	}
+
 	if v.ByResourceArn != nil {
 		encoder.SetQuery("resourceArn").String(*v.ByResourceArn)
 	}
@@ -2783,6 +3074,63 @@ func awsRestjson1_serializeOpHttpBindingsListFrameworksInput(v *ListFrameworksIn
 
 	if v.NextToken != nil {
 		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListLegalHolds struct {
+}
+
+func (*awsRestjson1_serializeOpListLegalHolds) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListLegalHolds) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLegalHoldsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/legal-holds")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListLegalHoldsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListLegalHoldsInput(v *ListLegalHoldsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -2912,12 +3260,82 @@ func awsRestjson1_serializeOpHttpBindingsListRecoveryPointsByBackupVaultInput(v 
 		encoder.SetQuery("createdBefore").String(smithytime.FormatDateTime(*v.ByCreatedBefore))
 	}
 
+	if v.ByParentRecoveryPointArn != nil {
+		encoder.SetQuery("parentRecoveryPointArn").String(*v.ByParentRecoveryPointArn)
+	}
+
 	if v.ByResourceArn != nil {
 		encoder.SetQuery("resourceArn").String(*v.ByResourceArn)
 	}
 
 	if v.ByResourceType != nil {
 		encoder.SetQuery("resourceType").String(*v.ByResourceType)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListRecoveryPointsByLegalHold struct {
+}
+
+func (*awsRestjson1_serializeOpListRecoveryPointsByLegalHold) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListRecoveryPointsByLegalHold) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListRecoveryPointsByLegalHoldInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/legal-holds/{LegalHoldId}/recovery-points")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListRecoveryPointsByLegalHoldInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListRecoveryPointsByLegalHoldInput(v *ListRecoveryPointsByLegalHoldInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.LegalHoldId == nil || len(*v.LegalHoldId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member LegalHoldId must not be empty")}
+	}
+	if v.LegalHoldId != nil {
+		if err := encoder.SetURI("LegalHoldId").String(*v.LegalHoldId); err != nil {
+			return err
+		}
 	}
 
 	if v.MaxResults != nil {
@@ -5037,6 +5455,23 @@ func awsRestjson1_serializeDocumentCopyActions(v []types.CopyAction, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDateRange(v *types.DateRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FromDate != nil {
+		ok := object.Key("FromDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.FromDate))
+	}
+
+	if v.ToDate != nil {
+		ok := object.Key("ToDate")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ToDate))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFormatList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5139,6 +5574,34 @@ func awsRestjson1_serializeDocumentMetadata(v map[string]string, value smithyjso
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRecoveryPointSelection(v *types.RecoveryPointSelection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DateRange != nil {
+		ok := object.Key("DateRange")
+		if err := awsRestjson1_serializeDocumentDateRange(v.DateRange, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceIdentifiers != nil {
+		ok := object.Key("ResourceIdentifiers")
+		if err := awsRestjson1_serializeDocumentResourceIdentifiers(v.ResourceIdentifiers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VaultNames != nil {
+		ok := object.Key("VaultNames")
+		if err := awsRestjson1_serializeDocumentVaultNames(v.VaultNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentReportDeliveryChannel(v *types.ReportDeliveryChannel, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5167,6 +5630,13 @@ func awsRestjson1_serializeDocumentReportSetting(v *types.ReportSetting, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.Accounts != nil {
+		ok := object.Key("Accounts")
+		if err := awsRestjson1_serializeDocumentStringList(v.Accounts, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FrameworkArns != nil {
 		ok := object.Key("FrameworkArns")
 		if err := awsRestjson1_serializeDocumentStringList(v.FrameworkArns, ok); err != nil {
@@ -5179,6 +5649,20 @@ func awsRestjson1_serializeDocumentReportSetting(v *types.ReportSetting, value s
 		ok.Integer(v.NumberOfFrameworks)
 	}
 
+	if v.OrganizationUnits != nil {
+		ok := object.Key("OrganizationUnits")
+		if err := awsRestjson1_serializeDocumentStringList(v.OrganizationUnits, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Regions != nil {
+		ok := object.Key("Regions")
+		if err := awsRestjson1_serializeDocumentStringList(v.Regions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ReportTemplate != nil {
 		ok := object.Key("ReportTemplate")
 		ok.String(*v.ReportTemplate)
@@ -5188,6 +5672,17 @@ func awsRestjson1_serializeDocumentReportSetting(v *types.ReportSetting, value s
 }
 
 func awsRestjson1_serializeDocumentResourceArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceIdentifiers(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -5271,6 +5766,17 @@ func awsRestjson1_serializeDocumentTags(v map[string]string, value smithyjson.Va
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVaultNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

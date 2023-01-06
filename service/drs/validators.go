@@ -330,6 +330,26 @@ func (m *validateOpRetryDataReplication) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpReverseReplication struct {
+}
+
+func (*validateOpReverseReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpReverseReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ReverseReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpReverseReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartFailbackLaunch struct {
 }
 
@@ -370,6 +390,26 @@ func (m *validateOpStartRecovery) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartReplication struct {
+}
+
+func (*validateOpStartReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartReplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStopFailback struct {
 }
 
@@ -385,6 +425,26 @@ func (m *validateOpStopFailback) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopFailbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopReplication struct {
+}
+
+func (*validateOpStopReplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopReplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopReplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopReplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -594,6 +654,10 @@ func addOpRetryDataReplicationValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpRetryDataReplication{}, middleware.After)
 }
 
+func addOpReverseReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpReverseReplication{}, middleware.After)
+}
+
 func addOpStartFailbackLaunchValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartFailbackLaunch{}, middleware.After)
 }
@@ -602,8 +666,16 @@ func addOpStartRecoveryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartRecovery{}, middleware.After)
 }
 
+func addOpStartReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartReplication{}, middleware.After)
+}
+
 func addOpStopFailbackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopFailback{}, middleware.After)
+}
+
+func addOpStopReplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopReplication{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -972,6 +1044,21 @@ func validateOpRetryDataReplicationInput(v *RetryDataReplicationInput) error {
 	}
 }
 
+func validateOpReverseReplicationInput(v *ReverseReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReverseReplicationInput"}
+	if v.RecoveryInstanceID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryInstanceID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartFailbackLaunchInput(v *StartFailbackLaunchInput) error {
 	if v == nil {
 		return nil
@@ -1006,6 +1093,21 @@ func validateOpStartRecoveryInput(v *StartRecoveryInput) error {
 	}
 }
 
+func validateOpStartReplicationInput(v *StartReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartReplicationInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStopFailbackInput(v *StopFailbackInput) error {
 	if v == nil {
 		return nil
@@ -1013,6 +1115,21 @@ func validateOpStopFailbackInput(v *StopFailbackInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopFailbackInput"}
 	if v.RecoveryInstanceID == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecoveryInstanceID"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopReplicationInput(v *StopReplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopReplicationInput"}
+	if v.SourceServerID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceServerID"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

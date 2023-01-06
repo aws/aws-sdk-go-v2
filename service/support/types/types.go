@@ -47,31 +47,31 @@ type AttachmentDetails struct {
 // * displayId - The identifier for the case on pages
 // in the Amazon Web Services Support Center.
 //
-// * language - The ISO 639-1 code for
-// the language in which Amazon Web Services provides support. Amazon Web Services
-// Support currently supports English ("en") and Japanese ("ja"). Language
-// parameters must be passed explicitly for operations that take them.
-//
-// * nextToken
-// - A resumption point for pagination.
-//
-// * recentCommunications - One or more
-// Communication objects. Fields of these objects are attachments, body, caseId,
-// submittedBy, and timeCreated.
-//
-// * serviceCode - The identifier for the Amazon Web
-// Services service that corresponds to the service code defined in the call to
-// DescribeServices.
-//
-// * severityCode - The severity code assigned to the case.
-// Contains one of the values returned by the call to DescribeSeverityLevels. The
-// possible values are: low, normal, high, urgent, and critical.
-//
-// * status - The
-// status of the case in the Amazon Web Services Support Center. Valid values:
+// * language - The language in which
+// Amazon Web Services Support handles the case. Amazon Web Services Support
+// currently supports English ("en") and Japanese ("ja"). You must specify the ISO
+// 639-1 code for the language parameter if you want support in that language.
 //
 // *
-// opened
+// nextToken - A resumption point for pagination.
+//
+// * recentCommunications - One or
+// more Communication objects. Fields of these objects are attachments, body,
+// caseId, submittedBy, and timeCreated.
+//
+// * serviceCode - The identifier for the
+// Amazon Web Services service that corresponds to the service code defined in the
+// call to DescribeServices.
+//
+// * severityCode - The severity code assigned to the
+// case. Contains one of the values returned by the call to DescribeSeverityLevels.
+// The possible values are: low, normal, high, urgent, and critical.
+//
+// * status -
+// The status of the case in the Amazon Web Services Support Center. Valid
+// values:
+//
+// * opened
 //
 // * pending-customer-action
 //
@@ -79,18 +79,18 @@ type AttachmentDetails struct {
 //
 // * resolved
 //
-// * unassigned
-//
 // *
-// work-in-progress
+// unassigned
+//
+// * work-in-progress
 //
 // * subject - The subject line of the case.
 //
-// * submittedBy - The
-// email address of the account that submitted the case.
+// *
+// submittedBy - The email address of the account that submitted the case.
 //
-// * timeCreated - The time
-// the case was created, in ISO-8601 format.
+// *
+// timeCreated - The time the case was created, in ISO-8601 format.
 type CaseDetails struct {
 
 	// The support case ID requested or returned in the call. The case ID is an
@@ -108,10 +108,10 @@ type CaseDetails struct {
 	// a numeric string.
 	DisplayId *string
 
-	// The ISO 639-1 code for the language in which Amazon Web Services provides
-	// support. Amazon Web Services Support currently supports English ("en") and
-	// Japanese ("ja"). Language parameters must be passed explicitly for operations
-	// that take them.
+	// The language in which Amazon Web Services Support handles the case. Amazon Web
+	// Services Support currently supports English ("en") and Japanese ("ja"). You must
+	// specify the ISO 639-1 code for the language parameter if you want support in
+	// that language.
 	Language *string
 
 	// The five most recent communications between you and Amazon Web Services Support

@@ -15,8 +15,8 @@ import (
 // DEVELOPMENT stage to LIVE. This automatically updates all cache behaviors that
 // are using this function to use the newly published copy in the LIVE stage. When
 // a function is published to the LIVE stage, you can attach the function to a
-// distribution’s cache behavior, using the function’s Amazon Resource Name (ARN).
-// To publish a function, you must provide the function’s name and version (ETag
+// distribution's cache behavior, using the function's Amazon Resource Name (ARN).
+// To publish a function, you must provide the function's name and version (ETag
 // value). To get these values, you can use ListFunctions and DescribeFunction.
 func (c *Client) PublishFunction(ctx context.Context, params *PublishFunctionInput, optFns ...func(*Options)) (*PublishFunctionOutput, error) {
 	if params == nil {

@@ -13,10 +13,10 @@ import (
 
 // Transcribes the audio from a medical dictation or conversation and applies any
 // additional Request Parameters you choose to include in your request. In addition
-// to many of the standard transcription features, Amazon Transcribe Medical
-// provides you with a robust medical vocabulary and, optionally, content
-// identification, which adds flags to personal health information (PHI). To learn
-// more about these features, refer to How Amazon Transcribe Medical works
+// to many standard transcription features, Amazon Transcribe Medical provides you
+// with a robust medical vocabulary and, optionally, content identification, which
+// adds flags to personal health information (PHI). To learn more about these
+// features, refer to How Amazon Transcribe Medical works
 // (https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works-med.html). To
 // make a StartMedicalTranscriptionJob request, you must first upload your media
 // file into an Amazon S3 bucket; you can then specify the S3 location of the file
@@ -71,14 +71,18 @@ type StartMedicalTranscriptionJobInput struct {
 	LanguageCode types.LanguageCode
 
 	// Describes the Amazon S3 location of the media file you want to use in your
-	// request.
+	// request. For information on supported media formats, refer to the MediaFormat
+	// (https://docs.aws.amazon.com/APIReference/API_StartTranscriptionJob.html#transcribe-StartTranscriptionJob-request-MediaFormat)
+	// parameter or the Media formats
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
+	// section in the Amazon S3 Developer Guide.
 	//
 	// This member is required.
 	Media *types.Media
 
-	// A unique name, chosen by you, for your medical transcription job. The name you
-	// specify is also used as the default name of your transcription output file. If
-	// you want to specify a different name for your transcription output, use the
+	// A unique name, chosen by you, for your medical transcription job. The name that
+	// you specify is also used as the default name of your transcription output file.
+	// If you want to specify a different name for your transcription output, use the
 	// OutputKey parameter. This name is case sensitive, cannot contain spaces, and
 	// must be unique within an Amazon Web Services account. If you try to create a new
 	// job with the same name as an existing job, you get a ConflictException error.
@@ -99,9 +103,6 @@ type StartMedicalTranscriptionJobInput struct {
 	// (https://console.aws.amazon.com/s3). See also Permissions Required for IAM User
 	// Roles
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user).
-	// If you don't specify OutputBucketName, your transcript is placed in a
-	// service-managed Amazon S3 bucket and you are provided with a URI to access your
-	// transcript.
 	//
 	// This member is required.
 	OutputBucketName *string
@@ -138,12 +139,12 @@ type StartMedicalTranscriptionJobInput struct {
 	// Specify the format of your input media file.
 	MediaFormat types.MediaFormat
 
-	// The sample rate, in Hertz, of the audio track in your input media file. If you
+	// The sample rate, in hertz, of the audio track in your input media file. If you
 	// don't specify the media sample rate, Amazon Transcribe Medical determines it for
 	// you. If you specify the sample rate, it must match the rate detected by Amazon
-	// Transcribe Medical; if there's a mismatch between the value you specify and the
-	// value detected, your job fails. Therefore, in most cases, it's advised to omit
-	// MediaSampleRateHertz and let Amazon Transcribe Medical determine the sample
+	// Transcribe Medical; if there's a mismatch between the value that you specify and
+	// the value detected, your job fails. Therefore, in most cases, it's advised to
+	// omit MediaSampleRateHertz and let Amazon Transcribe Medical determine the sample
 	// rate.
 	MediaSampleRateHertz *int32
 
@@ -217,8 +218,8 @@ type StartMedicalTranscriptionJobInput struct {
 	OutputKey *string
 
 	// Specify additional optional settings in your request, including channel
-	// identification, alternative transcriptions, and speaker labeling; allows you to
-	// apply custom vocabularies to your transcription job.
+	// identification, alternative transcriptions, and speaker partitioning. You can
+	// use that to apply custom vocabularies to your transcription job.
 	Settings *types.MedicalTranscriptionSetting
 
 	// Adds one or more custom tags, each in the form of a key:value pair, to a new

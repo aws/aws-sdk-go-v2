@@ -87,7 +87,7 @@ type CreateQuerySuggestionsBlockListInput struct {
 
 type CreateQuerySuggestionsBlockListOutput struct {
 
-	// The unique identifier of the created block list.
+	// The identifier of the created block list.
 	Id *string
 
 	// Metadata pertaining to the operation's result.

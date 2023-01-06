@@ -15,9 +15,8 @@ import (
 // update the metadata, specify the build ID to update and provide the new values.
 // If successful, a build object containing the updated metadata is returned. Learn
 // more  Upload a Custom Server Build
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
-// Related actions CreateBuild | ListBuilds | DescribeBuild | UpdateBuild |
-// DeleteBuild | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)All
+// APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateBuild(ctx context.Context, params *UpdateBuildInput, optFns ...func(*Options)) (*UpdateBuildOutput, error) {
 	if params == nil {
@@ -34,7 +33,6 @@ func (c *Client) UpdateBuild(ctx context.Context, params *UpdateBuildInput, optF
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type UpdateBuildInput struct {
 
 	// A unique identifier for the build to update. You can use either the build ID or
@@ -43,18 +41,17 @@ type UpdateBuildInput struct {
 	// This member is required.
 	BuildId *string
 
-	// A descriptive label that is associated with a build. Build names do not need to
-	// be unique.
+	// A descriptive label associated with a build. Build names do not need to be
+	// unique.
 	Name *string
 
-	// Version information that is associated with a build or script. Version strings
-	// do not need to be unique.
+	// Version information associated with a build or script. Version strings do not
+	// need to be unique.
 	Version *string
 
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type UpdateBuildOutput struct {
 
 	// The updated build resource.

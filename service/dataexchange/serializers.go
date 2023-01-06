@@ -2214,6 +2214,51 @@ func awsRestjson1_serializeDocumentAutoExportRevisionToS3RequestDetails(v *types
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCreateS3DataAccessFromS3BucketRequestDetails(v *types.CreateS3DataAccessFromS3BucketRequestDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssetSource != nil {
+		ok := object.Key("AssetSource")
+		if err := awsRestjson1_serializeDocumentS3DataAccessAssetSourceEntry(v.AssetSource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataSetId != nil {
+		ok := object.Key("DataSetId")
+		ok.String(*v.DataSetId)
+	}
+
+	if v.RevisionId != nil {
+		ok := object.Key("RevisionId")
+		ok.String(*v.RevisionId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDatabaseLFTagPolicyAndPermissions(v *types.DatabaseLFTagPolicyAndPermissions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expression != nil {
+		ok := object.Key("Expression")
+		if err := awsRestjson1_serializeDocumentListOfLFTags(v.Expression, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Permissions != nil {
+		ok := object.Key("Permissions")
+		if err := awsRestjson1_serializeDocumentListOfDatabaseLFTagPolicyPermissions(v.Permissions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEvent(v *types.Event, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2403,6 +2448,47 @@ func awsRestjson1_serializeDocumentImportAssetFromSignedUrlRequestDetails(v *typ
 	return nil
 }
 
+func awsRestjson1_serializeDocumentImportAssetsFromLakeFormationTagPolicyRequestDetails(v *types.ImportAssetsFromLakeFormationTagPolicyRequestDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		if err := awsRestjson1_serializeDocumentDatabaseLFTagPolicyAndPermissions(v.Database, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DataSetId != nil {
+		ok := object.Key("DataSetId")
+		ok.String(*v.DataSetId)
+	}
+
+	if v.RevisionId != nil {
+		ok := object.Key("RevisionId")
+		ok.String(*v.RevisionId)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.Table != nil {
+		ok := object.Key("Table")
+		if err := awsRestjson1_serializeDocumentTableLFTagPolicyAndPermissions(v.Table, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentImportAssetsFromRedshiftDataSharesRequestDetails(v *types.ImportAssetsFromRedshiftDataSharesRequestDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2451,6 +2537,36 @@ func awsRestjson1_serializeDocumentImportAssetsFromS3RequestDetails(v *types.Imp
 	return nil
 }
 
+func awsRestjson1_serializeDocumentLFTag(v *types.LFTag, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TagKey != nil {
+		ok := object.Key("TagKey")
+		ok.String(*v.TagKey)
+	}
+
+	if v.TagValues != nil {
+		ok := object.Key("TagValues")
+		if err := awsRestjson1_serializeDocumentListOfLFTagValues(v.TagValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListOf__string(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentListOfAssetDestinationEntry(v []types.AssetDestinationEntry, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2473,6 +2589,41 @@ func awsRestjson1_serializeDocumentListOfAssetSourceEntry(v []types.AssetSourceE
 		if err := awsRestjson1_serializeDocumentAssetSourceEntry(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListOfDatabaseLFTagPolicyPermissions(v []types.DatabaseLFTagPolicyPermission, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListOfLFTags(v []types.LFTag, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLFTag(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListOfLFTagValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -2503,6 +2654,17 @@ func awsRestjson1_serializeDocumentListOfRevisionDestinationEntry(v []types.Revi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentListOfTableTagPolicyLFPermissions(v []types.TableTagPolicyLFPermission, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMapOf__string(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2529,6 +2691,13 @@ func awsRestjson1_serializeDocumentRedshiftDataShareAssetSourceEntry(v *types.Re
 func awsRestjson1_serializeDocumentRequestDetails(v *types.RequestDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CreateS3DataAccessFromS3Bucket != nil {
+		ok := object.Key("CreateS3DataAccessFromS3Bucket")
+		if err := awsRestjson1_serializeDocumentCreateS3DataAccessFromS3BucketRequestDetails(v.CreateS3DataAccessFromS3Bucket, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.ExportAssetsToS3 != nil {
 		ok := object.Key("ExportAssetsToS3")
@@ -2561,6 +2730,13 @@ func awsRestjson1_serializeDocumentRequestDetails(v *types.RequestDetails, value
 	if v.ImportAssetFromSignedUrl != nil {
 		ok := object.Key("ImportAssetFromSignedUrl")
 		if err := awsRestjson1_serializeDocumentImportAssetFromSignedUrlRequestDetails(v.ImportAssetFromSignedUrl, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ImportAssetsFromLakeFormationTagPolicy != nil {
+		ok := object.Key("ImportAssetsFromLakeFormationTagPolicy")
+		if err := awsRestjson1_serializeDocumentImportAssetsFromLakeFormationTagPolicyRequestDetails(v.ImportAssetsFromLakeFormationTagPolicy, ok); err != nil {
 			return err
 		}
 	}
@@ -2611,6 +2787,53 @@ func awsRestjson1_serializeDocumentRevisionPublished(v *types.RevisionPublished,
 	if v.DataSetId != nil {
 		ok := object.Key("DataSetId")
 		ok.String(*v.DataSetId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3DataAccessAssetSourceEntry(v *types.S3DataAccessAssetSourceEntry, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("Bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.KeyPrefixes != nil {
+		ok := object.Key("KeyPrefixes")
+		if err := awsRestjson1_serializeDocumentListOf__string(v.KeyPrefixes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Keys != nil {
+		ok := object.Key("Keys")
+		if err := awsRestjson1_serializeDocumentListOf__string(v.Keys, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTableLFTagPolicyAndPermissions(v *types.TableLFTagPolicyAndPermissions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expression != nil {
+		ok := object.Key("Expression")
+		if err := awsRestjson1_serializeDocumentListOfLFTags(v.Expression, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Permissions != nil {
+		ok := object.Key("Permissions")
+		if err := awsRestjson1_serializeDocumentListOfTableTagPolicyLFPermissions(v.Permissions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

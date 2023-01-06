@@ -34,9 +34,10 @@ func (c *Client) CreateAddon(ctx context.Context, params *CreateAddonInput, optF
 
 type CreateAddonInput struct {
 
-	// The name of the add-on. The name must match one of the names returned by
+	// The name of the add-on. The name must match one of the names that
 	// DescribeAddonVersions
-	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html).
+	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonVersions.html)
+	// returns.
 	//
 	// This member is required.
 	AddonName *string
@@ -54,6 +55,11 @@ type CreateAddonInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientRequestToken *string
+
+	// The set of configuration values for the add-on that's created. The values that
+	// you provide are validated against the schema in DescribeAddonConfiguration
+	// (https://docs.aws.amazon.com/eks/latest/APIReference/API_DescribeAddonConfiguration.html).
+	ConfigurationValues *string
 
 	// How to resolve field value conflicts for an Amazon EKS add-on. Conflicts are
 	// handled based on the value you choose:

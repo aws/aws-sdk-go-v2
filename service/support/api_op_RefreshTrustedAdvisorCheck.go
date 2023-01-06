@@ -22,10 +22,18 @@ import (
 // Services Support API.
 //
 // * If you call the Amazon Web Services Support API from an
-// account that does not have a Business, Enterprise On-Ramp, or Enterprise Support
+// account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
 // plan, the SubscriptionRequiredException error message appears. For information
 // about changing your support plan, see Amazon Web Services Support
 // (http://aws.amazon.com/premiumsupport/).
+//
+// To call the Trusted Advisor operations
+// in the Amazon Web Services Support API, you must use the US East (N. Virginia)
+// endpoint. Currently, the US West (Oregon) and Europe (Ireland) endpoints don't
+// support the Trusted Advisor operations. For more information, see About the
+// Amazon Web Services Support API
+// (https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint)
+// in the Amazon Web Services Support User Guide.
 func (c *Client) RefreshTrustedAdvisorCheck(ctx context.Context, params *RefreshTrustedAdvisorCheckInput, optFns ...func(*Options)) (*RefreshTrustedAdvisorCheckOutput, error) {
 	if params == nil {
 		params = &RefreshTrustedAdvisorCheckInput{}

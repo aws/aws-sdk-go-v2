@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves the current status and configuration settings for an Amazon Macie
-// account.
+// Retrieves the status and configuration settings for an Amazon Macie account.
 func (c *Client) GetMacieSession(ctx context.Context, params *GetMacieSessionInput, optFns ...func(*Options)) (*GetMacieSessionOutput, error) {
 	if params == nil {
 		params = &GetMacieSessionInput{}

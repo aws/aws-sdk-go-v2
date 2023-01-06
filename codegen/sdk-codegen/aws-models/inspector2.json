@@ -172,7 +172,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object with details the status of an Amazon Web Services account within your Amazon Inspector environment</p>"
+                "smithy.api#documentation": "<p>An object with details the status of an Amazon Web Services account within your Amazon Inspector environment.</p>"
             }
         },
         "com.amazonaws.inspector2#AccountStateList": {
@@ -264,6 +264,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains details about an aggregation request based on finding title.</p>"
                     }
+                },
+                "lambdaLayerAggregation": {
+                    "target": "com.amazonaws.inspector2#LambdaLayerAggregation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns an object with findings aggregated by AWS Lambda layer.</p>"
+                    }
+                },
+                "lambdaFunctionAggregation": {
+                    "target": "com.amazonaws.inspector2#LambdaFunctionAggregation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns an object with findings aggregated by AWS Lambda function.</p>"
+                    }
                 }
             },
             "traits": {
@@ -281,6 +293,10 @@
                     {
                         "value": "AWS_ECR_CONTAINER_IMAGE",
                         "name": "AWS_ECR_CONTAINER_IMAGE"
+                    },
+                    {
+                        "value": "AWS_LAMBDA_FUNCTION",
+                        "name": "AWS_LAMBDA_FUNCTION"
                     }
                 ]
             }
@@ -341,6 +357,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains details about an aggregation response based on finding title.</p>"
                     }
+                },
+                "lambdaLayerAggregation": {
+                    "target": "com.amazonaws.inspector2#LambdaLayerAggregationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An aggregation of findings by AWS Lambda layer.</p>"
+                    }
+                },
+                "lambdaFunctionAggregation": {
+                    "target": "com.amazonaws.inspector2#LambdaFunctionAggregationResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An aggregation of findings by AWS Lambda function.</p>"
+                    }
                 }
             },
             "traits": {
@@ -392,6 +420,14 @@
                     {
                         "value": "ACCOUNT",
                         "name": "ACCOUNT"
+                    },
+                    {
+                        "value": "AWS_LAMBDA_FUNCTION",
+                        "name": "AWS_LAMBDA_FUNCTION"
+                    },
+                    {
+                        "value": "LAMBDA_LAYER",
+                        "name": "LAMBDA_LAYER"
                     }
                 ]
             }
@@ -435,7 +471,7 @@
                 "accountId": {
                     "target": "com.amazonaws.inspector2#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that the AMI belongs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the AMI.</p>"
                     }
                 },
                 "severityCounts": {
@@ -482,6 +518,33 @@
                         "name": "AFFECTED_INSTANCES"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#Architecture": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "X86_64",
+                        "name": "X86_64"
+                    },
+                    {
+                        "value": "ARM64",
+                        "name": "ARM64"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#ArchitectureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#Architecture"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.inspector2#Arn": {
@@ -563,6 +626,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents whether Amazon ECR scans are automatically enabled for new members of your Amazon Inspector\n         organization.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "lambda": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents whether AWS Lambda scans are automatically enabled for new members of your Amazon Inspector organization.\n      </p>"
                     }
                 }
             },
@@ -783,7 +852,7 @@
                 "registry": {
                     "target": "com.amazonaws.inspector2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The registry the Amazon ECR container image belongs to.</p>",
+                        "smithy.api#documentation": "<p>The registry for the Amazon ECR container image.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -815,6 +884,79 @@
                         "name": "ALL"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#AwsLambdaFunctionDetails": {
+            "type": "structure",
+            "members": {
+                "functionName": {
+                    "target": "com.amazonaws.inspector2#FunctionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AWS Lambda function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "runtime": {
+                    "target": "com.amazonaws.inspector2#Runtime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime environment for the AWS Lambda function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "codeSha256": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SHA256 hash of the AWS Lambda function's deployment package.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.inspector2#Version",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the AWS Lambda function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "executionRoleArn": {
+                    "target": "com.amazonaws.inspector2#ExecutionRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Lambda function's execution role.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "layers": {
+                    "target": "com.amazonaws.inspector2#LayerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Lambda function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">\n         layers</a>. A Lambda function can have up to five layers.</p>"
+                    }
+                },
+                "vpcConfig": {
+                    "target": "com.amazonaws.inspector2#LambdaVpcConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Lambda function's networking configuration.</p>"
+                    }
+                },
+                "packageType": {
+                    "target": "com.amazonaws.inspector2#PackageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of deployment package. Set to <code>Image</code> for container image and set <code>Zip</code> for .zip file archive.</p>"
+                    }
+                },
+                "architectures": {
+                    "target": "com.amazonaws.inspector2#ArchitectureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instruction set architecture that the AWS Lambda function supports. Architecture is a string array with one of the \n         valid values. The default architecture value is <code>x86_64</code>.</p>"
+                    }
+                },
+                "lastModifiedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a user last updated the configuration, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601 format</a>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> A summary of information about the AWS Lambda function.</p>"
             }
         },
         "com.amazonaws.inspector2#BadRequestException": {
@@ -1154,6 +1296,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon EC2 instance tags to filter on.</p>"
                     }
+                },
+                "lambdaFunctionName": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns coverage statistics for AWS Lambda functions filtered by function names.</p>"
+                    }
+                },
+                "lambdaFunctionTags": {
+                    "target": "com.amazonaws.inspector2#CoverageMapFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns coverage statistics for AWS Lambda functions filtered by tag.</p>"
+                    }
+                },
+                "lambdaFunctionRuntime": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns coverage statistics for AWS Lambda functions filtered by runtime.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1226,6 +1386,10 @@
                     {
                         "value": "AWS_ECR_REPOSITORY",
                         "name": "AWS_ECR_REPOSITORY"
+                    },
+                    {
+                        "value": "AWS_LAMBDA_FUNCTION",
+                        "name": "AWS_LAMBDA_FUNCTION"
                     }
                 ]
             }
@@ -1817,7 +1981,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describe Amazon Inspector configuration settings for an Amazon Web Services organization</p>",
+                "smithy.api#documentation": "<p>Describe Amazon Inspector configuration settings for an Amazon Web Services organization.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -1993,7 +2157,8 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "max": 2
+                    "min": 0,
+                    "max": 3
                 }
             }
         },
@@ -2145,7 +2310,7 @@
                 "accountId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services account the Amazon EC2 instance belongs to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account for the Amazon EC2 instance.</p>"
                     }
                 },
                 "severityCounts": {
@@ -2245,7 +2410,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the ECR automated re-scan duration setting for your environment</p>"
+                "smithy.api#documentation": "<p>Details about the ECR automated re-scan duration setting for your environment.</p>"
             }
         },
         "com.amazonaws.inspector2#EcrConfigurationState": {
@@ -2514,7 +2679,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2
+                    "max": 3
                 }
             }
         },
@@ -2601,6 +2766,41 @@
         },
         "com.amazonaws.inspector2#ErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.inspector2#ExecutionRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+            }
+        },
+        "com.amazonaws.inspector2#ExploitAvailable": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "YES",
+                        "name": "YES"
+                    },
+                    {
+                        "value": "NO",
+                        "name": "NO"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#ExploitabilityDetails": {
+            "type": "structure",
+            "members": {
+                "lastKnownExploitAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of the last exploit associated with a finding discovered in your environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of an exploit available for a finding discovered in your environment.</p>"
+            }
         },
         "com.amazonaws.inspector2#ExternalReportStatus": {
             "type": "string",
@@ -2986,6 +3186,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details on whether a fix is available through a version update. This value can be <code>YES</code>, <code>NO</code>, or <code>PARTIAL</code>.  A <code>PARTIAL</code> fix means that some, but not all, of the packages identified in the finding have fixes available through updated versions.</p>"
                     }
+                },
+                "lambdaFunctionName": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda functions by the name of the function.</p>"
+                    }
+                },
+                "lambdaFunctionLayers": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda functions by the function's <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html\">\n         layers</a>. A Lambda function can have up to five layers.</p>"
+                    }
+                },
+                "lambdaFunctionRuntime": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda functions by the runtime environment for the Lambda function.</p>"
+                    }
+                },
+                "lambdaFunctionLastModifiedAt": {
+                    "target": "com.amazonaws.inspector2#DateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda functions by the date and time that a user last updated the configuration, in <a href=\"https://www.iso.org/iso-8601-date-and-time-format.html\">ISO 8601 format</a>\n         </p>"
+                    }
+                },
+                "lambdaFunctionExecutionRoleArn": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda functions by execution role.</p>"
+                    }
+                },
+                "exploitAvailable": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list of AWS Lambda findings by the availability of exploits.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3138,6 +3374,18 @@
                     "target": "com.amazonaws.inspector2#FixAvailable",
                     "traits": {
                         "smithy.api#documentation": "<p>Details on whether a fix is available through a version update. This value can be <code>YES</code>, <code>NO</code>, or <code>PARTIAL</code>.  A <code>PARTIAL</code> fix means that some, but not all, of the packages identified in the finding have fixes available through updated versions.</p>"
+                    }
+                },
+                "exploitAvailable": {
+                    "target": "com.amazonaws.inspector2#ExploitAvailable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a finding discovered in your environment has an exploit available.</p>"
+                    }
+                },
+                "exploitabilityDetails": {
+                    "target": "com.amazonaws.inspector2#ExploitabilityDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of an exploit available for a finding discovered in your environment.</p>"
                     }
                 }
             },
@@ -3453,8 +3701,18 @@
                     {
                         "name": "ECR",
                         "value": "ECR"
+                    },
+                    {
+                        "name": "LAMBDA",
+                        "value": "LAMBDA"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.inspector2#FunctionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
             }
         },
         "com.amazonaws.inspector2#GetConfiguration": {
@@ -3952,7 +4210,1552 @@
                     ]
                 },
                 "smithy.api#documentation": "<p>Amazon Inspector is a vulnerability discovery service that automates continuous scanning for\n         security vulnerabilities within your Amazon EC2 and Amazon ECR environments.</p>",
-                "smithy.api#title": "Inspector2"
+                "smithy.api#title": "Inspector2",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://inspector2-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "type": "tree",
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://inspector2-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://inspector2.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://inspector2.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.af-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region af-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.af-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "af-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-north-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-north-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-west-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-west-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-northeast-3.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-3 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-northeast-3.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-3"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-northeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-northeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.me-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region me-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.me-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "me-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.sa-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region sa-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.sa-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "sa-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://inspector2.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
             }
         },
         "com.amazonaws.inspector2#InspectorScoreDetails": {
@@ -4022,6 +5825,301 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#IpV6Address"
+            }
+        },
+        "com.amazonaws.inspector2#LambdaFunctionAggregation": {
+            "type": "structure",
+            "members": {
+                "resourceIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource IDs to include in the aggregation results.</p>"
+                    }
+                },
+                "functionNames": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Lambda function names to include in the aggregation results.</p>"
+                    }
+                },
+                "runtimes": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns findings aggregated by AWS Lambda function runtime environments.</p>"
+                    }
+                },
+                "functionTags": {
+                    "target": "com.amazonaws.inspector2#MapFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to include in the aggregation results.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.inspector2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order to use for sorting the results.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.inspector2#LambdaFunctionSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding severity to use for sorting the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details that define a findings aggregation based on AWS Lambda functions.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#LambdaFunctionAggregationResponse": {
+            "type": "structure",
+            "members": {
+                "resourceId": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource IDs included in the aggregation results.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "functionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Lambda function names included in the aggregation results.</p>"
+                    }
+                },
+                "runtime": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtimes included in the aggregation results.</p>"
+                    }
+                },
+                "lambdaTags": {
+                    "target": "com.amazonaws.inspector2#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags included in the aggregation results.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the AWS Lambda function.\n      </p>"
+                    }
+                },
+                "severityCounts": {
+                    "target": "com.amazonaws.inspector2#SeverityCounts"
+                },
+                "lastModifiedAt": {
+                    "target": "com.amazonaws.inspector2#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date that the AWS Lambda function included in the aggregation results was last changed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A response that contains the results of an AWS Lambda function finding aggregation.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#LambdaFunctionMetadata": {
+            "type": "structure",
+            "members": {
+                "functionTags": {
+                    "target": "com.amazonaws.inspector2#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource tags on an AWS Lambda function.</p>"
+                    }
+                },
+                "layers": {
+                    "target": "com.amazonaws.inspector2#LambdaLayerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The layers for an AWS Lambda function. A Lambda function can have up to five layers.</p>"
+                    }
+                },
+                "functionName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a function.</p>"
+                    }
+                },
+                "runtime": {
+                    "target": "com.amazonaws.inspector2#Runtime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An AWS Lambda function's runtime.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The AWS Lambda function metadata.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#LambdaFunctionSortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CRITICAL",
+                        "name": "CRITICAL"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    },
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#LambdaLayerAggregation": {
+            "type": "structure",
+            "members": {
+                "functionNames": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the AWS Lambda functions associated with the layers.</p>"
+                    }
+                },
+                "resourceIds": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource IDs for the AWS Lambda function layers.</p>"
+                    }
+                },
+                "layerArns": {
+                    "target": "com.amazonaws.inspector2#StringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function layer.\n      </p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.inspector2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order to use for sorting the results.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.inspector2#LambdaLayerSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding severity to use for sorting the results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details that define a findings aggregation based on an AWS Lambda function's layers.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#LambdaLayerAggregationResponse": {
+            "type": "structure",
+            "members": {
+                "functionName": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the AWS Lambda functions associated with the layers.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Resource ID of the AWS Lambda function layer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "layerArn": {
+                    "target": "com.amazonaws.inspector2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function layer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.inspector2#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the AWS Lambda function layer.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "severityCounts": {
+                    "target": "com.amazonaws.inspector2#SeverityCounts"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A response that contains the results of an AWS Lambda function layer finding aggregation.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#LambdaLayerArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:[a-zA-Z0-9-]+:lambda:[a-zA-Z0-9-]+:\\d{12}:layer:[a-zA-Z0-9-_]+:[0-9]+$"
+            }
+        },
+        "com.amazonaws.inspector2#LambdaLayerList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.inspector2#LambdaLayerSortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CRITICAL",
+                        "name": "CRITICAL"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    },
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#LambdaVpcConfig": {
+            "type": "structure",
+            "members": {
+                "subnetIds": {
+                    "target": "com.amazonaws.inspector2#SubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC subnet IDs.</p>"
+                    }
+                },
+                "securityGroupIds": {
+                    "target": "com.amazonaws.inspector2#SecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to an AWS Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
+                    }
+                },
+                "vpcId": {
+                    "target": "com.amazonaws.inspector2#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC security groups and subnets that are attached to an AWS Lambda function. For more information, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html\">VPC Settings</a>.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#LayerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#LambdaLayerArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.inspector2#ListAccountPermissions": {
@@ -5258,6 +7356,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains details on the source layer hash to filter on.</p>"
                     }
+                },
+                "sourceLambdaLayerArn": {
+                    "target": "com.amazonaws.inspector2#StringFilter"
                 }
             },
             "traits": {
@@ -5380,6 +7481,21 @@
                     {
                         "value": "ALL",
                         "name": "ALL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#PackageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IMAGE",
+                        "name": "IMAGE"
+                    },
+                    {
+                        "value": "ZIP",
+                        "name": "ZIP"
                     }
                 ]
             }
@@ -5852,6 +7968,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains details about the Amazon ECR container image involved in the finding.</p>"
                     }
+                },
+                "awsLambdaFunction": {
+                    "target": "com.amazonaws.inspector2#AwsLambdaFunctionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the information about an AWS Lambda function affected by a finding.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5865,7 +7987,7 @@
                     "min": 10,
                     "max": 341
                 },
-                "smithy.api#pattern": "(^arn:.*:ecr:.*:\\d{12}:repository\\/(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*(\\/sha256:[a-z0-9]{64})?$)|(^i-([a-z0-9]{8}|[a-z0-9]{17}|\\\\*)$)"
+                "smithy.api#pattern": "(^arn:.*:ecr:.*:\\d{12}:repository\\/(?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*(\\/sha256:[a-z0-9]{64})?$)|(^i-([a-z0-9]{8}|[a-z0-9]{17}|\\\\*)$|(^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}(-gov)?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_\\.]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$))"
             }
         },
         "com.amazonaws.inspector2#ResourceList": {
@@ -5916,6 +8038,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An object that contains metadata details for an Amazon EC2 instance.</p>"
                     }
+                },
+                "lambdaFunction": {
+                    "target": "com.amazonaws.inspector2#LambdaFunctionMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains metadata details for an AWS Lambda function.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5933,6 +8061,10 @@
                     {
                         "value": "ECR",
                         "name": "ECR"
+                    },
+                    {
+                        "value": "LAMBDA",
+                        "name": "LAMBDA"
                     }
                 ]
             }
@@ -5953,6 +8085,9 @@
                         "smithy.api#documentation": "<p>An object detailing the state of Amazon Inspector scanning for Amazon ECR resources.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "lambda": {
+                    "target": "com.amazonaws.inspector2#State"
                 }
             },
             "traits": {
@@ -5975,6 +8110,12 @@
                         "smithy.api#documentation": "<p>The status of Amazon Inspector scanning for Amazon ECR resources.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "lambda": {
+                    "target": "com.amazonaws.inspector2#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of Amazon Inspector scanning for AWS Lambda function resources.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5996,6 +8137,69 @@
                     {
                         "value": "AWS_ECR_REPOSITORY",
                         "name": "AWS_ECR_REPOSITORY"
+                    },
+                    {
+                        "value": "AWS_LAMBDA_FUNCTION",
+                        "name": "AWS_LAMBDA_FUNCTION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#Runtime": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NODEJS",
+                        "name": "NODEJS"
+                    },
+                    {
+                        "value": "NODEJS_12_X",
+                        "name": "NODEJS_12_X"
+                    },
+                    {
+                        "value": "NODEJS_14_X",
+                        "name": "NODEJS_14_X"
+                    },
+                    {
+                        "value": "NODEJS_16_X",
+                        "name": "NODEJS_16_X"
+                    },
+                    {
+                        "value": "JAVA_8",
+                        "name": "JAVA_8"
+                    },
+                    {
+                        "value": "JAVA_8_AL2",
+                        "name": "JAVA_8_AL2"
+                    },
+                    {
+                        "value": "JAVA_11",
+                        "name": "JAVA_11"
+                    },
+                    {
+                        "value": "PYTHON_3_7",
+                        "name": "PYTHON_3_7"
+                    },
+                    {
+                        "value": "PYTHON_3_8",
+                        "name": "PYTHON_3_8"
+                    },
+                    {
+                        "value": "PYTHON_3_9",
+                        "name": "PYTHON_3_9"
+                    },
+                    {
+                        "value": "UNSUPPORTED",
+                        "name": "UNSUPPORTED"
+                    },
+                    {
+                        "value": "NODEJS_18_X",
+                        "name": "NODEJS_18_X"
+                    },
+                    {
+                        "value": "GO_1_X",
+                        "name": "GO_1_X"
                     }
                 ]
             }
@@ -6104,6 +8308,14 @@
                     {
                         "value": "STALE_INVENTORY",
                         "name": "STALE_INVENTORY"
+                    },
+                    {
+                        "value": "EXCLUDED_BY_TAG",
+                        "name": "EXCLUDED_BY_TAG"
+                    },
+                    {
+                        "value": "UNSUPPORTED_RUNTIME",
+                        "name": "UNSUPPORTED_RUNTIME"
                     }
                 ]
             }
@@ -6123,6 +8335,23 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#SecurityGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^sg-([a-z0-9]{8}|[a-z0-9]{17}|\\*)$"
+            }
+        },
+        "com.amazonaws.inspector2#SecurityGroupIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#SecurityGroupId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
         "com.amazonaws.inspector2#Service": {
             "type": "string",
             "traits": {
@@ -6134,6 +8363,10 @@
                     {
                         "value": "ECR",
                         "name": "ECR"
+                    },
+                    {
+                        "value": "LAMBDA",
+                        "name": "LAMBDA"
                     }
                 ]
             }
@@ -6461,7 +8694,7 @@
                 "comparison": {
                     "target": "com.amazonaws.inspector2#StringComparison",
                     "traits": {
-                        "smithy.api#documentation": "<p>The operator to use when comparing values in the filter</p>",
+                        "smithy.api#documentation": "<p>The operator to use when comparing values in the filter.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6502,6 +8735,23 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.inspector2#NonEmptyString"
+            }
+        },
+        "com.amazonaws.inspector2#SubnetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^subnet-([a-z0-9]{8}|[a-z0-9]{17}|\\*)$"
+            }
+        },
+        "com.amazonaws.inspector2#SubnetIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.inspector2#SubnetId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 16
+                }
             }
         },
         "com.amazonaws.inspector2#TagKey": {
@@ -6607,12 +8857,22 @@
                     "traits": {
                         "smithy.api#required": {}
                     }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds to wait before retrying the request.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The limit on the number of requests per second was exceeded.</p>",
                 "smithy.api#error": "client",
-                "smithy.api#httpError": 429
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
             }
         },
         "com.amazonaws.inspector2#TitleAggregation": {
@@ -6998,7 +9258,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5000
+                    "max": 7000
                 }
             }
         },
@@ -7049,6 +9309,10 @@
                     {
                         "name": "ECR_RESCAN",
                         "value": "ECR_RESCAN"
+                    },
+                    {
+                        "name": "LAMBDA_FUNCTION_HOURS",
+                        "value": "LAMBDA_FUNCTION_HOURS"
                     }
                 ]
             }
@@ -7138,6 +9402,18 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#Version": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^\\$LATEST|[0-9]+$"
+            }
+        },
+        "com.amazonaws.inspector2#VpcId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^vpc-([a-z0-9]{8}|[a-z0-9]{17}|\\*)$"
+            }
+        },
         "com.amazonaws.inspector2#VulnerabilityId": {
             "type": "string",
             "traits": {
@@ -7217,6 +9493,12 @@
                     "target": "com.amazonaws.inspector2#VulnerablePackageRemediation",
                     "traits": {
                         "smithy.api#documentation": "<p>The code to run in your environment to update packages with a fix available.</p>"
+                    }
+                },
+                "sourceLambdaLayerArn": {
+                    "target": "com.amazonaws.inspector2#LambdaLayerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the AWS Lambda function affected by a finding.</p>"
                     }
                 }
             },

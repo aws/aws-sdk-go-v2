@@ -3341,6 +3341,40 @@ func awsAwsjson11_serializeDocumentCustomStepDetails(v *types.CustomStepDetails,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDecryptStepDetails(v *types.DecryptStepDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationFileLocation != nil {
+		ok := object.Key("DestinationFileLocation")
+		if err := awsAwsjson11_serializeDocumentInputFileLocation(v.DestinationFileLocation, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.OverwriteExisting) > 0 {
+		ok := object.Key("OverwriteExisting")
+		ok.String(string(v.OverwriteExisting))
+	}
+
+	if v.SourceFileLocation != nil {
+		ok := object.Key("SourceFileLocation")
+		ok.String(*v.SourceFileLocation)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDeleteStepDetails(v *types.DeleteStepDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3789,6 +3823,13 @@ func awsAwsjson11_serializeDocumentWorkflowStep(v *types.WorkflowStep, value smi
 	if v.CustomStepDetails != nil {
 		ok := object.Key("CustomStepDetails")
 		if err := awsAwsjson11_serializeDocumentCustomStepDetails(v.CustomStepDetails, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DecryptStepDetails != nil {
+		ok := object.Key("DecryptStepDetails")
+		if err := awsAwsjson11_serializeDocumentDecryptStepDetails(v.DecryptStepDetails, ok); err != nil {
 			return err
 		}
 	}

@@ -156,7 +156,7 @@ type PutScheduledActionInput struct {
 	// edition and Aurora PostgreSQL-compatible edition.
 	//
 	// *
-	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
+	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for a
 	// SageMaker model endpoint variant.
 	//
 	// * custom-resource:ResourceType:Property - The

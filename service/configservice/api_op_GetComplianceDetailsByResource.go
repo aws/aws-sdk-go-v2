@@ -14,7 +14,7 @@ import (
 
 // Returns the evaluation results for the specified Amazon Web Services resource.
 // The results indicate which Config rules were used to evaluate the resource, when
-// each rule was last used, and whether the resource complies with each rule.
+// each rule was last invoked, and whether the resource complies with each rule.
 func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *GetComplianceDetailsByResourceInput, optFns ...func(*Options)) (*GetComplianceDetailsByResourceOutput, error) {
 	if params == nil {
 		params = &GetComplianceDetailsByResourceInput{}
@@ -32,18 +32,6 @@ func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *Get
 
 type GetComplianceDetailsByResourceInput struct {
 
-	// The ID of the Amazon Web Services resource for which you want compliance
-	// information.
-	//
-	// This member is required.
-	ResourceId *string
-
-	// The type of the Amazon Web Services resource for which you want compliance
-	// information.
-	//
-	// This member is required.
-	ResourceType *string
-
 	// Filters the results by compliance. The allowed values are COMPLIANT,
 	// NON_COMPLIANT, and NOT_APPLICABLE.
 	ComplianceTypes []types.ComplianceType
@@ -51,6 +39,19 @@ type GetComplianceDetailsByResourceInput struct {
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
+	// The unique ID of Amazon Web Services resource execution for which you want to
+	// retrieve evaluation results. You need to only provide either a
+	// ResourceEvaluationID or a ResourceID and ResourceType.
+	ResourceEvaluationId *string
+
+	// The ID of the Amazon Web Services resource for which you want compliance
+	// information.
+	ResourceId *string
+
+	// The type of the Amazon Web Services resource for which you want compliance
+	// information.
+	ResourceType *string
 
 	noSmithyDocumentSerde
 }
@@ -114,9 +115,6 @@ func (c *Client) addOperationGetComplianceDetailsByResourceMiddlewares(stack *mi
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addOpGetComplianceDetailsByResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetComplianceDetailsByResource(options.Region), middleware.Before); err != nil {

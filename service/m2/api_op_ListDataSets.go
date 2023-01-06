@@ -14,8 +14,8 @@ import (
 
 // Lists the data sets imported for a specific application. In Amazon Web Services
 // Mainframe Modernization, data sets are associated with applications deployed on
-// environments. This is known as importing data sets. Currently, Amazon Web
-// Services Mainframe Modernization can import data sets into catalogs using
+// runtime environments. This is known as importing data sets. Currently, Amazon
+// Web Services Mainframe Modernization can import data sets into catalogs using
 // CreateDataSetImportTask
 // (https://docs.aws.amazon.com/m2/latest/APIReference/API_CreateDataSetImportTask.html).
 func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, optFns ...func(*Options)) (*ListDataSetsOutput, error) {
@@ -58,7 +58,7 @@ type ListDataSetsInput struct {
 
 type ListDataSetsOutput struct {
 
-	// The list of data sets, containing ionformation including the creating time, the
+	// The list of data sets, containing information including the creation time, the
 	// data set name, the data set organization, the data set format, and the last time
 	// the data set was referenced or updated.
 	//

@@ -49,6 +49,56 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.connect#ActionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ActionSummary"
+            }
+        },
+        "com.amazonaws.connect#ActionSummary": {
+            "type": "structure",
+            "members": {
+                "ActionType": {
+                    "target": "com.amazonaws.connect#ActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action type.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an action.</p>"
+            }
+        },
+        "com.amazonaws.connect#ActionType": {
+            "type": "enum",
+            "members": {
+                "CREATE_TASK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_TASK"
+                    }
+                },
+                "ASSIGN_CONTACT_CATEGORY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSIGN_CONTACT_CATEGORY"
+                    }
+                },
+                "GENERATE_EVENTBRIDGE_EVENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERATE_EVENTBRIDGE_EVENT"
+                    }
+                },
+                "SEND_NOTIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SEND_NOTIFICATION"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#AfterContactWorkTimeLimit": {
             "type": "integer",
             "traits": {
@@ -258,6 +308,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent's status.</p>"
                     }
+                },
+                "StatusName": {
+                    "target": "com.amazonaws.connect#AgentStatusName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the agent status.</p>"
+                    }
                 }
             },
             "traits": {
@@ -356,6 +412,18 @@
         },
         "com.amazonaws.connect#AgentUsername": {
             "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#AgentsMinOneMaxHundred": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#UserId"
+            },
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
@@ -464,6 +532,9 @@
                     "target": "com.amazonaws.connect#CreateRoutingProfile"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateRule"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateSecurityProfile"
                 },
                 {
@@ -501,6 +572,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteQuickConnect"
+                },
+                {
+                    "target": "com.amazonaws.connect#DeleteRule"
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteSecurityProfile"
@@ -558,6 +632,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeRoutingProfile"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeRule"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeSecurityProfile"
@@ -695,6 +772,9 @@
                     "target": "com.amazonaws.connect#ListRoutingProfiles"
                 },
                 {
+                    "target": "com.amazonaws.connect#ListRules"
+                },
+                {
                     "target": "com.amazonaws.connect#ListSecurityKeys"
                 },
                 {
@@ -827,6 +907,9 @@
                     "target": "com.amazonaws.connect#UpdateInstanceStorageConfig"
                 },
                 {
+                    "target": "com.amazonaws.connect#UpdateParticipantRoleConfig"
+                },
+                {
                     "target": "com.amazonaws.connect#UpdatePhoneNumber"
                 },
                 {
@@ -861,6 +944,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateRoutingProfileQueues"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateRule"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateSecurityProfile"
@@ -905,14 +991,14 @@
                     "name": "connect"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and\n   manage a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize\n   contact routing. You can also resolve customer issues more efficiently by getting customers in\n   touch with the appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There\n   are also limits to the number of requests that you can make per second. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For\n   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>\n         <note>\n            <p>Working with flows? Check out the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow\n    language</a>.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Amazon Connect is a cloud-based contact center solution that you use to set up and\n   manage a customer contact center and provide reliable customer engagement at any scale.</p>\n         <p>Amazon Connect provides metrics and real-time reporting that enable you to optimize\n   contact routing. You can also resolve customer issues more efficiently by getting customers in\n   touch with the appropriate agents.</p>\n         <p>There are limits to the number of Amazon Connect resources that you can create. There\n   are also limits to the number of requests that you can make per second. For more information, see\n    <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <p>You can connect programmatically to an Amazon Web Services service by using an endpoint. For\n   a list of Amazon Connect endpoints, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/connect_region.html\">Amazon Connect Endpoints</a>.</p>",
                 "smithy.api#title": "Amazon Connect Service",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
                         "Region": {
                             "builtIn": "AWS::Region",
-                            "required": false,
+                            "required": true,
                             "documentation": "The AWS region used to dispatch the request.",
                             "type": "String"
                         },
@@ -961,15 +1047,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -1233,8 +1310,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1246,8 +1323,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1259,8 +1336,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1272,8 +1349,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-south-1"
+                                "Region": "ap-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1285,8 +1362,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1298,8 +1375,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1311,8 +1388,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1324,8 +1401,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ca-central-1"
+                                "Region": "ca-central-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1337,8 +1414,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1350,8 +1427,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1363,8 +1440,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1376,8 +1453,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-central-1"
+                                "Region": "eu-central-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1389,8 +1466,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1402,8 +1479,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1415,8 +1492,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1428,8 +1505,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-west-2"
+                                "Region": "us-west-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1441,8 +1518,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1454,8 +1531,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1467,8 +1544,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1480,8 +1557,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "af-south-1"
+                                "Region": "af-south-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1493,8 +1570,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1506,8 +1583,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1519,8 +1596,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1532,8 +1609,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "eu-west-2"
+                                "Region": "eu-west-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1545,8 +1622,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1558,8 +1635,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1571,8 +1648,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1584,8 +1661,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-2"
+                                "Region": "ap-northeast-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1597,8 +1674,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1610,8 +1687,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1623,8 +1700,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1636,8 +1713,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-northeast-1"
+                                "Region": "ap-northeast-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1649,8 +1726,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1662,8 +1739,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1675,8 +1752,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1688,8 +1765,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-gov-west-1"
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1701,8 +1778,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1714,8 +1791,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1727,8 +1804,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1740,8 +1817,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-1"
+                                "Region": "ap-southeast-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1753,8 +1830,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1766,8 +1843,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1779,8 +1856,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1792,8 +1869,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "ap-southeast-2"
+                                "Region": "ap-southeast-2",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1805,8 +1882,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1818,8 +1895,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": true
                             }
                         },
                         {
@@ -1831,8 +1908,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1844,8 +1921,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
-                                "Region": "us-east-1"
+                                "Region": "us-east-1",
+                                "UseFIPS": false
                             }
                         },
                         {
@@ -1857,8 +1934,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1869,8 +1946,8 @@
                             },
                             "params": {
                                 "UseDualStack": false,
-                                "UseFIPS": true,
                                 "Region": "us-east-1",
+                                "UseFIPS": true,
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1881,8 +1958,8 @@
                             },
                             "params": {
                                 "UseDualStack": true,
-                                "UseFIPS": false,
                                 "Region": "us-east-1",
+                                "UseFIPS": false,
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1915,6 +1992,13 @@
         },
         "com.amazonaws.connect#ApproximateTotalCount": {
             "type": "long"
+        },
+        "com.amazonaws.connect#AssignContactCategoryActionDefinition": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>This action must be set if <code>TriggerEventSource</code> is one of the following values:\n   <code>OnPostCallAnalysisAvailable</code> | <code>OnRealTimeCallAnalysisAvailable</code> |\n   <code>OnPostChatAnalysisAvailable</code>. Contact is categorized using the rule name.</p>\n         <p>\n            <code>RuleName</code> is used as <code>ContactCategory</code>.</p>"
+            }
         },
         "com.amazonaws.connect#AssociateApprovedOrigin": {
             "type": "operation",
@@ -2775,7 +2859,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 16384
                 }
             }
         },
@@ -2803,20 +2887,35 @@
                 "ContentType": {
                     "target": "com.amazonaws.connect#ChatContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>, <code>text/markdown</code>, and <code>application/json</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connect#ChatContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the chat message.</p>",
+                        "smithy.api#documentation": "<p>The content of the chat message. </p>\n         <ul>\n            <li>\n               <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length Constraints are\n     Minimum of 1, Maximum of 1024. </p>\n            </li>\n            <li>\n               <p>For <code>application/json</code>, the Length Constraints are Minimum of 1, Maximum of\n     12000. </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A chat message.</p>"
+            }
+        },
+        "com.amazonaws.connect#ChatParticipantRoleConfig": {
+            "type": "structure",
+            "members": {
+                "ParticipantTimerConfigList": {
+                    "target": "com.amazonaws.connect#ParticipantTimerConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of participant timers. You can specify any unique combination of role and timer type.\n   Duplicate entries error out the request with a 400.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for the chat participant role.</p>"
             }
         },
         "com.amazonaws.connect#ChatStreamingConfiguration": {
@@ -2872,7 +2971,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Claims an available phone number to your Amazon Connect instance or traffic distribution\n   group. You can call this API only in the same Amazon Web Services Region where the Amazon Connect instance or traffic distribution group was created.</p>\n         <p>For more information about how to use this operation, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-number.html\">Claim a phone number in your\n    country</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/claim-phone-numbers-traffic-distribution-groups.html\">Claim phone\n    numbers to traffic distribution groups</a> in the <i>Amazon Connect Administrator\n    Guide</i>. </p>\n         <important>\n            <p>You can call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchAvailablePhoneNumbers.html\">SearchAvailablePhoneNumbers</a> API for available phone numbers that you can claim. Call the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html\">DescribePhoneNumber</a> API\n    to verify the status of a previous <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ClaimPhoneNumber.html\">ClaimPhoneNumber</a>\n    operation.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number/claim",
@@ -2912,7 +3011,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.connect#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>\n  \n         <p>Pattern: <code>^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$</code>\n         </p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>\n         <p>Pattern: <code>^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$</code>\n         </p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -3452,7 +3551,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains summary information about a flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>"
+                "smithy.api#documentation": "<p>Contains summary information about a flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>"
             }
         },
         "com.amazonaws.connect#ContactFlowSummaryList": {
@@ -3579,6 +3678,18 @@
                     "traits": {
                         "smithy.api#enumValue": "API"
                     }
+                },
+                "DISCONNECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISCONNECT"
+                    }
+                },
+                "MONITOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MONITOR"
+                    }
                 }
             }
         },
@@ -3679,6 +3790,15 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 9
+                }
+            }
+        },
+        "com.amazonaws.connect#Content": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
                 }
             }
         },
@@ -3845,7 +3965,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a flow for the specified Amazon Connect instance.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
+                "smithy.api#documentation": "<p>Creates a flow for the specified Amazon Connect instance.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact-flows/{InstanceId}",
@@ -4649,6 +4769,120 @@
                 }
             }
         },
+        "com.amazonaws.connect#CreateRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to code conditions for the rule.\n  </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/rules/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateRuleRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name for the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TriggerEventSource": {
+                    "target": "com.amazonaws.connect#RuleTriggerEventSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event source to trigger the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Function": {
+                    "target": "com.amazonaws.connect#RuleFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.connect#RuleActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of actions to be run when the rule is triggered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublishStatus": {
+                    "target": "com.amazonaws.connect#RulePublishStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publish status of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.connect#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. If not provided, the Amazon Web Services\n            SDK populates this field. For more information about idempotency, see\n            <a href=\"https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/\">Making retries safe with idempotent APIs</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateRuleResponse": {
+            "type": "structure",
+            "members": {
+                "RuleArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.connect#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#CreateSecurityProfile": {
             "type": "operation",
             "input": {
@@ -4744,7 +4978,7 @@
                 "TagRestrictedResources": {
                     "target": "com.amazonaws.connect#TagRestrictedResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect.</p>"
+                        "smithy.api#documentation": "<p>The list of resources that a security profile applies tag restrictions to in Amazon Connect. Following are acceptable ResourceNames: <code>User</code> | <code>SecurityProfile</code> | <code>Queue</code> | \n   <code>RoutingProfile</code>\n         </p>"
                     }
                 }
             }
@@ -5589,6 +5823,35 @@
                 "target": "com.amazonaws.connect#CurrentMetricResult"
             }
         },
+        "com.amazonaws.connect#CurrentMetricSortCriteria": {
+            "type": "structure",
+            "members": {
+                "SortByMetric": {
+                    "target": "com.amazonaws.connect#CurrentMetricName"
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.connect#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The way to sort.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The way to sort the resulting response based on metrics. By default resources are sorted\n   based on <code>AGENTS_ONLINE</code>, <code>DESCENDING</code>. The metric collection is sorted\n   based on the input metrics.</p>"
+            }
+        },
+        "com.amazonaws.connect#CurrentMetricSortCriteriaMaxOne": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#CurrentMetricSortCriteria"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.connect#CurrentMetrics": {
             "type": "list",
             "member": {
@@ -5990,6 +6253,61 @@
                 }
             }
         },
+        "com.amazonaws.connect#DeleteRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteRuleRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a rule for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/rules/{InstanceId}/{RuleId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteRuleRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.connect#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#DeleteSecurityProfile": {
             "type": "operation",
             "input": {
@@ -6136,7 +6454,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a traffic distribution group. This API can be called only in the Region where the traffic distribution group is\n   created.</p>\n\n         <p>For more information about deleting traffic distribution groups, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html\">Delete traffic distribution groups</a> in\n   the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Deletes a traffic distribution group. This API can be called only in the Region where the traffic distribution group is\n   created.</p>\n         <p>For more information about deleting traffic distribution groups, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html\">Delete traffic distribution groups</a> in\n   the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/traffic-distribution-group/{TrafficDistributionGroupId}",
@@ -6547,7 +6865,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
+                "smithy.api#documentation": "<p>Describes the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contact-flows/{InstanceId}/{ContactFlowId}",
@@ -7202,6 +7520,73 @@
                 }
             }
         },
+        "com.amazonaws.connect#DescribeRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a rule for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/rules/{InstanceId}/{RuleId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeRuleRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.connect#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeRuleResponse": {
+            "type": "structure",
+            "members": {
+                "Rule": {
+                    "target": "com.amazonaws.connect#Rule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#DescribeSecurityProfile": {
             "type": "operation",
             "input": {
@@ -7636,6 +8021,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The channel used for grouping and filters.</p>"
                     }
+                },
+                "RoutingProfile": {
+                    "target": "com.amazonaws.connect#RoutingProfileReference"
                 }
             },
             "traits": {
@@ -8241,7 +8629,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Dismisses contacts from an agent’s CCP and returns the agent to an available state, which\n   allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a\n    <code>MISSED</code>, <code>ERROR</code>, <code>ENDED</code>, or <code>REJECTED</code> state in\n   the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">Agent\n    Event Stream</a>.</p>",
+                "smithy.api#documentation": "<p>Dismisses contacts from an agent’s CCP and returns the agent to an available state, which\n   allows the agent to receive a new routed contact. Contacts can only be dismissed if they are in a\n   <code>MISSED</code>, <code>ERROR</code>, <code>ENDED</code>, or <code>REJECTED</code> state in\n   the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/about-contact-states.html\">Agent\n    Event Stream</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/users/{InstanceId}/{UserId}/contact",
@@ -8388,6 +8776,71 @@
                 }
             }
         },
+        "com.amazonaws.connect#EventBridgeActionDefinition": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#EventBridgeActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The EventBridge action definition.</p>"
+            }
+        },
+        "com.amazonaws.connect#EventBridgeActionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#EventSourceName": {
+            "type": "enum",
+            "members": {
+                "OnPostCallAnalysisAvailable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnPostCallAnalysisAvailable"
+                    }
+                },
+                "OnRealTimeCallAnalysisAvailable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnRealTimeCallAnalysisAvailable"
+                    }
+                },
+                "OnPostChatAnalysisAvailable": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnPostChatAnalysisAvailable"
+                    }
+                },
+                "OnZendeskTicketCreate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnZendeskTicketCreate"
+                    }
+                },
+                "OnZendeskTicketStatusUpdate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnZendeskTicketStatusUpdate"
+                    }
+                },
+                "OnSalesforceCaseCreate": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OnSalesforceCaseCreate"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#Filters": {
             "type": "structure",
             "members": {
@@ -8401,6 +8854,12 @@
                     "target": "com.amazonaws.connect#Channels",
                     "traits": {
                         "smithy.api#documentation": "<p>The channel to use to filter the metrics.</p>"
+                    }
+                },
+                "RoutingProfiles": {
+                    "target": "com.amazonaws.connect#RoutingProfiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 100 routing profile IDs or ARNs.</p>"
                     }
                 }
             },
@@ -8536,20 +8995,20 @@
                 "Filters": {
                     "target": "com.amazonaws.connect#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is\n   retrieved only for the resources associated with the queues or channels included in the filter.\n   You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.</p>",
+                        "smithy.api#documentation": "<p>The filters to apply to returned metrics. You can filter up to the following limits:</p>\n         <ul>\n            <li>\n               <p>Queues: 100</p>\n            </li>\n            <li>\n               <p>Routing profiles: 100</p>\n            </li>\n            <li>\n               <p>Channels: 3 (VOICE, CHAT, and TASK channels are supported.)</p>\n            </li>\n         </ul>\n         <p>Metric data is retrieved only for the resources associated with the queues or routing\n   profiles, and by any channels included in the filter. (You cannot filter by both queue AND routing profile.) You can include both resource IDs and resource ARNs in the same request. </p>\n         <p>Currently tagging is only supported on the resources that are passed in the filter.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Groupings": {
                     "target": "com.amazonaws.connect#Groupings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when grouped by\n    <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all\n   queues. </p>\n         <ul>\n            <li>\n               <p>If you group by <code>CHANNEL</code>, you should include a Channels filter.\n    VOICE, CHAT, and TASK channels are supported.</p>\n            </li>\n            <li>\n               <p>If you group by <code>ROUTING_PROFILE</code>, you must include either a queue or routing profile filter.</p>\n            </li>\n            <li>\n               <p>If no <code>Grouping</code> is included in the request, a summary of metrics is\n    returned.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when grouped by\n    <code>QUEUE</code>, the metrics returned apply to each queue rather than aggregated for all\n   queues. </p>\n         <ul>\n            <li>\n               <p>If you group by <code>CHANNEL</code>, you should include a Channels filter.\n     VOICE, CHAT, and TASK channels are supported.</p>\n            </li>\n            <li>\n               <p>If you group by <code>ROUTING_PROFILE</code>, you must include either a queue or routing\n     profile filter. In addition, a routing profile filter is \n     required for metrics <code>CONTACTS_SCHEDULED</code>, <code>CONTACTS_IN_QUEUE</code>, and \n     <code> OLDEST_CONTACT_AGE</code>.</p>\n            </li>\n            <li>\n               <p>If no <code>Grouping</code> is included in the request, a summary of metrics is\n     returned.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CurrentMetrics": {
                     "target": "com.amazonaws.connect#CurrentMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics\n   are available. For a description of all the metrics, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html\">Real-time Metrics\n    Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <dl>\n            <dt>AGENTS_AFTER_CONTACT_WORK</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time\">ACW</a>\n               </p>\n\n            </dd>\n            <dt>AGENTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time\">Available</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ERROR</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time\">Error</a>\n               </p>\n            </dd>\n            <dt>AGENTS_NON_PRODUCTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time\">NPT (Non-Productive Time)</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CALL</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CONTACT</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ONLINE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time\">Online</a>\n               </p>\n            </dd>\n            <dt>AGENTS_STAFFED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time\">Staffed</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_IN_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time\">In\n       queue</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_SCHEDULED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time\">Scheduled</a>\n               </p>\n            </dd>\n            <dt>OLDEST_CONTACT_AGE</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>When you use groupings, Unit says SECONDS and the Value is returned in SECONDS. </p>\n               <p>When you do not use groupings, Unit says SECONDS but the Value is returned in\n      MILLISECONDS. For example, if you get a response like this:</p>\n               <p>\n                  <code>{ \"Metric\": { \"Name\": \"OLDEST_CONTACT_AGE\", \"Unit\": \"SECONDS\" }, \"Value\": 24113.0\n      </code>}</p>\n               <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p>\n\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time\">Oldest</a>\n               </p>\n            </dd>\n            <dt>SLOTS_ACTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time\">Active</a>\n               </p>\n            </dd>\n            <dt>SLOTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time\">Availability</a>\n               </p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics\n   are available. For a description of all the metrics, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html\">Real-time Metrics\n    Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>\n         <dl>\n            <dt>AGENTS_AFTER_CONTACT_WORK</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time\">ACW</a>\n               </p>\n            </dd>\n            <dt>AGENTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time\">Available</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ERROR</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time\">Error</a>\n               </p>\n            </dd>\n            <dt>AGENTS_NON_PRODUCTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time\">NPT (Non-Productive Time)</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CALL</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ON_CONTACT</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On\n       contact</a>\n               </p>\n            </dd>\n            <dt>AGENTS_ONLINE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time\">Online</a>\n               </p>\n            </dd>\n            <dt>AGENTS_STAFFED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time\">Staffed</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_IN_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time\">In\n       queue</a>\n               </p>\n            </dd>\n            <dt>CONTACTS_SCHEDULED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time\">Scheduled</a>\n               </p>\n            </dd>\n            <dt>OLDEST_CONTACT_AGE</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>When you use groupings, Unit says SECONDS and the Value is returned in SECONDS. </p>\n               <p>When you do not use groupings, Unit says SECONDS but the Value is returned in\n      MILLISECONDS. For example, if you get a response like this:</p>\n               <p>\n                  <code>{ \"Metric\": { \"Name\": \"OLDEST_CONTACT_AGE\", \"Unit\": \"SECONDS\" }, \"Value\": 24113.0\n      </code>}</p>\n               <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time\">Oldest</a>\n               </p>\n            </dd>\n            <dt>SLOTS_ACTIVE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time\">Active</a>\n               </p>\n            </dd>\n            <dt>SLOTS_AVAILABLE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time\">Availability</a>\n               </p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8564,6 +9023,12 @@
                     "traits": {
                         "smithy.api#default": null,
                         "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>"
+                    }
+                },
+                "SortCriteria": {
+                    "target": "com.amazonaws.connect#CurrentMetricSortCriteriaMaxOne",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The way to sort the resulting response based on metrics. You can enter one sort criteria. By\n   default resources are sorted based on <code>AGENTS_ONLINE</code>, <code>DESCENDING</code>. The\n   metric collection is sorted based on the input metrics.</p>\n         <p>Note the following:</p>\n         <ul>\n            <li>\n               <p>Sorting on <code>SLOTS_ACTIVE</code> and <code>SLOTS_AVAILABLE</code> is not supported.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -8587,6 +9052,12 @@
                     "target": "com.amazonaws.connect#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the metrics were retrieved and cached for pagination.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total count of the result, regardless of the current page size. </p>"
                     }
                 }
             }
@@ -8644,7 +9115,7 @@
                 "Filters": {
                     "target": "com.amazonaws.connect#UserDataFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters up to 100 <code>Queues</code>, or up to 9 <code>ContactStates</code>. The user data\n   is retrieved only for those users who are associated with the queues and have contacts that are\n   in the specified <code>ContactState</code>. </p>",
+                        "smithy.api#documentation": "<p>The filters to apply to returned user data. You can filter up to the following limits:</p>\n         <ul>\n            <li>\n               <p>Queues: 100</p>\n            </li>\n            <li>\n               <p>Routing profiles: 100</p>\n            </li>\n            <li>\n               <p>Agents: 100</p>\n            </li>\n            <li>\n               <p>Contact states: 9</p>\n            </li>\n            <li>\n               <p>User hierarchy groups: 1</p>\n            </li>\n         </ul>\n         <p> The user data is retrieved for only the specified\n  values/resources in the filter. A maximum of one filter can be passed from queues, routing profiles,\n  agents, and user hierarchy groups. </p>\n         <p>Currently tagging is only supported on the resources that are passed in the filter.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8676,6 +9147,12 @@
                     "target": "com.amazonaws.connect#UserDataList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the user data that is returned.</p>"
+                    }
+                },
+                "ApproximateTotalCount": {
+                    "target": "com.amazonaws.connect#ApproximateTotalCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total count of the result, regardless of the current page size.</p>"
                     }
                 }
             }
@@ -8785,7 +9262,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets historical metric data from the specified Amazon Connect instance.</p>\n\n         <p>For a description of each historical metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics\n    Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Gets historical metric data from the specified Amazon Connect instance.</p>\n         <p>For a description of each historical metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics\n    Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/metrics/historical/{InstanceId}",
@@ -8833,13 +9310,13 @@
                 "Groupings": {
                     "target": "com.amazonaws.connect#Groupings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when results are grouped by\n   queue, the metrics returned are grouped by queue. The values returned apply to the metrics for\n   each queue rather than aggregated for all queues.</p>\n\n         <p>If no grouping is specified, a summary of metrics for all queues is returned.</p>"
+                        "smithy.api#documentation": "<p>The grouping applied to the metrics returned. For example, when results are grouped by\n   queue, the metrics returned are grouped by queue. The values returned apply to the metrics for\n   each queue rather than aggregated for all queues.</p>\n         <p>If no grouping is specified, a summary of metrics for all queues is returned.</p>"
                     }
                 },
                 "HistoricalMetrics": {
                     "target": "com.amazonaws.connect#HistoricalMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <note>\n            <p>This API does not support a contacts\n    incoming metric (there's no CONTACTS_INCOMING metric missing from the documented list). </p>\n         </note>\n\n         <dl>\n            <dt>ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>API_CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CALLBACK_CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_CONSULTED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED_INCOMING</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED_OUTBOUND</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_MISSED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_IN</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>HOLD_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>OCCUPANCY</dt>\n            <dd>\n               <p>Unit: PERCENT</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: MAX</p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: PERCENT</p>\n               <p>Statistic: AVG</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>The metrics to retrieve. Specify the name, unit, and statistic for each metric. The\n   following historical metrics are available. For a description of each metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator\n    Guide</i>.</p>\n         <note>\n            <p>This API does not support a contacts\n    incoming metric (there's no CONTACTS_INCOMING metric missing from the documented list). </p>\n         </note>\n         <dl>\n            <dt>ABANDON_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>AFTER_CONTACT_WORK_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>API_CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CALLBACK_CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_ABANDONED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_AGENT_HUNG_UP_FIRST</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_CONSULTED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED_INCOMING</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HANDLED_OUTBOUND</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_HOLD_ABANDONS</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_MISSED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_QUEUED</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_IN</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_IN_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>CONTACTS_TRANSFERRED_OUT_FROM_QUEUE</dt>\n            <dd>\n               <p>Unit: COUNT</p>\n               <p>Statistic: SUM</p>\n            </dd>\n            <dt>HANDLE_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>HOLD_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>INTERACTION_AND_HOLD_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>INTERACTION_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>OCCUPANCY</dt>\n            <dd>\n               <p>Unit: PERCENT</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>QUEUE_ANSWER_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: AVG</p>\n            </dd>\n            <dt>QUEUED_TIME</dt>\n            <dd>\n               <p>Unit: SECONDS</p>\n               <p>Statistic: MAX</p>\n            </dd>\n            <dt>SERVICE_LEVEL</dt>\n            <dd>\n               <p>You can include up to 20 SERVICE_LEVEL metrics in a request.</p>\n               <p>Unit: PERCENT</p>\n               <p>Statistic: AVG</p>\n               <p>Threshold: For <code>ThresholdValue</code>, enter any whole number from 1 to 604800\n      (inclusive), in seconds. For <code>Comparison</code>, you must enter <code>LT</code> (for\n      \"Less than\"). </p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9106,6 +9583,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "CHANNEL"
+                    }
+                },
+                "ROUTING_PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ROUTING_PROFILE"
                     }
                 }
             }
@@ -11115,7 +11598,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the flows for the specified Amazon Connect instance.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>\n         <p>For more information about flows, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html\">Flows</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Provides information about the flows for the specified Amazon Connect instance.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>\n         <p>For more information about flows, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/concepts-contact-flows.html\">Flows</a> in the\n     <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/contact-flows-summary/{InstanceId}",
@@ -11556,7 +12039,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n\n         <p>Returns a paginated list of storage configs for the identified instance and resource\n   type.</p>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Returns a paginated list of storage configs for the identified instance and resource\n   type.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/instance/{InstanceId}/storage-configs",
@@ -11976,7 +12459,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n    Contact Center</a> in the <i>Amazon Connect Administrator\n   Guide</i>.</p>\n\n         <important>\n            <p>The phone number <code>Arn</code> value that is returned from each of the items in the\n     <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList\">PhoneNumberSummaryList</a> cannot be used to tag phone number resources. It will fail with\n    a <code>ResourceNotFoundException</code>. Instead, use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> API.\n    It returns the new phone number ARN that can be used to tag phone number resources.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Provides information about the phone numbers for the specified Amazon Connect instance. </p>\n         <p>For more information about phone numbers, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html\">Set Up Phone Numbers for Your\n    Contact Center</a> in the <i>Amazon Connect Administrator\n   Guide</i>.</p>\n         <important>\n            <p>The phone number <code>Arn</code> value that is returned from each of the items in the\n     <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList\">PhoneNumberSummaryList</a> cannot be used to tag phone number resources. It will fail with\n    a <code>ResourceNotFoundException</code>. Instead, use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html\">ListPhoneNumbersV2</a> API.\n    It returns the new phone number ARN that can be used to tag phone number resources.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/phone-numbers-summary/{InstanceId}",
@@ -12728,6 +13211,106 @@
                     "target": "com.amazonaws.connect#RoutingProfileSummaryList",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the routing profiles.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ListRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListRulesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListRulesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all rules for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/rules/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RuleSummaryList",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.connect#ListRulesRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublishStatus": {
+                    "target": "com.amazonaws.connect#RulePublishStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publish status of the rule.</p>",
+                        "smithy.api#httpQuery": "publishStatus"
+                    }
+                },
+                "EventSourceName": {
+                    "target": "com.amazonaws.connect#EventSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event source.</p>",
+                        "smithy.api#httpQuery": "eventSourceName"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult200",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ListRulesResponse": {
+            "type": "structure",
+            "members": {
+                "RuleSummaryList": {
+                    "target": "com.amazonaws.connect#RuleSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about a rule.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
@@ -13545,6 +14128,16 @@
                 }
             }
         },
+        "com.amazonaws.connect#MaxResult200": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.connect#MaxResult25": {
             "type": "integer",
             "traits": {
@@ -13656,7 +14249,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user specified by \n   <i>userId</i> will be set to silent monitoring mode on the contact.</p>",
+                "smithy.api#documentation": "<p>Initiates silent monitoring of a contact. The Contact Control Panel (CCP) of the user\n   specified by <i>userId</i> will be set to silent monitoring mode on the\n   contact.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/monitor",
@@ -13670,7 +14263,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.connect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the\n   instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13691,7 +14284,7 @@
                 "AllowedMonitorCapabilities": {
                     "target": "com.amazonaws.connect#AllowedMonitorCapabilities",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify which monitoring actions the user is allowed to take. For example, whether the user is \n   allowed to escalate from silent monitoring to barge.</p>"
+                        "smithy.api#documentation": "<p>Specify which monitoring actions the user is allowed to take. For example, whether the user\n   is allowed to escalate from silent monitoring to barge.</p>"
                     }
                 },
                 "ClientToken": {
@@ -13749,6 +14342,48 @@
                     "min": 1,
                     "max": 2500
                 }
+            }
+        },
+        "com.amazonaws.connect#NotificationContentType": {
+            "type": "enum",
+            "members": {
+                "PLAIN_TEXT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLAIN_TEXT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#NotificationDeliveryType": {
+            "type": "enum",
+            "members": {
+                "EMAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EMAIL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#NotificationRecipientType": {
+            "type": "structure",
+            "members": {
+                "UserTags": {
+                    "target": "com.amazonaws.connect#UserTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }. Amazon Connect users with the specified tags will be notified.</p>"
+                    }
+                },
+                "UserIds": {
+                    "target": "com.amazonaws.connect#UserIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of user IDs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of notification recipient.</p>"
             }
         },
         "com.amazonaws.connect#NumberReference": {
@@ -13875,6 +14510,104 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerAction": {
+            "type": "enum",
+            "members": {
+                "Unset": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Unset"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerConfigList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#ParticipantTimerConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerConfiguration": {
+            "type": "structure",
+            "members": {
+                "ParticipantRole": {
+                    "target": "com.amazonaws.connect#TimerEligibleParticipantRoles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role of the participant in the chat conversation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimerType": {
+                    "target": "com.amazonaws.connect#ParticipantTimerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of timer. <code>IDLE</code> indicates the timer applies for considering a human chat participant as idle. \n   <code>DISCONNECT_NONCUSTOMER</code> indicates the timer applies to automatically disconnecting a chat participant due to\n   idleness.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimerValue": {
+                    "target": "com.amazonaws.connect#ParticipantTimerValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the timer. Either the timer action (Unset to delete the timer), or the duration\n   of the timer in minutes. Only one value can be set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for the timer. After the timer configuration is set, it persists\n   for the duration of the chat. It persists across new contacts in the chain, for example, transfer\n   contacts.</p>\n         <p>For more information about how chat timeouts work, see \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html\">Set up chat timeouts for human participants</a>. </p>"
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerDurationInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 2,
+                    "max": 480
+                }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerType": {
+            "type": "enum",
+            "members": {
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDLE"
+                    }
+                },
+                "DISCONNECT_NONCUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISCONNECT_NONCUSTOMER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ParticipantTimerValue": {
+            "type": "union",
+            "members": {
+                "ParticipantTimerAction": {
+                    "target": "com.amazonaws.connect#ParticipantTimerAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timer action. Currently only one value is allowed: <code>Unset</code>. It deletes a timer.</p>"
+                    }
+                },
+                "ParticipantTimerDurationInMinutes": {
+                    "target": "com.amazonaws.connect#ParticipantTimerDurationInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of a timer, in minutes. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value of the timer. Either the timer action (<code>Unset</code> to delete the timer), or\n   the duration of the timer in minutes. Only one value can be set.</p>\n         <p>For more information about how chat timeouts work, see \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html\">Set up chat timeouts for human participants</a>. </p>"
             }
         },
         "com.amazonaws.connect#ParticipantToken": {
@@ -16779,7 +17512,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>When a contact is being recorded, and the recording has been suspended using\n   SuspendContactRecording, this API resumes recording the call.</p>\n\n         <p>Only voice recordings are supported at this time.</p>",
+                "smithy.api#documentation": "<p>When a contact is being recorded, and the recording has been suspended using\n   SuspendContactRecording, this API resumes recording the call.</p>\n         <p>Only voice recordings are supported at this time.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/resume-recording",
@@ -17131,6 +17864,277 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#RoutingProfileSummary"
+            }
+        },
+        "com.amazonaws.connect#RoutingProfiles": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#RoutingProfileId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.connect#Rule": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.connect#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TriggerEventSource": {
+                    "target": "com.amazonaws.connect#RuleTriggerEventSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event source to trigger the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Function": {
+                    "target": "com.amazonaws.connect#RuleFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.connect#RuleActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of actions to be run when the rule is triggered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublishStatus": {
+                    "target": "com.amazonaws.connect#RulePublishStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publish status of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the rule was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for the when the rule was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedBy": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource. For example, { \"tags\": {\"key1\":\"value1\", \"key2\":\"value2\"} }.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a rule.</p>"
+            }
+        },
+        "com.amazonaws.connect#RuleAction": {
+            "type": "structure",
+            "members": {
+                "ActionType": {
+                    "target": "com.amazonaws.connect#ActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of action that creates a rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskAction": {
+                    "target": "com.amazonaws.connect#TaskActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the task action. This field is required if <code>TriggerEventSource</code>\n   is one of the following values: <code>OnZendeskTicketCreate</code> |\n   <code>OnZendeskTicketStatusUpdate</code> | <code>OnSalesforceCaseCreate</code>\n         </p>"
+                    }
+                },
+                "EventBridgeAction": {
+                    "target": "com.amazonaws.connect#EventBridgeActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the EventBridge action.</p>"
+                    }
+                },
+                "AssignContactCategoryAction": {
+                    "target": "com.amazonaws.connect#AssignContactCategoryActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the contact category action.</p>"
+                    }
+                },
+                "SendNotificationAction": {
+                    "target": "com.amazonaws.connect#SendNotificationActionDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the send notification action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the action to be performed when a rule is triggered.</p>"
+            }
+        },
+        "com.amazonaws.connect#RuleActions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#RuleAction"
+            }
+        },
+        "com.amazonaws.connect#RuleFunction": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#RuleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#RuleName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+            }
+        },
+        "com.amazonaws.connect#RulePublishStatus": {
+            "type": "enum",
+            "members": {
+                "DRAFT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DRAFT"
+                    }
+                },
+                "PUBLISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#RuleSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleId": {
+                    "target": "com.amazonaws.connect#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventSourceName": {
+                    "target": "com.amazonaws.connect#EventSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublishStatus": {
+                    "target": "com.amazonaws.connect#RulePublishStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publish status of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActionSummaries": {
+                    "target": "com.amazonaws.connect#ActionSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of ActionTypes associated with a rule. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the rule was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.connect#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp for when the rule was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of <code>ActionTypes</code> associated with a rule. </p>"
+            }
+        },
+        "com.amazonaws.connect#RuleSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#RuleSummary"
+            }
+        },
+        "com.amazonaws.connect#RuleTriggerEventSource": {
+            "type": "structure",
+            "members": {
+                "EventSourceName": {
+                    "target": "com.amazonaws.connect#EventSourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IntegrationAssociationId": {
+                    "target": "com.amazonaws.connect#IntegrationAssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the integration association.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the event source. This field is required if <code>TriggerEventSource</code> is one of the\n   following values: <code>OnZendeskTicketCreate</code> | <code>OnZendeskTicketStatusUpdate</code> |\n   <code>OnSalesforceCaseCreate</code>\n         </p>"
             }
         },
         "com.amazonaws.connect#S3Config": {
@@ -17526,7 +18530,7 @@
                 "SearchCriteria": {
                     "target": "com.amazonaws.connect#SecurityProfileSearchCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The search criteria to be used to return security profiles. </p>\n         <note>\n            <p>The <code>name</code> field support \"contains\" queries with a minimum of 2 characters and maximum of 25 characters. Any queries with character lengths outside of this range will throw invalid results.</p>\n         </note>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n   \n         </note>"
+                        "smithy.api#documentation": "<p>The search criteria to be used to return security profiles. </p>\n         <note>\n            <p>The <code>name</code> field support \"contains\" queries with a minimum of 2 characters and\n    maximum of 25 characters. Any queries with character lengths outside of this range will throw\n    invalid results.</p>\n         </note>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n         </note>"
                     }
                 },
                 "SearchFilter": {
@@ -17586,7 +18590,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches users in an Amazon Connect instance, with optional filtering.</p>\n  \n         <note>\n            <p>\n               <code>AfterContactWorkTimeLimit</code> is returned in milliseconds. </p>\n         </note>",
+                "smithy.api#documentation": "<p>Searches users in an Amazon Connect instance, with optional filtering.</p>\n         <note>\n            <p>\n               <code>AfterContactWorkTimeLimit</code> is returned in milliseconds. </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/search-users",
@@ -17933,7 +18937,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The search criteria to be used to return security profiles.</p>\n         <note>\n            <p>The <code>name</code> field support \"contains\" queries with a minimum of 2 characters and\n    maximum of 25 characters. Any queries with character lengths outside of this range will throw\n    invalid results.</p> \n         </note>"
+                "smithy.api#documentation": "<p>The search criteria to be used to return security profiles.</p>\n         <note>\n            <p>The <code>name</code> field support \"contains\" queries with a minimum of 2 characters and\n    maximum of 25 characters. Any queries with character lengths outside of this range will throw\n    invalid results.</p>\n         </note>"
             }
         },
         "com.amazonaws.connect#SecurityProfileSearchSummary": {
@@ -18035,6 +19039,48 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.connect#SendNotificationActionDefinition": {
+            "type": "structure",
+            "members": {
+                "DeliveryMethod": {
+                    "target": "com.amazonaws.connect#NotificationDeliveryType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notification delivery method.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subject": {
+                    "target": "com.amazonaws.connect#Subject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subject of the email if the delivery method is <code>EMAIL</code>.\n   Supports variable injection. For more information, see \n<a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html\">JSONPath reference</a> \nin the <i>Amazon Connect Administrators Guide</i>.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.connect#Content",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notification content. Supports variable injection. For more information, see \n<a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html\">JSONPath reference</a> \nin the <i>Amazon Connect Administrators Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.connect#NotificationContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Content type format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Recipient": {
+                    "target": "com.amazonaws.connect#NotificationRecipientType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Notification recipient.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the send notification action.</p>"
+            }
+        },
         "com.amazonaws.connect#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -18056,6 +19102,23 @@
         },
         "com.amazonaws.connect#SnapshotVersion": {
             "type": "string"
+        },
+        "com.amazonaws.connect#SortOrder": {
+            "type": "enum",
+            "members": {
+                "ASCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASCENDING"
+                    }
+                },
+                "DESCENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESCENDING"
+                    }
+                }
+            }
         },
         "com.amazonaws.connect#SourceApplicationName": {
             "type": "string",
@@ -18110,7 +19173,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token\n   required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web Services Support. </p>\n\n         <p>For more information about chat, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat.html\">Chat</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Initiates a flow to start a new chat for the customer. Response of this API provides a token\n   required to obtain credentials from the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API in the Amazon Connect Participant Service.</p>\n         <p>When a new chat contact is successfully created, clients must subscribe to the participant’s\n   connection for the created chat within 5 minutes. This is achieved by invoking <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> with WEBSOCKET and CONNECTION_CREDENTIALS. </p>\n         <p>A 429 error occurs in the following situations:</p>\n         <ul>\n            <li>\n               <p>API rate limit is exceeded. API TPS throttling returns a <code>TooManyRequests</code>\n     exception.</p>\n            </li>\n            <li>\n               <p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">quota for concurrent active\n      chats</a> is exceeded. Active chat throttling returns a\n      <code>LimitExceededException</code>.</p>\n            </li>\n         </ul>\n         <p>If you use the <code>ChatDurationInMinutes</code> parameter and receive a 400 error, your\n   account may not support the ability to configure custom chat durations. For more information,\n   contact Amazon Web Services Support. </p>\n         <p>For more information about chat, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat.html\">Chat</a> in the <i>Amazon Connect\n    Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/chat",
@@ -18170,7 +19233,7 @@
                 "SupportedMessagingContentTypes": {
                     "target": "com.amazonaws.connect#SupportedMessagingContentTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The supported chat message content types. Content types can be text/plain or both text/plain\n   and text/markdown.</p>"
+                        "smithy.api#documentation": "<p>The supported chat message content types. Content types must always contain <code>text/plain</code>. You\n   can then put any other supported type in the list. For example, all the following lists are valid\n   because they contain <code>text/plain</code>: <code>[text/plain, text/markdown, application/json]</code>, <code>[text/markdown,\n   text/plain]</code>, <code>[text/plain, application/json]</code>.</p>"
                     }
                 }
             }
@@ -18221,7 +19284,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts recording the contact: </p>\n         <ul>\n            <li>\n               <p>If the API is called <i>before</i> the agent joins the call, recording\n     starts when the agent joins the call.</p>\n            </li>\n            <li>\n               <p>If the API is called <i>after</i> the agent joins the call, recording starts\n     at the time of the API call.</p>\n            </li>\n         </ul>\n\n         <p>StartContactRecording is a one-time action. For example, if you use StopContactRecording to\n   stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios\n   where the recording has started and you want to suspend and resume it, such as when collecting\n   sensitive information (for example, a credit card number), use SuspendContactRecording and\n   ResumeContactRecording.</p>\n         <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording\n    behavior</a> block.</p>\n         <p>Only voice recordings are supported at this time.</p>",
+                "smithy.api#documentation": "<p>Starts recording the contact: </p>\n         <ul>\n            <li>\n               <p>If the API is called <i>before</i> the agent joins the call, recording\n     starts when the agent joins the call.</p>\n            </li>\n            <li>\n               <p>If the API is called <i>after</i> the agent joins the call, recording starts\n     at the time of the API call.</p>\n            </li>\n         </ul>\n         <p>StartContactRecording is a one-time action. For example, if you use StopContactRecording to\n   stop recording an ongoing call, you can't use StartContactRecording to restart it. For scenarios\n   where the recording has started and you want to suspend and resume it, such as when collecting\n   sensitive information (for example, a credit card number), use SuspendContactRecording and\n   ResumeContactRecording.</p>\n         <p>You can use this API to override the recording behavior configured in the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/set-recording-behavior.html\">Set recording\n    behavior</a> block.</p>\n         <p>Only voice recordings are supported at this time.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/start-recording",
@@ -18378,7 +19441,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Places an outbound call to a contact, and then initiates the flow. It performs the actions\n   in the flow that's specified (in <code>ContactFlowId</code>).</p>\n\n         <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If\n   the flow places an outbound call to a contact, and then puts the contact in queue, the call is\n   then routed to the agent, like any other inbound case.</p>\n\n         <p>There is a 60-second dialing timeout for this operation. If the call is not connected after\n   60 seconds, it fails.</p>\n         <note>\n            <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK\n    mobile numbers, you must submit a service quota increase request. For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n     Guide</i>. </p>\n         </note>\n         <note>\n            <p>Campaign calls are not allowed by default. Before you can make a call with\n     <code>TrafficType</code> = <code>CAMPAIGN</code>, you must submit a service quota increase\n    request to the quota <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas\">Amazon Connect campaigns</a>. </p>\n         </note>",
+                "smithy.api#documentation": "<p>Places an outbound call to a contact, and then initiates the flow. It performs the actions\n   in the flow that's specified (in <code>ContactFlowId</code>).</p>\n         <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If\n   the flow places an outbound call to a contact, and then puts the contact in queue, the call is\n   then routed to the agent, like any other inbound case.</p>\n         <p>There is a 60-second dialing timeout for this operation. If the call is not connected after\n   60 seconds, it fails.</p>\n         <note>\n            <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK\n    mobile numbers, you must submit a service quota increase request. For more information, see\n     <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator\n     Guide</i>. </p>\n         </note>\n         <note>\n            <p>Campaign calls are not allowed by default. Before you can make a call with\n     <code>TrafficType</code> = <code>CAMPAIGN</code>, you must submit a service quota increase\n    request to the quota <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#outbound-communications-quotas\">Amazon Connect campaigns</a>. </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/contact/outbound-voice",
@@ -18637,7 +19700,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for the following initiation\n   methods:</p>\n  \n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Ends the specified contact. This call does not work for the following initiation\n   methods:</p>\n         <ul>\n            <li>\n               <p>DISCONNECT</p>\n            </li>\n            <li>\n               <p>TRANSFER</p>\n            </li>\n            <li>\n               <p>QUEUE_TRANSFER</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/stop",
@@ -18665,7 +19728,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Stops recording a call when a contact is being recorded. StopContactRecording is a one-time\n   action. If you use StopContactRecording to stop recording an ongoing call, you can't use\n   StartContactRecording to restart it. For scenarios where the recording has started and you want\n   to suspend it for sensitive information (for example, to collect a credit card number), and then\n   restart it, use SuspendContactRecording and ResumeContactRecording.</p>\n\n         <p>Only voice recordings are supported at this time.</p>",
+                "smithy.api#documentation": "<p>Stops recording a call when a contact is being recorded. StopContactRecording is a one-time\n   action. If you use StopContactRecording to stop recording an ongoing call, you can't use\n   StartContactRecording to restart it. For scenarios where the recording has started and you want\n   to suspend it for sensitive information (for example, to collect a credit card number), and then\n   restart it, use SuspendContactRecording and ResumeContactRecording.</p>\n         <p>Only voice recordings are supported at this time.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact/stop-recording",
@@ -18874,7 +19937,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition. </p>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n   \n         </note>"
+                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a string condition. </p>\n         <note>\n            <p>The currently supported value for <code>FieldName</code>: <code>name</code>\n            </p>\n         </note>"
             }
         },
         "com.amazonaws.connect#StringReference": {
@@ -18895,6 +19958,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a reference when the <code>referenceType</code> is <code>STRING</code>.\n   Otherwise, null.</p>"
+            }
+        },
+        "com.amazonaws.connect#Subject": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
             }
         },
         "com.amazonaws.connect#SupportedMessagingContentType": {
@@ -19120,6 +20192,58 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.connect#TaskActionDefinition": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.connect#TaskNameExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name. Supports variable injection. For more information, see \n<a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html\">JSONPath reference</a> \nin the <i>Amazon Connect Administrators Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#TaskDescriptionExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description. Supports variable injection. For more information, see \n<a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html\">JSONPath reference</a> \nin the <i>Amazon Connect Administrators Guide</i>.</p>"
+                    }
+                },
+                "ContactFlowId": {
+                    "target": "com.amazonaws.connect#ContactFlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "References": {
+                    "target": "com.amazonaws.connect#ContactReferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the reference when the <code>referenceType</code> is <code>URL</code>.\n   Otherwise, null. (Supports variable injection in the <code>Value</code> field.)</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the task action.</p>"
+            }
+        },
+        "com.amazonaws.connect#TaskDescriptionExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.connect#TaskNameExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
                 }
             }
         },
@@ -19521,6 +20645,23 @@
         },
         "com.amazonaws.connect#TimeZone": {
             "type": "string"
+        },
+        "com.amazonaws.connect#TimerEligibleParticipantRoles": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                },
+                "AGENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT"
+                    }
+                }
+            }
         },
         "com.amazonaws.connect#Timestamp": {
             "type": "timestamp"
@@ -20115,7 +21256,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
+                "smithy.api#documentation": "<p>Updates the specified flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact-flows/{InstanceId}/{ContactFlowId}/content",
@@ -20145,7 +21286,7 @@
                 "Content": {
                     "target": "com.amazonaws.connect#ContactFlowContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The JSON string that represents flow's content. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language-example.html\">Example contact\n    flow in Amazon Connect Flow language</a> in the <i>Amazon Connect\n    Administrator Guide</i>. </p>",
+                        "smithy.api#documentation": "<p>The JSON string that represents flow's content. For an example, see <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html\">Example contact\n    flow in Amazon Connect Flow language</a>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -20408,7 +21549,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The name of the flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
+                "smithy.api#documentation": "<p>The name of the flow.</p>\n         <p>You can also create and update flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html\">Amazon Connect\n   Flow language</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/contact-flows/{InstanceId}/{ContactFlowId}/name",
@@ -20780,6 +21921,89 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.connect#UpdateParticipantRoleConfig": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateParticipantRoleConfigRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#UpdateParticipantRoleConfigResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates timeouts for when human chat participants are to be considered idle, and when agents\n   are automatically disconnected from a chat due to idleness. You can set four timers:</p>\n         <ul>\n            <li>\n               <p>Customer idle timeout</p>\n            </li>\n            <li>\n               <p>Customer auto-disconnect timeout</p>\n            </li>\n            <li>\n               <p>Agent idle timeout</p>\n            </li>\n            <li>\n               <p>Agent auto-disconnect timeout</p>\n            </li>\n         </ul>\n         <p>For more information about how chat timeouts work, see \n   <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/setup-chat-timeouts.html\">Set up chat timeouts for human participants</a>. </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/contact/participant-role-config/{InstanceId}/{ContactId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateParticipantRoleConfigChannelInfo": {
+            "type": "union",
+            "members": {
+                "Chat": {
+                    "target": "com.amazonaws.connect#ChatParticipantRoleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the chat participant role.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for the chat participant role.</p>"
+            }
+        },
+        "com.amazonaws.connect#UpdateParticipantRoleConfigRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactId": {
+                    "target": "com.amazonaws.connect#ContactId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the contact in this instance of Amazon Connect. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelConfiguration": {
+                    "target": "com.amazonaws.connect#UpdateParticipantRoleConfigChannelInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Connect channel you want to configure.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateParticipantRoleConfigResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.connect#UpdatePhoneNumber": {
             "type": "operation",
@@ -21577,6 +22801,92 @@
                 }
             }
         },
+        "com.amazonaws.connect#UpdateRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateRuleRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a rule for the specified Amazon Connect instance.</p>\n         <p>Use the <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/connect-rules-language.html\">Rules Function language</a> to code conditions for the rule.\n  </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/rules/{InstanceId}/{RuleId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateRuleRequest": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.connect#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule. You can change the name only if <code>TriggerEventSource</code> is one\n   of the following values: <code>OnZendeskTicketCreate</code> |\n    <code>OnZendeskTicketStatusUpdate</code> | <code>OnSalesforceCaseCreate</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Function": {
+                    "target": "com.amazonaws.connect#RuleFunction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conditions of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Actions": {
+                    "target": "com.amazonaws.connect#RuleActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of actions to be run when the rule is triggered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublishStatus": {
+                    "target": "com.amazonaws.connect#RulePublishStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publish status of the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#UpdateSecurityProfile": {
             "type": "operation",
             "input": {
@@ -21862,7 +23172,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony\n    traffic distribution across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
+                "smithy.api#documentation": "<p>Updates the traffic distribution for a given traffic distribution group. </p>\n         <p>For more information about updating a traffic distribution group, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html\">Update telephony\n    traffic distribution across Amazon Web Services Regions\n   </a> in the <i>Amazon Connect Administrator Guide</i>. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/traffic-distribution/{Id}",
@@ -22523,6 +23833,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of contact reference information.</p>"
                     }
+                },
+                "NextStatus": {
+                    "target": "com.amazonaws.connect#AgentStatusName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Next status of the agent.</p>"
+                    }
                 }
             },
             "traits": {
@@ -22535,7 +23851,7 @@
                 "Queues": {
                     "target": "com.amazonaws.connect#Queues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains information about a queue resource for which metrics are returned.</p>"
+                        "smithy.api#documentation": "<p>A list of up to 100 queues or ARNs.</p>"
                     }
                 },
                 "ContactFilter": {
@@ -22543,10 +23859,40 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A filter for the user data based on the contact information that is associated to the user.\n   It contains a list of contact states. </p>"
                     }
+                },
+                "RoutingProfiles": {
+                    "target": "com.amazonaws.connect#RoutingProfiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 100 routing profile IDs or ARNs.</p>"
+                    }
+                },
+                "Agents": {
+                    "target": "com.amazonaws.connect#AgentsMinOneMaxHundred",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 100 agent IDs or ARNs.</p>"
+                    }
+                },
+                "UserHierarchyGroups": {
+                    "target": "com.amazonaws.connect#UserDataHierarchyGroups",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A UserHierarchyGroup ID or ARN.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A filter for the user data.</p>"
+            }
+        },
+        "com.amazonaws.connect#UserDataHierarchyGroups": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#HierarchyGroupId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.connect#UserDataList": {
@@ -22557,6 +23903,12 @@
         },
         "com.amazonaws.connect#UserId": {
             "type": "string"
+        },
+        "com.amazonaws.connect#UserIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#UserId"
+            }
         },
         "com.amazonaws.connect#UserIdentityInfo": {
             "type": "structure",
@@ -22650,7 +24002,7 @@
                     "target": "com.amazonaws.connect#AfterContactWorkTimeLimit",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The After Call Work (ACW) timeout setting, in seconds.</p>\n  \n         <note>\n            <p>When returned by a <code>SearchUsers</code> call, <code>AfterContactWorkTimeLimit</code> is\n    returned in milliseconds. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The After Call Work (ACW) timeout setting, in seconds.</p>\n         <note>\n            <p>When returned by a <code>SearchUsers</code> call, <code>AfterContactWorkTimeLimit</code> is\n    returned in milliseconds. </p>\n         </note>"
                     }
                 },
                 "DeskPhoneNumber": {
@@ -22741,7 +24093,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The search criteria to be used to return users.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with\n    a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will throw invalid results. \n    </p>\n         </note>"
+                "smithy.api#documentation": "<p>The search criteria to be used to return users.</p>\n         <note>\n            <p>The <code>name</code> and <code>description</code> fields support \"contains\" queries with\n    a minimum of 2 characters and a maximum of 25 characters. Any queries with character lengths\n    outside of this range will throw invalid results.  </p>\n         </note>"
             }
         },
         "com.amazonaws.connect#UserSearchFilter": {
@@ -22856,6 +24208,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#UserSummary"
+            }
+        },
+        "com.amazonaws.connect#UserTagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.connect#String"
+            },
+            "value": {
+                "target": "com.amazonaws.connect#String"
             }
         },
         "com.amazonaws.connect#Value": {
@@ -23077,6 +24438,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "zh-CN"
+                    }
+                },
+                "EN_NZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-NZ"
+                    }
+                },
+                "EN_ZA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "en-ZA"
                     }
                 }
             }

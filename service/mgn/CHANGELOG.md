@@ -1,3 +1,23 @@
+# v1.17.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.16.3 (2023-01-03)
+
+* No change notes available for this release.
+
+# v1.16.2 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.0 (2022-11-28)
+
+* **Feature**: This release adds support for Application and Wave management. We also now support custom post-launch actions.
+
 # v1.15.14 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -31,12 +31,12 @@ func (c *Client) ListEndpointAccess(ctx context.Context, params *ListEndpointAcc
 type ListEndpointAccessInput struct {
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken to display the next page of results.
 	MaxResults *int32
 
 	// If your initial ListEndpointAccess operation returns a nextToken, you can
-	// include the returned nextToken in subsequent ListEndpointAccess operations,
-	// which returns results in the next page.
+	// include the returned nextToken in following ListEndpointAccess operations, which
+	// returns results in the next page.
 	NextToken *string
 
 	// The unique identifier of the virtual private cloud with access to Amazon
@@ -139,7 +139,7 @@ var _ ListEndpointAccessAPIClient = (*Client)(nil)
 // ListEndpointAccess
 type ListEndpointAccessPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken to display the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

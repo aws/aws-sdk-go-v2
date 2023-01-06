@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a conflict with this request. Try again.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -45,12 +54,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The cluster endpoint isn't available. Try another cluster endpoint.
 type EndpointTemporarilyUnavailableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -65,7 +81,10 @@ func (e *EndpointTemporarilyUnavailableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EndpointTemporarilyUnavailableException) ErrorCode() string {
-	return "EndpointTemporarilyUnavailableException"
+	if e.ErrorCodeOverride == nil {
+		return "EndpointTemporarilyUnavailableException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *EndpointTemporarilyUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
@@ -74,6 +93,8 @@ func (e *EndpointTemporarilyUnavailableException) ErrorFault() smithy.ErrorFault
 // There was an unexpected error during processing of the request.
 type InternalServerException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RetryAfterSeconds int32
 
@@ -89,12 +110,19 @@ func (e *InternalServerException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
+func (e *InternalServerException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request references a routing control or control panel that was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -111,13 +139,20 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request can't update that many routing control states at the same time. Try
 // again with fewer routing control states.
 type ServiceLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceId   *string
 	ResourceType *string
@@ -136,12 +171,19 @@ func (e *ServiceLimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceLimitExceededException) ErrorCode() string             { return "ServiceLimitExceededException" }
+func (e *ServiceLimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied because of request throttling.
 type ThrottlingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	RetryAfterSeconds int32
 
@@ -157,12 +199,19 @@ func (e *ThrottlingException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottlingException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was a validation error on the request.
 type ValidationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	Reason ValidationExceptionReason
 	Fields []ValidationExceptionField
@@ -179,5 +228,10 @@ func (e *ValidationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

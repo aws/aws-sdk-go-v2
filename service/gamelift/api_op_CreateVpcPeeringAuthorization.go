@@ -14,9 +14,11 @@ import (
 // Requests authorization to create or delete a peer connection between the VPC for
 // your Amazon GameLift fleet and a virtual private cloud (VPC) in your Amazon Web
 // Services account. VPC peering enables the game servers on your fleet to
-// communicate directly with other Amazon Web Services resources. Once you've
-// received authorization, call CreateVpcPeeringConnection to establish the peering
-// connection. For more information, see VPC Peering with Amazon GameLift Fleets
+// communicate directly with other Amazon Web Services resources. After you've
+// received authorization, use CreateVpcPeeringConnection
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringConnection.html)
+// to establish the peering connection. For more information, see VPC Peering with
+// Amazon GameLift Fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 // You can peer with VPCs that are owned by any Amazon Web Services account you
 // have access to, including the account that you use to manage your Amazon
@@ -33,11 +35,8 @@ import (
 // GameLift fleet. Identify the following values: (1) VPC ID that you want to
 // delete the peering connection for, and (2) ID of the Amazon Web Services account
 // that you use to manage Amazon GameLift. The authorization remains valid for 24
-// hours unless it is canceled by a call to DeleteVpcPeeringAuthorization. You must
-// create or delete the peering connection while the authorization is valid.
-// Related actions CreateVpcPeeringAuthorization | DescribeVpcPeeringAuthorizations
-// | DeleteVpcPeeringAuthorization | CreateVpcPeeringConnection |
-// DescribeVpcPeeringConnections | DeleteVpcPeeringConnection | All APIs by task
+// hours unless it is canceled. You must create or delete the peering connection
+// while the authorization is valid. Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateVpcPeeringAuthorization(ctx context.Context, params *CreateVpcPeeringAuthorizationInput, optFns ...func(*Options)) (*CreateVpcPeeringAuthorizationOutput, error) {
 	if params == nil {
@@ -54,7 +53,6 @@ func (c *Client) CreateVpcPeeringAuthorization(ctx context.Context, params *Crea
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type CreateVpcPeeringAuthorizationInput struct {
 
 	// A unique identifier for the Amazon Web Services account that you use to manage
@@ -77,7 +75,6 @@ type CreateVpcPeeringAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type CreateVpcPeeringAuthorizationOutput struct {
 
 	// Details on the requested VPC peering authorization, including expiration.

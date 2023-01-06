@@ -45,8 +45,7 @@ type DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationInput struct {
 
 type DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociationOutput struct {
 
-	// Describes an association between a local gateway route table and a virtual
-	// interface group.
+	// Information about the association.
 	LocalGatewayRouteTableVirtualInterfaceGroupAssociation *types.LocalGatewayRouteTableVirtualInterfaceGroupAssociation
 
 	// Metadata pertaining to the operation's result.

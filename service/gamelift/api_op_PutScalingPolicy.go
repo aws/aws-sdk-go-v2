@@ -22,12 +22,8 @@ import (
 // policies of each type in force at the same time; you can have one target-based
 // policy, one or multiple rule-based scaling policies, or both. We recommend
 // caution, however, because multiple auto-scaling policies can have unintended
-// consequences. You can temporarily suspend all scaling policies for a fleet by
-// calling StopFleetActions with the fleet action AUTO_SCALING. To resume scaling
-// policies, call StartFleetActions with the same fleet action. To stop just one
-// scaling policy--or to permanently remove it, you must delete the policy with
-// DeleteScalingPolicy. Learn more about how to work with auto-scaling in Set Up
-// Fleet Automatic Scaling
+// consequences. Learn more about how to work with auto-scaling in Set Up Fleet
+// Automatic Scaling
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-autoscaling.html).
 // Target-based policy A target-based policy tracks a single metric:
 // PercentAvailableGameSessions. This metric tells us how much of a fleet's hosting
@@ -65,10 +61,7 @@ import (
 // policy name is returned. Scaling policies are automatically in force as soon as
 // they're successfully created. If the fleet's auto-scaling actions are
 // temporarily suspended, the new policy will be in force once the fleet actions
-// are restarted. Related actions DescribeFleetCapacity | UpdateFleetCapacity |
-// DescribeEC2InstanceLimits | PutScalingPolicy | DescribeScalingPolicies |
-// DeleteScalingPolicy | StopFleetActions | StartFleetActions | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// are restarted.
 func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyInput, optFns ...func(*Options)) (*PutScalingPolicyOutput, error) {
 	if params == nil {
 		params = &PutScalingPolicyInput{}
@@ -84,7 +77,6 @@ func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyI
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type PutScalingPolicyInput struct {
 
 	// A unique identifier for the fleet to apply this policy to. You can use either
@@ -167,20 +159,20 @@ type PutScalingPolicyInput struct {
 	// Amount of adjustment to make, based on the scaling adjustment type.
 	ScalingAdjustment int32
 
-	// The type of adjustment to make to a fleet's instance count (see
-	// FleetCapacity):
+	// The type of adjustment to make to a fleet's instance count:
 	//
-	// * ChangeInCapacity -- add (or subtract) the scaling adjustment
-	// value from the current instance count. Positive values scale up while negative
-	// values scale down.
+	// * ChangeInCapacity
+	// -- add (or subtract) the scaling adjustment value from the current instance
+	// count. Positive values scale up while negative values scale down.
 	//
-	// * ExactCapacity -- set the instance count to the scaling
-	// adjustment value.
+	// *
+	// ExactCapacity -- set the instance count to the scaling adjustment value.
 	//
-	// * PercentChangeInCapacity -- increase or reduce the current
-	// instance count by the scaling adjustment, read as a percentage. Positive values
-	// scale up while negative values scale down; for example, a value of "-10" scales
-	// the fleet down by 10%.
+	// *
+	// PercentChangeInCapacity -- increase or reduce the current instance count by the
+	// scaling adjustment, read as a percentage. Positive values scale up while
+	// negative values scale down; for example, a value of "-10" scales the fleet down
+	// by 10%.
 	ScalingAdjustmentType types.ScalingAdjustmentType
 
 	// An object that contains settings for a target-based scaling policy.
@@ -192,7 +184,6 @@ type PutScalingPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type PutScalingPolicyOutput struct {
 
 	// A descriptive label that is associated with a fleet's scaling policy. Policy

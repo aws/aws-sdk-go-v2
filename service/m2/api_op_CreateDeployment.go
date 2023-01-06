@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates and starts a deployment to deploy an application into an environment.
+// Creates and starts a deployment to deploy an application into a runtime
+// environment.
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentInput{}
@@ -39,7 +40,8 @@ type CreateDeploymentInput struct {
 	// This member is required.
 	ApplicationVersion *int32
 
-	// The identifier of the environment where this application will be deployed.
+	// The identifier of the runtime environment where you want to deploy this
+	// application.
 	//
 	// This member is required.
 	EnvironmentId *string

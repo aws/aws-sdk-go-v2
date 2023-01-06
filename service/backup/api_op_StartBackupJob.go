@@ -87,7 +87,8 @@ type StartBackupJobInput struct {
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
 	// it doesn't start successfully. This value is optional, and the default is 8
-	// hours.
+	// hours. If this value is included, it must be at least 60 minutes to avoid
+	// errors.
 	StartWindowMinutes *int64
 
 	noSmithyDocumentSerde
@@ -103,6 +104,10 @@ type StartBackupJobOutput struct {
 	// example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.
 	CreationDate *time.Time
+
+	// This is a returned boolean value indicating this is a parent (composite) backup
+	// job.
+	IsParent bool
 
 	// An ARN that uniquely identifies a recovery point; for example,
 	// arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.

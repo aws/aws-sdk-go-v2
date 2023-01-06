@@ -48,8 +48,8 @@ type DeleteDeliveryStreamInput struct {
 	// RevokeGrant
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_RevokeGrant.html)
 	// operation to revoke the grant you gave to Kinesis Data Firehose. If a failure to
-	// retire the grant happens due to an AWS KMS issue, Kinesis Data Firehose keeps
-	// retrying the delete operation. The default value is false.
+	// retire the grant happens due to an Amazon Web Services KMS issue, Kinesis Data
+	// Firehose keeps retrying the delete operation. The default value is false.
 	AllowForceDelete *bool
 
 	noSmithyDocumentSerde

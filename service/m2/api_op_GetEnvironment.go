@@ -70,7 +70,7 @@ type GetEnvironmentOutput struct {
 	// This member is required.
 	InstanceType *string
 
-	// The name of the runtime environment.
+	// The name of the runtime environment. Must be unique within the account.
 	//
 	// This member is required.
 	Name *string
@@ -108,6 +108,9 @@ type GetEnvironmentOutput struct {
 	// environment.
 	HighAvailabilityConfig *types.HighAvailabilityConfig
 
+	// The identifier of a customer managed key.
+	KmsKeyId *string
+
 	// The Amazon Resource Name (ARN) for the load balancer used with the runtime
 	// environment.
 	LoadBalancerArn *string
@@ -115,8 +118,8 @@ type GetEnvironmentOutput struct {
 	// Indicates the pending maintenance scheduled on this environment.
 	PendingMaintenance *types.PendingMaintenance
 
-	// Configures a desired maintenance window for the environment. If you do not
-	// provide a value, a random system-generated value will be assigned.
+	// Configures the maintenance window you want for the runtime environment. If you
+	// do not provide a value, a random system-generated value will be assigned.
 	PreferredMaintenanceWindow *string
 
 	// Whether applications running in this runtime environment are publicly

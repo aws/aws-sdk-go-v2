@@ -350,6 +350,26 @@ func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetTableRestoreStatus struct {
+}
+
+func (*validateOpGetTableRestoreStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTableRestoreStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTableRestoreStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTableRestoreStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetUsageLimit struct {
 }
 
@@ -465,6 +485,26 @@ func (m *validateOpRestoreFromSnapshot) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRestoreFromSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRestoreTableFromSnapshot struct {
+}
+
+func (*validateOpRestoreTableFromSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRestoreTableFromSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RestoreTableFromSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRestoreTableFromSnapshotInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -678,6 +718,10 @@ func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
 }
 
+func addOpGetTableRestoreStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTableRestoreStatus{}, middleware.After)
+}
+
 func addOpGetUsageLimitValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetUsageLimit{}, middleware.After)
 }
@@ -700,6 +744,10 @@ func addOpRestoreFromRecoveryPointValidationMiddleware(stack *middleware.Stack) 
 
 func addOpRestoreFromSnapshotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRestoreFromSnapshot{}, middleware.After)
+}
+
+func addOpRestoreTableFromSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRestoreTableFromSnapshot{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -776,6 +824,11 @@ func validateOpConvertRecoveryPointToSnapshotInput(v *ConvertRecoveryPointToSnap
 	if v.SnapshotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -834,6 +887,11 @@ func validateOpCreateSnapshotInput(v *CreateSnapshotInput) error {
 	}
 	if v.SnapshotName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1051,6 +1109,21 @@ func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	}
 }
 
+func validateOpGetTableRestoreStatusInput(v *GetTableRestoreStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTableRestoreStatusInput"}
+	if v.TableRestoreRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableRestoreRequestId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetUsageLimitInput(v *GetUsageLimitInput) error {
 	if v == nil {
 		return nil
@@ -1145,6 +1218,36 @@ func validateOpRestoreFromSnapshotInput(v *RestoreFromSnapshotInput) error {
 	}
 	if v.WorkgroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkgroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRestoreTableFromSnapshotInput(v *RestoreTableFromSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RestoreTableFromSnapshotInput"}
+	if v.NamespaceName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NamespaceName"))
+	}
+	if v.WorkgroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkgroupName"))
+	}
+	if v.SnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotName"))
+	}
+	if v.SourceDatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceDatabaseName"))
+	}
+	if v.SourceTableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceTableName"))
+	}
+	if v.NewTableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewTableName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -118,6 +118,44 @@ func (ComparisonOperatorType) Values() []ComparisonOperatorType {
 	}
 }
 
+type ComputeStatus string
+
+// Enum values for ComputeStatus
+const (
+	ComputeStatusPending     ComputeStatus = "PENDING"
+	ComputeStatusActive      ComputeStatus = "ACTIVE"
+	ComputeStatusTerminating ComputeStatus = "TERMINATING"
+)
+
+// Values returns all known values for ComputeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComputeStatus) Values() []ComputeStatus {
+	return []ComputeStatus{
+		"PENDING",
+		"ACTIVE",
+		"TERMINATING",
+	}
+}
+
+type ComputeType string
+
+// Enum values for ComputeType
+const (
+	ComputeTypeEc2      ComputeType = "EC2"
+	ComputeTypeAnywhere ComputeType = "ANYWHERE"
+)
+
+// Values returns all known values for ComputeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ComputeType) Values() []ComputeType {
+	return []ComputeType{
+		"EC2",
+		"ANYWHERE",
+	}
+}
+
 type EC2InstanceType string
 
 // Enum values for EC2InstanceType
@@ -397,6 +435,7 @@ const (
 	EventCodeFleetVpcPeeringFailed                      EventCode = "FLEET_VPC_PEERING_FAILED"
 	EventCodeFleetVpcPeeringDeleted                     EventCode = "FLEET_VPC_PEERING_DELETED"
 	EventCodeInstanceInterrupted                        EventCode = "INSTANCE_INTERRUPTED"
+	EventCodeInstanceRecycled                           EventCode = "INSTANCE_RECYCLED"
 )
 
 // Values returns all known values for EventCode. Note that this can be expanded in
@@ -437,6 +476,7 @@ func (EventCode) Values() []EventCode {
 		"FLEET_VPC_PEERING_FAILED",
 		"FLEET_VPC_PEERING_DELETED",
 		"INSTANCE_INTERRUPTED",
+		"INSTANCE_RECYCLED",
 	}
 }
 
@@ -469,6 +509,7 @@ const (
 	FleetStatusDeleting    FleetStatus = "DELETING"
 	FleetStatusError       FleetStatus = "ERROR"
 	FleetStatusTerminated  FleetStatus = "TERMINATED"
+	FleetStatusNotFound    FleetStatus = "NOT_FOUND"
 )
 
 // Values returns all known values for FleetStatus. Note that this can be expanded
@@ -485,6 +526,7 @@ func (FleetStatus) Values() []FleetStatus {
 		"DELETING",
 		"ERROR",
 		"TERMINATED",
+		"NOT_FOUND",
 	}
 }
 
@@ -968,6 +1010,24 @@ func (IpProtocol) Values() []IpProtocol {
 	}
 }
 
+type LocationFilter string
+
+// Enum values for LocationFilter
+const (
+	LocationFilterAws    LocationFilter = "AWS"
+	LocationFilterCustom LocationFilter = "CUSTOM"
+)
+
+// Values returns all known values for LocationFilter. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LocationFilter) Values() []LocationFilter {
+	return []LocationFilter{
+		"AWS",
+		"CUSTOM",
+	}
+}
+
 type LocationUpdateStatus string
 
 // Enum values for LocationUpdateStatus
@@ -1019,17 +1079,18 @@ type MetricName string
 
 // Enum values for MetricName
 const (
-	MetricNameActivatingGameSessions       MetricName = "ActivatingGameSessions"
-	MetricNameActiveGameSessions           MetricName = "ActiveGameSessions"
-	MetricNameActiveInstances              MetricName = "ActiveInstances"
-	MetricNameAvailableGameSessions        MetricName = "AvailableGameSessions"
-	MetricNameAvailablePlayerSessions      MetricName = "AvailablePlayerSessions"
-	MetricNameCurrentPlayerSessions        MetricName = "CurrentPlayerSessions"
-	MetricNameIdleInstances                MetricName = "IdleInstances"
-	MetricNamePercentAvailableGameSessions MetricName = "PercentAvailableGameSessions"
-	MetricNamePercentIdleInstances         MetricName = "PercentIdleInstances"
-	MetricNameQueueDepth                   MetricName = "QueueDepth"
-	MetricNameWaitTime                     MetricName = "WaitTime"
+	MetricNameActivatingGameSessions            MetricName = "ActivatingGameSessions"
+	MetricNameActiveGameSessions                MetricName = "ActiveGameSessions"
+	MetricNameActiveInstances                   MetricName = "ActiveInstances"
+	MetricNameAvailableGameSessions             MetricName = "AvailableGameSessions"
+	MetricNameAvailablePlayerSessions           MetricName = "AvailablePlayerSessions"
+	MetricNameCurrentPlayerSessions             MetricName = "CurrentPlayerSessions"
+	MetricNameIdleInstances                     MetricName = "IdleInstances"
+	MetricNamePercentAvailableGameSessions      MetricName = "PercentAvailableGameSessions"
+	MetricNamePercentIdleInstances              MetricName = "PercentIdleInstances"
+	MetricNameQueueDepth                        MetricName = "QueueDepth"
+	MetricNameWaitTime                          MetricName = "WaitTime"
+	MetricNameConcurrentActivatableGameSessions MetricName = "ConcurrentActivatableGameSessions"
 )
 
 // Values returns all known values for MetricName. Note that this can be expanded
@@ -1048,6 +1109,7 @@ func (MetricName) Values() []MetricName {
 		"PercentIdleInstances",
 		"QueueDepth",
 		"WaitTime",
+		"ConcurrentActivatableGameSessions",
 	}
 }
 

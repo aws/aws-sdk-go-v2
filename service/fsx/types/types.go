@@ -80,12 +80,17 @@ type AdministrativeAction struct {
 	// for OpenZFS volume initiated from the Amazon FSx console, API (UpdateVolume), or
 	// CLI (update-volume).
 	//
-	// * SNAPSHOT_UPDATE - A snapshot update to an Amazon FSx for
-	// OpenZFS volume initiated from the Amazon FSx console, API (UpdateSnapshot), or
-	// CLI (update-snapshot).
+	// * VOLUME_RESTORE - An Amazon FSx for OpenZFS volume is
+	// returned to the state saved by the specified snapshot, initiated from an API
+	// (RestoreVolumeFromSnapshot) or CLI (restore-volume-from-snapshot).
 	//
-	// * RELEASE_NFS_V3_LOCKS - Tracks the release of Network
-	// File System (NFS) V3 locks on an Amazon FSx for OpenZFS file system.
+	// *
+	// SNAPSHOT_UPDATE - A snapshot update to an Amazon FSx for OpenZFS volume
+	// initiated from the Amazon FSx console, API (UpdateSnapshot), or CLI
+	// (update-snapshot).
+	//
+	// * RELEASE_NFS_V3_LOCKS - Tracks the release of Network File
+	// System (NFS) V3 locks on an Amazon FSx for OpenZFS file system.
 	AdministrativeActionType AdministrativeActionType
 
 	// Provides information about a failed administrative action.
@@ -637,7 +642,7 @@ type CreateFileSystemOntapConfiguration struct {
 	DeploymentType OntapDeploymentType
 
 	// Sets the throughput capacity for the file system that you're creating. Valid
-	// values are 128, 256, 512, 1024, and 2048 MBps.
+	// values are 128, 256, 512, 1024, 2048, and 4096 MBps.
 	//
 	// This member is required.
 	ThroughputCapacity *int32
@@ -656,10 +661,12 @@ type CreateFileSystemOntapConfiguration struct {
 	DiskIopsConfiguration *DiskIopsConfiguration
 
 	// (Multi-AZ only) Specifies the IP address range in which the endpoints to access
-	// your file system will be created. By default, Amazon FSx selects an unused IP
-	// address range for you from the 198.19.* range. The Endpoint IP address range you
-	// select for your file system must exist outside the VPC's CIDR range and must be
-	// at least /30 or larger.
+	// your file system will be created. By default in the Amazon FSx API, Amazon FSx
+	// selects an unused IP address range for you from the 198.19.* range. By default
+	// in the Amazon FSx console, Amazon FSx chooses the last 64 IP addresses from the
+	// VPC’s primary CIDR range to use as the endpoint IP address range for the file
+	// system. You can have overlapping endpoint IP addresses for file systems deployed
+	// in the same VPC/route tables.
 	EndpointIpAddressRange *string
 
 	// The ONTAP administrative password for the fsxadmin user with which you
@@ -691,17 +698,42 @@ type CreateFileSystemOntapConfiguration struct {
 // are creating.
 type CreateFileSystemOpenZFSConfiguration struct {
 
-	// Specifies the file system deployment type. Amazon FSx for OpenZFS supports
-	// SINGLE_AZ_1. SINGLE_AZ_1 deployment type is configured for redundancy within a
-	// single Availability Zone.
+	// Specifies the file system deployment type. Single AZ deployment types are
+	// configured for redundancy within a single Availability Zone in an Amazon Web
+	// Services Region . Valid values are the following:
+	//
+	// * SINGLE_AZ_1- (Default)
+	// Creates file systems with throughput capacities of 64 - 4,096 MB/s. Single_AZ_1
+	// is available in all Amazon Web Services Regions where Amazon FSx for OpenZFS is
+	// available, except US West (Oregon).
+	//
+	// * SINGLE_AZ_2- Creates file systems with
+	// throughput capacities of 160 - 10,240 MB/s using an NVMe L2ARC cache.
+	// Single_AZ_2 is available only in the US East (N. Virginia), US East (Ohio), US
+	// West (Oregon), and Europe (Ireland) Amazon Web Services Regions.
+	//
+	// For more
+	// information, see: Deployment type availability
+	// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/availability-durability.html#available-aws-regions)
+	// and File system performance
+	// (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/performance.html#zfs-fs-performance)
+	// in the Amazon FSx for OpenZFS User Guide.
 	//
 	// This member is required.
 	DeploymentType OpenZFSDeploymentType
 
 	// Specifies the throughput of an Amazon FSx for OpenZFS file system, measured in
-	// megabytes per second (MB/s). Valid values are 64, 128, 256, 512, 1024, 2048,
-	// 3072, or 4096 MB/s. You pay for additional throughput capacity that you
-	// provision.
+	// megabytes per second (MB/s). Valid values depend on the DeploymentType you
+	// choose, as follows:
+	//
+	// * For SINGLE_AZ_1, valid values are 64, 128, 256, 512,
+	// 1024, 2048, 3072, or 4096 MB/s.
+	//
+	// * For SINGLE_AZ_2, valid values are 160, 320,
+	// 640, 1280, 2560, 3840, 5120, 7680, or 10240 MB/s.
+	//
+	// You pay for additional
+	// throughput capacity that you provision.
 	//
 	// This member is required.
 	ThroughputCapacity *int32
@@ -872,27 +904,42 @@ type CreateFileSystemWindowsConfiguration struct {
 // Specifies the configuration of the ONTAP volume that you are creating.
 type CreateOntapVolumeConfiguration struct {
 
-	// Specifies the location in the SVM's namespace where the volume is mounted. The
-	// JunctionPath must have a leading forward slash, such as /vol3.
-	//
-	// This member is required.
-	JunctionPath *string
-
 	// Specifies the size of the volume, in megabytes (MB), that you are creating.
 	//
 	// This member is required.
 	SizeInMegabytes *int32
 
-	// Set to true to enable deduplication, compression, and compaction storage
-	// efficiency features on the volume.
-	//
-	// This member is required.
-	StorageEfficiencyEnabled *bool
-
 	// Specifies the ONTAP SVM in which to create the volume.
 	//
 	// This member is required.
 	StorageVirtualMachineId *string
+
+	// A boolean flag indicating whether tags for the volume should be copied to
+	// backups. This value defaults to false. If it's set to true, all tags for the
+	// volume are copied to all automatic and user-initiated backups where the user
+	// doesn't specify tags. If this value is true, and you specify one or more tags,
+	// only the specified tags are copied to backups. If you specify one or more tags
+	// when creating a user-initiated backup, no tags are copied from the volume,
+	// regardless of this value.
+	CopyTagsToBackups *bool
+
+	// Specifies the location in the SVM's namespace where the volume is mounted. The
+	// JunctionPath must have a leading forward slash, such as /vol3.
+	JunctionPath *string
+
+	// Specifies the type of volume you are creating. Valid values are the
+	// following:
+	//
+	// * RW specifies a read/write volume. RW is the default.
+	//
+	// * DP
+	// specifies a data-protection volume. A DP volume is read-only and can be used as
+	// the destination of a NetApp SnapMirror relationship.
+	//
+	// For more information, see
+	// Volume types (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-types) in
+	// the Amazon FSx for NetApp ONTAP User Guide.
+	OntapVolumeType InputOntapVolumeType
 
 	// Specifies the security style for the volume. If a volume's security style is not
 	// specified, it is automatically set to the root volume's security style. The
@@ -914,6 +961,33 @@ type CreateOntapVolumeConfiguration struct {
 	// file system is managed by both UNIX and Windows administrators and users consist
 	// of both NFS and SMB clients.
 	SecurityStyle SecurityStyle
+
+	// Specifies the snapshot policy for the volume. There are three built-in snapshot
+	// policies:
+	//
+	// * default: This is the default policy. A maximum of six hourly
+	// snapshots taken five minutes past the hour. A maximum of two daily snapshots
+	// taken Monday through Saturday at 10 minutes after midnight. A maximum of two
+	// weekly snapshots taken every Sunday at 15 minutes after midnight.
+	//
+	// *
+	// default-1weekly: This policy is the same as the default policy except that it
+	// only retains one snapshot from the weekly schedule.
+	//
+	// * none: This policy does
+	// not take any snapshots. This policy can be assigned to volumes to prevent
+	// automatic snapshots from being taken.
+	//
+	// You can also provide the name of a custom
+	// policy that you created with the ONTAP CLI or REST API. For more information,
+	// see Snapshot policies
+	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies)
+	// in the Amazon FSx for NetApp ONTAP User Guide.
+	SnapshotPolicy *string
+
+	// Set to true to enable deduplication, compression, and compaction storage
+	// efficiency features on the volume.
+	StorageEfficiencyEnabled *bool
 
 	// Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx
 	// for ONTAP's intelligent tiering automatically transitions a volume's data
@@ -1146,7 +1220,7 @@ type DataRepositoryAssociation struct {
 	// repositories.
 	DataRepositorySubdirectories []string
 
-	// Provides detailed information about the data respository if its Lifecycle is set
+	// Provides detailed information about the data repository if its Lifecycle is set
 	// to MISCONFIGURED or FAILED.
 	FailureDetails *DataRepositoryFailureDetails
 
@@ -1274,7 +1348,7 @@ type DataRepositoryConfiguration struct {
 	// new and changed Lustre file system files in S3.
 	ExportPath *string
 
-	// Provides detailed information about the data respository if its Lifecycle is set
+	// Provides detailed information about the data repository if its Lifecycle is set
 	// to MISCONFIGURED or FAILED.
 	FailureDetails *DataRepositoryFailureDetails
 
@@ -1319,7 +1393,7 @@ type DataRepositoryConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides detailed information about the data respository if its Lifecycle is set
+// Provides detailed information about the data repository if its Lifecycle is set
 // to MISCONFIGURED or FAILED.
 type DataRepositoryFailureDetails struct {
 
@@ -2488,6 +2562,15 @@ type OntapFileSystemConfiguration struct {
 // The configuration of an Amazon FSx for NetApp ONTAP volume.
 type OntapVolumeConfiguration struct {
 
+	// A boolean flag indicating whether tags for the volume should be copied to
+	// backups. This value defaults to false. If it's set to true, all tags for the
+	// volume are copied to all automatic and user-initiated backups where the user
+	// doesn't specify tags. If this value is true, and you specify one or more tags,
+	// only the specified tags are copied to backups. If you specify one or more tags
+	// when creating a user-initiated backup, no tags are copied from the volume,
+	// regardless of this value.
+	CopyTagsToBackups *bool
+
 	// Specifies the FlexCache endpoint type of the volume. Valid values are the
 	// following:
 	//
@@ -2529,6 +2612,29 @@ type OntapVolumeConfiguration struct {
 
 	// The configured size of the volume, in megabytes (MBs).
 	SizeInMegabytes *int32
+
+	// Specifies the snapshot policy for the volume. There are three built-in snapshot
+	// policies:
+	//
+	// * default: This is the default policy. A maximum of six hourly
+	// snapshots taken five minutes past the hour. A maximum of two daily snapshots
+	// taken Monday through Saturday at 10 minutes after midnight. A maximum of two
+	// weekly snapshots taken every Sunday at 15 minutes after midnight.
+	//
+	// *
+	// default-1weekly: This policy is the same as the default policy except that it
+	// only retains one snapshot from the weekly schedule.
+	//
+	// * none: This policy does
+	// not take any snapshots. This policy can be assigned to volumes to prevent
+	// automatic snapshots from being taken.
+	//
+	// You can also provide the name of a custom
+	// policy that you created with the ONTAP CLI or REST API. For more information,
+	// see Snapshot policies
+	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies)
+	// in the Amazon FSx for NetApp ONTAP User Guide.
+	SnapshotPolicy *string
 
 	// The volume's storage efficiency setting.
 	StorageEfficiencyEnabled *bool
@@ -2665,8 +2771,7 @@ type OpenZFSFileSystemConfiguration struct {
 	DailyAutomaticBackupStartTime *string
 
 	// Specifies the file-system deployment type. Amazon FSx for OpenZFS supports
-	// SINGLE_AZ_1. SINGLE_AZ_1 is a file system configured for a single Availability
-	// Zone (AZ) of redundancy.
+	// SINGLE_AZ_1 and SINGLE_AZ_2.
 	DeploymentType OpenZFSDeploymentType
 
 	// The SSD IOPS (input/output operations per second) configuration for an Amazon
@@ -2680,7 +2785,7 @@ type OpenZFSFileSystemConfiguration struct {
 	RootVolumeId *string
 
 	// The throughput of an Amazon FSx file system, measured in megabytes per second
-	// (MBps). Valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.
+	// (MBps).
 	ThroughputCapacity *int32
 
 	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for
@@ -2782,6 +2887,15 @@ type OpenZFSVolumeConfiguration struct {
 	// speeds.
 	DataCompressionType OpenZFSDataCompressionType
 
+	// A Boolean value indicating whether dependent clone volumes created from
+	// intermediate snapshots should be deleted when a volume is restored from
+	// snapshot.
+	DeleteClonedVolumes *bool
+
+	// A Boolean value indicating whether snapshots between the current state and the
+	// specified snapshot should be deleted when a volume is restored from snapshot.
+	DeleteIntermediateSnaphots *bool
+
 	// The configuration object for mounting a Network File System (NFS) file system.
 	NfsExports []OpenZFSNfsExport
 
@@ -2800,6 +2914,9 @@ type OpenZFSVolumeConfiguration struct {
 	// should use the default record size. For guidance on when to set a custom record
 	// size, see the Amazon FSx for OpenZFS User Guide.
 	RecordSizeKiB *int32
+
+	// Specifies the ID of the snapshot to which the volume was restored.
+	RestoreToSnapshot *string
 
 	// The maximum amount of storage in gibibtyes (GiB) that the volume can use from
 	// its parent. You can specify a quota larger than the storage on the parent
@@ -3315,6 +3432,10 @@ type UpdateFileSystemLustreConfiguration struct {
 // The configuration updates for an Amazon FSx for NetApp ONTAP file system.
 type UpdateFileSystemOntapConfiguration struct {
 
+	// (Multi-AZ only) A list of IDs of new virtual private cloud (VPC) route tables to
+	// associate (add) with your Amazon FSx for NetApp ONTAP file system.
+	AddRouteTableIds []string
+
 	// The number of days to retain automatic backups. Setting this property to 0
 	// disables automatic backups. You can retain automatic backups for a maximum of 90
 	// days. The default is 0.
@@ -3335,8 +3456,15 @@ type UpdateFileSystemOntapConfiguration struct {
 	// The ONTAP administrative password for the fsxadmin user.
 	FsxAdminPassword *string
 
+	// (Multi-AZ only) A list of IDs of existing virtual private cloud (VPC) route
+	// tables to disassociate (remove) from your Amazon FSx for NetApp ONTAP file
+	// system. You can use the API operation to retrieve the list of VPC route table
+	// IDs for a file system.
+	RemoveRouteTableIds []string
+
 	// Specifies the throughput of an FSx for NetApp ONTAP file system, measured in
-	// megabytes per second (MBps). Valid values are 128, 256, 512, 1024, or 2048 MB/s.
+	// megabytes per second (MBps). Valid values are 128, 256, 512, 1024, 2048, and
+	// 4096 MBps.
 	ThroughputCapacity *int32
 
 	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for
@@ -3387,8 +3515,15 @@ type UpdateFileSystemOpenZFSConfiguration struct {
 	// and how the amount was provisioned (by the customer or by the system).
 	DiskIopsConfiguration *DiskIopsConfiguration
 
-	// The throughput of an Amazon FSx file system, measured in megabytes per second
-	// (MBps). Valid values are 64, 128, 256, 512, 1024, 2048, 3072, or 4096 MB/s.
+	// The throughput of an Amazon FSx for OpenZFS file system, measured in megabytes
+	// per second  (MB/s). Valid values depend on the DeploymentType you choose, as
+	// follows:
+	//
+	// * For SINGLE_AZ_1, valid values are 64, 128, 256, 512, 1024, 2048,
+	// 3072, or 4096 MB/s.
+	//
+	// * For SINGLE_AZ_2, valid values are 160, 320, 640, 1280,
+	// 2560, 3840, 5120, 7680, or 10240 MB/s.
 	ThroughputCapacity *int32
 
 	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for
@@ -3449,6 +3584,15 @@ type UpdateFileSystemWindowsConfiguration struct {
 // updating.
 type UpdateOntapVolumeConfiguration struct {
 
+	// A boolean flag indicating whether tags for the volume should be copied to
+	// backups. This value defaults to false. If it's set to true, all tags for the
+	// volume are copied to all automatic and user-initiated backups where the user
+	// doesn't specify tags. If this value is true, and you specify one or more tags,
+	// only the specified tags are copied to backups. If you specify one or more tags
+	// when creating a user-initiated backup, no tags are copied from the volume,
+	// regardless of this value.
+	CopyTagsToBackups *bool
+
 	// Specifies the location in the SVM's namespace where the volume is mounted. The
 	// JunctionPath must have a leading forward slash, such as /vol3.
 	JunctionPath *string
@@ -3458,6 +3602,29 @@ type UpdateOntapVolumeConfiguration struct {
 
 	// Specifies the size of the volume in megabytes.
 	SizeInMegabytes *int32
+
+	// Specifies the snapshot policy for the volume. There are three built-in snapshot
+	// policies:
+	//
+	// * default: This is the default policy. A maximum of six hourly
+	// snapshots taken five minutes past the hour. A maximum of two daily snapshots
+	// taken Monday through Saturday at 10 minutes after midnight. A maximum of two
+	// weekly snapshots taken every Sunday at 15 minutes after midnight.
+	//
+	// *
+	// default-1weekly: This policy is the same as the default policy except that it
+	// only retains one snapshot from the weekly schedule.
+	//
+	// * none: This policy does
+	// not take any snapshots. This policy can be assigned to volumes to prevent
+	// automatic snapshots from being taken.
+	//
+	// You can also provide the name of a custom
+	// policy that you created with the ONTAP CLI or REST API. For more information,
+	// see Snapshot policies
+	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/snapshots-ontap.html#snapshot-policies)
+	// in the Amazon FSx for NetApp ONTAP User Guide.
+	SnapshotPolicy *string
 
 	// Default is false. Set to true to enable the deduplication, compression, and
 	// compaction storage efficiency features on the volume.
@@ -3536,9 +3703,9 @@ type UpdateSvmActiveDirectoryConfiguration struct {
 // Describes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS volume.
 type Volume struct {
 
-	// A list of administrative actions for the file system that are in process or
-	// waiting to be processed. Administrative actions describe changes to the Amazon
-	// FSx system that you initiated.
+	// A list of administrative actions for the volume that are in process or waiting
+	// to be processed. Administrative actions describe changes to the volume that you
+	// have initiated using the UpdateVolume action.
 	AdministrativeActions []AdministrativeAction
 
 	// The time that the resource was created, in seconds (since 1970-01-01T00:00:00Z),

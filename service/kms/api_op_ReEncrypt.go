@@ -51,10 +51,10 @@ import (
 // KMS key that you intend.
 //
 // * To reencrypt the data, you must use the
-// DestinationKeyId parameter specify the KMS key that re-encrypts the data after
-// it is decrypted. If the destination KMS key is an asymmetric KMS key, you must
-// also provide the encryption algorithm. The algorithm that you choose must be
-// compatible with the KMS key. When you use an asymmetric KMS key to encrypt or
+// DestinationKeyId parameter to specify the KMS key that re-encrypts the data
+// after it is decrypted. If the destination KMS key is an asymmetric KMS key, you
+// must also provide the encryption algorithm. The algorithm that you choose must
+// be compatible with the KMS key. When you use an asymmetric KMS key to encrypt or
 // reencrypt data, be sure to record the KMS key and encryption algorithm that you
 // choose. You will be required to provide the same KMS key and encryption
 // algorithm when you decrypt the data. If the KMS key and algorithm do not match

@@ -20,9 +20,12 @@ import (
 // directory. Applications using the access point can only access data in the
 // application's own directory and any subdirectories. To learn more, see Mounting
 // a file system using EFS access points
-// (https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html). This
-// operation requires permissions for the elasticfilesystem:CreateAccessPoint
-// action.
+// (https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html). If multiple
+// requests to create access points on the same file system are sent in quick
+// succession, and the file system is near the limit of 120 access points, you may
+// experience a throttling response for these requests. This is to ensure that the
+// file system does not exceed the stated access point limit. This operation
+// requires permissions for the elasticfilesystem:CreateAccessPoint action.
 func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPointInput, optFns ...func(*Options)) (*CreateAccessPointOutput, error) {
 	if params == nil {
 		params = &CreateAccessPointInput{}

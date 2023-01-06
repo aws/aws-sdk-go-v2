@@ -71,6 +71,9 @@ type GetComponentTypeOutput struct {
 	// This member is required.
 	WorkspaceId *string
 
+	// The component type name.
+	ComponentTypeName *string
+
 	// The description of the component type.
 	Description *string
 
@@ -102,6 +105,9 @@ type GetComponentTypeOutput struct {
 
 	// The current status of the component type.
 	Status *types.Status
+
+	// The syncSource of the sync job, if this entity was created by a sync job.
+	SyncSource *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -15,34 +15,27 @@ import (
 // Retrieves the resource capacity settings for one or more fleets. The data
 // returned includes the current fleet capacity (number of EC2 instances), and
 // settings that can control how capacity scaling. For fleets with remote
-// locations, this operation retrieves data for the fleet's home Region only. See
-// DescribeFleetLocationCapacity to get capacity settings for a fleet's remote
-// locations. This operation can be used in the following ways:
+// locations, this operation retrieves data for the fleet's home Region only. This
+// operation can be used in the following ways:
 //
-// * To get capacity
-// data for one or more specific fleets, provide a list of fleet IDs or fleet
-// ARNs.
+// * To get capacity data for one or
+// more specific fleets, provide a list of fleet IDs or fleet ARNs.
 //
-// * To get capacity data for all fleets, do not provide a fleet
-// identifier.
+// * To get
+// capacity data for all fleets, do not provide a fleet identifier.
 //
-// When requesting multiple fleets, use the pagination parameters to
-// retrieve results as a set of sequential pages. If successful, a FleetCapacity
-// object is returned for each requested fleet ID. Each FleetCapacity object
-// includes a Location property, which is set to the fleet's home Region. When a
-// list of fleet IDs is provided, attribute objects are returned only for fleets
-// that currently exist. Some API operations may limit the number of fleet IDs that
-// are allowed in one request. If a request exceeds this limit, the request fails
-// and the error message includes the maximum allowed. Learn more Setting up
-// GameLift fleets
+// When
+// requesting multiple fleets, use the pagination parameters to retrieve results as
+// a set of sequential pages. If successful, a FleetCapacity object is returned for
+// each requested fleet ID. Each FleetCapacity object includes a Location property,
+// which is set to the fleet's home Region. When a list of fleet IDs is provided,
+// attribute objects are returned only for fleets that currently exist. Some API
+// operations may limit the number of fleet IDs that are allowed in one request. If
+// a request exceeds this limit, the request fails and the error message includes
+// the maximum allowed. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)GameLift
 // metrics for fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
-// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
-// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
-// | DescribeFleetPortSettings | DescribeFleetUtilization |
-// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetCapacity(ctx context.Context, params *DescribeFleetCapacityInput, optFns ...func(*Options)) (*DescribeFleetCapacityOutput, error) {
 	if params == nil {
 		params = &DescribeFleetCapacityInput{}
@@ -58,11 +51,10 @@ func (c *Client) DescribeFleetCapacity(ctx context.Context, params *DescribeFlee
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeFleetCapacityInput struct {
 
-	// A unique identifier for the fleet(s) to retrieve capacity information for. You
-	// can use either the fleet ID or ARN value. Leave this parameter empty to retrieve
+	// A unique identifier for the fleet to retrieve capacity information for. You can
+	// use either the fleet ID or ARN value. Leave this parameter empty to retrieve
 	// capacity information for all fleets.
 	FleetIds []string
 
@@ -80,7 +72,6 @@ type DescribeFleetCapacityInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeFleetCapacityOutput struct {
 
 	// A collection of objects that contains capacity information for each requested

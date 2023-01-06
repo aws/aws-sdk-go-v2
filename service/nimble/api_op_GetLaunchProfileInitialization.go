@@ -29,7 +29,7 @@ func (c *Client) GetLaunchProfileInitialization(ctx context.Context, params *Get
 
 type GetLaunchProfileInitializationInput struct {
 
-	// The Launch Profile ID.
+	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
 	LaunchProfileId *string
@@ -44,7 +44,7 @@ type GetLaunchProfileInitializationInput struct {
 	// This member is required.
 	LaunchPurpose *string
 
-	// The platform where this Launch Profile will be used, either WINDOWS or LINUX.
+	// The platform where this Launch Profile will be used, either Windows or Linux.
 	//
 	// This member is required.
 	Platform *string

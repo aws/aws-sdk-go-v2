@@ -11,6 +11,8 @@ import (
 type BatchEntryIdsNotDistinct struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,13 +26,18 @@ func (e *BatchEntryIdsNotDistinct) ErrorMessage() string {
 	return *e.Message
 }
 func (e *BatchEntryIdsNotDistinct) ErrorCode() string {
-	return "AWS.SimpleQueueService.BatchEntryIdsNotDistinct"
+	if e.ErrorCodeOverride == nil {
+		return "AWS.SimpleQueueService.BatchEntryIdsNotDistinct"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *BatchEntryIdsNotDistinct) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The length of all the messages put together is more than the limit.
 type BatchRequestTooLong struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -44,12 +51,19 @@ func (e *BatchRequestTooLong) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *BatchRequestTooLong) ErrorCode() string             { return "AWS.SimpleQueueService.BatchRequestTooLong" }
+func (e *BatchRequestTooLong) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AWS.SimpleQueueService.BatchRequestTooLong"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *BatchRequestTooLong) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The batch request doesn't contain any entries.
 type EmptyBatchRequest struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -63,12 +77,19 @@ func (e *EmptyBatchRequest) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EmptyBatchRequest) ErrorCode() string             { return "AWS.SimpleQueueService.EmptyBatchRequest" }
+func (e *EmptyBatchRequest) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AWS.SimpleQueueService.EmptyBatchRequest"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EmptyBatchRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified attribute doesn't exist.
 type InvalidAttributeName struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -82,12 +103,19 @@ func (e *InvalidAttributeName) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidAttributeName) ErrorCode() string             { return "InvalidAttributeName" }
+func (e *InvalidAttributeName) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidAttributeName"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidAttributeName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The Id of a batch entry in a batch request doesn't abide by the specification.
 type InvalidBatchEntryId struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -101,12 +129,19 @@ func (e *InvalidBatchEntryId) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidBatchEntryId) ErrorCode() string             { return "AWS.SimpleQueueService.InvalidBatchEntryId" }
+func (e *InvalidBatchEntryId) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AWS.SimpleQueueService.InvalidBatchEntryId"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidBatchEntryId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified receipt handle isn't valid for the current version.
 type InvalidIdFormat struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -120,12 +155,19 @@ func (e *InvalidIdFormat) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidIdFormat) ErrorCode() string             { return "InvalidIdFormat" }
+func (e *InvalidIdFormat) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidIdFormat"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidIdFormat) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The message contains characters outside the allowed set.
 type InvalidMessageContents struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -139,12 +181,19 @@ func (e *InvalidMessageContents) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidMessageContents) ErrorCode() string             { return "InvalidMessageContents" }
+func (e *InvalidMessageContents) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidMessageContents"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidMessageContents) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified message isn't in flight.
 type MessageNotInflight struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -158,7 +207,12 @@ func (e *MessageNotInflight) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MessageNotInflight) ErrorCode() string             { return "AWS.SimpleQueueService.MessageNotInflight" }
+func (e *MessageNotInflight) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AWS.SimpleQueueService.MessageNotInflight"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MessageNotInflight) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified action violates a limit. For example, ReceiveMessage returns this
@@ -167,6 +221,8 @@ func (e *MessageNotInflight) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // reached.
 type OverLimit struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -180,7 +236,12 @@ func (e *OverLimit) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OverLimit) ErrorCode() string             { return "OverLimit" }
+func (e *OverLimit) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OverLimit"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OverLimit) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the specified queue previously received a PurgeQueue request
@@ -188,6 +249,8 @@ func (e *OverLimit) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 // queue).
 type PurgeQueueInProgress struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -202,7 +265,10 @@ func (e *PurgeQueueInProgress) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PurgeQueueInProgress) ErrorCode() string {
-	return "AWS.SimpleQueueService.PurgeQueueInProgress"
+	if e.ErrorCodeOverride == nil {
+		return "AWS.SimpleQueueService.PurgeQueueInProgress"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *PurgeQueueInProgress) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -210,6 +276,8 @@ func (e *PurgeQueueInProgress) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // queue with the same name.
 type QueueDeletedRecently struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -224,13 +292,18 @@ func (e *QueueDeletedRecently) ErrorMessage() string {
 	return *e.Message
 }
 func (e *QueueDeletedRecently) ErrorCode() string {
-	return "AWS.SimpleQueueService.QueueDeletedRecently"
+	if e.ErrorCodeOverride == nil {
+		return "AWS.SimpleQueueService.QueueDeletedRecently"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *QueueDeletedRecently) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified queue doesn't exist.
 type QueueDoesNotExist struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -244,7 +317,12 @@ func (e *QueueDoesNotExist) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *QueueDoesNotExist) ErrorCode() string             { return "AWS.SimpleQueueService.NonExistentQueue" }
+func (e *QueueDoesNotExist) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AWS.SimpleQueueService.NonExistentQueue"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *QueueDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A queue with this name already exists. Amazon SQS returns this error only if the
@@ -252,6 +330,8 @@ func (e *QueueDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // queue.
 type QueueNameExists struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -265,12 +345,19 @@ func (e *QueueNameExists) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *QueueNameExists) ErrorCode() string             { return "QueueAlreadyExists" }
+func (e *QueueNameExists) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "QueueAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *QueueNameExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified receipt handle isn't valid.
 type ReceiptHandleIsInvalid struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -284,12 +371,19 @@ func (e *ReceiptHandleIsInvalid) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ReceiptHandleIsInvalid) ErrorCode() string             { return "ReceiptHandleIsInvalid" }
+func (e *ReceiptHandleIsInvalid) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ReceiptHandleIsInvalid"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ReceiptHandleIsInvalid) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The batch request contains more entries than permissible.
 type TooManyEntriesInBatchRequest struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -304,13 +398,18 @@ func (e *TooManyEntriesInBatchRequest) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TooManyEntriesInBatchRequest) ErrorCode() string {
-	return "AWS.SimpleQueueService.TooManyEntriesInBatchRequest"
+	if e.ErrorCodeOverride == nil {
+		return "AWS.SimpleQueueService.TooManyEntriesInBatchRequest"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *TooManyEntriesInBatchRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Error code 400. Unsupported operation.
 type UnsupportedOperation struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -325,6 +424,9 @@ func (e *UnsupportedOperation) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnsupportedOperation) ErrorCode() string {
-	return "AWS.SimpleQueueService.UnsupportedOperation"
+	if e.ErrorCodeOverride == nil {
+		return "AWS.SimpleQueueService.UnsupportedOperation"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

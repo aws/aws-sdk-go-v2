@@ -51,7 +51,7 @@ type CreateLocalGatewayRouteTableInput struct {
 
 type CreateLocalGatewayRouteTableOutput struct {
 
-	// Describes a local gateway route table.
+	// Information about the local gateway route table.
 	LocalGatewayRouteTable *types.LocalGatewayRouteTable
 
 	// Metadata pertaining to the operation's result.

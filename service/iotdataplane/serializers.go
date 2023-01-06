@@ -5,10 +5,12 @@ package iotdataplane
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"fmt"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	"github.com/aws/smithy-go/middleware"
+	"github.com/aws/smithy-go/ptr"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -375,8 +377,30 @@ func awsRestjson1_serializeOpHttpBindingsPublishInput(v *PublishInput, encoder *
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ContentType != nil {
+		encoder.SetQuery("contentType").String(*v.ContentType)
+	}
+
+	if v.CorrelationData != nil && len(*v.CorrelationData) > 0 {
+		locationName := "X-Amz-Mqtt5-Correlation-Data"
+		encoder.SetHeader(locationName).String(*v.CorrelationData)
+	}
+
+	if v.MessageExpiry != 0 {
+		encoder.SetQuery("messageExpiry").Long(v.MessageExpiry)
+	}
+
+	if len(v.PayloadFormatIndicator) > 0 {
+		locationName := "X-Amz-Mqtt5-Payload-Format-Indicator"
+		encoder.SetHeader(locationName).String(string(v.PayloadFormatIndicator))
+	}
+
 	if v.Qos != 0 {
 		encoder.SetQuery("qos").Integer(v.Qos)
+	}
+
+	if v.ResponseTopic != nil {
+		encoder.SetQuery("responseTopic").String(*v.ResponseTopic)
 	}
 
 	if v.Retain {
@@ -390,6 +414,13 @@ func awsRestjson1_serializeOpHttpBindingsPublishInput(v *PublishInput, encoder *
 		if err := encoder.SetURI("topic").String(*v.Topic); err != nil {
 			return err
 		}
+	}
+
+	if v.UserProperties != nil && len(*v.UserProperties) > 0 {
+		locationName := "X-Amz-Mqtt5-User-Properties"
+		encodedVal := base64.StdEncoding.EncodeToString([]byte(*v.UserProperties))
+		encodedPtr := ptr.String(encodedVal)
+		encoder.SetHeader(locationName).String(*encodedPtr)
 	}
 
 	return nil

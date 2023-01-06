@@ -14,7 +14,7 @@ import (
 // Modifies an existing Amazon Managed Grafana workspace. If you use this operation
 // and omit any optional parameters, the existing values of those parameters are
 // not changed. To modify the user authentication methods that the workspace uses,
-// such as SAML or Amazon Web Services SSO, use UpdateWorkspaceAuthentication
+// such as SAML or IAM Identity Center, use UpdateWorkspaceAuthentication
 // (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspaceAuthentication.html).
 // To modify which users in the workspace have the Admin and Editor Grafana roles,
 // use UpdatePermissions
@@ -65,9 +65,17 @@ type UpdateWorkspaceInput struct {
 	// (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
 	PermissionType types.PermissionType
 
+	// Whether to remove the VPC configuration from the workspace. Setting this to true
+	// and providing a vpcConfiguration to set will return an error.
+	RemoveVpcConfiguration *bool
+
 	// The name of the CloudFormation stack set to use to generate IAM roles to be used
 	// for this workspace.
 	StackSetName *string
+
+	// The configuration settings for an Amazon VPC that contains data sources for your
+	// Grafana workspace to connect to.
+	VpcConfiguration *types.VpcConfiguration
 
 	// Specify the Amazon Web Services data sources that you want to be queried in this
 	// workspace. Specifying these data sources here enables Amazon Managed Grafana to

@@ -1,3 +1,23 @@
+# v1.27.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.26.2 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.0 (2022-11-29)
+
+* **Feature**: Adds support for Lambda SnapStart, which helps improve the startup performance of functions. Customers can now manage SnapStart based functions via CreateFunction and UpdateFunctionConfiguration APIs
+
+# v1.25.1 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.25.0 (2022-11-17)
 
 * **Feature**: Add Node 18 (nodejs18.x) support to AWS Lambda.

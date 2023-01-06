@@ -5171,6 +5171,18 @@ func awsRestjson1_serializeDocumentAudioDescription(v *types.AudioDescription, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAudioDolbyEDecode(v *types.AudioDolbyEDecode, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ProgramSelection) > 0 {
+		ok := object.Key("programSelection")
+		ok.String(string(v.ProgramSelection))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAudioHlsRenditionSelection(v *types.AudioHlsRenditionSelection, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5367,6 +5379,13 @@ func awsRestjson1_serializeDocumentAudioTrack(v *types.AudioTrack, value smithyj
 func awsRestjson1_serializeDocumentAudioTrackSelection(v *types.AudioTrackSelection, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DolbyEDecode != nil {
+		ok := object.Key("dolbyEDecode")
+		if err := awsRestjson1_serializeDocumentAudioDolbyEDecode(v.DolbyEDecode, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Tracks != nil {
 		ok := object.Key("tracks")
@@ -6812,6 +6831,13 @@ func awsRestjson1_serializeDocumentFrameCaptureSettings(v *types.FrameCaptureSet
 		ok.String(string(v.CaptureIntervalUnits))
 	}
 
+	if v.TimecodeBurninSettings != nil {
+		ok := object.Key("timecodeBurninSettings")
+		if err := awsRestjson1_serializeDocumentTimecodeBurninSettings(v.TimecodeBurninSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7117,6 +7143,13 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 		ok.String(string(v.TemporalAq))
 	}
 
+	if v.TimecodeBurninSettings != nil {
+		ok := object.Key("timecodeBurninSettings")
+		if err := awsRestjson1_serializeDocumentTimecodeBurninSettings(v.TimecodeBurninSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.TimecodeInsertion) > 0 {
 		ok := object.Key("timecodeInsertion")
 		ok.String(string(v.TimecodeInsertion))
@@ -7340,6 +7373,13 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 	if len(v.Tier) > 0 {
 		ok := object.Key("tier")
 		ok.String(string(v.Tier))
+	}
+
+	if v.TimecodeBurninSettings != nil {
+		ok := object.Key("timecodeBurninSettings")
+		if err := awsRestjson1_serializeDocumentTimecodeBurninSettings(v.TimecodeBurninSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.TimecodeInsertion) > 0 {
@@ -8013,6 +8053,11 @@ func awsRestjson1_serializeDocumentInputDeviceConfigurableSettings(v *types.Inpu
 	if len(v.ConfiguredInput) > 0 {
 		ok := object.Key("configuredInput")
 		ok.String(string(v.ConfiguredInput))
+	}
+
+	if v.LatencyMs != 0 {
+		ok := object.Key("latencyMs")
+		ok.Integer(v.LatencyMs)
 	}
 
 	if v.MaxBitrate != 0 {
@@ -9012,6 +9057,13 @@ func awsRestjson1_serializeDocumentMpeg2Settings(v *types.Mpeg2Settings, value s
 	if len(v.SubgopLength) > 0 {
 		ok := object.Key("subgopLength")
 		ok.String(string(v.SubgopLength))
+	}
+
+	if v.TimecodeBurninSettings != nil {
+		ok := object.Key("timecodeBurninSettings")
+		if err := awsRestjson1_serializeDocumentTimecodeBurninSettings(v.TimecodeBurninSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.TimecodeInsertion) > 0 {
@@ -10470,6 +10522,28 @@ func awsRestjson1_serializeDocumentTemporalFilterSettings(v *types.TemporalFilte
 	if len(v.Strength) > 0 {
 		ok := object.Key("strength")
 		ok.String(string(v.Strength))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTimecodeBurninSettings(v *types.TimecodeBurninSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.FontSize) > 0 {
+		ok := object.Key("fontSize")
+		ok.String(string(v.FontSize))
+	}
+
+	if len(v.Position) > 0 {
+		ok := object.Key("position")
+		ok.String(string(v.Position))
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("prefix")
+		ok.String(*v.Prefix)
 	}
 
 	return nil

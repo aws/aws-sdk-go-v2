@@ -5365,6 +5365,11 @@ func awsRestjson1_deserializeOpDocumentUpdatePricingRuleOutput(v **UpdatePricing
 				sv.Service = ptr.String(jtv)
 			}
 
+		case "Tiering":
+			if err := awsRestjson1_deserializeDocumentUpdateTieringInput(&sv.Tiering, value); err != nil {
+				return err
+			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6747,6 +6752,46 @@ func awsRestjson1_deserializeDocumentDisassociateResourcesResponseList(v *[]type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFreeTierConfig(v **types.FreeTierConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FreeTierConfig
+	if *v == nil {
+		sv = &types.FreeTierConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Activated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected TieringActivated to be of type *bool, got %T instead", value)
+				}
+				sv.Activated = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7458,6 +7503,11 @@ func awsRestjson1_deserializeDocumentPricingRuleListElement(v **types.PricingRul
 				sv.Service = ptr.String(jtv)
 			}
 
+		case "Tiering":
+			if err := awsRestjson1_deserializeDocumentTiering(&sv.Tiering, value); err != nil {
+				return err
+			}
+
 		case "Type":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7688,6 +7738,118 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 					return err
 				}
 				sv.RetryAfterSeconds = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTiering(v **types.Tiering, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Tiering
+	if *v == nil {
+		sv = &types.Tiering{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FreeTier":
+			if err := awsRestjson1_deserializeDocumentFreeTierConfig(&sv.FreeTier, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUpdateFreeTierConfig(v **types.UpdateFreeTierConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UpdateFreeTierConfig
+	if *v == nil {
+		sv = &types.UpdateFreeTierConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Activated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected TieringActivated to be of type *bool, got %T instead", value)
+				}
+				sv.Activated = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUpdateTieringInput(v **types.UpdateTieringInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UpdateTieringInput
+	if *v == nil {
+		sv = &types.UpdateTieringInput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FreeTier":
+			if err := awsRestjson1_deserializeDocumentUpdateFreeTierConfig(&sv.FreeTier, value); err != nil {
+				return err
 			}
 
 		default:

@@ -12,10 +12,12 @@ import (
 	"time"
 )
 
-// Describes the state machine associated with a specific execution. This operation
-// is eventually consistent. The results are best effort and may not reflect very
-// recent updates and changes. This API action is not supported by EXPRESS state
-// machines.
+// Provides information about a state machine's definition, its execution role ARN,
+// and configuration. If an execution was dispatched by a Map Run, the Map Run is
+// returned in the response. Additionally, the state machine returned will be the
+// state machine associated with the Map Run. This operation is eventually
+// consistent. The results are best effort and may not reflect very recent updates
+// and changes. This API action is not supported by EXPRESS state machines.
 func (c *Client) DescribeStateMachineForExecution(ctx context.Context, params *DescribeStateMachineForExecutionInput, optFns ...func(*Options)) (*DescribeStateMachineForExecutionOutput, error) {
 	if params == nil {
 		params = &DescribeStateMachineForExecutionInput{}
@@ -74,8 +76,18 @@ type DescribeStateMachineForExecutionOutput struct {
 	// This member is required.
 	UpdateDate *time.Time
 
+	// A user-defined or an auto-generated string that identifies a Map state. This
+	// ﬁeld is returned only if the executionArn is a child workflow execution that was
+	// started by a Distributed Map state.
+	Label *string
+
 	// The LoggingConfiguration data type is used to set CloudWatch Logs options.
 	LoggingConfiguration *types.LoggingConfiguration
+
+	// The Amazon Resource Name (ARN) of the Map Run that started the child workflow
+	// execution. This field is returned only if the executionArn is a child workflow
+	// execution that was started by a Distributed Map state.
+	MapRunArn *string
 
 	// Selects whether X-Ray tracing is enabled.
 	TracingConfiguration *types.TracingConfiguration

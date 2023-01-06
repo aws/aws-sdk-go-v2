@@ -24,11 +24,11 @@ import (
 // role must be configured with permission to call the DescribeAssociation API
 // operation. If you don't have permission to call DescribeAssociation, then you
 // receive the following error: An error occurred (AccessDeniedException) when
-// calling the UpdateAssociation operation: User: <user_arn> isn't authorized to
-// perform: ssm:DescribeAssociation on resource: <resource_arn> When you update an
-// association, the association immediately runs against the specified targets. You
-// can add the ApplyOnlyAtCronInterval parameter to run the association during the
-// next schedule run.
+// calling the UpdateAssociation operation: User: isn't authorized to perform:
+// ssm:DescribeAssociation on resource:  When you update an association, the
+// association immediately runs against the specified targets. You can add the
+// ApplyOnlyAtCronInterval parameter to run the association during the next
+// schedule run.
 func (c *Client) UpdateAssociation(ctx context.Context, params *UpdateAssociationInput, optFns ...func(*Options)) (*UpdateAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateAssociationInput{}

@@ -41,6 +41,9 @@ type DescribeImageVersionInput struct {
 	// This member is required.
 	ImageName *string
 
+	// The alias of the image version.
+	Alias *string
+
 	// The version of the image. If not specified, the latest version is described.
 	Version *int32
 
@@ -61,7 +64,10 @@ type DescribeImageVersionOutput struct {
 	// When a create or delete operation fails, the reason for the failure.
 	FailureReason *string
 
-	// The Amazon Resource Name (ARN) of the image the version is based on.
+	// Indicates Horovod compatibility.
+	Horovod bool
+
+	// The ARN of the image the version is based on.
 	ImageArn *string
 
 	// The ARN of the version.
@@ -70,8 +76,53 @@ type DescribeImageVersionOutput struct {
 	// The status of the version.
 	ImageVersionStatus types.ImageVersionStatus
 
+	// Indicates SageMaker job type compatibility.
+	//
+	// * TRAINING: The image version is
+	// compatible with SageMaker training jobs.
+	//
+	// * INFERENCE: The image version is
+	// compatible with SageMaker inference jobs.
+	//
+	// * NOTEBOOK_KERNEL: The image version
+	// is compatible with SageMaker notebook kernels.
+	JobType types.JobType
+
 	// When the version was last modified.
 	LastModifiedTime *time.Time
+
+	// The machine learning framework vended in the image version.
+	MLFramework *string
+
+	// Indicates CPU or GPU compatibility.
+	//
+	// * CPU: The image version is compatible with
+	// CPU.
+	//
+	// * GPU: The image version is compatible with GPU.
+	Processor types.Processor
+
+	// The supported programming language and its version.
+	ProgrammingLang *string
+
+	// The maintainer description of the image version.
+	ReleaseNotes *string
+
+	// The stability of the image version specified by the maintainer.
+	//
+	// * NOT_PROVIDED:
+	// The maintainers did not provide a status for image version stability.
+	//
+	// * STABLE:
+	// The image version is stable.
+	//
+	// * TO_BE_ARCHIVED: The image version is set to be
+	// archived. Custom image versions that are set to be archived are automatically
+	// archived after three months.
+	//
+	// * ARCHIVED: The image version is archived.
+	// Archived image versions are not searchable and are no longer actively supported.
+	VendorGuidance types.VendorGuidance
 
 	// The version number.
 	Version *int32

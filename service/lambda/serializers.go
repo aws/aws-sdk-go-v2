@@ -779,6 +779,13 @@ func awsRestjson1_serializeOpDocumentCreateFunctionInput(v *CreateFunctionInput,
 		ok.String(string(v.Runtime))
 	}
 
+	if v.SnapStart != nil {
+		ok := object.Key("SnapStart")
+		if err := awsRestjson1_serializeDocumentSnapStart(v.SnapStart, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -4816,6 +4823,13 @@ func awsRestjson1_serializeOpDocumentUpdateFunctionConfigurationInput(v *UpdateF
 		ok.String(string(v.Runtime))
 	}
 
+	if v.SnapStart != nil {
+		ok := object.Key("SnapStart")
+		if err := awsRestjson1_serializeDocumentSnapStart(v.SnapStart, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Timeout != nil {
 		ok := object.Key("Timeout")
 		ok.Integer(*v.Timeout)
@@ -5567,6 +5581,18 @@ func awsRestjson1_serializeDocumentSigningProfileVersionArns(v []string, value s
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSnapStart(v *types.SnapStart, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ApplyOn) > 0 {
+		ok := object.Key("ApplyOn")
+		ok.String(string(v.ApplyOn))
+	}
+
 	return nil
 }
 

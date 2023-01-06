@@ -11,6 +11,8 @@ import (
 type AccessDeniedException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -23,12 +25,19 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource to be created or added already exists.
 type AlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -42,12 +51,19 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
+func (e *AlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Two processes are trying to modify a resource simultaneously.
 type ConcurrentModificationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -62,13 +78,18 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ConcurrentModificationException) ErrorCode() string {
-	return "ConcurrentModificationException"
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentModificationException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A specified entity does not exist
 type EntityNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -82,12 +103,19 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntityNotFoundException) ErrorCode() string             { return "EntityNotFoundException" }
+func (e *EntityNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EntityNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Contains details about an error where the query request expired.
 type ExpiredException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -101,12 +129,19 @@ func (e *ExpiredException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ExpiredException) ErrorCode() string             { return "ExpiredException" }
+func (e *ExpiredException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ExpiredException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An encryption operation failed.
 type GlueEncryptionException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -120,12 +155,19 @@ func (e *GlueEncryptionException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *GlueEncryptionException) ErrorCode() string             { return "GlueEncryptionException" }
+func (e *GlueEncryptionException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "GlueEncryptionException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *GlueEncryptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An internal service error occurred.
 type InternalServiceException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -139,12 +181,19 @@ func (e *InternalServiceException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceException) ErrorCode() string             { return "InternalServiceException" }
+func (e *InternalServiceException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServiceException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The input provided was not valid.
 type InvalidInputException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -158,12 +207,19 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInputException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation timed out.
 type OperationTimeoutException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -177,7 +233,12 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationTimeoutException) ErrorCode() string             { return "OperationTimeoutException" }
+func (e *OperationTimeoutException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OperationTimeoutException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The engine does not support filtering data based on the enforced permissions.
@@ -186,6 +247,8 @@ func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smit
 // exist on the table, this exception is thrown.
 type PermissionTypeMismatchException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -200,7 +263,10 @@ func (e *PermissionTypeMismatchException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *PermissionTypeMismatchException) ErrorCode() string {
-	return "PermissionTypeMismatchException"
+	if e.ErrorCodeOverride == nil {
+		return "PermissionTypeMismatchException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *PermissionTypeMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
@@ -208,6 +274,8 @@ func (e *PermissionTypeMismatchException) ErrorFault() smithy.ErrorFault { retur
 // transaction.
 type ResourceNotReadyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -221,12 +289,19 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
+func (e *ResourceNotReadyException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotReadyException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A resource numerical limit was exceeded.
 type ResourceNumberLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -241,7 +316,10 @@ func (e *ResourceNumberLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourceNumberLimitExceededException) ErrorCode() string {
-	return "ResourceNumberLimitExceededException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNumberLimitExceededException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourceNumberLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -250,6 +328,8 @@ func (e *ResourceNumberLimitExceededException) ErrorFault() smithy.ErrorFault {
 // Contains details about an error related to statistics not being ready.
 type StatisticsNotReadyYetException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -263,12 +343,19 @@ func (e *StatisticsNotReadyYetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *StatisticsNotReadyYetException) ErrorCode() string             { return "StatisticsNotReadyYetException" }
+func (e *StatisticsNotReadyYetException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "StatisticsNotReadyYetException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *StatisticsNotReadyYetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Contains details about an error where the query request was throttled.
 type ThrottledException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -282,12 +369,19 @@ func (e *ThrottledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ThrottledException) ErrorCode() string             { return "ThrottledException" }
+func (e *ThrottledException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ThrottledException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Contains details about an error related to a transaction that was cancelled.
 type TransactionCanceledException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -301,13 +395,20 @@ func (e *TransactionCanceledException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TransactionCanceledException) ErrorCode() string             { return "TransactionCanceledException" }
+func (e *TransactionCanceledException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TransactionCanceledException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TransactionCanceledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Contains details about an error related to a transaction commit that was in
 // progress.
 type TransactionCommitInProgressException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -322,7 +423,10 @@ func (e *TransactionCommitInProgressException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *TransactionCommitInProgressException) ErrorCode() string {
-	return "TransactionCommitInProgressException"
+	if e.ErrorCodeOverride == nil {
+		return "TransactionCommitInProgressException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *TransactionCommitInProgressException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -332,6 +436,8 @@ func (e *TransactionCommitInProgressException) ErrorFault() smithy.ErrorFault {
 // committed and cannot be used for UpdateTableObjects.
 type TransactionCommittedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -345,12 +451,19 @@ func (e *TransactionCommittedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TransactionCommittedException) ErrorCode() string             { return "TransactionCommittedException" }
+func (e *TransactionCommittedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TransactionCommittedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TransactionCommittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Contains details about an error related to work units not being ready.
 type WorkUnitsNotReadyYetException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -364,5 +477,10 @@ func (e *WorkUnitsNotReadyYetException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *WorkUnitsNotReadyYetException) ErrorCode() string             { return "WorkUnitsNotReadyYetException" }
+func (e *WorkUnitsNotReadyYetException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "WorkUnitsNotReadyYetException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *WorkUnitsNotReadyYetException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

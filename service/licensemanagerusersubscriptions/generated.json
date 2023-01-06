@@ -18,6 +18,7 @@
         "api_op_RegisterIdentityProvider.go",
         "api_op_StartProductSubscription.go",
         "api_op_StopProductSubscription.go",
+        "api_op_UpdateIdentityProviderSettings.go",
         "deserializers.go",
         "doc.go",
         "endpoints.go",

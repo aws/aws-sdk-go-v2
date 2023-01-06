@@ -26,16 +26,24 @@ type ConnectionErrorCodeType string
 
 // Enum values for ConnectionErrorCodeType
 const (
-	ConnectionErrorCodeTypeInvalidCredentials                ConnectionErrorCodeType = "INVALID_CREDENTIALS"
-	ConnectionErrorCodeTypeClusterNotFound                   ConnectionErrorCodeType = "CLUSTER_NOT_FOUND"
-	ConnectionErrorCodeTypeNetworkErrors                     ConnectionErrorCodeType = "NETWORK_ERRORS"
-	ConnectionErrorCodeTypeInternalError                     ConnectionErrorCodeType = "INTERNAL_ERROR"
-	ConnectionErrorCodeTypeInsufficientCloudhsmHsms          ConnectionErrorCodeType = "INSUFFICIENT_CLOUDHSM_HSMS"
-	ConnectionErrorCodeTypeUserLockedOut                     ConnectionErrorCodeType = "USER_LOCKED_OUT"
-	ConnectionErrorCodeTypeUserNotFound                      ConnectionErrorCodeType = "USER_NOT_FOUND"
-	ConnectionErrorCodeTypeUserLoggedIn                      ConnectionErrorCodeType = "USER_LOGGED_IN"
-	ConnectionErrorCodeTypeSubnetNotFound                    ConnectionErrorCodeType = "SUBNET_NOT_FOUND"
-	ConnectionErrorCodeTypeInsufficientFreeAddressesInSubnet ConnectionErrorCodeType = "INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET"
+	ConnectionErrorCodeTypeInvalidCredentials                        ConnectionErrorCodeType = "INVALID_CREDENTIALS"
+	ConnectionErrorCodeTypeClusterNotFound                           ConnectionErrorCodeType = "CLUSTER_NOT_FOUND"
+	ConnectionErrorCodeTypeNetworkErrors                             ConnectionErrorCodeType = "NETWORK_ERRORS"
+	ConnectionErrorCodeTypeInternalError                             ConnectionErrorCodeType = "INTERNAL_ERROR"
+	ConnectionErrorCodeTypeInsufficientCloudhsmHsms                  ConnectionErrorCodeType = "INSUFFICIENT_CLOUDHSM_HSMS"
+	ConnectionErrorCodeTypeUserLockedOut                             ConnectionErrorCodeType = "USER_LOCKED_OUT"
+	ConnectionErrorCodeTypeUserNotFound                              ConnectionErrorCodeType = "USER_NOT_FOUND"
+	ConnectionErrorCodeTypeUserLoggedIn                              ConnectionErrorCodeType = "USER_LOGGED_IN"
+	ConnectionErrorCodeTypeSubnetNotFound                            ConnectionErrorCodeType = "SUBNET_NOT_FOUND"
+	ConnectionErrorCodeTypeInsufficientFreeAddressesInSubnet         ConnectionErrorCodeType = "INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET"
+	ConnectionErrorCodeTypeXksProxyAccessDenied                      ConnectionErrorCodeType = "XKS_PROXY_ACCESS_DENIED"
+	ConnectionErrorCodeTypeXksProxyNotReachable                      ConnectionErrorCodeType = "XKS_PROXY_NOT_REACHABLE"
+	ConnectionErrorCodeTypeXksVpcEndpointServiceNotFound             ConnectionErrorCodeType = "XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND"
+	ConnectionErrorCodeTypeXksProxyInvalidResponse                   ConnectionErrorCodeType = "XKS_PROXY_INVALID_RESPONSE"
+	ConnectionErrorCodeTypeXksProxyInvalidConfiguration              ConnectionErrorCodeType = "XKS_PROXY_INVALID_CONFIGURATION"
+	ConnectionErrorCodeTypeXksVpcEndpointServiceInvalidConfiguration ConnectionErrorCodeType = "XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION"
+	ConnectionErrorCodeTypeXksProxyTimedOut                          ConnectionErrorCodeType = "XKS_PROXY_TIMED_OUT"
+	ConnectionErrorCodeTypeXksProxyInvalidTlsConfiguration           ConnectionErrorCodeType = "XKS_PROXY_INVALID_TLS_CONFIGURATION"
 )
 
 // Values returns all known values for ConnectionErrorCodeType. Note that this can
@@ -53,6 +61,14 @@ func (ConnectionErrorCodeType) Values() []ConnectionErrorCodeType {
 		"USER_LOGGED_IN",
 		"SUBNET_NOT_FOUND",
 		"INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET",
+		"XKS_PROXY_ACCESS_DENIED",
+		"XKS_PROXY_NOT_REACHABLE",
+		"XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND",
+		"XKS_PROXY_INVALID_RESPONSE",
+		"XKS_PROXY_INVALID_CONFIGURATION",
+		"XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION",
+		"XKS_PROXY_TIMED_OUT",
+		"XKS_PROXY_INVALID_TLS_CONFIGURATION",
 	}
 }
 
@@ -117,6 +133,24 @@ func (CustomerMasterKeySpec) Values() []CustomerMasterKeySpec {
 		"HMAC_384",
 		"HMAC_512",
 		"SM2",
+	}
+}
+
+type CustomKeyStoreType string
+
+// Enum values for CustomKeyStoreType
+const (
+	CustomKeyStoreTypeAwsCloudhsm      CustomKeyStoreType = "AWS_CLOUDHSM"
+	CustomKeyStoreTypeExternalKeyStore CustomKeyStoreType = "EXTERNAL_KEY_STORE"
+)
+
+// Values returns all known values for CustomKeyStoreType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomKeyStoreType) Values() []CustomKeyStoreType {
+	return []CustomKeyStoreType{
+		"AWS_CLOUDHSM",
+		"EXTERNAL_KEY_STORE",
 	}
 }
 
@@ -424,9 +458,10 @@ type OriginType string
 
 // Enum values for OriginType
 const (
-	OriginTypeAwsKms      OriginType = "AWS_KMS"
-	OriginTypeExternal    OriginType = "EXTERNAL"
-	OriginTypeAwsCloudhsm OriginType = "AWS_CLOUDHSM"
+	OriginTypeAwsKms           OriginType = "AWS_KMS"
+	OriginTypeExternal         OriginType = "EXTERNAL"
+	OriginTypeAwsCloudhsm      OriginType = "AWS_CLOUDHSM"
+	OriginTypeExternalKeyStore OriginType = "EXTERNAL_KEY_STORE"
 )
 
 // Values returns all known values for OriginType. Note that this can be expanded
@@ -437,6 +472,7 @@ func (OriginType) Values() []OriginType {
 		"AWS_KMS",
 		"EXTERNAL",
 		"AWS_CLOUDHSM",
+		"EXTERNAL_KEY_STORE",
 	}
 }
 
@@ -487,5 +523,23 @@ const (
 func (WrappingKeySpec) Values() []WrappingKeySpec {
 	return []WrappingKeySpec{
 		"RSA_2048",
+	}
+}
+
+type XksProxyConnectivityType string
+
+// Enum values for XksProxyConnectivityType
+const (
+	XksProxyConnectivityTypePublicEndpoint     XksProxyConnectivityType = "PUBLIC_ENDPOINT"
+	XksProxyConnectivityTypeVpcEndpointService XksProxyConnectivityType = "VPC_ENDPOINT_SERVICE"
+)
+
+// Values returns all known values for XksProxyConnectivityType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (XksProxyConnectivityType) Values() []XksProxyConnectivityType {
+	return []XksProxyConnectivityType{
+		"PUBLIC_ENDPOINT",
+		"VPC_ENDPOINT_SERVICE",
 	}
 }

@@ -39,6 +39,9 @@ type StartReplicationInput struct {
 
 type StartReplicationOutput struct {
 
+	// Source server application ID.
+	ApplicationID *string
+
 	// Source server ARN.
 	Arn *string
 

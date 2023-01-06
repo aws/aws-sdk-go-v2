@@ -34,6 +34,16 @@ type UpdateDomainInput struct {
 	// This member is required.
 	DomainId *string
 
+	// The entity that creates and manages the required security groups for inter-app
+	// communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType
+	// is VPCOnly and
+	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is
+	// provided.
+	AppSecurityGroupManagement types.AppSecurityGroupManagement
+
+	// The default settings used to create a space within the Domain.
+	DefaultSpaceSettings *types.DefaultSpaceSettings
+
 	// A collection of settings.
 	DefaultUserSettings *types.UserSettings
 

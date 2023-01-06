@@ -31,7 +31,7 @@ import (
 // to delete. To get out of such a situation, you must break the cycle by changing
 // the rule of one of the composite alarms in the cycle to remove a dependency that
 // creates the cycle. The simplest change to make to break a cycle is to change the
-// AlarmRule of one of the alarms to False. Additionally, the evaluation of
+// AlarmRule of one of the alarms to false. Additionally, the evaluation of
 // composite alarms stops if CloudWatch detects a cycle in the evaluation path.
 // When this operation creates an alarm, the alarm state is immediately set to
 // INSUFFICIENT_DATA. The alarm is then evaluated and its state is set

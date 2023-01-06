@@ -34,6 +34,22 @@ type BillingRecord struct {
 	noSmithyDocumentSerde
 }
 
+// Customer's consent for the owner change request.
+type Consent struct {
+
+	// Currency for the MaxPrice.
+	//
+	// This member is required.
+	Currency *string
+
+	// Maximum amount the customer agreed to accept.
+	//
+	// This member is required.
+	MaxPrice float64
+
+	noSmithyDocumentSerde
+}
+
 // ContactDetail includes the following elements.
 type ContactDetail struct {
 
@@ -100,6 +116,74 @@ type ContactDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the DNSSEC key. You get this from your DNS provider and then
+// give it to Route 53 (by using AssociateDelegationSignerToDomain
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html))
+// to pass it to the registry to establish the chain of trust.
+type DnssecKey struct {
+
+	// The number of the public key’s cryptographic algorithm according to an IANA
+	// (https://www.iana.org/assignments/dns-sec-alg-numbers/dns-sec-alg-numbers.xml)
+	// assignment. If Route 53 is your DNS service, set this to 13. For more
+	// information about enabling DNSSEC signing, see Enabling DNSSEC signing and
+	// establishing a chain of trust
+	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec-enable-signing.html).
+	Algorithm *int32
+
+	// The delegation signer digest. Digest is calculated from the public key provided
+	// using specified digest algorithm and this digest is the actual value returned
+	// from the registry nameservers as the value of DS records.
+	Digest *string
+
+	// The number of the DS digest algorithm according to an IANA assignment. For more
+	// information, see IANA
+	// (https://www.iana.org/assignments/ds-rr-types/ds-rr-types.xhtml) for DNSSEC
+	// Delegation Signer (DS) Resource Record (RR) Type Digest Algorithms.
+	DigestType *int32
+
+	// Defines the type of key. It can be either a KSK (key-signing-key, value 257) or
+	// ZSK (zone-signing-key, value 256). Using KSK is always encouraged. Only use ZSK
+	// if your DNS provider isn't Route 53 and you don’t have KSK available. If you
+	// have KSK and ZSK keys, always use KSK to create a delegations signer (DS)
+	// record. If you have ZSK keys only – use ZSK to create a DS record.
+	Flags *int32
+
+	// An ID assigned to each DS record created by AssociateDelegationSignerToDomain
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html).
+	Id *string
+
+	// A numeric identification of the DNSKEY record referred to by this DS record.
+	KeyTag *int32
+
+	// The base64-encoded public key part of the key pair that is passed to the
+	// registry .
+	PublicKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a delegation signer (DS) record that was created in the
+// registry by AssociateDelegationSignerToDomain
+// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_AssociateDelegationSignerToDomain.html).
+type DnssecSigningAttributes struct {
+
+	// Algorithm which was used to generate the digest from the public key.
+	Algorithm *int32
+
+	// Defines the type of key. It can be either a KSK (key-signing-key, value 257) or
+	// ZSK (zone-signing-key, value 256). Using KSK is always encouraged. Only use ZSK
+	// if your DNS provider isn't Route 53 and you don’t have KSK available. If you
+	// have KSK and ZSK keys, always use KSK to create a delegations signer (DS)
+	// record. If you have ZSK keys only – use ZSK to create a DS record.
+	Flags *int32
+
+	// The base64-encoded public key part of the key pair that is passed to the
+	// registry.
+	PublicKey *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the domain price associated with a TLD.
 type DomainPrice struct {
 
@@ -151,13 +235,11 @@ type DomainSuggestion struct {
 // Summary information about one domain.
 type DomainSummary struct {
 
-	// The name of the domain that the summary information applies to.
-	//
-	// This member is required.
-	DomainName *string
-
 	// Indicates whether the domain is automatically renewed upon expiration.
 	AutoRenew *bool
+
+	// The name of the domain that the summary information applies to.
+	DomainName *string
 
 	// Expiration date of the domain in Unix time format and Coordinated Universal Time
 	// (UTC).
@@ -175,9 +257,12 @@ type DomainSummary struct {
 type DomainTransferability struct {
 
 	// Whether the domain name can be transferred to Route 53. You can transfer only
-	// domains that have a value of TRANSFERABLE for Transferable. Valid values:
+	// domains that have a value of TRANSFERABLE or Transferable. Valid values:
 	// TRANSFERABLE The domain name can be transferred to Route 53. UNTRANSFERRABLE The
 	// domain name can't be transferred to Route 53. DONT_KNOW Reserved for future use.
+	// DOMAIN_IN_OWN_ACCOUNT The domain already exists in the current Amazon Web
+	// Services account. DOMAIN_IN_ANOTHER_ACCOUNT the domain exists in another Amazon
+	// Web Services account. PREMIUM_DOMAIN Premium domain transfer is not supported.
 	Transferable Transferable
 
 	noSmithyDocumentSerde
@@ -565,7 +650,7 @@ type ExtraParam struct {
 	// *
 	// SG_ID_NUMBER
 	//
-	// .co.uk, .me.uk, and .org.uk
+	// .uk, .co.uk, .me.uk, and .org.uk
 	//
 	// * UK_CONTACT_TYPE Valid values
 	// include the following:
@@ -655,7 +740,7 @@ type FilterCondition struct {
 	noSmithyDocumentSerde
 }
 
-// Nameserver includes the following elements.
+// Name server includes the following elements.
 type Nameserver struct {
 
 	// The fully qualified host name of the name server. Constraint: Maximum 255
@@ -677,24 +762,49 @@ type Nameserver struct {
 // OperationSummary includes the following elements.
 type OperationSummary struct {
 
+	// Name of the domain.
+	DomainName *string
+
+	// The date when the last change was made in Unix time format and Coordinated
+	// Universal Time (UTC).
+	LastUpdatedDate *time.Time
+
+	// Message about the operation.
+	Message *string
+
 	// Identifier returned to track the requested action.
-	//
-	// This member is required.
 	OperationId *string
 
 	// The current status of the requested operation in the system.
-	//
-	// This member is required.
 	Status OperationStatus
 
-	// The date when the request was submitted.
+	// Automatically checks whether there are no outstanding operations on domains that
+	// need customer attention. Valid values are:
 	//
-	// This member is required.
+	// * PENDING_ACCEPTANCE: The operation
+	// is waiting for acceptance from the account that is receiving the domain.
+	//
+	// *
+	// PENDING_CUSTOMER_ACTION: The operation is waiting for customer action, for
+	// example, returning an email.
+	//
+	// * PENDING_AUTHORIZATION: The operation is waiting
+	// for the form of authorization. For more information, see
+	// ResendOperationAuthorization
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html).
+	//
+	// *
+	// PENDING_PAYMENT_VERIFICATION: The operation is waiting for the payment method to
+	// validate.
+	//
+	// * PENDING_SUPPORT_CASE: The operation includes a support case and is
+	// waiting for its resolution.
+	StatusFlag StatusFlag
+
+	// The date when the request was submitted.
 	SubmittedDate *time.Time
 
 	// Type of the action requested.
-	//
-	// This member is required.
 	Type OperationType
 
 	noSmithyDocumentSerde

@@ -16,12 +16,6 @@ import (
 // settings, specify the configuration name to be updated and provide the new
 // settings. Learn more  Design a FlexMatch matchmaker
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
-// Related actions CreateMatchmakingConfiguration |
-// DescribeMatchmakingConfigurations | UpdateMatchmakingConfiguration |
-// DeleteMatchmakingConfiguration | CreateMatchmakingRuleSet |
-// DescribeMatchmakingRuleSets | ValidateMatchmakingRuleSet |
-// DeleteMatchmakingRuleSet | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateMatchmakingConfiguration(ctx context.Context, params *UpdateMatchmakingConfigurationInput, optFns ...func(*Options)) (*UpdateMatchmakingConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateMatchmakingConfigurationInput{}
@@ -37,7 +31,6 @@ func (c *Client) UpdateMatchmakingConfiguration(ctx context.Context, params *Upd
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type UpdateMatchmakingConfigurationInput struct {
 
 	// A unique identifier for the matchmaking configuration to update. You can use
@@ -66,7 +59,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	// The method that is used to backfill game sessions created with this matchmaking
 	// configuration. Specify MANUAL when your game manages backfill requests manually
 	// or does not use the match backfill feature. Specify AUTOMATIC to have GameLift
-	// create a StartMatchBackfill request whenever a game session has one or more open
+	// create a match backfill request whenever a game session has one or more open
 	// slots. Learn more about manual and automatic backfill in Backfill Existing Games
 	// with FlexMatch
 	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html).
@@ -76,7 +69,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	// Information to add to all events related to the matchmaking configuration.
 	CustomEventData *string
 
-	// A descriptive label that is associated with matchmaking configuration.
+	// A description for the matchmaking configuration.
 	Description *string
 
 	// Indicates whether this matchmaking configuration is being used with GameLift
@@ -93,8 +86,8 @@ type UpdateMatchmakingConfigurationInput struct {
 	FlexMatchMode types.FlexMatchMode
 
 	// A set of custom properties for a game session, formatted as key:value pairs.
-	// These properties are passed to a game server process in the GameSession object
-	// with a request to start a new game session (see Start a Game Session
+	// These properties are passed to a game server process with a request to start a
+	// new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
 	// This information is added to the new GameSession object that is created for a
 	// successful match. This parameter is not used if FlexMatchMode is set to
@@ -102,12 +95,11 @@ type UpdateMatchmakingConfigurationInput struct {
 	GameProperties []types.GameProperty
 
 	// A set of custom game session properties, formatted as a single string value.
-	// This data is passed to a game server process in the GameSession object with a
-	// request to start a new game session (see Start a Game Session
+	// This data is passed to a game server process with a request to start a new game
+	// session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
-	// This information is added to the new GameSession object that is created for a
-	// successful match. This parameter is not used if FlexMatchMode is set to
-	// STANDALONE.
+	// This information is added to the game session that is created for a successful
+	// match. This parameter is not used if FlexMatchMode is set to STANDALONE.
 	GameSessionData *string
 
 	// The Amazon Resource Name (ARN
@@ -139,7 +131,6 @@ type UpdateMatchmakingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type UpdateMatchmakingConfigurationOutput struct {
 
 	// The updated matchmaking configuration.

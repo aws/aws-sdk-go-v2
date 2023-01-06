@@ -933,6 +933,9 @@ func awsRestjson1_deserializeOpErrorPublish(response *smithyhttp.Response, metad
 	case strings.EqualFold("MethodNotAllowedException", errorCode):
 		return awsRestjson1_deserializeErrorMethodNotAllowedException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("UnauthorizedException", errorCode):
 		return awsRestjson1_deserializeErrorUnauthorizedException(response, errorBody)
 

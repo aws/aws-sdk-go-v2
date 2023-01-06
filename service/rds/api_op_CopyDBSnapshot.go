@@ -76,8 +76,14 @@ type CopyDBSnapshotInput struct {
 	// This member is required.
 	TargetDBSnapshotIdentifier *string
 
+	// A value that indicates whether to copy the DB option group associated with the
+	// source DB snapshot to the target Amazon Web Services account and associate with
+	// the target DB snapshot. The associated option group can be copied only with
+	// cross-account snapshot copy calls.
+	CopyOptionGroup *bool
+
 	// A value that indicates whether to copy all tags from the source DB snapshot to
-	// the target DB snapshot. By default, tags are not copied.
+	// the target DB snapshot. By default, tags aren't copied.
 	CopyTags *bool
 
 	// The Amazon Web Services KMS key identifier for an encrypted DB snapshot. The

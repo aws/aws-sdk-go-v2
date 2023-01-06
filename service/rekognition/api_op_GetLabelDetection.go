@@ -23,16 +23,56 @@ import (
 // from the initial call to StartLabelDetection. GetLabelDetection returns an array
 // of detected labels (Labels) sorted by the time the labels were detected. You can
 // also sort by the label name by specifying NAME for the SortBy input parameter.
-// The labels returned include the label name, the percentage confidence in the
-// accuracy of the detected label, and the time the label was detected in the
-// video. The returned labels also include bounding box information for common
-// objects, a hierarchical taxonomy of detected labels, and the version of the
-// label model used for detection. Use MaxResults parameter to limit the number of
-// labels returned. If there are more results than specified in MaxResults, the
-// value of NextToken in the operation response contains a pagination token for
-// getting the next set of results. To get the next page of results, call
-// GetlabelDetection and populate the NextToken request parameter with the token
-// value returned from the previous call to GetLabelDetection.
+// If there is no NAME specified, the default sort is by timestamp. You can select
+// how results are aggregated by using the AggregateBy input parameter. The default
+// aggregation method is TIMESTAMPS. You can also aggregate by SEGMENTS, which
+// aggregates all instances of labels detected in a given segment. The returned
+// Labels array may include the following attributes:
+//
+// * Name - The name of the
+// detected label.
+//
+// * Confidence - The level of confidence in the label assigned to
+// a detected object.
+//
+// * Parents - The ancestor labels for a detected label.
+// GetLabelDetection returns a hierarchical taxonomy of detected labels. For
+// example, a detected car might be assigned the label car. The label car has two
+// parent labels: Vehicle (its parent) and Transportation (its grandparent). The
+// response includes the all ancestors for a label, where every ancestor is a
+// unique label. In the previous example, Car, Vehicle, and Transportation are
+// returned as unique labels in the response.
+//
+// * Aliases - Possible Aliases for the
+// label.
+//
+// * Categories - The label categories that the detected label belongs
+// to.
+//
+// * BoundingBox — Bounding boxes are described for all instances of detected
+// common object labels, returned in an array of Instance objects. An Instance
+// object contains a BoundingBox object, describing the location of the label on
+// the input image. It also includes the confidence for the accuracy of the
+// detected bounding box.
+//
+// * Timestamp - Time, in milliseconds from the start of
+// the video, that the label was detected. For aggregation by SEGMENTS, the
+// StartTimestampMillis, EndTimestampMillis, and DurationMillis structures are what
+// define a segment. Although the “Timestamp” structure is still returned with each
+// label, its value is set to be the same as StartTimestampMillis.
+//
+// Timestamp and
+// Bounding box information are returned for detected Instances, only if
+// aggregation is done by TIMESTAMPS. If aggregating by SEGMENTS, information about
+// detected instances isn’t returned. The version of the label model used for the
+// detection is also returned. Note DominantColors isn't returned for Instances,
+// although it is shown as part of the response in the sample seen below. Use
+// MaxResults parameter to limit the number of labels returned. If there are more
+// results than specified in MaxResults, the value of NextToken in the operation
+// response contains a pagination token for getting the next set of results. To get
+// the next page of results, call GetlabelDetection and populate the NextToken
+// request parameter with the token value returned from the previous call to
+// GetLabelDetection.
 func (c *Client) GetLabelDetection(ctx context.Context, params *GetLabelDetectionInput, optFns ...func(*Options)) (*GetLabelDetectionOutput, error) {
 	if params == nil {
 		params = &GetLabelDetectionInput{}
@@ -55,6 +95,10 @@ type GetLabelDetectionInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	// Defines how to aggregate the returned results. Results can be aggregated by
+	// timestamps or segments.
+	AggregateBy types.LabelDetectionAggregateBy
 
 	// Maximum number of results to return per paginated call. The largest value you
 	// can specify is 1000. If you specify a value greater than 1000, a maximum of 1000

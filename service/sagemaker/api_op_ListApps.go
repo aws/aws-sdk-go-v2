@@ -46,7 +46,12 @@ type ListAppsInput struct {
 	// The sort order for the results. The default is Ascending.
 	SortOrder types.SortOrder
 
-	// A parameter to search by user profile name.
+	// A parameter to search by space name. If UserProfileNameEquals is set, then this
+	// value cannot be set.
+	SpaceNameEquals *string
+
+	// A parameter to search by user profile name. If SpaceNameEquals is set, then this
+	// value cannot be set.
 	UserProfileNameEquals *string
 
 	noSmithyDocumentSerde

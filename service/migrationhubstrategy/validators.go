@@ -170,6 +170,26 @@ func (m *validateOpPutPortfolioPreferences) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartAssessment struct {
+}
+
+func (*validateOpStartAssessment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartAssessment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartAssessmentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartAssessmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartImportFileTask struct {
 }
 
@@ -282,6 +302,10 @@ func addOpPutPortfolioPreferencesValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpPutPortfolioPreferences{}, middleware.After)
 }
 
+func addOpStartAssessmentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartAssessment{}, middleware.After)
+}
+
 func addOpStartImportFileTaskValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartImportFileTask{}, middleware.After)
 }
@@ -306,6 +330,44 @@ func validateApplicationPreferences(v *types.ApplicationPreferences) error {
 	if v.ManagementPreference != nil {
 		if err := validateManagementPreference(v.ManagementPreference); err != nil {
 			invalidParams.AddNested("ManagementPreference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssessmentTarget(v *types.AssessmentTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssessmentTarget"}
+	if len(v.Condition) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Condition"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAssessmentTargets(v []types.AssessmentTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssessmentTargets"}
+	for i := range v {
+		if err := validateAssessmentTarget(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -578,6 +640,23 @@ func validateOpPutPortfolioPreferencesInput(v *PutPortfolioPreferencesInput) err
 	if v.DatabasePreferences != nil {
 		if err := validateDatabasePreferences(v.DatabasePreferences); err != nil {
 			invalidParams.AddNested("DatabasePreferences", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartAssessmentInput(v *StartAssessmentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartAssessmentInput"}
+	if v.AssessmentTargets != nil {
+		if err := validateAssessmentTargets(v.AssessmentTargets); err != nil {
+			invalidParams.AddNested("AssessmentTargets", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

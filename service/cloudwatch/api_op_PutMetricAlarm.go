@@ -12,25 +12,29 @@ import (
 )
 
 // Creates or updates an alarm and associates it with the specified metric, metric
-// math expression, or anomaly detection model. Alarms based on anomaly detection
-// models cannot have Auto Scaling actions. When this operation creates an alarm,
-// the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then
-// evaluated and its state is set appropriately. Any actions associated with the
-// new state are then executed. When you update an existing alarm, its state is
-// left unchanged, but the update completely overwrites the previous configuration
-// of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for
-// some alarm operations:
+// math expression, anomaly detection model, or Metrics Insights query. For more
+// information about using a Metrics Insights query for an alarm, see Create alarms
+// on Metrics Insights queries
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Create_Metrics_Insights_Alarm.html).
+// Alarms based on anomaly detection models cannot have Auto Scaling actions. When
+// this operation creates an alarm, the alarm state is immediately set to
+// INSUFFICIENT_DATA. The alarm is then evaluated and its state is set
+// appropriately. Any actions associated with the new state are then executed. When
+// you update an existing alarm, its state is left unchanged, but the update
+// completely overwrites the previous configuration of the alarm. If you are an IAM
+// user, you must have Amazon EC2 permissions for some alarm operations:
 //
-// * The iam:CreateServiceLinkedRole for all alarms with
-// EC2 actions
+// * The
+// iam:CreateServiceLinkedRole for all alarms with EC2 actions
 //
-// * The iam:CreateServiceLinkedRole to create an alarm with Systems
-// Manager OpsItem actions.
+// * The
+// iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem
+// actions.
 //
-// The first time you create an alarm in the Amazon Web
-// Services Management Console, the CLI, or by using the PutMetricAlarm API,
-// CloudWatch creates the necessary service-linked role for you. The service-linked
-// roles are called AWSServiceRoleForCloudWatchEvents and
+// The first time you create an alarm in the Amazon Web Services
+// Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch
+// creates the necessary service-linked role for you. The service-linked roles are
+// called AWSServiceRoleForCloudWatchEvents and
 // AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see Amazon
 // Web Services service-linked role
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_terms-and-concepts.html#iam-term-service-linked-role).

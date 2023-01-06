@@ -247,7 +247,7 @@ type LambdaEndpointConfig struct {
 // The input for the Lambda endpoint type.
 type LambdaEndpointInput struct {
 
-	// The Amazon Resource Name (ARN) of the Lambda endpoint.
+	// The Amazon Resource Name (ARN) of the Lambda function or alias.
 	//
 	// This member is required.
 	Arn *string

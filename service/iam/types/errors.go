@@ -12,6 +12,8 @@ import (
 type ConcurrentModificationException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,7 +26,12 @@ func (e *ConcurrentModificationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConcurrentModificationException) ErrorCode() string             { return "ConcurrentModification" }
+func (e *ConcurrentModificationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConcurrentModification"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the most recent credential report has expired.
@@ -34,6 +41,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // the IAM User Guide.
 type CredentialReportExpiredException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -47,13 +56,20 @@ func (e *CredentialReportExpiredException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CredentialReportExpiredException) ErrorCode() string             { return "ReportExpired" }
+func (e *CredentialReportExpiredException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ReportExpired"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CredentialReportExpiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the credential report does not exist. To
 // generate a credential report, use GenerateCredentialReport.
 type CredentialReportNotPresentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -67,7 +83,12 @@ func (e *CredentialReportNotPresentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CredentialReportNotPresentException) ErrorCode() string { return "ReportNotPresent" }
+func (e *CredentialReportNotPresentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ReportNotPresent"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CredentialReportNotPresentException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -75,6 +96,8 @@ func (e *CredentialReportNotPresentException) ErrorFault() smithy.ErrorFault {
 // The request was rejected because the credential report is still being generated.
 type CredentialReportNotReadyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -88,13 +111,20 @@ func (e *CredentialReportNotReadyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *CredentialReportNotReadyException) ErrorCode() string             { return "ReportInProgress" }
+func (e *CredentialReportNotReadyException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ReportInProgress"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *CredentialReportNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to delete a resource that has
 // attached subordinate entities. The error message describes these entities.
 type DeleteConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -108,13 +138,20 @@ func (e *DeleteConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DeleteConflictException) ErrorCode() string             { return "DeleteConflict" }
+func (e *DeleteConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DeleteConflict"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DeleteConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the same certificate is associated with an IAM
 // user in the account.
 type DuplicateCertificateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -128,13 +165,20 @@ func (e *DuplicateCertificateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateCertificateException) ErrorCode() string             { return "DuplicateCertificate" }
+func (e *DuplicateCertificateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DuplicateCertificate"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DuplicateCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the SSH public key is already associated with
 // the specified IAM user.
 type DuplicateSSHPublicKeyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -148,13 +192,20 @@ func (e *DuplicateSSHPublicKeyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DuplicateSSHPublicKeyException) ErrorCode() string             { return "DuplicateSSHPublicKey" }
+func (e *DuplicateSSHPublicKeyException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DuplicateSSHPublicKey"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DuplicateSSHPublicKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create a resource that already
 // exists.
 type EntityAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -168,7 +219,12 @@ func (e *EntityAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EntityAlreadyExistsException) ErrorCode() string             { return "EntityAlreadyExists" }
+func (e *EntityAlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EntityAlreadyExists"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it referenced an entity that is temporarily
@@ -177,6 +233,8 @@ func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return s
 // several minutes. The error message describes the entity.
 type EntityTemporarilyUnmodifiableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -191,7 +249,10 @@ func (e *EntityTemporarilyUnmodifiableException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EntityTemporarilyUnmodifiableException) ErrorCode() string {
-	return "EntityTemporarilyUnmodifiable"
+	if e.ErrorCodeOverride == nil {
+		return "EntityTemporarilyUnmodifiable"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *EntityTemporarilyUnmodifiableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -201,6 +262,8 @@ func (e *EntityTemporarilyUnmodifiableException) ErrorFault() smithy.ErrorFault 
 // error message describes the specific error.
 type InvalidAuthenticationCodeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -214,7 +277,12 @@ func (e *InvalidAuthenticationCodeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidAuthenticationCodeException) ErrorCode() string { return "InvalidAuthenticationCode" }
+func (e *InvalidAuthenticationCodeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidAuthenticationCode"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidAuthenticationCodeException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
@@ -222,6 +290,8 @@ func (e *InvalidAuthenticationCodeException) ErrorFault() smithy.ErrorFault {
 // The request was rejected because the certificate is invalid.
 type InvalidCertificateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -235,13 +305,20 @@ func (e *InvalidCertificateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidCertificateException) ErrorCode() string             { return "InvalidCertificate" }
+func (e *InvalidCertificateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidCertificate"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because an invalid or out-of-range value was supplied
 // for an input parameter.
 type InvalidInputException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -255,13 +332,20 @@ func (e *InvalidInputException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidInputException) ErrorCode() string             { return "InvalidInput" }
+func (e *InvalidInputException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidInput"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the public key is malformed or otherwise
 // invalid.
 type InvalidPublicKeyException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -275,13 +359,20 @@ func (e *InvalidPublicKeyException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPublicKeyException) ErrorCode() string             { return "InvalidPublicKey" }
+func (e *InvalidPublicKeyException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidPublicKey"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidPublicKeyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the type of user for the transaction was
 // incorrect.
 type InvalidUserTypeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -295,13 +386,20 @@ func (e *InvalidUserTypeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidUserTypeException) ErrorCode() string             { return "InvalidUserType" }
+func (e *InvalidUserTypeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidUserType"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidUserTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the public key certificate and the private key
 // do not match.
 type KeyPairMismatchException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -315,7 +413,12 @@ func (e *KeyPairMismatchException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *KeyPairMismatchException) ErrorCode() string             { return "KeyPairMismatch" }
+func (e *KeyPairMismatchException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "KeyPairMismatch"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *KeyPairMismatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create resources beyond the
@@ -323,6 +426,8 @@ func (e *KeyPairMismatchException) ErrorFault() smithy.ErrorFault { return smith
 // limit exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -336,13 +441,20 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceeded" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceeded"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the certificate was malformed or expired. The
 // error message describes the specific error.
 type MalformedCertificateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -356,13 +468,20 @@ func (e *MalformedCertificateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MalformedCertificateException) ErrorCode() string             { return "MalformedCertificate" }
+func (e *MalformedCertificateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MalformedCertificate"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MalformedCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the policy document was malformed. The error
 // message describes the specific error.
 type MalformedPolicyDocumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -376,13 +495,20 @@ func (e *MalformedPolicyDocumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *MalformedPolicyDocumentException) ErrorCode() string             { return "MalformedPolicyDocument" }
+func (e *MalformedPolicyDocumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "MalformedPolicyDocument"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it referenced a resource entity that does not
 // exist. The error message describes the resource.
 type NoSuchEntityException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -396,13 +522,20 @@ func (e *NoSuchEntityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *NoSuchEntityException) ErrorCode() string             { return "NoSuchEntity" }
+func (e *NoSuchEntityException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NoSuchEntity"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *NoSuchEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the provided password did not meet the
 // requirements imposed by the account password policy.
 type PasswordPolicyViolationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -416,13 +549,20 @@ func (e *PasswordPolicyViolationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PasswordPolicyViolationException) ErrorCode() string             { return "PasswordPolicyViolation" }
+func (e *PasswordPolicyViolationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "PasswordPolicyViolation"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *PasswordPolicyViolationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because a provided policy could not be successfully
 // evaluated. An additional detailed message indicates the source of the failure.
 type PolicyEvaluationException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -436,13 +576,20 @@ func (e *PolicyEvaluationException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyEvaluationException) ErrorCode() string             { return "PolicyEvaluation" }
+func (e *PolicyEvaluationException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "PolicyEvaluation"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *PolicyEvaluationException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The request failed because Amazon Web Services service role policies can only be
 // attached to the service-linked role for that service.
 type PolicyNotAttachableException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -456,13 +603,20 @@ func (e *PolicyNotAttachableException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *PolicyNotAttachableException) ErrorCode() string             { return "PolicyNotAttachable" }
+func (e *PolicyNotAttachableException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "PolicyNotAttachable"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *PolicyNotAttachableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request failed because the maximum number of concurrent requests for this
 // account are already running.
 type ReportGenerationLimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -477,7 +631,10 @@ func (e *ReportGenerationLimitExceededException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ReportGenerationLimitExceededException) ErrorCode() string {
-	return "ReportGenerationLimitExceeded"
+	if e.ErrorCodeOverride == nil {
+		return "ReportGenerationLimitExceeded"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ReportGenerationLimitExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -487,6 +644,8 @@ func (e *ReportGenerationLimitExceededException) ErrorFault() smithy.ErrorFault 
 // failure.
 type ServiceFailureException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -500,12 +659,19 @@ func (e *ServiceFailureException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceFailureException) ErrorCode() string             { return "ServiceFailure" }
+func (e *ServiceFailureException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ServiceFailure"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The specified service does not support service-specific credentials.
 type ServiceNotSupportedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -519,7 +685,12 @@ func (e *ServiceNotSupportedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ServiceNotSupportedException) ErrorCode() string             { return "NotSupportedService" }
+func (e *ServiceNotSupportedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "NotSupportedService"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ServiceNotSupportedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because only the service that depends on the
@@ -528,6 +699,8 @@ func (e *ServiceNotSupportedException) ErrorFault() smithy.ErrorFault { return s
 // role. You must request the change through that service.
 type UnmodifiableEntityException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -541,13 +714,20 @@ func (e *UnmodifiableEntityException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnmodifiableEntityException) ErrorCode() string             { return "UnmodifiableEntity" }
+func (e *UnmodifiableEntityException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnmodifiableEntity"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnmodifiableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the public key encoding format is unsupported
 // or unrecognized.
 type UnrecognizedPublicKeyEncodingException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -562,7 +742,10 @@ func (e *UnrecognizedPublicKeyEncodingException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *UnrecognizedPublicKeyEncodingException) ErrorCode() string {
-	return "UnrecognizedPublicKeyEncoding"
+	if e.ErrorCodeOverride == nil {
+		return "UnrecognizedPublicKeyEncoding"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *UnrecognizedPublicKeyEncodingException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

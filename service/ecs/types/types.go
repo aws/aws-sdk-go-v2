@@ -69,7 +69,7 @@ type Attribute struct {
 	// The value of the attribute. The value must contain between 1 and 128 characters.
 	// It can contain letters (uppercase and lowercase), numbers, hyphens (-),
 	// underscores (_), periods (.), at signs (@), forward slashes (/), back slashes
-	// (\), colons (:), or spaces. The value can't can't start or end with a space.
+	// (\), colons (:), or spaces. The value can't start or end with a space.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -310,6 +310,22 @@ type Cluster struct {
 	// The number of tasks in the cluster that are in the RUNNING state.
 	RunningTasksCount int32
 
+	// Use this parameter to set a default Service Connect namespace. After you set a
+	// default Service Connect namespace, any new services with Service Connect turned
+	// on that are created in the cluster are added as client services in the
+	// namespace. This setting only applies to new services that set the enabled
+	// parameter to true in the ServiceConnectConfiguration. You can set the namespace
+	// of each service individually in the ServiceConnectConfiguration to override this
+	// default parameter. Tasks that run in a namespace can use short names to connect
+	// to services in the namespace. Tasks can connect to services across all of the
+	// clusters in the namespace. Tasks connect through a managed proxy container that
+	// collects logs and metrics for increased visibility. Only the tasks that Amazon
+	// ECS services create are supported with Service Connect. For more information,
+	// see Service Connect
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	ServiceConnectDefaults *ClusterServiceConnectDefaults
+
 	// The settings for the cluster. This parameter indicates whether CloudWatch
 	// Container Insights is enabled or disabled for a cluster.
 	Settings []ClusterSetting
@@ -389,6 +405,69 @@ type ClusterConfiguration struct {
 
 	// The details of the execute command configuration.
 	ExecuteCommandConfiguration *ExecuteCommandConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Use this parameter to set a default Service Connect namespace. After you set a
+// default Service Connect namespace, any new services with Service Connect turned
+// on that are created in the cluster are added as client services in the
+// namespace. This setting only applies to new services that set the enabled
+// parameter to true in the ServiceConnectConfiguration. You can set the namespace
+// of each service individually in the ServiceConnectConfiguration to override this
+// default parameter. Tasks that run in a namespace can use short names to connect
+// to services in the namespace. Tasks can connect to services across all of the
+// clusters in the namespace. Tasks connect through a managed proxy container that
+// collects logs and metrics for increased visibility. Only the tasks that Amazon
+// ECS services create are supported with Service Connect. For more information,
+// see Service Connect
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type ClusterServiceConnectDefaults struct {
+
+	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map
+	// namespace. When you create a service and don't specify a Service Connect
+	// configuration, this namespace is used.
+	Namespace *string
+
+	noSmithyDocumentSerde
+}
+
+// Use this parameter to set a default Service Connect namespace. After you set a
+// default Service Connect namespace, any new services with Service Connect turned
+// on that are created in the cluster are added as client services in the
+// namespace. This setting only applies to new services that set the enabled
+// parameter to true in the ServiceConnectConfiguration. You can set the namespace
+// of each service individually in the ServiceConnectConfiguration to override this
+// default parameter. Tasks that run in a namespace can use short names to connect
+// to services in the namespace. Tasks can connect to services across all of the
+// clusters in the namespace. Tasks connect through a managed proxy container that
+// collects logs and metrics for increased visibility. Only the tasks that Amazon
+// ECS services create are supported with Service Connect. For more information,
+// see Service Connect
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type ClusterServiceConnectDefaultsRequest struct {
+
+	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace
+	// that's used when you create a service and don't specify a Service Connect
+	// configuration. The namespace name can include up to 1024 characters. The name is
+	// case-sensitive. The name can't include hyphens (-), tilde (~), greater than (>),
+	// less than (<), or slash (/). If you enter an existing namespace name or ARN,
+	// then that namespace will be used. Any namespace type is supported. The namespace
+	// must be in this account and this Amazon Web Services Region. If you enter a new
+	// name, a Cloud Map namespace will be created. Amazon ECS creates a Cloud Map
+	// namespace with the "API calls" method of instance discovery only. This instance
+	// discovery method is the "HTTP" namespace type in the Command Line Interface.
+	// Other types of instance discovery aren't used by Service Connect. If you update
+	// the service with an empty string "" for the namespace name, the cluster
+	// configuration for Service Connect is removed. Note that the namespace will
+	// remain in Cloud Map and must be deleted separately. For more information about
+	// Cloud Map, see Working with Services (https://docs.aws.amazon.com/) in the Cloud
+	// Map Developer Guide.
+	//
+	// This member is required.
+	Namespace *string
 
 	noSmithyDocumentSerde
 }
@@ -1423,6 +1502,24 @@ type Deployment struct {
 	// The number of tasks in the deployment that are in the RUNNING status.
 	RunningCount int32
 
+	// The details of the Service Connect configuration that's used by this deployment.
+	// Compare the configuration between multiple deployments when troubleshooting
+	// issues with new deployments. The configuration for this service to discover and
+	// connect to services, and be discovered by, and connected from, other services
+	// within a namespace. Tasks that run in a namespace can use short names to connect
+	// to services in the namespace. Tasks can connect to services across all of the
+	// clusters in the namespace. Tasks connect through a managed proxy container that
+	// collects logs and metrics for increased visibility. Only the tasks that Amazon
+	// ECS services create are supported with Service Connect. For more information,
+	// see Service Connect
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	ServiceConnectConfiguration *ServiceConnectConfiguration
+
+	// The list of Service Connect resources that are associated with this deployment.
+	// Each list entry maps a discovery name to a Cloud Map service name.
+	ServiceConnectResources []ServiceConnectServiceResource
+
 	// The status of the deployment. The following describes each state. PRIMARY The
 	// most recent deployment of a service. ACTIVE A service deployment that still has
 	// running tasks, but are in the process of being replaced with a new PRIMARY
@@ -1435,6 +1532,38 @@ type Deployment struct {
 
 	// The Unix timestamp for the time when the service deployment was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// One of the methods which provide a way for you to quickly identify when a
+// deployment has failed, and then to optionally roll back the failure to the last
+// working deployment. When the alarms are generated, Amazon ECS sets the service
+// deployment to failed. Set the rollback parameter to have Amazon ECS to roll back
+// your service to the last completed deployment after a failure. You can only use
+// the DeploymentAlarms method to detect failures when the DeploymentController is
+// set to ECS (rolling update). For more information, see Rolling update
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-type-ecs.html)
+// in the Amazon Elastic Container Service Developer Guide .
+type DeploymentAlarms struct {
+
+	// One or more CloudWatch alarm names. Use a "," to separate the alarms.
+	//
+	// This member is required.
+	AlarmNames []string
+
+	// Determines whether to use the CloudWatch alarm option in the service deployment
+	// process.
+	//
+	// This member is required.
+	Enable bool
+
+	// Determines whether to configure Amazon ECS to roll back the service if a service
+	// deployment fails. If rollback is used, when a service deployment fails, the
+	// service is rolled back to the last deployment that completed successfully.
+	//
+	// This member is required.
+	Rollback bool
 
 	noSmithyDocumentSerde
 }
@@ -1456,7 +1585,7 @@ type DeploymentCircuitBreaker struct {
 	Enable bool
 
 	// Determines whether to configure Amazon ECS to roll back the service if a service
-	// deployment fails. If rollback is enabled, when a service deployment fails, the
+	// deployment fails. If rollback is on, when a service deployment fails, the
 	// service is rolled back to the last deployment that completed successfully.
 	//
 	// This member is required.
@@ -1468,6 +1597,9 @@ type DeploymentCircuitBreaker struct {
 // Optional deployment parameters that control how many tasks run during a
 // deployment and the ordering of stopping and starting tasks.
 type DeploymentConfiguration struct {
+
+	// Information about the CloudWatch alarms.
+	Alarms *DeploymentAlarms
 
 	// The deployment circuit breaker can only be used for services using the rolling
 	// update (ECS) deployment type. The deployment circuit breaker determines whether
@@ -1940,28 +2072,34 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 // defined.
 //
 // The following describes the possible healthStatus values for a task.
-// The container health check status of nonessential containers do not have an
-// effect on the health status of a task.
+// The container health check status of nonessential containers only affects the
+// health status of a task if no essential containers have health checks
+// defined.
 //
-// * HEALTHY-All essential containers
-// within the task have passed their health checks.
+// * HEALTHY-All essential containers within the task have passed their
+// health checks.
 //
-// * UNHEALTHY-One or more
-// essential containers have failed their health check.
+// * UNHEALTHY-One or more essential containers have failed their
+// health check.
 //
-// * UNKNOWN-The essential
-// containers within the task are still having their health checks evaluated or
-// there are no container health checks defined.
+// * UNKNOWN-The essential containers within the task are still
+// having their health checks evaluated or there are only nonessential containers
+// with health checks defined.
 //
-// If a task is run manually, and
-// not as part of a service, the task will continue its lifecycle regardless of its
-// health status. For tasks that are part of a service, if the task reports as
-// unhealthy then the task will be stopped and the service scheduler will replace
-// it. The following are notes about container health check support:
+// If a task is run manually, and not as part of a
+// service, the task will continue its lifecycle regardless of its health status.
+// For tasks that are part of a service, if the task reports as unhealthy then the
+// task will be stopped and the service scheduler will replace it. For tasks that
+// are a part of a service and the service uses the ECS rolling deployment type,
+// the deployment is paused while the new tasks have the UNKNOWN task health check
+// status. For example, tasks that define health checks for nonessential containers
+// when no essential containers have health checks will have the UNKNOWN health
+// check status indefinitely which prevents the deployment from completing. The
+// following are notes about container health check support:
 //
-// * Container
-// health checks require version 1.17.0 or greater of the Amazon ECS container
-// agent. For more information, see Updating the Amazon ECS container agent
+// * Container health
+// checks require version 1.17.0 or greater of the Amazon ECS container agent. For
+// more information, see Updating the Amazon ECS container agent
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html).
 //
 // *
@@ -2422,7 +2560,7 @@ type ManagedScaling struct {
 
 	// The maximum number of Amazon EC2 instances that Amazon ECS will scale out at one
 	// time. The scale in process is not affected by this parameter. If this parameter
-	// is omitted, the default value of 10000 is used.
+	// is omitted, the default value of 1 is used.
 	MaximumScalingStepSize *int32
 
 	// The minimum number of Amazon EC2 instances that Amazon ECS will scale out at one
@@ -2477,8 +2615,69 @@ type NetworkBinding struct {
 	// The port number on the container that's used with the network binding.
 	ContainerPort *int32
 
+	// The port number range on the container that's bound to the dynamically mapped
+	// host port range. The following rules apply when you specify a
+	// containerPortRange:
+	//
+	// * You must use either the bridge network mode or the awsvpc
+	// network mode.
+	//
+	// * This parameter is available for both the EC2 and Fargate launch
+	// types.
+	//
+	// * This parameter is available for both the Linux and Windows operating
+	// systems.
+	//
+	// * The container instance must have at least version 1.67.0 of the
+	// container agent and at least version 1.67.0-1 of the ecs-init package
+	//
+	// * You can
+	// specify a maximum of 100 port ranges per container.
+	//
+	// * You do not specify a
+	// hostPortRange. The value of the hostPortRange is set as follows:
+	//
+	// * For
+	// containers in a task with the awsvpc network mode, the hostPort is set to the
+	// same value as the containerPort. This is a static mapping strategy.
+	//
+	// * For
+	// containers in a task with the bridge network mode, the Amazon ECS agent finds
+	// open host ports from the default ephemeral range and passes it to docker to bind
+	// them to the container ports.
+	//
+	// * The containerPortRange valid values are between
+	// 1 and 65535.
+	//
+	// * A port can only be included in one port mapping per
+	// container.
+	//
+	// * You cannot specify overlapping port ranges.
+	//
+	// * The first port in
+	// the range must be less than last port in the range.
+	//
+	// * Docker recommends that
+	// you turn off the docker-proxy in the Docker daemon config file when you have a
+	// large number of ports. For more information, see  Issue #11185
+	// (https://github.com/moby/moby/issues/11185) on the Github website. For
+	// information about how to turn off the docker-proxy in the Docker daemon config
+	// file, see Docker daemon
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon)
+	// in the Amazon ECS Developer Guide.
+	//
+	// You can call DescribeTasks
+	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html)
+	// to view the hostPortRange which are the host ports that are bound to the
+	// container ports.
+	ContainerPortRange *string
+
 	// The port number on the host that's used with the network binding.
 	HostPort *int32
+
+	// The port number range on the host that's used with the network binding. This is
+	// assigned is assigned by Docker and delivered by the Amazon ECS agent.
+	HostPortRange *string
 
 	// The protocol used for the network binding.
 	Protocol TransportProtocol
@@ -2592,6 +2791,23 @@ type PlatformDevice struct {
 // DescribeTasks API responses.
 type PortMapping struct {
 
+	// The application protocol that's used for the port mapping. This parameter only
+	// applies to Service Connect. We recommend that you set this parameter to be
+	// consistent with the protocol that your application uses. If you set this
+	// parameter, Amazon ECS adds protocol-specific connection handling to the Service
+	// Connect proxy. If you set this parameter, Amazon ECS adds protocol-specific
+	// telemetry in the Amazon ECS console and CloudWatch. If you don't set a value for
+	// this parameter, then TCP is used. However, Amazon ECS doesn't add
+	// protocol-specific telemetry for TCP. Tasks that run in a namespace can use short
+	// names to connect to services in the namespace. Tasks can connect to services
+	// across all of the clusters in the namespace. Tasks connect through a managed
+	// proxy container that collects logs and metrics for increased visibility. Only
+	// the tasks that Amazon ECS services create are supported with Service Connect.
+	// For more information, see Service Connect
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	AppProtocol ApplicationProtocol
+
 	// The port number on the container that's bound to the user-specified or
 	// automatically assigned host port. If you use containers in a task with the
 	// awsvpc or host network mode, specify the exposed ports using containerPort. If
@@ -2602,8 +2818,77 @@ type PortMapping struct {
 	// reserved ports limit of a container instance.
 	ContainerPort *int32
 
+	// The port number range on the container that's bound to the dynamically mapped
+	// host port range. The following rules apply when you specify a
+	// containerPortRange:
+	//
+	// * You must use either the bridge network mode or the awsvpc
+	// network mode.
+	//
+	// * This parameter is available for both the EC2 and Fargate launch
+	// types.
+	//
+	// * This parameter is available for both the Linux and Windows operating
+	// systems.
+	//
+	// * The container instance must have at least version 1.67.0 of the
+	// container agent and at least version 1.67.0-1 of the ecs-init package
+	//
+	// * You can
+	// specify a maximum of 100 port ranges per container.
+	//
+	// * You do not specify a
+	// hostPortRange. The value of the hostPortRange is set as follows:
+	//
+	// * For
+	// containers in a task with the awsvpc network mode, the hostPort is set to the
+	// same value as the containerPort. This is a static mapping strategy.
+	//
+	// * For
+	// containers in a task with the bridge network mode, the Amazon ECS agent finds
+	// open host ports from the default ephemeral range and passes it to docker to bind
+	// them to the container ports.
+	//
+	// * The containerPortRange valid values are between
+	// 1 and 65535.
+	//
+	// * A port can only be included in one port mapping per
+	// container.
+	//
+	// * You cannot specify overlapping port ranges.
+	//
+	// * The first port in
+	// the range must be less than last port in the range.
+	//
+	// * Docker recommends that
+	// you turn off the docker-proxy in the Docker daemon config file when you have a
+	// large number of ports. For more information, see  Issue #11185
+	// (https://github.com/moby/moby/issues/11185) on the Github website. For
+	// information about how to turn off the docker-proxy in the Docker daemon config
+	// file, see Docker daemon
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/bootstrap_container_instance.html#bootstrap_docker_daemon)
+	// in the Amazon ECS Developer Guide.
+	//
+	// You can call DescribeTasks
+	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DescribeTasks.html)
+	// to view the hostPortRange which are the host ports that are bound to the
+	// container ports.
+	ContainerPortRange *string
+
 	// The port number on the container instance to reserve for your container. If you
-	// use containers in a task with the awsvpc or host network mode, the hostPort can
+	// specify a containerPortRange, leave this field empty and the value of the
+	// hostPort is set as follows:
+	//
+	// * For containers in a task with the awsvpc network
+	// mode, the hostPort is set to the same value as the containerPort. This is a
+	// static mapping strategy.
+	//
+	// * For containers in a task with the bridge network
+	// mode, the Amazon ECS agent finds open ports on the host and automaticaly binds
+	// them to the container ports. This is a dynamic mapping strategy.
+	//
+	// If you use
+	// containers in a task with the awsvpc or host network mode, the hostPort can
 	// either be left blank or set to the same value as the containerPort. If you use
 	// containers in a task with the bridge network mode, you can specify a
 	// non-reserved host port for your container port mapping, or you can omit the
@@ -2624,6 +2909,16 @@ type PortMapping struct {
 	// reserved ports at a time. This number includes the default reserved ports.
 	// Automatically assigned ports aren't included in the 100 reserved ports quota.
 	HostPort *int32
+
+	// The name that's used for the port mapping. This parameter only applies to
+	// Service Connect. This parameter is the name that you use in the
+	// serviceConnectConfiguration of a service. The name can include up to 64
+	// characters. The characters can include lowercase letters, numbers, underscores
+	// (_), and hyphens (-). The name can't start with a hyphen. For more information,
+	// see Service Connect
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	Name *string
 
 	// The protocol used for the port mapping. Valid values are tcp and udp. The
 	// default is tcp.
@@ -2783,7 +3078,7 @@ type ResourceRequirement struct {
 type RuntimePlatform struct {
 
 	// The CPU architecture. You can run your Linux tasks on an ARM-based platform by
-	// setting the value to ARM64. This option is avaiable for tasks that run on Linux
+	// setting the value to ARM64. This option is available for tasks that run on Linux
 	// Amazon EC2 instance or Linux containers on Fargate.
 	CpuArchitecture CPUArchitecture
 
@@ -3025,6 +3320,194 @@ type Service struct {
 	// number of tasks, how many tasks are running, and whether the task set serves
 	// production traffic.
 	TaskSets []TaskSet
+
+	noSmithyDocumentSerde
+}
+
+// Each alias ("endpoint") is a fully-qualified name and port number that other
+// tasks ("clients") can use to connect to this service. Each name and port mapping
+// must be unique within the namespace. Tasks that run in a namespace can use short
+// names to connect to services in the namespace. Tasks can connect to services
+// across all of the clusters in the namespace. Tasks connect through a managed
+// proxy container that collects logs and metrics for increased visibility. Only
+// the tasks that Amazon ECS services create are supported with Service Connect.
+// For more information, see Service Connect
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type ServiceConnectClientAlias struct {
+
+	// The listening port number for the Service Connect proxy. This port is available
+	// inside of all of the tasks within the same namespace. To avoid changing your
+	// applications in client Amazon ECS services, set this to the same port that the
+	// client application uses by default. For more information, see Service Connect
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	//
+	// This member is required.
+	Port *int32
+
+	// The dnsName is the name that you use in the applications of client tasks to
+	// connect to this service. The name must be a valid DNS name but doesn't need to
+	// be fully-qualified. The name can include up to 127 characters. The name can
+	// include lowercase letters, numbers, underscores (_), hyphens (-), and periods
+	// (.). The name can't start with a hyphen. If this parameter isn't specified, the
+	// default value of discoveryName.namespace is used. If the discoveryName isn't
+	// specified, the port mapping name from the task definition is used in
+	// portName.namespace. To avoid changing your applications in client Amazon ECS
+	// services, set this to the same name that the client application uses by default.
+	// For example, a few common names are database, db, or the lowercase name of a
+	// database, such as mysql or redis. For more information, see Service Connect
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	DnsName *string
+
+	noSmithyDocumentSerde
+}
+
+// The Service Connect configuration of your Amazon ECS service. The configuration
+// for this service to discover and connect to services, and be discovered by, and
+// connected from, other services within a namespace. Tasks that run in a namespace
+// can use short names to connect to services in the namespace. Tasks can connect
+// to services across all of the clusters in the namespace. Tasks connect through a
+// managed proxy container that collects logs and metrics for increased visibility.
+// Only the tasks that Amazon ECS services create are supported with Service
+// Connect. For more information, see Service Connect
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type ServiceConnectConfiguration struct {
+
+	// Specifies whether to use Service Connect with this service.
+	//
+	// This member is required.
+	Enabled bool
+
+	// The log configuration for the container. This parameter maps to LogConfig in the
+	// Create a container
+	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
+	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
+	// --log-driver option to docker run
+	// (https://docs.docker.com/engine/reference/commandline/run/). By default,
+	// containers use the same logging driver that the Docker daemon uses. However, the
+	// container might use a different logging driver than the Docker daemon by
+	// specifying a log driver configuration in the container definition. For more
+	// information about the options for different supported log drivers, see Configure
+	// logging drivers (https://docs.docker.com/engine/admin/logging/overview/) in the
+	// Docker documentation. Understand the following when specifying a log
+	// configuration for your containers.
+	//
+	// * Amazon ECS currently supports a subset of
+	// the logging drivers available to the Docker daemon (shown in the valid values
+	// below). Additional log drivers may be available in future releases of the Amazon
+	// ECS container agent.
+	//
+	// * This parameter requires version 1.18 of the Docker
+	// Remote API or greater on your container instance.
+	//
+	// * For tasks that are hosted
+	// on Amazon EC2 instances, the Amazon ECS container agent must register the
+	// available logging drivers with the ECS_AVAILABLE_LOGGING_DRIVERS environment
+	// variable before containers placed on that instance can use these log
+	// configuration options. For more information, see Amazon ECS container agent
+	// configuration
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	//
+	// * For tasks that are
+	// on Fargate, because you don't have access to the underlying infrastructure your
+	// tasks are hosted on, any additional software needed must be installed outside of
+	// the task. For example, the Fluentd output aggregators or a remote host running
+	// Logstash to send Gelf logs to.
+	LogConfiguration *LogConfiguration
+
+	// The namespace name or full Amazon Resource Name (ARN) of the Cloud Map namespace
+	// for use with Service Connect. The namespace must be in the same Amazon Web
+	// Services Region as the Amazon ECS service and cluster. The type of namespace
+	// doesn't affect Service Connect. For more information about Cloud Map, see
+	// Working with Services (https://docs.aws.amazon.com/) in the Cloud Map Developer
+	// Guide.
+	Namespace *string
+
+	// The list of Service Connect service objects. These are names and aliases (also
+	// known as endpoints) that are used by other Amazon ECS services to connect to
+	// this service. This field is not required for a "client" Amazon ECS service
+	// that's a member of a namespace only to connect to other services within the
+	// namespace. An example of this would be a frontend application that accepts
+	// incoming requests from either a load balancer that's attached to the service or
+	// by other means. An object selects a port from the task definition, assigns a
+	// name for the Cloud Map service, and a list of aliases (endpoints) and ports for
+	// client applications to refer to this service.
+	Services []ServiceConnectService
+
+	noSmithyDocumentSerde
+}
+
+// The Service Connect service object configuration. For more information, see
+// Service Connect
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+// in the Amazon Elastic Container Service Developer Guide.
+type ServiceConnectService struct {
+
+	// The portName must match the name of one of the portMappings from all the
+	// containers in the task definition of this Amazon ECS service.
+	//
+	// This member is required.
+	PortName *string
+
+	// The list of client aliases for this Service Connect service. You use these to
+	// assign names that can be used by client applications. The maximum number of
+	// client aliases that you can have in this list is 1. Each alias ("endpoint") is a
+	// fully-qualified name and port number that other Amazon ECS tasks ("clients") can
+	// use to connect to this service. Each name and port mapping must be unique within
+	// the namespace. For each ServiceConnectService, you must provide at least one
+	// clientAlias with one port.
+	ClientAliases []ServiceConnectClientAlias
+
+	// The discoveryName is the name of the new Cloud Map service that Amazon ECS
+	// creates for this Amazon ECS service. This must be unique within the Cloud Map
+	// namespace. The name can contain up to 64 characters. The name can include
+	// lowercase letters, numbers, underscores (_), and hyphens (-). The name can't
+	// start with a hyphen. If this parameter isn't specified, the default value of
+	// discoveryName.namespace is used. If the discoveryName isn't specified, the port
+	// mapping name from the task definition is used in portName.namespace.
+	DiscoveryName *string
+
+	// The port number for the Service Connect proxy to listen on. Use the value of
+	// this field to bypass the proxy for traffic on the port number specified in the
+	// named portMapping in the task definition of this application, and then use it in
+	// your VPC security groups to allow traffic into the proxy for this Amazon ECS
+	// service. In awsvpc mode and Fargate, the default value is the container port
+	// number. The container port number is in the portMapping in the task definition.
+	// In bridge mode, the default value is the ephemeral port of the Service Connect
+	// proxy.
+	IngressPortOverride *int32
+
+	noSmithyDocumentSerde
+}
+
+// The Service Connect resource. Each configuration maps a discovery name to a
+// Cloud Map service name. The data is stored in Cloud Map as part of the Service
+// Connect configuration for each discovery name of this Amazon ECS service. A task
+// can resolve the dnsName for each of the clientAliases of a service. However a
+// task can't resolve the discovery names. If you want to connect to a service,
+// refer to the ServiceConnectConfiguration of that service for the list of
+// clientAliases that you can use.
+type ServiceConnectServiceResource struct {
+
+	// The Amazon Resource Name (ARN) for the namespace in Cloud Map that matches the
+	// discovery name for this Service Connect resource. You can use this ARN in other
+	// integrations with Cloud Map. However, Service Connect can't ensure connectivity
+	// outside of Amazon ECS.
+	DiscoveryArn *string
+
+	// The discovery name of this Service Connect resource. The discoveryName is the
+	// name of the new Cloud Map service that Amazon ECS creates for this Amazon ECS
+	// service. This must be unique within the Cloud Map namespace. The name can
+	// contain up to 64 characters. The name can include lowercase letters, numbers,
+	// underscores (_), and hyphens (-). The name can't start with a hyphen. If this
+	// parameter isn't specified, the default value of discoveryName.namespace is used.
+	// If the discoveryName isn't specified, the port mapping name from the task
+	// definition is used in portName.namespace.
+	DiscoveryName *string
 
 	noSmithyDocumentSerde
 }
@@ -3731,7 +4214,7 @@ type TaskOverride struct {
 	// One or more container overrides that are sent to a task.
 	ContainerOverrides []ContainerOverride
 
-	// The cpu override for the task.
+	// The CPU override for the task.
 	Cpu *string
 
 	// The ephemeral storage setting override for the task. This parameter is only
@@ -3845,7 +4328,7 @@ type TaskSet struct {
 	ServiceRegistries []ServiceRegistry
 
 	// The stability status. This indicates whether the task set has reached a steady
-	// state. If the following conditions are met, the task set sre in STEADY_STATE:
+	// state. If the following conditions are met, the task set are in STEADY_STATE:
 	//
 	// *
 	// The task runningCount is equal to the computedDesiredCount.

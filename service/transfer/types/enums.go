@@ -168,6 +168,22 @@ func (EncryptionAlg) Values() []EncryptionAlg {
 	}
 }
 
+type EncryptionType string
+
+// Enum values for EncryptionType
+const (
+	EncryptionTypePgp EncryptionType = "PGP"
+)
+
+// Values returns all known values for EncryptionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionType) Values() []EncryptionType {
+	return []EncryptionType{
+		"PGP",
+	}
+}
+
 type EndpointType string
 
 // Enum values for EndpointType
@@ -474,10 +490,11 @@ type WorkflowStepType string
 
 // Enum values for WorkflowStepType
 const (
-	WorkflowStepTypeCopy   WorkflowStepType = "COPY"
-	WorkflowStepTypeCustom WorkflowStepType = "CUSTOM"
-	WorkflowStepTypeTag    WorkflowStepType = "TAG"
-	WorkflowStepTypeDelete WorkflowStepType = "DELETE"
+	WorkflowStepTypeCopy    WorkflowStepType = "COPY"
+	WorkflowStepTypeCustom  WorkflowStepType = "CUSTOM"
+	WorkflowStepTypeTag     WorkflowStepType = "TAG"
+	WorkflowStepTypeDelete  WorkflowStepType = "DELETE"
+	WorkflowStepTypeDecrypt WorkflowStepType = "DECRYPT"
 )
 
 // Values returns all known values for WorkflowStepType. Note that this can be
@@ -489,5 +506,6 @@ func (WorkflowStepType) Values() []WorkflowStepType {
 		"CUSTOM",
 		"TAG",
 		"DELETE",
+		"DECRYPT",
 	}
 }

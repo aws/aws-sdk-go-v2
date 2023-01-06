@@ -355,7 +355,7 @@ func awsAwsjson11_deserializeDocumentEntitlementList(v *[]types.Entitlement, val
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentEntitlementValue(v *types.EntitlementValue, value interface{}) error {
+func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -368,27 +368,25 @@ func awsAwsjson11_deserializeDocumentEntitlementValue(v *types.EntitlementValue,
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var uv types.EntitlementValue
-loop:
+	var sv *types.EntitlementValue
+	if *v == nil {
+		sv = &types.EntitlementValue{}
+	} else {
+		sv = *v
+	}
+
 	for key, value := range shape {
-		if value == nil {
-			continue
-		}
 		switch key {
 		case "BooleanValue":
-			var mv bool
 			if value != nil {
 				jtv, ok := value.(bool)
 				if !ok {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
-				mv = jtv
+				sv.BooleanValue = ptr.Bool(jtv)
 			}
-			uv = &types.EntitlementValueMemberBooleanValue{Value: mv}
-			break loop
 
 		case "DoubleValue":
-			var mv float64
 			if value != nil {
 				switch jtv := value.(type) {
 				case json.Number:
@@ -396,7 +394,7 @@ loop:
 					if err != nil {
 						return err
 					}
-					mv = f64
+					sv.DoubleValue = ptr.Float64(f64)
 
 				case string:
 					var f64 float64
@@ -414,18 +412,15 @@ loop:
 						return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 					}
-					mv = f64
+					sv.DoubleValue = ptr.Float64(f64)
 
 				default:
 					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
 
 				}
 			}
-			uv = &types.EntitlementValueMemberDoubleValue{Value: mv}
-			break loop
 
 		case "IntegerValue":
-			var mv int32
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
@@ -435,30 +430,24 @@ loop:
 				if err != nil {
 					return err
 				}
-				mv = int32(i64)
+				sv.IntegerValue = ptr.Int32(int32(i64))
 			}
-			uv = &types.EntitlementValueMemberIntegerValue{Value: mv}
-			break loop
 
 		case "StringValue":
-			var mv string
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
-				mv = jtv
+				sv.StringValue = ptr.String(jtv)
 			}
-			uv = &types.EntitlementValueMemberStringValue{Value: mv}
-			break loop
 
 		default:
-			uv = &types.UnknownUnionMember{Tag: key}
-			break loop
+			_, _ = key, value
 
 		}
 	}
-	*v = uv
+	*v = sv
 	return nil
 }
 

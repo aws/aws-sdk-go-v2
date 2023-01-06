@@ -14,11 +14,12 @@ import (
 // Creates a new rule set for FlexMatch matchmaking. A rule set describes the type
 // of match to create, such as the number and size of teams. It also sets the
 // parameters for acceptable player matches, such as minimum skill level or
-// character type. A rule set is used by a MatchmakingConfiguration. To create a
-// matchmaking rule set, provide unique rule set name and the rule set body in JSON
-// format. Rule sets must be defined in the same Region as the matchmaking
-// configuration they are used with. Since matchmaking rule sets cannot be edited,
-// it is a good idea to check the rule set syntax using ValidateMatchmakingRuleSet
+// character type. To create a matchmaking rule set, provide unique rule set name
+// and the rule set body in JSON format. Rule sets must be defined in the same
+// Region as the matchmaking configuration they are used with. Since matchmaking
+// rule sets cannot be edited, it is a good idea to check the rule set syntax using
+// ValidateMatchmakingRuleSet
+// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ValidateMatchmakingRuleSet.html)
 // before creating a new rule set. Learn more
 //
 // * Build a rule set
@@ -31,13 +32,6 @@ import (
 // *
 // Matchmaking with FlexMatch
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-intro.html)
-//
-// Related
-// actions CreateMatchmakingConfiguration | DescribeMatchmakingConfigurations |
-// UpdateMatchmakingConfiguration | DeleteMatchmakingConfiguration |
-// CreateMatchmakingRuleSet | DescribeMatchmakingRuleSets |
-// ValidateMatchmakingRuleSet | DeleteMatchmakingRuleSet | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMatchmakingRuleSetInput, optFns ...func(*Options)) (*CreateMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &CreateMatchmakingRuleSetInput{}
@@ -53,7 +47,6 @@ func (c *Client) CreateMatchmakingRuleSet(ctx context.Context, params *CreateMat
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type CreateMatchmakingRuleSetInput struct {
 
 	// A unique identifier for the matchmaking rule set. A matchmaking configuration
@@ -74,16 +67,12 @@ type CreateMatchmakingRuleSetInput struct {
 	// useful for resource management, access management and cost allocation. For more
 	// information, see  Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
-	// Web Services General Reference. Once the resource is created, you can use
-	// TagResource, UntagResource, and ListTagsForResource to add, remove, and view
-	// tags. The maximum tag limit may be lower than stated. See the Amazon Web
-	// Services General Reference for actual tagging limits.
+	// Web Services General Reference.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type CreateMatchmakingRuleSetOutput struct {
 
 	// The newly created matchmaking rule set.

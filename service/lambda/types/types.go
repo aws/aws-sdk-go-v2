@@ -164,7 +164,7 @@ type CodeSigningPolicies struct {
 type Concurrency struct {
 
 	// The number of concurrent executions that are reserved for this function. For
-	// more information, see Managing Concurrency
+	// more information, see Managing Lambda reserved concurrency
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html).
 	ReservedConcurrentExecutions *int32
 
@@ -259,8 +259,8 @@ type EnvironmentError struct {
 }
 
 // The results of an operation to update or read environment variables. If the
-// operation is successful, the response contains the environment variables. If it
-// failed, the response contains details about the error.
+// operation succeeds, the response contains the environment variables. If it
+// fails, the response contains details about the error.
 type EnvironmentResponse struct {
 
 	// Error messages for environment variables that couldn't be applied.
@@ -272,11 +272,11 @@ type EnvironmentResponse struct {
 	noSmithyDocumentSerde
 }
 
-// The size of the function’s /tmp directory in MB. The default value is 512, but
-// can be any whole number between 512 and 10240 MB.
+// The size of the function's /tmp directory in MB. The default value is 512, but
+// it can be any whole number between 512 and 10,240 MB.
 type EphemeralStorage struct {
 
-	// The size of the function’s /tmp directory.
+	// The size of the function's /tmp directory.
 	//
 	// This member is required.
 	Size *int32
@@ -312,9 +312,8 @@ type EventSourceMappingConfiguration struct {
 	// The Amazon Resource Name (ARN) of the event source.
 	EventSourceArn *string
 
-	// (Streams and Amazon SQS) An object that defines the filter criteria that
-	// determine whether Lambda should process an event. For more information, see
-	// Lambda event filtering
+	// An object that defines the filter criteria that determine whether Lambda should
+	// process an event. For more information, see Lambda event filtering
 	// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-eventfiltering.html).
 	FilterCriteria *FilterCriteria
 
@@ -443,7 +442,7 @@ type FilterCriteria struct {
 	noSmithyDocumentSerde
 }
 
-// The code for the Lambda function. You can specify either an object in Amazon S3,
+// The code for the Lambda function. You can either specify an object in Amazon S3,
 // upload a .zip file archive deployment package directly, or specify the URI of a
 // container image.
 type FunctionCode struct {
@@ -464,7 +463,7 @@ type FunctionCode struct {
 	S3ObjectVersion *string
 
 	// The base64-encoded contents of the deployment package. Amazon Web Services SDK
-	// and Amazon Web Services CLI clients handle the encoding for you.
+	// and CLI clients handle the encoding for you.
 	ZipFile []byte
 
 	noSmithyDocumentSerde
@@ -514,7 +513,7 @@ type FunctionConfiguration struct {
 	Environment *EnvironmentResponse
 
 	// The size of the function’s /tmp directory in MB. The default value is 512, but
-	// can be any whole number between 512 and 10240 MB.
+	// it can be any whole number between 512 and 10,240 MB.
 	EphemeralStorage *EphemeralStorage
 
 	// Connection settings for an Amazon EFS file system
@@ -527,14 +526,14 @@ type FunctionConfiguration struct {
 	// The name of the function.
 	FunctionName *string
 
-	// The function that Lambda calls to begin executing your function.
+	// The function that Lambda calls to begin running your function.
 	Handler *string
 
 	// The function's image configuration values.
 	ImageConfigResponse *ImageConfigResponse
 
 	// The KMS key that's used to encrypt the function's environment variables. This
-	// key is only returned if you've configured a customer managed key.
+	// key is returned only if you've configured a customer managed key.
 	KMSKeyArn *string
 
 	// The date and time that the function was last updated, in ISO-8601 format
@@ -551,7 +550,7 @@ type FunctionConfiguration struct {
 	// The reason code for the last update that was performed on the function.
 	LastUpdateStatusReasonCode LastUpdateStatusReasonCode
 
-	// The function's  layers
+	// The function's layers
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
 	Layers []Layer
 
@@ -579,6 +578,12 @@ type FunctionConfiguration struct {
 
 	// The ARN of the signing profile version.
 	SigningProfileVersionArn *string
+
+	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
+	// execution environment when you publish a function version. For more information,
+	// see Reducing startup time with Lambda SnapStart
+	// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
+	SnapStart *SnapStartResponse
 
 	// The current state of the function. When the state is Inactive, you can
 	// reactivate the function by invoking it.
@@ -644,7 +649,7 @@ type FunctionUrlConfig struct {
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you
 	// want to restrict access to authenticated IAM users only. Set to NONE if you want
 	// to bypass IAM authentication to create a public endpoint. For more information,
-	// see  Security and auth model for Lambda function URLs
+	// see Security and auth model for Lambda function URLs
 	// (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
 	//
 	// This member is required.
@@ -680,8 +685,8 @@ type FunctionUrlConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration values that override the container image Dockerfile settings. See
-// Container settings
+// Configuration values that override the container image Dockerfile settings. For
+// more information, see Container image settings
 // (https://docs.aws.amazon.com/lambda/latest/dg/images-create.html#images-parms).
 type ImageConfig struct {
 
@@ -710,7 +715,7 @@ type ImageConfigError struct {
 	noSmithyDocumentSerde
 }
 
-// Response to GetFunctionConfiguration request.
+// Response to a GetFunctionConfiguration request.
 type ImageConfigResponse struct {
 
 	// Error response to GetFunctionConfiguration.
@@ -903,6 +908,36 @@ type SelfManagedKafkaEventSourceConfig struct {
 	noSmithyDocumentSerde
 }
 
+// The function's SnapStart setting. Set ApplyOn to PublishedVersions to create a
+// snapshot of the initialized execution environment when you publish a function
+// version. For more information, see Reducing startup time with Lambda SnapStart
+// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html).
+type SnapStart struct {
+
+	// Set to PublishedVersions to create a snapshot of the initialized execution
+	// environment when you publish a function version.
+	ApplyOn SnapStartApplyOn
+
+	noSmithyDocumentSerde
+}
+
+// The function's SnapStart
+// (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) setting.
+type SnapStartResponse struct {
+
+	// When set to PublishedVersions, Lambda creates a snapshot of the execution
+	// environment when you publish a function version.
+	ApplyOn SnapStartApplyOn
+
+	// When you provide a qualified Amazon Resource Name (ARN)
+	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using),
+	// this response element indicates whether SnapStart is activated for the specified
+	// function version.
+	OptimizationStatus SnapStartOptimizationStatus
+
+	noSmithyDocumentSerde
+}
+
 // To secure and define access to your event source, you can specify the
 // authentication protocol, VPC components, or virtual host.
 type SourceAccessConfiguration struct {
@@ -979,11 +1014,11 @@ type TracingConfigResponse struct {
 }
 
 // The VPC security groups and subnets that are attached to a Lambda function. For
-// more information, see VPC Settings
+// more information, see Configuring a Lambda function to access resources in a VPC
 // (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html).
 type VpcConfig struct {
 
-	// A list of VPC security groups IDs.
+	// A list of VPC security group IDs.
 	SecurityGroupIds []string
 
 	// A list of VPC subnet IDs.
@@ -995,7 +1030,7 @@ type VpcConfig struct {
 // The VPC security groups and subnets that are attached to a Lambda function.
 type VpcConfigResponse struct {
 
-	// A list of VPC security groups IDs.
+	// A list of VPC security group IDs.
 	SecurityGroupIds []string
 
 	// A list of VPC subnet IDs.

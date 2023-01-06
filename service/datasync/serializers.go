@@ -3825,6 +3825,13 @@ func awsAwsjson11_serializeOpDocumentStartTaskExecutionInput(v *StartTaskExecuti
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentInputTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TaskArn != nil {
 		ok := object.Key("TaskArn")
 		ok.String(*v.TaskArn)

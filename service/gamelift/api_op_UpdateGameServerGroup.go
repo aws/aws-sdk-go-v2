@@ -21,11 +21,6 @@ import (
 // continue to perform instance balancing activity. If successful, a
 // GameServerGroup object is returned. Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related actions CreateGameServerGroup | ListGameServerGroups |
-// DescribeGameServerGroup | UpdateGameServerGroup | DeleteGameServerGroup |
-// ResumeGameServerGroup | SuspendGameServerGroup | DescribeGameServerInstances |
-// All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameServerGroupInput, optFns ...func(*Options)) (*UpdateGameServerGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerGroupInput{}
@@ -43,8 +38,7 @@ func (c *Client) UpdateGameServerGroup(ctx context.Context, params *UpdateGameSe
 
 type UpdateGameServerGroupInput struct {
 
-	// A unique identifier for the game server group. Use either the GameServerGroup
-	// name or ARN value.
+	// A unique identifier for the game server group. Use either the name or ARN value.
 	//
 	// This member is required.
 	GameServerGroupName *string

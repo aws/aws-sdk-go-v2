@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a statement from a topic's access control policy.
+// Removes a statement from a topic's access control policy. To remove the ability
+// to change topic permissions, you must deny permissions to the AddPermission,
+// RemovePermission, and SetTopicAttributes actions in your IAM policy.
 func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionInput, optFns ...func(*Options)) (*RemovePermissionOutput, error) {
 	if params == nil {
 		params = &RemovePermissionInput{}

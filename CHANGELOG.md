@@ -1,3 +1,1173 @@
+# Release (2023-01-05)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.19.0](service/accessanalyzer/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.8.0](service/account/CHANGELOG.md#v180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.17.0](service/acm/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.20.0](service/acmpca/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/alexaforbusiness`: [v1.15.0](service/alexaforbusiness/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.16.0](service/amp/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.13.0](service/amplify/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.14.0](service/amplifybackend/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+  * **Feature**: Updated GetBackendAPIModels response to include ModelIntrospectionSchema json string
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.9.0](service/amplifyuibuilder/CHANGELOG.md#v190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.16.0](service/apigateway/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.11.0](service/apigatewaymanagementapi/CHANGELOG.md#v1110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.13.0](service/apigatewayv2/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.15.0](service/appconfig/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.5.0](service/appconfigdata/CHANGELOG.md#v150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.23.0](service/appflow/CHANGELOG.md#v1230-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.14.0](service/appintegrations/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.17.0](service/applicationautoscaling/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler`: [v1.10.0](service/applicationcostprofiler/CHANGELOG.md#v1100-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.15.0](service/applicationdiscoveryservice/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.17.0](service/applicationinsights/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.17.0](service/appmesh/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.16.0](service/apprunner/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+  * **Feature**: This release adds support of securely referencing secrets and configuration data that are stored in Secrets Manager and SSM Parameter Store by adding them as environment secrets in your App Runner service.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.19.0](service/appstream/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.18.0](service/appsync/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.1.0](service/arczonalshift/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.22.0](service/athena/CHANGELOG.md#v1220-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.22.0](service/auditmanager/CHANGELOG.md#v1220-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.26.0](service/autoscaling/CHANGELOG.md#v1260-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/autoscalingplans`: [v1.13.0](service/autoscalingplans/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.19.0](service/backup/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.9.0](service/backupgateway/CHANGELOG.md#v190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/backupstorage`: [v1.1.0](service/backupstorage/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.21.0](service/batch/CHANGELOG.md#v1210-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.4.0](service/billingconductor/CHANGELOG.md#v140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.17.0](service/braket/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.14.0](service/budgets/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.22.0](service/chime/CHANGELOG.md#v1220-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkidentity`: [v1.10.0](service/chimesdkidentity/CHANGELOG.md#v1100-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.2.0](service/chimesdkmediapipelines/CHANGELOG.md#v120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.14.0](service/chimesdkmeetings/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.12.0](service/chimesdkmessaging/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.1.0](service/chimesdkvoice/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.17.0](service/cloud9/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.11.0](service/cloudcontrol/CHANGELOG.md#v1110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.13.0](service/clouddirectory/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.25.0](service/cloudformation/CHANGELOG.md#v1250-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.24.0](service/cloudfront/CHANGELOG.md#v1240-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsm`: [v1.13.0](service/cloudhsm/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.14.0](service/cloudhsmv2/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.14.0](service/cloudsearch/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain`: [v1.12.0](service/cloudsearchdomain/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.22.0](service/cloudtrail/CHANGELOG.md#v1220-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.24.0](service/cloudwatch/CHANGELOG.md#v1240-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.15.0](service/cloudwatchevents/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.18.0](service/cloudwatchlogs/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.14.0](service/codeartifact/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.20.0](service/codebuild/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.1.0](service/codecatalyst/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.14.0](service/codecommit/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.16.0](service/codedeploy/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codeguruprofiler`: [v1.13.0](service/codeguruprofiler/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.17.0](service/codegurureviewer/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.14.0](service/codepipeline/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codestar`: [v1.13.0](service/codestar/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.14.0](service/codestarconnections/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/codestarnotifications`: [v1.14.0](service/codestarnotifications/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.15.0](service/cognitoidentity/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.22.0](service/cognitoidentityprovider/CHANGELOG.md#v1220-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/cognitosync`: [v1.12.0](service/cognitosync/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.21.0](service/comprehend/CHANGELOG.md#v1210-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.15.0](service/comprehendmedical/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.20.0](service/computeoptimizer/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.29.0](service/configservice/CHANGELOG.md#v1290-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.43.0](service/connect/CHANGELOG.md#v1430-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+  * **Feature**: Documentation update for a new Initiation Method value in DescribeContact API
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.2.0](service/connectcampaigns/CHANGELOG.md#v120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.2.0](service/connectcases/CHANGELOG.md#v120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.13.0](service/connectcontactlens/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.14.0](service/connectparticipant/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.1.0](service/controltower/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.15.0](service/costandusagereportservice/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.25.0](service/costexplorer/CHANGELOG.md#v1250-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.22.0](service/customerprofiles/CHANGELOG.md#v1220-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.23.0](service/databasemigrationservice/CHANGELOG.md#v1230-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.21.0](service/databrew/CHANGELOG.md#v1210-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.18.0](service/dataexchange/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/datapipeline`: [v1.14.0](service/datapipeline/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.21.0](service/datasync/CHANGELOG.md#v1210-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.12.0](service/dax/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.18.0](service/detective/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.15.0](service/devicefarm/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.21.0](service/devopsguru/CHANGELOG.md#v1210-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.18.0](service/directconnect/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.16.0](service/directoryservice/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.14.0](service/dlm/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.20.0](service/docdb/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.1.0](service/docdbelastic/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.10.0](service/drs/CHANGELOG.md#v1100-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.18.0](service/dynamodb/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.14.0](service/dynamodbstreams/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.16.0](service/ebs/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.15.0](service/ec2instanceconnect/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.18.0](service/ecr/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.14.0](service/ecrpublic/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.23.0](service/ecs/CHANGELOG.md#v1230-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.19.0](service/efs/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.27.0](service/eks/CHANGELOG.md#v1270-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.26.0](service/elasticache/CHANGELOG.md#v1260-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.15.0](service/elasticbeanstalk/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/elasticinference`: [v1.12.0](service/elasticinference/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.15.0](service/elasticloadbalancing/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.19.0](service/elasticloadbalancingv2/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.18.0](service/elasticsearchservice/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/elastictranscoder`: [v1.14.0](service/elastictranscoder/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.22.0](service/emr/CHANGELOG.md#v1220-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.16.0](service/emrcontainers/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.5.0](service/emrserverless/CHANGELOG.md#v150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+  * **Feature**: Adds support for customized images. You can now provide runtime images when creating or updating EMR Serverless Applications.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.17.0](service/eventbridge/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/evidently`: [v1.10.0](service/evidently/CHANGELOG.md#v1100-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.9.0](service/finspace/CHANGELOG.md#v190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.14.0](service/finspacedata/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.16.0](service/firehose/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.14.0](service/fis/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.22.0](service/fms/CHANGELOG.md#v1220-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.24.0](service/forecast/CHANGELOG.md#v1240-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/forecastquery`: [v1.13.0](service/forecastquery/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.21.0](service/frauddetector/CHANGELOG.md#v1210-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.28.0](service/fsx/CHANGELOG.md#v1280-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.17.0](service/gamelift/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/gamesparks`: [v1.2.0](service/gamesparks/CHANGELOG.md#v120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.14.0](service/glacier/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.16.0](service/globalaccelerator/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.39.0](service/glue/CHANGELOG.md#v1390-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.11.0](service/grafana/CHANGELOG.md#v1110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.15.0](service/greengrass/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.21.0](service/greengrassv2/CHANGELOG.md#v1210-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.15.0](service/groundstation/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.17.0](service/guardduty/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.16.0](service/health/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.15.0](service/healthlake/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/honeycode`: [v1.13.0](service/honeycode/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.19.0](service/iam/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.16.0](service/identitystore/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.21.0](service/imagebuilder/CHANGELOG.md#v1210-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/inspector`: [v1.13.0](service/inspector/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.11.0](service/inspector2/CHANGELOG.md#v1110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.33.0](service/iot/CHANGELOG.md#v1330-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice`: [v1.11.0](service/iot1clickdevicesservice/CHANGELOG.md#v1110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iot1clickprojects`: [v1.12.0](service/iot1clickprojects/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotanalytics`: [v1.14.0](service/iotanalytics/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.14.0](service/iotdataplane/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.17.0](service/iotdeviceadvisor/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotevents`: [v1.15.0](service/iotevents/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.13.0](service/ioteventsdata/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotfleethub`: [v1.13.0](service/iotfleethub/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.3.0](service/iotfleetwise/CHANGELOG.md#v130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane`: [v1.12.0](service/iotjobsdataplane/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotroborunner`: [v1.1.0](service/iotroborunner/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.15.0](service/iotsecuretunneling/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.27.0](service/iotsitewise/CHANGELOG.md#v1270-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.14.0](service/iotthingsgraph/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.10.0](service/iottwinmaker/CHANGELOG.md#v1100-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.24.0](service/iotwireless/CHANGELOG.md#v1240-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.19.0](service/ivs/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.3.0](service/ivschat/CHANGELOG.md#v130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.19.0](service/kafka/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.9.0](service/kafkaconnect/CHANGELOG.md#v190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.37.0](service/kendra/CHANGELOG.md#v1370-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.1.0](service/keyspaces/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.17.0](service/kinesis/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalytics`: [v1.14.0](service/kinesisanalytics/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.16.0](service/kinesisanalyticsv2/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.15.0](service/kinesisvideo/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.14.0](service/kinesisvideoarchivedmedia/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia`: [v1.11.0](service/kinesisvideomedia/CHANGELOG.md#v1110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling`: [v1.11.0](service/kinesisvideosignaling/CHANGELOG.md#v1110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.2.0](service/kinesisvideowebrtcstorage/CHANGELOG.md#v120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.20.0](service/kms/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.19.0](service/lakeformation/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.27.0](service/lambda/CHANGELOG.md#v1270-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.17.0](service/lexmodelbuildingservice/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.27.0](service/lexmodelsv2/CHANGELOG.md#v1270-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimeservice`: [v1.13.0](service/lexruntimeservice/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.16.0](service/lexruntimev2/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.17.0](service/licensemanager/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.1.0](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.2.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.25.0](service/lightsail/CHANGELOG.md#v1250-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+  * **Documentation**: Documentation updates for Amazon Lightsail.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.20.0](service/location/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.17.0](service/lookoutequipment/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.19.0](service/lookoutmetrics/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/lookoutvision`: [v1.15.0](service/lookoutvision/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.3.0](service/m2/CHANGELOG.md#v130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/machinelearning`: [v1.15.0](service/machinelearning/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/macie`: [v1.15.0](service/macie/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.26.0](service/macie2/CHANGELOG.md#v1260-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.14.0](service/managedblockchain/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.15.0](service/marketplacecatalog/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.12.0](service/marketplacecommerceanalytics/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.12.0](service/marketplaceentitlementservice/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.14.0](service/marketplacemetering/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.18.0](service/mediaconnect/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.29.0](service/mediaconvert/CHANGELOG.md#v1290-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.28.0](service/medialive/CHANGELOG.md#v1280-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.20.0](service/mediapackage/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.21.0](service/mediapackagevod/CHANGELOG.md#v1210-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mediastore`: [v1.13.0](service/mediastore/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mediastoredata`: [v1.13.0](service/mediastoredata/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.20.0](service/mediatailor/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.12.0](service/memorydb/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.17.0](service/mgn/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.13.0](service/migrationhub/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubconfig`: [v1.13.0](service/migrationhubconfig/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator`: [v1.1.0](service/migrationhuborchestrator/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.8.0](service/migrationhubrefactorspaces/CHANGELOG.md#v180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.7.0](service/migrationhubstrategy/CHANGELOG.md#v170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mobile`: [v1.12.0](service/mobile/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.14.0](service/mq/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mturk`: [v1.14.0](service/mturk/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.14.0](service/mwaa/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+  * **Documentation**: MWAA supports Apache Airflow version 2.4.3.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.19.0](service/neptune/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.22.0](service/networkfirewall/CHANGELOG.md#v1220-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.17.0](service/networkmanager/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/nimble`: [v1.16.0](service/nimble/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.1.0](service/oam/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.1.0](service/omics/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.12.0](service/opensearch/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.1.0](service/opensearchserverless/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/opsworks`: [v1.14.0](service/opsworks/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/opsworkscm`: [v1.15.0](service/opsworkscm/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.18.0](service/organizations/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.24.0](service/outposts/CHANGELOG.md#v1240-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.10.0](service/panorama/CHANGELOG.md#v1100-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.23.0](service/personalize/CHANGELOG.md#v1230-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.13.0](service/personalizeevents/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.13.0](service/personalizeruntime/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.16.0](service/pi/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.18.0](service/pinpoint/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.12.0](service/pinpointemail/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice`: [v1.11.0](service/pinpointsmsvoice/CHANGELOG.md#v1110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.1.0](service/pinpointsmsvoicev2/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.1.0](service/pipes/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.22.0](service/polly/CHANGELOG.md#v1220-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.18.0](service/pricing/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/privatenetworks`: [v1.1.0](service/privatenetworks/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.19.0](service/proton/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/qldb`: [v1.15.0](service/qldb/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/qldbsession`: [v1.14.0](service/qldbsession/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.29.0](service/quicksight/CHANGELOG.md#v1290-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.17.0](service/ram/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.8.0](service/rbin/CHANGELOG.md#v180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.39.0](service/rds/CHANGELOG.md#v1390-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+  * **Feature**: This release adds support for specifying which certificate authority (CA) to use for a DB instance's server certificate during DB instance creation, as well as other CA enhancements.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.13.0](service/rdsdata/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.27.0](service/redshift/CHANGELOG.md#v1270-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.18.0](service/redshiftdata/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.4.0](service/redshiftserverless/CHANGELOG.md#v140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.23.0](service/rekognition/CHANGELOG.md#v1230-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.8.0](service/resiliencehub/CHANGELOG.md#v180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.2.0](service/resourceexplorer2/CHANGELOG.md#v120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.13.0](service/resourcegroups/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.14.0](service/resourcegroupstaggingapi/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/robomaker`: [v1.18.0](service/robomaker/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.1.0](service/rolesanywhere/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.26.0](service/route53/CHANGELOG.md#v1260-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.14.0](service/route53domains/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.11.0](service/route53recoverycluster/CHANGELOG.md#v1110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.11.0](service/route53recoverycontrolconfig/CHANGELOG.md#v1110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness`: [v1.9.0](service/route53recoveryreadiness/CHANGELOG.md#v190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.16.0](service/route53resolver/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.9.0](service/rum/CHANGELOG.md#v190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.30.0](service/s3/CHANGELOG.md#v1300-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.29.0](service/s3control/CHANGELOG.md#v1290-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.14.0](service/s3outposts/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.62.0](service/sagemaker/CHANGELOG.md#v1620-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime`: [v1.15.0](service/sagemakera2iruntime/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.13.0](service/sagemakeredge/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.13.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.1.0](service/sagemakergeospatial/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.17.0](service/sagemakerruntime/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.12.0](service/savingsplans/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/scheduler`: [v1.1.0](service/scheduler/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/schemas`: [v1.15.0](service/schemas/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.18.0](service/secretsmanager/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.27.0](service/securityhub/CHANGELOG.md#v1270-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.2.0](service/securitylake/CHANGELOG.md#v120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository`: [v1.12.0](service/serverlessapplicationrepository/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.16.0](service/servicecatalog/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.16.0](service/servicecatalogappregistry/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.19.0](service/servicediscovery/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.14.0](service/servicequotas/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.15.0](service/ses/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.16.0](service/sesv2/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.17.0](service/sfn/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.18.0](service/shield/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/signer`: [v1.14.0](service/signer/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.1.0](service/simspaceweaver/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sms`: [v1.13.0](service/sms/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.17.0](service/snowball/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement`: [v1.9.0](service/snowdevicemanagement/CHANGELOG.md#v190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.19.0](service/sns/CHANGELOG.md#v1190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.20.0](service/sqs/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.35.0](service/ssm/CHANGELOG.md#v1350-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.14.0](service/ssmcontacts/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.20.0](service/ssmincidents/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.1.0](service/ssmsap/CHANGELOG.md#v110-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.12.0](service/sso/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.16.0](service/ssoadmin/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.14.0](service/ssooidc/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.18.0](service/storagegateway/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.18.0](service/sts/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.14.0](service/support/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.2.0](service/supportapp/CHANGELOG.md#v120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.14.0](service/swf/CHANGELOG.md#v1140-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.17.0](service/synthetics/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.20.0](service/textract/CHANGELOG.md#v1200-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.15.0](service/timestreamquery/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.15.0](service/timestreamwrite/CHANGELOG.md#v1150-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.25.0](service/transcribe/CHANGELOG.md#v1250-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.9.0](service/transcribestreaming/CHANGELOG.md#v190-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.28.0](service/transfer/CHANGELOG.md#v1280-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.17.0](service/translate/CHANGELOG.md#v1170-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.12.0](service/voiceid/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/waf`: [v1.12.0](service/waf/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/wafregional`: [v1.13.0](service/wafregional/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.24.0](service/wafv2/CHANGELOG.md#v1240-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.18.0](service/wellarchitected/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.12.0](service/wisdom/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.13.0](service/workdocs/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/worklink`: [v1.13.0](service/worklink/CHANGELOG.md#v1130-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.18.0](service/workmail/CHANGELOG.md#v1180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/workmailmessageflow`: [v1.12.0](service/workmailmessageflow/CHANGELOG.md#v1120-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.28.0](service/workspaces/CHANGELOG.md#v1280-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.8.0](service/workspacesweb/CHANGELOG.md#v180-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.16.0](service/xray/CHANGELOG.md#v1160-2023-01-05)
+  * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# Release (2023-01-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.16.0](service/applicationautoscaling/CHANGELOG.md#v1160-2023-01-04)
+  * **Feature**: Customers can now use the existing DescribeScalingActivities API to also see the detailed and machine-readable reasons for Application Auto Scaling not scaling their resources and, if needed, take the necessary corrective actions.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.17.4](service/cloudwatchlogs/CHANGELOG.md#v1174-2023-01-04)
+  * **Documentation**: Update to remove sequenceToken as a required field in PutLogEvents calls.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.34.0](service/ssm/CHANGELOG.md#v1340-2023-01-04)
+  * **Feature**: Adding support for QuickSetup Document Type in Systems Manager
+
+# Release (2023-01-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.1.0](service/securitylake/CHANGELOG.md#v110-2023-01-03)
+  * **Feature**: Allow CreateSubscriber API to take string input that allows setting more descriptive SubscriberDescription field. Make souceTypes field required in model level for UpdateSubscriberRequest as it is required for every API call on the backend. Allow ListSubscribers take any String as nextToken param.
+
+# Release (2022-12-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.23.0](service/cloudfront/CHANGELOG.md#v1230-2022-12-30)
+  * **Feature**: Extend response headers policy to support removing headers from viewer responses
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.2.1](service/iotfleetwise/CHANGELOG.md#v121-2022-12-30)
+  * **Documentation**: Update documentation - correct the epoch constant value of default value for expiryTime field in CreateCampaign request.
+
+# Release (2022-12-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.15.28](service/apigateway/CHANGELOG.md#v11528-2022-12-29)
+  * **Documentation**: Documentation updates for Amazon API Gateway
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.21.0](service/emr/CHANGELOG.md#v1210-2022-12-29)
+  * **Feature**: Added GetClusterSessionCredentials API to allow Amazon SageMaker Studio to connect to EMR on EC2 clusters with runtime roles and AWS Lake Formation-based access control for Apache Spark, Apache Hive, and Presto queries.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.17.0](service/secretsmanager/CHANGELOG.md#v1170-2022-12-29)
+  * **Feature**: Added owning service filter, include planned deletion flag, and next rotation date response parameter in ListSecrets.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.11.0](service/wisdom/CHANGELOG.md#v1110-2022-12-29)
+  * **Feature**: This release extends Wisdom CreateContent and StartContentUpload APIs to support PDF and MicrosoftWord docx document uploading.
+
+# Release (2022-12-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.25.0](service/elasticache/CHANGELOG.md#v1250-2022-12-28)
+  * **Feature**: This release allows you to modify the encryption in transit setting, for existing Redis clusters. You can now change the TLS configuration of your Redis clusters without the need to re-build or re-provision the clusters or impact application availability.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.21.0](service/networkfirewall/CHANGELOG.md#v1210-2022-12-28)
+  * **Feature**: AWS Network Firewall now provides status messages for firewalls to help you troubleshoot when your endpoint fails.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.38.0](service/rds/CHANGELOG.md#v1380-2022-12-28)
+  * **Feature**: This release adds support for Custom Engine Version (CEV) on RDS Custom SQL Server.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.10.0](service/route53recoverycontrolconfig/CHANGELOG.md#v1100-2022-12-28)
+  * **Feature**: Added support for Python paginators in the route53-recovery-control-config List* APIs.
+
+# Release (2022-12-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.11.0](service/memorydb/CHANGELOG.md#v1110-2022-12-27)
+  * **Feature**: This release adds support for MemoryDB Reserved nodes which provides a significant discount compared to on-demand node pricing. Reserved nodes are not physical nodes, but rather a billing discount applied to the use of on-demand nodes in your account.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.27.0](service/transfer/CHANGELOG.md#v1270-2022-12-27)
+  * **Feature**: Add additional operations to throw ThrottlingExceptions
+
+# Release (2022-12-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.42.0](service/connect/CHANGELOG.md#v1420-2022-12-23)
+  * **Feature**: Support for Routing Profile filter, SortCriteria, and grouping by Routing Profiles for GetCurrentMetricData API. Support for RoutingProfiles, UserHierarchyGroups, and Agents as filters, NextStatus and AgentStatusName for GetCurrentUserData. Adds ApproximateTotalCount to both APIs.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.13.0](service/connectparticipant/CHANGELOG.md#v1130-2022-12-23)
+  * **Feature**: Amazon Connect Chat introduces the Message Receipts feature. This feature allows agents and customers to receive message delivered and read receipts after they send a chat message.
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.17.0](service/detective/CHANGELOG.md#v1170-2022-12-23)
+  * **Feature**: This release adds a missed AccessDeniedException type to several endpoints.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.27.0](service/fsx/CHANGELOG.md#v1270-2022-12-23)
+  * **Feature**: Fix a bug where a recent release might break certain existing SDKs.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.10.0](service/inspector2/CHANGELOG.md#v1100-2022-12-23)
+  * **Feature**: Amazon Inspector adds support for scanning NodeJS 18.x and Go 1.x AWS Lambda function runtimes.
+
+# Release (2022-12-22)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.19.0](service/computeoptimizer/CHANGELOG.md#v1190-2022-12-22)
+  * **Feature**: This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for ecs services running on Fargate.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.41.0](service/connect/CHANGELOG.md#v1410-2022-12-22)
+  * **Feature**: Amazon Connect Chat introduces the Idle Participant/Autodisconnect feature, which allows users to set timeouts relating to the activity of chat participants, using the new UpdateParticipantRoleConfig API.
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.16.0](service/iotdeviceadvisor/CHANGELOG.md#v1160-2022-12-22)
+  * **Feature**: This release adds the following new features: 1) Documentation updates for IoT Device Advisor APIs. 2) Updated required request parameters for IoT Device Advisor APIs. 3) Added new service feature: ability to provide the test endpoint when customer executing the StartSuiteRun API.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.1.0](service/kinesisvideowebrtcstorage/CHANGELOG.md#v110-2022-12-22)
+  * **Feature**: Amazon Kinesis Video Streams offers capabilities to stream video and audio in real-time via WebRTC to the cloud for storage, playback, and analytical processing. Customers can use our enhanced WebRTC SDK and cloud APIs to enable real-time streaming, as well as media ingestion to the cloud.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.37.0](service/rds/CHANGELOG.md#v1370-2022-12-22)
+  * **Feature**: Add support for managing master user password in AWS Secrets Manager for the DBInstance and DBCluster.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.16.11](service/secretsmanager/CHANGELOG.md#v11611-2022-12-22)
+  * **Documentation**: Documentation updates for Secrets Manager
+
+# Release (2022-12-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.0.0](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v100-2022-12-21)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS License Manager now offers cross-region, cross-account tracking of commercial Linux subscriptions on AWS. This includes subscriptions purchased as part of EC2 subscription-included AMIs, on the AWS Marketplace, or brought to AWS via Red Hat Cloud Access Program.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.25.0](service/macie2/CHANGELOG.md#v1250-2022-12-21)
+  * **Feature**: This release adds support for analyzing Amazon S3 objects that use the S3 Glacier Instant Retrieval (Glacier_IR) storage class.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.61.0](service/sagemaker/CHANGELOG.md#v1610-2022-12-21)
+  * **Feature**: This release enables adding RStudio Workbench support to an existing Amazon SageMaker Studio domain. It allows setting your RStudio on SageMaker environment configuration parameters and also updating the RStudioConnectUrl and RStudioPackageManagerUrl parameters for existing domains
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.33.4](service/ssm/CHANGELOG.md#v1334-2022-12-21)
+  * **Documentation**: Doc-only updates for December 2022.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.13.22](service/support/CHANGELOG.md#v11322-2022-12-21)
+  * **Documentation**: Documentation updates for the AWS Support API
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.26.0](service/transfer/CHANGELOG.md#v1260-2022-12-21)
+  * **Feature**: This release adds support for Decrypt as a workflow step type.
+
+# Release (2022-12-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.20.0](service/batch/CHANGELOG.md#v1200-2022-12-20)
+  * **Feature**: Adds isCancelled and isTerminated to DescribeJobs response.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.77.0](service/ec2/CHANGELOG.md#v1770-2022-12-20)
+  * **Feature**: Adds support for pagination in the EC2 DescribeImages API.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.16.0](service/lookoutequipment/CHANGELOG.md#v1160-2022-12-20)
+  * **Feature**: This release adds support for listing inference schedulers by status.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.27.0](service/medialive/CHANGELOG.md#v1270-2022-12-20)
+  * **Feature**: This release adds support for two new features to AWS Elemental MediaLive. First, you can now burn-in timecodes to your MediaLive outputs. Second, we now now support the ability to decode Dolby E audio when it comes in on an input.
+* `github.com/aws/aws-sdk-go-v2/service/nimble`: [v1.15.0](service/nimble/CHANGELOG.md#v1150-2022-12-20)
+  * **Feature**: Amazon Nimble Studio now supports configuring session storage volumes and persistence, as well as backup and restore sessions through launch profiles.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.1.0](service/resourceexplorer2/CHANGELOG.md#v110-2022-12-20)
+  * **Feature**: Documentation updates for AWS Resource Explorer.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.13.0](service/route53domains/CHANGELOG.md#v1130-2022-12-20)
+  * **Feature**: Use Route 53 domain APIs to change owner, create/delete DS record, modify IPS tag, resend authorization. New: AssociateDelegationSignerToDomain, DisassociateDelegationSignerFromDomain, PushDomain, ResendOperationAuthorization. Updated: UpdateDomainContact, ListOperations, CheckDomainTransferability.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.60.0](service/sagemaker/CHANGELOG.md#v1600-2022-12-20)
+  * **Feature**: Amazon SageMaker Autopilot adds support for new objective metrics in CreateAutoMLJob API.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.24.0](service/transcribe/CHANGELOG.md#v1240-2022-12-20)
+  * **Feature**: Enable our batch transcription jobs for Swedish and Vietnamese.
+
+# Release (2022-12-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.21.0](service/athena/CHANGELOG.md#v1210-2022-12-19)
+  * **Feature**: Add missed InvalidRequestException in GetCalculationExecutionCode,StopCalculationExecution APIs. Correct required parameters (Payload and Type) in UpdateNotebook API. Change Notebook size from 15 Mb to 10 Mb.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.22.0](service/ecs/CHANGELOG.md#v1220-2022-12-19)
+  * **Feature**: This release adds support for alarm-based rollbacks in ECS, a new feature that allows customers to add automated safeguards for Amazon ECS service rolling updates.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.14.0](service/kinesisvideo/CHANGELOG.md#v1140-2022-12-19)
+  * **Feature**: Amazon Kinesis Video Streams offers capabilities to stream video and audio in real-time via WebRTC to the cloud for storage, playback, and analytical processing. Customers can use our enhanced WebRTC SDK and cloud APIs to enable real-time streaming, as well as media ingestion to the cloud.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.0.0](service/kinesisvideowebrtcstorage/CHANGELOG.md#v100-2022-12-19)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Kinesis Video Streams offers capabilities to stream video and audio in real-time via WebRTC to the cloud for storage, playback, and analytical processing. Customers can use our enhanced WebRTC SDK and cloud APIs to enable real-time streaming, as well as media ingestion to the cloud.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.36.0](service/rds/CHANGELOG.md#v1360-2022-12-19)
+  * **Feature**: Add support for --enable-customer-owned-ip to RDS create-db-instance-read-replica API for RDS on Outposts.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.59.0](service/sagemaker/CHANGELOG.md#v1590-2022-12-19)
+  * **Feature**: AWS Sagemaker - Sagemaker Images now supports Aliases as secondary identifiers for ImageVersions. SageMaker Images now supports additional metadata for ImageVersions for better images management.
+
+# Release (2022-12-16)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.22.0](service/appflow/CHANGELOG.md#v1220-2022-12-16)
+  * **Feature**: This release updates the ListConnectorEntities API action so that it returns paginated responses that customers can retrieve with next tokens.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.22.2](service/cloudfront/CHANGELOG.md#v1222-2022-12-16)
+  * **Documentation**: Updated documentation for CloudFront
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.20.0](service/datasync/CHANGELOG.md#v1200-2022-12-16)
+  * **Feature**: AWS DataSync now supports the use of tags with task executions. With this new feature, you can apply tags each time you execute a task, giving you greater control and management over your task executions.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.18.3](service/efs/CHANGELOG.md#v1183-2022-12-16)
+  * **Documentation**: General documentation updates for EFS.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.16.6](service/guardduty/CHANGELOG.md#v1166-2022-12-16)
+  * **Documentation**: This release provides the valid characters for the Description and Name field.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.2.0](service/iotfleetwise/CHANGELOG.md#v120-2022-12-16)
+  * **Feature**: Updated error handling for empty resource names in "UpdateSignalCatalog" and "GetModelManifest" operations.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.58.0](service/sagemaker/CHANGELOG.md#v1580-2022-12-16)
+  * **Feature**: AWS sagemaker - Features: This release adds support for random seed, it's an integer value used to initialize a pseudo-random number generator. Setting a random seed will allow the hyperparameter tuning search strategies to produce more consistent configurations for the same tuning job.
+
+# Release (2022-12-15)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.17.3
+  * **Bug Fix**: Unify logic between shared config and in finding home directory
+* `github.com/aws/aws-sdk-go-v2/config`: [v1.18.5](config/CHANGELOG.md#v1185-2022-12-15)
+  * **Bug Fix**: Unify logic between shared config and in finding home directory
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.13.5](credentials/CHANGELOG.md#v1135-2022-12-15)
+  * **Bug Fix**: Unify logic between shared config and in finding home directory
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.8.0](service/backupgateway/CHANGELOG.md#v180-2022-12-15)
+  * **Feature**: This release adds support for VMware vSphere tags, enabling customer to protect VMware virtual machines using tag-based policies for AWS tags mapped from vSphere tags. This release also adds support for customer-accessible gateway-hypervisor interaction log and upload bandwidth rate limit schedule.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.40.0](service/connect/CHANGELOG.md#v1400-2022-12-15)
+  * **Feature**: Added support for "English - New Zealand" and "English - South African" to be used with Amazon Connect Custom Vocabulary APIs.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.21.0](service/ecs/CHANGELOG.md#v1210-2022-12-15)
+  * **Feature**: This release adds support for container port ranges in ECS, a new capability that allows customers to provide container port ranges to simplify use cases where multiple ports are in use in a container. This release updates TaskDefinition mutation APIs and the Task description APIs.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.26.0](service/eks/CHANGELOG.md#v1260-2022-12-15)
+  * **Feature**: Add support for Windows managed nodes groups.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.38.0](service/glue/CHANGELOG.md#v1380-2022-12-15)
+  * **Feature**: This release adds support for AWS Glue Crawler with native DeltaLake tables, allowing Crawlers to classify Delta Lake format tables and catalog them for query engines to query against.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.16.0](service/kinesis/CHANGELOG.md#v1160-2022-12-15)
+  * **Feature**: Added StreamARN parameter for Kinesis Data Streams APIs. Added a new opaque pagination token for ListStreams. SDKs will auto-generate Account Endpoint when accessing Kinesis Data Streams.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.19.5](service/location/CHANGELOG.md#v1195-2022-12-15)
+  * **Documentation**: This release adds support for a new style, "VectorOpenDataStandardLight" which can be used with the new data source, "Open Data Maps (Preview)".
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.2.0](service/m2/CHANGELOG.md#v120-2022-12-15)
+  * **Feature**: Adds an optional create-only `KmsKeyId` property to Environment and Application resources.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.57.0](service/sagemaker/CHANGELOG.md#v1570-2022-12-15)
+  * **Feature**: SageMaker Inference Recommender now allows customers to load tests their models on various instance types using private VPC.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.26.0](service/securityhub/CHANGELOG.md#v1260-2022-12-15)
+  * **Feature**: Added new resource details objects to ASFF, including resources for AwsEc2LaunchTemplate, AwsSageMakerNotebookInstance, AwsWafv2WebAcl and AwsWafv2RuleGroup.
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.16.0](service/translate/CHANGELOG.md#v1160-2022-12-15)
+  * **Feature**: Raised the input byte size limit of the Text field in the TranslateText API to 10000 bytes.
+
+# Release (2022-12-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.23.0](service/cloudwatch/CHANGELOG.md#v1230-2022-12-14)
+  * **Feature**: Adding support for Metrics Insights Alarms
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.24.0](service/costexplorer/CHANGELOG.md#v1240-2022-12-14)
+  * **Feature**: This release supports percentage-based thresholds on Cost Anomaly Detection alert subscriptions.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.16.0](service/networkmanager/CHANGELOG.md#v1160-2022-12-14)
+  * **Feature**: Appliance Mode support for AWS Cloud WAN.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.17.0](service/redshiftdata/CHANGELOG.md#v1170-2022-12-14)
+  * **Feature**: This release adds a new --client-token field to ExecuteStatement and BatchExecuteStatement operations. Customers can now run queries with the additional client token parameter to ensures idempotency.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.0.1](service/sagemakermetrics/CHANGELOG.md#v101-2022-12-14)
+  * **Documentation**: Update SageMaker Metrics documentation.
+
+# Release (2022-12-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.21.0](service/cloudtrail/CHANGELOG.md#v1210-2022-12-13)
+  * **Feature**: Merging mainline branch for service model into mainline release branch. There are no new APIs.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.11.21](service/marketplaceentitlementservice/CHANGELOG.md#v11121-2022-12-13)
+  * **Bug Fix**: Fixing a shape type in the marketplaceentitlementservice client
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.35.0](service/rds/CHANGELOG.md#v1350-2022-12-13)
+  * **Feature**: This deployment adds ClientPasswordAuthType field to the Auth structure of the DBProxy.
+
+# Release (2022-12-12)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.21.0](service/customerprofiles/CHANGELOG.md#v1210-2022-12-12)
+  * **Feature**: This release allows custom strings in PartyType and Gender through 2 new attributes in the CreateProfile and UpdateProfile APIs: PartyTypeString and GenderString.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.76.0](service/ec2/CHANGELOG.md#v1760-2022-12-12)
+  * **Feature**: This release updates DescribeFpgaImages to show supported instance types of AFIs in its response.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.13.0](service/kinesisvideo/CHANGELOG.md#v1130-2022-12-12)
+  * **Feature**: This release adds support for public preview of Kinesis Video Stream at Edge enabling customers to provide configuration for the Kinesis Video Stream EdgeAgent running on an on-premise IoT device. Customers can now locally record from cameras and stream videos to the cloud on configured schedule.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutvision`: [v1.14.13](service/lookoutvision/CHANGELOG.md#v11413-2022-12-12)
+  * **Documentation**: This documentation update adds kms:GenerateDataKey as a required permission to StartModelPackagingJob.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.7.0](service/migrationhubrefactorspaces/CHANGELOG.md#v170-2022-12-12)
+  * **Feature**: This release adds support for Lambda alias service endpoints. Lambda alias ARNs can now be passed into CreateService.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.34.0](service/rds/CHANGELOG.md#v1340-2022-12-12)
+  * **Feature**: Update the RDS API model to support copying option groups during the CopyDBSnapshot operation
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.22.0](service/rekognition/CHANGELOG.md#v1220-2022-12-12)
+  * **Feature**: Adds support for "aliases" and "categories", inclusion and exclusion filters for labels and label categories, and aggregating labels by video segment timestamps for Stored Video Label Detection APIs.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.0.0](service/sagemakermetrics/CHANGELOG.md#v100-2022-12-12)
+  * **Release**: New AWS service client module
+  * **Feature**: This release introduces support SageMaker Metrics APIs.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.23.3](service/wafv2/CHANGELOG.md#v1233-2022-12-12)
+  * **Documentation**: Documents the naming requirement for logging destinations that you use with web ACLs.
+
+# Release (2022-12-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.17.2](service/cloudwatchlogs/CHANGELOG.md#v1172-2022-12-09)
+  * **Documentation**: Doc-only update for CloudWatch Logs, for Tagging Permissions clarifications
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.1.0](service/iotfleetwise/CHANGELOG.md#v110-2022-12-09)
+  * **Feature**: Deprecated assignedValue property for actuators and attributes.  Added a message to invalid nodes and invalid decoder manifest exceptions.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.26.0](service/medialive/CHANGELOG.md#v1260-2022-12-09)
+  * **Feature**: Link devices now support buffer size (latency) configuration. A higher latency value means a longer delay in transmitting from the device to MediaLive, but improved resiliency. A lower latency value means a shorter delay, but less resiliency.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.20.0](service/mediapackagevod/CHANGELOG.md#v1200-2022-12-09)
+  * **Feature**: This release provides the approximate number of assets in a packaging group.
+
+# Release (2022-12-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.25.0](service/autoscaling/CHANGELOG.md#v1250-2022-12-08)
+  * **Feature**: Adds support for metric math for target tracking scaling policies, saving you the cost and effort of publishing a custom metric to CloudWatch. Also adds support for VPC Lattice by adding the Attach/Detach/DescribeTrafficSources APIs and a new health check type to the CreateAutoScalingGroup API.
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.9.0](service/iottwinmaker/CHANGELOG.md#v190-2022-12-08)
+  * **Feature**: This release adds the following new features: 1) New APIs for managing a continuous sync of assets and asset models from AWS IoT SiteWise. 2) Support user friendly names for component types (ComponentTypeName) and properties (DisplayName).
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.6.0](service/migrationhubstrategy/CHANGELOG.md#v160-2022-12-08)
+  * **Feature**: This release adds known application filtering, server selection for assessments, support for potential recommendations, and indications for configuration and assessment status. For more information, see the AWS Migration Hub documentation at https://docs.aws.amazon.com/migrationhub/index.html
+
+# Release (2022-12-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.22.0](service/cloudfront/CHANGELOG.md#v1220-2022-12-07)
+  * **Feature**: Introducing UpdateDistributionWithStagingConfig that can be used to promote the staging configuration to the production.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.23.0](service/costexplorer/CHANGELOG.md#v1230-2022-12-07)
+  * **Feature**: This release adds the LinkedAccountName field to the GetAnomalies API response under RootCause
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.25.0](service/eks/CHANGELOG.md#v1250-2022-12-07)
+  * **Feature**: Adds support for EKS add-ons configurationValues fields and DescribeAddonConfiguration function
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.19.2](service/kms/CHANGELOG.md#v1192-2022-12-07)
+  * **Documentation**: Updated examples and exceptions for External Key Store (XKS).
+
+# Release (2022-12-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.3.0](service/billingconductor/CHANGELOG.md#v130-2022-12-06)
+  * **Feature**: This release adds the Tiering Pricing Rule feature.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.39.0](service/connect/CHANGELOG.md#v1390-2022-12-06)
+  * **Feature**: This release provides APIs that enable you to programmatically manage rules for Contact Lens conversational analytics and third party applications. For more information, see   https://docs.aws.amazon.com/connect/latest/APIReference/rules-api.html
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.33.0](service/rds/CHANGELOG.md#v1330-2022-12-06)
+  * **Feature**: This release adds the BlueGreenDeploymentNotFoundFault to the AddTagsToResource, ListTagsForResource, and RemoveTagsFromResource operations.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.12.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1120-2022-12-06)
+  * **Feature**: For online + offline Feature Groups, added ability to target PutRecord and DeleteRecord actions to only online store, or only offline store. If target store parameter is not specified, actions will apply to both stores.
+
+# Release (2022-12-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.22.0](service/costexplorer/CHANGELOG.md#v1220-2022-12-05)
+  * **Feature**: This release introduces two new APIs that offer a 1-click experience to refresh Savings Plans recommendations. The two APIs are StartSavingsPlansPurchaseRecommendationGeneration and ListSavingsPlansPurchaseRecommendationGeneration.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.75.0](service/ec2/CHANGELOG.md#v1750-2022-12-05)
+  * **Feature**: Documentation updates for EC2.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.2.0](service/ivschat/CHANGELOG.md#v120-2022-12-05)
+  * **Feature**: Adds PendingVerification error type to messaging APIs to block the resource usage for accounts identified as being fraudulent.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.32.0](service/rds/CHANGELOG.md#v1320-2022-12-05)
+  * **Feature**: This release adds the InvalidDBInstanceStateFault to the RestoreDBClusterFromSnapshot operation.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.23.0](service/transcribe/CHANGELOG.md#v1230-2022-12-05)
+  * **Feature**: Amazon Transcribe now supports creating custom language models in the following languages: Japanese (ja-JP) and German (de-DE).
+
+# Release (2022-12-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.17.0](service/appsync/CHANGELOG.md#v1170-2022-12-02)
+  * **Feature**: Fixes the URI for the evaluatecode endpoint to include the /v1 prefix (ie. "/v1/dataplane-evaluatecode").
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.20.1](service/ecs/CHANGELOG.md#v1201-2022-12-02)
+  * **Documentation**: Documentation updates for Amazon ECS
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.21.0](service/fms/CHANGELOG.md#v1210-2022-12-02)
+  * **Feature**: AWS Firewall Manager now supports Fortigate Cloud Native Firewall as a Service as a third-party policy type.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.28.0](service/mediaconvert/CHANGELOG.md#v1280-2022-12-02)
+  * **Feature**: The AWS Elemental MediaConvert SDK has added support for configurable ID3 eMSG box attributes and the ability to signal them with InbandEventStream tags in DASH and CMAF outputs.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.25.0](service/medialive/CHANGELOG.md#v1250-2022-12-02)
+  * **Feature**: Updates to Event Signaling and Management (ESAM) API and documentation.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.21.0](service/polly/CHANGELOG.md#v1210-2022-12-02)
+  * **Feature**: Add language code for Finnish (fi-FI)
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.18.0](service/proton/CHANGELOG.md#v1180-2022-12-02)
+  * **Feature**: CreateEnvironmentAccountConnection RoleArn input is now optional
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.3.0](service/redshiftserverless/CHANGELOG.md#v130-2022-12-02)
+  * **Feature**: Add Table Level Restore operations for Amazon Redshift Serverless. Add multi-port support for Amazon Redshift Serverless endpoints. Add Tagging support to Snapshots and Recovery Points in Amazon Redshift Serverless.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.18.7](service/sns/CHANGELOG.md#v1187-2022-12-02)
+  * **Documentation**: This release adds the message payload-filtering feature to the SNS Subscribe, SetSubscriptionAttributes, and GetSubscriptionAttributes API actions
+
+# Release (2022-12-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.0.0](service/codecatalyst/CHANGELOG.md#v100-2022-12-01)
+  * **Release**: New AWS service client module
+  * **Feature**: This release adds operations that support customers using the AWS Toolkits and Amazon CodeCatalyst, a unified software development service that helps developers develop, deploy, and maintain applications in the cloud. For more information, see the documentation.
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.20.0](service/comprehend/CHANGELOG.md#v1200-2022-12-01)
+  * **Feature**: Comprehend now supports semi-structured documents (such as PDF files or image files) as inputs for custom analysis using the synchronous APIs (ClassifyDocument and DetectEntities).
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.16.0](service/gamelift/CHANGELOG.md#v1160-2022-12-01)
+  * **Feature**: GameLift introduces a new feature, GameLift Anywhere. GameLift Anywhere allows you to integrate your own compute resources with GameLift. You can also use GameLift Anywhere to iteratively test your game servers without uploading the build to GameLift for every iteration.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.0.0](service/pipes/CHANGELOG.md#v100-2022-12-01)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS introduces new Amazon EventBridge Pipes which allow you to connect sources (SQS, Kinesis, DDB, Kafka, MQ) to Targets (14+ EventBridge Targets) without any code, with filtering, batching, input transformation, and an optional Enrichment stage (Lambda, StepFunctions, ApiGateway, ApiDestinations)
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.16.0](service/sfn/CHANGELOG.md#v1160-2022-12-01)
+  * **Feature**: This release adds support for the AWS Step Functions Map state in Distributed mode. The changes include a new MapRun resource and several new and modified APIs.
+
+# Release (2022-11-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.18.0](service/accessanalyzer/CHANGELOG.md#v1180-2022-11-30)
+  * **Feature**: This release adds support for S3 cross account access points. IAM Access Analyzer will now produce public or cross account findings when it detects bucket delegation to external account access points.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.20.0](service/athena/CHANGELOG.md#v1200-2022-11-30)
+  * **Feature**: This release includes support for using Apache Spark in Amazon Athena.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.17.0](service/dataexchange/CHANGELOG.md#v1170-2022-11-30)
+  * **Feature**: This release enables data providers to license direct access to data in their Amazon S3 buckets or AWS Lake Formation data lakes through AWS Data Exchange. Subscribers get read-only access to the data and can use it in downstream AWS services, like Amazon Athena, without creating or managing copies.
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.0.0](service/docdbelastic/CHANGELOG.md#v100-2022-11-30)
+  * **Release**: New AWS service client module
+  * **Feature**: Launched Amazon DocumentDB Elastic Clusters. You can now use the SDK to create, list, update and delete Amazon DocumentDB Elastic Cluster resources
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.37.0](service/glue/CHANGELOG.md#v1370-2022-11-30)
+  * **Feature**: This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.28.0](service/s3control/CHANGELOG.md#v1280-2022-11-30)
+  * **Feature**: Amazon S3 now supports cross-account access points. S3 bucket owners can now allow trusted AWS accounts to create access points associated with their bucket.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.56.0](service/sagemaker/CHANGELOG.md#v1560-2022-11-30)
+  * **Feature**: Added Models as part of the Search API. Added Model shadow deployments in realtime inference, and shadow testing in managed inference. Added support for shared spaces, geospatial APIs, Model Cards, AutoMLJobStep in pipelines, Git repositories on user profiles and domains, Model sharing in Jumpstart.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.0.0](service/sagemakergeospatial/CHANGELOG.md#v100-2022-11-30)
+  * **Release**: New AWS service client module
+  * **Feature**: This release provides Amazon SageMaker geospatial APIs to build, train, deploy and visualize geospatial models.
+
+# Release (2022-11-29.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.74.0](service/ec2/CHANGELOG.md#v1740-2022-11-292)
+  * **Feature**: This release adds support for AWS Verified Access and the Hpc6id Amazon EC2 compute optimized instance type, which features 3rd generation Intel Xeon Scalable processors.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.15.0](service/firehose/CHANGELOG.md#v1150-2022-11-292)
+  * **Feature**: Allow support for the Serverless offering for Amazon OpenSearch Service as a Kinesis Data Firehose delivery destination.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.19.0](service/kms/CHANGELOG.md#v1190-2022-11-292)
+  * **Feature**: AWS KMS introduces the External Key Store (XKS), a new feature for customers who want to protect their data with encryption keys stored in an external key management system under their control.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.0.0](service/omics/CHANGELOG.md#v100-2022-11-292)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Omics is a new, purpose-built service that can be used by healthcare and life science organizations to store, query, and analyze omics data. The insights from that data can be used to accelerate scientific discoveries and improve healthcare.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.0.0](service/opensearchserverless/CHANGELOG.md#v100-2022-11-292)
+  * **Release**: New AWS service client module
+  * **Feature**: Publish SDK for Amazon OpenSearch Serverless
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.0.0](service/securitylake/CHANGELOG.md#v100-2022-11-292)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Security Lake automatically centralizes security data from cloud, on-premises, and custom sources into a purpose-built data lake stored in your account. Security Lake makes it easier to analyze security data, so you can improve the protection of your workloads, applications, and data
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.0.0](service/simspaceweaver/CHANGELOG.md#v100-2022-11-292)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS SimSpace Weaver is a new service that helps customers build spatial simulations at new levels of scale - resulting in virtual worlds with millions of dynamic entities. See the AWS SimSpace Weaver developer guide for more details on how to get started. https://docs.aws.amazon.com/simspaceweaver
+
+# Release (2022-11-29)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.0.0](service/arczonalshift/CHANGELOG.md#v100-2022-11-29)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon Route 53 Application Recovery Controller Zonal Shift is a new service that makes it easy to shift traffic away from an Availability Zone in a Region. See the developer guide for more information: https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route53-recovery.html
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.18.0](service/computeoptimizer/CHANGELOG.md#v1180-2022-11-29)
+  * **Feature**: Adds support for a new recommendation preference that makes it possible for customers to optimize their EC2 recommendations by utilizing an external metrics ingestion service to provide metrics.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.28.0](service/configservice/CHANGELOG.md#v1280-2022-11-29)
+  * **Feature**: With this release, you can use AWS Config to evaluate your resources for compliance with Config rules before they are created or updated. Using Config rules in proactive mode enables you to test and build compliant resource templates or check resource configurations at the time they are provisioned.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.73.0](service/ec2/CHANGELOG.md#v1730-2022-11-29)
+  * **Feature**: Introduces ENA Express, which uses AWS SRD and dynamic routing to increase throughput and minimize latency, adds support for trust relationships between Reachability Analyzer and AWS Organizations to enable cross-account analysis, and adds support for Infrastructure Performance metric subscriptions.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.24.0](service/eks/CHANGELOG.md#v1240-2022-11-29)
+  * **Feature**: Adds support for additional EKS add-ons metadata and filtering fields
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.26.0](service/fsx/CHANGELOG.md#v1260-2022-11-29)
+  * **Feature**: This release adds support for 4GB/s / 160K PIOPS FSx for ONTAP file systems and 10GB/s / 350K PIOPS FSx for OpenZFS file systems (Single_AZ_2). For FSx for ONTAP, this also adds support for DP volumes, snapshot policy, copy tags to backups, and Multi-AZ route table updates.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.36.0](service/glue/CHANGELOG.md#v1360-2022-11-29)
+  * **Feature**: This release allows the creation of Custom Visual Transforms (Dynamic Transforms) to be created via AWS Glue CLI/SDK.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.9.0](service/inspector2/CHANGELOG.md#v190-2022-11-29)
+  * **Feature**: This release adds support for Inspector to scan AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.26.0](service/lambda/CHANGELOG.md#v1260-2022-11-29)
+  * **Feature**: Adds support for Lambda SnapStart, which helps improve the startup performance of functions. Customers can now manage SnapStart based functions via CreateFunction and UpdateFunctionConfiguration APIs
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.1.0](service/licensemanagerusersubscriptions/CHANGELOG.md#v110-2022-11-29)
+  * **Feature**: AWS now offers fully-compliant, Amazon-provided licenses for Microsoft Office Professional Plus 2021 Amazon Machine Images (AMIs) on Amazon EC2. These AMIs are now available on the Amazon EC2 console and on AWS Marketplace to launch instances on-demand without any long-term licensing commitments.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.24.0](service/macie2/CHANGELOG.md#v1240-2022-11-29)
+  * **Feature**: Added support for configuring Macie to continually sample objects from S3 buckets and inspect them for sensitive data. Results appear in statistics, findings, and other data that Macie provides.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.28.0](service/quicksight/CHANGELOG.md#v1280-2022-11-29)
+  * **Feature**: This release adds new Describe APIs and updates Create and Update APIs to support the data model for Dashboards, Analyses, and Templates.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.27.0](service/s3control/CHANGELOG.md#v1270-2022-11-29)
+  * **Feature**: Added two new APIs to support Amazon S3 Multi-Region Access Point failover controls: GetMultiRegionAccessPointRoutes and SubmitMultiRegionAccessPointRoutes. The failover control APIs are supported in the following Regions: us-east-1, us-west-2, eu-west-1, ap-southeast-2, and ap-northeast-1.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.25.0](service/securityhub/CHANGELOG.md#v1250-2022-11-29)
+  * **Feature**: Adding StandardsManagedBy field to DescribeStandards API response
+
+# Release (2022-11-28)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.18.0](service/backup/CHANGELOG.md#v1180-2022-11-28)
+  * **Feature**: AWS Backup introduces support for legal hold and application stack backups. AWS Backup Audit Manager introduces support for cross-Region, cross-account reports.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.22.0](service/cloudwatch/CHANGELOG.md#v1220-2022-11-28)
+  * **Feature**: Adds cross-account support to the GetMetricData API. Adds cross-account support to the ListMetrics API through the usage of the IncludeLinkedAccounts flag and the new OwningAccounts field.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.17.0](service/cloudwatchlogs/CHANGELOG.md#v1170-2022-11-28)
+  * **Feature**: Updates to support CloudWatch Logs data protection and CloudWatch cross-account observability
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.9.0](service/drs/CHANGELOG.md#v190-2022-11-28)
+  * **Feature**: Non breaking changes to existing APIs, and additional APIs added to support in-AWS failing back using AWS Elastic Disaster Recovery.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.20.0](service/ecs/CHANGELOG.md#v1200-2022-11-28)
+  * **Feature**: This release adds support for ECS Service Connect, a new capability that simplifies writing and operating resilient distributed applications. This release updates the TaskDefinition, Cluster, Service mutation APIs with Service connect constructs and also adds a new ListServicesByNamespace API.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.18.0](service/efs/CHANGELOG.md#v1180-2022-11-28)
+  * **Feature**: This release adds elastic as a new ThroughputMode value for EFS file systems and adds AFTER_1_DAY as a value for TransitionToIARules.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.32.0](service/iot/CHANGELOG.md#v1320-2022-11-28)
+  * **Feature**: Job scheduling enables the scheduled rollout of a Job with start and end times and a customizable end behavior when end time is reached. This is available for continuous and snapshot jobs. Added support for MQTT5 properties to AWS IoT TopicRule Republish Action.
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.13.0](service/iotdataplane/CHANGELOG.md#v1130-2022-11-28)
+  * **Feature**: This release adds support for MQTT5 properties to AWS IoT HTTP Publish API.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.23.0](service/iotwireless/CHANGELOG.md#v1230-2022-11-28)
+  * **Feature**: This release includes a new feature for customers to calculate the position of their devices by adding three new APIs: UpdateResourcePosition, GetResourcePosition, and GetPositionEstimate.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.36.0](service/kendra/CHANGELOG.md#v1360-2022-11-28)
+  * **Feature**: Amazon Kendra now supports preview of table information from HTML tables in the search results. The most relevant cells with their corresponding rows, columns are displayed as a preview in the search result. The most relevant table cell or cells are also highlighted in table preview.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.16.0](service/mgn/CHANGELOG.md#v1160-2022-11-28)
+  * **Feature**: This release adds support for Application and Wave management. We also now support custom post-launch actions.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.0.0](service/oam/CHANGELOG.md#v100-2022-11-28)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon CloudWatch Observability Access Manager is a new service that allows configuration of the CloudWatch cross-account observability feature.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.17.0](service/organizations/CHANGELOG.md#v1170-2022-11-28)
+  * **Feature**: This release introduces delegated administrator for AWS Organizations, a new feature to help you delegate the management of your Organizations policies, enabling you to govern your AWS organization in a decentralized way. You can now allow member accounts to manage Organizations policies.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.31.0](service/rds/CHANGELOG.md#v1310-2022-11-28)
+  * **Feature**: This release enables new Aurora and RDS feature called Blue/Green Deployments that makes updates to databases safer, simpler and faster.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.19.0](service/textract/CHANGELOG.md#v1190-2022-11-28)
+  * **Feature**: This release adds support for classifying and splitting lending documents by type, and extracting information by using the Analyze Lending APIs. This release also includes support for summarized information of the processed lending document package, in addition to per document results.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.22.0](service/transcribe/CHANGELOG.md#v1220-2022-11-28)
+  * **Feature**: This release adds support for 'inputType' for post-call and real-time (streaming) Call Analytics within Amazon Transcribe.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.8.0](service/transcribestreaming/CHANGELOG.md#v180-2022-11-28)
+  * **Feature**: This release adds support for real-time (streaming) and post-call Call Analytics within Amazon Transcribe.
+
+# Release (2022-11-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.10.0](service/grafana/CHANGELOG.md#v1100-2022-11-23)
+  * **Feature**: This release includes support for configuring a Grafana workspace to connect to a datasource within a VPC as well as new APIs for configuring Grafana settings.
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.7.0](service/rbin/CHANGELOG.md#v170-2022-11-23)
+  * **Feature**: This release adds support for Rule Lock for Recycle Bin, which allows you to lock retention rules so that they can no longer be modified or deleted.
+
+# Release (2022-11-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.21.0](service/appflow/CHANGELOG.md#v1210-2022-11-22)
+  * **Feature**: Adding support for Amazon AppFlow to transfer the data to Amazon Redshift databases through Amazon Redshift Data API service. This feature will support the Redshift destination connector on both public and private accessible Amazon Redshift Clusters and Amazon Redshift Serverless.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.15.0](service/kinesisanalyticsv2/CHANGELOG.md#v1150-2022-11-22)
+  * **Feature**: Support for Apache Flink 1.15 in Kinesis Data Analytics.
+
+# Release (2022-11-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.25.0](service/route53/CHANGELOG.md#v1250-2022-11-21)
+  * **Feature**: Amazon Route 53 now supports the Asia Pacific (Hyderabad) Region (ap-south-2) for latency records, geoproximity records, and private DNS for Amazon VPCs in that region.
+
 # Release (2022-11-18.2)
 
 ## Module Highlights

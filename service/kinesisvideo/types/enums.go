@@ -36,8 +36,9 @@ type ChannelProtocol string
 
 // Enum values for ChannelProtocol
 const (
-	ChannelProtocolWss   ChannelProtocol = "WSS"
-	ChannelProtocolHttps ChannelProtocol = "HTTPS"
+	ChannelProtocolWss    ChannelProtocol = "WSS"
+	ChannelProtocolHttps  ChannelProtocol = "HTTPS"
+	ChannelProtocolWebrtc ChannelProtocol = "WEBRTC"
 )
 
 // Values returns all known values for ChannelProtocol. Note that this can be
@@ -47,6 +48,7 @@ func (ChannelProtocol) Values() []ChannelProtocol {
 	return []ChannelProtocol{
 		"WSS",
 		"HTTPS",
+		"WEBRTC",
 	}
 }
 
@@ -172,6 +174,43 @@ func (ImageSelectorType) Values() []ImageSelectorType {
 	}
 }
 
+type MediaStorageConfigurationStatus string
+
+// Enum values for MediaStorageConfigurationStatus
+const (
+	MediaStorageConfigurationStatusEnabled  MediaStorageConfigurationStatus = "ENABLED"
+	MediaStorageConfigurationStatusDisabled MediaStorageConfigurationStatus = "DISABLED"
+)
+
+// Values returns all known values for MediaStorageConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MediaStorageConfigurationStatus) Values() []MediaStorageConfigurationStatus {
+	return []MediaStorageConfigurationStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type MediaUriType string
+
+// Enum values for MediaUriType
+const (
+	MediaUriTypeRtspUri MediaUriType = "RTSP_URI"
+	MediaUriTypeFileUri MediaUriType = "FILE_URI"
+)
+
+// Values returns all known values for MediaUriType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MediaUriType) Values() []MediaUriType {
+	return []MediaUriType{
+		"RTSP_URI",
+		"FILE_URI",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -191,6 +230,50 @@ func (Status) Values() []Status {
 		"ACTIVE",
 		"UPDATING",
 		"DELETING",
+	}
+}
+
+type StrategyOnFullSize string
+
+// Enum values for StrategyOnFullSize
+const (
+	StrategyOnFullSizeDeleteOldestMedia StrategyOnFullSize = "DELETE_OLDEST_MEDIA"
+	StrategyOnFullSizeDenyNewMedia      StrategyOnFullSize = "DENY_NEW_MEDIA"
+)
+
+// Values returns all known values for StrategyOnFullSize. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StrategyOnFullSize) Values() []StrategyOnFullSize {
+	return []StrategyOnFullSize{
+		"DELETE_OLDEST_MEDIA",
+		"DENY_NEW_MEDIA",
+	}
+}
+
+type SyncStatus string
+
+// Enum values for SyncStatus
+const (
+	SyncStatusSyncing      SyncStatus = "SYNCING"
+	SyncStatusAcknowledged SyncStatus = "ACKNOWLEDGED"
+	SyncStatusInSync       SyncStatus = "IN_SYNC"
+	SyncStatusSyncFailed   SyncStatus = "SYNC_FAILED"
+	SyncStatusDeleting     SyncStatus = "DELETING"
+	SyncStatusDeleteFailed SyncStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for SyncStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SyncStatus) Values() []SyncStatus {
+	return []SyncStatus{
+		"SYNCING",
+		"ACKNOWLEDGED",
+		"IN_SYNC",
+		"SYNC_FAILED",
+		"DELETING",
+		"DELETE_FAILED",
 	}
 }
 

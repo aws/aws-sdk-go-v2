@@ -16,11 +16,6 @@ import (
 // the property values that you want to change. If successful, an updated
 // FleetAttributes object is returned. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions CreateFleetLocations | UpdateFleetAttributes |
-// UpdateFleetCapacity | UpdateFleetPortSettings | UpdateRuntimeConfiguration |
-// StopFleetActions | StartFleetActions | PutScalingPolicy | DeleteFleet |
-// DeleteFleetLocations | DeleteScalingPolicy | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetAttributesInput, optFns ...func(*Options)) (*UpdateFleetAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateFleetAttributesInput{}
@@ -36,7 +31,6 @@ func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetA
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type UpdateFleetAttributesInput struct {
 
 	// A unique identifier for the fleet to update attribute metadata for. You can use
@@ -44,6 +38,9 @@ type UpdateFleetAttributesInput struct {
 	//
 	// This member is required.
 	FleetId *string
+
+	// GameLift Anywhere configuration options.
+	AnywhereConfiguration *types.AnywhereConfiguration
 
 	// A human-readable description of a fleet.
 	Description *string
@@ -60,14 +57,15 @@ type UpdateFleetAttributesInput struct {
 
 	// The game session protection policy to apply to all new instances created in this
 	// fleet. Instances that already exist are not affected. You can set protection for
-	// individual instances using UpdateGameSession.
+	// individual instances using UpdateGameSession
+	// (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)
+	// .
 	//
-	// * NoProtection -- The game
-	// session can be terminated during a scale-down event.
-	//
-	// * FullProtection -- If the
-	// game session is in an ACTIVE status, it cannot be terminated during a scale-down
+	// * NoProtection -- The game session can be terminated during a scale-down
 	// event.
+	//
+	// * FullProtection -- If the game session is in an ACTIVE status, it
+	// cannot be terminated during a scale-down event.
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
 	// Policy settings that limit the number of game sessions an individual player can
@@ -77,8 +75,14 @@ type UpdateFleetAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type UpdateFleetAttributesOutput struct {
+
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
+	// assigned to a GameLift fleet resource and uniquely identifies it. ARNs are
+	// unique across all Regions. Format is
+	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	FleetArn *string
 
 	// A unique identifier for the fleet that was updated.
 	FleetId *string

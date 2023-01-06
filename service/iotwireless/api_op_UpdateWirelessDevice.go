@@ -46,6 +46,10 @@ type UpdateWirelessDeviceInput struct {
 	// The new name of the resource.
 	Name *string
 
+	// FPort values for the GNSS, stream, and ClockSync functions of the positioning
+	// information.
+	Positioning types.PositioningConfigStatus
+
 	noSmithyDocumentSerde
 }
 

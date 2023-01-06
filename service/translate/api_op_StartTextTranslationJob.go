@@ -14,15 +14,14 @@ import (
 
 // Starts an asynchronous batch translation job. Use batch translation jobs to
 // translate large volumes of text across multiple documents at once. For batch
-// translation, the input documents must share the same source language. You can
-// specify one or more target languages. Batch translation translates each input
-// document into each of the target languages. For more information, see
-// Asynchronous batch processing
-// (https://docs.aws.amazon.com/translate/latest/dg/async.html) Batch translation
+// translation, you can input documents with different source languages (specify
+// auto as the source language). You can specify one or more target languages.
+// Batch translation translates each input document into each of the target
+// languages. For more information, see Asynchronous batch processing
+// (https://docs.aws.amazon.com/translate/latest/dg/async.html). Batch translation
 // jobs can be described with the DescribeTextTranslationJob operation, listed with
 // the ListTextTranslationJobs operation, and stopped with the
-// StopTextTranslationJob operation. Amazon Translate does not support batch
-// translation of multiple source languages at once.
+// StopTextTranslationJob operation.
 func (c *Client) StartTextTranslationJob(ctx context.Context, params *StartTextTranslationJobInput, optFns ...func(*Options)) (*StartTextTranslationJobOutput, error) {
 	if params == nil {
 		params = &StartTextTranslationJobInput{}
@@ -65,18 +64,19 @@ type StartTextTranslationJobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// The language code of the input language. For a list of language codes, see
-	// Supported languages
-	// (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html). Amazon
-	// Translate does not automatically detect a source language during batch
-	// translation jobs.
+	// The language code of the input language. Specify the language if all input
+	// documents share the same language. If you don't know the language of the source
+	// files, or your input documents contains different source languages, select auto.
+	// Amazon Translate auto detects the source language for each input document. For a
+	// list of supported language codes, see Supported languages
+	// (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html).
 	//
 	// This member is required.
 	SourceLanguageCode *string
 
 	// The target languages of the translation job. Enter up to 10 language codes. Each
-	// input file is translated into each target language. Each language code is two or
-	// five characters long. For a list of language codes, see Supported languages
+	// input file is translated into each target language. Each language code is 2 or 5
+	// characters long. For a list of language codes, see Supported languages
 	// (https://docs.aws.amazon.com/translate/latest/dg/what-is-languages.html).
 	//
 	// This member is required.

@@ -203,9 +203,10 @@ type ApiKey struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync
-// function. Specifies the name and version of the runtime to use. Note that if a
-// runtime is specified, code must also be specified.
+// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or
+// Amazon Web Services AppSync function. Specifies the name and version of the
+// runtime to use. Note that if a runtime is specified, code must also be
+// specified.
 type AppSyncRuntime struct {
 
 	// The name of the runtime to use. Currently, the only allowed value is APPSYNC_JS.
@@ -535,9 +536,10 @@ type FunctionConfiguration struct {
 	// The Function response mapping template.
 	ResponseMappingTemplate *string
 
-	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync
-	// function. Specifies the name and version of the runtime to use. Note that if a
-	// runtime is specified, code must also be specified.
+	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or
+	// Amazon Web Services AppSync function. Specifies the name and version of the
+	// runtime to use. Note that if a runtime is specified, code must also be
+	// specified.
 	Runtime *AppSyncRuntime
 
 	// Describes a Sync configuration for a resolver. Specifies which Conflict
@@ -833,9 +835,10 @@ type Resolver struct {
 	// The response mapping template.
 	ResponseMappingTemplate *string
 
-	// Describes a runtime used by an AWS AppSync pipeline resolver or AWS AppSync
-	// function. Specifies the name and version of the runtime to use. Note that if a
-	// runtime is specified, code must also be specified.
+	// Describes a runtime used by an Amazon Web Services AppSync pipeline resolver or
+	// Amazon Web Services AppSync function. Specifies the name and version of the
+	// runtime to use. Note that if a runtime is specified, code must also be
+	// specified.
 	Runtime *AppSyncRuntime
 
 	// The SyncConfig for a resolver attached to a versioned data source.

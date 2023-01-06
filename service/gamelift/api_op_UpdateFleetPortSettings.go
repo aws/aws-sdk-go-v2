@@ -22,11 +22,6 @@ import (
 // location by calling DescribeFleetPortSettings with a location name. Learn more
 // Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related actions CreateFleetLocations | UpdateFleetAttributes |
-// UpdateFleetCapacity | UpdateFleetPortSettings | UpdateRuntimeConfiguration |
-// StopFleetActions | StartFleetActions | PutScalingPolicy | DeleteFleet |
-// DeleteFleetLocations | DeleteScalingPolicy | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateFleetPortSettings(ctx context.Context, params *UpdateFleetPortSettingsInput, optFns ...func(*Options)) (*UpdateFleetPortSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateFleetPortSettingsInput{}
@@ -42,7 +37,6 @@ func (c *Client) UpdateFleetPortSettings(ctx context.Context, params *UpdateFlee
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type UpdateFleetPortSettingsInput struct {
 
 	// A unique identifier for the fleet to update port settings for. You can use
@@ -60,8 +54,14 @@ type UpdateFleetPortSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type UpdateFleetPortSettingsOutput struct {
+
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
+	// assigned to a GameLift fleet resource and uniquely identifies it. ARNs are
+	// unique across all Regions. Format is
+	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	FleetArn *string
 
 	// A unique identifier for the fleet that was updated.
 	FleetId *string

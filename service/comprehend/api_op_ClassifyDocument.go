@@ -13,6 +13,14 @@ import (
 
 // Creates a new document classification request to analyze a single document in
 // real-time, using a previously created and trained custom model and an endpoint.
+// You can input plain text or you can upload a single-page input document (text,
+// PDF, Word, or image). If the system detects errors while processing a page in
+// the input document, the API response includes an entry in Errors that describes
+// the errors. If the system detects a document-level error in your input document,
+// the API returns an InvalidRequestException error response. For details about
+// this exception, see  Errors in semi-structured documents
+// (https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html) in
+// the Comprehend Developer Guide.
 func (c *Client) ClassifyDocument(ctx context.Context, params *ClassifyDocumentInput, optFns ...func(*Options)) (*ClassifyDocumentOutput, error) {
 	if params == nil {
 		params = &ClassifyDocumentInput{}
@@ -37,9 +45,24 @@ type ClassifyDocumentInput struct {
 	// This member is required.
 	EndpointArn *string
 
-	// The document text to be analyzed.
-	//
-	// This member is required.
+	// Use the Bytes parameter to input a text, PDF, Word or image file. You can also
+	// use the Bytes parameter to input an Amazon Textract DetectDocumentText or
+	// AnalyzeDocument output file. Provide the input document as a sequence of
+	// base64-encoded bytes. If your code uses an Amazon Web Services SDK to classify
+	// documents, the SDK may encode the document file bytes for you. The maximum
+	// length of this field depends on the input document type. For details, see
+	// Inputs for real-time custom analysis
+	// (https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html) in the
+	// Comprehend Developer Guide. If you use the Bytes parameter, do not use the Text
+	// parameter.
+	Bytes []byte
+
+	// Provides configuration parameters to override the default actions for extracting
+	// text from PDF documents and image files.
+	DocumentReaderConfig *types.DocumentReaderConfig
+
+	// The document text to be analyzed. If you enter text using this parameter, do not
+	// use the Bytes parameter.
 	Text *string
 
 	noSmithyDocumentSerde
@@ -52,6 +75,18 @@ type ClassifyDocumentOutput struct {
 	// expected to have only a single class assigned to it. For example, an animal can
 	// be a dog or a cat, but not both at the same time.
 	Classes []types.DocumentClass
+
+	// Extraction information about the document. This field is present in the response
+	// only if your request includes the Byte parameter.
+	DocumentMetadata *types.DocumentMetadata
+
+	// The document type for each page in the input document. This field is present in
+	// the response only if your request includes the Byte parameter.
+	DocumentType []types.DocumentTypeListItem
+
+	// Page-level errors that the system detected while processing the input document.
+	// The field is empty if the system encountered no errors.
+	Errors []types.ErrorsListItem
 
 	// The labels used the document being analyzed. These are used for multi-label
 	// trained models. Individual labels represent different categories that are

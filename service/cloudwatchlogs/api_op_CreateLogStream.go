@@ -23,8 +23,7 @@ import (
 // * Log stream names can be between 1 and 512
 // characters long.
 //
-// * The ':' (colon) and '*' (asterisk) characters are not
-// allowed.
+// * Don't use ':' (colon) or '*' (asterisk) characters.
 func (c *Client) CreateLogStream(ctx context.Context, params *CreateLogStreamInput, optFns ...func(*Options)) (*CreateLogStreamOutput, error) {
 	if params == nil {
 		params = &CreateLogStreamInput{}

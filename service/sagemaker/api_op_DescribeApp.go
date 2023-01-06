@@ -45,9 +45,10 @@ type DescribeAppInput struct {
 	// This member is required.
 	DomainId *string
 
-	// The user profile name.
-	//
-	// This member is required.
+	// The name of the space.
+	SpaceName *string
+
+	// The user profile name. If this value is not set, then SpaceName must be set.
 	UserProfileName *string
 
 	noSmithyDocumentSerde
@@ -84,6 +85,10 @@ type DescribeAppOutput struct {
 	// The instance type and the Amazon Resource Name (ARN) of the SageMaker image
 	// created on the instance.
 	ResourceSpec *types.ResourceSpec
+
+	// The name of the space. If this value is not set, then UserProfileName must be
+	// set.
+	SpaceName *string
 
 	// The status.
 	Status types.AppStatus

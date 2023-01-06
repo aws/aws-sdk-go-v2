@@ -11,6 +11,8 @@ import (
 type InvalidParameterException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	ParameterName *string
 
 	noSmithyDocumentSerde
@@ -25,12 +27,19 @@ func (e *InvalidParameterException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
+func (e *InvalidParameterException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidParameterException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have reached the limit on the maximum number of resources allowed.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 
@@ -46,12 +55,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 	ResourceName *string
@@ -68,12 +84,19 @@ func (e *ResourceAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceAlreadyExistsException) ErrorCode() string             { return "ResourceAlreadyExistsException" }
+func (e *ResourceAlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource can't be modified at this time.
 type ResourceInUseException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 	ResourceName *string
@@ -90,12 +113,19 @@ func (e *ResourceInUseException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceInUseException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified resource doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 	ResourceName *string
@@ -112,12 +142,19 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because a condition wasn't satisfied in advance.
 type ResourcePreconditionNotMetException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	ResourceType *string
 	ResourceName *string
@@ -135,7 +172,10 @@ func (e *ResourcePreconditionNotMetException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *ResourcePreconditionNotMetException) ErrorCode() string {
-	return "ResourcePreconditionNotMetException"
+	if e.ErrorCodeOverride == nil {
+		return "ResourcePreconditionNotMetException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *ResourcePreconditionNotMetException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

@@ -16,13 +16,17 @@ import (
 // or filter the results using a filter pattern, a time range, and the name of the
 // log stream. You must have the logs;FilterLogEvents permission to perform this
 // operation. By default, this operation returns as many log events as can fit in 1
-// MB (up to 10,000 log events) or all the events found within the time range that
-// you specify. If the results include a token, then there are more log events
-// available, and you can get additional results by specifying the token in a
+// MB (up to 10,000 log events) or all the events found within the specified time
+// range. If the results include a token, that means there are more log events
+// available. You can get additional results by specifying the token in a
 // subsequent call. This operation can return empty results while there are more
 // log events available through the token. The returned log events are sorted by
 // event timestamp, the timestamp when the event was ingested by CloudWatch Logs,
-// and the ID of the PutLogEvents request.
+// and the ID of the PutLogEvents request. If you are using CloudWatch
+// cross-account observability, you can use this operation in a monitoring account
+// and view data from the linked source accounts. For more information, see
+// CloudWatch cross-account observability
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
 func (c *Client) FilterLogEvents(ctx context.Context, params *FilterLogEventsInput, optFns ...func(*Options)) (*FilterLogEventsOutput, error) {
 	if params == nil {
 		params = &FilterLogEventsInput{}
@@ -40,7 +44,8 @@ func (c *Client) FilterLogEvents(ctx context.Context, params *FilterLogEventsInp
 
 type FilterLogEventsInput struct {
 
-	// The name of the log group to search.
+	// The name of the log group to search. If you specify values for both logGroupName
+	// and logGroupIdentifier, the action returns an InvalidParameterException error.
 	//
 	// This member is required.
 	LogGroupName *string
@@ -55,13 +60,13 @@ type FilterLogEventsInput struct {
 	// If not provided, all the events are matched.
 	FilterPattern *string
 
-	// If the value is true, the operation makes a best effort to provide responses
-	// that contain events from multiple log streams within the log group, interleaved
-	// in a single response. If the value is false, all the matched log events in the
-	// first log stream are searched first, then those in the next log stream, and so
-	// on. The default is false. Important: Starting on June 17, 2019, this parameter
-	// is ignored and the value is assumed to be true. The response from this operation
-	// always interleaves events from multiple log streams within a log group.
+	// If the value is true, the operation attempts to provide responses that contain
+	// events from multiple log streams within the log group, interleaved in a single
+	// response. If the value is false, all the matched log events in the first log
+	// stream are searched first, then those in the next log stream, and so on.
+	// Important As of June 17, 2019, this parameter is ignored and the value is
+	// assumed to be true. The response from this operation always interleaves events
+	// from multiple log streams within a log group.
 	//
 	// Deprecated: Starting on June 17, 2019, this parameter will be ignored and the
 	// value will be assumed to be true. The response from this operation will always
@@ -70,6 +75,12 @@ type FilterLogEventsInput struct {
 
 	// The maximum number of events to return. The default is 10,000 events.
 	Limit *int32
+
+	// Specify either the name or ARN of the log group to view log events from. If the
+	// log group is in a source account and you are using a monitoring account, you
+	// must use the log group ARN. If you specify values for both logGroupName and
+	// logGroupIdentifier, the action returns an InvalidParameterException error.
+	LogGroupIdentifier *string
 
 	// Filters the results to include only events from log streams that have names
 	// starting with this prefix. If you specify a value for both logStreamNamePrefix
@@ -91,6 +102,11 @@ type FilterLogEventsInput struct {
 	// 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not returned.
 	StartTime *int64
 
+	// Specify true to display the log event fields with all sensitive data unmasked
+	// and visible. The default is false. To use this operation with this parameter,
+	// you must be signed into an account with the logs:Unmask permission.
+	Unmask bool
+
 	noSmithyDocumentSerde
 }
 
@@ -103,9 +119,9 @@ type FilterLogEventsOutput struct {
 	// 24 hours.
 	NextToken *string
 
-	// IMPORTANT Starting on May 15, 2020, this parameter will be deprecated. This
-	// parameter will be an empty list after the deprecation occurs. Indicates which
-	// log streams have been searched and whether each has been searched completely.
+	// Important As of May 15, 2020, this parameter is no longer supported. This
+	// parameter returns an empty list. Indicates which log streams have been searched
+	// and whether each has been searched completely.
 	SearchedLogStreams []types.SearchedLogStream
 
 	// Metadata pertaining to the operation's result.

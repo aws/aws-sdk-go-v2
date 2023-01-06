@@ -58,3 +58,32 @@ func ExampleListEntitiesFilter_outputUsage() {
 var _ *string
 var _ *string
 var _ *string
+
+func ExampleSyncResourceFilter_outputUsage() {
+	var union types.SyncResourceFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SyncResourceFilterMemberExternalId:
+		_ = v.Value // Value is string
+
+	case *types.SyncResourceFilterMemberResourceId:
+		_ = v.Value // Value is string
+
+	case *types.SyncResourceFilterMemberResourceType:
+		_ = v.Value // Value is types.SyncResourceType
+
+	case *types.SyncResourceFilterMemberState:
+		_ = v.Value // Value is types.SyncResourceState
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ types.SyncResourceType
+var _ types.SyncResourceState

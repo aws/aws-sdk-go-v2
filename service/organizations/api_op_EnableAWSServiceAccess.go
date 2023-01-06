@@ -25,7 +25,7 @@ import (
 // For more information about enabling services to integrate with Organizations,
 // see Integrating Organizations with Other Amazon Web Services Services
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
-// in the Organizations User Guide. This operation can be called only from the
+// in the Organizations User Guide. You can only call this operation from the
 // organization's management account and only if the organization has enabled all
 // features
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html).

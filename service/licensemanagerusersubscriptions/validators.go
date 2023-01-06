@@ -5,6 +5,7 @@ package licensemanagerusersubscriptions
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -169,6 +170,26 @@ func (m *validateOpStopProductSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateIdentityProviderSettings struct {
+}
+
+func (*validateOpUpdateIdentityProviderSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateIdentityProviderSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateIdentityProviderSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateIdentityProviderSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateUser{}, middleware.After)
 }
@@ -199,6 +220,46 @@ func addOpStartProductSubscriptionValidationMiddleware(stack *middleware.Stack) 
 
 func addOpStopProductSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopProductSubscription{}, middleware.After)
+}
+
+func addOpUpdateIdentityProviderSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateIdentityProviderSettings{}, middleware.After)
+}
+
+func validateSettings(v *types.Settings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Settings"}
+	if v.Subnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Subnets"))
+	}
+	if v.SecurityGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateSettings(v *types.UpdateSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSettings"}
+	if v.AddSubnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AddSubnets"))
+	}
+	if v.RemoveSubnets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RemoveSubnets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpAssociateUserInput(v *AssociateUserInput) error {
@@ -308,6 +369,11 @@ func validateOpRegisterIdentityProviderInput(v *RegisterIdentityProviderInput) e
 	if v.Product == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Product"))
 	}
+	if v.Settings != nil {
+		if err := validateSettings(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -349,6 +415,31 @@ func validateOpStopProductSubscriptionInput(v *StopProductSubscriptionInput) err
 	}
 	if v.Product == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Product"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateIdentityProviderSettingsInput(v *UpdateIdentityProviderSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateIdentityProviderSettingsInput"}
+	if v.IdentityProvider == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdentityProvider"))
+	}
+	if v.Product == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Product"))
+	}
+	if v.UpdateSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UpdateSettings"))
+	} else if v.UpdateSettings != nil {
+		if err := validateUpdateSettings(v.UpdateSettings); err != nil {
+			invalidParams.AddNested("UpdateSettings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

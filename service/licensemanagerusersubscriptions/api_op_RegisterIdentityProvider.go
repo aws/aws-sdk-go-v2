@@ -39,6 +39,10 @@ type RegisterIdentityProviderInput struct {
 	// This member is required.
 	Product *string
 
+	// The registered identity provider’s product related configuration settings such
+	// as the subnets to provision VPC endpoints.
+	Settings *types.Settings
+
 	noSmithyDocumentSerde
 }
 

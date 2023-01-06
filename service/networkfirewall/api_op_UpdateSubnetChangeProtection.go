@@ -33,7 +33,7 @@ type UpdateSubnetChangeProtectionInput struct {
 	// firewall, the operation initializes this setting to TRUE.
 	//
 	// This member is required.
-	SubnetChangeProtection *bool
+	SubnetChangeProtection bool
 
 	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
 	// name, and you can specify both.
@@ -74,7 +74,7 @@ type UpdateSubnetChangeProtectionOutput struct {
 	// subnet associations. Use this setting to protect against accidentally modifying
 	// the subnet associations for a firewall that is in use. When you create a
 	// firewall, the operation initializes this setting to TRUE.
-	SubnetChangeProtection *bool
+	SubnetChangeProtection bool
 
 	// An optional token that you can use for optimistic locking. Network Firewall
 	// returns a token to your requests that access the firewall. The token marks the

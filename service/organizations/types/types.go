@@ -601,6 +601,30 @@ type PolicyTypeSummary struct {
 	noSmithyDocumentSerde
 }
 
+// A structure that contains details about a resource policy.
+type ResourcePolicy struct {
+
+	// The policy text of the resource policy.
+	Content *string
+
+	// A structure that contains resource policy ID and Amazon Resource Name (ARN).
+	ResourcePolicySummary *ResourcePolicySummary
+
+	noSmithyDocumentSerde
+}
+
+// A structure that contains resource policy ID and Amazon Resource Name (ARN).
+type ResourcePolicySummary struct {
+
+	// The Amazon Resource Name (ARN) of the resource policy.
+	Arn *string
+
+	// The unique identifier (ID) of the resource policy.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about a root. A root is a top-level parent node in the
 // hierarchy of an organization that can contain organizational units (OUs) and
 // accounts. The root contains every Amazon Web Services account in the

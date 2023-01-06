@@ -11,17 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates the participant's connection. Note that ParticipantToken is used for
-// invoking this API instead of ConnectionToken. The participant token is valid for
-// the lifetime of the participant – until they are part of a contact. The response
-// URL for WEBSOCKET Type has a connect expiry timeout of 100s. Clients must
-// manually connect to the returned websocket URL and subscribe to the desired
-// topic. For chat, you need to publish the following on the established websocket
-// connection: {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}} Upon
-// websocket URL expiry, as specified in the response ConnectionExpiry parameter,
-// clients need to call this API again to obtain a new websocket URL and perform
-// the same steps as before. Message streaming support: This API can also be used
-// together with the StartContactStreaming
+// Creates the participant's connection. ParticipantToken is used for invoking this
+// API instead of ConnectionToken. The participant token is valid for the lifetime
+// of the participant – until they are part of a contact. The response URL for
+// WEBSOCKET Type has a connect expiry timeout of 100s. Clients must manually
+// connect to the returned websocket URL and subscribe to the desired topic. For
+// chat, you need to publish the following on the established websocket connection:
+// {"topic":"aws/subscribe","content":{"topics":["aws/chat"]}} Upon websocket URL
+// expiry, as specified in the response ConnectionExpiry parameter, clients need to
+// call this API again to obtain a new websocket URL and perform the same steps as
+// before. Message streaming support: This API can also be used together with the
+// StartContactStreaming
 // (https://docs.aws.amazon.com/connect/latest/APIReference/API_StartContactStreaming.html)
 // API to create a participant connection for chat contacts that are not using a
 // websocket. For more information about message streaming, Enable real-time chat
@@ -59,14 +59,13 @@ type CreateParticipantConnectionInput struct {
 	// This member is required.
 	ParticipantToken *string
 
-	// Type of connection information required.
-	//
-	// This member is required.
-	Type []types.ConnectionType
-
 	// Amazon Connect Participant is used to mark the participant as connected for
 	// message streaming.
 	ConnectParticipant *bool
+
+	// Type of connection information required. This can be omitted if
+	// ConnectParticipant is true.
+	Type []types.ConnectionType
 
 	noSmithyDocumentSerde
 }

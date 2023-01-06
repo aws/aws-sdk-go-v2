@@ -7,6 +7,52 @@ import (
 	"time"
 )
 
+// Describes a bandwidth rate limit interval for a gateway. A bandwidth rate limit
+// schedule consists of one or more bandwidth rate limit intervals. A bandwidth
+// rate limit interval defines a period of time on one or more days of the week,
+// during which bandwidth rate limits are specified for uploading, downloading, or
+// both.
+type BandwidthRateLimitInterval struct {
+
+	// The days of the week component of the bandwidth rate limit interval, represented
+	// as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents
+	// Saturday.
+	//
+	// This member is required.
+	DaysOfWeek []int32
+
+	// The hour of the day to end the bandwidth rate limit interval.
+	//
+	// This member is required.
+	EndHourOfDay *int32
+
+	// The minute of the hour to end the bandwidth rate limit interval. The bandwidth
+	// rate limit interval ends at the end of the minute. To end an interval at the end
+	// of an hour, use the value 59.
+	//
+	// This member is required.
+	EndMinuteOfHour *int32
+
+	// The hour of the day to start the bandwidth rate limit interval.
+	//
+	// This member is required.
+	StartHourOfDay *int32
+
+	// The minute of the hour to start the bandwidth rate limit interval. The interval
+	// begins at the start of that minute. To begin an interval exactly at the start of
+	// the hour, use the value 0.
+	//
+	// This member is required.
+	StartMinuteOfHour *int32
+
+	// The average upload rate limit component of the bandwidth rate limit interval, in
+	// bits per second. This field does not appear in the response if the upload rate
+	// limit is not set. For Backup Gateway, the minimum value is (Value).
+	AverageUploadRateLimitInBitsPerSec *int64
+
+	noSmithyDocumentSerde
+}
+
 // A gateway is an Backup Gateway appliance that runs on the customer's network to
 // provide seamless connectivity to backup storage in the Amazon Web Services
 // Cloud.
@@ -87,6 +133,44 @@ type Hypervisor struct {
 	Name *string
 
 	// The state of the hypervisor.
+	State HypervisorState
+
+	noSmithyDocumentSerde
+}
+
+// These are the details of the specified hypervisor. A hypervisor is hardware,
+// software, or firmware that creates and manages virtual machines, and allocates
+// resources to them.
+type HypervisorDetails struct {
+
+	// The server host of the hypervisor. This can be either an IP address or a
+	// fully-qualified domain name (FQDN).
+	Host *string
+
+	// The Amazon Resource Name (ARN) of the hypervisor.
+	HypervisorArn *string
+
+	// The Amazon Resource Name (ARN) of the KMS used to encrypt the hypervisor.
+	KmsKeyArn *string
+
+	// This is the time when the most recent successful sync of metadata occurred.
+	LastSuccessfulMetadataSyncTime *time.Time
+
+	// This is the most recent status for the indicated metadata sync.
+	LatestMetadataSyncStatus SyncMetadataStatus
+
+	// This is the most recent status for the indicated metadata sync.
+	LatestMetadataSyncStatusMessage *string
+
+	// The Amazon Resource Name (ARN) of the group of gateways within the requested
+	// log.
+	LogGroupArn *string
+
+	// This is the name of the specified hypervisor.
+	Name *string
+
+	// This is the current state of the specified hypervisor. The possible states are
+	// PENDING, ONLINE, OFFLINE, or ERROR.
 	State HypervisorState
 
 	noSmithyDocumentSerde
@@ -189,6 +273,55 @@ type VirtualMachineDetails struct {
 	// The Amazon Resource Name (ARN) of the virtual machine. For example,
 	// arn:aws:backup-gateway:us-west-1:0000000000000:vm/vm-0000ABCDEFGIJKL.
 	ResourceArn *string
+
+	// These are the details of the VMware tags associated with the specified virtual
+	// machine.
+	VmwareTags []VmwareTag
+
+	noSmithyDocumentSerde
+}
+
+// A VMware tag is a tag attached to a specific virtual machine. A tag
+// (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BGW_Tag.html) is a
+// key-value pair you can use to manage, filter, and search for your resources. The
+// content of VMware tags can be matched to Amazon Web Services tags.
+type VmwareTag struct {
+
+	// The is the category of VMware.
+	VmwareCategory *string
+
+	// This is a user-defined description of a VMware tag.
+	VmwareTagDescription *string
+
+	// This is the user-defined name of a VMware tag.
+	VmwareTagName *string
+
+	noSmithyDocumentSerde
+}
+
+// This displays the mapping of on-premises VMware tags to the corresponding Amazon
+// Web Services tags.
+type VmwareToAwsTagMapping struct {
+
+	// The key part of the Amazon Web Services tag's key-value pair.
+	//
+	// This member is required.
+	AwsTagKey *string
+
+	// The value part of the Amazon Web Services tag's key-value pair.
+	//
+	// This member is required.
+	AwsTagValue *string
+
+	// The is the category of VMware.
+	//
+	// This member is required.
+	VmwareCategory *string
+
+	// This is the user-defined name of a VMware tag.
+	//
+	// This member is required.
+	VmwareTagName *string
 
 	noSmithyDocumentSerde
 }

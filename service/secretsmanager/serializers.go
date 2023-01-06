@@ -1588,6 +1588,11 @@ func awsAwsjson11_serializeOpDocumentListSecretsInput(v *ListSecretsInput, value
 		}
 	}
 
+	if v.IncludePlannedDeletion != nil {
+		ok := object.Key("IncludePlannedDeletion")
+		ok.Boolean(*v.IncludePlannedDeletion)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)

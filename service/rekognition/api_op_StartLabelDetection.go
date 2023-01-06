@@ -24,7 +24,15 @@ import (
 // get the results of the label detection operation, first check that the status
 // value published to the Amazon SNS topic is SUCCEEDED. If so, call
 // GetLabelDetection and pass the job identifier (JobId) from the initial call to
-// StartLabelDetection.
+// StartLabelDetection. Optional Parameters StartLabelDetection has the
+// GENERAL_LABELS Feature applied by default. This feature allows you to provide
+// filtering criteria to the Settings parameter. You can filter with sets of
+// individual labels or with label categories. You can specify inclusive filters,
+// exclusive filters, or a combination of inclusive and exclusive filters. For more
+// information on filtering, see Detecting labels in a video
+// (https://docs.aws.amazon.com/rekognition/latest/dg/labels-detecting-labels-video.html).
+// You can specify MinConfidence to control the confidence threshold for the labels
+// returned. The default is 50.
 func (c *Client) StartLabelDetection(ctx context.Context, params *StartLabelDetectionInput, optFns ...func(*Options)) (*StartLabelDetectionOutput, error) {
 	if params == nil {
 		params = &StartLabelDetectionInput{}
@@ -54,6 +62,10 @@ type StartLabelDetectionInput struct {
 	// than once.
 	ClientRequestToken *string
 
+	// The features to return after video analysis. You can specify that GENERAL_LABELS
+	// are returned.
+	Features []types.LabelDetectionFeatureName
+
 	// An identifier you specify that's returned in the completion notification that's
 	// published to your Amazon Simple Notification Service topic. For example, you can
 	// use JobTag to group related jobs and identify them in the completion
@@ -65,8 +77,8 @@ type StartLabelDetectionInput struct {
 	// Rekognition is that a label is correctly identified.0 is the lowest confidence.
 	// 100 is the highest confidence. Amazon Rekognition Video doesn't return any
 	// labels with a confidence level lower than this specified value. If you don't
-	// specify MinConfidence, the operation returns labels with confidence values
-	// greater than or equal to 50 percent.
+	// specify MinConfidence, the operation returns labels and bounding boxes (if
+	// detected) with confidence values greater than or equal to 50 percent.
 	MinConfidence *float32
 
 	// The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the
@@ -74,6 +86,11 @@ type StartLabelDetectionInput struct {
 	// have a topic name that begins with AmazonRekognition if you are using the
 	// AmazonRekognitionServiceRole permissions policy.
 	NotificationChannel *types.NotificationChannel
+
+	// The settings for a StartLabelDetection request.Contains the specified parameters
+	// for the label detection request of an asynchronous label analysis operation.
+	// Settings can include filters for GENERAL_LABELS.
+	Settings *types.LabelDetectionSettings
 
 	noSmithyDocumentSerde
 }

@@ -14,23 +14,22 @@ import (
 // associated with only one KMS key at a time, although a KMS key can have multiple
 // aliases. The alias and the KMS key must be in the same Amazon Web Services
 // account and Region. Adding, deleting, or updating an alias can allow or deny
-// permission to the KMS key. For details, see ABAC in KMS
+// permission to the KMS key. For details, see ABAC for KMS
 // (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 // Management Service Developer Guide. The current and new KMS key must be the same
-// type (both symmetric or both asymmetric), and they must have the same key usage
-// (ENCRYPT_DECRYPT or SIGN_VERIFY). This restriction prevents errors in code that
-// uses aliases. If you must assign an alias to a different type of KMS key, use
-// DeleteAlias to delete the old alias and CreateAlias to create a new alias. You
-// cannot use UpdateAlias to change an alias name. To change an alias name, use
-// DeleteAlias to delete the old alias and CreateAlias to create a new alias.
-// Because an alias is not a property of a KMS key, you can create, update, and
-// delete the aliases of a KMS key without affecting the KMS key. Also, aliases do
-// not appear in the response from the DescribeKey operation. To get the aliases of
-// all KMS keys in the account, use the ListAliases operation. The KMS key that you
-// use for this operation must be in a compatible key state. For details, see Key
-// states of KMS keys
-// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// Key Management Service Developer Guide. Cross-account use: No. You cannot
+// type (both symmetric or both asymmetric or both HMAC), and they must have the
+// same key usage. This restriction prevents errors in code that uses aliases. If
+// you must assign an alias to a different type of KMS key, use DeleteAlias to
+// delete the old alias and CreateAlias to create a new alias. You cannot use
+// UpdateAlias to change an alias name. To change an alias name, use DeleteAlias to
+// delete the old alias and CreateAlias to create a new alias. Because an alias is
+// not a property of a KMS key, you can create, update, and delete the aliases of a
+// KMS key without affecting the KMS key. Also, aliases do not appear in the
+// response from the DescribeKey operation. To get the aliases of all KMS keys in
+// the account, use the ListAliases operation. The KMS key that you use for this
+// operation must be in a compatible key state. For details, see Key states of KMS
+// keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
+// the Key Management Service Developer Guide. Cross-account use: No. You cannot
 // perform this operation on a KMS key in a different Amazon Web Services account.
 // Required permissions
 //
@@ -87,11 +86,11 @@ type UpdateAliasInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
 	// The KMS key must be in the same Amazon Web Services account and Region as the
 	// alias. Also, the new target KMS key must be the same type as the current target
-	// KMS key (both symmetric or both asymmetric) and they must have the same key
-	// usage. Specify the key ID or key ARN of the KMS key. For example:
+	// KMS key (both symmetric or both asymmetric or both HMAC) and they must have the
+	// same key usage. Specify the key ID or key ARN of the KMS key. For example:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// *
+	// Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab

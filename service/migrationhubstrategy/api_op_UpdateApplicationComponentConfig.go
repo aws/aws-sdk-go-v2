@@ -34,6 +34,15 @@ type UpdateApplicationComponentConfigInput struct {
 	// This member is required.
 	ApplicationComponentId *string
 
+	// The type of known component.
+	AppType types.AppType
+
+	// Update the configuration request of an application component. If it is set to
+	// true, the source code and/or database credentials are updated. If it is set to
+	// false, the source code and/or database credentials are updated and an analysis
+	// is initiated.
+	ConfigureOnly *bool
+
 	// Indicates whether the application component has been included for server
 	// recommendation or not.
 	InclusionStatus types.InclusionStatus

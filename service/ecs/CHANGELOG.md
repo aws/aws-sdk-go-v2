@@ -1,3 +1,29 @@
+# v1.23.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.22.0 (2022-12-19)
+
+* **Feature**: This release adds support for alarm-based rollbacks in ECS, a new feature that allows customers to add automated safeguards for Amazon ECS service rolling updates.
+
+# v1.21.0 (2022-12-15)
+
+* **Feature**: This release adds support for container port ranges in ECS, a new capability that allows customers to provide container port ranges to simplify use cases where multiple ports are in use in a container. This release updates TaskDefinition mutation APIs and the Task description APIs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.1 (2022-12-02)
+
+* **Documentation**: Documentation updates for Amazon ECS
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.20.0 (2022-11-28)
+
+* **Feature**: This release adds support for ECS Service Connect, a new capability that simplifies writing and operating resilient distributed applications. This release updates the TaskDefinition, Cluster, Service mutation APIs with Service connect constructs and also adds a new ListServicesByNamespace API.
+
+# v1.19.2 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.19.1 (2022-11-16)
 
 * No change notes available for this release.

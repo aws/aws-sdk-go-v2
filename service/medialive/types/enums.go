@@ -786,6 +786,38 @@ func (DeviceUpdateStatus) Values() []DeviceUpdateStatus {
 	}
 }
 
+type DolbyEProgramSelection string
+
+// Enum values for DolbyEProgramSelection
+const (
+	DolbyEProgramSelectionAllChannels DolbyEProgramSelection = "ALL_CHANNELS"
+	DolbyEProgramSelectionProgram1    DolbyEProgramSelection = "PROGRAM_1"
+	DolbyEProgramSelectionProgram2    DolbyEProgramSelection = "PROGRAM_2"
+	DolbyEProgramSelectionProgram3    DolbyEProgramSelection = "PROGRAM_3"
+	DolbyEProgramSelectionProgram4    DolbyEProgramSelection = "PROGRAM_4"
+	DolbyEProgramSelectionProgram5    DolbyEProgramSelection = "PROGRAM_5"
+	DolbyEProgramSelectionProgram6    DolbyEProgramSelection = "PROGRAM_6"
+	DolbyEProgramSelectionProgram7    DolbyEProgramSelection = "PROGRAM_7"
+	DolbyEProgramSelectionProgram8    DolbyEProgramSelection = "PROGRAM_8"
+)
+
+// Values returns all known values for DolbyEProgramSelection. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DolbyEProgramSelection) Values() []DolbyEProgramSelection {
+	return []DolbyEProgramSelection{
+		"ALL_CHANNELS",
+		"PROGRAM_1",
+		"PROGRAM_2",
+		"PROGRAM_3",
+		"PROGRAM_4",
+		"PROGRAM_5",
+		"PROGRAM_6",
+		"PROGRAM_7",
+		"PROGRAM_8",
+	}
+}
+
 type DvbSdtOutputSdt string
 
 // Enum values for DvbSdtOutputSdt
@@ -3040,7 +3072,8 @@ type InputDeviceType string
 
 // Enum values for InputDeviceType
 const (
-	InputDeviceTypeHd InputDeviceType = "HD"
+	InputDeviceTypeHd  InputDeviceType = "HD"
+	InputDeviceTypeUhd InputDeviceType = "UHD"
 )
 
 // Values returns all known values for InputDeviceType. Note that this can be
@@ -3049,6 +3082,7 @@ const (
 func (InputDeviceType) Values() []InputDeviceType {
 	return []InputDeviceType{
 		"HD",
+		"UHD",
 	}
 }
 
@@ -5000,6 +5034,60 @@ func (TemporalFilterStrength) Values() []TemporalFilterStrength {
 		"STRENGTH_14",
 		"STRENGTH_15",
 		"STRENGTH_16",
+	}
+}
+
+type TimecodeBurninFontSize string
+
+// Enum values for TimecodeBurninFontSize
+const (
+	TimecodeBurninFontSizeExtraSmall10 TimecodeBurninFontSize = "EXTRA_SMALL_10"
+	TimecodeBurninFontSizeLarge48      TimecodeBurninFontSize = "LARGE_48"
+	TimecodeBurninFontSizeMedium32     TimecodeBurninFontSize = "MEDIUM_32"
+	TimecodeBurninFontSizeSmall16      TimecodeBurninFontSize = "SMALL_16"
+)
+
+// Values returns all known values for TimecodeBurninFontSize. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimecodeBurninFontSize) Values() []TimecodeBurninFontSize {
+	return []TimecodeBurninFontSize{
+		"EXTRA_SMALL_10",
+		"LARGE_48",
+		"MEDIUM_32",
+		"SMALL_16",
+	}
+}
+
+type TimecodeBurninPosition string
+
+// Enum values for TimecodeBurninPosition
+const (
+	TimecodeBurninPositionBottomCenter TimecodeBurninPosition = "BOTTOM_CENTER"
+	TimecodeBurninPositionBottomLeft   TimecodeBurninPosition = "BOTTOM_LEFT"
+	TimecodeBurninPositionBottomRight  TimecodeBurninPosition = "BOTTOM_RIGHT"
+	TimecodeBurninPositionMiddleCenter TimecodeBurninPosition = "MIDDLE_CENTER"
+	TimecodeBurninPositionMiddleLeft   TimecodeBurninPosition = "MIDDLE_LEFT"
+	TimecodeBurninPositionMiddleRight  TimecodeBurninPosition = "MIDDLE_RIGHT"
+	TimecodeBurninPositionTopCenter    TimecodeBurninPosition = "TOP_CENTER"
+	TimecodeBurninPositionTopLeft      TimecodeBurninPosition = "TOP_LEFT"
+	TimecodeBurninPositionTopRight     TimecodeBurninPosition = "TOP_RIGHT"
+)
+
+// Values returns all known values for TimecodeBurninPosition. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimecodeBurninPosition) Values() []TimecodeBurninPosition {
+	return []TimecodeBurninPosition{
+		"BOTTOM_CENTER",
+		"BOTTOM_LEFT",
+		"BOTTOM_RIGHT",
+		"MIDDLE_CENTER",
+		"MIDDLE_LEFT",
+		"MIDDLE_RIGHT",
+		"TOP_CENTER",
+		"TOP_LEFT",
+		"TOP_RIGHT",
 	}
 }
 

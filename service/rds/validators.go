@@ -270,6 +270,26 @@ func (m *validateOpCopyOptionGroup) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateBlueGreenDeployment struct {
+}
+
+func (*validateOpCreateBlueGreenDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBlueGreenDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBlueGreenDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBlueGreenDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCustomDBEngineVersion struct {
 }
 
@@ -565,6 +585,26 @@ func (m *validateOpCreateOptionGroup) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateOptionGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBlueGreenDeployment struct {
+}
+
+func (*validateOpDeleteBlueGreenDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBlueGreenDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBlueGreenDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBlueGreenDeploymentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -885,6 +925,26 @@ func (m *validateOpDeregisterDBProxyTargets) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeregisterDBProxyTargetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeBlueGreenDeployments struct {
+}
+
+func (*validateOpDescribeBlueGreenDeployments) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeBlueGreenDeployments) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeBlueGreenDeploymentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeBlueGreenDeploymentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2590,6 +2650,26 @@ func (m *validateOpStopDBInstance) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSwitchoverBlueGreenDeployment struct {
+}
+
+func (*validateOpSwitchoverBlueGreenDeployment) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSwitchoverBlueGreenDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SwitchoverBlueGreenDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSwitchoverBlueGreenDeploymentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSwitchoverReadReplica struct {
 }
 
@@ -2662,6 +2742,10 @@ func addOpCopyOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopyOptionGroup{}, middleware.After)
 }
 
+func addOpCreateBlueGreenDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBlueGreenDeployment{}, middleware.After)
+}
+
 func addOpCreateCustomDBEngineVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCustomDBEngineVersion{}, middleware.After)
 }
@@ -2720,6 +2804,10 @@ func addOpCreateEventSubscriptionValidationMiddleware(stack *middleware.Stack) e
 
 func addOpCreateOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOptionGroup{}, middleware.After)
+}
+
+func addOpDeleteBlueGreenDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBlueGreenDeployment{}, middleware.After)
 }
 
 func addOpDeleteCustomDBEngineVersionValidationMiddleware(stack *middleware.Stack) error {
@@ -2784,6 +2872,10 @@ func addOpDeleteOptionGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeregisterDBProxyTargetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterDBProxyTargets{}, middleware.After)
+}
+
+func addOpDescribeBlueGreenDeploymentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeBlueGreenDeployments{}, middleware.After)
 }
 
 func addOpDescribeCertificatesValidationMiddleware(stack *middleware.Stack) error {
@@ -3126,6 +3218,10 @@ func addOpStopDBInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopDBInstance{}, middleware.After)
 }
 
+func addOpSwitchoverBlueGreenDeploymentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSwitchoverBlueGreenDeployment{}, middleware.After)
+}
+
 func addOpSwitchoverReadReplicaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSwitchoverReadReplica{}, middleware.After)
 }
@@ -3440,6 +3536,24 @@ func validateOpCopyOptionGroupInput(v *CopyOptionGroupInput) error {
 	}
 }
 
+func validateOpCreateBlueGreenDeploymentInput(v *CreateBlueGreenDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBlueGreenDeploymentInput"}
+	if v.BlueGreenDeploymentName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueGreenDeploymentName"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateCustomDBEngineVersionInput(v *CreateCustomDBEngineVersionInput) error {
 	if v == nil {
 		return nil
@@ -3450,15 +3564,6 @@ func validateOpCreateCustomDBEngineVersionInput(v *CreateCustomDBEngineVersionIn
 	}
 	if v.EngineVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EngineVersion"))
-	}
-	if v.DatabaseInstallationFilesS3BucketName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseInstallationFilesS3BucketName"))
-	}
-	if v.KMSKeyId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("KMSKeyId"))
-	}
-	if v.Manifest == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Manifest"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3752,6 +3857,21 @@ func validateOpCreateOptionGroupInput(v *CreateOptionGroupInput) error {
 	}
 }
 
+func validateOpDeleteBlueGreenDeploymentInput(v *DeleteBlueGreenDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBlueGreenDeploymentInput"}
+	if v.BlueGreenDeploymentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueGreenDeploymentIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteCustomDBEngineVersionInput(v *DeleteCustomDBEngineVersionInput) error {
 	if v == nil {
 		return nil
@@ -3987,6 +4107,23 @@ func validateOpDeregisterDBProxyTargetsInput(v *DeregisterDBProxyTargetsInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "DeregisterDBProxyTargetsInput"}
 	if v.DBProxyName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBProxyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeBlueGreenDeploymentsInput(v *DescribeBlueGreenDeploymentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeBlueGreenDeploymentsInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5194,9 +5331,6 @@ func validateOpRestoreDBClusterFromS3Input(v *RestoreDBClusterFromS3Input) error
 	if v.MasterUsername == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MasterUsername"))
 	}
-	if v.MasterUserPassword == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MasterUserPassword"))
-	}
 	if v.SourceEngine == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceEngine"))
 	}
@@ -5478,6 +5612,21 @@ func validateOpStopDBInstanceInput(v *StopDBInstanceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StopDBInstanceInput"}
 	if v.DBInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSwitchoverBlueGreenDeploymentInput(v *SwitchoverBlueGreenDeploymentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SwitchoverBlueGreenDeploymentInput"}
+	if v.BlueGreenDeploymentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueGreenDeploymentIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

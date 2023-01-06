@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -27,6 +28,9 @@ func (c *Client) StartAssessment(ctx context.Context, params *StartAssessmentInp
 }
 
 type StartAssessmentInput struct {
+
+	// List of criteria for assessment.
+	AssessmentTargets []types.AssessmentTarget
 
 	// The S3 bucket used by the collectors to send analysis data to the service. The
 	// bucket name must begin with migrationhub-strategy-.
@@ -93,6 +97,9 @@ func (c *Client) addOperationStartAssessmentMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpStartAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartAssessment(options.Region), middleware.Before); err != nil {

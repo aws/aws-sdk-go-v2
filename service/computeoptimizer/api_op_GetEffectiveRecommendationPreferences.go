@@ -59,6 +59,19 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	// in the Compute Optimizer User Guide.
 	EnhancedInfrastructureMetrics types.EnhancedInfrastructureMetrics
 
+	// The provider of the external metrics recommendation preference. Considers all
+	// applicable preferences that you might have set at the account and organization
+	// level. If the preference is applied in the latest recommendation refresh, an
+	// object with a valid source value appears in the response. If the preference
+	// isn't applied to the recommendations already, then this object doesn't appear in
+	// the response. To validate whether the preference is applied to your last
+	// generated set of recommendations, review the effectiveRecommendationPreferences
+	// value in the response of the GetEC2InstanceRecommendations actions. For more
+	// information, see Enhanced infrastructure metrics
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html)
+	// in the Compute Optimizer User Guide.
+	ExternalMetricsPreference *types.ExternalMetricsPreference
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

@@ -1,0 +1,2622 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.simspaceweaver#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.simspaceweaver#NonEmptyString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.simspaceweaver#AppPortMappings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.simspaceweaver#SimulationAppPortMapping"
+            }
+        },
+        "com.amazonaws.simspaceweaver#BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.simspaceweaver#ClockStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    },
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "STARTED",
+                        "name": "STARTED"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simspaceweaver#ClockTargetStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    },
+                    {
+                        "value": "STARTED",
+                        "name": "STARTED"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simspaceweaver#CloudWatchLogsLogGroup": {
+            "type": "structure",
+            "members": {
+                "LogGroupArn": {
+                    "target": "com.amazonaws.simspaceweaver#LogGroupArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon CloudWatch Logs log group for the simulation.\n         For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n   in the <i>Amazon Web Services General Reference</i>. For more information about log groups, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working with log\n   groups and log streams</a> in the <i>Amazon CloudWatch Logs User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon CloudWatch Logs log group for the simulation. For more information about log groups, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working with log\n   groups and log streams</a> in the <i>Amazon CloudWatch Logs User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.simspaceweaver#NonEmptyString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.simspaceweaver#DeleteApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#DeleteAppInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#DeleteAppOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to delete an app",
+                "smithy.api#documentation": "<p>Deletes the instance of the given custom app.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/deleteapp",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.simspaceweaver#DeleteAppInput": {
+            "type": "structure",
+            "members": {
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation of the app.</p>",
+                        "smithy.api#httpQuery": "simulation",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "SimulationName"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain of the app.</p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "DomainName"
+                    }
+                },
+                "App": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app.</p>",
+                        "smithy.api#httpQuery": "app",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "AppName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#DeleteAppOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.simspaceweaver#DeleteSimulation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#DeleteSimulationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#DeleteSimulationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to delete a simulation",
+                "smithy.api#documentation": "<p>Deletes all SimSpace Weaver resources assigned to the given simulation.</p>\n         <note>\n            <p>Your simulation uses resources in other Amazon Web Services services. This API operation doesn't delete\n            resources in other Amazon Web Services services.</p>\n         </note>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/deletesimulation",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.simspaceweaver#DeleteSimulationInput": {
+            "type": "structure",
+            "members": {
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation.</p>",
+                        "smithy.api#httpQuery": "simulation",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "SimulationName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#DeleteSimulationOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.simspaceweaver#DescribeApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#DescribeAppInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#DescribeAppOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to describe an app",
+                "smithy.api#documentation": "<p>Returns the state of the given custom app.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/describeapp",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.simspaceweaver#DescribeAppInput": {
+            "type": "structure",
+            "members": {
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation of the app.</p>",
+                        "smithy.api#httpQuery": "simulation",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "SimulationName"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain of the app.</p>",
+                        "smithy.api#httpQuery": "domain",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "DomainName"
+                    }
+                },
+                "App": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app.</p>",
+                        "smithy.api#httpQuery": "app",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "AppName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#DescribeAppOutput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app.</p>"
+                    }
+                },
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation of the app.</p>"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain of the app.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationAppStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current lifecycle state of the custom app.</p>"
+                    }
+                },
+                "TargetStatus": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationAppTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired lifecycle state of the custom app.</p>"
+                    }
+                },
+                "LaunchOverrides": {
+                    "target": "com.amazonaws.simspaceweaver#LaunchOverrides"
+                },
+                "Description": {
+                    "target": "com.amazonaws.simspaceweaver#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the app.</p>"
+                    }
+                },
+                "EndpointInfo": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationAppEndpointInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the network endpoint for the custom app. You can use the endpoint to connect to the custom app.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#DescribeSimulation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#DescribeSimulationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#DescribeSimulationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to describe a simulation",
+                "smithy.api#documentation": "<p>Returns the current state of the given simulation.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/describesimulation",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.simspaceweaver#DescribeSimulationInput": {
+            "type": "structure",
+            "members": {
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation.</p>",
+                        "smithy.api#httpQuery": "simulation",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "SimulationName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#DescribeSimulationOutput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation.</p>"
+                    }
+                },
+                "ExecutionId": {
+                    "target": "com.amazonaws.simspaceweaver#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A universally unique identifier (UUID) for this simulation.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the simulation. For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n   in the <i>Amazon Web Services General Reference</i>.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.simspaceweaver#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the simulation.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.simspaceweaver#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role\n   that the simulation assumes to perform actions. For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n   in the <i>Amazon Web Services General Reference</i>. For more information about IAM roles,\n   see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the \n   <i>Identity and Access Management User Guide</i>.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.simspaceweaver#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the simulation was created, expressed as the \n   number of seconds and milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current lifecycle state of the simulation.</p>"
+                    }
+                },
+                "TargetStatus": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired lifecycle state of the simulation.</p>"
+                    }
+                },
+                "SchemaS3Location": {
+                    "target": "com.amazonaws.simspaceweaver#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the simulation schema in Amazon Simple Storage Service (Amazon S3).\n   For more information about Amazon S3, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html\">\n               <i>Amazon Simple Storage Service User Guide</i>\n            </a>.</p>"
+                    }
+                },
+                "SchemaError": {
+                    "target": "com.amazonaws.simspaceweaver#OptionalString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message that SimSpace Weaver returns only if there is a problem with the simulation\n         schema.</p>"
+                    }
+                },
+                "LoggingConfiguration": {
+                    "target": "com.amazonaws.simspaceweaver#LoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings that control how SimSpace Weaver handles your simulation log data.</p>"
+                    }
+                },
+                "LiveSimulationState": {
+                    "target": "com.amazonaws.simspaceweaver#LiveSimulationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of additional state information, such as \ndomain and clock configuration.</p>"
+                    }
+                },
+                "MaximumDuration": {
+                    "target": "com.amazonaws.simspaceweaver#TimeToLiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum running time of the simulation,\n   specified as a number of months (m or M), hours (h or H), or days (d or D). The simulation \n   stops when it reaches this limit.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#Domain": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>"
+                    }
+                },
+                "Lifecycle": {
+                    "target": "com.amazonaws.simspaceweaver#LifecycleManagementStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of lifecycle management for apps in the domain. This value indicates whether\n         apps in this domain are <i>managed</i> (SimSpace Weaver starts and stops the apps) or\n            <i>unmanaged</i> (you must start and stop the apps).</p>\n         <p class=\"title\">\n            <b>Lifecycle types</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PerWorker</code> – Managed: SimSpace Weaver starts 1 app on each worker</p>\n            </li>\n            <li>\n               <p>\n                  <code>BySpatialSubdivision</code> – Managed: SimSpace Weaver starts 1 app for each spatial partition</p>\n            </li>\n            <li>\n               <p>\n                  <code>ByRequest</code> – Unmanaged: You use the <b>StartApp</b>\n               API to start the apps and use the <b>StopApp</b> API to stop the apps.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The lifecycle types will change when the service is released for general availability (GA).</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of app instances that run the same executable app code and have the same\n         launch options and commands.</p>\n         <p>For more information about domains, see <a href=\"https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html\">Key concepts</a>\n   in the <i>Amazon Web Services SimSpace Weaver User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#DomainList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.simspaceweaver#Domain"
+            }
+        },
+        "com.amazonaws.simspaceweaver#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.simspaceweaver#NonEmptyString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.simspaceweaver#LaunchCommandList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.simspaceweaver#NonEmptyString"
+            }
+        },
+        "com.amazonaws.simspaceweaver#LaunchOverrides": {
+            "type": "structure",
+            "members": {
+                "LaunchCommands": {
+                    "target": "com.amazonaws.simspaceweaver#LaunchCommandList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>App launch commands and command line parameters that override the launch command\n         configured in the simulation schema.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options that apply when the app starts. These optiAons override default behavior.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#LifecycleManagementStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Unknown",
+                        "name": "Unknown"
+                    },
+                    {
+                        "value": "PerWorker",
+                        "name": "PerWorker"
+                    },
+                    {
+                        "value": "BySpatialSubdivision",
+                        "name": "BySpatialSubdivision"
+                    },
+                    {
+                        "value": "ByRequest",
+                        "name": "ByRequest"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simspaceweaver#ListApps": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#ListAppsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#ListAppsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to list apps",
+                "smithy.api#documentation": "<p>Lists all custom apps or service apps for the given simulation and domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/listapps",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.simspaceweaver#ListAppsInput": {
+            "type": "structure",
+            "members": {
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation that you want to list apps for.</p>",
+                        "smithy.api#httpQuery": "simulation",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "SimulationName"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain that you want to list apps for.</p>",
+                        "smithy.api#httpQuery": "domain"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.simspaceweaver#PositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of apps to list.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.simspaceweaver#OptionalString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If SimSpace Weaver returns <code>nextToken</code>, there are more results available. \n   The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, \n   call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, \n   <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. \n   If you provide a token that isn't valid, you receive an <i>HTTP 400 ValidationException</i> error.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#ListAppsOutput": {
+            "type": "structure",
+            "members": {
+                "Apps": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationAppList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of apps for the given simulation and domain.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.simspaceweaver#OptionalString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If SimSpace Weaver returns <code>nextToken</code>, there are more results available. \n   The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, \n   call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, \n   <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. \n   If you provide a token that isn't valid, you receive an <i>HTTP 400 ValidationException</i> error.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#ListSimulations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#ListSimulationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#ListSimulationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to list simulations",
+                "smithy.api#documentation": "<p>Lists the SimSpace Weaver simulations in the Amazon Web Services account used to make the API call.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/listsimulations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.simspaceweaver#ListSimulationsInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.simspaceweaver#PositiveInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of simulations to list.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.simspaceweaver#OptionalString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If SimSpace Weaver returns <code>nextToken</code>, there are more results available. \n   The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, \n   call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, \n   <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. \n   If you provide a token that isn't valid, you receive an <i>HTTP 400 ValidationException</i> error.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#ListSimulationsOutput": {
+            "type": "structure",
+            "members": {
+                "Simulations": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of simulations.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.simspaceweaver#OptionalString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If SimSpace Weaver returns <code>nextToken</code>, there are more results available. \n   The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, \n   call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, \n   <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. \n   If you provide a token that isn't valid, you receive an <i>HTTP 400 ValidationException</i> error.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to list the tags for a resource",
+                "smithy.api#documentation": "<p>Lists all tags on a SimSpace Weaver resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.simspaceweaver#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource. For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n   in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.simspaceweaver#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags for the resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#LiveSimulationState": {
+            "type": "structure",
+            "members": {
+                "Domains": {
+                    "target": "com.amazonaws.simspaceweaver#DomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of domains for the simulation. For more information about domains, see <a href=\"https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html\">Key concepts</a>\n   in the <i>Amazon Web Services SimSpace Weaver User Guide</i>.</p>"
+                    }
+                },
+                "Clocks": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationClockList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of simulation clocks.</p>\n         <note>\n            <p>At this time, a simulation has only one clock.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of additional state information, such as \ndomain and clock configuration.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#LogDestination": {
+            "type": "structure",
+            "members": {
+                "CloudWatchLogsLogGroup": {
+                    "target": "com.amazonaws.simspaceweaver#CloudWatchLogsLogGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon CloudWatch Logs log group that stores simulation log data. For more information about log groups, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working with log\n   groups and log streams</a> in the <i>Amazon CloudWatch Logs User Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location where SimSpace Weaver sends simulation log data.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#LogDestinations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.simspaceweaver#LogDestination"
+            }
+        },
+        "com.amazonaws.simspaceweaver#LogGroupArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:(?:aws|aws-cn):log-group:([a-z]{2}-[a-z]+-\\d{1}):(\\d{12})?:role\\/(.+)$"
+            }
+        },
+        "com.amazonaws.simspaceweaver#LoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "Destinations": {
+                    "target": "com.amazonaws.simspaceweaver#LogDestinations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the locations where SimSpace Weaver sends simulation log data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The logging configuration for a simulation.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#NonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#ObjectKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#OptionalString": {
+            "type": "string"
+        },
+        "com.amazonaws.simspaceweaver#PortNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 65535
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#PositiveInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.simspaceweaver#NonEmptyString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.simspaceweaver#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:(?:aws|aws-cn):iam::(\\d{12})?:role\\/(.+)$"
+            }
+        },
+        "com.amazonaws.simspaceweaver#S3Location": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.simspaceweaver#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an Amazon S3 bucket. For more information about buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html\">Creating,\n            configuring, and working with Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User\n            Guide</i>.</p>"
+                    }
+                },
+                "ObjectKey": {
+                    "target": "com.amazonaws.simspaceweaver#ObjectKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key name of an object in Amazon S3. For more information about Amazon S3 objects and object\n         keys, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-downloading-objects.html\">Uploading,\n            downloading, and working with objects in Amazon S3</a> in the <i>Amazon Simple Storage Service User\n            Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver stores simulation data, such as your app zip\n         files and schema file. For more information about Amazon S3, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html\">\n               <i>Amazon Simple Storage Service User Guide</i>\n            </a>.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.simspaceweaver#NonEmptyString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimSpaceWeaver": {
+            "type": "service",
+            "version": "2022-10-28",
+            "operations": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#Simulation"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SimSpaceWeaver",
+                    "arnNamespace": "simspaceweaver",
+                    "cloudFormationName": "SimSpaceWeaver",
+                    "endpointPrefix": "simspaceweaver",
+                    "cloudTrailEventSource": "simspaceweaver.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "simspaceweaver"
+                },
+                "aws.iam#defineConditionKeys": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by tags associated with the resource",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by tags that are passed in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+                    },
+                    "aws:TagKeys": {
+                        "type": "ArrayOfString",
+                        "documentation": "Filters access by tag keys that are passed in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+                    }
+                },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*,authorization,date,x-amz-date,x-amz-security-token,x-amz-target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,amz-sdk-invocation-id,amz-sdk-request"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Amazon Web Services SimSpace Weaver (SimSpace Weaver) is a managed service that you can use to build and operate large-scale \n         spatial simulations in the Amazon Web Services Cloud. For example, you can create a digital twin of a city,\n         crowd simulations with millions of people and objects, and massilvely-multiplayer games with\n         hundreds of thousands of connected players.\n         For more information about SimSpace Weaver, see the <i>\n               <a href=\"https://docs.aws.amazon.com/simspaceweaver/latest/userguide/\">Amazon Web Services SimSpace Weaver User Guide</a>\n            </i>.</p>\n         <p>This API reference describes the API operations and data types that you can use to\n         communicate directly with SimSpace Weaver.</p>\n         <p>SimSpace Weaver also provides the SimSpace Weaver app SDK, which you use for app development. The SimSpace Weaver\n         app SDK API reference is included in the SimSpace Weaver app SDK documentation, which is part of the\n         SimSpace Weaver app SDK distributable package.</p>",
+                "smithy.api#title": "AWS SimSpace Weaver",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://simspaceweaver-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://simspaceweaver-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://simspaceweaver.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://simspaceweaver.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "cn-north-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-iso-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://simspaceweaver.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-isob-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimSpaceWeaverArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:(?:aws|aws-cn):simspaceweaver:([a-z]{2}-[a-z]+-\\d{1}):(\\d{12})?:([a-z]+)\\/(.+)$"
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
+            }
+        },
+        "com.amazonaws.simspaceweaver#Simulation": {
+            "type": "resource",
+            "identifiers": {
+                "SimulationName": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.simspaceweaver#StartSimulation"
+            },
+            "read": {
+                "target": "com.amazonaws.simspaceweaver#DescribeSimulation"
+            },
+            "update": {
+                "target": "com.amazonaws.simspaceweaver#StopSimulation"
+            },
+            "delete": {
+                "target": "com.amazonaws.simspaceweaver#DeleteSimulation"
+            },
+            "list": {
+                "target": "com.amazonaws.simspaceweaver#ListSimulations"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#DeleteApp"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#DescribeApp"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ListApps"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#StartApp"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#StartClock"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#StopApp"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#StopClock"
+                }
+            ],
+            "traits": {
+                "aws.api#arn": {
+                    "template": "simulation/{SimulationName}"
+                },
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {},
+                "smithy.api#documentation": "Represents a simulation"
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationAppEndpointInfo": {
+            "type": "structure",
+            "members": {
+                "Address": {
+                    "target": "com.amazonaws.simspaceweaver#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the app. SimSpace Weaver dynamically assigns this IP address when the\n         app starts.</p>"
+                    }
+                },
+                "IngressPortMappings": {
+                    "target": "com.amazonaws.simspaceweaver#AppPortMappings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inbound TCP/UDP port numbers of the app. The combination of an IP address and\n         a port number form a network endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the network endpoint that you can use to connect to your custom or \n         service app.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationAppList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.simspaceweaver#SimulationAppMetadata"
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationAppMetadata": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app.</p>"
+                    }
+                },
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation of the app.</p>"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain of the app. For more information about domains, see <a href=\"https://docs.aws.amazon.com/simspaceweaver/latest/userguide/what-is_key-concepts.html\">Key concepts</a>\n   in the <i>Amazon Web Services SimSpace Weaver User Guide</i>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationAppStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the app.</p>"
+                    }
+                },
+                "TargetStatus": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationAppTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired status of the app.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of metadata about an app.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationAppPortMapping": {
+            "type": "structure",
+            "members": {
+                "Declared": {
+                    "target": "com.amazonaws.simspaceweaver#PortNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TCP/UDP port number of the app, declared in the simulation schema. SimSpace Weaver maps\n         the <code>Declared</code> port to the <code>Actual</code> port. The source code for the\n         app should bind to the <code>Declared</code> port.</p>"
+                    }
+                },
+                "Actual": {
+                    "target": "com.amazonaws.simspaceweaver#PortNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TCP/UDP port number of the running app. SimSpace Weaver dynamically assigns this port\n         number when the app starts. SimSpace Weaver maps the <code>Declared</code> port to the\n            <code>Actual</code> port. Clients connect to the app using the app's IP address\n         and the <code>Actual</code> port number.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of TCP/UDP ports for a custom or service app.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationAppStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "STARTED",
+                        "name": "STARTED"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationAppTargetStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    },
+                    {
+                        "value": "STARTED",
+                        "name": "STARTED"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationClock": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.simspaceweaver#ClockStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the simulation clock.</p>"
+                    }
+                },
+                "TargetStatus": {
+                    "target": "com.amazonaws.simspaceweaver#ClockTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired status of the simulation clock.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Status information about the simulation clock.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationClockList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.simspaceweaver#SimulationClock"
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.simspaceweaver#SimulationMetadata"
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationMetadata": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the simulation. For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n   in the <i>Amazon Web Services General Reference</i>.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.simspaceweaver#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the simulation was created, expressed as the \n   number of seconds and milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the simulation.</p>"
+                    }
+                },
+                "TargetStatus": {
+                    "target": "com.amazonaws.simspaceweaver#SimulationTargetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired status of the simulation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of data about the simulation.</p>"
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    },
+                    {
+                        "value": "STARTING",
+                        "name": "STARTING"
+                    },
+                    {
+                        "value": "STARTED",
+                        "name": "STARTED"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simspaceweaver#SimulationTargetStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNKNOWN",
+                        "name": "UNKNOWN"
+                    },
+                    {
+                        "value": "STARTED",
+                        "name": "STARTED"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simspaceweaver#StartApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#StartAppInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#StartAppOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to start an app",
+                "smithy.api#documentation": "<p>Starts a custom app with the configuration specified in the simulation schema.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/startapp",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StartAppInput": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.simspaceweaver#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that you provide to ensure that repeated calls to this\n   API operation using the same parameters complete only once. A <code>ClientToken</code> is also known as an\n   <i>idempotency token</i>. A <code>ClientToken</code> expires after 24 hours.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation of the app.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "SimulationName"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain of the app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.simspaceweaver#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the app.</p>"
+                    }
+                },
+                "LaunchOverrides": {
+                    "target": "com.amazonaws.simspaceweaver#LaunchOverrides"
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StartAppOutput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app.</p>"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain of the app.</p>"
+                    }
+                },
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation of the app.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StartClock": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#StartClockInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#StartClockOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to start a simulation clock",
+                "smithy.api#documentation": "<p>Starts the simulation clock.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/startclock",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StartClockInput": {
+            "type": "structure",
+            "members": {
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "SimulationName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StartClockOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.simspaceweaver#StartSimulation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#StartSimulationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#StartSimulationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to start a simulation",
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Starts a simulation with the given name and schema.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/startsimulation",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StartSimulationInput": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.simspaceweaver#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that you provide to ensure that repeated calls to this\n   API operation using the same parameters complete only once. A <code>ClientToken</code> is also known as an\n   <i>idempotency token</i>. A <code>ClientToken</code> expires after 24 hours.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.simspaceweaver#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the simulation.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.simspaceweaver#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role\n   that the simulation assumes to perform actions. For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n   in the <i>Amazon Web Services General Reference</i>. For more information about IAM roles,\n   see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the \n   <i>Identity and Access Management User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SchemaS3Location": {
+                    "target": "com.amazonaws.simspaceweaver#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the simulation schema in Amazon Simple Storage Service (Amazon S3).\n   For more information about Amazon S3, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html\">\n               <i>Amazon Simple Storage Service User Guide</i>\n            </a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaximumDuration": {
+                    "target": "com.amazonaws.simspaceweaver#TimeToLiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum running time of the simulation,\n   specified as a number of months (m or M), hours (h or H), or days (d or D). The simulation \n   stops when it reaches this limit.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.simspaceweaver#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags for the simulation. For more information about tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the\n   <i>Amazon Web Services General Reference</i>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StartSimulationOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the simulation. For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n   in the <i>Amazon Web Services General Reference</i>.</p>"
+                    }
+                },
+                "ExecutionId": {
+                    "target": "com.amazonaws.simspaceweaver#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A universally unique identifier (UUID) for this simulation.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.simspaceweaver#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the simulation was created, expressed as the \n   number of seconds and milliseconds in UTC since the Unix epoch (0:0:0.000, January 1, 1970).</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StopApp": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#StopAppInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#StopAppOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to stop an app",
+                "smithy.api#documentation": "<p>Stops the given custom app and shuts down all of its allocated compute resources.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/stopapp",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StopAppInput": {
+            "type": "structure",
+            "members": {
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation of the app.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "SimulationName"
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain of the app.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "DomainName"
+                    }
+                },
+                "App": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the app.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "AppName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StopAppOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.simspaceweaver#StopClock": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#StopClockInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#StopClockOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to stop a simulation clock",
+                "smithy.api#documentation": "<p>Stops the simulation clock.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/stopclock",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StopClockInput": {
+            "type": "structure",
+            "members": {
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "SimulationName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StopClockOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.simspaceweaver#StopSimulation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#StopSimulationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#StopSimulationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to stop a simulation",
+                "smithy.api#documentation": "<p>Stops the given simulation.</p>\n         <important>\n            <p>You can't restart a simulation after you stop it. \n         If you need to restart a simulation, you must stop it, delete it, \n         and start a new instance of it.</p>\n         </important>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/stopsimulation",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StopSimulationInput": {
+            "type": "structure",
+            "members": {
+                "Simulation": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the simulation.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "SimulationName"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#StopSimulationOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.simspaceweaver#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.simspaceweaver#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.simspaceweaver#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.simspaceweaver#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to tag a resource",
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Adds tags to a SimSpace Weaver resource. For more information about tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the\n   <i>Amazon Web Services General Reference</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to add tags to.\n         For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n   in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.simspaceweaver#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to apply to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.simspaceweaver#Simulation",
+                        "ids": {
+                            "SimulationName": "ResourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simspaceweaver#TagResourceOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.simspaceweaver#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#TimeToLiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 6
+                },
+                "smithy.api#pattern": "^\\d{1,5}[mhdMHD]$"
+            }
+        },
+        "com.amazonaws.simspaceweaver#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.simspaceweaver#TooManyTagsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.simspaceweaver#NonEmptyString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.simspaceweaver#UUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36
+                },
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
+            }
+        },
+        "com.amazonaws.simspaceweaver#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.simspaceweaver#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.simspaceweaver#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.simspaceweaver#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.simspaceweaver#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to untag a resource",
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Removes tags from a SimSpace Weaver resource. For more information about tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a> in the\n   <i>Amazon Web Services General Reference</i>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.simspaceweaver#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.simspaceweaver#SimSpaceWeaverArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to remove tags from.\n         For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a>\n   in the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.simspaceweaver#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag keys to remove from the resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.simspaceweaver#Simulation",
+                        "ids": {
+                            "SimulationName": "ResourceArn"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.simspaceweaver#UntagResourceOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.simspaceweaver#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.simspaceweaver#NonEmptyString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p/>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

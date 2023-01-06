@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new ReplicationConfigurationTemplate.
+// Updates an existing Launch Configuration Template by ID.
 func (c *Client) UpdateLaunchConfigurationTemplate(ctx context.Context, params *UpdateLaunchConfigurationTemplateInput, optFns ...func(*Options)) (*UpdateLaunchConfigurationTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateLaunchConfigurationTemplateInput{}
@@ -29,32 +29,107 @@ func (c *Client) UpdateLaunchConfigurationTemplate(ctx context.Context, params *
 
 type UpdateLaunchConfigurationTemplateInput struct {
 
-	// Update Launch configuration Target instance right sizing request.
+	// Launch Configuration Template ID.
 	//
 	// This member is required.
 	LaunchConfigurationTemplateID *string
 
-	// Update Launch configuration Target instance right sizing request.
+	// Associate public Ip address.
+	AssociatePublicIpAddress *bool
+
+	// Launch configuration template boot mode.
+	BootMode types.BootMode
+
+	// Copy private Ip.
+	CopyPrivateIp *bool
+
+	// Copy tags.
+	CopyTags *bool
+
+	// Enable map auto tagging.
+	EnableMapAutoTagging *bool
+
+	// Large volume config.
+	LargeVolumeConf *types.LaunchTemplateDiskConf
+
+	// Launch disposition.
+	LaunchDisposition types.LaunchDisposition
+
+	// Configure Licensing.
+	Licensing *types.Licensing
+
+	// Launch configuration template map auto tagging MPE ID.
+	MapAutoTaggingMpeID *string
+
+	// Post Launch Action to execute on the Test or Cutover instance.
 	PostLaunchActions *types.PostLaunchActions
+
+	// Small volume config.
+	SmallVolumeConf *types.LaunchTemplateDiskConf
+
+	// Small volume maximum size.
+	SmallVolumeMaxSize int64
+
+	// Target instance type right-sizing method.
+	TargetInstanceTypeRightSizingMethod types.TargetInstanceTypeRightSizingMethod
 
 	noSmithyDocumentSerde
 }
 
 type UpdateLaunchConfigurationTemplateOutput struct {
 
-	// Copy Private IP during Launch Configuration.
+	// ID of the Launch Configuration Template.
 	//
 	// This member is required.
 	LaunchConfigurationTemplateID *string
 
-	// Copy Private IP during Launch Configuration.
+	// ARN of the Launch Configuration Template.
 	Arn *string
 
-	// Copy Private IP during Launch Configuration.
+	// Associate public Ip address.
+	AssociatePublicIpAddress *bool
+
+	// Launch configuration template boot mode.
+	BootMode types.BootMode
+
+	// Copy private Ip.
+	CopyPrivateIp *bool
+
+	// Copy tags.
+	CopyTags *bool
+
+	// EC2 launch template ID.
+	Ec2LaunchTemplateID *string
+
+	// Enable map auto tagging.
+	EnableMapAutoTagging *bool
+
+	// Large volume config.
+	LargeVolumeConf *types.LaunchTemplateDiskConf
+
+	// Launch disposition.
+	LaunchDisposition types.LaunchDisposition
+
+	// Configure Licensing.
+	Licensing *types.Licensing
+
+	// Launch configuration template map auto tagging MPE ID.
+	MapAutoTaggingMpeID *string
+
+	// Post Launch Actions of the Launch Configuration Template.
 	PostLaunchActions *types.PostLaunchActions
 
-	// Copy Private IP during Launch Configuration.
+	// Small volume config.
+	SmallVolumeConf *types.LaunchTemplateDiskConf
+
+	// Small volume maximum size.
+	SmallVolumeMaxSize int64
+
+	// Tags of the Launch Configuration Template.
 	Tags map[string]string
+
+	// Target instance type right-sizing method.
+	TargetInstanceTypeRightSizingMethod types.TargetInstanceTypeRightSizingMethod
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

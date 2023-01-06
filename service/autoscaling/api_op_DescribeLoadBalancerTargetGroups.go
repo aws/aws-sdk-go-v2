@@ -32,7 +32,10 @@ import (
 // Load Balancing to distribute traffic across the instances in your Auto Scaling
 // group
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-load-balancer.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// in the Amazon EC2 Auto Scaling User Guide. You can use this operation to
+// describe target groups that were attached by using
+// AttachLoadBalancerTargetGroups, but not for target groups that were attached by
+// using AttachTrafficSources.
 func (c *Client) DescribeLoadBalancerTargetGroups(ctx context.Context, params *DescribeLoadBalancerTargetGroupsInput, optFns ...func(*Options)) (*DescribeLoadBalancerTargetGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeLoadBalancerTargetGroupsInput{}

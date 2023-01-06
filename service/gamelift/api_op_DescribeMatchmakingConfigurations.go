@@ -21,12 +21,6 @@ import (
 // a list of names, only configurations that currently exist are returned. Learn
 // more  Setting up FlexMatch matchmakers
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/matchmaker-build.html)
-// Related actions CreateMatchmakingConfiguration |
-// DescribeMatchmakingConfigurations | UpdateMatchmakingConfiguration |
-// DeleteMatchmakingConfiguration | CreateMatchmakingRuleSet |
-// DescribeMatchmakingRuleSets | ValidateMatchmakingRuleSet |
-// DeleteMatchmakingRuleSet | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeMatchmakingConfigurations(ctx context.Context, params *DescribeMatchmakingConfigurationsInput, optFns ...func(*Options)) (*DescribeMatchmakingConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeMatchmakingConfigurationsInput{}
@@ -42,7 +36,6 @@ func (c *Client) DescribeMatchmakingConfigurations(ctx context.Context, params *
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeMatchmakingConfigurationsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -67,7 +60,6 @@ type DescribeMatchmakingConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeMatchmakingConfigurationsOutput struct {
 
 	// A collection of requested matchmaking configurations.

@@ -84,7 +84,7 @@ type DescribeModelPackageOutput struct {
 	CertifyForMarketplace bool
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	CreatedBy *types.UserContext
 
 	// The metadata properties associated with the model package versions.
@@ -106,7 +106,7 @@ type DescribeModelPackageOutput struct {
 	InferenceSpecification *types.InferenceSpecification
 
 	// Information about the user who created or modified an experiment, trial, trial
-	// component, lineage group, or project.
+	// component, lineage group, project, or model card.
 	LastModifiedBy *types.UserContext
 
 	// The last time that the model package was modified.

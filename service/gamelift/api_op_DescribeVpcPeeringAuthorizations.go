@@ -14,10 +14,7 @@ import (
 // Retrieves valid VPC peering authorizations that are pending for the Amazon Web
 // Services account. This operation returns all VPC peering authorizations and
 // requests for peering. This includes those initiated and received by this
-// account. Related actions CreateVpcPeeringAuthorization |
-// DescribeVpcPeeringAuthorizations | DeleteVpcPeeringAuthorization |
-// CreateVpcPeeringConnection | DescribeVpcPeeringConnections |
-// DeleteVpcPeeringConnection | All APIs by task
+// account. Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeVpcPeeringAuthorizations(ctx context.Context, params *DescribeVpcPeeringAuthorizationsInput, optFns ...func(*Options)) (*DescribeVpcPeeringAuthorizationsOutput, error) {
 	if params == nil {

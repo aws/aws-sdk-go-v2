@@ -43,7 +43,7 @@ type GetFindingsInput struct {
 
 type GetFindingsOutput struct {
 
-	// An array of objects, one for each finding that meets the criteria specified in
+	// An array of objects, one for each finding that matches the criteria specified in
 	// the request.
 	Findings []types.Finding
 

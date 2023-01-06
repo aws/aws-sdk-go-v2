@@ -1,0 +1,2305 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.oam#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:(\\w|-)+:oam:.+:.+:.+"
+            }
+        },
+        "com.amazonaws.oam#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                },
+                "amznErrorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the exception.</p>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource was in an inconsistent state during an update or a deletion.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.oam#CreateLink": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#CreateLinkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#CreateLinkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#MissingRequiredParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}",
+                    "oam:ResourceTypes"
+                ],
+                "smithy.api#documentation": "<p>Creates a link between a source account and a sink that you have created in a monitoring account.</p>\n        <p>Before you create a link, you must create a sink in the monitoring account and create a\n            sink policy in that account. The sink policy must permit the source account to link to it. You\n            can grant permission to source accounts by granting permission to an entire organization or to\n            individual accounts.</p>\n        <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html\">CreateSink</a> and\n            <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html\">PutSinkPolicy</a>.</p>\n        <p>Each monitoring account can be linked to as many as 100,000 source accounts.</p>\n        <p>Each source account can be linked to as many as five monitoring accounts.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateLink"
+                }
+            }
+        },
+        "com.amazonaws.oam#CreateLinkInput": {
+            "type": "structure",
+            "members": {
+                "LabelTemplate": {
+                    "target": "com.amazonaws.oam#LabelTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify a friendly human-readable name to use to identify this source account when you are viewing data from it in the monitoring\n            account.</p>\n        <p>You can use a custom label or use the following variables:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>$AccountName</code> is the name of the account</p>\n            </li>\n            <li>\n               <p>\n                  <code>$AccountEmail</code> is the globally unique email address of the account</p>\n            </li>\n            <li>\n               <p>\n                  <code>$AccountEmailNoDomain</code> is the email address of the account without the domain name</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.oam#ResourceTypesInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of strings that define which types of data that the source account shares with the monitoring\n            account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SinkIdentifier": {
+                    "target": "com.amazonaws.oam#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink to use to create this link. You can use <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListSinks.html\">ListSinks</a> to find the ARNs of sinks.</p>\n        <p>For more information about sinks, see\n            <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_CreateSink.html\">CreateSink</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.oam#TagMapInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the link. </p>\n        <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n            permissions by granting a user\n            permission to access or change only resources with certain tag values.</p>\n        <p>For more information about using tags to control access, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#CreateLinkOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the link that is newly created.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The random ID string that Amazon Web Services generated as part of the link ARN.</p>"
+                    }
+                },
+                "Label": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label that you assigned to this link. If the <code>labelTemplate</code> includes variables,\n            this field displays the variables resolved to their actual values.</p>"
+                    }
+                },
+                "LabelTemplate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact label template that you specified, with the variables not resolved.</p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.oam#ResourceTypesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types supported by this link.</p>"
+                    }
+                },
+                "SinkArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink that is used for this link.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.oam#TagMapOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the link.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#CreateSink": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#CreateSinkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#CreateSinkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#MissingRequiredParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Use this to create a <i>sink</i> in the current account, so that it can be\n            used as a monitoring account in CloudWatch cross-account observability. A sink is a resource that\n            represents an attachment point in a monitoring account. Source accounts can link to the sink\n            to send observability data.</p>\n        <p>After you create a sink, you must create a sink policy that allows source accounts to attach to it.\n            For more information, see <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_PutSinkPolicy.html\">PutSinkPolicy</a>.</p>\n        <p>Each account can contain one sink. If you delete a sink, you can then create a new one in that account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/CreateSink"
+                }
+            }
+        },
+        "com.amazonaws.oam#CreateSinkInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.oam#SinkName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the sink.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.oam#TagMapInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the link. </p>\n        <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n            permissions by granting a user\n            permission to access or change only resources with certain tag values.</p>\n        <p>For more information about using tags to control access, see\n            <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html\">Controlling access to Amazon Web Services resources using tags</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#CreateSinkOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink that is newly created.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The random ID string that Amazon Web Services generated as part of the sink ARN.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the sink.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.oam#TagMapOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the sink.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#DeleteLink": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#DeleteLinkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#DeleteLinkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#MissingRequiredParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Deletes a link between a monitoring account sink and a source account. You must run this operation\n            in the source account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteLink"
+                }
+            }
+        },
+        "com.amazonaws.oam#DeleteLinkInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.oam#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the link to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#DeleteLinkOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#DeleteSink": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#DeleteSinkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#DeleteSinkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#MissingRequiredParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Deletes a sink. You must delete all links to a sink before you can delete that sink.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/DeleteSink"
+                }
+            }
+        },
+        "com.amazonaws.oam#DeleteSinkInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.oam#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#DeleteSinkOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#GetLink": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#GetLinkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#GetLinkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#MissingRequiredParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Returns complete information about one link.</p>\n        <p>To use this operation, provide the link ARN. To retrieve a list of link ARNs, use <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListLinks.html\">ListLinks</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetLink"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.oam#GetLinkInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.oam#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the link to retrieve information for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#GetLinkOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the link.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The random ID string that Amazon Web Services generated as part of the link ARN.</p>"
+                    }
+                },
+                "Label": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label that you assigned to this link, with the variables resolved to their actual values.</p>"
+                    }
+                },
+                "LabelTemplate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact label template that was specified when the link was created, with the template variables not resolved.</p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.oam#ResourceTypesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types supported by this link.</p>"
+                    }
+                },
+                "SinkArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink that is used for this link.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.oam#TagMapOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the link.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#GetSink": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#GetSinkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#GetSinkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#MissingRequiredParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Returns complete information about one monitoring account sink.</p>\n        <p>To use this operation, provide the sink ARN. To retrieve a list of sink ARNs, use <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListSinks.html\">ListSinks</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetSink"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.oam#GetSinkInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.oam#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink to retrieve information for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#GetSinkOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The random ID string that Amazon Web Services generated as part of the sink ARN.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the sink.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.oam#TagMapOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the sink.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#GetSinkPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#GetSinkPolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#GetSinkPolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#MissingRequiredParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Returns the current sink policy attached to this sink. The sink policy specifies what\n            accounts can attach to this sink as source accounts, and what types of data they can share.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetSinkPolicy"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.oam#GetSinkPolicyInput": {
+            "type": "structure",
+            "members": {
+                "SinkIdentifier": {
+                    "target": "com.amazonaws.oam#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink to retrieve the policy of.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#GetSinkPolicyOutput": {
+            "type": "structure",
+            "members": {
+                "SinkArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink.</p>"
+                    }
+                },
+                "SinkId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The random ID string that Amazon Web Services generated as part of the sink ARN.</p>"
+                    }
+                },
+                "Policy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy that you specified, in JSON format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#InternalServiceFault": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                },
+                "amznErrorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the exception.</p>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unexpected error while processing the request. Retry the request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.oam#InvalidParameterException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                },
+                "amznErrorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the exception.</p>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A parameter is specified incorrectly.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.oam#LabelTemplate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.oam#ListAttachedLinks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#ListAttachedLinksInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#ListAttachedLinksOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#MissingRequiredParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Returns a list of source account links that are linked to this monitoring account sink.</p>\n        <p>To use this operation, provide the sink ARN. To retrieve a list of sink ARNs, use <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListSinks.html\">ListSinks</a>.</p>\n        <p>To find a list of links for one source account, use <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListLinks.html\">ListLinks</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListAttachedLinks"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Items"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "dataplane"
+                ]
+            }
+        },
+        "com.amazonaws.oam#ListAttachedLinksInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.oam#ListAttachedLinksMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Limits the number of returned links to the specified number.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.oam#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. You received this token from a previous call.</p>"
+                    }
+                },
+                "SinkIdentifier": {
+                    "target": "com.amazonaws.oam#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink that you want to retrieve links for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#ListAttachedLinksItem": {
+            "type": "structure",
+            "members": {
+                "Label": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label that was assigned to this link at creation, with the variables resolved to their actual values.</p>"
+                    }
+                },
+                "LinkArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the link.</p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.oam#ResourceTypesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types supported by this link.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about one link attached to this monitoring\n            account sink.</p>"
+            }
+        },
+        "com.amazonaws.oam#ListAttachedLinksItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.oam#ListAttachedLinksItem"
+            }
+        },
+        "com.amazonaws.oam#ListAttachedLinksMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.oam#ListAttachedLinksOutput": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.oam#ListAttachedLinksItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that contain the information about the attached links.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of links.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#ListLinks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#ListLinksInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#ListLinksOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation in a source account to return a list of links to monitoring account sinks that\n            this source account has.</p>\n        <p>To find a list of links for one monitoring account sink, use <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_ListAttachedLinks.html\">ListAttachedLinks</a> from within the monitoring account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListLinks"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.oam#ListLinksInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.oam#ListLinksMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Limits the number of returned links to the specified number.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.oam#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. You received this token from a previous call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#ListLinksItem": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the link.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The random ID string that Amazon Web Services generated as part of the link ARN.</p>"
+                    }
+                },
+                "Label": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label that was assigned to this link at creation, with the variables resolved to their actual values.</p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.oam#ResourceTypesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types supported by this link.</p>"
+                    }
+                },
+                "SinkArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink that this link is attached to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about one of this source account's links to a monitoring account.</p>"
+            }
+        },
+        "com.amazonaws.oam#ListLinksItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.oam#ListLinksItem"
+            }
+        },
+        "com.amazonaws.oam#ListLinksMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.oam#ListLinksOutput": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.oam#ListLinksItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that contain the information about the returned links.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of links.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#ListSinks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#ListSinksInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#ListSinksOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Use this operation in a monitoring account to return the list of sinks created in that account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/ListSinks"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Items"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.oam#ListSinksInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.oam#ListSinksMaxResults",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>Limits the number of returned links to the specified number.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.oam#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. You received this token from a previous call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#ListSinksItem": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The random ID string that Amazon Web Services generated as part of the sink ARN.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the sink.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that contains information about one of this monitoring account's sinks.</p>"
+            }
+        },
+        "com.amazonaws.oam#ListSinksItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.oam#ListSinksItem"
+            }
+        },
+        "com.amazonaws.oam#ListSinksMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.oam#ListSinksOutput": {
+            "type": "structure",
+            "members": {
+                "Items": {
+                    "target": "com.amazonaws.oam#ListSinksItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of structures that contain the information about the returned sinks.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use when requesting the next set of sinks.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#ListTagsForResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#ListTagsForResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to list the tags for a resource",
+                "smithy.api#documentation": "<p>Displays the tags associated with a resource. Both sinks and links support tagging.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.oam#ListTagsForResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.oam#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the  resource that you want to view tags for.</p>\n        <p>The ARN format of a sink is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:sink/<i>sink-id</i>\n            </code>\n         </p>\n        <p>The ARN format of a link is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:link/<i>link-id</i>\n            </code>\n         </p>\n        <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html\">CloudWatch Logs\n            resources and operations</a>.</p>\n        <important>\n            <p>Unlike tagging permissions in other Amazon Web Services services, to retrieve the list of tags\n            for links or sinks you must have the <code>oam:RequestTag</code> permission. The\n            <code>aws:ReguestTag</code> permission does not allow you to tag and untag links and\n            sinks.</p>\n         </important>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#ListTagsForResourceOutput": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.oam#TagMapOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags associated with the requested resource.&gt;</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#MissingRequiredParameterException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                },
+                "amznErrorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the exception.</p>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A required parameter is missing from the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.oam#NextToken": {
+            "type": "string"
+        },
+        "com.amazonaws.oam#PutSinkPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#PutSinkPolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#PutSinkPolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#MissingRequiredParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Creates or updates the resource policy that grants permissions to source\n            accounts to link to the monitoring account sink. When you create a sink policy, you can grant\n            permissions to all accounts in an organization or to individual accounts.</p>\n        <p>You can also use a sink policy to limit the types of data that is shared. The three types that\n            you can allow or deny are:</p>\n        <ul>\n            <li>\n               <p>\n                  <b>Metrics</b> - Specify with\n                <code>AWS::CloudWatch::Metric</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Log groups</b> - Specify with <code>AWS::Logs::LogGroup</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Traces</b> - Specify with <code>AWS::XRay::Trace</code>\n               </p>\n            </li>\n         </ul>\n        <p>See the examples in this section to see how to specify permitted source accounts and data types.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/PutSinkPolicy"
+                }
+            }
+        },
+        "com.amazonaws.oam#PutSinkPolicyInput": {
+            "type": "structure",
+            "members": {
+                "SinkIdentifier": {
+                    "target": "com.amazonaws.oam#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink to attach this policy to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.oam#SinkPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON policy to use. If you are updating an existing policy, the entire existing policy is\n            replaced by what you specify here.</p>\n        <p>The policy must be in JSON string format with quotation marks escaped and no newlines.</p>\n        <p>For examples of different types of policies, see the <b>Examples</b> section on this page.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#PutSinkPolicyOutput": {
+            "type": "structure",
+            "members": {
+                "SinkArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink.</p>"
+                    }
+                },
+                "SinkId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The random ID string that Amazon Web Services generated as part of the sink ARN.</p>"
+                    }
+                },
+                "Policy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy that you specified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#ResourceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_:\\.\\-\\/]{0,2047}$"
+            }
+        },
+        "com.amazonaws.oam#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                },
+                "amznErrorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the exception.</p>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request references a resource that does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.oam#ResourceType": {
+            "type": "enum",
+            "members": {
+                "AWS_CLOUDWATCH_METRIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::CloudWatch::Metric"
+                    }
+                },
+                "AWS_LOGS_LOGGROUP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::Logs::LogGroup"
+                    }
+                },
+                "AWS_XRAY_TRACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS::XRay::Trace"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.oam#ResourceTypesInput": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.oam#ResourceType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.oam#ResourceTypesOutput": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.oam#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                },
+                "amznErrorType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the exception.</p>",
+                        "smithy.api#httpHeader": "x-amzn-ErrorType"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request would cause a service quota to be exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.oam#SinkName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\.\\-]{1,255}$"
+            }
+        },
+        "com.amazonaws.oam#SinkPolicy": {
+            "type": "string"
+        },
+        "com.amazonaws.oam#TagKey": {
+            "type": "string",
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.oam#TagKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.oam#TagKey"
+            }
+        },
+        "com.amazonaws.oam#TagMapInput": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.oam#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.oam#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.oam#TagMapOutput": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.oam#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#TagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#TagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.oam#TooManyTagsException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to tag a resource",
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys",
+                    "aws:RequestTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified resource.\n            Both sinks and links can be tagged. </p>\n        <p>Tags can help you organize and categorize your resources. You can also use them to scope user\n            permissions by granting a user\n            permission to access or change only resources with certain tag values.</p>\n        <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n        <p>You can use the <code>TagResource</code> action with a resource that already has tags. If you specify a new tag key for the alarm,\n            this tag is appended to the list of tags associated\n            with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces\n            the previous value for that tag.</p>\n        <p>You can associate as many as 50 tags with a resource.</p>\n        <important>\n            <p>Unlike tagging permissions in other Amazon Web Services services, to tag or untag links and\n            sinks you must have the <code>oam:ResourceTag</code> permission. The\n            <code>iam:ResourceTag</code> permission does not allow you to tag and untag links and\n            sinks.</p>\n         </important>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.oam#TagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.oam#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the  resource that you're adding tags to.</p>\n        <p>The ARN format of a sink is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:sink/<i>sink-id</i>\n            </code>\n         </p>\n        <p>The ARN format of a link is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:link/<i>link-id</i>\n            </code>\n         </p>\n        <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html\">CloudWatch Logs\n            resources and operations</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.oam#TagMapInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of key-value pairs to associate with the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#TagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#TagValue": {
+            "type": "string",
+            "traits": {
+                "aws.api#data": "tagging",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.oam#TooManyTagsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource can have no more than 50 tags.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.oam#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#UntagResourceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#UntagResourceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to untag a resource",
+                "aws.iam#conditionKeys": [
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Removes one or more tags from the specified resource.</p>\n        <important>\n            <p>Unlike tagging permissions in other Amazon Web Services services, to tag or untag links and\n            sinks you must have the <code>oam:ResourceTag</code> permission. The\n            <code>iam:TagResource</code> permission does not allow you to tag and untag links and\n            sinks.</p>\n         </important>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.oam#UntagResourceInput": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.oam#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource that you're removing tags from.</p>\n        <p>The ARN format of a sink is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:sink/<i>sink-id</i>\n            </code>\n         </p>\n        <p>The ARN format of a link is\n            <code>arn:aws:oam:<i>Region</i>:<i>account-id</i>:link/<i>link-id</i>\n            </code>\n         </p>\n        <p>For more information about ARN format, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/iam-access-control-overview-cwl.html\">CloudWatch Logs\n            resources and operations</a>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.oam#TagKeys",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tag keys to remove from the resource.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#UntagResourceOutput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#UpdateLink": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.oam#UpdateLinkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.oam#UpdateLinkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.oam#InternalServiceFault"
+                },
+                {
+                    "target": "com.amazonaws.oam#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#MissingRequiredParameterException"
+                },
+                {
+                    "target": "com.amazonaws.oam#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "oam:ResourceTypes"
+                ],
+                "smithy.api#documentation": "<p>Use this operation to change what types of data are shared from a source account to its linked\n            monitoring account sink. You can't change the sink or change the monitoring account with this operation.</p>\n        <p>To update the list of tags associated with the sink, use\n            <a href=\"https://docs.aws.amazon.com/OAM/latest/APIReference/API_TagResource.html\">TagResource</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateLink"
+                }
+            }
+        },
+        "com.amazonaws.oam#UpdateLinkInput": {
+            "type": "structure",
+            "members": {
+                "Identifier": {
+                    "target": "com.amazonaws.oam#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the link that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.oam#ResourceTypesInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of strings that define which types of data that the source account will send to the monitoring\n            account.</p>\n        <p>Your input here replaces the current set of data types that are shared.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.oam#UpdateLinkOutput": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the link that you have updated.</p>"
+                    }
+                },
+                "Id": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The random ID string that Amazon Web Services generated as part of the sink ARN.</p>"
+                    }
+                },
+                "Label": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label assigned to this link, with the variables resolved to their actual values.</p>"
+                    }
+                },
+                "LabelTemplate": {
+                    "target": "com.amazonaws.oam#LabelTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exact label template that was specified when the link was created, with the template variables not resolved.</p>"
+                    }
+                },
+                "ResourceTypes": {
+                    "target": "com.amazonaws.oam#ResourceTypesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource types now supported by this link.</p>"
+                    }
+                },
+                "SinkArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the sink that is used for this link.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.oam#TagMapOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags assigned to the link.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.oam#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value of a parameter in the request caused an error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.oam#oamservice": {
+            "type": "service",
+            "version": "2022-06-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.oam#CreateLink"
+                },
+                {
+                    "target": "com.amazonaws.oam#CreateSink"
+                },
+                {
+                    "target": "com.amazonaws.oam#DeleteLink"
+                },
+                {
+                    "target": "com.amazonaws.oam#DeleteSink"
+                },
+                {
+                    "target": "com.amazonaws.oam#GetLink"
+                },
+                {
+                    "target": "com.amazonaws.oam#GetSink"
+                },
+                {
+                    "target": "com.amazonaws.oam#GetSinkPolicy"
+                },
+                {
+                    "target": "com.amazonaws.oam#ListAttachedLinks"
+                },
+                {
+                    "target": "com.amazonaws.oam#ListLinks"
+                },
+                {
+                    "target": "com.amazonaws.oam#ListSinks"
+                },
+                {
+                    "target": "com.amazonaws.oam#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.oam#PutSinkPolicy"
+                },
+                {
+                    "target": "com.amazonaws.oam#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.oam#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.oam#UpdateLink"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "OAM",
+                    "arnNamespace": "oam",
+                    "cloudTrailEventSource": "{{CLOUD_TRAIL_EVENT_SOURCE}}"
+                },
+                "aws.auth#sigv4": {
+                    "name": "oam"
+                },
+                "aws.iam#defineConditionKeys": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by tag key-value pairs attached to the resource",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+                    },
+                    "aws:TagKeys": {
+                        "type": "ArrayOfString",
+                        "documentation": "Filters access by the presence of tag keys in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by the presence of tag key-value pairs in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+                    },
+                    "oam:ResourceTypes": {
+                        "type": "ArrayOfString",
+                        "documentation": "Filters access by the presence of resource types in the request",
+                        "externalDocumentation": "${DocHomeURL}oam/latest/apireference/api_createlink.html#api_createlink_requestsyntax"
+                    }
+                },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "Content-Type",
+                        "X-Amz-Requested-Operation"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Use Amazon CloudWatch Observability Access Manager to create and manage links between source accounts and\n            monitoring accounts by using <i>CloudWatch cross-account observability</i>. With\n            CloudWatch cross-account observability, you can monitor and troubleshoot applications that span\n            multiple accounts within a Region. Seamlessly search, visualize, and analyze your metrics,\n            logs, and traces in any of the linked accounts without account boundaries.</p>\n\n        <p>Set up one or more Amazon Web Services accounts as <i>monitoring\n            accounts</i> and link them with multiple <i>source accounts</i>. A\n            monitoring account is a central Amazon Web Services account that can view and interact with\n            observability data generated from source accounts. A source account is an individual Amazon Web Services account that generates observability data for the resources that reside in it.\n            Source accounts share their observability data with the monitoring account. The shared\n            observability data can include metrics in Amazon CloudWatch, logs in Amazon CloudWatch Logs, and traces in X-Ray.</p>",
+                "smithy.api#title": "CloudWatch Observability Access Manager",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": true,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "aws.partition",
+                                    "argv": [
+                                        {
+                                            "ref": "Region"
+                                        }
+                                    ],
+                                    "assign": "PartitionResult"
+                                }
+                            ],
+                            "type": "tree",
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "fn": "parseURL",
+                                            "argv": [
+                                                {
+                                                    "ref": "Endpoint"
+                                                }
+                                            ],
+                                            "assign": "url"
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                                    "type": "error"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": {
+                                                            "ref": "Endpoint"
+                                                        },
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        },
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://oam-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsFIPS"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://oam-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseDualStack"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "type": "tree",
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        true,
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "supportsDualStack"
+                                                            ]
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "type": "tree",
+                                            "rules": [
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://oam.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                            "type": "error"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": "https://oam.{Region}.{PartitionResult#dnsSuffix}",
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "cn-north-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "cn-north-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://oam.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        }
+    }
+}

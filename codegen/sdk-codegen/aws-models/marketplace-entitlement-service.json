@@ -115,7 +115,7 @@
             }
         },
         "com.amazonaws.marketplaceentitlementservice#EntitlementValue": {
-            "type": "union",
+            "type": "structure",
             "members": {
                 "IntegerValue": {
                     "target": "com.amazonaws.marketplaceentitlementservice#Integer",

@@ -771,7 +771,7 @@
                 "ScteMarkersSource": {
                     "target": "com.amazonaws.mediapackagevod#ScteMarkersSource",
                     "traits": {
-                        "smithy.api#documentation": "The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content.",
+                        "smithy.api#documentation": "The source of scte markers used. When set to SEGMENTS, the scte markers are sourced from the segments of the ingested content. When set to MANIFEST, the scte markers are sourced from the manifest of the ingested content. The MANIFEST value is compatible with source HLS playlists using the SCTE-35 Enhanced syntax (#EXT-OATCLS-SCTE35 tags). SCTE-35 Elemental and SCTE-35 Daterange syntaxes are not supported with this option.",
                         "smithy.api#jsonName": "scteMarkersSource"
                     }
                 },
@@ -1284,6 +1284,14 @@
         "com.amazonaws.mediapackagevod#DescribePackagingGroupResponse": {
             "type": "structure",
             "members": {
+                "ApproximateAssetCount": {
+                    "target": "com.amazonaws.mediapackagevod#__integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "The approximate asset count of the PackagingGroup.",
+                        "smithy.api#jsonName": "approximateAssetCount"
+                    }
+                },
                 "Arn": {
                     "target": "com.amazonaws.mediapackagevod#__string",
                     "traits": {
@@ -3348,6 +3356,14 @@
         "com.amazonaws.mediapackagevod#PackagingGroup": {
             "type": "structure",
             "members": {
+                "ApproximateAssetCount": {
+                    "target": "com.amazonaws.mediapackagevod#__integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "The approximate asset count of the PackagingGroup.",
+                        "smithy.api#jsonName": "approximateAssetCount"
+                    }
+                },
                 "Arn": {
                     "target": "com.amazonaws.mediapackagevod#__string",
                     "traits": {
@@ -3839,6 +3855,14 @@
         "com.amazonaws.mediapackagevod#UpdatePackagingGroupResponse": {
             "type": "structure",
             "members": {
+                "ApproximateAssetCount": {
+                    "target": "com.amazonaws.mediapackagevod#__integer",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "The approximate asset count of the PackagingGroup.",
+                        "smithy.api#jsonName": "approximateAssetCount"
+                    }
+                },
                 "Arn": {
                     "target": "com.amazonaws.mediapackagevod#__string",
                     "traits": {

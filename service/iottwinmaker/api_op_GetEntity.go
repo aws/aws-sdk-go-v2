@@ -98,6 +98,9 @@ type GetEntityOutput struct {
 	// The description of the entity.
 	Description *string
 
+	// The syncSource of the sync job, if this entity was created by a sync job.
+	SyncSource *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

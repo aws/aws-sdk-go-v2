@@ -217,7 +217,7 @@ type ReplicateKeyInput struct {
 	// Assigns one or more tags to the replica key. Use this parameter to tag the KMS
 	// key when it is created. To tag an existing KMS key, use the TagResource
 	// operation. Tagging or untagging a KMS key can allow or deny permission to the
-	// KMS key. For details, see ABAC in KMS
+	// KMS key. For details, see ABAC for KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 	// Management Service Developer Guide. To use this parameter, you must have
 	// kms:TagResource

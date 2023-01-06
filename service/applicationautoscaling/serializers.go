@@ -960,6 +960,11 @@ func awsAwsjson11_serializeOpDocumentDescribeScalingActivitiesInput(v *DescribeS
 	object := value.Object()
 	defer object.Close()
 
+	if v.IncludeNotScaledActivities != nil {
+		ok := object.Key("IncludeNotScaledActivities")
+		ok.Boolean(*v.IncludeNotScaledActivities)
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)

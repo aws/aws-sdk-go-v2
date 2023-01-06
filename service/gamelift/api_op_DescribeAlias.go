@@ -14,8 +14,7 @@ import (
 // Retrieves properties for an alias. This operation returns all alias metadata and
 // settings. To get an alias's target fleet ID only, use ResolveAlias. To get alias
 // properties, specify the alias ID. If successful, the requested alias record is
-// returned. Related actions CreateAlias | ListAliases | DescribeAlias |
-// UpdateAlias | DeleteAlias | ResolveAlias | All APIs by task
+// returned. Related actions All APIs by task
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeAlias(ctx context.Context, params *DescribeAliasInput, optFns ...func(*Options)) (*DescribeAliasOutput, error) {
 	if params == nil {
@@ -32,7 +31,6 @@ func (c *Client) DescribeAlias(ctx context.Context, params *DescribeAliasInput, 
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type DescribeAliasInput struct {
 
 	// The unique identifier for the fleet alias that you want to retrieve. You can use
@@ -44,7 +42,6 @@ type DescribeAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type DescribeAliasOutput struct {
 
 	// The requested alias resource.

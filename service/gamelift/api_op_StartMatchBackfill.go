@@ -18,8 +18,8 @@ import (
 // the game session. FlexMatch uses this information to select new players so that
 // backfilled match continues to meet the original match requirements. When using
 // FlexMatch with GameLift managed hosting, you can request a backfill match from a
-// client service by calling this operation with a GameSession identifier. You also
-// have the option of making backfill requests directly from your game server. In
+// client service by calling this operation with a GameSessions ID. You also have
+// the option of making backfill requests directly from your game server. In
 // response to a request, FlexMatch creates player sessions for the new players,
 // updates the GameSession resource, and sends updated matchmaking data to the game
 // server. You can request a backfill match at any point after a game session is
@@ -41,9 +41,6 @@ import (
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html)
 // (reference)  How GameLift FlexMatch works
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/gamelift-match.html)
-// Related actions StartMatchmaking | DescribeMatchmaking | StopMatchmaking |
-// AcceptMatch | StartMatchBackfill | All APIs by task
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) StartMatchBackfill(ctx context.Context, params *StartMatchBackfillInput, optFns ...func(*Options)) (*StartMatchBackfillOutput, error) {
 	if params == nil {
 		params = &StartMatchBackfillInput{}
@@ -59,7 +56,6 @@ func (c *Client) StartMatchBackfill(ctx context.Context, params *StartMatchBackf
 	return out, nil
 }
 
-// Represents the input for a request operation.
 type StartMatchBackfillInput struct {
 
 	// Name of the matchmaker to use for this request. You can use either the
@@ -72,7 +68,8 @@ type StartMatchBackfillInput struct {
 
 	// Match information on all players that are currently assigned to the game
 	// session. This information is used by the matchmaker to find new players and add
-	// them to the existing game.
+	// them to the existing game. You can include up to 199 Players in a
+	// StartMatchBackfill request.
 	//
 	// * PlayerID, PlayerAttributes, Team -- This
 	// information is maintained in the GameSession object, MatchmakerData property,
@@ -102,7 +99,6 @@ type StartMatchBackfillInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the returned data in response to a request operation.
 type StartMatchBackfillOutput struct {
 
 	// Ticket representing the backfill matchmaking request. This object includes the

@@ -3,4 +3,4 @@
 package backup
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.17.11"
+const goModuleVersion = "1.19.0"

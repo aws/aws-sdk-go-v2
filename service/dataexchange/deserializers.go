@@ -5837,8 +5837,18 @@ func awsRestjson1_deserializeDocumentAssetDetails(v **types.AssetDetails, value 
 				return err
 			}
 
+		case "LakeFormationDataPermissionAsset":
+			if err := awsRestjson1_deserializeDocumentLakeFormationDataPermissionAsset(&sv.LakeFormationDataPermissionAsset, value); err != nil {
+				return err
+			}
+
 		case "RedshiftDataShareAsset":
 			if err := awsRestjson1_deserializeDocumentRedshiftDataShareAsset(&sv.RedshiftDataShareAsset, value); err != nil {
+				return err
+			}
+
+		case "S3DataAccessAsset":
+			if err := awsRestjson1_deserializeDocumentS3DataAccessAsset(&sv.S3DataAccessAsset, value); err != nil {
 				return err
 			}
 
@@ -6167,6 +6177,137 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
 				}
 				sv.ResourceType = types.ResourceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCreateS3DataAccessFromS3BucketResponseDetails(v **types.CreateS3DataAccessFromS3BucketResponseDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CreateS3DataAccessFromS3BucketResponseDetails
+	if *v == nil {
+		sv = &types.CreateS3DataAccessFromS3BucketResponseDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AssetSource":
+			if err := awsRestjson1_deserializeDocumentS3DataAccessAssetSourceEntry(&sv.AssetSource, value); err != nil {
+				return err
+			}
+
+		case "DataSetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.DataSetId = ptr.String(jtv)
+			}
+
+		case "RevisionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.RevisionId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDatabaseLFTagPolicy(v **types.DatabaseLFTagPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatabaseLFTagPolicy
+	if *v == nil {
+		sv = &types.DatabaseLFTagPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Expression":
+			if err := awsRestjson1_deserializeDocumentListOfLFTags(&sv.Expression, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDatabaseLFTagPolicyAndPermissions(v **types.DatabaseLFTagPolicyAndPermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatabaseLFTagPolicyAndPermissions
+	if *v == nil {
+		sv = &types.DatabaseLFTagPolicyAndPermissions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Expression":
+			if err := awsRestjson1_deserializeDocumentListOfLFTags(&sv.Expression, value); err != nil {
+				return err
+			}
+
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentListOfDatabaseLFTagPolicyPermissions(&sv.Permissions, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6975,6 +7116,83 @@ func awsRestjson1_deserializeDocumentImportAssetFromSignedUrlResponseDetails(v *
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentImportAssetsFromLakeFormationTagPolicyResponseDetails(v **types.ImportAssetsFromLakeFormationTagPolicyResponseDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ImportAssetsFromLakeFormationTagPolicyResponseDetails
+	if *v == nil {
+		sv = &types.ImportAssetsFromLakeFormationTagPolicyResponseDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CatalogId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.CatalogId = ptr.String(jtv)
+			}
+
+		case "Database":
+			if err := awsRestjson1_deserializeDocumentDatabaseLFTagPolicyAndPermissions(&sv.Database, value); err != nil {
+				return err
+			}
+
+		case "DataSetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.DataSetId = ptr.String(jtv)
+			}
+
+		case "RevisionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Id to be of type string, got %T instead", value)
+				}
+				sv.RevisionId = ptr.String(jtv)
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "Table":
+			if err := awsRestjson1_deserializeDocumentTableLFTagPolicyAndPermissions(&sv.Table, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentImportAssetsFromRedshiftDataSharesResponseDetails(v **types.ImportAssetsFromRedshiftDataSharesResponseDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7341,6 +7559,277 @@ func awsRestjson1_deserializeDocumentJobError(v **types.JobError, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentLakeFormationDataPermissionAsset(v **types.LakeFormationDataPermissionAsset, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LakeFormationDataPermissionAsset
+	if *v == nil {
+		sv = &types.LakeFormationDataPermissionAsset{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LakeFormationDataPermissionDetails":
+			if err := awsRestjson1_deserializeDocumentLakeFormationDataPermissionDetails(&sv.LakeFormationDataPermissionDetails, value); err != nil {
+				return err
+			}
+
+		case "LakeFormationDataPermissionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LakeFormationDataPermissionType to be of type string, got %T instead", value)
+				}
+				sv.LakeFormationDataPermissionType = types.LakeFormationDataPermissionType(jtv)
+			}
+
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentListOfLFPermissions(&sv.Permissions, value); err != nil {
+				return err
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLakeFormationDataPermissionDetails(v **types.LakeFormationDataPermissionDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LakeFormationDataPermissionDetails
+	if *v == nil {
+		sv = &types.LakeFormationDataPermissionDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LFTagPolicy":
+			if err := awsRestjson1_deserializeDocumentLFTagPolicyDetails(&sv.LFTagPolicy, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLFResourceDetails(v **types.LFResourceDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LFResourceDetails
+	if *v == nil {
+		sv = &types.LFResourceDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Database":
+			if err := awsRestjson1_deserializeDocumentDatabaseLFTagPolicy(&sv.Database, value); err != nil {
+				return err
+			}
+
+		case "Table":
+			if err := awsRestjson1_deserializeDocumentTableLFTagPolicy(&sv.Table, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLFTag(v **types.LFTag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LFTag
+	if *v == nil {
+		sv = &types.LFTag{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TagKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TagKey = ptr.String(jtv)
+			}
+
+		case "TagValues":
+			if err := awsRestjson1_deserializeDocumentListOfLFTagValues(&sv.TagValues, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLFTagPolicyDetails(v **types.LFTagPolicyDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LFTagPolicyDetails
+	if *v == nil {
+		sv = &types.LFTagPolicyDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CatalogId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsAccountId to be of type string, got %T instead", value)
+				}
+				sv.CatalogId = ptr.String(jtv)
+			}
+
+		case "ResourceDetails":
+			if err := awsRestjson1_deserializeDocumentLFResourceDetails(&sv.ResourceDetails, value); err != nil {
+				return err
+			}
+
+		case "ResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LFResourceType to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = types.LFResourceType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListOf__string(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentListOfAssetDestinationEntry(v *[]types.AssetDestinationEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7436,6 +7925,42 @@ func awsRestjson1_deserializeDocumentListOfAssetSourceEntry(v *[]types.AssetSour
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListOfDatabaseLFTagPolicyPermissions(v *[]types.DatabaseLFTagPolicyPermission, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DatabaseLFTagPolicyPermission
+	if *v == nil {
+		cv = []types.DatabaseLFTagPolicyPermission{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DatabaseLFTagPolicyPermission
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DatabaseLFTagPolicyPermission to be of type string, got %T instead", value)
+			}
+			col = types.DatabaseLFTagPolicyPermission(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -7579,6 +8104,112 @@ func awsRestjson1_deserializeDocumentListOfJobError(v *[]types.JobError, value i
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentListOfLFPermissions(v *[]types.LFPermission, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LFPermission
+	if *v == nil {
+		cv = []types.LFPermission{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LFPermission
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected LFPermission to be of type string, got %T instead", value)
+			}
+			col = types.LFPermission(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListOfLFTags(v *[]types.LFTag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LFTag
+	if *v == nil {
+		cv = []types.LFTag{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LFTag
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLFTag(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListOfLFTagValues(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentListOfRedshiftDataShareAssetSourceEntry(v *[]types.RedshiftDataShareAssetSourceEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7674,6 +8305,42 @@ func awsRestjson1_deserializeDocumentListOfRevisionEntry(v *[]types.RevisionEntr
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListOfTableTagPolicyLFPermissions(v *[]types.TableTagPolicyLFPermission, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.TableTagPolicyLFPermission
+	if *v == nil {
+		cv = []types.TableTagPolicyLFPermission{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.TableTagPolicyLFPermission
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TableTagPolicyLFPermission to be of type string, got %T instead", value)
+			}
+			col = types.TableTagPolicyLFPermission(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -7917,6 +8584,11 @@ func awsRestjson1_deserializeDocumentResponseDetails(v **types.ResponseDetails, 
 
 	for key, value := range shape {
 		switch key {
+		case "CreateS3DataAccessFromS3Bucket":
+			if err := awsRestjson1_deserializeDocumentCreateS3DataAccessFromS3BucketResponseDetails(&sv.CreateS3DataAccessFromS3Bucket, value); err != nil {
+				return err
+			}
+
 		case "ExportAssetsToS3":
 			if err := awsRestjson1_deserializeDocumentExportAssetsToS3ResponseDetails(&sv.ExportAssetsToS3, value); err != nil {
 				return err
@@ -7939,6 +8611,11 @@ func awsRestjson1_deserializeDocumentResponseDetails(v **types.ResponseDetails, 
 
 		case "ImportAssetFromSignedUrl":
 			if err := awsRestjson1_deserializeDocumentImportAssetFromSignedUrlResponseDetails(&sv.ImportAssetFromSignedUrl, value); err != nil {
+				return err
+			}
+
+		case "ImportAssetsFromLakeFormationTagPolicy":
+			if err := awsRestjson1_deserializeDocumentImportAssetsFromLakeFormationTagPolicyResponseDetails(&sv.ImportAssetsFromLakeFormationTagPolicy, value); err != nil {
 				return err
 			}
 
@@ -8201,6 +8878,124 @@ func awsRestjson1_deserializeDocumentRevisionPublished(v **types.RevisionPublish
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentS3DataAccessAsset(v **types.S3DataAccessAsset, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3DataAccessAsset
+	if *v == nil {
+		sv = &types.S3DataAccessAsset{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "KeyPrefixes":
+			if err := awsRestjson1_deserializeDocumentListOf__string(&sv.KeyPrefixes, value); err != nil {
+				return err
+			}
+
+		case "Keys":
+			if err := awsRestjson1_deserializeDocumentListOf__string(&sv.Keys, value); err != nil {
+				return err
+			}
+
+		case "S3AccessPointAlias":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.S3AccessPointAlias = ptr.String(jtv)
+			}
+
+		case "S3AccessPointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.S3AccessPointArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3DataAccessAssetSourceEntry(v **types.S3DataAccessAssetSourceEntry, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3DataAccessAssetSourceEntry
+	if *v == nil {
+		sv = &types.S3DataAccessAssetSourceEntry{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "KeyPrefixes":
+			if err := awsRestjson1_deserializeDocumentListOf__string(&sv.KeyPrefixes, value); err != nil {
+				return err
+			}
+
+		case "Keys":
+			if err := awsRestjson1_deserializeDocumentListOf__string(&sv.Keys, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentS3SnapshotAsset(v **types.S3SnapshotAsset, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8338,6 +9133,83 @@ func awsRestjson1_deserializeDocumentServiceLimitExceededException(v **types.Ser
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTableLFTagPolicy(v **types.TableLFTagPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TableLFTagPolicy
+	if *v == nil {
+		sv = &types.TableLFTagPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Expression":
+			if err := awsRestjson1_deserializeDocumentListOfLFTags(&sv.Expression, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTableLFTagPolicyAndPermissions(v **types.TableLFTagPolicyAndPermissions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TableLFTagPolicyAndPermissions
+	if *v == nil {
+		sv = &types.TableLFTagPolicyAndPermissions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Expression":
+			if err := awsRestjson1_deserializeDocumentListOfLFTags(&sv.Expression, value); err != nil {
+				return err
+			}
+
+		case "Permissions":
+			if err := awsRestjson1_deserializeDocumentListOfTableTagPolicyLFPermissions(&sv.Permissions, value); err != nil {
+				return err
 			}
 
 		default:

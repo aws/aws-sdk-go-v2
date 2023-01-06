@@ -440,6 +440,10 @@ type RecoveryInstance struct {
 	// The ID of the Job that created the Recovery Instance.
 	JobID *string
 
+	// Environment (On Premises / AWS) of the instance that the recovery instance
+	// originated from.
+	OriginEnvironment OriginEnvironment
+
 	// The date and time of the Point in Time (PIT) snapshot that this Recovery
 	// Instance was launched from.
 	PointInTimeSnapshotDateTime *string
@@ -578,6 +582,10 @@ type RecoveryInstanceFailback struct {
 	// The Job ID of the last failback log for this Recovery Instance.
 	FailbackJobID *string
 
+	// The launch type (Recovery / Drill) of the last launch for the failback
+	// replication of this recovery instance.
+	FailbackLaunchType FailbackLaunchType
+
 	// Whether we are failing back to the original Source Server for this Recovery
 	// Instance.
 	FailbackToOriginalServer *bool
@@ -658,8 +666,9 @@ type ReplicationConfigurationReplicatedDisk struct {
 	// Whether to boot from this disk or not.
 	IsBootDisk *bool
 
-	// The Staging Disk EBS volume type to be used during replication when
-	// stagingDiskType is set to Auto. This is a read-only field.
+	// When stagingDiskType is set to Auto, this field shows the current staging disk
+	// EBS volume type as it is constantly updated by the service. This is a read-only
+	// field.
 	OptimizedStagingDiskType ReplicationConfigurationReplicatedDiskStagingDiskType
 
 	// The Staging Disk EBS volume type to be used during replication.
@@ -731,6 +740,21 @@ type ReplicationConfigurationTemplate struct {
 	noSmithyDocumentSerde
 }
 
+// Properties of the cloud environment where this Source Server originated from.
+type SourceCloudProperties struct {
+
+	// AWS Account ID for an EC2-originated Source Server.
+	OriginAccountID *string
+
+	// AWS Availability Zone for an EC2-originated Source Server.
+	OriginAvailabilityZone *string
+
+	// AWS Region for an EC2-originated Source Server.
+	OriginRegion *string
+
+	noSmithyDocumentSerde
+}
+
 // Properties of the Source Server machine.
 type SourceProperties struct {
 
@@ -778,6 +802,17 @@ type SourceServer struct {
 
 	// The ID of the Recovery Instance associated with this Source Server.
 	RecoveryInstanceId *string
+
+	// Replication direction of the Source Server.
+	ReplicationDirection ReplicationDirection
+
+	// For EC2-originated Source Servers which have been failed over and then failed
+	// back, this value will mean the ARN of the Source Server on the opposite
+	// replication direction.
+	ReversedDirectionSourceServerArn *string
+
+	// Source cloud properties of the Source Server.
+	SourceCloudProperties *SourceCloudProperties
 
 	// The source properties of the Source Server.
 	SourceProperties *SourceProperties

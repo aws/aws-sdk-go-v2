@@ -108,9 +108,21 @@ type DescribeFeatureGroupOutput struct {
 	// A value indicating whether the update made to the feature group was successful.
 	LastUpdateStatus *types.LastUpdateStatus
 
-	// The configuration of the OfflineStore, inducing the S3 location of the
-	// OfflineStore, Amazon Web Services Glue or Amazon Web Services Hive data
-	// catalogue configurations, and the security configuration.
+	// The configuration of the offline store. It includes the following
+	// configurations:
+	//
+	// * Amazon S3 location of the offline store.
+	//
+	// * Configuration of
+	// the Glue data catalog.
+	//
+	// * Table format of the offline store.
+	//
+	// * Option to
+	// disable the automatic creation of a Glue table for the offline store.
+	//
+	// *
+	// Encryption configuration.
 	OfflineStoreConfig *types.OfflineStoreConfig
 
 	// The status of the OfflineStore. Notifies you if replicating data into the

@@ -61,6 +61,19 @@ type GetMapGlyphsInput struct {
 	// Italic | Fira GO Map | Fira GO Map Bold | Noto Sans CJK JP Bold | Noto Sans CJK
 	// JP Light | Noto Sans CJK JP Regular
 	//
+	// Valid font stacks for Open Data (Preview)
+	// (https://docs.aws.amazon.com/location/latest/developerguide/open-data.html)
+	// styles:
+	//
+	// * VectorOpenDataStandardLight – Amazon Ember Regular,Noto Sans Regular
+	// | Amazon Ember Bold,Noto Sans Bold | Amazon Ember Medium,Noto Sans Medium |
+	// Amazon Ember Regular Italic,Noto Sans Italic | Amazon Ember Condensed RC
+	// Regular,Noto Sans Regular | Amazon Ember Condensed RC Bold,Noto Sans Bold
+	//
+	// The
+	// fonts used by VectorOpenDataStandardLight are combined fonts that use Amazon
+	// Ember for most glyphs but Noto Sans for glyphs unsupported by Amazon Ember.
+	//
 	// This member is required.
 	FontStack *string
 

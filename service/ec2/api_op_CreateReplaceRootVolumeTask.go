@@ -17,8 +17,8 @@ import (
 // a specific snapshot taken from the original root volume, or that is restored
 // from an AMI that has the same key characteristics as that of the instance. For
 // more information, see Replace a root volume
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-restoring-volume.html#replace-root)
-// in the Amazon Elastic Compute Cloud User Guide.
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/replace-root.html) in the
+// Amazon Elastic Compute Cloud User Guide.
 func (c *Client) CreateReplaceRootVolumeTask(ctx context.Context, params *CreateReplaceRootVolumeTaskInput, optFns ...func(*Options)) (*CreateReplaceRootVolumeTaskOutput, error) {
 	if params == nil {
 		params = &CreateReplaceRootVolumeTaskInput{}

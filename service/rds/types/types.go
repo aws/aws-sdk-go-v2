@@ -140,7 +140,116 @@ type AvailableProcessorFeature struct {
 	noSmithyDocumentSerde
 }
 
-// A CA certificate for an Amazon Web Services account.
+// Contains the details about a blue/green deployment. For more information, see
+// Using Amazon RDS Blue/Green Deployments for database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
+// database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+// in the Amazon Aurora User Guide.
+type BlueGreenDeployment struct {
+
+	// The system-generated identifier of the blue/green deployment.
+	BlueGreenDeploymentIdentifier *string
+
+	// The user-supplied name of the blue/green deployment.
+	BlueGreenDeploymentName *string
+
+	// Specifies the time when the blue/green deployment was created, in Universal
+	// Coordinated Time (UTC).
+	CreateTime *time.Time
+
+	// Specifies the time when the blue/green deployment was deleted, in Universal
+	// Coordinated Time (UTC).
+	DeleteTime *time.Time
+
+	// The source database for the blue/green deployment. Before switchover, the source
+	// database is the production database in the blue environment.
+	Source *string
+
+	// The status of the blue/green deployment. Values:
+	//
+	// * PROVISIONING - Resources are
+	// being created in the green environment.
+	//
+	// * AVAILABLE - Resources are available
+	// in the green environment.
+	//
+	// * SWITCHOVER_IN_PROGRESS - The deployment is being
+	// switched from the blue environment to the green environment.
+	//
+	// *
+	// SWITCHOVER_COMPLETED - Switchover from the blue environment to the green
+	// environment is complete.
+	//
+	// * INVALID_CONFIGURATION - Resources in the green
+	// environment are invalid, so switchover isn't possible.
+	//
+	// * SWITCHOVER_FAILED -
+	// Switchover was attempted but failed.
+	//
+	// * DELETING - The blue/green deployment is
+	// being deleted.
+	Status *string
+
+	// Additional information about the status of the blue/green deployment.
+	StatusDetails *string
+
+	// The details about each source and target resource in the blue/green deployment.
+	SwitchoverDetails []SwitchoverDetail
+
+	// A list of tags. For more information, see Tagging Amazon RDS Resources
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+	// the Amazon RDS User Guide.
+	TagList []Tag
+
+	// The target database for the blue/green deployment. Before switchover, the target
+	// database is the clone database in the green environment.
+	Target *string
+
+	// Either tasks to be performed or tasks that have been completed on the target
+	// database before switchover.
+	Tasks []BlueGreenDeploymentTask
+
+	noSmithyDocumentSerde
+}
+
+// Contains the details about a task for a blue/green deployment. For more
+// information, see Using Amazon RDS Blue/Green Deployments for database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
+// database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+// in the Amazon Aurora User Guide.
+type BlueGreenDeploymentTask struct {
+
+	// The name of the blue/green deployment task.
+	Name *string
+
+	// The status of the blue/green deployment task. Values:
+	//
+	// * PENDING - The resources
+	// are being prepared for deployment.
+	//
+	// * IN_PROGRESS - The resource is being
+	// deployed.
+	//
+	// * COMPLETED - The resource has been deployed.
+	//
+	// * FAILED - Deployment
+	// of the resource failed.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// A CA certificate for an Amazon Web Services account. For more information, see
+// Using SSL/TLS to encrypt a connection to a DB instance
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+// cluster
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+// in the Amazon Aurora User Guide.
 type Certificate struct {
 
 	// The Amazon Resource Name (ARN) for the certificate.
@@ -166,6 +275,25 @@ type Certificate struct {
 	ValidFrom *time.Time
 
 	// The final date that the certificate continues to be valid.
+	ValidTill *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Returns the details of the DB instance’s server certificate. For more
+// information, see Using SSL/TLS to encrypt a connection to a DB instance
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+// cluster
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+// in the Amazon Aurora User Guide.
+type CertificateDetails struct {
+
+	// The CA identifier of the CA certificate used for the DB instance's server
+	// certificate.
+	CAIdentifier *string
+
+	// The expiration date of the DB instance’s server certificate.
 	ValidTill *time.Time
 
 	noSmithyDocumentSerde
@@ -329,6 +457,18 @@ type ConnectionPoolConfigurationInfo struct {
 	// MySQL engine family databases. Currently, the only allowed value is
 	// EXCLUDE_VARIABLE_SETS.
 	SessionPinningFilters []string
+
+	noSmithyDocumentSerde
+}
+
+// A value that indicates the AMI information.
+type CustomDBEngineVersionAMI struct {
+
+	// A value that indicates the ID of the AMI.
+	ImageId *string
+
+	// A value that indicates the status of a custom engine version (CEV).
+	Status *string
 
 	noSmithyDocumentSerde
 }
@@ -542,6 +682,16 @@ type DBCluster struct {
 	// Specifies the latest time to which a database can be restored with point-in-time
 	// restore.
 	LatestRestorableTime *time.Time
+
+	// Contains the secret managed by RDS in Amazon Web Services Secrets Manager for
+	// the master user password. For more information, see Password management with
+	// Amazon Web Services Secrets Manager
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// in the Amazon RDS User Guide and Password management with Amazon Web Services
+	// Secrets Manager
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html)
+	// in the Amazon Aurora User Guide.
+	MasterUserSecret *MasterUserSecret
 
 	// Contains the master username for the DB cluster.
 	MasterUsername *string
@@ -1028,6 +1178,10 @@ type DBEngineVersion struct {
 	// The description of the database engine.
 	DBEngineDescription *string
 
+	// A value that indicates the source media provider of the AMI based on the usage
+	// operation. Applicable for RDS Custom for SQL Server.
+	DBEngineMediaType *string
+
 	// The ARN of the custom engine version.
 	DBEngineVersionArn *string
 
@@ -1058,6 +1212,9 @@ type DBEngineVersion struct {
 	// CloudWatch Logs.
 	ExportableLogTypes []string
 
+	// The EC2 image
+	Image *CustomDBEngineVersionAMI
+
 	// The Amazon Web Services KMS key identifier for an encrypted CEV. This parameter
 	// is required for RDS Custom, but optional for Amazon RDS.
 	KMSKeyId *string
@@ -1067,6 +1224,15 @@ type DBEngineVersion struct {
 
 	// The status of the DB engine version, either available or deprecated.
 	Status *string
+
+	// A list of the supported CA certificate identifiers. For more information, see
+	// Using SSL/TLS to encrypt a connection to a DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+	// cluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
+	SupportedCACertificateIdentifiers []string
 
 	// A list of the character sets supported by this engine for the CharacterSetName
 	// parameter of the CreateDBInstance operation.
@@ -1096,6 +1262,10 @@ type DBEngineVersion struct {
 	// A value that indicates whether the engine version supports Babelfish for Aurora
 	// PostgreSQL.
 	SupportsBabelfish bool
+
+	// A value that indicates whether the engine version supports rotating the server
+	// certificate without rebooting the DB instance.
+	SupportsCertificateRotationWithoutRestart *bool
 
 	// A value that indicates whether you can use Aurora global databases with a
 	// specific DB engine version.
@@ -1188,8 +1358,17 @@ type DBInstance struct {
 	// Services Outposts or the Amazon Web Services Region.
 	BackupTarget *string
 
-	// The identifier of the CA certificate for this DB instance.
+	// The identifier of the CA certificate for this DB instance. For more information,
+	// see Using SSL/TLS to encrypt a connection to a DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+	// cluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
 	CACertificateIdentifier *string
+
+	// The details of the DB instance's server certificate.
+	CertificateDetails *CertificateDetails
 
 	// If present, specifies the name of the character set that this instance is
 	// associated with.
@@ -1230,7 +1409,7 @@ type DBInstance struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-on-outposts.html) in
 	// the Amazon RDS User Guide. For more information about CoIPs, see Customer-owned
 	// IP addresses
-	// (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-networking-components.html#ip-addressing)
+	// (https://docs.aws.amazon.com/outposts/latest/userguide/routing.html#ip-addressing)
 	// in the Amazon Web Services Outposts User Guide.
 	CustomerOwnedIpEnabled *bool
 
@@ -1355,6 +1534,13 @@ type DBInstance struct {
 
 	// Specifies the listener connection endpoint for SQL Server Always On.
 	ListenerEndpoint *Endpoint
+
+	// Contains the secret managed by RDS in Amazon Web Services Secrets Manager for
+	// the master user password. For more information, see Password management with
+	// Amazon Web Services Secrets Manager
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+	// in the Amazon RDS User Guide.
+	MasterUserSecret *MasterUserSecret
 
 	// Contains the master username for the DB instance.
 	MasterUsername *string
@@ -2652,6 +2838,45 @@ type IPRange struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the secret managed by RDS in Amazon Web Services Secrets Manager for
+// the master user password. For more information, see Password management with
+// Amazon Web Services Secrets Manager
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/rds-secrets-manager.html)
+// in the Amazon RDS User Guide and Password management with Amazon Web Services
+// Secrets Manager
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/rds-secrets-manager.html)
+// in the Amazon Aurora User Guide.
+type MasterUserSecret struct {
+
+	// The Amazon Web Services KMS key identifier that is used to encrypt the secret.
+	KmsKeyId *string
+
+	// The Amazon Resource Name (ARN) of the secret.
+	SecretArn *string
+
+	// The status of the secret. The possible status values include the following:
+	//
+	// *
+	// creating - The secret is being created.
+	//
+	// * active - The secret is available for
+	// normal use and rotation.
+	//
+	// * rotating - The secret is being rotated.
+	//
+	// * impaired
+	// - The secret can be used to access database credentials, but it can't be
+	// rotated. A secret might have this status if, for example, permissions are
+	// changed so that RDS can no longer access either the secret or the KMS key for
+	// the secret. When a secret has this status, you can correct the condition that
+	// caused the status. Alternatively, modify the DB instance to turn off automatic
+	// management of database credentials, and then modify the DB instance again to
+	// turn on automatic management of database credentials.
+	SecretStatus *string
+
+	noSmithyDocumentSerde
+}
+
 // The minimum DB engine version required for each corresponding allowed value for
 // an option setting.
 type MinimumEngineVersionPerAllowedValue struct {
@@ -2733,13 +2958,16 @@ type OptionGroup struct {
 	// and non-VPC instances.
 	AllowsVpcAndNonVpcInstanceMemberships bool
 
+	// Indicates when the option group was copied.
+	CopyTimestamp *time.Time
+
 	// Indicates the name of the engine that this option group can be applied to.
 	EngineName *string
 
 	// Indicates the major engine version associated with this option group.
 	MajorEngineVersion *string
 
-	// The Amazon Resource Name (ARN) for the option group.
+	// Specifies the Amazon Resource Name (ARN) for the option group.
 	OptionGroupArn *string
 
 	// Provides a description of the option group.
@@ -2750,6 +2978,13 @@ type OptionGroup struct {
 
 	// Indicates what options are available in the option group.
 	Options []Option
+
+	// Specifies the Amazon Web Services account ID for the option group from which
+	// this option group is copied.
+	SourceAccountId *string
+
+	// Specifies the name of the option group from which this option group is copied.
+	SourceOptionGroup *string
 
 	// If AllowsVpcAndNonVpcInstanceMemberships is false, this field is blank. If
 	// AllowsVpcAndNonVpcInstanceMemberships is true and this field is blank, then this
@@ -2777,6 +3012,9 @@ type OptionGroupMembership struct {
 
 // Available option.
 type OptionGroupOption struct {
+
+	// Specifies whether the option can be copied across Amazon Web Services accounts.
+	CopyableCrossAccount *bool
 
 	// If the option requires a port, specifies the default port for the option.
 	DefaultPort *int32
@@ -3173,7 +3411,13 @@ type PendingModifiedValues struct {
 	// The number of days for which automated backups are retained.
 	BackupRetentionPeriod *int32
 
-	// The identifier of the CA certificate for the DB instance.
+	// The identifier of the CA certificate for the DB instance. For more information,
+	// see Using SSL/TLS to encrypt a connection to a DB instance
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon RDS User Guide and  Using SSL/TLS to encrypt a connection to a DB
+	// cluster
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html)
+	// in the Amazon Aurora User Guide.
 	CACertificateIdentifier *string
 
 	// The name of the compute and memory capacity class for the DB instance.
@@ -3611,7 +3855,46 @@ type Subnet struct {
 	noSmithyDocumentSerde
 }
 
-// Metadata assigned to an Amazon RDS resource consisting of a key-value pair.
+// Contains the details about a blue/green deployment. For more information, see
+// Using Amazon RDS Blue/Green Deployments for database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
+// in the Amazon RDS User Guide and  Using Amazon RDS Blue/Green Deployments for
+// database updates
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
+// in the Amazon Aurora User Guide.
+type SwitchoverDetail struct {
+
+	// The Amazon Resource Name (ARN) of a resource in the blue environment.
+	SourceMember *string
+
+	// The switchover status of a resource in a blue/green deployment. Values:
+	//
+	// *
+	// preparing-for-switchover - The resource is being prepared to switch over.
+	//
+	// *
+	// ready-for-switchover - The resource is ready to switch over.
+	//
+	// *
+	// switchover-in-progress - The resource is being switched over.
+	//
+	// *
+	// switchover-completed - The resource has been switched over.
+	//
+	// * switchover-failed
+	// - The resource attempted to switch over but failed.
+	Status *string
+
+	// The Amazon Resource Name (ARN) of a resource in the green environment.
+	TargetMember *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata assigned to an Amazon RDS resource consisting of a key-value pair. For
+// more information, see Tagging Amazon RDS Resources
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
+// the Amazon RDS User Guide.
 type Tag struct {
 
 	// A key is the required name of the tag. The string value can be from 1 to 128
@@ -3706,6 +3989,9 @@ type UserAuthConfig struct {
 	// the underlying database.
 	AuthScheme AuthScheme
 
+	// The type of authentication the proxy uses for connections from clients.
+	ClientPasswordAuthType ClientPasswordAuthType
+
 	// A user-specified description about the authentication used by a proxy to log in
 	// as a specific database user.
 	Description *string
@@ -3733,6 +4019,9 @@ type UserAuthConfigInfo struct {
 	// The type of authentication that the proxy uses for connections from the proxy to
 	// the underlying database.
 	AuthScheme AuthScheme
+
+	// The type of authentication the proxy uses for connections from clients.
+	ClientPasswordAuthType ClientPasswordAuthType
 
 	// A user-specified description about the authentication used by a proxy to log in
 	// as a specific database user.

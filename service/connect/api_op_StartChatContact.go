@@ -97,8 +97,11 @@ type StartChatContactInput struct {
 	// The initial message to be sent to the newly created chat.
 	InitialMessage *types.ChatMessage
 
-	// The supported chat message content types. Content types can be text/plain or
-	// both text/plain and text/markdown.
+	// The supported chat message content types. Content types must always contain
+	// text/plain. You can then put any other supported type in the list. For example,
+	// all the following lists are valid because they contain text/plain: [text/plain,
+	// text/markdown, application/json], [text/markdown, text/plain], [text/plain,
+	// application/json].
 	SupportedMessagingContentTypes []string
 
 	noSmithyDocumentSerde

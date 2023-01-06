@@ -5324,6 +5324,15 @@ func awsAwsjson11_deserializeDocumentCategoryProperties(v **types.CategoryProper
 				}
 			}
 
+		case "InputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputType to be of type string, got %T instead", value)
+				}
+				sv.InputType = types.InputType(jtv)
+			}
+
 		case "LastUpdateTime":
 			if value != nil {
 				switch jtv := value.(type) {

@@ -11,6 +11,7 @@ const (
 	FilterNameStringTypeTagKey        FilterNameStringType = "tag-key"
 	FilterNameStringTypeTagValue      FilterNameStringType = "tag-value"
 	FilterNameStringTypePrimaryRegion FilterNameStringType = "primary-region"
+	FilterNameStringTypeOwningService FilterNameStringType = "owning-service"
 	FilterNameStringTypeAll           FilterNameStringType = "all"
 )
 
@@ -24,6 +25,7 @@ func (FilterNameStringType) Values() []FilterNameStringType {
 		"tag-key",
 		"tag-value",
 		"primary-region",
+		"owning-service",
 		"all",
 	}
 }

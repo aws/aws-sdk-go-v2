@@ -4,6 +4,7 @@ package redshiftdata
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
@@ -29,6 +30,12 @@ import (
 // required. When connecting to a serverless workgroup, specify the workgroup name
 // and database name. Also, permission to call the
 // redshift-serverless:GetCredentials operation is required.
+//
+// For more information
+// about the Amazon Redshift Data API and CLI usage examples, see Using the Amazon
+// Redshift Data API
+// (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the Amazon
+// Redshift Management Guide.
 func (c *Client) ExecuteStatement(ctx context.Context, params *ExecuteStatementInput, optFns ...func(*Options)) (*ExecuteStatementOutput, error) {
 	if params == nil {
 		params = &ExecuteStatementInput{}
@@ -56,6 +63,10 @@ type ExecuteStatementInput struct {
 	//
 	// This member is required.
 	Sql *string
+
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	ClientToken *string
 
 	// The cluster identifier. This parameter is required when connecting to a cluster
 	// and authenticating using either Secrets Manager or temporary credentials.
@@ -165,6 +176,9 @@ func (c *Client) addOperationExecuteStatementMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opExecuteStatementMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpExecuteStatementValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -181,6 +195,39 @@ func (c *Client) addOperationExecuteStatementMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpExecuteStatement struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpExecuteStatement) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpExecuteStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*ExecuteStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *ExecuteStatementInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opExecuteStatementMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpExecuteStatement{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opExecuteStatement(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -24,16 +24,11 @@ import (
 // KMS key. When you use the public key within KMS, you benefit from the
 // authentication, authorization, and logging that are part of every KMS operation.
 // You also reduce of risk of encrypting data that cannot be decrypted. These
-// features are not effective outside of KMS. To verify a signature outside of KMS
-// with an SM2 public key (China Regions only), you must specify the distinguishing
-// ID. By default, KMS uses 1234567812345678 as the distinguishing ID. For more
-// information, see Offline verification with SM2 key pairs
-// (https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification).
-// To help you use the public key safely outside of KMS, GetPublicKey returns
-// important information about the public key in the response, including:
+// features are not effective outside of KMS. To help you use the public key safely
+// outside of KMS, GetPublicKey returns important information about the public key
+// in the response, including:
 //
-// *
-// KeySpec
+// * KeySpec
 // (https://docs.aws.amazon.com/kms/latest/APIReference/API_GetPublicKey.html#KMS-GetPublicKey-response-KeySpec):
 // The type of key material in the public key, such as RSA_4096 or
 // ECC_NIST_P521.
@@ -54,9 +49,13 @@ import (
 // used improperly. For example, you can prevent a public signing key from being
 // used encrypt data, or prevent a public key from being used with an encryption
 // algorithm that is not supported by KMS. You can also avoid errors, such as using
-// the wrong signing algorithm in a verification operation. The KMS key that you
-// use for this operation must be in a compatible key state. For details, see Key
-// states of KMS keys
+// the wrong signing algorithm in a verification operation. To verify a signature
+// outside of KMS with an SM2 public key (China Regions only), you must specify the
+// distinguishing ID. By default, KMS uses 1234567812345678 as the distinguishing
+// ID. For more information, see Offline verification with SM2 key pairs
+// (https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-sm-offline-verification).
+// The KMS key that you use for this operation must be in a compatible key state.
+// For details, see Key states of KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
 // Key Management Service Developer Guide. Cross-account use: Yes. To perform this
 // operation with a KMS key in a different Amazon Web Services account, specify the
@@ -121,7 +120,7 @@ type GetPublicKeyOutput struct {
 
 	// Instead, use the KeySpec field in the GetPublicKey response. The KeySpec and
 	// CustomerMasterKeySpec fields have the same value. We recommend that you use the
-	// KeySpec field in your code. However, to avoid breaking changes, KMS will support
+	// KeySpec field in your code. However, to avoid breaking changes, KMS supports
 	// both fields.
 	//
 	// Deprecated: This field has been deprecated. Instead, use the KeySpec field.

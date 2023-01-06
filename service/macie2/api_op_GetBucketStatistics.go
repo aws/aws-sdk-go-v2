@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves (queries) aggregated statistical data about S3 buckets that Amazon
-// Macie monitors and analyzes.
+// Retrieves (queries) aggregated statistical data about all the S3 buckets that
+// Amazon Macie monitors and analyzes for an account.
 func (c *Client) GetBucketStatistics(ctx context.Context, params *GetBucketStatisticsInput, optFns ...func(*Options)) (*GetBucketStatisticsOutput, error) {
 	if params == nil {
 		params = &GetBucketStatisticsInput{}
@@ -59,6 +59,11 @@ type GetBucketStatisticsOutput struct {
 	// Services account.
 	BucketCountBySharedAccessType *types.BucketCountBySharedAccessType
 
+	// The aggregated sensitive data discovery statistics for the buckets. If automated
+	// sensitive data discovery is currently disabled for your account, the value for
+	// each statistic is 0.
+	BucketStatisticsBySensitivity *types.BucketStatisticsBySensitivity
+
 	// The total number of objects that Amazon Macie can analyze in the buckets. These
 	// objects use a supported storage class and have a file name extension for a
 	// supported file or storage format.
@@ -67,10 +72,9 @@ type GetBucketStatisticsOutput struct {
 	// The total storage size, in bytes, of all the objects that Amazon Macie can
 	// analyze in the buckets. These objects use a supported storage class and have a
 	// file name extension for a supported file or storage format. If versioning is
-	// enabled for any of the buckets, Macie calculates this value based on the size of
-	// the latest version of each applicable object in those buckets. This value
-	// doesn't reflect the storage size of all versions of all applicable objects in
-	// the buckets.
+	// enabled for any of the buckets, this value is based on the size of the latest
+	// version of each applicable object in the buckets. This value doesn't reflect the
+	// storage size of all versions of all applicable objects in the buckets.
 	ClassifiableSizeInBytes int64
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
@@ -82,16 +86,16 @@ type GetBucketStatisticsOutput struct {
 	ObjectCount int64
 
 	// The total storage size, in bytes, of the buckets. If versioning is enabled for
-	// any of the buckets, Amazon Macie calculates this value based on the size of the
-	// latest version of each object in those buckets. This value doesn't reflect the
-	// storage size of all versions of the objects in the buckets.
+	// any of the buckets, this value is based on the size of the latest version of
+	// each object in the buckets. This value doesn't reflect the storage size of all
+	// versions of the objects in the buckets.
 	SizeInBytes int64
 
 	// The total storage size, in bytes, of the objects that are compressed (.gz,
 	// .gzip, .zip) files in the buckets. If versioning is enabled for any of the
-	// buckets, Amazon Macie calculates this value based on the size of the latest
-	// version of each applicable object in those buckets. This value doesn't reflect
-	// the storage size of all versions of the applicable objects in the buckets.
+	// buckets, this value is based on the size of the latest version of each
+	// applicable object in the buckets. This value doesn't reflect the storage size of
+	// all versions of the applicable objects in the buckets.
 	SizeInBytesCompressed int64
 
 	// The total number of objects that Amazon Macie can't analyze in the buckets.

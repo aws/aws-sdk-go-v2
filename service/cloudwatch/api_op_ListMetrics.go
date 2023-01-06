@@ -16,13 +16,17 @@ import (
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
 // or GetMetricStatistics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html)
-// to obtain statistical data. Up to 500 results are returned for any one call. To
+// to get statistical data. Up to 500 results are returned for any one call. To
 // retrieve additional results, use the returned token with subsequent calls. After
-// you create a metric, allow up to 15 minutes before the metric appears. You can
-// see statistics about the metric sooner by using GetMetricData
+// you create a metric, allow up to 15 minutes for the metric to appear. To see
+// metric statistics sooner, use GetMetricData
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricData.html)
 // or GetMetricStatistics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html).
+// If you are using CloudWatch cross-account observability, you can use this
+// operation in a monitoring account and view metrics from the linked source
+// accounts. For more information, see CloudWatch cross-account observability
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-Unified-Cross-Account.html).
 // ListMetrics doesn't return information about metrics if those metrics haven't
 // reported data in the past two weeks. To retrieve those metrics, use
 // GetMetricData
@@ -50,6 +54,10 @@ type ListMetricsInput struct {
 	// returned.
 	Dimensions []types.DimensionFilter
 
+	// If you are using this operation in a monitoring account, specify true to include
+	// metrics from source accounts in the returned data. The default is false.
+	IncludeLinkedAccounts bool
+
 	// The name of the metric to filter against. Only the metrics with names that match
 	// exactly will be returned.
 	MetricName *string
@@ -61,6 +69,11 @@ type ListMetricsInput struct {
 	// The token returned by a previous call to indicate that there is more data
 	// available.
 	NextToken *string
+
+	// When you use this operation in a monitoring account, use this field to return
+	// metrics only from one source account. To do so, specify that source account ID
+	// in this field, and also specify true for IncludeLinkedAccounts.
+	OwningAccount *string
 
 	// To filter the results to show only metrics that have had data points published
 	// in the past three hours, specify this parameter with a value of PT3H. This is
@@ -80,6 +93,12 @@ type ListMetricsOutput struct {
 
 	// The token that marks the start of the next batch of returned results.
 	NextToken *string
+
+	// If you are using this operation in a monitoring account, this array contains the
+	// account IDs of the source accounts where the metrics in the returned data are
+	// from. This field is a 1:1 mapping between each metric that is returned and the
+	// ID of the owning account.
+	OwningAccounts []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

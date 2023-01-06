@@ -2620,6 +2620,9 @@ func awsAwsjson10_deserializeOpErrorGetModelManifest(response *smithyhttp.Respon
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6109,6 +6112,9 @@ func awsAwsjson10_deserializeOpErrorUpdateSignalCatalog(response *smithyhttp.Res
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -8027,6 +8033,15 @@ func awsAwsjson10_deserializeDocumentDecoderManifestValidationException(v **type
 				return err
 			}
 
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -8464,6 +8479,15 @@ func awsAwsjson10_deserializeDocumentInvalidNodeException(v **types.InvalidNodeE
 		case "invalidNodes":
 			if err := awsAwsjson10_deserializeDocumentNodes(&sv.InvalidNodes, value); err != nil {
 				return err
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		case "reason":

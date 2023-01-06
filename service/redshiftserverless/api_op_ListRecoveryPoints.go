@@ -35,15 +35,19 @@ type ListRecoveryPointsInput struct {
 	EndTime *time.Time
 
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken to display the next page of results.
 	MaxResults *int32
+
+	// The Amazon Resource Name (ARN) of the namespace from which to list recovery
+	// points.
+	NamespaceArn *string
 
 	// The name of the namespace to list recovery points for.
 	NamespaceName *string
 
 	// If your initial ListRecoveryPoints operation returns a nextToken, you can
-	// include the returned nextToken in subsequent ListRecoveryPoints operations,
-	// which returns results in the next page.
+	// include the returned nextToken in following ListRecoveryPoints operations, which
+	// returns results in the next page.
 	NextToken *string
 
 	// The time when the recovery point's creation was initiated.
@@ -140,7 +144,7 @@ var _ ListRecoveryPointsAPIClient = (*Client)(nil)
 // ListRecoveryPoints
 type ListRecoveryPointsPaginatorOptions struct {
 	// An optional parameter that specifies the maximum number of results to return.
-	// You can use nextToken to get the next page of results.
+	// You can use nextToken to display the next page of results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -43,6 +43,22 @@ type CreateTemplateInput struct {
 	// This member is required.
 	AwsAccountId *string
 
+	// An ID for the template that you want to create. This template is unique per
+	// Amazon Web Services Region; in each Amazon Web Services account.
+	//
+	// This member is required.
+	TemplateId *string
+
+	// The definition of a template. A definition is the data model of all features in
+	// a Dashboard, Template, or Analysis.
+	Definition *types.TemplateVersionDefinition
+
+	// A display name for the template.
+	Name *string
+
+	// A list of resource permissions to be set on the template.
+	Permissions []types.ResourcePermission
+
 	// The entity that you are using as a source when you create the template. In
 	// SourceEntity, you specify the type of object you're using as source:
 	// SourceTemplate for a template or SourceAnalysis for an analysis. Both of these
@@ -53,21 +69,7 @@ type CreateTemplateInput struct {
 	// DataSetReferences entity within SourceTemplate or SourceAnalysis to list the
 	// replacement datasets for the placeholders listed in the original. The schema in
 	// each dataset must match its placeholder.
-	//
-	// This member is required.
 	SourceEntity *types.TemplateSourceEntity
-
-	// An ID for the template that you want to create. This template is unique per
-	// Amazon Web Services Region; in each Amazon Web Services account.
-	//
-	// This member is required.
-	TemplateId *string
-
-	// A display name for the template.
-	Name *string
-
-	// A list of resource permissions to be set on the template.
-	Permissions []types.ResourcePermission
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the resource.

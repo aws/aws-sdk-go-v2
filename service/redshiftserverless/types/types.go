@@ -145,6 +145,10 @@ type NetworkInterface struct {
 // created every 30 minutes and kept for 24 hours.
 type RecoveryPoint struct {
 
+	// The Amazon Resource Name (ARN) of the namespace the recovery point is associated
+	// with.
+	NamespaceArn *string
+
 	// The name of the namespace the recovery point is associated with.
 	NamespaceName *string
 
@@ -240,6 +244,60 @@ type Snapshot struct {
 
 	// The total size, in megabytes, of how big the snapshot is.
 	TotalBackupSizeInMegaBytes *float64
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a table restore request.
+type TableRestoreStatus struct {
+
+	// A description of the status of the table restore request. Status values include
+	// SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS.
+	Message *string
+
+	// The namespace of the table being restored from.
+	NamespaceName *string
+
+	// The name of the table to create from the restore operation.
+	NewTableName *string
+
+	// The amount of data restored to the new table so far, in megabytes (MB).
+	ProgressInMegaBytes *int64
+
+	// The time that the table restore request was made, in Universal Coordinated Time
+	// (UTC).
+	RequestTime *time.Time
+
+	// The name of the snapshot being restored from.
+	SnapshotName *string
+
+	// The name of the source database being restored from.
+	SourceDatabaseName *string
+
+	// The name of the source schema being restored from.
+	SourceSchemaName *string
+
+	// The name of the source table being restored from.
+	SourceTableName *string
+
+	// A value that describes the current state of the table restore request. Possible
+	// values include SUCCEEDED, FAILED, CANCELED, PENDING, IN_PROGRESS.
+	Status *string
+
+	// The ID of the RestoreTableFromSnapshot request.
+	TableRestoreRequestId *string
+
+	// The name of the database to restore to.
+	TargetDatabaseName *string
+
+	// The name of the schema to restore to.
+	TargetSchemaName *string
+
+	// The total amount of data to restore to the new table, in megabytes (MB).
+	TotalDataInMegaBytes *int64
+
+	// The name of the workgroup being restored from.
+	WorkgroupName *string
 
 	noSmithyDocumentSerde
 }
@@ -345,6 +403,10 @@ type Workgroup struct {
 
 	// The namespace the workgroup is associated with.
 	NamespaceName *string
+
+	// The custom port to use when connecting to a workgroup. Valid port ranges are
+	// 5431-5455 and 8191-8215. The default is 5439.
+	Port *int32
 
 	// A value that specifies whether the workgroup can be accessible from a public
 	// network

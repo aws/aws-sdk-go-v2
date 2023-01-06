@@ -64,8 +64,6 @@ type CheckDomainTransferabilityOutput struct {
 
 	// A complex type that contains information about whether the specified domain can
 	// be transferred to Route 53.
-	//
-	// This member is required.
 	Transferability *types.DomainTransferability
 
 	// Metadata pertaining to the operation's result.

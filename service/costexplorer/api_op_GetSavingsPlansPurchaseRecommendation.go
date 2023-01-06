@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves your request parameters, Savings Plan Recommendations Summary and
-// Details.
+// Retrieves the Savings Plans recommendations for your account. First use
+// StartSavingsPlansPurchaseRecommendationGeneration to generate a new set of
+// recommendations, and then use GetSavingsPlansPurchaseRecommendation to retrieve
+// them.
 func (c *Client) GetSavingsPlansPurchaseRecommendation(ctx context.Context, params *GetSavingsPlansPurchaseRecommendationInput, optFns ...func(*Options)) (*GetSavingsPlansPurchaseRecommendationOutput, error) {
 	if params == nil {
 		params = &GetSavingsPlansPurchaseRecommendationInput{}

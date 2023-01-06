@@ -421,6 +421,9 @@ func awsAwsjson11_deserializeOpErrorCreateEventDataStore(response *smithyhttp.Re
 	case strings.EqualFold("InsufficientEncryptionPolicyException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientEncryptionPolicyException(response, errorBody)
 
+	case strings.EqualFold("InvalidEventSelectorsException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidEventSelectorsException(response, errorBody)
+
 	case strings.EqualFold("InvalidKmsKeyIdException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKmsKeyIdException(response, errorBody)
 
@@ -643,6 +646,9 @@ func awsAwsjson11_deserializeOpErrorCreateTrail(response *smithyhttp.Response, m
 	case strings.EqualFold("S3BucketDoesNotExistException", errorCode):
 		return awsAwsjson11_deserializeErrorS3BucketDoesNotExistException(response, errorBody)
 
+	case strings.EqualFold("TagsLimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorTagsLimitExceededException(response, errorBody)
+
 	case strings.EqualFold("TrailAlreadyExistsException", errorCode):
 		return awsAwsjson11_deserializeErrorTrailAlreadyExistsException(response, errorBody)
 
@@ -772,6 +778,9 @@ func awsAwsjson11_deserializeOpErrorDeleteEventDataStore(response *smithyhttp.Re
 	case strings.EqualFold("EventDataStoreTerminationProtectedException", errorCode):
 		return awsAwsjson11_deserializeErrorEventDataStoreTerminationProtectedException(response, errorBody)
 
+	case strings.EqualFold("InactiveEventDataStoreException", errorCode):
+		return awsAwsjson11_deserializeErrorInactiveEventDataStoreException(response, errorBody)
+
 	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
 
@@ -898,6 +907,9 @@ func awsAwsjson11_deserializeOpErrorDeleteTrail(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
 
@@ -1669,6 +1681,9 @@ func awsAwsjson11_deserializeOpErrorGetEventSelectors(response *smithyhttp.Respo
 	}
 
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
@@ -1912,6 +1927,9 @@ func awsAwsjson11_deserializeOpErrorGetInsightSelectors(response *smithyhttp.Res
 	}
 
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("InsightNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorInsightNotEnabledException(response, errorBody)
 
@@ -2179,6 +2197,9 @@ func awsAwsjson11_deserializeOpErrorGetTrail(response *smithyhttp.Response, meta
 	}
 
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
@@ -2299,6 +2320,9 @@ func awsAwsjson11_deserializeOpErrorGetTrailStatus(response *smithyhttp.Response
 	}
 
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("InvalidTrailNameException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidTrailNameException(response, errorBody)
 
@@ -3541,6 +3565,9 @@ func awsAwsjson11_deserializeOpErrorPutEventSelectors(response *smithyhttp.Respo
 	}
 
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
 
@@ -3676,6 +3703,9 @@ func awsAwsjson11_deserializeOpErrorPutInsightSelectors(response *smithyhttp.Res
 	}
 
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("InsufficientEncryptionPolicyException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientEncryptionPolicyException(response, errorBody)
 
@@ -4393,6 +4423,9 @@ func awsAwsjson11_deserializeOpErrorStartLogging(response *smithyhttp.Response, 
 	}
 
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
 
@@ -4795,6 +4828,9 @@ func awsAwsjson11_deserializeOpErrorStopLogging(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("InsufficientDependencyServiceAccessPermissionException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientDependencyServiceAccessPermissionException(response, errorBody)
 
@@ -4948,6 +4984,9 @@ func awsAwsjson11_deserializeOpErrorUpdateEventDataStore(response *smithyhttp.Re
 	case strings.EqualFold("InsufficientEncryptionPolicyException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientEncryptionPolicyException(response, errorBody)
 
+	case strings.EqualFold("InvalidEventSelectorsException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidEventSelectorsException(response, errorBody)
+
 	case strings.EqualFold("InvalidKmsKeyIdException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKmsKeyIdException(response, errorBody)
 
@@ -5086,6 +5125,9 @@ func awsAwsjson11_deserializeOpErrorUpdateTrail(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("CloudTrailARNInvalidException", errorCode):
+		return awsAwsjson11_deserializeErrorCloudTrailARNInvalidException(response, errorBody)
+
 	case strings.EqualFold("CloudTrailAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorCloudTrailAccessNotEnabledException(response, errorBody)
 

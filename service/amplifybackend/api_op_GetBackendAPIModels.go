@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a model schema for existing backend API resource.
+// Gets a model introspection schema for an existing backend API resource.
 func (c *Client) GetBackendAPIModels(ctx context.Context, params *GetBackendAPIModelsInput, optFns ...func(*Options)) (*GetBackendAPIModelsOutput, error) {
 	if params == nil {
 		params = &GetBackendAPIModelsInput{}
@@ -49,6 +49,10 @@ type GetBackendAPIModelsInput struct {
 }
 
 type GetBackendAPIModelsOutput struct {
+
+	// Stringified JSON of the model introspection schema for an existing backend API
+	// resource.
+	ModelIntrospectionSchema *string
 
 	// Stringified JSON of the datastore model.
 	Models *string

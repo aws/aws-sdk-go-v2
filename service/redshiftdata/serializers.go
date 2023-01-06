@@ -609,6 +609,11 @@ func awsAwsjson11_serializeOpDocumentBatchExecuteStatementInput(v *BatchExecuteS
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.ClusterIdentifier != nil {
 		ok := object.Key("ClusterIdentifier")
 		ok.String(*v.ClusterIdentifier)
@@ -738,6 +743,11 @@ func awsAwsjson11_serializeOpDocumentDescribeTableInput(v *DescribeTableInput, v
 func awsAwsjson11_serializeOpDocumentExecuteStatementInput(v *ExecuteStatementInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.ClusterIdentifier != nil {
 		ok := object.Key("ClusterIdentifier")

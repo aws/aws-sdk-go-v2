@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all the tags associated with a specified resource.
+// Returns all the tags associated with an Amazon Web Services resource.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -31,16 +31,17 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 // ListTagsForResourceRequest
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource whose tags to list.
+	// Specifies the Amazon Resource Name (ARN) of the resource that you want tag
+	// information on.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The maximum number of locations to return.
+	// Specifies how many results that you want in the response.
 	MaxResults *int32
 
-	// An opaque string that indicates the position at which to begin the next list of
-	// locations.
+	// Specifies an opaque string that indicates the position to begin the next list of
+	// results in the response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,11 +50,11 @@ type ListTagsForResourceInput struct {
 // ListTagsForResourceResponse
 type ListTagsForResourceOutput struct {
 
-	// An opaque string that indicates the position at which to begin returning the
-	// next list of resource tags.
+	// The opaque string that indicates the position to begin the next list of results
+	// in the response.
 	NextToken *string
 
-	// Array of resource tags.
+	// An array of tags applied to the specified resource.
 	Tags []types.TagListEntry
 
 	// Metadata pertaining to the operation's result.
@@ -136,7 +137,7 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 // ListTagsForResourcePaginatorOptions is the paginator options for
 // ListTagsForResource
 type ListTagsForResourcePaginatorOptions struct {
-	// The maximum number of locations to return.
+	// Specifies how many results that you want in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

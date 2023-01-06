@@ -14,6 +14,7 @@ const (
 	BackupJobStateCompleted BackupJobState = "COMPLETED"
 	BackupJobStateFailed    BackupJobState = "FAILED"
 	BackupJobStateExpired   BackupJobState = "EXPIRED"
+	BackupJobStatePartial   BackupJobState = "PARTIAL"
 )
 
 // Values returns all known values for BackupJobState. Note that this can be
@@ -29,6 +30,7 @@ func (BackupJobState) Values() []BackupJobState {
 		"COMPLETED",
 		"FAILED",
 		"EXPIRED",
+		"PARTIAL",
 	}
 }
 
@@ -104,6 +106,7 @@ const (
 	CopyJobStateRunning   CopyJobState = "RUNNING"
 	CopyJobStateCompleted CopyJobState = "COMPLETED"
 	CopyJobStateFailed    CopyJobState = "FAILED"
+	CopyJobStatePartial   CopyJobState = "PARTIAL"
 )
 
 // Values returns all known values for CopyJobState. Note that this can be expanded
@@ -115,6 +118,29 @@ func (CopyJobState) Values() []CopyJobState {
 		"RUNNING",
 		"COMPLETED",
 		"FAILED",
+		"PARTIAL",
+	}
+}
+
+type LegalHoldStatus string
+
+// Enum values for LegalHoldStatus
+const (
+	LegalHoldStatusCreating  LegalHoldStatus = "CREATING"
+	LegalHoldStatusActive    LegalHoldStatus = "ACTIVE"
+	LegalHoldStatusCanceling LegalHoldStatus = "CANCELING"
+	LegalHoldStatusCanceled  LegalHoldStatus = "CANCELED"
+)
+
+// Values returns all known values for LegalHoldStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LegalHoldStatus) Values() []LegalHoldStatus {
+	return []LegalHoldStatus{
+		"CREATING",
+		"ACTIVE",
+		"CANCELING",
+		"CANCELED",
 	}
 }
 

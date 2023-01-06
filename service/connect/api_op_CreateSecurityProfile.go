@@ -53,7 +53,8 @@ type CreateSecurityProfileInput struct {
 	Permissions []string
 
 	// The list of resources that a security profile applies tag restrictions to in
-	// Amazon Connect.
+	// Amazon Connect. Following are acceptable ResourceNames: User | SecurityProfile |
+	// Queue | RoutingProfile
 	TagRestrictedResources []string
 
 	// The tags used to organize, track, or control access for this resource. For

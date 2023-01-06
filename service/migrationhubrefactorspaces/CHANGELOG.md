@@ -1,3 +1,19 @@
+# v1.8.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.7.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.0 (2022-12-12)
+
+* **Feature**: This release adds support for Lambda alias service endpoints. Lambda alias ARNs can now be passed into CreateService.
+
+# v1.6.14 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.13 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

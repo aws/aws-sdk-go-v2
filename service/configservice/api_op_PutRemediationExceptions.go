@@ -17,7 +17,8 @@ import (
 // for a specific resource with a specific Config rule. Config generates a
 // remediation exception when a problem occurs executing a remediation action to a
 // specific resource. Remediation exceptions blocks auto-remediation until the
-// exception is cleared.
+// exception is cleared. To place an exception on an Amazon Web Services resource,
+// ensure remediation is set as manual remediation.
 func (c *Client) PutRemediationExceptions(ctx context.Context, params *PutRemediationExceptionsInput, optFns ...func(*Options)) (*PutRemediationExceptionsOutput, error) {
 	if params == nil {
 		params = &PutRemediationExceptionsInput{}

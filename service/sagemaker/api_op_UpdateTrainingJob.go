@@ -35,12 +35,12 @@ type UpdateTrainingJobInput struct {
 	// This member is required.
 	TrainingJobName *string
 
-	// Configuration information for Debugger system monitoring, framework profiling,
-	// and storage paths.
+	// Configuration information for Amazon SageMaker Debugger system monitoring,
+	// framework profiling, and storage paths.
 	ProfilerConfig *types.ProfilerConfigForUpdate
 
-	// Configuration information for Debugger rules for profiling system and framework
-	// metrics.
+	// Configuration information for Amazon SageMaker Debugger rules for profiling
+	// system and framework metrics.
 	ProfilerRuleConfigurations []types.ProfilerRuleConfiguration
 
 	// The training job ResourceConfig to update warm pool retention length.

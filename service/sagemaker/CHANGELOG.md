@@ -1,3 +1,36 @@
+# v1.62.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.61.0 (2022-12-21)
+
+* **Feature**: This release enables adding RStudio Workbench support to an existing Amazon SageMaker Studio domain. It allows setting your RStudio on SageMaker environment configuration parameters and also updating the RStudioConnectUrl and RStudioPackageManagerUrl parameters for existing domains
+
+# v1.60.0 (2022-12-20)
+
+* **Feature**: Amazon SageMaker Autopilot adds support for new objective metrics in CreateAutoMLJob API.
+
+# v1.59.0 (2022-12-19)
+
+* **Feature**: AWS Sagemaker - Sagemaker Images now supports Aliases as secondary identifiers for ImageVersions. SageMaker Images now supports additional metadata for ImageVersions for better images management.
+
+# v1.58.0 (2022-12-16)
+
+* **Feature**: AWS sagemaker - Features: This release adds support for random seed, it's an integer value used to initialize a pseudo-random number generator. Setting a random seed will allow the hyperparameter tuning search strategies to produce more consistent configurations for the same tuning job.
+
+# v1.57.0 (2022-12-15)
+
+* **Feature**: SageMaker Inference Recommender now allows customers to load tests their models on various instance types using private VPC.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.56.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.56.0 (2022-11-30)
+
+* **Feature**: Added Models as part of the Search API. Added Model shadow deployments in realtime inference, and shadow testing in managed inference. Added support for shared spaces, geospatial APIs, Model Cards, AutoMLJobStep in pipelines, Git repositories on user profiles and domains, Model sharing in Jumpstart.
+
 # v1.55.0 (2022-11-18)
 
 * **Feature**: Added DisableProfiler flag as a new field in ProfilerConfig

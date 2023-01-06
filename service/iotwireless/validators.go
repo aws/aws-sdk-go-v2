@@ -890,6 +890,26 @@ func (m *validateOpGetPositionConfiguration) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPositionEstimate struct {
+}
+
+func (*validateOpGetPositionEstimate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPositionEstimate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPositionEstimateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPositionEstimateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPosition struct {
 }
 
@@ -945,6 +965,26 @@ func (m *validateOpGetResourceLogLevel) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResourceLogLevelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResourcePosition struct {
+}
+
+func (*validateOpGetResourcePosition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcePosition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcePositionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcePositionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1610,6 +1650,26 @@ func (m *validateOpUpdateResourceEventConfiguration) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateResourcePosition struct {
+}
+
+func (*validateOpUpdateResourcePosition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResourcePosition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResourcePositionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResourcePositionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateWirelessDevice struct {
 }
 
@@ -1826,6 +1886,10 @@ func addOpGetPositionConfigurationValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpGetPositionConfiguration{}, middleware.After)
 }
 
+func addOpGetPositionEstimateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPositionEstimate{}, middleware.After)
+}
+
 func addOpGetPositionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPosition{}, middleware.After)
 }
@@ -1836,6 +1900,10 @@ func addOpGetResourceEventConfigurationValidationMiddleware(stack *middleware.St
 
 func addOpGetResourceLogLevelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourceLogLevel{}, middleware.After)
+}
+
+func addOpGetResourcePositionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcePosition{}, middleware.After)
 }
 
 func addOpGetServiceProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -1970,12 +2038,154 @@ func addOpUpdateResourceEventConfigurationValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpUpdateResourceEventConfiguration{}, middleware.After)
 }
 
+func addOpUpdateResourcePositionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResourcePosition{}, middleware.After)
+}
+
 func addOpUpdateWirelessDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWirelessDevice{}, middleware.After)
 }
 
 func addOpUpdateWirelessGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWirelessGateway{}, middleware.After)
+}
+
+func validateCdmaList(v []types.CdmaObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CdmaList"}
+	for i := range v {
+		if err := validateCdmaObj(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCdmaLocalId(v *types.CdmaLocalId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CdmaLocalId"}
+	if v.PnOffset == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PnOffset"))
+	}
+	if v.CdmaChannel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CdmaChannel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCdmaNmrList(v []types.CdmaNmrObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CdmaNmrList"}
+	for i := range v {
+		if err := validateCdmaNmrObj(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCdmaNmrObj(v *types.CdmaNmrObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CdmaNmrObj"}
+	if v.PnOffset == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PnOffset"))
+	}
+	if v.CdmaChannel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CdmaChannel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCdmaObj(v *types.CdmaObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CdmaObj"}
+	if v.SystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SystemId"))
+	}
+	if v.NetworkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetworkId"))
+	}
+	if v.BaseStationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseStationId"))
+	}
+	if v.CdmaLocalId != nil {
+		if err := validateCdmaLocalId(v.CdmaLocalId); err != nil {
+			invalidParams.AddNested("CdmaLocalId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CdmaNmr != nil {
+		if err := validateCdmaNmrList(v.CdmaNmr); err != nil {
+			invalidParams.AddNested("CdmaNmr", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCellTowers(v *types.CellTowers) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CellTowers"}
+	if v.Gsm != nil {
+		if err := validateGsmList(v.Gsm); err != nil {
+			invalidParams.AddNested("Gsm", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Wcdma != nil {
+		if err := validateWcdmaList(v.Wcdma); err != nil {
+			invalidParams.AddNested("Wcdma", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tdscdma != nil {
+		if err := validateTdscdmaList(v.Tdscdma); err != nil {
+			invalidParams.AddNested("Tdscdma", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Lte != nil {
+		if err := validateLteList(v.Lte); err != nil {
+			invalidParams.AddNested("Lte", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Cdma != nil {
+		if err := validateCdmaList(v.Cdma); err != nil {
+			invalidParams.AddNested("Cdma", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateGatewayList(v []types.GatewayListItem) error {
@@ -2013,6 +2223,163 @@ func validateGatewayListItem(v *types.GatewayListItem) error {
 	}
 }
 
+func validateGlobalIdentity(v *types.GlobalIdentity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlobalIdentity"}
+	if v.Lac == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Lac"))
+	}
+	if v.GeranCid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GeranCid"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGnss(v *types.Gnss) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Gnss"}
+	if v.Payload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Payload"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGsmList(v []types.GsmObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GsmList"}
+	for i := range v {
+		if err := validateGsmObj(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGsmLocalId(v *types.GsmLocalId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GsmLocalId"}
+	if v.Bsic == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bsic"))
+	}
+	if v.Bcch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bcch"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGsmNmrList(v []types.GsmNmrObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GsmNmrList"}
+	for i := range v {
+		if err := validateGsmNmrObj(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGsmNmrObj(v *types.GsmNmrObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GsmNmrObj"}
+	if v.Bsic == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bsic"))
+	}
+	if v.Bcch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bcch"))
+	}
+	if v.GlobalIdentity != nil {
+		if err := validateGlobalIdentity(v.GlobalIdentity); err != nil {
+			invalidParams.AddNested("GlobalIdentity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGsmObj(v *types.GsmObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GsmObj"}
+	if v.Mcc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mcc"))
+	}
+	if v.Mnc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mnc"))
+	}
+	if v.Lac == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Lac"))
+	}
+	if v.GeranCid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GeranCid"))
+	}
+	if v.GsmLocalId != nil {
+		if err := validateGsmLocalId(v.GsmLocalId); err != nil {
+			invalidParams.AddNested("GsmLocalId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GsmNmr != nil {
+		if err := validateGsmNmrList(v.GsmNmr); err != nil {
+			invalidParams.AddNested("GsmNmr", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIp(v *types.Ip) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Ip"}
+	if v.IpAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IpAddress"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLoRaWANSendDataToDevice(v *types.LoRaWANSendDataToDevice) error {
 	if v == nil {
 		return nil
@@ -2021,6 +2388,110 @@ func validateLoRaWANSendDataToDevice(v *types.LoRaWANSendDataToDevice) error {
 	if v.ParticipatingGateways != nil {
 		if err := validateParticipatingGateways(v.ParticipatingGateways); err != nil {
 			invalidParams.AddNested("ParticipatingGateways", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLteList(v []types.LteObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LteList"}
+	for i := range v {
+		if err := validateLteObj(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLteLocalId(v *types.LteLocalId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LteLocalId"}
+	if v.Pci == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pci"))
+	}
+	if v.Earfcn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Earfcn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLteNmrList(v []types.LteNmrObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LteNmrList"}
+	for i := range v {
+		if err := validateLteNmrObj(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLteNmrObj(v *types.LteNmrObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LteNmrObj"}
+	if v.Pci == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Pci"))
+	}
+	if v.Earfcn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Earfcn"))
+	}
+	if v.EutranCid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EutranCid"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLteObj(v *types.LteObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LteObj"}
+	if v.Mcc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mcc"))
+	}
+	if v.Mnc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mnc"))
+	}
+	if v.EutranCid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EutranCid"))
+	}
+	if v.LteLocalId != nil {
+		if err := validateLteLocalId(v.LteLocalId); err != nil {
+			invalidParams.AddNested("LteLocalId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LteNmr != nil {
+		if err := validateLteNmrList(v.LteNmr); err != nil {
+			invalidParams.AddNested("LteNmr", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2115,6 +2586,246 @@ func validateTagList(v []types.Tag) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTdscdmaList(v []types.TdscdmaObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TdscdmaList"}
+	for i := range v {
+		if err := validateTdscdmaObj(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTdscdmaLocalId(v *types.TdscdmaLocalId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TdscdmaLocalId"}
+	if v.Uarfcn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uarfcn"))
+	}
+	if v.CellParams == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CellParams"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTdscdmaNmrList(v []types.TdscdmaNmrObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TdscdmaNmrList"}
+	for i := range v {
+		if err := validateTdscdmaNmrObj(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTdscdmaNmrObj(v *types.TdscdmaNmrObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TdscdmaNmrObj"}
+	if v.Uarfcn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uarfcn"))
+	}
+	if v.CellParams == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CellParams"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTdscdmaObj(v *types.TdscdmaObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TdscdmaObj"}
+	if v.Mcc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mcc"))
+	}
+	if v.Mnc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mnc"))
+	}
+	if v.UtranCid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UtranCid"))
+	}
+	if v.TdscdmaLocalId != nil {
+		if err := validateTdscdmaLocalId(v.TdscdmaLocalId); err != nil {
+			invalidParams.AddNested("TdscdmaLocalId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TdscdmaNmr != nil {
+		if err := validateTdscdmaNmrList(v.TdscdmaNmr); err != nil {
+			invalidParams.AddNested("TdscdmaNmr", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWcdmaList(v []types.WcdmaObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WcdmaList"}
+	for i := range v {
+		if err := validateWcdmaObj(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWcdmaLocalId(v *types.WcdmaLocalId) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WcdmaLocalId"}
+	if v.Uarfcndl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uarfcndl"))
+	}
+	if v.Psc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Psc"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWcdmaNmrList(v []types.WcdmaNmrObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WcdmaNmrList"}
+	for i := range v {
+		if err := validateWcdmaNmrObj(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWcdmaNmrObj(v *types.WcdmaNmrObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WcdmaNmrObj"}
+	if v.Uarfcndl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uarfcndl"))
+	}
+	if v.Psc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Psc"))
+	}
+	if v.UtranCid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UtranCid"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWcdmaObj(v *types.WcdmaObj) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WcdmaObj"}
+	if v.Mcc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mcc"))
+	}
+	if v.Mnc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Mnc"))
+	}
+	if v.UtranCid == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UtranCid"))
+	}
+	if v.WcdmaLocalId != nil {
+		if err := validateWcdmaLocalId(v.WcdmaLocalId); err != nil {
+			invalidParams.AddNested("WcdmaLocalId", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WcdmaNmr != nil {
+		if err := validateWcdmaNmrList(v.WcdmaNmr); err != nil {
+			invalidParams.AddNested("WcdmaNmr", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWiFiAccessPoint(v *types.WiFiAccessPoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WiFiAccessPoint"}
+	if v.MacAddress == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MacAddress"))
+	}
+	if v.Rss == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rss"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWiFiAccessPoints(v []types.WiFiAccessPoint) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WiFiAccessPoints"}
+	for i := range v {
+		if err := validateWiFiAccessPoint(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3050,6 +3761,38 @@ func validateOpGetPositionConfigurationInput(v *GetPositionConfigurationInput) e
 	}
 }
 
+func validateOpGetPositionEstimateInput(v *GetPositionEstimateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPositionEstimateInput"}
+	if v.WiFiAccessPoints != nil {
+		if err := validateWiFiAccessPoints(v.WiFiAccessPoints); err != nil {
+			invalidParams.AddNested("WiFiAccessPoints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CellTowers != nil {
+		if err := validateCellTowers(v.CellTowers); err != nil {
+			invalidParams.AddNested("CellTowers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Ip != nil {
+		if err := validateIp(v.Ip); err != nil {
+			invalidParams.AddNested("Ip", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Gnss != nil {
+		if err := validateGnss(v.Gnss); err != nil {
+			invalidParams.AddNested("Gnss", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPositionInput(v *GetPositionInput) error {
 	if v == nil {
 		return nil
@@ -3095,6 +3838,24 @@ func validateOpGetResourceLogLevelInput(v *GetResourceLogLevelInput) error {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
 	}
 	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourcePositionInput(v *GetResourcePositionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePositionInput"}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
@@ -3676,6 +4437,24 @@ func validateOpUpdateResourceEventConfigurationInput(v *UpdateResourceEventConfi
 	}
 	if len(v.IdentifierType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("IdentifierType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateResourcePositionInput(v *UpdateResourcePositionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResourcePositionInput"}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

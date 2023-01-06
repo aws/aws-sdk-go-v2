@@ -36,6 +36,18 @@ type UpdateTemplateInput struct {
 	// This member is required.
 	AwsAccountId *string
 
+	// The ID for the template.
+	//
+	// This member is required.
+	TemplateId *string
+
+	// The definition of a template. A definition is the data model of all features in
+	// a Dashboard, Template, or Analysis.
+	Definition *types.TemplateVersionDefinition
+
+	// The name for the template.
+	Name *string
+
 	// The entity that you are using as a source when you update the template. In
 	// SourceEntity, you specify the type of object you're using as source:
 	// SourceTemplate for a template or SourceAnalysis for an analysis. Both of these
@@ -46,17 +58,7 @@ type UpdateTemplateInput struct {
 	// DataSetReferences entity within SourceTemplate or SourceAnalysis to list the
 	// replacement datasets for the placeholders listed in the original. The schema in
 	// each dataset must match its placeholder.
-	//
-	// This member is required.
 	SourceEntity *types.TemplateSourceEntity
-
-	// The ID for the template.
-	//
-	// This member is required.
-	TemplateId *string
-
-	// The name for the template.
-	Name *string
 
 	// A description of the current template version that is being updated. Every time
 	// you call UpdateTemplate, you create a new version of the template. Each version

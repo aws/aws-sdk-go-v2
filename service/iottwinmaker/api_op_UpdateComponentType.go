@@ -35,10 +35,13 @@ type UpdateComponentTypeInput struct {
 	// This member is required.
 	ComponentTypeId *string
 
-	// The ID of the workspace that contains the component type.
+	// The ID of the workspace.
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	// The component type name.
+	ComponentTypeName *string
 
 	// The description of the component type.
 	Description *string

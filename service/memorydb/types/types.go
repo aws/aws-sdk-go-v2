@@ -414,11 +414,88 @@ type PendingModifiedServiceUpdate struct {
 	noSmithyDocumentSerde
 }
 
+// The recurring charge to run this reserved node.
+type RecurringCharge struct {
+
+	// The amount of the recurring charge to run this reserved node.
+	RecurringChargeAmount float64
+
+	// The frequency of the recurring price charged to run this reserved node.
+	RecurringChargeFrequency *string
+
+	noSmithyDocumentSerde
+}
+
 // A request to configure the number of replicas in a shard
 type ReplicaConfigurationRequest struct {
 
 	// The number of replicas to scale up or down to
 	ReplicaCount int32
+
+	noSmithyDocumentSerde
+}
+
+// Represents the output of a PurchaseReservedNodesOffering operation.
+type ReservedNode struct {
+
+	// The Amazon Resource Name (ARN) of the reserved node.
+	ARN *string
+
+	// The duration of the reservation in seconds.
+	Duration int32
+
+	// The fixed price charged for this reserved node.
+	FixedPrice float64
+
+	// The number of nodes that have been reserved.
+	NodeCount int32
+
+	// The node type for the reserved nodes.
+	NodeType *string
+
+	// The offering type of this reserved node.
+	OfferingType *string
+
+	// The recurring price charged to run this reserved node.
+	RecurringCharges []RecurringCharge
+
+	// A customer-specified identifier to track this reservation.
+	ReservationId *string
+
+	// The ID of the reserved node offering to purchase.
+	ReservedNodesOfferingId *string
+
+	// The time the reservation started.
+	StartTime *time.Time
+
+	// The state of the reserved node.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+// The offering type of this node.
+type ReservedNodesOffering struct {
+
+	// The duration of the reservation in seconds.
+	Duration int32
+
+	// The fixed price charged for this reserved node.
+	FixedPrice float64
+
+	// The node type for the reserved nodes. For more information, see Supported node
+	// types
+	// (https://docs.aws.amazon.com/memorydb/latest/devguide/nodes.reserved.html#reserved-nodes-supported).
+	NodeType *string
+
+	// The offering type of this reserved node.
+	OfferingType *string
+
+	// The recurring price charged to run this reserved node.
+	RecurringCharges []RecurringCharge
+
+	// The offering identifier.
+	ReservedNodesOfferingId *string
 
 	noSmithyDocumentSerde
 }

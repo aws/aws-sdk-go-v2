@@ -150,6 +150,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartEdgeConfigurationUpdate struct {
+}
+
+func (*validateOpStartEdgeConfigurationUpdate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartEdgeConfigurationUpdate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartEdgeConfigurationUpdateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartEdgeConfigurationUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -270,6 +290,26 @@ func (m *validateOpUpdateImageGenerationConfiguration) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMediaStorageConfiguration struct {
+}
+
+func (*validateOpUpdateMediaStorageConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMediaStorageConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMediaStorageConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMediaStorageConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateNotificationConfiguration struct {
 }
 
@@ -358,6 +398,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpStartEdgeConfigurationUpdateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartEdgeConfigurationUpdate{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -382,6 +426,10 @@ func addOpUpdateImageGenerationConfigurationValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpUpdateImageGenerationConfiguration{}, middleware.After)
 }
 
+func addOpUpdateMediaStorageConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMediaStorageConfiguration{}, middleware.After)
+}
+
 func addOpUpdateNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNotificationConfiguration{}, middleware.After)
 }
@@ -392,6 +440,33 @@ func addOpUpdateSignalingChannelValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStream{}, middleware.After)
+}
+
+func validateEdgeConfig(v *types.EdgeConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EdgeConfig"}
+	if v.HubDeviceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HubDeviceArn"))
+	}
+	if v.RecorderConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecorderConfig"))
+	} else if v.RecorderConfig != nil {
+		if err := validateRecorderConfig(v.RecorderConfig); err != nil {
+			invalidParams.AddNested("RecorderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UploaderConfig != nil {
+		if err := validateUploaderConfig(v.UploaderConfig); err != nil {
+			invalidParams.AddNested("UploaderConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateImageGenerationConfiguration(v *types.ImageGenerationConfiguration) error {
@@ -443,6 +518,39 @@ func validateImageGenerationDestinationConfig(v *types.ImageGenerationDestinatio
 	}
 }
 
+func validateMediaSourceConfig(v *types.MediaSourceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaSourceConfig"}
+	if v.MediaUriSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaUriSecretArn"))
+	}
+	if len(v.MediaUriType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaUriType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaStorageConfiguration(v *types.MediaStorageConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaStorageConfiguration"}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNotificationConfiguration(v *types.NotificationConfiguration) error {
 	if v == nil {
 		return nil
@@ -472,6 +580,48 @@ func validateNotificationDestinationConfig(v *types.NotificationDestinationConfi
 	invalidParams := smithy.InvalidParamsError{Context: "NotificationDestinationConfig"}
 	if v.Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecorderConfig(v *types.RecorderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecorderConfig"}
+	if v.MediaSourceConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaSourceConfig"))
+	} else if v.MediaSourceConfig != nil {
+		if err := validateMediaSourceConfig(v.MediaSourceConfig); err != nil {
+			invalidParams.AddNested("MediaSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScheduleConfig != nil {
+		if err := validateScheduleConfig(v.ScheduleConfig); err != nil {
+			invalidParams.AddNested("ScheduleConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduleConfig(v *types.ScheduleConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduleConfig"}
+	if v.ScheduleExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if v.DurationInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurationInSeconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -523,6 +673,25 @@ func validateTagOnCreateList(v []types.Tag) error {
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUploaderConfig(v *types.UploaderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UploaderConfig"}
+	if v.ScheduleConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleConfig"))
+	} else if v.ScheduleConfig != nil {
+		if err := validateScheduleConfig(v.ScheduleConfig); err != nil {
+			invalidParams.AddNested("ScheduleConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -642,6 +811,25 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpStartEdgeConfigurationUpdateInput(v *StartEdgeConfigurationUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartEdgeConfigurationUpdateInput"}
+	if v.EdgeConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EdgeConfig"))
+	} else if v.EdgeConfig != nil {
+		if err := validateEdgeConfig(v.EdgeConfig); err != nil {
+			invalidParams.AddNested("EdgeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -741,6 +929,28 @@ func validateOpUpdateImageGenerationConfigurationInput(v *UpdateImageGenerationC
 	if v.ImageGenerationConfiguration != nil {
 		if err := validateImageGenerationConfiguration(v.ImageGenerationConfiguration); err != nil {
 			invalidParams.AddNested("ImageGenerationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMediaStorageConfigurationInput(v *UpdateMediaStorageConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMediaStorageConfigurationInput"}
+	if v.ChannelARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelARN"))
+	}
+	if v.MediaStorageConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaStorageConfiguration"))
+	} else if v.MediaStorageConfiguration != nil {
+		if err := validateMediaStorageConfiguration(v.MediaStorageConfiguration); err != nil {
+			invalidParams.AddNested("MediaStorageConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

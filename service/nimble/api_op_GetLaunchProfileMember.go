@@ -29,7 +29,7 @@ func (c *Client) GetLaunchProfileMember(ctx context.Context, params *GetLaunchPr
 
 type GetLaunchProfileMemberInput struct {
 
-	// The Launch Profile ID.
+	// The ID of the launch profile used to control access from the streaming session.
 	//
 	// This member is required.
 	LaunchProfileId *string

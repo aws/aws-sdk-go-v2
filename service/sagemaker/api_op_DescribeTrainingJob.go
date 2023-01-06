@@ -193,17 +193,19 @@ type DescribeTrainingJobOutput struct {
 	// checkpoint data.
 	CheckpointConfig *types.CheckpointConfig
 
-	// Configuration information for the Debugger hook parameters, metric and tensor
-	// collections, and storage paths. To learn more about how to configure the
-	// DebugHookConfig parameter, see Use the SageMaker and Debugger Configuration API
-	// Operations to Create, Update, and Debug Your Training Job
+	// Configuration information for the Amazon SageMaker Debugger hook parameters,
+	// metric and tensor collections, and storage paths. To learn more about how to
+	// configure the DebugHookConfig parameter, see Use the SageMaker and Debugger
+	// Configuration API Operations to Create, Update, and Debug Your Training Job
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/debugger-createtrainingjob-api.html).
 	DebugHookConfig *types.DebugHookConfig
 
-	// Configuration information for Debugger rules for debugging output tensors.
+	// Configuration information for Amazon SageMaker Debugger rules for debugging
+	// output tensors.
 	DebugRuleConfigurations []types.DebugRuleConfiguration
 
-	// Evaluation status of Debugger rules for debugging on a training job.
+	// Evaluation status of Amazon SageMaker Debugger rules for debugging on a training
+	// job.
 	DebugRuleEvaluationStatuses []types.DebugRuleEvaluationStatus
 
 	// To encrypt all communications between ML compute instances in distributed
@@ -263,15 +265,16 @@ type DescribeTrainingJobOutput struct {
 	// stored. SageMaker creates subfolders for model artifacts.
 	OutputDataConfig *types.OutputDataConfig
 
-	// Configuration information for Debugger system monitoring, framework profiling,
-	// and storage paths.
+	// Configuration information for Amazon SageMaker Debugger system monitoring,
+	// framework profiling, and storage paths.
 	ProfilerConfig *types.ProfilerConfig
 
-	// Configuration information for Debugger rules for profiling system and framework
-	// metrics.
+	// Configuration information for Amazon SageMaker Debugger rules for profiling
+	// system and framework metrics.
 	ProfilerRuleConfigurations []types.ProfilerRuleConfiguration
 
-	// Evaluation status of Debugger rules for profiling on a training job.
+	// Evaluation status of Amazon SageMaker Debugger rules for profiling on a training
+	// job.
 	ProfilerRuleEvaluationStatuses []types.ProfilerRuleEvaluationStatus
 
 	// Profiling status of a training job.
@@ -289,7 +292,8 @@ type DescribeTrainingJobOutput struct {
 	// transitioned through.
 	SecondaryStatusTransitions []types.SecondaryStatusTransition
 
-	// Configuration of storage locations for the Debugger TensorBoard output data.
+	// Configuration of storage locations for the Amazon SageMaker Debugger TensorBoard
+	// output data.
 	TensorBoardOutputConfig *types.TensorBoardOutputConfig
 
 	// Indicates the time when the training job ends on training instances. You are

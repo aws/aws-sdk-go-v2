@@ -150,6 +150,9 @@ type ComponentResponse struct {
 	// The status of the component type.
 	Status *Status
 
+	// The syncSource of the sync job, if this entity was created by a sync job.
+	SyncSource *string
+
 	noSmithyDocumentSerde
 }
 
@@ -175,6 +178,9 @@ type ComponentTypeSummary struct {
 	//
 	// This member is required.
 	UpdateDateTime *time.Time
+
+	// The component type name.
+	ComponentTypeName *string
 
 	// The description of the component type.
 	Description *string
@@ -563,6 +569,9 @@ type PropertyDefinitionRequest struct {
 	// An object that contains the default value.
 	DefaultValue *DataValue
 
+	// A friendly name for the property.
+	DisplayName *string
+
 	// A Boolean value that specifies whether the property ID comes from an external
 	// data store.
 	IsExternalId *bool
@@ -632,6 +641,9 @@ type PropertyDefinitionResponse struct {
 
 	// An object that contains the default value.
 	DefaultValue *DataValue
+
+	// A friendly name for the property.
+	DisplayName *string
 
 	noSmithyDocumentSerde
 }
@@ -884,6 +896,123 @@ type Status struct {
 	noSmithyDocumentSerde
 }
 
+// The SyncJob status.
+type SyncJobStatus struct {
+
+	// The SyncJob error.
+	Error *ErrorDetails
+
+	// The SyncJob status state.
+	State SyncJobState
+
+	noSmithyDocumentSerde
+}
+
+// The SyncJob summary.
+type SyncJobSummary struct {
+
+	// The SyncJob summary ARN.
+	Arn *string
+
+	// The creation date and time.
+	CreationDateTime *time.Time
+
+	// The SyncJob summaries status.
+	Status *SyncJobStatus
+
+	// The sync source.
+	SyncSource *string
+
+	// The update date and time.
+	UpdateDateTime *time.Time
+
+	// The ID of the workspace that contains the sync job.
+	WorkspaceId *string
+
+	noSmithyDocumentSerde
+}
+
+// The sync resource filter.
+//
+// The following types satisfy this interface:
+//
+//	SyncResourceFilterMemberExternalId
+//	SyncResourceFilterMemberResourceId
+//	SyncResourceFilterMemberResourceType
+//	SyncResourceFilterMemberState
+type SyncResourceFilter interface {
+	isSyncResourceFilter()
+}
+
+// The external Id.
+type SyncResourceFilterMemberExternalId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SyncResourceFilterMemberExternalId) isSyncResourceFilter() {}
+
+// The sync resource filter resource Id.
+type SyncResourceFilterMemberResourceId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SyncResourceFilterMemberResourceId) isSyncResourceFilter() {}
+
+// The sync resource filter resoucre type
+type SyncResourceFilterMemberResourceType struct {
+	Value SyncResourceType
+
+	noSmithyDocumentSerde
+}
+
+func (*SyncResourceFilterMemberResourceType) isSyncResourceFilter() {}
+
+// The sync resource filter's state.
+type SyncResourceFilterMemberState struct {
+	Value SyncResourceState
+
+	noSmithyDocumentSerde
+}
+
+func (*SyncResourceFilterMemberState) isSyncResourceFilter() {}
+
+// The sync resource status.
+type SyncResourceStatus struct {
+
+	// The status error.
+	Error *ErrorDetails
+
+	// The sync resource status state.
+	State SyncResourceState
+
+	noSmithyDocumentSerde
+}
+
+// The sync resource summary.
+type SyncResourceSummary struct {
+
+	// The external Id.
+	ExternalId *string
+
+	// The resource Id.
+	ResourceId *string
+
+	// The resource type.
+	ResourceType SyncResourceType
+
+	// The sync resource summary status.
+	Status *SyncResourceStatus
+
+	// The update date and time.
+	UpdateDateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The tabular conditions.
 type TabularConditions struct {
 
@@ -940,3 +1069,4 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isListComponentTypesFilter() {}
 func (*UnknownUnionMember) isListEntitiesFilter()       {}
+func (*UnknownUnionMember) isSyncResourceFilter()       {}

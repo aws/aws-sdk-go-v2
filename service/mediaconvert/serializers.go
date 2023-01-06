@@ -3828,6 +3828,11 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 		}
 	}
 
+	if len(v.MpdManifestBandwidthType) > 0 {
+		ok := object.Key("mpdManifestBandwidthType")
+		ok.String(string(v.MpdManifestBandwidthType))
+	}
+
 	if len(v.MpdProfile) > 0 {
 		ok := object.Key("mpdProfile")
 		ok.String(string(v.MpdProfile))
@@ -3861,6 +3866,11 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 	if len(v.TargetDurationCompatibilityMode) > 0 {
 		ok := object.Key("targetDurationCompatibilityMode")
 		ok.String(string(v.TargetDurationCompatibilityMode))
+	}
+
+	if len(v.VideoCompositionOffsets) > 0 {
+		ok := object.Key("videoCompositionOffsets")
+		ok.String(string(v.VideoCompositionOffsets))
 	}
 
 	if len(v.WriteDashManifest) > 0 {
@@ -3970,6 +3980,11 @@ func awsRestjson1_serializeDocumentCmfcSettings(v *types.CmfcSettings, value smi
 		ok.String(string(v.KlvMetadata))
 	}
 
+	if len(v.ManifestMetadataSignaling) > 0 {
+		ok := object.Key("manifestMetadataSignaling")
+		ok.String(string(v.ManifestMetadataSignaling))
+	}
+
 	if len(v.Scte35Esam) > 0 {
 		ok := object.Key("scte35Esam")
 		ok.String(string(v.Scte35Esam))
@@ -3983,6 +3998,21 @@ func awsRestjson1_serializeDocumentCmfcSettings(v *types.CmfcSettings, value smi
 	if len(v.TimedMetadata) > 0 {
 		ok := object.Key("timedMetadata")
 		ok.String(string(v.TimedMetadata))
+	}
+
+	if len(v.TimedMetadataBoxVersion) > 0 {
+		ok := object.Key("timedMetadataBoxVersion")
+		ok.String(string(v.TimedMetadataBoxVersion))
+	}
+
+	if v.TimedMetadataSchemeIdUri != nil {
+		ok := object.Key("timedMetadataSchemeIdUri")
+		ok.String(*v.TimedMetadataSchemeIdUri)
+	}
+
+	if v.TimedMetadataValue != nil {
+		ok := object.Key("timedMetadataValue")
+		ok.String(*v.TimedMetadataValue)
 	}
 
 	return nil
@@ -4228,6 +4258,11 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 		}
 	}
 
+	if len(v.MpdManifestBandwidthType) > 0 {
+		ok := object.Key("mpdManifestBandwidthType")
+		ok.String(string(v.MpdManifestBandwidthType))
+	}
+
 	if len(v.MpdProfile) > 0 {
 		ok := object.Key("mpdProfile")
 		ok.String(string(v.MpdProfile))
@@ -4251,6 +4286,11 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 	if len(v.SegmentLengthControl) > 0 {
 		ok := object.Key("segmentLengthControl")
 		ok.String(string(v.SegmentLengthControl))
+	}
+
+	if len(v.VideoCompositionOffsets) > 0 {
+		ok := object.Key("videoCompositionOffsets")
+		ok.String(string(v.VideoCompositionOffsets))
 	}
 
 	if len(v.WriteSegmentTimelineInRepresentation) > 0 {
@@ -7470,6 +7510,11 @@ func awsRestjson1_serializeDocumentMpdSettings(v *types.MpdSettings, value smith
 		ok.String(string(v.KlvMetadata))
 	}
 
+	if len(v.ManifestMetadataSignaling) > 0 {
+		ok := object.Key("manifestMetadataSignaling")
+		ok.String(string(v.ManifestMetadataSignaling))
+	}
+
 	if len(v.Scte35Esam) > 0 {
 		ok := object.Key("scte35Esam")
 		ok.String(string(v.Scte35Esam))
@@ -7483,6 +7528,21 @@ func awsRestjson1_serializeDocumentMpdSettings(v *types.MpdSettings, value smith
 	if len(v.TimedMetadata) > 0 {
 		ok := object.Key("timedMetadata")
 		ok.String(string(v.TimedMetadata))
+	}
+
+	if len(v.TimedMetadataBoxVersion) > 0 {
+		ok := object.Key("timedMetadataBoxVersion")
+		ok.String(string(v.TimedMetadataBoxVersion))
+	}
+
+	if v.TimedMetadataSchemeIdUri != nil {
+		ok := object.Key("timedMetadataSchemeIdUri")
+		ok.String(*v.TimedMetadataSchemeIdUri)
+	}
+
+	if v.TimedMetadataValue != nil {
+		ok := object.Key("timedMetadataValue")
+		ok.String(*v.TimedMetadataValue)
 	}
 
 	return nil

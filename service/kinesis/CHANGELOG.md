@@ -1,3 +1,20 @@
+# v1.17.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.16.0 (2022-12-15)
+
+* **Feature**: Added StreamARN parameter for Kinesis Data Streams APIs. Added a new opaque pagination token for ListStreams. SDKs will auto-generate Account Endpoint when accessing Kinesis Data Streams.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.15.25 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.15.24 (2022-11-22)
+
+* No change notes available for this release.
+
 # v1.15.23 (2022-11-16)
 
 * No change notes available for this release.

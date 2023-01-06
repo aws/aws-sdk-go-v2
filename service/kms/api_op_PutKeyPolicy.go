@@ -93,7 +93,7 @@ type PutKeyPolicyInput struct {
 	// For information about
 	// key policies, see Key policies in KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-	// Key Management Service Developer Guide. For help writing and formatting a JSON
+	// Key Management Service Developer Guide.For help writing and formatting a JSON
 	// policy document, see the IAM JSON Policy Reference
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in
 	// the Identity and Access Management User Guide .

@@ -12,8 +12,8 @@ import (
 )
 
 // Gets a cache policy configuration. To get a cache policy configuration, you must
-// provide the policy’s identifier. If the cache policy is attached to a
-// distribution’s cache behavior, you can get the policy’s identifier using
+// provide the policy's identifier. If the cache policy is attached to a
+// distribution's cache behavior, you can get the policy's identifier using
 // ListDistributions or GetDistribution. If the cache policy is not attached to a
 // cache behavior, you can get the identifier using ListCachePolicies.
 func (c *Client) GetCachePolicyConfig(ctx context.Context, params *GetCachePolicyConfigInput, optFns ...func(*Options)) (*GetCachePolicyConfigOutput, error) {
@@ -34,7 +34,7 @@ func (c *Client) GetCachePolicyConfig(ctx context.Context, params *GetCachePolic
 type GetCachePolicyConfigInput struct {
 
 	// The unique identifier for the cache policy. If the cache policy is attached to a
-	// distribution’s cache behavior, you can get the policy’s identifier using
+	// distribution's cache behavior, you can get the policy's identifier using
 	// ListDistributions or GetDistribution. If the cache policy is not attached to a
 	// cache behavior, you can get the identifier using ListCachePolicies.
 	//

@@ -3,4 +3,4 @@
 package iot1clickdevicesservice
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.10.19"
+const goModuleVersion = "1.11.0"

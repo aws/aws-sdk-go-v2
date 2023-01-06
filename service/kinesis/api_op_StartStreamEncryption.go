@@ -24,7 +24,9 @@ import (
 // period. Note: It can take up to 5 seconds after the stream is in an ACTIVE
 // status before all records written to the stream are encrypted. After you enable
 // encryption, you can verify that encryption is applied by inspecting the API
-// response from PutRecord or PutRecords.
+// response from PutRecord or PutRecords. When invoking this API, it is recommended
+// you use the StreamARN input parameter rather than the StreamName input
+// parameter.
 func (c *Client) StartStreamEncryption(ctx context.Context, params *StartStreamEncryptionInput, optFns ...func(*Options)) (*StartStreamEncryptionOutput, error) {
 	if params == nil {
 		params = &StartStreamEncryptionInput{}
@@ -71,9 +73,10 @@ type StartStreamEncryptionInput struct {
 	// This member is required.
 	KeyId *string
 
+	// The ARN of the stream.
+	StreamARN *string
+
 	// The name of the stream for which to start encrypting records.
-	//
-	// This member is required.
 	StreamName *string
 
 	noSmithyDocumentSerde

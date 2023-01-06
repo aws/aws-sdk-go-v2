@@ -1,3 +1,16 @@
+# v1.9.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.8.0 (2022-12-15)
+
+* **Feature**: This release adds support for VMware vSphere tags, enabling customer to protect VMware virtual machines using tag-based policies for AWS tags mapped from vSphere tags. This release also adds support for customer-accessible gateway-hypervisor interaction log and upload bandwidth rate limit schedule.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.3 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

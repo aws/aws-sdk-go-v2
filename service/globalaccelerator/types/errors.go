@@ -11,6 +11,8 @@ import (
 type AcceleratorNotDisabledException struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -24,13 +26,18 @@ func (e *AcceleratorNotDisabledException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AcceleratorNotDisabledException) ErrorCode() string {
-	return "AcceleratorNotDisabledException"
+	if e.ErrorCodeOverride == nil {
+		return "AcceleratorNotDisabledException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *AcceleratorNotDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The accelerator that you specified doesn't exist.
 type AcceleratorNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -44,12 +51,19 @@ func (e *AcceleratorNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AcceleratorNotFoundException) ErrorCode() string             { return "AcceleratorNotFoundException" }
+func (e *AcceleratorNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AcceleratorNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AcceleratorNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You don't have access permission.
 type AccessDeniedException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -63,13 +77,20 @@ func (e *AccessDeniedException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "AccessDeniedException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The listener that you specified has an endpoint group associated with it. You
 // must remove all dependent resources from a listener before you can delete it.
 type AssociatedEndpointGroupFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -84,7 +105,10 @@ func (e *AssociatedEndpointGroupFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AssociatedEndpointGroupFoundException) ErrorCode() string {
-	return "AssociatedEndpointGroupFoundException"
+	if e.ErrorCodeOverride == nil {
+		return "AssociatedEndpointGroupFoundException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *AssociatedEndpointGroupFoundException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -94,6 +118,8 @@ func (e *AssociatedEndpointGroupFoundException) ErrorFault() smithy.ErrorFault {
 // remove all dependent resources from an accelerator before you can delete it.
 type AssociatedListenerFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -108,13 +134,18 @@ func (e *AssociatedListenerFoundException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *AssociatedListenerFoundException) ErrorCode() string {
-	return "AssociatedListenerFoundException"
+	if e.ErrorCodeOverride == nil {
+		return "AssociatedListenerFoundException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *AssociatedListenerFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The CIDR that you specified was not found or is incorrect.
 type ByoipCidrNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -128,12 +159,19 @@ func (e *ByoipCidrNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ByoipCidrNotFoundException) ErrorCode() string             { return "ByoipCidrNotFoundException" }
+func (e *ByoipCidrNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ByoipCidrNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ByoipCidrNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't use both of those options.
 type ConflictException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -147,12 +185,19 @@ func (e *ConflictException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The endpoint that you specified doesn't exist.
 type EndpointAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -166,12 +211,19 @@ func (e *EndpointAlreadyExistsException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EndpointAlreadyExistsException) ErrorCode() string             { return "EndpointAlreadyExistsException" }
+func (e *EndpointAlreadyExistsException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EndpointAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EndpointAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The endpoint group that you specified already exists.
 type EndpointGroupAlreadyExistsException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -186,7 +238,10 @@ func (e *EndpointGroupAlreadyExistsException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *EndpointGroupAlreadyExistsException) ErrorCode() string {
-	return "EndpointGroupAlreadyExistsException"
+	if e.ErrorCodeOverride == nil {
+		return "EndpointGroupAlreadyExistsException"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *EndpointGroupAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
@@ -195,6 +250,8 @@ func (e *EndpointGroupAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 // The endpoint group that you specified doesn't exist.
 type EndpointGroupNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -208,12 +265,19 @@ func (e *EndpointGroupNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EndpointGroupNotFoundException) ErrorCode() string             { return "EndpointGroupNotFoundException" }
+func (e *EndpointGroupNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EndpointGroupNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EndpointGroupNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The endpoint that you specified doesn't exist.
 type EndpointNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -227,13 +291,20 @@ func (e *EndpointNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *EndpointNotFoundException) ErrorCode() string             { return "EndpointNotFoundException" }
+func (e *EndpointNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "EndpointNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *EndpointNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The CIDR that you specified is not valid for this action. For example, the state
 // of the CIDR might be incorrect for this action.
 type IncorrectCidrStateException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -247,12 +318,19 @@ func (e *IncorrectCidrStateException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *IncorrectCidrStateException) ErrorCode() string             { return "IncorrectCidrStateException" }
+func (e *IncorrectCidrStateException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "IncorrectCidrStateException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *IncorrectCidrStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There was an internal error for Global Accelerator.
 type InternalServiceErrorException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -266,12 +344,19 @@ func (e *InternalServiceErrorException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InternalServiceErrorException) ErrorCode() string             { return "InternalServiceErrorException" }
+func (e *InternalServiceErrorException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InternalServiceErrorException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // An argument that you specified is invalid.
 type InvalidArgumentException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -285,12 +370,19 @@ func (e *InvalidArgumentException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidArgumentException) ErrorCode() string             { return "InvalidArgumentException" }
+func (e *InvalidArgumentException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidArgumentException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There isn't another item to return.
 type InvalidNextTokenException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -304,13 +396,20 @@ func (e *InvalidNextTokenException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidNextTokenException) ErrorCode() string             { return "InvalidNextTokenException" }
+func (e *InvalidNextTokenException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidNextTokenException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The port numbers that you specified are not valid numbers or are not unique for
 // this accelerator.
 type InvalidPortRangeException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -324,12 +423,19 @@ func (e *InvalidPortRangeException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *InvalidPortRangeException) ErrorCode() string             { return "InvalidPortRangeException" }
+func (e *InvalidPortRangeException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "InvalidPortRangeException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *InvalidPortRangeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Processing your request would cause you to exceed an Global Accelerator limit.
 type LimitExceededException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -343,12 +449,19 @@ func (e *LimitExceededException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
+func (e *LimitExceededException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The listener that you specified doesn't exist.
 type ListenerNotFoundException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -362,13 +475,20 @@ func (e *ListenerNotFoundException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *ListenerNotFoundException) ErrorCode() string             { return "ListenerNotFoundException" }
+func (e *ListenerNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "ListenerNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // There's already a transaction in progress. Another transaction can't be
 // processed.
 type TransactionInProgressException struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -382,5 +502,10 @@ func (e *TransactionInProgressException) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TransactionInProgressException) ErrorCode() string             { return "TransactionInProgressException" }
+func (e *TransactionInProgressException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TransactionInProgressException"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TransactionInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

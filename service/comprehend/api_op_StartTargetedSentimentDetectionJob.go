@@ -39,7 +39,8 @@ type StartTargetedSentimentDetectionJobInput struct {
 	// This member is required.
 	DataAccessRoleArn *string
 
-	// The input properties for an inference job.
+	// The input properties for an inference job. The document reader config field
+	// applies only to non-text inputs for custom analysis.
 	//
 	// This member is required.
 	InputDataConfig *types.InputDataConfig

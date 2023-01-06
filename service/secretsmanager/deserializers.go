@@ -3924,6 +3924,22 @@ func awsAwsjson11_deserializeDocumentSecretListEntry(v **types.SecretListEntry, 
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "NextRotationDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.NextRotationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected NextRotationDateType to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "OwningService":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4741,6 +4757,22 @@ func awsAwsjson11_deserializeOpDocumentDescribeSecretOutput(v **DescribeSecretOu
 					return fmt.Errorf("expected SecretNameType to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "NextRotationDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.NextRotationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected NextRotationDateType to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "OwningService":

@@ -35,7 +35,7 @@ type ListUsageLimitsInput struct {
 	MaxResults *int32
 
 	// If your initial ListUsageLimits operation returns a nextToken, you can include
-	// the returned nextToken in subsequent ListUsageLimits operations, which returns
+	// the returned nextToken in following ListUsageLimits operations, which returns
 	// results in the next page.
 	NextToken *string
 

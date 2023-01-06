@@ -7703,6 +7703,1248 @@ func awsRestjson1_serializeDocumentAwsEc2InstanceNetworkInterfacesList(v []types
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails(v *types.AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeviceName != nil {
+		ok := object.Key("DeviceName")
+		ok.String(*v.DeviceName)
+	}
+
+	if v.Ebs != nil {
+		ok := object.Key("Ebs")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails(v.Ebs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NoDevice != nil {
+		ok := object.Key("NoDevice")
+		ok.String(*v.NoDevice)
+	}
+
+	if v.VirtualName != nil {
+		ok := object.Key("VirtualName")
+		ok.String(*v.VirtualName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails(v *types.AwsEc2LaunchTemplateDataBlockDeviceMappingSetEbsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeleteOnTermination {
+		ok := object.Key("DeleteOnTermination")
+		ok.Boolean(v.DeleteOnTermination)
+	}
+
+	if v.Encrypted {
+		ok := object.Key("Encrypted")
+		ok.Boolean(v.Encrypted)
+	}
+
+	if v.Iops != 0 {
+		ok := object.Key("Iops")
+		ok.Integer(v.Iops)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.SnapshotId != nil {
+		ok := object.Key("SnapshotId")
+		ok.String(*v.SnapshotId)
+	}
+
+	if v.Throughput != 0 {
+		ok := object.Key("Throughput")
+		ok.Integer(v.Throughput)
+	}
+
+	if v.VolumeSize != 0 {
+		ok := object.Key("VolumeSize")
+		ok.Integer(v.VolumeSize)
+	}
+
+	if v.VolumeType != nil {
+		ok := object.Key("VolumeType")
+		ok.String(*v.VolumeType)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataBlockDeviceMappingSetList(v []types.AwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataBlockDeviceMappingSetDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails(v *types.AwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CapacityReservationId != nil {
+		ok := object.Key("CapacityReservationId")
+		ok.String(*v.CapacityReservationId)
+	}
+
+	if v.CapacityReservationResourceGroupArn != nil {
+		ok := object.Key("CapacityReservationResourceGroupArn")
+		ok.String(*v.CapacityReservationResourceGroupArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails(v *types.AwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CapacityReservationPreference != nil {
+		ok := object.Key("CapacityReservationPreference")
+		ok.String(*v.CapacityReservationPreference)
+	}
+
+	if v.CapacityReservationTarget != nil {
+		ok := object.Key("CapacityReservationTarget")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataCapacityReservationSpecificationCapacityReservationTargetDetails(v.CapacityReservationTarget, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataCpuOptionsDetails(v *types.AwsEc2LaunchTemplateDataCpuOptionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CoreCount != 0 {
+		ok := object.Key("CoreCount")
+		ok.Integer(v.CoreCount)
+	}
+
+	if v.ThreadsPerCore != 0 {
+		ok := object.Key("ThreadsPerCore")
+		ok.Integer(v.ThreadsPerCore)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataCreditSpecificationDetails(v *types.AwsEc2LaunchTemplateDataCreditSpecificationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CpuCredits != nil {
+		ok := object.Key("CpuCredits")
+		ok.String(*v.CpuCredits)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataDetails(v *types.AwsEc2LaunchTemplateDataDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BlockDeviceMappingSet != nil {
+		ok := object.Key("BlockDeviceMappingSet")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataBlockDeviceMappingSetList(v.BlockDeviceMappingSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CapacityReservationSpecification != nil {
+		ok := object.Key("CapacityReservationSpecification")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataCapacityReservationSpecificationDetails(v.CapacityReservationSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CpuOptions != nil {
+		ok := object.Key("CpuOptions")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataCpuOptionsDetails(v.CpuOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CreditSpecification != nil {
+		ok := object.Key("CreditSpecification")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataCreditSpecificationDetails(v.CreditSpecification, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DisableApiStop {
+		ok := object.Key("DisableApiStop")
+		ok.Boolean(v.DisableApiStop)
+	}
+
+	if v.DisableApiTermination {
+		ok := object.Key("DisableApiTermination")
+		ok.Boolean(v.DisableApiTermination)
+	}
+
+	if v.EbsOptimized {
+		ok := object.Key("EbsOptimized")
+		ok.Boolean(v.EbsOptimized)
+	}
+
+	if v.ElasticGpuSpecificationSet != nil {
+		ok := object.Key("ElasticGpuSpecificationSet")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataElasticGpuSpecificationSetList(v.ElasticGpuSpecificationSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ElasticInferenceAcceleratorSet != nil {
+		ok := object.Key("ElasticInferenceAcceleratorSet")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetList(v.ElasticInferenceAcceleratorSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnclaveOptions != nil {
+		ok := object.Key("EnclaveOptions")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataEnclaveOptionsDetails(v.EnclaveOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HibernationOptions != nil {
+		ok := object.Key("HibernationOptions")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataHibernationOptionsDetails(v.HibernationOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IamInstanceProfile != nil {
+		ok := object.Key("IamInstanceProfile")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataIamInstanceProfileDetails(v.IamInstanceProfile, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ImageId != nil {
+		ok := object.Key("ImageId")
+		ok.String(*v.ImageId)
+	}
+
+	if v.InstanceInitiatedShutdownBehavior != nil {
+		ok := object.Key("InstanceInitiatedShutdownBehavior")
+		ok.String(*v.InstanceInitiatedShutdownBehavior)
+	}
+
+	if v.InstanceMarketOptions != nil {
+		ok := object.Key("InstanceMarketOptions")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceMarketOptionsDetails(v.InstanceMarketOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceRequirements != nil {
+		ok := object.Key("InstanceRequirements")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsDetails(v.InstanceRequirements, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceType != nil {
+		ok := object.Key("InstanceType")
+		ok.String(*v.InstanceType)
+	}
+
+	if v.KernelId != nil {
+		ok := object.Key("KernelId")
+		ok.String(*v.KernelId)
+	}
+
+	if v.KeyName != nil {
+		ok := object.Key("KeyName")
+		ok.String(*v.KeyName)
+	}
+
+	if v.LicenseSet != nil {
+		ok := object.Key("LicenseSet")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataLicenseSetList(v.LicenseSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaintenanceOptions != nil {
+		ok := object.Key("MaintenanceOptions")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataMaintenanceOptionsDetails(v.MaintenanceOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetadataOptions != nil {
+		ok := object.Key("MetadataOptions")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataMetadataOptionsDetails(v.MetadataOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Monitoring != nil {
+		ok := object.Key("Monitoring")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataMonitoringDetails(v.Monitoring, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkInterfaceSet != nil {
+		ok := object.Key("NetworkInterfaceSet")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetList(v.NetworkInterfaceSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Placement != nil {
+		ok := object.Key("Placement")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataPlacementDetails(v.Placement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PrivateDnsNameOptions != nil {
+		ok := object.Key("PrivateDnsNameOptions")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails(v.PrivateDnsNameOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RamDiskId != nil {
+		ok := object.Key("RamDiskId")
+		ok.String(*v.RamDiskId)
+	}
+
+	if v.SecurityGroupIdSet != nil {
+		ok := object.Key("SecurityGroupIdSet")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.SecurityGroupIdSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecurityGroupSet != nil {
+		ok := object.Key("SecurityGroupSet")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.SecurityGroupSet, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UserData != nil {
+		ok := object.Key("UserData")
+		ok.String(*v.UserData)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails(v *types.AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataElasticGpuSpecificationSetList(v []types.AwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataElasticGpuSpecificationSetDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails(v *types.AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Count != 0 {
+		ok := object.Key("Count")
+		ok.Integer(v.Count)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetList(v []types.AwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataElasticInferenceAcceleratorSetDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataEnclaveOptionsDetails(v *types.AwsEc2LaunchTemplateDataEnclaveOptionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataHibernationOptionsDetails(v *types.AwsEc2LaunchTemplateDataHibernationOptionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Configured {
+		ok := object.Key("Configured")
+		ok.Boolean(v.Configured)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataIamInstanceProfileDetails(v *types.AwsEc2LaunchTemplateDataIamInstanceProfileDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceMarketOptionsDetails(v *types.AwsEc2LaunchTemplateDataInstanceMarketOptionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MarketType != nil {
+		ok := object.Key("MarketType")
+		ok.String(*v.MarketType)
+	}
+
+	if v.SpotOptions != nil {
+		ok := object.Key("SpotOptions")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails(v.SpotOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails(v *types.AwsEc2LaunchTemplateDataInstanceMarketOptionsSpotOptionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BlockDurationMinutes != 0 {
+		ok := object.Key("BlockDurationMinutes")
+		ok.Integer(v.BlockDurationMinutes)
+	}
+
+	if v.InstanceInterruptionBehavior != nil {
+		ok := object.Key("InstanceInterruptionBehavior")
+		ok.String(*v.InstanceInterruptionBehavior)
+	}
+
+	if v.MaxPrice != nil {
+		ok := object.Key("MaxPrice")
+		ok.String(*v.MaxPrice)
+	}
+
+	if v.SpotInstanceType != nil {
+		ok := object.Key("SpotInstanceType")
+		ok.String(*v.SpotInstanceType)
+	}
+
+	if v.ValidUntil != nil {
+		ok := object.Key("ValidUntil")
+		ok.String(*v.ValidUntil)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails(v *types.AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Max != 0 {
+		ok := object.Key("Max")
+		ok.Integer(v.Max)
+	}
+
+	if v.Min != 0 {
+		ok := object.Key("Min")
+		ok.Integer(v.Min)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails(v *types.AwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Max != 0 {
+		ok := object.Key("Max")
+		ok.Integer(v.Max)
+	}
+
+	if v.Min != 0 {
+		ok := object.Key("Min")
+		ok.Integer(v.Min)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails(v *types.AwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Max != 0 {
+		ok := object.Key("Max")
+		ok.Integer(v.Max)
+	}
+
+	if v.Min != 0 {
+		ok := object.Key("Min")
+		ok.Integer(v.Min)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsDetails(v *types.AwsEc2LaunchTemplateDataInstanceRequirementsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AcceleratorCount != nil {
+		ok := object.Key("AcceleratorCount")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorCountDetails(v.AcceleratorCount, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AcceleratorManufacturers != nil {
+		ok := object.Key("AcceleratorManufacturers")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.AcceleratorManufacturers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AcceleratorNames != nil {
+		ok := object.Key("AcceleratorNames")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.AcceleratorNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AcceleratorTotalMemoryMiB != nil {
+		ok := object.Key("AcceleratorTotalMemoryMiB")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsAcceleratorTotalMemoryMiBDetails(v.AcceleratorTotalMemoryMiB, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AcceleratorTypes != nil {
+		ok := object.Key("AcceleratorTypes")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.AcceleratorTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BareMetal != nil {
+		ok := object.Key("BareMetal")
+		ok.String(*v.BareMetal)
+	}
+
+	if v.BaselineEbsBandwidthMbps != nil {
+		ok := object.Key("BaselineEbsBandwidthMbps")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsBaselineEbsBandwidthMbpsDetails(v.BaselineEbsBandwidthMbps, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BurstablePerformance != nil {
+		ok := object.Key("BurstablePerformance")
+		ok.String(*v.BurstablePerformance)
+	}
+
+	if v.CpuManufacturers != nil {
+		ok := object.Key("CpuManufacturers")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.CpuManufacturers, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExcludedInstanceTypes != nil {
+		ok := object.Key("ExcludedInstanceTypes")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.ExcludedInstanceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceGenerations != nil {
+		ok := object.Key("InstanceGenerations")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.InstanceGenerations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LocalStorage != nil {
+		ok := object.Key("LocalStorage")
+		ok.String(*v.LocalStorage)
+	}
+
+	if v.LocalStorageTypes != nil {
+		ok := object.Key("LocalStorageTypes")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.LocalStorageTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MemoryGiBPerVCpu != nil {
+		ok := object.Key("MemoryGiBPerVCpu")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails(v.MemoryGiBPerVCpu, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MemoryMiB != nil {
+		ok := object.Key("MemoryMiB")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails(v.MemoryMiB, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkInterfaceCount != nil {
+		ok := object.Key("NetworkInterfaceCount")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails(v.NetworkInterfaceCount, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OnDemandMaxPricePercentageOverLowestPrice != 0 {
+		ok := object.Key("OnDemandMaxPricePercentageOverLowestPrice")
+		ok.Integer(v.OnDemandMaxPricePercentageOverLowestPrice)
+	}
+
+	if v.RequireHibernateSupport {
+		ok := object.Key("RequireHibernateSupport")
+		ok.Boolean(v.RequireHibernateSupport)
+	}
+
+	if v.SpotMaxPricePercentageOverLowestPrice != 0 {
+		ok := object.Key("SpotMaxPricePercentageOverLowestPrice")
+		ok.Integer(v.SpotMaxPricePercentageOverLowestPrice)
+	}
+
+	if v.TotalLocalStorageGB != nil {
+		ok := object.Key("TotalLocalStorageGB")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails(v.TotalLocalStorageGB, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VCpuCount != nil {
+		ok := object.Key("VCpuCount")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails(v.VCpuCount, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails(v *types.AwsEc2LaunchTemplateDataInstanceRequirementsMemoryGiBPerVCpuDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Max != 0 {
+		ok := object.Key("Max")
+		switch {
+		case math.IsNaN(v.Max):
+			ok.String("NaN")
+
+		case math.IsInf(v.Max, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Max, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Max)
+
+		}
+	}
+
+	if v.Min != 0 {
+		ok := object.Key("Min")
+		switch {
+		case math.IsNaN(v.Min):
+			ok.String("NaN")
+
+		case math.IsInf(v.Min, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Min, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Min)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails(v *types.AwsEc2LaunchTemplateDataInstanceRequirementsMemoryMiBDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Max != 0 {
+		ok := object.Key("Max")
+		ok.Integer(v.Max)
+	}
+
+	if v.Min != 0 {
+		ok := object.Key("Min")
+		ok.Integer(v.Min)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails(v *types.AwsEc2LaunchTemplateDataInstanceRequirementsNetworkInterfaceCountDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Max != 0 {
+		ok := object.Key("Max")
+		ok.Integer(v.Max)
+	}
+
+	if v.Min != 0 {
+		ok := object.Key("Min")
+		ok.Integer(v.Min)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails(v *types.AwsEc2LaunchTemplateDataInstanceRequirementsTotalLocalStorageGBDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Max != 0 {
+		ok := object.Key("Max")
+		switch {
+		case math.IsNaN(v.Max):
+			ok.String("NaN")
+
+		case math.IsInf(v.Max, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Max, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Max)
+
+		}
+	}
+
+	if v.Min != 0 {
+		ok := object.Key("Min")
+		switch {
+		case math.IsNaN(v.Min):
+			ok.String("NaN")
+
+		case math.IsInf(v.Min, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Min, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Min)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails(v *types.AwsEc2LaunchTemplateDataInstanceRequirementsVCpuCountDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Max != 0 {
+		ok := object.Key("Max")
+		ok.Integer(v.Max)
+	}
+
+	if v.Min != 0 {
+		ok := object.Key("Min")
+		ok.Integer(v.Min)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataLicenseSetDetails(v *types.AwsEc2LaunchTemplateDataLicenseSetDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LicenseConfigurationArn != nil {
+		ok := object.Key("LicenseConfigurationArn")
+		ok.String(*v.LicenseConfigurationArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataLicenseSetList(v []types.AwsEc2LaunchTemplateDataLicenseSetDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataLicenseSetDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataMaintenanceOptionsDetails(v *types.AwsEc2LaunchTemplateDataMaintenanceOptionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoRecovery != nil {
+		ok := object.Key("AutoRecovery")
+		ok.String(*v.AutoRecovery)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataMetadataOptionsDetails(v *types.AwsEc2LaunchTemplateDataMetadataOptionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HttpEndpoint != nil {
+		ok := object.Key("HttpEndpoint")
+		ok.String(*v.HttpEndpoint)
+	}
+
+	if v.HttpProtocolIpv6 != nil {
+		ok := object.Key("HttpProtocolIpv6")
+		ok.String(*v.HttpProtocolIpv6)
+	}
+
+	if v.HttpPutResponseHopLimit != 0 {
+		ok := object.Key("HttpPutResponseHopLimit")
+		ok.Integer(v.HttpPutResponseHopLimit)
+	}
+
+	if v.HttpTokens != nil {
+		ok := object.Key("HttpTokens")
+		ok.String(*v.HttpTokens)
+	}
+
+	if v.InstanceMetadataTags != nil {
+		ok := object.Key("InstanceMetadataTags")
+		ok.String(*v.InstanceMetadataTags)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataMonitoringDetails(v *types.AwsEc2LaunchTemplateDataMonitoringDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetDetails(v *types.AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AssociateCarrierIpAddress {
+		ok := object.Key("AssociateCarrierIpAddress")
+		ok.Boolean(v.AssociateCarrierIpAddress)
+	}
+
+	if v.AssociatePublicIpAddress {
+		ok := object.Key("AssociatePublicIpAddress")
+		ok.Boolean(v.AssociatePublicIpAddress)
+	}
+
+	if v.DeleteOnTermination {
+		ok := object.Key("DeleteOnTermination")
+		ok.Boolean(v.DeleteOnTermination)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.DeviceIndex != 0 {
+		ok := object.Key("DeviceIndex")
+		ok.Integer(v.DeviceIndex)
+	}
+
+	if v.Groups != nil {
+		ok := object.Key("Groups")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.Groups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InterfaceType != nil {
+		ok := object.Key("InterfaceType")
+		ok.String(*v.InterfaceType)
+	}
+
+	if v.Ipv4PrefixCount != 0 {
+		ok := object.Key("Ipv4PrefixCount")
+		ok.Integer(v.Ipv4PrefixCount)
+	}
+
+	if v.Ipv4Prefixes != nil {
+		ok := object.Key("Ipv4Prefixes")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesList(v.Ipv4Prefixes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Ipv6AddressCount != 0 {
+		ok := object.Key("Ipv6AddressCount")
+		ok.Integer(v.Ipv6AddressCount)
+	}
+
+	if v.Ipv6Addresses != nil {
+		ok := object.Key("Ipv6Addresses")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesList(v.Ipv6Addresses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Ipv6PrefixCount != 0 {
+		ok := object.Key("Ipv6PrefixCount")
+		ok.Integer(v.Ipv6PrefixCount)
+	}
+
+	if v.Ipv6Prefixes != nil {
+		ok := object.Key("Ipv6Prefixes")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesList(v.Ipv6Prefixes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NetworkCardIndex != 0 {
+		ok := object.Key("NetworkCardIndex")
+		ok.Integer(v.NetworkCardIndex)
+	}
+
+	if v.NetworkInterfaceId != nil {
+		ok := object.Key("NetworkInterfaceId")
+		ok.String(*v.NetworkInterfaceId)
+	}
+
+	if v.PrivateIpAddress != nil {
+		ok := object.Key("PrivateIpAddress")
+		ok.String(*v.PrivateIpAddress)
+	}
+
+	if v.PrivateIpAddresses != nil {
+		ok := object.Key("PrivateIpAddresses")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesList(v.PrivateIpAddresses, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecondaryPrivateIpAddressCount != 0 {
+		ok := object.Key("SecondaryPrivateIpAddressCount")
+		ok.Integer(v.SecondaryPrivateIpAddressCount)
+	}
+
+	if v.SubnetId != nil {
+		ok := object.Key("SubnetId")
+		ok.String(*v.SubnetId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails(v *types.AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Ipv4Prefix != nil {
+		ok := object.Key("Ipv4Prefix")
+		ok.String(*v.Ipv4Prefix)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesList(v []types.AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv4PrefixesDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails(v *types.AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Ipv6Address != nil {
+		ok := object.Key("Ipv6Address")
+		ok.String(*v.Ipv6Address)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesList(v []types.AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6AddressesDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails(v *types.AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Ipv6Prefix != nil {
+		ok := object.Key("Ipv6Prefix")
+		ok.String(*v.Ipv6Prefix)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesList(v []types.AwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetIpv6PrefixesDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetList(v []types.AwsEc2LaunchTemplateDataNetworkInterfaceSetDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails(v *types.AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Primary {
+		ok := object.Key("Primary")
+		ok.Boolean(v.Primary)
+	}
+
+	if v.PrivateIpAddress != nil {
+		ok := object.Key("PrivateIpAddress")
+		ok.String(*v.PrivateIpAddress)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesList(v []types.AwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataNetworkInterfaceSetPrivateIpAddressesDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataPlacementDetails(v *types.AwsEc2LaunchTemplateDataPlacementDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Affinity != nil {
+		ok := object.Key("Affinity")
+		ok.String(*v.Affinity)
+	}
+
+	if v.AvailabilityZone != nil {
+		ok := object.Key("AvailabilityZone")
+		ok.String(*v.AvailabilityZone)
+	}
+
+	if v.GroupName != nil {
+		ok := object.Key("GroupName")
+		ok.String(*v.GroupName)
+	}
+
+	if v.HostId != nil {
+		ok := object.Key("HostId")
+		ok.String(*v.HostId)
+	}
+
+	if v.HostResourceGroupArn != nil {
+		ok := object.Key("HostResourceGroupArn")
+		ok.String(*v.HostResourceGroupArn)
+	}
+
+	if v.PartitionNumber != 0 {
+		ok := object.Key("PartitionNumber")
+		ok.Integer(v.PartitionNumber)
+	}
+
+	if v.SpreadDomain != nil {
+		ok := object.Key("SpreadDomain")
+		ok.String(*v.SpreadDomain)
+	}
+
+	if v.Tenancy != nil {
+		ok := object.Key("Tenancy")
+		ok.String(*v.Tenancy)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails(v *types.AwsEc2LaunchTemplateDataPrivateDnsNameOptionsDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableResourceNameDnsAAAARecord {
+		ok := object.Key("EnableResourceNameDnsAAAARecord")
+		ok.Boolean(v.EnableResourceNameDnsAAAARecord)
+	}
+
+	if v.EnableResourceNameDnsARecord {
+		ok := object.Key("EnableResourceNameDnsARecord")
+		ok.Boolean(v.EnableResourceNameDnsARecord)
+	}
+
+	if v.HostnameType != nil {
+		ok := object.Key("HostnameType")
+		ok.String(*v.HostnameType)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDetails(v *types.AwsEc2LaunchTemplateDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultVersionNumber != 0 {
+		ok := object.Key("DefaultVersionNumber")
+		ok.Long(v.DefaultVersionNumber)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.LatestVersionNumber != 0 {
+		ok := object.Key("LatestVersionNumber")
+		ok.Long(v.LatestVersionNumber)
+	}
+
+	if v.LaunchTemplateData != nil {
+		ok := object.Key("LaunchTemplateData")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDataDetails(v.LaunchTemplateData, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LaunchTemplateName != nil {
+		ok := object.Key("LaunchTemplateName")
+		ok.String(*v.LaunchTemplateName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsEc2NetworkAclAssociation(v *types.AwsEc2NetworkAclAssociation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17038,6 +18280,133 @@ func awsRestjson1_serializeDocumentAwsS3ObjectDetails(v *types.AwsS3ObjectDetail
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAwsSageMakerNotebookInstanceDetails(v *types.AwsSageMakerNotebookInstanceDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AcceleratorTypes != nil {
+		ok := object.Key("AcceleratorTypes")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.AcceleratorTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AdditionalCodeRepositories != nil {
+		ok := object.Key("AdditionalCodeRepositories")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.AdditionalCodeRepositories, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultCodeRepository != nil {
+		ok := object.Key("DefaultCodeRepository")
+		ok.String(*v.DefaultCodeRepository)
+	}
+
+	if v.DirectInternetAccess != nil {
+		ok := object.Key("DirectInternetAccess")
+		ok.String(*v.DirectInternetAccess)
+	}
+
+	if v.FailureReason != nil {
+		ok := object.Key("FailureReason")
+		ok.String(*v.FailureReason)
+	}
+
+	if v.InstanceMetadataServiceConfiguration != nil {
+		ok := object.Key("InstanceMetadataServiceConfiguration")
+		if err := awsRestjson1_serializeDocumentAwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails(v.InstanceMetadataServiceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.InstanceType != nil {
+		ok := object.Key("InstanceType")
+		ok.String(*v.InstanceType)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.NetworkInterfaceId != nil {
+		ok := object.Key("NetworkInterfaceId")
+		ok.String(*v.NetworkInterfaceId)
+	}
+
+	if v.NotebookInstanceArn != nil {
+		ok := object.Key("NotebookInstanceArn")
+		ok.String(*v.NotebookInstanceArn)
+	}
+
+	if v.NotebookInstanceLifecycleConfigName != nil {
+		ok := object.Key("NotebookInstanceLifecycleConfigName")
+		ok.String(*v.NotebookInstanceLifecycleConfigName)
+	}
+
+	if v.NotebookInstanceName != nil {
+		ok := object.Key("NotebookInstanceName")
+		ok.String(*v.NotebookInstanceName)
+	}
+
+	if v.NotebookInstanceStatus != nil {
+		ok := object.Key("NotebookInstanceStatus")
+		ok.String(*v.NotebookInstanceStatus)
+	}
+
+	if v.PlatformIdentifier != nil {
+		ok := object.Key("PlatformIdentifier")
+		ok.String(*v.PlatformIdentifier)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.RootAccess != nil {
+		ok := object.Key("RootAccess")
+		ok.String(*v.RootAccess)
+	}
+
+	if v.SecurityGroups != nil {
+		ok := object.Key("SecurityGroups")
+		if err := awsRestjson1_serializeDocumentNonEmptyStringList(v.SecurityGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SubnetId != nil {
+		ok := object.Key("SubnetId")
+		ok.String(*v.SubnetId)
+	}
+
+	if v.Url != nil {
+		ok := object.Key("Url")
+		ok.String(*v.Url)
+	}
+
+	if v.VolumeSizeInGB != 0 {
+		ok := object.Key("VolumeSizeInGB")
+		ok.Integer(v.VolumeSizeInGB)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails(v *types.AwsSageMakerNotebookInstanceMetadataServiceConfigurationDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MinimumInstanceMetadataServiceVersion != nil {
+		ok := object.Key("MinimumInstanceMetadataServiceVersion")
+		ok.String(*v.MinimumInstanceMetadataServiceVersion)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAwsSecretsManagerSecretDetails(v *types.AwsSecretsManagerSecretDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -18843,6 +20212,399 @@ func awsRestjson1_serializeDocumentAwsWafRulePredicateListDetails(v *types.AwsWa
 	if v.Type != nil {
 		ok := object.Key("Type")
 		ok.String(*v.Type)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2ActionAllowDetails(v *types.AwsWafv2ActionAllowDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomRequestHandling != nil {
+		ok := object.Key("CustomRequestHandling")
+		if err := awsRestjson1_serializeDocumentAwsWafv2CustomRequestHandlingDetails(v.CustomRequestHandling, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2ActionBlockDetails(v *types.AwsWafv2ActionBlockDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomResponse != nil {
+		ok := object.Key("CustomResponse")
+		if err := awsRestjson1_serializeDocumentAwsWafv2CustomResponseDetails(v.CustomResponse, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2CustomHttpHeader(v *types.AwsWafv2CustomHttpHeader, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2CustomRequestHandlingDetails(v *types.AwsWafv2CustomRequestHandlingDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InsertHeaders != nil {
+		ok := object.Key("InsertHeaders")
+		if err := awsRestjson1_serializeDocumentAwsWafv2InsertHeadersList(v.InsertHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2CustomResponseDetails(v *types.AwsWafv2CustomResponseDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomResponseBodyKey != nil {
+		ok := object.Key("CustomResponseBodyKey")
+		ok.String(*v.CustomResponseBodyKey)
+	}
+
+	if v.ResponseCode != 0 {
+		ok := object.Key("ResponseCode")
+		ok.Integer(v.ResponseCode)
+	}
+
+	if v.ResponseHeaders != nil {
+		ok := object.Key("ResponseHeaders")
+		if err := awsRestjson1_serializeDocumentAwsWafv2InsertHeadersList(v.ResponseHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2InsertHeadersList(v []types.AwsWafv2CustomHttpHeader, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsWafv2CustomHttpHeader(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2RuleGroupDetails(v *types.AwsWafv2RuleGroupDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Capacity != 0 {
+		ok := object.Key("Capacity")
+		ok.Long(v.Capacity)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Rules != nil {
+		ok := object.Key("Rules")
+		if err := awsRestjson1_serializeDocumentAwsWafv2RulesList(v.Rules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Scope != nil {
+		ok := object.Key("Scope")
+		ok.String(*v.Scope)
+	}
+
+	if v.VisibilityConfig != nil {
+		ok := object.Key("VisibilityConfig")
+		if err := awsRestjson1_serializeDocumentAwsWafv2VisibilityConfigDetails(v.VisibilityConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2RulesActionCaptchaDetails(v *types.AwsWafv2RulesActionCaptchaDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomRequestHandling != nil {
+		ok := object.Key("CustomRequestHandling")
+		if err := awsRestjson1_serializeDocumentAwsWafv2CustomRequestHandlingDetails(v.CustomRequestHandling, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2RulesActionCountDetails(v *types.AwsWafv2RulesActionCountDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomRequestHandling != nil {
+		ok := object.Key("CustomRequestHandling")
+		if err := awsRestjson1_serializeDocumentAwsWafv2CustomRequestHandlingDetails(v.CustomRequestHandling, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2RulesActionDetails(v *types.AwsWafv2RulesActionDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Allow != nil {
+		ok := object.Key("Allow")
+		if err := awsRestjson1_serializeDocumentAwsWafv2ActionAllowDetails(v.Allow, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Block != nil {
+		ok := object.Key("Block")
+		if err := awsRestjson1_serializeDocumentAwsWafv2ActionBlockDetails(v.Block, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Captcha != nil {
+		ok := object.Key("Captcha")
+		if err := awsRestjson1_serializeDocumentAwsWafv2RulesActionCaptchaDetails(v.Captcha, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Count != nil {
+		ok := object.Key("Count")
+		if err := awsRestjson1_serializeDocumentAwsWafv2RulesActionCountDetails(v.Count, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2RulesDetails(v *types.AwsWafv2RulesDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Action != nil {
+		ok := object.Key("Action")
+		if err := awsRestjson1_serializeDocumentAwsWafv2RulesActionDetails(v.Action, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.OverrideAction != nil {
+		ok := object.Key("OverrideAction")
+		ok.String(*v.OverrideAction)
+	}
+
+	if v.Priority != 0 {
+		ok := object.Key("Priority")
+		ok.Integer(v.Priority)
+	}
+
+	if v.VisibilityConfig != nil {
+		ok := object.Key("VisibilityConfig")
+		if err := awsRestjson1_serializeDocumentAwsWafv2VisibilityConfigDetails(v.VisibilityConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2RulesList(v []types.AwsWafv2RulesDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAwsWafv2RulesDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2VisibilityConfigDetails(v *types.AwsWafv2VisibilityConfigDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudWatchMetricsEnabled {
+		ok := object.Key("CloudWatchMetricsEnabled")
+		ok.Boolean(v.CloudWatchMetricsEnabled)
+	}
+
+	if v.MetricName != nil {
+		ok := object.Key("MetricName")
+		ok.String(*v.MetricName)
+	}
+
+	if v.SampledRequestsEnabled {
+		ok := object.Key("SampledRequestsEnabled")
+		ok.Boolean(v.SampledRequestsEnabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2WebAclActionDetails(v *types.AwsWafv2WebAclActionDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Allow != nil {
+		ok := object.Key("Allow")
+		if err := awsRestjson1_serializeDocumentAwsWafv2ActionAllowDetails(v.Allow, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Block != nil {
+		ok := object.Key("Block")
+		if err := awsRestjson1_serializeDocumentAwsWafv2ActionBlockDetails(v.Block, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2WebAclCaptchaConfigDetails(v *types.AwsWafv2WebAclCaptchaConfigDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImmunityTimeProperty != nil {
+		ok := object.Key("ImmunityTimeProperty")
+		if err := awsRestjson1_serializeDocumentAwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails(v.ImmunityTimeProperty, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails(v *types.AwsWafv2WebAclCaptchaConfigImmunityTimePropertyDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ImmunityTime != 0 {
+		ok := object.Key("ImmunityTime")
+		ok.Long(v.ImmunityTime)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAwsWafv2WebAclDetails(v *types.AwsWafv2WebAclDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Arn != nil {
+		ok := object.Key("Arn")
+		ok.String(*v.Arn)
+	}
+
+	if v.Capacity != 0 {
+		ok := object.Key("Capacity")
+		ok.Long(v.Capacity)
+	}
+
+	if v.CaptchaConfig != nil {
+		ok := object.Key("CaptchaConfig")
+		if err := awsRestjson1_serializeDocumentAwsWafv2WebAclCaptchaConfigDetails(v.CaptchaConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultAction != nil {
+		ok := object.Key("DefaultAction")
+		if err := awsRestjson1_serializeDocumentAwsWafv2WebAclActionDetails(v.DefaultAction, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.ManagedbyFirewallManager {
+		ok := object.Key("ManagedbyFirewallManager")
+		ok.Boolean(v.ManagedbyFirewallManager)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Rules != nil {
+		ok := object.Key("Rules")
+		if err := awsRestjson1_serializeDocumentAwsWafv2RulesList(v.Rules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VisibilityConfig != nil {
+		ok := object.Key("VisibilityConfig")
+		if err := awsRestjson1_serializeDocumentAwsWafv2VisibilityConfigDetails(v.VisibilityConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -20887,6 +22649,13 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 		}
 	}
 
+	if v.AwsEc2LaunchTemplate != nil {
+		ok := object.Key("AwsEc2LaunchTemplate")
+		if err := awsRestjson1_serializeDocumentAwsEc2LaunchTemplateDetails(v.AwsEc2LaunchTemplate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AwsEc2NetworkAcl != nil {
 		ok := object.Key("AwsEc2NetworkAcl")
 		if err := awsRestjson1_serializeDocumentAwsEc2NetworkAclDetails(v.AwsEc2NetworkAcl, ok); err != nil {
@@ -21209,6 +22978,13 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 		}
 	}
 
+	if v.AwsSageMakerNotebookInstance != nil {
+		ok := object.Key("AwsSageMakerNotebookInstance")
+		if err := awsRestjson1_serializeDocumentAwsSageMakerNotebookInstanceDetails(v.AwsSageMakerNotebookInstance, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AwsSecretsManagerSecret != nil {
 		ok := object.Key("AwsSecretsManagerSecret")
 		if err := awsRestjson1_serializeDocumentAwsSecretsManagerSecretDetails(v.AwsSecretsManagerSecret, ok); err != nil {
@@ -21282,6 +23058,20 @@ func awsRestjson1_serializeDocumentResourceDetails(v *types.ResourceDetails, val
 	if v.AwsWafRuleGroup != nil {
 		ok := object.Key("AwsWafRuleGroup")
 		if err := awsRestjson1_serializeDocumentAwsWafRuleGroupDetails(v.AwsWafRuleGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsWafv2RuleGroup != nil {
+		ok := object.Key("AwsWafv2RuleGroup")
+		if err := awsRestjson1_serializeDocumentAwsWafv2RuleGroupDetails(v.AwsWafv2RuleGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AwsWafv2WebAcl != nil {
+		ok := object.Key("AwsWafv2WebAcl")
+		if err := awsRestjson1_serializeDocumentAwsWafv2WebAclDetails(v.AwsWafv2WebAcl, ok); err != nil {
 			return err
 		}
 	}

@@ -62,6 +62,10 @@ type GetWirelessDeviceOutput struct {
 	// The name of the resource.
 	Name *string
 
+	// FPort values for the GNSS, stream, and ClockSync functions of the positioning
+	// information.
+	Positioning types.PositioningConfigStatus
+
 	// Sidewalk device object.
 	Sidewalk *types.SidewalkDevice
 

@@ -1,3 +1,24 @@
+# v1.28.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.27.0 (2022-12-20)
+
+* **Feature**: This release adds support for two new features to AWS Elemental MediaLive. First, you can now burn-in timecodes to your MediaLive outputs. Second, we now now support the ability to decode Dolby E audio when it comes in on an input.
+
+# v1.26.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.26.0 (2022-12-09)
+
+* **Feature**: Link devices now support buffer size (latency) configuration. A higher latency value means a longer delay in transmitting from the device to MediaLive, but improved resiliency. A lower latency value means a shorter delay, but less resiliency.
+
+# v1.25.0 (2022-12-02)
+
+* **Feature**: Updates to Event Signaling and Management (ESAM) API and documentation.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.24.2 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

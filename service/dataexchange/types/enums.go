@@ -6,9 +6,11 @@ type AssetType string
 
 // Enum values for AssetType
 const (
-	AssetTypeS3Snapshot        AssetType = "S3_SNAPSHOT"
-	AssetTypeRedshiftDataShare AssetType = "REDSHIFT_DATA_SHARE"
-	AssetTypeApiGatewayApi     AssetType = "API_GATEWAY_API"
+	AssetTypeS3Snapshot                  AssetType = "S3_SNAPSHOT"
+	AssetTypeRedshiftDataShare           AssetType = "REDSHIFT_DATA_SHARE"
+	AssetTypeApiGatewayApi               AssetType = "API_GATEWAY_API"
+	AssetTypeS3DataAccess                AssetType = "S3_DATA_ACCESS"
+	AssetTypeLakeFormationDataPermission AssetType = "LAKE_FORMATION_DATA_PERMISSION"
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded in
@@ -19,6 +21,8 @@ func (AssetType) Values() []AssetType {
 		"S3_SNAPSHOT",
 		"REDSHIFT_DATA_SHARE",
 		"API_GATEWAY_API",
+		"S3_DATA_ACCESS",
+		"LAKE_FORMATION_DATA_PERMISSION",
 	}
 }
 
@@ -50,6 +54,23 @@ func (Code) Values() []Code {
 	}
 }
 
+type DatabaseLFTagPolicyPermission string
+
+// Enum values for DatabaseLFTagPolicyPermission
+const (
+	DatabaseLFTagPolicyPermissionDescribe DatabaseLFTagPolicyPermission = "DESCRIBE"
+)
+
+// Values returns all known values for DatabaseLFTagPolicyPermission. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DatabaseLFTagPolicyPermission) Values() []DatabaseLFTagPolicyPermission {
+	return []DatabaseLFTagPolicyPermission{
+		"DESCRIBE",
+	}
+}
+
 type ExceptionCause string
 
 // Enum values for ExceptionCause
@@ -72,9 +93,11 @@ type JobErrorLimitName string
 
 // Enum values for JobErrorLimitName
 const (
-	JobErrorLimitNameAssetsPerRevision                        JobErrorLimitName = "Assets per revision"
-	JobErrorLimitNameAssetSizeInGb                            JobErrorLimitName = "Asset size in GB"
-	JobErrorLimitNameAmazonRedshiftDatashareAssetsPerRevision JobErrorLimitName = "Amazon Redshift datashare assets per revision"
+	JobErrorLimitNameAssetsPerRevision                               JobErrorLimitName = "Assets per revision"
+	JobErrorLimitNameAssetSizeInGb                                   JobErrorLimitName = "Asset size in GB"
+	JobErrorLimitNameAmazonRedshiftDatashareAssetsPerRevision        JobErrorLimitName = "Amazon Redshift datashare assets per revision"
+	JobErrorLimitNameAwsLakeFormationDataPermissionAssetsPerRevision JobErrorLimitName = "AWS Lake Formation data permission assets per revision"
+	JobErrorLimitNameAmazonS3DataAccessAssetsPerRevision             JobErrorLimitName = "Amazon S3 data access assets per revision"
 )
 
 // Values returns all known values for JobErrorLimitName. Note that this can be
@@ -85,6 +108,8 @@ func (JobErrorLimitName) Values() []JobErrorLimitName {
 		"Assets per revision",
 		"Asset size in GB",
 		"Amazon Redshift datashare assets per revision",
+		"AWS Lake Formation data permission assets per revision",
+		"Amazon S3 data access assets per revision",
 	}
 }
 
@@ -108,32 +133,91 @@ func (JobErrorResourceTypes) Values() []JobErrorResourceTypes {
 	}
 }
 
+type LakeFormationDataPermissionType string
+
+// Enum values for LakeFormationDataPermissionType
+const (
+	LakeFormationDataPermissionTypeLFTagPolicy LakeFormationDataPermissionType = "LFTagPolicy"
+)
+
+// Values returns all known values for LakeFormationDataPermissionType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LakeFormationDataPermissionType) Values() []LakeFormationDataPermissionType {
+	return []LakeFormationDataPermissionType{
+		"LFTagPolicy",
+	}
+}
+
+type LFPermission string
+
+// Enum values for LFPermission
+const (
+	LFPermissionDescribe LFPermission = "DESCRIBE"
+	LFPermissionSelect   LFPermission = "SELECT"
+)
+
+// Values returns all known values for LFPermission. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (LFPermission) Values() []LFPermission {
+	return []LFPermission{
+		"DESCRIBE",
+		"SELECT",
+	}
+}
+
+type LFResourceType string
+
+// Enum values for LFResourceType
+const (
+	LFResourceTypeTable    LFResourceType = "TABLE"
+	LFResourceTypeDatabase LFResourceType = "DATABASE"
+)
+
+// Values returns all known values for LFResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LFResourceType) Values() []LFResourceType {
+	return []LFResourceType{
+		"TABLE",
+		"DATABASE",
+	}
+}
+
 type LimitName string
 
 // Enum values for LimitName
 const (
-	LimitNameProductsPerAccount                                                 LimitName = "Products per account"
-	LimitNameDataSetsPerAccount                                                 LimitName = "Data sets per account"
-	LimitNameDataSetsPerProduct                                                 LimitName = "Data sets per product"
-	LimitNameRevisionsPerDataSet                                                LimitName = "Revisions per data set"
-	LimitNameAssetsPerRevision                                                  LimitName = "Assets per revision"
-	LimitNameAssetsPerImportJobFromAmazonS3                                     LimitName = "Assets per import job from Amazon S3"
-	LimitNameAssetPerExportJobFromAmazonS3                                      LimitName = "Asset per export job from Amazon S3"
-	LimitNameAssetSizeInGb                                                      LimitName = "Asset size in GB"
-	LimitNameConcurrentInProgressJobsToExportAssetsToAmazonS3                   LimitName = "Concurrent in progress jobs to export assets to Amazon S3"
-	LimitNameConcurrentInProgressJobsToExportAssetsToASignedUrl                 LimitName = "Concurrent in progress jobs to export assets to a signed URL"
-	LimitNameConcurrentInProgressJobsToImportAssetsFromAmazonS3                 LimitName = "Concurrent in progress jobs to import assets from Amazon S3"
-	LimitNameConcurrentInProgressJobsToImportAssetsFromASignedUrl               LimitName = "Concurrent in progress jobs to import assets from a signed URL"
-	LimitNameConcurrentInProgressJobsToExportRevisionsToAmazonS3                LimitName = "Concurrent in progress jobs to export revisions to Amazon S3"
-	LimitNameEventActionsPerAccount                                             LimitName = "Event actions per account"
-	LimitNameAutoExportEventActionsPerDataSet                                   LimitName = "Auto export event actions per data set"
-	LimitNameAmazonRedshiftDatashareAssetsPerImportJobFromRedshift              LimitName = "Amazon Redshift datashare assets per import job from Redshift"
-	LimitNameConcurrentInProgressJobsToImportAssetsFromAmazonRedshiftDatashares LimitName = "Concurrent in progress jobs to import assets from Amazon Redshift datashares"
-	LimitNameRevisionsPerAmazonRedshiftDatashareDataSet                         LimitName = "Revisions per Amazon Redshift datashare data set"
-	LimitNameAmazonRedshiftDatashareAssetsPerRevision                           LimitName = "Amazon Redshift datashare assets per revision"
-	LimitNameConcurrentInProgressJobsToImportAssetsFromAnApiGatewayApi          LimitName = "Concurrent in progress jobs to import assets from an API Gateway API"
-	LimitNameAmazonApiGatewayApiAssetsPerRevision                               LimitName = "Amazon API Gateway API assets per revision"
-	LimitNameRevisionsPerAmazonApiGatewayApiDataSet                             LimitName = "Revisions per Amazon API Gateway API data set"
+	LimitNameProductsPerAccount                                                    LimitName = "Products per account"
+	LimitNameDataSetsPerAccount                                                    LimitName = "Data sets per account"
+	LimitNameDataSetsPerProduct                                                    LimitName = "Data sets per product"
+	LimitNameRevisionsPerDataSet                                                   LimitName = "Revisions per data set"
+	LimitNameAssetsPerRevision                                                     LimitName = "Assets per revision"
+	LimitNameAssetsPerImportJobFromAmazonS3                                        LimitName = "Assets per import job from Amazon S3"
+	LimitNameAssetPerExportJobFromAmazonS3                                         LimitName = "Asset per export job from Amazon S3"
+	LimitNameAssetSizeInGb                                                         LimitName = "Asset size in GB"
+	LimitNameConcurrentInProgressJobsToExportAssetsToAmazonS3                      LimitName = "Concurrent in progress jobs to export assets to Amazon S3"
+	LimitNameConcurrentInProgressJobsToExportAssetsToASignedUrl                    LimitName = "Concurrent in progress jobs to export assets to a signed URL"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromAmazonS3                    LimitName = "Concurrent in progress jobs to import assets from Amazon S3"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromASignedUrl                  LimitName = "Concurrent in progress jobs to import assets from a signed URL"
+	LimitNameConcurrentInProgressJobsToExportRevisionsToAmazonS3                   LimitName = "Concurrent in progress jobs to export revisions to Amazon S3"
+	LimitNameEventActionsPerAccount                                                LimitName = "Event actions per account"
+	LimitNameAutoExportEventActionsPerDataSet                                      LimitName = "Auto export event actions per data set"
+	LimitNameAmazonRedshiftDatashareAssetsPerImportJobFromRedshift                 LimitName = "Amazon Redshift datashare assets per import job from Redshift"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromAmazonRedshiftDatashares    LimitName = "Concurrent in progress jobs to import assets from Amazon Redshift datashares"
+	LimitNameRevisionsPerAmazonRedshiftDatashareDataSet                            LimitName = "Revisions per Amazon Redshift datashare data set"
+	LimitNameAmazonRedshiftDatashareAssetsPerRevision                              LimitName = "Amazon Redshift datashare assets per revision"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromAnApiGatewayApi             LimitName = "Concurrent in progress jobs to import assets from an API Gateway API"
+	LimitNameAmazonApiGatewayApiAssetsPerRevision                                  LimitName = "Amazon API Gateway API assets per revision"
+	LimitNameRevisionsPerAmazonApiGatewayApiDataSet                                LimitName = "Revisions per Amazon API Gateway API data set"
+	LimitNameConcurrentInProgressJobsToImportAssetsFromAnAwsLakeFormationTagPolicy LimitName = "Concurrent in progress jobs to import assets from an AWS Lake Formation tag policy"
+	LimitNameAwsLakeFormationDataPermissionAssetsPerRevision                       LimitName = "AWS Lake Formation data permission assets per revision"
+	LimitNameRevisionsPerAwsLakeFormationDataPermissionDataSet                     LimitName = "Revisions per AWS Lake Formation data permission data set"
+	LimitNameRevisionsPerAmazonS3DataAccessDataSet                                 LimitName = "Revisions per Amazon S3 data access data set"
+	LimitNameAmazonS3DataAccessAssetsPerRevision                                   LimitName = "Amazon S3 data access assets per revision"
+	LimitNameConcurrentInProgressJobsToCreateAmazonS3DataAccessAssetsFromS3Buckets LimitName = "Concurrent in progress jobs to create Amazon S3 data access assets from S3 buckets"
 )
 
 // Values returns all known values for LimitName. Note that this can be expanded in
@@ -163,6 +247,12 @@ func (LimitName) Values() []LimitName {
 		"Concurrent in progress jobs to import assets from an API Gateway API",
 		"Amazon API Gateway API assets per revision",
 		"Revisions per Amazon API Gateway API data set",
+		"Concurrent in progress jobs to import assets from an AWS Lake Formation tag policy",
+		"AWS Lake Formation data permission assets per revision",
+		"Revisions per AWS Lake Formation data permission data set",
+		"Revisions per Amazon S3 data access data set",
+		"Amazon S3 data access assets per revision",
+		"Concurrent in progress jobs to create Amazon S3 data access assets from S3 buckets",
 	}
 }
 
@@ -268,17 +358,37 @@ func (State) Values() []State {
 	}
 }
 
+type TableTagPolicyLFPermission string
+
+// Enum values for TableTagPolicyLFPermission
+const (
+	TableTagPolicyLFPermissionDescribe TableTagPolicyLFPermission = "DESCRIBE"
+	TableTagPolicyLFPermissionSelect   TableTagPolicyLFPermission = "SELECT"
+)
+
+// Values returns all known values for TableTagPolicyLFPermission. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TableTagPolicyLFPermission) Values() []TableTagPolicyLFPermission {
+	return []TableTagPolicyLFPermission{
+		"DESCRIBE",
+		"SELECT",
+	}
+}
+
 type Type string
 
 // Enum values for Type
 const (
-	TypeImportAssetsFromS3                 Type = "IMPORT_ASSETS_FROM_S3"
-	TypeImportAssetFromSignedUrl           Type = "IMPORT_ASSET_FROM_SIGNED_URL"
-	TypeExportAssetsToS3                   Type = "EXPORT_ASSETS_TO_S3"
-	TypeExportAssetToSignedUrl             Type = "EXPORT_ASSET_TO_SIGNED_URL"
-	TypeExportRevisionsToS3                Type = "EXPORT_REVISIONS_TO_S3"
-	TypeImportAssetsFromRedshiftDataShares Type = "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
-	TypeImportAssetFromApiGatewayApi       Type = "IMPORT_ASSET_FROM_API_GATEWAY_API"
+	TypeImportAssetsFromS3                     Type = "IMPORT_ASSETS_FROM_S3"
+	TypeImportAssetFromSignedUrl               Type = "IMPORT_ASSET_FROM_SIGNED_URL"
+	TypeExportAssetsToS3                       Type = "EXPORT_ASSETS_TO_S3"
+	TypeExportAssetToSignedUrl                 Type = "EXPORT_ASSET_TO_SIGNED_URL"
+	TypeExportRevisionsToS3                    Type = "EXPORT_REVISIONS_TO_S3"
+	TypeImportAssetsFromRedshiftDataShares     Type = "IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES"
+	TypeImportAssetFromApiGatewayApi           Type = "IMPORT_ASSET_FROM_API_GATEWAY_API"
+	TypeCreateS3DataAccessFromS3Bucket         Type = "CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET"
+	TypeImportAssetsFromLakeFormationTagPolicy Type = "IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY"
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
@@ -293,5 +403,7 @@ func (Type) Values() []Type {
 		"EXPORT_REVISIONS_TO_S3",
 		"IMPORT_ASSETS_FROM_REDSHIFT_DATA_SHARES",
 		"IMPORT_ASSET_FROM_API_GATEWAY_API",
+		"CREATE_S3_DATA_ACCESS_FROM_S3_BUCKET",
+		"IMPORT_ASSETS_FROM_LAKE_FORMATION_TAG_POLICY",
 	}
 }

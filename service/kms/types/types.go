@@ -34,82 +34,183 @@ type AliasListEntry struct {
 // Contains information about each custom key store in the custom key store list.
 type CustomKeyStoresListEntry struct {
 
-	// A unique identifier for the CloudHSM cluster that is associated with the custom
-	// key store.
+	// A unique identifier for the CloudHSM cluster that is associated with an CloudHSM
+	// key store. This field appears only when the CustomKeyStoreType is AWS_CLOUDHSM.
 	CloudHsmClusterId *string
 
 	// Describes the connection error. This field appears in the response only when the
-	// ConnectionState is FAILED. For help resolving these errors, see How to Fix a
-	// Connection Failure
+	// ConnectionState is FAILED. Many failures can be resolved by updating the
+	// properties of the custom key store. To update a custom key store, disconnect it
+	// (DisconnectCustomKeyStore), correct the errors (UpdateCustomKeyStore), and try
+	// to connect again (ConnectCustomKeyStore). For additional help resolving these
+	// errors, see How to Fix a Connection Failure
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed)
-	// in Key Management Service Developer Guide. Valid values are:
+	// in Key Management Service Developer Guide. All custom key stores:
 	//
 	// *
-	// CLUSTER_NOT_FOUND - KMS cannot find the CloudHSM cluster with the specified
-	// cluster ID.
+	// INTERNAL_ERROR — KMS could not complete the request due to an internal error.
+	// Retry the request. For ConnectCustomKeyStore requests, disconnect the custom key
+	// store before trying to connect again.
 	//
-	// * INSUFFICIENT_CLOUDHSM_HSMS - The associated CloudHSM cluster does
-	// not contain any active HSMs. To connect a custom key store to its CloudHSM
-	// cluster, the cluster must contain at least one active HSM.
+	// * NETWORK_ERRORS — Network errors are
+	// preventing KMS from connecting the custom key store to its backing key
+	// store.
 	//
-	// * INTERNAL_ERROR -
-	// KMS could not complete the request due to an internal error. Retry the request.
-	// For ConnectCustomKeyStore requests, disconnect the custom key store before
-	// trying to connect again.
+	// CloudHSM key stores:
 	//
-	// * INVALID_CREDENTIALS - KMS does not have the correct
-	// password for the kmsuser crypto user in the CloudHSM cluster. Before you can
-	// connect your custom key store to its CloudHSM cluster, you must change the
-	// kmsuser account password and update the key store password value for the custom
-	// key store.
+	// * CLUSTER_NOT_FOUND — KMS cannot find the CloudHSM
+	// cluster with the specified cluster ID.
 	//
-	// * NETWORK_ERRORS - Network errors are preventing KMS from connecting
-	// to the custom key store.
+	// * INSUFFICIENT_CLOUDHSM_HSMS — The
+	// associated CloudHSM cluster does not contain any active HSMs. To connect a
+	// custom key store to its CloudHSM cluster, the cluster must contain at least one
+	// active HSM.
 	//
-	// * SUBNET_NOT_FOUND - A subnet in the CloudHSM cluster
-	// configuration was deleted. If KMS cannot find all of the subnets in the cluster
-	// configuration, attempts to connect the custom key store to the CloudHSM cluster
-	// fail. To fix this error, create a cluster from a recent backup and associate it
-	// with your custom key store. (This process creates a new cluster configuration
-	// with a VPC and private subnets.) For details, see How to Fix a Connection
-	// Failure
+	// * INSUFFICIENT_FREE_ADDRESSES_IN_SUBNET — At least one private
+	// subnet associated with the CloudHSM cluster doesn't have any available IP
+	// addresses. A CloudHSM key store connection requires one free IP address in each
+	// of the associated private subnets, although two are preferable. For details, see
+	// How to Fix a Connection Failure
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed)
 	// in the Key Management Service Developer Guide.
 	//
-	// * USER_LOCKED_OUT - The kmsuser
+	// * INVALID_CREDENTIALS — The
+	// KeyStorePassword for the custom key store doesn't match the current password of
+	// the kmsuser crypto user in the CloudHSM cluster. Before you can connect your
+	// custom key store to its CloudHSM cluster, you must change the kmsuser account
+	// password and update the KeyStorePassword value for the custom key store.
+	//
+	// *
+	// SUBNET_NOT_FOUND — A subnet in the CloudHSM cluster configuration was deleted.
+	// If KMS cannot find all of the subnets in the cluster configuration, attempts to
+	// connect the custom key store to the CloudHSM cluster fail. To fix this error,
+	// create a cluster from a recent backup and associate it with your custom key
+	// store. (This process creates a new cluster configuration with a VPC and private
+	// subnets.) For details, see How to Fix a Connection Failure
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed)
+	// in the Key Management Service Developer Guide.
+	//
+	// * USER_LOCKED_OUT — The kmsuser
 	// CU account is locked out of the associated CloudHSM cluster due to too many
 	// failed password attempts. Before you can connect your custom key store to its
 	// CloudHSM cluster, you must change the kmsuser account password and update the
 	// key store password value for the custom key store.
 	//
-	// * USER_LOGGED_IN - The
-	// kmsuser CU account is logged into the the associated CloudHSM cluster. This
-	// prevents KMS from rotating the kmsuser account password and logging into the
-	// cluster. Before you can connect your custom key store to its CloudHSM cluster,
-	// you must log the kmsuser CU out of the cluster. If you changed the kmsuser
-	// password to log into the cluster, you must also and update the key store
-	// password value for the custom key store. For help, see How to Log Out and
-	// Reconnect
+	// * USER_LOGGED_IN — The
+	// kmsuser CU account is logged into the associated CloudHSM cluster. This prevents
+	// KMS from rotating the kmsuser account password and logging into the cluster.
+	// Before you can connect your custom key store to its CloudHSM cluster, you must
+	// log the kmsuser CU out of the cluster. If you changed the kmsuser password to
+	// log into the cluster, you must also and update the key store password value for
+	// the custom key store. For help, see How to Log Out and Reconnect
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#login-kmsuser-2)
 	// in the Key Management Service Developer Guide.
 	//
-	// * USER_NOT_FOUND - KMS cannot
+	// * USER_NOT_FOUND — KMS cannot
 	// find a kmsuser CU account in the associated CloudHSM cluster. Before you can
 	// connect your custom key store to its CloudHSM cluster, you must create a kmsuser
 	// CU account in the cluster, and then update the key store password value for the
 	// custom key store.
+	//
+	// External key stores:
+	//
+	// * INVALID_CREDENTIALS — One or both of
+	// the XksProxyAuthenticationCredential values is not valid on the specified
+	// external key store proxy.
+	//
+	// * XKS_PROXY_ACCESS_DENIED — KMS requests are denied
+	// access to the external key store proxy. If the external key store proxy has
+	// authorization rules, verify that they permit KMS to communicate with the proxy
+	// on your behalf.
+	//
+	// * XKS_PROXY_INVALID_CONFIGURATION — A configuration error is
+	// preventing the external key store from connecting to its proxy. Verify the value
+	// of the XksProxyUriPath.
+	//
+	// * XKS_PROXY_INVALID_RESPONSE — KMS cannot interpret the
+	// response from the external key store proxy. If you see this connection error
+	// code repeatedly, notify your external key store proxy vendor.
+	//
+	// *
+	// XKS_PROXY_INVALID_TLS_CONFIGURATION — KMS cannot connect to the external key
+	// store proxy because the TLS configuration is invalid. Verify that the XKS proxy
+	// supports TLS 1.2 or 1.3. Also, verify that the TLS certificate is not expired,
+	// and that it matches the hostname in the XksProxyUriEndpoint value, and that it
+	// is signed by a certificate authority included in the Trusted Certificate
+	// Authorities
+	// (https://github.com/aws/aws-kms-xksproxy-api-spec/blob/main/TrustedCertificateAuthorities)
+	// list.
+	//
+	// * XKS_PROXY_NOT_REACHABLE — KMS can't communicate with your external key
+	// store proxy. Verify that the XksProxyUriEndpoint and XksProxyUriPath are
+	// correct. Use the tools for your external key store proxy to verify that the
+	// proxy is active and available on its network. Also, verify that your external
+	// key manager instances are operating properly. Connection attempts fail with this
+	// connection error code if the proxy reports that all external key manager
+	// instances are unavailable.
+	//
+	// * XKS_PROXY_TIMED_OUT — KMS can connect to the
+	// external key store proxy, but the proxy does not respond to KMS in the time
+	// allotted. If you see this connection error code repeatedly, notify your external
+	// key store proxy vendor.
+	//
+	// * XKS_VPC_ENDPOINT_SERVICE_INVALID_CONFIGURATION — The
+	// Amazon VPC endpoint service configuration doesn't conform to the requirements
+	// for an KMS external key store.
+	//
+	// * The VPC endpoint service must be an endpoint
+	// service for interface endpoints in the caller's Amazon Web Services account.
+	//
+	// *
+	// It must have a network load balancer (NLB) connected to at least two subnets,
+	// each in a different Availability Zone.
+	//
+	// * The Allow principals list must include
+	// the KMS service principal for the Region, cks.kms..amazonaws.com,
+	//
+	// such as
+	// cks.kms.us-east-1.amazonaws.com.
+	//
+	// * It must not require acceptance
+	// (https://docs.aws.amazon.com/vpc/latest/privatelink/create-endpoint-service.html)
+	// of connection requests.
+	//
+	// * It must have a private DNS name. The private DNS name
+	// for an external key store with VPC_ENDPOINT_SERVICE connectivity must be unique
+	// in its Amazon Web Services Region.
+	//
+	// * The domain of the private DNS name must
+	// have a verification status
+	// (https://docs.aws.amazon.com/vpc/latest/privatelink/verify-domains.html) of
+	// verified.
+	//
+	// * The TLS certificate
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html)
+	// specifies the private DNS hostname at which the endpoint is reachable.
+	//
+	// *
+	// XKS_VPC_ENDPOINT_SERVICE_NOT_FOUND — KMS can't find the VPC endpoint service
+	// that it uses to communicate with the external key store proxy. Verify that the
+	// XksProxyVpcEndpointServiceName is correct and the KMS service principal has
+	// service consumer permissions on the Amazon VPC endpoint service.
 	ConnectionErrorCode ConnectionErrorCodeType
 
-	// Indicates whether the custom key store is connected to its CloudHSM cluster. You
-	// can create and use KMS keys in your custom key stores only when its connection
-	// state is CONNECTED. The value is DISCONNECTED if the key store has never been
+	// Indicates whether the custom key store is connected to its backing key store.
+	// For an CloudHSM key store, the ConnectionState indicates whether it is connected
+	// to its CloudHSM cluster. For an external key store, the ConnectionState
+	// indicates whether it is connected to the external key store proxy that
+	// communicates with your external key manager. You can create and use KMS keys in
+	// your custom key stores only when its ConnectionState is CONNECTED. The
+	// ConnectionState value is DISCONNECTED only if the key store has never been
 	// connected or you use the DisconnectCustomKeyStore operation to disconnect it. If
 	// the value is CONNECTED but you are having trouble using the custom key store,
-	// make sure that its associated CloudHSM cluster is active and contains at least
-	// one active HSM. A value of FAILED indicates that an attempt to connect was
-	// unsuccessful. The ConnectionErrorCode field in the response indicates the cause
-	// of the failure. For help resolving a connection failure, see Troubleshooting a
-	// Custom Key Store
+	// make sure that the backing key store is reachable and active. For an CloudHSM
+	// key store, verify that its associated CloudHSM cluster is active and contains at
+	// least one active HSM. For an external key store, verify that the external key
+	// store proxy and external key manager are connected and enabled. A value of
+	// FAILED indicates that an attempt to connect was unsuccessful. The
+	// ConnectionErrorCode field in the response indicates the cause of the failure.
+	// For help resolving a connection failure, see Troubleshooting a custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) in the
 	// Key Management Service Developer Guide.
 	ConnectionState ConnectionStateType
@@ -123,11 +224,25 @@ type CustomKeyStoresListEntry struct {
 	// The user-specified friendly name for the custom key store.
 	CustomKeyStoreName *string
 
-	// The trust anchor certificate of the associated CloudHSM cluster. When you
-	// initialize the cluster
+	// Indicates the type of the custom key store. AWS_CLOUDHSM indicates a custom key
+	// store backed by an CloudHSM cluster. EXTERNAL_KEY_STORE indicates a custom key
+	// store backed by an external key store proxy and external key manager outside of
+	// Amazon Web Services.
+	CustomKeyStoreType CustomKeyStoreType
+
+	// The trust anchor certificate of the CloudHSM cluster associated with an CloudHSM
+	// key store. When you initialize the cluster
 	// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr),
-	// you create this certificate and save it in the customerCA.crt file.
+	// you create this certificate and save it in the customerCA.crt file. This field
+	// appears only when the CustomKeyStoreType is AWS_CLOUDHSM.
 	TrustAnchorCertificate *string
+
+	// Configuration settings for the external key store proxy (XKS proxy). The
+	// external key store proxy translates KMS requests into a format that your
+	// external key manager can understand. The proxy configuration includes connection
+	// information that KMS requires. This field appears only when the
+	// CustomKeyStoreType is EXTERNAL_KEY_STORE.
+	XksProxyConfiguration *XksProxyConfigurationType
 
 	noSmithyDocumentSerde
 }
@@ -139,20 +254,20 @@ type CustomKeyStoresListEntry struct {
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context).
 // KMS applies the grant constraints only to cryptographic operations that support
 // an encryption context, that is, all cryptographic operations with a symmetric
-// encryption KMS key
+// KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#symmetric-cmks).
 // Grant constraints are not applied to operations that do not support an
-// encryption context, such as cryptographic operations with HMAC KMS keys or
-// asymmetric KMS keys, and management operations, such as DescribeKey or
-// RetireGrant. In a cryptographic operation, the encryption context in the
-// decryption operation must be an exact, case-sensitive match for the keys and
-// values in the encryption context of the encryption operation. Only the order of
-// the pairs can vary. However, in a grant constraint, the key in each key-value
-// pair is not case sensitive, but the value is case sensitive. To avoid confusion,
-// do not use multiple encryption context pairs that differ only by case. To
-// require a fully case-sensitive encryption context, use the
-// kms:EncryptionContext: and kms:EncryptionContextKeys conditions in an IAM or key
-// policy. For details, see kms:EncryptionContext:
+// encryption context, such as cryptographic operations with asymmetric KMS keys
+// and management operations, such as DescribeKey or RetireGrant. In a
+// cryptographic operation, the encryption context in the decryption operation must
+// be an exact, case-sensitive match for the keys and values in the encryption
+// context of the encryption operation. Only the order of the pairs can vary.
+// However, in a grant constraint, the key in each key-value pair is not case
+// sensitive, but the value is case sensitive. To avoid confusion, do not use
+// multiple encryption context pairs that differ only by case. To require a fully
+// case-sensitive encryption context, use the kms:EncryptionContext: and
+// kms:EncryptionContextKeys conditions in an IAM or key policy. For details, see
+// kms:EncryptionContext:
 // (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-context)
 // in the Key Management Service Developer Guide .
 type GrantConstraints struct {
@@ -229,7 +344,7 @@ type KeyListEntry struct {
 }
 
 // Contains metadata about a KMS key. This data type is used as a response element
-// for the CreateKey and DescribeKey operations.
+// for the CreateKey, DescribeKey, and ReplicateKey operations.
 type KeyMetadata struct {
 
 	// The globally unique identifier for the KMS key.
@@ -248,10 +363,10 @@ type KeyMetadata struct {
 	Arn *string
 
 	// The cluster ID of the CloudHSM cluster that contains the key material for the
-	// KMS key. When you create a KMS key in a custom key store
+	// KMS key. When you create a KMS key in an CloudHSM custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html),
 	// KMS creates the key material for the KMS key in the associated CloudHSM cluster.
-	// This value is present only when the KMS key is created in a custom key store.
+	// This field is present only when the KMS key is created in an CloudHSM key store.
 	CloudHsmClusterId *string
 
 	// The date and time when the KMS key was created.
@@ -259,13 +374,13 @@ type KeyMetadata struct {
 
 	// A unique identifier for the custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
-	// that contains the KMS key. This value is present only when the KMS key is
+	// that contains the KMS key. This field is present only when the KMS key is
 	// created in a custom key store.
 	CustomKeyStoreId *string
 
 	// Instead, use the KeySpec field. The KeySpec and CustomerMasterKeySpec fields
 	// have the same value. We recommend that you use the KeySpec field in your code.
-	// However, to avoid breaking changes, KMS will support both fields.
+	// However, to avoid breaking changes, KMS supports both fields.
 	//
 	// Deprecated: This field has been deprecated. Instead, use the KeySpec field.
 	CustomerMasterKeySpec CustomerMasterKeySpec
@@ -377,6 +492,12 @@ type KeyMetadata struct {
 	// ExpirationModel is KEY_MATERIAL_EXPIRES, otherwise this value is omitted.
 	ValidTo *time.Time
 
+	// Information about the external key that is associated with a KMS key in an
+	// external key store. For more information, see External key
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key)
+	// in the Key Management Service Developer Guide.
+	XksKeyConfiguration *XksKeyConfigurationType
+
 	noSmithyDocumentSerde
 }
 
@@ -429,6 +550,79 @@ type Tag struct {
 	//
 	// This member is required.
 	TagValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the external key
+// (https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key)that
+// is associated with a KMS key in an external key store. This element appears in a
+// CreateKey or DescribeKey response only for a KMS key in an external key store.
+// The external key is a symmetric encryption key that is hosted by an external key
+// manager outside of Amazon Web Services. When you use the KMS key in an external
+// key store in a cryptographic operation, the cryptographic operation is performed
+// in the external key manager using the specified external key. For more
+// information, see External key
+// (https://docs.aws.amazon.com/kms/latest/developerguide/keystore-external.html#concept-external-key)
+// in the Key Management Service Developer Guide.
+type XksKeyConfigurationType struct {
+
+	// The ID of the external key in its external key manager. This is the ID that the
+	// external key store proxy uses to identify the external key.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// KMS uses the authentication credential to sign requests that it sends to the
+// external key store proxy (XKS proxy) on your behalf. You establish these
+// credentials on your external key store proxy and report them to KMS. The
+// XksProxyAuthenticationCredential includes two required elements.
+type XksProxyAuthenticationCredentialType struct {
+
+	// A unique identifier for the raw secret access key.
+	//
+	// This member is required.
+	AccessKeyId *string
+
+	// A secret string of 43-64 characters. Valid characters are a-z, A-Z, 0-9, /, +,
+	// and =.
+	//
+	// This member is required.
+	RawSecretAccessKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about the external key store proxy (XKS proxy). Your
+// external key store proxy translates KMS requests into a format that your
+// external key manager can understand. These fields appear in a
+// DescribeCustomKeyStores response only when the CustomKeyStoreType is
+// EXTERNAL_KEY_STORE.
+type XksProxyConfigurationType struct {
+
+	// The part of the external key store proxy authentication credential
+	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateCustomKeyStore.html#KMS-CreateCustomKeyStore-request-XksProxyAuthenticationCredential)
+	// that uniquely identifies the secret access key.
+	AccessKeyId *string
+
+	// Indicates whether the external key store proxy uses a public endpoint or an
+	// Amazon VPC endpoint service to communicate with KMS.
+	Connectivity XksProxyConnectivityType
+
+	// The URI endpoint for the external key store proxy. If the external key store
+	// proxy has a public endpoint, it is displayed here. If the external key store
+	// proxy uses an Amazon VPC endpoint service name, this field displays the private
+	// DNS name associated with the VPC endpoint service.
+	UriEndpoint *string
+
+	// The path to the external key store proxy APIs.
+	UriPath *string
+
+	// The Amazon VPC endpoint service used to communicate with the external key store
+	// proxy. This field appears only when the external key store proxy uses an Amazon
+	// VPC endpoint service to communicate with KMS.
+	VpcEndpointServiceName *string
 
 	noSmithyDocumentSerde
 }

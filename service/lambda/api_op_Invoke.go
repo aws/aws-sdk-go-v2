@@ -23,8 +23,9 @@ import (
 // error occurs, your function may be invoked multiple times. Retry behavior varies
 // by error type, client, event source, and invocation type. For example, if you
 // invoke a function asynchronously and it returns an error, Lambda executes the
-// function up to two more times. For more information, see Retry Behavior
-// (https://docs.aws.amazon.com/lambda/latest/dg/retries-on-errors.html). For
+// function up to two more times. For more information, see Error handling and
+// automatic retries in Lambda
+// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-retries.html). For
 // asynchronous invocation
 // (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html), Lambda
 // adds events to a queue before sending them to your function. If your function
@@ -32,18 +33,18 @@ import (
 // Occasionally, your function may receive the same event multiple times, even if
 // no error occurs. To retain events that were not processed, configure your
 // function with a dead-letter queue
-// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#dlq). The
-// status code in the API response doesn't reflect function errors. Error codes are
-// reserved for errors that prevent your function from executing, such as
-// permissions errors, limit errors
-// (https://docs.aws.amazon.com/lambda/latest/dg/limits.html), or issues with your
-// function's code and configuration. For example, Lambda returns
-// TooManyRequestsException if executing the function would cause you to exceed a
-// concurrency limit at either the account level
+// (https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html#invocation-dlq).
+// The status code in the API response doesn't reflect function errors. Error codes
+// are reserved for errors that prevent your function from executing, such as
+// permissions errors, quota
+// (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
+// errors, or issues with your function's code and configuration. For example,
+// Lambda returns TooManyRequestsException if running the function would cause you
+// to exceed a concurrency limit at either the account level
 // (ConcurrentInvocationLimitExceeded) or function level
 // (ReservedFunctionConcurrentInvocationLimitExceeded). For functions with a long
-// timeout, your client might be disconnected during synchronous invocation while
-// it waits for a response. Configure your HTTP client, SDK, firewall, proxy, or
+// timeout, your client might disconnect during synchronous invocation while it
+// waits for a response. Configure your HTTP client, SDK, firewall, proxy, or
 // operating system to allow for long connections with timeout or keep-alive
 // settings. This operation requires permission for the lambda:InvokeFunction
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html) action.
@@ -70,12 +71,12 @@ type InvokeInput struct {
 	// The name of the Lambda function, version, or alias. Name formats
 	//
 	// * Function
-	// name - my-function (name-only), my-function:v1 (with alias).
+	// name – my-function (name-only), my-function:v1 (with alias).
 	//
-	// * Function ARN -
+	// * Function ARN –
 	// arn:aws:lambda:us-west-2:123456789012:function:my-function.
 	//
-	// * Partial ARN -
+	// * Partial ARN –
 	// 123456789012:function:my-function.
 	//
 	// You can append a version number or alias to
@@ -85,22 +86,22 @@ type InvokeInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// Up to 3583 bytes of base64-encoded data about the invoking client to pass to the
-	// function in the context object.
+	// Up to 3,583 bytes of base64-encoded data about the invoking client to pass to
+	// the function in the context object.
 	ClientContext *string
 
 	// Choose from the following options.
 	//
-	// * RequestResponse (default) - Invoke the
+	// * RequestResponse (default) – Invoke the
 	// function synchronously. Keep the connection open until the function returns a
 	// response or times out. The API response includes the function response and
 	// additional data.
 	//
-	// * Event - Invoke the function asynchronously. Send events that
-	// fail multiple times to the function's dead-letter queue (if it's configured).
+	// * Event – Invoke the function asynchronously. Send events that
+	// fail multiple times to the function's dead-letter queue (if one is configured).
 	// The API response only includes a status code.
 	//
-	// * DryRun - Validate parameter
+	// * DryRun – Validate parameter
 	// values and verify that the user or role has permission to invoke the function.
 	InvocationType types.InvocationType
 
@@ -129,7 +130,7 @@ type InvokeOutput struct {
 	// about the error are included in the response payload.
 	FunctionError *string
 
-	// The last 4 KB of the execution log, which is base64 encoded.
+	// The last 4 KB of the execution log, which is base64-encoded.
 	LogResult *string
 
 	// The response from the function, or an error object.

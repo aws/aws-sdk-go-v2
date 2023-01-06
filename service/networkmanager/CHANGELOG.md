@@ -1,3 +1,19 @@
+# v1.17.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.16.1 (2022-12-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.0 (2022-12-14)
+
+* **Feature**: Appliance Mode support for AWS Cloud WAN.
+
+# v1.15.8 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.7 (2022-10-24)
 
 * **Dependency Update**: Updated to the latest SDK module versions

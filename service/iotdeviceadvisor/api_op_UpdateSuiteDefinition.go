@@ -33,13 +33,15 @@ func (c *Client) UpdateSuiteDefinition(ctx context.Context, params *UpdateSuiteD
 
 type UpdateSuiteDefinitionInput struct {
 
+	// Updates a Device Advisor test suite with suite definition configuration.
+	//
+	// This member is required.
+	SuiteDefinitionConfiguration *types.SuiteDefinitionConfiguration
+
 	// Suite definition ID of the test suite to be updated.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
-
-	// Updates a Device Advisor test suite with suite definition configuration.
-	SuiteDefinitionConfiguration *types.SuiteDefinitionConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -58,7 +60,7 @@ type UpdateSuiteDefinitionOutput struct {
 	// Suite definition ID of the updated test suite.
 	SuiteDefinitionId *string
 
-	// Suite definition name of the updated test suite.
+	// Updates the suite definition name. This is a required parameter.
 	SuiteDefinitionName *string
 
 	// Suite definition version of the updated test suite.

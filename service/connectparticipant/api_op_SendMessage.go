@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a message. Note that ConnectionToken is used for invoking this API instead
-// of ParticipantToken. The Amazon Connect Participant Service APIs do not use
+// Sends a message. ConnectionToken is used for invoking this API instead of
+// ParticipantToken. The Amazon Connect Participant Service APIs do not use
 // Signature Version 4 authentication
 // (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optFns ...func(*Options)) (*SendMessageOutput, error) {
@@ -39,16 +39,26 @@ type SendMessageInput struct {
 
 	// The content of the message.
 	//
+	// * For text/plain and text/markdown, the Length
+	// Constraints are Minimum of 1, Maximum of 1024.
+	//
+	// * For application/json, the
+	// Length Constraints are Minimum of 1, Maximum of 12000.
+	//
 	// This member is required.
 	Content *string
 
-	// The type of the content. Supported types are text/plain.
+	// The type of the content. Supported types are text/plain, text/markdown, and
+	// application/json.
 	//
 	// This member is required.
 	ContentType *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
-	// of the request.
+	// of the request. If not provided, the Amazon Web Services SDK populates this
+	// field. For more information about idempotency, see Making retries safe with
+	// idempotent APIs
+	// (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/).
 	ClientToken *string
 
 	noSmithyDocumentSerde

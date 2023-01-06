@@ -35,7 +35,7 @@ type UpdateFindingsFilterInput struct {
 	// This member is required.
 	Id *string
 
-	// The action to perform on findings that meet the filter criteria
+	// The action to perform on findings that match the filter criteria
 	// (findingCriteria). Valid values are: ARCHIVE, suppress (automatically archive)
 	// the findings; and, NOOP, don't perform any action on the findings.
 	Action types.FindingsFilterAction

@@ -1,3 +1,28 @@
+# v1.39.0 (2023-01-05)
+
+* **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).
+
+# v1.38.1 (2022-12-19)
+
+* No change notes available for this release.
+
+# v1.38.0 (2022-12-15)
+
+* **Feature**: This release adds support for AWS Glue Crawler with native DeltaLake tables, allowing Crawlers to classify Delta Lake format tables and catalog them for query engines to query against.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.1 (2022-12-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.0 (2022-11-30)
+
+* **Feature**: This release adds support for AWS Glue Data Quality, which helps you evaluate and monitor the quality of your data and includes the API for creating, deleting, or updating data quality rulesets, runs and evaluations.
+
+# v1.36.0 (2022-11-29)
+
+* **Feature**: This release allows the creation of Custom Visual Transforms (Dynamic Transforms) to be created via AWS Glue CLI/SDK.
+
 # v1.35.0 (2022-11-18)
 
 * **Feature**: AWSGlue Crawler - Adding support for Table and Column level Comments with database level datatypes for JDBC based crawler.

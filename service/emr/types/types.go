@@ -577,6 +577,25 @@ type Configuration struct {
 	noSmithyDocumentSerde
 }
 
+// The credentials that you can use to connect to cluster endpoints. Credentials
+// consist of a username and a password.
+//
+// The following types satisfy this interface:
+//
+//	CredentialsMemberUsernamePassword
+type Credentials interface {
+	isCredentials()
+}
+
+// The username and password that you use to connect to cluster endpoints.
+type CredentialsMemberUsernamePassword struct {
+	Value UsernamePassword
+
+	noSmithyDocumentSerde
+}
+
+func (*CredentialsMemberUsernamePassword) isCredentials() {}
+
 // Configuration of requested EBS block device associated with the instance group.
 type EbsBlockDevice struct {
 
@@ -2229,7 +2248,7 @@ type SessionMappingDetail struct {
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
-	// in the Amazon Web Services SSO Identity Store API Reference.
+	// in the IAM Identity Center Identity Store API Reference.
 	IdentityName *string
 
 	// Specifies whether the identity mapped to the Amazon EMR Studio is a user or a
@@ -2256,15 +2275,15 @@ type SessionMappingSummary struct {
 	// The time the session mapping was created.
 	CreationTime *time.Time
 
-	// The globally unique identifier (GUID) of the user or group from the Amazon Web
-	// Services SSO Identity Store.
+	// The globally unique identifier (GUID) of the user or group from the IAM Identity
+	// Center Identity Store.
 	IdentityId *string
 
 	// The name of the user or group. For more information, see UserName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
-	// in the Amazon Web Services SSO Identity Store API Reference.
+	// in the IAM Identity Center Identity Store API Reference.
 	IdentityName *string
 
 	// Specifies whether the identity mapped to the Amazon EMR Studio is a user or a
@@ -2590,8 +2609,8 @@ type StepTimeline struct {
 // Details for an Amazon EMR Studio including ID, creation time, name, and so on.
 type Studio struct {
 
-	// Specifies whether the Amazon EMR Studio authenticates users using IAM or Amazon
-	// Web Services SSO.
+	// Specifies whether the Amazon EMR Studio authenticates users using IAM or IAM
+	// Identity Center.
 	AuthMode AuthMode
 
 	// The time the Amazon EMR Studio was created.
@@ -2658,8 +2677,8 @@ type Studio struct {
 // with the Studio.
 type StudioSummary struct {
 
-	// Specifies whether the Studio authenticates users using IAM or Amazon Web
-	// Services SSO.
+	// Specifies whether the Studio authenticates users using IAM or IAM Identity
+	// Center.
 	AuthMode AuthMode
 
 	// The time when the Amazon EMR Studio was created.
@@ -2718,6 +2737,20 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// The username and password that you use to connect to cluster endpoints.
+type UsernamePassword struct {
+
+	// The password associated with the temporary credentials that you use to connect
+	// to cluster endpoints.
+	Password *string
+
+	// The username associated with the temporary credentials that you use to connect
+	// to cluster endpoints.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
 // EBS volume specifications such as volume type, IOPS, size (GiB) and throughput
 // (MiB/s) that are requested for the EBS volume attached to an EC2 instance in the
 // cluster.
@@ -2729,7 +2762,8 @@ type VolumeSpecification struct {
 	// This member is required.
 	SizeInGB *int32
 
-	// The volume type. Volume types supported are gp2, io1, and standard.
+	// The volume type. Volume types supported are gp3, gp2, io1, st1, sc1, and
+	// standard.
 	//
 	// This member is required.
 	VolumeType *string
@@ -2745,3 +2779,14 @@ type VolumeSpecification struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isCredentials() {}

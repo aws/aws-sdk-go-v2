@@ -17,6 +17,8 @@ import (
 type DefaultUndefinedFault struct {
 	Message *string
 
+	ErrorCodeOverride *string
+
 	noSmithyDocumentSerde
 }
 
@@ -29,7 +31,12 @@ func (e *DefaultUndefinedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DefaultUndefinedFault) ErrorCode() string             { return "DefaultUndefinedFault" }
+func (e *DefaultUndefinedFault) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DefaultUndefinedFault"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DefaultUndefinedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the domain already exists. You may get this fault if you are
@@ -37,6 +44,8 @@ func (e *DefaultUndefinedFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // undeprecate a domain that is currently registered.
 type DomainAlreadyExistsFault struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -50,12 +59,19 @@ func (e *DomainAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DomainAlreadyExistsFault) ErrorCode() string             { return "DomainAlreadyExistsFault" }
+func (e *DomainAlreadyExistsFault) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DomainAlreadyExistsFault"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DomainAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned when the specified domain has been deprecated.
 type DomainDeprecatedFault struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -69,7 +85,12 @@ func (e *DomainDeprecatedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *DomainDeprecatedFault) ErrorCode() string             { return "DomainDeprecatedFault" }
+func (e *DomainDeprecatedFault) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "DomainDeprecatedFault"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *DomainDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned by any operation if a system imposed limitation has been reached. To
@@ -77,6 +98,8 @@ func (e *DomainDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // limit by contacting AWS.
 type LimitExceededFault struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -90,13 +113,20 @@ func (e *LimitExceededFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *LimitExceededFault) ErrorCode() string             { return "LimitExceededFault" }
+func (e *LimitExceededFault) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "LimitExceededFault"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned when the caller doesn't have sufficient permissions to invoke the
 // action.
 type OperationNotPermittedFault struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -110,12 +140,19 @@ func (e *OperationNotPermittedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *OperationNotPermittedFault) ErrorCode() string             { return "OperationNotPermittedFault" }
+func (e *OperationNotPermittedFault) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "OperationNotPermittedFault"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *OperationNotPermittedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You've exceeded the number of tags allowed for a domain.
 type TooManyTagsFault struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -129,7 +166,12 @@ func (e *TooManyTagsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TooManyTagsFault) ErrorCode() string             { return "TooManyTagsFault" }
+func (e *TooManyTagsFault) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TooManyTagsFault"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TooManyTagsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the type already exists in the specified domain. You may get this
@@ -137,6 +179,8 @@ func (e *TooManyTagsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // deprecated, or if you undeprecate a type that is currently registered.
 type TypeAlreadyExistsFault struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -150,12 +194,19 @@ func (e *TypeAlreadyExistsFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TypeAlreadyExistsFault) ErrorCode() string             { return "TypeAlreadyExistsFault" }
+func (e *TypeAlreadyExistsFault) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TypeAlreadyExistsFault"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TypeAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned when the specified activity or workflow type was already deprecated.
 type TypeDeprecatedFault struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -169,7 +220,12 @@ func (e *TypeDeprecatedFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *TypeDeprecatedFault) ErrorCode() string             { return "TypeDeprecatedFault" }
+func (e *TypeDeprecatedFault) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "TypeDeprecatedFault"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *TypeDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned when the named resource cannot be found with in the scope of this
@@ -177,6 +233,8 @@ func (e *TypeDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // created or is no longer available for this operation.
 type UnknownResourceFault struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -190,13 +248,20 @@ func (e *UnknownResourceFault) ErrorMessage() string {
 	}
 	return *e.Message
 }
-func (e *UnknownResourceFault) ErrorCode() string             { return "UnknownResourceFault" }
+func (e *UnknownResourceFault) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "UnknownResourceFault"
+	}
+	return *e.ErrorCodeOverride
+}
 func (e *UnknownResourceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned by StartWorkflowExecution when an open execution with the same
 // workflowId is already running in the specified domain.
 type WorkflowExecutionAlreadyStartedFault struct {
 	Message *string
+
+	ErrorCodeOverride *string
 
 	noSmithyDocumentSerde
 }
@@ -211,7 +276,10 @@ func (e *WorkflowExecutionAlreadyStartedFault) ErrorMessage() string {
 	return *e.Message
 }
 func (e *WorkflowExecutionAlreadyStartedFault) ErrorCode() string {
-	return "WorkflowExecutionAlreadyStartedFault"
+	if e.ErrorCodeOverride == nil {
+		return "WorkflowExecutionAlreadyStartedFault"
+	}
+	return *e.ErrorCodeOverride
 }
 func (e *WorkflowExecutionAlreadyStartedFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient

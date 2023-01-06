@@ -165,8 +165,8 @@ type CreateServiceInput struct {
 	// started. This is only used when your service is configured to use a load
 	// balancer. If your service has a load balancer defined and you don't specify a
 	// health check grace period value, the default value of 0 is used. If you do not
-	// use an Elastic Load Balancing, we recomend that you use the startPeriod in the
-	// task definition healtch check parameters. For more information, see Health check
+	// use an Elastic Load Balancing, we recommend that you use the startPeriod in the
+	// task definition health check parameters. For more information, see Health check
 	// (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_HealthCheck.html).
 	// If your service's tasks take a while to start and respond to Elastic Load
 	// Balancing health checks, you can specify a health check grace period of up to
@@ -309,6 +309,17 @@ type CreateServiceInput struct {
 	// using the Fargate launch type or the CODE_DEPLOY or EXTERNAL deployment
 	// controller types don't support the DAEMON scheduling strategy.
 	SchedulingStrategy types.SchedulingStrategy
+
+	// The configuration for this service to discover and connect to services, and be
+	// discovered by, and connected from, other services within a namespace. Tasks that
+	// run in a namespace can use short names to connect to services in the namespace.
+	// Tasks can connect to services across all of the clusters in the namespace. Tasks
+	// connect through a managed proxy container that collects logs and metrics for
+	// increased visibility. Only the tasks that Amazon ECS services create are
+	// supported with Service Connect. For more information, see Service Connect
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
+	// in the Amazon Elastic Container Service Developer Guide.
+	ServiceConnectConfiguration *types.ServiceConnectConfiguration
 
 	// The details of the service discovery registry to associate with this service.
 	// For more information, see Service discovery

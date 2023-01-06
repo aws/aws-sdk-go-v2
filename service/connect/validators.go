@@ -410,6 +410,26 @@ func (m *validateOpCreateRoutingProfile) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRule struct {
+}
+
+func (*validateOpCreateRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateSecurityProfile struct {
 }
 
@@ -665,6 +685,26 @@ func (m *validateOpDeleteQuickConnect) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteQuickConnectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRule struct {
+}
+
+func (*validateOpDeleteRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1045,6 +1085,26 @@ func (m *validateOpDescribeRoutingProfile) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeRoutingProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRule struct {
+}
+
+func (*validateOpDescribeRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1910,6 +1970,26 @@ func (m *validateOpListRoutingProfiles) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRules struct {
+}
+
+func (*validateOpListRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListSecurityKeys struct {
 }
 
@@ -2750,6 +2830,26 @@ func (m *validateOpUpdateInstanceStorageConfig) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateParticipantRoleConfig struct {
+}
+
+func (*validateOpUpdateParticipantRoleConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateParticipantRoleConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateParticipantRoleConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateParticipantRoleConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePhoneNumber struct {
 }
 
@@ -2985,6 +3085,26 @@ func (m *validateOpUpdateRoutingProfileQueues) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateRoutingProfileQueuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateRule struct {
+}
+
+func (*validateOpUpdateRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3270,6 +3390,10 @@ func addOpCreateRoutingProfileValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCreateRoutingProfile{}, middleware.After)
 }
 
+func addOpCreateRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRule{}, middleware.After)
+}
+
 func addOpCreateSecurityProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSecurityProfile{}, middleware.After)
 }
@@ -3320,6 +3444,10 @@ func addOpDeleteIntegrationAssociationValidationMiddleware(stack *middleware.Sta
 
 func addOpDeleteQuickConnectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteQuickConnect{}, middleware.After)
+}
+
+func addOpDeleteRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRule{}, middleware.After)
 }
 
 func addOpDeleteSecurityProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -3396,6 +3524,10 @@ func addOpDescribeQuickConnectValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDescribeRoutingProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRoutingProfile{}, middleware.After)
+}
+
+func addOpDescribeRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRule{}, middleware.After)
 }
 
 func addOpDescribeSecurityProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -3570,6 +3702,10 @@ func addOpListRoutingProfilesValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListRoutingProfiles{}, middleware.After)
 }
 
+func addOpListRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRules{}, middleware.After)
+}
+
 func addOpListSecurityKeysValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListSecurityKeys{}, middleware.After)
 }
@@ -3738,6 +3874,10 @@ func addOpUpdateInstanceStorageConfigValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpUpdateInstanceStorageConfig{}, middleware.After)
 }
 
+func addOpUpdateParticipantRoleConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateParticipantRoleConfig{}, middleware.After)
+}
+
 func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePhoneNumber{}, middleware.After)
 }
@@ -3784,6 +3924,10 @@ func addOpUpdateRoutingProfileNameValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRoutingProfileQueues{}, middleware.After)
+}
+
+func addOpUpdateRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRule{}, middleware.After)
 }
 
 func addOpUpdateSecurityProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -3836,6 +3980,25 @@ func validateChatMessage(v *types.ChatMessage) error {
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChatParticipantRoleConfig(v *types.ChatParticipantRoleConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ChatParticipantRoleConfig"}
+	if v.ParticipantTimerConfigList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantTimerConfigList"))
+	} else if v.ParticipantTimerConfigList != nil {
+		if err := validateParticipantTimerConfigList(v.ParticipantTimerConfigList); err != nil {
+			invalidParams.AddNested("ParticipantTimerConfigList", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3919,6 +4082,21 @@ func validateEncryptionConfig(v *types.EncryptionConfig) error {
 	}
 	if v.KeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEventBridgeActionDefinition(v *types.EventBridgeActionDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EventBridgeActionDefinition"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4177,6 +4355,44 @@ func validateParticipantDetails(v *types.ParticipantDetails) error {
 	}
 }
 
+func validateParticipantTimerConfigList(v []types.ParticipantTimerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParticipantTimerConfigList"}
+	for i := range v {
+		if err := validateParticipantTimerConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParticipantTimerConfiguration(v *types.ParticipantTimerConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParticipantTimerConfiguration"}
+	if len(v.ParticipantRole) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ParticipantRole"))
+	}
+	if len(v.TimerType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TimerType"))
+	}
+	if v.TimerValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimerValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePhoneNumberQuickConnectConfig(v *types.PhoneNumberQuickConnectConfig) error {
 	if v == nil {
 		return nil
@@ -4335,6 +4551,68 @@ func validateRoutingProfileQueueReferenceList(v []types.RoutingProfileQueueRefer
 	}
 }
 
+func validateRuleAction(v *types.RuleAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleAction"}
+	if len(v.ActionType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionType"))
+	}
+	if v.TaskAction != nil {
+		if err := validateTaskActionDefinition(v.TaskAction); err != nil {
+			invalidParams.AddNested("TaskAction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EventBridgeAction != nil {
+		if err := validateEventBridgeActionDefinition(v.EventBridgeAction); err != nil {
+			invalidParams.AddNested("EventBridgeAction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SendNotificationAction != nil {
+		if err := validateSendNotificationActionDefinition(v.SendNotificationAction); err != nil {
+			invalidParams.AddNested("SendNotificationAction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleActions(v []types.RuleAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleActions"}
+	for i := range v {
+		if err := validateRuleAction(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleTriggerEventSource(v *types.RuleTriggerEventSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleTriggerEventSource"}
+	if len(v.EventSourceName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EventSourceName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3Config(v *types.S3Config) error {
 	if v == nil {
 		return nil
@@ -4349,6 +4627,53 @@ func validateS3Config(v *types.S3Config) error {
 	if v.EncryptionConfig != nil {
 		if err := validateEncryptionConfig(v.EncryptionConfig); err != nil {
 			invalidParams.AddNested("EncryptionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSendNotificationActionDefinition(v *types.SendNotificationActionDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendNotificationActionDefinition"}
+	if len(v.DeliveryMethod) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeliveryMethod"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if len(v.ContentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if v.Recipient == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Recipient"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTaskActionDefinition(v *types.TaskActionDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TaskActionDefinition"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ContactFlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if v.References != nil {
+		if err := validateContactReferences(v.References); err != nil {
+			invalidParams.AddNested("References", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4401,6 +4726,25 @@ func validateTelephonyConfig(v *types.TelephonyConfig) error {
 		if err := validateDistributionList(v.Distributions); err != nil {
 			invalidParams.AddNested("Distributions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateParticipantRoleConfigChannelInfo(v types.UpdateParticipantRoleConfigChannelInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateParticipantRoleConfigChannelInfo"}
+	switch uv := v.(type) {
+	case *types.UpdateParticipantRoleConfigChannelInfoMemberChat:
+		if err := validateChatParticipantRoleConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[Chat]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4875,6 +5219,44 @@ func validateOpCreateRoutingProfileInput(v *CreateRoutingProfileInput) error {
 	}
 }
 
+func validateOpCreateRuleInput(v *CreateRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRuleInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TriggerEventSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TriggerEventSource"))
+	} else if v.TriggerEventSource != nil {
+		if err := validateRuleTriggerEventSource(v.TriggerEventSource); err != nil {
+			invalidParams.AddNested("TriggerEventSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Function == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Function"))
+	}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	} else if v.Actions != nil {
+		if err := validateRuleActions(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.PublishStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PublishStatus"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateSecurityProfileInput(v *CreateSecurityProfileInput) error {
 	if v == nil {
 		return nil
@@ -5127,6 +5509,24 @@ func validateOpDeleteQuickConnectInput(v *DeleteQuickConnectInput) error {
 	}
 	if v.QuickConnectId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRuleInput(v *DeleteRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRuleInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5466,6 +5866,24 @@ func validateOpDescribeRoutingProfileInput(v *DescribeRoutingProfileInput) error
 	}
 	if v.RoutingProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoutingProfileId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRuleInput(v *DescribeRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRuleInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6212,6 +6630,21 @@ func validateOpListRoutingProfilesInput(v *ListRoutingProfilesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRoutingProfilesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRulesInput(v *ListRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRulesInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
@@ -7043,6 +7476,31 @@ func validateOpUpdateInstanceStorageConfigInput(v *UpdateInstanceStorageConfigIn
 	}
 }
 
+func validateOpUpdateParticipantRoleConfigInput(v *UpdateParticipantRoleConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateParticipantRoleConfigInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.ChannelConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelConfiguration"))
+	} else if v.ChannelConfiguration != nil {
+		if err := validateUpdateParticipantRoleConfigChannelInfo(v.ChannelConfiguration); err != nil {
+			invalidParams.AddNested("ChannelConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdatePhoneNumberInput(v *UpdatePhoneNumberInput) error {
 	if v == nil {
 		return nil
@@ -7284,6 +7742,40 @@ func validateOpUpdateRoutingProfileQueuesInput(v *UpdateRoutingProfileQueuesInpu
 		if err := validateRoutingProfileQueueConfigList(v.QueueConfigs); err != nil {
 			invalidParams.AddNested("QueueConfigs", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRuleInput(v *UpdateRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRuleInput"}
+	if v.RuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleId"))
+	}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Function == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Function"))
+	}
+	if v.Actions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Actions"))
+	} else if v.Actions != nil {
+		if err := validateRuleActions(v.Actions); err != nil {
+			invalidParams.AddNested("Actions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.PublishStatus) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PublishStatus"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

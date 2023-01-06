@@ -7,19 +7,37 @@ import (
 	"time"
 )
 
-type AmazonopensearchserviceBufferingHints struct {
+// Describes the buffering to perform before delivering data to the Serverless
+// offering for Amazon OpenSearch Service destination.
+type AmazonOpenSearchServerlessBufferingHints struct {
+
+	// Buffer incoming data for the specified period of time, in seconds, before
+	// delivering it to the destination. The default value is 300 (5 minutes).
 	IntervalInSeconds *int32
 
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the
+	// destination. The default value is 5. We recommend setting this parameter to a
+	// value greater than the amount of data you typically ingest into the delivery
+	// stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the
+	// value should be 10 MB or higher.
 	SizeInMBs *int32
 
 	noSmithyDocumentSerde
 }
 
-type AmazonopensearchserviceDestinationConfiguration struct {
+// Describes the configuration of a destination in the Serverless offering for
+// Amazon OpenSearch Service.
+type AmazonOpenSearchServerlessDestinationConfiguration struct {
 
+	// The Serverless offering for Amazon OpenSearch Service index name.
+	//
 	// This member is required.
 	IndexName *string
 
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
+	// Firehose for calling the Serverless offering for Amazon OpenSearch Service
+	// Configuration API and for indexing documents.
+	//
 	// This member is required.
 	RoleARN *string
 
@@ -28,24 +46,207 @@ type AmazonopensearchserviceDestinationConfiguration struct {
 	// This member is required.
 	S3Configuration *S3DestinationConfiguration
 
+	// The buffering options. If no value is specified, the default values for
+	// AmazonopensearchserviceBufferingHints are used.
+	BufferingHints *AmazonOpenSearchServerlessBufferingHints
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The endpoint to use when communicating with the collection in the Serverless
+	// offering for Amazon OpenSearch Service.
+	CollectionEndpoint *string
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to the Serverless offering for Amazon OpenSearch Service. The default value is
+	// 300 (5 minutes).
+	RetryOptions *AmazonOpenSearchServerlessRetryOptions
+
+	// Defines how documents should be delivered to Amazon S3. When it is set to
+	// FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not
+	// be indexed to the configured Amazon S3 destination, with
+	// AmazonOpenSearchService-failed/ appended to the key prefix. When set to
+	// AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3,
+	// and also writes failed documents with AmazonOpenSearchService-failed/ appended
+	// to the prefix.
+	S3BackupMode AmazonOpenSearchServerlessS3BackupMode
+
+	// The details of the VPC of the Amazon ES destination.
+	VpcConfiguration *VpcConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The destination description in the Serverless offering for Amazon OpenSearch
+// Service.
+type AmazonOpenSearchServerlessDestinationDescription struct {
+
+	// The buffering options.
+	BufferingHints *AmazonOpenSearchServerlessBufferingHints
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The endpoint to use when communicating with the collection in the Serverless
+	// offering for Amazon OpenSearch Service.
+	CollectionEndpoint *string
+
+	// The Serverless offering for Amazon OpenSearch Service index name.
+	IndexName *string
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	// The Serverless offering for Amazon OpenSearch Service retry options.
+	RetryOptions *AmazonOpenSearchServerlessRetryOptions
+
+	// The Amazon Resource Name (ARN) of the AWS credentials.
+	RoleARN *string
+
+	// The Amazon S3 backup mode.
+	S3BackupMode AmazonOpenSearchServerlessS3BackupMode
+
+	// Describes a destination in Amazon S3.
+	S3DestinationDescription *S3DestinationDescription
+
+	// The details of the VPC of the Amazon ES destination.
+	VpcConfigurationDescription *VpcConfigurationDescription
+
+	noSmithyDocumentSerde
+}
+
+// Describes an update for a destination in the Serverless offering for Amazon
+// OpenSearch Service.
+type AmazonOpenSearchServerlessDestinationUpdate struct {
+
+	// The buffering options. If no value is specified, AmazonopensearchBufferingHints
+	// object default values are used.
+	BufferingHints *AmazonOpenSearchServerlessBufferingHints
+
+	// Describes the Amazon CloudWatch logging options for your delivery stream.
+	CloudWatchLoggingOptions *CloudWatchLoggingOptions
+
+	// The endpoint to use when communicating with the collection in the Serverless
+	// offering for Amazon OpenSearch Service.
+	CollectionEndpoint *string
+
+	// The Serverless offering for Amazon OpenSearch Service index name.
+	IndexName *string
+
+	// Describes a data processing configuration.
+	ProcessingConfiguration *ProcessingConfiguration
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to the Serverless offering for Amazon OpenSearch Service. The default value is
+	// 300 (5 minutes).
+	RetryOptions *AmazonOpenSearchServerlessRetryOptions
+
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
+	// Firehose for calling the Serverless offering for Amazon OpenSearch Service
+	// Configuration API and for indexing documents.
+	RoleARN *string
+
+	// Describes an update for a destination in Amazon S3.
+	S3Update *S3DestinationUpdate
+
+	noSmithyDocumentSerde
+}
+
+// Configures retry behavior in case Kinesis Data Firehose is unable to deliver
+// documents to the Serverless offering for Amazon OpenSearch Service.
+type AmazonOpenSearchServerlessRetryOptions struct {
+
+	// After an initial failure to deliver to the Serverless offering for Amazon
+	// OpenSearch Service, the total amount of time during which Kinesis Data Firehose
+	// retries delivery (including the first attempt). After this time has elapsed, the
+	// failed documents are written to Amazon S3. Default value is 300 seconds (5
+	// minutes). A value of 0 (zero) results in no retries.
+	DurationInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the buffering to perform before delivering data to the Amazon
+// OpenSearch Service destination.
+type AmazonopensearchserviceBufferingHints struct {
+
+	// Buffer incoming data for the specified period of time, in seconds, before
+	// delivering it to the destination. The default value is 300 (5 minutes).
+	IntervalInSeconds *int32
+
+	// Buffer incoming data to the specified size, in MBs, before delivering it to the
+	// destination. The default value is 5. We recommend setting this parameter to a
+	// value greater than the amount of data you typically ingest into the delivery
+	// stream in 10 seconds. For example, if you typically ingest data at 1 MB/sec, the
+	// value should be 10 MB or higher.
+	SizeInMBs *int32
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration of a destination in Amazon OpenSearch Service
+type AmazonopensearchserviceDestinationConfiguration struct {
+
+	// The ElasticsearAmazon OpenSearch Service index name.
+	//
+	// This member is required.
+	IndexName *string
+
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
+	// Firehose for calling the Amazon OpenSearch Service Configuration API and for
+	// indexing documents.
+	//
+	// This member is required.
+	RoleARN *string
+
+	// Describes the configuration of a destination in Amazon S3.
+	//
+	// This member is required.
+	S3Configuration *S3DestinationConfiguration
+
+	// The buffering options. If no value is specified, the default values for
+	// AmazonopensearchserviceBufferingHints are used.
 	BufferingHints *AmazonopensearchserviceBufferingHints
 
 	// Describes the Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
+	// The endpoint to use when communicating with the cluster. Specify either this
+	// ClusterEndpoint or the DomainARN field.
 	ClusterEndpoint *string
 
+	// The ARN of the Amazon OpenSearch Service domain. The IAM role must have
+	// permissions for DescribeElasticsearchDomain, DescribeElasticsearchDomains, and
+	// DescribeElasticsearchDomainConfig after assuming the role specified in RoleARN.
 	DomainARN *string
 
+	// The Amazon OpenSearch Service index rotation period. Index rotation appends a
+	// timestamp to the IndexName to facilitate the expiration of old data.
 	IndexRotationPeriod AmazonopensearchserviceIndexRotationPeriod
 
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to Amazon OpenSearch Service. The default value is 300 (5 minutes).
 	RetryOptions *AmazonopensearchserviceRetryOptions
 
+	// Defines how documents should be delivered to Amazon S3. When it is set to
+	// FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not
+	// be indexed to the configured Amazon S3 destination, with
+	// AmazonOpenSearchService-failed/ appended to the key prefix. When set to
+	// AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3,
+	// and also writes failed documents with AmazonOpenSearchService-failed/ appended
+	// to the prefix.
 	S3BackupMode AmazonopensearchserviceS3BackupMode
 
+	// The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can be
+	// only one type per index. If you try to specify a new type for an existing index
+	// that already has another type, Kinesis Data Firehose returns an error during run
+	// time.
 	TypeName *string
 
 	// The details of the VPC of the Amazon ES destination.
@@ -54,32 +255,47 @@ type AmazonopensearchserviceDestinationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The destination description in Amazon OpenSearch Service.
 type AmazonopensearchserviceDestinationDescription struct {
+
+	// The buffering options.
 	BufferingHints *AmazonopensearchserviceBufferingHints
 
 	// Describes the Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
+	// The endpoint to use when communicating with the cluster. Kinesis Data Firehose
+	// uses either this ClusterEndpoint or the DomainARN field to send data to Amazon
+	// OpenSearch Service.
 	ClusterEndpoint *string
 
+	// The ARN of the Amazon OpenSearch Service domain.
 	DomainARN *string
 
+	// The Amazon OpenSearch Service index name.
 	IndexName *string
 
+	// The Amazon OpenSearch Service index rotation period
 	IndexRotationPeriod AmazonopensearchserviceIndexRotationPeriod
 
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
+	// The Amazon OpenSearch Service retry options.
 	RetryOptions *AmazonopensearchserviceRetryOptions
 
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials.
 	RoleARN *string
 
+	// The Amazon S3 backup mode.
 	S3BackupMode AmazonopensearchserviceS3BackupMode
 
 	// Describes a destination in Amazon S3.
 	S3DestinationDescription *S3DestinationDescription
 
+	// The Amazon OpenSearch Service type name. This applies to Elasticsearch 6.x and
+	// lower versions. For Elasticsearch 7.x and OpenSearch Service 1.x, there's no
+	// value for TypeName.
 	TypeName *string
 
 	// The details of the VPC of the Amazon ES destination.
@@ -88,36 +304,68 @@ type AmazonopensearchserviceDestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an update for a destination in Amazon OpenSearch Service.
 type AmazonopensearchserviceDestinationUpdate struct {
+
+	// The buffering options. If no value is specified, AmazonopensearchBufferingHints
+	// object default values are used.
 	BufferingHints *AmazonopensearchserviceBufferingHints
 
 	// Describes the Amazon CloudWatch logging options for your delivery stream.
 	CloudWatchLoggingOptions *CloudWatchLoggingOptions
 
+	// The endpoint to use when communicating with the cluster. Specify either this
+	// ClusterEndpoint or the DomainARN field.
 	ClusterEndpoint *string
 
+	// The ARN of the Amazon OpenSearch Service domain. The IAM role must have
+	// permissions for DescribeDomain, DescribeDomains, and DescribeDomainConfig after
+	// assuming the IAM role specified in RoleARN.
 	DomainARN *string
 
+	// The Amazon OpenSearch Service index name.
 	IndexName *string
 
+	// The Amazon OpenSearch Service index rotation period. Index rotation appends a
+	// timestamp to IndexName to facilitate the expiration of old data.
 	IndexRotationPeriod AmazonopensearchserviceIndexRotationPeriod
 
 	// Describes a data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver documents
+	// to Amazon OpenSearch Service. The default value is 300 (5 minutes).
 	RetryOptions *AmazonopensearchserviceRetryOptions
 
+	// The Amazon Resource Name (ARN) of the IAM role to be assumed by Kinesis Data
+	// Firehose for calling the Amazon OpenSearch Service Configuration API and for
+	// indexing documents.
 	RoleARN *string
 
 	// Describes an update for a destination in Amazon S3.
 	S3Update *S3DestinationUpdate
 
+	// The Amazon OpenSearch Service type name. For Elasticsearch 6.x, there can be
+	// only one type per index. If you try to specify a new type for an existing index
+	// that already has another type, Kinesis Data Firehose returns an error during
+	// runtime. If you upgrade Elasticsearch from 6.x to 7.x and don’t update your
+	// delivery stream, Kinesis Data Firehose still delivers data to Elasticsearch with
+	// the old index name and type name. If you want to update your delivery stream
+	// with a new index name, provide an empty string for TypeName.
 	TypeName *string
 
 	noSmithyDocumentSerde
 }
 
+// Configures retry behavior in case Kinesis Data Firehose is unable to deliver
+// documents to Amazon OpenSearch Service.
 type AmazonopensearchserviceRetryOptions struct {
+
+	// After an initial failure to deliver to Amazon OpenSearch Service, the total
+	// amount of time during which Kinesis Data Firehose retries delivery (including
+	// the first attempt). After this time has elapsed, the failed documents are
+	// written to Amazon S3. Default value is 300 seconds (5 minutes). A value of 0
+	// (zero) results in no retries.
 	DurationInSeconds *int32
 
 	noSmithyDocumentSerde
@@ -197,9 +445,9 @@ type CopyCommand struct {
 // Specifies that you want Kinesis Data Firehose to convert data from the JSON
 // format to the Parquet or ORC format before writing it to Amazon S3. Kinesis Data
 // Firehose uses the serializer and deserializer that you specify, in addition to
-// the column information from the AWS Glue table, to deserialize your input data
-// from JSON and then serialize it to the Parquet or ORC format. For more
-// information, see Kinesis Data Firehose Record Format Conversion
+// the column information from the Amazon Web Services Glue table, to deserialize
+// your input data from JSON and then serialize it to the Parquet or ORC format.
+// For more information, see Kinesis Data Firehose Record Format Conversion
 // (https://docs.aws.amazon.com/firehose/latest/dev/record-format-conversion.html).
 type DataFormatConversionConfiguration struct {
 
@@ -217,8 +465,8 @@ type DataFormatConversionConfiguration struct {
 	// if Enabled is set to true.
 	OutputFormatConfiguration *OutputFormatConfiguration
 
-	// Specifies the AWS Glue Data Catalog table that contains the column information.
-	// This parameter is required if Enabled is set to true.
+	// Specifies the Amazon Web Services Glue Data Catalog table that contains the
+	// column information. This parameter is required if Enabled is set to true.
 	SchemaConfiguration *SchemaConfiguration
 
 	noSmithyDocumentSerde
@@ -228,7 +476,7 @@ type DataFormatConversionConfiguration struct {
 type DeliveryStreamDescription struct {
 
 	// The Amazon Resource Name (ARN) of the delivery stream. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -310,13 +558,13 @@ type DeliveryStreamEncryptionConfiguration struct {
 	FailureDescription *FailureDescription
 
 	// If KeyType is CUSTOMER_MANAGED_CMK, this field contains the ARN of the customer
-	// managed CMK. If KeyType is AWS_OWNED_CMK, DeliveryStreamEncryptionConfiguration
-	// doesn't contain a value for KeyARN.
+	// managed CMK. If KeyType is Amazon Web Services_OWNED_CMK,
+	// DeliveryStreamEncryptionConfiguration doesn't contain a value for KeyARN.
 	KeyARN *string
 
 	// Indicates the type of customer master key (CMK) that is used for encryption. The
-	// default setting is AWS_OWNED_CMK. For more information about CMKs, see Customer
-	// Master Keys (CMKs)
+	// default setting is Amazon Web Services_OWNED_CMK. For more information about
+	// CMKs, see Customer Master Keys (CMKs)
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
 	KeyType KeyType
 
@@ -335,8 +583,8 @@ type DeliveryStreamEncryptionConfiguration struct {
 type DeliveryStreamEncryptionConfigurationInput struct {
 
 	// Indicates the type of customer master key (CMK) to use for encryption. The
-	// default setting is AWS_OWNED_CMK. For more information about CMKs, see Customer
-	// Master Keys (CMKs)
+	// default setting is Amazon Web Services_OWNED_CMK. For more information about
+	// CMKs, see Customer Master Keys (CMKs)
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys).
 	// When you invoke CreateDeliveryStream or StartDeliveryStreamEncryption with
 	// KeyType set to CUSTOMER_MANAGED_CMK, Kinesis Data Firehose invokes the Amazon
@@ -354,14 +602,14 @@ type DeliveryStreamEncryptionConfigurationInput struct {
 	// asymmetric CMKs. For information about symmetric and asymmetric CMKs, see About
 	// Symmetric and Asymmetric CMKs
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html)
-	// in the AWS Key Management Service developer guide.
+	// in the Amazon Web Services Key Management Service developer guide.
 	//
 	// This member is required.
 	KeyType KeyType
 
 	// If you set KeyType to CUSTOMER_MANAGED_CMK, you must specify the Amazon Resource
-	// Name (ARN) of the CMK. If you set KeyType to AWS_OWNED_CMK, Kinesis Data
-	// Firehose uses a service-account CMK.
+	// Name (ARN) of the CMK. If you set KeyType to Amazon Web Services_OWNED_CMK,
+	// Kinesis Data Firehose uses a service-account CMK.
 	KeyARN *string
 
 	noSmithyDocumentSerde
@@ -400,6 +648,10 @@ type DestinationDescription struct {
 	// This member is required.
 	DestinationId *string
 
+	// The destination in the Serverless offering for Amazon OpenSearch Service.
+	AmazonOpenSearchServerlessDestinationDescription *AmazonOpenSearchServerlessDestinationDescription
+
+	// The destination in Amazon OpenSearch Service.
 	AmazonopensearchserviceDestinationDescription *AmazonopensearchserviceDestinationDescription
 
 	// The destination in Amazon ES.
@@ -426,9 +678,6 @@ type DestinationDescription struct {
 // The configuration of the dynamic partitioning mechanism that creates smaller
 // data sets from the streaming data by partitioning it based on partition keys.
 // Currently, dynamic partitioning is only supported for Amazon S3 destinations.
-// For more information, see
-// https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
-// (https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html)
 type DynamicPartitioningConfiguration struct {
 
 	// Specifies that the dynamic partitioning is enabled for this Kinesis Data
@@ -473,7 +722,7 @@ type ElasticsearchDestinationConfiguration struct {
 	// For more information, see Grant Kinesis Data Firehose Access to an Amazon S3
 	// Destination
 	// (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
-	// and Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// and Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -496,10 +745,9 @@ type ElasticsearchDestinationConfiguration struct {
 	ClusterEndpoint *string
 
 	// The ARN of the Amazon ES domain. The IAM role must have permissions for
-	// DescribeElasticsearchDomain, DescribeElasticsearchDomains, and
-	// DescribeElasticsearchDomainConfig after assuming the role specified in RoleARN.
-	// For more information, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces
+	// DescribeDomain, DescribeDomains, and DescribeDomainConfig after assuming the
+	// role specified in RoleARN. For more information, see Amazon Resource Names
+	// (ARNs) and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	// Specify either ClusterEndpoint or DomainARN.
 	DomainARN *string
@@ -520,11 +768,12 @@ type ElasticsearchDestinationConfiguration struct {
 
 	// Defines how documents should be delivered to Amazon S3. When it is set to
 	// FailedDocumentsOnly, Kinesis Data Firehose writes any documents that could not
-	// be indexed to the configured Amazon S3 destination, with elasticsearch-failed/
-	// appended to the key prefix. When set to AllDocuments, Kinesis Data Firehose
-	// delivers all incoming records to Amazon S3, and also writes failed documents
-	// with elasticsearch-failed/ appended to the prefix. For more information, see
-	// Amazon S3 Backup for the Amazon ES Destination
+	// be indexed to the configured Amazon S3 destination, with
+	// AmazonOpenSearchService-failed/ appended to the key prefix. When set to
+	// AllDocuments, Kinesis Data Firehose delivers all incoming records to Amazon S3,
+	// and also writes failed documents with AmazonOpenSearchService-failed/ appended
+	// to the prefix. For more information, see Amazon S3 Backup for the Amazon ES
+	// Destination
 	// (https://docs.aws.amazon.com/firehose/latest/dev/basic-deliver.html#es-s3-backup).
 	// Default value is FailedDocumentsOnly. You can't change this backup mode after
 	// you create the delivery stream.
@@ -557,7 +806,7 @@ type ElasticsearchDestinationDescription struct {
 	ClusterEndpoint *string
 
 	// The ARN of the Amazon ES domain. For more information, see Amazon Resource Names
-	// (ARNs) and AWS Service Namespaces
+	// (ARNs) and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	// Kinesis Data Firehose uses either ClusterEndpoint or DomainARN to send data to
 	// Amazon ES.
@@ -575,8 +824,9 @@ type ElasticsearchDestinationDescription struct {
 	// The Amazon ES retry options.
 	RetryOptions *ElasticsearchRetryOptions
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string
 
@@ -587,7 +837,8 @@ type ElasticsearchDestinationDescription struct {
 	S3DestinationDescription *S3DestinationDescription
 
 	// The Elasticsearch type name. This applies to Elasticsearch 6.x and lower
-	// versions. For Elasticsearch 7.x, there's no value for TypeName.
+	// versions. For Elasticsearch 7.x and OpenSearch Service 1.x, there's no value for
+	// TypeName.
 	TypeName *string
 
 	// The details of the VPC of the Amazon ES destination.
@@ -611,10 +862,9 @@ type ElasticsearchDestinationUpdate struct {
 	ClusterEndpoint *string
 
 	// The ARN of the Amazon ES domain. The IAM role must have permissions for
-	// DescribeElasticsearchDomain, DescribeElasticsearchDomains, and
-	// DescribeElasticsearchDomainConfig after assuming the IAM role specified in
-	// RoleARN. For more information, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces
+	// DescribeDomain, DescribeDomains, and DescribeDomainConfig after assuming the IAM
+	// role specified in RoleARN. For more information, see Amazon Resource Names
+	// (ARNs) and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	// Specify either ClusterEndpoint or DomainARN.
 	DomainARN *string
@@ -641,7 +891,7 @@ type ElasticsearchDestinationUpdate struct {
 	// For more information, see Grant Kinesis Data Firehose Access to an Amazon S3
 	// Destination
 	// (https://docs.aws.amazon.com/firehose/latest/dev/controlling-access.html#using-iam-s3)
-	// and Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// and Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string
 
@@ -691,14 +941,15 @@ type EncryptionConfiguration struct {
 type ExtendedS3DestinationConfiguration struct {
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces
+	// and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
 	BucketARN *string
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -720,9 +971,6 @@ type ExtendedS3DestinationConfiguration struct {
 	// The configuration of the dynamic partitioning mechanism that creates smaller
 	// data sets from the streaming data by partitioning it based on partition keys.
 	// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
-	// For more information, see
-	// https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
-	// (https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html)
 	DynamicPartitioningConfiguration *DynamicPartitioningConfiguration
 
 	// The encryption configuration. If no value is specified, the default is no
@@ -759,7 +1007,7 @@ type ExtendedS3DestinationConfiguration struct {
 type ExtendedS3DestinationDescription struct {
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces
+	// and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -781,8 +1029,9 @@ type ExtendedS3DestinationDescription struct {
 	// This member is required.
 	EncryptionConfiguration *EncryptionConfiguration
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -798,9 +1047,6 @@ type ExtendedS3DestinationDescription struct {
 	// The configuration of the dynamic partitioning mechanism that creates smaller
 	// data sets from the streaming data by partitioning it based on partition keys.
 	// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
-	// For more information, see
-	// https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
-	// (https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html)
 	DynamicPartitioningConfiguration *DynamicPartitioningConfiguration
 
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records before
@@ -831,7 +1077,7 @@ type ExtendedS3DestinationDescription struct {
 type ExtendedS3DestinationUpdate struct {
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces
+	// and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	BucketARN *string
 
@@ -851,9 +1097,6 @@ type ExtendedS3DestinationUpdate struct {
 	// The configuration of the dynamic partitioning mechanism that creates smaller
 	// data sets from the streaming data by partitioning it based on partition keys.
 	// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
-	// For more information, see
-	// https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
-	// (https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html)
 	DynamicPartitioningConfiguration *DynamicPartitioningConfiguration
 
 	// The encryption configuration. If no value is specified, the default is no
@@ -875,8 +1118,9 @@ type ExtendedS3DestinationUpdate struct {
 	// The data processing configuration.
 	ProcessingConfiguration *ProcessingConfiguration
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string
 
@@ -1191,7 +1435,8 @@ type KinesisStreamSourceConfiguration struct {
 	KinesisStreamARN *string
 
 	// The ARN of the role that provides access to the source Kinesis data stream. For
-	// more information, see AWS Identity and Access Management (IAM) ARN Format
+	// more information, see Amazon Web Services Identity and Access Management (IAM)
+	// ARN Format
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam).
 	//
 	// This member is required.
@@ -1214,7 +1459,8 @@ type KinesisStreamSourceDescription struct {
 	KinesisStreamARN *string
 
 	// The ARN of the role used by the source Kinesis data stream. For more
-	// information, see AWS Identity and Access Management (IAM) ARN Format
+	// information, see Amazon Web Services Identity and Access Management (IAM) ARN
+	// Format
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam).
 	RoleARN *string
 
@@ -1225,8 +1471,9 @@ type KinesisStreamSourceDescription struct {
 type KMSEncryptionConfig struct {
 
 	// The Amazon Resource Name (ARN) of the encryption key. Must belong to the same
-	// AWS Region as the destination Amazon S3 bucket. For more information, see Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces
+	// Amazon Web Services Region as the destination Amazon S3 bucket. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -1398,7 +1645,11 @@ type Processor struct {
 // Describes the processor parameter.
 type ProcessorParameter struct {
 
-	// The name of the parameter.
+	// The name of the parameter. Currently the following default values are supported:
+	// 3 for NumberOfRetries and 60 for the BufferIntervalInSeconds. The
+	// BufferSizeInMBs ranges between 0.2 MB and up to 3MB. The default buffering hint
+	// is 1MB for all destinations, except Splunk. For Splunk, the default buffering
+	// hint is 256 KB.
 	//
 	// This member is required.
 	ParameterName ProcessorParameterName
@@ -1459,8 +1710,9 @@ type RedshiftDestinationConfiguration struct {
 	// This member is required.
 	Password *string
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -1515,8 +1767,9 @@ type RedshiftDestinationDescription struct {
 	// This member is required.
 	CopyCommand *CopyCommand
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -1573,8 +1826,9 @@ type RedshiftDestinationUpdate struct {
 	// to Amazon Redshift. Default value is 3600 (60 minutes).
 	RetryOptions *RedshiftRetryOptions
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string
 
@@ -1626,14 +1880,15 @@ type RetryOptions struct {
 type S3DestinationConfiguration struct {
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces
+	// and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
 	BucketARN *string
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -1675,7 +1930,7 @@ type S3DestinationConfiguration struct {
 type S3DestinationDescription struct {
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces
+	// and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -1698,8 +1953,9 @@ type S3DestinationDescription struct {
 	// This member is required.
 	EncryptionConfiguration *EncryptionConfiguration
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.
@@ -1727,7 +1983,7 @@ type S3DestinationDescription struct {
 type S3DestinationUpdate struct {
 
 	// The ARN of the S3 bucket. For more information, see Amazon Resource Names (ARNs)
-	// and AWS Service Namespaces
+	// and Amazon Web Services Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	BucketARN *string
 
@@ -1760,8 +2016,9 @@ type S3DestinationUpdate struct {
 	// (https://docs.aws.amazon.com/firehose/latest/dev/s3-prefixes.html).
 	Prefix *string
 
-	// The Amazon Resource Name (ARN) of the AWS credentials. For more information, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// The Amazon Resource Name (ARN) of the Amazon Web Services credentials. For more
+	// information, see Amazon Resource Names (ARNs) and Amazon Web Services Service
+	// Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	RoleARN *string
 
@@ -1773,30 +2030,31 @@ type S3DestinationUpdate struct {
 // set to true.
 type SchemaConfiguration struct {
 
-	// The ID of the AWS Glue Data Catalog. If you don't supply this, the AWS account
-	// ID is used by default.
+	// The ID of the Amazon Web Services Glue Data Catalog. If you don't supply this,
+	// the Amazon Web Services account ID is used by default.
 	CatalogId *string
 
-	// Specifies the name of the AWS Glue database that contains the schema for the
-	// output data. If the SchemaConfiguration request parameter is used as part of
-	// invoking the CreateDeliveryStream API, then the DatabaseName property is
-	// required and its value must be specified.
+	// Specifies the name of the Amazon Web Services Glue database that contains the
+	// schema for the output data. If the SchemaConfiguration request parameter is used
+	// as part of invoking the CreateDeliveryStream API, then the DatabaseName property
+	// is required and its value must be specified.
 	DatabaseName *string
 
-	// If you don't specify an AWS Region, the default is the current Region.
+	// If you don't specify an Amazon Web Services Region, the default is the current
+	// Region.
 	Region *string
 
-	// The role that Kinesis Data Firehose can use to access AWS Glue. This role must
-	// be in the same account you use for Kinesis Data Firehose. Cross-account roles
-	// aren't allowed. If the SchemaConfiguration request parameter is used as part of
-	// invoking the CreateDeliveryStream API, then the RoleARN property is required and
-	// its value must be specified.
+	// The role that Kinesis Data Firehose can use to access Amazon Web Services Glue.
+	// This role must be in the same account you use for Kinesis Data Firehose.
+	// Cross-account roles aren't allowed. If the SchemaConfiguration request parameter
+	// is used as part of invoking the CreateDeliveryStream API, then the RoleARN
+	// property is required and its value must be specified.
 	RoleARN *string
 
-	// Specifies the AWS Glue table that contains the column information that
-	// constitutes your data schema. If the SchemaConfiguration request parameter is
-	// used as part of invoking the CreateDeliveryStream API, then the TableName
-	// property is required and its value must be specified.
+	// Specifies the Amazon Web Services Glue table that contains the column
+	// information that constitutes your data schema. If the SchemaConfiguration
+	// request parameter is used as part of invoking the CreateDeliveryStream API, then
+	// the TableName property is required and its value must be specified.
 	TableName *string
 
 	// Specifies the table version for the output data schema. If you don't specify

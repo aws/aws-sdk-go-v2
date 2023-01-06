@@ -36,9 +36,9 @@ type ListLaunchProfilesInput struct {
 	StudioId *string
 
 	// The max number of results to return in the response.
-	MaxResults int32
+	MaxResults *int32
 
-	// The token to request the next page of results.
+	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
 	// The principal ID. This currently supports a IAM Identity Center UserId.
@@ -162,8 +162,8 @@ func NewListLaunchProfilesPaginator(client ListLaunchProfilesAPIClient, params *
 	}
 
 	options := ListLaunchProfilesPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
 	}
 
 	for _, fn := range optFns {
@@ -193,7 +193,11 @@ func (p *ListLaunchProfilesPaginator) NextPage(ctx context.Context, optFns ...fu
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListLaunchProfiles(ctx, &params, optFns...)
 	if err != nil {

@@ -64,6 +64,64 @@ func (AnalysisFilterAttribute) Values() []AnalysisFilterAttribute {
 	}
 }
 
+type AnchorOption string
+
+// Enum values for AnchorOption
+const (
+	AnchorOptionNow AnchorOption = "NOW"
+)
+
+// Values returns all known values for AnchorOption. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AnchorOption) Values() []AnchorOption {
+	return []AnchorOption{
+		"NOW",
+	}
+}
+
+type ArcThickness string
+
+// Enum values for ArcThickness
+const (
+	ArcThicknessSmall  ArcThickness = "SMALL"
+	ArcThicknessMedium ArcThickness = "MEDIUM"
+	ArcThicknessLarge  ArcThickness = "LARGE"
+	ArcThicknessWhole  ArcThickness = "WHOLE"
+)
+
+// Values returns all known values for ArcThickness. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ArcThickness) Values() []ArcThickness {
+	return []ArcThickness{
+		"SMALL",
+		"MEDIUM",
+		"LARGE",
+		"WHOLE",
+	}
+}
+
+type ArcThicknessOptions string
+
+// Enum values for ArcThicknessOptions
+const (
+	ArcThicknessOptionsSmall  ArcThicknessOptions = "SMALL"
+	ArcThicknessOptionsMedium ArcThicknessOptions = "MEDIUM"
+	ArcThicknessOptionsLarge  ArcThicknessOptions = "LARGE"
+)
+
+// Values returns all known values for ArcThicknessOptions. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ArcThicknessOptions) Values() []ArcThicknessOptions {
+	return []ArcThicknessOptions{
+		"SMALL",
+		"MEDIUM",
+		"LARGE",
+	}
+}
+
 type AssignmentStatus string
 
 // Enum values for AssignmentStatus
@@ -104,6 +162,182 @@ func (AuthenticationMethodOption) Values() []AuthenticationMethodOption {
 	}
 }
 
+type AxisBinding string
+
+// Enum values for AxisBinding
+const (
+	AxisBindingPrimaryYaxis   AxisBinding = "PRIMARY_YAXIS"
+	AxisBindingSecondaryYaxis AxisBinding = "SECONDARY_YAXIS"
+)
+
+// Values returns all known values for AxisBinding. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AxisBinding) Values() []AxisBinding {
+	return []AxisBinding{
+		"PRIMARY_YAXIS",
+		"SECONDARY_YAXIS",
+	}
+}
+
+type BarChartOrientation string
+
+// Enum values for BarChartOrientation
+const (
+	BarChartOrientationHorizontal BarChartOrientation = "HORIZONTAL"
+	BarChartOrientationVertical   BarChartOrientation = "VERTICAL"
+)
+
+// Values returns all known values for BarChartOrientation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BarChartOrientation) Values() []BarChartOrientation {
+	return []BarChartOrientation{
+		"HORIZONTAL",
+		"VERTICAL",
+	}
+}
+
+type BarsArrangement string
+
+// Enum values for BarsArrangement
+const (
+	BarsArrangementClustered      BarsArrangement = "CLUSTERED"
+	BarsArrangementStacked        BarsArrangement = "STACKED"
+	BarsArrangementStackedPercent BarsArrangement = "STACKED_PERCENT"
+)
+
+// Values returns all known values for BarsArrangement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BarsArrangement) Values() []BarsArrangement {
+	return []BarsArrangement{
+		"CLUSTERED",
+		"STACKED",
+		"STACKED_PERCENT",
+	}
+}
+
+type BaseMapStyleType string
+
+// Enum values for BaseMapStyleType
+const (
+	BaseMapStyleTypeLightGray BaseMapStyleType = "LIGHT_GRAY"
+	BaseMapStyleTypeDarkGray  BaseMapStyleType = "DARK_GRAY"
+	BaseMapStyleTypeStreet    BaseMapStyleType = "STREET"
+	BaseMapStyleTypeImagery   BaseMapStyleType = "IMAGERY"
+)
+
+// Values returns all known values for BaseMapStyleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BaseMapStyleType) Values() []BaseMapStyleType {
+	return []BaseMapStyleType{
+		"LIGHT_GRAY",
+		"DARK_GRAY",
+		"STREET",
+		"IMAGERY",
+	}
+}
+
+type BoxPlotFillStyle string
+
+// Enum values for BoxPlotFillStyle
+const (
+	BoxPlotFillStyleSolid       BoxPlotFillStyle = "SOLID"
+	BoxPlotFillStyleTransparent BoxPlotFillStyle = "TRANSPARENT"
+)
+
+// Values returns all known values for BoxPlotFillStyle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BoxPlotFillStyle) Values() []BoxPlotFillStyle {
+	return []BoxPlotFillStyle{
+		"SOLID",
+		"TRANSPARENT",
+	}
+}
+
+type CategoricalAggregationFunction string
+
+// Enum values for CategoricalAggregationFunction
+const (
+	CategoricalAggregationFunctionCount         CategoricalAggregationFunction = "COUNT"
+	CategoricalAggregationFunctionDistinctCount CategoricalAggregationFunction = "DISTINCT_COUNT"
+)
+
+// Values returns all known values for CategoricalAggregationFunction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CategoricalAggregationFunction) Values() []CategoricalAggregationFunction {
+	return []CategoricalAggregationFunction{
+		"COUNT",
+		"DISTINCT_COUNT",
+	}
+}
+
+type CategoryFilterMatchOperator string
+
+// Enum values for CategoryFilterMatchOperator
+const (
+	CategoryFilterMatchOperatorEquals         CategoryFilterMatchOperator = "EQUALS"
+	CategoryFilterMatchOperatorDoesNotEqual   CategoryFilterMatchOperator = "DOES_NOT_EQUAL"
+	CategoryFilterMatchOperatorContains       CategoryFilterMatchOperator = "CONTAINS"
+	CategoryFilterMatchOperatorDoesNotContain CategoryFilterMatchOperator = "DOES_NOT_CONTAIN"
+	CategoryFilterMatchOperatorStartsWith     CategoryFilterMatchOperator = "STARTS_WITH"
+	CategoryFilterMatchOperatorEndsWith       CategoryFilterMatchOperator = "ENDS_WITH"
+)
+
+// Values returns all known values for CategoryFilterMatchOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CategoryFilterMatchOperator) Values() []CategoryFilterMatchOperator {
+	return []CategoryFilterMatchOperator{
+		"EQUALS",
+		"DOES_NOT_EQUAL",
+		"CONTAINS",
+		"DOES_NOT_CONTAIN",
+		"STARTS_WITH",
+		"ENDS_WITH",
+	}
+}
+
+type CategoryFilterSelectAllOptions string
+
+// Enum values for CategoryFilterSelectAllOptions
+const (
+	CategoryFilterSelectAllOptionsFilterAllValues CategoryFilterSelectAllOptions = "FILTER_ALL_VALUES"
+)
+
+// Values returns all known values for CategoryFilterSelectAllOptions. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CategoryFilterSelectAllOptions) Values() []CategoryFilterSelectAllOptions {
+	return []CategoryFilterSelectAllOptions{
+		"FILTER_ALL_VALUES",
+	}
+}
+
+type ColorFillType string
+
+// Enum values for ColorFillType
+const (
+	ColorFillTypeDiscrete ColorFillType = "DISCRETE"
+	ColorFillTypeGradient ColorFillType = "GRADIENT"
+)
+
+// Values returns all known values for ColorFillType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColorFillType) Values() []ColorFillType {
+	return []ColorFillType{
+		"DISCRETE",
+		"GRADIENT",
+	}
+}
+
 type ColumnDataType string
 
 // Enum values for ColumnDataType
@@ -126,6 +360,24 @@ func (ColumnDataType) Values() []ColumnDataType {
 	}
 }
 
+type ColumnRole string
+
+// Enum values for ColumnRole
+const (
+	ColumnRoleDimension ColumnRole = "DIMENSION"
+	ColumnRoleMeasure   ColumnRole = "MEASURE"
+)
+
+// Values returns all known values for ColumnRole. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ColumnRole) Values() []ColumnRole {
+	return []ColumnRole{
+		"DIMENSION",
+		"MEASURE",
+	}
+}
+
 type ColumnTagName string
 
 // Enum values for ColumnTagName
@@ -141,6 +393,139 @@ func (ColumnTagName) Values() []ColumnTagName {
 	return []ColumnTagName{
 		"COLUMN_GEOGRAPHIC_ROLE",
 		"COLUMN_DESCRIPTION",
+	}
+}
+
+type ComparisonMethod string
+
+// Enum values for ComparisonMethod
+const (
+	ComparisonMethodDifference        ComparisonMethod = "DIFFERENCE"
+	ComparisonMethodPercentDifference ComparisonMethod = "PERCENT_DIFFERENCE"
+	ComparisonMethodPercent           ComparisonMethod = "PERCENT"
+)
+
+// Values returns all known values for ComparisonMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonMethod) Values() []ComparisonMethod {
+	return []ComparisonMethod{
+		"DIFFERENCE",
+		"PERCENT_DIFFERENCE",
+		"PERCENT",
+	}
+}
+
+type ConditionalFormattingIconDisplayOption string
+
+// Enum values for ConditionalFormattingIconDisplayOption
+const (
+	ConditionalFormattingIconDisplayOptionIconOnly ConditionalFormattingIconDisplayOption = "ICON_ONLY"
+)
+
+// Values returns all known values for ConditionalFormattingIconDisplayOption. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ConditionalFormattingIconDisplayOption) Values() []ConditionalFormattingIconDisplayOption {
+	return []ConditionalFormattingIconDisplayOption{
+		"ICON_ONLY",
+	}
+}
+
+type ConditionalFormattingIconSetType string
+
+// Enum values for ConditionalFormattingIconSetType
+const (
+	ConditionalFormattingIconSetTypePlusMinus        ConditionalFormattingIconSetType = "PLUS_MINUS"
+	ConditionalFormattingIconSetTypeCheckX           ConditionalFormattingIconSetType = "CHECK_X"
+	ConditionalFormattingIconSetTypeThreeColorArrow  ConditionalFormattingIconSetType = "THREE_COLOR_ARROW"
+	ConditionalFormattingIconSetTypeThreeGrayArrow   ConditionalFormattingIconSetType = "THREE_GRAY_ARROW"
+	ConditionalFormattingIconSetTypeCaretUpMinusDown ConditionalFormattingIconSetType = "CARET_UP_MINUS_DOWN"
+	ConditionalFormattingIconSetTypeThreeShape       ConditionalFormattingIconSetType = "THREE_SHAPE"
+	ConditionalFormattingIconSetTypeThreeCircle      ConditionalFormattingIconSetType = "THREE_CIRCLE"
+	ConditionalFormattingIconSetTypeFlags            ConditionalFormattingIconSetType = "FLAGS"
+	ConditionalFormattingIconSetTypeBars             ConditionalFormattingIconSetType = "BARS"
+	ConditionalFormattingIconSetTypeFourColorArrow   ConditionalFormattingIconSetType = "FOUR_COLOR_ARROW"
+	ConditionalFormattingIconSetTypeFourGrayArrow    ConditionalFormattingIconSetType = "FOUR_GRAY_ARROW"
+)
+
+// Values returns all known values for ConditionalFormattingIconSetType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ConditionalFormattingIconSetType) Values() []ConditionalFormattingIconSetType {
+	return []ConditionalFormattingIconSetType{
+		"PLUS_MINUS",
+		"CHECK_X",
+		"THREE_COLOR_ARROW",
+		"THREE_GRAY_ARROW",
+		"CARET_UP_MINUS_DOWN",
+		"THREE_SHAPE",
+		"THREE_CIRCLE",
+		"FLAGS",
+		"BARS",
+		"FOUR_COLOR_ARROW",
+		"FOUR_GRAY_ARROW",
+	}
+}
+
+type CrossDatasetTypes string
+
+// Enum values for CrossDatasetTypes
+const (
+	CrossDatasetTypesAllDatasets   CrossDatasetTypes = "ALL_DATASETS"
+	CrossDatasetTypesSingleDataset CrossDatasetTypes = "SINGLE_DATASET"
+)
+
+// Values returns all known values for CrossDatasetTypes. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CrossDatasetTypes) Values() []CrossDatasetTypes {
+	return []CrossDatasetTypes{
+		"ALL_DATASETS",
+		"SINGLE_DATASET",
+	}
+}
+
+type CustomContentImageScalingConfiguration string
+
+// Enum values for CustomContentImageScalingConfiguration
+const (
+	CustomContentImageScalingConfigurationFitToHeight   CustomContentImageScalingConfiguration = "FIT_TO_HEIGHT"
+	CustomContentImageScalingConfigurationFitToWidth    CustomContentImageScalingConfiguration = "FIT_TO_WIDTH"
+	CustomContentImageScalingConfigurationDoNotScale    CustomContentImageScalingConfiguration = "DO_NOT_SCALE"
+	CustomContentImageScalingConfigurationScaleToVisual CustomContentImageScalingConfiguration = "SCALE_TO_VISUAL"
+)
+
+// Values returns all known values for CustomContentImageScalingConfiguration. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CustomContentImageScalingConfiguration) Values() []CustomContentImageScalingConfiguration {
+	return []CustomContentImageScalingConfiguration{
+		"FIT_TO_HEIGHT",
+		"FIT_TO_WIDTH",
+		"DO_NOT_SCALE",
+		"SCALE_TO_VISUAL",
+	}
+}
+
+type CustomContentType string
+
+// Enum values for CustomContentType
+const (
+	CustomContentTypeImage                CustomContentType = "IMAGE"
+	CustomContentTypeOtherEmbeddedContent CustomContentType = "OTHER_EMBEDDED_CONTENT"
+)
+
+// Values returns all known values for CustomContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomContentType) Values() []CustomContentType {
+	return []CustomContentType{
+		"IMAGE",
+		"OTHER_EMBEDDED_CONTENT",
 	}
 }
 
@@ -239,6 +624,70 @@ func (DashboardUIState) Values() []DashboardUIState {
 	return []DashboardUIState{
 		"EXPANDED",
 		"COLLAPSED",
+	}
+}
+
+type DataLabelContent string
+
+// Enum values for DataLabelContent
+const (
+	DataLabelContentValue           DataLabelContent = "VALUE"
+	DataLabelContentPercent         DataLabelContent = "PERCENT"
+	DataLabelContentValueAndPercent DataLabelContent = "VALUE_AND_PERCENT"
+)
+
+// Values returns all known values for DataLabelContent. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataLabelContent) Values() []DataLabelContent {
+	return []DataLabelContent{
+		"VALUE",
+		"PERCENT",
+		"VALUE_AND_PERCENT",
+	}
+}
+
+type DataLabelOverlap string
+
+// Enum values for DataLabelOverlap
+const (
+	DataLabelOverlapDisableOverlap DataLabelOverlap = "DISABLE_OVERLAP"
+	DataLabelOverlapEnableOverlap  DataLabelOverlap = "ENABLE_OVERLAP"
+)
+
+// Values returns all known values for DataLabelOverlap. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataLabelOverlap) Values() []DataLabelOverlap {
+	return []DataLabelOverlap{
+		"DISABLE_OVERLAP",
+		"ENABLE_OVERLAP",
+	}
+}
+
+type DataLabelPosition string
+
+// Enum values for DataLabelPosition
+const (
+	DataLabelPositionInside  DataLabelPosition = "INSIDE"
+	DataLabelPositionOutside DataLabelPosition = "OUTSIDE"
+	DataLabelPositionLeft    DataLabelPosition = "LEFT"
+	DataLabelPositionTop     DataLabelPosition = "TOP"
+	DataLabelPositionBottom  DataLabelPosition = "BOTTOM"
+	DataLabelPositionRight   DataLabelPosition = "RIGHT"
+)
+
+// Values returns all known values for DataLabelPosition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataLabelPosition) Values() []DataLabelPosition {
+	return []DataLabelPosition{
+		"INSIDE",
+		"OUTSIDE",
+		"LEFT",
+		"TOP",
+		"BOTTOM",
+		"RIGHT",
 	}
 }
 
@@ -404,6 +853,28 @@ func (DataSourceType) Values() []DataSourceType {
 	}
 }
 
+type DateAggregationFunction string
+
+// Enum values for DateAggregationFunction
+const (
+	DateAggregationFunctionCount         DateAggregationFunction = "COUNT"
+	DateAggregationFunctionDistinctCount DateAggregationFunction = "DISTINCT_COUNT"
+	DateAggregationFunctionMin           DateAggregationFunction = "MIN"
+	DateAggregationFunctionMax           DateAggregationFunction = "MAX"
+)
+
+// Values returns all known values for DateAggregationFunction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DateAggregationFunction) Values() []DateAggregationFunction {
+	return []DateAggregationFunction{
+		"COUNT",
+		"DISTINCT_COUNT",
+		"MIN",
+		"MAX",
+	}
+}
+
 type Edition string
 
 // Enum values for Edition
@@ -502,6 +973,26 @@ func (FileFormat) Values() []FileFormat {
 	}
 }
 
+type FilterNullOption string
+
+// Enum values for FilterNullOption
+const (
+	FilterNullOptionAllValues    FilterNullOption = "ALL_VALUES"
+	FilterNullOptionNullsOnly    FilterNullOption = "NULLS_ONLY"
+	FilterNullOptionNonNullsOnly FilterNullOption = "NON_NULLS_ONLY"
+)
+
+// Values returns all known values for FilterNullOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterNullOption) Values() []FilterNullOption {
+	return []FilterNullOption{
+		"ALL_VALUES",
+		"NULLS_ONLY",
+		"NON_NULLS_ONLY",
+	}
+}
+
 type FilterOperator string
 
 // Enum values for FilterOperator
@@ -517,6 +1008,24 @@ func (FilterOperator) Values() []FilterOperator {
 	return []FilterOperator{
 		"StringEquals",
 		"StringLike",
+	}
+}
+
+type FilterVisualScope string
+
+// Enum values for FilterVisualScope
+const (
+	FilterVisualScopeAllVisuals      FilterVisualScope = "ALL_VISUALS"
+	FilterVisualScopeSelectedVisuals FilterVisualScope = "SELECTED_VISUALS"
+)
+
+// Values returns all known values for FilterVisualScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterVisualScope) Values() []FilterVisualScope {
+	return []FilterVisualScope{
+		"ALL_VISUALS",
+		"SELECTED_VISUALS",
 	}
 }
 
@@ -564,6 +1073,104 @@ func (FolderType) Values() []FolderType {
 	}
 }
 
+type FontDecoration string
+
+// Enum values for FontDecoration
+const (
+	FontDecorationUnderline FontDecoration = "UNDERLINE"
+	FontDecorationNone      FontDecoration = "NONE"
+)
+
+// Values returns all known values for FontDecoration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FontDecoration) Values() []FontDecoration {
+	return []FontDecoration{
+		"UNDERLINE",
+		"NONE",
+	}
+}
+
+type FontStyle string
+
+// Enum values for FontStyle
+const (
+	FontStyleNormal FontStyle = "NORMAL"
+	FontStyleItalic FontStyle = "ITALIC"
+)
+
+// Values returns all known values for FontStyle. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (FontStyle) Values() []FontStyle {
+	return []FontStyle{
+		"NORMAL",
+		"ITALIC",
+	}
+}
+
+type FontWeightName string
+
+// Enum values for FontWeightName
+const (
+	FontWeightNameNormal FontWeightName = "NORMAL"
+	FontWeightNameBold   FontWeightName = "BOLD"
+)
+
+// Values returns all known values for FontWeightName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FontWeightName) Values() []FontWeightName {
+	return []FontWeightName{
+		"NORMAL",
+		"BOLD",
+	}
+}
+
+type ForecastComputationSeasonality string
+
+// Enum values for ForecastComputationSeasonality
+const (
+	ForecastComputationSeasonalityAutomatic ForecastComputationSeasonality = "AUTOMATIC"
+	ForecastComputationSeasonalityCustom    ForecastComputationSeasonality = "CUSTOM"
+)
+
+// Values returns all known values for ForecastComputationSeasonality. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ForecastComputationSeasonality) Values() []ForecastComputationSeasonality {
+	return []ForecastComputationSeasonality{
+		"AUTOMATIC",
+		"CUSTOM",
+	}
+}
+
+type FunnelChartMeasureDataLabelStyle string
+
+// Enum values for FunnelChartMeasureDataLabelStyle
+const (
+	FunnelChartMeasureDataLabelStyleValueOnly                         FunnelChartMeasureDataLabelStyle = "VALUE_ONLY"
+	FunnelChartMeasureDataLabelStylePercentageByFirstStage            FunnelChartMeasureDataLabelStyle = "PERCENTAGE_BY_FIRST_STAGE"
+	FunnelChartMeasureDataLabelStylePercentageByPreviousStage         FunnelChartMeasureDataLabelStyle = "PERCENTAGE_BY_PREVIOUS_STAGE"
+	FunnelChartMeasureDataLabelStyleValueAndPercentageByFirstStage    FunnelChartMeasureDataLabelStyle = "VALUE_AND_PERCENTAGE_BY_FIRST_STAGE"
+	FunnelChartMeasureDataLabelStyleValueAndPercentageByPreviousStage FunnelChartMeasureDataLabelStyle = "VALUE_AND_PERCENTAGE_BY_PREVIOUS_STAGE"
+)
+
+// Values returns all known values for FunnelChartMeasureDataLabelStyle. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FunnelChartMeasureDataLabelStyle) Values() []FunnelChartMeasureDataLabelStyle {
+	return []FunnelChartMeasureDataLabelStyle{
+		"VALUE_ONLY",
+		"PERCENTAGE_BY_FIRST_STAGE",
+		"PERCENTAGE_BY_PREVIOUS_STAGE",
+		"VALUE_AND_PERCENTAGE_BY_FIRST_STAGE",
+		"VALUE_AND_PERCENTAGE_BY_PREVIOUS_STAGE",
+	}
+}
+
 type GeoSpatialCountryCode string
 
 // Enum values for GeoSpatialCountryCode
@@ -608,6 +1215,24 @@ func (GeoSpatialDataRole) Values() []GeoSpatialDataRole {
 	}
 }
 
+type GeospatialSelectedPointStyle string
+
+// Enum values for GeospatialSelectedPointStyle
+const (
+	GeospatialSelectedPointStylePoint   GeospatialSelectedPointStyle = "POINT"
+	GeospatialSelectedPointStyleCluster GeospatialSelectedPointStyle = "CLUSTER"
+)
+
+// Values returns all known values for GeospatialSelectedPointStyle. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GeospatialSelectedPointStyle) Values() []GeospatialSelectedPointStyle {
+	return []GeospatialSelectedPointStyle{
+		"POINT",
+		"CLUSTER",
+	}
+}
+
 type GroupFilterAttribute string
 
 // Enum values for GroupFilterAttribute
@@ -637,6 +1262,112 @@ const (
 func (GroupFilterOperator) Values() []GroupFilterOperator {
 	return []GroupFilterOperator{
 		"StartsWith",
+	}
+}
+
+type HistogramBinType string
+
+// Enum values for HistogramBinType
+const (
+	HistogramBinTypeBinCount HistogramBinType = "BIN_COUNT"
+	HistogramBinTypeBinWidth HistogramBinType = "BIN_WIDTH"
+)
+
+// Values returns all known values for HistogramBinType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HistogramBinType) Values() []HistogramBinType {
+	return []HistogramBinType{
+		"BIN_COUNT",
+		"BIN_WIDTH",
+	}
+}
+
+type HorizontalTextAlignment string
+
+// Enum values for HorizontalTextAlignment
+const (
+	HorizontalTextAlignmentLeft   HorizontalTextAlignment = "LEFT"
+	HorizontalTextAlignmentCenter HorizontalTextAlignment = "CENTER"
+	HorizontalTextAlignmentRight  HorizontalTextAlignment = "RIGHT"
+	HorizontalTextAlignmentAuto   HorizontalTextAlignment = "AUTO"
+)
+
+// Values returns all known values for HorizontalTextAlignment. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HorizontalTextAlignment) Values() []HorizontalTextAlignment {
+	return []HorizontalTextAlignment{
+		"LEFT",
+		"CENTER",
+		"RIGHT",
+		"AUTO",
+	}
+}
+
+type Icon string
+
+// Enum values for Icon
+const (
+	IconCaretUp        Icon = "CARET_UP"
+	IconCaretDown      Icon = "CARET_DOWN"
+	IconPlus           Icon = "PLUS"
+	IconMinus          Icon = "MINUS"
+	IconArrowUp        Icon = "ARROW_UP"
+	IconArrowDown      Icon = "ARROW_DOWN"
+	IconArrowLeft      Icon = "ARROW_LEFT"
+	IconArrowUpLeft    Icon = "ARROW_UP_LEFT"
+	IconArrowDownLeft  Icon = "ARROW_DOWN_LEFT"
+	IconArrowRight     Icon = "ARROW_RIGHT"
+	IconArrowUpRight   Icon = "ARROW_UP_RIGHT"
+	IconArrowDownRight Icon = "ARROW_DOWN_RIGHT"
+	IconFaceUp         Icon = "FACE_UP"
+	IconFaceDown       Icon = "FACE_DOWN"
+	IconFaceFlat       Icon = "FACE_FLAT"
+	IconOneBar         Icon = "ONE_BAR"
+	IconTwoBar         Icon = "TWO_BAR"
+	IconThreeBar       Icon = "THREE_BAR"
+	IconCircle         Icon = "CIRCLE"
+	IconTriangle       Icon = "TRIANGLE"
+	IconSquare         Icon = "SQUARE"
+	IconFlag           Icon = "FLAG"
+	IconThumbsUp       Icon = "THUMBS_UP"
+	IconThumbsDown     Icon = "THUMBS_DOWN"
+	IconCheckmark      Icon = "CHECKMARK"
+	IconX              Icon = "X"
+)
+
+// Values returns all known values for Icon. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Icon) Values() []Icon {
+	return []Icon{
+		"CARET_UP",
+		"CARET_DOWN",
+		"PLUS",
+		"MINUS",
+		"ARROW_UP",
+		"ARROW_DOWN",
+		"ARROW_LEFT",
+		"ARROW_UP_LEFT",
+		"ARROW_DOWN_LEFT",
+		"ARROW_RIGHT",
+		"ARROW_UP_RIGHT",
+		"ARROW_DOWN_RIGHT",
+		"FACE_UP",
+		"FACE_DOWN",
+		"FACE_FLAT",
+		"ONE_BAR",
+		"TWO_BAR",
+		"THREE_BAR",
+		"CIRCLE",
+		"TRIANGLE",
+		"SQUARE",
+		"FLAG",
+		"THUMBS_UP",
+		"THUMBS_DOWN",
+		"CHECKMARK",
+		"X",
 	}
 }
 
@@ -910,6 +1641,171 @@ func (JoinType) Values() []JoinType {
 	}
 }
 
+type LayoutElementType string
+
+// Enum values for LayoutElementType
+const (
+	LayoutElementTypeVisual           LayoutElementType = "VISUAL"
+	LayoutElementTypeFilterControl    LayoutElementType = "FILTER_CONTROL"
+	LayoutElementTypeParameterControl LayoutElementType = "PARAMETER_CONTROL"
+	LayoutElementTypeTextBox          LayoutElementType = "TEXT_BOX"
+)
+
+// Values returns all known values for LayoutElementType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LayoutElementType) Values() []LayoutElementType {
+	return []LayoutElementType{
+		"VISUAL",
+		"FILTER_CONTROL",
+		"PARAMETER_CONTROL",
+		"TEXT_BOX",
+	}
+}
+
+type LegendPosition string
+
+// Enum values for LegendPosition
+const (
+	LegendPositionAuto   LegendPosition = "AUTO"
+	LegendPositionRight  LegendPosition = "RIGHT"
+	LegendPositionBottom LegendPosition = "BOTTOM"
+	LegendPositionTop    LegendPosition = "TOP"
+)
+
+// Values returns all known values for LegendPosition. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LegendPosition) Values() []LegendPosition {
+	return []LegendPosition{
+		"AUTO",
+		"RIGHT",
+		"BOTTOM",
+		"TOP",
+	}
+}
+
+type LineChartLineStyle string
+
+// Enum values for LineChartLineStyle
+const (
+	LineChartLineStyleSolid  LineChartLineStyle = "SOLID"
+	LineChartLineStyleDotted LineChartLineStyle = "DOTTED"
+	LineChartLineStyleDashed LineChartLineStyle = "DASHED"
+)
+
+// Values returns all known values for LineChartLineStyle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LineChartLineStyle) Values() []LineChartLineStyle {
+	return []LineChartLineStyle{
+		"SOLID",
+		"DOTTED",
+		"DASHED",
+	}
+}
+
+type LineChartMarkerShape string
+
+// Enum values for LineChartMarkerShape
+const (
+	LineChartMarkerShapeCircle        LineChartMarkerShape = "CIRCLE"
+	LineChartMarkerShapeTriangle      LineChartMarkerShape = "TRIANGLE"
+	LineChartMarkerShapeSquare        LineChartMarkerShape = "SQUARE"
+	LineChartMarkerShapeDiamond       LineChartMarkerShape = "DIAMOND"
+	LineChartMarkerShapeRoundedSquare LineChartMarkerShape = "ROUNDED_SQUARE"
+)
+
+// Values returns all known values for LineChartMarkerShape. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LineChartMarkerShape) Values() []LineChartMarkerShape {
+	return []LineChartMarkerShape{
+		"CIRCLE",
+		"TRIANGLE",
+		"SQUARE",
+		"DIAMOND",
+		"ROUNDED_SQUARE",
+	}
+}
+
+type LineChartType string
+
+// Enum values for LineChartType
+const (
+	LineChartTypeLine        LineChartType = "LINE"
+	LineChartTypeArea        LineChartType = "AREA"
+	LineChartTypeStackedArea LineChartType = "STACKED_AREA"
+)
+
+// Values returns all known values for LineChartType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LineChartType) Values() []LineChartType {
+	return []LineChartType{
+		"LINE",
+		"AREA",
+		"STACKED_AREA",
+	}
+}
+
+type LineInterpolation string
+
+// Enum values for LineInterpolation
+const (
+	LineInterpolationLinear  LineInterpolation = "LINEAR"
+	LineInterpolationSmooth  LineInterpolation = "SMOOTH"
+	LineInterpolationStepped LineInterpolation = "STEPPED"
+)
+
+// Values returns all known values for LineInterpolation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LineInterpolation) Values() []LineInterpolation {
+	return []LineInterpolation{
+		"LINEAR",
+		"SMOOTH",
+		"STEPPED",
+	}
+}
+
+type MapZoomMode string
+
+// Enum values for MapZoomMode
+const (
+	MapZoomModeAuto   MapZoomMode = "AUTO"
+	MapZoomModeManual MapZoomMode = "MANUAL"
+)
+
+// Values returns all known values for MapZoomMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MapZoomMode) Values() []MapZoomMode {
+	return []MapZoomMode{
+		"AUTO",
+		"MANUAL",
+	}
+}
+
+type MaximumMinimumComputationType string
+
+// Enum values for MaximumMinimumComputationType
+const (
+	MaximumMinimumComputationTypeMaximum MaximumMinimumComputationType = "MAXIMUM"
+	MaximumMinimumComputationTypeMinimum MaximumMinimumComputationType = "MINIMUM"
+)
+
+// Values returns all known values for MaximumMinimumComputationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MaximumMinimumComputationType) Values() []MaximumMinimumComputationType {
+	return []MaximumMinimumComputationType{
+		"MAXIMUM",
+		"MINIMUM",
+	}
+}
+
 type MemberType string
 
 // Enum values for MemberType
@@ -927,6 +1823,26 @@ func (MemberType) Values() []MemberType {
 		"DASHBOARD",
 		"ANALYSIS",
 		"DATASET",
+	}
+}
+
+type MissingDataTreatmentOption string
+
+// Enum values for MissingDataTreatmentOption
+const (
+	MissingDataTreatmentOptionInterpolate MissingDataTreatmentOption = "INTERPOLATE"
+	MissingDataTreatmentOptionShowAsZero  MissingDataTreatmentOption = "SHOW_AS_ZERO"
+	MissingDataTreatmentOptionShowAsBlank MissingDataTreatmentOption = "SHOW_AS_BLANK"
+)
+
+// Values returns all known values for MissingDataTreatmentOption. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MissingDataTreatmentOption) Values() []MissingDataTreatmentOption {
+	return []MissingDataTreatmentOption{
+		"INTERPOLATE",
+		"SHOW_AS_ZERO",
+		"SHOW_AS_BLANK",
 	}
 }
 
@@ -969,6 +1885,439 @@ func (NamespaceStatus) Values() []NamespaceStatus {
 		"DELETING",
 		"RETRYABLE_FAILURE",
 		"NON_RETRYABLE_FAILURE",
+	}
+}
+
+type NegativeValueDisplayMode string
+
+// Enum values for NegativeValueDisplayMode
+const (
+	NegativeValueDisplayModePositive NegativeValueDisplayMode = "POSITIVE"
+	NegativeValueDisplayModeNegative NegativeValueDisplayMode = "NEGATIVE"
+)
+
+// Values returns all known values for NegativeValueDisplayMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NegativeValueDisplayMode) Values() []NegativeValueDisplayMode {
+	return []NegativeValueDisplayMode{
+		"POSITIVE",
+		"NEGATIVE",
+	}
+}
+
+type NumberScale string
+
+// Enum values for NumberScale
+const (
+	NumberScaleNone      NumberScale = "NONE"
+	NumberScaleAuto      NumberScale = "AUTO"
+	NumberScaleThousands NumberScale = "THOUSANDS"
+	NumberScaleMillions  NumberScale = "MILLIONS"
+	NumberScaleBillions  NumberScale = "BILLIONS"
+	NumberScaleTrillions NumberScale = "TRILLIONS"
+)
+
+// Values returns all known values for NumberScale. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (NumberScale) Values() []NumberScale {
+	return []NumberScale{
+		"NONE",
+		"AUTO",
+		"THOUSANDS",
+		"MILLIONS",
+		"BILLIONS",
+		"TRILLIONS",
+	}
+}
+
+type NumericEqualityMatchOperator string
+
+// Enum values for NumericEqualityMatchOperator
+const (
+	NumericEqualityMatchOperatorEquals       NumericEqualityMatchOperator = "EQUALS"
+	NumericEqualityMatchOperatorDoesNotEqual NumericEqualityMatchOperator = "DOES_NOT_EQUAL"
+)
+
+// Values returns all known values for NumericEqualityMatchOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NumericEqualityMatchOperator) Values() []NumericEqualityMatchOperator {
+	return []NumericEqualityMatchOperator{
+		"EQUALS",
+		"DOES_NOT_EQUAL",
+	}
+}
+
+type NumericFilterSelectAllOptions string
+
+// Enum values for NumericFilterSelectAllOptions
+const (
+	NumericFilterSelectAllOptionsFilterAllValues NumericFilterSelectAllOptions = "FILTER_ALL_VALUES"
+)
+
+// Values returns all known values for NumericFilterSelectAllOptions. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (NumericFilterSelectAllOptions) Values() []NumericFilterSelectAllOptions {
+	return []NumericFilterSelectAllOptions{
+		"FILTER_ALL_VALUES",
+	}
+}
+
+type NumericSeparatorSymbol string
+
+// Enum values for NumericSeparatorSymbol
+const (
+	NumericSeparatorSymbolComma NumericSeparatorSymbol = "COMMA"
+	NumericSeparatorSymbolDot   NumericSeparatorSymbol = "DOT"
+	NumericSeparatorSymbolSpace NumericSeparatorSymbol = "SPACE"
+)
+
+// Values returns all known values for NumericSeparatorSymbol. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NumericSeparatorSymbol) Values() []NumericSeparatorSymbol {
+	return []NumericSeparatorSymbol{
+		"COMMA",
+		"DOT",
+		"SPACE",
+	}
+}
+
+type OtherCategories string
+
+// Enum values for OtherCategories
+const (
+	OtherCategoriesInclude OtherCategories = "INCLUDE"
+	OtherCategoriesExclude OtherCategories = "EXCLUDE"
+)
+
+// Values returns all known values for OtherCategories. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OtherCategories) Values() []OtherCategories {
+	return []OtherCategories{
+		"INCLUDE",
+		"EXCLUDE",
+	}
+}
+
+type PanelBorderStyle string
+
+// Enum values for PanelBorderStyle
+const (
+	PanelBorderStyleSolid  PanelBorderStyle = "SOLID"
+	PanelBorderStyleDashed PanelBorderStyle = "DASHED"
+	PanelBorderStyleDotted PanelBorderStyle = "DOTTED"
+)
+
+// Values returns all known values for PanelBorderStyle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PanelBorderStyle) Values() []PanelBorderStyle {
+	return []PanelBorderStyle{
+		"SOLID",
+		"DASHED",
+		"DOTTED",
+	}
+}
+
+type PaperOrientation string
+
+// Enum values for PaperOrientation
+const (
+	PaperOrientationPortrait  PaperOrientation = "PORTRAIT"
+	PaperOrientationLandscape PaperOrientation = "LANDSCAPE"
+)
+
+// Values returns all known values for PaperOrientation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PaperOrientation) Values() []PaperOrientation {
+	return []PaperOrientation{
+		"PORTRAIT",
+		"LANDSCAPE",
+	}
+}
+
+type PaperSize string
+
+// Enum values for PaperSize
+const (
+	PaperSizeUsLetter        PaperSize = "US_LETTER"
+	PaperSizeUsLegal         PaperSize = "US_LEGAL"
+	PaperSizeUsTabloidLedger PaperSize = "US_TABLOID_LEDGER"
+	PaperSizeA0              PaperSize = "A0"
+	PaperSizeA1              PaperSize = "A1"
+	PaperSizeA2              PaperSize = "A2"
+	PaperSizeA3              PaperSize = "A3"
+	PaperSizeA4              PaperSize = "A4"
+	PaperSizeA5              PaperSize = "A5"
+	PaperSizeJisB4           PaperSize = "JIS_B4"
+	PaperSizeJisB5           PaperSize = "JIS_B5"
+)
+
+// Values returns all known values for PaperSize. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (PaperSize) Values() []PaperSize {
+	return []PaperSize{
+		"US_LETTER",
+		"US_LEGAL",
+		"US_TABLOID_LEDGER",
+		"A0",
+		"A1",
+		"A2",
+		"A3",
+		"A4",
+		"A5",
+		"JIS_B4",
+		"JIS_B5",
+	}
+}
+
+type ParameterValueType string
+
+// Enum values for ParameterValueType
+const (
+	ParameterValueTypeMultiValued  ParameterValueType = "MULTI_VALUED"
+	ParameterValueTypeSingleValued ParameterValueType = "SINGLE_VALUED"
+)
+
+// Values returns all known values for ParameterValueType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterValueType) Values() []ParameterValueType {
+	return []ParameterValueType{
+		"MULTI_VALUED",
+		"SINGLE_VALUED",
+	}
+}
+
+type PivotTableConditionalFormattingScopeRole string
+
+// Enum values for PivotTableConditionalFormattingScopeRole
+const (
+	PivotTableConditionalFormattingScopeRoleField      PivotTableConditionalFormattingScopeRole = "FIELD"
+	PivotTableConditionalFormattingScopeRoleFieldTotal PivotTableConditionalFormattingScopeRole = "FIELD_TOTAL"
+	PivotTableConditionalFormattingScopeRoleGrandTotal PivotTableConditionalFormattingScopeRole = "GRAND_TOTAL"
+)
+
+// Values returns all known values for PivotTableConditionalFormattingScopeRole.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PivotTableConditionalFormattingScopeRole) Values() []PivotTableConditionalFormattingScopeRole {
+	return []PivotTableConditionalFormattingScopeRole{
+		"FIELD",
+		"FIELD_TOTAL",
+		"GRAND_TOTAL",
+	}
+}
+
+type PivotTableMetricPlacement string
+
+// Enum values for PivotTableMetricPlacement
+const (
+	PivotTableMetricPlacementRow    PivotTableMetricPlacement = "ROW"
+	PivotTableMetricPlacementColumn PivotTableMetricPlacement = "COLUMN"
+)
+
+// Values returns all known values for PivotTableMetricPlacement. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PivotTableMetricPlacement) Values() []PivotTableMetricPlacement {
+	return []PivotTableMetricPlacement{
+		"ROW",
+		"COLUMN",
+	}
+}
+
+type PivotTableSubtotalLevel string
+
+// Enum values for PivotTableSubtotalLevel
+const (
+	PivotTableSubtotalLevelAll    PivotTableSubtotalLevel = "ALL"
+	PivotTableSubtotalLevelCustom PivotTableSubtotalLevel = "CUSTOM"
+	PivotTableSubtotalLevelLast   PivotTableSubtotalLevel = "LAST"
+)
+
+// Values returns all known values for PivotTableSubtotalLevel. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PivotTableSubtotalLevel) Values() []PivotTableSubtotalLevel {
+	return []PivotTableSubtotalLevel{
+		"ALL",
+		"CUSTOM",
+		"LAST",
+	}
+}
+
+type PrimaryValueDisplayType string
+
+// Enum values for PrimaryValueDisplayType
+const (
+	PrimaryValueDisplayTypeHidden     PrimaryValueDisplayType = "HIDDEN"
+	PrimaryValueDisplayTypeComparison PrimaryValueDisplayType = "COMPARISON"
+	PrimaryValueDisplayTypeActual     PrimaryValueDisplayType = "ACTUAL"
+)
+
+// Values returns all known values for PrimaryValueDisplayType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PrimaryValueDisplayType) Values() []PrimaryValueDisplayType {
+	return []PrimaryValueDisplayType{
+		"HIDDEN",
+		"COMPARISON",
+		"ACTUAL",
+	}
+}
+
+type ReferenceLineLabelHorizontalPosition string
+
+// Enum values for ReferenceLineLabelHorizontalPosition
+const (
+	ReferenceLineLabelHorizontalPositionLeft   ReferenceLineLabelHorizontalPosition = "LEFT"
+	ReferenceLineLabelHorizontalPositionCenter ReferenceLineLabelHorizontalPosition = "CENTER"
+	ReferenceLineLabelHorizontalPositionRight  ReferenceLineLabelHorizontalPosition = "RIGHT"
+)
+
+// Values returns all known values for ReferenceLineLabelHorizontalPosition. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReferenceLineLabelHorizontalPosition) Values() []ReferenceLineLabelHorizontalPosition {
+	return []ReferenceLineLabelHorizontalPosition{
+		"LEFT",
+		"CENTER",
+		"RIGHT",
+	}
+}
+
+type ReferenceLineLabelVerticalPosition string
+
+// Enum values for ReferenceLineLabelVerticalPosition
+const (
+	ReferenceLineLabelVerticalPositionAbove ReferenceLineLabelVerticalPosition = "ABOVE"
+	ReferenceLineLabelVerticalPositionBelow ReferenceLineLabelVerticalPosition = "BELOW"
+)
+
+// Values returns all known values for ReferenceLineLabelVerticalPosition. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReferenceLineLabelVerticalPosition) Values() []ReferenceLineLabelVerticalPosition {
+	return []ReferenceLineLabelVerticalPosition{
+		"ABOVE",
+		"BELOW",
+	}
+}
+
+type ReferenceLinePatternType string
+
+// Enum values for ReferenceLinePatternType
+const (
+	ReferenceLinePatternTypeSolid  ReferenceLinePatternType = "SOLID"
+	ReferenceLinePatternTypeDashed ReferenceLinePatternType = "DASHED"
+	ReferenceLinePatternTypeDotted ReferenceLinePatternType = "DOTTED"
+)
+
+// Values returns all known values for ReferenceLinePatternType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReferenceLinePatternType) Values() []ReferenceLinePatternType {
+	return []ReferenceLinePatternType{
+		"SOLID",
+		"DASHED",
+		"DOTTED",
+	}
+}
+
+type ReferenceLineValueLabelRelativePosition string
+
+// Enum values for ReferenceLineValueLabelRelativePosition
+const (
+	ReferenceLineValueLabelRelativePositionBeforeCustomLabel ReferenceLineValueLabelRelativePosition = "BEFORE_CUSTOM_LABEL"
+	ReferenceLineValueLabelRelativePositionAfterCustomLabel  ReferenceLineValueLabelRelativePosition = "AFTER_CUSTOM_LABEL"
+)
+
+// Values returns all known values for ReferenceLineValueLabelRelativePosition.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ReferenceLineValueLabelRelativePosition) Values() []ReferenceLineValueLabelRelativePosition {
+	return []ReferenceLineValueLabelRelativePosition{
+		"BEFORE_CUSTOM_LABEL",
+		"AFTER_CUSTOM_LABEL",
+	}
+}
+
+type RelativeDateType string
+
+// Enum values for RelativeDateType
+const (
+	RelativeDateTypePrevious RelativeDateType = "PREVIOUS"
+	RelativeDateTypeThis     RelativeDateType = "THIS"
+	RelativeDateTypeLast     RelativeDateType = "LAST"
+	RelativeDateTypeNow      RelativeDateType = "NOW"
+	RelativeDateTypeNext     RelativeDateType = "NEXT"
+)
+
+// Values returns all known values for RelativeDateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RelativeDateType) Values() []RelativeDateType {
+	return []RelativeDateType{
+		"PREVIOUS",
+		"THIS",
+		"LAST",
+		"NOW",
+		"NEXT",
+	}
+}
+
+type RelativeFontSize string
+
+// Enum values for RelativeFontSize
+const (
+	RelativeFontSizeExtraSmall RelativeFontSize = "EXTRA_SMALL"
+	RelativeFontSizeSmall      RelativeFontSize = "SMALL"
+	RelativeFontSizeMedium     RelativeFontSize = "MEDIUM"
+	RelativeFontSizeLarge      RelativeFontSize = "LARGE"
+	RelativeFontSizeExtraLarge RelativeFontSize = "EXTRA_LARGE"
+)
+
+// Values returns all known values for RelativeFontSize. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RelativeFontSize) Values() []RelativeFontSize {
+	return []RelativeFontSize{
+		"EXTRA_SMALL",
+		"SMALL",
+		"MEDIUM",
+		"LARGE",
+		"EXTRA_LARGE",
+	}
+}
+
+type ResizeOption string
+
+// Enum values for ResizeOption
+const (
+	ResizeOptionFixed      ResizeOption = "FIXED"
+	ResizeOptionResponsive ResizeOption = "RESPONSIVE"
+)
+
+// Values returns all known values for ResizeOption. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResizeOption) Values() []ResizeOption {
+	return []ResizeOption{
+		"FIXED",
+		"RESPONSIVE",
 	}
 }
 
@@ -1037,6 +2386,202 @@ func (RowLevelPermissionPolicy) Values() []RowLevelPermissionPolicy {
 	}
 }
 
+type SectionPageBreakStatus string
+
+// Enum values for SectionPageBreakStatus
+const (
+	SectionPageBreakStatusEnabled  SectionPageBreakStatus = "ENABLED"
+	SectionPageBreakStatusDisabled SectionPageBreakStatus = "DISABLED"
+)
+
+// Values returns all known values for SectionPageBreakStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SectionPageBreakStatus) Values() []SectionPageBreakStatus {
+	return []SectionPageBreakStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type SelectAllValueOptions string
+
+// Enum values for SelectAllValueOptions
+const (
+	SelectAllValueOptionsAllValues SelectAllValueOptions = "ALL_VALUES"
+)
+
+// Values returns all known values for SelectAllValueOptions. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SelectAllValueOptions) Values() []SelectAllValueOptions {
+	return []SelectAllValueOptions{
+		"ALL_VALUES",
+	}
+}
+
+type SelectedFieldOptions string
+
+// Enum values for SelectedFieldOptions
+const (
+	SelectedFieldOptionsAllFields SelectedFieldOptions = "ALL_FIELDS"
+)
+
+// Values returns all known values for SelectedFieldOptions. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SelectedFieldOptions) Values() []SelectedFieldOptions {
+	return []SelectedFieldOptions{
+		"ALL_FIELDS",
+	}
+}
+
+type SelectedTooltipType string
+
+// Enum values for SelectedTooltipType
+const (
+	SelectedTooltipTypeBasic    SelectedTooltipType = "BASIC"
+	SelectedTooltipTypeDetailed SelectedTooltipType = "DETAILED"
+)
+
+// Values returns all known values for SelectedTooltipType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SelectedTooltipType) Values() []SelectedTooltipType {
+	return []SelectedTooltipType{
+		"BASIC",
+		"DETAILED",
+	}
+}
+
+type SheetContentType string
+
+// Enum values for SheetContentType
+const (
+	SheetContentTypePaginated   SheetContentType = "PAGINATED"
+	SheetContentTypeInteractive SheetContentType = "INTERACTIVE"
+)
+
+// Values returns all known values for SheetContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SheetContentType) Values() []SheetContentType {
+	return []SheetContentType{
+		"PAGINATED",
+		"INTERACTIVE",
+	}
+}
+
+type SheetControlDateTimePickerType string
+
+// Enum values for SheetControlDateTimePickerType
+const (
+	SheetControlDateTimePickerTypeSingleValued SheetControlDateTimePickerType = "SINGLE_VALUED"
+	SheetControlDateTimePickerTypeDateRange    SheetControlDateTimePickerType = "DATE_RANGE"
+)
+
+// Values returns all known values for SheetControlDateTimePickerType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SheetControlDateTimePickerType) Values() []SheetControlDateTimePickerType {
+	return []SheetControlDateTimePickerType{
+		"SINGLE_VALUED",
+		"DATE_RANGE",
+	}
+}
+
+type SheetControlListType string
+
+// Enum values for SheetControlListType
+const (
+	SheetControlListTypeMultiSelect  SheetControlListType = "MULTI_SELECT"
+	SheetControlListTypeSingleSelect SheetControlListType = "SINGLE_SELECT"
+)
+
+// Values returns all known values for SheetControlListType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SheetControlListType) Values() []SheetControlListType {
+	return []SheetControlListType{
+		"MULTI_SELECT",
+		"SINGLE_SELECT",
+	}
+}
+
+type SheetControlSliderType string
+
+// Enum values for SheetControlSliderType
+const (
+	SheetControlSliderTypeSinglePoint SheetControlSliderType = "SINGLE_POINT"
+	SheetControlSliderTypeRange       SheetControlSliderType = "RANGE"
+)
+
+// Values returns all known values for SheetControlSliderType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SheetControlSliderType) Values() []SheetControlSliderType {
+	return []SheetControlSliderType{
+		"SINGLE_POINT",
+		"RANGE",
+	}
+}
+
+type SimpleNumericalAggregationFunction string
+
+// Enum values for SimpleNumericalAggregationFunction
+const (
+	SimpleNumericalAggregationFunctionSum           SimpleNumericalAggregationFunction = "SUM"
+	SimpleNumericalAggregationFunctionAverage       SimpleNumericalAggregationFunction = "AVERAGE"
+	SimpleNumericalAggregationFunctionMin           SimpleNumericalAggregationFunction = "MIN"
+	SimpleNumericalAggregationFunctionMax           SimpleNumericalAggregationFunction = "MAX"
+	SimpleNumericalAggregationFunctionCount         SimpleNumericalAggregationFunction = "COUNT"
+	SimpleNumericalAggregationFunctionDistinctCount SimpleNumericalAggregationFunction = "DISTINCT_COUNT"
+	SimpleNumericalAggregationFunctionVar           SimpleNumericalAggregationFunction = "VAR"
+	SimpleNumericalAggregationFunctionVarp          SimpleNumericalAggregationFunction = "VARP"
+	SimpleNumericalAggregationFunctionStdev         SimpleNumericalAggregationFunction = "STDEV"
+	SimpleNumericalAggregationFunctionStdevp        SimpleNumericalAggregationFunction = "STDEVP"
+	SimpleNumericalAggregationFunctionMedian        SimpleNumericalAggregationFunction = "MEDIAN"
+)
+
+// Values returns all known values for SimpleNumericalAggregationFunction. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SimpleNumericalAggregationFunction) Values() []SimpleNumericalAggregationFunction {
+	return []SimpleNumericalAggregationFunction{
+		"SUM",
+		"AVERAGE",
+		"MIN",
+		"MAX",
+		"COUNT",
+		"DISTINCT_COUNT",
+		"VAR",
+		"VARP",
+		"STDEV",
+		"STDEVP",
+		"MEDIAN",
+	}
+}
+
+type SortDirection string
+
+// Enum values for SortDirection
+const (
+	SortDirectionAsc  SortDirection = "ASC"
+	SortDirectionDesc SortDirection = "DESC"
+)
+
+// Values returns all known values for SortDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SortDirection) Values() []SortDirection {
+	return []SortDirection{
+		"ASC",
+		"DESC",
+	}
+}
+
 type Status string
 
 // Enum values for Status
@@ -1052,6 +2597,131 @@ func (Status) Values() []Status {
 	return []Status{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type TableBorderStyle string
+
+// Enum values for TableBorderStyle
+const (
+	TableBorderStyleNone  TableBorderStyle = "NONE"
+	TableBorderStyleSolid TableBorderStyle = "SOLID"
+)
+
+// Values returns all known values for TableBorderStyle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TableBorderStyle) Values() []TableBorderStyle {
+	return []TableBorderStyle{
+		"NONE",
+		"SOLID",
+	}
+}
+
+type TableCellImageScalingConfiguration string
+
+// Enum values for TableCellImageScalingConfiguration
+const (
+	TableCellImageScalingConfigurationFitToCellHeight TableCellImageScalingConfiguration = "FIT_TO_CELL_HEIGHT"
+	TableCellImageScalingConfigurationFitToCellWidth  TableCellImageScalingConfiguration = "FIT_TO_CELL_WIDTH"
+	TableCellImageScalingConfigurationDoNotScale      TableCellImageScalingConfiguration = "DO_NOT_SCALE"
+)
+
+// Values returns all known values for TableCellImageScalingConfiguration. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TableCellImageScalingConfiguration) Values() []TableCellImageScalingConfiguration {
+	return []TableCellImageScalingConfiguration{
+		"FIT_TO_CELL_HEIGHT",
+		"FIT_TO_CELL_WIDTH",
+		"DO_NOT_SCALE",
+	}
+}
+
+type TableFieldIconSetType string
+
+// Enum values for TableFieldIconSetType
+const (
+	TableFieldIconSetTypeLink TableFieldIconSetType = "LINK"
+)
+
+// Values returns all known values for TableFieldIconSetType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TableFieldIconSetType) Values() []TableFieldIconSetType {
+	return []TableFieldIconSetType{
+		"LINK",
+	}
+}
+
+type TableOrientation string
+
+// Enum values for TableOrientation
+const (
+	TableOrientationVertical   TableOrientation = "VERTICAL"
+	TableOrientationHorizontal TableOrientation = "HORIZONTAL"
+)
+
+// Values returns all known values for TableOrientation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TableOrientation) Values() []TableOrientation {
+	return []TableOrientation{
+		"VERTICAL",
+		"HORIZONTAL",
+	}
+}
+
+type TableTotalsPlacement string
+
+// Enum values for TableTotalsPlacement
+const (
+	TableTotalsPlacementStart TableTotalsPlacement = "START"
+	TableTotalsPlacementEnd   TableTotalsPlacement = "END"
+)
+
+// Values returns all known values for TableTotalsPlacement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TableTotalsPlacement) Values() []TableTotalsPlacement {
+	return []TableTotalsPlacement{
+		"START",
+		"END",
+	}
+}
+
+type TableTotalsScrollStatus string
+
+// Enum values for TableTotalsScrollStatus
+const (
+	TableTotalsScrollStatusPinned   TableTotalsScrollStatus = "PINNED"
+	TableTotalsScrollStatusScrolled TableTotalsScrollStatus = "SCROLLED"
+)
+
+// Values returns all known values for TableTotalsScrollStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TableTotalsScrollStatus) Values() []TableTotalsScrollStatus {
+	return []TableTotalsScrollStatus{
+		"PINNED",
+		"SCROLLED",
+	}
+}
+
+type TargetVisualOptions string
+
+// Enum values for TargetVisualOptions
+const (
+	TargetVisualOptionsAllVisuals TargetVisualOptions = "ALL_VISUALS"
+)
+
+// Values returns all known values for TargetVisualOptions. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TargetVisualOptions) Values() []TargetVisualOptions {
+	return []TargetVisualOptions{
+		"ALL_VISUALS",
 	}
 }
 
@@ -1095,6 +2765,24 @@ func (TextQualifier) Values() []TextQualifier {
 	}
 }
 
+type TextWrap string
+
+// Enum values for TextWrap
+const (
+	TextWrapNone TextWrap = "NONE"
+	TextWrapWrap TextWrap = "WRAP"
+)
+
+// Values returns all known values for TextWrap. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TextWrap) Values() []TextWrap {
+	return []TextWrap{
+		"NONE",
+		"WRAP",
+	}
+}
+
 type ThemeErrorType string
 
 // Enum values for ThemeErrorType
@@ -1131,6 +2819,112 @@ func (ThemeType) Values() []ThemeType {
 	}
 }
 
+type TimeGranularity string
+
+// Enum values for TimeGranularity
+const (
+	TimeGranularityYear        TimeGranularity = "YEAR"
+	TimeGranularityQuarter     TimeGranularity = "QUARTER"
+	TimeGranularityMonth       TimeGranularity = "MONTH"
+	TimeGranularityWeek        TimeGranularity = "WEEK"
+	TimeGranularityDay         TimeGranularity = "DAY"
+	TimeGranularityHour        TimeGranularity = "HOUR"
+	TimeGranularityMinute      TimeGranularity = "MINUTE"
+	TimeGranularitySecond      TimeGranularity = "SECOND"
+	TimeGranularityMillisecond TimeGranularity = "MILLISECOND"
+)
+
+// Values returns all known values for TimeGranularity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TimeGranularity) Values() []TimeGranularity {
+	return []TimeGranularity{
+		"YEAR",
+		"QUARTER",
+		"MONTH",
+		"WEEK",
+		"DAY",
+		"HOUR",
+		"MINUTE",
+		"SECOND",
+		"MILLISECOND",
+	}
+}
+
+type TooltipTitleType string
+
+// Enum values for TooltipTitleType
+const (
+	TooltipTitleTypeNone         TooltipTitleType = "NONE"
+	TooltipTitleTypePrimaryValue TooltipTitleType = "PRIMARY_VALUE"
+)
+
+// Values returns all known values for TooltipTitleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TooltipTitleType) Values() []TooltipTitleType {
+	return []TooltipTitleType{
+		"NONE",
+		"PRIMARY_VALUE",
+	}
+}
+
+type TopBottomComputationType string
+
+// Enum values for TopBottomComputationType
+const (
+	TopBottomComputationTypeTop    TopBottomComputationType = "TOP"
+	TopBottomComputationTypeBottom TopBottomComputationType = "BOTTOM"
+)
+
+// Values returns all known values for TopBottomComputationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TopBottomComputationType) Values() []TopBottomComputationType {
+	return []TopBottomComputationType{
+		"TOP",
+		"BOTTOM",
+	}
+}
+
+type TopBottomSortOrder string
+
+// Enum values for TopBottomSortOrder
+const (
+	TopBottomSortOrderPercentDifference  TopBottomSortOrder = "PERCENT_DIFFERENCE"
+	TopBottomSortOrderAbsoluteDifference TopBottomSortOrder = "ABSOLUTE_DIFFERENCE"
+)
+
+// Values returns all known values for TopBottomSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TopBottomSortOrder) Values() []TopBottomSortOrder {
+	return []TopBottomSortOrder{
+		"PERCENT_DIFFERENCE",
+		"ABSOLUTE_DIFFERENCE",
+	}
+}
+
+type URLTargetConfiguration string
+
+// Enum values for URLTargetConfiguration
+const (
+	URLTargetConfigurationNewTab    URLTargetConfiguration = "NEW_TAB"
+	URLTargetConfigurationNewWindow URLTargetConfiguration = "NEW_WINDOW"
+	URLTargetConfigurationSameTab   URLTargetConfiguration = "SAME_TAB"
+)
+
+// Values returns all known values for URLTargetConfiguration. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (URLTargetConfiguration) Values() []URLTargetConfiguration {
+	return []URLTargetConfiguration{
+		"NEW_TAB",
+		"NEW_WINDOW",
+		"SAME_TAB",
+	}
+}
+
 type UserRole string
 
 // Enum values for UserRole
@@ -1152,5 +2946,191 @@ func (UserRole) Values() []UserRole {
 		"READER",
 		"RESTRICTED_AUTHOR",
 		"RESTRICTED_READER",
+	}
+}
+
+type ValueWhenUnsetOption string
+
+// Enum values for ValueWhenUnsetOption
+const (
+	ValueWhenUnsetOptionRecommendedValue ValueWhenUnsetOption = "RECOMMENDED_VALUE"
+	ValueWhenUnsetOptionNull             ValueWhenUnsetOption = "NULL"
+)
+
+// Values returns all known values for ValueWhenUnsetOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ValueWhenUnsetOption) Values() []ValueWhenUnsetOption {
+	return []ValueWhenUnsetOption{
+		"RECOMMENDED_VALUE",
+		"NULL",
+	}
+}
+
+type VerticalTextAlignment string
+
+// Enum values for VerticalTextAlignment
+const (
+	VerticalTextAlignmentTop    VerticalTextAlignment = "TOP"
+	VerticalTextAlignmentMiddle VerticalTextAlignment = "MIDDLE"
+	VerticalTextAlignmentBottom VerticalTextAlignment = "BOTTOM"
+)
+
+// Values returns all known values for VerticalTextAlignment. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VerticalTextAlignment) Values() []VerticalTextAlignment {
+	return []VerticalTextAlignment{
+		"TOP",
+		"MIDDLE",
+		"BOTTOM",
+	}
+}
+
+type Visibility string
+
+// Enum values for Visibility
+const (
+	VisibilityHidden  Visibility = "HIDDEN"
+	VisibilityVisible Visibility = "VISIBLE"
+)
+
+// Values returns all known values for Visibility. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Visibility) Values() []Visibility {
+	return []Visibility{
+		"HIDDEN",
+		"VISIBLE",
+	}
+}
+
+type VisualCustomActionTrigger string
+
+// Enum values for VisualCustomActionTrigger
+const (
+	VisualCustomActionTriggerDataPointClick VisualCustomActionTrigger = "DATA_POINT_CLICK"
+	VisualCustomActionTriggerDataPointMenu  VisualCustomActionTrigger = "DATA_POINT_MENU"
+)
+
+// Values returns all known values for VisualCustomActionTrigger. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VisualCustomActionTrigger) Values() []VisualCustomActionTrigger {
+	return []VisualCustomActionTrigger{
+		"DATA_POINT_CLICK",
+		"DATA_POINT_MENU",
+	}
+}
+
+type WidgetStatus string
+
+// Enum values for WidgetStatus
+const (
+	WidgetStatusEnabled  WidgetStatus = "ENABLED"
+	WidgetStatusDisabled WidgetStatus = "DISABLED"
+)
+
+// Values returns all known values for WidgetStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (WidgetStatus) Values() []WidgetStatus {
+	return []WidgetStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type WordCloudCloudLayout string
+
+// Enum values for WordCloudCloudLayout
+const (
+	WordCloudCloudLayoutFluid  WordCloudCloudLayout = "FLUID"
+	WordCloudCloudLayoutNormal WordCloudCloudLayout = "NORMAL"
+)
+
+// Values returns all known values for WordCloudCloudLayout. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WordCloudCloudLayout) Values() []WordCloudCloudLayout {
+	return []WordCloudCloudLayout{
+		"FLUID",
+		"NORMAL",
+	}
+}
+
+type WordCloudWordCasing string
+
+// Enum values for WordCloudWordCasing
+const (
+	WordCloudWordCasingLowerCase    WordCloudWordCasing = "LOWER_CASE"
+	WordCloudWordCasingExistingCase WordCloudWordCasing = "EXISTING_CASE"
+)
+
+// Values returns all known values for WordCloudWordCasing. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WordCloudWordCasing) Values() []WordCloudWordCasing {
+	return []WordCloudWordCasing{
+		"LOWER_CASE",
+		"EXISTING_CASE",
+	}
+}
+
+type WordCloudWordOrientation string
+
+// Enum values for WordCloudWordOrientation
+const (
+	WordCloudWordOrientationHorizontal            WordCloudWordOrientation = "HORIZONTAL"
+	WordCloudWordOrientationHorizontalAndVertical WordCloudWordOrientation = "HORIZONTAL_AND_VERTICAL"
+)
+
+// Values returns all known values for WordCloudWordOrientation. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WordCloudWordOrientation) Values() []WordCloudWordOrientation {
+	return []WordCloudWordOrientation{
+		"HORIZONTAL",
+		"HORIZONTAL_AND_VERTICAL",
+	}
+}
+
+type WordCloudWordPadding string
+
+// Enum values for WordCloudWordPadding
+const (
+	WordCloudWordPaddingNone   WordCloudWordPadding = "NONE"
+	WordCloudWordPaddingSmall  WordCloudWordPadding = "SMALL"
+	WordCloudWordPaddingMedium WordCloudWordPadding = "MEDIUM"
+	WordCloudWordPaddingLarge  WordCloudWordPadding = "LARGE"
+)
+
+// Values returns all known values for WordCloudWordPadding. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WordCloudWordPadding) Values() []WordCloudWordPadding {
+	return []WordCloudWordPadding{
+		"NONE",
+		"SMALL",
+		"MEDIUM",
+		"LARGE",
+	}
+}
+
+type WordCloudWordScaling string
+
+// Enum values for WordCloudWordScaling
+const (
+	WordCloudWordScalingEmphasize WordCloudWordScaling = "EMPHASIZE"
+	WordCloudWordScalingNormal    WordCloudWordScaling = "NORMAL"
+)
+
+// Values returns all known values for WordCloudWordScaling. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WordCloudWordScaling) Values() []WordCloudWordScaling {
+	return []WordCloudWordScaling{
+		"EMPHASIZE",
+		"NORMAL",
 	}
 }

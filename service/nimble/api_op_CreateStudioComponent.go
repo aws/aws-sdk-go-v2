@@ -46,8 +46,9 @@ type CreateStudioComponentInput struct {
 	Type types.StudioComponentType
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. If you don’t specify a client token, the AWS SDK automatically
-	// generates a client token and uses it for the request to ensure idempotency.
+	// the request. If you don’t specify a client token, the Amazon Web Services SDK
+	// automatically generates a client token and uses it for the request to ensure
+	// idempotency.
 	ClientToken *string
 
 	// The configuration of the studio component, based on component type.
@@ -63,21 +64,22 @@ type CreateStudioComponentInput struct {
 	InitializationScripts []types.StudioComponentInitializationScript
 
 	// An IAM role attached to a Studio Component that gives the studio component
-	// access to AWS resources at anytime while the instance is running.
+	// access to Amazon Web Services resources at anytime while the instance is
+	// running.
 	RuntimeRoleArn *string
 
 	// Parameters for the studio component scripts.
 	ScriptParameters []types.ScriptParameterKeyValue
 
 	// An IAM role attached to Studio Component when the system initialization script
-	// runs which give the studio component access to AWS resources when the system
-	// initialization script runs.
+	// runs which give the studio component access to Amazon Web Services resources
+	// when the system initialization script runs.
 	SecureInitializationRoleArn *string
 
 	// The specific subtype of a studio component.
 	Subtype types.StudioComponentSubtype
 
-	// A collection of labels, in the form of key:value pairs, that apply to this
+	// A collection of labels, in the form of key-value pairs, that apply to this
 	// resource.
 	Tags map[string]string
 

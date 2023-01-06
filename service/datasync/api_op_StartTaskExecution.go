@@ -11,12 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts a specific invocation of a task. A TaskExecution value represents an
-// individual run of a task. Each task can have at most one TaskExecution at a
-// time. TaskExecution has the following transition phases: INITIALIZING |
-// PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. For detailed
-// information, see the Task Execution section in the Components and Terminology
-// topic in the DataSync User Guide.
+// Starts an DataSync task. For each task, you can only run one task execution at a
+// time. There are several phases to a task execution. For more information, see
+// Task execution statuses
+// (https://docs.aws.amazon.com/datasync/latest/userguide/working-with-task-executions.html#understand-task-execution-statuses).
 func (c *Client) StartTaskExecution(ctx context.Context, params *StartTaskExecutionInput, optFns ...func(*Options)) (*StartTaskExecutionOutput, error) {
 	if params == nil {
 		params = &StartTaskExecutionInput{}
@@ -35,35 +33,34 @@ func (c *Client) StartTaskExecution(ctx context.Context, params *StartTaskExecut
 // StartTaskExecutionRequest
 type StartTaskExecutionInput struct {
 
-	// The Amazon Resource Name (ARN) of the task to start.
+	// Specifies the Amazon Resource Name (ARN) of the task that you want to start.
 	//
 	// This member is required.
 	TaskArn *string
 
-	// A list of filter rules that determines which files to exclude from a task. The
-	// list contains a single filter string that consists of the patterns to exclude.
-	// The patterns are delimited by "|" (that is, a pipe), for example,
+	// Specifies a list of filter rules that determines which files to exclude from a
+	// task. The list contains a single filter string that consists of the patterns to
+	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
 	// "/folder1|/folder2".
 	Excludes []types.FilterRule
 
-	// A list of filter rules that determines which files to include when running a
-	// task. The pattern should contain a single filter string that consists of the
-	// patterns to include. The patterns are delimited by "|" (that is, a pipe), for
-	// example, "/folder1|/folder2".
+	// Specifies a list of filter rules that determines which files to include when
+	// running a task. The pattern should contain a single filter string that consists
+	// of the patterns to include. The patterns are delimited by "|" (that is, a pipe),
+	// for example, "/folder1|/folder2".
 	Includes []types.FilterRule
 
-	// Represents the options that are available to control the behavior of a
-	// StartTaskExecution
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
-	// operation. Behavior includes preserving metadata such as user ID (UID), group ID
-	// (GID), and file permissions, and also overwriting files in the destination, data
-	// integrity verification, and so on. A task has a set of default options
-	// associated with it. If you don't specify an option in StartTaskExecution
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html),
-	// the default value is used. You can override the defaults options on each task
-	// execution by specifying an overriding Options value to StartTaskExecution
-	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html).
+	// Configures your DataSync task settings. These options include how DataSync
+	// handles files, objects, and their associated metadata. You also can specify how
+	// DataSync verifies data integrity, set bandwidth limits for your task, among
+	// other options. Each task setting has a default value. Unless you need to, you
+	// don't have to configure any of these Options before starting your task.
 	OverrideOptions *types.Options
+
+	// Specifies the tags that you want to apply to the Amazon Resource Name (ARN)
+	// representing the task execution. Tags are key-value pairs that help you manage,
+	// filter, and search for your DataSync resources.
+	Tags []types.TagListEntry
 
 	noSmithyDocumentSerde
 }
@@ -71,7 +68,7 @@ type StartTaskExecutionInput struct {
 // StartTaskExecutionResponse
 type StartTaskExecutionOutput struct {
 
-	// The Amazon Resource Name (ARN) of the specific task execution that was started.
+	// The ARN of the running task execution.
 	TaskExecutionArn *string
 
 	// Metadata pertaining to the operation's result.
