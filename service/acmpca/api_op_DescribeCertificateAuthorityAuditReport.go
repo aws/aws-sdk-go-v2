@@ -18,12 +18,12 @@ import (
 
 // Lists information about a specific audit report created by calling the
 // CreateCertificateAuthorityAuditReport
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
 // action. Audit information is created every time the certificate authority (CA)
 // private key is used. The private key is used when you call the IssueCertificate
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html)
 // action or the RevokeCertificate
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_RevokeCertificate.html)
 // action.
 func (c *Client) DescribeCertificateAuthorityAuditReport(ctx context.Context, params *DescribeCertificateAuthorityAuditReportInput, optFns ...func(*Options)) (*DescribeCertificateAuthorityAuditReportOutput, error) {
 	if params == nil {
@@ -43,7 +43,7 @@ func (c *Client) DescribeCertificateAuthorityAuditReport(ctx context.Context, pa
 type DescribeCertificateAuthorityAuditReportInput struct {
 
 	// The report ID returned by calling the CreateCertificateAuthorityAuditReport
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
+	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
 	// action.
 	//
 	// This member is required.

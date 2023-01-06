@@ -15,9 +15,9 @@ import (
 // Manager settings, you continue to have access to the evidence that you
 // previously collected under that account. This is also the case when you
 // deregister a delegated administrator from Organizations. However, Audit Manager
-// will stop collecting and attaching evidence to that delegated administrator
-// account moving forward. Keep in mind the following cleanup task if you use
-// evidence finder: Before you use your management account to remove a delegated
+// stops collecting and attaching evidence to that delegated administrator account
+// moving forward. Keep in mind the following cleanup task if you use evidence
+// finder: Before you use your management account to remove a delegated
 // administrator, make sure that the current delegated administrator account signs
 // in to Audit Manager and disables evidence finder first. Disabling evidence
 // finder automatically deletes the event data store that was created in their
@@ -25,12 +25,12 @@ import (
 // event data store remains in their account. In this case, we recommend that the
 // original delegated administrator goes to CloudTrail Lake and manually deletes
 // the event data store
-// (https://docs.aws.amazon.com/userguide/awscloudtrail/latest/userguide/query-eds-disable-termination.html).
+// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-eds-disable-termination.html).
 // This cleanup task is necessary to ensure that you don't end up with multiple
-// event data stores. Audit Manager will ignore an unused event data store after
-// you remove or change a delegated administrator account. However, the unused
-// event data store continues to incur storage costs from CloudTrail Lake if you
-// don't delete it. When you deregister a delegated administrator account for Audit
+// event data stores. Audit Manager ignores an unused event data store after you
+// remove or change a delegated administrator account. However, the unused event
+// data store continues to incur storage costs from CloudTrail Lake if you don't
+// delete it. When you deregister a delegated administrator account for Audit
 // Manager, the data for that account isn’t deleted. If you want to delete resource
 // data for a delegated administrator account, you must perform that task
 // separately before you deregister the account. Either, you can do this in the
@@ -69,7 +69,9 @@ import (
 // in the Audit Manager User Guide)
 //
 // At this time, Audit Manager doesn't provide an
-// option to delete evidence. All available delete operations are listed above.
+// option to delete evidence for a specific delegated administrator. Instead, when
+// your management account deregisters Audit Manager, we perform a cleanup for the
+// current delegated administrator account at the time of deregistration.
 func (c *Client) DeregisterOrganizationAdminAccount(ctx context.Context, params *DeregisterOrganizationAdminAccountInput, optFns ...func(*Options)) (*DeregisterOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &DeregisterOrganizationAdminAccountInput{}

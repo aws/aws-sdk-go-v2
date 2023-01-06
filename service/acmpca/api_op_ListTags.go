@@ -16,9 +16,9 @@ import (
 // been shared with you. Tags are labels that you can use to identify and organize
 // your CAs. Each tag consists of a key and an optional value. Call the
 // TagCertificateAuthority
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_TagCertificateAuthority.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_TagCertificateAuthority.html)
 // action to add one or more tags to your CA. Call the UntagCertificateAuthority
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UntagCertificateAuthority.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_UntagCertificateAuthority.html)
 // action to remove tags.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
@@ -39,7 +39,7 @@ type ListTagsInput struct {
 
 	// The Amazon Resource Name (ARN) that was returned when you called the
 	// CreateCertificateAuthority
-	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+	// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 	// action. This must be of the form:
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	//

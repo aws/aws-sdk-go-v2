@@ -57,7 +57,7 @@ type UpdateAssessmentInput struct {
 
 type UpdateAssessmentOutput struct {
 
-	// The response object for the UpdateAssessmentRequest API. This is the name of the
+	// The response object for the UpdateAssessment API. This is the name of the
 	// updated assessment.
 	Assessment *types.Assessment
 

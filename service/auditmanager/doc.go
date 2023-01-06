@@ -26,7 +26,7 @@
 //
 // * Common parameters
 // (https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html):
-// Parameters that all Query operations can use.
+// Parameters that all operations can use.
 //
 // * Common errors
 // (https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html):

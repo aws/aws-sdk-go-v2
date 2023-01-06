@@ -3971,7 +3971,7 @@ func awsAwsjson11_deserializeDocumentCrlConfiguration(v **types.CrlConfiguration
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String253 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected CnameString to be of type string, got %T instead", value)
 				}
 				sv.CustomCname = ptr.String(jtv)
 			}
@@ -4002,7 +4002,7 @@ func awsAwsjson11_deserializeDocumentCrlConfiguration(v **types.CrlConfiguration
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String3To255 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected S3BucketName3To255 to be of type string, got %T instead", value)
 				}
 				sv.S3BucketName = ptr.String(jtv)
 			}
@@ -4876,7 +4876,7 @@ func awsAwsjson11_deserializeDocumentOcspConfiguration(v **types.OcspConfigurati
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String253 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected CnameString to be of type string, got %T instead", value)
 				}
 				sv.OcspCustomCname = ptr.String(jtv)
 			}

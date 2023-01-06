@@ -114,7 +114,7 @@ func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 
 // The token specified in the NextToken argument is not valid. Use the token
 // returned from your previous call to ListCertificateAuthorities
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListCertificateAuthorities.html).
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html).
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -248,8 +248,8 @@ func (e *InvalidTagException) ErrorCode() string {
 }
 func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An ACM Private CA quota has been exceeded. See the exception message returned to
-// determine the quota that was exceeded.
+// An Amazon Web Services Private CA quota has been exceeded. See the exception
+// message returned to determine the quota that was exceeded.
 type LimitExceededException struct {
 	Message *string
 

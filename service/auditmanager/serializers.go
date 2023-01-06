@@ -4342,6 +4342,13 @@ func awsRestjson1_serializeOpDocumentUpdateSettingsInput(v *UpdateSettingsInput,
 		}
 	}
 
+	if v.DeregistrationPolicy != nil {
+		ok := object.Key("deregistrationPolicy")
+		if err := awsRestjson1_serializeDocumentDeregistrationPolicy(v.DeregistrationPolicy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EvidenceFinderEnabled != nil {
 		ok := object.Key("evidenceFinderEnabled")
 		ok.Boolean(*v.EvidenceFinderEnabled)
@@ -4729,6 +4736,18 @@ func awsRestjson1_serializeDocumentDelegationIds(v []string, value smithyjson.Va
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeregistrationPolicy(v *types.DeregistrationPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DeleteResources) > 0 {
+		ok := object.Key("deleteResources")
+		ok.String(string(v.DeleteResources))
+	}
+
 	return nil
 }
 

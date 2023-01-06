@@ -14,7 +14,7 @@ import (
 
 // Lists the private certificate authorities that you created by using the
 // CreateCertificateAuthority
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
+// (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
 // action.
 func (c *Client) ListCertificateAuthorities(ctx context.Context, params *ListCertificateAuthoritiesInput, optFns ...func(*Options)) (*ListCertificateAuthoritiesOutput, error) {
 	if params == nil {
