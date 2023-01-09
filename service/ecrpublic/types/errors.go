@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The specified layer upload does not contain any layer parts.
+// The specified layer upload doesn't contain any layer parts.
 type EmptyUploadException struct {
 	Message *string
 
@@ -60,7 +60,7 @@ func (e *ImageAlreadyExistsException) ErrorCode() string {
 }
 func (e *ImageAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified image digest does not match the digest that Amazon ECR calculated
+// The specified image digest doesn't match the digest that Amazon ECR calculated
 // for the image.
 type ImageDigestDoesNotMatchException struct {
 	Message *string
@@ -87,7 +87,7 @@ func (e *ImageDigestDoesNotMatchException) ErrorCode() string {
 }
 func (e *ImageDigestDoesNotMatchException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The image requested does not exist in the specified repository.
+// The image requested doesn't exist in the specified repository.
 type ImageNotFoundException struct {
 	Message *string
 
@@ -140,8 +140,8 @@ func (e *ImageTagAlreadyExistsException) ErrorCode() string {
 }
 func (e *ImageTagAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The layer digest calculation performed by Amazon ECR upon receipt of the image
-// layer does not match the digest specified.
+// The layer digest calculation performed by Amazon ECR when the image layer
+// doesn't match the digest specified.
 type InvalidLayerException struct {
 	Message *string
 
@@ -167,7 +167,7 @@ func (e *InvalidLayerException) ErrorCode() string {
 }
 func (e *InvalidLayerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The layer part size is not valid, or the first byte specified is not consecutive
+// The layer part size isn't valid, or the first byte specified isn't consecutive
 // to the last byte of a previous layer part upload.
 type InvalidLayerPartException struct {
 	Message *string
@@ -306,8 +306,8 @@ func (e *LayerPartTooSmallException) ErrorCode() string {
 }
 func (e *LayerPartTooSmallException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified layers could not be found, or the specified layer is not valid for
-// this repository.
+// The specified layers can't be found, or the specified layer isn't valid for this
+// repository.
 type LayersNotFoundException struct {
 	Message *string
 
@@ -333,7 +333,7 @@ func (e *LayersNotFoundException) ErrorCode() string {
 }
 func (e *LayersNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation did not succeed because it would have exceeded a service limit for
+// The operation didn't succeed because it would have exceeded a service limit for
 // your account. For more information, see Amazon ECR Service Quotas
 // (https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html) in
 // the Amazon Elastic Container Registry User Guide.
@@ -362,7 +362,7 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The manifest list is referencing an image that does not exist.
+// The manifest list is referencing an image that doesn't exist.
 type ReferencedImagesNotFoundException struct {
 	Message *string
 
@@ -388,7 +388,7 @@ func (e *ReferencedImagesNotFoundException) ErrorCode() string {
 }
 func (e *ReferencedImagesNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The registry does not exist.
+// The registry doesn't exist.
 type RegistryNotFoundException struct {
 	Message *string
 
@@ -440,6 +440,34 @@ func (e *RepositoryAlreadyExistsException) ErrorCode() string {
 }
 func (e *RepositoryAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The repository catalog data doesn't exist.
+type RepositoryCatalogDataNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RepositoryCatalogDataNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RepositoryCatalogDataNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RepositoryCatalogDataNotFoundException) ErrorCode() string {
+	if e.ErrorCodeOverride == nil {
+		return "RepositoryCatalogDataNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *RepositoryCatalogDataNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The specified repository contains images. To delete a repository that contains
 // images, you must force the deletion with the force parameter.
 type RepositoryNotEmptyException struct {
@@ -467,9 +495,8 @@ func (e *RepositoryNotEmptyException) ErrorCode() string {
 }
 func (e *RepositoryNotEmptyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified repository could not be found. Check the spelling of the specified
-// repository and ensure that you are performing operations on the correct
-// registry.
+// The specified repository can't be found. Check the spelling of the specified
+// repository and ensure that you're performing operations on the correct registry.
 type RepositoryNotFoundException struct {
 	Message *string
 
@@ -495,7 +522,7 @@ func (e *RepositoryNotFoundException) ErrorCode() string {
 }
 func (e *RepositoryNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified repository and registry combination does not have an associated
+// The specified repository and registry combination doesn't have an associated
 // repository policy.
 type RepositoryPolicyNotFoundException struct {
 	Message *string
@@ -575,7 +602,7 @@ func (e *TooManyTagsException) ErrorCode() string {
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The action is not supported in this Region.
+// The action isn't supported in this Region.
 type UnsupportedCommandException struct {
 	Message *string
 
@@ -601,7 +628,7 @@ func (e *UnsupportedCommandException) ErrorCode() string {
 }
 func (e *UnsupportedCommandException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The upload could not be found, or the specified upload ID is not valid for this
+// The upload can't be found, or the specified upload ID isn't valid for this
 // repository.
 type UploadNotFoundException struct {
 	Message *string

@@ -1,0 +1,8 @@
+{
+    "id": "93074dad-cb52-4306-89c0-60c47696df55",
+    "type": "feature",
+    "description": "This release for Amazon ECR Public makes several change to bring the SDK into sync with the API.",
+    "modules": [
+        "service/ecrpublic"
+    ]
+}

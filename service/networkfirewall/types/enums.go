@@ -268,9 +268,10 @@ type StatefulAction string
 
 // Enum values for StatefulAction
 const (
-	StatefulActionPass  StatefulAction = "PASS"
-	StatefulActionDrop  StatefulAction = "DROP"
-	StatefulActionAlert StatefulAction = "ALERT"
+	StatefulActionPass   StatefulAction = "PASS"
+	StatefulActionDrop   StatefulAction = "DROP"
+	StatefulActionAlert  StatefulAction = "ALERT"
+	StatefulActionReject StatefulAction = "REJECT"
 )
 
 // Values returns all known values for StatefulAction. Note that this can be
@@ -281,6 +282,7 @@ func (StatefulAction) Values() []StatefulAction {
 		"PASS",
 		"DROP",
 		"ALERT",
+		"REJECT",
 	}
 }
 

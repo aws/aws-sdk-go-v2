@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the repository policy associated with the specified repository.
+// Deletes the repository policy that's associated with the specified repository.
 func (c *Client) DeleteRepositoryPolicy(ctx context.Context, params *DeleteRepositoryPolicyInput, optFns ...func(*Options)) (*DeleteRepositoryPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteRepositoryPolicyInput{}
@@ -28,15 +28,15 @@ func (c *Client) DeleteRepositoryPolicy(ctx context.Context, params *DeleteRepos
 
 type DeleteRepositoryPolicyInput struct {
 
-	// The name of the repository that is associated with the repository policy to
+	// The name of the repository that's associated with the repository policy to
 	// delete.
 	//
 	// This member is required.
 	RepositoryName *string
 
-	// The AWS account ID associated with the public registry that contains the
-	// repository policy to delete. If you do not specify a registry, the default
-	// public registry is assumed.
+	// The Amazon Web Services account ID that's associated with the public registry
+	// that contains the repository policy to delete. If you do not specify a registry,
+	// the default public registry is assumed.
 	RegistryId *string
 
 	noSmithyDocumentSerde
@@ -47,10 +47,10 @@ type DeleteRepositoryPolicyOutput struct {
 	// The JSON repository policy that was deleted from the repository.
 	PolicyText *string
 
-	// The registry ID associated with the request.
+	// The registry ID that's associated with the request.
 	RegistryId *string
 
-	// The repository name associated with the request.
+	// The repository name that's associated with the request.
 	RepositoryName *string
 
 	// Metadata pertaining to the operation's result.

@@ -1086,6 +1086,13 @@ type StatefulRule struct {
 	// can enable the rule with ALERT action, verify in the logs that the rule is
 	// filtering as you want, then change the action to DROP.
 	//
+	// * REJECT - Drops TCP
+	// traffic that matches the conditions of the stateful rule, and sends a TCP reset
+	// packet back to sender of the packet. A TCP reset packet is a packet with no
+	// payload and a RST bit contained in the TCP header flags. Also sends an alert log
+	// mesage if alert logging is configured in the FirewallLoggingConfiguration.
+	// REJECT isn't currently available for use with IMAP and FTP protocols.
+	//
 	// This member is required.
 	Action StatefulAction
 

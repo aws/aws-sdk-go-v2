@@ -1,0 +1,8 @@
+{
+    "id": "00bd8cc5-44da-4286-a4fb-17381dbee5fc",
+    "type": "feature",
+    "description": "Enabled FIPS aws-us-gov endpoints in SDK.",
+    "modules": [
+        "service/ram"
+    ]
+}

@@ -667,6 +667,11 @@ func awsRestjson1_serializeOpDocumentCreatePortalInput(v *CreatePortalInput, val
 		}
 	}
 
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("authenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
@@ -3226,6 +3231,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdatePortalInput(v *UpdatePortalInput,
 func awsRestjson1_serializeOpDocumentUpdatePortalInput(v *UpdatePortalInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("authenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
 
 	if v.DisplayName != nil {
 		ok := object.Key("displayName")

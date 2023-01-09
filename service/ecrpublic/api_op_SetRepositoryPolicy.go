@@ -44,14 +44,14 @@ type SetRepositoryPolicyInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// If the policy you are attempting to set on a repository policy would prevent you
-	// from setting another policy in the future, you must force the
-	// SetRepositoryPolicy operation. This is intended to prevent accidental repository
-	// lock outs.
+	// If the policy that you want to set on a repository policy would prevent you from
+	// setting another policy in the future, you must force the SetRepositoryPolicy
+	// operation. This prevents accidental repository lockouts.
 	Force bool
 
-	// The AWS account ID associated with the registry that contains the repository. If
-	// you do not specify a registry, the default public registry is assumed.
+	// The Amazon Web Services account ID that's associated with the registry that
+	// contains the repository. If you do not specify a registry, the default public
+	// registry is assumed.
 	RegistryId *string
 
 	noSmithyDocumentSerde
@@ -59,13 +59,13 @@ type SetRepositoryPolicyInput struct {
 
 type SetRepositoryPolicyOutput struct {
 
-	// The JSON repository policy text applied to the repository.
+	// The JSON repository policy text that's applied to the repository.
 	PolicyText *string
 
-	// The registry ID associated with the request.
+	// The registry ID that's associated with the request.
 	RegistryId *string
 
-	// The repository name associated with the request.
+	// The repository name that's associated with the request.
 	RepositoryName *string
 
 	// Metadata pertaining to the operation's result.
