@@ -1,3 +1,7 @@
+# v1.9.0 (2023-01-09)
+
+* **Feature**: This release adds support for a new portal authentication type: AWS IAM Identity Center (successor to AWS Single Sign-On).
+
 # v1.8.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

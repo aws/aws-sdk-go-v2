@@ -1,3 +1,7 @@
+# v1.23.0 (2023-01-09)
+
+* **Feature**: Network Firewall now supports the Suricata rule action reject, in addition to the actions pass, drop, and alert.
+
 # v1.22.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

@@ -1,3 +1,16 @@
+# Release (2023-01-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.15.0](service/ecrpublic/CHANGELOG.md#v1150-2023-01-09)
+  * **Feature**: This release for Amazon ECR Public makes several change to bring the SDK into sync with the API.
+* `github.com/aws/aws-sdk-go-v2/service/kendraranking`: [v1.0.0](service/kendraranking/CHANGELOG.md#v100-2023-01-09)
+  * **Release**: New AWS service client module
+  * **Feature**: Introducing Amazon Kendra Intelligent Ranking, a new set of Kendra APIs that leverages Kendra semantic ranking capabilities to improve the quality of search results from other search services (i.e. OpenSearch, ElasticSearch, Solr).
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.23.0](service/networkfirewall/CHANGELOG.md#v1230-2023-01-09)
+  * **Feature**: Network Firewall now supports the Suricata rule action reject, in addition to the actions pass, drop, and alert.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.9.0](service/workspacesweb/CHANGELOG.md#v190-2023-01-09)
+  * **Feature**: This release adds support for a new portal authentication type: AWS IAM Identity Center (successor to AWS Single Sign-On).
+
 # Release (2023-01-06)
 
 ## Module Highlights

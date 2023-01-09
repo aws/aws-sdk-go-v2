@@ -1,8 +1,0 @@
-{
-    "id": "718812f5-5cbc-410e-8d46-f4d8ea3a3f66",
-    "type": "feature",
-    "description": "Network Firewall now supports the Suricata rule action reject, in addition to the actions pass, drop, and alert.",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

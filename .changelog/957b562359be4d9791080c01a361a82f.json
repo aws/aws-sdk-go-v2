@@ -1,8 +1,0 @@
-{
-    "id": "957b5623-59be-4d97-9108-0c01a361a82f",
-    "type": "feature",
-    "description": "Introducing Amazon Kendra Intelligent Ranking, a new set of Kendra APIs that leverages Kendra semantic ranking capabilities to improve the quality of search results from other search services (i.e. OpenSearch, ElasticSearch, Solr).",
-    "modules": [
-        "service/kendraranking"
-    ]
-}

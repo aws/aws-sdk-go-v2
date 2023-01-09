@@ -1,3 +1,7 @@
+# v1.15.0 (2023-01-09)
+
+* **Feature**: This release for Amazon ECR Public makes several change to bring the SDK into sync with the API.
+
 # v1.14.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

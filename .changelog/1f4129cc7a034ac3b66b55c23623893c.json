@@ -1,8 +1,0 @@
-{
-    "id": "1f4129cc-7a03-4ac3-b66b-55c23623893c",
-    "type": "feature",
-    "description": "This release adds support for a new portal authentication type: AWS IAM Identity Center (successor to AWS Single Sign-On).",
-    "modules": [
-        "service/workspacesweb"
-    ]
-}
