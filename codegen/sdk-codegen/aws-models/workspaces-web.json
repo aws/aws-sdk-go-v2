@@ -237,15 +237,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -509,8 +500,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -522,8 +513,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -535,8 +526,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -548,8 +539,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-south-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-south-1"
                             }
                         },
                         {
@@ -561,8 +552,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -574,8 +565,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -587,8 +578,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -600,8 +591,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ca-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ca-central-1"
                             }
                         },
                         {
@@ -613,8 +604,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -626,8 +617,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -639,8 +630,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -652,8 +643,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-central-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-central-1"
                             }
                         },
                         {
@@ -665,8 +656,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -678,8 +669,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -691,8 +682,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -704,8 +695,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-west-2"
                             }
                         },
                         {
@@ -717,8 +708,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -730,8 +721,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -743,8 +734,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -756,8 +747,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-2"
                             }
                         },
                         {
@@ -769,8 +760,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -782,8 +773,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -795,8 +786,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -808,8 +799,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "eu-west-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "eu-west-1"
                             }
                         },
                         {
@@ -821,8 +812,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -834,8 +825,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -847,8 +838,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -860,8 +851,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-2"
                             }
                         },
                         {
@@ -873,8 +864,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -886,8 +877,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -899,8 +890,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -912,8 +903,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-northeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-northeast-1"
                             }
                         },
                         {
@@ -925,8 +916,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -938,8 +929,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -951,8 +942,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -964,8 +955,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-1"
                             }
                         },
                         {
@@ -977,8 +968,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -990,8 +981,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1003,8 +994,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1016,8 +1007,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "ap-southeast-2",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "ap-southeast-2"
                             }
                         },
                         {
@@ -1029,8 +1020,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1042,8 +1033,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1055,8 +1046,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": true
+                                "UseDualStack": true,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1068,8 +1059,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
-                                "UseDualStack": false
+                                "UseDualStack": false,
+                                "Region": "us-east-1"
                             }
                         },
                         {
@@ -1081,8 +1072,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1093,8 +1084,8 @@
                             },
                             "params": {
                                 "UseFIPS": true,
-                                "Region": "us-east-1",
                                 "UseDualStack": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -1105,8 +1096,8 @@
                             },
                             "params": {
                                 "UseFIPS": false,
-                                "Region": "us-east-1",
                                 "UseDualStack": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -1519,6 +1510,21 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.workspacesweb#AuthenticationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Standard",
+                        "name": "STANDARD"
+                    },
+                    {
+                        "value": "IAM_Identity_Center",
+                        "name": "IAM_IDENTITY_CENTER"
+                    }
+                ]
             }
         },
         "com.amazonaws.workspacesweb#BrowserPolicy": {
@@ -2088,6 +2094,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, subsequent retries with the same\n         client token returns the result from the original successful request. </p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "authenticationType": {
+                    "target": "com.amazonaws.workspacesweb#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM_Identity_Center</code> web portals are authenticated through AWS IAM Identity\n         Center (successor to AWS Single Sign-On). They provide additional features, such as\n         IdP-initiated authentication. Identity sources (including external identity provider\n         integration), plus user and group access to your web portal, can be configured in the IAM\n         Identity Center.</p>"
                     }
                 }
             }
@@ -4590,6 +4602,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the user access logging settings that is associated with the web portal.</p>"
                     }
+                },
+                "authenticationType": {
+                    "target": "com.amazonaws.workspacesweb#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM_Identity_Center</code> web portals are authenticated through AWS IAM Identity\n         Center (successor to AWS Single Sign-On). They provide additional features, such as\n         IdP-initiated authentication. Identity sources (including external identity provider\n         integration), plus user and group access to your web portal, can be configured in the IAM\n         Identity Center.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4704,6 +4722,12 @@
                     "target": "com.amazonaws.workspacesweb#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the user access logging settings that is associated with the web portal.</p>"
+                    }
+                },
+                "authenticationType": {
+                    "target": "com.amazonaws.workspacesweb#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM_Identity_Center</code> web portals are authenticated through AWS IAM Identity\n         Center (successor to AWS Single Sign-On). They provide additional features, such as\n         IdP-initiated authentication. Identity sources (including external identity provider\n         integration), plus user and group access to your web portal, can be configured in the IAM\n         Identity Center.</p>"
                     }
                 }
             },
@@ -5461,6 +5485,12 @@
                     "target": "com.amazonaws.workspacesweb#DisplayName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the web portal. This is not visible to users who log into the web portal.</p>"
+                    }
+                },
+                "authenticationType": {
+                    "target": "com.amazonaws.workspacesweb#AuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication integration points used when signing into the web portal.\n         Defaults to <code>Standard</code>.</p>\n         <p>\n            <code>Standard</code> web portals are authenticated directly through your identity\n         provider. You need to call <code>CreateIdentityProvider</code> to integrate your identity\n         provider with your web portal. User and group access to your web portal is controlled\n         through your identity provider.</p>\n         <p>\n            <code>IAM_Identity_Center</code> web portals are authenticated through AWS IAM Identity\n         Center (successor to AWS Single Sign-On). They provide additional features, such as\n         IdP-initiated authentication. Identity sources (including external identity provider\n         integration), plus user and group access to your web portal, can be configured in the IAM\n         Identity Center.</p>"
                     }
                 }
             }
