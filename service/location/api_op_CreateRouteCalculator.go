@@ -17,7 +17,7 @@ import (
 // to a route calculator resource to estimate travel time, distance, and get
 // directions. A route calculator sources traffic and road network data from your
 // chosen data provider. If your application is tracking or routing assets you use
-// in your business, such as delivery vehicles or employees, you may only use HERE
+// in your business, such as delivery vehicles or employees, you must not use Esri
 // as your geolocation provider. See section 82 of the AWS service terms
 // (http://aws.amazon.com/service-terms) for more details.
 func (c *Client) CreateRouteCalculator(ctx context.Context, params *CreateRouteCalculatorInput, optFns ...func(*Options)) (*CreateRouteCalculatorOutput, error) {
@@ -53,15 +53,22 @@ type CreateRouteCalculatorInput struct {
 
 	// Specifies the data provider of traffic and road network data. This field is
 	// case-sensitive. Enter the valid values as shown. For example, entering HERE
-	// returns an error. Route calculators that use Esri as a data source only
-	// calculate routes that are shorter than 400 km. Valid values include:
+	// returns an error. Valid values include:
 	//
-	// * Esri –
-	// For additional information about Esri
+	// * Esri – For additional information
+	// about Esri
 	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
 	// coverage in your region of interest, see Esri details on street networks and
 	// traffic coverage
-	// (https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm).
+	// (https://doc.arcgis.com/en/arcgis-online/reference/network-coverage.htm). Route
+	// calculators that use Esri as a data source only calculate routes that are
+	// shorter than 400 km.
+	//
+	// * Grab – Grab provides routing functionality for Southeast
+	// Asia. For additional information about GrabMaps
+	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html)'
+	// coverage, see GrabMaps countries and areas covered
+	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area).
 	//
 	// *
 	// Here – For additional information about HERE Technologies

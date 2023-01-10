@@ -106,6 +106,8 @@ func (TravelMode) Values() []TravelMode {
 		"Car",
 		"Truck",
 		"Walking",
+		"Bicycle",
+		"Motorcycle",
 	}
 }
 

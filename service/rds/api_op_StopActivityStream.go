@@ -13,9 +13,13 @@ import (
 
 // Stops a database activity stream that was started using the Amazon Web Services
 // console, the start-activity-stream CLI command, or the StartActivityStream
-// action. For more information, see Database Activity Streams
+// action. For more information, see  Monitoring Amazon Aurora with Database
+// Activity Streams
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)
-// in the Amazon Aurora User Guide.
+// in the Amazon Aurora User Guide or  Monitoring Amazon RDS with Database Activity
+// Streams
+// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html)
+// in the Amazon RDS User Guide.
 func (c *Client) StopActivityStream(ctx context.Context, params *StopActivityStreamInput, optFns ...func(*Options)) (*StopActivityStreamOutput, error) {
 	if params == nil {
 		params = &StopActivityStreamInput{}

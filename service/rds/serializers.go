@@ -10811,6 +10811,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	object := value.Object()
 	_ = object
 
+	if v.AllocatedStorage != nil {
+		objectKey := object.Key("AllocatedStorage")
+		objectKey.Integer(*v.AllocatedStorage)
+	}
+
 	if v.AutoMinorVersionUpgrade != nil {
 		objectKey := object.Key("AutoMinorVersionUpgrade")
 		objectKey.Boolean(*v.AutoMinorVersionUpgrade)
@@ -14753,6 +14758,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 	object := value.Object()
 	_ = object
 
+	if v.AllocatedStorage != nil {
+		objectKey := object.Key("AllocatedStorage")
+		objectKey.Integer(*v.AllocatedStorage)
+	}
+
 	if v.AutoMinorVersionUpgrade != nil {
 		objectKey := object.Key("AutoMinorVersionUpgrade")
 		objectKey.Boolean(*v.AutoMinorVersionUpgrade)
@@ -15194,6 +15204,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *RestoreDBInstanceToPointInTimeInput, value query.Value) error {
 	object := value.Object()
 	_ = object
+
+	if v.AllocatedStorage != nil {
+		objectKey := object.Key("AllocatedStorage")
+		objectKey.Integer(*v.AllocatedStorage)
+	}
 
 	if v.AutoMinorVersionUpgrade != nil {
 		objectKey := object.Key("AutoMinorVersionUpgrade")

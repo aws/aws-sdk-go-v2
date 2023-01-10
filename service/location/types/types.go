@@ -201,10 +201,12 @@ type CalculateRouteMatrixSummary struct {
 	//
 	// * Esri
 	//
+	// * Grab
+	//
 	// * Here
 	//
-	// For more information
-	// about data providers, see Amazon Location Service data providers
+	// For more
+	// information about data providers, see Amazon Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
@@ -238,10 +240,12 @@ type CalculateRouteSummary struct {
 	//
 	// * Esri
 	//
+	// * Grab
+	//
 	// * Here
 	//
-	// For more information
-	// about data providers, see Amazon Location Service data providers
+	// For more
+	// information about data providers, see Amazon Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
@@ -716,10 +720,12 @@ type ListPlaceIndexesResponseEntry struct {
 	// *
 	// Esri
 	//
+	// * Grab
+	//
 	// * Here
 	//
-	// For more information about data providers, see Amazon Location
-	// Service data providers
+	// For more information about data providers, see Amazon
+	// Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
@@ -772,10 +778,12 @@ type ListRouteCalculatorsResponseEntry struct {
 	//
 	// * Esri
 	//
+	// * Grab
+	//
 	// * Here
 	//
-	// For more information about data providers,
-	// see Amazon Location Service data providers
+	// For more information about data
+	// providers, see Amazon Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
@@ -910,8 +918,23 @@ type MapConfiguration struct {
 	// more tiles are retrieved than when using either vector or raster tiles alone.
 	// Your charges will include all tiles retrieved.
 	//
-	// Valid Open Data (Preview) map
-	// styles
+	// Valid GrabMaps map styles
+	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html):
+	//
+	// *
+	// VectorGrabStandardLight – The Grab Standard Light map style provides a basemap
+	// with detailed land use coloring, area names, roads, landmarks, and points of
+	// interest covering Southeast Asia.
+	//
+	// * VectorGrabStandardDark – The Grab Standard
+	// Dark map style provides a dark variation of the standard basemap covering
+	// Southeast Asia.
+	//
+	// Grab provides maps only for countries in Southeast Asia, and is
+	// only available in the Asia Pacific (Singapore) Region (ap-southeast-1). For more
+	// information, see GrabMaps countries and area covered
+	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area).
+	// Valid Open Data (Preview) map styles
 	// (https://docs.aws.amazon.com/location/latest/developerguide/open-data.html):
 	//
 	// *
@@ -978,7 +1001,7 @@ type Place struct {
 	// Street.
 	Street *string
 
-	// A country, or an area that's part of a larger region. For example, Metro
+	// A county, or an area that's part of a larger region. For example, Metro
 	// Vancouver.
 	SubRegion *string
 
@@ -1095,7 +1118,8 @@ type SearchForPositionResult struct {
 
 	// The unique identifier of the place. You can use this with the GetPlace operation
 	// to find the place again later. For SearchPlaceIndexForPosition operations, the
-	// PlaceId is returned only by place indexes that use HERE as a data provider.
+	// PlaceId is returned only by place indexes that use HERE or Grab as a data
+	// provider.
 	PlaceId *string
 
 	noSmithyDocumentSerde
@@ -1112,7 +1136,7 @@ type SearchForSuggestionsResult struct {
 
 	// The unique identifier of the place. You can use this with the GetPlace operation
 	// to find the place again later. For SearchPlaceIndexForSuggestions operations,
-	// the PlaceId is returned by place indexes that use HERE or Esri as data
+	// the PlaceId is returned by place indexes that use Esri, Grab, or HERE as data
 	// providers.
 	PlaceId *string
 
@@ -1136,13 +1160,14 @@ type SearchForTextResult struct {
 
 	// The unique identifier of the place. You can use this with the GetPlace operation
 	// to find the place again later. For SearchPlaceIndexForText operations, the
-	// PlaceId is returned only by place indexes that use HERE as a data provider.
+	// PlaceId is returned only by place indexes that use HERE or Grab as a data
+	// provider.
 	PlaceId *string
 
 	// The relative confidence in the match for a result among the results returned.
 	// For example, if more fields for an address match (including house number,
 	// street, city, country/region, and postal code), the relevance score is closer to
-	// 1. Returned only when the partner selected is Esri.
+	// 1. Returned only when the partner selected is Esri or Grab.
 	Relevance *float64
 
 	noSmithyDocumentSerde
@@ -1156,10 +1181,13 @@ type SearchPlaceIndexForPositionSummary struct {
 	//
 	// * Esri
 	//
+	// * Grab
+	//
 	// * Here
 	//
-	// For more
-	// information about data providers, see Amazon Location Service data providers
+	// For
+	// more information about data providers, see Amazon Location Service data
+	// providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
@@ -1190,10 +1218,13 @@ type SearchPlaceIndexForSuggestionsSummary struct {
 	//
 	// * Esri
 	//
+	// * Grab
+	//
 	// * Here
 	//
-	// For more
-	// information about data providers, see Amazon Location Service data providers
+	// For
+	// more information about data providers, see Amazon Location Service data
+	// providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
@@ -1236,10 +1267,13 @@ type SearchPlaceIndexForTextSummary struct {
 	//
 	// * Esri
 	//
+	// * Grab
+	//
 	// * Here
 	//
-	// For more
-	// information about data providers, see Amazon Location Service data providers
+	// For
+	// more information about data providers, see Amazon Location Service data
+	// providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.

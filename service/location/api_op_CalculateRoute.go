@@ -119,17 +119,22 @@ type CalculateRouteInput struct {
 	IncludeLegGeometry *bool
 
 	// Specifies the mode of transport when calculating a route. Used in estimating the
-	// speed of travel and road compatibility. You can choose Car, Truck, or Walking as
-	// options for the TravelMode. The TravelMode you specify also determines how you
-	// specify route preferences:
+	// speed of travel and road compatibility. You can choose Car, Truck, Walking,
+	// Bicycle or Motorcycle as options for the TravelMode. Bicycle and Motorcycle are
+	// only valid when using Grab as a data provider, and only within Southeast Asia.
+	// Truck is not available for Grab. For more details on the using Grab for routing,
+	// including areas of coverage, see GrabMaps
+	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html) in the
+	// Amazon Location Service Developer Guide. The TravelMode you specify also
+	// determines how you specify route preferences:
 	//
-	// * If traveling by Car use the CarModeOptions
+	// * If traveling by Car use the
+	// CarModeOptions parameter.
+	//
+	// * If traveling by Truck use the TruckModeOptions
 	// parameter.
 	//
-	// * If traveling by Truck use the TruckModeOptions parameter.
-	//
-	// Default
-	// Value: Car
+	// Default Value: Car
 	TravelMode types.TravelMode
 
 	// Specifies route preferences when traveling by Truck, such as avoiding routes

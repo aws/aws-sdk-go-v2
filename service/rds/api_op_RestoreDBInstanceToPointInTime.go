@@ -53,6 +53,12 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// This member is required.
 	TargetDBInstanceIdentifier *string
 
+	// The amount of storage (in gibibytes) to allocate initially for the DB instance.
+	// Follow the allocation rules specified in CreateDBInstance. Be sure to allocate
+	// enough memory for your new DB instance so that the restore operation can
+	// succeed. You can also allocate additional memory for future growth.
+	AllocatedStorage *int32
+
 	// A value that indicates whether minor version upgrades are applied automatically
 	// to the DB instance during the maintenance window. This setting doesn't apply to
 	// RDS Custom.

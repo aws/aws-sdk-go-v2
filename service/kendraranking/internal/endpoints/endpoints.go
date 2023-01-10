@@ -146,11 +146,6 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "kendra-ranking.ap-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
-				Region: "ap-northeast-1",
-			}: endpoints.Endpoint{
-				Hostname: "kendra-ranking.ap-northeast-1.api.aws",
-			},
-			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
 			}: endpoints.Endpoint{
 				Hostname: "kendra-ranking.ap-northeast-2.api.aws",
@@ -159,11 +154,6 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-northeast-3",
 			}: endpoints.Endpoint{
 				Hostname: "kendra-ranking.ap-northeast-3.api.aws",
-			},
-			endpoints.EndpointKey{
-				Region: "ap-south-1",
-			}: endpoints.Endpoint{
-				Hostname: "kendra-ranking.ap-south-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "ap-south-2",

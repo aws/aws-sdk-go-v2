@@ -90,7 +90,7 @@ type RestoreDBInstanceFromS3Input struct {
 	// This member is required.
 	SourceEngineVersion *string
 
-	// The amount of storage (in gigabytes) to allocate initially for the DB instance.
+	// The amount of storage (in gibibytes) to allocate initially for the DB instance.
 	// Follow the allocation rules specified in CreateDBInstance. Be sure to allocate
 	// enough memory for your new DB instance so that the restore operation can
 	// succeed. You can also allocate additional memory for future growth.

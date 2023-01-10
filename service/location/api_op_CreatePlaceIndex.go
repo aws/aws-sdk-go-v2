@@ -19,7 +19,7 @@ import (
 // SearchPlaceIndexForPosition operation, and enable autosuggestions by using the
 // SearchPlaceIndexForSuggestions operation. If your application is tracking or
 // routing assets you use in your business, such as delivery vehicles or employees,
-// you may only use HERE as your geolocation provider. See section 82 of the AWS
+// you must not use Esri as your geolocation provider. See section 82 of the AWS
 // service terms (http://aws.amazon.com/service-terms) for more details.
 func (c *Client) CreatePlaceIndex(ctx context.Context, params *CreatePlaceIndexInput, optFns ...func(*Options)) (*CreatePlaceIndexOutput, error) {
 	if params == nil {
@@ -47,6 +47,13 @@ type CreatePlaceIndexInput struct {
 	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
 	// coverage in your region of interest, see Esri details on geocoding coverage
 	// (https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm).
+	//
+	// *
+	// Grab – Grab provides place index functionality for Southeast Asia. For
+	// additional information about GrabMaps
+	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html)'
+	// coverage, see GrabMaps countries and areas covered
+	// (https://docs.aws.amazon.com/location/latest/developerguide/grab.html#grab-coverage-area).
 	//
 	// *
 	// Here – For additional information about HERE Technologies

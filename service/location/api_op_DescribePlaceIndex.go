@@ -53,10 +53,12 @@ type DescribePlaceIndexOutput struct {
 	// *
 	// Esri
 	//
+	// * Grab
+	//
 	// * Here
 	//
-	// For more information about data providers, see Amazon Location
-	// Service data providers
+	// For more information about data providers, see Amazon
+	// Location Service data providers
 	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
