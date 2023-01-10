@@ -1,3 +1,7 @@
+# v1.21.0 (2023-01-10)
+
+* **Feature**: This release adds support for two new route travel models, Bicycle and Motorcycle which can be used with Grab data source.
+
 # v1.20.0 (2023-01-05)
 
 * **Feature**: Add `ErrorCodeOverride` field to all error structs (aws/smithy-go#401).

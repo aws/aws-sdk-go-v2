@@ -1,3 +1,11 @@
+# Release (2023-01-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.21.0](service/location/CHANGELOG.md#v1210-2023-01-10)
+  * **Feature**: This release adds support for two new route travel models, Bicycle and Motorcycle which can be used with Grab data source.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.40.0](service/rds/CHANGELOG.md#v1400-2023-01-10)
+  * **Feature**: This release adds support for configuring allocated storage on the CreateDBInstanceReadReplica, RestoreDBInstanceFromDBSnapshot, and RestoreDBInstanceToPointInTime APIs.
+
 # Release (2023-01-09)
 
 ## Module Highlights

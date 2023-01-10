@@ -1,8 +1,0 @@
-{
-    "id": "054b56cb-5945-492d-9eee-c99960d5130c",
-    "type": "feature",
-    "description": "This release adds support for two new route travel models, Bicycle and Motorcycle which can be used with Grab data source.",
-    "modules": [
-        "service/location"
-    ]
-}
