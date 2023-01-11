@@ -103,8 +103,12 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
 
     private static void awsQueryCompatibleDefaultBlockWriter(GoWriter writer) {
         writer.openBlock("default:", "", () -> {
+            writer.write("awsQueryErrorCode := getAwsQueryErrorCode(response)");
+            writer.openBlock("if awsQueryErrorCode != \"\" {", "}", () -> {
+                writer.write("errorCode = awsQueryErrorCode");
+            });
             writer.openBlock("genericError := &smithy.GenericAPIError{", "}", () -> {
-                writer.write("Code: getAwsQueryErrorCode(response),");
+                writer.write("Code: errorCode,");
                 writer.write("Message: errorMessage,");
             });
             writer.write("return genericError");
