@@ -75,9 +75,9 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
         AwsProtocolUtils.handleDecodeError(writer);
         writer.write("errorBody.Seek(0, io.SeekStart)");
         if (isAwsQueryCompatibleTraitFound(context)) {
-            writer.write("codeFromHeader := getAwsQueryErrorCode(response)");
-            writer.openBlock("if codeFromHeader != \"\" {", "}", () -> {
-                writer.write("output.ErrorCodeOverride = &codeFromHeader");
+            writer.write("awsQueryErrorCode := getAwsQueryErrorCode(response)");
+            writer.openBlock("if awsQueryErrorCode != \"\" {", "}", () -> {
+                writer.write("output.ErrorCodeOverride = &awsQueryErrorCode");
             });
         }
         writer.write("return output");
