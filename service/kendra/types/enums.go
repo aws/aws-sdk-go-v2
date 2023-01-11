@@ -249,6 +249,13 @@ const (
 	ContentTypeMsWord    ContentType = "MS_WORD"
 	ContentTypePlainText ContentType = "PLAIN_TEXT"
 	ContentTypePpt       ContentType = "PPT"
+	ContentTypeRtf       ContentType = "RTF"
+	ContentTypeXml       ContentType = "XML"
+	ContentTypeXslt      ContentType = "XSLT"
+	ContentTypeMsExcel   ContentType = "MS_EXCEL"
+	ContentTypeCsv       ContentType = "CSV"
+	ContentTypeJson      ContentType = "JSON"
+	ContentTypeMd        ContentType = "MD"
 )
 
 // Values returns all known values for ContentType. Note that this can be expanded
@@ -261,6 +268,13 @@ func (ContentType) Values() []ContentType {
 		"MS_WORD",
 		"PLAIN_TEXT",
 		"PPT",
+		"RTF",
+		"XML",
+		"XSLT",
+		"MS_EXCEL",
+		"CSV",
+		"JSON",
+		"MD",
 	}
 }
 

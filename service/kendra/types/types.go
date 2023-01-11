@@ -671,7 +671,7 @@ type ConfluencePageConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// >Maps attributes or field names of Confluence pages to Amazon Kendra index field
+// Maps attributes or field names of Confluence pages to Amazon Kendra index field
 // names. To create custom fields, use the UpdateIndex API before you map to
 // Confluence fields. For more information, see Mapping data source fields
 // (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
@@ -731,8 +731,8 @@ type ConfluenceSpaceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// >Maps attributes or field names of Confluence spaces to Amazon Kendra index
-// field names. To create custom fields, use the UpdateIndex API before you map to
+// Maps attributes or field names of Confluence spaces to Amazon Kendra index field
+// names. To create custom fields, use the UpdateIndex API before you map to
 // Confluence fields. For more information, see Mapping data source fields
 // (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The
 // Confluence data source field names must exist in your Confluence custom
@@ -2191,9 +2191,7 @@ type InlineCustomDocumentEnrichmentConfiguration struct {
 // Provides the configuration information to connect to Jira as your data source.
 type JiraConfiguration struct {
 
-	// The URL of the Jira account. For example, company.atlassian.net or
-	// https://jira.company.com. You can find your Jira account URL in the URL of your
-	// profile page for Jira desktop.
+	// The URL of the Jira account. For example, company.atlassian.net.
 	//
 	// This member is required.
 	JiraAccountUrl *string
@@ -2202,11 +2200,11 @@ type JiraConfiguration struct {
 	// key-value pairs required to connect to your Jira data source. The secret must
 	// contain a JSON structure with the following keys:
 	//
-	// * jiraId—The Jira
-	// username.
+	// * jiraId—The Jira user name
+	// or email.
 	//
-	// * jiraCredentials—The Jira API token. For more information on
-	// creating an API token in Jira, see  Using a Jira data source
+	// * jiraCredentials—The Jira API token. For more information, see Using
+	// a Jira data source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html).
 	//
 	// This member is required.
@@ -2280,7 +2278,8 @@ type JiraConfiguration struct {
 	UseChangeLog bool
 
 	// Configuration information for an Amazon Virtual Private Cloud to connect to your
-	// Jira. Your Jira account must reside inside your VPC.
+	// Jira. For more information, see Configuring a VPC
+	// (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html).
 	VpcConfiguration *DataSourceVpcConfiguration
 
 	// A list of DataSourceToIndexFieldMapping objects that map attributes or field
@@ -2374,7 +2373,7 @@ type OneDriveConfiguration struct {
 	OneDriveUsers *OneDriveUsers
 
 	// The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the
-	// user name and password to connect to OneDrive. The user namd should be the
+	// user name and password to connect to OneDrive. The user name should be the
 	// application ID for the OneDrive application, and the password is the application
 	// key for the OneDrive application.
 	//

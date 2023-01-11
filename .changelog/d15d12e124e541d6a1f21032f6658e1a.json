@@ -1,0 +1,8 @@
+{
+    "id": "d15d12e1-24e5-41d6-a1f2-1032f6658e1a",
+    "type": "feature",
+    "description": "This release adds support to new document types - RTF, XML, XSLT, MS_EXCEL, CSV, JSON, MD",
+    "modules": [
+        "service/kendra"
+    ]
+}

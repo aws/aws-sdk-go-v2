@@ -26,7 +26,7 @@ import (
 // * Relevant documents
 //
 // You can specify that the query return only one type
-// of result using the QueryResultTypeConfig parameter. Each query returns the 100
+// of result using the QueryResultTypeFilter parameter. Each query returns the 100
 // most relevant results.
 func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*Options)) (*QueryOutput, error) {
 	if params == nil {
