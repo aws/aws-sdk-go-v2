@@ -131,6 +131,10 @@ func (p *CredentialsCache) Retrieve(ctx context.Context) (Credentials, error) {
 	}
 
 	resCh := p.sf.DoChan("", func() (interface{}, error) {
+		currCreds, ok := p.getCreds()
+		if ok && !currCreds.Expired() {
+			return currCreds, nil
+		}
 		return p.singleRetrieve(&suppressedContext{ctx})
 	})
 	select {
