@@ -282,15 +282,6 @@
                                                     "ref": "Endpoint"
                                                 }
                                             ]
-                                        },
-                                        {
-                                            "fn": "parseURL",
-                                            "argv": [
-                                                {
-                                                    "ref": "Endpoint"
-                                                }
-                                            ],
-                                            "assign": "url"
                                         }
                                     ],
                                     "type": "tree",
@@ -546,6 +537,630 @@
                 "smithy.rules#endpointTests": {
                     "testCases": [
                         {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.ap-south-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-south-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.ap-south-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-south-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.ca-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ca-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.ca-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ca-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.eu-central-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-central-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.eu-central-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-central-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.us-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.us-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.eu-west-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.eu-west-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.eu-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region eu-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.eu-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "eu-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.ap-northeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-northeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.ap-northeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-northeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.us-gov-west-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-gov-west-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.ap-southeast-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.ap-southeast-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.ap-southeast-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region ap-southeast-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.ap-southeast-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "ap-southeast-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra-fips.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.us-east-2.api.aws"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-2 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://kendra.us-east-2.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-2"
+                            }
+                        },
+                        {
                             "documentation": "For custom endpoint with fips disabled and dualstack disabled",
                             "expect": {
                                 "endpoint": {
@@ -553,9 +1168,9 @@
                                 }
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": false,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -565,9 +1180,9 @@
                                 "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": true,
                                 "UseDualStack": false,
+                                "UseFIPS": true,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         },
@@ -577,9 +1192,9 @@
                                 "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
                             },
                             "params": {
-                                "Region": "us-east-1",
-                                "UseFIPS": false,
                                 "UseDualStack": true,
+                                "UseFIPS": false,
+                                "Region": "us-east-1",
                                 "Endpoint": "https://example.com"
                             }
                         }
@@ -2280,7 +2895,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>>Maps attributes or field names of Confluence pages to Amazon Kendra index field\n            names. To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            Confluence fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. The\n            Confluence data source field names must exist in your Confluence custom metadata.</p>"
+                "smithy.api#documentation": "<p>Maps attributes or field names of Confluence pages to Amazon Kendra index field\n            names. To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            Confluence fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. The\n            Confluence data source field names must exist in your Confluence custom metadata.</p>"
             }
         },
         "com.amazonaws.kendra#ConfluenceSpaceConfiguration": {
@@ -2408,7 +3023,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>>Maps attributes or field names of Confluence spaces to Amazon Kendra index field\n            names. To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            Confluence fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. The\n            Confluence data source field names must exist in your Confluence custom metadata.</p>"
+                "smithy.api#documentation": "<p>Maps attributes or field names of Confluence spaces to Amazon Kendra index field\n            names. To create custom fields, use the <code>UpdateIndex</code> API before you map to\n            Confluence fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping data source fields</a>. The\n            Confluence data source field names must exist in your Confluence custom metadata.</p>"
             }
         },
         "com.amazonaws.kendra#ConfluenceVersion": {
@@ -2529,6 +3144,48 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PPT"
+                    }
+                },
+                "RTF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RTF"
+                    }
+                },
+                "XML": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XML"
+                    }
+                },
+                "XSLT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "XSLT"
+                    }
+                },
+                "MS_EXCEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MS_EXCEL"
+                    }
+                },
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                },
+                "JSON": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "JSON"
+                    }
+                },
+                "MD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MD"
                     }
                 }
             }
@@ -8095,14 +8752,14 @@
                 "JiraAccountUrl": {
                     "target": "com.amazonaws.kendra#JiraAccountUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the Jira account. For example, <i>company.atlassian.net</i>\n            or <i>https://jira.company.com</i>. You can find your Jira account URL in\n            the URL of your profile page for Jira desktop.</p>",
+                        "smithy.api#documentation": "<p>The URL of the Jira account. For example, <i>company.atlassian.net</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a secret in Secrets Manager contains the\n            key-value pairs required to connect to your Jira data source. The secret must contain a\n            JSON structure with the following keys:</p>\n         <ul>\n            <li>\n               <p>jiraId—The Jira username.</p>\n            </li>\n            <li>\n               <p>jiraCredentials—The Jira API token. For more information on creating an\n                    API token in Jira, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html\"> Using a Jira data\n                        source</a>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a secret in Secrets Manager contains the\n            key-value pairs required to connect to your Jira data source. The secret must contain a\n            JSON structure with the following keys:</p>\n         <ul>\n            <li>\n               <p>jiraId—The Jira user name or email.</p>\n            </li>\n            <li>\n               <p>jiraCredentials—The Jira API token. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-jira.html\">Using a Jira data\n                        source</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8110,7 +8767,7 @@
                     "target": "com.amazonaws.kendra#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to use the Jira change log to determine which documents require\n            updating in the index. Depending on the change log's size, it may take longer for Amazon Kendra\n            to use the change log than to scan all of your documents in Jira.</p>"
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to use the Jira change log to determine which documents require\n            updating in the index. Depending on the change log's size, it may take longer for \n            Amazon Kendra to use the change log than to scan all of your documents in Jira.</p>"
                     }
                 },
                 "Project": {
@@ -8140,31 +8797,31 @@
                 "AttachmentFieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of DataSourceToIndexFieldMapping objects that map attributes or field names of\n            Jira attachments to Amazon Kendra index field names. To create custom fields, use the\n            UpdateIndex API before you map to Jira fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\"> Mapping data source\n                fields</a>. The Jira data source field names must exist in your Jira custom\n            metadata.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes or \n            field names of Jira attachments to Amazon Kendra index field names. To create \n            custom fields, use the <code>UpdateIndex</code> API before you map to Jira fields. \n            For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\"> Mapping data source\n                fields</a>. The Jira data source field names must exist in your Jira custom\n            metadata.</p>"
                     }
                 },
                 "CommentFieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of DataSourceToIndexFieldMapping objects that map attributes or field names of\n            Jira comments to Amazon Kendra index field names. To create custom fields, use the\n            UpdateIndex API before you map to Jira fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\"> Mapping data source\n                fields</a>. The Jira data source field names must exist in your Jira custom\n            metadata.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes or field names of\n            Jira comments to Amazon Kendra index field names. To create custom fields, use the\n            <code>UpdateIndex</code> API before you map to Jira fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\"> Mapping data source\n                fields</a>. The Jira data source field names must exist in your Jira custom\n            metadata.</p>"
                     }
                 },
                 "IssueFieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of DataSourceToIndexFieldMapping objects that map attributes or field names of\n            Jira issues to Amazon Kendra index field names. To create custom fields, use the\n            UpdateIndex API before you map to Jira fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\"> Mapping data source\n                fields</a>. The Jira data source field names must exist in your Jira custom\n            metadata.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes or field names of\n            Jira issues to Amazon Kendra index field names. To create custom fields, use the\n            <code>UpdateIndex</code> API before you map to Jira fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\"> Mapping data source\n                fields</a>. The Jira data source field names must exist in your Jira custom\n            metadata.</p>"
                     }
                 },
                 "ProjectFieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of DataSourceToIndexFieldMapping objects that map attributes or field names of\n            Jira projects to Amazon Kendra index field names. To create custom fields, use the\n            UpdateIndex API before you map to Jira fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\"> Mapping data source\n                fields</a>. The Jira data source field names must exist in your Jira custom\n            metadata.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes or field names of\n            Jira projects to Amazon Kendra index field names. To create custom fields, use the\n            <code>UpdateIndex</code> API before you map to Jira fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\"> Mapping data source\n                fields</a>. The Jira data source field names must exist in your Jira custom\n            metadata.</p>"
                     }
                 },
                 "WorkLogFieldMappings": {
                     "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of DataSourceToIndexFieldMapping objects that map attributes or field names of\n            Jira work logs to Amazon Kendra index field names. To create custom fields, use the\n            UpdateIndex API before you map to Jira fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\"> Mapping data source\n                fields</a>. The Jira data source field names must exist in your Jira custom\n            metadata.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map attributes or field names of\n            Jira work logs to Amazon Kendra index field names. To create custom fields, use the\n            <code>UpdateIndex</code> API before you map to Jira fields. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\"> Mapping data source\n                fields</a>. The Jira data source field names must exist in your Jira custom\n            metadata.</p>"
                     }
                 },
                 "InclusionPatterns": {
@@ -8182,7 +8839,7 @@
                 "VpcConfiguration": {
                     "target": "com.amazonaws.kendra#DataSourceVpcConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration information for an Amazon Virtual Private Cloud to connect to your Jira. Your\n            Jira account must reside inside your VPC.</p>"
+                        "smithy.api#documentation": "<p>Configuration information for an Amazon Virtual Private Cloud to connect to your Jira. For \n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html\">Configuring a VPC</a>.</p>"
                     }
                 }
             },
@@ -9582,7 +10239,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the\n            user name and password to connect to OneDrive. The user namd should be the application\n            ID for the OneDrive application, and the password is the application key for the\n            OneDrive application.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the\n            user name and password to connect to OneDrive. The user name should be the application\n            ID for the OneDrive application, and the password is the application key for the\n            OneDrive application.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10035,7 +10692,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches an active index. Use this API to search your documents using query. The\n            <code>Query</code> API enables to do faceted search and to filter results based on\n         document attributes.</p>\n         <p>It also enables you to provide user context that Amazon Kendra uses to enforce\n         document access control in the search results.</p>\n         <p>Amazon Kendra searches your index for text content and question and answer (FAQ)\n         content. By default the response contains three types of results.</p>\n         <ul>\n            <li>\n               <p>Relevant passages</p>\n            </li>\n            <li>\n               <p>Matching FAQs</p>\n            </li>\n            <li>\n               <p>Relevant documents</p>\n            </li>\n         </ul>\n         <p>You can specify that the query return only one type of result using the\n            <code>QueryResultTypeConfig</code> parameter.</p>\n         <p>Each query returns the 100 most relevant results. </p>"
+                "smithy.api#documentation": "<p>Searches an active index. Use this API to search your documents using query. The\n            <code>Query</code> API enables to do faceted search and to filter results based on\n         document attributes.</p>\n         <p>It also enables you to provide user context that Amazon Kendra uses to enforce\n         document access control in the search results.</p>\n         <p>Amazon Kendra searches your index for text content and question and answer (FAQ)\n         content. By default the response contains three types of results.</p>\n         <ul>\n            <li>\n               <p>Relevant passages</p>\n            </li>\n            <li>\n               <p>Matching FAQs</p>\n            </li>\n            <li>\n               <p>Relevant documents</p>\n            </li>\n         </ul>\n         <p>You can specify that the query return only one type of result using the\n            <code>QueryResultTypeFilter</code> parameter.</p>\n         <p>Each query returns the 100 most relevant results. </p>"
             }
         },
         "com.amazonaws.kendra#QueryCapacityUnit": {
