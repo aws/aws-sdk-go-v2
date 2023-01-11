@@ -164,12 +164,6 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         writer.write("");
         handleDecodeError(writer);
         writer.write("errorBody.Seek(0, io.SeekStart)");
-        if (context.getService().hasTrait(AwsQueryCompatibleTrait.class)) {
-            writer.write("codeFromHeader := getAwsQueryErrorCode(response)");
-            writer.openBlock("if codeFromHeader != \"\" {", "}", () -> {
-                writer.write("output.ErrorCodeOverride = &codeFromHeader");
-            });
-        }
         writer.write("return output");
     }
 

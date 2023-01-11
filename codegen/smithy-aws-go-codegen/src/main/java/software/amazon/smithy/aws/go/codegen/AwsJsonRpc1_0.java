@@ -22,6 +22,7 @@ import software.amazon.smithy.aws.traits.protocols.AwsQueryCompatibleTrait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.integration.HttpProtocolGeneratorUtils;
+import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.model.shapes.OperationShape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
@@ -59,14 +60,27 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
         }
     }
 
-    private static void awsQueryCompatibleDefaultBlockWriter(GoWriter writer) {
-        writer.openBlock("default:", "", () -> {
-            writer.openBlock("genericError := &smithy.GenericAPIError{", "}", () -> {
-                writer.write("Code: getAwsQueryErrorCode(response),");
-                writer.write("Message: errorMessage,");
+    @Override
+    protected void deserializeError(GenerationContext context, StructureShape shape) {
+        GoWriter writer = context.getWriter().get();
+        Symbol symbol = context.getSymbolProvider().toSymbol(shape);
+        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(),
+                getProtocolName());
+
+        AwsProtocolUtils.initializeJsonDecoder(writer, "errorBody");
+        AwsProtocolUtils.decodeJsonIntoInterface(writer, "");
+        writer.write("output := &$T{}", symbol);
+        writer.write("err := $L(&output, shape)", functionName);
+        writer.write("");
+        AwsProtocolUtils.handleDecodeError(writer);
+        writer.write("errorBody.Seek(0, io.SeekStart)");
+        if (context.getService().hasTrait(AwsQueryCompatibleTrait.class)) {
+            writer.write("codeFromHeader := getAwsQueryErrorCode(response)");
+            writer.openBlock("if codeFromHeader != \"\" {", "}", () -> {
+                writer.write("output.ErrorCodeOverride = &codeFromHeader");
             });
-            writer.write("return genericError");
-        });
+        }
+        writer.write("return output");
     }
 
     @Override
@@ -85,6 +99,16 @@ final class AwsJsonRpc1_0 extends JsonRpcProtocolGenerator {
                 writer.write("return \"\"");
             });
         }
+    }
+
+    private static void awsQueryCompatibleDefaultBlockWriter(GoWriter writer) {
+        writer.openBlock("default:", "", () -> {
+            writer.openBlock("genericError := &smithy.GenericAPIError{", "}", () -> {
+                writer.write("Code: getAwsQueryErrorCode(response),");
+                writer.write("Message: errorMessage,");
+            });
+            writer.write("return genericError");
+        });
     }
 
     private boolean isAwsQueryCompatibleTraitFound(GenerationContext context) {
